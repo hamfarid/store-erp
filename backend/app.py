@@ -378,6 +378,8 @@ def register_blueprints(app):
         ("routes.sales", "sales_bp"),
         # Purchases
         ("routes.purchases", "purchases_bp"),
+        # POS
+        ("routes.pos", "pos_bp"),
         # ('routes.sales_advanced', 'sales_advanced_bp'),  # Model file, not route
         ("routes.invoices_unified", "invoices_unified_bp"),
         # ('routes.returns_management', 'returns_management_bp'),  # Model file, not route
@@ -392,6 +394,7 @@ def register_blueprints(app):
         # ('routes.profit_loss_system', 'profit_loss_bp'),  # Model file, not route (duplicate)
         # Reports
         ("routes.reports", "reports_bp"),
+        ("routes.reports_system", "reports_system_bp"),
         ("routes.advanced_reports", "advanced_reports_bp"),
         ("routes.comprehensive_reports", "comprehensive_reports_bp"),
         ("routes.financial_reports", "financial_reports_bp"),
