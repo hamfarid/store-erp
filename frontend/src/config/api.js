@@ -118,7 +118,8 @@ export const API_ENDPOINTS = {
     PROFIT_LOSS: '/api/reports/profit-loss',
     CUSTOM: '/api/reports/custom',
     SETUP: '/api/reports/setup',
-    TEMPLATES: '/api/reports/templates'
+    TEMPLATES: '/api/reports/templates',
+    ADVANCED: '/api/reports/advanced'
   },
   
   // المحاسبة
@@ -148,6 +149,54 @@ export const API_ENDPOINTS = {
     ASSIGN_USER_ROLE: (userId) => `/api/admin/users/${userId}/role`,
     AUDIT_LOGS: '/api/admin/audit-logs',
     STATS: '/api/admin/stats'
+  },
+  
+  // المشتريات
+  PURCHASES: {
+    LIST: '/api/purchases',
+    CREATE: '/api/purchases',
+    UPDATE: (id) => `/api/purchases/${id}`,
+    DELETE: (id) => `/api/purchases/${id}`,
+    GET: (id) => `/api/purchases/${id}`,
+    APPROVE: (id) => `/api/purchases/${id}/approve`,
+    RECEIVE: (id) => `/api/purchases/${id}/receive`,
+    STATISTICS: '/api/purchases/statistics'
+  },
+  
+  // نظام نقطة البيع (POS)
+  POS: {
+    SHIFTS: '/api/pos/shifts',
+    OPEN_SHIFT: '/api/pos/shifts/open',
+    CLOSE_SHIFT: (id) => `/api/pos/shifts/${id}/close`,
+    CURRENT_SHIFT: '/api/pos/shifts/current',
+    SALES: '/api/pos/sales',
+    CREATE_SALE: '/api/pos/sales',
+    REFUND: (id) => `/api/pos/sales/${id}/refund`,
+    STATISTICS: '/api/pos/statistics',
+    SEARCH_PRODUCT: '/api/pos/products/search'
+  },
+  
+  // نظام التقارير المتقدم
+  REPORTS_SYSTEM: {
+    SALES_SUMMARY: '/api/reports-system/sales/summary',
+    SALES_BY_PRODUCT: '/api/reports-system/sales/by-product',
+    SALES_BY_CUSTOMER: '/api/reports-system/sales/by-customer',
+    STOCK_LEVELS: '/api/reports-system/inventory/stock-levels',
+    EXPIRING_LOTS: '/api/reports-system/inventory/expiring-lots',
+    PROFIT_LOSS: '/api/reports-system/financial/profit-loss',
+    SHIFTS_PERFORMANCE: '/api/reports-system/pos/shifts-performance',
+    EXPORT: '/api/reports-system/export'
+  },
+  
+  // الأذونات والأدوار
+  PERMISSIONS: {
+    LIST: '/api/permissions',
+    ROLES: '/api/roles',
+    CREATE_ROLE: '/api/roles',
+    UPDATE_ROLE: (id) => `/api/roles/${id}`,
+    DELETE_ROLE: (id) => `/api/roles/${id}`,
+    ASSIGN_PERMISSIONS: (id) => `/api/roles/${id}/permissions`,
+    USER_PERMISSIONS: (userId) => `/api/users/${userId}/permissions`
   }
 };
 

@@ -76,6 +76,10 @@ const ModernSuppliersPage = lazy(() => import('../pages/SuppliersPage'));
 const ModernWarehousesPage = lazy(() => import('../pages/WarehousesPage'));
 const ModernStockMovementsPage = lazy(() => import('../pages/StockMovementsPage'));
 const ModernPurchasesPage = lazy(() => import('../pages/PurchasesPage'));
+const POSSystem = lazy(() => import('../pages/POSSystem'));
+const ReportsSystem = lazy(() => import('../pages/ReportsSystem'));
+const PurchaseOrdersManagement = lazy(() => import('../pages/PurchaseOrdersManagement'));
+const RolesPermissionsManagement = lazy(() => import('../pages/RolesPermissionsManagement'));
 
 // Admin Pages
 const AdminDashboard = lazy(() => import('../pages/AdminDashboard'));
@@ -755,6 +759,42 @@ const AppRouter = () => {
               <ProtectedRoute requiredPermission="invoices.view">
                 <Suspense fallback={<LoadingSpinner />}>
                   <ModernPurchasesPage />
+                </Suspense>
+              </ProtectedRoute>
+            } />
+
+            {/* نظام نقطة البيع (POS) */}
+            <Route path="pos" element={
+              <ProtectedRoute requiredPermission="sales.create">
+                <Suspense fallback={<LoadingSpinner />}>
+                  <POSSystem />
+                </Suspense>
+              </ProtectedRoute>
+            } />
+
+            {/* نظام التقارير المتقدم */}
+            <Route path="reports-system" element={
+              <ProtectedRoute requiredPermission="reports.view">
+                <Suspense fallback={<LoadingSpinner />}>
+                  <ReportsSystem />
+                </Suspense>
+              </ProtectedRoute>
+            } />
+
+            {/* إدارة أوامر الشراء */}
+            <Route path="purchases-management" element={
+              <ProtectedRoute requiredPermission="purchases.view">
+                <Suspense fallback={<LoadingSpinner />}>
+                  <PurchaseOrdersManagement />
+                </Suspense>
+              </ProtectedRoute>
+            } />
+
+            {/* إدارة الأدوار والأذونات */}
+            <Route path="roles-permissions" element={
+              <ProtectedRoute requiredPermission="admin.view">
+                <Suspense fallback={<LoadingSpinner />}>
+                  <RolesPermissionsManagement />
                 </Suspense>
               </ProtectedRoute>
             } />
