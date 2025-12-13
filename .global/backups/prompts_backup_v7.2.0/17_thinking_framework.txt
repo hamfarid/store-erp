@@ -1,0 +1,1207 @@
+================================================================================
+MODULE 17: THINKING FRAMEWORK
+================================================================================
+
+OVERVIEW
+--------
+هذا المودول يوفر إطار عمل منهجي للتفكير وحل المشاكل، يمكّن الذكاء الاصطناعي
+من تحليل المشاكل المعقدة، تقسيمها إلى مهام قابلة للتنفيذ، وتصميم حلول فعالة.
+
+CORE PHILOSOPHY
+---------------
+"Think systematically, solve methodically, learn continuously"
+
+الذكاء الاصطناعي يجب أن:
+- يفكر بشكل منهجي ومنطقي
+- يحلل المشاكل بعمق
+- يقسم المهام المعقدة
+- يصمم حلول فعالة
+- يتعلم من التجارب
+
+================================================================================
+SECTION 1: SEQUENTIAL THINKING
+================================================================================
+
+OVERVIEW
+--------
+Sequential Thinking هو نهج منهجي لحل المشاكل خطوة بخطوة، حيث كل خطوة
+تبني على نتائج الخطوة السابقة.
+
+THINKING PROCESS
+----------------
+
+### Step 1: Problem Understanding
+
+**Purpose:** فهم المشكلة بعمق قبل محاولة حلها
+
+**Questions to Ask:**
+- ما هي المشكلة الحقيقية؟
+- ما هي الأعراض vs الأسباب الجذرية؟
+- من المتأثرون بهذه المشكلة؟
+- ما هو التأثير الحالي؟
+- ما هي القيود والمحددات؟
+
+**Tools:**
+```typescript
+{
+  "step": "problem_understanding",
+  "tools": [
+    "context7.get_documentation",
+    "github.search_issues",
+    "sentry.get_issue_details"
+  ],
+  "output": {
+    "problem_statement": "Clear description of the problem",
+    "affected_components": ["list", "of", "components"],
+    "impact_assessment": {
+      "severity": "low | medium | high | critical",
+      "users_affected": 100,
+      "business_impact": "description"
+    },
+    "constraints": ["technical", "time", "resource"]
+  }
+}
+```
+
+**Example:**
+
+```python
+# Problem Understanding Template
+def understand_problem(issue_id):
+    # Gather information
+    issue = sentry.get_issue_details(issue_id)
+    similar = github.search_similar_issues(issue.message)
+    docs = context7.get_documentation(issue.component)
+    
+    # Analyze
+    problem = {
+        "statement": extract_problem_statement(issue),
+        "root_cause": analyze_root_cause(issue, similar),
+        "affected_components": identify_components(issue),
+        "impact": assess_impact(issue),
+        "constraints": identify_constraints()
+    }
+    
+    return problem
+```
+
+---
+
+### Step 2: Context Analysis
+
+**Purpose:** تحليل السياق المحيط بالمشكلة
+
+**Aspects to Analyze:**
+- **Technical Context:** التقنيات المستخدمة، البنية الحالية
+- **Code Context:** جودة الكود، التبعيات، التعقيد
+- **Historical Context:** مشاكل مشابهة سابقة، حلول سابقة
+- **Team Context:** الخبرات المتاحة، الموارد
+- **Business Context:** الأولويات، المواعيد النهائية
+
+**Tools:**
+```typescript
+{
+  "step": "context_analysis",
+  "tools": [
+    "code-analysis.analyze_codebase",
+    "ruff.check_project",
+    "github.get_commit_history",
+    "taskqueue.get_related_tasks"
+  ],
+  "output": {
+    "technical_context": {...},
+    "code_quality": {...},
+    "historical_data": [...],
+    "team_capacity": {...}
+  }
+}
+```
+
+**Example:**
+
+```python
+# Context Analysis
+def analyze_context(problem):
+    context = {
+        "technical": {
+            "stack": detect_tech_stack(),
+            "architecture": analyze_architecture(),
+            "dependencies": analyze_dependencies()
+        },
+        "code": {
+            "quality_score": ruff.check_project(),
+            "complexity": code_analysis.measure_complexity(),
+            "test_coverage": pytest.get_coverage()
+        },
+        "historical": {
+            "similar_issues": github.search_similar_issues(),
+            "past_solutions": extract_solutions(),
+            "lessons_learned": get_lessons_learned()
+        },
+        "team": {
+            "available_skills": assess_team_skills(),
+            "capacity": calculate_capacity(),
+            "expertise": identify_experts()
+        }
+    }
+    
+    return context
+```
+
+---
+
+### Step 3: Solution Design
+
+**Purpose:** تصميم حل فعال بناءً على الفهم والتحليل
+
+**Design Principles:**
+- **KISS:** Keep It Simple, Stupid
+- **DRY:** Don't Repeat Yourself
+- **YAGNI:** You Aren't Gonna Need It
+- **SOLID:** Single responsibility, Open-closed, Liskov substitution, Interface segregation, Dependency inversion
+
+**Approach:**
+1. Brainstorm multiple solutions
+2. Evaluate each solution
+3. Select the best approach
+4. Design detailed implementation plan
+
+**Tools:**
+```typescript
+{
+  "step": "solution_design",
+  "tools": [
+    "sequential-thinking.generate_solutions",
+    "code-analysis.suggest_patterns",
+    "context7.search_best_practices"
+  ],
+  "output": {
+    "solutions": [
+      {
+        "approach": "description",
+        "pros": ["list", "of", "pros"],
+        "cons": ["list", "of", "cons"],
+        "complexity": "low | medium | high",
+        "estimated_effort": "hours",
+        "risk_level": "low | medium | high"
+      }
+    ],
+    "recommended_solution": {...},
+    "implementation_plan": [...]
+  }
+}
+```
+
+**Example:**
+
+```python
+# Solution Design
+def design_solution(problem, context):
+    # Generate multiple solutions
+    solutions = []
+    
+    # Solution 1: Quick fix
+    solutions.append({
+        "name": "Quick Fix",
+        "approach": "Patch the immediate issue",
+        "pros": ["Fast", "Low risk"],
+        "cons": ["Technical debt", "Not addressing root cause"],
+        "complexity": "low",
+        "effort": "2 hours",
+        "risk": "low"
+    })
+    
+    # Solution 2: Proper fix
+    solutions.append({
+        "name": "Proper Fix",
+        "approach": "Refactor and fix root cause",
+        "pros": ["Long-term solution", "Improves code quality"],
+        "cons": ["More time", "Higher risk"],
+        "complexity": "medium",
+        "effort": "8 hours",
+        "risk": "medium"
+    })
+    
+    # Solution 3: Complete rewrite
+    solutions.append({
+        "name": "Complete Rewrite",
+        "approach": "Rewrite the component",
+        "pros": ["Best quality", "Modern approach"],
+        "cons": ["Very time consuming", "High risk"],
+        "complexity": "high",
+        "effort": "40 hours",
+        "risk": "high"
+    })
+    
+    # Evaluate and select
+    recommended = evaluate_solutions(solutions, context)
+    
+    return {
+        "solutions": solutions,
+        "recommended": recommended,
+        "rationale": explain_selection(recommended)
+    }
+```
+
+---
+
+### Step 4: Task Breakdown
+
+**Purpose:** تقسيم الحل إلى مهام قابلة للتنفيذ
+
+**Breakdown Strategy:**
+- تقسيم حسب المكونات
+- تقسيم حسب الطبقات (Frontend, Backend, Database)
+- تقسيم حسب الأولوية
+- تحديد التبعيات بين المهام
+
+**Tools:**
+```typescript
+{
+  "step": "task_breakdown",
+  "tools": [
+    "sequential-thinking.decompose_problem",
+    "taskqueue.bulk_add_tasks",
+    "github.create_milestone"
+  ],
+  "output": {
+    "tasks": [
+      {
+        "id": "TASK-1",
+        "title": "Task title",
+        "description": "Detailed description",
+        "type": "bug | feature | refactor | test",
+        "priority": "low | medium | high | critical",
+        "estimated_effort": "hours",
+        "dependencies": ["TASK-0"],
+        "assigned_to": "developer@example.com",
+        "labels": ["backend", "database"]
+      }
+    ],
+    "execution_order": ["TASK-1", "TASK-2", "TASK-3"],
+    "critical_path": ["TASK-1", "TASK-3"]
+  }
+}
+```
+
+**Example:**
+
+```python
+# Task Breakdown
+def breakdown_tasks(solution):
+    tasks = []
+    
+    # Phase 1: Preparation
+    tasks.append({
+        "id": "TASK-1",
+        "title": "Setup test environment",
+        "description": "Create isolated test environment",
+        "type": "setup",
+        "priority": "high",
+        "effort": "1 hour",
+        "dependencies": [],
+        "phase": "preparation"
+    })
+    
+    tasks.append({
+        "id": "TASK-2",
+        "title": "Write failing tests",
+        "description": "TDD: Write tests that demonstrate the bug",
+        "type": "test",
+        "priority": "high",
+        "effort": "2 hours",
+        "dependencies": ["TASK-1"],
+        "phase": "preparation"
+    })
+    
+    # Phase 2: Implementation
+    tasks.append({
+        "id": "TASK-3",
+        "title": "Implement fix",
+        "description": "Fix the root cause",
+        "type": "bug-fix",
+        "priority": "high",
+        "effort": "4 hours",
+        "dependencies": ["TASK-2"],
+        "phase": "implementation"
+    })
+    
+    # Phase 3: Verification
+    tasks.append({
+        "id": "TASK-4",
+        "title": "Verify fix",
+        "description": "Run all tests and verify",
+        "type": "test",
+        "priority": "high",
+        "effort": "1 hour",
+        "dependencies": ["TASK-3"],
+        "phase": "verification"
+    })
+    
+    # Phase 4: Deployment
+    tasks.append({
+        "id": "TASK-5",
+        "title": "Deploy to production",
+        "description": "Deploy and monitor",
+        "type": "deployment",
+        "priority": "high",
+        "effort": "1 hour",
+        "dependencies": ["TASK-4"],
+        "phase": "deployment"
+    })
+    
+    return {
+        "tasks": tasks,
+        "total_effort": sum(t["effort"] for t in tasks),
+        "critical_path": identify_critical_path(tasks)
+    }
+```
+
+---
+
+### Step 5: Execution Planning
+
+**Purpose:** تخطيط التنفيذ الفعلي
+
+**Planning Aspects:**
+- **Timeline:** متى سيتم تنفيذ كل مهمة؟
+- **Resources:** من سينفذ كل مهمة؟
+- **Dependencies:** ما هي التبعيات؟
+- **Risks:** ما هي المخاطر المحتملة؟
+- **Contingencies:** ما هي الخطط البديلة؟
+
+**Tools:**
+```typescript
+{
+  "step": "execution_planning",
+  "tools": [
+    "taskqueue.schedule_tasks",
+    "github.create_project_board",
+    "notion.create_project_page"
+  ],
+  "output": {
+    "timeline": {
+      "start_date": "2025-01-03",
+      "end_date": "2025-01-05",
+      "milestones": [...]
+    },
+    "resource_allocation": {
+      "developer_1": ["TASK-1", "TASK-3"],
+      "developer_2": ["TASK-2", "TASK-4"]
+    },
+    "risk_mitigation": [...]
+  }
+}
+```
+
+---
+
+### Step 6: Monitoring & Adjustment
+
+**Purpose:** مراقبة التقدم وتعديل الخطة حسب الحاجة
+
+**Monitoring Aspects:**
+- **Progress Tracking:** تتبع إكمال المهام
+- **Quality Metrics:** مقاييس الجودة
+- **Performance Metrics:** مقاييس الأداء
+- **Issue Detection:** اكتشاف المشاكل مبكراً
+
+**Tools:**
+```typescript
+{
+  "step": "monitoring",
+  "tools": [
+    "taskqueue.get_progress",
+    "sentry.monitor_errors",
+    "cloudflare.get_metrics",
+    "github.get_pr_status"
+  ],
+  "output": {
+    "progress": {
+      "completed": 3,
+      "in_progress": 1,
+      "blocked": 0,
+      "total": 5
+    },
+    "quality": {
+      "test_coverage": 85,
+      "code_quality": 92,
+      "security_score": 95
+    },
+    "issues": [...]
+  }
+}
+```
+
+---
+
+### Step 7: Learning & Documentation
+
+**Purpose:** التعلم من التجربة وتوثيق الدروس المستفادة
+
+**Documentation:**
+- **What worked well:** ما الذي نجح؟
+- **What didn't work:** ما الذي لم ينجح؟
+- **Lessons learned:** الدروس المستفادة
+- **Best practices:** أفضل الممارسات
+- **Recommendations:** التوصيات للمستقبل
+
+**Tools:**
+```typescript
+{
+  "step": "learning",
+  "tools": [
+    "notion.create_retrospective",
+    "github.update_wiki",
+    "learning-system.record_lesson"
+  ],
+  "output": {
+    "retrospective": {
+      "what_worked": [...],
+      "what_didnt": [...],
+      "lessons": [...],
+      "action_items": [...]
+    },
+    "documentation": "url_to_docs",
+    "knowledge_base_updated": true
+  }
+}
+```
+
+================================================================================
+SECTION 2: PROBLEM DECOMPOSITION
+================================================================================
+
+OVERVIEW
+--------
+Problem Decomposition هو فن تقسيم المشاكل المعقدة إلى مشاكل أصغر وأبسط
+يمكن حلها بشكل مستقل.
+
+DECOMPOSITION STRATEGIES
+------------------------
+
+### 1. Functional Decomposition
+
+**Approach:** تقسيم حسب الوظائف
+
+```typescript
+{
+  "problem": "Build e-commerce platform",
+  "decomposition": {
+    "user_management": {
+      "registration": [...],
+      "authentication": [...],
+      "profile_management": [...]
+    },
+    "product_catalog": {
+      "product_listing": [...],
+      "search": [...],
+      "filtering": [...]
+    },
+    "shopping_cart": {
+      "add_to_cart": [...],
+      "update_cart": [...],
+      "checkout": [...]
+    },
+    "payment": {
+      "payment_processing": [...],
+      "refunds": [...],
+      "invoicing": [...]
+    },
+    "order_management": {
+      "order_tracking": [...],
+      "shipping": [...],
+      "returns": [...]
+    }
+  }
+}
+```
+
+---
+
+### 2. Layer Decomposition
+
+**Approach:** تقسيم حسب الطبقات المعمارية
+
+```typescript
+{
+  "problem": "Implement new feature",
+  "layers": {
+    "presentation": {
+      "ui_components": [...],
+      "forms": [...],
+      "validation": [...]
+    },
+    "business_logic": {
+      "services": [...],
+      "workflows": [...],
+      "rules": [...]
+    },
+    "data_access": {
+      "repositories": [...],
+      "queries": [...],
+      "caching": [...]
+    },
+    "database": {
+      "schema": [...],
+      "migrations": [...],
+      "indexes": [...]
+    }
+  }
+}
+```
+
+---
+
+### 3. Temporal Decomposition
+
+**Approach:** تقسيم حسب الزمن/المراحل
+
+```typescript
+{
+  "problem": "Launch new product",
+  "phases": {
+    "phase_1_mvp": {
+      "duration": "2 weeks",
+      "features": ["core_features"],
+      "goal": "Validate concept"
+    },
+    "phase_2_beta": {
+      "duration": "4 weeks",
+      "features": ["additional_features", "polish"],
+      "goal": "Get user feedback"
+    },
+    "phase_3_launch": {
+      "duration": "2 weeks",
+      "features": ["final_features", "optimization"],
+      "goal": "Public launch"
+    },
+    "phase_4_growth": {
+      "duration": "ongoing",
+      "features": ["scaling", "new_features"],
+      "goal": "Grow user base"
+    }
+  }
+}
+```
+
+---
+
+### 4. Component Decomposition
+
+**Approach:** تقسيم حسب المكونات
+
+```typescript
+{
+  "problem": "Refactor legacy system",
+  "components": {
+    "authentication_service": {
+      "complexity": "medium",
+      "priority": "high",
+      "dependencies": ["user_service"]
+    },
+    "user_service": {
+      "complexity": "low",
+      "priority": "high",
+      "dependencies": []
+    },
+    "payment_service": {
+      "complexity": "high",
+      "priority": "critical",
+      "dependencies": ["user_service", "order_service"]
+    },
+    "notification_service": {
+      "complexity": "low",
+      "priority": "medium",
+      "dependencies": ["user_service"]
+    }
+  }
+}
+```
+
+---
+
+### 5. Dependency-Based Decomposition
+
+**Approach:** تقسيم بناءً على التبعيات
+
+```python
+# Dependency Graph
+def decompose_by_dependencies(problem):
+    # Build dependency graph
+    graph = {
+        "database_schema": [],
+        "data_models": ["database_schema"],
+        "repositories": ["data_models"],
+        "services": ["repositories"],
+        "api_endpoints": ["services"],
+        "frontend_components": ["api_endpoints"]
+    }
+    
+    # Topological sort for execution order
+    execution_order = topological_sort(graph)
+    
+    return {
+        "dependency_graph": graph,
+        "execution_order": execution_order,
+        "parallel_groups": identify_parallel_tasks(graph)
+    }
+```
+
+================================================================================
+SECTION 3: SOLUTION DESIGN PATTERNS
+================================================================================
+
+OVERVIEW
+--------
+مجموعة من أنماط التصميم المجربة لحل المشاكل الشائعة.
+
+ARCHITECTURAL PATTERNS
+---------------------
+
+### 1. Microservices Pattern
+
+**When to Use:**
+- تطبيقات كبيرة ومعقدة
+- فرق متعددة تعمل بشكل مستقل
+- حاجة للتوسع المستقل للمكونات
+
+**Structure:**
+```typescript
+{
+  "pattern": "microservices",
+  "services": {
+    "user_service": {
+      "responsibility": "User management",
+      "database": "users_db",
+      "api": "/api/users",
+      "dependencies": []
+    },
+    "product_service": {
+      "responsibility": "Product catalog",
+      "database": "products_db",
+      "api": "/api/products",
+      "dependencies": []
+    },
+    "order_service": {
+      "responsibility": "Order processing",
+      "database": "orders_db",
+      "api": "/api/orders",
+      "dependencies": ["user_service", "product_service"]
+    }
+  },
+  "communication": "REST APIs + Message Queue",
+  "api_gateway": "Kong/Nginx"
+}
+```
+
+---
+
+### 2. Event-Driven Pattern
+
+**When to Use:**
+- حاجة للتفاعل الفوري مع الأحداث
+- أنظمة موزعة
+- حاجة لفصل المكونات
+
+**Structure:**
+```typescript
+{
+  "pattern": "event_driven",
+  "events": {
+    "user_registered": {
+      "publisher": "user_service",
+      "subscribers": [
+        "email_service",
+        "analytics_service",
+        "notification_service"
+      ]
+    },
+    "order_placed": {
+      "publisher": "order_service",
+      "subscribers": [
+        "payment_service",
+        "inventory_service",
+        "shipping_service"
+      ]
+    }
+  },
+  "message_broker": "RabbitMQ/Kafka",
+  "event_store": "EventStoreDB"
+}
+```
+
+---
+
+### 3. CQRS Pattern
+
+**When to Use:**
+- قراءات وكتابات مختلفة جداً
+- حاجة لتحسين الأداء
+- أنظمة معقدة
+
+**Structure:**
+```typescript
+{
+  "pattern": "cqrs",
+  "command_side": {
+    "purpose": "Handle writes",
+    "database": "write_db (normalized)",
+    "models": "domain_models",
+    "validation": "strict"
+  },
+  "query_side": {
+    "purpose": "Handle reads",
+    "database": "read_db (denormalized)",
+    "models": "view_models",
+    "optimization": "heavy"
+  },
+  "synchronization": "Event sourcing"
+}
+```
+
+---
+
+### 4. Layered Architecture
+
+**When to Use:**
+- تطبيقات تقليدية
+- فرق صغيرة إلى متوسطة
+- متطلبات واضحة
+
+**Structure:**
+```typescript
+{
+  "pattern": "layered",
+  "layers": {
+    "presentation": {
+      "responsibility": "UI/UX",
+      "technologies": ["React", "Vue", "Angular"],
+      "depends_on": ["application"]
+    },
+    "application": {
+      "responsibility": "Business logic",
+      "technologies": ["Services", "Use cases"],
+      "depends_on": ["domain", "infrastructure"]
+    },
+    "domain": {
+      "responsibility": "Core business rules",
+      "technologies": ["Entities", "Value objects"],
+      "depends_on": []
+    },
+    "infrastructure": {
+      "responsibility": "Technical concerns",
+      "technologies": ["Database", "APIs", "Cache"],
+      "depends_on": []
+    }
+  }
+}
+```
+
+================================================================================
+SECTION 4: DECISION TREES
+================================================================================
+
+OVERVIEW
+--------
+أشجار قرارات لمساعدة الذكاء الاصطناعي في اتخاذ قرارات ذكية.
+
+DECISION TREE: CHOOSING ARCHITECTURE
+------------------------------------
+
+```typescript
+{
+  "decision": "choose_architecture",
+  "tree": {
+    "question": "What is the project size?",
+    "options": {
+      "small": {
+        "question": "Is it a simple CRUD app?",
+        "options": {
+          "yes": {
+            "recommendation": "Monolithic + MVC",
+            "rationale": "Simple, fast to develop"
+          },
+          "no": {
+            "recommendation": "Layered Architecture",
+            "rationale": "Good separation of concerns"
+          }
+        }
+      },
+      "medium": {
+        "question": "Do you have multiple teams?",
+        "options": {
+          "yes": {
+            "recommendation": "Microservices",
+            "rationale": "Independent development"
+          },
+          "no": {
+            "recommendation": "Modular Monolith",
+            "rationale": "Balance between simplicity and modularity"
+          }
+        }
+      },
+      "large": {
+        "question": "Is high scalability required?",
+        "options": {
+          "yes": {
+            "recommendation": "Microservices + Event-Driven",
+            "rationale": "Maximum scalability and flexibility"
+          },
+          "no": {
+            "recommendation": "Microservices",
+            "rationale": "Good for large teams"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+DECISION TREE: CHOOSING DATABASE
+--------------------------------
+
+```typescript
+{
+  "decision": "choose_database",
+  "tree": {
+    "question": "What type of data?",
+    "options": {
+      "structured": {
+        "question": "Do you need ACID transactions?",
+        "options": {
+          "yes": {
+            "question": "What scale?",
+            "options": {
+              "small_medium": {
+                "recommendation": "PostgreSQL",
+                "rationale": "Best relational DB"
+              },
+              "large": {
+                "recommendation": "CockroachDB",
+                "rationale": "Distributed SQL"
+              }
+            }
+          },
+          "no": {
+            "recommendation": "NoSQL (MongoDB)",
+            "rationale": "Flexible schema"
+          }
+        }
+      },
+      "unstructured": {
+        "question": "What access pattern?",
+        "options": {
+          "key_value": {
+            "recommendation": "Redis/DynamoDB",
+            "rationale": "Fast key-value access"
+          },
+          "document": {
+            "recommendation": "MongoDB/Elasticsearch",
+            "rationale": "Document storage and search"
+          },
+          "graph": {
+            "recommendation": "Neo4j",
+            "rationale": "Graph relationships"
+          }
+        }
+      },
+      "time_series": {
+        "recommendation": "TimescaleDB/InfluxDB",
+        "rationale": "Optimized for time-series data"
+      }
+    }
+  }
+}
+```
+
+---
+
+DECISION TREE: CHOOSING TESTING STRATEGY
+----------------------------------------
+
+```typescript
+{
+  "decision": "choose_testing_strategy",
+  "tree": {
+    "question": "What are you testing?",
+    "options": {
+      "backend_api": {
+        "tests": [
+          {
+            "type": "unit",
+            "coverage": "70%",
+            "tools": ["pytest", "jest"],
+            "focus": "Business logic"
+          },
+          {
+            "type": "integration",
+            "coverage": "20%",
+            "tools": ["pytest", "supertest"],
+            "focus": "API endpoints"
+          },
+          {
+            "type": "e2e",
+            "coverage": "10%",
+            "tools": ["playwright"],
+            "focus": "Critical flows"
+          }
+        ]
+      },
+      "frontend": {
+        "tests": [
+          {
+            "type": "unit",
+            "coverage": "60%",
+            "tools": ["jest", "vitest"],
+            "focus": "Components, utils"
+          },
+          {
+            "type": "integration",
+            "coverage": "30%",
+            "tools": ["testing-library"],
+            "focus": "Component interactions"
+          },
+          {
+            "type": "e2e",
+            "coverage": "10%",
+            "tools": ["playwright", "cypress"],
+            "focus": "User journeys"
+          }
+        ]
+      },
+      "full_stack": {
+        "tests": [
+          {
+            "type": "unit",
+            "coverage": "65%",
+            "tools": ["pytest", "jest"],
+            "focus": "All units"
+          },
+          {
+            "type": "integration",
+            "coverage": "25%",
+            "tools": ["pytest", "testing-library"],
+            "focus": "API + Components"
+          },
+          {
+            "type": "e2e",
+            "coverage": "10%",
+            "tools": ["playwright"],
+            "focus": "Critical user flows"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+================================================================================
+SECTION 5: COGNITIVE FRAMEWORKS
+================================================================================
+
+OVERVIEW
+--------
+أطر عمل معرفية لتحسين التفكير وحل المشاكل.
+
+FIRST PRINCIPLES THINKING
+-------------------------
+
+**Concept:** تحليل المشكلة إلى المبادئ الأساسية وإعادة البناء من الصفر
+
+**Process:**
+1. **Identify assumptions:** حدد الافتراضات الحالية
+2. **Break down:** قسّم إلى المبادئ الأساسية
+3. **Reconstruct:** أعد البناء من الصفر
+4. **Innovate:** ابتكر حلول جديدة
+
+**Example:**
+
+```python
+# First Principles: "We need to store user data"
+
+# Traditional thinking:
+"We need a database" → "Let's use MySQL"
+
+# First principles thinking:
+assumptions = [
+    "We need to store data",
+    "Data must be persistent",
+    "Data must be queryable",
+    "Data must be secure"
+]
+
+fundamental_truths = [
+    "Data is just bytes",
+    "Bytes can be stored in many ways",
+    "Different storage has different trade-offs"
+]
+
+solutions = [
+    {
+        "approach": "File system",
+        "pros": ["Simple", "No dependencies"],
+        "cons": ["No queries", "No transactions"]
+    },
+    {
+        "approach": "SQLite",
+        "pros": ["Simple", "SQL", "Transactions"],
+        "cons": ["Single file", "Limited concurrency"]
+    },
+    {
+        "approach": "PostgreSQL",
+        "pros": ["Full SQL", "High concurrency", "ACID"],
+        "cons": ["More complex", "Separate service"]
+    },
+    {
+        "approach": "Redis",
+        "pros": ["Very fast", "Simple"],
+        "cons": ["In-memory", "Limited queries"]
+    }
+]
+
+# Choose based on actual requirements, not assumptions
+```
+
+---
+
+SYSTEMS THINKING
+---------------
+
+**Concept:** فهم الأنظمة ككل متكامل وليس أجزاء منفصلة
+
+**Key Concepts:**
+- **Interconnections:** كل شيء مترابط
+- **Feedback loops:** الأنظمة تحتوي على حلقات تغذية راجعة
+- **Emergence:** السلوك الكلي يختلف عن مجموع الأجزاء
+- **Delays:** التأثيرات قد تظهر بعد وقت
+
+**Example:**
+
+```typescript
+{
+  "system": "e-commerce_platform",
+  "components": {
+    "users": {
+      "behavior": "Purchase products",
+      "affects": ["inventory", "revenue", "shipping"]
+    },
+    "inventory": {
+      "behavior": "Track stock",
+      "affects": ["product_availability", "purchasing"],
+      "feedback_loop": "Low stock → Reorder → High stock"
+    },
+    "pricing": {
+      "behavior": "Dynamic pricing",
+      "affects": ["demand", "revenue"],
+      "feedback_loop": "High demand → Higher price → Lower demand"
+    },
+    "shipping": {
+      "behavior": "Deliver orders",
+      "affects": ["customer_satisfaction", "costs"],
+      "delay": "2-5 days"
+    }
+  },
+  "emergent_properties": [
+    "Customer lifetime value",
+    "Platform reputation",
+    "Market position"
+  ]
+}
+```
+
+---
+
+PARETO PRINCIPLE (80/20 RULE)
+-----------------------------
+
+**Concept:** 80% من النتائج تأتي من 20% من الجهد
+
+**Application:**
+- **Features:** 20% من الميزات تستخدم 80% من الوقت
+- **Bugs:** 20% من الأكواد تسبب 80% من الأخطاء
+- **Performance:** 20% من الكود يستهلك 80% من الموارد
+- **Users:** 20% من المستخدمين يولدون 80% من القيمة
+
+**Example:**
+
+```python
+# Identify high-impact areas
+def apply_pareto_principle(project):
+    # Analyze features
+    features = analyze_feature_usage()
+    top_20_percent = features[:len(features)//5]
+    
+    # Focus optimization efforts
+    optimization_plan = {
+        "high_priority": [
+            f for f in top_20_percent
+            if f.usage > 0.8 and f.performance < 0.8
+        ],
+        "medium_priority": [...],
+        "low_priority": [...]
+    }
+    
+    return optimization_plan
+```
+
+---
+
+OCCAM'S RAZOR
+-------------
+
+**Concept:** الحل الأبسط عادة هو الأفضل
+
+**Application:**
+- عند التصميم: اختر الحل الأبسط الذي يحل المشكلة
+- عند التصحيح: ابدأ بالأسباب الأكثر احتمالاً
+- عند التحسين: لا تضف تعقيد غير ضروري
+
+**Example:**
+
+```python
+# Problem: Slow API response
+
+# Complex solution:
+"Add caching layer + CDN + Load balancer + Database replication"
+
+# Occam's Razor: Start simple
+steps = [
+    "1. Profile the code - find the bottleneck",
+    "2. Optimize the bottleneck",
+    "3. Measure improvement",
+    "4. If still slow, add caching",
+    "5. If still slow, consider infrastructure"
+]
+
+# Often, the bottleneck is a simple N+1 query or missing index
+```
+
+================================================================================
+RESOURCES
+================================================================================
+
+### Books
+- "Thinking, Fast and Slow" by Daniel Kahneman
+- "The Art of Problem Solving" by Russell L. Ackoff
+- "Systems Thinking" by Donella H. Meadows
+- "Design Patterns" by Gang of Four
+
+### Online Resources
+- **Problem Solving:** https://www.problemsolving.com/
+- **Design Patterns:** https://refactoring.guru/design-patterns
+- **Systems Thinking:** https://thesystemsthinker.com/
+
+### Tools
+- **Mermaid:** For diagrams
+- **PlantUML:** For UML diagrams
+- **Draw.io:** For flowcharts
+
+================================================================================
+END OF MODULE 17: THINKING FRAMEWORK
+================================================================================
+

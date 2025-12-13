@@ -1,0 +1,4 @@
+#!/bin/bash
+# Global Guidelines CLI Wrapper
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+python3 "$SCRIPT_DIR/tools/global_cli.py" "$@"

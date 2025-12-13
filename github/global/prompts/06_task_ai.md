@@ -1,0 +1,909 @@
+================================================================================
+MODULE 18: TASK AI & AUTOMATION
+================================================================================
+
+⚠️ NOTE: This module is part of Global Guidelines (instruction manual).
+Apply this guidance to THE USER'S PROJECT, not to Global Guidelines itself.
+Global Guidelines is in: ~/global/ or similar
+User's project is in: A separate directory (ask user for project path)
+
+
+
+OVERVIEW
+--------
+هذا المودول يوفر نظام ذكي لإدارة المهام والأتمتة الكاملة لسير العمل،
+يمكّن الذكاء الاصطناعي من إنشاء، ترتيب، تعيين، وتتبع المهام تلقائياً.
+
+CORE PHILOSOPHY
+---------------
+"Automate the routine, focus on the creative"
+
+النظام يجب أن:
+- ينشئ المهام تلقائياً عند اكتشاف الحاجة
+- يرتب الأولويات بذكاء
+- يعين المهام للأشخاص المناسبين
+- يتتبع التقدم ويحدث الحالة
+- يتعلم من الأنماط ويحسن الأداء
+
+================================================================================
+SECTION 1: INTELLIGENT TASK MANAGER
+================================================================================
+
+OVERVIEW
+--------
+مدير مهام ذكي يفهم السياق ويتخذ قرارات تلقائية.
+
+AUTO TASK CREATION
+------------------
+
+### Trigger-Based Creation
+
+```typescript
+{
+  "auto_task_creation": {
+    "triggers": [
+      {
+        "event": "error_detected",
+        "source": "sentry",
+        "action": "create_bug_task",
+        "template": {
+          "title": "Fix: {{error.message}}",
+          "description": "Error detected in {{error.file}}:{{error.line}}\n\nStack trace:\n{{error.stack}}",
+          "type": "bug",
+          "priority": "{{calculate_priority(error.severity)}}",
+          "labels": ["bug", "auto-created", "{{error.component}}"],
+          "assigned_to": "{{find_last_modifier(error.file)}}"
+        }
+      },
+      {
+        "event": "feature_requested",
+        "source": "github.issues",
+        "action": "create_feature_task",
+        "template": {
+          "title": "Feature: {{issue.title}}",
+          "description": "{{issue.body}}",
+          "type": "feature",
+          "priority": "{{analyze_priority(issue)}}",
+          "labels": ["feature", "{{issue.labels}}"],
+          "assigned_to": "{{suggest_owner(issue)}}"
+        }
+      },
+      {
+        "event": "code_smell_found",
+        "source": "code-analysis",
+        "action": "create_refactor_task",
+        "template": {
+          "title": "Refactor: {{smell.description}}",
+          "description": "Code smell detected:\n- Type: {{smell.type}}\n- Location: {{smell.file}}:{{smell.line}}\n- Severity: {{smell.severity}}",
+          "type": "refactor",
+          "priority": "{{smell.severity}}",
+          "labels": ["refactor", "code-quality"],
+          "assigned_to": "{{find_expert(smell.area)}}"
+        }
+      },
+      {
+        "event": "security_issue",
+        "source": "security-scan",
+        "action": "create_security_task",
+        "template": {
+          "title": "Security: {{issue.title}}",
+          "description": "Security vulnerability found:\n- CVE: {{issue.cve}}\n- Severity: {{issue.severity}}\n- Package: {{issue.package}}\n- Fix: {{issue.fix}}",
+          "type": "security",
+          "priority": "critical",
+          "labels": ["security", "urgent"],
+          "assigned_to": "security_team"
+        }
+      },
+      {
+        "event": "test_coverage_low",
+        "source": "coverage-report",
+        "action": "create_test_task",
+        "template": {
+          "title": "Improve test coverage for {{file}}",
+          "description": "Current coverage: {{coverage}}%\nTarget: 80%\n\nUncovered lines:\n{{uncovered_lines}}",
+          "type": "test",
+          "priority": "medium",
+          "labels": ["testing", "coverage"],
+          "assigned_to": "{{find_owner(file)}}"
+        }
+      },
+      {
+        "event": "dependency_outdated",
+        "source": "dependency-check",
+        "action": "create_update_task",
+        "template": {
+          "title": "Update {{package}} to {{latest_version}}",
+          "description": "Current: {{current_version}}\nLatest: {{latest_version}}\n\nChangelog:\n{{changelog}}",
+          "type": "maintenance",
+          "priority": "{{assess_update_priority(package)}}",
+          "labels": ["dependencies", "maintenance"],
+          "assigned_to": "{{find_maintainer()}}"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Implementation
+
+```python
+# Auto Task Creation System
+class TaskAI:
+    def __init__(self):
+        self.triggers = load_triggers()
+        self.task_queue = TaskQueue()
+        self.github = GitHubClient()
+        
+    def on_event(self, event_type, event_data):
+        """Handle incoming events and create tasks"""
+        # Find matching triggers
+        triggers = [t for t in self.triggers if t['event'] == event_type]
+        
+        for trigger in triggers:
+            # Create task from template
+            task = self.create_task_from_template(
+                trigger['template'],
+                event_data
+            )
+            
+            # Add to queue
+            self.task_queue.add(task)
+            
+            # Create GitHub issue
+            if trigger.get('create_github_issue'):
+                self.github.create_issue(task)
+            
+            # Notify assignee
+            self.notify_assignee(task)
+    
+    def create_task_from_template(self, template, data):
+        """Create task by filling template with data"""
+        task = {}
+        
+        for key, value in template.items():
+            if isinstance(value, str) and '{{' in value:
+                # Replace template variables
+                task[key] = self.render_template(value, data)
+            else:
+                task[key] = value
+        
+        return task
+    
+    def render_template(self, template, data):
+        """Render template with data"""
+        import re
+        
+        def replace_var(match):
+            var = match.group(1)
+            
+            # Handle function calls
+            if '(' in var:
+                func_name = var.split('(')[0]
+                func = getattr(self, func_name)
+                args = eval(var.split('(')[1].rstrip(')'))
+                return str(func(args))
+            
+            # Handle nested access
+            parts = var.split('.')
+            value = data
+            for part in parts:
+                value = value.get(part, '')
+            
+            return str(value)
+        
+        return re.sub(r'\{\{(.+?)\}\}', replace_var, template)
+```
+
+---
+
+## SMART PRIORITY CALCULATION
+
+```python
+def calculate_priority(error_severity, impact, urgency):
+    """Calculate task priority using multiple factors"""
+    
+    # Severity score (0-10)
+    severity_scores = {
+        'critical': 10,
+        'high': 7,
+        'medium': 5,
+        'low': 2
+    }
+    severity_score = severity_scores.get(error_severity, 5)
+    
+    # Impact score (0-10)
+    impact_score = impact  # users affected, revenue impact, etc.
+    
+    # Urgency score (0-10)
+    urgency_score = urgency  # deadline, SLA, etc.
+    
+    # Weighted calculation
+    priority_score = (
+        severity_score * 0.4 +
+        impact_score * 0.4 +
+        urgency_score * 0.2
+    )
+    
+    # Map to priority level
+    if priority_score >= 8:
+        return 'critical'
+    elif priority_score >= 6:
+        return 'high'
+    elif priority_score >= 4:
+        return 'medium'
+    else:
+        return 'low'
+```
+
+================================================================================
+SECTION 2: AUTO-PRIORITIZATION
+================================================================================
+
+OVERVIEW
+--------
+نظام ذكي لترتيب أولويات المهام بناءً على عوامل متعددة.
+
+PRIORITIZATION ALGORITHMS
+-------------------------
+
+### 1. Eisenhower Matrix
+
+```python
+def eisenhower_matrix(task):
+    """Categorize task using Eisenhower Matrix"""
+    
+    urgent = task.deadline_soon or task.blocking_others
+    important = task.impact_high or task.strategic_value
+    
+    if urgent and important:
+        return {
+            'quadrant': 'Q1 - Do First',
+            'priority': 'critical',
+            'action': 'execute_immediately'
+        }
+    elif not urgent and important:
+        return {
+            'quadrant': 'Q2 - Schedule',
+            'priority': 'high',
+            'action': 'schedule_for_later'
+        }
+    elif urgent and not important:
+        return {
+            'quadrant': 'Q3 - Delegate',
+            'priority': 'medium',
+            'action': 'delegate_to_team'
+        }
+    else:
+        return {
+            'quadrant': 'Q4 - Eliminate',
+            'priority': 'low',
+            'action': 'consider_removing'
+        }
+```
+
+---
+
+### 2. Weighted Scoring
+
+```python
+def weighted_scoring(task):
+    """Calculate priority using weighted factors"""
+    
+    factors = {
+        'business_value': {
+            'weight': 0.25,
+            'score': task.business_value  # 0-10
+        },
+        'urgency': {
+            'weight': 0.20,
+            'score': calculate_urgency(task.deadline)
+        },
+        'complexity': {
+            'weight': 0.15,
+            'score': 10 - task.complexity  # Lower complexity = higher priority
+        },
+        'dependencies': {
+            'weight': 0.15,
+            'score': count_blocked_tasks(task)
+        },
+        'risk': {
+            'weight': 0.15,
+            'score': task.risk_level
+        },
+        'effort': {
+            'weight': 0.10,
+            'score': 10 - task.estimated_effort  # Lower effort = higher priority
+        }
+    }
+    
+    total_score = sum(
+        f['weight'] * f['score']
+        for f in factors.values()
+    )
+    
+    return {
+        'score': total_score,
+        'priority': score_to_priority(total_score),
+        'factors': factors
+    }
+```
+
+---
+
+### 3. RICE Framework
+
+```python
+def rice_score(task):
+    """Calculate RICE score (Reach, Impact, Confidence, Effort)"""
+    
+    reach = task.users_affected  # How many users?
+    impact = task.impact_score  # 0.25, 0.5, 1, 2, 3
+    confidence = task.confidence  # 0-100%
+    effort = task.estimated_hours  # Person-hours
+    
+    rice = (reach * impact * confidence) / effort
+    
+    return {
+        'rice_score': rice,
+        'priority': rice_to_priority(rice),
+        'breakdown': {
+            'reach': reach,
+            'impact': impact,
+            'confidence': confidence,
+            'effort': effort
+        }
+    }
+```
+
+---
+
+### 4. Dynamic Re-Prioritization
+
+```python
+class DynamicPrioritizer:
+    def __init__(self):
+        self.tasks = []
+        self.context = {}
+    
+    def reprioritize(self, event=None):
+        """Re-prioritize all tasks based on current context"""
+        
+        # Update context
+        if event:
+            self.update_context(event)
+        
+        # Re-calculate priorities
+        for task in self.tasks:
+            # Get current priority
+            old_priority = task.priority
+            
+            # Calculate new priority
+            new_priority = self.calculate_priority(task, self.context)
+            
+            # Update if changed
+            if new_priority != old_priority:
+                task.priority = new_priority
+                self.notify_priority_change(task, old_priority, new_priority)
+        
+        # Re-sort tasks
+        self.tasks.sort(key=lambda t: t.priority_score, reverse=True)
+    
+    def update_context(self, event):
+        """Update context based on events"""
+        if event['type'] == 'deadline_approaching':
+            self.context['urgency_multiplier'] = 1.5
+        elif event['type'] == 'production_issue':
+            self.context['critical_mode'] = True
+        elif event['type'] == 'team_capacity_low':
+            self.context['focus_on_quick_wins'] = True
+```
+
+================================================================================
+SECTION 3: WORKFLOW AUTOMATION
+================================================================================
+
+OVERVIEW
+--------
+أتمتة كاملة لسير العمل من البداية للنهاية.
+
+AUTOMATED WORKFLOWS
+------------------
+
+### 1. Complete Bug Fix Automation
+
+```typescript
+{
+  "workflow": "automated_bug_fix",
+  "trigger": "error_detected",
+  "steps": [
+    {
+      "phase": "Detection",
+      "auto": true,
+      "actions": [
+        {
+          "tool": "sentry.get_issue_details",
+          "output": "error_details"
+        },
+        {
+          "tool": "code-analysis.find_root_cause",
+          "input": "{{error_details}}",
+          "output": "root_cause"
+        }
+      ]
+    },
+    {
+      "phase": "Task Creation",
+      "auto": true,
+      "actions": [
+        {
+          "tool": "taskqueue.add_task",
+          "input": {
+            "title": "Fix: {{error_details.message}}",
+            "priority": "{{calculate_priority(error_details)}}",
+            "assigned_to": "{{find_expert(root_cause)}}"
+          },
+          "output": "task_id"
+        },
+        {
+          "tool": "github.create_issue",
+          "input": {
+            "title": "Bug: {{error_details.message}}",
+            "body": "{{format_bug_report(error_details, root_cause)}}",
+            "labels": ["bug", "auto-created"]
+          },
+          "output": "github_issue"
+        }
+      ]
+    },
+    {
+      "phase": "Notification",
+      "auto": true,
+      "actions": [
+        {
+          "tool": "slack.send_message",
+          "input": {
+            "channel": "#bugs",
+            "message": "New bug detected: {{error_details.message}}\nAssigned to: {{task.assigned_to}}\nGitHub: {{github_issue.url}}"
+          }
+        }
+      ]
+    },
+    {
+      "phase": "Monitoring",
+      "auto": true,
+      "actions": [
+        {
+          "tool": "sentry.monitor_issue",
+          "input": {"issue_id": "{{error_details.id}}"},
+          "duration": "24h"
+        }
+      ]
+    },
+    {
+      "phase": "Auto-Close",
+      "auto": true,
+      "condition": "{{no_new_errors_for_24h}}",
+      "actions": [
+        {
+          "tool": "taskqueue.complete_task",
+          "input": {"task_id": "{{task_id}}"}
+        },
+        {
+          "tool": "github.close_issue",
+          "input": {"issue_number": "{{github_issue.number}}"}
+        },
+        {
+          "tool": "slack.send_message",
+          "input": {
+            "channel": "#bugs",
+            "message": "Bug automatically resolved: {{error_details.message}}"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+### 2. Code Quality Automation
+
+```typescript
+{
+  "workflow": "code_quality_automation",
+  "trigger": "on_commit || scheduled_daily",
+  "steps": [
+    {
+      "phase": "Analysis",
+      "auto": true,
+      "parallel": true,
+      "actions": [
+        {"tool": "ruff.check_project", "output": "python_issues"},
+        {"tool": "eslint.lint_directory", "output": "js_issues"},
+        {"tool": "code-analysis.security_scan", "output": "security_issues"},
+        {"tool": "code-analysis.find_dead_code", "output": "dead_code"}
+      ]
+    },
+    {
+      "phase": "Auto-Fix",
+      "auto": true,
+      "actions": [
+        {
+          "tool": "ruff.fix_issues",
+          "input": "{{python_issues.auto_fixable}}",
+          "output": "python_fixed"
+        },
+        {
+          "tool": "eslint.fix_issues",
+          "input": "{{js_issues.auto_fixable}}",
+          "output": "js_fixed"
+        }
+      ]
+    },
+    {
+      "phase": "Task Creation",
+      "auto": true,
+      "condition": "{{has_unfixable_issues}}",
+      "actions": [
+        {
+          "tool": "taskqueue.bulk_add_tasks",
+          "input": {
+            "tasks": "{{generate_tasks_from_issues(python_issues, js_issues, security_issues)}}"
+          }
+        }
+      ]
+    },
+    {
+      "phase": "Reporting",
+      "auto": true,
+      "actions": [
+        {
+          "tool": "github.create_pr",
+          "condition": "{{python_fixed || js_fixed}}",
+          "input": {
+            "title": "Auto-fix: Code quality improvements",
+            "body": "Automatically fixed issues:\n{{format_fixes(python_fixed, js_fixed)}}",
+            "labels": ["auto-fix", "code-quality"]
+          }
+        },
+        {
+          "tool": "slack.send_message",
+          "input": {
+            "channel": "#code-quality",
+            "message": "Daily code quality report:\n{{format_report(python_issues, js_issues, security_issues)}}"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+### 3. Deployment Automation
+
+```typescript
+{
+  "workflow": "automated_deployment",
+  "trigger": "pr_merged_to_main",
+  "steps": [
+    {
+      "phase": "Pre-Deployment Checks",
+      "auto": true,
+      "actions": [
+        {
+          "tool": "playwright.test_all",
+          "fail_on_error": true
+        },
+        {
+          "tool": "code-analysis.security_scan",
+          "fail_on_critical": true
+        },
+        {
+          "tool": "ruff.check_project",
+          "fail_on_error": true
+        }
+      ]
+    },
+    {
+      "phase": "Build",
+      "auto": true,
+      "actions": [
+        {
+          "tool": "docker.build_image",
+          "input": {"tag": "{{git.commit_sha}}"}
+        }
+      ]
+    },
+    {
+      "phase": "Deploy to Staging",
+      "auto": true,
+      "actions": [
+        {
+          "tool": "cloudflare.deploy",
+          "input": {"environment": "staging"}
+        },
+        {
+          "tool": "playwright.test_all",
+          "input": {"environment": "staging"}
+        }
+      ]
+    },
+    {
+      "phase": "Deploy to Production",
+      "auto": false,
+      "require_approval": true,
+      "actions": [
+        {
+          "tool": "cloudflare.deploy",
+          "input": {"environment": "production"}
+        },
+        {
+          "tool": "sentry.create_release",
+          "input": {"version": "{{git.commit_sha}}"}
+        }
+      ]
+    },
+    {
+      "phase": "Post-Deployment",
+      "auto": true,
+      "actions": [
+        {
+          "tool": "sentry.monitor",
+          "duration": "1h"
+        },
+        {
+          "tool": "cloudflare.get_metrics",
+          "duration": "1h"
+        },
+        {
+          "tool": "slack.send_message",
+          "input": {
+            "channel": "#deployments",
+            "message": "Deployed {{git.commit_sha}} to production\n{{format_metrics()}}"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+================================================================================
+SECTION 4: PROGRESS TRACKING
+================================================================================
+
+OVERVIEW
+--------
+تتبع تلقائي لتقدم المهام والمشاريع.
+
+AUTO PROGRESS UPDATES
+---------------------
+
+```python
+class ProgressTracker:
+    def __init__(self):
+        self.tasks = {}
+        self.projects = {}
+    
+    def track_task(self, task_id):
+        """Track task progress automatically"""
+        task = self.get_task(task_id)
+        
+        # Monitor various signals
+        signals = {
+            'git_commits': self.count_commits(task),
+            'pr_status': self.get_pr_status(task),
+            'test_results': self.get_test_results(task),
+            'code_changes': self.analyze_code_changes(task),
+            'time_spent': self.calculate_time_spent(task)
+        }
+        
+        # Update progress
+        progress = self.calculate_progress(signals)
+        task.progress = progress
+        
+        # Update status
+        new_status = self.determine_status(task, signals)
+        if new_status != task.status:
+            self.update_status(task, new_status)
+        
+        # Check for blockers
+        blockers = self.detect_blockers(task, signals)
+        if blockers:
+            self.handle_blockers(task, blockers)
+        
+        return {
+            'progress': progress,
+            'status': new_status,
+            'signals': signals,
+            'blockers': blockers
+        }
+    
+    def calculate_progress(self, signals):
+        """Calculate task progress percentage"""
+        factors = []
+        
+        # Code changes
+        if signals['code_changes']:
+            factors.append(min(signals['code_changes'] / 100, 1.0) * 30)
+        
+        # Tests
+        if signals['test_results']:
+            factors.append(signals['test_results']['pass_rate'] * 30)
+        
+        # PR status
+        if signals['pr_status'] == 'approved':
+            factors.append(20)
+        elif signals['pr_status'] == 'open':
+            factors.append(10)
+        
+        # Commits
+        if signals['git_commits'] > 0:
+            factors.append(min(signals['git_commits'] / 5, 1.0) * 20)
+        
+        return min(sum(factors), 100)
+    
+    def detect_blockers(self, task, signals):
+        """Detect potential blockers"""
+        blockers = []
+        
+        # No activity for 3 days
+        if signals['time_spent'] == 0 and task.age_days > 3:
+            blockers.append({
+                'type': 'no_activity',
+                'severity': 'medium',
+                'message': 'No activity for 3 days'
+            })
+        
+        # Tests failing
+        if signals['test_results'] and signals['test_results']['pass_rate'] < 0.8:
+            blockers.append({
+                'type': 'failing_tests',
+                'severity': 'high',
+                'message': f"Only {signals['test_results']['pass_rate']*100}% tests passing"
+            })
+        
+        # PR not reviewed
+        if signals['pr_status'] == 'open' and task.age_days > 2:
+            blockers.append({
+                'type': 'needs_review',
+                'severity': 'medium',
+                'message': 'PR waiting for review'
+            })
+        
+        return blockers
+```
+
+---
+
+## AUTOMATED REPORTING
+
+```python
+def generate_progress_report(project_id):
+    """Generate automated progress report"""
+    
+    project = get_project(project_id)
+    tasks = get_project_tasks(project_id)
+    
+    # Calculate metrics
+    metrics = {
+        'total_tasks': len(tasks),
+        'completed': len([t for t in tasks if t.status == 'done']),
+        'in_progress': len([t for t in tasks if t.status == 'in_progress']),
+        'blocked': len([t for t in tasks if t.status == 'blocked']),
+        'not_started': len([t for t in tasks if t.status == 'todo']),
+        'completion_rate': calculate_completion_rate(tasks),
+        'velocity': calculate_velocity(tasks),
+        'estimated_completion': estimate_completion_date(tasks)
+    }
+    
+    # Identify issues
+    issues = []
+    
+    if metrics['blocked'] > 0:
+        issues.append(f"{metrics['blocked']} tasks are blocked")
+    
+    if metrics['velocity'] < project.target_velocity:
+        issues.append(f"Velocity ({metrics['velocity']}) below target ({project.target_velocity})")
+    
+    # Generate report
+    report = f"""
+# Progress Report: {project.name}
+
+## Overview
+- Total Tasks: {metrics['total_tasks']}
+- Completed: {metrics['completed']} ({metrics['completion_rate']}%)
+- In Progress: {metrics['in_progress']}
+- Blocked: {metrics['blocked']}
+- Not Started: {metrics['not_started']}
+
+## Velocity
+- Current: {metrics['velocity']} tasks/week
+- Target: {project.target_velocity} tasks/week
+
+## Estimated Completion
+{metrics['estimated_completion']}
+
+## Issues
+{format_issues(issues)}
+
+## Top Tasks
+{format_top_tasks(tasks)}
+"""
+    
+    return report
+```
+
+================================================================================
+SECTION 5: TEAM COLLABORATION
+================================================================================
+
+OVERVIEW
+--------
+تسهيل التعاون بين أعضاء الفريق.
+
+AUTO ASSIGNMENT
+--------------
+
+```python
+def auto_assign_task(task):
+    """Automatically assign task to best team member"""
+    
+    # Get team members
+    team = get_team_members()
+    
+    # Score each member
+    scores = {}
+    for member in team:
+        score = 0
+        
+        # Expertise match
+        if task.required_skills & member.skills:
+            score += 40
+        
+        # Availability
+        if member.current_workload < member.capacity:
+            score += 30
+        
+        # Past performance
+        if task.type in member.successful_tasks:
+            score += 20
+        
+        # Interest
+        if task.area in member.interests:
+            score += 10
+        
+        scores[member.id] = score
+    
+    # Select best member
+    best_member = max(scores, key=scores.get)
+    
+    return {
+        'assigned_to': best_member,
+        'score': scores[best_member],
+        'rationale': explain_assignment(best_member, task, scores)
+    }
+```
+
+================================================================================
+RESOURCES
+================================================================================
+
+### Task Management Tools
+- **Jira:** https://www.atlassian.com/software/jira
+- **Linear:** https://linear.app/
+- **Asana:** https://asana.com/
+
+### Automation Tools
+- **Zapier:** https://zapier.com/
+- **n8n:** https://n8n.io/
+- **GitHub Actions:** https://github.com/features/actions
+
+================================================================================
+END OF MODULE 18: TASK AI & AUTOMATION
+================================================================================
+

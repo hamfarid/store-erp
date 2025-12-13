@@ -1,0 +1,13 @@
+# robots.txt for Store Management System
+
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /settings/
+
+# Sitemap
+Sitemap: https://yourdomain.com/sitemap.xml
+

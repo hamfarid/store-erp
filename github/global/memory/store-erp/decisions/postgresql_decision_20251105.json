@@ -1,0 +1,31 @@
+{
+  "decision": "Use PostgreSQL for the Database",
+  "project": "Store ERP System",
+  "date": "2025-11-05",
+  "status": "DECIDED",
+  "priority": "HIGH",
+  "summary": "Use PostgreSQL as primary database for production, SQLite for development",
+  "rationale": [
+    "ACID compliance for financial transactions",
+    "Complex relationships support",
+    "Advanced features (JSON, full-text search)",
+    "Scalability and performance",
+    "Arabic language support",
+    "Team expertise"
+  ],
+  "implementation": {
+    "development": "SQLite",
+    "production": "PostgreSQL 15+",
+    "orm": "SQLAlchemy",
+    "migrations": "Alembic"
+  },
+  "alternatives_rejected": [
+    "MySQL/MariaDB (less features)",
+    "MongoDB (not suitable for relational data)"
+  ],
+  "trade_offs": [
+    "Complexity vs robustness",
+    "Cost vs scalability"
+  ],
+  "timestamp": "2025-11-05T11:38:54.366520"
+}

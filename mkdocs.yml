@@ -1,0 +1,183 @@
+# P1.54: MkDocs Configuration for GitHub Pages
+# Store Management System Documentation
+
+site_name: Store Management System
+site_url: https://hamfarid.github.io/Store/
+site_description: Comprehensive documentation for the Store Management System
+site_author: Store Team
+copyright: Copyright &copy; 2025 Store Management System
+
+repo_name: hamfarid/Store
+repo_url: https://github.com/hamfarid/Store
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: en
+  
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  
+  font:
+    text: Roboto
+    code: Roboto Mono
+  
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.follow
+  
+  icon:
+    logo: material/store
+    repo: fontawesome/brands/github
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/hamfarid/Store
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/store_system
+  
+  generator: false
+  
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+plugins:
+  - search:
+      lang: en
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+  - minify:
+      minify_html: true
+  - awesome-pages
+
+nav:
+  - Home: index.md
+  
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Configuration: getting-started/configuration.md
+    - Quick Start: getting-started/quickstart.md
+  
+  - Architecture:
+    - Overview: architecture/overview.md
+    - Backend: architecture/backend.md
+    - Frontend: architecture/frontend.md
+    - Database: architecture/database.md
+  
+  - API Reference:
+    - Overview: api/overview.md
+    - Authentication: api/authentication.md
+    - Users: api/users.md
+    - Products: api/products.md
+    - Inventory: api/inventory.md
+    - Invoices: api/invoices.md
+    - Partners: api/partners.md
+    - RAG: api/rag.md
+  
+  - Security:
+    - Overview: security/overview.md
+    - Authentication: security/authentication.md
+    - Authorization: security/authorization.md
+    - RBAC: security/rbac.md
+    - Best Practices: security/best-practices.md
+  
+  - Development:
+    - Contributing: development/contributing.md
+    - Code Style: development/code-style.md
+    - Testing: development/testing.md
+    - Debugging: development/debugging.md
+  
+  - Deployment:
+    - Docker: deployment/docker.md
+    - Kubernetes: deployment/kubernetes.md
+    - CI/CD: deployment/cicd.md
+    - Monitoring: deployment/monitoring.md
+  
+  - User Guide:
+    - Dashboard: user-guide/dashboard.md
+    - Products: user-guide/products.md
+    - Inventory: user-guide/inventory.md
+    - Invoices: user-guide/invoices.md
+    - Reports: user-guide/reports.md
+  
+  - Changelog: CHANGELOG.md
+  - Task List: TODO.md
+

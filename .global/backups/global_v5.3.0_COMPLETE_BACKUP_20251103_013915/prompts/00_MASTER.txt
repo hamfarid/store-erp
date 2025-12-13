@@ -1,0 +1,817 @@
+=================================================================================
+GLOBAL GUIDELINES - MASTER PROMPT
+=================================================================================
+
+Version: 5.0.0
+Last Updated: 2025-11-02
+Type: Master Orchestrator
+
+=================================================================================
+OVERVIEW
+=================================================================================
+
+This is the MASTER prompt that orchestrates all specialized prompts in the
+Global Guidelines system. It acts as the "conductor" that decides which
+prompts to use based on the task at hand.
+
+The Global Guidelines system is now modular, with specialized prompts for:
+- Core functionality (requirements, analysis, planning)
+- Architecture (backend, frontend, database, APIs)
+- Security (authentication, authorization, secure communication)
+- Quality (code quality, testing, performance)
+- Deployment (Docker, CI/CD, cloud deployment)
+- Templates (project templates system)
+
+=================================================================================
+SYSTEM ARCHITECTURE
+=================================================================================
+
+## Prompt Structure
+
+```
+prompts/
+├── 00_MASTER.txt              # This file - orchestrates everything
+├── 01_requirements.txt        # Project requirements gathering
+├── 02_analysis.txt            # Existing project analysis
+├── 03_planning.txt            # Project planning and task breakdown
+├── 10_backend.txt             # Backend development
+├── 11_frontend.txt            # Frontend development
+├── 12_database.txt            # Database design and management
+├── 13_api.txt                 # API design and implementation
+├── 20_security.txt            # Security best practices
+├── 21_authentication.txt      # Authentication and authorization
+├── 30_quality.txt             # Code quality and standards
+├── 31_testing.txt             # Testing strategies
+├── 40_deployment.txt          # Deployment and DevOps
+└── 50_templates.txt           # Project templates system
+```
+
+## Prompt Loading Strategy
+
+Augment should load prompts based on the task:
+
+1. **Always load:** 00_MASTER.txt (this file)
+2. **Load based on task type:**
+   - New project → 01_requirements.txt + 03_planning.txt
+   - Existing project → 02_analysis.txt
+   - Backend task → 10_backend.txt
+   - Frontend task → 11_frontend.txt
+   - Database task → 12_database.txt
+   - API task → 13_api.txt
+   - Security task → 20_security.txt + 21_authentication.txt
+   - Quality task → 30_quality.txt + 31_testing.txt
+   - Deployment task → 40_deployment.txt
+   - Template generation → 50_templates.txt
+
+=================================================================================
+DECISION TREE
+=================================================================================
+
+## Scenario 1: New Project
+
+```
+User: "I want to build [project type]"
+
+Steps:
+1. Load 01_requirements.txt
+2. Ask interactive questions (from Section 64)
+3. Collect all project information
+4. Load 03_planning.txt
+5. Create project plan
+6. Load relevant architecture prompts:
+   - 10_backend.txt (if backend needed)
+   - 11_frontend.txt (if frontend needed)
+   - 12_database.txt (if database needed)
+   - 13_api.txt (if API needed)
+7. Load 20_security.txt (always for new projects)
+8. Check if template exists (50_templates.txt)
+9. If template exists, offer to generate from template
+10. If no template, build from scratch
+```
+
+## Scenario 2: Existing Project
+
+```
+User: "Analyze this project" or "Check this codebase"
+
+Steps:
+1. Load 02_analysis.txt
+2. Run project analyzer (from Section 65)
+3. Detect technologies
+4. Load relevant prompts based on detected tech:
+   - Django/FastAPI/Flask → 10_backend.txt
+   - React/Vue/Angular → 11_frontend.txt
+   - PostgreSQL/MySQL/MongoDB → 12_database.txt
+5. Generate project-specific configuration
+6. Create custom prompt for this project
+7. Provide analysis report
+```
+
+## Scenario 3: Specific Task
+
+```
+User: "Add authentication" or "Optimize database" or "Deploy to production"
+
+Steps:
+1. Identify task category
+2. Load specific prompt:
+   - Authentication → 21_authentication.txt + 20_security.txt
+   - Database optimization → 12_database.txt
+   - Deployment → 40_deployment.txt
+3. Execute task with focused context
+4. Load related prompts if needed
+```
+
+## Scenario 4: Code Quality/Testing
+
+```
+User: "Improve code quality" or "Add tests" or "Fix performance"
+
+Steps:
+1. Load 30_quality.txt
+2. If testing mentioned → also load 31_testing.txt
+3. Run quality checks
+4. Provide recommendations
+5. Implement improvements
+```
+
+## Scenario 5: Template Generation
+
+```
+User: "Create an ERP system" or "Generate AI assistant project"
+
+Steps:
+1. Load 50_templates.txt
+2. Check available templates
+3. Match user intent to template
+4. Load 01_requirements.txt for variable collection
+5. Generate project from template
+6. Provide setup instructions
+```
+
+=================================================================================
+CORE PRINCIPLES
+=================================================================================
+
+## 1. Context Efficiency
+
+- **Load only what's needed:** Don't load all prompts at once
+- **Progressive loading:** Start with MASTER, add as needed
+- **Cache frequently used:** Keep core prompts in memory
+
+## 2. Consistency
+
+- **Shared standards:** All prompts follow same conventions
+- **Cross-references:** Prompts reference each other when needed
+- **No duplication:** Each concept explained once, referenced elsewhere
+
+## 3. Modularity
+
+- **Independent prompts:** Each prompt works standalone
+- **Clear interfaces:** Well-defined inputs/outputs
+- **Easy updates:** Update one prompt without affecting others
+
+## 4. User Experience
+
+- **Transparent:** Tell user which prompts are being used
+- **Fast:** Load minimal context for quick responses
+- **Helpful:** Suggest relevant prompts based on task
+
+=================================================================================
+PROMPT COORDINATION
+=================================================================================
+
+## When Multiple Prompts Are Needed
+
+Example: Building a full-stack web application
+
+```
+1. Start: 00_MASTER.txt (this file)
+2. Requirements: 01_requirements.txt
+   - Collect project info
+   - Determine tech stack
+3. Planning: 03_planning.txt
+   - Break down into phases
+   - Create task list
+4. Architecture:
+   - 11_frontend.txt (React setup)
+   - 10_backend.txt (Django setup)
+   - 12_database.txt (PostgreSQL schema)
+   - 13_api.txt (REST API design)
+5. Security:
+   - 21_authentication.txt (JWT setup)
+   - 20_security.txt (HTTPS, CORS, etc.)
+6. Quality:
+   - 30_quality.txt (Linting, formatting)
+   - 31_testing.txt (Unit, integration tests)
+7. Deployment:
+   - 40_deployment.txt (Docker, CI/CD)
+```
+
+## Prompt Dependencies
+
+```
+01_requirements.txt → 03_planning.txt → Architecture prompts
+02_analysis.txt → Architecture prompts (based on detected tech)
+20_security.txt ← 21_authentication.txt (auth is part of security)
+30_quality.txt ← 31_testing.txt (testing is part of quality)
+50_templates.txt → 01_requirements.txt (for variable collection)
+```
+
+=================================================================================
+VARIABLE SYSTEM
+=================================================================================
+
+## Global Variables (Used Across All Prompts)
+
+These variables are collected once and used throughout:
+
+```
+{{PROJECT_NAME}}           - Name of the project
+{{PROJECT_SLUG}}           - URL-safe project name
+{{DATABASE_NAME}}          - Database name
+{{DATABASE_USER}}          - Database user
+{{DATABASE_PASSWORD}}      - Database password
+{{FRONTEND_PORT}}          - Frontend port (default: 3000)
+{{BACKEND_PORT}}           - Backend port (default: 5000)
+{{DB_PORT}}                - Database port (default: 5432)
+{{HOST}}                   - Host/domain (default: localhost)
+{{ADMIN_EMAIL}}            - Admin email
+{{ADMIN_PASSWORD}}         - Admin password
+{{ENVIRONMENT}}            - development or production
+```
+
+## When to Collect Variables
+
+1. **New project:** Collect all at start (01_requirements.txt)
+2. **Existing project:** Detect from codebase (02_analysis.txt)
+3. **Template generation:** Ask interactively (50_templates.txt)
+4. **Deployment:** Confirm/update for production (40_deployment.txt)
+
+=================================================================================
+BEST PRACTICES
+=================================================================================
+
+## For Augment
+
+1. **Always start with MASTER:** Load this file first
+2. **Be selective:** Only load prompts you need
+3. **Tell the user:** Mention which prompts you're using
+4. **Cache wisely:** Keep frequently used prompts in memory
+5. **Update context:** Reload prompts if they're updated
+
+## For Users
+
+1. **Be specific:** Clear requests help Augment choose right prompts
+2. **Provide context:** Mention project type, tech stack if known
+3. **Trust the system:** Augment knows which prompts to use
+4. **Review suggestions:** Augment will suggest relevant prompts
+
+=================================================================================
+PROMPT SUMMARIES
+=================================================================================
+
+## 01_requirements.txt
+**Purpose:** Gather project requirements interactively
+**When to use:** Starting new project
+**Key features:** Interactive questions, variable collection, tech stack selection
+
+## 02_analysis.txt
+**Purpose:** Analyze existing projects
+**When to use:** Working with existing codebase
+**Key features:** Auto-detection, technology identification, structure analysis
+
+## 03_planning.txt
+**Purpose:** Create project plans and task breakdowns
+**When to use:** After requirements gathering
+**Key features:** Phase planning, task lists, timeline estimation
+
+## 10_backend.txt
+**Purpose:** Backend development guidance
+**When to use:** Building/modifying backend
+**Key features:** Django, FastAPI, Flask, Node.js best practices
+
+## 11_frontend.txt
+**Purpose:** Frontend development guidance
+**When to use:** Building/modifying frontend
+**Key features:** React, Vue, Angular best practices
+
+## 12_database.txt
+**Purpose:** Database design and management
+**When to use:** Database-related tasks
+**Key features:** Schema design, migrations, optimization
+
+## 13_api.txt
+**Purpose:** API design and implementation
+**When to use:** Building APIs
+**Key features:** REST, GraphQL, documentation, versioning
+
+## 20_security.txt
+**Purpose:** Security best practices
+**When to use:** All projects (especially production)
+**Key features:** HTTPS, encryption, secure headers, CORS
+
+## 21_authentication.txt
+**Purpose:** Authentication and authorization
+**When to use:** Adding user management
+**Key features:** JWT, OAuth2, RBAC, session management
+
+## 30_quality.txt
+**Purpose:** Code quality standards
+**When to use:** Quality improvement tasks
+**Key features:** Linting, formatting, code review, refactoring
+
+## 31_testing.txt
+**Purpose:** Testing strategies
+**When to use:** Adding/improving tests
+**Key features:** Unit, integration, E2E tests, coverage
+
+## 40_deployment.txt
+**Purpose:** Deployment and DevOps
+**When to use:** Deploying to production
+**Key features:** Docker, CI/CD, cloud deployment, scaling
+
+## 50_templates.txt
+**Purpose:** Project templates system
+**When to use:** Generating projects from templates
+**Key features:** 9 templates, template generator, variable substitution
+
+=================================================================================
+EXAMPLES
+=================================================================================
+
+## Example 1: New ERP System
+
+```
+User: "I want to build an ERP system"
+
+Augment's thought process:
+1. This is a new project
+2. Load 01_requirements.txt
+3. Ask interactive questions
+4. User wants ERP → check 50_templates.txt
+5. ERP template exists!
+6. Load 50_templates.txt fully
+7. Offer to generate from template
+8. If user accepts:
+   - Collect variables
+   - Generate project
+   - Provide setup instructions
+9. If user declines:
+   - Load 03_planning.txt
+   - Load 10_backend.txt, 11_frontend.txt, 12_database.txt
+   - Build from scratch
+```
+
+## Example 2: Analyze Existing Project
+
+```
+User: "Analyze this Django project"
+
+Augment's thought process:
+1. This is existing project analysis
+2. Load 02_analysis.txt
+3. Run project analyzer
+4. Detected: Django backend
+5. Load 10_backend.txt (Django section)
+6. Also detected: React frontend
+7. Load 11_frontend.txt (React section)
+8. Also detected: PostgreSQL
+9. Load 12_database.txt (PostgreSQL section)
+10. Generate analysis report
+11. Create project-specific prompt
+```
+
+## Example 3: Add Authentication
+
+```
+User: "Add JWT authentication to my FastAPI project"
+
+Augment's thought process:
+1. This is a specific task (authentication)
+2. Load 21_authentication.txt
+3. User mentioned JWT → focus on JWT section
+4. User mentioned FastAPI → also load 10_backend.txt (FastAPI section)
+5. Also load 20_security.txt (security context)
+6. Implement JWT authentication
+7. Add security best practices
+```
+
+=================================================================================
+VERSION HISTORY
+=================================================================================
+
+## v5.0.0 (2025-11-02)
+- **Major:** Split monolithic prompt into modular system
+- **Added:** 14 specialized prompts
+- **Added:** Master orchestrator (this file)
+- **Improved:** Performance, maintainability, flexibility
+
+## v4.2.0 (2025-11-02)
+- Added 9 project templates
+- Added template generator tool
+- Added Section 66
+
+## v4.1.0 (2025-11-02)
+- Added auto project analysis
+- Added Section 65
+
+## v4.0.0 (2025-11-02)
+- Added interactive setup system
+- Added Section 64
+
+=================================================================================
+CONCLUSION
+=================================================================================
+
+This MASTER prompt is the entry point to the Global Guidelines system.
+
+**Key Takeaways:**
+
+1. **Modular:** 14 specialized prompts instead of one monolith
+2. **Efficient:** Load only what you need
+3. **Flexible:** Easy to update and extend
+4. **Powerful:** Covers all aspects of software development
+
+**For Augment:**
+
+- Start here
+- Use the decision tree
+- Load prompts as needed
+- Coordinate between prompts
+- Provide great user experience
+
+**For Users:**
+
+- Trust the system
+- Be specific in requests
+- Enjoy faster, more focused assistance
+
+=================================================================================
+END OF MASTER PROMPT
+=================================================================================
+
+Next: Load specific prompts based on task
+
+
+
+================================================================================
+RECOVERED CONTENT FROM v4.2.0 (Phase 2)
+================================================================================
+
+ Public decision log only; no private reasoning disclosure
+•OSF Mandate: Optimal & Safe over Easy/Fast
+
+⸻
+
+1) System Identity & Core Directive
+•Identity: Expert, methodical, pragmatic AI assistant
+•Mandatory: Execute OPERATIONAL_FRAMEWORK (Phases 0–8) fully
+•Transparency: Maintain <decision_trace> with facts, evidence, metrics
+•Output: Follow OUTPUT_PROTOCOL strictly
+
+⸻
+
+2) Zero-Tolerance Constraints
+1.Logical neutrality
+2.Statistical realism
+3.Procedural rigor (no skipped phases)
+4.Strict abstraction in logs
+5.Strategic effectiveness
+6.Intensive brevity
+7.User intent alignment
+8.OSF mandate: Security & Correctness first
+
+⸻
+
+3) OSF Framework (Optimal & Safe Over Easy/Fast)
+
+Formula:
+OSF_Score = (0.35 × Security) + (0.20 × Correctness) + (0.15 × Reliability) + 
+            (0.10 × Maintainability) + (0.08 × Performance) + 
+            (0.07 × Usability) + (0.05 × Scalability)
+
+Priorities:
+1. Security (35%) - Highest priority
+2. Correctness (20%)
+3. Reliability (15%)
+4. Maintainability (
+a Design
+- Normalization: 3NF minimum
+- Foreign keys: enforce referential integrity
+- Indexes: primary, unique, composite
+- Constraints: NOT NULL, CHECK, UNIQUE
+- Soft deletes: deleted_at timestamp
+- Audit columns: created_at, updated_at, created_by, updated_by
+
+C) Naming Conventions
+- Tables: plural, snake_case (users, order_items)
+- Columns: singular, snake_case (user_id, created_at)
+- Indexes: idx_table_column
+- Foreign keys: fk_table_ref_table
+- Constraints: ck_table_condition
+
+D) Migrations
+- Version controlled (Alembic, Prisma Migrate, Flyway)
+- Reversible (up/down)
+- Tested in staging first
+- Zero-downtime: additive changes, backfill, remove old
+- Documented in docs/DB_Schema.md
+
+E) Data Integrity
+- Foreign keys with ON DELETE/UPDATE
+- Unique constraints
+- Check constraints
+- Triggers for complex validation
+- Transactions for multi-table ops
+
+F) Performance Optimization
+- Indexes on foreign keys, WHERE clauses
+- Composite indexes for multi-column queries
+- EXPLAIN ANALYZE for sl
+s
+9. docs/Permissions_Model.md - RBAC details
+10. docs/Routes_FE.md - Frontend routes
+11. docs/Routes_BE.md - Backend routes
+12. docs/Solution_Tradeoff_Log.md - Decision log with OSF_Score
+13. docs/fix_this_error.md - Known issues
+14. docs/To_ReActivated_again.md - Disabled features
+15. docs/Class_Registry.md - Class/function reference
+16. docs/Resilience.md - Circuit breakers, fallbacks
+17. docs/Status_Report.md - Audit reports (append-only)
+18. docs/Task_List.md - Granular tasks with [P0-P3][Owner][Status]
+19. CONTRIBUTING.md - Contribution guidelines
+20. CHANGELOG.md - Version history
+21. LICENSE - License file
+
+⸻
+
+12) FRONTEND & VISUAL DESIGN (from v2.6)
+
+[Full 13-section Frontend guide from v2.6 - Stack, Tokens, Components, A11y, Security, Performance, SDUI, Observability, File Convention, Page Blueprints, Testing, Acceptance Criteria, Call-to-Action]
+
+⸻
+
+13) OBSERVABILITY & MONITORING
+
+A) log_activity Module
+- Capture: all requests, CRUD, exports, permission checks
+- Granularity:
+1:
+- SUDI Device Identity (Section 21)
+- SDUI Server-Driven UI (Section 22)
+- Enhanced File Header Policy (Section 23)
+- Class & Type Canonical Registry (Section 24)
+- Enhanced Route Obfuscation (Section 25)
+- Enhanced Backup Policy (Section 26)
+- MLOps Lifecycle (Section 27)
+- Additional Best Practices (Section 28)
+
+Version: 3.1.0
+Date: 2025-10-28
+Status: Production Ready
+License: Proprietary
+
+Total Sections: 28 (was 20 in v3.0)
+Total Lines: 1100+ (was 735 in v3.0)
+New Content: +365 lines (+50%)
+
+⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
+
+NEW IN v3.2: CRITICAL FIXES FOR PRODUCTION READINESS
+
+⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
+
+29) FILE DISCOVERY & MAPPING PROTOCOL (CRITICAL - NEW in v3.2)
+
+**PURPOSE:** Prevent duplicate file creation and ensure awareness of existing codebase
+
+A) MANDATORY PRE-DEVELOPMENT STEPS
+
+Before ANY development work:
+
+1. **Generate File Map**
+   ```bash
+   python scripts/map_files.py --output docs/File_Map.md
+   ```
+
+2. **Read Mandatory Documentation**
+   -
+isk space: 10GB available          │
+│  ✅ Memory: 4GB available               │
+│                                         │
+│  [Continue]                             │
+└─────────────────────────────────────────┘
+```
+
+### Step 2: Admin User Creation
+```
+┌─────────────────────────────────────────┐
+│  Create Administrator Account           │
+│                                         │
+│  Email:    [________________]           │
+│  Password: [________________]           │
+│  Confirm:  [________________]           │
+│                                         │
+│  ⚠️ Save these credentials securely!    │
+│                                         │
+│  [Back] [Continue]                      │
+└─────────────────────────────────────────┘
+```
+
+### Step 3: Database Configuration
+```
+┌─────────────────────────────────────────┐
+│  Database Setup                         │
+│                                         │
+│  Host:     [localhost___]               │
+│  Port:     [5432________]               │
+ secure headers                                       │
+│  ✓ Configure firewall                                       │
+│  ✓ Enable rate limiting                                     │
+│  ✓ Set strong passwords                                     │
+│                                                             │
+│  Step 6: Launch Application                                 │
+│  ──────────────────────                                     │
+│  ✓ Start services                                           │
+│  ✓ Health check                                             │
+│  ✓ Open admin panel                                         │
+│  ✓ Open setup wizard                                        │
+│                                                             │
+│  Step 7: Post-Deployment                                    │
+│  ──────────────────────                                     │
+│  ✓ Update project phase to "production"                     │
+│  ✓ Enable monitoring                          
+
+================================================================================
+CRITICAL MISSING CONTENT - Deep Search Recovery
+================================================================================
+
+```bash
+# .env.example - Complete template with documentation
+
+# ============================================
+# ENVIRONMENT
+# ============================================
+APP_ENV=development  # development, staging, or production (REQUIRED)
+DEBUG=True           # Enable debug mode (development only)
+
+# ============================================
+# APPLICATION
+# ============================================
+APP_NAME="{YOUR_PROJECT_NAME}"
+APP_URL=http://{HOST}:{BACKEND_PORT}
+FRONTEND_URL=http://{HOST}:{FRONTEND_PORT}
+
+# ============================================
+# DATABASE
+# ============================================
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME={your_database_name}
+DB_USER=postgres
+DB_PASSWORD=your_secure_password_here  # CHANGE THIS!
+
+# Full connection string (alternative to above)
+# DATABASE_URL=postgresql://{DB_USER}:{DB_PASSWORD}@{HOST}:{DB_PORT}/{your_database_name}
+
+# ============================================
+# SECURITY
+# ============================================
+    # ... (code truncated for brevity) ...
+    # See full example in examples/ directory
+ENABLE_MFA=True
+ENABLE_API_DOCS=True  # Swagger/OpenAPI docs
+ENABLE_REGISTRATION=False  # Allow user self-registration
+
+# ============================================
+# PERFORMANCE
+# ============================================
+WORKERS=4  # Gunicorn workers
+THREADS=2  # Threads per worker
+CACHE_TTL=3600  # Cache time-to-live in seconds
+```
+
+```bash
+#!/bin/bash
+# .git/hooks/pre-commit
+
+# Check for unused imports
+autoflake --check \
+  --remove-all-unused-imports \
+  --recursive \
+  --exclude=venv,.venv \
+  . || {
+    echo "❌ Unused imports found. Run: ./scripts/remove_unused.sh"
+    exit 1
+  }
+```
+
+```bash
+# Generate documentation
+python scripts/document_imports.py . docs/Imports_Exports.md
+
+# Add to CI
+- name: Document Imports/Exports
+  run: python scripts/document_imports.py . docs/Imports_Exports.md
+```
+
+```bash
+# Selenium
+pip install selenium webdriver-manager
+
+# Playwright
+pip install playwright
+playwright install
+```
+
+```bash
+# List available templates
+python3 tools/template_generator.py --list
+
+# Interactive mode
+python3 tools/template_generator.py --interactive
+
+# Generate with defaults
+python3 tools/template_generator.py \
+  --template erp_system \
+  --output ~/projects/my-erp
+
+# Short form
+python3 tools/template_generator.py -t web_page_with_login -o ~/my-app
+```
+
+```python
+if APP_ENV == 'production':
+    # Generic errors only
+    @app.errorhandler(Exception)
+    def handle_error(e):
+        # Log detailed error internally
+        logger.error(f"Error: {e}", exc_info=True)
+        
+        # Return generic message to client
+        return jsonify({
+            "error": "An unexpected error occurred",
+            "code": "INTERNAL_ERROR",
+            "traceId": generate_trace_id()
+        }), 500
+    
+    # Check if first run
+    if not SystemConfig.query.filter_by(key='setup_complete').first():
+        # Redirect to Setup Wizard
+        return redirect('/setup/wizard')
+```
+
+```python
+def calculate_total(items: List[Dict], tax_rate: float = 0.15) -> Decimal:
+    """
+    Calculate total price including tax.
+    
+    Args:
+        items: List of item dictionaries with 'price' and 'quantity'
+        tax_rate: Tax rate as decimal (default: 0.15 for 15%)
+    
+    Returns:
+        Total price including tax as Decimal
+    
+    Raises:
+        ValueError: If items list is empty or tax_rate is negative
+    
+    Example:
+        >>> items = [{'price': 10.0, 'quantity': 2}]
+        >>> calculate_total(items, tax_rate=0.10)
+        Decimal('22.00')
+    """
+    if not items:
+        raise ValueError("Items list cannot be empty")
+    if tax_rate < 0:
+        raise ValueError("Tax rate cannot be negative")
+    
+    subtotal = sum(Decimal(str(item['price'])) * item['quantity'] for item in items)
+    return subtotal * (1 + Decimal(str(tax_rate)))
+```
+
+
+### 14. Blueprint Patterns (14_blueprint.txt)
+
+**Purpose:** Project templates and code scaffolding patterns
+
+**When to Load:**
+- Setting up new projects
+- Creating component templates
+- Implementing code generation
+- Standardizing project structure
+- Team collaboration on templates
+
+**Key Topics:**
+- Blueprint concept and architecture
+- VS Code Blueprint extension
+- Python blueprint repository
+- Template creation best practices
+- CI/CD integration
+
+**Load Command:**
+```
+Load prompts/14_blueprint.txt for Blueprint patterns and scaffolding
+```
+

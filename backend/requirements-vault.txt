@@ -1,0 +1,10 @@
+# Vault Integration Dependencies
+# Part of T21 - KMS/Vault Integration
+# Date: 2025-11-06
+
+# HashiCorp Vault Python Client
+hvac==2.1.0
+
+# For secret generation and cryptography
+cryptography>=41.0.0
+

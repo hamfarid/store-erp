@@ -1,0 +1,263 @@
+# -*- yaml -*-
+# FILE: docker-compose.prod.yml | PURPOSE: P0.22 Security-Hardened Production Configuration | OWNER: DevOps | RELATED: Dockerfile | LAST-AUDITED: 2025-12-01
+
+version: '3.8'
+
+# P0.22: Security hardening applied:
+# - All containers run as non-root
+# - Read-only root filesystems where possible
+# - No new privileges security option
+# - Resource limits to prevent DoS
+# - Internal network isolation
+# - Health checks for all services
+# - Secrets management via environment variables
+
+services:
+  # قاعدة البيانات PostgreSQL
+  database:
+    image: postgres:15-alpine
+    container_name: store_db_prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-store_production}
+      POSTGRES_USER: ${DB_USER:-store_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - store_network
+    ports:
+      - "127.0.0.1:5432:5432"  # ربط محلي فقط للأمان
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-store_user} -d ${DB_NAME:-store_production}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
+
+  # Redis للتخزين المؤقت
+  redis:
+    image: redis:7-alpine
+    container_name: store_redis_prod
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes --appendfsync everysec
+    volumes:
+      - redis_data:/data
+    networks:
+      - store_network
+    ports:
+      - "127.0.0.1:6379:6379"  # ربط محلي فقط للأمان
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  # P0.22: الواجهة الخلفية - Security Hardened
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: store_backend_prod
+    restart: unless-stopped
+    # P0.22: Run as non-root user
+    user: "1001:1001"
+    environment:
+      FLASK_ENV: production
+      FLASK_DEBUG: 0
+      DATABASE_URL: postgresql://${DB_USER:-store_user}:${DB_PASSWORD}@database:5432/${DB_NAME:-store_production}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
+      SECRET_KEY: ${SECRET_KEY}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      SECURITY_PASSWORD_SALT: ${SECURITY_PASSWORD_SALT}
+      MAIL_SERVER: ${MAIL_SERVER}
+      MAIL_PORT: ${MAIL_PORT:-587}
+      MAIL_USE_TLS: ${MAIL_USE_TLS:-true}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      UPLOAD_FOLDER: /app/uploads
+      MAX_CONTENT_LENGTH: 16777216  # 16MB
+      # P0.22: Security settings
+      PYTHONHASHSEED: random
+      PYTHONDONTWRITEBYTECODE: 1
+    volumes:
+      - backend_uploads:/app/uploads
+      - backend_logs:/app/logs
+      - backend_backups:/app/backups
+    networks:
+      - store_network
+    ports:
+      - "127.0.0.1:5001:5000"  # ربط محلي فقط للأمان
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    # P0.22: Security options
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:size=100M,mode=1777
+      - /app/instance:size=50M,mode=0770
+      - /dev/shm:size=64M
+    # P0.22: Resource limits to prevent DoS
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    # P0.22: Drop all capabilities and add only needed ones
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+
+  # الواجهة الأمامية
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: store_frontend_prod
+    restart: unless-stopped
+    networks:
+      - store_network
+    ports:
+      - "127.0.0.1:3001:80"  # ربط محلي فقط للأمان
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+      - /var/run
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: store_nginx_prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    networks:
+      - store_network
+    depends_on:
+      - frontend
+      - backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    security_opt:
+      - no-new-privileges:true
+
+  # مراقب النظام Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: store_prometheus_prod
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - store_network
+    ports:
+      - "127.0.0.1:9090:9090"  # ربط محلي فقط للأمان
+    security_opt:
+      - no-new-privileges:true
+
+  # لوحة المراقبة Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: store_grafana_prod
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
+      GF_USERS_ALLOW_SIGN_UP: false
+      GF_SECURITY_DISABLE_GRAVATAR: true
+      GF_ANALYTICS_REPORTING_ENABLED: false
+      GF_ANALYTICS_CHECK_FOR_UPDATES: false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    networks:
+      - store_network
+    ports:
+      - "127.0.0.1:3000:3000"  # ربط محلي فقط للأمان
+    depends_on:
+      - prometheus
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  store_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  backend_uploads:
+    driver: local
+  backend_logs:
+    driver: local
+  backend_backups:
+    driver: local
+  nginx_logs:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local

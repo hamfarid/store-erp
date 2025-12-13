@@ -1,0 +1,244 @@
+# -*- yaml -*-
+# FILE: monitoring/alert_rules.yml | PURPOSE: Prometheus Alert Rules | OWNER: DevOps | RELATED: prometheus.yml | LAST-AUDITED: 2025-10-21
+
+# قواعد التنبيهات - نظام إدارة المخزون العربي
+# Alert Rules - Arabic Inventory Management System
+
+groups:
+  # تنبيهات النظام الحرجة
+  # Critical system alerts
+  - name: system.critical
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: critical
+          category: system
+        annotations:
+          summary: "استخدام CPU عالي على {{ $labels.instance }}"
+          description: "استخدام CPU وصل إلى {{ $value }}% لأكثر من 5 دقائق"
+
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+        for: 5m
+        labels:
+          severity: critical
+          category: system
+        annotations:
+          summary: "استخدام الذاكرة عالي على {{ $labels.instance }}"
+          description: "استخدام الذاكرة وصل إلى {{ $value }}% لأكثر من 5 دقائق"
+
+      - alert: DiskSpaceLow
+        expr: (node_filesystem_avail_bytes{fstype!="tmpfs"} / node_filesystem_size_bytes{fstype!="tmpfs"}) * 100 < 10
+        for: 2m
+        labels:
+          severity: critical
+          category: storage
+        annotations:
+          summary: "مساحة القرص منخفضة على {{ $labels.instance }}"
+          description: "المساحة المتاحة {{ $value }}% في {{ $labels.mountpoint }}"
+
+      - alert: SystemDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+          category: availability
+        annotations:
+          summary: "النظام {{ $labels.instance }} متوقف"
+          description: "لا يمكن الوصول إلى {{ $labels.job }} على {{ $labels.instance }}"
+
+  # تنبيهات التطبيق
+  # Application alerts
+  - name: application.alerts
+    rules:
+      - alert: HighErrorRate
+        expr: rate(flask_http_request_exceptions_total[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+          category: application
+        annotations:
+          summary: "معدل أخطاء عالي في التطبيق"
+          description: "معدل الأخطاء وصل إلى {{ $value }} أخطاء/ثانية"
+
+      - alert: SlowResponseTime
+        expr: histogram_quantile(0.95, rate(flask_http_request_duration_seconds_bucket[5m])) > 2
+        for: 3m
+        labels:
+          severity: warning
+          category: performance
+        annotations:
+          summary: "وقت الاستجابة بطيء"
+          description: "95% من الطلبات تستغرق أكثر من {{ $value }} ثانية"
+
+      - alert: DatabaseConnectionsHigh
+        expr: pg_stat_database_numbackends / pg_settings_max_connections * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          category: database
+        annotations:
+          summary: "اتصالات قاعدة البيانات عالية"
+          description: "استخدام {{ $value }}% من اتصالات قاعدة البيانات"
+
+      - alert: RedisMemoryHigh
+        expr: redis_memory_used_bytes / redis_memory_max_bytes * 100 > 90
+        for: 5m
+        labels:
+          severity: warning
+          category: cache
+        annotations:
+          summary: "استخدام ذاكرة Redis عالي"
+          description: "استخدام {{ $value }}% من ذاكرة Redis"
+
+  # تنبيهات الأمان
+  # Security alerts
+  - name: security.alerts
+    rules:
+      - alert: HighFailedLogins
+        expr: increase(flask_http_request_total{status="401"}[5m]) > 10
+        for: 1m
+        labels:
+          severity: critical
+          category: security
+        annotations:
+          summary: "محاولات تسجيل دخول فاشلة عالية"
+          description: "{{ $value }} محاولة تسجيل دخول فاشلة في آخر 5 دقائق"
+
+      - alert: SuspiciousActivity
+        expr: rate(nginx_http_requests_total{status=~"4.."}[5m]) > 5
+        for: 2m
+        labels:
+          severity: warning
+          category: security
+        annotations:
+          summary: "نشاط مشبوه في الشبكة"
+          description: "معدل عالي من أخطاء 4xx: {{ $value }} طلبات/ثانية"
+
+      - alert: SSLCertificateExpiring
+        expr: ssl_cert_not_after - time() < 7 * 24 * 3600
+        for: 1h
+        labels:
+          severity: warning
+          category: security
+        annotations:
+          summary: "شهادة SSL ستنتهي قريباً"
+          description: "شهادة SSL لـ {{ $labels.instance }} ستنتهي خلال أسبوع"
+
+  # تنبيهات قاعدة البيانات
+  # Database alerts
+  - name: database.alerts
+    rules:
+      - alert: DatabaseDown
+        expr: pg_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          category: database
+        annotations:
+          summary: "قاعدة البيانات متوقفة"
+          description: "لا يمكن الوصول إلى قاعدة البيانات PostgreSQL"
+
+      - alert: LongRunningQueries
+        expr: pg_stat_activity_max_tx_duration > 300
+        for: 2m
+        labels:
+          severity: warning
+          category: database
+        annotations:
+          summary: "استعلامات طويلة المدى"
+          description: "يوجد استعلام يعمل لأكثر من {{ $value }} ثانية"
+
+      - alert: DatabaseDeadlocks
+        expr: increase(pg_stat_database_deadlocks[5m]) > 0
+        for: 1m
+        labels:
+          severity: warning
+          category: database
+        annotations:
+          summary: "تعارض في قاعدة البيانات"
+          description: "{{ $value }} حالة تعارض في آخر 5 دقائق"
+
+  # تنبيهات الشبكة
+  # Network alerts
+  - name: network.alerts
+    rules:
+      - alert: HighNetworkTraffic
+        expr: rate(node_network_receive_bytes_total[5m]) > 100000000  # 100MB/s
+        for: 5m
+        labels:
+          severity: warning
+          category: network
+        annotations:
+          summary: "حركة شبكة عالية"
+          description: "حركة الشبكة الواردة {{ $value }} بايت/ثانية"
+
+      - alert: WebsiteDown
+        expr: probe_success == 0
+        for: 1m
+        labels:
+          severity: critical
+          category: availability
+        annotations:
+          summary: "الموقع غير متاح"
+          description: "لا يمكن الوصول إلى {{ $labels.instance }}"
+
+  # تنبيهات النسخ الاحتياطية
+  # Backup alerts
+  - name: backup.alerts
+    rules:
+      - alert: BackupFailed
+        expr: backup_last_success_timestamp < time() - 24 * 3600
+        for: 1m
+        labels:
+          severity: critical
+          category: backup
+        annotations:
+          summary: "فشل النسخة الاحتياطية"
+          description: "لم يتم إنشاء نسخة احتياطية ناجحة منذ أكثر من 24 ساعة"
+
+      - alert: BackupSizeAnomaly
+        expr: abs(backup_size_bytes - avg_over_time(backup_size_bytes[7d])) / avg_over_time(backup_size_bytes[7d]) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+          category: backup
+        annotations:
+          summary: "حجم النسخة الاحتياطية غير طبيعي"
+          description: "حجم النسخة الاحتياطية يختلف بنسبة {{ $value }}% عن المتوسط"
+
+  # تنبيهات الأعمال
+  # Business alerts
+  - name: business.alerts
+    rules:
+      - alert: LowStockLevels
+        expr: inventory_low_stock_items > 10
+        for: 5m
+        labels:
+          severity: warning
+          category: business
+        annotations:
+          summary: "مستويات مخزون منخفضة"
+          description: "{{ $value }} منتج لديه مخزون منخفض"
+
+      - alert: HighOrderVolume
+        expr: rate(orders_total[1h]) > 100
+        for: 10m
+        labels:
+          severity: info
+          category: business
+        annotations:
+          summary: "حجم طلبات عالي"
+          description: "معدل الطلبات وصل إلى {{ $value }} طلب/ساعة"
+
+      - alert: PaymentFailures
+        expr: rate(payment_failures_total[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+          category: business
+        annotations:
+          summary: "فشل في المدفوعات"
+          description: "معدل فشل المدفوعات {{ $value }} فشل/ثانية"

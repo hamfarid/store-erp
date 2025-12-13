@@ -1,0 +1,21 @@
+[flake8]
+max-line-length = 120
+exclude = 
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    node_modules,
+    dist,
+    build,
+    .pytest_cache,
+    .mypy_cache,
+    htmlcov,
+    migrations,
+    test_files_archive,
+    unneed,
+    unneeded
+ignore = E203,E266,W503,E501
+per-file-ignores =
+    __init__.py:F401
+    backend/unify_invoice_models.py:W291,W293

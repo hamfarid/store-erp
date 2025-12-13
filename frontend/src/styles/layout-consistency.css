@@ -1,0 +1,628 @@
+/**
+ * Layout Consistency Fixes
+ * Ensures consistent layout and spacing across all pages
+ */
+
+/* ============================================================================
+   Container Consistency
+   ============================================================================ */
+
+/* Standard page container */
+.page-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .page-container {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-container {
+    padding: 2.5rem;
+    max-width: 1400px;
+  }
+}
+
+/* Content wrapper */
+.content-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* ============================================================================
+   Grid Layout Consistency
+   ============================================================================ */
+
+/* Standard grid layouts */
+.grid-container {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.grid-1 {
+  grid-template-columns: 1fr;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================================================
+   Card Consistency
+   ============================================================================ */
+
+.card-standard {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.dark .card-standard {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dark .card-header {
+  border-bottom-color: #374151;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.dark .card-title {
+  color: #f9fafb;
+}
+
+.card-content {
+  width: 100%;
+}
+
+/* ============================================================================
+   Table Consistency
+   ============================================================================ */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  background: white;
+}
+
+.dark .table-wrapper {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.table-standard {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.table-standard thead {
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.dark .table-standard thead {
+  background: #111827;
+  border-bottom-color: #374151;
+}
+
+.table-standard th {
+  padding: 1rem;
+  text-align: right;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.dark .table-standard th {
+  color: #d1d5db;
+}
+
+.table-standard td {
+  padding: 1rem;
+  text-align: right;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.875rem;
+  color: #111827;
+}
+
+.dark .table-standard td {
+  border-bottom-color: #374151;
+  color: #f9fafb;
+}
+
+.table-standard tbody tr:hover {
+  background: #f9fafb;
+}
+
+.dark .table-standard tbody tr:hover {
+  background: #111827;
+}
+
+.table-standard tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ============================================================================
+   Form Consistency
+   ============================================================================ */
+
+.form-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.form-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.form-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .form-grid-2,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #374151;
+  text-align: right;
+}
+
+.dark .form-label {
+  color: #d1d5db;
+}
+
+.form-input-standard {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  background: white;
+  color: #111827;
+  direction: rtl;
+  text-align: right;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dark .form-input-standard {
+  background: #1f2937;
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.form-input-standard:focus {
+  outline: none;
+  border-color: #80AA45;
+  box-shadow: 0 0 0 3px rgba(128, 170, 69, 0.1);
+}
+
+/* ============================================================================
+   Button Group Consistency
+   ============================================================================ */
+
+.button-group {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.button-group-right {
+  justify-content: flex-end;
+}
+
+.button-group-left {
+  justify-content: flex-start;
+}
+
+.button-group-center {
+  justify-content: center;
+}
+
+.button-group-space-between {
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .button-group {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .button-group > * {
+    width: 100%;
+  }
+}
+
+/* ============================================================================
+   Page Header Consistency
+   ============================================================================ */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.dark .page-header {
+  border-bottom-color: #374151;
+}
+
+.page-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.dark .page-title {
+  color: #f9fafb;
+}
+
+.page-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .page-actions {
+    width: 100%;
+  }
+  
+  .page-actions > * {
+    flex: 1;
+  }
+}
+
+/* ============================================================================
+   Search and Filter Bar Consistency
+   ============================================================================ */
+
+.search-filter-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-filter-bar .search-input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-filter-bar .filter-select {
+  min-width: 150px;
+}
+
+.search-filter-bar .action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .search-filter-bar {
+    flex-direction: column;
+  }
+  
+  .search-filter-bar .search-input,
+  .search-filter-bar .filter-select {
+    width: 100%;
+  }
+}
+
+/* ============================================================================
+   Stats Cards Consistency
+   ============================================================================ */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stats-card {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dark .stats-card {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.stats-card-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0;
+}
+
+.dark .stats-card-title {
+  color: #9ca3af;
+}
+
+.stats-card-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.dark .stats-card-value {
+  color: #f9fafb;
+}
+
+.stats-card-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dark .stats-card-footer {
+  border-top-color: #374151;
+}
+
+/* ============================================================================
+   Empty State Consistency
+   ============================================================================ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  width: 100%;
+}
+
+.empty-state-icon {
+  width: 4rem;
+  height: 4rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.dark .empty-state-icon {
+  color: #6b7280;
+}
+
+.empty-state-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.dark .empty-state-title {
+  color: #f9fafb;
+}
+
+.empty-state-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+  max-width: 400px;
+  margin-bottom: 1.5rem;
+}
+
+.dark .empty-state-description {
+  color: #9ca3af;
+}
+
+/* ============================================================================
+   Loading State Consistency
+   ============================================================================ */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  width: 100%;
+}
+
+.loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid #e5e7eb;
+  border-top-color: #80AA45;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.dark .loading-spinner {
+  border-color: #374151;
+  border-top-color: #80AA45;
+}
+
+.loading-text {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.dark .loading-text {
+  color: #9ca3af;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+   RTL Fixes
+   ============================================================================ */
+
+[dir="rtl"] .page-container,
+[dir="rtl"] .content-wrapper {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .table-standard th,
+[dir="rtl"] .table-standard td {
+  text-align: right;
+}
+
+[dir="rtl"] .form-label,
+[dir="rtl"] .form-input-standard {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .button-group-right {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .button-group-left {
+  justify-content: flex-end;
+}
+
+/* ============================================================================
+   Responsive Fixes
+   ============================================================================ */
+
+@media (max-width: 640px) {
+  .page-container {
+    padding: 1rem;
+  }
+  
+  .card-standard {
+    padding: 1rem;
+  }
+  
+  .table-wrapper {
+    font-size: 0.75rem;
+  }
+  
+  .table-standard th,
+  .table-standard td {
+    padding: 0.5rem;
+  }
+}
+
+/* ============================================================================
+   Print Styles
+   ============================================================================ */
+
+@media print {
+  .page-container {
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  .button-group,
+  .page-actions,
+  .search-filter-bar {
+    display: none;
+  }
+  
+  .table-wrapper {
+    border: none;
+    box-shadow: none;
+  }
+}
+

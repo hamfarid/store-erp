@@ -1,0 +1,30 @@
+تقرير الإصلاحات السريعة
+==================================================
+
+وقت التنفيذ: 2025-10-04 09:47:10
+مجلد النسخ الاحتياطية: quick_fix_backup_20251004_094710
+عدد الإصلاحات: 21
+
+تفاصيل الإصلاحات:
+------------------------------
+ 1. ⚠️ لم يتم العثور على نمط Flask app
+ 2. ✅ إزالة كلمات مرور ثابتة من create_admin_direct.py
+ 3. ✅ إزالة كلمات مرور ثابتة من create_admin_user.py
+ 4. ✅ إزالة كلمات مرور ثابتة من simple_reports_server.js
+ 5. ✅ حذف قاعدة بيانات مكررة: src/inventory.db
+ 6. 💾 نسخة احتياطية: quick_fix_backup_20251004_094710/inventory.db
+ 7. ✅ حذف قاعدة بيانات مكررة: src/instance/inventory.db
+ 8. 💾 نسخة احتياطية: quick_fix_backup_20251004_094710/inventory.db
+ 9. ✅ حذف قاعدة بيانات مكررة: instance/inventory_encrypted_test_983efc.db
+10. 💾 نسخة احتياطية: quick_fix_backup_20251004_094710/inventory_encrypted_test_983efc.db
+11. ✅ حذف قاعدة بيانات مكررة: instance/locktest_smoke.db
+12. 💾 نسخة احتياطية: quick_fix_backup_20251004_094710/locktest_smoke.db
+13. 📦 نقل ملف اختبار: test_all_pages.py -> test_files_archive/test_all_pages.py
+14. 📦 نقل ملف اختبار: test_endpoints.py -> test_files_archive/test_endpoints.py
+15. 📦 نقل ملف اختبار: test_login.py -> test_files_archive/test_login.py
+16. 📦 نقل ملف اختبار: test_response_format.py -> test_files_archive/test_response_format.py
+17. 📦 نقل ملف اختبار: integration_test.py -> test_files_archive/integration_test.py
+18. 📦 نقل ملف اختبار: requirements-dev.txt -> test_files_archive/requirements-dev.txt
+19. ✅ تم نقل 6 ملف اختبار إلى test_files_archive
+20. ✅ حذف ملف مكرر: database.py (الاحتفاظ بـ src/database.py)
+21. ✅ إضافة متغيرات أمان جديدة إلى .env

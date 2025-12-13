@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-11-05T09:38:39.317847",
+  "type": "project_knowledge",
+  "project": "Store ERP",
+  "knowledge": {
+    "project_name": "Store",
+    "project_type": "ERP System - Arabic Inventory Management",
+    "location": "D:\\APPS_AI\\store\\Store",
+    "technologies": {
+      "backend": "Flask (Python)",
+      "frontend": "React + Vite",
+      "database": "SQLite",
+      "deployment": "Docker"
+    },
+    "features": [
+      "Product Management",
+      "Customer Management",
+      "Supplier Management",
+      "Inventory Tracking",
+      "Sales Management",
+      "Purchase Management",
+      "Reporting & Analytics"
+    ],
+    "characteristics": {
+      "rtl_support": true,
+      "language": "Arabic",
+      "status": "production"
+    }
+  },
+  "helper_tools": {
+    "memory_location": "C:\\Users\\hadym\\.global\\memory",
+    "mcp_location": "C:\\Users\\hadym\\.global\\mcp",
+    "sentry_integration": true
+  }
+}

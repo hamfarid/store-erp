@@ -1,0 +1,151 @@
+/* Layout and Sidebar Fixed Styles */
+
+/* RTL Direction */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Sidebar Position Fix */
+aside.fixed {
+  position: fixed;
+  right: 0;
+  top: 4rem; /* Header height */
+  width: 18rem; /* 72 = w-72 */
+  height: calc(100vh - 4rem);
+  background-color: white;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  z-index: 30;
+}
+
+/* Main Content Adjustment */
+main.flex-1 {
+  flex: 1;
+  transition: padding-right 0.3s ease;
+}
+
+main.pr-72 {
+  padding-right: 18rem; /* Match sidebar width */
+}
+
+main.pr-0 {
+  padding-right: 0;
+}
+
+/* Prevent body scroll when sidebar open on mobile */
+@media (max-width: 1024px) {
+  body.sidebar-open {
+    overflow: hidden;
+  }
+  
+  aside.fixed {
+    transform: translateX(0);
+  }
+  
+  aside.fixed.hidden {
+    transform: translateX(100%);
+  }
+}
+
+/* Overlay for mobile */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+/* Header Fix */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Flex Container */
+.flex {
+  display: flex;
+}
+
+/* Transitions */
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+/* Spacing */
+.p-6 {
+  padding: 1.5rem;
+}
+
+/* Background */
+.bg-white {
+  background-color: white;
+}
+
+/* Border Radius */
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+/* Shadow */
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Min Height */
+.min-h-96 {
+  min-height: 24rem;
+}
+
+/* Z-index Layers */
+.z-20 {
+  z-index: 20;
+}
+
+.z-30 {
+  z-index: 30;
+}
+
+.z-40 {
+  z-index: 40;
+}
+
+/* Hide on Large Screens */
+@media (min-width: 1024px) {
+  .lg\:hidden {
+    display: none;
+  }
+}
+
+/* Scrollbar Styling for Sidebar */
+aside::-webkit-scrollbar {
+  width: 6px;
+}
+
+aside::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+aside::-webkit-scrollbar-thumb {
+  background: #80AA45;
+  border-radius: 3px;
+}
+
+aside::-webkit-scrollbar-thumb:hover {
+  background: #689030;
+}

@@ -1,0 +1,103 @@
+# .global Directory Structure
+
+This directory contains local project configuration that should NOT be committed to Git.
+
+## Structure
+
+```
+.global/
+└── project_config.json    # Project configuration file
+```
+
+## Creating .global
+
+### Option 1: Interactive Setup
+```bash
+python tools/project_config_manager.py setup
+```
+
+### Option 2: Manual Creation
+```bash
+mkdir -p .global
+cp .global.example/project_config.example.json .global/project_config.json
+# Edit the file with your settings
+```
+
+## Configuration File Format
+
+```json
+{
+  "project": {
+    "name": "your-project-name",
+    "phase": "development",
+    "deployed": false,
+    "created_at": "2025-01-02T12:00:00",
+    "updated_at": "2025-01-02T12:00:00"
+  },
+  "ports": {
+    "frontend": 3000,
+    "backend": 5000,
+    "database": 5432
+  },
+  "database": {
+    "name": "your_db_name",
+    "preserve_data": false,
+    "add_sample_data": true,
+    "type": "postgresql",
+    "host": "localhost",
+    "port": 5432
+  },
+  "environment": {
+    "type": "local",
+    "host": "localhost",
+    "domain": null,
+    "ip_address": null
+  },
+  "admin": {
+    "username": "admin",
+    "email": "admin@example.com",
+    "password_hash": null,
+    "created": false
+  },
+  "features": {
+    "auto_backup": true,
+    "logging": true,
+    "monitoring": true
+  }
+}
+```
+
+## Usage with project_config_manager.py
+
+```bash
+# Setup new project
+python tools/project_config_manager.py setup
+
+# Show current configuration
+python tools/project_config_manager.py show
+
+# Generate .env file from config
+python tools/project_config_manager.py env
+
+# Deploy to production
+python tools/project_config_manager.py deploy
+```
+
+## Security Notes
+
+⚠️ **IMPORTANT:**
+- Never commit `.global/` to Git
+- Already added to `.gitignore`
+- Contains sensitive project configuration
+- Each developer should create their own `.global/`
+
+## Why .global is Ignored
+
+The `.global/` directory contains:
+- Local development settings
+- Port configurations that may differ per developer
+- Database credentials (if any)
+- Environment-specific configuration
+- Project state that is machine-specific
+
+Each team member should run the setup to create their own configuration.

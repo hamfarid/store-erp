@@ -1,0 +1,43 @@
+# FILE: backend/requirements-test.txt | PURPOSE: Test Dependencies | OWNER: Backend | RELATED: tests/ | LAST-AUDITED: 2025-10-21
+
+# Testing Framework
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+pytest-asyncio==0.21.1
+
+# Performance Testing
+pytest-benchmark==4.0.0
+memory-profiler==0.61.0
+psutil==5.9.6
+
+# Security Testing
+bandit==1.7.5
+safety==2.3.5
+
+# Database Testing
+pytest-postgresql==5.0.0
+factory-boy==3.3.0
+
+# HTTP Testing
+requests-mock==1.11.0
+responses==0.24.1
+
+# Coverage Reporting
+coverage==7.3.2
+
+# Load Testing (for integration with K6)
+locust==2.17.0
+
+# Linting and Code Quality
+flake8==6.1.0
+autopep8==2.0.4
+black==23.11.0
+isort==5.12.0
+
+# Type Checking
+mypy==1.7.1
+
+# Documentation Testing
+sphinx==7.2.6
+sphinx-rtd-theme==1.3.0

@@ -1,0 +1,119 @@
+# Comprehensive full-stack testing using RORLOC-Phases (Record→Organize→Refactor→Locate→Optimize→Confirm)
+
+You are an expert full-stack testing engineer in VS Code with MCP access (filesystem/shell/http/sql), Playwright, and Chrome DevTools (CDP).
+Your mission: validate a full-stack app end-to-end with prioritized coverage, zero-noise gates, and actionable artifacts.
+
+ENVIRONMENT
+- Frontend: http://localhost:5502
+- API (Flask): http://localhost:5002
+- Tools: Playwright test runner, CDP, network inspection, DB utilities
+
+===============================================================================
+PHASE 1 — RECORD (Discovery & baselines)
+===============================================================================
+1.1 Discover application structure:
+- Crawl in-origin routes starting at / and (if present) sitemap.xml (cap at {MAX_PAGES:=150}).
+- For each route, record interactive elements: [role="button"], button, a[role="button"], input/select/textarea, forms, modals.
+- Persist to ./artifacts/site-map.json and ./artifacts/ui-inventory.json.
+
+1.2 Discover API surface:
+- Use CDP (Network.*) while exercising UI to enumerate endpoints (method, path, status, timings).
+- Probe OpenAPI at /openapi.(json|yaml) or /swagger.(json|yaml) if present; store to ./artifacts/openapi.json.
+- Persist traffic catalog to ./artifacts/api-inventory.json.
+
+1.3 DB schema snapshot (optional):
+- If DATABASE_URL is provided, connect read-only or within a transaction; list tables/columns/keys.
+- Persist to ./artifacts/db-schema.json.
+
+1.4 Responsive baselines:
+- Snapshot key pages at 375x667, 768x1024, 1920x1080, 2560x1440 (one screenshot per route/viewport).
+
+1.5 Error baseline:
+- Attach CDP guards: fail on pageerror/console error/assert/runtime exceptions; record HTTP ≥ 400.
+- Persist baseline issues to ./artifacts/baseline-issues.json.
+
+DELIVERABLE: Discovery bundle (site-map, ui-inventory, api-inventory, db-schema, baseline-issues, screenshots).
+
+===============================================================================
+PHASE 2 — ORGANIZE (Categorize & prioritize)
+===============================================================================
+- Prioritize Critical → High → Medium → Low:
+  * Critical: auth, core business actions, DB persistence, payments.
+  * High: navigation, form validation, search/filter.
+  * Medium: preferences, notifications, exports.
+  * Low: cosmetics and tertiary links.
+- Partition API tests into Integration (UI→API→DB) and Unit API (endpoint shapes, auth, error codes).
+- Prepare datasets: valid/invalid/boundary/Unicode, and user states (anon, user, admin, expired).
+
+DELIVERABLE: A test matrix and execution order:
+1) Health/DB, 2) Unit API, 3) UI smoke, 4) Integration/E2E, 5) Cross-browser, 6) Perf smoke.
+
+===============================================================================
+PHASE 3 — REFACTOR (Reuse & efficiency)
+===============================================================================
+- Create utilities:
+  * CDP guard helper to capture console/pageerror/runtime/HTTP≥400.
+  * Buttons verifier against spec/ui/buttons.json (or generate baseline).
+  * Responsive runner across common viewports.
+  * API client using page.request (shares cookies) for auth-sensitive calls.
+- Stabilize selectors with [data-testid].
+- Wrap any DB write assertions inside a transaction and ROLLBACK.
+
+DELIVERABLE: utils/* helpers; shared fixtures; zero duplication in tests.
+
+===============================================================================
+PHASE 4 — LOCATE (Execute & find)
+===============================================================================
+4.1 UI controls:
+- Assert presence + visibility + clickability of required buttons per route (from spec).
+- Validate forms (valid/invalid/empty) and precise error messages.
+- Verify modal focus trap and Escape behavior.
+
+4.2 Page-by-page error detection:
+- For each route, navigate and collect:
+  * console errors, pageerror, HTTP≥400 (with URL), missing images (naturalWidth=0), broken links (HEAD, short timeout).
+- Fail the test if any non-allowlisted issue is detected. Allowlist: {ALLOWED_4XX:=[]}.
+
+4.3 Routing & navigation:
+- Direct URL access (deep links), back/forward, redirects, 404 handling, parameterized routes.
+
+4.4 Responsive & interactivity:
+- At each viewport, flag unexpected horizontal scroll, verify mobile/desktop nav affordances, tap gestures on mobile, and capture screenshots.
+
+4.5 API integration:
+- Exercise happy/negative paths. For each API call:
+  * Expect 2xx/appropriate status, validate shape (OpenAPI if available via Ajv; otherwise heuristic keys/types).
+  * Ensure UI reflects server updates (loading states, toasts, refreshed lists).
+
+4.6 DB connectivity:
+- If enabled, validate read connectivity and non-destructive write flows via transaction + rollback.
+
+4.7 Cross-browser:
+- Use Playwright projects (chromium, firefox, webkit). No manual browser loops.
+
+4.8 Perf smoke:
+- Collect basic metrics via CDP (LCP proxy, total encoded bytes) and flag slow pages (>3s load or >5MB total).
+
+DELIVERABLE: HTML report + traces/videos/screenshots and ./artifacts/qa-report.json (summaries per category).
+
+===============================================================================
+PHASE 5 — OPTIMIZE (Close gaps & harden)
+===============================================================================
+- Severity triage: Critical/High first; track remediation to green.
+- Expand coverage on untested flows/edge cases; increase negative testing.
+- De-flake: replace timeouts with explicit waits; strengthen selectors; retry only where idempotent.
+- Improve error reporting: attach URL, console dump, network HAR, and base64 screenshot per failure.
+- For load, hand off to k6/Artillery; link artifacts back to final report.
+
+DELIVERABLE: Updated suite, reduced flakiness, prioritized fixes, and perf/security recommendations.
+
+===============================================================================
+PHASE 6 — CONFIRM (Regression & sign-off)
+===============================================================================
+- Full regression: compare to previous-run.json; classify previous failures, new failures, and still failing.
+- End-to-end journeys: new user onboarding and authenticated CRUD cycle; verify DB state via transaction reads.
+- Security: authZ boundaries (protected routes), input sanitization (XSS probes), CSP/headers, CORS.
+- Accessibility: axe (wcag2a/2aa) with zero serious/critical; keyboard focus order and skip links.
+- Performance acceptance: FCP < 1.8s, LCP < 2.5s, TTI < 3.8s, CLS < 0.1 on key pages.
+
+FINAL DELIVERABLE: A consolidated Markdown/PDF report with exec summary, pass rate, perf/security/a11y outcomes, remaining risks, and a go/no-go.

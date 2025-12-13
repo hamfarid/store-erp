@@ -1,0 +1,175 @@
+# -*- yaml -*-
+# FILE: monitoring/prometheus.yml | PURPOSE: Prometheus Configuration for System Monitoring | OWNER: DevOps | RELATED: docker-compose.prod.yml | LAST-AUDITED: 2025-10-21
+
+# تكوين Prometheus للمراقبة الشاملة - نظام إدارة المخزون العربي
+# Prometheus Configuration for Comprehensive Monitoring - Arabic Inventory Management System
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'arabic-inventory-system'
+    environment: 'production'
+
+# إعدادات التنبيهات
+# Alerting configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+# قواعد التنبيهات
+# Alert rules
+rule_files:
+  - "alert_rules.yml"
+  - "system_rules.yml"
+  - "application_rules.yml"
+
+# إعدادات جمع البيانات
+# Scrape configurations
+scrape_configs:
+  # مراقبة Prometheus نفسه
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+    scrape_interval: 5s
+    metrics_path: /metrics
+
+  # مراقبة النظام (Node Exporter)
+  # System monitoring (Node Exporter)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+    scrape_interval: 10s
+    metrics_path: /metrics
+
+  # مراقبة قاعدة البيانات PostgreSQL
+  # PostgreSQL database monitoring
+  - job_name: 'postgres-exporter'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+    scrape_interval: 15s
+    metrics_path: /metrics
+
+  # مراقبة Redis
+  # Redis monitoring
+  - job_name: 'redis-exporter'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+    scrape_interval: 15s
+    metrics_path: /metrics
+
+  # مراقبة الواجهة الخلفية
+  # Backend application monitoring
+  - job_name: 'backend-app'
+    static_configs:
+      - targets: ['backend:5000']
+    scrape_interval: 10s
+    metrics_path: /metrics
+    scrape_timeout: 5s
+    honor_labels: true
+
+  # مراقبة Nginx
+  # Nginx monitoring
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx-exporter:9113']
+    scrape_interval: 15s
+    metrics_path: /metrics
+
+  # مراقبة Docker
+  # Docker monitoring
+  - job_name: 'docker'
+    static_configs:
+      - targets: ['docker-exporter:9323']
+    scrape_interval: 30s
+    metrics_path: /metrics
+
+  # مراقبة تطبيق مخصص للنظام
+  # Custom application monitoring
+  - job_name: 'inventory-system'
+    static_configs:
+      - targets: ['backend:5000']
+    scrape_interval: 30s
+    metrics_path: /api/metrics
+    scrape_timeout: 10s
+    params:
+      format: ['prometheus']
+
+  # مراقبة الأمان والتسجيل
+  # Security and logging monitoring
+  - job_name: 'security-logs'
+    static_configs:
+      - targets: ['log-exporter:9144']
+    scrape_interval: 60s
+    metrics_path: /metrics
+
+  # مراقبة النسخ الاحتياطية
+  # Backup monitoring
+  - job_name: 'backup-status'
+    static_configs:
+      - targets: ['backup-monitor:9145']
+    scrape_interval: 300s  # كل 5 دقائق
+    metrics_path: /metrics
+
+  # مراقبة شهادات SSL
+  # SSL certificate monitoring
+  - job_name: 'ssl-exporter'
+    static_configs:
+      - targets: ['ssl-exporter:9219']
+    scrape_interval: 3600s  # كل ساعة
+    metrics_path: /metrics
+
+  # مراقبة الشبكة
+  # Network monitoring
+  - job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+        - https://your-domain.com
+        - https://your-domain.com/api/health
+        - https://your-domain.com/health
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+
+  # مراقبة أداء التطبيق
+  # Application performance monitoring
+  - job_name: 'apm'
+    static_configs:
+      - targets: ['apm-server:8200']
+    scrape_interval: 30s
+    metrics_path: /metrics
+
+# إعدادات التخزين
+# Storage configuration
+storage:
+  tsdb:
+    path: /prometheus
+    retention.time: 30d
+    retention.size: 10GB
+    wal-compression: true
+
+# إعدادات الويب
+# Web configuration
+web:
+  console.templates: /etc/prometheus/consoles
+  console.libraries: /etc/prometheus/console_libraries
+  enable-lifecycle: true
+  enable-admin-api: true
+  max-connections: 512
+
+# إعدادات الاستعلام
+# Query configuration
+query:
+  max-concurrency: 20
+  timeout: 2m
+  max-samples: 50000000

@@ -1,0 +1,84 @@
+{
+  "project": "store-erp",
+  "version": "1.0.0",
+  "initialized": "2025-11-05T04:00:00Z",
+  "mcp_servers": {
+    "sentry": {
+      "enabled": true,
+      "organization": "gaara-group",
+      "status": "active",
+      "purpose": "Error monitoring and performance tracking",
+      "features": [
+        "error_tracking",
+        "performance_monitoring",
+        "issue_management",
+        "release_tracking"
+      ]
+    },
+    "cloudflare": {
+      "enabled": false,
+      "status": "available",
+      "purpose": "Application development primitives",
+      "features": [
+        "d1_database",
+        "r2_storage",
+        "kv_store",
+        "workers_bindings"
+      ],
+      "note": "Available but not currently configured"
+    },
+    "playwright": {
+      "enabled": false,
+      "status": "available",
+      "purpose": "Browser automation",
+      "features": [
+        "browser_testing",
+        "e2e_testing",
+        "screenshot_capture",
+        "pdf_generation"
+      ],
+      "note": "Available but not currently configured"
+    },
+    "serena": {
+      "enabled": false,
+      "status": "available",
+      "purpose": "Semantic code retrieval and editing",
+      "features": [
+        "code_search",
+        "semantic_analysis",
+        "code_editing",
+        "refactoring_support"
+      ],
+      "note": "Available but not currently configured"
+    }
+  },
+  "environment_separation": {
+    "helper_tools_location": "C:\\Users\\hadym\\.global\\",
+    "project_memory": "C:\\Users\\hadym\\.global\\memory\\store-erp\\",
+    "project_mcp": "C:\\Users\\hadym\\.global\\mcp\\store-erp\\",
+    "user_project": "D:\\APPS_AI\\store\\Store\\",
+    "critical_note": "NEVER mix helper tools with user project!"
+  },
+  "guidelines": {
+    "version": "10.2.0",
+    "framework": "AI-First modules (01-06)",
+    "core_principle": "Always choose the BEST solution, not the easiest",
+    "modules_loaded": [
+      "Memory Management (Prompt 60)",
+      "MCP (Prompt 15)",
+      "MCP Integration (Prompt 16)",
+      "Thinking Framework (Prompt 17)",
+      "Context Engineering (Prompt 19)",
+      "Task AI (Prompt 18)"
+    ],
+    "total_prompts_available": 21
+  },
+  "quality_standards": {
+    "test_coverage": "80%+ (100% for critical paths)",
+    "documentation_coverage": "80%+",
+    "code_style": "PEP 8",
+    "type_hints": "required",
+    "docstrings": "required"
+  }
+}
+

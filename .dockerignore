@@ -1,0 +1,151 @@
+# Complete Inventory Management System - Docker Ignore File
+# Excludes unnecessary files from Docker build context
+
+# ==================== VERSION CONTROL ====================
+.git
+.gitignore
+.gitattributes
+.gitmodules
+
+# ==================== PYTHON ====================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ==================== VIRTUAL ENVIRONMENTS ====================
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# ==================== IDE & EDITORS ====================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ==================== TESTING ====================
+.tox/
+.coverage
+.pytest_cache/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+htmlcov/
+.nyc_output
+
+# ==================== DOCUMENTATION ====================
+docs/_build/
+.readthedocs.yml
+*.md
+README*
+CHANGELOG*
+LICENSE*
+
+# ==================== LOGS & TEMPORARY FILES ====================
+*.log
+logs/
+tmp/
+temp/
+.tmp/
+
+# ==================== DATABASE FILES ====================
+*.db
+*.sqlite
+*.sqlite3
+database/
+
+# ==================== BACKUP FILES ====================
+backups/
+*.bak
+*.backup
+
+# ==================== UPLOADS & MEDIA ====================
+uploads/
+media/
+static/uploads/
+
+# ==================== CONFIGURATION ====================
+.env.local
+.env.development
+.env.test
+.env.production
+config.local.py
+settings.local.py
+
+# ==================== DOCKER ====================
+Dockerfile.dev
+docker-compose.dev.yml
+docker-compose.override.yml
+.dockerignore
+
+# ==================== NODE.JS (if any) ====================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ==================== REQUIREMENTS VARIANTS ====================
+requirements_comprehensive.txt
+requirements_fixed.txt
+requirements_integrated.txt
+requirements.txt
+
+# ==================== DEVELOPMENT SCRIPTS ====================
+start_server_simple.py
+start_system_new.py
+test_*.py
+validate_*.py
+format_*.py
+
+# ==================== MONITORING & REPORTS ====================
+reports/
+monitoring/
+.prometheus/
+.grafana/
+
+# ==================== CERTIFICATES & KEYS ====================
+*.pem
+*.key
+*.crt
+*.cert
+ssl/
+certs/
+keys/
+
+# ==================== MISC ====================
+.pytest_cache
+.mypy_cache
+.coverage
+.tox
+.cache
+*.orig

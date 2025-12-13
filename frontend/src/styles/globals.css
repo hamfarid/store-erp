@@ -1,0 +1,228 @@
+/* ملف الأنماط العامة للنظام */
+
+/* إعدادات الخط العربي */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+
+/* متغيرات CSS مخصصة - Gaara Seeds Brand */
+:root {
+  /* Brand Colors - Gaara Seeds */
+  --primary-color: #80AA45;
+  --primary-hover: #689030;
+  --secondary-color: #3B715A;
+  --secondary-hover: #22523D;
+  --accent-color: #E65E36;
+  --accent-hover: #C7451F;
+
+  /* Semantic Colors */
+  --success-color: #80AA45;
+  --warning-color: #E65E36;
+  --danger-color: #C7451F;
+  --info-color: #3B715A;
+
+  /* Light Theme (Default) - Gaara Seeds */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #E7F0E9;
+  --bg-tertiary: #BFCBC2;
+
+  --text-primary: #10271D;
+  --text-secondary: #708079;
+  --text-tertiary: #7A7A7A;
+  --text-inverse: #FFFFFF;
+  --text-disabled: #BFCBC2;
+
+  --border-light: #E7F0E9;
+  --border-color: #BFCBC2;
+  --border-dark: #708079;
+  --border-focus: #80AA45;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Theme - Gaara Seeds */
+:root.dark,
+[data-theme="dark"] {
+  --bg-primary: #10271D;
+  --bg-secondary: #22523D;
+  --bg-tertiary: #3B715A;
+
+  --text-primary: #E7F0E9;
+  --text-secondary: #BFCBC2;
+  --text-tertiary: #708079;
+  --text-inverse: #10271D;
+  --text-disabled: #708079;
+
+  --border-light: #3B715A;
+  --border-color: #708079;
+  --border-dark: #BFCBC2;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* إعادة تعيين الأنماط الأساسية */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
+  direction: rtl;
+}
+
+body {
+  font-family: 'Cairo', 'Tajawal', system-ui, sans-serif;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  direction: rtl;
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* أنماط الروابط */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* أنماط العناوين */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+/* أنماط الفقرات */
+p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* أنماط القوائم */
+ul, ol {
+  margin-bottom: 1rem;
+  padding-right: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.25rem;
+}
+
+/* أنماط الصور */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+/* أنماط الجداول */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: right;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background-color: var(--bg-tertiary);
+  font-weight: 600;
+}
+
+/* أنماط النماذج */
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* أنماط التمرير */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* أنماط التركيز */
+*:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* أنماط الانتقالات */
+.transition-all {
+  transition: all 0.2s ease;
+}
+
+.transition-colors {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* أنماط الظلال */
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+
+/* أنماط الحدود المدورة */
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+
+/* أنماط متجاوبة */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+  
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+}

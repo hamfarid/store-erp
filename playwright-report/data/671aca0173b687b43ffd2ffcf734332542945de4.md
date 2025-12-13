@@ -1,0 +1,44 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - button "تبديل إلى الوضع الداكن" [ref=e6]:
+    - img
+    - img
+  - generic [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - generic [ref=e15]: مرحباً بك
+        - generic [ref=e16]: نظام إدارة المخزون الزراعي
+      - generic [ref=e17]:
+        - alert [ref=e18]:
+          - img
+          - generic [ref=e19]: لا يمكن الاتصال بالخادم. تأكد من تشغيل الخادم على المنفذ 5506
+          - button "إغلاق" [ref=e20]:
+            - img
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - text: اسم المستخدم
+            - generic [ref=e23]:
+              - img
+              - textbox "اسم المستخدم" [ref=e24]:
+                - /placeholder: أدخل اسم المستخدم
+                - text: admin
+          - generic [ref=e25]:
+            - text: كلمة المرور
+            - generic [ref=e26]:
+              - img
+              - textbox "كلمة المرور" [ref=e27]:
+                - /placeholder: أدخل كلمة المرور
+                - text: admin123
+              - button "إظهار كلمة المرور" [ref=e28]:
+                - img
+          - button "تسجيل الدخول" [ref=e29]:
+            - img [ref=e30]
+            - text: تسجيل الدخول
+      - generic [ref=e33]:
+        - paragraph [ref=e35]: "بيانات تجريبية: admin / admin123"
+        - button "نسيت كلمة المرور؟" [ref=e36]
+    - paragraph [ref=e37]: © 2025 نظام إدارة المخزون. جميع الحقوق محفوظة.
+```

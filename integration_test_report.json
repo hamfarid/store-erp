@@ -1,0 +1,102 @@
+{
+  "timestamp": "2025-10-04T09:42:17.883320",
+  "summary": {
+    "total_tests": 16,
+    "passed": 10,
+    "failed": 5,
+    "warnings": 0,
+    "success_rate": 62.5
+  },
+  "results": {
+    "backend_tests": [
+      {
+        "test": "Backend Health Check",
+        "status": "PASS",
+        "message": "الخادم الخلفي يعمل بشكل طبيعي"
+      },
+      {
+        "test": "API Endpoint /api/products",
+        "status": "FAIL",
+        "message": "كود غير متوقع: 500"
+      },
+      {
+        "test": "API Endpoint /api/customers",
+        "status": "FAIL",
+        "message": "كود غير متوقع: 500"
+      },
+      {
+        "test": "API Endpoint /api/suppliers",
+        "status": "FAIL",
+        "message": "كود غير متوقع: 500"
+      },
+      {
+        "test": "API Endpoint /api/invoices",
+        "status": "FAIL",
+        "message": "كود غير متوقع: 404"
+      },
+      {
+        "test": "API Endpoint /api/inventory",
+        "status": "FAIL",
+        "message": "كود غير متوقع: 404"
+      },
+      {
+        "test": "Database File instance/inventory.db",
+        "status": "PASS",
+        "message": "قاعدة البيانات موجودة (حجم: 122880 بايت)"
+      },
+      {
+        "test": "Database File src/inventory.db",
+        "status": "PASS",
+        "message": "قاعدة البيانات موجودة (حجم: 131072 بايت)"
+      }
+    ],
+    "frontend_tests": [
+      {
+        "test": "Frontend Build File ../frontend/dist/index.html",
+        "status": "PASS",
+        "message": "ملف البناء موجود"
+      },
+      {
+        "test": "Frontend Build File ../frontend/package.json",
+        "status": "PASS",
+        "message": "ملف البناء موجود"
+      }
+    ],
+    "integration_tests": [
+      {
+        "test": "API Configuration",
+        "status": "PASS",
+        "message": "ملف إعدادات API موجود"
+      }
+    ],
+    "security_tests": [
+      {
+        "test": "Security Variable SECRET_KEY",
+        "status": "PASS",
+        "message": "متغير الأمان محدد"
+      },
+      {
+        "test": "Security Variable JWT_SECRET_KEY",
+        "status": "PASS",
+        "message": "متغير الأمان محدد"
+      },
+      {
+        "test": "Security Variable ENCRYPTION_KEY",
+        "status": "PASS",
+        "message": "متغير الأمان محدد"
+      }
+    ],
+    "performance_tests": [
+      {
+        "test": "System Size",
+        "status": "INFO",
+        "message": "حجم النظام: 4.52 MB (357 ملف)"
+      },
+      {
+        "test": "Large Files",
+        "status": "PASS",
+        "message": "لا توجد ملفات كبيرة جداً"
+      }
+    ]
+  }
+}

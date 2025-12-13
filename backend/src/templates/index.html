@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة المخزون الزراعي - Gaara Seeds</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'arabic': ['Cairo', 'Tajawal', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+        .rtl { direction: rtl; }
+    </style>
+</head>
+<body class="bg-gray-50 rtl">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center ml-3">
+                        <span class="text-white text-lg">🌾</span>
+                    </div>
+                    <h1 class="text-xl font-semibold text-gray-900">نظام إدارة المخزون الزراعي</h1>
+                </div>
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <span class="text-sm text-gray-700">Gaara Seeds</span>
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                        <span class="text-green-600 text-sm">G</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            
+            <!-- Welcome Section -->
+            <div class="bg-white rounded-lg shadow-sm border p-8 mb-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-green-600 text-2xl">🚀</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">مرحباً بك في النظام الموحد</h2>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                        نظام إدارة المخزون الزراعي المتطور مصمم خصيصاً لشركة Gaara Seeds. 
+                        النظام يوفر حلولاً شاملة لإدارة المنتجات والمخزون والعملاء والموردين.
+                    </p>
+                    
+                    <!-- Status Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <span class="text-white text-xl">✅</span>
+                            </div>
+                            <h3 class="font-semibold text-green-900 mb-2">Backend API</h3>
+                            <p class="text-green-700 text-sm">يعمل على المنفذ 5000</p>
+                            <div class="mt-2">
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">متصل</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <span class="text-white text-xl">⚛️</span>
+                            </div>
+                            <h3 class="font-semibold text-blue-900 mb-2">React Frontend</h3>
+                            <p class="text-blue-700 text-sm">يعمل على المنفذ 5502</p>
+                            <div class="mt-2">
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">متاح</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-50 p-6 rounded-lg">
+                            <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <span class="text-white text-xl">🗄️</span>
+                            </div>
+                            <h3 class="font-semibold text-purple-900 mb-2">قاعدة البيانات</h3>
+                            <p class="text-purple-700 text-sm">SQLite محسنة</p>
+                            <div class="mt-2">
+                                <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">محسنة</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="http://localhost:5502" 
+                           class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                            🚀 فتح واجهة React
+                        </a>
+                        <a href="/health" 
+                           class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                            🔍 فحص صحة النظام
+                        </a>
+                        <a href="/api/dashboard/stats" 
+                           class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                            📊 عرض الإحصائيات
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-blue-600 text-xl">📦</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">إدارة المنتجات</h3>
+                    <p class="text-gray-600 text-sm">إضافة وتعديل وحذف المنتجات مع تتبع المخزون</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-green-600 text-xl">👥</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">إدارة العملاء</h3>
+                    <p class="text-gray-600 text-sm">قاعدة بيانات شاملة للعملاء والموردين</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-purple-600 text-xl">🏭</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">إدارة المخازن</h3>
+                    <p class="text-gray-600 text-sm">إدارة متعددة المخازن مع تتبع المنتجات</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-orange-600 text-xl">📈</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">حركات المخزون</h3>
+                    <p class="text-gray-600 text-sm">تتبع جميع حركات الدخول والخروج</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-red-600 text-xl">🧾</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">نظام الفواتير</h3>
+                    <p class="text-gray-600 text-sm">فواتير المبيعات والمشتريات مع الحسابات</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-indigo-600 text-xl">📊</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">التقارير</h3>
+                    <p class="text-gray-600 text-sm">تقارير شاملة ومفصلة للمبيعات والمخزون</p>
+                </div>
+            </div>
+
+            <!-- API Documentation -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">📚 APIs المتاحة</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <h4 class="font-medium text-gray-900 mb-2">المصادقة</h4>
+                        <ul class="space-y-1 text-gray-600">
+                            <li>POST /api/auth/login</li>
+                            <li>POST /api/auth/logout</li>
+                            <li>GET /api/auth/me</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-900 mb-2">المنتجات</h4>
+                        <ul class="space-y-1 text-gray-600">
+                            <li>GET /api/products</li>
+                            <li>POST /api/products</li>
+                            <li>GET /api/products/{id}</li>
+                            <li>PUT /api/products/{id}</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-900 mb-2">العملاء</h4>
+                        <ul class="space-y-1 text-gray-600">
+                            <li>GET /api/customers</li>
+                            <li>POST /api/customers</li>
+                            <li>GET /api/customers/{id}</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-900 mb-2">التقارير</h4>
+                        <ul class="space-y-1 text-gray-600">
+                            <li>GET /api/reports/sales</li>
+                            <li>GET /api/reports/purchases</li>
+                            <li>GET /api/reports/inventory</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-12">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-gray-600">
+                <p>© 2024 Gaara Seeds - نظام إدارة المخزون الزراعي الموحد</p>
+                <p class="text-sm mt-2">تم التطوير والتحسين بنجاح ✅</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // فحص حالة الاتصال مع APIs
+        async function checkAPIStatus() {
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                console.log('حالة النظام:', data);
+            } catch (error) {
+                console.error('خطأ في الاتصال:', error);
+            }
+        }
+
+        // تشغيل فحص الحالة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', checkAPIStatus);
+    </script>
+</body>
+</html>

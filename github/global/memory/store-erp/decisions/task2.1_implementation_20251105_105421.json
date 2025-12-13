@@ -1,0 +1,33 @@
+{
+  "task": "Task 2.1: Fix Import Errors",
+  "date": "2025-11-05",
+  "timestamp": "20251105_105421",
+  "decisions_made": [
+    {
+      "decision": "Fix imports by changing 'backend.src' to 'src'",
+      "rationale": "pytest runs from backend/ directory, so imports should be relative to that",
+      "alternatives_considered": [
+        "Add backend/ to PYTHONPATH",
+        "Use relative imports (..module)",
+        "Restructure project"
+      ],
+      "why_this_is_best": "Simplest fix, follows Python best practices, no project restructuring needed"
+    },
+    {
+      "decision": "Fix both test files and source files",
+      "rationale": "circuit_breaker_manager.py also had import errors",
+      "why_this_is_best": "Complete fix ensures no cascading import errors"
+    },
+    {
+      "decision": "Don't fix Circuit Breaker logic issues in Task 2.1",
+      "rationale": "Task 2.1 is specifically for import errors, logic fixes belong in Task 2.2",
+      "why_this_is_best": "Keeps tasks focused and manageable"
+    }
+  ],
+  "trade_offs": [
+    {
+      "trade_off": "Fixed imports but didn't fix failing tests",
+      "accepted_because": "Task 2.1 scope is import errors only, test logic is Task 2.2"
+    }
+  ]
+}

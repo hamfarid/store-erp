@@ -1,0 +1,161 @@
+# FILE: templates/ci.yml
+# PURPOSE: قالب GitHub Actions CI/CD (يجب نقله إلى .github/workflows/)
+# OWNER: Global Team
+# LAST-AUDITED: 2025-10-21
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  validate:
+    name: Validate Project Structure
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Make validation script executable
+      run: chmod +x validate_project.sh
+    
+    - name: Run validation
+      run: ./validate_project.sh .
+    
+    - name: Check for required files
+      run: |
+        echo "Checking for required files..."
+        test -f GLOBAL_GUIDELINES.txt
+        test -f setup_project_structure.sh
+        test -f Solution_Tradeoff_Log.md
+        test -f download_and_setup.sh
+        test -f validate_project.sh
+        test -f README.md
+        test -f CHANGELOG.md
+        test -f CONTRIBUTING.md
+        test -f LICENSE
+        echo "✅ All required files present"
+
+  shellcheck:
+    name: ShellCheck Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Run ShellCheck
+      uses: ludeeus/action-shellcheck@master
+      with:
+        scandir: '.'
+        severity: warning
+
+  markdown-lint:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Markdown Lint
+      uses: articulate/actions-markdownlint@v1
+      with:
+        config: .markdownlint.json
+        files: '*.md'
+        ignore: node_modules
+      continue-on-error: true
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+      continue-on-error: true
+    
+    - name: Upload Trivy results to GitHub Security
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'
+      continue-on-error: true
+
+  test-scripts:
+    name: Test Scripts
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Test setup_project_structure.sh
+      run: |
+        chmod +x setup_project_structure.sh
+        ./setup_project_structure.sh test_project /tmp/test_project
+        ls -la /tmp/test_project
+    
+    - name: Validate created project
+      run: |
+        chmod +x validate_project.sh
+        ./validate_project.sh /tmp/test_project
+    
+    - name: Cleanup
+      run: rm -rf /tmp/test_project
+
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: [validate, shellcheck, test-scripts]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Get version from CHANGELOG
+      id: version
+      run: |
+        VERSION=$(grep -m 1 "## \[" CHANGELOG.md | sed 's/## \[\(.*\)\].*/\1/')
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+    
+    - name: Check if tag exists
+      id: check_tag
+      run: |
+        if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+          echo "exists=true" >> $GITHUB_OUTPUT
+        else
+          echo "exists=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Create Release
+      if: steps.check_tag.outputs.exists == 'false'
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ steps.version.outputs.version }}
+        release_name: Release v${{ steps.version.outputs.version }}
+        body_path: CHANGELOG.md
+        draft: false
+        prerelease: false
+
+# ملاحظات:
+# 1. انقل هذا الملف إلى .github/workflows/ci.yml في مستودعك
+# 2. تأكد من أن GitHub Actions مفعّل في إعدادات المستودع
+# 3. قد تحتاج إلى تعديل الصلاحيات في Settings > Actions > General
+

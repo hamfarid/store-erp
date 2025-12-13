@@ -1,0 +1,790 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: #FFFFFF;
+  --foreground: #10271D;
+  --card: #FFFFFF;
+  --card-foreground: #10271D;
+  --popover: #FFFFFF;
+  --popover-foreground: #10271D;
+  --primary: #80AA45;
+  --primary-foreground: #FFFFFF;
+  --secondary: #3B715A;
+  --secondary-foreground: #FFFFFF;
+  --muted: #E7F0E9;
+  --muted-foreground: #708079;
+  --accent: #E65E36;
+  --accent-foreground: #FFFFFF;
+  --destructive: #C7451F;
+  --border: #BFCBC2;
+  --input: #FFFFFF;
+  --ring: #80AA45;
+  --chart-1: #80AA45;
+  --chart-2: #3B715A;
+  --chart-3: #E65E36;
+  --chart-4: #689030;
+  --chart-5: #22523D;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #10271D;
+  --sidebar-primary: #80AA45;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E7F0E9;
+  --sidebar-accent-foreground: #10271D;
+  --sidebar-border: #BFCBC2;
+  --sidebar-ring: #80AA45;
+}
+
+.dark {
+  --background: #10271D;
+  --foreground: #E7F0E9;
+  --card: #22523D;
+  --card-foreground: #E7F0E9;
+  --popover: #22523D;
+  --popover-foreground: #E7F0E9;
+  --primary: #689030;
+  --primary-foreground: #10271D;
+  --secondary: #3B715A;
+  --secondary-foreground: #E7F0E9;
+  --muted: #3B715A;
+  --muted-foreground: #BFCBC2;
+  --accent: #E65E36;
+  --accent-foreground: #E7F0E9;
+  --destructive: #C7451F;
+  --border: #708079;
+  --input: #22523D;
+  --ring: #80AA45;
+  --chart-1: #80AA45;
+  --chart-2: #3B715A;
+  --chart-3: #E65E36;
+  --chart-4: #689030;
+  --chart-5: #22523D;
+  --sidebar: #10271D;
+  --sidebar-foreground: #E7F0E9;
+  --sidebar-primary: #80AA45;
+  --sidebar-primary-foreground: #E7F0E9;
+  --sidebar-accent: #3B715A;
+  --sidebar-accent-foreground: #E7F0E9;
+  --sidebar-border: #708079;
+  --sidebar-ring: #80AA45;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .bg-primary-50 { @apply bg-[#F5F9EF]; }
+  .bg-primary-100 { @apply bg-[#E8F1D8]; }
+  .bg-primary-200 { @apply bg-[#D4E5B1]; }
+  .bg-primary-300 { @apply bg-[#BFD88A]; }
+  .bg-primary-400 { @apply bg-[#A0C167]; }
+  .bg-primary-500 { @apply bg-[#80AA45]; }
+  .bg-primary-600 { @apply bg-[#689030]; }
+  .bg-primary-700 { @apply bg-[#4F6D24]; }
+  .bg-primary-800 { @apply bg-[#374B19]; }
+  .bg-primary-900 { @apply bg-[#1F2A0E]; }
+
+  .text-primary-50 { @apply text-[#F5F9EF]; }
+  .text-primary-100 { @apply text-[#E8F1D8]; }
+  .text-primary-200 { @apply text-[#D4E5B1]; }
+  .text-primary-300 { @apply text-[#BFD88A]; }
+  .text-primary-400 { @apply text-[#A0C167]; }
+  .text-primary-500 { @apply text-[#80AA45]; }
+  .text-primary-600 { @apply text-[#689030]; }
+  .text-primary-700 { @apply text-[#4F6D24]; }
+  .text-primary-800 { @apply text-[#374B19]; }
+  .text-primary-900 { @apply text-[#1F2A0E]; }
+
+  .border-primary-50 { @apply border-[#F5F9EF]; }
+  .border-primary-100 { @apply border-[#E8F1D8]; }
+  .border-primary-200 { @apply border-[#D4E5B1]; }
+  .border-primary-300 { @apply border-[#BFD88A]; }
+  .border-primary-400 { @apply border-[#A0C167]; }
+  .border-primary-500 { @apply border-[#80AA45]; }
+  .border-primary-600 { @apply border-[#689030]; }
+  .border-primary-700 { @apply border-[#4F6D24]; }
+  .border-primary-800 { @apply border-[#374B19]; }
+  .border-primary-900 { @apply border-[#1F2A0E]; }
+
+  .hover\:bg-primary-600:hover { @apply bg-[#689030]; }
+  .hover\:bg-primary-700:hover { @apply bg-[#4F6D24]; }
+
+  .focus\:ring-primary-500:focus { @apply ring-[#80AA45]; }
+  .focus\:border-primary-500:focus { @apply border-[#80AA45]; }
+
+  .from-primary-50 { @apply from-[#F5F9EF]; }
+  .from-primary-100 { @apply from-[#E8F1D8]; }
+  .to-secondary-100 { @apply to-[#D4E6DF]; }
+}
+
+/* ============================================================================
+   Modern Animations
+   ============================================================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.5s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Staggered animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+.stagger-7 { animation-delay: 0.7s; }
+.stagger-8 { animation-delay: 0.8s; }
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* ============================================================================
+   Modern Scrollbar
+   ============================================================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* ============================================================================
+   Glass Effect
+   ============================================================================ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================================
+   Gradient Text
+   ============================================================================ */
+
+.gradient-text {
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================================
+   Modern Shadows
+   ============================================================================ */
+
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+}
+
+.shadow-glow-amber {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+.shadow-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================================
+   Hover Effects
+   ============================================================================ */
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(20, 184, 166, 0.4);
+}
+
+/* ============================================================================
+   Enhanced Focus States (WCAG AA)
+   ============================================================================ */
+
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+}
+
+.focus-visible-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+}
+
+/* ============================================================================
+   Modern Card Styles
+   ============================================================================ */
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+.card-interactive {
+  @apply cursor-pointer transition-all duration-200;
+}
+
+.card-interactive:hover {
+  @apply shadow-xl -translate-y-0.5;
+  border-color: var(--primary);
+}
+
+/* ============================================================================
+   Status Badges
+   ============================================================================ */
+
+.badge-success {
+  @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400;
+}
+
+.badge-warning {
+  @apply bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400;
+}
+
+.badge-error {
+  @apply bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-400;
+}
+
+.badge-info {
+  @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400;
+}
+
+/* ============================================================================
+   Loading States
+   ============================================================================ */
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 0%,
+    hsl(var(--muted) / 0.5) 50%,
+    hsl(var(--muted)) 100%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 2s ease-in-out infinite;
+}
+
+/* ============================================================================
+   Table Enhancements
+   ============================================================================ */
+
+.table-modern {
+  @apply w-full text-sm;
+}
+
+.table-modern thead {
+  @apply bg-muted/50;
+}
+
+.table-modern th {
+  @apply h-12 px-4 text-right font-medium text-muted-foreground;
+}
+
+.table-modern td {
+  @apply p-4 align-middle;
+}
+
+.table-modern tbody tr {
+  @apply border-b transition-colors hover:bg-muted/50;
+}
+
+.table-modern tbody tr:last-child {
+  @apply border-0;
+}
+
+/* ============================================================================
+   Form Enhancements
+   ============================================================================ */
+
+.input-modern {
+  @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm;
+  @apply ring-offset-background placeholder:text-muted-foreground;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  @apply disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.label-modern {
+  @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+}
+
+/* ============================================================================
+   RTL Support Enhancements
+   ============================================================================ */
+
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+[dir="rtl"] .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ============================================================================
+   Sidebar Modern Styles
+   ============================================================================ */
+
+.sidebar-modern {
+  @apply flex flex-col h-full bg-sidebar text-sidebar-foreground;
+  @apply border-l border-sidebar-border;
+}
+
+.sidebar-item-modern {
+  @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm;
+  @apply transition-all duration-200;
+  @apply hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+}
+
+.sidebar-item-modern.active {
+  @apply bg-sidebar-primary text-sidebar-primary-foreground;
+  @apply font-medium;
+}
+
+/* ============================================================================
+   Dialog/Modal Modern Styles
+   ============================================================================ */
+
+.dialog-overlay {
+  @apply fixed inset-0 z-50 bg-black/80;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.dialog-content {
+  @apply fixed left-[50%] top-[50%] z-50 w-full max-w-lg;
+  @apply translate-x-[-50%] translate-y-[-50%];
+  @apply bg-background rounded-lg border shadow-lg p-6;
+  animation: scaleIn 0.2s ease-out;
+}
+
+/* ============================================================================
+   Button Variants Modern
+   ============================================================================ */
+
+.btn-modern {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium;
+  @apply ring-offset-background transition-colors;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+}
+
+.btn-modern-primary {
+  @apply btn-modern bg-primary text-primary-foreground hover:bg-primary/90;
+  @apply h-10 px-4 py-2;
+}
+
+.btn-modern-secondary {
+  @apply btn-modern bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  @apply h-10 px-4 py-2;
+}
+
+.btn-modern-outline {
+  @apply btn-modern border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+  @apply h-10 px-4 py-2;
+}
+
+.btn-modern-ghost {
+  @apply btn-modern hover:bg-accent hover:text-accent-foreground;
+  @apply h-10 px-4 py-2;
+}
+
+.btn-modern-destructive {
+  @apply btn-modern bg-destructive text-white hover:bg-destructive/90;
+  @apply h-10 px-4 py-2;
+}
+
+.btn-modern-icon {
+  @apply btn-modern h-10 w-10;
+}
+
+.btn-modern-sm {
+  @apply h-9 rounded-md px-3;
+}
+
+.btn-modern-lg {
+  @apply h-11 rounded-md px-8;
+}
+
+/* ============================================================================
+   Chart Styles
+   ============================================================================ */
+
+.chart-container {
+  @apply w-full aspect-[4/3] min-h-[200px];
+}
+
+.chart-tooltip {
+  @apply rounded-lg border bg-background px-3 py-2 shadow-lg;
+}
+
+/* ============================================================================
+   Notification/Toast Styles
+   ============================================================================ */
+
+.toast-container {
+  @apply fixed bottom-4 left-4 z-[100] flex flex-col gap-2;
+}
+
+[dir="rtl"] .toast-container {
+  @apply left-auto right-4;
+}
+
+.toast {
+  @apply flex items-center gap-3 rounded-lg border bg-background px-4 py-3 shadow-lg;
+  @apply animate-slide-in-right;
+}
+
+[dir="rtl"] .toast {
+  animation-name: slideInLeft;
+}
+
+.toast-success {
+  @apply border-emerald-500/50 bg-emerald-50 dark:bg-emerald-950/30;
+}
+
+.toast-error {
+  @apply border-rose-500/50 bg-rose-50 dark:bg-rose-950/30;
+}
+
+.toast-warning {
+  @apply border-amber-500/50 bg-amber-50 dark:bg-amber-950/30;
+}
+
+.toast-info {
+  @apply border-blue-500/50 bg-blue-50 dark:bg-blue-950/30;
+}
+
+/* ============================================================================
+   Empty State Styles
+   ============================================================================ */
+
+.empty-state {
+  @apply flex flex-col items-center justify-center py-12 text-center;
+}
+
+.empty-state-icon {
+  @apply h-16 w-16 text-muted-foreground/50 mb-4;
+}
+
+.empty-state-title {
+  @apply text-lg font-semibold text-foreground mb-2;
+}
+
+.empty-state-description {
+  @apply text-sm text-muted-foreground max-w-sm;
+}
+
+/* ============================================================================
+   Page Layout
+   ============================================================================ */
+
+.page-container {
+  @apply flex min-h-screen flex-col;
+}
+
+.page-header {
+  @apply flex items-center justify-between border-b bg-background px-6 py-4;
+}
+
+.page-title {
+  @apply text-2xl font-bold tracking-tight;
+}
+
+.page-content {
+  @apply flex-1 space-y-6 p-6;
+}
+
+/* ============================================================================
+   Data Grid Styles
+   ============================================================================ */
+
+.data-grid {
+  @apply grid gap-4;
+}
+
+.data-grid-2 {
+  @apply grid-cols-1 sm:grid-cols-2;
+}
+
+.data-grid-3 {
+  @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.data-grid-4 {
+  @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+/* ============================================================================
+   Stats Card Modern
+   ============================================================================ */
+
+.stats-card {
+  @apply rounded-xl border bg-card p-6 shadow-sm transition-all duration-300;
+  @apply hover:shadow-md hover:border-primary/20;
+}
+
+.stats-card-icon {
+  @apply h-12 w-12 rounded-lg flex items-center justify-center mb-4;
+}
+
+.stats-card-value {
+  @apply text-3xl font-bold tracking-tight;
+}
+
+.stats-card-label {
+  @apply text-sm text-muted-foreground;
+}
+
+.stats-card-trend {
+  @apply text-xs font-medium flex items-center gap-1 mt-2;
+}
+
+.stats-card-trend.up {
+  @apply text-emerald-600 dark:text-emerald-400;
+}
+
+.stats-card-trend.down {
+  @apply text-rose-600 dark:text-rose-400;
+}
+
+/* ============================================================================
+   Print Styles
+   ============================================================================ */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .sidebar-modern,
+  .page-header {
+    display: none !important;
+  }
+}

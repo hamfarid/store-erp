@@ -1,0 +1,311 @@
+/* Login Page Fixed Styles */
+
+/* Gradient Background */
+.min-h-screen {
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(128, 170, 69, 0.1) 0%, rgba(59, 113, 90, 0.2) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Card Container */
+.max-w-md {
+  max-width: 28rem;
+  width: 100%;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+/* Header Styles */
+.text-center {
+  text-align: center;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Icon Circle */
+.h-12.w-12 {
+  height: 3rem;
+  width: 3rem;
+  background-color: #80AA45;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Typography */
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: #10271D;
+}
+
+.text-muted-foreground {
+  color: #3B715A;
+  font-weight: 500;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+/* Error Message */
+.bg-destructive {
+  background-color: rgba(199, 69, 31, 0.1);
+  border: 1px solid rgba(199, 69, 31, 0.3);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+}
+
+.text-destructive {
+  color: #C7451F;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Form Styles */
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+/* Form Labels */
+.block {
+  display: block;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-foreground {
+  color: #10271D;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+/* Input Container */
+.relative {
+  position: relative;
+}
+
+/* Input Fields */
+.form-input,
+input[type="text"],
+input[type="password"] {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  padding-right: 2.5rem;
+  border: 1px solid #BFCBC2;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  direction: rtl;
+  text-align: right;
+}
+
+.form-input:focus,
+input:focus {
+  outline: none;
+  border-color: #80AA45;
+  box-shadow: 0 0 0 3px rgba(128, 170, 69, 0.1);
+}
+
+/* Icons in Input */
+.absolute.inset-y-0 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.pr-3 {
+  padding-right: 0.75rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #80AA45;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #689030;
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Toggle Password Button */
+button[type="button"] {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Demo Credentials Box */
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.bg-muted {
+  background-color: rgba(128, 170, 69, 0.15);
+  border: 1px solid rgba(128, 170, 69, 0.3);
+  border-radius: 0.375rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  color: #10271D;
+  font-weight: 500;
+}
+
+/* Icons */
+.h-5.w-5 {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.h-4.w-4 {
+  height: 1rem;
+  width: 1rem;
+}
+
+.h-6.w-6 {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-gray-400 {
+  color: #9ca3af;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+/* Loading Spinner */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.border-b-2 {
+  border-bottom: 2px solid;
+}
+
+.border-white {
+  border-color: white;
+}
+
+/* Flex Utilities */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.space-x-2 > * + * {
+  margin-left: 0.5rem;
+}
+
+/* Width */
+.w-full {
+  width: 100%;
+}

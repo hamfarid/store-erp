@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2025-11-20T08:10:33.711Z",
+  "pages": {
+    "/": {
+      "buttons": 2,
+      "inputs": 2,
+      "links": 0,
+      "tables": 0
+    },
+    "/login": {
+      "buttons": 2,
+      "inputs": 2,
+      "links": 0,
+      "tables": 0
+    },
+    "/register": {
+      "buttons": 2,
+      "inputs": 0,
+      "links": 0,
+      "tables": 0
+    },
+    "/dashboard": {
+      "buttons": 2,
+      "inputs": 2,
+      "links": 0,
+      "tables": 0
+    },
+    "/profile": {
+      "buttons": 2,
+      "inputs": 0,
+      "links": 0,
+      "tables": 0
+    },
+    "/settings": {
+      "buttons": 2,
+      "inputs": 2,
+      "links": 0,
+      "tables": 0
+    },
+    "/products": {
+      "buttons": 2,
+      "inputs": 2,
+      "links": 0,
+      "tables": 0
+    },
+    "/invoices": {
+      "buttons": 2,
+      "inputs": 2,
+      "links": 0,
+      "tables": 0
+    },
+    "/customers": {
+      "buttons": 2,
+      "inputs": 2,
+      "links": 0,
+      "tables": 0
+    },
+    "/inventory": {
+      "buttons": 2,
+      "inputs": 2,
+      "links": 0,
+      "tables": 0
+    },
+    "/reports": {
+      "buttons": 2,
+      "inputs": 2,
+      "links": 0,
+      "tables": 0
+    },
+    "/admin": {
+      "buttons": 2,
+      "inputs": 0,
+      "links": 0,
+      "tables": 0
+    },
+    "/admin/users": {
+      "buttons": 17,
+      "inputs": 4,
+      "links": 14,
+      "tables": 1
+    },
+    "/admin/settings": {
+      "buttons": 2,
+      "inputs": 0,
+      "links": 0,
+      "tables": 0
+    }
+  }
+}

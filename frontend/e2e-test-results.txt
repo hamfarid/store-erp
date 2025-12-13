@@ -1,0 +1,985 @@
+
+Running 245 tests using 10 workers
+
+  ✓    2 [chromium] › tests\e2e\auth.spec.js:9:3 › Authentication Flow › should display login form (3.5s)
+  ✓    9 [chromium] › tests\e2e\auth.spec.js:123:3 › Authentication Flow › should validate email format (3.3s)
+  ✓    7 [chromium] › tests\e2e\auth.spec.js:103:3 › Authentication Flow › should redirect to login when accessing protected route (3.6s)
+  ✓    8 [chromium] › tests\e2e\auth.spec.js:112:3 › Authentication Flow › should handle password reset flow (4.6s)
+  ✓    3 [chromium] › tests\e2e\auth.spec.js:28:3 › Authentication Flow › should login successfully with valid credentials (7.1s)
+  ✓    6 [chromium] › tests\e2e\auth.spec.js:82:3 › Authentication Flow › should handle remember me functionality (7.0s)
+  ✓    5 [chromium] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session (7.1s)
+  ✓   10 [chromium] › tests\e2e\auth.spec.js:135:3 › Authentication Flow › should handle session timeout (7.2s)
+  ✓    1 [chromium] › tests\e2e\auth.spec.js:16:3 › Authentication Flow › should show error on invalid credentials (7.6s)
+  ✓   11 [chromium] › tests\e2e\dashboard.spec.js:15:3 › Dashboard Navigation › should display dashboard (5.2s)
+  ✓   13 [chromium] › tests\e2e\dashboard.spec.js:30:3 › Dashboard Navigation › should navigate to products (5.1s)
+  ✘   12 [chromium] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics (5.1s)
+  ✓   14 [chromium] › tests\e2e\dashboard.spec.js:42:3 › Dashboard Navigation › should navigate to invoices (5.3s)
+  ✓   16 [chromium] › tests\e2e\dashboard.spec.js:66:3 › Dashboard Navigation › should navigate to inventory (5.0s)
+  ✓   17 [chromium] › tests\e2e\dashboard.spec.js:78:3 › Dashboard Navigation › should navigate to reports (5.2s)
+  ✓   15 [chromium] › tests\e2e\dashboard.spec.js:54:3 › Dashboard Navigation › should navigate to customers (5.3s)
+  ✓   18 [chromium] › tests\e2e\dashboard.spec.js:90:3 › Dashboard Navigation › should navigate to settings (4.9s)
+  ✓   19 [chromium] › tests\e2e\dashboard.spec.js:102:3 › Dashboard Navigation › should toggle sidebar (5.1s)
+  ✓   20 [chromium] › tests\e2e\dashboard.spec.js:123:3 › Dashboard Navigation › should toggle theme (4.9s)
+  ✓   21 [chromium] › tests\e2e\dashboard.spec.js:144:3 › Dashboard Navigation › should display user profile menu (4.9s)
+  ✓   22 [chromium] › tests\e2e\dashboard.spec.js:168:3 › Dashboard Navigation › should display search functionality (4.8s)
+  ✓   23 [chromium] › tests\e2e\dashboard.spec.js:155:3 › Dashboard Navigation › should display notifications (4.9s)
+  ✓   24 [chromium] › tests\e2e\dashboard.spec.js:186:3 › Dashboard Navigation › should handle responsive layout on mobile (4.8s)
+  ✓   25 [chromium] › tests\e2e\dashboard.spec.js:200:3 › Dashboard Navigation › should handle responsive layout on tablet (5.3s)
+  ✓   28 [chromium] › tests\e2e\invoices.spec.js:29:3 › Invoice Management › should search for invoice (5.4s)
+  ✓   26 [chromium] › tests\e2e\dashboard.spec.js:214:3 › Dashboard Navigation › should load dashboard quickly (5.9s)
+  ✓   30 [chromium] › tests\e2e\invoices.spec.js:88:3 › Invoice Management › should view invoice details (5.4s)
+  ✓   29 [chromium] › tests\e2e\invoices.spec.js:47:3 › Invoice Management › should create new invoice (5.6s)
+  ✓   31 [chromium] › tests\e2e\invoices.spec.js:105:3 › Invoice Management › should edit invoice (5.3s)
+  ✓   32 [chromium] › tests\e2e\invoices.spec.js:132:3 › Invoice Management › should print invoice (5.3s)
+  ✓   33 [chromium] › tests\e2e\invoices.spec.js:149:3 › Invoice Management › should download invoice as PDF (5.3s)
+  ✘    4 [chromium] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully (22.7s)
+  ✓   34 [chromium] › tests\e2e\invoices.spec.js:169:3 › Invoice Management › should filter invoices by status (5.5s)
+  ✘   27 [chromium] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list (10.9s)
+  ✓   35 [chromium] › tests\e2e\invoices.spec.js:187:3 › Invoice Management › should filter invoices by date range (5.5s)
+  ✓   36 [chromium] › tests\e2e\invoices.spec.js:207:3 › Invoice Management › should mark invoice as paid (5.4s)
+  ✓   38 [chromium] › tests\e2e\invoices.spec.js:245:3 › Invoice Management › should delete invoice (5.6s)
+  ✓   37 [chromium] › tests\e2e\invoices.spec.js:221:3 › Invoice Management › should send invoice via email (5.7s)
+  ✓   39 [chromium] › tests\e2e\invoices.spec.js:265:3 › Invoice Management › should export invoices (5.8s)
+  ✓   41 [chromium] › tests\e2e\products.spec.js:29:3 › Product Management › should search for product (5.4s)
+  ✓   42 [chromium] › tests\e2e\products.spec.js:77:3 › Product Management › should edit product (5.7s)
+  ✓   43 [chromium] › tests\e2e\products.spec.js:123:3 › Product Management › should filter products by category (5.5s)
+  ✓   44 [chromium] › tests\e2e\products.spec.js:141:3 › Product Management › should sort products by price (5.5s)
+  ✓   45 [chromium] › tests\e2e\products.spec.js:47:3 › Product Management › should create new product (5.7s)
+  ✓   47 [chromium] › tests\e2e\products.spec.js:160:3 › Product Management › should paginate products (5.8s)
+  ✓   48 [chromium] › tests\e2e\products.spec.js:178:3 › Product Management › should view product details (6.2s)
+  ✓   49 [chromium] › tests\e2e\products.spec.js:195:3 › Product Management › should handle bulk actions (5.5s)
+  ✓   46 [chromium] › tests\e2e\products.spec.js:103:3 › Product Management › should delete product (6.7s)
+  ✘   40 [chromium] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list (10.9s)
+  ✓   50 [firefox] › tests\e2e\auth.spec.js:9:3 › Authentication Flow › should display login form (2.7s)
+  ✓   57 [firefox] › tests\e2e\auth.spec.js:103:3 › Authentication Flow › should redirect to login when accessing protected route (3.7s)
+  ✓   55 [firefox] › tests\e2e\dashboard.spec.js:15:3 › Dashboard Navigation › should display dashboard (5.5s)
+  ✓   51 [firefox] › tests\e2e\auth.spec.js:16:3 › Authentication Flow › should show error on invalid credentials (7.6s)
+  ✓   52 [firefox] › tests\e2e\auth.spec.js:28:3 › Authentication Flow › should login successfully with valid credentials (7.1s)
+  ✓   59 [firefox] › tests\e2e\auth.spec.js:112:3 › Authentication Flow › should handle password reset flow (3.8s)
+  ✓   56 [firefox] › tests\e2e\auth.spec.js:82:3 › Authentication Flow › should handle remember me functionality (7.5s)
+  ✓   60 [firefox] › tests\e2e\auth.spec.js:123:3 › Authentication Flow › should validate email format (4.9s)
+  ✓   63 [firefox] › tests\e2e\dashboard.spec.js:42:3 › Dashboard Navigation › should navigate to invoices (6.2s)
+  ✘   61 [firefox] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics (6.4s)
+  ✓   64 [firefox] › tests\e2e\dashboard.spec.js:54:3 › Dashboard Navigation › should navigate to customers (6.4s)
+  ✓   62 [firefox] › tests\e2e\dashboard.spec.js:30:3 › Dashboard Navigation › should navigate to products (7.8s)
+  ✓   65 [firefox] › tests\e2e\dashboard.spec.js:66:3 › Dashboard Navigation › should navigate to inventory (6.0s)
+  ✓   58 [firefox] › tests\e2e\auth.spec.js:135:3 › Authentication Flow › should handle session timeout (9.2s)
+  ✘   53 [firefox] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session (14.1s)
+  ✓   67 [firefox] › tests\e2e\dashboard.spec.js:90:3 › Dashboard Navigation › should navigate to settings (5.7s)
+  ✓   66 [firefox] › tests\e2e\dashboard.spec.js:78:3 › Dashboard Navigation › should navigate to reports (6.1s)
+  ✓   68 [firefox] › tests\e2e\dashboard.spec.js:102:3 › Dashboard Navigation › should toggle sidebar (5.1s)
+  ✓   69 [firefox] › tests\e2e\dashboard.spec.js:144:3 › Dashboard Navigation › should display user profile menu (5.4s)
+  ✓   70 [firefox] › tests\e2e\dashboard.spec.js:155:3 › Dashboard Navigation › should display notifications (5.5s)
+  ✓   72 [firefox] › tests\e2e\dashboard.spec.js:186:3 › Dashboard Navigation › should handle responsive layout on mobile (5.5s)
+  ✓   71 [firefox] › tests\e2e\dashboard.spec.js:168:3 › Dashboard Navigation › should display search functionality (5.8s)
+  ✓   73 [firefox] › tests\e2e\dashboard.spec.js:123:3 › Dashboard Navigation › should toggle theme (6.9s)
+  ✓   74 [firefox] › tests\e2e\dashboard.spec.js:214:3 › Dashboard Navigation › should load dashboard quickly (6.6s)
+  ✘   54 [firefox] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully (22.3s)
+  ✓   78 [firefox] › tests\e2e\invoices.spec.js:47:3 › Invoice Management › should create new invoice (6.4s)
+  ✓   77 [firefox] › tests\e2e\invoices.spec.js:29:3 › Invoice Management › should search for invoice (7.4s)
+  ✓   76 [firefox] › tests\e2e\dashboard.spec.js:200:3 › Dashboard Navigation › should handle responsive layout on tablet (7.4s)
+  ✓   79 [firefox] › tests\e2e\invoices.spec.js:88:3 › Invoice Management › should view invoice details (6.9s)
+  ✓   80 [firefox] › tests\e2e\invoices.spec.js:105:3 › Invoice Management › should edit invoice (6.8s)
+  ✓   81 [firefox] › tests\e2e\invoices.spec.js:132:3 › Invoice Management › should print invoice (7.6s)
+  ✘   75 [firefox] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list (11.7s)
+  ✓   83 [firefox] › tests\e2e\invoices.spec.js:169:3 › Invoice Management › should filter invoices by status (6.6s)
+  ✓   82 [firefox] › tests\e2e\invoices.spec.js:149:3 › Invoice Management › should download invoice as PDF (7.2s)
+  ✓   84 [firefox] › tests\e2e\invoices.spec.js:207:3 › Invoice Management › should mark invoice as paid (7.0s)
+  ✓   86 [firefox] › tests\e2e\invoices.spec.js:245:3 › Invoice Management › should delete invoice (7.1s)
+  ✓   85 [firefox] › tests\e2e\invoices.spec.js:221:3 › Invoice Management › should send invoice via email (7.1s)
+  ✓   88 [firefox] › tests\e2e\invoices.spec.js:265:3 › Invoice Management › should export invoices (7.1s)
+  ✓   90 [firefox] › tests\e2e\products.spec.js:29:3 › Product Management › should search for product (6.6s)
+  ✓   91 [firefox] › tests\e2e\products.spec.js:77:3 › Product Management › should edit product (7.0s)
+  ✓   87 [firefox] › tests\e2e\invoices.spec.js:187:3 › Invoice Management › should filter invoices by date range (9.3s)
+  ✓   92 [firefox] › tests\e2e\products.spec.js:103:3 › Product Management › should delete product (7.1s)
+  ✓   96 [firefox] › tests\e2e\products.spec.js:141:3 › Product Management › should sort products by price (7.1s)
+  ✓   95 [firefox] › tests\e2e\products.spec.js:160:3 › Product Management › should paginate products (7.6s)
+  ✘   89 [firefox] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list (12.6s)
+  ✓   97 [firefox] › tests\e2e\products.spec.js:178:3 › Product Management › should view product details (7.5s)
+  ✓   94 [firefox] › tests\e2e\products.spec.js:123:3 › Product Management › should filter products by category (8.7s)
+  ✓   98 [firefox] › tests\e2e\products.spec.js:195:3 › Product Management › should handle bulk actions (7.4s)
+  ✓  100 [webkit] › tests\e2e\auth.spec.js:9:3 › Authentication Flow › should display login form (2.8s)
+  ✓   93 [firefox] › tests\e2e\products.spec.js:47:3 › Product Management › should create new product (9.8s)
+  ✓   99 [webkit] › tests\e2e\auth.spec.js:16:3 › Authentication Flow › should show error on invalid credentials (6.9s)
+  ✓  101 [webkit] › tests\e2e\auth.spec.js:28:3 › Authentication Flow › should login successfully with valid credentials (6.6s)
+  ✓  106 [webkit] › tests\e2e\auth.spec.js:112:3 › Authentication Flow › should handle password reset flow (3.0s)
+  ✓  108 [webkit] › tests\e2e\auth.spec.js:123:3 › Authentication Flow › should validate email format (2.9s)
+  ✓  107 [webkit] › tests\e2e\auth.spec.js:103:3 › Authentication Flow › should redirect to login when accessing protected route (3.5s)
+  ✓  102 [webkit] › tests\e2e\auth.spec.js:135:3 › Authentication Flow › should handle session timeout (6.9s)
+  ✓  103 [webkit] › tests\e2e\auth.spec.js:82:3 › Authentication Flow › should handle remember me functionality (6.6s)
+  ✓  109 [webkit] › tests\e2e\dashboard.spec.js:15:3 › Dashboard Navigation › should display dashboard (7.2s)
+  ✘  110 [webkit] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics (6.4s)
+  ✓  111 [webkit] › tests\e2e\dashboard.spec.js:30:3 › Dashboard Navigation › should navigate to products (6.3s)
+  ✓  112 [webkit] › tests\e2e\dashboard.spec.js:42:3 › Dashboard Navigation › should navigate to invoices (6.6s)
+  ✓  113 [webkit] › tests\e2e\dashboard.spec.js:54:3 › Dashboard Navigation › should navigate to customers (6.3s)
+  ✓  114 [webkit] › tests\e2e\dashboard.spec.js:66:3 › Dashboard Navigation › should navigate to inventory (6.3s)
+  ✓  116 [webkit] › tests\e2e\dashboard.spec.js:90:3 › Dashboard Navigation › should navigate to settings (6.1s)
+  ✓  115 [webkit] › tests\e2e\dashboard.spec.js:78:3 › Dashboard Navigation › should navigate to reports (6.7s)
+  ✘  104 [webkit] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session (13.3s)
+  ✓  117 [webkit] › tests\e2e\dashboard.spec.js:102:3 › Dashboard Navigation › should toggle sidebar (5.7s)
+  ✓  118 [webkit] › tests\e2e\dashboard.spec.js:144:3 › Dashboard Navigation › should display user profile menu (6.1s)
+  ✓  122 [webkit] › tests\e2e\dashboard.spec.js:186:3 › Dashboard Navigation › should handle responsive layout on mobile (5.9s)
+  ✓  119 [webkit] › tests\e2e\dashboard.spec.js:155:3 › Dashboard Navigation › should display notifications (6.3s)
+  ✓  121 [webkit] › tests\e2e\dashboard.spec.js:168:3 › Dashboard Navigation › should display search functionality (6.5s)
+  ✓  120 [webkit] › tests\e2e\dashboard.spec.js:123:3 › Dashboard Navigation › should toggle theme (6.4s)
+  ✓  123 [webkit] › tests\e2e\dashboard.spec.js:200:3 › Dashboard Navigation › should handle responsive layout on tablet (6.4s)
+  ✓  124 [webkit] › tests\e2e\dashboard.spec.js:214:3 › Dashboard Navigation › should load dashboard quickly (7.3s)
+  ✘  105 [webkit] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully (21.1s)
+  ✓  125 [webkit] › tests\e2e\invoices.spec.js:29:3 › Invoice Management › should search for invoice (7.0s)
+  ✓  127 [webkit] › tests\e2e\invoices.spec.js:47:3 › Invoice Management › should create new invoice (7.1s)
+  ✓  130 [webkit] › tests\e2e\invoices.spec.js:132:3 › Invoice Management › should print invoice (7.1s)
+  ✓  129 [webkit] › tests\e2e\invoices.spec.js:105:3 › Invoice Management › should edit invoice (7.9s)
+  ✓  128 [webkit] › tests\e2e\invoices.spec.js:88:3 › Invoice Management › should view invoice details (8.3s)
+  ✓  131 [webkit] › tests\e2e\invoices.spec.js:149:3 › Invoice Management › should download invoice as PDF (7.8s)
+  ✓  132 [webkit] › tests\e2e\invoices.spec.js:169:3 › Invoice Management › should filter invoices by status (7.3s)
+  ✘  126 [webkit] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list (11.6s)
+  ✓  133 [webkit] › tests\e2e\invoices.spec.js:187:3 › Invoice Management › should filter invoices by date range (7.3s)
+  ✓  134 [webkit] › tests\e2e\invoices.spec.js:221:3 › Invoice Management › should send invoice via email (7.1s)
+  ✓  136 [webkit] › tests\e2e\invoices.spec.js:245:3 › Invoice Management › should delete invoice (7.1s)
+  ✓  135 [webkit] › tests\e2e\invoices.spec.js:207:3 › Invoice Management › should mark invoice as paid (7.7s)
+  ✓  137 [webkit] › tests\e2e\invoices.spec.js:265:3 › Invoice Management › should export invoices (8.1s)
+  ✓  139 [webkit] › tests\e2e\products.spec.js:29:3 › Product Management › should search for product (7.7s)
+  ✓  140 [webkit] › tests\e2e\products.spec.js:47:3 › Product Management › should create new product (7.7s)
+  ✓  141 [webkit] › tests\e2e\products.spec.js:77:3 › Product Management › should edit product (7.5s)
+  ✓  142 [webkit] › tests\e2e\products.spec.js:123:3 › Product Management › should filter products by category (7.4s)
+  ✓  144 [webkit] › tests\e2e\products.spec.js:141:3 › Product Management › should sort products by price (7.4s)
+  ✓  149 [Mobile Chrome] › tests\e2e\auth.spec.js:9:3 › Authentication Flow › should display login form (2.1s)
+  ✓  143 [webkit] › tests\e2e\products.spec.js:103:3 › Product Management › should delete product (8.0s)
+  ✓  145 [webkit] › tests\e2e\products.spec.js:160:3 › Product Management › should paginate products (6.8s)
+  ✓  146 [webkit] › tests\e2e\products.spec.js:178:3 › Product Management › should view product details (7.3s)
+  ✘  138 [webkit] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list (12.9s)
+  ✓  147 [webkit] › tests\e2e\products.spec.js:195:3 › Product Management › should handle bulk actions (7.0s)
+  ✓  154 [Mobile Chrome] › tests\e2e\auth.spec.js:103:3 › Authentication Flow › should redirect to login when accessing protected route (1.5s)
+  ✓  155 [Mobile Chrome] › tests\e2e\auth.spec.js:112:3 › Authentication Flow › should handle password reset flow (1.4s)
+  ✓  150 [Mobile Chrome] › tests\e2e\auth.spec.js:28:3 › Authentication Flow › should login successfully with valid credentials (5.4s)
+  ✓  148 [Mobile Chrome] › tests\e2e\auth.spec.js:16:3 › Authentication Flow › should show error on invalid credentials (6.3s)
+  ✓  156 [Mobile Chrome] › tests\e2e\auth.spec.js:123:3 › Authentication Flow › should validate email format (1.4s)
+  ✓  151 [Mobile Chrome] › tests\e2e\auth.spec.js:82:3 › Authentication Flow › should handle remember me functionality (4.9s)
+  ✓  152 [Mobile Chrome] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session (5.4s)
+  ✓  157 [Mobile Chrome] › tests\e2e\auth.spec.js:135:3 › Authentication Flow › should handle session timeout (5.0s)
+  ✓  159 [Mobile Chrome] › tests\e2e\dashboard.spec.js:30:3 › Dashboard Navigation › should navigate to products (5.0s)
+  ✓  160 [Mobile Chrome] › tests\e2e\dashboard.spec.js:42:3 › Dashboard Navigation › should navigate to invoices (4.9s)
+  ✓  161 [Mobile Chrome] › tests\e2e\dashboard.spec.js:54:3 › Dashboard Navigation › should navigate to customers (4.8s)
+  ✘  158 [Mobile Chrome] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics (5.9s)
+  ✓  163 [Mobile Chrome] › tests\e2e\dashboard.spec.js:66:3 › Dashboard Navigation › should navigate to inventory (4.9s)
+  ✓  164 [Mobile Chrome] › tests\e2e\dashboard.spec.js:78:3 › Dashboard Navigation › should navigate to reports (4.9s)
+  ✓  162 [Mobile Chrome] › tests\e2e\dashboard.spec.js:15:3 › Dashboard Navigation › should display dashboard (5.6s)
+  ✓  165 [Mobile Chrome] › tests\e2e\dashboard.spec.js:90:3 › Dashboard Navigation › should navigate to settings (4.9s)
+  ✓  166 [Mobile Chrome] › tests\e2e\dashboard.spec.js:102:3 › Dashboard Navigation › should toggle sidebar (4.9s)
+  ✓  167 [Mobile Chrome] › tests\e2e\dashboard.spec.js:123:3 › Dashboard Navigation › should toggle theme (5.1s)
+  ✓  168 [Mobile Chrome] › tests\e2e\dashboard.spec.js:144:3 › Dashboard Navigation › should display user profile menu (4.9s)
+  ✓  170 [Mobile Chrome] › tests\e2e\dashboard.spec.js:186:3 › Dashboard Navigation › should handle responsive layout on mobile (5.0s)
+  ✓  169 [Mobile Chrome] › tests\e2e\dashboard.spec.js:155:3 › Dashboard Navigation › should display notifications (5.3s)
+  ✓  171 [Mobile Chrome] › tests\e2e\dashboard.spec.js:200:3 › Dashboard Navigation › should handle responsive layout on tablet (5.5s)
+  ✓  172 [Mobile Chrome] › tests\e2e\dashboard.spec.js:214:3 › Dashboard Navigation › should load dashboard quickly (5.5s)
+  ✓  173 [Mobile Chrome] › tests\e2e\dashboard.spec.js:168:3 › Dashboard Navigation › should display search functionality (4.9s)
+  ✓  175 [Mobile Chrome] › tests\e2e\invoices.spec.js:29:3 › Invoice Management › should search for invoice (5.3s)
+  ✓  176 [Mobile Chrome] › tests\e2e\invoices.spec.js:47:3 › Invoice Management › should create new invoice (5.4s)
+  ✓  177 [Mobile Chrome] › tests\e2e\invoices.spec.js:88:3 › Invoice Management › should view invoice details (5.4s)
+  ✓  179 [Mobile Chrome] › tests\e2e\invoices.spec.js:132:3 › Invoice Management › should print invoice (5.7s)
+  ✓  178 [Mobile Chrome] › tests\e2e\invoices.spec.js:105:3 › Invoice Management › should edit invoice (6.2s)
+  ✓  180 [Mobile Chrome] › tests\e2e\invoices.spec.js:149:3 › Invoice Management › should download invoice as PDF (5.4s)
+  ✓  181 [Mobile Chrome] › tests\e2e\invoices.spec.js:169:3 › Invoice Management › should filter invoices by status (5.5s)
+  ✓  182 [Mobile Chrome] › tests\e2e\invoices.spec.js:187:3 › Invoice Management › should filter invoices by date range (5.7s)
+  ✘  174 [Mobile Chrome] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list (11.0s)
+  ✘  153 [Mobile Chrome] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully (21.2s)
+  ✓  183 [Mobile Chrome] › tests\e2e\invoices.spec.js:207:3 › Invoice Management › should mark invoice as paid (5.8s)
+  ✓  184 [Mobile Chrome] › tests\e2e\invoices.spec.js:221:3 › Invoice Management › should send invoice via email (5.8s)
+  ✓  185 [Mobile Chrome] › tests\e2e\invoices.spec.js:245:3 › Invoice Management › should delete invoice (5.5s)
+  ✓  186 [Mobile Chrome] › tests\e2e\invoices.spec.js:265:3 › Invoice Management › should export invoices (6.1s)
+  ✓  188 [Mobile Chrome] › tests\e2e\products.spec.js:29:3 › Product Management › should search for product (5.7s)
+  ✓  190 [Mobile Chrome] › tests\e2e\products.spec.js:77:3 › Product Management › should edit product (5.7s)
+  ✓  189 [Mobile Chrome] › tests\e2e\products.spec.js:47:3 › Product Management › should create new product (6.1s)
+  ✓  191 [Mobile Chrome] › tests\e2e\products.spec.js:103:3 › Product Management › should delete product (5.8s)
+  ✓  193 [Mobile Chrome] › tests\e2e\products.spec.js:141:3 › Product Management › should sort products by price (5.6s)
+  ✓  197 [Mobile Safari] › tests\e2e\auth.spec.js:9:3 › Authentication Flow › should display login form (2.1s)
+  ✓  192 [Mobile Chrome] › tests\e2e\products.spec.js:123:3 › Product Management › should filter products by category (5.9s)
+  ✓  195 [Mobile Chrome] › tests\e2e\products.spec.js:178:3 › Product Management › should view product details (5.6s)
+  ✓  194 [Mobile Chrome] › tests\e2e\products.spec.js:160:3 › Product Management › should paginate products (5.9s)
+  ✘  187 [Mobile Chrome] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list (11.2s)
+  ✓  196 [Mobile Chrome] › tests\e2e\products.spec.js:195:3 › Product Management › should handle bulk actions (5.7s)
+  ✓  198 [Mobile Safari] › tests\e2e\auth.spec.js:16:3 › Authentication Flow › should show error on invalid credentials (6.7s)
+  ✓  204 [Mobile Safari] › tests\e2e\auth.spec.js:112:3 › Authentication Flow › should handle password reset flow (2.8s)
+  ✓  205 [Mobile Safari] › tests\e2e\auth.spec.js:123:3 › Authentication Flow › should validate email format (2.8s)
+  ✓  199 [Mobile Safari] › tests\e2e\auth.spec.js:28:3 › Authentication Flow › should login successfully with valid credentials (7.0s)
+  ✓  203 [Mobile Safari] › tests\e2e\auth.spec.js:103:3 › Authentication Flow › should redirect to login when accessing protected route (3.4s)
+  ✓  200 [Mobile Safari] › tests\e2e\auth.spec.js:82:3 › Authentication Flow › should handle remember me functionality (6.1s)
+  ✓  206 [Mobile Safari] › tests\e2e\auth.spec.js:135:3 › Authentication Flow › should handle session timeout (6.9s)
+  ✓  207 [Mobile Safari] › tests\e2e\dashboard.spec.js:15:3 › Dashboard Navigation › should display dashboard (6.6s)
+  ✓  213 [Mobile Safari] › tests\e2e\dashboard.spec.js:78:3 › Dashboard Navigation › should navigate to reports (5.5s)
+  ✘  208 [Mobile Safari] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics (6.8s)
+  ✓  210 [Mobile Safari] › tests\e2e\dashboard.spec.js:42:3 › Dashboard Navigation › should navigate to invoices (6.7s)
+  ✓  212 [Mobile Safari] › tests\e2e\dashboard.spec.js:66:3 › Dashboard Navigation › should navigate to inventory (6.5s)
+  ✓  211 [Mobile Safari] › tests\e2e\dashboard.spec.js:54:3 › Dashboard Navigation › should navigate to customers (6.7s)
+  ✓  209 [Mobile Safari] › tests\e2e\dashboard.spec.js:30:3 › Dashboard Navigation › should navigate to products (7.0s)
+  ✘  201 [Mobile Safari] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session (13.4s)
+  ✓  215 [Mobile Safari] › tests\e2e\dashboard.spec.js:102:3 › Dashboard Navigation › should toggle sidebar (5.8s)
+  ✓  214 [Mobile Safari] › tests\e2e\dashboard.spec.js:90:3 › Dashboard Navigation › should navigate to settings (5.9s)
+  ✓  216 [Mobile Safari] › tests\e2e\dashboard.spec.js:123:3 › Dashboard Navigation › should toggle theme (6.7s)
+  ✓  219 [Mobile Safari] › tests\e2e\dashboard.spec.js:186:3 › Dashboard Navigation › should handle responsive layout on mobile (6.2s)
+  ✓  218 [Mobile Safari] › tests\e2e\dashboard.spec.js:168:3 › Dashboard Navigation › should display search functionality (6.4s)
+  ✓  220 [Mobile Safari] › tests\e2e\dashboard.spec.js:200:3 › Dashboard Navigation › should handle responsive layout on tablet (6.6s)
+  ✓  217 [Mobile Safari] › tests\e2e\dashboard.spec.js:155:3 › Dashboard Navigation › should display notifications (7.0s)
+  ✓  221 [Mobile Safari] › tests\e2e\dashboard.spec.js:144:3 › Dashboard Navigation › should display user profile menu (6.7s)
+  ✓  224 [Mobile Safari] › tests\e2e\dashboard.spec.js:214:3 › Dashboard Navigation › should load dashboard quickly (6.5s)
+  ✓  223 [Mobile Safari] › tests\e2e\invoices.spec.js:29:3 › Invoice Management › should search for invoice (7.2s)
+  ✘  202 [Mobile Safari] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully (21.7s)
+  ✓  227 [Mobile Safari] › tests\e2e\invoices.spec.js:105:3 › Invoice Management › should edit invoice (7.6s)
+  ✓  228 [Mobile Safari] › tests\e2e\invoices.spec.js:132:3 › Invoice Management › should print invoice (7.4s)
+  ✓  225 [Mobile Safari] › tests\e2e\invoices.spec.js:47:3 › Invoice Management › should create new invoice (8.0s)
+  ✓  226 [Mobile Safari] › tests\e2e\invoices.spec.js:88:3 › Invoice Management › should view invoice details (7.9s)
+  ✓  229 [Mobile Safari] › tests\e2e\invoices.spec.js:149:3 › Invoice Management › should download invoice as PDF (7.4s)
+  ✓  230 [Mobile Safari] › tests\e2e\invoices.spec.js:169:3 › Invoice Management › should filter invoices by status (7.8s)
+  ✘  222 [Mobile Safari] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list (12.4s)
+  ✓  231 [Mobile Safari] › tests\e2e\invoices.spec.js:187:3 › Invoice Management › should filter invoices by date range (7.8s)
+  ✓  232 [Mobile Safari] › tests\e2e\invoices.spec.js:207:3 › Invoice Management › should mark invoice as paid (7.7s)
+  ✓  233 [Mobile Safari] › tests\e2e\invoices.spec.js:221:3 › Invoice Management › should send invoice via email (7.7s)
+  ✓  234 [Mobile Safari] › tests\e2e\invoices.spec.js:245:3 › Invoice Management › should delete invoice (7.9s)
+  ✓  238 [Mobile Safari] › tests\e2e\products.spec.js:47:3 › Product Management › should create new product (7.9s)
+  ✓  235 [Mobile Safari] › tests\e2e\invoices.spec.js:265:3 › Invoice Management › should export invoices (8.1s)
+  ✓  237 [Mobile Safari] › tests\e2e\products.spec.js:29:3 › Product Management › should search for product (8.5s)
+  ✓  239 [Mobile Safari] › tests\e2e\products.spec.js:77:3 › Product Management › should edit product (8.0s)
+  ✓  241 [Mobile Safari] › tests\e2e\products.spec.js:123:3 › Product Management › should filter products by category (7.2s)
+  ✓  240 [Mobile Safari] › tests\e2e\products.spec.js:103:3 › Product Management › should delete product (7.4s)
+  ✓  242 [Mobile Safari] › tests\e2e\products.spec.js:141:3 › Product Management › should sort products by price (7.4s)
+  ✓  243 [Mobile Safari] › tests\e2e\products.spec.js:160:3 › Product Management › should paginate products (7.6s)
+  ✘  236 [Mobile Safari] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list (14.4s)
+  ✓  244 [Mobile Safari] › tests\e2e\products.spec.js:178:3 › Product Management › should view product details (7.4s)
+  ✓  245 [Mobile Safari] › tests\e2e\products.spec.js:195:3 › Product Management › should handle bulk actions (7.4s)
+
+
+  1) [chromium] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully ───
+
+    TimeoutError: page.click: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-testid="user-menu"]')[22m
+
+
+      70 |     
+      71 |     // Click user menu
+    > 72 |     await page.click('[data-testid="user-menu"]');
+         |                ^
+      73 |     
+      74 |     // Click logout
+      75 |     await page.click('[data-testid="logout-button"]');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\auth.spec.js:72:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-logout-successfully-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-logout-successfully-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\auth-Authentication-Flow-should-logout-successfully-chromium\error-context.md
+
+  2) [chromium] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      25 |     const metricCards = page.locator('[data-testid="metric-card"]');
+      26 |     const count = await metricCards.count();
+    > 27 |     expect(count).toBeGreaterThan(0);
+         |                   ^
+      28 |   });
+      29 |
+      30 |   test('should navigate to products', async ({ page }) => {
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\dashboard.spec.js:27:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-chromium\error-context.md
+
+  3) [chromium] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="invoices-table"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="invoices-table"]')[22m
+
+
+      19 |   test('should display invoices list', async ({ page }) => {
+      20 |     // Check if invoices table is visible
+    > 21 |     await expect(page.locator('[data-testid="invoices-table"]')).toBeVisible();
+         |                                                                  ^
+      22 |     
+      23 |     // Check if invoices are loaded
+      24 |     const rows = page.locator('[data-testid="invoices-table"] tbody tr');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\invoices.spec.js:21:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\invoices-Invoice-Management-should-display-invoices-list-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\invoices-Invoice-Management-should-display-invoices-list-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\invoices-Invoice-Management-should-display-invoices-list-chromium\error-context.md
+
+  4) [chromium] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="products-table"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="products-table"]')[22m
+
+
+      19 |   test('should display products list', async ({ page }) => {
+      20 |     // Check if products table is visible
+    > 21 |     await expect(page.locator('[data-testid="products-table"]')).toBeVisible();
+         |                                                                  ^
+      22 |     
+      23 |     // Check if products are loaded
+      24 |     const rows = page.locator('[data-testid="products-table"] tbody tr');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\products.spec.js:21:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\products-Product-Management-should-display-products-list-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\products-Product-Management-should-display-products-list-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\products-Product-Management-should-display-products-list-chromium\error-context.md
+
+  5) [firefox] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session ──
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/.*dashboard/[39m
+    Received string:  [31m"http://localhost:5502/login"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://localhost:5502/login"[22m
+
+
+      55 |     
+      56 |     // Should still be logged in
+    > 57 |     await expect(newPage).toHaveURL(/.*dashboard/);
+         |                           ^
+      58 |     
+      59 |     await newPage.close();
+      60 |   });
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\auth.spec.js:57:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-firefox\test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-firefox\video-1.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\auth-Authentication-Flow-should-persist-login-session-firefox\error-context.md
+
+  6) [firefox] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully ────
+
+    TimeoutError: page.click: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-testid="user-menu"]')[22m
+
+
+      70 |     
+      71 |     // Click user menu
+    > 72 |     await page.click('[data-testid="user-menu"]');
+         |                ^
+      73 |     
+      74 |     // Click logout
+      75 |     await page.click('[data-testid="logout-button"]');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\auth.spec.js:72:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-logout-successfully-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-logout-successfully-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\auth-Authentication-Flow-should-logout-successfully-firefox\error-context.md
+
+  7) [firefox] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      25 |     const metricCards = page.locator('[data-testid="metric-card"]');
+      26 |     const count = await metricCards.count();
+    > 27 |     expect(count).toBeGreaterThan(0);
+         |                   ^
+      28 |   });
+      29 |
+      30 |   test('should navigate to products', async ({ page }) => {
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\dashboard.spec.js:27:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-firefox\error-context.md
+
+  8) [firefox] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="invoices-table"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="invoices-table"]')[22m
+
+
+      19 |   test('should display invoices list', async ({ page }) => {
+      20 |     // Check if invoices table is visible
+    > 21 |     await expect(page.locator('[data-testid="invoices-table"]')).toBeVisible();
+         |                                                                  ^
+      22 |     
+      23 |     // Check if invoices are loaded
+      24 |     const rows = page.locator('[data-testid="invoices-table"] tbody tr');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\invoices.spec.js:21:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\invoices-Invoice-Management-should-display-invoices-list-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\invoices-Invoice-Management-should-display-invoices-list-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\invoices-Invoice-Management-should-display-invoices-list-firefox\error-context.md
+
+  9) [firefox] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="products-table"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="products-table"]')[22m
+
+
+      19 |   test('should display products list', async ({ page }) => {
+      20 |     // Check if products table is visible
+    > 21 |     await expect(page.locator('[data-testid="products-table"]')).toBeVisible();
+         |                                                                  ^
+      22 |     
+      23 |     // Check if products are loaded
+      24 |     const rows = page.locator('[data-testid="products-table"] tbody tr');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\products.spec.js:21:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\products-Product-Management-should-display-products-list-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\products-Product-Management-should-display-products-list-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\products-Product-Management-should-display-products-list-firefox\error-context.md
+
+  10) [webkit] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session ──
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/.*dashboard/[39m
+    Received string:  [31m"http://localhost:5502/login"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://localhost:5502/login"[22m
+
+
+      55 |     
+      56 |     // Should still be logged in
+    > 57 |     await expect(newPage).toHaveURL(/.*dashboard/);
+         |                           ^
+      58 |     
+      59 |     await newPage.close();
+      60 |   });
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\auth.spec.js:57:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-webkit\test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-webkit\video-1.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\auth-Authentication-Flow-should-persist-login-session-webkit\error-context.md
+
+  11) [webkit] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully ────
+
+    TimeoutError: page.click: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-testid="user-menu"]')[22m
+
+
+      70 |     
+      71 |     // Click user menu
+    > 72 |     await page.click('[data-testid="user-menu"]');
+         |                ^
+      73 |     
+      74 |     // Click logout
+      75 |     await page.click('[data-testid="logout-button"]');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\auth.spec.js:72:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-logout-successfully-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-logout-successfully-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\auth-Authentication-Flow-should-logout-successfully-webkit\error-context.md
+
+  12) [webkit] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      25 |     const metricCards = page.locator('[data-testid="metric-card"]');
+      26 |     const count = await metricCards.count();
+    > 27 |     expect(count).toBeGreaterThan(0);
+         |                   ^
+      28 |   });
+      29 |
+      30 |   test('should navigate to products', async ({ page }) => {
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\dashboard.spec.js:27:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-webkit\error-context.md
+
+  13) [webkit] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="invoices-table"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="invoices-table"]')[22m
+
+
+      19 |   test('should display invoices list', async ({ page }) => {
+      20 |     // Check if invoices table is visible
+    > 21 |     await expect(page.locator('[data-testid="invoices-table"]')).toBeVisible();
+         |                                                                  ^
+      22 |     
+      23 |     // Check if invoices are loaded
+      24 |     const rows = page.locator('[data-testid="invoices-table"] tbody tr');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\invoices.spec.js:21:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\invoices-Invoice-Management-should-display-invoices-list-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\invoices-Invoice-Management-should-display-invoices-list-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\invoices-Invoice-Management-should-display-invoices-list-webkit\error-context.md
+
+  14) [webkit] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="products-table"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="products-table"]')[22m
+
+
+      19 |   test('should display products list', async ({ page }) => {
+      20 |     // Check if products table is visible
+    > 21 |     await expect(page.locator('[data-testid="products-table"]')).toBeVisible();
+         |                                                                  ^
+      22 |     
+      23 |     // Check if products are loaded
+      24 |     const rows = page.locator('[data-testid="products-table"] tbody tr');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\products.spec.js:21:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\products-Product-Management-should-display-products-list-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\products-Product-Management-should-display-products-list-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\products-Product-Management-should-display-products-list-webkit\error-context.md
+
+  15) [Mobile Chrome] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully 
+
+    TimeoutError: page.click: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-testid="user-menu"]')[22m
+
+
+      70 |     
+      71 |     // Click user menu
+    > 72 |     await page.click('[data-testid="user-menu"]');
+         |                ^
+      73 |     
+      74 |     // Click logout
+      75 |     await page.click('[data-testid="logout-button"]');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\auth.spec.js:72:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-logout-successfully-Mobile-Chrome\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-logout-successfully-Mobile-Chrome\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\auth-Authentication-Flow-should-logout-successfully-Mobile-Chrome\error-context.md
+
+  16) [Mobile Chrome] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      25 |     const metricCards = page.locator('[data-testid="metric-card"]');
+      26 |     const count = await metricCards.count();
+    > 27 |     expect(count).toBeGreaterThan(0);
+         |                   ^
+      28 |   });
+      29 |
+      30 |   test('should navigate to products', async ({ page }) => {
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\dashboard.spec.js:27:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-Mobile-Chrome\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-Mobile-Chrome\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-Mobile-Chrome\error-context.md
+
+  17) [Mobile Chrome] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="invoices-table"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="invoices-table"]')[22m
+
+
+      19 |   test('should display invoices list', async ({ page }) => {
+      20 |     // Check if invoices table is visible
+    > 21 |     await expect(page.locator('[data-testid="invoices-table"]')).toBeVisible();
+         |                                                                  ^
+      22 |     
+      23 |     // Check if invoices are loaded
+      24 |     const rows = page.locator('[data-testid="invoices-table"] tbody tr');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\invoices.spec.js:21:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\invoices-Invoice-Management-should-display-invoices-list-Mobile-Chrome\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\invoices-Invoice-Management-should-display-invoices-list-Mobile-Chrome\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\invoices-Invoice-Management-should-display-invoices-list-Mobile-Chrome\error-context.md
+
+  18) [Mobile Chrome] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="products-table"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="products-table"]')[22m
+
+
+      19 |   test('should display products list', async ({ page }) => {
+      20 |     // Check if products table is visible
+    > 21 |     await expect(page.locator('[data-testid="products-table"]')).toBeVisible();
+         |                                                                  ^
+      22 |     
+      23 |     // Check if products are loaded
+      24 |     const rows = page.locator('[data-testid="products-table"] tbody tr');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\products.spec.js:21:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\products-Product-Management-should-display-products-list-Mobile-Chrome\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\products-Product-Management-should-display-products-list-Mobile-Chrome\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\products-Product-Management-should-display-products-list-Mobile-Chrome\error-context.md
+
+  19) [Mobile Safari] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/.*dashboard/[39m
+    Received string:  [31m"http://localhost:5502/login"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://localhost:5502/login"[22m
+
+
+      55 |     
+      56 |     // Should still be logged in
+    > 57 |     await expect(newPage).toHaveURL(/.*dashboard/);
+         |                           ^
+      58 |     
+      59 |     await newPage.close();
+      60 |   });
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\auth.spec.js:57:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-Mobile-Safari\test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-Mobile-Safari\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-Mobile-Safari\video-1.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-persist-login-session-Mobile-Safari\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\auth-Authentication-Flow-should-persist-login-session-Mobile-Safari\error-context.md
+
+  20) [Mobile Safari] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully 
+
+    TimeoutError: page.click: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-testid="user-menu"]')[22m
+
+
+      70 |     
+      71 |     // Click user menu
+    > 72 |     await page.click('[data-testid="user-menu"]');
+         |                ^
+      73 |     
+      74 |     // Click logout
+      75 |     await page.click('[data-testid="logout-button"]');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\auth.spec.js:72:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-logout-successfully-Mobile-Safari\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\auth-Authentication-Flow-should-logout-successfully-Mobile-Safari\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\auth-Authentication-Flow-should-logout-successfully-Mobile-Safari\error-context.md
+
+  21) [Mobile Safari] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      25 |     const metricCards = page.locator('[data-testid="metric-card"]');
+      26 |     const count = await metricCards.count();
+    > 27 |     expect(count).toBeGreaterThan(0);
+         |                   ^
+      28 |   });
+      29 |
+      30 |   test('should navigate to products', async ({ page }) => {
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\dashboard.spec.js:27:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-Mobile-Safari\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-Mobile-Safari\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\dashboard-Dashboard-Navigation-should-display-key-metrics-Mobile-Safari\error-context.md
+
+  22) [Mobile Safari] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="invoices-table"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="invoices-table"]')[22m
+
+
+      19 |   test('should display invoices list', async ({ page }) => {
+      20 |     // Check if invoices table is visible
+    > 21 |     await expect(page.locator('[data-testid="invoices-table"]')).toBeVisible();
+         |                                                                  ^
+      22 |     
+      23 |     // Check if invoices are loaded
+      24 |     const rows = page.locator('[data-testid="invoices-table"] tbody tr');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\invoices.spec.js:21:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\invoices-Invoice-Management-should-display-invoices-list-Mobile-Safari\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\invoices-Invoice-Management-should-display-invoices-list-Mobile-Safari\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\invoices-Invoice-Management-should-display-invoices-list-Mobile-Safari\error-context.md
+
+  23) [Mobile Safari] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid="products-table"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('[data-testid="products-table"]')[22m
+
+
+      19 |   test('should display products list', async ({ page }) => {
+      20 |     // Check if products table is visible
+    > 21 |     await expect(page.locator('[data-testid="products-table"]')).toBeVisible();
+         |                                                                  ^
+      22 |     
+      23 |     // Check if products are loaded
+      24 |     const rows = page.locator('[data-testid="products-table"] tbody tr');
+        at D:\APPS_AI\store\Store\frontend\tests\e2e\products.spec.js:21:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\products-Product-Management-should-display-products-list-Mobile-Safari\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\products-Product-Management-should-display-products-list-Mobile-Safari\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\products-Product-Management-should-display-products-list-Mobile-Safari\error-context.md
+
+  23 failed
+    [chromium] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully ────
+    [chromium] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics 
+    [chromium] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list 
+    [chromium] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list 
+    [firefox] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session ───
+    [firefox] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully ─────
+    [firefox] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics 
+    [firefox] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list 
+    [firefox] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list 
+    [webkit] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session ────
+    [webkit] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully ──────
+    [webkit] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics 
+    [webkit] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list ─
+    [webkit] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list ─
+    [Mobile Chrome] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully 
+    [Mobile Chrome] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics 
+    [Mobile Chrome] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list 
+    [Mobile Chrome] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list 
+    [Mobile Safari] › tests\e2e\auth.spec.js:43:3 › Authentication Flow › should persist login session 
+    [Mobile Safari] › tests\e2e\auth.spec.js:62:3 › Authentication Flow › should logout successfully 
+    [Mobile Safari] › tests\e2e\dashboard.spec.js:23:3 › Dashboard Navigation › should display key metrics 
+    [Mobile Safari] › tests\e2e\invoices.spec.js:19:3 › Invoice Management › should display invoices list 
+    [Mobile Safari] › tests\e2e\products.spec.js:19:3 › Product Management › should display products list 
+  222 passed (3.1m)

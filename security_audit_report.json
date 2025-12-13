@@ -1,0 +1,143 @@
+{
+  "timestamp": "2025-10-04T15:14:56.477003",
+  "security_score": 0,
+  "max_score": 100,
+  "grade": "F (فاشل)",
+  "vulnerabilities_count": 15,
+  "vulnerabilities": [
+    {
+      "type": "weak_password",
+      "severity": "high",
+      "description": "كلمة مرور ضعيفة موجودة: password",
+      "file": "backend/.env"
+    },
+    {
+      "type": "weak_password",
+      "severity": "high",
+      "description": "كلمة مرور ضعيفة موجودة: admin",
+      "file": "backend/.env"
+    },
+    {
+      "type": "weak_password",
+      "severity": "high",
+      "description": "كلمة مرور ضعيفة موجودة: test",
+      "file": "backend/.env"
+    },
+    {
+      "type": "sql_injection",
+      "severity": "critical",
+      "description": "احتمالية SQL Injection في: backend/src/database.py",
+      "pattern": "\\.execute\\s*\\(\\s*f[\"\\']"
+    },
+    {
+      "type": "xss_vulnerability",
+      "severity": "high",
+      "description": "احتمالية XSS في: frontend/src/components/InvoicePrint.jsx",
+      "pattern": "innerHTML\\s*="
+    },
+    {
+      "type": "xss_vulnerability",
+      "severity": "high",
+      "description": "احتمالية XSS في: frontend/src/components/ui/chart.jsx",
+      "pattern": "dangerouslySetInnerHTML"
+    },
+    {
+      "type": "generic_exception",
+      "severity": "low",
+      "description": "معالجة أخطاء عامة في: backend/src/database.py",
+      "recommendation": "تحديد نوع الاستثناء المطلوب"
+    },
+    {
+      "type": "sensitive_info_leak",
+      "severity": "high",
+      "description": "تسريب معلومات حساسة في: backend/src/database_encryption.py",
+      "recommendation": "إزالة طباعة المعلومات الحساسة"
+    },
+    {
+      "type": "sensitive_info_leak",
+      "severity": "high",
+      "description": "تسريب معلومات حساسة في: backend/src/encryption_manager.py",
+      "recommendation": "إزالة طباعة المعلومات الحساسة"
+    },
+    {
+      "type": "sensitive_info_leak",
+      "severity": "high",
+      "description": "تسريب معلومات حساسة في: backend/src/https_server.py",
+      "recommendation": "إزالة طباعة المعلومات الحساسة"
+    },
+    {
+      "type": "sensitive_info_leak",
+      "severity": "high",
+      "description": "تسريب معلومات حساسة في: backend/src/secure_communication.py",
+      "recommendation": "إزالة طباعة المعلومات الحساسة"
+    },
+    {
+      "type": "generic_exception",
+      "severity": "low",
+      "description": "معالجة أخطاء عامة في: backend/src/routes/customers.py",
+      "recommendation": "تحديد نوع الاستثناء المطلوب"
+    },
+    {
+      "type": "generic_exception",
+      "severity": "low",
+      "description": "معالجة أخطاء عامة في: backend/src/routes/suppliers.py",
+      "recommendation": "تحديد نوع الاستثناء المطلوب"
+    },
+    {
+      "type": "generic_exception",
+      "severity": "low",
+      "description": "معالجة أخطاء عامة في: backend/src/routes/products.py",
+      "recommendation": "تحديد نوع الاستثناء المطلوب"
+    },
+    {
+      "type": "sensitive_info_leak",
+      "severity": "high",
+      "description": "تسريب معلومات حساسة في: backend/src/routes/auth_routes.py",
+      "recommendation": "إزالة طباعة المعلومات الحساسة"
+    }
+  ],
+  "recommendations": [
+    {
+      "category": "كلمات المرور",
+      "items": [
+        "استخدام كلمات مرور قوية (12+ حرف)",
+        "تفعيل المصادقة الثنائية",
+        "تغيير كلمات المرور دورياً",
+        "استخدام مدير كلمات مرور"
+      ]
+    },
+    {
+      "category": "التشفير",
+      "items": [
+        "استخدام HTTPS في الإنتاج",
+        "تشفير قاعدة البيانات",
+        "استخدام مفاتيح تشفير قوية",
+        "تدوير المفاتيح دورياً"
+      ]
+    },
+    {
+      "category": "المراقبة",
+      "items": [
+        "تسجيل جميع محاولات تسجيل الدخول",
+        "مراقبة الأنشطة المشبوهة",
+        "إعداد تنبيهات أمنية",
+        "مراجعة السجلات دورياً"
+      ]
+    },
+    {
+      "category": "النسخ الاحتياطية",
+      "items": [
+        "نسخ احتياطية مشفرة",
+        "اختبار استعادة البيانات",
+        "تخزين النسخ في مواقع متعددة",
+        "جدولة النسخ الاحتياطية"
+      ]
+    }
+  ],
+  "summary": {
+    "critical": 1,
+    "high": 10,
+    "medium": 0,
+    "low": 4
+  }
+}

@@ -1,0 +1,110 @@
+/* ملف CSS خارجي للأنماط المشتركة */
+
+/* إصلاح backdrop-filter للمتصفحات */
+.backdrop-blur {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+/* أنماط الأزرار */
+.btn-primary {
+    background-color: #3b82f6;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+/* أنماط النماذج */
+.form-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* أنماط الجداول */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: right;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* أنماط التنبيهات */
+.alert {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+.alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.alert-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.alert-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+/* أنماط إمكانية الوصول */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* تحسينات التفاعل */
+.interactive:hover {
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.interactive:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}

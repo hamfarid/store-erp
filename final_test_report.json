@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-10-05T08:30:48.253550",
+  "success_rate": 91.66666666666666,
+  "total_tests": 12,
+  "successful_tests": 11,
+  "failed_tests": 1,
+  "test_results": {
+    "backend_tests": {
+      "status": true,
+      "categories": true,
+      "warehouses": true,
+      "products": true,
+      "users": true
+    },
+    "frontend_tests": {
+      "server": false
+    },
+    "integration_tests": {
+      "create_category": true
+    },
+    "database_tests": {
+      "exists": true,
+      "users": true,
+      "categories": true,
+      "warehouses": true,
+      "products": true
+    },
+    "overall_status": "GOOD"
+  }
+}

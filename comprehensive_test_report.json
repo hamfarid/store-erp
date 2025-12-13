@@ -1,0 +1,155 @@
+{
+  "test_summary": {
+    "total_tests": 19,
+    "passed_tests": 7,
+    "failed_tests": 10,
+    "warnings": 2,
+    "success_rate": 36.84
+  },
+  "test_details": [
+    {
+      "test": "Backend Health",
+      "status": "PASS",
+      "message": "الخادم يعمل - الإصدار 1.5.0",
+      "timestamp": "2025-10-05T07:50:31.703736",
+      "details": {
+        "environment": "production",
+        "message": "Complete Inventory Management System v1.5 is running",
+        "status": "healthy",
+        "timestamp": "2025-10-05T07:50:31.702527",
+        "version": "1.5.0"
+      }
+    },
+    {
+      "test": "API /api/health",
+      "status": "PASS",
+      "message": "فحص الصحة - 200",
+      "timestamp": "2025-10-05T07:50:31.706327",
+      "details": {}
+    },
+    {
+      "test": "API /api/system/status",
+      "status": "PASS",
+      "message": "حالة النظام - 200",
+      "timestamp": "2025-10-05T07:50:31.708656",
+      "details": {}
+    },
+    {
+      "test": "API /api/products",
+      "status": "PASS",
+      "message": "قائمة المنتجات - 200",
+      "timestamp": "2025-10-05T07:50:31.711743",
+      "details": {}
+    },
+    {
+      "test": "API /api/customers",
+      "status": "PASS",
+      "message": "قائمة العملاء - 200",
+      "timestamp": "2025-10-05T07:50:31.714253",
+      "details": {}
+    },
+    {
+      "test": "API /api/suppliers",
+      "status": "PASS",
+      "message": "قائمة الموردين - 200",
+      "timestamp": "2025-10-05T07:50:31.716545",
+      "details": {}
+    },
+    {
+      "test": "API /api/categories",
+      "status": "FAIL",
+      "message": "قائمة الفئات - خطأ 404",
+      "timestamp": "2025-10-05T07:50:31.718733",
+      "details": {}
+    },
+    {
+      "test": "API /api/warehouses",
+      "status": "FAIL",
+      "message": "قائمة المستودعات - خطأ 404",
+      "timestamp": "2025-10-05T07:50:31.720936",
+      "details": {}
+    },
+    {
+      "test": "API /api/inventory",
+      "status": "FAIL",
+      "message": "المخزون - خطأ 404",
+      "timestamp": "2025-10-05T07:50:31.722836",
+      "details": {}
+    },
+    {
+      "test": "API /api/reports/sales",
+      "status": "FAIL",
+      "message": "تقارير المبيعات - خطأ 404",
+      "timestamp": "2025-10-05T07:50:31.724746",
+      "details": {}
+    },
+    {
+      "test": "API /api/users",
+      "status": "FAIL",
+      "message": "قائمة المستخدمين - خطأ 404",
+      "timestamp": "2025-10-05T07:50:31.726566",
+      "details": {}
+    },
+    {
+      "test": "Authentication Login",
+      "status": "FAIL",
+      "message": "فشل تسجيل الدخول - 401",
+      "timestamp": "2025-10-05T07:50:31.729083",
+      "details": {}
+    },
+    {
+      "test": "Security Unauthorized",
+      "status": "WARN",
+      "message": "قد تكون هناك مشكلة أمنية - 404",
+      "timestamp": "2025-10-05T07:50:31.730868",
+      "details": {}
+    },
+    {
+      "test": "Security CORS",
+      "status": "PASS",
+      "message": "إعدادات CORS موجودة",
+      "timestamp": "2025-10-05T07:50:31.732705",
+      "details": {}
+    },
+    {
+      "test": "Report daily",
+      "status": "FAIL",
+      "message": "خطأ 404",
+      "timestamp": "2025-10-05T07:50:31.734768",
+      "details": {}
+    },
+    {
+      "test": "Report summary",
+      "status": "FAIL",
+      "message": "خطأ 404",
+      "timestamp": "2025-10-05T07:50:31.736670",
+      "details": {}
+    },
+    {
+      "test": "Report analysis",
+      "status": "FAIL",
+      "message": "خطأ 404",
+      "timestamp": "2025-10-05T07:50:31.738501",
+      "details": {}
+    },
+    {
+      "test": "Report summary",
+      "status": "FAIL",
+      "message": "خطأ 404",
+      "timestamp": "2025-10-05T07:50:31.740257",
+      "details": {}
+    },
+    {
+      "test": "Frontend Availability",
+      "status": "WARN",
+      "message": "الواجهة الأمامية غير متاحة: HTTPConnectionPool(host='localhost', port=5502): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fa7684d0b50>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "timestamp": "2025-10-05T07:50:31.741177",
+      "details": {}
+    }
+  ],
+  "timestamp": "2025-10-05T07:50:31.741211",
+  "system_info": {
+    "backend_url": "http://localhost:5002",
+    "frontend_url": "http://localhost:5502"
+  }
+}

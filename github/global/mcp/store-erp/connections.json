@@ -1,0 +1,111 @@
+{
+  "connections": {
+    "sentry": {
+      "server": "sentry",
+      "status": "connected",
+      "organization": "gaara-group",
+      "project": "store-erp",
+      "features_enabled": [
+        "error_tracking",
+        "performance_monitoring",
+        "issue_management",
+        "release_tracking"
+      ],
+      "authentication": "OAuth (configured)",
+      "last_connected": "2025-11-05T04:00:00Z",
+      "connection_health": "healthy"
+    },
+    "cloudflare": {
+      "server": "cloudflare",
+      "status": "available",
+      "features_available": [
+        "d1_database",
+        "r2_storage",
+        "kv_store",
+        "workers_bindings"
+      ],
+      "authentication": "Not configured",
+      "note": "Available for use when needed"
+    },
+    "playwright": {
+      "server": "playwright",
+      "status": "available",
+      "features_available": [
+        "browser_automation",
+        "e2e_testing",
+        "screenshot_capture",
+        "pdf_generation"
+      ],
+      "authentication": "Not required",
+      "note": "Browser installation required before use"
+    },
+    "serena": {
+      "server": "serena",
+      "status": "available",
+      "features_available": [
+        "semantic_code_search",
+        "code_editing",
+        "refactoring_support"
+      ],
+      "authentication": "Not configured",
+      "note": "Project onboarding required before use"
+    }
+  },
+  "connection_details": {
+    "mcp_cli_tool": "manus-mcp-cli",
+    "usage_pattern": "manus-mcp-cli tool call <tool_name> --server <server_name> --input '<json_args>'",
+    "server_flag_required": true,
+    "oauth_automatic": true
+  },
+  "environment": {
+    "mcp_location": "C:\\Users\\hadym\\.global\\mcp\\store-erp\\",
+    "project_specific": true,
+    "shared_with_other_projects": false
+  },
+  "usage_examples": {
+    "sentry_list_projects": {
+      "command": "manus-mcp-cli tool list --server sentry",
+      "description": "List available Sentry tools"
+    },
+    "sentry_get_issues": {
+      "command": "manus-mcp-cli tool call get_project_issues --server sentry --input '{\"project\":\"store-erp\"}'",
+      "description": "Get issues for Store ERP project"
+    },
+    "playwright_install": {
+      "command": "manus-mcp-cli tool call browser_install --server playwright --input '{\"browser\":\"chromium\"}'",
+      "description": "Install Chromium browser for testing"
+    },
+    "serena_check": {
+      "command": "manus-mcp-cli tool call check_onboarding --server serena --input '{\"project\":\"store-erp\"}'",
+      "description": "Check if Store ERP is onboarded to Serena"
+    }
+  },
+  "best_practices": {
+    "connection_management": [
+      "Only connect to servers when needed",
+      "Verify connection health regularly",
+      "Use OAuth for authentication when available",
+      "Keep credentials secure"
+    ],
+    "tool_usage": [
+      "Review available tools before calling",
+      "Provide valid JSON arguments",
+      "Handle errors gracefully",
+      "Log important operations"
+    ],
+    "environment_separation": [
+      "MCP tools are for AI assistant only",
+      "Never mix MCP with user project code",
+      "Keep MCP configuration in .global/mcp/store-erp/",
+      "User project stays in D:\\APPS_AI\\store\\Store\\"
+    ]
+  },
+  "notes": {
+    "active_connections": 1,
+    "available_connections": 3,
+    "total_servers": 4,
+    "project_specific": "This MCP configuration is for store-erp project only",
+    "isolation": "Other projects have their own MCP configurations"
+  }
+}
+

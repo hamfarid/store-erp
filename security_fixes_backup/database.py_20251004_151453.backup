@@ -1,0 +1,266 @@
+"""
+إعدادات قاعدة البيانات المحسنة
+Enhanced Database Configuration
+"""
+
+import os
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from datetime import datetime
+
+# إنشاء كائن قاعدة البيانات
+db = SQLAlchemy()
+migrate = Migrate()
+
+def configure_database(app):
+    """تكوين قاعدة البيانات مع Flask app"""
+    
+    # إعدادات قاعدة البيانات
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    instance_dir = os.path.join(os.path.dirname(basedir), 'instance')
+    
+    # إنشاء مجلد instance إذا لم يكن موجوداً
+    if not os.path.exists(instance_dir):
+        os.makedirs(instance_dir)
+    
+    # مسار قاعدة البيانات
+    database_path = os.path.join(instance_dir, 'inventory.db')
+    
+    # تكوين Flask app
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{database_path}'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+        'pool_pre_ping': True,
+        'pool_recycle': 300,
+    }
+    
+    # تهيئة قاعدة البيانات مع التطبيق
+    db.init_app(app)
+    migrate.init_app(app, db)
+    
+    return db
+
+def create_tables(app):
+    """إنشاء الجداول"""
+    try:
+        with app.app_context():
+            # إنشاء جميع الجداول
+            db.create_all()
+            print("✅ تم إنشاء جداول قاعدة البيانات بنجاح")
+            return True
+    except Exception as e:
+        print(f"❌ خطأ في إنشاء الجداول: {e}")
+        return False
+
+def create_default_data():
+    """إنشاء البيانات الأساسية"""
+    from flask import current_app
+    
+    try:
+        # التأكد من وجود app context
+        if not current_app:
+            print("⚠️ لا يوجد Flask app context، تخطي إنشاء البيانات الأساسية")
+            return True
+            
+        # استيراد النماذج مع التحقق من وجودها
+        try:
+            from models.user import User, Role
+        except ImportError:
+            print("⚠️ نماذج المستخدمين غير متوفرة، تخطي إنشاء البيانات الأساسية")
+            return True
+        
+        # إنشاء الأدوار الأساسية
+        if Role.query.count() == 0:
+            admin_role = Role(
+                name='admin',
+                description='مدير النظام',
+                permissions='all'
+            )
+            user_role = Role(
+                name='user', 
+                description='مستخدم عادي',
+                permissions='read,write'
+            )
+            
+            db.session.add(admin_role)
+            db.session.add(user_role)
+            db.session.commit()
+            print("✅ تم إنشاء الأدوار الأساسية")
+        
+        # إنشاء المستخدم الإداري
+        if User.query.filter_by(username='admin').first() is None:
+            admin_user = User(
+                username='admin',
+                email='admin@store.com',
+                full_name='مدير النظام',
+                role_id=1,
+                is_active=True,
+                created_at=datetime.utcnow()
+            )
+            admin_user.set_password('admin123')
+            
+            db.session.add(admin_user)
+            db.session.commit()
+            print("✅ تم إنشاء المستخدم الإداري")
+        
+        # إنشاء الفئات الأساسية
+        from models.inventory import Category
+        if Category.query.count() == 0:
+            categories = [
+                Category(name='إلكترونيات', description='الأجهزة الإلكترونية'),
+                Category(name='ملابس', description='الملابس والأزياء'),
+                Category(name='طعام', description='المواد الغذائية'),
+                Category(name='كتب', description='الكتب والمطبوعات'),
+                Category(name='أدوات', description='الأدوات والمعدات')
+            ]
+            
+            for category in categories:
+                db.session.add(category)
+            
+            db.session.commit()
+            print("✅ تم إنشاء الفئات الأساسية")
+        
+        # إنشاء المخازن الأساسية
+        from models.inventory import Warehouse
+        if Warehouse.query.count() == 0:
+            warehouses = [
+                Warehouse(
+                    name='المخزن الرئيسي',
+                    location='الرياض',
+                    description='المخزن الرئيسي للشركة',
+                    is_active=True
+                ),
+                Warehouse(
+                    name='مخزن فرعي',
+                    location='جدة', 
+                    description='مخزن فرعي',
+                    is_active=True
+                )
+            ]
+            
+            for warehouse in warehouses:
+                db.session.add(warehouse)
+            
+            db.session.commit()
+            print("✅ تم إنشاء المخازن الأساسية")
+        
+        print("✅ تم إنشاء جميع البيانات الأساسية بنجاح")
+        return True
+        
+    except Exception as e:
+        print(f"❌ خطأ في إنشاء البيانات الأساسية: {e}")
+        db.session.rollback()
+        return False
+
+def get_database_info():
+    """الحصول على معلومات قاعدة البيانات"""
+    try:
+        info = {
+            'tables': [],
+            'total_records': 0
+        }
+        
+        # قائمة الجداول
+        tables = db.metadata.tables.keys()
+        info['tables'] = list(tables)
+        
+        # عدد السجلات في كل جدول
+        for table_name in tables:
+            try:
+                table = db.metadata.tables[table_name]
+                count = db.session.execute(f"SELECT COUNT(*) FROM {table_name}").scalar()
+                info[f'{table_name}_count'] = count
+                info['total_records'] += count
+            except:
+                info[f'{table_name}_count'] = 0
+        
+        return info
+        
+    except Exception as e:
+        print(f"خطأ في الحصول على معلومات قاعدة البيانات: {e}")
+        return {}
+
+def backup_database():
+    """إنشاء نسخة احتياطية من قاعدة البيانات"""
+    try:
+        import shutil
+        from datetime import datetime
+        
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        instance_dir = os.path.join(os.path.dirname(basedir), 'instance')
+        
+        source_db = os.path.join(instance_dir, 'inventory.db')
+        backup_name = f"inventory_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.db"
+        backup_path = os.path.join(instance_dir, backup_name)
+        
+        if os.path.exists(source_db):
+            shutil.copy2(source_db, backup_path)
+            print(f"✅ تم إنشاء نسخة احتياطية: {backup_name}")
+            return backup_path
+        else:
+            print("❌ ملف قاعدة البيانات غير موجود")
+            return None
+            
+    except Exception as e:
+        print(f"❌ خطأ في إنشاء النسخة الاحتياطية: {e}")
+        return None
+
+def optimize_database():
+    """تحسين أداء قاعدة البيانات"""
+    try:
+        # تشغيل VACUUM لتحسين قاعدة البيانات
+        db.session.execute("VACUUM;")
+        
+        # تحليل الجداول لتحسين الاستعلامات
+        db.session.execute("ANALYZE;")
+        
+        db.session.commit()
+        print("✅ تم تحسين قاعدة البيانات")
+        return True
+        
+    except Exception as e:
+        print(f"❌ خطأ في تحسين قاعدة البيانات: {e}")
+        return False
+
+# دوال مساعدة للتطوير
+def reset_database():
+    """إعادة تعيين قاعدة البيانات (للتطوير فقط)"""
+    try:
+        db.drop_all()
+        db.create_all()
+        create_default_data()
+        print("✅ تم إعادة تعيين قاعدة البيانات")
+        return True
+    except Exception as e:
+        print(f"❌ خطأ في إعادة تعيين قاعدة البيانات: {e}")
+        return False
+
+def check_database_health():
+    """فحص صحة قاعدة البيانات"""
+    try:
+        # فحص الاتصال
+        db.session.execute("SELECT 1;")
+        
+        # فحص الجداول الأساسية
+        required_tables = ['users', 'roles', 'products', 'categories', 'warehouses']
+        existing_tables = db.metadata.tables.keys()
+        
+        missing_tables = [table for table in required_tables if table not in existing_tables]
+        
+        health_status = {
+            'connection': True,
+            'tables_exist': len(missing_tables) == 0,
+            'missing_tables': missing_tables,
+            'total_tables': len(existing_tables)
+        }
+        
+        return health_status
+        
+    except Exception as e:
+        return {
+            'connection': False,
+            'error': str(e),
+            'tables_exist': False,
+            'missing_tables': [],
+            'total_tables': 0
+        }

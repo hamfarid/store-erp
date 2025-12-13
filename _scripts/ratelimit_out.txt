@@ -1,0 +1,10 @@
+LIMITER_PRESENT True
+AUTH_LOGIN_CODES [400, 400, 400, 400, 400, 429]
+AUTH_LOGIN_RETRY_AFTER [None, None, None, None, None, None]
+AUTH_LOGIN_REMAINING [None, None, None, None, None, None]
+AUTH_REFRESH_CODES [401, 401, 401, 401, 401, 401, 401, 401, 401, 401, 429]
+AUTH_REFRESH_RETRY_AFTER [None, None, None, None, None, None, None, None, None, None, None]
+AUTH_REFRESH_REMAINING [None, None, None, None, None, None, None, None, None, None, None]
+AUTH_SKIPPED False
+HEALTH_CODES [200, 200, 200, 200, 200]
+STATUS_CODES [404, 404, 404]

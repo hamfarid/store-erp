@@ -1,0 +1,10 @@
+تقرير إصلاحات Flake8
+==============================
+
+ملفات معالجة: 2
+ملفات مُصلحة: 2
+
+الملفات المعالجة:
+--------------------
+- complete_inventory_system\backend\src\routes\integration_apis.py
+- complete_inventory_system\backend\src\routes\inventory_advanced.py
