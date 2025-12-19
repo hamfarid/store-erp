@@ -72,3 +72,4 @@ dist/
 *.tmp
 *.temp
 .cache/
+README.md.backup
