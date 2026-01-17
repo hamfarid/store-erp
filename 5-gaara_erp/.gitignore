@@ -108,3 +108,6 @@ secrets/
 # Local configuration
 local_settings.py
 settings_local.py
+# Large backup files
+*.tar.gz
+*.zip
