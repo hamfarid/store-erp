@@ -1,258 +1,282 @@
-// مكتبة التحقق من صحة البيانات
-export const validators = {
-  // التحقق من أن القيمة غير فارغة
-  required: (value, fieldName = 'الحقل') => {
-    if (!value || (typeof value === 'string' && value.trim() === '')) {
-      return `${fieldName} مطلوب`
-    }
-    return null
-  },
+/**
+ * Validation Utilities
+ * Common validation functions for forms and data.
+ */
 
-  // التحقق من الحد الأدنى لطول النص
-  minLength: (value, min, fieldName = 'الحقل') => {
-    if (value && value.length < min) {
-      return `${fieldName} يجب أن يكون ${min} أحرف على الأقل`
-    }
-    return null
-  },
+/**
+ * Validate email format
+ * @param {string} email - Email to validate
+ * @returns {boolean} True if valid
+ */
+export const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 
-  // التحقق من الحد الأقصى لطول النص
-  maxLength: (value, max, fieldName = 'الحقل') => {
-    if (value && value.length > max) {
-      return `${fieldName} يجب أن يكون ${max} أحرف كحد أقصى`
-    }
-    return null
-  },
+/**
+ * Validate phone number (Saudi/Egyptian format)
+ * @param {string} phone - Phone number to validate
+ * @returns {boolean} True if valid
+ */
+export const isValidPhone = (phone) => {
+  // Saudi: 05xxxxxxxx or +9665xxxxxxxx
+  // Egyptian: 01xxxxxxxx or +201xxxxxxxx
+  const phoneRegex = /^(\+?966|0)?5\d{8}$|^(\+?20|0)?1[0125]\d{8}$/;
+  return phoneRegex.test(phone.replace(/\s/g, ''));
+};
 
-  // التحقق من صحة البريد الإلكتروني
-  email: (value, fieldName = 'البريد الإلكتروني') => {
-    if (value) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      if (!emailRegex.test(value)) {
-        return `${fieldName} غير صحيح`
-      }
+/**
+ * Validate Saudi National ID
+ * @param {string} id - National ID to validate
+ * @returns {boolean} True if valid
+ */
+export const isValidNationalId = (id) => {
+  if (!id || id.length !== 10) return false;
+  
+  // Saudi ID starts with 1 or 2
+  if (!/^[12]\d{9}$/.test(id)) return false;
+  
+  // Luhn algorithm validation
+  let sum = 0;
+  for (let i = 0; i < 10; i++) {
+    let digit = parseInt(id[i]);
+    if (i % 2 === 0) {
+      digit *= 2;
+      if (digit > 9) digit -= 9;
     }
-    return null
-  },
-
-  // التحقق من صحة رقم الهاتف
-  phone: (value, fieldName = 'رقم الهاتف') => {
-    if (value) {
-      const phoneRegex = /^[0-9+\-\s()]+$/
-      if (!phoneRegex.test(value) || value.length < 10) {
-        return `${fieldName} غير صحيح`
-      }
-    }
-    return null
-  },
-
-  // التحقق من أن القيمة رقم موجب
-  positiveNumber: (value, fieldName = 'الرقم') => {
-    if (value !== undefined && value !== null && value !== '') {
-      const num = parseFloat(value)
-      if (isNaN(num) || num < 0) {
-        return `${fieldName} يجب أن يكون رقم موجب`
-      }
-    }
-    return null
-  },
-
-  // التحقق من أن القيمة رقم صحيح موجب
-  positiveInteger: (value, fieldName = 'الرقم') => {
-    if (value !== undefined && value !== null && value !== '') {
-      const num = parseInt(value)
-      if (isNaN(num) || num < 0 || !Number.isInteger(parseFloat(value))) {
-        return `${fieldName} يجب أن يكون رقم صحيح موجب`
-      }
-    }
-    return null
-  },
-
-  // التحقق من أن القيمة أكبر من قيمة معينة
-  greaterThan: (value, min, fieldName = 'الرقم') => {
-    if (value !== undefined && value !== null && value !== '') {
-      const num = parseFloat(value)
-      if (isNaN(num) || num <= min) {
-        return `${fieldName} يجب أن يكون أكبر من ${min}`
-      }
-    }
-    return null
-  },
-
-  // التحقق من أن القيمة أقل من قيمة معينة
-  lessThan: (value, max, fieldName = 'الرقم') => {
-    if (value !== undefined && value !== null && value !== '') {
-      const num = parseFloat(value)
-      if (isNaN(num) || num >= max) {
-        return `${fieldName} يجب أن يكون أقل من ${max}`
-      }
-    }
-    return null
-  },
-
-  // التحقق من أن القيمة ضمن نطاق معين
-  range: (value, min, max, fieldName = 'الرقم') => {
-    if (value !== undefined && value !== null && value !== '') {
-      const num = parseFloat(value)
-      if (isNaN(num) || num < min || num > max) {
-        return `${fieldName} يجب أن يكون بين ${min} و ${max}`
-      }
-    }
-    return null
-  },
-
-  // التحقق من أن رمز المنتج فريد
-  uniqueSku: (value, existingSkus = [], fieldName = 'رمز المنتج') => {
-    if (value && existingSkus.includes(value.toUpperCase())) {
-      return `${fieldName} موجود مسبقاً`
-    }
-    return null
+    sum += digit;
   }
-}
+  
+  return sum % 10 === 0;
+};
 
-// دالة للتحقق من صحة نموذج المنتج
-export const validateProduct = (product, existingProducts = []) => {
-  const errors = {}
-  const existingBarcodes = existingProducts
-    .filter(p => p.id !== product.id && p.barcode)
-    .map(p => p.barcode?.toUpperCase())
+/**
+ * Validate Commercial Registration (CR) number
+ * @param {string} cr - CR number to validate
+ * @returns {boolean} True if valid
+ */
+export const isValidCR = (cr) => {
+  // Saudi CR is 10 digits starting with 10
+  return /^10\d{8}$/.test(cr);
+};
 
-  // التحقق من اسم المنتج
-  const nameError = validators.required(product.name, 'اسم المنتج') ||
-                   validators.minLength(product.name, 2, 'اسم المنتج') ||
-                   validators.maxLength(product.name, 200, 'اسم المنتج')
-  if (nameError) errors.name = nameError
+/**
+ * Validate VAT number
+ * @param {string} vat - VAT number to validate
+ * @returns {boolean} True if valid
+ */
+export const isValidVAT = (vat) => {
+  // Saudi VAT is 15 digits starting with 3
+  return /^3\d{14}$/.test(vat);
+};
 
-  // التحقق من المرتبة
-  const rankError = validators.required(product.rank_id, 'المرتبة')
-  if (rankError) errors.rank_id = rankError
-
-  // التحقق من الوحدة
-  const unitError = validators.required(product.unit, 'الوحدة') ||
-                   validators.maxLength(product.unit, 50, 'الوحدة')
-  if (unitError) errors.unit = unitError
-
-  // التحقق من الباركود (اختياري ولكن يجب أن يكون فريد)
-  if (product.barcode) {
-    const barcodeError = validators.uniqueSku(product.barcode, existingBarcodes, 'الباركود')
-    if (barcodeError) errors.barcode = barcodeError
-  }
-
-  // التحقق من سعر التكلفة (اختياري)
-  if (product.cost_price) {
-    const costPriceError = validators.positiveNumber(product.cost_price, 'سعر التكلفة')
-    if (costPriceError) errors.cost_price = costPriceError
-  }
-
-  // التحقق من سعر البيع (اختياري)
-  if (product.selling_price) {
-    const sellingPriceError = validators.positiveNumber(product.selling_price, 'سعر البيع')
-    if (sellingPriceError) errors.selling_price = sellingPriceError
-  }
-
-  // التحقق من أن سعر البيع أكبر من سعر التكلفة
-  if (product.cost_price && product.selling_price) {
-    const costPrice = parseFloat(product.cost_price)
-    const sellingPrice = parseFloat(product.selling_price)
-    if (!isNaN(costPrice) && !isNaN(sellingPrice) && sellingPrice <= costPrice) {
-      errors.selling_price = 'سعر البيع يجب أن يكون أكبر من سعر التكلفة'
+/**
+ * Validate barcode (EAN-13 or EAN-8)
+ * @param {string} barcode - Barcode to validate
+ * @returns {boolean} True if valid
+ */
+export const isValidBarcode = (barcode) => {
+  if (!barcode) return false;
+  
+  // EAN-8 or EAN-13
+  if (!/^\d{8}$|^\d{13}$/.test(barcode)) return false;
+  
+  // Check digit validation
+  const digits = barcode.split('').map(Number);
+  const checkDigit = digits.pop();
+  
+  let sum = 0;
+  const isEAN13 = digits.length === 12;
+  
+  digits.forEach((digit, index) => {
+    if (isEAN13) {
+      sum += digit * (index % 2 === 0 ? 1 : 3);
+    } else {
+      sum += digit * (index % 2 === 0 ? 3 : 1);
     }
+  });
+  
+  const calculatedCheck = (10 - (sum % 10)) % 10;
+  return calculatedCheck === checkDigit;
+};
+
+/**
+ * Validate password strength
+ * @param {string} password - Password to validate
+ * @returns {Object} Validation result with score and issues
+ */
+export const validatePassword = (password) => {
+  const issues = [];
+  let score = 0;
+  
+  if (!password) {
+    return { valid: false, score: 0, issues: ['كلمة المرور مطلوبة'] };
   }
-
-  // التحقق من كمية إعادة الطلب (اختياري)
-  if (product.reorder_quantity) {
-    const reorderError = validators.positiveNumber(product.reorder_quantity, 'كمية إعادة الطلب')
-    if (reorderError) errors.reorder_quantity = reorderError
-  }
-
-  // التحقق من الحد الأدنى
-  const minQuantityError = validators.required(product.min_quantity, 'الحد الأدنى') ||
-                          validators.positiveInteger(product.min_quantity, 'الحد الأدنى')
-  if (minQuantityError) errors.min_quantity = minQuantityError
-
+  
+  if (password.length >= 8) score += 1;
+  else issues.push('يجب أن تكون 8 أحرف على الأقل');
+  
+  if (/[A-Z]/.test(password)) score += 1;
+  else issues.push('يجب أن تحتوي على حرف كبير');
+  
+  if (/[a-z]/.test(password)) score += 1;
+  else issues.push('يجب أن تحتوي على حرف صغير');
+  
+  if (/[0-9]/.test(password)) score += 1;
+  else issues.push('يجب أن تحتوي على رقم');
+  
+  if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) score += 1;
+  else issues.push('يجب أن تحتوي على رمز خاص');
+  
   return {
-    isValid: Object.keys(errors).length === 0,
-    errors
+    valid: score >= 4,
+    score,
+    strength: score <= 2 ? 'weak' : score <= 3 ? 'medium' : 'strong',
+    issues
+  };
+};
+
+/**
+ * Validate required field
+ * @param {any} value - Value to check
+ * @param {string} fieldName - Field name for error message
+ * @returns {string|null} Error message or null if valid
+ */
+export const validateRequired = (value, fieldName = 'هذا الحقل') => {
+  if (value === null || value === undefined || value === '') {
+    return `${fieldName} مطلوب`;
   }
-}
+  return null;
+};
 
-// دالة للتحقق من صحة نموذج العميل
-export const validateCustomer = (customer) => {
-  const errors = {}
-
-  // التحقق من اسم العميل
-  const nameError = validators.required(customer.name, 'اسم العميل') ||
-                   validators.minLength(customer.name, 2, 'اسم العميل') ||
-                   validators.maxLength(customer.name, 200, 'اسم العميل')
-  if (nameError) errors.name = nameError
-
-  // التحقق من الشخص المسؤول
-  const contactPersonError = validators.required(customer.contact_person, 'الشخص المسؤول') ||
-                            validators.maxLength(customer.contact_person, 100, 'الشخص المسؤول')
-  if (contactPersonError) errors.contact_person = contactPersonError
-
-  // التحقق من رقم الهاتف
-  const phoneError = validators.required(customer.phone, 'رقم الهاتف') ||
-                    validators.phone(customer.phone, 'رقم الهاتف')
-  if (phoneError) errors.phone = phoneError
-
-  // التحقق من البريد الإلكتروني (اختياري)
-  if (customer.email) {
-    const emailError = validators.email(customer.email, 'البريد الإلكتروني')
-    if (emailError) errors.email = emailError
+/**
+ * Validate minimum length
+ * @param {string} value - Value to check
+ * @param {number} min - Minimum length
+ * @param {string} fieldName - Field name for error message
+ * @returns {string|null} Error message or null if valid
+ */
+export const validateMinLength = (value, min, fieldName = 'هذا الحقل') => {
+  if (value && value.length < min) {
+    return `${fieldName} يجب أن يكون ${min} أحرف على الأقل`;
   }
+  return null;
+};
 
-  // التحقق من العنوان (اختياري)
-  if (customer.address) {
-    const addressError = validators.maxLength(customer.address, 500, 'العنوان')
-    if (addressError) errors.address = addressError
+/**
+ * Validate maximum length
+ * @param {string} value - Value to check
+ * @param {number} max - Maximum length
+ * @param {string} fieldName - Field name for error message
+ * @returns {string|null} Error message or null if valid
+ */
+export const validateMaxLength = (value, max, fieldName = 'هذا الحقل') => {
+  if (value && value.length > max) {
+    return `${fieldName} يجب ألا يتجاوز ${max} حرف`;
   }
+  return null;
+};
 
-  return {
-    isValid: Object.keys(errors).length === 0,
-    errors
+/**
+ * Validate number range
+ * @param {number} value - Value to check
+ * @param {number} min - Minimum value
+ * @param {number} max - Maximum value
+ * @param {string} fieldName - Field name for error message
+ * @returns {string|null} Error message or null if valid
+ */
+export const validateRange = (value, min, max, fieldName = 'القيمة') => {
+  const num = parseFloat(value);
+  if (isNaN(num)) {
+    return `${fieldName} يجب أن يكون رقماً`;
   }
-}
-
-// دالة للتحقق من صحة نموذج المورد
-export const validateSupplier = (supplier) => {
-  const errors = {}
-
-  // التحقق من اسم المورد
-  const nameError = validators.required(supplier.name, 'اسم المورد') ||
-                   validators.minLength(supplier.name, 2, 'اسم المورد') ||
-                   validators.maxLength(supplier.name, 200, 'اسم المورد')
-  if (nameError) errors.name = nameError
-
-  // التحقق من الشخص المسؤول
-  const contactPersonError = validators.required(supplier.contact_person, 'الشخص المسؤول') ||
-                            validators.maxLength(supplier.contact_person, 100, 'الشخص المسؤول')
-  if (contactPersonError) errors.contact_person = contactPersonError
-
-  // التحقق من رقم الهاتف
-  const phoneError = validators.required(supplier.phone, 'رقم الهاتف') ||
-                    validators.phone(supplier.phone, 'رقم الهاتف')
-  if (phoneError) errors.phone = phoneError
-
-  // التحقق من التخصص
-  const categoryError = validators.required(supplier.category, 'التخصص')
-  if (categoryError) errors.category = categoryError
-
-  // التحقق من البريد الإلكتروني (اختياري)
-  if (supplier.email) {
-    const emailError = validators.email(supplier.email, 'البريد الإلكتروني')
-    if (emailError) errors.email = emailError
+  if (num < min) {
+    return `${fieldName} يجب أن يكون ${min} على الأقل`;
   }
-
-  // التحقق من العنوان (اختياري)
-  if (supplier.address) {
-    const addressError = validators.maxLength(supplier.address, 500, 'العنوان')
-    if (addressError) errors.address = addressError
+  if (num > max) {
+    return `${fieldName} يجب ألا يتجاوز ${max}`;
   }
+  return null;
+};
 
-  return {
-    isValid: Object.keys(errors).length === 0,
-    errors
+/**
+ * Validate date
+ * @param {string|Date} date - Date to validate
+ * @returns {boolean} True if valid
+ */
+export const isValidDate = (date) => {
+  if (!date) return false;
+  const d = new Date(date);
+  return !isNaN(d.getTime());
+};
+
+/**
+ * Validate date is in future
+ * @param {string|Date} date - Date to validate
+ * @returns {boolean} True if in future
+ */
+export const isFutureDate = (date) => {
+  if (!isValidDate(date)) return false;
+  return new Date(date) > new Date();
+};
+
+/**
+ * Validate date is in past
+ * @param {string|Date} date - Date to validate
+ * @returns {boolean} True if in past
+ */
+export const isPastDate = (date) => {
+  if (!isValidDate(date)) return false;
+  return new Date(date) < new Date();
+};
+
+/**
+ * Validate quantity is positive
+ * @param {number} quantity - Quantity to validate
+ * @returns {string|null} Error message or null if valid
+ */
+export const validateQuantity = (quantity) => {
+  const num = parseFloat(quantity);
+  if (isNaN(num)) {
+    return 'الكمية يجب أن تكون رقماً';
   }
-}
+  if (num <= 0) {
+    return 'الكمية يجب أن تكون أكبر من صفر';
+  }
+  return null;
+};
 
+/**
+ * Validate price
+ * @param {number} price - Price to validate
+ * @returns {string|null} Error message or null if valid
+ */
+export const validatePrice = (price) => {
+  const num = parseFloat(price);
+  if (isNaN(num)) {
+    return 'السعر يجب أن يكون رقماً';
+  }
+  if (num < 0) {
+    return 'السعر يجب أن يكون صفر أو أكبر';
+  }
+  return null;
+};
+
+export default {
+  isValidEmail,
+  isValidPhone,
+  isValidNationalId,
+  isValidCR,
+  isValidVAT,
+  isValidBarcode,
+  validatePassword,
+  validateRequired,
+  validateMinLength,
+  validateMaxLength,
+  validateRange,
+  isValidDate,
+  isFutureDate,
+  isPastDate,
+  validateQuantity,
+  validatePrice
+};

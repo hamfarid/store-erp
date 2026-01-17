@@ -36,6 +36,9 @@ export { default as settingsService } from './settingsService';
 // خدمات إدارية
 export { default as adminService } from './adminService';
 
+// خدمات الصحة والمراقبة
+export { default as healthService } from './healthService';
+
 // API Service الموحد (للتوافق)
 export { default as ApiService } from './ApiService';
 export { default as enhancedAPI } from './enhancedAPI';
