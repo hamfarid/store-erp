@@ -263,10 +263,17 @@ def reset_sequences(db):
 @pytest.fixture(autouse=True)
 def clear_cache():
     """Clear cache before and after each test."""
-    from django.core.cache import cache
-    cache.clear()
+    try:
+        from django.core.cache import cache
+        cache.clear()
+    except (ImportError, Exception):
+        pass
     yield
-    cache.clear()
+    try:
+        from django.core.cache import cache
+        cache.clear()
+    except (ImportError, Exception):
+        pass
 
 
 # ============================================
