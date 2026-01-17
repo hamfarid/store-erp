@@ -5,12 +5,12 @@ class ScannerBlocker:
     """
     Middleware to block automated scanners and malicious access patterns
     """
-    
+
     BLOCKED_USER_AGENTS = [
         'nikto', 'sqlmap', 'nmap', 'nessus', 'arachni', 'acunetix',
         'netsparker', 'burp', 'metasploit', 'w3af', 'zaproxy'
     ]
-    
+
     BLOCKED_PATHS = [
         '/.env', '/.git', '/.svn', '/wp-admin', '/wp-login',
         '/phpmyadmin', '/admin.php', '/config.php', '/.ds_store'
@@ -30,7 +30,7 @@ class ScannerBlocker:
                     # Log attempt (in production use real logger)
                     print(f"🚫 Blocked scanner User-Agent: {agent} from {request.remote_addr}")
                     abort(403)
-            
+
             # Check Path
             path = request.path.lower()
             for blocked in self.BLOCKED_PATHS:

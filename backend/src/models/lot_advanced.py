@@ -162,22 +162,22 @@ class LotAdvanced(db.Model):
         """بيع كمية من اللوط"""
         if qty > self.quantity:
             raise ValueError(f"الكمية المطلوبة ({qty}) أكبر من الموجود ({self.quantity})")
-        
+
         self.quantity -= qty
-        
+
         # تحديث المحجوز إذا كان موجود
         if self.reserved_quantity and self.reserved_quantity >= qty:
             self.reserved_quantity -= qty
-        
+
         # تحديث الحالة إذا نفذت الكمية
         if self.quantity == 0:
             self.status = 'sold_out'
-        
+
         # تحديث تواريخ البيع
         if not self.first_sale_date:
             self.first_sale_date = date.today()
         self.last_sale_date = date.today()
-        
+
         return True
 
     def add_quantity(self, qty):
@@ -256,6 +256,6 @@ def check_expiry_status(mapper, connection, target):
     """فحص وتحديث حالة الانتهاء تلقائياً"""
     if target.expiry_date and target.expiry_date < date.today() and target.status == 'active':
         target.status = 'expired'
-    
+
     if target.quantity == 0 and target.status == 'active':
         target.status = 'sold_out'

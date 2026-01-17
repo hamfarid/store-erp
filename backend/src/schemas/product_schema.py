@@ -41,6 +41,6 @@ class ProductSchema(Schema):
         required=False, allow_none=True, validate=validate.Range(min=0)
     )
     category_id = fields.Int(required=False, allow_none=True)
-    is_active = fields.Bool(required=False, default=True)
+    is_active = fields.Bool(required=False, load_default=True)
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
