@@ -1,0 +1,75 @@
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+*.env
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.Python
+venv/
+env/
+.venv/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+instance/
+
+# Uploads
+uploads/
+media/
+
+# Backups
+*.bak
+*.backup
+backups/
+
+# Archives (keep only final releases)
+*.zip
+*.tar.gz
+*.rar
+
+# Lock files (optional - comment out if you want to track them)
+# package-lock.json
+# yarn.lock
+# Pipfile.lock

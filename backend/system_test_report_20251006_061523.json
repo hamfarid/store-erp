@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-10-06T06:15:20.849571",
+  "tests": [
+    {
+      "name": "Flask App Creation",
+      "status": "PASS",
+      "message": "Flask app created successfully",
+      "timestamp": "2025-10-06T06:15:23.177972"
+    },
+    {
+      "name": "Database Initialization",
+      "status": "FAIL",
+      "message": "Database initialization failed: Textual SQL expression 'SELECT 1' should be explicitly declared as text('SELECT 1')",
+      "timestamp": "2025-10-06T06:15:23.178200"
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "passed": 1,
+    "failed": 1,
+    "errors": [
+      "Database Initialization: Database initialization failed: Textual SQL expression 'SELECT 1' should be explicitly declared as text('SELECT 1')"
+    ]
+  }
+}

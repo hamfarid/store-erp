@@ -1,0 +1,89 @@
+{
+  "high_confidence": {
+    "description": "Safe to delete (archives, backups, test scripts)",
+    "files": [],
+    "count": 0
+  },
+  "medium_confidence": {
+    "description": "Duplicates (keep one copy)",
+    "files": [],
+    "count": 0
+  },
+  "needs_review": {
+    "description": "Requires manual review before deletion",
+    "routes": [
+      "src\\routes\\accounting.py",
+      "src\\routes\\admin_panel.py",
+      "src\\routes\\batch_management.py",
+      "src\\routes\\categories.py",
+      "src\\routes\\company_settings.py",
+      "src\\routes\\customer_supplier_accounts.py",
+      "src\\routes\\dashboard.py",
+      "src\\routes\\errors.py",
+      "src\\routes\\excel_import.py",
+      "src\\routes\\excel_import_clean.py",
+      "src\\routes\\excel_templates.py",
+      "src\\routes\\export.py",
+      "src\\routes\\import_data.py",
+      "src\\routes\\import_export_advanced.py",
+      "src\\routes\\interactive_dashboard.py",
+      "src\\routes\\invoices_unified.py",
+      "src\\routes\\lot_management.py",
+      "src\\routes\\mfa_routes.py",
+      "src\\routes\\openapi_demo.py",
+      "src\\routes\\openapi_external_docs.py",
+      "src\\routes\\openapi_health.py",
+      "src\\routes\\payment_debt_management.py",
+      "src\\routes\\payment_management.py",
+      "src\\routes\\products_unified.py",
+      "src\\routes\\rag.py",
+      "src\\routes\\sales.py",
+      "src\\routes\\sales_advanced.py",
+      "src\\routes\\sales_simple.py",
+      "src\\routes\\temp_api.py"
+    ],
+    "services": [
+      "src\\services\\cache_service.py",
+      "src\\services\\customer_supplier_accounts_service.py",
+      "src\\services\\db_optimizer.py",
+      "src\\services\\error_handler.py",
+      "src\\services\\import_export_service.py",
+      "src\\services\\interactive_dashboard_service.py",
+      "src\\services\\monitoring_service.py",
+      "src\\services\\payment_debt_management_service.py",
+      "src\\services\\performance_optimizer.py"
+    ],
+    "components": [
+      "server.js"
+    ],
+    "other": [
+      "copy_products_data.py",
+      "final_fix_phase4.py",
+      "fix_all_errors.py",
+      "fix_indexes.py",
+      "init_db_final.py",
+      "migrate_invoices.py",
+      "quick_fix_original_endpoints.py",
+      "sqlite_cleanup.py",
+      "src\\api_meta.py",
+      "src\\metrics.py",
+      "src\\schemas\\error_schemas.py",
+      "src\\schemas\\product_schema.py",
+      "src\\security_headers.py",
+      "src\\tasks\\example_tasks.py",
+      "src\\utils\\logger.py",
+      "src\\utils\\startup_logger.py",
+      "start_backend.py",
+      "start_server.py",
+      "start_server_simple.py",
+      "tools\\api_smoke_check.py",
+      "tools\\route_probe.py"
+    ],
+    "count": 60
+  },
+  "summary": {
+    "total_unused": 65,
+    "safe_to_delete": 0,
+    "needs_review": 60
+  }
+}

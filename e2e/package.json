@@ -1,0 +1,40 @@
+{
+  "name": "store-erp-e2e-tests",
+  "version": "2.0.0",
+  "description": "E2E, Performance, and Security Tests for Store ERP v2.0.0",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project=mobile-chrome --project=mobile-safari",
+    "test:auth": "playwright test tests/auth.spec.ts",
+    "test:pos": "playwright test tests/pos.spec.ts",
+    "test:lots": "playwright test tests/lots.spec.ts",
+    "test:reports": "playwright test tests/reports.spec.ts",
+    "test:settings": "playwright test tests/settings.spec.ts",
+    "test:performance": "playwright test tests/performance.spec.ts",
+    "test:security": "playwright test tests/security.spec.ts",
+    "test:critical": "playwright test tests/auth.spec.ts tests/pos.spec.ts",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen http://localhost:6501"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "e2e",
+    "testing",
+    "playwright",
+    "store-erp",
+    "security",
+    "performance"
+  ],
+  "author": "Store ERP Team"
+}

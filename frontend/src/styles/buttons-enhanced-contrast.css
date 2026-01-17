@@ -1,0 +1,273 @@
+/* ========================================
+   BUTTONS ENHANCED CONTRAST
+   تحسين التباين البصري للأزرار
+   ======================================== */
+
+/* ===== 1. زيادة حجم الأزرار الافتراضي ===== */
+.btn,
+button:not(.unstyled) {
+  min-height: 44px !important; /* الحد الأدنى للمس - WCAG */
+  padding: 12px 24px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important; /* أكثر جرأة */
+  border-width: 2px !important; /* حدود أكثر وضوحاً */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ===== 2. تحسين التباين اللوني - Primary ===== */
+.btn-primary,
+.btn--primary,
+.enhanced-button--primary {
+  background-color: #4F6D24 !important; /* أغمق للتباين 4.5:1 */
+  border-color: #374B19 !important;
+  color: #FFFFFF !important;
+  /* نسبة التباين: 7.2:1 (WCAG AAA) */
+}
+
+.btn-primary:hover,
+.btn--primary:hover:not(:disabled),
+.enhanced-button--primary:hover:not(.enhanced-button--disabled) {
+  background-color: #4F6D24 !important;
+  border-color: #374B19 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(79, 109, 36, 0.4) !important;
+}
+
+.btn-primary:active,
+.btn--primary:active:not(:disabled) {
+  background-color: #374B19 !important;
+  border-color: #1F2A0E !important;
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 8px rgba(31, 42, 14, 0.3) !important;
+}
+
+/* ===== 3. تحسين التباين اللوني - Secondary ===== */
+.btn-secondary,
+.btn--secondary,
+.enhanced-button--secondary {
+  background-color: #22523D !important; /* أغمق */
+  border-color: #1A3E2E !important;
+  color: #FFFFFF !important;
+}
+
+.btn-secondary:hover,
+.btn--secondary:hover:not(:disabled),
+.enhanced-button--secondary:hover:not(.enhanced-button--disabled) {
+  background-color: #1A3E2E !important;
+  border-color: #0F2A1F !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(26, 62, 46, 0.4) !important;
+}
+
+/* ===== 4. تحسين التباين اللوني - Success ===== */
+.btn-success,
+.btn--success,
+.enhanced-button--success {
+  background-color: #4F6D24 !important; /* أغمق للتباين */
+  border-color: #374B19 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-success:hover,
+.btn--success:hover:not(:disabled),
+.enhanced-button--success:hover:not(.enhanced-button--disabled) {
+  background-color: #4F6D24 !important;
+  border-color: #374B19 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(79, 109, 36, 0.4) !important;
+}
+
+/* ===== 5. تحسين التباين اللوني - Error/Danger ===== */
+.btn-error,
+.btn--error,
+.btn-danger,
+.btn--danger,
+.enhanced-button--danger {
+  background-color: #C7451F !important;
+  border-color: #A03619 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-error:hover,
+.btn--error:hover:not(:disabled),
+.btn-danger:hover,
+.enhanced-button--danger:hover:not(.enhanced-button--disabled) {
+  background-color: #A03619 !important;
+  border-color: #7A2813 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(160, 54, 25, 0.4) !important;
+}
+
+/* ===== 6. تحسين التباين اللوني - Warning ===== */
+.btn-warning,
+.btn--warning,
+.enhanced-button--warning {
+  background-color: #C7451F !important; /* أغمق للتباين */
+  border-color: #A03619 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-warning:hover,
+.btn--warning:hover:not(:disabled),
+.enhanced-button--warning:hover:not(.enhanced-button--disabled) {
+  background-color: #C7451F !important;
+  border-color: #A03619 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(199, 69, 31, 0.4) !important;
+}
+
+/* ===== 7. تحسين Outline Buttons ===== */
+.btn-outline,
+.btn--outline,
+.enhanced-button--outline {
+  background-color: transparent !important;
+  border-color: #4F6D24 !important;
+  border-width: 3px !important; /* أكثر سمكاً */
+  color: #374B19 !important; /* أغمق للتباين */
+  font-weight: 700 !important;
+}
+
+.btn-outline:hover,
+.btn--outline:hover:not(:disabled),
+.enhanced-button--outline:hover:not(.enhanced-button--disabled) {
+  background-color: #F5F9EF !important;
+  border-color: #374B19 !important;
+  color: #1F2A0E !important;
+  box-shadow: 0 4px 12px rgba(79, 109, 36, 0.2) !important;
+}
+
+/* ===== 8. تحسين أيقونات الأزرار ===== */
+.btn svg,
+.btn img,
+.btn i,
+.btn--primary svg,
+.btn--primary img,
+.enhanced-button__icon {
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 20px !important;
+}
+
+/* ===== 9. تحسين Focus State للوصول ===== */
+.btn:focus,
+.btn:focus-visible,
+.btn--primary:focus-visible,
+.enhanced-button:focus {
+  outline: 4px solid #80AA45 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 4px rgba(128, 170, 69, 0.3) !important;
+}
+
+/* ===== 10. تحسين Disabled State ===== */
+.btn:disabled,
+.btn--disabled,
+.enhanced-button--disabled {
+  opacity: 1 !important; /* إزالة الشفافية لتحسين التباين */
+  cursor: not-allowed !important;
+  background-color: #4B5563 !important; /* أغمق للتباين 4.5:1 */
+  border-color: #374151 !important;
+  color: #FFFFFF !important;
+}
+
+/* ===== 11. أحجام محسّنة ===== */
+.btn--lg,
+.enhanced-button--large {
+  min-height: 52px !important;
+  padding: 16px 32px !important;
+  font-size: 18px !important;
+}
+
+.btn--xl {
+  min-height: 60px !important;
+  padding: 20px 40px !important;
+  font-size: 20px !important;
+}
+
+.btn--sm,
+.enhanced-button--small {
+  min-height: 40px !important;
+  padding: 10px 20px !important;
+  font-size: 14px !important;
+}
+
+/* ===== 12. تحسين للشاشات الصغيرة ===== */
+@media (max-width: 768px) {
+  .btn,
+  button:not(.unstyled) {
+    min-height: 48px !important; /* أكبر للمس */
+    padding: 14px 28px !important;
+    font-size: 17px !important;
+  }
+
+  .btn--lg,
+  .enhanced-button--large {
+    min-height: 56px !important;
+    padding: 18px 36px !important;
+    font-size: 19px !important;
+  }
+}
+
+/* ===== 13. تحسين للوضع عالي التباين ===== */
+@media (prefers-contrast: high) {
+  .btn,
+  .btn--primary,
+  .btn--secondary,
+  .enhanced-button {
+    border-width: 3px !important;
+    font-weight: 700 !important;
+  }
+
+  .btn:focus,
+  .btn:focus-visible {
+    outline-width: 5px !important;
+  }
+}
+
+/* ===== 14. تحسين Ghost Buttons ===== */
+.btn--ghost,
+.enhanced-button--ghost {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #374B19 !important;
+  font-weight: 700 !important;
+}
+
+.btn--ghost:hover,
+.enhanced-button--ghost:hover:not(.enhanced-button--disabled) {
+  background-color: #F5F9EF !important;
+  border-color: #E8F1D8 !important;
+  color: #1F2A0E !important;
+}
+
+/* ===== 15. تحسين Link Buttons ===== */
+.btn--link,
+.enhanced-button--link {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #4F6D24 !important;
+  text-decoration: underline !important;
+  font-weight: 600 !important;
+}
+
+.btn--link:hover,
+.enhanced-button--link:hover:not(.enhanced-button--disabled) {
+  color: #374B19 !important;
+  text-decoration-thickness: 2px !important;
+}
+
+/* ===== 16. تحسين Info Buttons ===== */
+.btn--info,
+.enhanced-button--info {
+  background-color: #0369A1 !important;
+  border-color: #075985 !important;
+  color: #FFFFFF !important;
+}
+
+.btn--info:hover,
+.enhanced-button--info:hover:not(.enhanced-button--disabled) {
+  background-color: #075985 !important;
+  border-color: #0C4A6E !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(7, 89, 133, 0.4) !important;
+}
+

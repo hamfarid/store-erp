@@ -1,0 +1,21 @@
+# Autonomous Multi-Agent System
+
+# Environment
+.env
+venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Generated
+generated_*
+output/

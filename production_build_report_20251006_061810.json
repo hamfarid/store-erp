@@ -1,0 +1,73 @@
+{
+  "timestamp": "2025-10-06T06:18:10.092395",
+  "actions": [
+    {
+      "action": "Cache Cleanup",
+      "details": "Removed 9 cache files/directories",
+      "timestamp": "2025-10-06T06:18:10.130409"
+    },
+    {
+      "action": "Python Code Optimization",
+      "details": "Applied autopep8 formatting",
+      "timestamp": "2025-10-06T06:18:22.450456"
+    },
+    {
+      "action": "Requirements Generation",
+      "details": "pipreqs not available, skipped",
+      "timestamp": "2025-10-06T06:18:22.451214"
+    },
+    {
+      "action": "Production Structure",
+      "details": "Copied 18 items to production directory",
+      "timestamp": "2025-10-06T06:18:22.506622"
+    },
+    {
+      "action": "Deployment Scripts",
+      "details": "Created startup scripts",
+      "timestamp": "2025-10-06T06:18:22.507159"
+    },
+    {
+      "action": "Production README",
+      "details": "Created comprehensive README file",
+      "timestamp": "2025-10-06T06:18:22.507308"
+    }
+  ],
+  "files_removed": [
+    "/home/ubuntu/store_v1.5_folder/backend/__pycache__",
+    "/home/ubuntu/store_v1.5_folder/backend/src/__pycache__",
+    "/home/ubuntu/store_v1.5_folder/backend/src/models/__pycache__",
+    "/home/ubuntu/store_v1.5_folder/backend/src/routes/__pycache__",
+    "/home/ubuntu/store_v1.5_folder/backend/.env",
+    "/home/ubuntu/store_v1.5_folder/backend/database_archive/quick_fix_backup_20251004_094710/.env",
+    "/home/ubuntu/store_v1.5_folder/frontend/.env",
+    "/home/ubuntu/store_v1.5_folder/frontend/package-lock.json",
+    "/home/ubuntu/store_v1.5_folder/frontend/pnpm-lock.yaml"
+  ],
+  "files_copied": [
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/backend",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/frontend",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/docs",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/README.md",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/QUICK_START_GUIDE.md",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/USER_GUIDE.md",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/TECHNICAL_DOCUMENTATION.md",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/API_DOCUMENTATION.md",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/PROJECT_SUMMARY.md",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/FINAL_REPORT.md",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/requirements.txt",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/docker-compose.yml",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/scripts",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/templates",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/sample_data",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/advanced_sample_data",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/advanced_templates",
+    "/home/ubuntu/arabic_inventory_system_production_20251006_061810/excel_templates"
+  ],
+  "summary": {
+    "total_actions": 6,
+    "files_removed": 9,
+    "files_copied": 18,
+    "production_directory": "/home/ubuntu/arabic_inventory_system_production_20251006_061810",
+    "build_timestamp": "20251006_061810"
+  }
+}

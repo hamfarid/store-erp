@@ -1,0 +1,3482 @@
+{
+  "summary": {
+    "total_files": 279,
+    "total_dependencies": 747,
+    "unused_files": 243,
+    "duplicate_sets": 0,
+    "similar_pairs": 38
+  },
+  "unused_files": [
+    "docs\\IMPLEMENTATION_GUIDE.js",
+    "docs\\INTEGRATION_EXAMPLES.js",
+    "docs\\QUICK_REFERENCE.js",
+    "eslint.config.js",
+    "playwright.config.js",
+    "src\\components\\About.jsx",
+    "src\\components\\AccountingSystem.jsx",
+    "src\\components\\AdminDashboard.jsx",
+    "src\\components\\AdminRoles.jsx",
+    "src\\components\\AdminSecurity.jsx",
+    "src\\components\\AdminUsers.jsx",
+    "src\\components\\AdvancedPermissions.jsx",
+    "src\\components\\AdvancedReportsSystem.jsx",
+    "src\\components\\AdvancedSettings.jsx",
+    "src\\components\\AppRouter.jsx",
+    "src\\components\\Breadcrumbs.jsx",
+    "src\\components\\CashBoxManagement.jsx",
+    "src\\components\\CashBoxes.jsx",
+    "src\\components\\CategoriesManagement.jsx",
+    "src\\components\\CategoryManagement.jsx",
+    "src\\components\\CategorySettings.jsx",
+    "src\\components\\ComingSoon.jsx",
+    "src\\components\\CompanySettings.jsx",
+    "src\\components\\CurrencyManagement.jsx",
+    "src\\components\\CustomerDetails.jsx",
+    "src\\components\\CustomerManagement.jsx",
+    "src\\components\\Customers.jsx",
+    "src\\components\\CustomersAdvanced.jsx",
+    "src\\components\\Dashboard.jsx",
+    "src\\components\\ErrorBoundary.js",
+    "src\\components\\ErrorPages\\Error403.jsx",
+    "src\\components\\ErrorPages\\Error404.jsx",
+    "src\\components\\ErrorPages\\Error500.jsx",
+    "src\\components\\ErrorPages\\Error502.jsx",
+    "src\\components\\ErrorPages\\Error503.jsx",
+    "src\\components\\ErrorPages\\Error504.jsx",
+    "src\\components\\ErrorPages\\Error505.jsx",
+    "src\\components\\ErrorPages\\ErrorBoundary.jsx",
+    "src\\components\\ErrorPages\\ErrorPageBase.jsx",
+    "src\\components\\ExcelImport.jsx",
+    "src\\components\\FinancialReports.jsx",
+    "src\\components\\FormValidation.jsx",
+    "src\\components\\FormValidationExample.jsx",
+    "src\\components\\GeneralSettings.jsx",
+    "src\\components\\Help.jsx",
+    "src\\components\\ImportExport.jsx",
+    "src\\components\\ImportExportAdvanced.jsx",
+    "src\\components\\IntegratedDashboard.jsx",
+    "src\\components\\IntegratedReports.jsx",
+    "src\\components\\IntegrationManager.jsx",
+    "src\\components\\InventoryDetails.jsx",
+    "src\\components\\InventoryManagement.jsx",
+    "src\\components\\InventoryReports.jsx",
+    "src\\components\\InvoiceManagementComplete.jsx",
+    "src\\components\\InvoicePrint.jsx",
+    "src\\components\\InvoicesAdvanced.jsx",
+    "src\\components\\Layout.jsx",
+    "src\\components\\LayoutComplete.jsx",
+    "src\\components\\Login.jsx",
+    "src\\components\\LoginAdvanced.jsx",
+    "src\\components\\LotManagement.jsx",
+    "src\\components\\LotManagementAdvanced.jsx",
+    "src\\components\\LotWarehouseManager.jsx",
+    "src\\components\\NotificationSystem.jsx",
+    "src\\components\\NotificationSystemAdvanced.jsx",
+    "src\\components\\PaymentVouchers.jsx",
+    "src\\components\\PrintExport.jsx",
+    "src\\components\\ProductDetails.jsx",
+    "src\\components\\ProductManagement.jsx",
+    "src\\components\\ProductManagementComplete.jsx",
+    "src\\components\\ProductModal.jsx",
+    "src\\components\\Products.jsx",
+    "src\\components\\ProductsAdvanced.jsx",
+    "src\\components\\ProfitLoss.jsx",
+    "src\\components\\ProfitLossReport.jsx",
+    "src\\components\\ProtectedComponent.js",
+    "src\\components\\PurchaseInvoiceManagement.jsx",
+    "src\\components\\PurchaseInvoices.jsx",
+    "src\\components\\RagChat.jsx",
+    "src\\components\\ReportDetails.jsx",
+    "src\\components\\Reports.jsx",
+    "src\\components\\ReportsSystem.jsx",
+    "src\\components\\Router.jsx",
+    "src\\components\\SalesInvoices.jsx",
+    "src\\components\\SecureAuth.jsx",
+    "src\\components\\SecurityMonitoring.jsx",
+    "src\\components\\Settings.jsx",
+    "src\\components\\SetupWizard.jsx",
+    "src\\components\\Sidebar.jsx",
+    "src\\components\\SidebarAdvanced.jsx",
+    "src\\components\\SidebarEnhanced.jsx",
+    "src\\components\\SimpleLogin.jsx",
+    "src\\components\\StockMovements.jsx",
+    "src\\components\\StockMovementsAdvanced.jsx",
+    "src\\components\\StockMovementsComplete.jsx",
+    "src\\components\\SupplierDetails.jsx",
+    "src\\components\\SupplierManagement.jsx",
+    "src\\components\\Suppliers.jsx",
+    "src\\components\\SuppliersAdvanced.jsx",
+    "src\\components\\SystemDocumentation.jsx",
+    "src\\components\\SystemSettings.jsx",
+    "src\\components\\SystemSettingsAdvanced.jsx",
+    "src\\components\\TrainingCenter.jsx",
+    "src\\components\\UnifiedDashboard.jsx",
+    "src\\components\\UnifiedLayout.jsx",
+    "src\\components\\UnifiedProductsManager.jsx",
+    "src\\components\\UnifiedRouter.jsx",
+    "src\\components\\UserManagement.jsx",
+    "src\\components\\UserManagementAdvanced.jsx",
+    "src\\components\\UserManagementComplete.jsx",
+    "src\\components\\UserProfile.jsx",
+    "src\\components\\WarehouseManagement.jsx",
+    "src\\components\\WarehousesManagement.jsx",
+    "src\\components\\WorkflowManagement.jsx",
+    "src\\components\\common\\ConfirmDialog.jsx",
+    "src\\components\\common\\ConfirmationDialog.jsx",
+    "src\\components\\common\\EnhancedButton.jsx",
+    "src\\components\\common\\EnhancedToast.jsx",
+    "src\\components\\common\\ErrorBoundary.jsx",
+    "src\\components\\common\\FormValidation.jsx",
+    "src\\components\\common\\LoadingSpinner.jsx",
+    "src\\components\\common\\NotificationCenter.jsx",
+    "src\\components\\common\\PermissionSystem.jsx",
+    "src\\components\\common\\PrintExport.jsx",
+    "src\\components\\common\\ProgressBar.jsx",
+    "src\\components\\common\\Toast.jsx",
+    "src\\components\\enhanced\\ProductCard.jsx",
+    "src\\components\\enhanced\\ProductList.jsx",
+    "src\\components\\modals\\CustomerAddModal.jsx",
+    "src\\components\\modals\\LotAddModal.jsx",
+    "src\\components\\modals\\ProductAddModal.jsx",
+    "src\\components\\modals\\SupplierAddModal.jsx",
+    "src\\components\\ui\\AccessibleButton.jsx",
+    "src\\components\\ui\\AccessibleForm.jsx",
+    "src\\components\\ui\\AccessibleTable.jsx",
+    "src\\components\\ui\\AdvancedTable.jsx",
+    "src\\components\\ui\\Button.jsx",
+    "src\\components\\ui\\Charts.jsx",
+    "src\\components\\ui\\DataTable.jsx",
+    "src\\components\\ui\\DynamicForm.jsx",
+    "src\\components\\ui\\EmptyState.jsx",
+    "src\\components\\ui\\ErrorBoundary.jsx",
+    "src\\components\\ui\\ExportImport.jsx",
+    "src\\components\\ui\\FormComponents.jsx",
+    "src\\components\\ui\\FormField.jsx",
+    "src\\components\\ui\\LoadingSpinner.jsx",
+    "src\\components\\ui\\Notification.jsx",
+    "src\\components\\ui\\PermissionsGuard.jsx",
+    "src\\components\\ui\\SearchFilter.jsx",
+    "src\\components\\ui\\ThemedIcon.jsx",
+    "src\\components\\ui\\Validation.jsx",
+    "src\\components\\ui\\accordion.jsx",
+    "src\\components\\ui\\alert-dialog.jsx",
+    "src\\components\\ui\\alert.jsx",
+    "src\\components\\ui\\aspect-ratio.jsx",
+    "src\\components\\ui\\avatar.jsx",
+    "src\\components\\ui\\badge.jsx",
+    "src\\components\\ui\\breadcrumb.jsx",
+    "src\\components\\ui\\calendar.jsx",
+    "src\\components\\ui\\card.jsx",
+    "src\\components\\ui\\carousel.jsx",
+    "src\\components\\ui\\chart.jsx",
+    "src\\components\\ui\\checkbox.jsx",
+    "src\\components\\ui\\collapsible.jsx",
+    "src\\components\\ui\\command.jsx",
+    "src\\components\\ui\\context-menu.jsx",
+    "src\\components\\ui\\dialog.jsx",
+    "src\\components\\ui\\drawer.jsx",
+    "src\\components\\ui\\dropdown-menu.jsx",
+    "src\\components\\ui\\form.jsx",
+    "src\\components\\ui\\hover-card.jsx",
+    "src\\components\\ui\\input-otp.jsx",
+    "src\\components\\ui\\input.jsx",
+    "src\\components\\ui\\label.jsx",
+    "src\\components\\ui\\menubar.jsx",
+    "src\\components\\ui\\navigation-menu.jsx",
+    "src\\components\\ui\\pagination.jsx",
+    "src\\components\\ui\\popover.jsx",
+    "src\\components\\ui\\progress.jsx",
+    "src\\components\\ui\\radio-group.jsx",
+    "src\\components\\ui\\resizable.jsx",
+    "src\\components\\ui\\scroll-area.jsx",
+    "src\\components\\ui\\select.jsx",
+    "src\\components\\ui\\separator.jsx",
+    "src\\components\\ui\\sheet.jsx",
+    "src\\components\\ui\\sidebar.jsx",
+    "src\\components\\ui\\skeleton.jsx",
+    "src\\components\\ui\\slider.jsx",
+    "src\\components\\ui\\sonner.jsx",
+    "src\\components\\ui\\switch.jsx",
+    "src\\components\\ui\\table.jsx",
+    "src\\components\\ui\\tabs.jsx",
+    "src\\components\\ui\\textarea.jsx",
+    "src\\components\\ui\\toggle-group.jsx",
+    "src\\components\\ui\\toggle.jsx",
+    "src\\components\\ui\\tooltip.jsx",
+    "src\\config\\api.js",
+    "src\\context\\AuthContext.jsx",
+    "src\\contexts\\AppContext.jsx",
+    "src\\contexts\\AuthContext.jsx",
+    "src\\contexts\\PermissionContext.jsx",
+    "src\\contexts\\ThemeContext.jsx",
+    "src\\hooks\\use-mobile.js",
+    "src\\hooks\\useConnectionStatus.js",
+    "src\\hooks\\usePerformance.js",
+    "src\\main.jsx",
+    "src\\pages\\AdvancedReports.jsx",
+    "src\\pages\\AdvancedUserManagement.jsx",
+    "src\\pages\\ComingSoon.jsx",
+    "src\\pages\\CompanySettings.jsx",
+    "src\\pages\\ComprehensiveReports.jsx",
+    "src\\pages\\CustomerDetails.jsx",
+    "src\\pages\\CustomerSupplierAccounts.jsx",
+    "src\\pages\\ImportExport.jsx",
+    "src\\pages\\InteractiveDashboard.jsx",
+    "src\\pages\\InvoicesPage.jsx",
+    "src\\pages\\Maintenance.jsx",
+    "src\\pages\\NotFound.jsx",
+    "src\\pages\\OpeningBalancesTreasury.jsx",
+    "src\\pages\\PaymentDebtManagement.jsx",
+    "src\\pages\\PickupDeliveryOrders.jsx",
+    "src\\pages\\ProductDetails.jsx",
+    "src\\pages\\Reports.jsx",
+    "src\\pages\\ReturnsManagement.jsx",
+    "src\\pages\\ServerError.jsx",
+    "src\\pages\\Settings.jsx",
+    "src\\pages\\SetupWizard.jsx",
+    "src\\pages\\SystemSettings.jsx",
+    "src\\pages\\ThemeSettings.jsx",
+    "src\\pages\\Unauthorized.jsx",
+    "src\\pages\\UserManagement.jsx",
+    "src\\pages\\WarehouseAdjustments.jsx",
+    "src\\pages\\WarehouseConstraints.jsx",
+    "src\\services\\ApiService.js",
+    "src\\services\\api.js",
+    "src\\services\\apiClient.js",
+    "src\\services\\customerService.js",
+    "src\\services\\enhancedAPI.js",
+    "src\\services\\productService.js",
+    "src\\store\\slices\\authSlice.js",
+    "src\\styles\\design-tokens.js",
+    "src\\types\\index.d.ts",
+    "tailwind.config.js"
+  ],
+  "duplicates": {},
+  "similar_files": [
+    {
+      "file1": "src\\components\\About.jsx",
+      "file2": "src\\components\\CustomerDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\About.jsx",
+      "file2": "src\\components\\Help.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\About.jsx",
+      "file2": "src\\components\\InventoryDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\About.jsx",
+      "file2": "src\\components\\ProductDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\About.jsx",
+      "file2": "src\\components\\ReportDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\About.jsx",
+      "file2": "src\\components\\SupplierDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\About.jsx",
+      "file2": "src\\components\\UserProfile.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\CustomerDetails.jsx",
+      "file2": "src\\components\\Help.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\CustomerDetails.jsx",
+      "file2": "src\\components\\InventoryDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\CustomerDetails.jsx",
+      "file2": "src\\components\\ProductDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\CustomerDetails.jsx",
+      "file2": "src\\components\\ReportDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\CustomerDetails.jsx",
+      "file2": "src\\components\\SupplierDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\CustomerDetails.jsx",
+      "file2": "src\\components\\UserProfile.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\Help.jsx",
+      "file2": "src\\components\\InventoryDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\Help.jsx",
+      "file2": "src\\components\\ProductDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\Help.jsx",
+      "file2": "src\\components\\ReportDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\Help.jsx",
+      "file2": "src\\components\\SupplierDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\Help.jsx",
+      "file2": "src\\components\\UserProfile.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\InventoryDetails.jsx",
+      "file2": "src\\components\\ProductDetails.jsx",
+      "similarity": "93.89%"
+    },
+    {
+      "file1": "src\\components\\InventoryDetails.jsx",
+      "file2": "src\\components\\ReportDetails.jsx",
+      "similarity": "93.89%"
+    }
+  ],
+  "dependency_map": {
+    "eslint.config.js": {
+      "imports": [
+        "@eslint/js",
+        "globals",
+        "eslint-plugin-react-hooks",
+        "eslint-plugin-react-refresh"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "fix_react_proptypes.js": {
+      "imports": [
+        "fs",
+        "path",
+        "url",
+        "prop-types"
+      ],
+      "exports": [],
+      "used_by": [
+        "vite.config.performance.js",
+        "docs\\IMPLEMENTATION_GUIDE.js",
+        "docs\\INTEGRATION_EXAMPLES.js",
+        "docs\\QUICK_REFERENCE.js",
+        "src\\App.jsx",
+        "src\\main.jsx",
+        "src\\components\\About.jsx",
+        "src\\components\\AccountingSystem.jsx",
+        "src\\components\\AdminDashboard.jsx",
+        "src\\components\\AdminRoles.jsx",
+        "src\\components\\AdminSecurity.jsx",
+        "src\\components\\AdminUsers.jsx",
+        "src\\components\\AdvancedPermissions.jsx",
+        "src\\components\\AdvancedReportsSystem.jsx",
+        "src\\components\\AdvancedSettings.jsx",
+        "src\\components\\AppRouter.jsx",
+        "src\\components\\Breadcrumbs.jsx",
+        "src\\components\\CashBoxes.jsx",
+        "src\\components\\CashBoxManagement.jsx",
+        "src\\components\\CategoriesManagement.jsx",
+        "src\\components\\CategoryManagement.jsx",
+        "src\\components\\CategorySettings.jsx",
+        "src\\components\\ComingSoon.jsx",
+        "src\\components\\CompanySettings.jsx",
+        "src\\components\\CurrencyManagement.jsx",
+        "src\\components\\CustomerDetails.jsx",
+        "src\\components\\CustomerManagement.jsx",
+        "src\\components\\Customers.jsx",
+        "src\\components\\CustomersAdvanced.jsx",
+        "src\\components\\Dashboard.jsx",
+        "src\\components\\ErrorBoundary.js",
+        "src\\components\\ExcelImport.jsx",
+        "src\\components\\FinancialReports.jsx",
+        "src\\components\\FormValidation.jsx",
+        "src\\components\\FormValidationExample.jsx",
+        "src\\components\\GeneralSettings.jsx",
+        "src\\components\\Help.jsx",
+        "src\\components\\ImportExport.jsx",
+        "src\\components\\ImportExportAdvanced.jsx",
+        "src\\components\\IntegratedDashboard.jsx",
+        "src\\components\\IntegratedReports.jsx",
+        "src\\components\\IntegrationManager.jsx",
+        "src\\components\\InventoryDetails.jsx",
+        "src\\components\\InventoryManagement.jsx",
+        "src\\components\\InventoryReports.jsx",
+        "src\\components\\InvoiceManagementComplete.jsx",
+        "src\\components\\InvoicePrint.jsx",
+        "src\\components\\InvoicesAdvanced.jsx",
+        "src\\components\\Layout.jsx",
+        "src\\components\\LayoutComplete.jsx",
+        "src\\components\\Login.jsx",
+        "src\\components\\LoginAdvanced.jsx",
+        "src\\components\\LotManagement.jsx",
+        "src\\components\\LotManagementAdvanced.jsx",
+        "src\\components\\LotWarehouseManager.jsx",
+        "src\\components\\NotificationSystem.jsx",
+        "src\\components\\NotificationSystemAdvanced.jsx",
+        "src\\components\\PaymentVouchers.jsx",
+        "src\\components\\PrintExport.jsx",
+        "src\\components\\ProductDetails.jsx",
+        "src\\components\\ProductManagement.jsx",
+        "src\\components\\ProductManagementComplete.jsx",
+        "src\\components\\ProductModal.jsx",
+        "src\\components\\Products.jsx",
+        "src\\components\\ProductsAdvanced.jsx",
+        "src\\components\\ProfitLoss.jsx",
+        "src\\components\\ProfitLossReport.jsx",
+        "src\\components\\ProtectedComponent.js",
+        "src\\components\\PurchaseInvoiceManagement.jsx",
+        "src\\components\\PurchaseInvoices.jsx",
+        "src\\components\\RagChat.jsx",
+        "src\\components\\ReportDetails.jsx",
+        "src\\components\\Reports.jsx",
+        "src\\components\\ReportsSystem.jsx",
+        "src\\components\\Router.jsx",
+        "src\\components\\SalesInvoices.jsx",
+        "src\\components\\SecureAuth.jsx",
+        "src\\components\\SecurityMonitoring.jsx",
+        "src\\components\\Settings.jsx",
+        "src\\components\\SetupWizard.jsx",
+        "src\\components\\Sidebar.jsx",
+        "src\\components\\SidebarAdvanced.jsx",
+        "src\\components\\SidebarEnhanced.jsx",
+        "src\\components\\SimpleLogin.jsx",
+        "src\\components\\StockMovements.jsx",
+        "src\\components\\StockMovementsAdvanced.jsx",
+        "src\\components\\StockMovementsComplete.jsx",
+        "src\\components\\SupplierDetails.jsx",
+        "src\\components\\SupplierManagement.jsx",
+        "src\\components\\Suppliers.jsx",
+        "src\\components\\SuppliersAdvanced.jsx",
+        "src\\components\\SystemDocumentation.jsx",
+        "src\\components\\SystemSettings.jsx",
+        "src\\components\\SystemSettingsAdvanced.jsx",
+        "src\\components\\TrainingCenter.jsx",
+        "src\\components\\UnifiedDashboard.jsx",
+        "src\\components\\UnifiedLayout.jsx",
+        "src\\components\\UnifiedProductsManager.jsx",
+        "src\\components\\UnifiedRouter.jsx",
+        "src\\components\\UserManagement.jsx",
+        "src\\components\\UserManagementAdvanced.jsx",
+        "src\\components\\UserManagementComplete.jsx",
+        "src\\components\\UserProfile.jsx",
+        "src\\components\\WarehouseManagement.jsx",
+        "src\\components\\WarehousesManagement.jsx",
+        "src\\components\\WorkflowManagement.jsx",
+        "src\\components\\common\\ConfirmationDialog.jsx",
+        "src\\components\\common\\ConfirmDialog.jsx",
+        "src\\components\\common\\EnhancedButton.jsx",
+        "src\\components\\common\\EnhancedToast.jsx",
+        "src\\components\\common\\ErrorBoundary.jsx",
+        "src\\components\\common\\FormValidation.jsx",
+        "src\\components\\common\\LoadingSpinner.jsx",
+        "src\\components\\common\\NotificationCenter.jsx",
+        "src\\components\\common\\PermissionSystem.jsx",
+        "src\\components\\common\\PrintExport.jsx",
+        "src\\components\\common\\ProgressBar.jsx",
+        "src\\components\\common\\Toast.jsx",
+        "src\\components\\enhanced\\ProductCard.jsx",
+        "src\\components\\enhanced\\ProductList.jsx",
+        "src\\components\\ErrorPages\\Error403.jsx",
+        "src\\components\\ErrorPages\\Error404.jsx",
+        "src\\components\\ErrorPages\\Error500.jsx",
+        "src\\components\\ErrorPages\\Error502.jsx",
+        "src\\components\\ErrorPages\\Error503.jsx",
+        "src\\components\\ErrorPages\\Error504.jsx",
+        "src\\components\\ErrorPages\\Error505.jsx",
+        "src\\components\\ErrorPages\\ErrorBoundary.jsx",
+        "src\\components\\ErrorPages\\ErrorPageBase.jsx",
+        "src\\components\\ErrorPages\\ErrorTestPage.jsx",
+        "src\\components\\modals\\CustomerAddModal.jsx",
+        "src\\components\\modals\\LotAddModal.jsx",
+        "src\\components\\modals\\ProductAddModal.jsx",
+        "src\\components\\modals\\SupplierAddModal.jsx",
+        "src\\components\\ui\\AccessibleButton.jsx",
+        "src\\components\\ui\\AccessibleForm.jsx",
+        "src\\components\\ui\\AccessibleTable.jsx",
+        "src\\components\\ui\\accordion.jsx",
+        "src\\components\\ui\\AdvancedTable.jsx",
+        "src\\components\\ui\\alert-dialog.jsx",
+        "src\\components\\ui\\alert.jsx",
+        "src\\components\\ui\\avatar.jsx",
+        "src\\components\\ui\\badge.jsx",
+        "src\\components\\ui\\breadcrumb.jsx",
+        "src\\components\\ui\\Button.jsx",
+        "src\\components\\ui\\calendar.jsx",
+        "src\\components\\ui\\card.jsx",
+        "src\\components\\ui\\carousel.jsx",
+        "src\\components\\ui\\chart.jsx",
+        "src\\components\\ui\\Charts.jsx",
+        "src\\components\\ui\\checkbox.jsx",
+        "src\\components\\ui\\command.jsx",
+        "src\\components\\ui\\context-menu.jsx",
+        "src\\components\\ui\\DataTable.jsx",
+        "src\\components\\ui\\dialog.jsx",
+        "src\\components\\ui\\drawer.jsx",
+        "src\\components\\ui\\dropdown-menu.jsx",
+        "src\\components\\ui\\DynamicForm.jsx",
+        "src\\components\\ui\\EmptyState.jsx",
+        "src\\components\\ui\\ErrorBoundary.jsx",
+        "src\\components\\ui\\ExportImport.jsx",
+        "src\\components\\ui\\form.jsx",
+        "src\\components\\ui\\FormComponents.jsx",
+        "src\\components\\ui\\FormField.jsx",
+        "src\\components\\ui\\hover-card.jsx",
+        "src\\components\\ui\\input-otp.jsx",
+        "src\\components\\ui\\input.jsx",
+        "src\\components\\ui\\label.jsx",
+        "src\\components\\ui\\LoadingSpinner.jsx",
+        "src\\components\\ui\\menubar.jsx",
+        "src\\components\\ui\\navigation-menu.jsx",
+        "src\\components\\ui\\Notification.jsx",
+        "src\\components\\ui\\pagination.jsx",
+        "src\\components\\ui\\PermissionsGuard.jsx",
+        "src\\components\\ui\\popover.jsx",
+        "src\\components\\ui\\progress.jsx",
+        "src\\components\\ui\\radio-group.jsx",
+        "src\\components\\ui\\resizable.jsx",
+        "src\\components\\ui\\scroll-area.jsx",
+        "src\\components\\ui\\SearchFilter.jsx",
+        "src\\components\\ui\\select.jsx",
+        "src\\components\\ui\\separator.jsx",
+        "src\\components\\ui\\sheet.jsx",
+        "src\\components\\ui\\sidebar.jsx",
+        "src\\components\\ui\\slider.jsx",
+        "src\\components\\ui\\switch.jsx",
+        "src\\components\\ui\\table.jsx",
+        "src\\components\\ui\\tabs.jsx",
+        "src\\components\\ui\\textarea.jsx",
+        "src\\components\\ui\\ThemedIcon.jsx",
+        "src\\components\\ui\\toggle-group.jsx",
+        "src\\components\\ui\\toggle.jsx",
+        "src\\components\\ui\\tooltip.jsx",
+        "src\\components\\ui\\Validation.jsx",
+        "src\\context\\AuthContext.jsx",
+        "src\\contexts\\AppContext.jsx",
+        "src\\contexts\\AuthContext.jsx",
+        "src\\contexts\\PermissionContext.jsx",
+        "src\\contexts\\ThemeContext.jsx",
+        "src\\hooks\\use-mobile.js",
+        "src\\hooks\\useConnectionStatus.js",
+        "src\\hooks\\usePerformance.js",
+        "src\\pages\\AdvancedReports.jsx",
+        "src\\pages\\AdvancedUserManagement.jsx",
+        "src\\pages\\ComingSoon.jsx",
+        "src\\pages\\CompanySettings.jsx",
+        "src\\pages\\ComprehensiveReports.jsx",
+        "src\\pages\\CustomerDetails.jsx",
+        "src\\pages\\CustomerSupplierAccounts.jsx",
+        "src\\pages\\ImportExport.jsx",
+        "src\\pages\\InteractiveDashboard.jsx",
+        "src\\pages\\InvoicesPage.jsx",
+        "src\\pages\\Maintenance.jsx",
+        "src\\pages\\NotFound.jsx",
+        "src\\pages\\OpeningBalancesTreasury.jsx",
+        "src\\pages\\PaymentDebtManagement.jsx",
+        "src\\pages\\PickupDeliveryOrders.jsx",
+        "src\\pages\\ProductDetails.jsx",
+        "src\\pages\\Reports.jsx",
+        "src\\pages\\ReturnsManagement.jsx",
+        "src\\pages\\ServerError.jsx",
+        "src\\pages\\Settings.jsx",
+        "src\\pages\\SetupWizard.jsx",
+        "src\\pages\\SystemSettings.jsx",
+        "src\\pages\\ThemeSettings.jsx",
+        "src\\pages\\Unauthorized.jsx",
+        "src\\pages\\UserManagement.jsx",
+        "src\\pages\\WarehouseAdjustments.jsx",
+        "src\\pages\\WarehouseConstraints.jsx",
+        "src\\routes\\index.js",
+        "src\\tests\\AccessibleComponents.test.jsx",
+        "src\\tests\\enhanced\\ProductCard.test.jsx"
+      ]
+    },
+    "playwright.config.js": {
+      "imports": [
+        "@playwright/test"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "tailwind.config.js": {
+      "imports": [],
+      "exports": [],
+      "used_by": []
+    },
+    "test_response_helper.js": {
+      "imports": [],
+      "exports": [],
+      "used_by": []
+    },
+    "vite.config.js": {
+      "imports": [
+        "vite",
+        "@vitejs/plugin-react",
+        "node:url",
+        "node:path"
+      ],
+      "exports": [],
+      "used_by": [
+        "vite.config.performance.js"
+      ]
+    },
+    "vite.config.performance.js": {
+      "imports": [
+        "vite",
+        "@vitejs/plugin-react",
+        "rollup-plugin-visualizer",
+        "vite-plugin-compression",
+        "path",
+        "react"
+      ],
+      "exports": [],
+      "used_by": [
+        "vite.config.js"
+      ]
+    },
+    "docs\\IMPLEMENTATION_GUIDE.js": {
+      "imports": [
+        "react",
+        "@/utils/validationRules"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "docs\\INTEGRATION_EXAMPLES.js": {
+      "imports": [
+        "react",
+        "@/components/FormValidation",
+        "@/utils/validationRules",
+        "@/components/FormValidation",
+        "@/components/FormValidation"
+      ],
+      "exports": [
+        "LoginForm,\n  ProductRegistrationForm,\n  UserProfileForm,\n  useForm"
+      ],
+      "used_by": []
+    },
+    "docs\\QUICK_REFERENCE.js": {
+      "imports": [
+        "react",
+        "@/utils/validationRules"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\App.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "./components/ui/ErrorBoundary",
+        "./components/ui/LoadingSpinner"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\main.jsx": {
+      "imports": [
+        "react",
+        "react-dom/client",
+        "./App.jsx",
+        "./contexts/ThemeContext"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\About.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../ui/Card",
+        "../ui/Button",
+        "../ui/LoadingSpinner",
+        "../ui/Toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\AccountingSystem.jsx": {
+      "imports": [
+        "react",
+        "./ui/DataTable",
+        "./ui/DynamicForm",
+        "./ui/Notification",
+        "./ui/SearchFilter",
+        "../utils/responseHelper"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\AdminDashboard.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\AdminRoles.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\AdminSecurity.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\AdminUsers.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\AdvancedPermissions.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\AdvancedReportsSystem.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\AdvancedSettings.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/api"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\AppRouter.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/AuthContext",
+        "./Layout",
+        "./Login",
+        "../pages/InteractiveDashboard",
+        "./ErrorPages",
+        "./ui/PermissionsGuard"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Breadcrumbs.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\CashBoxes.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\CashBoxManagement.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\CategoriesManagement.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\CategoryManagement.jsx": {
+      "imports": [
+        "react",
+        "./CategoriesManagement"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\CategorySettings.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ComingSoon.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "prop-types",
+        "react-router-dom"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\CompanySettings.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\CurrencyManagement.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\CustomerDetails.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../ui/Card",
+        "../ui/Button",
+        "../ui/LoadingSpinner",
+        "../ui/Toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\CustomerManagement.jsx": {
+      "imports": [
+        "react",
+        "./CustomersAdvanced"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Customers.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\CustomersAdvanced.jsx": {
+      "imports": [
+        "react",
+        "./modals"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Dashboard.jsx": {
+      "imports": [
+        "react",
+        "prop-types",
+        "recharts",
+        "react-router-dom",
+        "../utils/responseHelper"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorBoundary.js": {
+      "imports": [
+        "react",
+        "antd"
+      ],
+      "exports": [
+        "withErrorBoundary",
+        "useErrorHandler",
+        "ErrorMessage"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ExcelImport.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\FinancialReports.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\FormValidation.jsx": {
+      "imports": [
+        "react",
+        "../utils/validationRules"
+      ],
+      "exports": [
+        "FormField",
+        "FormSelect",
+        "FormTextarea",
+        "FormCheckbox",
+        "FormRadio",
+        "FormContainer"
+      ],
+      "used_by": []
+    },
+    "src\\components\\FormValidationExample.jsx": {
+      "imports": [
+        "react",
+        "../utils/validationRules"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\GeneralSettings.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Help.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../ui/Card",
+        "../ui/Button",
+        "../ui/LoadingSpinner",
+        "../ui/Toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ImportExport.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ImportExportAdvanced.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\IntegratedDashboard.jsx": {
+      "imports": [
+        "react",
+        "../services/api",
+        "./common/LoadingSpinner",
+        "./common/EnhancedToast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\IntegratedReports.jsx": {
+      "imports": [
+        "react",
+        "../services/api",
+        "./common/EnhancedToast",
+        "./common/LoadingSpinner",
+        "./common/EnhancedButton",
+        "./common/ProgressBar"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\IntegrationManager.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\InventoryDetails.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../ui/Card",
+        "../ui/Button",
+        "../ui/LoadingSpinner",
+        "../ui/Toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\InventoryManagement.jsx": {
+      "imports": [
+        "react",
+        "./StockMovementsComplete"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\InventoryReports.jsx": {
+      "imports": [
+        "react",
+        "react-to-print"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\InvoiceManagementComplete.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\InvoicePrint.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\InvoicesAdvanced.jsx": {
+      "imports": [
+        "react",
+        "./ui/DataTable",
+        "./ui/DynamicForm",
+        "./ui/Notification",
+        "./ui/SearchFilter"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Layout.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "./SidebarEnhanced",
+        "./Breadcrumbs",
+        "../hooks/useConnectionStatus",
+        "../contexts/AuthContext"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\LayoutComplete.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/AuthContext",
+        "./NotificationSystemAdvanced"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Login.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "lucide-react",
+        "../contexts/AuthContext",
+        "../utils/responseHelper"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\LoginAdvanced.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\LotManagement.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\LotManagementAdvanced.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\LotWarehouseManager.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\NotificationSystem.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [
+        "useNotifications",
+        "NotificationProvider",
+        "NotificationBell",
+        "NotificationSettings"
+      ],
+      "used_by": []
+    },
+    "src\\components\\NotificationSystemAdvanced.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\PaymentVouchers.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\PrintExport.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ProductDetails.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../ui/Card",
+        "../ui/Button",
+        "../ui/LoadingSpinner",
+        "../ui/Toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ProductManagement.jsx": {
+      "imports": [
+        "react",
+        "./ProductManagementComplete"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ProductManagementComplete.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "./ui/AdvancedTable",
+        "./ui/DynamicForm",
+        "./ui/Notification",
+        "./ui/ExportImport",
+        "./ui/PermissionsGuard",
+        "./modals",
+        "../services/apiClient"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ProductModal.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "./common/EnhancedButton"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Products.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService",
+        "../utils/validation",
+        "./ExcelImport",
+        "../utils/responseHelper",
+        "./ui/EmptyState"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ProductsAdvanced.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ProfitLoss.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ProfitLossReport.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ProtectedComponent.js": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "@mui/material",
+        "../contexts/PermissionContext"
+      ],
+      "exports": [
+        "ProtectedComponent",
+        "WarehouseProtected",
+        "CustomerProtected",
+        "AdminOnly",
+        "RoleProtected",
+        "ProtectedButton",
+        "ProtectedField",
+        "ProtectedMenuItem",
+        "usePermissionCheck"
+      ],
+      "used_by": []
+    },
+    "src\\components\\PurchaseInvoiceManagement.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\PurchaseInvoices.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\RagChat.jsx": {
+      "imports": [
+        "react",
+        "axios"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ReportDetails.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../ui/Card",
+        "../ui/Button",
+        "../ui/LoadingSpinner",
+        "../ui/Toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Reports.jsx": {
+      "imports": [
+        "react",
+        "recharts"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ReportsSystem.jsx": {
+      "imports": [
+        "react",
+        "./ui/DataTable",
+        "./ui/Notification",
+        "./ui/SearchFilter"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Router.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../routes",
+        "./common/LoadingSpinner",
+        "./ErrorPages/ErrorBoundary"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SalesInvoices.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "react-hot-toast",
+        "../services/api",
+        "./LotWarehouseManager",
+        "./InvoicePrint"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SecureAuth.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../utils/encryption.js",
+        "../utils/secureApi.js"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SecurityMonitoring.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Settings.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService",
+        "../utils/responseHelper"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SetupWizard.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "lucide-react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Sidebar.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/AuthContext"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SidebarAdvanced.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SidebarEnhanced.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/AuthContext"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SimpleLogin.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "../contexts/AuthContext"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\StockMovements.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\StockMovementsAdvanced.jsx": {
+      "imports": [
+        "react",
+        "../services/api"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\StockMovementsComplete.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SupplierDetails.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../ui/Card",
+        "../ui/Button",
+        "../ui/LoadingSpinner",
+        "../ui/Toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SupplierManagement.jsx": {
+      "imports": [
+        "react",
+        "./SuppliersAdvanced"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\Suppliers.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SuppliersAdvanced.jsx": {
+      "imports": [
+        "react",
+        "./modals"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SystemDocumentation.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SystemSettings.jsx": {
+      "imports": [
+        "react",
+        "./ui/DataTable",
+        "./ui/DynamicForm",
+        "./ui/Notification"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\SystemSettingsAdvanced.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\TrainingCenter.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\UnifiedDashboard.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/AuthContext",
+        "../services/api",
+        "../utils/logger"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\UnifiedLayout.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/AuthContext"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\UnifiedProductsManager.jsx": {
+      "imports": [
+        "react",
+        "../contexts/AuthContext",
+        "./ProductModal",
+        "./common/ConfirmDialog",
+        "./common/Toast",
+        "../services/apiClient",
+        "./ui/EmptyState"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\UnifiedRouter.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/AuthContext",
+        "./UnifiedDashboard",
+        "./UnifiedProductsManager",
+        "./SimpleLogin",
+        "./UnifiedLayout"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\UserManagement.jsx": {
+      "imports": [
+        "react",
+        "./UserManagementComplete"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\UserManagementAdvanced.jsx": {
+      "imports": [
+        "react",
+        "./ui/DataTable",
+        "./ui/DynamicForm",
+        "./ui/Notification",
+        "./ui/SearchFilter",
+        "../services/apiClient"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\UserManagementComplete.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "../contexts/AuthContext",
+        "../services/apiClient"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\UserProfile.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../ui/Card",
+        "../ui/Button",
+        "../ui/LoadingSpinner",
+        "../ui/Toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\WarehouseManagement.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\WarehousesManagement.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\WorkflowManagement.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\common\\ConfirmationDialog.jsx": {
+      "imports": [
+        "react",
+        "react-dom"
+      ],
+      "exports": [
+        "ConfirmationProvider",
+        "useConfirmation",
+        "withConfirmation",
+        "useConfirmedAction"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\ConfirmDialog.jsx": {
+      "imports": [
+        "react",
+        "lucide-react"
+      ],
+      "exports": [
+        "DeleteConfirmDialog",
+        "SaveConfirmDialog",
+        "LogoutConfirmDialog",
+        "ResetConfirmDialog",
+        "SubmitConfirmDialog"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\EnhancedButton.jsx": {
+      "imports": [
+        "react",
+        "./LoadingSpinner",
+        "../../utils/logger"
+      ],
+      "exports": [
+        "SaveButton",
+        "DeleteButton",
+        "EditButton",
+        "AddButton",
+        "SearchButton",
+        "ExportButton",
+        "PrintButton",
+        "RefreshButton"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\EnhancedToast.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "ToastProvider",
+        "useToast",
+        "useEnhancedToast"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\ErrorBoundary.jsx": {
+      "imports": [
+        "react",
+        "prop-types"
+      ],
+      "exports": [
+        "ErrorFallback",
+        "useErrorHandler"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\FormValidation.jsx": {
+      "imports": [
+        "react",
+        "prop-types"
+      ],
+      "exports": [
+        "validationRules",
+        "useFormValidation",
+        "ValidatedInput",
+        "ValidatedSelect",
+        "FormSummary"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\LoadingSpinner.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "ButtonSpinner",
+        "TableLoader",
+        "CardLoader",
+        "useLoading"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\NotificationCenter.jsx": {
+      "imports": [
+        "react",
+        "prop-types"
+      ],
+      "exports": [
+        "NotificationProvider",
+        "NotificationBell",
+        "NotificationPanel",
+        "useNotifications"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\PermissionSystem.jsx": {
+      "imports": [
+        "react",
+        "prop-types",
+        "../../contexts/AuthContext"
+      ],
+      "exports": [
+        "PermissionProvider",
+        "usePermissions",
+        "PermissionGuard",
+        "PermissionButton",
+        "RoleManager",
+        "UserManager"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\PrintExport.jsx": {
+      "imports": [
+        "react",
+        "react-to-print",
+        "xlsx",
+        "jspdf",
+        "./EnhancedButton",
+        "./ProgressBar",
+        "./EnhancedToast"
+      ],
+      "exports": [
+        "PrintableComponent",
+        "usePrint",
+        "useExport",
+        "ExportButtons",
+        "PrintExportToolbar"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\ProgressBar.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "ProgressProvider",
+        "ProgressBar",
+        "CircularProgress",
+        "StepProgress",
+        "ProgressModal",
+        "useProgress",
+        "useProgressOperation",
+        "ProgressTracker"
+      ],
+      "used_by": []
+    },
+    "src\\components\\common\\Toast.jsx": {
+      "imports": [
+        "react",
+        "lucide-react"
+      ],
+      "exports": [
+        "useToast",
+        "ToastContainer"
+      ],
+      "used_by": []
+    },
+    "src\\components\\enhanced\\ProductCard.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\enhanced\\ProductList.jsx": {
+      "imports": [
+        "react",
+        "./ProductCard"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\Error403.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "./ErrorPageBase"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\Error404.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "./ErrorPageBase"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\Error500.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "./ErrorPageBase"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\Error502.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "./ErrorPageBase"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\Error503.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "./ErrorPageBase"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\Error504.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "./ErrorPageBase"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\Error505.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "./ErrorPageBase"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\ErrorBoundary.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "prop-types",
+        "./Error500"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\ErrorPageBase.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\ErrorTestPage.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ErrorPages\\index.js": {
+      "imports": [],
+      "exports": [
+        "default as ErrorBoundary",
+        "default as ErrorPageBase",
+        "default as Error404",
+        "default as Error403",
+        "default as Error500",
+        "default as Error502",
+        "default as Error503",
+        "default as Error504",
+        "default as Error505",
+        "default as ErrorTestPage"
+      ],
+      "used_by": []
+    },
+    "src\\components\\modals\\CustomerAddModal.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "../../services/apiClient"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\modals\\index.js": {
+      "imports": [],
+      "exports": [
+        "default as ProductAddModal",
+        "default as CustomerAddModal",
+        "default as SupplierAddModal",
+        "default as LotAddModal"
+      ],
+      "used_by": []
+    },
+    "src\\components\\modals\\LotAddModal.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "../../services/apiClient"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\modals\\ProductAddModal.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "../../services/apiClient"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\modals\\SupplierAddModal.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "../../services/apiClient"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ui\\AccessibleButton.jsx": {
+      "imports": [
+        "react",
+        "../../lib/utils"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ui\\AccessibleForm.jsx": {
+      "imports": [
+        "react",
+        "../../lib/utils"
+      ],
+      "exports": [
+        "FormGroup",
+        "FormLabel",
+        "FormInput",
+        "FormSelect",
+        "FormTextarea",
+        "FormCheckbox"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\AccessibleTable.jsx": {
+      "imports": [
+        "react",
+        "../../lib/utils"
+      ],
+      "exports": [
+        "AccessibleTable",
+        "TablePagination"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\accordion.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-accordion",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Accordion, AccordionItem, AccordionTrigger, AccordionContent"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\AdvancedTable.jsx": {
+      "imports": [
+        "react",
+        "./EmptyState"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ui\\alert-dialog.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-alert-dialog",
+        "@/lib/utils",
+        "@/components/ui/button"
+      ],
+      "exports": [
+        "AlertDialog,\n  AlertDialogPortal,\n  AlertDialogOverlay,\n  AlertDialogTrigger,\n  AlertDialogContent,\n  AlertDialogHeader,\n  AlertDialogFooter,\n  AlertDialogTitle,\n  AlertDialogDescription,\n  AlertDialogAction,\n  AlertDialogCancel,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\alert.jsx": {
+      "imports": [
+        "react",
+        "class-variance-authority",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Alert, AlertTitle, AlertDescription"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\aspect-ratio.jsx": {
+      "imports": [
+        "@radix-ui/react-aspect-ratio"
+      ],
+      "exports": [
+        "AspectRatio"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\avatar.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-avatar",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Avatar, AvatarImage, AvatarFallback"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\badge.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Badge, badgeVariants"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\breadcrumb.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-slot",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Breadcrumb,\n  BreadcrumbList,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbPage,\n  BreadcrumbSeparator,\n  BreadcrumbEllipsis,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\Button.jsx": {
+      "imports": [
+        "react",
+        "prop-types",
+        "../../theme"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ui\\calendar.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "react-day-picker",
+        "@/lib/utils",
+        "@/components/ui/button"
+      ],
+      "exports": [
+        "Calendar"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\card.jsx": {
+      "imports": [
+        "react",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Card,\n  CardHeader,\n  CardFooter,\n  CardTitle,\n  CardAction,\n  CardDescription,\n  CardContent,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\carousel.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "embla-carousel-react",
+        "@/lib/utils",
+        "@/components/ui/button"
+      ],
+      "exports": [
+        "Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\chart.jsx": {
+      "imports": [
+        "react",
+        "recharts",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "ChartContainer,\n  ChartTooltip,\n  ChartTooltipContent,\n  ChartLegend,\n  ChartLegendContent,\n  ChartStyle,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\Charts.jsx": {
+      "imports": [
+        "react",
+        "lucide-react"
+      ],
+      "exports": [
+        "ChartContainer,\n  LineChart,\n  PieChartComponent as PieChart,\n  StatCard,\n  HorizontalBarChart,\n  ComparisonChart,\n  TrendChart,\n  CircularProgress"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\checkbox.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-checkbox",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Checkbox"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\collapsible.jsx": {
+      "imports": [
+        "@radix-ui/react-collapsible"
+      ],
+      "exports": [
+        "Collapsible, CollapsibleTrigger, CollapsibleContent"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\command.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "cmdk",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Command,\n  CommandDialog,\n  CommandInput,\n  CommandList,\n  CommandEmpty,\n  CommandGroup,\n  CommandItem,\n  CommandShortcut,\n  CommandSeparator,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\context-menu.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-context-menu",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "ContextMenu,\n  ContextMenuTrigger,\n  ContextMenuContent,\n  ContextMenuItem,\n  ContextMenuCheckboxItem,\n  ContextMenuRadioItem,\n  ContextMenuLabel,\n  ContextMenuSeparator,\n  ContextMenuShortcut,\n  ContextMenuGroup,\n  ContextMenuPortal,\n  ContextMenuSub,\n  ContextMenuSubContent,\n  ContextMenuSubTrigger,\n  ContextMenuRadioGroup,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\DataTable.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ui\\dialog.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-dialog",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Dialog,\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogOverlay,\n  DialogPortal,\n  DialogTitle,\n  DialogTrigger,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\drawer.jsx": {
+      "imports": [
+        "react",
+        "vaul",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Drawer,\n  DrawerPortal,\n  DrawerOverlay,\n  DrawerTrigger,\n  DrawerClose,\n  DrawerContent,\n  DrawerHeader,\n  DrawerFooter,\n  DrawerTitle,\n  DrawerDescription,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\dropdown-menu.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-dropdown-menu",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "DropdownMenu,\n  DropdownMenuPortal,\n  DropdownMenuTrigger,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuLabel,\n  DropdownMenuItem,\n  DropdownMenuCheckboxItem,\n  DropdownMenuRadioGroup,\n  DropdownMenuRadioItem,\n  DropdownMenuSeparator,\n  DropdownMenuShortcut,\n  DropdownMenuSub,\n  DropdownMenuSubTrigger,\n  DropdownMenuSubContent,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\DynamicForm.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ui\\EmptyState.jsx": {
+      "imports": [
+        "react",
+        "prop-types",
+        "lucide-react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ui\\ErrorBoundary.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ui\\ExportImport.jsx": {
+      "imports": [
+        "react",
+        "lucide-react"
+      ],
+      "exports": [
+        "ExportComponent,\n  ImportComponent,\n  ExportImportComponent"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\form.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-slot",
+        "react-hook-form",
+        "@/lib/utils",
+        "@/components/ui/label"
+      ],
+      "exports": [
+        "useFormField,\n  Form,\n  FormItem,\n  FormLabel,\n  FormControl,\n  FormDescription,\n  FormMessage,\n  FormField,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\FormComponents.jsx": {
+      "imports": [
+        "react",
+        "lucide-react"
+      ],
+      "exports": [
+        "ErrorMessage",
+        "SuccessMessage",
+        "InfoMessage",
+        "WarningMessage",
+        "Alert",
+        "ValidatedInput",
+        "ValidatedSelect",
+        "ValidatedTextarea",
+        "LoadingSpinner",
+        "EmptyState",
+        "ConfirmDialog"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\FormField.jsx": {
+      "imports": [
+        "react",
+        "prop-types"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\components\\ui\\hover-card.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-hover-card",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "HoverCard, HoverCardTrigger, HoverCardContent"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\input-otp.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "input-otp",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\input.jsx": {
+      "imports": [
+        "react",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Input"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\label.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-label",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Label"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\LoadingSpinner.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "FullPageLoader",
+        "InlineLoader",
+        "ButtonLoader"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\menubar.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-menubar",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Menubar,\n  MenubarPortal,\n  MenubarMenu,\n  MenubarTrigger,\n  MenubarContent,\n  MenubarGroup,\n  MenubarSeparator,\n  MenubarLabel,\n  MenubarItem,\n  MenubarShortcut,\n  MenubarCheckboxItem,\n  MenubarRadioGroup,\n  MenubarRadioItem,\n  MenubarSub,\n  MenubarSubTrigger,\n  MenubarSubContent,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\navigation-menu.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-navigation-menu",
+        "class-variance-authority",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "NavigationMenu,\n  NavigationMenuList,\n  NavigationMenuItem,\n  NavigationMenuContent,\n  NavigationMenuTrigger,\n  NavigationMenuLink,\n  NavigationMenuIndicator,\n  NavigationMenuViewport,\n  navigationMenuTriggerStyle,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\Notification.jsx": {
+      "imports": [
+        "react",
+        "lucide-react"
+      ],
+      "exports": [
+        "Notification, LoadingSpinner, Modal"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\pagination.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "@/lib/utils",
+        "@/components/ui/button"
+      ],
+      "exports": [
+        "Pagination,\n  PaginationContent,\n  PaginationLink,\n  PaginationItem,\n  PaginationPrevious,\n  PaginationNext,\n  PaginationEllipsis,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\PermissionsGuard.jsx": {
+      "imports": [
+        "react",
+        "lucide-react"
+      ],
+      "exports": [
+        "PermissionsProvider",
+        "usePermissions",
+        "PermissionGuard",
+        "PermissionButton",
+        "PermissionLink",
+        "PermissionMenuItem",
+        "usePermissionCheck",
+        "PermissionsDebug",
+        "PERMISSIONS"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\popover.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-popover",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Popover, PopoverTrigger, PopoverContent, PopoverAnchor"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\progress.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-progress",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Progress"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\radio-group.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-radio-group",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "RadioGroup, RadioGroupItem"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\resizable.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "react-resizable-panels",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "ResizablePanelGroup, ResizablePanel, ResizableHandle"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\scroll-area.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-scroll-area",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "ScrollArea, ScrollBar"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\SearchFilter.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "SearchFilter, QuickFilters"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\select.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-select",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Select,\n  SelectContent,\n  SelectGroup,\n  SelectItem,\n  SelectLabel,\n  SelectScrollDownButton,\n  SelectScrollUpButton,\n  SelectSeparator,\n  SelectTrigger,\n  SelectValue,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\separator.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-separator",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Separator"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\sheet.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-dialog",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Sheet,\n  SheetTrigger,\n  SheetClose,\n  SheetContent,\n  SheetHeader,\n  SheetFooter,\n  SheetTitle,\n  SheetDescription,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\sidebar.jsx": {
+      "imports": [
+        "lucide-react",
+        "react",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "@/hooks/use-mobile",
+        "@/lib/utils",
+        "@/components/ui/button",
+        "@/components/ui/input",
+        "@/components/ui/separator",
+        "@/components/ui/sheet",
+        "@/components/ui/skeleton",
+        "@/components/ui/tooltip"
+      ],
+      "exports": [
+        "Sidebar,\n  SidebarContent,\n  SidebarFooter,\n  SidebarGroup,\n  SidebarGroupAction,\n  SidebarGroupContent,\n  SidebarGroupLabel,\n  SidebarHeader,\n  SidebarInput,\n  SidebarInset,\n  SidebarMenu,\n  SidebarMenuAction,\n  SidebarMenuBadge,\n  SidebarMenuButton,\n  SidebarMenuItem,\n  SidebarMenuSkeleton,\n  SidebarMenuSub,\n  SidebarMenuSubButton,\n  SidebarMenuSubItem,\n  SidebarProvider,\n  SidebarRail,\n  SidebarSeparator,\n  SidebarTrigger,\n  useSidebar,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\skeleton.jsx": {
+      "imports": [
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Skeleton"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\slider.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-slider",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Slider"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\sonner.jsx": {
+      "imports": [
+        "next-themes",
+        "sonner"
+      ],
+      "exports": [
+        "Toaster"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\switch.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-switch",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Switch"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\table.jsx": {
+      "imports": [
+        "react",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Table,\n  TableHeader,\n  TableBody,\n  TableFooter,\n  TableHead,\n  TableRow,\n  TableCell,\n  TableCaption,"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\tabs.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-tabs",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Tabs, TabsList, TabsTrigger, TabsContent"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\textarea.jsx": {
+      "imports": [
+        "react",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Textarea"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\ThemedIcon.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "ThemedIcon",
+        "IconVariants"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\toggle-group.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-toggle-group",
+        "@/lib/utils",
+        "@/components/ui/toggle"
+      ],
+      "exports": [
+        "ToggleGroup, ToggleGroupItem"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\toggle.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-toggle",
+        "class-variance-authority",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Toggle, toggleVariants"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\tooltip.jsx": {
+      "imports": [
+        "react",
+        "@radix-ui/react-tooltip",
+        "@/lib/utils"
+      ],
+      "exports": [
+        "Tooltip, TooltipTrigger, TooltipContent, TooltipProvider"
+      ],
+      "used_by": []
+    },
+    "src\\components\\ui\\Validation.jsx": {
+      "imports": [
+        "react",
+        "lucide-react"
+      ],
+      "exports": [
+        "validationRules",
+        "validateField",
+        "validateForm",
+        "ValidationMessage",
+        "ValidatedInput",
+        "ValidatedTextarea",
+        "ValidatedSelect",
+        "useFormValidation"
+      ],
+      "used_by": []
+    },
+    "src\\config\\api.js": {
+      "imports": [],
+      "exports": [
+        "API_BASE_URL",
+        "API_ENDPOINTS",
+        "DEFAULT_REQUEST_CONFIG",
+        "buildApiUrl",
+        "getAuthHeaders",
+        "handleApiError",
+        "apiRequest"
+      ],
+      "used_by": []
+    },
+    "src\\context\\AuthContext.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "useAuth",
+        "AuthProvider"
+      ],
+      "used_by": []
+    },
+    "src\\contexts\\AppContext.jsx": {
+      "imports": [
+        "react",
+        "./AuthContext"
+      ],
+      "exports": [
+        "AppProvider",
+        "useApp"
+      ],
+      "used_by": []
+    },
+    "src\\contexts\\AuthContext.jsx": {
+      "imports": [
+        "react",
+        "../config/api"
+      ],
+      "exports": [
+        "useAuth",
+        "PERMISSIONS",
+        "ROLES",
+        "AuthProvider"
+      ],
+      "used_by": []
+    },
+    "src\\contexts\\PermissionContext.jsx": {
+      "imports": [
+        "react",
+        "../services/apiClient"
+      ],
+      "exports": [
+        "usePermissions",
+        "PermissionProvider",
+        "withPermissions",
+        "requirePermission"
+      ],
+      "used_by": []
+    },
+    "src\\contexts\\ThemeContext.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "THEMES",
+        "ThemeProvider",
+        "useTheme",
+        "ThemeToggle",
+        "ThemeSelector"
+      ],
+      "used_by": []
+    },
+    "src\\hooks\\use-mobile.js": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "useIsMobile"
+      ],
+      "used_by": []
+    },
+    "src\\hooks\\useConnectionStatus.js": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "useConnectionStatus"
+      ],
+      "used_by": []
+    },
+    "src\\hooks\\usePerformance.js": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "useDebounce",
+        "useThrottle",
+        "useIntersectionObserver",
+        "useLazyLoad",
+        "useVirtualScroll",
+        "useImageLazyLoad",
+        "useMemoCompare",
+        "useWhyDidYouUpdate",
+        "useRenderCount",
+        "useOptimizedCallback",
+        "useOptimizedMemo",
+        "usePrevious",
+        "useMediaQuery"
+      ],
+      "used_by": []
+    },
+    "src\\lib\\utils.js": {
+      "imports": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "exports": [
+        "cn"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\pages\\AdvancedReports.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\AdvancedUserManagement.jsx": {
+      "imports": [
+        "react",
+        "../contexts/PermissionContext.jsx"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\ComingSoon.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../components/ui/Button"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\CompanySettings.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\ComprehensiveReports.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\CustomerDetails.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/PermissionContext",
+        "../services/customerService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\CustomerSupplierAccounts.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\ImportExport.jsx": {
+      "imports": [
+        "react",
+        "lucide-react",
+        "react-hot-toast",
+        "../services/ApiService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\InteractiveDashboard.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\InvoicesPage.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\Maintenance.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../components/ui/Button"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\NotFound.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../components/ui/Button"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\OpeningBalancesTreasury.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\PaymentDebtManagement.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\PickupDeliveryOrders.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\ProductDetails.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/PermissionContext",
+        "../services/productService"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\Reports.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "@mui/x-date-pickers/AdapterDateFns"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\ReturnsManagement.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\ServerError.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../components/ui/Button"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\Settings.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/PermissionContext"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\SetupWizard.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\SystemSettings.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\ThemeSettings.jsx": {
+      "imports": [
+        "react",
+        "../contexts/ThemeContext",
+        "lucide-react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\Unauthorized.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../components/ui/Button"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\UserManagement.jsx": {
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../contexts/PermissionContext"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\WarehouseAdjustments.jsx": {
+      "imports": [
+        "react"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\pages\\WarehouseConstraints.jsx": {
+      "imports": [
+        "react",
+        "react-hot-toast"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\routes\\index.js": {
+      "imports": [
+        "react"
+      ],
+      "exports": [
+        "routes"
+      ],
+      "used_by": []
+    },
+    "src\\services\\api.js": {
+      "imports": [
+        "axios",
+        "react-hot-toast",
+        "../utils/responseHelper"
+      ],
+      "exports": [
+        "productsAPI,\n  warehousesAPI,\n  lotsAPI,\n  stockMovementsAPI,\n  reportsAPI,\n  dashboardAPI,\n  settingsAPI,\n  integrationAPI,\n  salesInvoicesAPI,\n  customersAPI,\n  suppliersAPI"
+      ],
+      "used_by": []
+    },
+    "src\\services\\apiClient.js": {
+      "imports": [],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\services\\ApiService.js": {
+      "imports": [],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\services\\customerService.js": {
+      "imports": [
+        "./apiClient"
+      ],
+      "exports": [
+        "customerService"
+      ],
+      "used_by": []
+    },
+    "src\\services\\enhancedAPI.js": {
+      "imports": [
+        "axios"
+      ],
+      "exports": [
+        "enhancedAuthAPI",
+        "enhancedProductsAPI",
+        "enhancedInventoryAPI",
+        "enhancedOrdersAPI",
+        "enhancedCustomersAPI",
+        "enhancedReportsAPI",
+        "enhancedSettingsAPI",
+        "enhancedNotificationsAPI",
+        "enhancedSystemAPI"
+      ],
+      "used_by": []
+    },
+    "src\\services\\productService.js": {
+      "imports": [
+        "./apiClient"
+      ],
+      "exports": [
+        "productService"
+      ],
+      "used_by": []
+    },
+    "src\\store\\index.js": {
+      "imports": [
+        "@reduxjs/toolkit",
+        "redux-persist",
+        "redux-persist/lib/storage",
+        "@reduxjs/toolkit",
+        "./slices/authSlice",
+        "./slices/productsSlice",
+        "./slices/cartSlice",
+        "./slices/favoritesSlice",
+        "./slices/uiSlice",
+        "./slices/inventorySlice",
+        "./slices/ordersSlice",
+        "./slices/customersSlice",
+        "./slices/reportsSlice"
+      ],
+      "exports": [
+        "store",
+        "persistor",
+        "clearPersistedState",
+        "resetStore",
+        "selectAuth",
+        "selectProducts",
+        "selectCart",
+        "selectFavorites",
+        "selectUI",
+        "selectInventory",
+        "selectOrders",
+        "selectCustomers",
+        "selectReports",
+        "selectCartTotal",
+        "selectCartItemCount",
+        "selectIsProductInCart",
+        "selectIsProductFavorite",
+        "selectUserPermissions",
+        "selectHasPermission",
+        "selectFilteredProducts"
+      ],
+      "used_by": []
+    },
+    "src\\store\\slices\\authSlice.js": {
+      "imports": [
+        "@reduxjs/toolkit",
+        "../../services/authAPI"
+      ],
+      "exports": [
+        "loginUser",
+        "registerUser",
+        "refreshToken",
+        "logoutUser",
+        "updateProfile",
+        "changePassword",
+        "verifyMFA",
+        "requestPasswordReset",
+        "resetPassword",
+        "selectAuth",
+        "selectUser",
+        "selectIsAuthenticated",
+        "selectAuthLoading",
+        "selectAuthError",
+        "selectUserPermissions",
+        "selectMFARequired",
+        "selectLoginAttempts",
+        "selectHasPermission",
+        "selectIsSessionValid",
+        "selectUserRole",
+        "selectIsAdmin",
+        "selectCanManageProducts",
+        "selectCanManageOrders",
+        "selectCanViewReports"
+      ],
+      "used_by": []
+    },
+    "src\\styles\\design-tokens.js": {
+      "imports": [],
+      "exports": [
+        "colors",
+        "typography",
+        "spacing",
+        "borderRadius",
+        "shadows",
+        "transitions",
+        "zIndex",
+        "breakpoints",
+        "designTokens"
+      ],
+      "used_by": []
+    },
+    "src\\tests\\AccessibleComponents.test.jsx": {
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "@testing-library/user-event",
+        "../components/ui/AccessibleButton",
+        "../components/ui/AccessibleForm",
+        "../components/ui/AccessibleTable"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\tests\\setup.js": {
+      "imports": [
+        "vitest"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\tests\\enhanced\\ProductCard.test.jsx": {
+      "imports": [
+        "react",
+        "@testing-library/react",
+        "react-router-dom",
+        "../../components/enhanced/ProductCard"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\theme\\index.js": {
+      "imports": [],
+      "exports": [
+        "theme",
+        "getColor",
+        "getSpacing",
+        "getFontFamily",
+        "getBreakpoint",
+        "cssVariables"
+      ],
+      "used_by": []
+    },
+    "src\\types\\index.d.ts": {
+      "imports": [],
+      "exports": [],
+      "used_by": []
+    },
+    "src\\utils\\buttonChecker.js": {
+      "imports": [],
+      "exports": [],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\utils\\encryption.js": {
+      "imports": [
+        "crypto-js"
+      ],
+      "exports": [
+        "FrontendEncryption"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\utils\\errorLogger.js": {
+      "imports": [],
+      "exports": [
+        "ERROR_LEVELS",
+        "ERROR_CATEGORIES",
+        "logDebug",
+        "logInfo",
+        "logWarn",
+        "logError",
+        "logFatal",
+        "logNetworkError",
+        "logApiError",
+        "logAuthError",
+        "logValidationError"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\utils\\logger.js": {
+      "imports": [
+        "../services/api"
+      ],
+      "exports": [
+        "logClick",
+        "logRoute",
+        "logError",
+        "logEvent",
+        "useLogger"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\utils\\logger.ts": {
+      "imports": [],
+      "exports": [
+        "logger",
+        "getLogger",
+        "initLogging",
+        "setupAxiosLogging",
+        "logErrorBoundary"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\utils\\performance-monitor.js": {
+      "imports": [],
+      "exports": [
+        "trackWebVitals",
+        "trackComponentRender",
+        "trackAPICall",
+        "trackRouteChange",
+        "trackMemoryUsage",
+        "getPerformanceReport",
+        "printPerformanceReport",
+        "initPerformanceMonitoring",
+        "usePerformanceTracking"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\utils\\performance.js": {
+      "imports": [],
+      "exports": [
+        "lazyLoadImage",
+        "debounce",
+        "throttle",
+        "dataCache",
+        "loadComponent",
+        "withErrorBoundary",
+        "measurePerformance",
+        "optimizedFetch"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\utils\\responseHelper.js": {
+      "imports": [],
+      "exports": [
+        "isSuccess",
+        "isError",
+        "getErrorMessage",
+        "getData",
+        "normalizeResponse",
+        "handleResponse",
+        "handleApiCall",
+        "ok",
+        "getStatus"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\utils\\secureApi.js": {
+      "imports": [
+        "axios",
+        "./encryption.js"
+      ],
+      "exports": [
+        "SecureApiClient"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\utils\\validation.js": {
+      "imports": [],
+      "exports": [
+        "validators",
+        "validateProduct",
+        "validateCustomer",
+        "validateSupplier"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "src\\utils\\validationRules.js": {
+      "imports": [],
+      "exports": [
+        "validationRules",
+        "validateValue",
+        "validateForm"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    },
+    "tests\\global-setup.js": {
+      "imports": [
+        "child_process",
+        "util",
+        "child_process",
+        "node:process"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "tests\\global-teardown.js": {
+      "imports": [
+        "child_process"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "tests\\e2e\\auth.spec.js": {
+      "imports": [
+        "@playwright/test"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "tests\\e2e\\dashboard.spec.js": {
+      "imports": [
+        "@playwright/test"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "tests\\e2e\\invoices.spec.js": {
+      "imports": [
+        "@playwright/test"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "tests\\e2e\\performance-analysis.spec.js": {
+      "imports": [
+        "@playwright/test"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "tests\\e2e\\products.spec.js": {
+      "imports": [
+        "@playwright/test"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "tests\\e2e\\record.spec.js": {
+      "imports": [
+        "@playwright/test",
+        "../utils/artifacts.js"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "tests\\e2e\\responsive-baseline.spec.js": {
+      "imports": [
+        "@playwright/test",
+        "../utils/artifacts.js"
+      ],
+      "exports": [],
+      "used_by": []
+    },
+    "tests\\utils\\artifacts.js": {
+      "imports": [
+        "fs",
+        "path",
+        "url",
+        "child_process"
+      ],
+      "exports": [
+        "artifactPath"
+      ],
+      "used_by": [
+        "tests\\global-setup.js"
+      ]
+    }
+  }
+}

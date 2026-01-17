@@ -1,0 +1,1690 @@
+
+> inventory-frontend@1.5.0 lint
+> eslint . --fix
+
+
+D:\APPS_AI\store\Store\frontend\src\components\About.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\AccountingSystem.jsx
+   24:10  error    'selectedItem' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                           no-unused-vars
+   29:6   warning  React Hook useEffect has a missing dependency: 'loadAccountingData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   40:14  error    'error' is defined but never used                                                                                      no-unused-vars
+   58:14  error    'error' is defined but never used                                                                                      no-unused-vars
+  104:14  error    'error' is defined but never used                                                                                      no-unused-vars
+  147:14  error    'error' is defined but never used                                                                                      no-unused-vars
+  202:14  error    'error' is defined but never used                                                                                      no-unused-vars
+  679:19  error    'item' is defined but never used                                                                                       no-unused-vars
+  950:26  error    'error' is defined but never used                                                                                      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\AdminDashboard.jsx
+  143:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\AdminRoles.jsx
+   35:6   warning  React Hook useEffect has a missing dependency: 'loadRoles'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+   39:6   warning  React Hook useEffect has a missing dependency: 'filterRoles'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  103:14  error    'error' is defined but never used                                                                               no-unused-vars
+  149:16  error    'error' is defined but never used                                                                               no-unused-vars
+  167:14  error    'error' is defined but never used                                                                               no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\AdminSecurity.jsx
+   21:6   warning  React Hook useEffect has a missing dependency: 'filterLogs'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  102:14  error    'error' is defined but never used                                                                              no-unused-vars
+  102:21  error    Empty block statement                                                                                          no-empty
+
+D:\APPS_AI\store\Store\frontend\src\components\AdminUsers.jsx
+   18:6   warning  React Hook useEffect has a missing dependency: 'loadUsers'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+   22:6   warning  React Hook useEffect has a missing dependency: 'filterUsers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   91:14  error    'err' is defined but never used                                                                                 no-unused-vars
+  132:16  error    'err' is defined but never used                                                                                 no-unused-vars
+  144:14  error    'err' is defined but never used                                                                                 no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\AdvancedPermissions.jsx
+   69:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  126:14  error    'error' is defined but never used                                                                            no-unused-vars
+  147:14  error    'error' is defined but never used                                                                            no-unused-vars
+  162:14  error    'error' is defined but never used                                                                            no-unused-vars
+  187:14  error    'error' is defined but never used                                                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\AdvancedReportsSystem.jsx
+  151:6   warning  React Hook useEffect has a missing dependency: 'generateReport'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  185:53  error    'IconComponent' is defined but never used                                                                          no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\AdvancedSettings.jsx
+  153:9   warning  The 'loadSettings' function makes the dependencies of useEffect Hook (at line 151) change on every render. To fix this, wrap the definition of 'loadSettings' in its own useCallback() Hook  react-hooks/exhaustive-deps
+  161:14  error    'error' is defined but never used                                                                                                                                                            no-unused-vars
+  199:14  error    'error' is defined but never used                                                                                                                                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\CashBoxManagement.jsx
+    8:35  error  'apiDelete' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   21:10  error  'showDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+   21:28  error  'setShowDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   22:10  error  'isDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u           no-unused-vars
+   22:22  error  'setIsDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u        no-unused-vars
+   23:10  error  'itemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u         no-unused-vars
+   23:24  error  'setItemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u      no-unused-vars
+   94:9   error  'toast' is not defined                                                                               no-undef
+   99:9   error  'toast' is not defined                                                                               no-undef
+  108:7   error  'toast' is not defined                                                                               no-undef
+  121:7   error  'toast' is not defined                                                                               no-undef
+  127:7   error  'toast' is not defined                                                                               no-undef
+  154:9   error  'toast' is not defined                                                                               no-undef
+  157:9   error  'toast' is not defined                                                                               no-undef
+  161:7   error  'toast' is not defined                                                                               no-undef
+
+D:\APPS_AI\store\Store\frontend\src\components\CashBoxes.jsx
+   22:6   warning  React Hook useEffect has a missing dependency: 'filterCashBoxes'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   46:14  error    'error' is defined but never used                                                                                   no-unused-vars
+  133:16  error    'error' is defined but never used                                                                                   no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\CategoriesManagement.jsx
+   24:6   warning  React Hook useEffect has a missing dependency: 'filterCategories'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   40:14  error    'error' is defined but never used                                                                                    no-unused-vars
+  112:11  error    'handleViewCategory' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+  128:16  error    'error' is defined but never used                                                                                    no-unused-vars
+  152:14  error    'error' is defined but never used                                                                                    no-unused-vars
+  322:38  error    'handleViewCategory' is not defined                                                                                  no-undef
+
+D:\APPS_AI\store\Store\frontend\src\components\CategorySettings.jsx
+   36:14  error  'error' is defined but never used  no-unused-vars
+   89:14  error  'error' is defined but never used  no-unused-vars
+  123:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\CompanySettings.jsx
+   47:14  error  'error' is defined but never used  no-unused-vars
+  105:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\CurrencyManagement.jsx
+   16:10  error  'showDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+   16:28  error  'setShowDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   17:10  error  'isDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u           no-unused-vars
+   17:22  error  'setIsDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u        no-unused-vars
+   18:10  error  'itemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u         no-unused-vars
+   18:24  error  'setItemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u      no-unused-vars
+   87:9   error  'toast' is not defined                                                                               no-undef
+   91:7   error  'toast' is not defined                                                                               no-undef
+  120:9   error  'toast' is not defined                                                                               no-undef
+  123:9   error  'toast' is not defined                                                                               no-undef
+  127:7   error  'toast' is not defined                                                                               no-undef
+
+D:\APPS_AI\store\Store\frontend\src\components\CustomerDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\Customers.jsx
+  309:7  error  Parsing error: Unexpected token <
+
+D:\APPS_AI\store\Store\frontend\src\components\CustomersAdvanced.jsx
+   11:10  error    'error' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                             no-unused-vars
+   13:10  error    'showEditModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   23:6   warning  React Hook useEffect has a missing dependency: 'loadCustomers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  137:9   error    'handleSaveCustomer' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+  366:21  error    'customer' is defined but never used                                                                              no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\Dashboard.jsx
+   60:16  error  'apiError' is defined but never used  no-unused-vars
+   60:26  error  Empty block statement                 no-empty
+  138:14  error  'error' is defined but never used     no-unused-vars
+  153:29  error  'Icon' is defined but never used      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ErrorBoundary.js
+   89:18  error  'reportError' is defined but never used           no-unused-vars
+   89:31  error  Empty block statement                             no-empty
+  115:18  error  'error' is defined but never used                 no-unused-vars
+  115:25  error  Empty block statement                             no-empty
+  378:18  error  'reportError' is defined but never used           no-unused-vars
+  390:5   error  'showDetails' is assigned a value but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ErrorPages\ErrorBoundary.jsx
+  35:13  error  'suggestions' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\FinancialReports.jsx
+   34:6   warning  React Hook useEffect has a missing dependency: 'loadFinancialReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   73:14  error    'error' is defined but never used                                                                                        no-unused-vars
+  104:14  error    'error' is defined but never used                                                                                        no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\FormValidation.jsx
+  2:10  error  'validateValue' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\GeneralSettings.jsx
+  74:14  error  'error' is defined but never used  no-unused-vars
+  97:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\Help.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\ImportExport.jsx
+  585:7  error  Parsing error: Unexpected token <
+
+D:\APPS_AI\store\Store\frontend\src\components\ImportExportAdvanced.jsx
+  127:14  error  'error' is defined but never used  no-unused-vars
+  127:21  error  Empty block statement              no-empty
+  188:14  error  'error' is defined but never used  no-unused-vars
+  235:14  error  'error' is defined but never used  no-unused-vars
+  258:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\IntegratedDashboard.jsx
+   32:14  error    'error' is defined but never used                                                                                                        no-unused-vars
+   44:6   warning  React Hook useEffect has a missing dependency: 'loadDashboardData'. Either include it or remove the dependency array                     react-hooks/exhaustive-deps
+  135:6   warning  React Hook useEffect has missing dependencies: 'mockAlerts' and 'mockDashboardData'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\IntegratedReports.jsx
+   24:9   error    'toast' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                              no-unused-vars
+   25:11  error    'startOperation' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   25:27  error    'updateOperation' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+   25:44  error    'completeOperation' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+  115:6   warning  React Hook useEffect has a missing dependency: 'loadReportData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  132:14  error    'error' is defined but never used                                                                                  no-unused-vars
+  140:14  error    'error' is defined but never used                                                                                  no-unused-vars
+  140:21  error    Empty block statement                                                                                              no-empty
+
+D:\APPS_AI\store\Store\frontend\src\components\IntegrationManager.jsx
+  103:6   warning  React Hook useEffect has missing dependencies: 'mockIntegrationStatus' and 'mockSyncHistory'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  175:14  error    'error' is defined but never used                                                                                                                 no-unused-vars
+  202:14  error    'error' is defined but never used                                                                                                                 no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\InventoryDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\InventoryReports.jsx
+   18:6   warning  React Hook useEffect has a missing dependency: 'loadReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  111:14  error    'error' is defined but never used                                                                               no-unused-vars
+  111:21  error    Empty block statement                                                                                           no-empty
+
+D:\APPS_AI\store\Store\frontend\src\components\InvoiceManagementComplete.jsx
+   11:10  error    'customers' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+   12:10  error    'suppliers' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+   13:10  error    'products' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   14:10  error    'warehouses' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+   15:10  error    'loading' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+   21:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                 no-unused-vars
+   25:10  error    'showDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+   25:28  error    'setShowDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u          no-unused-vars
+   26:10  error    'isDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+   26:22  error    'setIsDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+   27:10  error    'itemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                 no-unused-vars
+   27:24  error    'setItemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u              no-unused-vars
+  164:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  191:14  error    'error' is defined but never used                                                                            no-unused-vars
+  263:9   error    'salesInvoices' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+  264:9   error    'purchaseInvoices' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+  631:27  error    'toast' is not defined                                                                                       no-undef
+
+D:\APPS_AI\store\Store\frontend\src\components\InvoicesAdvanced.jsx
+  461:30  error  Parsing error: Unexpected token }
+
+D:\APPS_AI\store\Store\frontend\src\components\Layout.jsx
+  16:11  error  'theme' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u        no-unused-vars
+  24:24  error  'lastChecked' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\LoginAdvanced.jsx
+  16:10  error  'selectedCompany' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+  16:27  error  'setSelectedCompany' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  86:14  error  'error' is defined but never used                                                                   no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\LotManagement.jsx
+   25:6   warning  React Hook useEffect has a missing dependency: 'filterLots'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   41:14  error    'error' is defined but never used                                                                              no-unused-vars
+  147:16  error    'error' is defined but never used                                                                              no-unused-vars
+  162:14  error    'error' is defined but never used                                                                              no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\LotManagementAdvanced.jsx
+   90:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  117:14  error    'error' is defined but never used                                                                            no-unused-vars
+  487:38  error    'error' is defined but never used                                                                            no-unused-vars
+  579:24  error    'error' is defined but never used                                                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\LotWarehouseManager.jsx
+   3:10  error  'toast' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  10:10  error  'availableStock' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\NotificationSystem.jsx
+  148:31  error  Parsing error: Unexpected token )
+
+D:\APPS_AI\store\Store\frontend\src\components\NotificationSystemAdvanced.jsx
+   91:6   warning  React Hook useEffect has a missing dependency: 'loadNotifications'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  103:14  error    'error' is defined but never used                                                                                     no-unused-vars
+  170:39  error    'priority' is defined but never used                                                                                  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\PaymentVouchers.jsx
+   29:22  error    'setIsDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+   38:6   warning  React Hook useEffect has a missing dependency: 'filterVouchers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  157:13  error    'apiService' is not defined                                                                                        no-undef
+  159:7   error    'fetchVouchers' is not defined                                                                                     no-undef
+  160:14  error    'error' is defined but never used                                                                                  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ProductDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\ProductManagementComplete.jsx
+   23:10  error    'warehouses' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+   28:10  error    'showDetailsModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+   30:10  error    'showDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+   30:28  error    'setShowDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u          no-unused-vars
+   31:10  error    'isDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+   31:22  error    'setIsDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+   33:10  error    'selectedProducts' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+   34:10  error    'activeTab' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+   34:21  error    'setActiveTab' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                 no-unused-vars
+   41:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   51:14  error    'error' is defined but never used                                                                            no-unused-vars
+   68:14  error    'error' is defined but never used                                                                            no-unused-vars
+  322:14  error    'error' is defined but never used                                                                            no-unused-vars
+  328:37  error    'file' is defined but never used                                                                             no-unused-vars
+  333:14  error    'error' is defined but never used                                                                            no-unused-vars
+  339:45  error    'filename' is defined but never used                                                                         no-unused-vars
+  342:14  error    'error' is defined but never used                                                                            no-unused-vars
+  589:21  error    'product' is defined but never used                                                                          no-unused-vars
+  605:22  error    'data' is defined but never used                                                                             no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ProductModal.jsx
+  128:14  error  'error' is defined but never used  no-unused-vars
+  128:21  error  Empty block statement              no-empty
+
+D:\APPS_AI\store\Store\frontend\src\components\Products.jsx
+  177:14  error  'error' is defined but never used  no-unused-vars
+  217:18  error  'error' is defined but never used  no-unused-vars
+  217:25  error  Empty block statement              no-empty
+  247:16  error  'err' is defined but never used    no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ProductsAdvanced.jsx
+   12:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   13:10  error    'showEditModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+   99:6   warning  React Hook useEffect has a missing dependency: 'mockProducts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  173:16  error    'error' is defined but never used                                                                                no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ProfitLoss.jsx
+   53:10  error    'comparisonData' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                         no-unused-vars
+   53:26  error    'setComparisonData' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+   58:6   warning  React Hook useEffect has a missing dependency: 'loadProfitLossData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  104:14  error    'error' is defined but never used                                                                                      no-unused-vars
+  135:14  error    'error' is defined but never used                                                                                      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ProfitLossReport.jsx
+  17:10  error  'showDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+  17:28  error  'setShowDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  18:10  error  'isDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u           no-unused-vars
+  18:22  error  'setIsDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u        no-unused-vars
+  19:10  error  'itemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u         no-unused-vars
+  19:24  error  'setItemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u      no-unused-vars
+  59:9   error  'toast' is not defined                                                                               no-undef
+  66:7   error  'toast' is not defined                                                                               no-undef
+
+D:\APPS_AI\store\Store\frontend\src\components\PurchaseInvoiceManagement.jsx
+   22:10  error  'showDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+   22:28  error  'setShowDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   23:10  error  'isDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u           no-unused-vars
+   23:22  error  'setIsDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u        no-unused-vars
+   24:10  error  'itemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u         no-unused-vars
+   24:24  error  'setItemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u      no-unused-vars
+  167:9   error  'toast' is not defined                                                                               no-undef
+  172:9   error  'toast' is not defined                                                                               no-undef
+  176:7   error  'toast' is not defined                                                                               no-undef
+  204:9   error  'toast' is not defined                                                                               no-undef
+  207:9   error  'toast' is not defined                                                                               no-undef
+  211:7   error  'toast' is not defined                                                                               no-undef
+
+D:\APPS_AI\store\Store\frontend\src\components\PurchaseInvoices.jsx
+  25:14  error  'error' is defined but never used  no-unused-vars
+  43:16  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ReportDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\ReportsSystem.jsx
+  438:40  error  Parsing error: Unexpected token }
+
+D:\APPS_AI\store\Store\frontend\src\components\SalesInvoices.jsx
+   41:14  error  'error' is defined but never used     no-unused-vars
+   59:16  error  'error' is defined but never used     no-unused-vars
+  131:16  error  'apiError' is defined but never used  no-unused-vars
+  154:14  error  'error' is defined but never used     no-unused-vars
+  701:24  error  'error' is defined but never used     no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\SecureAuth.jsx
+   34:6   warning  React Hook useEffect has missing dependencies: 'checkExistingAuth' and 'checkLockoutStatus'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+   63:14  error    'error' is defined but never used                                                                                                                no-unused-vars
+  217:14  error    'error' is defined but never used                                                                                                                no-unused-vars
+  217:21  error    Empty block statement                                                                                                                            no-empty
+  253:14  error    'error' is defined but never used                                                                                                                no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\SecurityMonitoring.jsx
+  18:10  error    'showDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+  18:28  error    'setShowDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u          no-unused-vars
+  19:10  error    'isDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+  19:22  error    'setIsDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+  20:10  error    'itemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                 no-unused-vars
+  20:24  error    'setItemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u              no-unused-vars
+  24:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\Settings.jsx
+   23:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   51:14  error    'error' is defined but never used                                                                            no-unused-vars
+  104:14  error    'error' is defined but never used                                                                            no-unused-vars
+  138:14  error    'error' is defined but never used                                                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\SetupWizard.jsx
+  76:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\Sidebar.jsx
+  20:10  error  'isCollapsed' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+  20:23  error  'setIsCollapsed' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\SidebarEnhanced.jsx
+  150:43  error  'Icon' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\SimpleLogin.jsx
+  30:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\StockMovements.jsx
+  20:6   warning  React Hook useEffect has a missing dependency: 'filterMovements'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  36:14  error    'error' is defined but never used                                                                                   no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\StockMovementsAdvanced.jsx
+   13:10  error    'showCreateModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+  113:6   warning  React Hook useEffect has a missing dependency: 'loadMovements'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  117:6   warning  React Hook useEffect has a missing dependency: 'applyFilters'. Either include it or remove the dependency array   react-hooks/exhaustive-deps
+  127:14  error    'error' is defined but never used                                                                                 no-unused-vars
+  216:14  error    'error' is defined but never used                                                                                 no-unused-vars
+  216:21  error    Empty block statement                                                                                             no-empty
+  224:14  error    'error' is defined but never used                                                                                 no-unused-vars
+  224:21  error    Empty block statement                                                                                             no-empty
+  232:14  error    'error' is defined but never used                                                                                 no-unused-vars
+  232:21  error    Empty block statement                                                                                             no-empty
+
+D:\APPS_AI\store\Store\frontend\src\components\SupplierDetails.jsx
+  14:10  error    'showDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+  14:28  error    'setShowDeleteDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u          no-unused-vars
+  15:10  error    'isDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+  15:22  error    'setIsDeleting' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+  16:10  error    'itemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                 no-unused-vars
+  16:24  error    'setItemToDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u              no-unused-vars
+  22:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\Suppliers.jsx
+  356:7  error  Parsing error: Unexpected token <
+
+D:\APPS_AI\store\Store\frontend\src\components\SuppliersAdvanced.jsx
+   20:6   warning  React Hook useEffect has a missing dependency: 'loadSuppliers'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+   24:6   warning  React Hook useEffect has a missing dependency: 'filterSuppliers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   41:14  error    'error' is defined but never used                                                                                   no-unused-vars
+  133:9   error    'handleSaveSupplier' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+  402:21  error    'supplier' is defined but never used                                                                                no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\SystemDocumentation.jsx
+   15:10  error  'documentation' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  173:14  error  'error' is defined but never used                                                              no-unused-vars
+  173:21  error  Empty block statement                                                                          no-empty
+  205:14  error  'error' is defined but never used                                                              no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\SystemSettings.jsx
+   23:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   32:14  error    'error' is defined but never used                                                                            no-unused-vars
+   50:14  error    'error' is defined but never used                                                                            no-unused-vars
+  170:14  error    'error' is defined but never used                                                                            no-unused-vars
+  537:30  error    'handleExportSettings' is not defined                                                                        no-undef
+
+D:\APPS_AI\store\Store\frontend\src\components\SystemSettingsAdvanced.jsx
+   1:27  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  70:14  error  'error' is defined but never used                                                 no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\TrainingCenter.jsx
+   15:10  error    'userProgress' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                         no-unused-vars
+  163:6   warning  React Hook useEffect has a missing dependency: 'loadTrainingData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  178:14  error    'error' is defined but never used                                                                                    no-unused-vars
+  193:14  error    'error' is defined but never used                                                                                    no-unused-vars
+  198:9   error    'startLesson' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                          no-unused-vars
+  207:14  error    'error' is defined but never used                                                                                    no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\UnifiedDashboard.jsx
+   16:8   error  'api' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   72:43  error  'Icon' is defined but never used                                            no-unused-vars
+  100:56  error  'Icon' is defined but never used                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\UnifiedProductsManager.jsx
+  41:5  error  Parsing error: Missing catch or finally clause
+
+D:\APPS_AI\store\Store\frontend\src\components\UserManagementAdvanced.jsx
+  713:30  error  Parsing error: Unexpected token }
+
+D:\APPS_AI\store\Store\frontend\src\components\UserProfile.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\WarehouseManagement.jsx
+  459:7  error  Parsing error: Unexpected token <
+
+D:\APPS_AI\store\Store\frontend\src\components\WarehousesManagement.jsx
+   23:6   warning  React Hook useEffect has a missing dependency: 'filterWarehouses'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   39:14  error    'error' is defined but never used                                                                                    no-unused-vars
+  122:16  error    'error' is defined but never used                                                                                    no-unused-vars
+  147:14  error    'error' is defined but never used                                                                                    no-unused-vars
+  448:5   error    'setEditingWarehouse' is not defined                                                                                 no-undef
+  449:5   error    'setShowViewModal' is not defined                                                                                    no-undef
+
+D:\APPS_AI\store\Store\frontend\src\components\WorkflowManagement.jsx
+   82:14  error  'error' is defined but never used                                                               no-unused-vars
+  125:14  error  'error' is defined but never used                                                               no-unused-vars
+  125:21  error  Empty block statement                                                                           no-empty
+  130:9   error  'createWorkflow' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  156:14  error  'error' is defined but never used                                                               no-unused-vars
+  172:14  error  'error' is defined but never used                                                               no-unused-vars
+  186:14  error  'error' is defined but never used                                                               no-unused-vars
+  191:9   error  'addStep' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u         no-unused-vars
+  206:9   error  'updateStep' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u      no-unused-vars
+  215:9   error  'removeStep' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\common\ConfirmationDialog.jsx
+  205:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  214:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  214:34  error    'Component' is defined but never used                                                                                           no-unused-vars
+  222:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\common\EnhancedToast.jsx
+   32:6   warning  React Hook useCallback has a missing dependency: 'removeToast'. Either include it or remove the dependency array                react-hooks/exhaustive-deps
+  212:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  221:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\common\ErrorBoundary.jsx
+  50:23  error  Parsing error: Unexpected token )
+
+D:\APPS_AI\store\Store\frontend\src\components\common\FormValidation.jsx
+    6:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  110:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  188:16  error    'error' is defined but never used                                                                                               no-unused-vars
+  188:23  error    Empty block statement                                                                                                           no-empty
+  419:16  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\common\LoadingSpinner.jsx
+  97:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\common\NotificationCenter.jsx
+  97:24  error  Parsing error: Unexpected token }
+
+D:\APPS_AI\store\Store\frontend\src\components\common\PermissionSystem.jsx
+   21:6   warning  React Hook useEffect has a missing dependency: 'loadUserPermissions'. Either include it or remove the dependency array                      react-hooks/exhaustive-deps
+   32:14  error    'error' is defined but never used                                                                                                           no-unused-vars
+   32:21  error    Empty block statement                                                                                                                       no-empty
+   77:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components              react-refresh/only-export-components
+  243:6   warning  React Hook useEffect has missing dependencies: 'defaultPermissions' and 'defaultRoles'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  324:10  error    'roles' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                       no-unused-vars
+  362:6   warning  React Hook useEffect has a missing dependency: 'mockUsers'. Either include it or remove the dependency array                                react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\common\PrintExport.jsx
+   33:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+   49:20  error    'error' is defined but never used                                                                                               no-unused-vars
+   75:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  119:14  error    'error' is defined but never used                                                                                               no-unused-vars
+  147:16  error    'e' is defined but never used                                                                                                   no-unused-vars
+  147:19  error    Empty block statement                                                                                                           no-empty
+  194:14  error    'error' is defined but never used                                                                                               no-unused-vars
+  234:14  error    'error' is defined but never used                                                                                               no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\common\ProgressBar.jsx
+    1:27  error    'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                no-unused-vars
+  179:52  error    'variant' is assigned a value but never used                                                                                    no-unused-vars
+  282:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  291:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  314:23  error    'removeOperation' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                 no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\common\Toast.jsx
+  100:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\modals\CategoryViewModal.jsx
+  49:27  warning  The ref value 'modalRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'modalRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\modals\CustomerViewModal.jsx
+  61:27  warning  The ref value 'modalRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'modalRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\modals\SupplierViewModal.jsx
+  49:27  warning  The ref value 'modalRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'modalRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\modals\WarehouseViewModal.jsx
+  49:27  warning  The ref value 'modalRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'modalRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\AccessibleTable.jsx
+  169:35  error  'colIndex' is defined but never used              no-unused-vars
+  301:3   error  'onItemsPerPageChange' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\AdvancedTable.jsx
+  1:36  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\Charts.jsx
+  50:9  error  'colors' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\EnhancedStates.jsx
+  58:9  error  'Icon' is assigned a value but never used  no-unused-vars
+  91:9  error  'Icon' is assigned a value but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\EnhancedToast.jsx
+  35:7   warning  Fast refresh only works when a file only exports components. Move your component(s) to a separate file  react-refresh/only-export-components
+  35:31  error    'Icon' is defined but never used                                                                        no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\ErrorBoundary.jsx
+   9:35  error  'error' is defined but never used  no-unused-vars
+  50:14  error  'process' is not defined           no-undef
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\ExportImport.jsx
+  38:14  error  'error' is defined but never used  no-unused-vars
+  38:21  error  Empty block statement              no-empty
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\Notification.jsx
+  25:6  warning  React Hook useEffect has a missing dependency: 'handleDismiss'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\PermissionsGuard.jsx
+   21:14  error    'error' is defined but never used                                                                                               no-unused-vars
+   98:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  267:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  331:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\SearchFilter.jsx
+  29:6  warning  React Hook useEffect has a missing dependency: 'onFilter'. Either include it or remove the dependency array. If 'onFilter' changes too often, find the parent component that defines it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\ThemedIcon.jsx
+  16:9   error    'Icon' is defined but never used                                                                                                no-unused-vars
+  34:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\Validation.jsx
+    5:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  157:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  169:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  399:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\badge.jsx
+  44:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\button.jsx
+  18:10  error  'theme' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\form.jsx
+  135:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\navigation-menu.jsx
+  151:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\sidebar.jsx
+  671:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\components\ui\toggle.jsx
+  43:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\context\AuthContext.jsx
+   5:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  47:18  error    'error' is defined but never used                                                                                               no-unused-vars
+  69:13  error    'response' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                        no-unused-vars
+  76:16  error    'error' is defined but never used                                                                                               no-unused-vars
+  76:23  error    Empty block statement                                                                                                           no-empty
+
+D:\APPS_AI\store\Store\frontend\src\contexts\AppContext.jsx
+  317:11  error    'user' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                            no-unused-vars
+  329:16  error    'error' is defined but never used                                                                                               no-unused-vars
+  329:23  error    Empty block statement                                                                                                           no-empty
+  385:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\contexts\AuthContext.jsx
+    6:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+   15:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+   94:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  158:16  error    'error' is defined but never used                                                                                               no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\contexts\PermissionContext.jsx
+   13:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  302:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  320:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  321:20  error    'WrappedComponent' is defined but never used                                                                                    no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\contexts\ThemeContext.jsx
+   17:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                react-refresh/only-export-components
+  167:6   warning  React Hook useEffect has missing dependencies: 'applyTheme', 'resolveTheme', and 'theme'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  193:6   warning  React Hook useEffect has a missing dependency: 'applyTheme'. Either include it or remove the dependency array                                 react-hooks/exhaustive-deps
+  221:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\src\hooks\usePerformance.js
+  274:10  warning  React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead  react-hooks/exhaustive-deps
+  285:10  warning  React Hook useMemo received a function whose dependencies are unknown. Pass an inline function instead      react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\pages\AdvancedReports.jsx
+   15:10  error    'selectedReport' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  166:6   warning  React Hook useEffect has a missing dependency: 'sampleReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  212:9   error    'getCategoryLabel' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\pages\AdvancedUserManagement.jsx
+  165:6   warning  React Hook useEffect has missing dependencies: 'loadGroups' and 'loadUsers'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  172:14  error    'error' is defined but never used                                                                                                no-unused-vars
+  184:14  error    'error' is defined but never used                                                                                                no-unused-vars
+  273:14  error    'error' is defined but never used                                                                                                no-unused-vars
+  287:14  error    'error' is defined but never used                                                                                                no-unused-vars
+  294:9   error    'handleAddGroup' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                   no-unused-vars
+  313:14  error    'error' is defined but never used                                                                                                no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\pages\CompanySettings.jsx
+   84:14  error  'error' is defined but never used  no-unused-vars
+  105:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\pages\ComprehensiveReports.jsx
+   15:10  error    'selectedReport' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  161:6   warning  React Hook useEffect has a missing dependency: 'sampleReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  206:9   error    'getCategoryLabel' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\pages\CustomerDetails.jsx
+  14:11  error    'canAccessCustomer' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  52:6   warning  React Hook useEffect has a missing dependency: 'loadCustomerData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\pages\ImportExport.jsx
+  182:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\pages\PaymentDebtManagement.jsx
+   15:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+   16:10  error    'selectedDebt' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  107:6   warning  React Hook useEffect has a missing dependency: 'sampleDebts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  170:9   error    'getTypeLabel' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  195:9   error    'isOverdue' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                       no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\pages\PickupDeliveryOrders.jsx
+   31:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   32:10  error    'selectedOrder' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  137:6   warning  React Hook useEffect has a missing dependency: 'sampleOrders'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\pages\ProductDetails.jsx
+  14:11  error    'canAccessWarehouse' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+  49:6   warning  React Hook useEffect has a missing dependency: 'loadProductData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\pages\Reports.jsx
+  203:49  error  'setSuppliers' is not defined         no-undef
+  204:48  error  'setProducts' is not defined          no-undef
+  260:39  error  'reportId' is defined but never used  no-unused-vars
+  264:14  error  'error' is defined but never used     no-unused-vars
+  264:21  error  Empty block statement                 no-empty
+  268:44  error  'reportId' is defined but never used  no-unused-vars
+  272:14  error  'error' is defined but never used     no-unused-vars
+  272:21  error  Empty block statement                 no-empty
+  276:39  error  'reportId' is defined but never used  no-unused-vars
+  280:16  error  'error' is defined but never used     no-unused-vars
+  280:23  error  Empty block statement                 no-empty
+
+D:\APPS_AI\store\Store\frontend\src\pages\ReturnsManagement.jsx
+   15:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+   16:10  error    'selectedReturn' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  111:6   warning  React Hook useEffect has a missing dependency: 'sampleReturns'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  159:9   error    'getTypeLabel' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\pages\Settings.jsx
+  13:11  error  'user' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u           no-unused-vars
+  13:17  error  'hasPermission' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  45:14  error  'error' is defined but never used                                                              no-unused-vars
+  45:21  error  Empty block statement                                                                          no-empty
+
+D:\APPS_AI\store\Store\frontend\src\pages\SetupWizard.jsx
+    3:27  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+   14:10  error  'showConfirmDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+   14:29  error  'setShowConfirmDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  189:14  error  'error' is defined but never used                                                                     no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\pages\SystemSettings.jsx
+   1:27  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  83:14  error  'error' is defined but never used                                                 no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\pages\UserManagement.jsx
+   12:17  error  'currentUser' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u            no-unused-vars
+   12:30  error  'hasPermission' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u          no-unused-vars
+   27:10  error  'permissionsDialogOpen' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  208:41  error  'userId' is defined but never used                                                                     no-unused-vars
+  208:49  error  'currentStatus' is defined but never used                                                              no-unused-vars
+  578:68  error  'index' is defined but never used                                                                      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\pages\WarehouseConstraints.jsx
+   28:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                          no-unused-vars
+   29:10  error    'selectedConstraint' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  102:6   warning  React Hook useEffect has a missing dependency: 'sampleConstraints'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\src\services\ApiService.js
+   25:14  error  'error' is defined but never used  no-unused-vars
+  117:5   error  Unnecessary try/catch wrapper      no-useless-catch
+  127:5   error  Unnecessary try/catch wrapper      no-useless-catch
+  302:5   error  Unnecessary try/catch wrapper      no-useless-catch
+  325:5   error  Unnecessary try/catch wrapper      no-useless-catch
+
+D:\APPS_AI\store\Store\frontend\src\services\api.js
+    7:21  error  'getData' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   45:16  error  '_' is defined but never used                                                   no-unused-vars
+  154:5   error  Unnecessary try/catch wrapper                                                   no-useless-catch
+  170:5   error  Unnecessary try/catch wrapper                                                   no-useless-catch
+  578:14  error  'error' is defined but never used                                               no-unused-vars
+  677:18  error  'id' is defined but never used                                                  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\services\apiClient.js
+  142:14  error  'error' is defined but never used  no-unused-vars
+  254:5   error  Unnecessary try/catch wrapper      no-useless-catch
+  319:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\services\enhancedAPI.js
+  110:5  error  Unnecessary try/catch wrapper  no-useless-catch
+
+D:\APPS_AI\store\Store\frontend\src\store\index.js
+  81:8  error  Parsing error: Unexpected token type
+
+D:\APPS_AI\store\Store\frontend\src\store\slices\authSlice.js
+   81:14  error  'error' is defined but never used  no-unused-vars
+  191:22  error  'state' is defined but never used  no-unused-vars
+  272:40  error  'state' is defined but never used  no-unused-vars
+  278:39  error  'state' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\tests\AccessibleComponents.test.jsx
+   15:37  error  'waitFor' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   24:1   error  'jest' is not defined                                                           no-undef
+   28:1   error  'describe' is not defined                                                       no-undef
+   29:3   error  'test' is not defined                                                           no-undef
+   37:5   error  'expect' is not defined                                                         no-undef
+   38:5   error  'expect' is not defined                                                         no-undef
+   39:5   error  'expect' is not defined                                                         no-undef
+   42:3   error  'test' is not defined                                                           no-undef
+   43:25  error  'jest' is not defined                                                           no-undef
+   54:5   error  'expect' is not defined                                                         no-undef
+   58:5   error  'expect' is not defined                                                         no-undef
+   61:3   error  'test' is not defined                                                           no-undef
+   69:5   error  'expect' is not defined                                                         no-undef
+   70:5   error  'expect' is not defined                                                         no-undef
+   71:5   error  'expect' is not defined                                                         no-undef
+   74:3   error  'test' is not defined                                                           no-undef
+   75:25  error  'jest' is not defined                                                           no-undef
+   83:5   error  'expect' is not defined                                                         no-undef
+   84:5   error  'expect' is not defined                                                         no-undef
+   87:5   error  'expect' is not defined                                                         no-undef
+   90:3   error  'test' is not defined                                                           no-undef
+   96:5   error  'expect' is not defined                                                         no-undef
+  103:5   error  'expect' is not defined                                                         no-undef
+  107:1   error  'describe' is not defined                                                       no-undef
+  108:3   error  'test' is not defined                                                           no-undef
+  119:5   error  'expect' is not defined                                                         no-undef
+  120:5   error  'expect' is not defined                                                         no-undef
+  121:5   error  'expect' is not defined                                                         no-undef
+  122:5   error  'expect' is not defined                                                         no-undef
+  125:3   error  'test' is not defined                                                           no-undef
+  137:5   error  'expect' is not defined                                                         no-undef
+  138:5   error  'expect' is not defined                                                         no-undef
+  139:5   error  'expect' is not defined                                                         no-undef
+  140:5   error  'expect' is not defined                                                         no-undef
+  143:3   error  'test' is not defined                                                           no-undef
+  155:5   error  'expect' is not defined                                                         no-undef
+  156:5   error  'expect' is not defined                                                         no-undef
+  159:3   error  'test' is not defined                                                           no-undef
+  160:26  error  'jest' is not defined                                                           no-undef
+  172:5   error  'expect' is not defined                                                         no-undef
+  173:5   error  'expect' is not defined                                                         no-undef
+  177:1   error  'describe' is not defined                                                       no-undef
+  184:3   error  'test' is not defined                                                           no-undef
+  195:5   error  'expect' is not defined                                                         no-undef
+  198:5   error  'expect' is not defined                                                         no-undef
+  201:5   error  'expect' is not defined                                                         no-undef
+  202:5   error  'expect' is not defined                                                         no-undef
+  203:5   error  'expect' is not defined                                                         no-undef
+  206:3   error  'test' is not defined                                                           no-undef
+  207:26  error  'jest' is not defined                                                           no-undef
+  220:5   error  'expect' is not defined                                                         no-undef
+  221:5   error  'expect' is not defined                                                         no-undef
+  224:3   error  'test' is not defined                                                           no-undef
+  234:5   error  'expect' is not defined                                                         no-undef
+  238:1   error  'describe' is not defined                                                       no-undef
+  239:3   error  'test' is not defined                                                           no-undef
+  252:5   error  'expect' is not defined                                                         no-undef
+  253:5   error  'expect' is not defined                                                         no-undef
+  254:5   error  'expect' is not defined                                                         no-undef
+  257:3   error  'test' is not defined                                                           no-undef
+  258:26  error  'jest' is not defined                                                           no-undef
+  269:5   error  'expect' is not defined                                                         no-undef
+  272:5   error  'expect' is not defined                                                         no-undef
+  273:5   error  'expect' is not defined                                                         no-undef
+  276:3   error  'test' is not defined                                                           no-undef
+  289:5   error  'expect' is not defined                                                         no-undef
+  290:5   error  'expect' is not defined                                                         no-undef
+  294:1   error  'describe' is not defined                                                       no-undef
+  307:3   error  'test' is not defined                                                           no-undef
+  317:5   error  'expect' is not defined                                                         no-undef
+  320:5   error  'expect' is not defined                                                         no-undef
+  321:5   error  'expect' is not defined                                                         no-undef
+  322:5   error  'expect' is not defined                                                         no-undef
+  325:5   error  'expect' is not defined                                                         no-undef
+  326:5   error  'expect' is not defined                                                         no-undef
+  327:5   error  'expect' is not defined                                                         no-undef
+  330:3   error  'test' is not defined                                                           no-undef
+  331:24  error  'jest' is not defined                                                           no-undef
+  342:5   error  'expect' is not defined                                                         no-undef
+  345:5   error  'expect' is not defined                                                         no-undef
+  348:3   error  'test' is not defined                                                           no-undef
+  349:29  error  'jest' is not defined                                                           no-undef
+  360:5   error  'expect' is not defined                                                         no-undef
+  365:5   error  'expect' is not defined                                                         no-undef
+  368:3   error  'test' is not defined                                                           no-undef
+  387:5   error  'expect' is not defined                                                         no-undef
+  390:3   error  'test' is not defined                                                           no-undef
+  398:5   error  'expect' is not defined                                                         no-undef
+  402:1   error  'describe' is not defined                                                       no-undef
+  403:3   error  'test' is not defined                                                           no-undef
+  417:5   error  'expect' is not defined                                                         no-undef
+  418:5   error  'expect' is not defined                                                         no-undef
+  425:1   error  'describe' is not defined                                                       no-undef
+  426:3   error  'test' is not defined                                                           no-undef
+  434:5   error  'expect' is not defined                                                         no-undef
+  437:3   error  'test' is not defined                                                           no-undef
+  449:5   error  'expect' is not defined                                                         no-undef
+  450:5   error  'expect' is not defined                                                         no-undef
+  454:1   error  'describe' is not defined                                                       no-undef
+  455:3   error  'test' is not defined                                                           no-undef
+  471:5   error  'expect' is not defined                                                         no-undef
+  474:5   error  'expect' is not defined                                                         no-undef
+  477:5   error  'expect' is not defined                                                         no-undef
+  480:3   error  'test' is not defined                                                           no-undef
+  494:5   error  'expect' is not defined                                                         no-undef
+  497:5   error  'expect' is not defined                                                         no-undef
+  498:5   error  'expect' is not defined                                                         no-undef
+
+D:\APPS_AI\store\Store\frontend\src\tests\enhanced\ProductCard.test.jsx
+   48:1   error  'describe' is not defined    no-undef
+   49:27  error  'jest' is not defined        no-undef
+   50:32  error  'jest' is not defined        no-undef
+   51:22  error  'jest' is not defined        no-undef
+   53:3   error  'beforeEach' is not defined  no-undef
+   54:5   error  'jest' is not defined        no-undef
+   57:3   error  'describe' is not defined    no-undef
+   58:5   error  'test' is not defined        no-undef
+   69:7   error  'expect' is not defined      no-undef
+   70:7   error  'expect' is not defined      no-undef
+   71:7   error  'expect' is not defined      no-undef
+   72:7   error  'expect' is not defined      no-undef
+   75:5   error  'test' is not defined        no-undef
+   86:7   error  'expect' is not defined      no-undef
+   87:7   error  'expect' is not defined      no-undef
+   90:5   error  'test' is not defined        no-undef
+  101:7   error  'expect' is not defined      no-undef
+  104:5   error  'test' is not defined        no-undef
+  115:7   error  'expect' is not defined      no-undef
+  118:5   error  'test' is not defined        no-undef
+  129:7   error  'expect' is not defined      no-undef
+  133:3   error  'describe' is not defined    no-undef
+  134:5   error  'test' is not defined        no-undef
+  146:7   error  'expect' is not defined      no-undef
+  147:7   error  'expect' is not defined      no-undef
+  151:3   error  'describe' is not defined    no-undef
+  152:5   error  'test' is not defined        no-undef
+  166:7   error  'expect' is not defined      no-undef
+  169:5   error  'test' is not defined        no-undef
+  183:7   error  'expect' is not defined      no-undef
+  186:5   error  'test' is not defined        no-undef
+  200:7   error  'expect' is not defined      no-undef
+  203:5   error  'test' is not defined        no-undef
+  217:7   error  'expect' is not defined      no-undef
+  220:7   error  'expect' is not defined      no-undef
+  223:5   error  'test' is not defined        no-undef
+  235:7   error  'expect' is not defined      no-undef
+  236:7   error  'expect' is not defined      no-undef
+  240:3   error  'describe' is not defined    no-undef
+  241:5   error  'test' is not defined        no-undef
+  254:7   error  'expect' is not defined      no-undef
+  255:7   error  'expect' is not defined      no-undef
+  258:5   error  'test' is not defined        no-undef
+  271:7   error  'expect' is not defined      no-undef
+  275:3   error  'describe' is not defined    no-undef
+  276:5   error  'test' is not defined        no-undef
+  294:9   error  'expect' is not defined      no-undef
+  298:5   error  'test' is not defined        no-undef
+  313:7   error  'expect' is not defined      no-undef
+  317:3   error  'describe' is not defined    no-undef
+  318:5   error  'test' is not defined        no-undef
+  329:7   error  'expect' is not defined      no-undef
+  330:7   error  'expect' is not defined      no-undef
+  333:5   error  'test' is not defined        no-undef
+  345:7   error  'expect' is not defined      no-undef
+  348:5   error  'test' is not defined        no-undef
+  361:7   error  'expect' is not defined      no-undef
+  364:7   error  'expect' is not defined      no-undef
+  368:3   error  'describe' is not defined    no-undef
+  369:5   error  'test' is not defined        no-undef
+  370:29  error  'jest' is not defined        no-undef
+  387:7   error  'expect' is not defined      no-undef
+  388:7   error  'expect' is not defined      no-undef
+  392:3   error  'describe' is not defined    no-undef
+  393:5   error  'test' is not defined        no-undef
+  405:7   error  'expect' is not defined      no-undef
+  409:3   error  'describe' is not defined    no-undef
+  410:5   error  'test' is not defined        no-undef
+  421:7   error  'expect' is not defined      no-undef
+
+D:\APPS_AI\store\Store\frontend\src\utils\buttonChecker.js
+  445:8  error  Parsing error: Unexpected token %
+
+D:\APPS_AI\store\Store\frontend\src\utils\encryption.js
+   44:14  error  'error' is defined but never used  no-unused-vars
+   60:14  error  'error' is defined but never used  no-unused-vars
+   72:14  error  'error' is defined but never used  no-unused-vars
+   84:14  error  'error' is defined but never used  no-unused-vars
+  108:14  error  'error' is defined but never used  no-unused-vars
+  135:14  error  'error' is defined but never used  no-unused-vars
+  153:14  error  'error' is defined but never used  no-unused-vars
+  176:14  error  'error' is defined but never used  no-unused-vars
+  203:14  error  'error' is defined but never used  no-unused-vars
+  223:14  error  'error' is defined but never used  no-unused-vars
+  237:14  error  'error' is defined but never used  no-unused-vars
+  258:14  error  'error' is defined but never used  no-unused-vars
+  275:14  error  'error' is defined but never used  no-unused-vars
+  295:16  error  'error' is defined but never used  no-unused-vars
+  295:23  error  Empty block statement              no-empty
+
+D:\APPS_AI\store\Store\frontend\src\utils\logger.js
+   46:69  error  Empty block statement              no-empty
+   71:69  error  Empty block statement              no-empty
+  113:69  error  Empty block statement              no-empty
+  156:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\utils\performance-monitor.js
+  67:14  error  'e' is defined but never used  no-unused-vars
+  81:14  error  'e' is defined but never used  no-unused-vars
+  98:14  error  'e' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\utils\performance.js
+    8:32  error  'reject' is defined but never used  no-unused-vars
+   97:24  error  'React' is not defined              no-undef
+  103:37  error  'error' is defined but never used   no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\src\utils\secureApi.js
+  65:11  error  Parsing error: Unexpected token $
+
+D:\APPS_AI\store\Store\frontend\test_response_helper.js
+  237:3  error  'process' is not defined  no-undef
+  240:3  error  'process' is not defined  no-undef
+
+D:\APPS_AI\store\Store\frontend\tests\e2e\performance-analysis.spec.js
+  37:11  error  'metrics' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  72:18  error  'e' is defined but never used                                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\tests\e2e\record.spec.js
+  21:18  error  'process' is not defined  no-undef
+
+D:\APPS_AI\store\Store\frontend\tests\global-setup.js
+  47:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\tests\global-teardown.js
+   7:22  error  'process' is not defined           no-undef
+  13:11  error  'process' is not defined           no-undef
+  21:14  error  'error' is defined but never used  no-unused-vars
+  28:9   error  'process' is not defined           no-undef
+
+D:\APPS_AI\store\Store\frontend\tests\utils\artifacts.js
+  48:21  error  'process' is not defined  no-undef
+
+D:\APPS_AI\store\Store\frontend\unneeded\docs\IMPLEMENTATION_GUIDE.js
+  132:26  error  Parsing error: Unexpected token }
+
+D:\APPS_AI\store\Store\frontend\unneeded\docs\INTEGRATION_EXAMPLES.js
+  168:10  error  Parsing error: Identifier 'FormField' has already been declared
+
+D:\APPS_AI\store\Store\frontend\unneeded\services\customerService.js
+  280:23  error  'params' is assigned a value but never used  no-unused-vars
+  440:14  error  'error' is defined but never used            no-unused-vars
+  455:14  error  'error' is defined but never used            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\services\productService.js
+  272:23  error  'params' is assigned a value but never used  no-unused-vars
+  341:14  error  'error' is defined but never used            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\About.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\AccountingSystem.jsx
+   22:10  error    'selectedItem' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                           no-unused-vars
+   27:6   warning  React Hook useEffect has a missing dependency: 'loadAccountingData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   38:14  error    'error' is defined but never used                                                                                      no-unused-vars
+   56:14  error    'error' is defined but never used                                                                                      no-unused-vars
+  102:14  error    'error' is defined but never used                                                                                      no-unused-vars
+  145:14  error    'error' is defined but never used                                                                                      no-unused-vars
+  200:14  error    'error' is defined but never used                                                                                      no-unused-vars
+  677:19  error    'item' is defined but never used                                                                                       no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\AdminDashboard.jsx
+  143:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\AdminRoles.jsx
+   35:6   warning  React Hook useEffect has a missing dependency: 'loadRoles'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+   39:6   warning  React Hook useEffect has a missing dependency: 'filterRoles'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  103:14  error    'error' is defined but never used                                                                               no-unused-vars
+  149:16  error    'error' is defined but never used                                                                               no-unused-vars
+  167:14  error    'error' is defined but never used                                                                               no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\AdminSecurity.jsx
+   21:6   warning  React Hook useEffect has a missing dependency: 'filterLogs'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  102:14  error    'error' is defined but never used                                                                              no-unused-vars
+  102:21  error    Empty block statement                                                                                          no-empty
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\AdminUsers.jsx
+   18:6   warning  React Hook useEffect has a missing dependency: 'loadUsers'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+   22:6   warning  React Hook useEffect has a missing dependency: 'filterUsers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   91:14  error    'err' is defined but never used                                                                                 no-unused-vars
+  132:16  error    'err' is defined but never used                                                                                 no-unused-vars
+  144:14  error    'err' is defined but never used                                                                                 no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\AdvancedPermissions.jsx
+   69:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  126:14  error    'error' is defined but never used                                                                            no-unused-vars
+  147:14  error    'error' is defined but never used                                                                            no-unused-vars
+  162:14  error    'error' is defined but never used                                                                            no-unused-vars
+  187:14  error    'error' is defined but never used                                                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\AdvancedReportsSystem.jsx
+  151:6   warning  React Hook useEffect has a missing dependency: 'generateReport'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  185:53  error    'IconComponent' is defined but never used                                                                          no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\AdvancedSettings.jsx
+  153:9   warning  The 'loadSettings' function makes the dependencies of useEffect Hook (at line 151) change on every render. To fix this, wrap the definition of 'loadSettings' in its own useCallback() Hook  react-hooks/exhaustive-deps
+  161:14  error    'error' is defined but never used                                                                                                                                                            no-unused-vars
+  199:14  error    'error' is defined but never used                                                                                                                                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\CashBoxes.jsx
+   22:6   warning  React Hook useEffect has a missing dependency: 'filterCashBoxes'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   46:14  error    'error' is defined but never used                                                                                   no-unused-vars
+  133:16  error    'error' is defined but never used                                                                                   no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\CategoriesManagement.jsx
+   22:6   warning  React Hook useEffect has a missing dependency: 'filterCategories'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   38:14  error    'error' is defined but never used                                                                                    no-unused-vars
+  121:16  error    'error' is defined but never used                                                                                    no-unused-vars
+  145:14  error    'error' is defined but never used                                                                                    no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\CategorySettings.jsx
+   36:14  error  'error' is defined but never used  no-unused-vars
+   89:14  error  'error' is defined but never used  no-unused-vars
+  123:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\CompanySettings.jsx
+   47:14  error  'error' is defined but never used  no-unused-vars
+  105:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\CustomerDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\CustomersAdvanced.jsx
+   10:10  error    'error' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                             no-unused-vars
+   12:10  error    'showEditModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   21:6   warning  React Hook useEffect has a missing dependency: 'loadCustomers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  134:9   error    'handleSaveCustomer' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+  363:21  error    'customer' is defined but never used                                                                              no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\Dashboard.jsx
+   60:16  error  'apiError' is defined but never used  no-unused-vars
+   60:26  error  Empty block statement                 no-empty
+  138:14  error  'error' is defined but never used     no-unused-vars
+  153:29  error  'Icon' is defined but never used      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ErrorBoundary.js
+   89:18  error  'reportError' is defined but never used           no-unused-vars
+   89:31  error  Empty block statement                             no-empty
+  115:18  error  'error' is defined but never used                 no-unused-vars
+  115:25  error  Empty block statement                             no-empty
+  378:18  error  'reportError' is defined but never used           no-unused-vars
+  390:5   error  'showDetails' is assigned a value but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ErrorPages\ErrorBoundary.jsx
+  35:13  error  'suggestions' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\FinancialReports.jsx
+   34:6   warning  React Hook useEffect has a missing dependency: 'loadFinancialReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   73:14  error    'error' is defined but never used                                                                                        no-unused-vars
+  104:14  error    'error' is defined but never used                                                                                        no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\FormValidation.jsx
+  2:10  error  'validateValue' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\GeneralSettings.jsx
+  74:14  error  'error' is defined but never used  no-unused-vars
+  97:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\Help.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ImportExport.jsx
+  146:11  error  'fileName' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ImportExportAdvanced.jsx
+  127:14  error  'error' is defined but never used  no-unused-vars
+  127:21  error  Empty block statement              no-empty
+  188:14  error  'error' is defined but never used  no-unused-vars
+  235:14  error  'error' is defined but never used  no-unused-vars
+  258:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\IntegratedDashboard.jsx
+   32:14  error    'error' is defined but never used                                                                                                        no-unused-vars
+   44:6   warning  React Hook useEffect has a missing dependency: 'loadDashboardData'. Either include it or remove the dependency array                     react-hooks/exhaustive-deps
+  135:6   warning  React Hook useEffect has missing dependencies: 'mockAlerts' and 'mockDashboardData'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\IntegratedReports.jsx
+   24:9   error    'toast' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                              no-unused-vars
+   25:11  error    'startOperation' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   25:27  error    'updateOperation' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+   25:44  error    'completeOperation' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+  115:6   warning  React Hook useEffect has a missing dependency: 'loadReportData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  132:14  error    'error' is defined but never used                                                                                  no-unused-vars
+  140:14  error    'error' is defined but never used                                                                                  no-unused-vars
+  140:21  error    Empty block statement                                                                                              no-empty
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\IntegrationManager.jsx
+  103:6   warning  React Hook useEffect has missing dependencies: 'mockIntegrationStatus' and 'mockSyncHistory'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  175:14  error    'error' is defined but never used                                                                                                                 no-unused-vars
+  202:14  error    'error' is defined but never used                                                                                                                 no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\InventoryDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\InventoryReports.jsx
+   18:6   warning  React Hook useEffect has a missing dependency: 'loadReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  111:14  error    'error' is defined but never used                                                                               no-unused-vars
+  111:21  error    Empty block statement                                                                                           no-empty
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\InvoiceManagementComplete.jsx
+    8:10  error    'customers' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+    9:10  error    'suppliers' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+   10:10  error    'products' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   11:10  error    'warehouses' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+   12:10  error    'loading' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+   18:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                 no-unused-vars
+  158:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  185:14  error    'error' is defined but never used                                                                            no-unused-vars
+  257:9   error    'salesInvoices' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+  258:9   error    'purchaseInvoices' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\InvoicesAdvanced.jsx
+  461:30  error  Parsing error: Unexpected token }
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\Layout.jsx
+  23:24  error  'lastChecked' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\LoginAdvanced.jsx
+  16:10  error  'selectedCompany' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+  16:27  error  'setSelectedCompany' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  86:14  error  'error' is defined but never used                                                                   no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\LotManagement.jsx
+  23:6   warning  React Hook useEffect has a missing dependency: 'filterLots'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  39:14  error    'error' is defined but never used                                                                              no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\LotManagementAdvanced.jsx
+   86:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  113:14  error    'error' is defined but never used                                                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\LotWarehouseManager.jsx
+   3:10  error  'toast' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  10:10  error  'availableStock' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\NotificationSystem.jsx
+  148:31  error  Parsing error: Unexpected token )
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\NotificationSystemAdvanced.jsx
+   91:6   warning  React Hook useEffect has a missing dependency: 'loadNotifications'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  103:14  error    'error' is defined but never used                                                                                     no-unused-vars
+  170:39  error    'priority' is defined but never used                                                                                  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\PaymentVouchers.jsx
+   31:6   warning  React Hook useEffect has a missing dependency: 'filterVouchers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   47:14  error    'error' is defined but never used                                                                                  no-unused-vars
+  153:16  error    'error' is defined but never used                                                                                  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ProductDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ProductManagementComplete.jsx
+   18:10  error    'warehouses' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+   23:10  error    'showDetailsModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+   26:10  error    'selectedProducts' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+   27:10  error    'activeTab' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+   27:21  error    'setActiveTab' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                 no-unused-vars
+   34:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   44:14  error    'error' is defined but never used                                                                            no-unused-vars
+   61:14  error    'error' is defined but never used                                                                            no-unused-vars
+  315:14  error    'error' is defined but never used                                                                            no-unused-vars
+  321:37  error    'file' is defined but never used                                                                             no-unused-vars
+  326:14  error    'error' is defined but never used                                                                            no-unused-vars
+  332:45  error    'filename' is defined but never used                                                                         no-unused-vars
+  335:14  error    'error' is defined but never used                                                                            no-unused-vars
+  582:21  error    'product' is defined but never used                                                                          no-unused-vars
+  598:22  error    'data' is defined but never used                                                                             no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ProductModal.jsx
+  128:14  error  'error' is defined but never used  no-unused-vars
+  128:21  error  Empty block statement              no-empty
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\Products.jsx
+  177:14  error  'error' is defined but never used  no-unused-vars
+  217:18  error  'error' is defined but never used  no-unused-vars
+  217:25  error  Empty block statement              no-empty
+  247:16  error  'err' is defined but never used    no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ProductsAdvanced.jsx
+  10:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+  11:10  error    'showEditModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  88:6   warning  React Hook useEffect has a missing dependency: 'mockProducts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ProfitLoss.jsx
+   53:10  error    'comparisonData' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                         no-unused-vars
+   53:26  error    'setComparisonData' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+   58:6   warning  React Hook useEffect has a missing dependency: 'loadProfitLossData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  104:14  error    'error' is defined but never used                                                                                      no-unused-vars
+  135:14  error    'error' is defined but never used                                                                                      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\PurchaseInvoices.jsx
+  25:14  error  'error' is defined but never used  no-unused-vars
+  43:16  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ReportDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ReportsSystem.jsx
+  438:40  error  Parsing error: Unexpected token }
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\SalesInvoices.jsx
+   40:14  error  'error' is defined but never used     no-unused-vars
+   58:16  error  'error' is defined but never used     no-unused-vars
+  130:16  error  'apiError' is defined but never used  no-unused-vars
+  153:14  error  'error' is defined but never used     no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\SecureAuth.jsx
+   34:6   warning  React Hook useEffect has missing dependencies: 'checkExistingAuth' and 'checkLockoutStatus'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+   63:14  error    'error' is defined but never used                                                                                                                no-unused-vars
+  217:14  error    'error' is defined but never used                                                                                                                no-unused-vars
+  217:21  error    Empty block statement                                                                                                                            no-empty
+  253:14  error    'error' is defined but never used                                                                                                                no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\SecurityMonitoring.jsx
+  18:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\Settings.jsx
+   23:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   51:14  error    'error' is defined but never used                                                                            no-unused-vars
+  104:14  error    'error' is defined but never used                                                                            no-unused-vars
+  138:14  error    'error' is defined but never used                                                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\Sidebar.jsx
+  20:10  error  'isCollapsed' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+  20:23  error  'setIsCollapsed' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\SidebarEnhanced.jsx
+  150:43  error  'Icon' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\SimpleLogin.jsx
+  30:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\StockMovements.jsx
+  20:6   warning  React Hook useEffect has a missing dependency: 'filterMovements'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  36:14  error    'error' is defined but never used                                                                                   no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\StockMovementsAdvanced.jsx
+   13:10  error    'showCreateModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+  113:6   warning  React Hook useEffect has a missing dependency: 'loadMovements'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  117:6   warning  React Hook useEffect has a missing dependency: 'applyFilters'. Either include it or remove the dependency array   react-hooks/exhaustive-deps
+  127:14  error    'error' is defined but never used                                                                                 no-unused-vars
+  216:14  error    'error' is defined but never used                                                                                 no-unused-vars
+  216:21  error    Empty block statement                                                                                             no-empty
+  224:14  error    'error' is defined but never used                                                                                 no-unused-vars
+  224:21  error    Empty block statement                                                                                             no-empty
+  232:14  error    'error' is defined but never used                                                                                 no-unused-vars
+  232:21  error    Empty block statement                                                                                             no-empty
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\SupplierDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\SuppliersAdvanced.jsx
+   18:6   warning  React Hook useEffect has a missing dependency: 'loadSuppliers'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+   22:6   warning  React Hook useEffect has a missing dependency: 'filterSuppliers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   39:14  error    'error' is defined but never used                                                                                   no-unused-vars
+  131:9   error    'handleSaveSupplier' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+  400:21  error    'supplier' is defined but never used                                                                                no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\SystemDocumentation.jsx
+   15:10  error  'documentation' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  173:14  error  'error' is defined but never used                                                              no-unused-vars
+  173:21  error  Empty block statement                                                                          no-empty
+  205:14  error  'error' is defined but never used                                                              no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\SystemSettings.jsx
+   23:6   warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   32:14  error    'error' is defined but never used                                                                            no-unused-vars
+   50:14  error    'error' is defined but never used                                                                            no-unused-vars
+  170:14  error    'error' is defined but never used                                                                            no-unused-vars
+  537:30  error    'handleExportSettings' is not defined                                                                        no-undef
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\SystemSettingsAdvanced.jsx
+   1:27  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  70:14  error  'error' is defined but never used                                                 no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\TrainingCenter.jsx
+   15:10  error    'userProgress' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                         no-unused-vars
+  163:6   warning  React Hook useEffect has a missing dependency: 'loadTrainingData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  178:14  error    'error' is defined but never used                                                                                    no-unused-vars
+  193:14  error    'error' is defined but never used                                                                                    no-unused-vars
+  198:9   error    'startLesson' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                          no-unused-vars
+  207:14  error    'error' is defined but never used                                                                                    no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\UnifiedDashboard.jsx
+   16:8   error  'api' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   72:43  error  'Icon' is defined but never used                                            no-unused-vars
+  100:56  error  'Icon' is defined but never used                                            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\UnifiedProductsManager.jsx
+  41:5  error  Parsing error: Missing catch or finally clause
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\UserManagementAdvanced.jsx
+  713:30  error  Parsing error: Unexpected token }
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\UserProfile.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\WarehouseManagement.jsx
+   6:10  error    'toast' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                       no-unused-vars
+  11:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                       no-unused-vars
+  99:6   warning  React Hook useEffect has a missing dependency: 'mockWarehouses'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\WarehousesManagement.jsx
+   21:6   warning  React Hook useEffect has a missing dependency: 'filterWarehouses'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   37:14  error    'error' is defined but never used                                                                                    no-unused-vars
+  120:16  error    'error' is defined but never used                                                                                    no-unused-vars
+  145:14  error    'error' is defined but never used                                                                                    no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\WorkflowManagement.jsx
+   82:14  error  'error' is defined but never used                                                               no-unused-vars
+  125:14  error  'error' is defined but never used                                                               no-unused-vars
+  125:21  error  Empty block statement                                                                           no-empty
+  130:9   error  'createWorkflow' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  156:14  error  'error' is defined but never used                                                               no-unused-vars
+  172:14  error  'error' is defined but never used                                                               no-unused-vars
+  186:14  error  'error' is defined but never used                                                               no-unused-vars
+  191:9   error  'addStep' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u         no-unused-vars
+  206:9   error  'updateStep' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u      no-unused-vars
+  215:9   error  'removeStep' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\common\ConfirmationDialog.jsx
+  205:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  214:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  214:34  error    'Component' is defined but never used                                                                                           no-unused-vars
+  222:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\common\EnhancedToast.jsx
+   32:6   warning  React Hook useCallback has a missing dependency: 'removeToast'. Either include it or remove the dependency array                react-hooks/exhaustive-deps
+  212:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  221:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\common\ErrorBoundary.jsx
+  50:23  error  Parsing error: Unexpected token )
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\common\FormValidation.jsx
+    6:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  110:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  188:16  error    'error' is defined but never used                                                                                               no-unused-vars
+  188:23  error    Empty block statement                                                                                                           no-empty
+  419:16  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\common\LoadingSpinner.jsx
+  97:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\common\NotificationCenter.jsx
+  97:24  error  Parsing error: Unexpected token }
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\common\PermissionSystem.jsx
+   21:6   warning  React Hook useEffect has a missing dependency: 'loadUserPermissions'. Either include it or remove the dependency array                      react-hooks/exhaustive-deps
+   32:14  error    'error' is defined but never used                                                                                                           no-unused-vars
+   32:21  error    Empty block statement                                                                                                                       no-empty
+   77:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components              react-refresh/only-export-components
+  243:6   warning  React Hook useEffect has missing dependencies: 'defaultPermissions' and 'defaultRoles'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  324:10  error    'roles' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                       no-unused-vars
+  362:6   warning  React Hook useEffect has a missing dependency: 'mockUsers'. Either include it or remove the dependency array                                react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\common\PrintExport.jsx
+   33:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+   49:20  error    'error' is defined but never used                                                                                               no-unused-vars
+   75:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  119:14  error    'error' is defined but never used                                                                                               no-unused-vars
+  147:16  error    'e' is defined but never used                                                                                                   no-unused-vars
+  147:19  error    Empty block statement                                                                                                           no-empty
+  194:14  error    'error' is defined but never used                                                                                               no-unused-vars
+  234:14  error    'error' is defined but never used                                                                                               no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\common\ProgressBar.jsx
+    1:27  error    'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                no-unused-vars
+  179:52  error    'variant' is assigned a value but never used                                                                                    no-unused-vars
+  282:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  291:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  314:23  error    'removeOperation' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                 no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\common\Toast.jsx
+  100:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\AccessibleTable.jsx
+  169:35  error  'colIndex' is defined but never used              no-unused-vars
+  301:3   error  'onItemsPerPageChange' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\AdvancedTable.jsx
+  1:36  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\Button.jsx
+  18:10  error  'theme' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\Charts.jsx
+  50:9  error  'colors' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\ErrorBoundary.jsx
+   9:35  error  'error' is defined but never used  no-unused-vars
+  50:14  error  'process' is not defined           no-undef
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\ExportImport.jsx
+  38:14  error  'error' is defined but never used  no-unused-vars
+  38:21  error  Empty block statement              no-empty
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\Notification.jsx
+  25:6  warning  React Hook useEffect has a missing dependency: 'handleDismiss'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\PermissionsGuard.jsx
+   21:14  error    'error' is defined but never used                                                                                               no-unused-vars
+   98:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  267:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  331:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\SearchFilter.jsx
+  29:6  warning  React Hook useEffect has a missing dependency: 'onFilter'. Either include it or remove the dependency array. If 'onFilter' changes too often, find the parent component that defines it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\ThemedIcon.jsx
+  16:9   error    'Icon' is defined but never used                                                                                                no-unused-vars
+  34:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\Validation.jsx
+    5:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  157:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  169:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  399:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\badge.jsx
+  44:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\form.jsx
+  135:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\navigation-menu.jsx
+  151:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\sidebar.jsx
+  671:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\components\ui\toggle.jsx
+  43:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\context\AuthContext.jsx
+   5:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  47:18  error    'error' is defined but never used                                                                                               no-unused-vars
+  69:13  error    'response' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                        no-unused-vars
+  76:16  error    'error' is defined but never used                                                                                               no-unused-vars
+  76:23  error    Empty block statement                                                                                                           no-empty
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\contexts\AppContext.jsx
+  317:11  error    'user' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                            no-unused-vars
+  329:16  error    'error' is defined but never used                                                                                               no-unused-vars
+  329:23  error    Empty block statement                                                                                                           no-empty
+  385:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\contexts\AuthContext.jsx
+    6:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+   15:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+   94:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  158:16  error    'error' is defined but never used                                                                                               no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\contexts\PermissionContext.jsx
+   13:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  302:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  320:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  321:20  error    'WrappedComponent' is defined but never used                                                                                    no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\contexts\ThemeContext.jsx
+   17:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                react-refresh/only-export-components
+  167:6   warning  React Hook useEffect has missing dependencies: 'applyTheme', 'resolveTheme', and 'theme'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  193:6   warning  React Hook useEffect has a missing dependency: 'applyTheme'. Either include it or remove the dependency array                                 react-hooks/exhaustive-deps
+  221:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                react-refresh/only-export-components
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\hooks\usePerformance.js
+  274:10  warning  React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead  react-hooks/exhaustive-deps
+  285:10  warning  React Hook useMemo received a function whose dependencies are unknown. Pass an inline function instead      react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\AdvancedReports.jsx
+   15:10  error    'selectedReport' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  166:6   warning  React Hook useEffect has a missing dependency: 'sampleReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  212:9   error    'getCategoryLabel' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\AdvancedUserManagement.jsx
+  165:6   warning  React Hook useEffect has missing dependencies: 'loadGroups' and 'loadUsers'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  172:14  error    'error' is defined but never used                                                                                                no-unused-vars
+  184:14  error    'error' is defined but never used                                                                                                no-unused-vars
+  273:14  error    'error' is defined but never used                                                                                                no-unused-vars
+  287:14  error    'error' is defined but never used                                                                                                no-unused-vars
+  294:9   error    'handleAddGroup' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                   no-unused-vars
+  313:14  error    'error' is defined but never used                                                                                                no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\CompanySettings.jsx
+   84:14  error  'error' is defined but never used  no-unused-vars
+  105:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\ComprehensiveReports.jsx
+   15:10  error    'selectedReport' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  161:6   warning  React Hook useEffect has a missing dependency: 'sampleReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  206:9   error    'getCategoryLabel' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\CustomerDetails.jsx
+  14:11  error    'canAccessCustomer' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  52:6   warning  React Hook useEffect has a missing dependency: 'loadCustomerData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\ImportExport.jsx
+  182:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\PaymentDebtManagement.jsx
+   15:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+   16:10  error    'selectedDebt' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  107:6   warning  React Hook useEffect has a missing dependency: 'sampleDebts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  170:9   error    'getTypeLabel' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  195:9   error    'isOverdue' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                       no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\PickupDeliveryOrders.jsx
+   31:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   32:10  error    'selectedOrder' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  137:6   warning  React Hook useEffect has a missing dependency: 'sampleOrders'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\ProductDetails.jsx
+  14:11  error    'canAccessWarehouse' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+  49:6   warning  React Hook useEffect has a missing dependency: 'loadProductData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\Reports.jsx
+  203:49  error  'setSuppliers' is not defined         no-undef
+  204:48  error  'setProducts' is not defined          no-undef
+  260:39  error  'reportId' is defined but never used  no-unused-vars
+  264:14  error  'error' is defined but never used     no-unused-vars
+  264:21  error  Empty block statement                 no-empty
+  268:44  error  'reportId' is defined but never used  no-unused-vars
+  272:14  error  'error' is defined but never used     no-unused-vars
+  272:21  error  Empty block statement                 no-empty
+  276:39  error  'reportId' is defined but never used  no-unused-vars
+  280:16  error  'error' is defined but never used     no-unused-vars
+  280:23  error  Empty block statement                 no-empty
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\ReturnsManagement.jsx
+   15:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+   16:10  error    'selectedReturn' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  111:6   warning  React Hook useEffect has a missing dependency: 'sampleReturns'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  159:9   error    'getTypeLabel' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\Settings.jsx
+  13:11  error  'user' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u           no-unused-vars
+  13:17  error  'hasPermission' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  45:14  error  'error' is defined but never used                                                              no-unused-vars
+  45:21  error  Empty block statement                                                                          no-empty
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\SetupWizard.jsx
+    3:27  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                      no-unused-vars
+   14:10  error  'showConfirmDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+   14:29  error  'setShowConfirmDialog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  189:14  error  'error' is defined but never used                                                                     no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\SystemSettings.jsx
+   1:27  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  83:14  error  'error' is defined but never used                                                 no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\UserManagement.jsx
+   12:17  error  'currentUser' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u            no-unused-vars
+   12:30  error  'hasPermission' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u          no-unused-vars
+   27:10  error  'permissionsDialogOpen' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  208:41  error  'userId' is defined but never used                                                                     no-unused-vars
+  208:49  error  'currentStatus' is defined but never used                                                              no-unused-vars
+  578:68  error  'index' is defined but never used                                                                      no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\pages\WarehouseConstraints.jsx
+   28:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                          no-unused-vars
+   29:10  error    'selectedConstraint' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  102:6   warning  React Hook useEffect has a missing dependency: 'sampleConstraints'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\services\ApiService.js
+   25:14  error  'error' is defined but never used  no-unused-vars
+  117:5   error  Unnecessary try/catch wrapper      no-useless-catch
+  127:5   error  Unnecessary try/catch wrapper      no-useless-catch
+  302:5   error  Unnecessary try/catch wrapper      no-useless-catch
+  325:5   error  Unnecessary try/catch wrapper      no-useless-catch
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\services\api.js
+    7:21  error  'getData' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   45:16  error  '_' is defined but never used                                                   no-unused-vars
+  153:5   error  Unnecessary try/catch wrapper                                                   no-useless-catch
+  169:5   error  Unnecessary try/catch wrapper                                                   no-useless-catch
+  577:14  error  'error' is defined but never used                                               no-unused-vars
+  676:18  error  'id' is defined but never used                                                  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\services\apiClient.js
+  142:14  error  'error' is defined but never used  no-unused-vars
+  254:5   error  Unnecessary try/catch wrapper      no-useless-catch
+  319:14  error  'error' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\services\customerService.js
+  280:23  error  'params' is assigned a value but never used  no-unused-vars
+  440:14  error  'error' is defined but never used            no-unused-vars
+  455:14  error  'error' is defined but never used            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\services\enhancedAPI.js
+  110:5  error  Unnecessary try/catch wrapper  no-useless-catch
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\services\productService.js
+  272:23  error  'params' is assigned a value but never used  no-unused-vars
+  341:14  error  'error' is defined but never used            no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\unneeded\src\store\slices\authSlice.js
+   81:14  error  'error' is defined but never used  no-unused-vars
+  191:22  error  'state' is defined but never used  no-unused-vars
+  272:40  error  'state' is defined but never used  no-unused-vars
+  278:39  error  'state' is defined but never used  no-unused-vars
+
+D:\APPS_AI\store\Store\frontend\vite.config.performance.js
+  206:22  error  '__dirname' is not defined  no-undef
+  207:32  error  '__dirname' is not defined  no-undef
+  208:27  error  '__dirname' is not defined  no-undef
+  209:27  error  '__dirname' is not defined  no-undef
+  210:27  error  '__dirname' is not defined  no-undef
+  211:28  error  '__dirname' is not defined  no-undef
+  212:30  error  '__dirname' is not defined  no-undef
+  213:30  error  '__dirname' is not defined  no-undef
+
+✖ 1121 problems (911 errors, 210 warnings)
+

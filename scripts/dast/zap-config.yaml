@@ -1,0 +1,442 @@
+# OWASP ZAP Configuration for Store ERP System
+# Enhanced DAST Configuration with Custom Rules & False Positive Filtering
+# Version: 2.0 - Enhanced with PR Integration & Custom Rules
+
+# ============================================
+# ZAP Baseline Configuration
+# ============================================
+env:
+  # Contexts
+  contexts:
+    - name: "Store ERP"
+      urls:
+        - "http://localhost:5002"
+        - "http://localhost:5001"
+      excludeUrls:
+        - ".*logout.*"
+        - ".*health.*"
+        - ".*metrics.*"
+        - ".*swagger.*"
+        - ".*api-docs.*"
+      authentication:
+        type: "form"
+        loginUrl: "http://localhost:5002/api/auth/login"
+        username: "admin"
+        password: "admin123"
+        usernameField: "username"
+        passwordField: "password"
+        loggedInIndicator: "dashboard|authenticated|token|success"
+        loggedOutIndicator: "login|unauthorized|401|403"
+
+# ============================================
+# Scan Configuration
+# ============================================
+scan:
+  # Target URL
+  url: "http://localhost:5000"
+  
+  # Scan type: baseline, full, or api
+  type: "baseline"
+  
+  # Recurse into child URLs
+  recurse: true
+  
+  # Maximum depth
+  maxDepth: 3
+  
+  # Maximum children
+  maxChildren: 10
+  
+  # Thread count
+  threadCount: 10
+  
+  # Timeout (seconds)  
+  timeout: 300
+
+# ============================================
+# Active Scan Configuration
+# ============================================
+activeScan:
+  # Enable active scanning
+  enabled: true
+  
+  # Policy name
+  policy: "API-Minimal"
+  
+  # Recurse
+  recurse: true
+  
+  # In scope only
+  inScopeOnly: true
+  
+  # Scan headers
+  scanHeaders: true
+  
+  # Delay between requests (ms)
+  delayInMs: 0
+  
+  # Handle anti-CSRF tokens
+  handleAntiCSRFTokens: true
+  
+  # Inject plugin IDs
+  injectPluginIds:
+    - "40012"  # Cross Site Scripting (Reflected)
+    - "40014"  # Cross Site Scripting (Stored)
+    - "40016"  # Cross Site Scripting (DOM)
+    - "40018"  # SQL Injection
+    - "40019"  # SQL Injection (SQLMap)
+    - "40021"  # XPath Injection
+    - "40022"  # Application Error Disclosure
+    - "40023"  # Path Traversal
+    - "40024"  # Parameter Pollution
+    - "40025"  # Proxy Disclosure
+    - "40026"  # Cross Domain Misconfiguration
+    - "40027"  # Information Disclosure - Suspicious Comments
+    - "40028"  # Open Redirect
+    - "40029"  # Cookie without Secure Flag
+    - "40030"  # Cookie without HttpOnly Flag
+    - "40031"  # Insufficient Site Isolation
+    - "40032"  # Insufficient Cross-Site Request Forgery Protection
+    - "40033"  # Missing Anti-CSRF Tokens
+    - "40034"  # Insufficient Logging and Monitoring
+    - "40035"  # Insufficient Rate Limiting
+    - "40036"  # Insufficient Input Validation
+    - "40037"  # Server-Side Template Injection
+    - "40038"  # Expression Language Injection
+    - "40039"  # Java Deserialization
+    - "40040"  # Insecure Deserialization
+
+# ============================================
+# Passive Scan Configuration
+# ============================================
+passiveScan:
+  # Enable passive scanning
+  enabled: true
+  
+  # Scan only in scope
+  inScopeOnly: true
+  
+  # Maximum body size (bytes)
+  maxBodySize: 10485760  # 10MB
+  
+  # Rules to enable
+  enabledRules:
+    - "10010"  # Cookie No HttpOnly Flag
+    - "10011"  # Cookie No Secure Flag
+    - "10012"  # Password Autocomplete
+    - "10015"  # Incomplete or No Cache-control Header Set
+    - "10016"  # Missing Content-Type Header
+    - "10017"  # Missing X-Content-Type-Options Header
+    - "10018"  # Missing X-Frame-Options Header
+    - "10019"  # Content Security Policy Missing
+    - "10020"  # Missing X-XSS-Protection Header
+    - "10021"  # X-Content-Type-Options Header Missing
+    - "10022"  # Information Disclosure - Debug Error Messages
+    - "10023"  # Information Disclosure - Comments
+    - "10024"  # Information Disclosure - Private IP Disclosure
+    - "10025"  # Information Disclosure - Private IP Disclosure
+    - "10026"  # HTTP Parameter Pollution
+    - "10027"  # Information Disclosure - Suspicious Comments
+    - "10028"  # Open Redirect
+    - "10029"  # Cookie without Secure Flag
+    - "10030"  # Cookie without HttpOnly Flag
+    - "10031"  # Insufficient Site Isolation
+    - "10032"  # Insufficient Cross-Site Request Forgery Protection
+    - "10033"  # Missing Anti-CSRF Tokens
+    - "10034"  # Insufficient Logging and Monitoring
+    - "10035"  # Insufficient Rate Limiting
+    - "10036"  # Insufficient Input Validation
+    - "10037"  # Server-Side Template Injection
+    - "10038"  # Expression Language Injection
+    - "10039"  # Java Deserialization
+    - "10040"  # Insecure Deserialization
+
+# ============================================
+# Authentication Configuration
+# ============================================
+authentication:
+  # Authentication type: form, http, cookie, script
+  type: "form"
+  
+  # Login URL
+  loginUrl: "http://localhost:5000/api/auth/login"
+  
+  # Username
+  username: "admin"
+  
+  # Password
+  password: "admin123"
+  
+  # Username field name
+  usernameField: "username"
+  
+  # Password field name
+  passwordField: "password"
+  
+  # Extra parameters
+  extraParams: {}
+  
+  # Logged in indicator (regex)
+  loggedInIndicator: "dashboard|authenticated|token"
+  
+  # Logged out indicator (regex)
+  loggedOutIndicator: "login|unauthorized|401"
+
+# ============================================
+# Report Configuration
+# ============================================
+report:
+  # Report format: html, json, md, sarif
+  format: "html"
+  
+  # Report file
+  file: "zap-report.html"
+  
+  # Include request/response
+  includeRequestResponse: true
+  
+  # Include statistics
+  includeStatistics: true
+  
+  # Include alerts
+  includeAlerts: true
+  
+  # Alert threshold: PASS, WARN, FAIL
+  alertThreshold: "WARN"
+
+# ============================================
+# Exclusions
+# ============================================
+exclusions:
+  # URL patterns to exclude
+  urls:
+    - ".*logout.*"
+    - ".*health.*"
+    - ".*metrics.*"
+    - ".*swagger.*"
+    - ".*api-docs.*"
+    - ".*static.*"
+    - ".*assets.*"
+    - ".*\\.js$"
+    - ".*\\.css$"
+    - ".*\\.png$"
+    - ".*\\.jpg$"
+    - ".*\\.gif$"
+    - ".*\\.ico$"
+    - ".*\\.woff.*"
+    - ".*\\.ttf$"
+  
+  # Parameter names to exclude
+  parameters:
+    - "csrf"
+    - "token"
+    - "nonce"
+    - "timestamp"
+
+# ============================================
+# Custom Rules - Enhanced for Store ERP
+# ============================================
+customRules:
+  # Rule 1: Check for hardcoded credentials
+  - id: "custom-001"
+    name: "Hardcoded Credentials Detection"
+    description: "Detects hardcoded credentials in responses"
+    enabled: true
+    pattern: "(password|secret|api_key|token|private_key)\\s*[=:]\\s*['\"]?[a-zA-Z0-9]{8,}['\"]?"
+    severity: "HIGH"
+    confidence: "MEDIUM"
+
+  # Rule 2: Check for debug information
+  - id: "custom-002"
+    name: "Debug Information Disclosure"
+    description: "Detects debug information in responses"
+    enabled: true
+    pattern: "(debug|trace|stack trace|exception|error at line|traceback)"
+    severity: "MEDIUM"
+    confidence: "HIGH"
+
+  # Rule 3: Check for SQL injection patterns
+  - id: "custom-003"
+    name: "SQL Injection Patterns"
+    description: "Detects potential SQL injection patterns"
+    enabled: true
+    pattern: "(union|select|insert|update|delete|drop|create)\\s+(from|into|table|database)"
+    severity: "HIGH"
+    confidence: "MEDIUM"
+
+  # Rule 4: Check for XXE patterns
+  - id: "custom-004"
+    name: "XXE Injection Patterns"
+    description: "Detects potential XXE injection patterns"
+    enabled: true
+    pattern: "<!ENTITY|SYSTEM|PUBLIC"
+    severity: "HIGH"
+    confidence: "MEDIUM"
+
+  # Rule 5: Check for JWT token exposure
+  - id: "custom-005"
+    name: "JWT Token Exposure"
+    description: "Detects exposed JWT tokens in responses"
+    enabled: true
+    pattern: "eyJ[a-zA-Z0-9_-]+\\.eyJ[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+"
+    severity: "HIGH"
+    confidence: "HIGH"
+
+  # Rule 6: Check for sensitive data in URLs
+  - id: "custom-006"
+    name: "Sensitive Data in URLs"
+    description: "Detects sensitive data in URL parameters"
+    enabled: true
+    pattern: "[?&](password|token|secret|api_key)="
+    severity: "MEDIUM"
+    confidence: "HIGH"
+
+  # Rule 7: Check for insecure direct object references
+  - id: "custom-007"
+    name: "Insecure Direct Object Reference"
+    description: "Detects potential IDOR vulnerabilities"
+    enabled: true
+    pattern: "/api/[a-z]+/\\d+(?!.*auth)"
+    severity: "MEDIUM"
+    confidence: "LOW"
+
+  # Rule 8: Check for missing rate limiting headers
+  - id: "custom-008"
+    name: "Missing Rate Limiting Headers"
+    description: "Detects missing rate limiting headers"
+    enabled: true
+    pattern: "^(?!.*X-RateLimit)"
+    severity: "LOW"
+    confidence: "MEDIUM"
+
+  # Rule 9: Check for PII exposure
+  - id: "custom-009"
+    name: "PII Exposure Detection"
+    description: "Detects potential PII exposure in responses"
+    enabled: true
+    pattern: "(ssn|social_security|credit_card|card_number|cvv)\\s*[=:]"
+    severity: "HIGH"
+    confidence: "MEDIUM"
+
+  # Rule 10: Check for internal IP disclosure
+  - id: "custom-010"
+    name: "Internal IP Disclosure"
+    description: "Detects internal IP addresses in responses"
+    enabled: true
+    pattern: "(10\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}|192\\.168\\.\\d{1,3}\\.\\d{1,3}|172\\.(1[6-9]|2[0-9]|3[01])\\.\\d{1,3}\\.\\d{1,3})"
+    severity: "LOW"
+    confidence: "HIGH"
+
+# ============================================
+# Alert Filtering - Enhanced False Positive Reduction
+# ============================================
+alertFiltering:
+  # False positives to ignore (with detailed justification)
+  ignoreAlerts:
+    # Development environment exceptions
+    - id: "10011"  # Cookie No Secure Flag
+      reason: "Acceptable for development environment (localhost)"
+      urls:
+        - "http://localhost:*"
+        - "http://127.0.0.1:*"
+
+    # Static content exceptions
+    - id: "10015"  # Incomplete or No Cache-control Header
+      reason: "Static assets handled by CDN/reverse proxy"
+      urls:
+        - ".*/static/.*"
+        - ".*/assets/.*"
+        - ".*\\.(js|css|png|jpg|gif|ico|woff|ttf)$"
+
+    # API documentation exceptions
+    - id: "10027"  # Information Disclosure - Suspicious Comments
+      reason: "API documentation comments are intentional"
+      urls:
+        - ".*/api-docs.*"
+        - ".*/swagger.*"
+        - ".*/openapi.*"
+
+    # Health check endpoints
+    - id: "10036"  # Insufficient Input Validation
+      reason: "Health check endpoints don't require validation"
+      urls:
+        - ".*/health.*"
+        - ".*/status.*"
+        - ".*/metrics.*"
+
+    # Known false positives for Arabic content
+    - id: "10023"  # Information Disclosure - Comments
+      reason: "Arabic language content may trigger false positives"
+      pattern: "[\u0600-\u06FF]+"
+
+  # Alerts to escalate (critical security issues)
+  escalateAlerts:
+    - id: "40018"  # SQL Injection
+      severity: "CRITICAL"
+      reason: "Direct database access vulnerability"
+
+    - id: "40012"  # XSS Reflected
+      severity: "CRITICAL"
+      reason: "User input reflection without sanitization"
+
+    - id: "40014"  # XSS Stored
+      severity: "CRITICAL"
+      reason: "Persistent XSS vulnerability"
+
+    - id: "40032"  # CSRF
+      severity: "CRITICAL"
+      reason: "Missing CSRF protection on state-changing operations"
+
+    - id: "40037"  # Server-Side Template Injection
+      severity: "CRITICAL"
+      reason: "Remote code execution vulnerability"
+
+    - id: "custom-001"  # Hardcoded Credentials
+      severity: "CRITICAL"
+      reason: "Exposed credentials in application"
+
+    - id: "custom-005"  # JWT Token Exposure
+      severity: "CRITICAL"
+      reason: "Authentication token exposure"
+
+  # Alerts to downgrade (low risk in this context)
+  downgradeAlerts:
+    - id: "10010"  # Cookie No HttpOnly Flag
+      severity: "LOW"
+      reason: "Some cookies need JavaScript access for SPA functionality"
+      urls:
+        - ".*/api/auth/.*"
+
+    - id: "10026"  # HTTP Parameter Pollution
+      severity: "LOW"
+      reason: "Framework handles parameter arrays correctly"
+
+# ============================================
+# Performance Configuration
+# ============================================
+performance:
+  # Maximum requests per second
+  maxRequestsPerSecond: 10
+  
+  # Connection timeout (seconds)
+  connectionTimeout: 30
+  
+  # Read timeout (seconds)
+  readTimeout: 30
+  
+  # Maximum retries
+  maxRetries: 3
+
+# ============================================
+# Logging Configuration
+# ============================================
+logging:
+  # Log level: DEBUG, INFO, WARN, ERROR
+  level: "INFO"
+  
+  # Log file
+  file: "zap-scan.log"
+  
+  # Log format
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+

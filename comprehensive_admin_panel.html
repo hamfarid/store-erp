@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الإدارة الشاملة - نظام ERP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            direction: rtl;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .header h1 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 2.2em;
+        }
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .tab {
+            flex: 1;
+            padding: 15px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            border-left: 1px solid #dee2e6;
+        }
+        .tab:last-child {
+            border-left: none;
+        }
+        .tab.active {
+            background: #3498db;
+            color: white;
+        }
+        .tab:hover {
+            background: #e9ecef;
+        }
+        .tab.active:hover {
+            background: #2980b9;
+        }
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-height: 600px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #2980b9;
+        }
+        .button.danger {
+            background: #e74c3c;
+        }
+        .button.danger:hover {
+            background: #c0392b;
+        }
+        .button.success {
+            background: #27ae60;
+        }
+        .button.success:hover {
+            background: #229954;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .result.info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        .table th {
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        .table tr:hover {
+            background: #f8f9fa;
+        }
+        .status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .status.active {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛠️ لوحة الإدارة الشاملة</h1>
+            <p>إدارة متقدمة لجميع جوانب النظام</p>
+            <div>
+                <button class="button" onclick="checkSystemHealth()">🔍 فحص حالة النظام</button>
+                <button class="button success" onclick="loginAsAdmin()">🔐 تسجيل دخول المدير</button>
+                <span id="user-info" style="margin-right: 20px; font-weight: bold;"></span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('permissions')">🔐 إدارة الصلاحيات</button>
+            <button class="tab" onclick="showTab('products')">📦 المنتجات المتقدمة</button>
+            <button class="tab" onclick="showTab('reports')">📊 التقارير المالية</button>
+            <button class="tab" onclick="showTab('import-export')">📁 الاستيراد/التصدير</button>
+            <button class="tab" onclick="showTab('logs')">📋 سجلات العمليات</button>
+        </div>
+
+        <div class="content">
+            <!-- إدارة الصلاحيات -->
+            <div id="permissions-tab" class="tab-content">
+                <div class="section">
+                    <h3>🔐 إدارة الأدوار والصلاحيات</h3>
+                    <button class="button" onclick="getRoles()">عرض الأدوار</button>
+                    <button class="button" onclick="getUsers()">عرض المستخدمين</button>
+                    <button class="button success" onclick="showCreateRoleForm()">إنشاء دور جديد</button>
+                    <div id="permissions-result" class="result"></div>
+                </div>
+
+                <div class="section">
+                    <h3>👥 تحديث صلاحيات المستخدم</h3>
+                    <div class="form-group">
+                        <label>معرف المستخدم:</label>
+                        <input type="number" id="user-id" placeholder="أدخل معرف المستخدم">
+                    </div>
+                    <div class="form-group">
+                        <label>الدور:</label>
+                        <select id="user-role" title="اختر من القائمة">
+                            <option value="1">مدير النظام</option>
+                            <option value="2">مدير المخزون</option>
+                            <option value="3">موظف مبيعات</option>
+                        </select>
+                    </div>
+                    <button class="button" onclick="updateUserPermissions()">تحديث الصلاحيات</button>
+                    <div id="user-permissions-result" class="result"></div>
+                </div>
+            </div>
+
+            <!-- المنتجات المتقدمة -->
+            <div id="products-tab" class="tab-content hidden">
+                <div class="section">
+                    <h3>📦 المنتجات بالهيكل المحدث</h3>
+                    <p><strong>هيكل التصنيف:</strong> التصنيف → مجموعة المنتج → المرتبة → أصناف → المنتج → المورد</p>
+                    <button class="button" onclick="getAdvancedProducts()">عرض المنتجات المتقدمة</button>
+                    <button class="button success" onclick="showAddProductForm()">إضافة منتج جديد</button>
+                    <div id="products-result" class="result"></div>
+                </div>
+            </div>
+
+            <!-- التقارير المالية -->
+            <div id="reports-tab" class="tab-content hidden">
+                <div class="section">
+                    <h3>📊 التقارير المالية المحدثة</h3>
+                    <div class="form-group">
+                        <label>فترة التقرير:</label>
+                        <select id="report-period" title="اختر من القائمة">
+                            <option value="current_month">الشهر الحالي</option>
+                            <option value="last_month">الشهر الماضي</option>
+                            <option value="quarter">الربع الحالي</option>
+                            <option value="custom">فترة مخصصة</option>
+                        </select>
+                    </div>
+                    <button class="button" onclick="getFinancialReports()">تحميل التقارير المالية</button>
+                    <button class="button success" onclick="exportFinancialReport()">تصدير التقرير</button>
+                    <div id="financial-result" class="result"></div>
+                </div>
+            </div>
+
+            <!-- الاستيراد/التصدير -->
+            <div id="import-export-tab" class="tab-content hidden">
+                <div class="section">
+                    <h3>📁 نظام الاستيراد والتصدير</h3>
+                    <button class="button" onclick="exportProducts()">تصدير المنتجات</button>
+                    <button class="button" onclick="exportCategories()">تصدير التصنيفات</button>
+                    <button class="button success" onclick="showImportForm()">استيراد بيانات</button>
+                    <div id="import-export-result" class="result"></div>
+                </div>
+            </div>
+
+            <!-- سجلات العمليات -->
+            <div id="logs-tab" class="tab-content hidden">
+                <div class="section">
+                    <h3>📋 سجلات الاستيراد والتصدير</h3>
+                    <button class="button" onclick="getImportExportLogs()">عرض السجلات</button>
+                    <button class="button danger" onclick="clearOldLogs()">مسح السجلات القديمة</button>
+                    <div id="logs-result" class="result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'http://localhost:8006';
+        let authToken = null;
+        let currentUser = null;
+
+        // إدارة التبويبات
+        function showTab(tabName) {
+            // إخفاء جميع التبويبات
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            // إزالة الفئة النشطة من جميع الأزرار
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // إظهار التبويب المحدد
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+            
+            // إضافة الفئة النشطة للزر المحدد
+            event.target.classList.add('active');
+        }
+
+        // فحص حالة النظام
+        async function checkSystemHealth() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/health`);
+                const data = await response.json();
+                
+                document.getElementById('permissions-result').textContent = 
+                    `✅ حالة النظام: ${data.status}\n${JSON.stringify(data, null, 2)}`;
+                document.getElementById('permissions-result').className = 'result success';
+            } catch (error) {
+                document.getElementById('permissions-result').textContent = 
+                    `❌ خطأ في الاتصال: ${error.message}`;
+                document.getElementById('permissions-result').className = 'result error';
+            }
+        }
+
+        // تسجيل الدخول كمدير
+        async function loginAsAdmin() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: 'admin',
+                        password: 'admin123'
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    authToken = data.token;
+                    currentUser = data.user;
+                    document.getElementById('user-info').textContent = 
+                        `مرحباً ${currentUser.name} (${currentUser.role_ar})`;
+                    
+                    alert('✅ تم تسجيل الدخول بنجاح!');
+                } else {
+                    alert(`❌ خطأ في تسجيل الدخول: ${data.error}`);
+                }
+            } catch (error) {
+                alert(`❌ خطأ في الاتصال: ${error.message}`);
+            }
+        }
+
+        // الحصول على الأدوار
+        async function getRoles() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/roles`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('permissions-result').textContent = 
+                        `✅ تم الحصول على ${data.count} دور\n${JSON.stringify(data.roles, null, 2)}`;
+                    document.getElementById('permissions-result').className = 'result success';
+                } else {
+                    document.getElementById('permissions-result').textContent = 
+                        `❌ خطأ: ${data.error}`;
+                    document.getElementById('permissions-result').className = 'result error';
+                }
+            } catch (error) {
+                document.getElementById('permissions-result').textContent = 
+                    `❌ خطأ في الاتصال: ${error.message}`;
+                document.getElementById('permissions-result').className = 'result error';
+            }
+        }
+
+        // تحديث صلاحيات المستخدم
+        async function updateUserPermissions() {
+            const userId = document.getElementById('user-id').value;
+            const roleId = document.getElementById('user-role').value;
+            
+            if (!userId) {
+                alert('يرجى إدخال معرف المستخدم');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/users/${userId}/permissions`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        role_id: roleId,
+                        permissions: {
+                            products: ['read', 'update'],
+                            reports: ['read']
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('user-permissions-result').textContent = 
+                        `✅ ${data.message}`;
+                    document.getElementById('user-permissions-result').className = 'result success';
+                } else {
+                    document.getElementById('user-permissions-result').textContent = 
+                        `❌ خطأ: ${data.error}`;
+                    document.getElementById('user-permissions-result').className = 'result error';
+                }
+            } catch (error) {
+                document.getElementById('user-permissions-result').textContent = 
+                    `❌ خطأ في الاتصال: ${error.message}`;
+                document.getElementById('user-permissions-result').className = 'result error';
+            }
+        }
+
+        // الحصول على المنتجات المتقدمة
+        async function getAdvancedProducts() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/products/advanced`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    document.getElementById('products-result').textContent =
+                        `✅ تم الحصول على ${data.count} منتج\n${JSON.stringify(data.products, null, 2)}`;
+                    document.getElementById('products-result').className = 'result success';
+                } else {
+                    document.getElementById('products-result').textContent =
+                        `❌ خطأ: ${data.error}`;
+                    document.getElementById('products-result').className = 'result error';
+                }
+            } catch (error) {
+                document.getElementById('products-result').textContent =
+                    `❌ خطأ في الاتصال: ${error.message}`;
+                document.getElementById('products-result').className = 'result error';
+            }
+        }
+
+        // الحصول على التقارير المالية
+        async function getFinancialReports() {
+            const period = document.getElementById('report-period').value;
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/reports/financial?period=${period}`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    document.getElementById('financial-result').textContent =
+                        `✅ تم تحميل التقارير المالية بنجاح\n${JSON.stringify(data.financial_report, null, 2)}`;
+                    document.getElementById('financial-result').className = 'result success';
+                } else {
+                    document.getElementById('financial-result').textContent =
+                        `❌ خطأ: ${data.error}`;
+                    document.getElementById('financial-result').className = 'result error';
+                }
+            } catch (error) {
+                document.getElementById('financial-result').textContent =
+                    `❌ خطأ في تحميل التقارير المالية: ${error.message}`;
+                document.getElementById('financial-result').className = 'result error';
+            }
+        }
+
+        // تصدير المنتجات
+        async function exportProducts() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/export/products`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        format: 'excel'
+                    })
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `products_export_${new Date().toISOString().slice(0,10)}.xlsx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+
+                    document.getElementById('import-export-result').textContent =
+                        '✅ تم تصدير المنتجات بنجاح';
+                    document.getElementById('import-export-result').className = 'result success';
+                } else {
+                    const data = await response.json();
+                    document.getElementById('import-export-result').textContent =
+                        `❌ خطأ في التصدير: ${data.error}`;
+                    document.getElementById('import-export-result').className = 'result error';
+                }
+            } catch (error) {
+                document.getElementById('import-export-result').textContent =
+                    `❌ خطأ في تصدير البيانات: ${error.message}`;
+                document.getElementById('import-export-result').className = 'result error';
+            }
+        }
+
+        // الحصول على سجلات الاستيراد/التصدير
+        async function getImportExportLogs() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/import-export/logs`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    let logsTable = `✅ تم الحصول على ${data.count} سجل\n\n`;
+                    logsTable += 'المعرف | النوع | اسم الملف | عدد السجلات | معدل النجاح | الحالة | التاريخ\n';
+                    logsTable += ''.padEnd(80, '-') + '\n';
+
+                    data.logs.forEach(log => {
+                        logsTable += `${log.id} | ${log.operation_type} | ${log.file_name || 'غير محدد'} | ${log.records_count} | ${log.success_rate.toFixed(1)}% | ${log.status} | ${log.created_at}\n`;
+                    });
+
+                    document.getElementById('logs-result').textContent = logsTable;
+                    document.getElementById('logs-result').className = 'result success';
+                } else {
+                    document.getElementById('logs-result').textContent =
+                        `❌ خطأ: ${data.error}`;
+                    document.getElementById('logs-result').className = 'result error';
+                }
+            } catch (error) {
+                document.getElementById('logs-result').textContent =
+                    `❌ خطأ في تحميل السجلات: ${error.message}`;
+                document.getElementById('logs-result').className = 'result error';
+            }
+        }
+
+        // حذف سجل
+        async function deleteLog(logId) {
+            if (!confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/import-export/logs/${logId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('✅ تم حذف السجل بنجاح');
+                    getImportExportLogs(); // إعادة تحميل السجلات
+                } else {
+                    alert(`❌ خطأ في الحذف: ${data.error}`);
+                }
+            } catch (error) {
+                alert(`❌ خطأ في الاتصال: ${error.message}`);
+            }
+        }
+
+        // تحميل الصفحة
+        window.onload = function() {
+            checkSystemHealth();
+        };
+    </script>
+</body>
+</html>

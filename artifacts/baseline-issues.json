@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2025-11-20T08:10:33.714Z",
+  "issues": [
+    {
+      "kind": "console",
+      "level": "warning",
+      "text": "⚠️ No data in response",
+      "location": {
+        "url": "http://localhost:5502/src/components/UserManagementComplete.jsx",
+        "lineNumber": 48,
+        "columnNumber": 16
+      }
+    },
+    {
+      "kind": "console",
+      "level": "warning",
+      "text": "⚠️ No data in response",
+      "location": {
+        "url": "http://localhost:5502/src/components/UserManagementComplete.jsx",
+        "lineNumber": 48,
+        "columnNumber": 16
+      }
+    }
+  ]
+}

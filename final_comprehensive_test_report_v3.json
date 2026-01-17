@@ -1,0 +1,102 @@
+{
+  "backend_tests": {
+    "basic": {
+      "server_status": {
+        "status": "ERROR",
+        "error": "HTTPConnectionPool(host='localhost', port=5002): Read timed out. (read timeout=10)"
+      },
+      "health_check": {
+        "status": "ERROR",
+        "error": "HTTPConnectionPool(host='localhost', port=5002): Read timed out. (read timeout=10)"
+      }
+    },
+    "auth": {
+      "login": {
+        "status": "ERROR",
+        "error": "HTTPConnectionPool(host='localhost', port=5002): Read timed out. (read timeout=10)"
+      },
+      "session_token": {
+        "status": "SKIP"
+      }
+    },
+    "endpoints": {
+      "categories": {
+        "status": "ERROR",
+        "error": "HTTPConnectionPool(host='localhost', port=5002): Read timed out. (read timeout=10)"
+      },
+      "products": {
+        "status": "ERROR",
+        "error": "HTTPConnectionPool(host='localhost', port=5002): Read timed out. (read timeout=10)"
+      },
+      "warehouses": {
+        "status": "ERROR",
+        "error": "HTTPConnectionPool(host='localhost', port=5002): Read timed out. (read timeout=10)"
+      },
+      "users": {
+        "status": "ERROR",
+        "error": "HTTPConnectionPool(host='localhost', port=5002): Read timed out. (read timeout=10)"
+      },
+      "inventory": {
+        "status": "ERROR",
+        "error": "HTTPConnectionPool(host='localhost', port=5002): Read timed out. (read timeout=10)"
+      },
+      "dashboard": {
+        "status": "ERROR",
+        "error": "HTTPConnectionPool(host='localhost', port=5002): Read timed out. (read timeout=10)"
+      }
+    }
+  },
+  "frontend_tests": {
+    "basic": {
+      "homepage": {
+        "status": "PASS",
+        "code": 200
+      },
+      "content": {
+        "status": "FAIL"
+      }
+    }
+  },
+  "integration_tests": {
+    "database": {
+      "db_exists": {
+        "status": "PASS"
+      },
+      "table_users": {
+        "status": "PASS"
+      },
+      "table_roles": {
+        "status": "PASS"
+      },
+      "table_user_roles": {
+        "status": "PASS"
+      },
+      "table_categories": {
+        "status": "PASS"
+      },
+      "table_products": {
+        "status": "PASS"
+      },
+      "table_warehouses": {
+        "status": "PASS"
+      },
+      "admin_user": {
+        "status": "PASS"
+      }
+    },
+    "system": {
+      "frontend_backend_connection": {
+        "status": "ERROR",
+        "error": "HTTPConnectionPool(host='localhost', port=5002): Read timed out. (read timeout=5)"
+      },
+      "port_5002": {
+        "status": "PASS"
+      },
+      "port_5503": {
+        "status": "PASS"
+      }
+    }
+  },
+  "overall_score": 47.82608695652174,
+  "timestamp": "2025-10-05T08:53:25.093098"
+}

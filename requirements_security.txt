@@ -1,0 +1,1 @@
+# التبعيات الأمنية الإضافية\n# Additional Security Dependencies\n\ncryptography\nbcrypt\npsutil\nflask-limiter\nflask-talisman\n

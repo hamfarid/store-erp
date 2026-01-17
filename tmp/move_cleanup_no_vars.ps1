@@ -1,0 +1,22 @@
+if (Test-Path 'DEPLOYMENT_SUCCESS_REPORT.md') { Move-Item -LiteralPath 'DEPLOYMENT_SUCCESS_REPORT.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'EXPERT_CONSULTATION_REPORT.md') { Move-Item -LiteralPath 'EXPERT_CONSULTATION_REPORT.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'FINAL_COMPLETION_REPORT.md') { Move-Item -LiteralPath 'FINAL_COMPLETION_REPORT.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'FINAL_REPORT.md') { Move-Item -LiteralPath 'FINAL_REPORT.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'GITHUB_ADVANCED_SETUP_REPORT.md') { Move-Item -LiteralPath 'GITHUB_ADVANCED_SETUP_REPORT.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'GITHUB_UPLOAD_INSTRUCTIONS.md') { Move-Item -LiteralPath 'GITHUB_UPLOAD_INSTRUCTIONS.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'LATEST_UPDATES_ANALYSIS.md') { Move-Item -LiteralPath 'LATEST_UPDATES_ANALYSIS.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'PRODUCTION_BUILD_REPORT.md') { Move-Item -LiteralPath 'PRODUCTION_BUILD_REPORT.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'PROJECT_SUMMARY.md') { Move-Item -LiteralPath 'PROJECT_SUMMARY.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'PROMPT_COMPLETION_REPORT.md') { Move-Item -LiteralPath 'PROMPT_COMPLETION_REPORT.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'QUICK_START_GUIDE.md') { Move-Item -LiteralPath 'QUICK_START_GUIDE.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'REPOSITORY_PRIVACY_UPDATE.md') { Move-Item -LiteralPath 'REPOSITORY_PRIVACY_UPDATE.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'TECHNICAL_DEEP_ANALYSIS_REPORT.md') { Move-Item -LiteralPath 'TECHNICAL_DEEP_ANALYSIS_REPORT.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'TECHNICAL_DOCUMENTATION.md') { Move-Item -LiteralPath 'TECHNICAL_DOCUMENTATION.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'UPDATED_FILES.md') { Move-Item -LiteralPath 'UPDATED_FILES.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'USER_GUIDE.md') { Move-Item -LiteralPath 'USER_GUIDE.md' -Destination 'unneeded/old_reports' -Force }
+if (Test-Path 'COMPREHENSIVE_ANALYSIS_REPORTS_20251021_032317.tar.gz') { Move-Item -LiteralPath 'COMPREHENSIVE_ANALYSIS_REPORTS_20251021_032317.tar.gz' -Destination 'unneeded/old_configs' -Force }
+if (Test-Path 'COMPREHENSIVE_DEVELOPMENT_PROMPT.md') { Move-Item -LiteralPath 'COMPREHENSIVE_DEVELOPMENT_PROMPT.md' -Destination 'unneeded/temp_data' -Force }
+if (Test-Path 'COMPREHENSIVE_FIX_REPORT.md') { Move-Item -LiteralPath 'COMPREHENSIVE_FIX_REPORT.md' -Destination 'unneeded/temp_data' -Force }
+if (Test-Path 'COMPREHENSIVE_SYSTEM_ANALYSIS_REPORT.md') { Move-Item -LiteralPath 'COMPREHENSIVE_SYSTEM_ANALYSIS_REPORT.md' -Destination 'unneeded/temp_data' -Force }
+if (Test-Path 'COMPREHENSIVE_SYSTEM_ANALYSIS_REPORT.json') { Move-Item -LiteralPath 'COMPREHENSIVE_SYSTEM_ANALYSIS_REPORT.json' -Destination 'unneeded/old_reports' -Force }
+Write-Output 'DONE'

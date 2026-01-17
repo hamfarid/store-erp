@@ -1,0 +1,144 @@
+# =============================================================================
+# Inventory Store System - Docker Compose Configuration
+# =============================================================================
+# Configured for Ai_project shared network
+# Port Assignment: Project 6 -> Backend: 6001, Frontend: 6501
+# =============================================================================
+
+services:
+  # قاعدة البيانات
+  database:
+    image: postgres:15-alpine
+    container_name: store_database
+    environment:
+      POSTGRES_DB: inventory_db
+      POSTGRES_USER: inventory_user
+      POSTGRES_PASSWORD: inventory_password
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "12502:5432"
+    networks:
+      - Ai_project
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U inventory_user -d inventory_db"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # الواجهة الخلفية
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: store_backend
+    environment:
+      - FLASK_ENV=production
+      - DATABASE_URL=postgresql://inventory_user:inventory_password@store_database:5432/inventory_db
+      - SECRET_KEY=your-secret-key-here
+      - JWT_SECRET_KEY=your-jwt-secret-key-here
+      - CORS_ORIGINS=http://localhost:6501,http://nginx-proxy,http://localhost:80
+    volumes:
+      - backend_uploads:/app/uploads
+      - backend_logs:/app/logs
+      - backend_backups:/app/backups
+      - backend_sessions:/app/flask_session
+    ports:
+      - "6001:5000"
+    networks:
+      - Ai_project
+    depends_on:
+      database:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # الواجهة الأمامية
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: store_frontend
+    ports:
+      - "6501:80"
+    networks:
+      - Ai_project
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis للتخزين المؤقت
+  redis:
+    image: redis:7-alpine
+    container_name: store_redis
+    ports:
+      - "6376:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - Ai_project
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: store_nginx
+    volumes:
+      - ./nginx/store.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend/dist:/usr/share/nginx/html:ro
+      - nginx_logs:/var/log/nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - Ai_project
+    depends_on:
+      - backend
+      - frontend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# الشبكات
+networks:
+  Ai_project:
+    external: true
+
+# التخزين المستمر
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  backend_uploads:
+    driver: local
+  backend_logs:
+    driver: local
+  backend_backups:
+    driver: local
+  backend_sessions:
+    driver: local
+  nginx_logs:
+    driver: local

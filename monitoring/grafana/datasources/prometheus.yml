@@ -1,0 +1,101 @@
+# -*- yaml -*-
+# FILE: monitoring/grafana/datasources/prometheus.yml | PURPOSE: Grafana Datasource Configuration | OWNER: DevOps | RELATED: prometheus.yml | LAST-AUDITED: 2025-10-21
+
+# تكوين مصادر البيانات لـ Grafana
+# Grafana Datasource Configuration
+
+apiVersion: 1
+
+datasources:
+  # مصدر بيانات Prometheus الرئيسي
+  # Main Prometheus datasource
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
+    jsonData:
+      httpMethod: POST
+      manageAlerts: true
+      prometheusType: Prometheus
+      prometheusVersion: 2.40.0
+      cacheLevel: 'High'
+      disableRecordingRules: false
+      incrementalQueryOverlapWindow: 10m
+      queryTimeout: 60s
+      timeInterval: 15s
+    secureJsonData: {}
+
+  # مصدر بيانات للسجلات (إذا كان متاحاً)
+  # Logs datasource (if available)
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    isDefault: false
+    editable: true
+    jsonData:
+      maxLines: 1000
+      timeout: 60s
+      derivedFields:
+        - datasourceUid: prometheus
+          matcherRegex: "traceID=(\\w+)"
+          name: TraceID
+          url: "$${__value.raw}"
+
+  # مصدر بيانات للتتبع (إذا كان متاحاً)
+  # Tracing datasource (if available)
+  - name: Jaeger
+    type: jaeger
+    access: proxy
+    url: http://jaeger:16686
+    isDefault: false
+    editable: true
+    jsonData:
+      tracesToLogs:
+        datasourceUid: loki
+        tags: ['job', 'instance', 'pod', 'namespace']
+        mappedTags: [{ key: 'service.name', value: 'service' }]
+        mapTagNamesEnabled: false
+        spanStartTimeShift: 1h
+        spanEndTimeShift: 1h
+        filterByTraceID: false
+        filterBySpanID: false
+
+  # مصدر بيانات للتطبيق المخصص
+  # Custom application datasource
+  - name: InventoryDB
+    type: postgres
+    access: proxy
+    url: database:5432
+    database: store_production
+    user: ${DB_USER}
+    isDefault: false
+    editable: false
+    jsonData:
+      sslmode: require
+      maxOpenConns: 10
+      maxIdleConns: 2
+      connMaxLifetime: 14400
+      postgresVersion: 1500
+      timescaledb: false
+    secureJsonData:
+      password: ${DB_PASSWORD}
+
+  # مصدر بيانات Redis للتخزين المؤقت
+  # Redis datasource for caching metrics
+  - name: Redis
+    type: redis-datasource
+    access: proxy
+    url: redis://redis:6379
+    isDefault: false
+    editable: true
+    jsonData:
+      client: standalone
+      poolSize: 5
+      timeout: 10
+      pingInterval: 0
+      pipelineWindow: 0
+    secureJsonData:
+      password: ${REDIS_PASSWORD}

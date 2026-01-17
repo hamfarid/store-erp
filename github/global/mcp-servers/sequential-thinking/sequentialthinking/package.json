@@ -1,0 +1,23 @@
+{
+	"name": "@smithery/sequentialthinking",
+	"version": "1.0.0",
+	"description": "MCP server to enhance LLMs with sequential thinking",
+	"main": "index.js",
+	"module": "./src/index.ts",
+	"type": "module",
+	"scripts": {
+		"build": "npx @smithery/cli@latest build",
+		"dev": "npx @smithery/cli@latest dev"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.18.1",
+		"@smithery/sdk": "^1.6.6",
+		"zod": "^3.25.46"
+	},
+	"devDependencies": {
+		"@smithery/cli": "^1.4.2"
+	}
+}

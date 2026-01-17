@@ -1,0 +1,266 @@
+# -*- yaml -*-
+# FILE: monitoring/alertmanager.yml | PURPOSE: Alertmanager Configuration for Notifications | OWNER: DevOps | RELATED: alert_rules.yml | LAST-AUDITED: 2025-10-21
+
+# تكوين Alertmanager للتنبيهات - نظام إدارة المخزون العربي
+# Alertmanager Configuration for Notifications - Arabic Inventory Management System
+
+global:
+  # إعدادات SMTP للبريد الإلكتروني
+  # SMTP settings for email notifications
+  smtp_smarthost: '${MAIL_SERVER}:${MAIL_PORT}'
+  smtp_from: '${MAIL_USERNAME}'
+  smtp_auth_username: '${MAIL_USERNAME}'
+  smtp_auth_password: '${MAIL_PASSWORD}'
+  smtp_require_tls: true
+
+  # إعدادات Slack
+  # Slack settings
+  slack_api_url: '${ALERT_SLACK_WEBHOOK}'
+
+  # إعدادات عامة
+  # General settings
+  resolve_timeout: 5m
+  http_config:
+    tls_config:
+      insecure_skip_verify: false
+
+# قوالب التنبيهات
+# Alert templates
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# مجموعات التوجيه
+# Route groups
+route:
+  group_by: ['alertname', 'cluster', 'service']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 12h
+  receiver: 'default-receiver'
+  
+  routes:
+    # تنبيهات حرجة - فورية
+    # Critical alerts - immediate
+    - match:
+        severity: critical
+      receiver: 'critical-alerts'
+      group_wait: 0s
+      group_interval: 5s
+      repeat_interval: 5m
+      continue: true
+
+    # تنبيهات الأمان - فورية
+    # Security alerts - immediate
+    - match:
+        category: security
+      receiver: 'security-alerts'
+      group_wait: 0s
+      group_interval: 1s
+      repeat_interval: 1m
+      continue: true
+
+    # تنبيهات قاعدة البيانات
+    # Database alerts
+    - match:
+        category: database
+      receiver: 'database-alerts'
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 30m
+
+    # تنبيهات الأعمال
+    # Business alerts
+    - match:
+        category: business
+      receiver: 'business-alerts'
+      group_wait: 1m
+      group_interval: 10m
+      repeat_interval: 1h
+
+    # تنبيهات النسخ الاحتياطية
+    # Backup alerts
+    - match:
+        category: backup
+      receiver: 'backup-alerts'
+      group_wait: 5m
+      group_interval: 1h
+      repeat_interval: 6h
+
+# تكوين المستقبلات
+# Receivers configuration
+receivers:
+  # المستقبل الافتراضي
+  # Default receiver
+  - name: 'default-receiver'
+    email_configs:
+      - to: '${ALERT_EMAIL_RECIPIENTS}'
+        subject: '[نظام المخزون] تنبيه عام - {{ .GroupLabels.alertname }}'
+        body: |
+          {{ range .Alerts }}
+          التنبيه: {{ .Annotations.summary }}
+          الوصف: {{ .Annotations.description }}
+          الخطورة: {{ .Labels.severity }}
+          الوقت: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ end }}
+        html: |
+          <!DOCTYPE html>
+          <html dir="rtl" lang="ar">
+          <head>
+            <meta charset="UTF-8">
+            <title>تنبيه نظام إدارة المخزون</title>
+          </head>
+          <body style="font-family: Arial, sans-serif; direction: rtl;">
+            <h2 style="color: #d9534f;">تنبيه من نظام إدارة المخزون</h2>
+            {{ range .Alerts }}
+            <div style="border: 1px solid #ddd; padding: 10px; margin: 10px 0;">
+              <h3>{{ .Annotations.summary }}</h3>
+              <p><strong>الوصف:</strong> {{ .Annotations.description }}</p>
+              <p><strong>الخطورة:</strong> {{ .Labels.severity }}</p>
+              <p><strong>الفئة:</strong> {{ .Labels.category }}</p>
+              <p><strong>وقت البداية:</strong> {{ .StartsAt.Format "2006-01-02 15:04:05" }}</p>
+              {{ if .EndsAt }}
+              <p><strong>وقت الانتهاء:</strong> {{ .EndsAt.Format "2006-01-02 15:04:05" }}</p>
+              {{ end }}
+            </div>
+            {{ end }}
+          </body>
+          </html>
+
+  # تنبيهات حرجة
+  # Critical alerts
+  - name: 'critical-alerts'
+    email_configs:
+      - to: '${ALERT_EMAIL_RECIPIENTS}'
+        subject: '🚨 [حرج] نظام المخزون - {{ .GroupLabels.alertname }}'
+        body: |
+          ⚠️ تنبيه حرج في نظام إدارة المخزون ⚠️
+          
+          {{ range .Alerts }}
+          🔴 التنبيه: {{ .Annotations.summary }}
+          📝 الوصف: {{ .Annotations.description }}
+          ⏰ الوقت: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          🏷️ التصنيف: {{ .Labels.category }}
+          
+          {{ end }}
+          
+          يرجى اتخاذ إجراء فوري لحل هذه المشكلة.
+    
+    slack_configs:
+      - channel: '#critical-alerts'
+        title: '🚨 تنبيه حرج - نظام المخزون'
+        text: |
+          {{ range .Alerts }}
+          *التنبيه:* {{ .Annotations.summary }}
+          *الوصف:* {{ .Annotations.description }}
+          *الخطورة:* {{ .Labels.severity }}
+          *الوقت:* {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ end }}
+        send_resolved: true
+
+  # تنبيهات الأمان
+  # Security alerts
+  - name: 'security-alerts'
+    email_configs:
+      - to: 'security@your-domain.com'
+        subject: '🔐 [أمان] نظام المخزون - {{ .GroupLabels.alertname }}'
+        body: |
+          🛡️ تنبيه أمني في نظام إدارة المخزون 🛡️
+          
+          {{ range .Alerts }}
+          🔒 التنبيه: {{ .Annotations.summary }}
+          📋 الوصف: {{ .Annotations.description }}
+          ⏰ الوقت: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          🌐 المصدر: {{ .Labels.instance }}
+          
+          {{ end }}
+          
+          يرجى مراجعة الأمان فوراً والتحقق من النشاط المشبوه.
+
+    slack_configs:
+      - channel: '#security-alerts'
+        title: '🔐 تنبيه أمني - نظام المخزون'
+        text: |
+          {{ range .Alerts }}
+          *التنبيه:* {{ .Annotations.summary }}
+          *الوصف:* {{ .Annotations.description }}
+          *المصدر:* {{ .Labels.instance }}
+          *الوقت:* {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ end }}
+        send_resolved: true
+
+  # تنبيهات قاعدة البيانات
+  # Database alerts
+  - name: 'database-alerts'
+    email_configs:
+      - to: 'dba@your-domain.com'
+        subject: '💾 [قاعدة البيانات] نظام المخزون - {{ .GroupLabels.alertname }}'
+        body: |
+          💾 تنبيه قاعدة البيانات في نظام إدارة المخزون
+          
+          {{ range .Alerts }}
+          📊 التنبيه: {{ .Annotations.summary }}
+          📝 الوصف: {{ .Annotations.description }}
+          ⏰ الوقت: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          
+          {{ end }}
+
+  # تنبيهات الأعمال
+  # Business alerts
+  - name: 'business-alerts'
+    email_configs:
+      - to: 'business@your-domain.com'
+        subject: '📈 [أعمال] نظام المخزون - {{ .GroupLabels.alertname }}'
+        body: |
+          📈 تنبيه أعمال في نظام إدارة المخزون
+          
+          {{ range .Alerts }}
+          💼 التنبيه: {{ .Annotations.summary }}
+          📝 الوصف: {{ .Annotations.description }}
+          ⏰ الوقت: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          
+          {{ end }}
+
+  # تنبيهات النسخ الاحتياطية
+  # Backup alerts
+  - name: 'backup-alerts'
+    email_configs:
+      - to: 'backup@your-domain.com'
+        subject: '💾 [نسخ احتياطي] نظام المخزون - {{ .GroupLabels.alertname }}'
+        body: |
+          💾 تنبيه النسخ الاحتياطية في نظام إدارة المخزون
+          
+          {{ range .Alerts }}
+          🗄️ التنبيه: {{ .Annotations.summary }}
+          📝 الوصف: {{ .Annotations.description }}
+          ⏰ الوقت: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          
+          {{ end }}
+
+# قواعد التثبيط
+# Inhibit rules
+inhibit_rules:
+  # تثبيط تنبيهات النظام عند توقف الخدمة
+  # Inhibit system alerts when service is down
+  - source_match:
+      alertname: 'SystemDown'
+    target_match:
+      alertname: 'HighCPUUsage'
+    equal: ['instance']
+
+  - source_match:
+      alertname: 'SystemDown'
+    target_match:
+      alertname: 'HighMemoryUsage'
+    equal: ['instance']
+
+  # تثبيط تنبيهات التطبيق عند توقف قاعدة البيانات
+  # Inhibit application alerts when database is down
+  - source_match:
+      alertname: 'DatabaseDown'
+    target_match:
+      alertname: 'HighErrorRate'
+
+  - source_match:
+      alertname: 'DatabaseDown'
+    target_match:
+      alertname: 'SlowResponseTime'

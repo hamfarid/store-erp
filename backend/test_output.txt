@@ -1,0 +1,403 @@
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\site-packages\pytest_asyncio\plugin.py:247: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.3.5, pluggy-1.6.0 -- C:\Users\hadym\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: E:\New folder\store-Manus-14-12-2025\backend
+configfile: pytest.ini
+plugins: cov-4.1.0, anyio-4.12.0, asyncio-1.3.0, django-4.11.1, flask-1.3.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 18 items
+
+tests/test_integration_api.py::TestProductsAPI::test_get_products_list PASSED [  5%]
+tests/test_integration_api.py::TestProductsAPI::test_get_products_with_pagination PASSED [ 11%]
+tests/test_integration_api.py::TestProductsAPI::test_get_products_with_search PASSED [ 16%]
+tests/test_integration_api.py::TestProductsAPI::test_get_products_with_filters PASSED [ 22%]
+tests/test_integration_api.py::TestProductsAPI::test_get_single_product ERROR [ 27%]
+tests/test_integration_api.py::TestProductsAPI::test_create_product FAILED [ 33%]
+tests/test_integration_api.py::TestProductsAPI::test_create_product_missing_required_fields PASSED [ 38%]
+tests/test_integration_api.py::TestProductsAPI::test_update_product ERROR [ 44%]
+tests/test_integration_api.py::TestProductsAPI::test_delete_product ERROR [ 50%]
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\site-packages\coverage\report_core.py:107: CoverageWarning: Couldn't parse Python file 'E:\New folder\store-Manus-14-12-2025\backend\src\integration\system_integration.py' (couldnt-parse); see https://coverage.readthedocs.io/en/7.13.1/messages.html#warning-couldnt-parse
+  coverage._warn(msg, slug="couldnt-parse")
+tests/test_integration_api.py::TestProductsAPI::test_delete_product_without_admin ERROR [ 55%]
+
+=================================== ERRORS ====================================
+__________ ERROR at setup of TestProductsAPI.test_get_single_product __________
+file E:\New folder\store-Manus-14-12-2025\backend\tests\test_integration_api.py, line 79
+      def test_get_single_product(self, client, auth_headers, sample_product):
+E       fixture 'sample_product' not found
+>       available fixtures: _class_scoped_runner, _configure_application, _dj_autoclear_mailbox, _django_clear_site_cache, _django_db_helper, _django_db_marker, _django_set_urlconf, _django_setup_unittest, _fail_for_invalid_template_variable, _function_scoped_runner, _live_server_helper, _module_scoped_runner, _monkeypatch_response_class, _package_scoped_runner, _push_request_context, _session_scoped_runner, _template_string_if_invalid_marker, accept_any, accept_json, accept_jsonp, accept_mimetype, admin_auth_headers, admin_client, admin_user, anyio_backend, anyio_backend_name, anyio_backend_options, async_client, async_rf, auth_headers, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, client_class, config, cov, db, db_session, django_assert_max_num_queries, django_assert_num_queries, django_capture_on_commit_callbacks, django_db_blocker, django_db_createdb, django_db_keepdb, django_db_modify_db_settings, django_db_modify_db_settings_parallel_suffix, django_db_modify_db_settings_tox_suffix, django_db_modify_db_settings_xdist_suffix, django_db_reset_sequences, django_db_serialized_rollback, django_db_setup, django_db_use_migrations, django_mail_dnsname, django_mail_patch_dns, django_test_environment, django_user_model, django_username_field, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, live_server, mailoutbox, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, rf, settings, test_app, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, transactional_db, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+E:\New folder\store-Manus-14-12-2025\backend\tests\test_integration_api.py:79
+---------------------------- Captured stdout setup ----------------------------
+\U0001f527 Development mode: True\n\u2705 Scanner Blocker active\n\u2705 Rate Limiter active\n\u2705 CSRF protection ENABLED (JWT API routes auto-exempt)\n\u26a0\ufe0f HTTPS enforcement DISABLED (development mode)\n\u2705 OpenAPI (flask-smorest) initialized: /api/docs\n\u2705 Registered /api/products (real endpoint with OpenAPI docs)\n\u2705 Registered /api/inventory/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/invoices/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/users/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/customers/* /api/suppliers/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/system/health (OpenAPI docs)\n\u2705 Registered /api/docs-integration/external/health (OpenAPI docs)\n\u2705 Registered /api/docs-demo/ping (OpenAPI docs)\n\u2705 Flask-Session initialized successfully\n\u2705 Flask-Login initialized\n\u2705 P0.13: CSP nonce middleware initialized\n\U0001f4cb \u062a\u0633\u062c\u064a\u0644 blueprints...\n\u2705 Registered user blueprint\n\u2705 Registered inventory blueprint\n\u2705 Registered dashboard blueprint\n\u26a0\ufe0f Core blueprint admin not available\n\u2705 Registered optional partners blueprint\n\u2705 Registered optional reports blueprint\n\u26a0\ufe0f Optional blueprint import not available\n\u2705 Registered optional export blueprint\n\u2705 Registered optional invoices blueprint\n\u2705 Registered optional accounting blueprint\n\u2705 Registered optional financial_reports blueprint\n\u2705 Registered optional advanced_reports blueprint\n\u2705 Registered optional excel_import blueprint\n\u2705 Registered optional excel_templates blueprint\n\u2705 Registered optional permissions blueprint\n\u2705 Registered optional sales_advanced blueprint\n\u2705 Registered optional profit_loss blueprint\n\u2705 Registered optional security blueprint\n\u2705 Registered optional security_routes blueprint\n\u2705 Registered optional lot blueprint\n\u26a0\ufe0f Optional blueprint batch_reports not available\n\u2705 Registered optional region_warehouse blueprint\n\u2705 Registered optional warehouse_transfer blueprint\n\u2705 Registered optional settings blueprint\n\u2705 Registered optional company_settings blueprint\n\u2705 Registered optional financial_reports_advanced blueprint\n\u2705 Registered optional import_export_advanced blueprint\n\u2705 Registered optional customer_supplier_accounts blueprint\n\u2705 Registered optional warehouse_adjustments blueprint\n\u2705 Registered optional returns_management blueprint\n\u2705 Registered optional payment_debt_management blueprint\n\u2705 Registered optional external_integration blueprint\n\u2705 Registered optional comprehensive_reports blueprint\n\u2705 Registered optional payment_management blueprint\n\u2705 Registered optional products_advanced blueprint\n\u2705 Registered optional rag blueprint\n\u2705 \u062a\u0645 \u062a\u0633\u062c\u064a\u0644 33 blueprint\n\u2705 Database initialized: E:\\New folder\\store-Manus-14-12-2025\\backend\\instance\\inventory.db\n\u26a0\ufe0f Model preload warning: cannot import name 'Inventory' from 'src.models.inventory' (E:\\New folder\\store-Manus-14-12-2025\\backend\\src\\models\\inventory.py)\n\u2705 Database tables created successfully
+---------------------------- Captured stderr setup ----------------------------
+INFO:src.middleware.csp_nonce:\u2705 P0.13: CSP nonce middleware initialized
+----------------------------- Captured log setup ------------------------------
+INFO     src.middleware.csp_nonce:csp_nonce.py:135 \u2705 P0.13: CSP nonce middleware initialized
+____________ ERROR at setup of TestProductsAPI.test_update_product ____________
+file E:\New folder\store-Manus-14-12-2025\backend\tests\test_integration_api.py, line 123
+      def test_update_product(self, client, auth_headers, sample_product):
+E       fixture 'sample_product' not found
+>       available fixtures: _class_scoped_runner, _configure_application, _dj_autoclear_mailbox, _django_clear_site_cache, _django_db_helper, _django_db_marker, _django_set_urlconf, _django_setup_unittest, _fail_for_invalid_template_variable, _function_scoped_runner, _live_server_helper, _module_scoped_runner, _monkeypatch_response_class, _package_scoped_runner, _push_request_context, _session_scoped_runner, _template_string_if_invalid_marker, accept_any, accept_json, accept_jsonp, accept_mimetype, admin_auth_headers, admin_client, admin_user, anyio_backend, anyio_backend_name, anyio_backend_options, async_client, async_rf, auth_headers, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, client_class, config, cov, db, db_session, django_assert_max_num_queries, django_assert_num_queries, django_capture_on_commit_callbacks, django_db_blocker, django_db_createdb, django_db_keepdb, django_db_modify_db_settings, django_db_modify_db_settings_parallel_suffix, django_db_modify_db_settings_tox_suffix, django_db_modify_db_settings_xdist_suffix, django_db_reset_sequences, django_db_serialized_rollback, django_db_setup, django_db_use_migrations, django_mail_dnsname, django_mail_patch_dns, django_test_environment, django_user_model, django_username_field, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, live_server, mailoutbox, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, rf, settings, test_app, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, transactional_db, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+E:\New folder\store-Manus-14-12-2025\backend\tests\test_integration_api.py:123
+---------------------------- Captured stdout setup ----------------------------
+\U0001f527 Development mode: True\n\u2705 Scanner Blocker active\n\u2705 Rate Limiter active\n\u2705 CSRF protection ENABLED (JWT API routes auto-exempt)\n\u26a0\ufe0f HTTPS enforcement DISABLED (development mode)\n\u2705 OpenAPI (flask-smorest) initialized: /api/docs\n\u2705 Registered /api/products (real endpoint with OpenAPI docs)\n\u2705 Registered /api/inventory/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/invoices/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/users/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/customers/* /api/suppliers/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/system/health (OpenAPI docs)\n\u2705 Registered /api/docs-integration/external/health (OpenAPI docs)\n\u2705 Registered /api/docs-demo/ping (OpenAPI docs)\n\u2705 Flask-Session initialized successfully\n\u2705 Flask-Login initialized\n\u2705 P0.13: CSP nonce middleware initialized\n\U0001f4cb \u062a\u0633\u062c\u064a\u0644 blueprints...\n\u2705 Registered user blueprint\n\u2705 Registered inventory blueprint\n\u2705 Registered dashboard blueprint\n\u26a0\ufe0f Core blueprint admin not available\n\u2705 Registered optional partners blueprint\n\u2705 Registered optional reports blueprint\n\u26a0\ufe0f Optional blueprint import not available\n\u2705 Registered optional export blueprint\n\u2705 Registered optional invoices blueprint\n\u2705 Registered optional accounting blueprint\n\u2705 Registered optional financial_reports blueprint\n\u2705 Registered optional advanced_reports blueprint\n\u2705 Registered optional excel_import blueprint\n\u2705 Registered optional excel_templates blueprint\n\u2705 Registered optional permissions blueprint\n\u2705 Registered optional sales_advanced blueprint\n\u2705 Registered optional profit_loss blueprint\n\u2705 Registered optional security blueprint\n\u2705 Registered optional security_routes blueprint\n\u2705 Registered optional lot blueprint\n\u26a0\ufe0f Optional blueprint batch_reports not available\n\u2705 Registered optional region_warehouse blueprint\n\u2705 Registered optional warehouse_transfer blueprint\n\u2705 Registered optional settings blueprint\n\u2705 Registered optional company_settings blueprint\n\u2705 Registered optional financial_reports_advanced blueprint\n\u2705 Registered optional import_export_advanced blueprint\n\u2705 Registered optional customer_supplier_accounts blueprint\n\u2705 Registered optional warehouse_adjustments blueprint\n\u2705 Registered optional returns_management blueprint\n\u2705 Registered optional payment_debt_management blueprint\n\u2705 Registered optional external_integration blueprint\n\u2705 Registered optional comprehensive_reports blueprint\n\u2705 Registered optional payment_management blueprint\n\u2705 Registered optional products_advanced blueprint\n\u2705 Registered optional rag blueprint\n\u2705 \u062a\u0645 \u062a\u0633\u062c\u064a\u0644 33 blueprint\n\u2705 Database initialized: E:\\New folder\\store-Manus-14-12-2025\\backend\\instance\\inventory.db\n\u26a0\ufe0f Model preload warning: cannot import name 'Inventory' from 'src.models.inventory' (E:\\New folder\\store-Manus-14-12-2025\\backend\\src\\models\\inventory.py)\n\u2705 Database tables created successfully
+---------------------------- Captured stderr setup ----------------------------
+INFO:src.middleware.csp_nonce:\u2705 P0.13: CSP nonce middleware initialized
+----------------------------- Captured log setup ------------------------------
+INFO     src.middleware.csp_nonce:csp_nonce.py:135 \u2705 P0.13: CSP nonce middleware initialized
+____________ ERROR at setup of TestProductsAPI.test_delete_product ____________
+file E:\New folder\store-Manus-14-12-2025\backend\tests\test_integration_api.py, line 137
+      def test_delete_product(self, client, admin_auth_headers, sample_product):
+E       fixture 'sample_product' not found
+>       available fixtures: _class_scoped_runner, _configure_application, _dj_autoclear_mailbox, _django_clear_site_cache, _django_db_helper, _django_db_marker, _django_set_urlconf, _django_setup_unittest, _fail_for_invalid_template_variable, _function_scoped_runner, _live_server_helper, _module_scoped_runner, _monkeypatch_response_class, _package_scoped_runner, _push_request_context, _session_scoped_runner, _template_string_if_invalid_marker, accept_any, accept_json, accept_jsonp, accept_mimetype, admin_auth_headers, admin_client, admin_user, anyio_backend, anyio_backend_name, anyio_backend_options, async_client, async_rf, auth_headers, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, client_class, config, cov, db, db_session, django_assert_max_num_queries, django_assert_num_queries, django_capture_on_commit_callbacks, django_db_blocker, django_db_createdb, django_db_keepdb, django_db_modify_db_settings, django_db_modify_db_settings_parallel_suffix, django_db_modify_db_settings_tox_suffix, django_db_modify_db_settings_xdist_suffix, django_db_reset_sequences, django_db_serialized_rollback, django_db_setup, django_db_use_migrations, django_mail_dnsname, django_mail_patch_dns, django_test_environment, django_user_model, django_username_field, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, live_server, mailoutbox, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, rf, settings, test_app, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, transactional_db, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+E:\New folder\store-Manus-14-12-2025\backend\tests\test_integration_api.py:137
+---------------------------- Captured stdout setup ----------------------------
+\U0001f527 Development mode: True\n\u2705 Scanner Blocker active\n\u2705 Rate Limiter active\n\u2705 CSRF protection ENABLED (JWT API routes auto-exempt)\n\u26a0\ufe0f HTTPS enforcement DISABLED (development mode)\n\u2705 OpenAPI (flask-smorest) initialized: /api/docs\n\u2705 Registered /api/products (real endpoint with OpenAPI docs)\n\u2705 Registered /api/inventory/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/invoices/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/users/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/customers/* /api/suppliers/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/system/health (OpenAPI docs)\n\u2705 Registered /api/docs-integration/external/health (OpenAPI docs)\n\u2705 Registered /api/docs-demo/ping (OpenAPI docs)\n\u2705 Flask-Session initialized successfully\n\u2705 Flask-Login initialized\n\u2705 P0.13: CSP nonce middleware initialized\n\U0001f4cb \u062a\u0633\u062c\u064a\u0644 blueprints...\n\u2705 Registered user blueprint\n\u2705 Registered inventory blueprint\n\u2705 Registered dashboard blueprint\n\u26a0\ufe0f Core blueprint admin not available\n\u2705 Registered optional partners blueprint\n\u2705 Registered optional reports blueprint\n\u26a0\ufe0f Optional blueprint import not available\n\u2705 Registered optional export blueprint\n\u2705 Registered optional invoices blueprint\n\u2705 Registered optional accounting blueprint\n\u2705 Registered optional financial_reports blueprint\n\u2705 Registered optional advanced_reports blueprint\n\u2705 Registered optional excel_import blueprint\n\u2705 Registered optional excel_templates blueprint\n\u2705 Registered optional permissions blueprint\n\u2705 Registered optional sales_advanced blueprint\n\u2705 Registered optional profit_loss blueprint\n\u2705 Registered optional security blueprint\n\u2705 Registered optional security_routes blueprint\n\u2705 Registered optional lot blueprint\n\u26a0\ufe0f Optional blueprint batch_reports not available\n\u2705 Registered optional region_warehouse blueprint\n\u2705 Registered optional warehouse_transfer blueprint\n\u2705 Registered optional settings blueprint\n\u2705 Registered optional company_settings blueprint\n\u2705 Registered optional financial_reports_advanced blueprint\n\u2705 Registered optional import_export_advanced blueprint\n\u2705 Registered optional customer_supplier_accounts blueprint\n\u2705 Registered optional warehouse_adjustments blueprint\n\u2705 Registered optional returns_management blueprint\n\u2705 Registered optional payment_debt_management blueprint\n\u2705 Registered optional external_integration blueprint\n\u2705 Registered optional comprehensive_reports blueprint\n\u2705 Registered optional payment_management blueprint\n\u2705 Registered optional products_advanced blueprint\n\u2705 Registered optional rag blueprint\n\u2705 \u062a\u0645 \u062a\u0633\u062c\u064a\u0644 33 blueprint\n\u2705 Database initialized: E:\\New folder\\store-Manus-14-12-2025\\backend\\instance\\inventory.db\n\u26a0\ufe0f Model preload warning: cannot import name 'Inventory' from 'src.models.inventory' (E:\\New folder\\store-Manus-14-12-2025\\backend\\src\\models\\inventory.py)\n\u2705 Database tables created successfully
+---------------------------- Captured stderr setup ----------------------------
+INFO:src.middleware.csp_nonce:\u2705 P0.13: CSP nonce middleware initialized
+----------------------------- Captured log setup ------------------------------
+INFO     src.middleware.csp_nonce:csp_nonce.py:135 \u2705 P0.13: CSP nonce middleware initialized
+_____ ERROR at setup of TestProductsAPI.test_delete_product_without_admin _____
+file E:\New folder\store-Manus-14-12-2025\backend\tests\test_integration_api.py, line 146
+      def test_delete_product_without_admin(self, client, auth_headers, sample_product):
+E       fixture 'sample_product' not found
+>       available fixtures: _class_scoped_runner, _configure_application, _dj_autoclear_mailbox, _django_clear_site_cache, _django_db_helper, _django_db_marker, _django_set_urlconf, _django_setup_unittest, _fail_for_invalid_template_variable, _function_scoped_runner, _live_server_helper, _module_scoped_runner, _monkeypatch_response_class, _package_scoped_runner, _push_request_context, _session_scoped_runner, _template_string_if_invalid_marker, accept_any, accept_json, accept_jsonp, accept_mimetype, admin_auth_headers, admin_client, admin_user, anyio_backend, anyio_backend_name, anyio_backend_options, async_client, async_rf, auth_headers, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, client, client_class, config, cov, db, db_session, django_assert_max_num_queries, django_assert_num_queries, django_capture_on_commit_callbacks, django_db_blocker, django_db_createdb, django_db_keepdb, django_db_modify_db_settings, django_db_modify_db_settings_parallel_suffix, django_db_modify_db_settings_tox_suffix, django_db_modify_db_settings_xdist_suffix, django_db_reset_sequences, django_db_serialized_rollback, django_db_setup, django_db_use_migrations, django_mail_dnsname, django_mail_patch_dns, django_test_environment, django_user_model, django_username_field, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, live_server, mailoutbox, monkeypatch, no_cover, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, rf, settings, test_app, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, transactional_db, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+E:\New folder\store-Manus-14-12-2025\backend\tests\test_integration_api.py:146
+---------------------------- Captured stdout setup ----------------------------
+\U0001f527 Development mode: True\n\u2705 Scanner Blocker active\n\u2705 Rate Limiter active\n\u2705 CSRF protection ENABLED (JWT API routes auto-exempt)\n\u26a0\ufe0f HTTPS enforcement DISABLED (development mode)\n\u2705 OpenAPI (flask-smorest) initialized: /api/docs\n\u2705 Registered /api/products (real endpoint with OpenAPI docs)\n\u2705 Registered /api/inventory/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/invoices/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/users/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/customers/* /api/suppliers/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/system/health (OpenAPI docs)\n\u2705 Registered /api/docs-integration/external/health (OpenAPI docs)\n\u2705 Registered /api/docs-demo/ping (OpenAPI docs)\n\u2705 Flask-Session initialized successfully\n\u2705 Flask-Login initialized\n\u2705 P0.13: CSP nonce middleware initialized\n\U0001f4cb \u062a\u0633\u062c\u064a\u0644 blueprints...\n\u2705 Registered user blueprint\n\u2705 Registered inventory blueprint\n\u2705 Registered dashboard blueprint\n\u26a0\ufe0f Core blueprint admin not available\n\u2705 Registered optional partners blueprint\n\u2705 Registered optional reports blueprint\n\u26a0\ufe0f Optional blueprint import not available\n\u2705 Registered optional export blueprint\n\u2705 Registered optional invoices blueprint\n\u2705 Registered optional accounting blueprint\n\u2705 Registered optional financial_reports blueprint\n\u2705 Registered optional advanced_reports blueprint\n\u2705 Registered optional excel_import blueprint\n\u2705 Registered optional excel_templates blueprint\n\u2705 Registered optional permissions blueprint\n\u2705 Registered optional sales_advanced blueprint\n\u2705 Registered optional profit_loss blueprint\n\u2705 Registered optional security blueprint\n\u2705 Registered optional security_routes blueprint\n\u2705 Registered optional lot blueprint\n\u26a0\ufe0f Optional blueprint batch_reports not available\n\u2705 Registered optional region_warehouse blueprint\n\u2705 Registered optional warehouse_transfer blueprint\n\u2705 Registered optional settings blueprint\n\u2705 Registered optional company_settings blueprint\n\u2705 Registered optional financial_reports_advanced blueprint\n\u2705 Registered optional import_export_advanced blueprint\n\u2705 Registered optional customer_supplier_accounts blueprint\n\u2705 Registered optional warehouse_adjustments blueprint\n\u2705 Registered optional returns_management blueprint\n\u2705 Registered optional payment_debt_management blueprint\n\u2705 Registered optional external_integration blueprint\n\u2705 Registered optional comprehensive_reports blueprint\n\u2705 Registered optional payment_management blueprint\n\u2705 Registered optional products_advanced blueprint\n\u2705 Registered optional rag blueprint\n\u2705 \u062a\u0645 \u062a\u0633\u062c\u064a\u0644 33 blueprint\n\u2705 Database initialized: E:\\New folder\\store-Manus-14-12-2025\\backend\\instance\\inventory.db\n\u26a0\ufe0f Model preload warning: cannot import name 'Inventory' from 'src.models.inventory' (E:\\New folder\\store-Manus-14-12-2025\\backend\\src\\models\\inventory.py)\n\u2705 Database tables created successfully
+---------------------------- Captured stderr setup ----------------------------
+INFO:src.middleware.csp_nonce:\u2705 P0.13: CSP nonce middleware initialized
+----------------------------- Captured log setup ------------------------------
+INFO     src.middleware.csp_nonce:csp_nonce.py:135 \u2705 P0.13: CSP nonce middleware initialized
+================================== FAILURES ===================================
+_____________________ TestProductsAPI.test_create_product _____________________
+tests\test_integration_api.py:106: in test_create_product
+    assert response.status_code in [200, 201, 404]
+E   assert 400 in [200, 201, 404]
+E    +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code
+---------------------------- Captured stdout setup ----------------------------
+\U0001f527 Development mode: True\n\u2705 Scanner Blocker active\n\u2705 Rate Limiter active\n\u2705 CSRF protection ENABLED (JWT API routes auto-exempt)\n\u26a0\ufe0f HTTPS enforcement DISABLED (development mode)\n\u2705 OpenAPI (flask-smorest) initialized: /api/docs\n\u2705 Registered /api/products (real endpoint with OpenAPI docs)\n\u2705 Registered /api/inventory/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/invoices/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/users/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/customers/* /api/suppliers/* (real endpoints with OpenAPI docs)\n\u2705 Registered /api/system/health (OpenAPI docs)\n\u2705 Registered /api/docs-integration/external/health (OpenAPI docs)\n\u2705 Registered /api/docs-demo/ping (OpenAPI docs)\n\u2705 Flask-Session initialized successfully\n\u2705 Flask-Login initialized\n\u2705 P0.13: CSP nonce middleware initialized\n\U0001f4cb \u062a\u0633\u062c\u064a\u0644 blueprints...\n\u2705 Registered user blueprint\n\u2705 Registered inventory blueprint\n\u2705 Registered dashboard blueprint\n\u26a0\ufe0f Core blueprint admin not available\n\u2705 Registered optional partners blueprint\n\u2705 Registered optional reports blueprint\n\u26a0\ufe0f Optional blueprint import not available\n\u2705 Registered optional export blueprint\n\u2705 Registered optional invoices blueprint\n\u2705 Registered optional accounting blueprint\n\u2705 Registered optional financial_reports blueprint\n\u2705 Registered optional advanced_reports blueprint\n\u2705 Registered optional excel_import blueprint\n\u2705 Registered optional excel_templates blueprint\n\u2705 Registered optional permissions blueprint\n\u2705 Registered optional sales_advanced blueprint\n\u2705 Registered optional profit_loss blueprint\n\u2705 Registered optional security blueprint\n\u2705 Registered optional security_routes blueprint\n\u2705 Registered optional lot blueprint\n\u26a0\ufe0f Optional blueprint batch_reports not available\n\u2705 Registered optional region_warehouse blueprint\n\u2705 Registered optional warehouse_transfer blueprint\n\u2705 Registered optional settings blueprint\n\u2705 Registered optional company_settings blueprint\n\u2705 Registered optional financial_reports_advanced blueprint\n\u2705 Registered optional import_export_advanced blueprint\n\u2705 Registered optional customer_supplier_accounts blueprint\n\u2705 Registered optional warehouse_adjustments blueprint\n\u2705 Registered optional returns_management blueprint\n\u2705 Registered optional payment_debt_management blueprint\n\u2705 Registered optional external_integration blueprint\n\u2705 Registered optional comprehensive_reports blueprint\n\u2705 Registered optional payment_management blueprint\n\u2705 Registered optional products_advanced blueprint\n\u2705 Registered optional rag blueprint\n\u2705 \u062a\u0645 \u062a\u0633\u062c\u064a\u0644 33 blueprint\n\u2705 Database initialized: E:\\New folder\\store-Manus-14-12-2025\\backend\\instance\\inventory.db\n\u26a0\ufe0f Model preload warning: cannot import name 'Inventory' from 'src.models.inventory' (E:\\New folder\\store-Manus-14-12-2025\\backend\\src\\models\\inventory.py)\n\u2705 Database tables created successfully
+---------------------------- Captured stderr setup ----------------------------
+INFO:src.middleware.csp_nonce:\u2705 P0.13: CSP nonce middleware initialized
+----------------------------- Captured log setup ------------------------------
+INFO     src.middleware.csp_nonce:csp_nonce.py:135 \u2705 P0.13: CSP nonce middleware initialized
+---------------------------- Captured stderr call -----------------------------
+INFO:flask_wtf.csrf:The CSRF token is missing.
+------------------------------ Captured log call ------------------------------
+INFO     flask_wtf.csrf:csrf.py:263 The CSRF token is missing.
+
+---------- coverage: platform win32, python 3.11.9-final-0 -----------
+Name                                                 Stmts   Miss Branch BrPart  Cover   Missing
+------------------------------------------------------------------------------------------------
+src\__init__.py                                          0      0      0      0   100%
+src\api_meta.py                                         38      8      2      0    80%   52-63, 67-68, 72, 87, 135
+src\auth.py                                            278    162     78      5    34%   31-33, 51, 76->exit, 83, 121-144, 167-181, 190-192, 198-199, 208, 219-225, 259-261, 266-289, 295-304, 319-320, 325, 330-340, 345-346, 351-361, 366-380, 385-410, 421-455, 463-487, 492, 497, 603-632, 637, 642-648, 667-678, 690
+src\auth_fixed.py                                       52     52      4      0     0%   15-128
+src\cache_manager.py                                   123    123     28      0     0%   18-246
+src\celery_app.py                                        9      9      0      0     0%   11-43
+src\celery_smoke.py                                     25     25      4      0     0%   6-40
+src\config\__init__.py                                   2      2      0      0     0%   5-7
+src\config\production.py                               107    107      8      0     0%   8-245
+src\config\rate_limit_config.py                         72     72     12      0     0%   10-238
+src\config\secrets_loader.py                            55     55     18      0     0%   12-157
+src\database.py                                        253    236     38      0     6%   24-32, 40-109, 114-219, 229-404, 409-433, 438-459, 464-479, 485-493, 498-522
+src\database_backup.py                                 128    128      8      0     0%   8-218
+src\database_encryption.py                             277    277     48      0     0%   12-692
+src\database_indexes.py                                 51     51     16      0     0%   16-122
+src\database_migration_unified.py                       90     90     14      0     0%   15-261
+src\decorators\__init__.py                               0      0      0      0   100%
+src\decorators\auth_decorators.py                       55     55     14      0     0%   9-118
+src\decorators\permission_decorators.py                112    112     34      0     0%   6-257
+src\encryption_manager.py                              311    311     58      0     0%   8-536
+src\https_server.py                                    129    129     20      0     0%   8-339
+src\integration\__init__.py                              2      2      0      0     0%   11-13
+src\jwt_manager.py                                     130    130     38      0     0%   13-340
+src\logging_config.py                                  103    103     44      0     0%   17-325
+src\logging_system.py                                  125    125      6      0     0%   11-328
+src\main.py                                            473    160    102     29    62%   29-31, 38-41, 49-52, 59-61, 72-76, 89-91, 166-168, 250->254, 266-267, 281-282, 301-311, 319-326, 352, 394-400, 406, 412->429, 424-425, 454->462, 459-460, 464-491, 518->526, 524-525, 547, 553-563, 576-577, 584-626, 637-638, 641-658, 669-670, 671->674, 674->677, 677->682, 682->685, 685->692, 692->695, 695->698, 698->705, 709, 736->738, 739-742, 762-763, 813-814, 843->exit, 852-853, 861-864, 869-907, 918-922, 936, 943, 958-969, 976-998
+src\main_simple.py                                     115    115     38      0     0%   10-404
+src\middleware\__init__.py                               0      0      0      0   100%
+src\middleware\circuit_breaker.py                      109    109     26      0     0%   12-232
+src\middleware\csp_nonce.py                             52     21     12      1    53%   45-47, 61-77, 118-127, 133, 148-161, 176
+src\middleware\error_envelope_middleware.py            104     40     14      0    54%   23-27, 32, 57-71, 112-135, 140-159, 176-178, 204-232
+src\middleware\performance_middleware.py               121    121     32      0     0%   6-252
+src\middleware\rate_limiter.py                         409    409    126      0     0%   23-870
+src\middleware\route_security.py                       131    131     30      0     0%   14-472
+src\middleware\scanner_blocker.py                       20      4     10      3    77%   20->exit, 31-32, 38-39
+src\middleware\security_middleware.py                  134    134     34      0     0%   19-332
+src\middleware\session_middleware.py                   152    152     30      0     0%   7-338
+src\models\__init__.py                                  48     10      0      0    79%   10-23
+src\models\accounting_system.py                         70     70      2      0     0%   14-124
+src\models\activity_log.py                              85     85     24      0     0%   6-473
+src\models\admin.py                                     92     92     18      0     0%   7-788
+src\models\audit_log.py                                 64     64      2      0     0%   9-194
+src\models\base.py                                      12     12      0      0     0%   7-42
+src\models\category.py                                  18      2      0      0    89%   45, 57
+src\models\crm_potential_customers.py                   63     63     18      0     0%   6-417
+src\models\customer.py                                  58     16      4      0    68%   12-13, 77, 81, 115-118, 122-127, 132, 140
+src\models\discount.py                                 173    173     56      0     0%   9-362
+src\models\enhanced_models.py                           60     60      2      0     0%   8-150
+src\models\fix_all_files.py                             53     53     20      0     0%   6-197
+src\models\fix_imports.py                               69     69     20      0     0%   6-235
+src\models\inventory.py                                199     95     10      2    51%   33-40, 72-73, 78-178, 215->224, 225, 290, 322, 354, 383-394
+src\models\invoice_unified.py                          197     78     38      0    51%   35-36, 195-247, 251-262, 266-279, 283-288, 292-297, 301-314, 318-331, 335-413, 416-417, 465, 480, 516, 530
+src\models\journal.py                                   73     73      0      0     0%   10-184
+src\models\lot_advanced.py                             131    131     22      0     0%   6-261
+src\models\models.py                                    89     89      0      0     0%   1-119
+src\models\notification.py                              59     59      0      0     0%   9-197
+src\models\notifications.py                             44     44      8      0     0%   6-335
+src\models\opening_balances_treasury.py                 86     86      4      0     0%   8-156
+src\models\optimized_queries.py                         80     80     14      0     0%   18-272
+src\models\partners.py                                 111     53      4      1    51%   31-69, 74-101, 137, 170->174, 175, 220
+src\models\payment.py                                  139    139      8      0     0%   9-387
+src\models\payment_management.py                       270     85      8      0    67%   28-66, 71-101, 202, 250-257, 261-268, 272-279, 312, 342-349, 353-358, 362-370, 393, 413-420, 443, 464-470, 495, 510-517, 543, 581, 613
+src\models\permission.py                                59     59     22      0     0%   6-148
+src\models\permissions.py                               69     69      2      0     0%   8-116
+src\models\pickup_delivery_orders.py                    69     69      2      0     0%   11-119
+src\models\price_history.py                             54     54     10      0     0%   9-179
+src\models\product_advanced.py                         138     44      4      0    66%   17-53, 204, 213, 218, 227, 232, 238-242, 246-252, 256, 260
+src\models\product_unified.py                            5      0      0      0   100%
+src\models\product_variant.py                           94     94     12      0     0%   9-301
+src\models\profit_loss_system.py                        69     69      2      0     0%   11-119
+src\models\purchase_order.py                           118    118      2      0     0%   9-315
+src\models\purchase_receipt.py                          65     65     14      0     0%   6-122
+src\models\refresh_token.py                             61     61      0      0     0%   13-242
+src\models\region_warehouse.py                         101    101      2      0     0%   8-175
+src\models\returns.py                                  175    175     28      0     0%   9-402
+src\models\returns_management.py                        69     69      2      0     0%   8-116
+src\models\role.py                                      86     86     26      0     0%   6-195
+src\models\sale.py                                      76     76      6      0     0%   4-159
+src\models\sales_advanced.py                           209    209     22      0     0%   8-473
+src\models\sales_engineer.py                            50     18      6      0    57%   11-12, 59, 63-85, 90, 95, 99-103, 107-111
+src\models\security_system.py                           69     69      2      0     0%   11-119
+src\models\settings.py                                  71     38     20      0    36%   43-55, 59-64, 67, 82-83, 97-115, 120, 125, 130-131, 134, 299-312
+src\models\shift.py                                     53     53      4      0     0%   4-88
+src\models\simple_fix.py                                46     46     10      0     0%   6-185
+src\models\stock_movement.py                           100    100     18      0     0%   9-374
+src\models\stock_movement_advanced.py                   69     69      2      0     0%   11-119
+src\models\supplier.py                                  66     23     10      0    57%   73, 77, 113-116, 120-125, 129, 135-137, 141-147
+src\models\supporting_models.py                        110     14      0      0    87%   39, 42, 71, 74, 103, 106, 136, 139, 169, 172, 199, 202, 235, 238
+src\models\system_settings_advanced.py                  69     69      2      0     0%   11-119
+src\models\test_all_files.py                            64     64     14      0     0%   6-112
+src\models\test_entire_project.py                       95     95     22      0     0%   6-152
+src\models\treasury_management.py                      201     77      6      0    60%   31-69, 74-104, 171, 202-208, 212-216, 262, 301-307, 311-317, 340, 365-368, 404, 434-439, 443-444, 459
+src\models\unified_invoice.py                          149    149      6      0     0%   7-289
+src\models\unified_models.py                            94     94      2      0     0%   11-169
+src\models\user.py                                     216    118     38      0    39%   17-19, 24-31, 66-72, 75, 78, 134-136, 151-162, 167-175, 180-193, 197-202, 210-219, 223-231, 235-240, 243, 246-267, 282-307, 314-316, 321, 326, 332-350, 372, 413-421, 424, 438-447
+src\models\user_management_advanced.py                  69     69      2      0     0%   11-119
+src\models\user_unified.py                              17      9      4      0    38%   21-22, 34-79
+src\models\warehouse.py                                 10      7      0      0    30%   10-19
+src\models\warehouse_adjustments.py                     69     69      2      0     0%   11-119
+src\models\warehouse_advanced.py                        69     69      2      0     0%   11-119
+src\models\warehouse_constraints.py                     69     69      2      0     0%   11-119
+src\models\warehouse_transfer.py                       108    108      6      0     0%   11-304
+src\models\warehouse_unified.py                          2      0      0      0   100%
+src\optimize_database.py                                86     86     16      0     0%   13-241
+src\password_hasher.py                                 127     98     36      2    19%   27-33, 41-44, 73-74, 86-118, 136-199, 215-229, 250, 264, 277, 287-318
+src\permissions.py                                     145     43     26      0    60%   423, 437-443, 454-483, 513-564, 573, 578, 583
+src\rag_cache.py                                       205    205     46      0     0%   16-479
+src\rag_evaluation.py                                  236    236     88      0     0%   13-659
+src\rag_ingest.py                                       93     93     36      0     0%   7-161
+src\rag_reranker.py                                    206    206     66      0     0%   14-538
+src\rag_service.py                                      58     52      6      0     9%   15-115
+src\resilience\__init__.py                               5      0      2      1    86%   42->exit
+src\resilience\circuit_breaker.py                      108     82     34      0    18%   44-60, 64, 67-69, 72-77, 80-85, 88-94, 97-99, 104-105, 113-129, 132-172, 185-190
+src\resilience\http_client.py                           61     47     12      0    19%   33-36, 40, 72-130, 137, 141, 145, 149
+src\resilience\pybreaker_http_client.py                 55     39     16      0    23%   37-41, 45-48, 52, 76-119, 126, 130, 134, 138
+src\routes\__init__.py                                   0      0      0      0   100%
+src\routes\accounting.py                                16      8      0      0    50%   27-32, 43-48
+src\routes\accounting_system.py                         70     70      2      0     0%   14-124
+src\routes\admin_panel.py                              301    301     78      0     0%   5-712
+src\routes\advanced_reports.py                          29     18      0      0    38%   26-31, 45-50, 64-86, 95-139
+src\routes\audit.py                                     69     69      4      0     0%   9-179
+src\routes\auth_unified.py                             313    247     74      0    17%   42-51, 64-74, 136-138, 164-189, 198-212, 221-231, 236-244, 249-266, 279-322, 330-359, 370-372, 396-547, 568-594, 622-706, 724-776, 785, 800-842, 860-912, 926-946
+src\routes\automation.py                               239    239     30      0     0%   18-582
+src\routes\batch.py                                    213    213     62      0     0%   10-609
+src\routes\batches_advanced.py                         191    191     42      0     0%   6-414
+src\routes\categories.py                                81     81     10      0     0%   13-168
+src\routes\circuit_breaker_routes.py                    69     69      4      0     0%   13-223
+src\routes\company_settings.py                         141    110     30      0    18%   31-50, 69, 74-92, 99-133, 140-253, 260-294, 301-351
+src\routes\comprehensive_reports.py                     29     18      0      0    38%   26-35, 49-54, 65-84, 93-118
+src\routes\customer_supplier_accounts.py               130    107     36      0    14%   119-145, 156-177, 188-230, 241-271, 282-330, 341-407, 418-448, 461-486
+src\routes\customers.py                                 59     49      8      0    15%   26-118, 128-160, 170-225
+src\routes\dashboard.py                                135     95     26      0    25%   29-52, 57-62, 84-155, 195-287, 312-342, 369-396, 422-433, 463-508, 518-542
+src\routes\errors.py                                    57     57     12      0     0%   13-150
+src\routes\excel_import.py                             188    148     38      0    18%   17-33, 43-71, 78, 86, 89, 92, 96, 103, 111-117, 124-161, 171-222, 228-255, 264-313, 322-361, 370-405
+src\routes\excel_import_clean.py                       165    165     38      0     0%   10-364
+src\routes\excel_operations.py                         461    461     84      0     0%   5-1154
+src\routes\excel_templates.py                           15      8      0      0    47%   26-29, 40-43
+src\routes\export.py                                   141    111     20      0    19%   37-45, 65-105, 133-172, 197-230, 249-290, 324-388
+src\routes\external_integration.py                      17      9      0      0    47%   27-41
+src\routes\financial_reports.py                        301    268     76      0     9%   32-45, 57-212, 218-362, 371-427, 436-571, 580-685, 694-840, 849-872, 878-955, 961-978, 987-1006
+src\routes\financial_reports_advanced.py               177    144     28      0    16%   28-38, 57-115, 120-125, 138-204, 211-271, 281-429, 441-479, 492-568
+src\routes\import_data.py                              448    448    146      0     0%   16-935
+src\routes\import_export_advanced.py                   277    237     82      0    11%   28-38, 43-46, 52, 73, 78-116, 121-147, 152-160, 167-302, 309-469, 478-601, 608-621, 631-649
+src\routes\integration_apis.py                          89     89     22      0     0%   9-438
+src\routes\interactive_dashboard.py                    205    205     34      0     0%   21-446
+src\routes\inventory.py                                279    207     46      0    22%   33-56, 76-85, 93-129, 140-146, 154-191, 202-208, 216-256, 267-292, 298-331, 339-396, 404-408, 416-461, 469-491, 502-511, 519-558, 569-580
+src\routes\inventory_advanced.py                        75     75     10      0     0%   11-422
+src\routes\inventory_fixed.py                           85     85      6      0     0%   18-174
+src\routes\inventory_smorest.py                        132     46      6      0    62%   318-343, 353-373, 387-420, 430-458, 474-530
+src\routes\invoices.py                                 148    124     40      0    13%   36-80, 91-173, 182-186, 197-268, 277-347, 356-390, 400-420
+src\routes\invoices_enhanced.py                         81     81     10      0     0%   8-159
+src\routes\invoices_smorest.py                         188    102     38      0    38%   55-59, 306-360, 370-433, 447-457, 467-500, 509-527
+src\routes\invoices_unified.py                         530    530    210      0     0%   15-1495
+src\routes\journal.py                                   74     74     14      0     0%   8-142
+src\routes\lot_management.py                           193    164     44      0    12%   19-35, 45-75, 79-94, 103-135, 140-143, 148-151, 161-210, 221-286, 295-311, 320-370, 379-398, 409-428
+src\routes\lot_reports.py                              202    202     58      0     0%   5-639
+src\routes\mfa_routes.py                               103    103     28      0     0%   10-329
+src\routes\notifications.py                             74     74      4      0     0%   9-210
+src\routes\openapi_demo.py                              11      1      0      0    91%   27
+src\routes\openapi_external_docs.py                     11      0      0      0   100%
+src\routes\openapi_health.py                            12      1      0      0    92%   27
+src\routes\opening_balances_treasury.py                 86     86      4      0     0%   8-156
+src\routes\partners.py                                 333    268     52      0    17%   36, 53-59, 65-91, 101-126, 132-169, 175-179, 185-220, 226-249, 258-283, 289-326, 332-336, 342-377, 383-406, 415-448, 454-508, 517-523, 529-566, 572-600, 606-629, 638-644, 650-687, 693-721, 727-750
+src\routes\partners_smorest.py                         187     82     30      1    49%   23->exit, 177-203, 225-232, 251-261, 277-294, 314-328, 358-378, 400-407, 426-436, 452-469, 489-503
+src\routes\partners_unified.py                         410    410    136      0     0%   12-966
+src\routes\payment_debt_management.py                  317    248     76      0    18%   34-36, 44-52, 59-105, 115-149, 162-174, 187-220, 238-253, 269-281, 294-327, 343-355, 371-386, 405-424, 440-466, 482-501, 520-562, 578-624, 643-672, 685-714
+src\routes\payment_management.py                       112     84      0      0    25%   38-51, 66-87, 93-128, 134-155, 161-195, 201-233, 239-247, 253-283, 289-327
+src\routes\permissions.py                               86     65      2      0    24%   19-27, 33-44, 64-102, 107-137, 152
+src\routes\pos.py                                      165    165     42      0     0%   4-430
+src\routes\products.py                                  62     49      8      0    19%   40-141, 151-188, 198-259
+src\routes\products_advanced.py                         64     49      8      0    21%   31-106, 117-155, 161-194, 205-238, 247-268, 279-284
+src\routes\products_enhanced.py                        334    334    104      0     0%   21-929
+src\routes\products_fixed.py                           103    103     16      0     0%   18-254
+src\routes\products_smorest.py                          59      0      6      1    98%   19->exit
+src\routes\products_unified.py                         425    425    146      0     0%   2-1286
+src\routes\profit_loss.py                               15      8      0      0    47%   26-35, 46-55
+src\routes\profit_loss_system.py                        69     69      2      0     0%   11-119
+src\routes\purchases.py                                178    178     48      0     0%   6-430
+src\routes\rag.py                                       42     20      2      0    50%   44-53, 59, 68-78, 97-118
+src\routes\region_warehouse.py                         117     66      2      0    43%   19-29, 37-47, 69-107, 112-142, 157, 182, 216
+src\routes\reports.py                                  248    202     58      1    15%   54-122, 132-169, 175-213, 221-223, 229-333, 339-445, 451-537, 543-629, 635-771, 777-866
+src\routes\reports_fixed.py                             87     87     20      0     0%   16-201
+src\routes\reports_system.py                           162    162     44      0     0%   4-421
+src\routes\returns_management.py                        80     57      2      0    28%   21, 29, 37, 59-97, 102-132, 147
+src\routes\sales.py                                     15      8      0      0    47%   26-31, 42-47
+src\routes\sales_advanced.py                           228    104     22      3    51%   22-32, 40-44, 61, 84-126, 131-161, 203, 242->258, 259, 310->313, 314, 348->355, 356, 389, 421, 442-448, 456-487, 501-530
+src\routes\sales_simple.py                              63     63      6      0     0%   8-218
+src\routes\security_routes.py                          147    111     46      0    19%   37-40, 45-59, 70-72, 83-97, 103-117, 123-145, 162-177, 183-189, 200-207, 218-240, 245-266, 271-276, 281-282, 293-331, 344-368
+src\routes\security_system.py                          171    144     28      0    14%   17-33, 43-73, 77-90, 95-110, 115-120, 125-143, 153-201, 210-215, 225-261, 270-322, 334-356
+src\routes\settings.py                                 113     75     30      0    27%   29-45, 53-55, 67-74, 86-115, 123-178, 186-226, 236-265, 284-288, 295-299
+src\routes\suppliers.py                                195    129     40      0    28%   82-135, 142-152, 160-213, 221-276, 283-311, 318-341, 348-378, 385-429
+src\routes\system_settings_advanced.py                  69     69      2      0     0%   11-119
+src\routes\system_status.py                             35     35      2      0     0%   10-113
+src\routes\temp_api.py                                  80     80      4      0     0%   10-347
+src\routes\treasury_management.py                      143    113     14      0    19%   38-51, 66-77, 83-114, 120-143, 149-175, 181-221, 227-237, 243-276, 282-332, 338-379
+src\routes\two_factor_auth.py                          100    100     22      0     0%   11-332
+src\routes\user.py                                     344    268    116      0    17%   41, 45, 61-63, 70-72, 77-78, 87-94, 111-118, 123-129, 135-178, 189-329, 339-357, 367-382, 394-450, 462-536, 548-595, 605-660, 670-753, 763-801, 811-819, 829-870, 879-892
+src\routes\user_management_advanced.py                  69     69      2      0     0%   11-119
+src\routes\users.py                                     93     93     18      0     0%   13-181
+src\routes\users_smorest.py                            148     58     26      1    52%   23->exit, 191-219, 242-273, 292-302, 318-340, 360-374, 388-392
+src\routes\users_unified.py                            316    316     82      0     0%   23-834
+src\routes\warehouse_adjustments.py                    176    146     52      0    13%   137-169, 182-193, 204-278, 289-344, 355-399, 410-449, 460-488, 497-501, 510-532, 541-584, 595-612
+src\routes\warehouse_transfer.py                       201    148     36      0    22%   35-40, 46-59, 63-80, 188-189, 199, 212-265, 278-339, 354-360, 375-416, 431-471, 486-509, 522-551
+src\routes\warehouses.py                                84     84     12      0     0%   13-173
+src\secure_communication.py                            181    181     46      0     0%   14-413
+src\security_config.py                                  88     88     28      0     0%   8-165
+src\security_headers.py                                  9      9      0      0     0%   14-41
+src\security_middleware.py                             159    159     38      0     0%   8-423
+src\sentry_config.py                                   114    114     26      0     0%   17-363
+src\services\__init__.py                                 3      0      0      0   100%
+src\services\api_documentation.py                       53     53     14      0     0%   7-254
+src\services\audit_service.py                          143    143     36      0     0%   9-413
+src\services\automation_service.py                     384    384    102      0     0%   17-725
+src\services\backup_service.py                         224    224     68      0     0%   9-505
+src\services\cache_service.py                           90     90     14      0     0%   6-165
+src\services\circuit_breaker_manager.py                 59     59     12      0     0%   10-176
+src\services\credit_service.py                         173    173     28      0     0%   9-471
+src\services\customer_supplier_accounts_service.py     356    356    104      0     0%   15-1073
+src\services\db_optimizer.py                            47     47      4      0     0%   6-105
+src\services\email_service.py                          101    101     32      0     0%   9-421
+src\services\error_handler.py                          353    353    100      0     0%   23-971
+src\services\import_export_service.py                  112    112     32      0     0%   6-335
+src\services\integrations\healthcheck_client.py         10      6      0      0    40%   18-24
+src\services\interactive_dashboard_service.py          218    218     48      0     0%   14-1024
+src\services\inventory_alerts.py                       156    156     34      0     0%   9-387
+src\services\inventory_service_advanced.py              95     74      8      0    20%   17, 28-61, 65-94, 98-114, 120-140, 146-171, 177-204, 208-233, 241-268, 272-294, 299-300, 305-306, 311, 316, 321
+src\services\invoice_email_service.py                  119    119     12      0     0%   14-343
+src\services\journal_service.py                         75     75     16      0     0%   10-208
+src\services\monitoring_service.py                      77     77     26      0     0%   6-201
+src\services\notification_service.py                   109    109     16      0     0%   9-364
+src\services\opening_balances_treasury_service.py      423    423    146      0     0%   12-1142
+src\services\payment_debt_management_service.py        175    153     72      0     9%   49-121, 135-181, 198-260, 280-351, 371-444, 464-501, 514-600
+src\services\performance_optimizer.py                  413    413    108      0     0%   19-1143
+src\services\permission_service.py                     188    188     54      0     0%   9-501
+src\services\report_service.py                         390    390    144      0     0%   12-1097
+src\services\reports_service.py                         99     99      0      0     0%   9-400
+src\services\returns_management_service.py             202    202     70      0     0%   12-658
+src\services\scheduler.py                              146    146     38      0     0%   9-360
+src\services\secrets_adapter.py                         79     79     14      0     0%   12-228
+src\services\settings_service.py                        97     81     22      0    13%   16-17, 23-48, 52-66, 70-98, 104-144, 150-197, 203-254, 260-297, 303-318, 322-349, 353-367
+src\services\system_settings_advanced_service.py       190    190     46      0     0%   14-668
+src\services\tax_service.py                            103    103     12      0     0%   9-319
+src\services\user_management_advanced_service.py       193    193     66      0     0%   14-689
+src\services\warehouse_adjustments_service.py          196    196     66      0     0%   12-639
+src\services\warehouse_constraints_service.py          233    233     84      0     0%   12-726
+src\tasks\__init__.py                                    0      0      0      0   100%
+src\tasks\example_tasks.py                               9      9      0      0     0%   1-24
+src\test_unified_server.py                             271    271     68      0     0%   11-502
+src\token_blacklist.py                                 133    104     32      1    18%   30-32, 56-62, 73-88, 101-120, 132-150, 162-175, 179-188, 192-209, 213-229, 240, 245, 257-258
+src\unified_server.py                                  261    261     32      0     0%   13-508
+src\unified_server_clean.py                            157    157     12      0     0%   11-300
+src\utils\__init__.py                                    2      0      0      0   100%
+src\utils\barcode_generator.py                         212    212     36      0     0%   9-479
+src\utils\comprehensive_logger.py                      163    163     44      0     0%   11-392
+src\utils\data_import.py                               181    181     52      0     0%   9-454
+src\utils\database_audit.py                             71     71     20      0     0%   11-140
+src\utils\encryption.py                                148    148     30      0     0%   33-346
+src\utils\error_handlers.py                             96     96      4      0     0%   10-341
+src\utils\export.py                                    213    167     64      0    17%   72-74, 86-204, 218, 230-381, 395, 407-421, 435, 447-460, 483-495, 500-507, 512-519
+src\utils\file_scanner.py                              157    157     56      0     0%   14-504
+src\utils\image_manager.py                             146    146     34      0     0%   9-316
+src\utils\logger.py                                    117    117      8      0     0%   15-410
+src\utils\logging_config.py                            104    104     20      0     0%   10-277
+src\utils\permission_helper.py                          60     60     20      0     0%   6-430
+src\utils\purchase_helper.py                            94     94     30      0     0%   6-279
+src\utils\search.py                                    170    170     72      0     0%   9-403
+src\utils\secrets_manager.py                           142    142     50      0     0%   29-309
+src\utils\security.py                                  135    135     44      0     0%   6-348
+src\utils\sequential_thinking.py                        22     14      4      1    35%   13, 16, 19-26, 34-39
+src\utils\ssrf_protection.py                           139    139     58      0     0%   14-387
+src\utils\startup_logger.py                             68     68      8      0     0%   11-229
+src\utils\two_factor_auth.py                           156    156     18      0     0%   18-411
+src\utils\validation.py                                247     77     36      0    60%   33-39, 47-64, 71-75, 82-85, 505-551, 587-604, 609-618, 623-635, 640-644, 649-653, 658-664
+src\utils\validators.py                                113    113     68      0     0%   10-301
+src\validators\__init__.py                              10     10      0      0     0%   20-101
+src\validators\auth_validators.py                       58     58      0      0     0%   16-187
+src\validators\category_validators.py                   62     62      0      0     0%   7-165
+src\validators\common_validators.py                     25     25      0      0     0%   14-82
+src\validators\invoice_validators.py                    81     81      0      0     0%   7-195
+src\validators\mfa_validators.py                        29     29      2      0     0%   14-93
+src\validators\product_validators.py                    78     78      4      0     0%   16-214
+src\validators\report_validators.py                     77     77      0      0     0%   7-169
+src\validators\supplier_validators.py                   67     67      0      0     0%   7-143
+src\validators\user_validators.py                       71     71      0      0     0%   7-183
+src\vault_client.py                                    122    122     28      0     0%   16-354
+------------------------------------------------------------------------------------------------
+TOTAL                                                35984  31957   7556     53     9%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+
+FAIL Required test coverage of 70% not reached. Total coverage: 9.44%
+=========================== short test summary info ===========================
+FAILED tests/test_integration_api.py::TestProductsAPI::test_create_product - assert 400 in [200, 201, 404]
+ +  where 400 = <WrapperTestResponse streamed [400 BAD REQUEST]>.status_code
+ERROR tests/test_integration_api.py::TestProductsAPI::test_get_single_product
+ERROR tests/test_integration_api.py::TestProductsAPI::test_update_product
+ERROR tests/test_integration_api.py::TestProductsAPI::test_delete_product
+ERROR tests/test_integration_api.py::TestProductsAPI::test_delete_product_without_admin
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+============= 1 failed, 5 passed, 82 warnings, 4 errors in 15.96s =============

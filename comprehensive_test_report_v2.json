@@ -1,0 +1,50 @@
+{
+  "timestamp": "2025-10-05T08:01:53.205581",
+  "test_results": {
+    "code_quality": {
+      "backend": "failed",
+      "scripts": "warning"
+    },
+    "backend": {
+      "health": "healthy",
+      "endpoints": {
+        "working": [],
+        "failed": [
+          "/api/categories (404)",
+          "/api/warehouses (404)",
+          "/api/users (404)",
+          "/api/inventory (404)",
+          "/api/reports/dashboard (404)"
+        ]
+      }
+    },
+    "frontend": {
+      "error": "HTTPConnectionPool(host='localhost', port=5502): Read timed out. (read timeout=10)"
+    },
+    "database": {
+      "tables": "complete",
+      "admin_user": "missing",
+      "data": {
+        "categories": 5,
+        "warehouses": 0
+      },
+      "status": "healthy"
+    },
+    "authentication": {
+      "login": "failed"
+    },
+    "endpoints": {},
+    "overall_status": "fair",
+    "overall_score": 55
+  },
+  "summary": {
+    "overall_score": 55,
+    "overall_status": "fair",
+    "recommendations": [
+      "إصلاح مشاكل جودة الكود في الخادم الخلفي",
+      "إنشاء مستخدم إداري في قاعدة البيانات",
+      "إصلاح نظام المصادقة",
+      "إصلاح الخادم الأمامي"
+    ]
+  }
+}

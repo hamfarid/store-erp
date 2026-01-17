@@ -1,0 +1,144 @@
+Tool `initialize_project` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"skipInstall":{"default":false,"type":"boolean"},"addAliases":{"default":true,"type":"boolean"},"initGit":{"default":true,"type":"boolean"},"storeTasksInGit":{"default":true,"type":"boolean"},"yes":{"default":true,"type":"boolean"},"projectRoot":{"type":"string"},"rules":{"type":"array","items":{"type":"string","enum":["amp","claude","cline","codex","cursor","gemini","kiro","opencode","kilo","roo","trae","vscode","windsurf","zed"]}}},"required":["skipInstall","addAliases","initGit","storeTasksInGit","yes","projectRoot"],"additionalProperties":false}
+
+Tool `models` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"setMain":{"type":"string"},"setResearch":{"type":"string"},"setFallback":{"type":"string"},"listAvailableModels":{"type":"boolean"},"projectRoot":{"type":"string"},"openrouter":{"type":"boolean"},"ollama":{"type":"boolean"},"bedrock":{"type":"boolean"},"azure":{"type":"boolean"},"vertex":{"type":"boolean"}},"required":["projectRoot"],"additionalProperties":false}
+
+Tool `rules` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"action":{"type":"string","enum":["add","remove"]},"profiles":{"minItems":1,"type":"array","items":{"type":"string","enum":["amp","claude","cline","codex","cursor","gemini","kiro","opencode","kilo","roo","trae","vscode","windsurf","zed"]}},"projectRoot":{"type":"string"},"force":{"default":false,"type":"boolean"}},"required":["action","profiles","projectRoot","force"],"additionalProperties":false}
+
+Tool `parse_prd` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"input":{"default":".taskmaster/docs/prd.txt","type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"},"output":{"type":"string"},"numTasks":{"type":"string"},"force":{"default":false,"type":"boolean"},"research":{"type":"boolean"},"append":{"type":"boolean"}},"required":["input","projectRoot","force"],"additionalProperties":false}
+
+Tool `analyze_project_complexity` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"threshold":{"default":5,"type":"integer","minimum":1,"maximum":10},"research":{"default":false,"type":"boolean"},"output":{"type":"string"},"file":{"type":"string"},"ids":{"type":"string"},"from":{"type":"integer","exclusiveMinimum":0,"maximum":9007199254740991},"to":{"type":"integer","exclusiveMinimum":0,"maximum":9007199254740991},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["threshold","research","projectRoot"],"additionalProperties":false}
+
+Tool `expand_task` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"num":{"type":"string"},"research":{"default":false,"type":"boolean"},"prompt":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"},"force":{"default":false,"type":"boolean"},"tag":{"type":"string"}},"required":["id","research","projectRoot","force"],"additionalProperties":false}
+
+Tool `expand_all` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"num":{"type":"string"},"research":{"type":"boolean"},"prompt":{"type":"string"},"force":{"type":"boolean"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"additionalProperties":false}
+
+Tool `scope_up_task` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"strength":{"type":"string"},"prompt":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"},"research":{"type":"boolean"}},"required":["id","projectRoot"],"additionalProperties":false}
+
+Tool `scope_down_task` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"strength":{"type":"string"},"prompt":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"},"research":{"type":"boolean"}},"required":["id","projectRoot"],"additionalProperties":false}
+
+Tool `get_tasks` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"status":{"type":"string"},"withSubtasks":{"type":"boolean"},"file":{"type":"string"},"complexityReport":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["projectRoot"],"additionalProperties":false}
+
+Tool `get_task` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"status":{"type":"string"},"file":{"type":"string"},"complexityReport":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["id","projectRoot"],"additionalProperties":false}
+
+Tool `next_task` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"file":{"type":"string"},"complexityReport":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["projectRoot"],"additionalProperties":false}
+
+Tool `complexity_report` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"file":{"type":"string"},"projectRoot":{"type":"string"}},"required":["projectRoot"],"additionalProperties":false}
+
+Tool `set_task_status` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"status":{"type":"string","enum":["pending","done","in-progress","review","deferred","cancelled"]},"file":{"type":"string"},"complexityReport":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["id","status","projectRoot"],"additionalProperties":false}
+
+Tool `generate` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"file":{"type":"string"},"output":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["projectRoot"],"additionalProperties":false}
+
+Tool `add_task` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"prompt":{"type":"string"},"title":{"type":"string"},"description":{"type":"string"},"details":{"type":"string"},"testStrategy":{"type":"string"},"dependencies":{"type":"string"},"priority":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"},"research":{"type":"boolean"}},"required":["projectRoot"],"additionalProperties":false}
+
+Tool `add_subtask` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"taskId":{"type":"string"},"title":{"type":"string"},"description":{"type":"string"},"details":{"type":"string"},"status":{"type":"string"},"dependencies":{"type":"string"},"file":{"type":"string"},"skipGenerate":{"type":"boolean"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["id","projectRoot"],"additionalProperties":false}
+
+Tool `update` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"from":{"type":"string"},"prompt":{"type":"string"},"research":{"type":"boolean"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["from","prompt"],"additionalProperties":false}
+
+Tool `update_task` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"prompt":{"type":"string"},"research":{"type":"boolean"},"append":{"type":"boolean"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["id","prompt","projectRoot"],"additionalProperties":false}
+
+Tool `update_subtask` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"prompt":{"type":"string"},"research":{"type":"boolean"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["id","prompt","projectRoot"],"additionalProperties":false}
+
+Tool `remove_task` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"},"confirm":{"type":"boolean"},"tag":{"type":"string"}},"required":["id","projectRoot"],"additionalProperties":false}
+
+Tool `remove_subtask` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"convert":{"type":"boolean"},"file":{"type":"string"},"skipGenerate":{"type":"boolean"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["id","projectRoot"],"additionalProperties":false}
+
+Tool `clear_subtasks` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"all":{"type":"boolean"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["projectRoot"],"additionalProperties":false}
+
+Tool `move_task` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"from":{"type":"string"},"to":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"},"fromTag":{"type":"string"},"toTag":{"type":"string"},"withDependencies":{"type":"boolean"},"ignoreDependencies":{"type":"boolean"}},"required":["from","projectRoot"],"additionalProperties":false}
+
+Tool `add_dependency` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"dependsOn":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["id","dependsOn","projectRoot"],"additionalProperties":false}
+
+Tool `remove_dependency` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"id":{"type":"string"},"dependsOn":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["id","dependsOn","projectRoot"],"additionalProperties":false}
+
+Tool `validate_dependencies` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["projectRoot"],"additionalProperties":false}
+
+Tool `fix_dependencies` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"file":{"type":"string"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["projectRoot"],"additionalProperties":false}
+
+Tool `response-language` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"projectRoot":{"type":"string"},"language":{"type":"string"}},"required":["projectRoot","language"],"additionalProperties":false}
+
+Tool `list_tags` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"showMetadata":{"type":"boolean"},"file":{"type":"string"},"projectRoot":{"type":"string"}},"required":["projectRoot"],"additionalProperties":false}
+
+Tool `add_tag` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"name":{"type":"string"},"copyFromCurrent":{"type":"boolean"},"copyFromTag":{"type":"string"},"fromBranch":{"type":"boolean"},"description":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"}},"required":["name","projectRoot"],"additionalProperties":false}
+
+Tool `delete_tag` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"name":{"type":"string"},"yes":{"type":"boolean"},"file":{"type":"string"},"projectRoot":{"type":"string"}},"required":["name","projectRoot"],"additionalProperties":false}
+
+Tool `use_tag` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"name":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"}},"required":["name","projectRoot"],"additionalProperties":false}
+
+Tool `rename_tag` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"oldName":{"type":"string"},"newName":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"}},"required":["oldName","newName","projectRoot"],"additionalProperties":false}
+
+Tool `copy_tag` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"sourceName":{"type":"string"},"targetName":{"type":"string"},"description":{"type":"string"},"file":{"type":"string"},"projectRoot":{"type":"string"}},"required":["sourceName","targetName","projectRoot"],"additionalProperties":false}
+
+Tool `research` has invalid JSON parameters:
+	- The schema uses meta-schema features ($dynamicRef) that are not yet supported by the validator. (at /$schema)
+	- Schema: {"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"query":{"type":"string"},"taskIds":{"type":"string"},"filePaths":{"type":"string"},"customContext":{"type":"string"},"includeProjectTree":{"type":"boolean"},"detailLevel":{"type":"string","enum":["low","medium","high"]},"saveTo":{"type":"string"},"saveToFile":{"type":"boolean"},"projectRoot":{"type":"string"},"tag":{"type":"string"}},"required":["query","projectRoot"],"additionalProperties":false}
+

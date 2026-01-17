@@ -1,0 +1,191 @@
+{
+  "mcp_tools": {
+    "sentry": {
+      "server_name": "sentry",
+      "status": "active",
+      "tools": [
+        {
+          "name": "list_projects",
+          "description": "List all projects in the Sentry organization",
+          "usage": "Get overview of all monitored projects"
+        },
+        {
+          "name": "get_project_issues",
+          "description": "Retrieve issues for a specific project",
+          "usage": "Monitor errors and issues in Store ERP"
+        },
+        {
+          "name": "get_issue_details",
+          "description": "Get detailed information about a specific issue",
+          "usage": "Investigate specific errors"
+        },
+        {
+          "name": "update_issue",
+          "description": "Update issue status or properties",
+          "usage": "Mark issues as resolved or assign them"
+        },
+        {
+          "name": "get_performance_data",
+          "description": "Retrieve performance monitoring data",
+          "usage": "Analyze application performance"
+        }
+      ],
+      "configuration": {
+        "organization": "gaara-group",
+        "project": "store-erp"
+      }
+    },
+    "cloudflare": {
+      "server_name": "cloudflare",
+      "status": "available",
+      "tools": [
+        {
+          "name": "d1_query",
+          "description": "Execute SQL queries on D1 database",
+          "usage": "Database operations (if configured)"
+        },
+        {
+          "name": "r2_upload",
+          "description": "Upload files to R2 object storage",
+          "usage": "File storage (if configured)"
+        },
+        {
+          "name": "kv_get",
+          "description": "Retrieve value from KV store",
+          "usage": "Key-value storage (if configured)"
+        },
+        {
+          "name": "kv_put",
+          "description": "Store value in KV store",
+          "usage": "Key-value storage (if configured)"
+        }
+      ],
+      "configuration": {
+        "note": "Not currently configured for Store ERP"
+      }
+    },
+    "playwright": {
+      "server_name": "playwright",
+      "status": "available",
+      "tools": [
+        {
+          "name": "browser_install",
+          "description": "Install browser for automation",
+          "usage": "Setup browser for testing"
+        },
+        {
+          "name": "navigate",
+          "description": "Navigate to a URL",
+          "usage": "E2E testing navigation"
+        },
+        {
+          "name": "click",
+          "description": "Click an element",
+          "usage": "E2E testing interactions"
+        },
+        {
+          "name": "fill",
+          "description": "Fill form fields",
+          "usage": "E2E testing form submission"
+        },
+        {
+          "name": "screenshot",
+          "description": "Capture screenshot",
+          "usage": "Visual testing and documentation"
+        }
+      ],
+      "configuration": {
+        "note": "Not currently configured for Store ERP"
+      }
+    },
+    "serena": {
+      "server_name": "serena",
+      "status": "available",
+      "tools": [
+        {
+          "name": "check_onboarding",
+          "description": "Check if project onboarding was performed",
+          "usage": "Verify Serena setup"
+        },
+        {
+          "name": "semantic_search",
+          "description": "Search code semantically",
+          "usage": "Find relevant code sections"
+        },
+        {
+          "name": "code_edit",
+          "description": "Edit code with semantic understanding",
+          "usage": "Refactoring and code improvements"
+        }
+      ],
+      "configuration": {
+        "note": "Not currently configured for Store ERP"
+      }
+    }
+  },
+  "usage_guidelines": {
+    "sentry": {
+      "when_to_use": [
+        "Monitoring application errors",
+        "Tracking performance issues",
+        "Investigating production bugs",
+        "Analyzing error trends"
+      ],
+      "best_practices": [
+        "Check issues regularly",
+        "Prioritize critical errors",
+        "Use performance data for optimization",
+        "Set up alerts for critical issues"
+      ]
+    },
+    "cloudflare": {
+      "when_to_use": [
+        "Need distributed database (D1)",
+        "Need object storage (R2)",
+        "Need key-value store (KV)",
+        "Building serverless features"
+      ],
+      "best_practices": [
+        "Configure only when needed",
+        "Use for scalability",
+        "Monitor usage and costs",
+        "Follow Cloudflare best practices"
+      ]
+    },
+    "playwright": {
+      "when_to_use": [
+        "E2E testing",
+        "Browser automation",
+        "Screenshot generation",
+        "PDF generation from web pages"
+      ],
+      "best_practices": [
+        "Install browser first",
+        "Use for critical user flows",
+        "Keep tests maintainable",
+        "Run in CI/CD pipeline"
+      ]
+    },
+    "serena": {
+      "when_to_use": [
+        "Semantic code search",
+        "Large refactoring tasks",
+        "Understanding unfamiliar code",
+        "Code analysis"
+      ],
+      "best_practices": [
+        "Onboard project first",
+        "Use for complex code navigation",
+        "Verify edits before committing",
+        "Keep semantic index updated"
+      ]
+    }
+  },
+  "notes": {
+    "active_tools": "Only Sentry is currently active",
+    "available_tools": "Cloudflare, Playwright, and Serena are available but not configured",
+    "configuration": "Configure additional tools as needed for specific tasks",
+    "environment_separation": "All MCP tools are helper tools for AI assistant, not part of user project"
+  }
+}
+

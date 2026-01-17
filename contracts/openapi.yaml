@@ -1,0 +1,2654 @@
+openapi: 3.1.0
+info:
+  title: Gaara Store - Inventory Management API
+  description: |
+    Arabic-first inventory management system API.
+
+    ## Features
+    - JWT-based authentication with token rotation
+    - MFA support (TOTP-based)
+    - Unified error envelope with traceId
+    - Request/response validation
+    - Comprehensive product, customer, supplier, and invoice management
+
+    ## Security
+    - All endpoints require JWT authentication (except /auth/login)
+    - Failed login lockout (5 attempts / 15 minutes)
+    - Argon2id password hashing
+    - HTTPS enforced in production
+
+  version: 1.7.0
+  contact:
+    name: Gaara Group
+    url: https://www.gaaragroup.com
+    email: support@gaaragroup.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:5002
+    description: Development server
+  - url: https://api.gaaragroup.com
+    description: Production server
+
+tags:
+  - name: Auth
+    description: Authentication and authorization endpoints
+  - name: MFA
+    description: Multi-factor authentication endpoints
+  - name: Products
+    description: Product management
+  - name: Customers
+    description: Customer management
+  - name: Suppliers
+    description: Supplier management
+  - name: Invoices
+    description: Invoice management
+  - name: Sales
+    description: Sales management
+  - name: Inventory
+    description: Inventory management
+  - name: Reports
+    description: Reporting endpoints
+  - name: Dashboard
+    description: Dashboard statistics
+  - name: System
+    description: System status and health
+  - name: Categories
+    description: Product categories management
+  - name: Users
+    description: User management
+
+security:
+  - BearerAuth: []
+
+paths:
+  # ============================================================================
+  # Authentication Endpoints
+  # ============================================================================
+  /api/auth/login:
+    post:
+      tags: [Auth]
+      summary: User login
+      description: Authenticate user and return JWT tokens
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            examples:
+              admin:
+                summary: Admin login
+                value:
+                  username: admin
+                  password: admin123
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '429':
+          description: Too many failed attempts (account locked)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /api/auth/logout:
+    post:
+      tags: [Auth]
+      summary: User logout
+      description: Revoke JWT tokens and end session
+      responses:
+        '200':
+          description: Logout successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /api/auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Refresh access token
+      description: Get new access token using refresh token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshRequest'
+      responses:
+        '200':
+          description: Token refreshed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshResponse'
+        '401':
+          description: Invalid or expired refresh token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /api/auth/me:
+    get:
+      tags: [Auth]
+      summary: Get current user
+      description: Get authenticated user information
+      responses:
+        '200':
+          description: User information retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  # ============================================================================
+  # MFA Endpoints
+  # ============================================================================
+  /api/mfa/setup:
+    post:
+      tags: [MFA]
+      summary: Setup MFA
+      description: Generate QR code for MFA setup
+      responses:
+        '200':
+          description: MFA setup initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MFASetupResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /api/mfa/verify:
+    post:
+      tags: [MFA]
+      summary: Verify MFA code
+      description: Verify TOTP code and enable MFA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MFAVerifyRequest'
+      responses:
+        '200':
+          description: MFA verified and enabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Invalid MFA code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /api/mfa/disable:
+    post:
+      tags: [MFA]
+      summary: Disable MFA
+      description: Disable MFA for current user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MFADisableRequest'
+      responses:
+        '200':
+          description: MFA disabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Invalid password
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  # ============================================================================
+  # Product Endpoints
+  # ============================================================================
+  /api/products:
+    get:
+      tags: [Products]
+      summary: List products
+      description: Get paginated list of products with filtering and search
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+          description: Page number
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+          description: Items per page
+        - name: search
+          in: query
+          schema:
+            type: string
+          description: Search query (name, SKU, barcode)
+        - name: category_id
+          in: query
+          schema:
+            type: integer
+          description: Filter by category ID
+        - name: is_active
+          in: query
+          schema:
+            type: boolean
+          description: Filter by active status
+        - name: low_stock
+          in: query
+          schema:
+            type: boolean
+          description: Show only low stock products
+      responses:
+        '200':
+          description: Products retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    post:
+      tags: [Products]
+      summary: Create product
+      description: Create a new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreateRequest'
+      responses:
+        '201':
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /api/products/{id}:
+    get:
+      tags: [Products]
+      summary: Get product by ID
+      description: Get detailed product information
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Product ID
+      responses:
+        '200':
+          description: Product retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    put:
+      tags: [Products]
+      summary: Update product
+      description: Update existing product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Product ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdateRequest'
+      responses:
+        '200':
+          description: Product updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    delete:
+      tags: [Products]
+      summary: Delete product
+      description: Delete a product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Product ID
+      responses:
+        '200':
+          description: Product deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  # ============================================================================
+  # Customer Endpoints
+  # ============================================================================
+  /api/customers:
+    get:
+      tags: [Customers]
+      summary: List customers
+      description: Get paginated list of customers with filtering and search
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+        - name: search
+          in: query
+          schema:
+            type: string
+          description: Search query (name, email, phone)
+      responses:
+        '200':
+          description: Customers retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerListResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    post:
+      tags: [Customers]
+      summary: Create customer
+      description: Create a new customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreateRequest'
+      responses:
+        '201':
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  /api/customers/{id}:
+    get:
+      tags: [Customers]
+      summary: Get customer by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Customer retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    put:
+      tags: [Customers]
+      summary: Update customer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerUpdateRequest'
+      responses:
+        '200':
+          description: Customer updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+    delete:
+      tags: [Customers]
+      summary: Delete customer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Customer deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  # ============================================================================
+  # Supplier Endpoints
+  # ============================================================================
+  /api/suppliers:
+    get:
+      tags: [Suppliers]
+      summary: List suppliers
+      description: Get paginated list of suppliers
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Suppliers retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierListResponse'
+
+    post:
+      tags: [Suppliers]
+      summary: Create supplier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplierCreateRequest'
+      responses:
+        '201':
+          description: Supplier created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierResponse'
+
+  /api/suppliers/{id}:
+    get:
+      tags: [Suppliers]
+      summary: Get supplier by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Supplier retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierResponse'
+
+    put:
+      tags: [Suppliers]
+      summary: Update supplier
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplierUpdateRequest'
+      responses:
+        '200':
+          description: Supplier updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierResponse'
+
+    delete:
+      tags: [Suppliers]
+      summary: Delete supplier
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Supplier deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  # ============================================================================
+  # Invoice Endpoints
+  # ============================================================================
+  /api/invoices:
+    get:
+      tags: [Invoices]
+      summary: List invoices
+      description: Get paginated list of invoices with optional filters
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, sent, paid, overdue, cancelled]
+        - name: customer_id
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoices retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceListResponse'
+
+    post:
+      tags: [Invoices]
+      summary: Create invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceCreateRequest'
+      responses:
+        '201':
+          description: Invoice created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResponse'
+
+  /api/invoices/{id}:
+    get:
+      tags: [Invoices]
+      summary: Get invoice by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResponse'
+
+    put:
+      tags: [Invoices]
+      summary: Update invoice
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceUpdateRequest'
+      responses:
+        '200':
+          description: Invoice updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResponse'
+
+    delete:
+      tags: [Invoices]
+      summary: Delete invoice
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /api/invoices/{id}/pdf:
+    get:
+      tags: [Invoices]
+      summary: Download invoice PDF
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: PDF generated successfully
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+
+  /api/invoices/{id}/send:
+    post:
+      tags: [Invoices]
+      summary: Send invoice via email
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  # ============================================================================
+  # Sales Endpoints
+  # ============================================================================
+  /api/sales:
+    get:
+      tags: [Sales]
+      summary: List sales transactions
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: start_date
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Sales retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleListResponse'
+
+    post:
+      tags: [Sales]
+      summary: Create sale transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleCreateRequest'
+      responses:
+        '201':
+          description: Sale created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleResponse'
+
+  /api/sales/{id}:
+    get:
+      tags: [Sales]
+      summary: Get sale by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sale retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleResponse'
+
+  /api/sales/stats:
+    get:
+      tags: [Sales]
+      summary: Get sales statistics
+      parameters:
+        - name: start_date
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Statistics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleStatsResponse'
+
+  # ============================================================================
+  # Inventory Endpoints
+  # ============================================================================
+  /api/inventory:
+    get:
+      tags: [Inventory]
+      summary: List inventory items
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: low_stock
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Inventory retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryListResponse'
+
+  /api/inventory/movements:
+    post:
+      tags: [Inventory]
+      summary: Create inventory movement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InventoryMovementRequest'
+      responses:
+        '201':
+          description: Movement created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryMovementResponse'
+
+  /api/inventory/low-stock:
+    get:
+      tags: [Inventory]
+      summary: Get low stock items
+      responses:
+        '200':
+          description: Low stock items retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryListResponse'
+
+  # ============================================================================
+  # Dashboard Endpoints
+  # ============================================================================
+  /api/dashboard/stats:
+    get:
+      tags: [Dashboard]
+      summary: Get dashboard statistics
+      description: Get overview statistics for dashboard
+      responses:
+        '200':
+          description: Statistics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardStatsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+
+  # ============================================================================
+  # Reports Endpoints
+  # ============================================================================
+  /api/reports/sales:
+    get:
+      tags: [Reports]
+      summary: Sales report
+      description: Get sales report with filters
+      parameters:
+        - name: start_date
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Sales report retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesReportResponse'
+
+  /api/reports/inventory:
+    get:
+      tags: [Reports]
+      summary: Inventory report
+      description: Get inventory status report
+      responses:
+        '200':
+          description: Inventory report retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryReportResponse'
+
+  /api/reports/financial:
+    get:
+      tags: [Reports]
+      summary: Financial report
+      description: Get financial summary report
+      parameters:
+        - name: start_date
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Financial report retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialReportResponse'
+
+  /api/reports/customers:
+    get:
+      tags: [Reports]
+      summary: Customer report
+      description: Get customer statistics and activity
+      responses:
+        '200':
+          description: Customer report retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerReportResponse'
+
+  /api/reports/suppliers:
+    get:
+      tags: [Reports]
+      summary: Supplier report
+      description: Get supplier statistics and activity
+      responses:
+        '200':
+          description: Supplier report retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierReportResponse'
+
+  # ============================================================================
+  # Categories Endpoints
+  # ============================================================================
+  /api/categories:
+    get:
+      tags: [Categories]
+      summary: List categories
+      description: Get all product categories
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Categories retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryListResponse'
+    post:
+      tags: [Categories]
+      summary: Create category
+      description: Create new product category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryCreateRequest'
+      responses:
+        '201':
+          description: Category created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryResponse'
+
+  /api/categories/{id}:
+    get:
+      tags: [Categories]
+      summary: Get category
+      description: Get category by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Category retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryResponse'
+    put:
+      tags: [Categories]
+      summary: Update category
+      description: Update category details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryUpdateRequest'
+      responses:
+        '200':
+          description: Category updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryResponse'
+    delete:
+      tags: [Categories]
+      summary: Delete category
+      description: Delete category by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Category deleted
+
+  # ============================================================================
+  # Users Endpoints
+  # ============================================================================
+  /api/users:
+    get:
+      tags: [Users]
+      summary: List users
+      description: Get all users (admin only)
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: role
+          in: query
+          schema:
+            type: string
+            enum: [admin, manager, user]
+      responses:
+        '200':
+          description: Users retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+    post:
+      tags: [Users]
+      summary: Create user
+      description: Create new user (admin only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateRequest'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+
+  /api/users/{id}:
+    get:
+      tags: [Users]
+      summary: Get user
+      description: Get user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    put:
+      tags: [Users]
+      summary: Update user
+      description: Update user details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateRequest'
+      responses:
+        '200':
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    delete:
+      tags: [Users]
+      summary: Delete user
+      description: Delete user by ID (admin only)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: User deleted
+
+  # ============================================================================
+  # System Endpoints
+  # ============================================================================
+  /api/system/health:
+    get:
+      tags: [System]
+      summary: Health check
+      description: Check system health status
+      security: []
+      responses:
+        '200':
+          description: System is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+
+  /api/system/status:
+    get:
+      tags: [System]
+      summary: System status
+      description: Get detailed system status
+      responses:
+        '200':
+          description: System status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemStatusResponse'
+
+  /api/system/version:
+    get:
+      tags: [System]
+      summary: API version
+      description: Get API version information
+      security: []
+      responses:
+        '200':
+          description: Version information retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResponse'
+
+# ============================================================================
+# Components
+# ============================================================================
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT access token (15 minutes TTL)
+  schemas:
+    # ========================================================================
+    # Common Schemas
+    # ========================================================================
+    SuccessResponse:
+      type: object
+      required: [success, message, traceId]
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Operation completed successfully"
+        traceId:
+          type: string
+          format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        data:
+          type: object
+          description: Optional response data
+
+    ErrorEnvelope:
+      type: object
+      required: [success, code, message, traceId]
+      properties:
+        success:
+          type: boolean
+          example: false
+        code:
+          type: string
+          example: "AUTH_001"
+          description: Error code for client handling
+        message:
+          type: string
+          example: "Invalid credentials"
+        details:
+          type: object
+          description: Optional error details
+        traceId:
+          type: string
+          format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+
+    # ========================================================================
+    # Auth Schemas
+    # ========================================================================
+    LoginRequest:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+          example: admin
+        password:
+          type: string
+          format: password
+          example: admin123
+        mfa_code:
+          type: string
+          pattern: '^\d{6}$'
+          description: TOTP code (required if MFA enabled)
+          example: "123456"
+
+    LoginResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [access_token, refresh_token, user]
+              properties:
+                access_token:
+                  type: string
+                  description: JWT access token (15 minutes)
+                refresh_token:
+                  type: string
+                  description: JWT refresh token (7 days)
+                user:
+                  $ref: '#/components/schemas/User'
+
+    RefreshRequest:
+      type: object
+      required: [refresh_token]
+      properties:
+        refresh_token:
+          type: string
+          description: JWT refresh token
+
+    RefreshResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [access_token]
+              properties:
+                access_token:
+                  type: string
+                  description: New JWT access token
+
+    UserResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/User'
+
+    User:
+      type: object
+      required: [id, username, email, full_name, role]
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: admin
+        email:
+          type: string
+          format: email
+          example: admin@gaaragroup.com
+        full_name:
+          type: string
+          example: "مدير النظام"
+        role:
+          type: string
+          enum: [admin, manager, user]
+          example: admin
+        mfa_enabled:
+          type: boolean
+          example: false
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    # ========================================================================
+    # MFA Schemas
+    # ========================================================================
+    MFASetupResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [qr_code, secret]
+              properties:
+                qr_code:
+                  type: string
+                  description: Base64-encoded QR code image
+                secret:
+                  type: string
+                  description: TOTP secret (for manual entry)
+
+    MFAVerifyRequest:
+      type: object
+      required: [code]
+      properties:
+        code:
+          type: string
+          pattern: '^\d{6}$'
+          example: "123456"
+
+    MFADisableRequest:
+      type: object
+      required: [password]
+      properties:
+        password:
+          type: string
+          format: password
+
+    # ========================================================================
+    # Product Schemas
+    # ========================================================================
+    ProductListResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [items, total, page, per_page, pages]
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Product'
+                total:
+                  type: integer
+                  example: 100
+                page:
+                  type: integer
+                  example: 1
+                per_page:
+                  type: integer
+                  example: 20
+                pages:
+                  type: integer
+                  example: 5
+
+    ProductResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Product'
+
+    Product:
+      type: object
+      required: [id, name, sku, price, stock_quantity]
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "منتج تجريبي"
+        sku:
+          type: string
+          example: "PROD-001"
+        barcode:
+          type: string
+          example: "1234567890123"
+        description:
+          type: string
+          example: "وصف المنتج"
+        price:
+          type: number
+          format: float
+          example: 99.99
+        cost:
+          type: number
+          format: float
+          example: 50.00
+        stock_quantity:
+          type: integer
+          example: 100
+        min_stock_level:
+          type: integer
+          example: 10
+        category_id:
+          type: integer
+          example: 1
+        is_active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    ProductCreateRequest:
+      type: object
+      required: [name, sku, price]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        sku:
+          type: string
+          minLength: 1
+          maxLength: 100
+        barcode:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        price:
+          type: number
+          format: float
+          minimum: 0
+        cost:
+          type: number
+          format: float
+          minimum: 0
+        stock_quantity:
+          type: integer
+          minimum: 0
+          default: 0
+        min_stock_level:
+          type: integer
+          minimum: 0
+          default: 0
+        category_id:
+          type: integer
+        is_active:
+          type: boolean
+          default: true
+
+    ProductUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        sku:
+          type: string
+          minLength: 1
+          maxLength: 100
+        barcode:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        price:
+          type: number
+          format: float
+          minimum: 0
+        cost:
+          type: number
+          format: float
+          minimum: 0
+        stock_quantity:
+          type: integer
+          minimum: 0
+        min_stock_level:
+          type: integer
+          minimum: 0
+        category_id:
+          type: integer
+        is_active:
+          type: boolean
+
+    # ========================================================================
+    # Customer Schemas
+    # ========================================================================
+    CustomerListResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [items, total, page, per_page, pages]
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Customer'
+                total:
+                  type: integer
+                page:
+                  type: integer
+                per_page:
+                  type: integer
+                pages:
+                  type: integer
+
+    CustomerResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Customer'
+
+    Customer:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "عميل تجريبي"
+        email:
+          type: string
+          format: email
+          example: "customer@example.com"
+        phone:
+          type: string
+          example: "+966501234567"
+        address:
+          type: string
+          example: "الرياض، المملكة العربية السعودية"
+        balance:
+          type: number
+          format: float
+          example: 0.00
+        is_active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    CustomerCreateRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        is_active:
+          type: boolean
+          default: true
+
+    CustomerUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        is_active:
+          type: boolean
+
+    # ========================================================================
+    # Supplier Schemas
+    # ========================================================================
+    SupplierListResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [items, total, page, per_page, pages]
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Supplier'
+                total:
+                  type: integer
+                page:
+                  type: integer
+                per_page:
+                  type: integer
+                pages:
+                  type: integer
+
+    SupplierResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Supplier'
+
+    Supplier:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "مورد تجريبي"
+        email:
+          type: string
+          format: email
+          example: "supplier@example.com"
+        phone:
+          type: string
+          example: "+966501234567"
+        address:
+          type: string
+          example: "جدة، المملكة العربية السعودية"
+        balance:
+          type: number
+          format: float
+          example: 0.00
+        is_active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    SupplierCreateRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        is_active:
+          type: boolean
+          default: true
+
+    SupplierUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: string
+        is_active:
+          type: boolean
+
+    # ========================================================================
+    # Dashboard Schemas
+    # ========================================================================
+    DashboardStatsResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                total_products:
+                  type: integer
+                  example: 150
+                active_products:
+                  type: integer
+                  example: 145
+                total_customers:
+                  type: integer
+                  example: 50
+                total_suppliers:
+                  type: integer
+                  example: 20
+                total_transactions:
+                  type: integer
+                  example: 500
+                total_revenue:
+                  type: number
+                  format: float
+                  example: 50000.00
+                low_stock_count:
+                  type: integer
+                  example: 5
+
+    # ========================================================================
+    # Invoice Schemas
+    # ========================================================================
+    InvoiceListResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [items, total, page, per_page, pages]
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Invoice'
+                total:
+                  type: integer
+                page:
+                  type: integer
+                per_page:
+                  type: integer
+                pages:
+                  type: integer
+
+    InvoiceResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Invoice'
+
+    Invoice:
+      type: object
+      required: [id, invoice_number, customer_id, issue_date, total_amount, status]
+      properties:
+        id:
+          type: integer
+          example: 1
+        invoice_number:
+          type: string
+          example: "INV-2025-001"
+        customer_id:
+          type: integer
+          example: 1
+        customer_name:
+          type: string
+          example: "عميل تجريبي"
+        issue_date:
+          type: string
+          format: date
+          example: "2025-01-15"
+        due_date:
+          type: string
+          format: date
+          example: "2025-02-15"
+        subtotal:
+          type: number
+          format: float
+          example: 1000.00
+        tax_amount:
+          type: number
+          format: float
+          example: 150.00
+        discount_amount:
+          type: number
+          format: float
+          example: 50.00
+        total_amount:
+          type: number
+          format: float
+          example: 1100.00
+        paid_amount:
+          type: number
+          format: float
+          example: 0.00
+        status:
+          type: string
+          enum: [draft, sent, paid, overdue, cancelled]
+          example: "draft"
+        notes:
+          type: string
+          example: "ملاحظات الفاتورة"
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    InvoiceItem:
+      type: object
+      required: [product_id, quantity, unit_price, total]
+      properties:
+        id:
+          type: integer
+          example: 1
+        product_id:
+          type: integer
+          example: 1
+        product_name:
+          type: string
+          example: "منتج تجريبي"
+        quantity:
+          type: integer
+          minimum: 1
+          example: 5
+        unit_price:
+          type: number
+          format: float
+          minimum: 0
+          example: 100.00
+        discount:
+          type: number
+          format: float
+          minimum: 0
+          example: 0.00
+        tax_rate:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 15.00
+        total:
+          type: number
+          format: float
+          example: 500.00
+
+    InvoiceCreateRequest:
+      type: object
+      required: [customer_id, issue_date, items]
+      properties:
+        customer_id:
+          type: integer
+        issue_date:
+          type: string
+          format: date
+        due_date:
+          type: string
+          format: date
+        discount_amount:
+          type: number
+          format: float
+          minimum: 0
+          default: 0.00
+        notes:
+          type: string
+        items:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required: [product_id, quantity, unit_price]
+            properties:
+              product_id:
+                type: integer
+              quantity:
+                type: integer
+                minimum: 1
+              unit_price:
+                type: number
+                format: float
+                minimum: 0
+              discount:
+                type: number
+                format: float
+                minimum: 0
+                default: 0.00
+              tax_rate:
+                type: number
+                format: float
+                minimum: 0
+                maximum: 100
+                default: 15.00
+
+    InvoiceUpdateRequest:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+        issue_date:
+          type: string
+          format: date
+        due_date:
+          type: string
+          format: date
+        discount_amount:
+          type: number
+          format: float
+          minimum: 0
+        status:
+          type: string
+          enum: [draft, sent, paid, overdue, cancelled]
+        notes:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              product_id:
+                type: integer
+              quantity:
+                type: integer
+                minimum: 1
+              unit_price:
+                type: number
+                format: float
+                minimum: 0
+              discount:
+                type: number
+                format: float
+                minimum: 0
+              tax_rate:
+                type: number
+                format: float
+                minimum: 0
+                maximum: 100
+
+    # ========================================================================
+    # Sales Schemas
+    # ========================================================================
+    SaleListResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [items, total, page, per_page, pages]
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Sale'
+                total:
+                  type: integer
+                page:
+                  type: integer
+                per_page:
+                  type: integer
+                pages:
+                  type: integer
+
+    SaleResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Sale'
+
+    Sale:
+      type: object
+      required: [id, sale_date, total_amount, payment_method]
+      properties:
+        id:
+          type: integer
+          example: 1
+        sale_date:
+          type: string
+          format: date-time
+          example: "2025-01-15T14:30:00Z"
+        customer_id:
+          type: integer
+          example: 1
+        customer_name:
+          type: string
+          example: "عميل تجريبي"
+        total_amount:
+          type: number
+          format: float
+          example: 500.00
+        payment_method:
+          type: string
+          enum: [cash, card, transfer, credit]
+          example: "cash"
+        notes:
+          type: string
+          example: "ملاحظات البيع"
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              product_id:
+                type: integer
+              product_name:
+                type: string
+              quantity:
+                type: integer
+              unit_price:
+                type: number
+                format: float
+              total:
+                type: number
+                format: float
+
+    SaleCreateRequest:
+      type: object
+      required: [items, payment_method]
+      properties:
+        customer_id:
+          type: integer
+        payment_method:
+          type: string
+          enum: [cash, card, transfer, credit]
+        notes:
+          type: string
+        items:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required: [product_id, quantity, unit_price]
+            properties:
+              product_id:
+                type: integer
+              quantity:
+                type: integer
+                minimum: 1
+              unit_price:
+                type: number
+                format: float
+                minimum: 0
+
+    SaleStatsResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                total_sales:
+                  type: number
+                  format: float
+                  example: 50000.00
+                total_transactions:
+                  type: integer
+                  example: 150
+                average_sale:
+                  type: number
+                  format: float
+                  example: 333.33
+                top_products:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      product_id:
+                        type: integer
+                      product_name:
+                        type: string
+                      quantity_sold:
+                        type: integer
+                      total_revenue:
+                        type: number
+                        format: float
+
+    # ========================================================================
+    # Inventory Schemas
+    # ========================================================================
+    InventoryListResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              required: [items, total, page, per_page, pages]
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InventoryItem'
+                total:
+                  type: integer
+                page:
+                  type: integer
+                per_page:
+                  type: integer
+                pages:
+                  type: integer
+
+    InventoryItem:
+      type: object
+      required: [product_id, product_name, current_stock]
+      properties:
+        product_id:
+          type: integer
+          example: 1
+        product_name:
+          type: string
+          example: "منتج تجريبي"
+        sku:
+          type: string
+          example: "PROD-001"
+        current_stock:
+          type: integer
+          example: 100
+        min_stock_level:
+          type: integer
+          example: 10
+        is_low_stock:
+          type: boolean
+          example: false
+        last_movement_date:
+          type: string
+          format: date-time
+
+    InventoryMovementRequest:
+      type: object
+      required: [product_id, quantity, movement_type]
+      properties:
+        product_id:
+          type: integer
+        quantity:
+          type: integer
+          minimum: 1
+        movement_type:
+          type: string
+          enum: [in, out, adjustment]
+        reason:
+          type: string
+        notes:
+          type: string
+
+    InventoryMovementResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: integer
+                product_id:
+                  type: integer
+                quantity:
+                  type: integer
+                movement_type:
+                  type: string
+                previous_stock:
+                  type: integer
+                new_stock:
+                  type: integer
+                created_at:
+                  type: string
+                  format: date-time
+
+    # ========================================================================
+    # Reports Schemas
+    # ========================================================================
+    SalesReportResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                total_sales:
+                  type: number
+                  format: float
+                total_transactions:
+                  type: integer
+                average_transaction:
+                  type: number
+                  format: float
+                top_products:
+                  type: array
+                  items:
+                    type: object
+
+    InventoryReportResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                total_items:
+                  type: integer
+                low_stock_items:
+                  type: integer
+                out_of_stock_items:
+                  type: integer
+                total_value:
+                  type: number
+                  format: float
+
+    FinancialReportResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                total_revenue:
+                  type: number
+                  format: float
+                total_cost:
+                  type: number
+                  format: float
+                gross_profit:
+                  type: number
+                  format: float
+                profit_margin:
+                  type: number
+                  format: float
+
+    CustomerReportResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                total_customers:
+                  type: integer
+                active_customers:
+                  type: integer
+                total_purchases:
+                  type: number
+                  format: float
+                average_purchase:
+                  type: number
+                  format: float
+
+    SupplierReportResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                total_suppliers:
+                  type: integer
+                active_suppliers:
+                  type: integer
+                total_purchases:
+                  type: number
+                  format: float
+                average_purchase:
+                  type: number
+                  format: float
+
+    # ========================================================================
+    # Categories Schemas
+    # ========================================================================
+    CategoryListResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Category'
+                total:
+                  type: integer
+                page:
+                  type: integer
+                per_page:
+                  type: integer
+                pages:
+                  type: integer
+
+    Category:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          example: "الإلكترونيات"
+        description:
+          type: string
+        is_active:
+          type: boolean
+          default: true
+        created_at:
+          type: string
+          format: date-time
+
+    CategoryCreateRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+
+    CategoryUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+        is_active:
+          type: boolean
+
+    CategoryResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Category'
+
+    # ========================================================================
+    # Users Schemas
+    # ========================================================================
+    UserListResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/User'
+                total:
+                  type: integer
+                page:
+                  type: integer
+                per_page:
+                  type: integer
+                pages:
+                  type: integer
+
+    UserCreateRequest:
+      type: object
+      required: [username, email, password, full_name, role]
+      properties:
+        username:
+          type: string
+          minLength: 3
+          maxLength: 50
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+          minLength: 8
+        full_name:
+          type: string
+        role:
+          type: string
+          enum: [admin, manager, user]
+        department:
+          type: string
+
+    UserUpdateRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        full_name:
+          type: string
+        role:
+          type: string
+          enum: [admin, manager, user]
+        department:
+          type: string
+        is_active:
+          type: boolean
+
+    # ========================================================================
+    # System Schemas
+    # ========================================================================
+    HealthCheckResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, degraded, unhealthy]
+        timestamp:
+          type: string
+          format: date-time
+        version:
+          type: string
+
+    SystemStatusResponse:
+      allOf:
+        - $ref: '#/components/schemas/SuccessResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                status:
+                  type: string
+                database:
+                  type: string
+                cache:
+                  type: string
+                uptime_seconds:
+                  type: integer
+
+    VersionResponse:
+      type: object
+      properties:
+        version:
+          type: string
+          example: "1.7.0"
+        api_version:
+          type: string
+          example: "1.7.0"
+        environment:
+          type: string
+          enum: [development, staging, production]
+        timestamp:
+          type: string
+          format: date-time

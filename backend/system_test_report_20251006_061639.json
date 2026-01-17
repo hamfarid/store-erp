@@ -1,0 +1,180 @@
+{
+  "timestamp": "2025-10-06T06:16:34.455488",
+  "tests": [
+    {
+      "name": "Flask App Creation",
+      "status": "PASS",
+      "message": "Flask app created successfully",
+      "timestamp": "2025-10-06T06:16:36.647957"
+    },
+    {
+      "name": "Database Connection",
+      "status": "PASS",
+      "message": "Database connection successful",
+      "timestamp": "2025-10-06T06:16:36.648908"
+    },
+    {
+      "name": "Database Tables",
+      "status": "PASS",
+      "message": "Created 9 tables",
+      "timestamp": "2025-10-06T06:16:36.650437",
+      "details": {
+        "tables": [
+          "customers",
+          "basic_model",
+          "sales_engineers",
+          "exchange_rates",
+          "sales_invoices",
+          "sales_invoice_items",
+          "customer_payments",
+          "customer_debts",
+          "sales_engineer_payments"
+        ]
+      }
+    },
+    {
+      "name": "Basic Model Imports",
+      "status": "PASS",
+      "message": "Basic models imported successfully",
+      "timestamp": "2025-10-06T06:16:36.650588"
+    },
+    {
+      "name": "Advanced Model Imports",
+      "status": "PASS",
+      "message": "Advanced models imported successfully",
+      "timestamp": "2025-10-06T06:16:36.650607"
+    },
+    {
+      "name": "Sales Model Imports",
+      "status": "PASS",
+      "message": "Sales models imported successfully",
+      "timestamp": "2025-10-06T06:16:36.650619"
+    },
+    {
+      "name": "User Model Instantiation",
+      "status": "PASS",
+      "message": "User model created successfully",
+      "timestamp": "2025-10-06T06:16:36.650729"
+    },
+    {
+      "name": "Customer Model Instantiation",
+      "status": "PASS",
+      "message": "Customer model created successfully",
+      "timestamp": "2025-10-06T06:16:36.666705"
+    },
+    {
+      "name": "Product Model Instantiation",
+      "status": "PASS",
+      "message": "Product model created successfully",
+      "timestamp": "2025-10-06T06:16:36.666774"
+    },
+    {
+      "name": "Category Model Instantiation",
+      "status": "PASS",
+      "message": "Category model created successfully",
+      "timestamp": "2025-10-06T06:16:36.666815"
+    },
+    {
+      "name": "Warehouse Model Instantiation",
+      "status": "PASS",
+      "message": "Warehouse model created successfully",
+      "timestamp": "2025-10-06T06:16:36.666843"
+    },
+    {
+      "name": "Authentication System",
+      "status": "FAIL",
+      "message": "Authentication test failed: (sqlite3.IntegrityError) UNIQUE constraint failed: roles.name\n[SQL: INSERT INTO roles (name, description, is_active, created_at) VALUES (?, ?, ?, ?)]\n[parameters: ('test_role', 'Test Role', 1, '2025-10-06 10:16:36.668794')]\n(Background on this error at: https://sqlalche.me/e/20/gkpj)",
+      "timestamp": "2025-10-06T06:16:36.669291"
+    },
+    {
+      "name": "Database Operations",
+      "status": "FAIL",
+      "message": "Database operations test failed: (sqlite3.OperationalError) table customers has no column named customer_code\n[SQL: INSERT INTO customers (customer_code, name, email, phone, mobile, address, city, country, postal_code, company_name, tax_number, credit_limit, payment_terms, currency, discount_rate, category, is_active, notes, sales_engineer_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]\n[parameters: (None, 'Test DB Customer', 'dbtest@example.com', '123456789', None, None, None, None, None, None, None, 0.0, None, 'USD', 0.0, 'REGULAR', 1, None, None, '2025-10-06 10:16:36.671101', '2025-10-06 10:16:36.671106')]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "timestamp": "2025-10-06T06:16:36.671633"
+    },
+    {
+      "name": "Frontend File package.json",
+      "status": "PASS",
+      "message": "File exists: package.json",
+      "timestamp": "2025-10-06T06:16:36.671733"
+    },
+    {
+      "name": "Frontend File src/App.jsx",
+      "status": "PASS",
+      "message": "File exists: src/App.jsx",
+      "timestamp": "2025-10-06T06:16:36.671763"
+    },
+    {
+      "name": "Frontend File src/main.jsx",
+      "status": "PASS",
+      "message": "File exists: src/main.jsx",
+      "timestamp": "2025-10-06T06:16:36.671783"
+    },
+    {
+      "name": "Frontend File index.html",
+      "status": "PASS",
+      "message": "File exists: index.html",
+      "timestamp": "2025-10-06T06:16:36.671798"
+    },
+    {
+      "name": "Frontend File vite.config.js",
+      "status": "PASS",
+      "message": "File exists: vite.config.js",
+      "timestamp": "2025-10-06T06:16:36.671827"
+    },
+    {
+      "name": "Flask Server Start",
+      "status": "PASS",
+      "message": "Flask server started successfully",
+      "timestamp": "2025-10-06T06:16:39.678080"
+    },
+    {
+      "name": "API Endpoint Health Check",
+      "status": "PASS",
+      "message": "Endpoint /api/health responded with status 200",
+      "timestamp": "2025-10-06T06:16:39.681340"
+    },
+    {
+      "name": "API Endpoint System Info",
+      "status": "PASS",
+      "message": "Endpoint /api/info responded with status 200",
+      "timestamp": "2025-10-06T06:16:39.684200"
+    },
+    {
+      "name": "API Endpoint Dashboard Stats",
+      "status": "PASS",
+      "message": "Endpoint /api/dashboard/stats responded with status 200",
+      "timestamp": "2025-10-06T06:16:39.686875"
+    },
+    {
+      "name": "API Endpoint Products API",
+      "status": "FAIL",
+      "message": "Endpoint /api/products responded with status 500",
+      "timestamp": "2025-10-06T06:16:39.689708"
+    },
+    {
+      "name": "API Endpoint Customers API",
+      "status": "FAIL",
+      "message": "Endpoint /api/customers responded with status 500",
+      "timestamp": "2025-10-06T06:16:39.692449"
+    },
+    {
+      "name": "API Endpoint Suppliers API",
+      "status": "FAIL",
+      "message": "Endpoint /api/suppliers responded with status 500",
+      "timestamp": "2025-10-06T06:16:39.695376"
+    }
+  ],
+  "summary": {
+    "total": 25,
+    "passed": 20,
+    "failed": 5,
+    "errors": [
+      "Authentication System: Authentication test failed: (sqlite3.IntegrityError) UNIQUE constraint failed: roles.name\n[SQL: INSERT INTO roles (name, description, is_active, created_at) VALUES (?, ?, ?, ?)]\n[parameters: ('test_role', 'Test Role', 1, '2025-10-06 10:16:36.668794')]\n(Background on this error at: https://sqlalche.me/e/20/gkpj)",
+      "Database Operations: Database operations test failed: (sqlite3.OperationalError) table customers has no column named customer_code\n[SQL: INSERT INTO customers (customer_code, name, email, phone, mobile, address, city, country, postal_code, company_name, tax_number, credit_limit, payment_terms, currency, discount_rate, category, is_active, notes, sales_engineer_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]\n[parameters: (None, 'Test DB Customer', 'dbtest@example.com', '123456789', None, None, None, None, None, None, None, 0.0, None, 'USD', 0.0, 'REGULAR', 1, None, None, '2025-10-06 10:16:36.671101', '2025-10-06 10:16:36.671106')]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "API Endpoint Products API: Endpoint /api/products responded with status 500",
+      "API Endpoint Customers API: Endpoint /api/customers responded with status 500",
+      "API Endpoint Suppliers API: Endpoint /api/suppliers responded with status 500"
+    ]
+  }
+}

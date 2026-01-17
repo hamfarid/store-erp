@@ -1,0 +1,1636 @@
+{
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "summary": "Login using username/password and return JWT tokens (real endpoint).",
+        "tags": [
+          "auth_smorest"
+        ]
+      }
+    },
+    "/api/products": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number (1-based)",
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "example": 1
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "per_page",
+            "description": "Items per page (max 100)",
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "example": 10
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "description": "Search term for product name",
+            "schema": {
+              "type": "string",
+              "default": "",
+              "example": "laptop"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "Get paginated list of products with optional search (real endpoint).",
+        "tags": [
+          "products_smorest"
+        ]
+      }
+    },
+    "/api/inventory/categories": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryList"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "List all categories",
+        "description": "Returns a list of all product categories in the system.",
+        "tags": [
+          "inventory_smorest"
+        ]
+      },
+      "post": {
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            }
+          }
+        },
+        "summary": "Create a new category",
+        "description": "Creates a new product category with the provided data.",
+        "tags": [
+          "inventory_smorest"
+        ]
+      }
+    },
+    "/api/inventory/warehouses": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WarehouseList"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "List all warehouses",
+        "description": "Returns a list of all warehouses in the system.",
+        "tags": [
+          "inventory_smorest"
+        ]
+      },
+      "post": {
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Warehouse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Warehouse"
+              }
+            }
+          }
+        },
+        "summary": "Create a new warehouse",
+        "description": "Creates a new warehouse with the provided data.",
+        "tags": [
+          "inventory_smorest"
+        ]
+      }
+    },
+    "/api/inventory/stock-movements": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number",
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1,
+              "example": 1
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "per_page",
+            "description": "Items per page",
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100,
+              "example": 20
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "movement_type",
+            "description": "Filter by movement type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "in",
+                "out",
+                "adjustment",
+                "transfer",
+                null
+              ],
+              "example": "in",
+              "nullable": true
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "product_id",
+            "description": "Filter by product ID",
+            "schema": {
+              "type": "integer",
+              "example": 1,
+              "nullable": true
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "warehouse_id",
+            "description": "Filter by warehouse ID",
+            "schema": {
+              "type": "integer",
+              "example": 1,
+              "nullable": true
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockMovementList"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "List stock movements with filters",
+        "description": "Returns a paginated list of stock movements with optional filters.\nSupports filtering by movement type, product, and warehouse.",
+        "tags": [
+          "inventory_smorest"
+        ]
+      }
+    },
+    "/api/invoices": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number",
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1,
+              "example": 1
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "per_page",
+            "description": "Items per page",
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100,
+              "example": 20
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "description": "Search in invoice number",
+            "schema": {
+              "type": "string",
+              "example": "INV-2025",
+              "nullable": true
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "invoice_type",
+            "description": "Filter by invoice type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sales",
+                "purchase",
+                "sales_return",
+                "purchase_return",
+                null
+              ],
+              "example": "sales",
+              "nullable": true
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "description": "Filter by status",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "pending",
+                "paid",
+                "cancelled",
+                null
+              ],
+              "example": "paid",
+              "nullable": true
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "customer_id",
+            "description": "Filter by customer ID",
+            "schema": {
+              "type": "integer",
+              "example": 1,
+              "nullable": true
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "supplier_id",
+            "description": "Filter by supplier ID",
+            "schema": {
+              "type": "integer",
+              "example": 1,
+              "nullable": true
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "date_from",
+            "description": "Filter from date",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2025-01-01",
+              "nullable": true
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "date_to",
+            "description": "Filter to date",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2025-12-31",
+              "nullable": true
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceList"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "List invoices with filters",
+        "description": "Returns paginated list of invoices with optional filters.",
+        "tags": [
+          "invoices_smorest"
+        ]
+      },
+      "post": {
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invoice"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Invoice"
+              }
+            }
+          }
+        },
+        "summary": "Create a new invoice",
+        "description": "Creates a new invoice with items and calculates totals.",
+        "tags": [
+          "invoices_smorest"
+        ]
+      }
+    },
+    "/api/invoices/{invoice_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invoice"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "Get specific invoice",
+        "description": "Returns detailed invoice information including items and payments.",
+        "tags": [
+          "invoices_smorest"
+        ]
+      },
+      "put": {
+        "responses": {
+          "422": {
+            "$ref": "#/components/responses/UNPROCESSABLE_CONTENT"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invoice"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Invoice"
+              }
+            }
+          }
+        },
+        "summary": "Update invoice",
+        "description": "Updates invoice details. Only draft invoices can be fully updated.",
+        "tags": [
+          "invoices_smorest"
+        ]
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "Delete invoice (admin only)",
+        "description": "Deletes an invoice. Only draft invoices can be deleted.",
+        "tags": [
+          "invoices_smorest"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "invoice_id",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      ]
+    },
+    "/api/docs-demo/ping": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PingResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "Simple documented endpoint for the OpenAPI bootstrap",
+        "tags": [
+          "openapi_demo"
+        ]
+      }
+    },
+    "/api/system/health": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "tags": [
+          "openapi_health"
+        ]
+      }
+    },
+    "/api/docs-integration/external/health": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalHealthResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/DEFAULT_ERROR"
+          }
+        },
+        "summary": "Documented external health (sample response for spec).",
+        "tags": [
+          "openapi_external_docs"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Store ERP API",
+    "version": "v1"
+  },
+  "tags": [
+    {
+      "name": "auth_smorest",
+      "description": "Real Auth endpoints (migrated to flask-smorest)"
+    },
+    {
+      "name": "products_smorest",
+      "description": "Real Products endpoints (migrated to flask-smorest)"
+    },
+    {
+      "name": "inventory_smorest",
+      "description": "Inventory management endpoints - Categories, Warehouses, Stock Movements"
+    },
+    {
+      "name": "invoices_smorest",
+      "description": "Invoice management endpoints - Sales, Purchase, Returns"
+    },
+    {
+      "name": "openapi_demo",
+      "description": "OpenAPI demo endpoints"
+    },
+    {
+      "name": "openapi_health",
+      "description": "System health"
+    },
+    {
+      "name": "openapi_external_docs",
+      "description": "External integration endpoints (documentation slice)"
+    }
+  ],
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Error code"
+          },
+          "status": {
+            "type": "string",
+            "description": "Error name"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "errors": {
+            "type": "object",
+            "description": "Errors"
+          }
+        }
+      },
+      "PaginationMetadata": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "total_pages": {
+            "type": "integer"
+          },
+          "first_page": {
+            "type": "integer"
+          },
+          "last_page": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "previous_page": {
+            "type": "integer"
+          },
+          "next_page": {
+            "type": "integer"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username for authentication",
+            "example": "admin"
+          },
+          "password": {
+            "type": "string",
+            "writeOnly": true,
+            "description": "User password (min 8 characters)",
+            "example": "Secret123!"
+          }
+        },
+        "required": [
+          "password",
+          "username"
+        ]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "username": {
+            "type": "string",
+            "example": "admin"
+          },
+          "email": {
+            "type": "string",
+            "example": "admin@example.com"
+          },
+          "role": {
+            "type": "string",
+            "example": "admin"
+          },
+          "is_active": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "required": [
+          "id",
+          "username"
+        ]
+      },
+      "LoginData": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "JWT access token (15 min expiry)",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "JWT refresh token (7 days expiry)",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          },
+          "user": {
+            "description": "Authenticated user information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ]
+          },
+          "expires_in": {
+            "type": "integer",
+            "description": "Access token expiry in seconds",
+            "example": 900
+          }
+        },
+        "required": [
+          "access_token",
+          "expires_in",
+          "refresh_token",
+          "user"
+        ]
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Request success status",
+            "example": true
+          },
+          "data": {
+            "description": "Login response data",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LoginData"
+              }
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message (Arabic)",
+            "example": "تم تسجيل الدخول بنجاح"
+          }
+        },
+        "required": [
+          "data",
+          "message",
+          "success"
+        ]
+      },
+      "ProductItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Product ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Product name",
+            "example": "Laptop Dell XPS 15"
+          },
+          "barcode": {
+            "type": "string",
+            "description": "Product barcode",
+            "example": "1234567890123"
+          },
+          "sku": {
+            "type": "string",
+            "description": "Stock Keeping Unit",
+            "example": "DELL-XPS15-001"
+          },
+          "category_id": {
+            "type": "integer",
+            "description": "Category ID",
+            "example": 1
+          },
+          "cost_price": {
+            "type": "number",
+            "description": "Cost price (EGP)",
+            "example": 4500.0
+          },
+          "selling_price": {
+            "type": "number",
+            "description": "Selling price (EGP)",
+            "example": 5999.0
+          },
+          "current_stock": {
+            "type": "integer",
+            "description": "Current stock quantity",
+            "example": 25
+          },
+          "min_stock_level": {
+            "type": "integer",
+            "description": "Minimum stock level",
+            "example": 5
+          },
+          "max_stock_level": {
+            "type": "integer",
+            "description": "Maximum stock level",
+            "example": 100
+          },
+          "description": {
+            "type": "string",
+            "description": "Product description",
+            "example": "High-performance laptop with 16GB RAM"
+          },
+          "specifications": {
+            "type": "string",
+            "description": "Technical specifications",
+            "example": "Intel i7, 16GB RAM, 512GB SSD"
+          },
+          "is_active": {
+            "type": "boolean",
+            "description": "Product active status",
+            "example": true
+          },
+          "is_trackable": {
+            "type": "boolean",
+            "description": "Inventory tracking enabled",
+            "example": true
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "Current page number",
+            "example": 1
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Total number of pages",
+            "example": 5
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "Items per page",
+            "example": 10
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of items",
+            "example": 42
+          }
+        },
+        "required": [
+          "page",
+          "pages",
+          "per_page",
+          "total"
+        ]
+      },
+      "ProductsResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Response status",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "description": "List of products",
+            "items": {
+              "$ref": "#/components/schemas/ProductItem"
+            }
+          },
+          "pagination": {
+            "description": "Pagination information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Pagination"
+              }
+            ]
+          }
+        },
+        "required": [
+          "data",
+          "pagination",
+          "status"
+        ]
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "Unique category identifier",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 100,
+            "description": "Category name in Arabic",
+            "example": "بذور"
+          },
+          "name_en": {
+            "type": "string",
+            "description": "Category name in English",
+            "example": "Seeds",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Category description",
+            "example": "جميع أنواع البذور الزراعية",
+            "nullable": true
+          },
+          "is_active": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether category is active",
+            "example": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Creation timestamp",
+            "example": "2025-11-06T10:00:00Z"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CategoryList": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Request success status",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "description": "List of categories",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "تم جلب التصنيفات بنجاح"
+          }
+        }
+      },
+      "Warehouse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "Unique warehouse identifier",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 100,
+            "description": "Warehouse name",
+            "example": "المخزن الرئيسي"
+          },
+          "code": {
+            "type": "string",
+            "description": "Warehouse code",
+            "example": "WH-001",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "description": "Warehouse address",
+            "example": "الرياض، المملكة العربية السعودية",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "description": "Contact phone number",
+            "example": "+966501234567",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Contact email",
+            "example": "warehouse@example.com",
+            "nullable": true
+          },
+          "manager_name": {
+            "type": "string",
+            "description": "Warehouse manager name",
+            "example": "أحمد محمد",
+            "nullable": true
+          },
+          "capacity": {
+            "type": "number",
+            "description": "Warehouse capacity in cubic meters",
+            "example": 1000.0,
+            "nullable": true
+          },
+          "current_stock": {
+            "type": "number",
+            "default": 0.0,
+            "description": "Current stock level",
+            "example": 750.5
+          },
+          "is_active": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether warehouse is active",
+            "example": true
+          },
+          "warehouse_type": {
+            "type": "string",
+            "default": "main",
+            "enum": [
+              "main",
+              "branch",
+              "temporary"
+            ],
+            "description": "Warehouse type",
+            "example": "main"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Creation timestamp",
+            "example": "2025-11-06T10:00:00Z"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "WarehouseList": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Request success status",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "description": "List of warehouses",
+            "items": {
+              "$ref": "#/components/schemas/Warehouse"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "تم جلب المخازن بنجاح"
+          }
+        }
+      },
+      "StockMovement": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "Unique movement identifier",
+            "example": 1
+          },
+          "product_id": {
+            "type": "integer",
+            "description": "Product ID",
+            "example": 1
+          },
+          "warehouse_id": {
+            "type": "integer",
+            "description": "Warehouse ID",
+            "example": 1,
+            "nullable": true
+          },
+          "movement_type": {
+            "type": "string",
+            "enum": [
+              "in",
+              "out",
+              "adjustment",
+              "transfer"
+            ],
+            "description": "Movement type",
+            "example": "in"
+          },
+          "quantity": {
+            "type": "number",
+            "minimum": 0.0,
+            "description": "Movement quantity",
+            "example": 100.0
+          },
+          "unit_price": {
+            "type": "number",
+            "description": "Unit price in EGP",
+            "example": 25.5,
+            "nullable": true
+          },
+          "total_value": {
+            "type": "number",
+            "description": "Total value in EGP",
+            "example": 2550.0,
+            "nullable": true
+          },
+          "reference_number": {
+            "type": "string",
+            "description": "Reference number",
+            "example": "PO-2025-001",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "description": "Movement notes",
+            "example": "استلام دفعة جديدة من البذور",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Creation timestamp",
+            "example": "2025-11-06T10:00:00Z"
+          }
+        },
+        "required": [
+          "movement_type",
+          "product_id",
+          "quantity"
+        ]
+      },
+      "StockMovementList": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Request success status",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "description": "List of stock movements",
+            "items": {
+              "$ref": "#/components/schemas/StockMovement"
+            }
+          },
+          "pagination": {
+            "type": "object",
+            "description": "Pagination information",
+            "example": {
+              "page": 1,
+              "per_page": 20,
+              "total": 150,
+              "pages": 8
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "تم جلب حركات المخزون بنجاح"
+          }
+        }
+      },
+      "InvoiceItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "Item ID",
+            "example": 1
+          },
+          "product_id": {
+            "type": "integer",
+            "description": "Product ID",
+            "example": 1
+          },
+          "product_name": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Product name",
+            "example": "بذور طماطم"
+          },
+          "quantity": {
+            "type": "number",
+            "minimum": 0.01,
+            "description": "Quantity",
+            "example": 10.0
+          },
+          "unit_price": {
+            "type": "number",
+            "minimum": 0.0,
+            "description": "Unit price in EGP",
+            "example": 50.0
+          },
+          "discount": {
+            "type": "number",
+            "default": 0.0,
+            "minimum": 0.0,
+            "description": "Discount amount",
+            "example": 5.0
+          },
+          "tax_rate": {
+            "type": "number",
+            "default": 0.15,
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "description": "Tax rate (0.15 = 15%)",
+            "example": 0.15
+          },
+          "total": {
+            "type": "number",
+            "readOnly": true,
+            "description": "Total amount",
+            "example": 575.0
+          }
+        },
+        "required": [
+          "product_id",
+          "quantity",
+          "unit_price"
+        ]
+      },
+      "InvoicePayment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "Payment ID",
+            "example": 1
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0.01,
+            "description": "Payment amount in EGP",
+            "example": 500.0
+          },
+          "payment_method": {
+            "type": "string",
+            "enum": [
+              "cash",
+              "card",
+              "bank_transfer",
+              "check"
+            ],
+            "description": "Payment method",
+            "example": "cash"
+          },
+          "payment_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Payment date",
+            "example": "2025-11-06T10:00:00Z"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Payment reference",
+            "example": "REF-12345",
+            "nullable": true
+          }
+        },
+        "required": [
+          "amount",
+          "payment_method"
+        ]
+      },
+      "Invoice": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "Invoice ID",
+            "example": 1
+          },
+          "invoice_number": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Invoice number",
+            "example": "INV-2025-001"
+          },
+          "invoice_type": {
+            "type": "string",
+            "enum": [
+              "sales",
+              "purchase",
+              "sales_return",
+              "purchase_return"
+            ],
+            "description": "Invoice type",
+            "example": "sales"
+          },
+          "invoice_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Invoice date",
+            "example": "2025-11-06"
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Due date",
+            "example": "2025-12-06",
+            "nullable": true
+          },
+          "customer_id": {
+            "type": "integer",
+            "description": "Customer ID (for sales)",
+            "example": 1,
+            "nullable": true
+          },
+          "supplier_id": {
+            "type": "integer",
+            "description": "Supplier ID (for purchases)",
+            "example": 1,
+            "nullable": true
+          },
+          "warehouse_id": {
+            "type": "integer",
+            "description": "Warehouse ID",
+            "example": 1
+          },
+          "status": {
+            "type": "string",
+            "default": "draft",
+            "enum": [
+              "draft",
+              "pending",
+              "paid",
+              "cancelled"
+            ],
+            "description": "Invoice status",
+            "example": "draft"
+          },
+          "subtotal": {
+            "type": "number",
+            "readOnly": true,
+            "description": "Subtotal amount",
+            "example": 500.0
+          },
+          "tax_amount": {
+            "type": "number",
+            "readOnly": true,
+            "description": "Tax amount",
+            "example": 75.0
+          },
+          "discount_amount": {
+            "type": "number",
+            "default": 0.0,
+            "minimum": 0.0,
+            "description": "Discount amount",
+            "example": 25.0
+          },
+          "shipping_cost": {
+            "type": "number",
+            "default": 0.0,
+            "minimum": 0.0,
+            "description": "Shipping cost",
+            "example": 50.0
+          },
+          "total_amount": {
+            "type": "number",
+            "readOnly": true,
+            "description": "Total amount",
+            "example": 600.0
+          },
+          "paid_amount": {
+            "type": "number",
+            "readOnly": true,
+            "description": "Paid amount",
+            "example": 300.0
+          },
+          "notes": {
+            "type": "string",
+            "description": "Notes",
+            "example": "عميل مميز",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Invoice items",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceItem"
+            }
+          },
+          "payments": {
+            "type": "array",
+            "readOnly": true,
+            "description": "Invoice payments",
+            "items": {
+              "$ref": "#/components/schemas/InvoicePayment"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Creation timestamp",
+            "example": "2025-11-06T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true,
+            "description": "Last update timestamp",
+            "example": "2025-11-06T11:00:00Z"
+          }
+        },
+        "required": [
+          "invoice_date",
+          "invoice_type",
+          "items",
+          "warehouse_id"
+        ]
+      },
+      "InvoiceList": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Request success status",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "description": "List of invoices",
+            "items": {
+              "$ref": "#/components/schemas/Invoice"
+            }
+          },
+          "pagination": {
+            "type": "object",
+            "description": "Pagination metadata"
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "تم جلب الفواتير بنجاح"
+          }
+        }
+      },
+      "PingResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "HealthResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "ok"
+          },
+          "service": {
+            "type": "string",
+            "example": "store-erp"
+          },
+          "version": {
+            "type": "string",
+            "example": "v1"
+          }
+        },
+        "required": [
+          "service",
+          "status",
+          "version"
+        ]
+      },
+      "ExternalHealthResponse": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "example": "httpbin"
+          },
+          "url": {
+            "type": "string",
+            "example": "https://httpbin.org/status/200"
+          },
+          "ok": {
+            "type": "boolean",
+            "example": true
+          },
+          "status_code": {
+            "type": "integer",
+            "example": 200
+          },
+          "elapsed_ms": {
+            "type": "integer",
+            "example": 42
+          }
+        },
+        "required": [
+          "elapsed_ms",
+          "ok",
+          "service",
+          "status_code",
+          "url"
+        ]
+      }
+    },
+    "responses": {
+      "UNPROCESSABLE_CONTENT": {
+        "description": "Unprocessable Content",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "DEFAULT_ERROR": {
+        "description": "Default error response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

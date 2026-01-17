@@ -1,0 +1,376 @@
+{
+  "frontend_apis": {
+    "Authentication": [
+      "/api/auth/login",
+      "/api/auth/logout",
+      "/api/auth/refresh",
+      "/api/auth/status",
+      "/api/auth/register"
+    ],
+    "Users": [
+      "/api/users",
+      "/api/users/{id}"
+    ],
+    "Products": [
+      "/api/products",
+      "/api/products/{id}",
+      "/api/products/search",
+      "/api/products-advanced"
+    ],
+    "Inventory": [
+      "/api/inventory",
+      "/api/inventory/{id}",
+      "/api/inventory/movements",
+      "/api/inventory/adjust"
+    ],
+    "Customers": [
+      "/api/customers",
+      "/api/customers/{id}"
+    ],
+    "Suppliers": [
+      "/api/suppliers",
+      "/api/suppliers/{id}"
+    ],
+    "Invoices": [
+      "/api/invoices",
+      "/api/invoices/{id}",
+      "/api/invoices/sales",
+      "/api/invoices/purchases"
+    ],
+    "Warehouses": [
+      "/api/warehouses",
+      "/api/warehouses/{id}"
+    ],
+    "Categories": [
+      "/api/categories",
+      "/api/categories/{id}"
+    ],
+    "Dashboard": [
+      "/api/dashboard/data",
+      "/api/dashboard/stats",
+      "/api/dashboard/statistics",
+      "/api/dashboard/alerts"
+    ],
+    "Reports": [
+      "/api/reports/inventory",
+      "/api/reports/sales",
+      "/api/reports/purchases",
+      "/api/reports/profit-loss",
+      "/api/reports/custom"
+    ],
+    "Accounting": [
+      "/api/accounting/accounts",
+      "/api/accounting/entries",
+      "/api/accounting/balance",
+      "/api/accounting/trial-balance"
+    ],
+    "Settings": [
+      "/api/settings/company",
+      "/api/settings/system",
+      "/api/settings/permissions"
+    ],
+    "Integration": [
+      "/api/integration/inventory-accounting/journal-entry",
+      "/api/integration/inventory-accounting/reconciliation"
+    ],
+    "RAG": [
+      "/api/rag/query"
+    ]
+  },
+  "backend_routes": {
+    "accounting": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\accounting.py",
+    "advanced_reports": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\advanced_reports.py",
+    "auth_routes": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\auth_routes.py",
+    "auth_unified": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\auth_unified.py",
+    "automation": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\automation.py",
+    "batch_management": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\batch_management.py",
+    "batch_reports": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\batch_reports.py",
+    "categories": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\categories.py",
+    "company_settings": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\company_settings.py",
+    "comprehensive_reports": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\comprehensive_reports.py",
+    "customer_supplier_accounts": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\customer_supplier_accounts.py",
+    "customers": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\customers.py",
+    "dashboard": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\dashboard.py",
+    "excel_import_clean": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\excel_import_clean.py",
+    "excel_operations": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\excel_operations.py",
+    "excel_templates": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\excel_templates.py",
+    "export": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\export.py",
+    "financial_reports": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\financial_reports.py",
+    "financial_reports_advanced": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\financial_reports_advanced.py",
+    "import_export_advanced": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\import_export_advanced.py",
+    "integration_apis": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\integration_apis.py",
+    "interactive_dashboard": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\interactive_dashboard.py",
+    "inventory": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\inventory.py",
+    "inventory_advanced": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\inventory_advanced.py",
+    "invoices_unified": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\invoices_unified.py",
+    "lot_management": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\lot_management.py",
+    "lot_reports": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\lot_reports.py",
+    "opening_balances_treasury": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\opening_balances_treasury.py",
+    "partners": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\partners.py",
+    "partners_unified": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\partners_unified.py",
+    "payment_debt_management": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\payment_debt_management.py",
+    "payment_management": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\payment_management.py",
+    "permissions": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\permissions.py",
+    "products": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\products.py",
+    "products_advanced": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\products_advanced.py",
+    "products_unified": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\products_unified.py",
+    "profit_loss": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\profit_loss.py",
+    "profit_loss_system": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\profit_loss_system.py",
+    "rag": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\rag.py",
+    "reports": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\reports.py",
+    "returns_management": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\returns_management.py",
+    "sales": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\sales.py",
+    "sales_advanced": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\sales_advanced.py",
+    "sales_simple": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\sales_simple.py",
+    "security_system": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\security_system.py",
+    "settings": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\settings.py",
+    "suppliers": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\suppliers.py",
+    "system_settings_advanced": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\system_settings_advanced.py",
+    "system_status": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\system_status.py",
+    "temp_api": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\temp_api.py",
+    "treasury_management": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\treasury_management.py",
+    "user": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\user.py",
+    "user_management_advanced": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\user_management_advanced.py",
+    "users": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\users.py",
+    "users_unified": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\users_unified.py",
+    "warehouse_adjustments": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\warehouse_adjustments.py",
+    "warehouse_transfer": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\warehouse_transfer.py",
+    "warehouses": "D:\\APPS_AI\\store\\store_v1.6\\backend\\src\\routes\\warehouses.py"
+  },
+  "registered": [
+    [
+      "temp_api",
+      "temp_api_bp"
+    ],
+    [
+      "system_status",
+      "status_bp"
+    ],
+    [
+      "dashboard",
+      "dashboard_bp"
+    ],
+    [
+      "auth_unified",
+      "auth_unified_bp"
+    ],
+    [
+      "users_unified",
+      "users_unified_bp"
+    ],
+    [
+      "products_unified",
+      "products_unified_bp"
+    ],
+    [
+      "partners_unified",
+      "partners_unified_bp"
+    ],
+    [
+      "invoices_unified",
+      "invoices_unified_bp"
+    ],
+    [
+      "products",
+      "products_bp"
+    ],
+    [
+      "customers",
+      "customers_bp"
+    ],
+    [
+      "suppliers",
+      "suppliers_bp"
+    ],
+    [
+      "sales",
+      "sales_bp"
+    ],
+    [
+      "inventory",
+      "inventory_bp"
+    ],
+    [
+      "reports",
+      "reports_bp"
+    ],
+    [
+      "auth_routes",
+      "auth_bp"
+    ],
+    [
+      "categories",
+      "categories_bp"
+    ],
+    [
+      "warehouses",
+      "warehouses_bp"
+    ],
+    [
+      "users",
+      "users_bp"
+    ],
+    [
+      "accounting",
+      "accounting_bp"
+    ],
+    [
+      "settings",
+      "settings_bp"
+    ],
+    [
+      "integration_apis",
+      "integration_bp"
+    ],
+    [
+      "rag",
+      "rag_bp"
+    ],
+    [
+      "advanced_reports",
+      "advanced_reports_bp"
+    ],
+    [
+      "financial_reports",
+      "financial_reports_bp"
+    ],
+    [
+      "financial_reports_advanced",
+      "financial_reports_advanced_bp"
+    ],
+    [
+      "comprehensive_reports",
+      "comprehensive_reports_bp"
+    ],
+    [
+      "products_advanced",
+      "products_advanced_bp"
+    ],
+    [
+      "sales_advanced",
+      "sales_advanced_bp"
+    ],
+    [
+      "inventory_advanced",
+      "inventory_advanced_bp"
+    ],
+    [
+      "lot_management",
+      "lot_bp"
+    ],
+    [
+      "batch_management",
+      "batch_bp"
+    ],
+    [
+      "batch_reports",
+      "batch_reports_bp"
+    ],
+    [
+      "warehouse_adjustments",
+      "warehouse_adjustments_bp"
+    ],
+    [
+      "warehouse_transfer",
+      "warehouse_transfer_bp"
+    ],
+    [
+      "returns_management",
+      "returns_management_bp"
+    ],
+    [
+      "payment_management",
+      "payment_management_bp"
+    ],
+    [
+      "payment_debt_management",
+      "payment_debt_management_bp"
+    ],
+    [
+      "treasury_management",
+      "treasury_management_bp"
+    ],
+    [
+      "customer_supplier_accounts",
+      "customer_supplier_accounts_bp"
+    ],
+    [
+      "partners",
+      "partners_bp"
+    ],
+    [
+      "company_settings",
+      "company_settings_bp"
+    ],
+    [
+      "system_settings_advanced",
+      "system_settings_advanced_bp"
+    ],
+    [
+      "permissions",
+      "permissions_bp"
+    ],
+    [
+      "export",
+      "export_bp"
+    ],
+    [
+      "excel_import_clean",
+      "excel_bp"
+    ],
+    [
+      "excel_operations",
+      "excel_operations_bp"
+    ],
+    [
+      "excel_templates",
+      "excel_templates_bp"
+    ],
+    [
+      "import_export_advanced",
+      "import_export_advanced_bp"
+    ],
+    [
+      "profit_loss",
+      "profit_loss_bp"
+    ],
+    [
+      "profit_loss_system",
+      "profit_loss_system_bp"
+    ],
+    [
+      "security_system",
+      "security_bp"
+    ],
+    [
+      "automation",
+      "automation_bp"
+    ],
+    [
+      "interactive_dashboard",
+      "interactive_dashboard_bp"
+    ],
+    [
+      "opening_balances_treasury",
+      "opening_balances_treasury_bp"
+    ],
+    [
+      "user_management_advanced",
+      "user_management_advanced_bp"
+    ],
+    [
+      "lot_reports",
+      "lot_reports_bp"
+    ],
+    [
+      "sales_simple",
+      "sales_simple_bp"
+    ],
+    [
+      "user",
+      "user_bp"
+    ]
+  ],
+  "missing_routes": [],
+  "unregistered": []
+}
