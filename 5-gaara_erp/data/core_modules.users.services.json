@@ -1,0 +1,436 @@
+{
+  "module": "core_modules.users.services",
+  "imports": [
+    "datetime",
+    "django.conf",
+    "django.contrib.auth",
+    "django.contrib.auth.tokens",
+    "django.core.mail",
+    "django.template.loader",
+    "django.utils",
+    "django.utils.encoding",
+    "django.utils.http",
+    "django.utils.translation",
+    "hashlib",
+    "logging",
+    "models",
+    "re",
+    "secrets"
+  ],
+  "classes": [
+    {
+      "name": "UserService",
+      "methods": [
+        "create_user",
+        "update_user",
+        "change_password",
+        "reset_password",
+        "deactivate_user",
+        "activate_user",
+        "delete_user",
+        "update_profile",
+        "update_settings",
+        "update_notification_preferences",
+        "create_api_key",
+        "revoke_api_key",
+        "verify_api_key",
+        "register_device",
+        "update_device",
+        "deactivate_device",
+        "get_user_activities",
+        "get_user_login_attempts",
+        "_create_default_notification_preferences"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AuthenticationService",
+      "methods": [
+        "authenticate_user",
+        "login_user",
+        "logout_user",
+        "generate_password_reset_token",
+        "verify_password_reset_token",
+        "send_password_reset_email",
+        "send_verification_email",
+        "verify_email",
+        "_get_client_ip",
+        "_get_device_info",
+        "_extract_windows_version",
+        "_extract_macos_version",
+        "_extract_linux_version",
+        "_extract_android_version",
+        "_extract_ios_version",
+        "_extract_chrome_version",
+        "_extract_firefox_version",
+        "_extract_safari_version",
+        "_extract_edge_version",
+        "_extract_ie_version",
+        "_extract_opera_version"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SessionService",
+      "methods": [
+        "get_active_sessions",
+        "end_session",
+        "end_all_sessions",
+        "end_sessions_by_device",
+        "clean_expired_sessions"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_user",
+      "parameters": [
+        "self",
+        "email",
+        "password",
+        "username",
+        "first_name",
+        "last_name"
+      ]
+    },
+    {
+      "name": "update_user",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "change_password",
+      "parameters": [
+        "self",
+        "user",
+        "current_password",
+        "new_password"
+      ]
+    },
+    {
+      "name": "reset_password",
+      "parameters": [
+        "self",
+        "user",
+        "new_password"
+      ]
+    },
+    {
+      "name": "deactivate_user",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "activate_user",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "delete_user",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "update_profile",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "update_settings",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "update_notification_preferences",
+      "parameters": [
+        "self",
+        "user",
+        "notification_type"
+      ]
+    },
+    {
+      "name": "create_api_key",
+      "parameters": [
+        "self",
+        "user",
+        "name",
+        "expires_in_days"
+      ]
+    },
+    {
+      "name": "revoke_api_key",
+      "parameters": [
+        "self",
+        "api_key"
+      ]
+    },
+    {
+      "name": "verify_api_key",
+      "parameters": [
+        "self",
+        "key"
+      ]
+    },
+    {
+      "name": "register_device",
+      "parameters": [
+        "self",
+        "user",
+        "device_id",
+        "device_name",
+        "device_type",
+        "os_name",
+        "os_version"
+      ]
+    },
+    {
+      "name": "update_device",
+      "parameters": [
+        "self",
+        "device"
+      ]
+    },
+    {
+      "name": "deactivate_device",
+      "parameters": [
+        "self",
+        "device"
+      ]
+    },
+    {
+      "name": "get_user_activities",
+      "parameters": [
+        "self",
+        "user",
+        "activity_type",
+        "start_date",
+        "end_date",
+        "limit"
+      ]
+    },
+    {
+      "name": "get_user_login_attempts",
+      "parameters": [
+        "self",
+        "user",
+        "email",
+        "ip_address",
+        "start_date",
+        "end_date",
+        "limit"
+      ]
+    },
+    {
+      "name": "_create_default_notification_preferences",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "authenticate_user",
+      "parameters": [
+        "self",
+        "request",
+        "email",
+        "password"
+      ]
+    },
+    {
+      "name": "login_user",
+      "parameters": [
+        "self",
+        "request",
+        "user"
+      ]
+    },
+    {
+      "name": "logout_user",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "generate_password_reset_token",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "verify_password_reset_token",
+      "parameters": [
+        "self",
+        "uidb64",
+        "token"
+      ]
+    },
+    {
+      "name": "send_password_reset_email",
+      "parameters": [
+        "self",
+        "user",
+        "reset_url"
+      ]
+    },
+    {
+      "name": "send_verification_email",
+      "parameters": [
+        "self",
+        "user",
+        "verification_url"
+      ]
+    },
+    {
+      "name": "verify_email",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "_get_client_ip",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "_get_device_info",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "_extract_windows_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_extract_macos_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_extract_linux_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_extract_android_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_extract_ios_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_extract_chrome_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_extract_firefox_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_extract_safari_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_extract_edge_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_extract_ie_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_extract_opera_version",
+      "parameters": [
+        "self",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "get_active_sessions",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "end_session",
+      "parameters": [
+        "self",
+        "session"
+      ]
+    },
+    {
+      "name": "end_all_sessions",
+      "parameters": [
+        "self",
+        "user",
+        "exclude_session_key"
+      ]
+    },
+    {
+      "name": "end_sessions_by_device",
+      "parameters": [
+        "self",
+        "device"
+      ]
+    },
+    {
+      "name": "clean_expired_sessions",
+      "parameters": [
+        "self",
+        "days"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

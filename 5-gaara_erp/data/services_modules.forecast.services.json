@@ -1,0 +1,92 @@
+{
+  "module": "services_modules.forecast.services",
+  "imports": [
+    "business_modules.accounting.models",
+    "business_modules.contacts.models",
+    "business_modules.inventory.models",
+    "business_modules.projects.models",
+    "business_modules.purchasing.models",
+    "business_modules.sales.models",
+    "core_modules.organization.models",
+    "datetime",
+    "decimal",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "get_conversion_factor",
+      "parameters": [
+        "product",
+        "from_unit",
+        "to_unit"
+      ]
+    },
+    {
+      "name": "generate_sales_forecast",
+      "parameters": [
+        "customer",
+        "product",
+        "start_period",
+        "end_period",
+        "forecast_unit",
+        "calculation_method",
+        "historical_months"
+      ]
+    },
+    {
+      "name": "generate_purchase_forecast",
+      "parameters": [
+        "supplier",
+        "product",
+        "start_period",
+        "end_period",
+        "forecast_unit",
+        "calculation_method",
+        "historical_months"
+      ]
+    },
+    {
+      "name": "generate_project_completion_forecast",
+      "parameters": [
+        "project",
+        "forecasted_completion_date",
+        "confidence_level",
+        "notes",
+        "calculation_method"
+      ]
+    },
+    {
+      "name": "calculate_expected_cash_in",
+      "parameters": [
+        "company",
+        "country",
+        "start_month",
+        "end_month"
+      ]
+    },
+    {
+      "name": "calculate_expected_cash_out",
+      "parameters": [
+        "company",
+        "country",
+        "start_month",
+        "end_month"
+      ]
+    },
+    {
+      "name": "generate_cash_flow_forecast",
+      "parameters": [
+        "company",
+        "country",
+        "start_month",
+        "end_month",
+        "opening_balance",
+        "currency"
+      ]
+    }
+  ],
+  "variables": []
+}

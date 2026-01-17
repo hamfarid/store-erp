@@ -1,0 +1,16 @@
+{
+  "module": "core_modules.core.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework",
+    "rest_framework.routers",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "router",
+    "app_name",
+    "urlpatterns"
+  ]
+}

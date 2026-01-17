@@ -1,0 +1,97 @@
+{
+  "module": "services_modules.projects.tests.test_risk_management_integration",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "models.project",
+    "models.risk",
+    "services.project_risk_integration",
+    "unittest",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "ProjectRiskIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_create_project_risk",
+        "test_create_project_risk_without_permission",
+        "test_get_project_risks",
+        "test_update_project_risk",
+        "test_delete_project_risk",
+        "test_get_project_risk_statistics",
+        "test_get_project_high_risks",
+        "test_get_project_risk_mitigation_status"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_project_risk",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_create_project_risk_without_permission",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_get_project_risks",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_update_project_risk",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_delete_project_risk",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_get_project_risk_statistics",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_get_project_high_risks",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_get_project_risk_mitigation_status",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    }
+  ],
+  "variables": []
+}

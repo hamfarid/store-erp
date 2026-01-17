@@ -1,0 +1,78 @@
+{
+  "module": "agricultural_modules.nurseries.tests.test_performance",
+  "imports": [
+    "decimal",
+    "django.contrib.auth.models",
+    "django.urls",
+    "django.utils",
+    "models",
+    "rest_framework",
+    "rest_framework.test",
+    "services",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "NurseryPerformanceTests",
+      "methods": [
+        "setUpTestData",
+        "setUp",
+        "test_list_nurseries_performance",
+        "test_list_production_batches_performance",
+        "test_create_production_batch_service_performance",
+        "test_record_nursery_activity_api_performance",
+        "test_production_batch_filtering_performance"
+      ],
+      "variables": [
+        "NUM_NURSERIES",
+        "NUM_BATCHES_PER_NURSERY_SECTION",
+        "NUM_ACTIVITIES_PER_BATCH"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_list_nurseries_performance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_list_production_batches_performance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_production_batch_service_performance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_nursery_activity_api_performance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_production_batch_filtering_performance",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,172 @@
+{
+  "module": "agricultural_modules.nurseries.services",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.db",
+    "django.utils",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_nursery",
+      "parameters": [
+        "name",
+        "location",
+        "area",
+        "manager_id"
+      ]
+    },
+    {
+      "name": "get_nursery_by_id",
+      "parameters": [
+        "nursery_id"
+      ]
+    },
+    {
+      "name": "list_nurseries",
+      "parameters": []
+    },
+    {
+      "name": "update_nursery",
+      "parameters": [
+        "nursery_id",
+        "name",
+        "location",
+        "area",
+        "manager_id"
+      ]
+    },
+    {
+      "name": "delete_nursery",
+      "parameters": [
+        "nursery_id"
+      ]
+    },
+    {
+      "name": "create_nursery_section",
+      "parameters": [
+        "nursery_id",
+        "name",
+        "section_type",
+        "area",
+        "capacity"
+      ]
+    },
+    {
+      "name": "get_nursery_section_by_id",
+      "parameters": [
+        "section_id"
+      ]
+    },
+    {
+      "name": "create_plant_variety",
+      "parameters": [
+        "name",
+        "scientific_name",
+        "description"
+      ]
+    },
+    {
+      "name": "create_growth_stage",
+      "parameters": [
+        "name",
+        "order",
+        "description",
+        "plant_variety_id"
+      ]
+    },
+    {
+      "name": "create_production_batch",
+      "parameters": [
+        "batch_identifier",
+        "plant_variety_id",
+        "start_date",
+        "initial_quantity",
+        "nursery_section_id",
+        "notes"
+      ]
+    },
+    {
+      "name": "get_production_batch_by_id",
+      "parameters": [
+        "batch_id"
+      ]
+    },
+    {
+      "name": "advance_batch_stage",
+      "parameters": [
+        "batch_id",
+        "next_stage_id",
+        "notes"
+      ]
+    },
+    {
+      "name": "update_batch_quantity",
+      "parameters": [
+        "batch_id",
+        "new_quantity",
+        "reason"
+      ]
+    },
+    {
+      "name": "create_nursery_activity_type",
+      "parameters": [
+        "name",
+        "description"
+      ]
+    },
+    {
+      "name": "record_nursery_activity",
+      "parameters": [
+        "activity_type_id",
+        "date_performed",
+        "performed_by_id",
+        "production_batch_id",
+        "nursery_section_id",
+        "cost",
+        "notes",
+        "resources_used"
+      ]
+    },
+    {
+      "name": "create_nursery_resource",
+      "parameters": [
+        "name",
+        "resource_type",
+        "unit_of_measure",
+        "description"
+      ]
+    },
+    {
+      "name": "record_quality_check",
+      "parameters": [
+        "production_batch_id",
+        "check_date",
+        "overall_quality",
+        "parameters_checked",
+        "notes",
+        "checked_by_id"
+      ]
+    },
+    {
+      "name": "record_environmental_log",
+      "parameters": [
+        "nursery_section_id",
+        "log_datetime",
+        "temperature",
+        "humidity",
+        "light_intensity",
+        "notes",
+        "recorded_by_id"
+      ]
+    },
+    {
+      "name": "get_batch_estimated_completion",
+      "parameters": [
+        "batch_id"
+      ]
+    }
+  ],
+  "variables": []
+}

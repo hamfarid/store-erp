@@ -1,0 +1,124 @@
+{
+  "module": "integration_modules.ai_agriculture.tests.test_apis",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.db",
+    "django.test",
+    "django.urls",
+    "django.utils",
+    "models",
+    "rest_framework",
+    "rest_framework.test"
+  ],
+  "classes": [
+    {
+      "name": "CropAnalysisAPITest",
+      "methods": [
+        "setUp",
+        "test_create_crop_analysis",
+        "test_retrieve_crop_analysis",
+        "test_get_farm_analyses",
+        "test_generate_recommendations",
+        "test_get_recommendations"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CropPredictionAPITest",
+      "methods": [
+        "setUp",
+        "test_predict_yield",
+        "test_predict_problems",
+        "test_get_yield_prediction",
+        "test_get_crop_prediction",
+        "test_farm_predictions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Farm",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Farm",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_crop_analysis",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_retrieve_crop_analysis",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_farm_analyses",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_recommendations",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_recommendations",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_predict_yield",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_predict_problems",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_yield_prediction",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_crop_prediction",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_farm_predictions",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,30 @@
+{
+  "module": "core_modules.setup.submodules.data_import_export.apps",
+  "imports": [
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SetupSubmodulesDataImportExportConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "label",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

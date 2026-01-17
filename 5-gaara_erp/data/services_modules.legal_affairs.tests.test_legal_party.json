@@ -1,0 +1,94 @@
+{
+  "module": "services_modules.legal_affairs.tests.test_legal_party",
+  "imports": [
+    "core_modules.core.models.company",
+    "django.contrib.auth.models",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "services_modules.legal_affairs.models.legal_case",
+    "services_modules.legal_affairs.models.legal_contract",
+    "services_modules.legal_affairs.models.legal_party"
+  ],
+  "classes": [
+    {
+      "name": "LegalPartyModelTest",
+      "methods": [
+        "setUp",
+        "test_party_creation",
+        "test_string_representation",
+        "test_validation_error_on_no_relation",
+        "test_get_contact_info",
+        "test_get_identification_info",
+        "test_is_individual",
+        "test_is_company",
+        "test_get_related_case_or_contract",
+        "test_get_related_documents"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_party_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_string_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_error_on_no_relation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_contact_info",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_identification_info",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_individual",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_related_case_or_contract",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_related_documents",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

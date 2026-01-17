@@ -1,0 +1,26 @@
+{
+  "module": "core_modules.organization.views",
+  "imports": [
+    "django.http",
+    "django.shortcuts",
+    "rest_framework.decorators",
+    "rest_framework.response"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "organization_list",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "organization_detail",
+      "parameters": [
+        "request",
+        "org_id"
+      ]
+    }
+  ],
+  "variables": []
+}

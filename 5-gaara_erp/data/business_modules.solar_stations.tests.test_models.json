@@ -1,0 +1,88 @@
+{
+  "module": "business_modules.solar_stations.tests.test_models",
+  "imports": [
+    "business_modules.solar_stations.models",
+    "django.contrib.auth.models",
+    "django.db",
+    "django.test",
+    "django.utils"
+  ],
+  "classes": [
+    {
+      "name": "SolarStationModelTest",
+      "methods": [
+        "test_create_solar_station"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductionRecordModelTest",
+      "methods": [
+        "setUpTestData",
+        "test_create_production_record"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MaintenanceRecordModelTest",
+      "methods": [
+        "setUpTestData",
+        "test_create_maintenance_record"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MonitoringDeviceModelTest",
+      "methods": [
+        "setUpTestData",
+        "test_create_monitoring_device"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "test_create_solar_station",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_create_production_record",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_create_maintenance_record",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_create_monitoring_device",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

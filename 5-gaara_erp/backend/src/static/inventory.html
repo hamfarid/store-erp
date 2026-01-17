@@ -1,0 +1,957 @@
+<!-- ملف: /home/ubuntu/complete_inventory_system/backend/src/static/inventory.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إدارة المخزون - نظام إدارة المخزون</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="css/inventory.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-boxes"></i> إدارة المخزون</h1>
+      <p>إدارة شاملة للأصناف والمخازن وحركات المخزون</p>
+    </div>
+
+    <div class="nav-bar">
+      <a href="/dashboard.html"><i class="fas fa-home"></i> العودة للرئيسية</a>
+      <div class="nav-user-info">
+        <span class="nav-user-badge">مرحباً، مدير النظام</span>
+        <a class="nav-logout" href="/"><i class="fas fa-sign-out-alt"></i> خروج</a>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button type="button" class="tab-button active" data-tab="products" onclick="showTab(event, 'products')"><i class="fas fa-box"></i> الأصناف</button>
+        <button type="button" class="tab-button" data-tab="categories" onclick="showTab(event, 'categories')"><i class="fas fa-tags"></i> الفئات</button>
+        <button type="button" class="tab-button" data-tab="warehouses" onclick="showTab(event, 'warehouses')"><i class="fas fa-warehouse"></i> المخازن</button>
+        <button type="button" class="tab-button" data-tab="movements" onclick="showTab(event, 'movements')"><i class="fas fa-exchange-alt"></i> حركات المخزون</button>
+      </div>
+
+      <div id="products-tab" class="tab-content active">
+        <div class="action-bar">
+          <div class="search-box">
+            <input type="text" id="products-search" placeholder="ابحث في الأصناف..." aria-label="ابحث في الأصناف">
+            <i class="fas fa-search"></i>
+          </div>
+          <div>
+            <button type="button" class="btn btn-success" onclick="showAddProductModal()"><i class="fas fa-plus"></i> إضافة صنف جديد</button>
+            <button type="button" class="btn btn-primary" onclick="loadProducts()"><i class="fas fa-sync"></i> تحديث</button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>الكود</th>
+                <th>اسم الصنف</th>
+                <th>الفئة</th>
+                <th>الوحدة</th>
+                <th>سعر البيع</th>
+                <th>المخزون الحالي</th>
+                <th>الحالة</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="products-table">
+              <tr>
+                <td colspan="8" class="loading"><i class="fas fa-spinner fa-spin"></i> جاري تحميل البيانات...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="categories-tab" class="tab-content">
+        <div class="action-bar">
+          <div class="search-box">
+            <input type="text" id="categories-search" placeholder="ابحث في الفئات..." aria-label="ابحث في الفئات">
+            <i class="fas fa-search"></i>
+          </div>
+          <div>
+            <button type="button" class="btn btn-success" onclick="showAddCategoryModal()"><i class="fas fa-plus"></i> إضافة فئة جديدة</button>
+            <button type="button" class="btn btn-primary" onclick="loadCategories()"><i class="fas fa-sync"></i> تحديث</button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>الكود</th>
+                <th>اسم الفئة</th>
+                <th>الوصف</th>
+                <th>عدد الأصناف</th>
+                <th>الحالة</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="categories-table">
+              <tr>
+                <td colspan="6" class="loading"><i class="fas fa-spinner fa-spin"></i> جاري تحميل البيانات...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="warehouses-tab" class="tab-content">
+        <div class="action-bar">
+          <div class="search-box">
+            <input type="text" id="warehouses-search" placeholder="ابحث في المخازن..." aria-label="ابحث في المخازن">
+            <i class="fas fa-search"></i>
+          </div>
+          <div>
+            <button type="button" class="btn btn-success" onclick="showAddWarehouseModal()"><i class="fas fa-plus"></i> إضافة مخزن جديد</button>
+            <button type="button" class="btn btn-primary" onclick="loadWarehouses()"><i class="fas fa-sync"></i> تحديث</button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>الكود</th>
+                <th>اسم المخزن</th>
+                <th>الموقع</th>
+                <th>المسؤول</th>
+                <th>عدد الأصناف</th>
+                <th>الحالة</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="warehouses-table">
+              <tr>
+                <td colspan="7" class="loading"><i class="fas fa-spinner fa-spin"></i> جاري تحميل البيانات...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="movements-tab" class="tab-content">
+        <div class="action-bar">
+          <div class="search-box">
+            <input type="text" id="movements-search" placeholder="ابحث في الحركات..." aria-label="ابحث في الحركات">
+            <i class="fas fa-search"></i>
+          </div>
+          <div>
+            <button type="button" class="btn btn-success" onclick="showAddMovementModal()"><i class="fas fa-plus"></i> إضافة حركة جديدة</button>
+            <button type="button" class="btn btn-primary" onclick="loadMovements()"><i class="fas fa-sync"></i> تحديث</button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>التاريخ</th>
+                <th>النوع</th>
+                <th>الصنف</th>
+                <th>المخزن</th>
+                <th>الكمية</th>
+                <th>المرجع</th>
+                <th>الملاحظات</th>
+              </tr>
+            </thead>
+            <tbody id="movements-table">
+              <tr>
+                <td colspan="7" class="loading"><i class="fas fa-spinner fa-spin"></i> جاري تحميل البيانات...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="product-modal" class="modal" aria-labelledby="product-modal-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="product-modal-title">إضافة صنف جديد</h3>
+        <button type="button" class="close-button" aria-label="إغلاق" onclick="closeModal('product-modal')">&times;</button>
+      </div>
+      <form id="product-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="product-code">كود الصنف</label>
+            <input type="text" id="product-code" name="code" placeholder="أدخل كود الصنف" required>
+          </div>
+          <div class="form-group">
+            <label for="product-name">اسم الصنف</label>
+            <input type="text" id="product-name" name="name" placeholder="أدخل اسم الصنف" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="product-category">الفئة</label>
+            <select id="product-category" name="category_id" required>
+              <option value="">اختر الفئة</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="product-unit">الوحدة</label>
+            <input type="text" id="product-unit" name="unit" placeholder="مثل: قطعة، صندوق" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="product-price">سعر البيع</label>
+            <input type="number" id="product-price" name="selling_price" min="0" step="0.01" placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label for="product-cost">سعر التكلفة</label>
+            <input type="number" id="product-cost" name="cost_price" min="0" step="0.01" placeholder="0.00">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="product-stock">المخزون الابتدائي</label>
+            <input type="number" id="product-stock" name="initial_stock" min="0" step="0.01" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label for="product-reorder">حد إعادة الطلب</label>
+            <input type="number" id="product-reorder" name="reorder_level" min="0" step="0.01" placeholder="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="product-description">الوصف</label>
+          <textarea id="product-description" name="description" placeholder="أدخل وصفاً مختصراً للصنف"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> حفظ</button>
+          <button type="button" class="btn btn-secondary" onclick="closeModal('product-modal')">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="category-modal" class="modal" aria-labelledby="category-modal-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="category-modal-title">إضافة فئة جديدة</h3>
+        <button type="button" class="close-button" aria-label="إغلاق" onclick="closeModal('category-modal')">&times;</button>
+      </div>
+      <form id="category-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="category-code">كود الفئة</label>
+            <input type="text" id="category-code" name="code" placeholder="أدخل كود الفئة" required>
+          </div>
+          <div class="form-group">
+            <label for="category-name">اسم الفئة</label>
+            <input type="text" id="category-name" name="name" placeholder="أدخل اسم الفئة" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="category-status">الحالة</label>
+          <select id="category-status" name="status">
+            <option value="active">نشطة</option>
+            <option value="inactive">غير نشطة</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="category-description">الوصف</label>
+          <textarea id="category-description" name="description" placeholder="أدخل وصفاً للفئة"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> حفظ</button>
+          <button type="button" class="btn btn-secondary" onclick="closeModal('category-modal')">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="warehouse-modal" class="modal" aria-labelledby="warehouse-modal-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="warehouse-modal-title">إضافة مخزن جديد</h3>
+        <button type="button" class="close-button" aria-label="إغلاق" onclick="closeModal('warehouse-modal')">&times;</button>
+      </div>
+      <form id="warehouse-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="warehouse-code">كود المخزن</label>
+            <input type="text" id="warehouse-code" name="code" placeholder="أدخل كود المخزن" required>
+          </div>
+          <div class="form-group">
+            <label for="warehouse-name">اسم المخزن</label>
+            <input type="text" id="warehouse-name" name="name" placeholder="أدخل اسم المخزن" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="warehouse-location">الموقع</label>
+            <input type="text" id="warehouse-location" name="location" placeholder="المدينة، العنوان" required>
+          </div>
+          <div class="form-group">
+            <label for="warehouse-manager">المسؤول</label>
+            <input type="text" id="warehouse-manager" name="manager" placeholder="اسم المسؤول" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="warehouse-phone">رقم التواصل</label>
+            <input type="tel" id="warehouse-phone" name="phone" placeholder="أدخل رقم الهاتف">
+          </div>
+          <div class="form-group">
+            <label for="warehouse-capacity">الطاقة الاستيعابية</label>
+            <input type="number" id="warehouse-capacity" name="capacity" min="0" step="0.01" placeholder="عدد أو كمية">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="warehouse-notes">ملاحظات</label>
+          <textarea id="warehouse-notes" name="notes" placeholder="أدخل أي ملاحظات إضافية"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> حفظ</button>
+          <button type="button" class="btn btn-secondary" onclick="closeModal('warehouse-modal')">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="movement-modal" class="modal" aria-labelledby="movement-modal-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="movement-modal-title">إضافة حركة مخزون</h3>
+        <button type="button" class="close-button" aria-label="إغلاق" onclick="closeModal('movement-modal')">&times;</button>
+      </div>
+      <form id="movement-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="movement-type">نوع الحركة</label>
+            <select id="movement-type" name="movement_type" required>
+              <option value="">اختر النوع</option>
+              <option value="in">إضافة إلى المخزون</option>
+              <option value="out">سحب من المخزون</option>
+              <option value="transfer">نقل بين المخازن</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="movement-date">التاريخ</label>
+            <input type="date" id="movement-date" name="movement_date" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="movement-product">الصنف</label>
+            <select id="movement-product" name="product_id" required>
+              <option value="">اختر الصنف</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="movement-warehouse">المخزن</label>
+            <select id="movement-warehouse" name="warehouse_id" required>
+              <option value="">اختر المخزن</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="movement-quantity">الكمية</label>
+            <input type="number" id="movement-quantity" name="quantity" min="0" step="0.01" placeholder="0" required>
+          </div>
+          <div class="form-group">
+            <label for="movement-reference">المرجع</label>
+            <input type="text" id="movement-reference" name="reference" placeholder="رقم الوثيقة أو المرجع">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="movement-notes">الملاحظات</label>
+          <textarea id="movement-notes" name="notes" placeholder="أدخل أي ملاحظات إضافية"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> حفظ</button>
+          <button type="button" class="btn btn-secondary" onclick="closeModal('movement-modal')">إلغاء</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script>
+    let currentTab = 'products';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupModalDismiss();
+      attachFormHandlers();
+      setupSearchFilters();
+      setActiveTabFromHash();
+
+      loadProducts();
+      loadCategories();
+      loadWarehouses();
+      loadMovements();
+    });
+
+    window.addEventListener('hashchange', setActiveTabFromHash);
+
+    function showTab(evt, tabName) {
+      document.querySelectorAll('.tab-content').forEach((tab) => {
+        tab.classList.toggle('active', tab.id === `${tabName}-tab`);
+      });
+
+      document.querySelectorAll('.tab-button').forEach((button) => {
+        button.classList.toggle('active', button.dataset.tab === tabName);
+      });
+
+      currentTab = tabName;
+
+      if (evt?.preventDefault) {
+        evt.preventDefault();
+      }
+
+      if (window.location.hash !== `#${tabName}`) {
+        history.replaceState(null, '', `#${tabName}`);
+      }
+    }
+
+    function setActiveTabFromHash() {
+      const hash = window.location.hash.replace('#', '');
+      if (!hash) {
+        return;
+      }
+
+      const targetTab = document.getElementById(`${hash}-tab`);
+      if (targetTab) {
+        showTab(null, hash);
+      }
+    }
+
+    function setLoading(tbodyId, colspan) {
+      const tbody = document.getElementById(tbodyId);
+      if (tbody) {
+        tbody.innerHTML = `<tr><td colspan="${colspan}" class="loading"><i class="fas fa-spinner fa-spin"></i> جاري تحميل البيانات...</td></tr>`;
+      }
+    }
+
+    async function loadProducts() {
+      setLoading('products-table', 8);
+      const products = await fetchInventoryData('/api/inventory/products');
+
+      if (products.length) {
+        displayProducts(products);
+      } else {
+        displayEmptyProducts();
+      }
+    }
+
+    function displayProducts(products) {
+      const tbody = document.getElementById('products-table');
+      if (!tbody) {
+        return;
+      }
+
+      tbody.innerHTML = products
+        .map((product) => {
+          const id = product.id ?? product.product_id ?? '';
+          const status = renderStatusBadge(product.status || product.state);
+          return `
+            <tr data-row="product">
+              <td>${product.code || product.sku || '-'}</td>
+              <td>${product.name || product.product_name || '-'}</td>
+              <td>${product.category_name || product.category || '-'}</td>
+              <td>${product.unit || '-'}</td>
+              <td>${formatCurrency(product.selling_price ?? product.price)}</td>
+              <td>${formatNumber(product.current_stock ?? product.stock_quantity ?? 0)}</td>
+              <td>${status}</td>
+              <td>
+                <button type="button" class="btn btn-primary" onclick="viewProduct('${id}')"><i class="fas fa-eye"></i></button>
+                <button type="button" class="btn btn-warning" onclick="editProduct('${id}')"><i class="fas fa-edit"></i></button>
+                <button type="button" class="btn btn-danger" onclick="deleteProduct('${id}')"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+          `;
+        })
+        .join('');
+
+      applySearchFilter('products-search', 'products-table');
+    }
+
+    function displayEmptyProducts() {
+      const tbody = document.getElementById('products-table');
+      if (tbody) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" class="empty-state">
+              <i class="fas fa-box-open"></i>
+              <p>لا توجد أصناف متاحة حالياً</p>
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    async function loadCategories() {
+      setLoading('categories-table', 6);
+      const categories = await fetchInventoryData('/api/inventory/categories');
+
+      if (categories.length) {
+        displayCategories(categories);
+      } else {
+        displayEmptyCategories();
+      }
+    }
+
+    function displayCategories(categories) {
+      const tbody = document.getElementById('categories-table');
+      if (!tbody) {
+        return;
+      }
+
+      tbody.innerHTML = categories
+        .map((category) => {
+          const id = category.id ?? category.category_id ?? '';
+          const status = renderStatusBadge(category.status);
+          return `
+            <tr data-row="category">
+              <td>${category.code || '-'}</td>
+              <td>${category.name || '-'}</td>
+              <td>${category.description || '-'}</td>
+              <td>${formatNumber(category.items_count ?? category.product_count ?? 0)}</td>
+              <td>${status}</td>
+              <td>
+                <button type="button" class="btn btn-primary" onclick="viewCategory('${id}')"><i class="fas fa-eye"></i></button>
+                <button type="button" class="btn btn-warning" onclick="editCategory('${id}')"><i class="fas fa-edit"></i></button>
+                <button type="button" class="btn btn-danger" onclick="deleteCategory('${id}')"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+          `;
+        })
+        .join('');
+
+      applySearchFilter('categories-search', 'categories-table');
+    }
+
+    function displayEmptyCategories() {
+      const tbody = document.getElementById('categories-table');
+      if (tbody) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="empty-state">
+              <i class="fas fa-tags"></i>
+              <p>لا توجد فئات مسجلة</p>
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    async function loadWarehouses() {
+      setLoading('warehouses-table', 7);
+      const warehouses = await fetchInventoryData('/api/inventory/warehouses');
+
+      if (warehouses.length) {
+        displayWarehouses(warehouses);
+      } else {
+        displayEmptyWarehouses();
+      }
+    }
+
+    function displayWarehouses(warehouses) {
+      const tbody = document.getElementById('warehouses-table');
+      if (!tbody) {
+        return;
+      }
+
+      tbody.innerHTML = warehouses
+        .map((warehouse) => {
+          const id = warehouse.id ?? warehouse.warehouse_id ?? '';
+          const status = renderStatusBadge(warehouse.status);
+          return `
+            <tr data-row="warehouse">
+              <td>${warehouse.code || '-'}</td>
+              <td>${warehouse.name || '-'}</td>
+              <td>${warehouse.location || warehouse.city || '-'}</td>
+              <td>${warehouse.manager || warehouse.manager_name || '-'}</td>
+              <td>${formatNumber(warehouse.items_count ?? warehouse.product_count ?? 0)}</td>
+              <td>${status}</td>
+              <td>
+                <button type="button" class="btn btn-primary" onclick="viewWarehouse('${id}')"><i class="fas fa-eye"></i></button>
+                <button type="button" class="btn btn-warning" onclick="editWarehouse('${id}')"><i class="fas fa-edit"></i></button>
+                <button type="button" class="btn btn-danger" onclick="deleteWarehouse('${id}')"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+          `;
+        })
+        .join('');
+
+      applySearchFilter('warehouses-search', 'warehouses-table');
+    }
+
+    function displayEmptyWarehouses() {
+      const tbody = document.getElementById('warehouses-table');
+      if (tbody) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="empty-state">
+              <i class="fas fa-warehouse"></i>
+              <p>لا توجد مخازن مسجلة حالياً</p>
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    async function loadMovements() {
+      setLoading('movements-table', 7);
+      const movements = await fetchInventoryData('/api/inventory/movements');
+
+      if (movements.length) {
+        displayMovements(movements);
+      } else {
+        displayEmptyMovements();
+      }
+    }
+
+    function displayMovements(movements) {
+      const tbody = document.getElementById('movements-table');
+      if (!tbody) {
+        return;
+      }
+
+      tbody.innerHTML = movements
+        .map((movement) => {
+          return `
+            <tr data-row="movement">
+              <td>${formatDate(movement.date || movement.created_at)}</td>
+              <td>${getMovementTypeLabel(movement.type)}</td>
+              <td>${movement.product_name || movement.product || '-'}</td>
+              <td>${movement.warehouse_name || movement.warehouse || '-'}</td>
+              <td>${formatNumber(movement.quantity)}</td>
+              <td>${movement.reference || '-'}</td>
+              <td>${movement.notes || '-'}</td>
+            </tr>
+          `;
+        })
+        .join('');
+
+      applySearchFilter('movements-search', 'movements-table');
+    }
+
+    function displayEmptyMovements() {
+      const tbody = document.getElementById('movements-table');
+      if (tbody) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="empty-state">
+              <i class="fas fa-exchange-alt"></i>
+              <p>لا توجد حركات مخزون مسجلة</p>
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    async function fetchInventoryData(url) {
+      try {
+        const response = await fetch(url, { headers: { Accept: 'application/json' } });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const payload = await response.json();
+
+        if (Array.isArray(payload)) {
+          return payload;
+        }
+
+        if (Array.isArray(payload?.data)) {
+          return payload.data;
+        }
+
+        if (Array.isArray(payload?.items)) {
+          return payload.items;
+        }
+
+        if (payload?.result && Array.isArray(payload.result)) {
+          return payload.result;
+        }
+
+        const collection = payload?.products || payload?.categories || payload?.warehouses || payload?.movements;
+        if (Array.isArray(collection)) {
+          return collection;
+        }
+
+        return [];
+      } catch (error) {
+        console.error(`خطأ أثناء جلب البيانات من ${url}:`, error);
+        return [];
+      }
+    }
+
+    function renderStatusBadge(status) {
+      if (!status) {
+        return '<span class="status-badge status-inactive">غير محدد</span>';
+      }
+
+      const normalized = String(status).toLowerCase();
+      const classes = {
+        active: 'status-active',
+        available: 'status-active',
+        enabled: 'status-active',
+        inactive: 'status-inactive',
+        disabled: 'status-inactive',
+        archived: 'status-inactive',
+        low: 'status-low',
+        'low_stock': 'status-low',
+        warning: 'status-low'
+      };
+
+      const labels = {
+        active: 'نشط',
+        available: 'متوفر',
+        enabled: 'مفعل',
+        inactive: 'غير نشط',
+        disabled: 'معطل',
+        archived: 'مؤرشف',
+        low: 'مخزون منخفض',
+        'low_stock': 'مخزون منخفض',
+        warning: 'تحذير'
+      };
+
+      const cssClass = classes[normalized] || 'status-active';
+      const label = labels[normalized] || status;
+      return `<span class="status-badge ${cssClass}">${label}</span>`;
+    }
+
+    function getMovementTypeLabel(type) {
+      if (!type) {
+        return '-';
+      }
+
+      const normalized = String(type).toLowerCase();
+      const labels = {
+        in: 'إضافة',
+        add: 'إضافة',
+        receive: 'استلام',
+        out: 'سحب',
+        remove: 'سحب',
+        issue: 'صرف',
+        transfer: 'نقل'
+      };
+
+      return labels[normalized] || type;
+    }
+
+    function formatCurrency(value) {
+      const amount = Number(value) || 0;
+      return new Intl.NumberFormat('ar-EG', { style: 'currency', currency: 'EGP', minimumFractionDigits: 2 }).format(amount);
+    }
+
+    function formatNumber(value) {
+      const number = Number(value) || 0;
+      return new Intl.NumberFormat('ar-EG').format(number);
+    }
+
+    function formatDate(value) {
+      if (!value) {
+        return '-';
+      }
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        return '-';
+      }
+      return date.toLocaleDateString('ar-EG');
+    }
+
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) {
+        return;
+      }
+
+      if (modal.tagName === 'DIALOG') {
+        if (typeof modal.showModal === 'function') {
+          if (!modal.open) {
+            modal.showModal();
+          }
+        } else {
+          modal.setAttribute('open', '');
+        }
+      } else {
+        modal.style.display = 'block';
+      }
+
+      document.body.classList.add('modal-open');
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) {
+        return;
+      }
+
+      if (modal.tagName === 'DIALOG') {
+        if (modal.open && typeof modal.close === 'function') {
+          modal.close();
+        }
+        modal.removeAttribute('open');
+      } else {
+        modal.style.display = 'none';
+      }
+
+      if (!document.querySelector('.modal[open]') && !document.querySelector('.modal[style*="block"]')) {
+        document.body.classList.remove('modal-open');
+      }
+    }
+
+    function showAddProductModal() {
+      const form = document.getElementById('product-form');
+      form?.reset();
+      document.getElementById('product-modal-title').textContent = 'إضافة صنف جديد';
+      openModal('product-modal');
+    }
+
+    function showAddCategoryModal() {
+      const form = document.getElementById('category-form');
+      form?.reset();
+      document.getElementById('category-modal-title').textContent = 'إضافة فئة جديدة';
+      openModal('category-modal');
+    }
+
+    function showAddWarehouseModal() {
+      const form = document.getElementById('warehouse-form');
+      form?.reset();
+      document.getElementById('warehouse-modal-title').textContent = 'إضافة مخزن جديد';
+      openModal('warehouse-modal');
+    }
+
+    function showAddMovementModal() {
+      const form = document.getElementById('movement-form');
+      form?.reset();
+      document.getElementById('movement-modal-title').textContent = 'إضافة حركة مخزون';
+      document.getElementById('movement-date').valueAsDate = new Date();
+      openModal('movement-modal');
+    }
+
+    function attachFormHandlers() {
+      const forms = [
+        { id: 'product-form', modal: 'product-modal', entity: 'الصنف' },
+        { id: 'category-form', modal: 'category-modal', entity: 'الفئة' },
+        { id: 'warehouse-form', modal: 'warehouse-modal', entity: 'المخزن' },
+        { id: 'movement-form', modal: 'movement-modal', entity: 'حركة المخزون' }
+      ];
+
+      forms.forEach(({ id, modal, entity }) => {
+        const form = document.getElementById(id);
+        if (!form) {
+          return;
+        }
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          notifyPendingFeature(`حفظ ${entity}`);
+          closeModal(modal);
+          form.reset();
+        });
+      });
+    }
+
+    function setupModalDismiss() {
+      document.querySelectorAll('.modal').forEach((modal) => {
+        modal.addEventListener('click', (event) => {
+          if (modal.tagName === 'DIALOG') {
+            const content = modal.querySelector('.modal-content');
+            if (content && !content.contains(event.target)) {
+              closeModal(modal.id);
+            }
+          } else if (event.target === modal) {
+            closeModal(modal.id);
+          }
+        });
+
+        if (modal.tagName === 'DIALOG') {
+          modal.addEventListener('cancel', (event) => {
+            event.preventDefault();
+            closeModal(modal.id);
+          });
+
+          modal.addEventListener('close', () => {
+            if (!document.querySelector('.modal[open]')) {
+              document.body.classList.remove('modal-open');
+            }
+          });
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          const openModalElement = document.querySelector('.modal[open]') || document.querySelector('.modal[style*="block"]');
+          if (openModalElement) {
+            closeModal(openModalElement.id);
+          }
+        }
+      });
+    }
+
+    function setupSearchFilters() {
+      const configs = [
+        { inputId: 'products-search', tableId: 'products-table' },
+        { inputId: 'categories-search', tableId: 'categories-table' },
+        { inputId: 'warehouses-search', tableId: 'warehouses-table' },
+        { inputId: 'movements-search', tableId: 'movements-table' }
+      ];
+
+      configs.forEach(({ inputId, tableId }) => {
+        const input = document.getElementById(inputId);
+        if (!input) {
+          return;
+        }
+
+        input.addEventListener('input', () => {
+          applySearchFilter(inputId, tableId);
+        });
+      });
+    }
+
+    function applySearchFilter(inputId, tableId) {
+      const input = document.getElementById(inputId);
+      const tbody = document.getElementById(tableId);
+      if (!input || !tbody) {
+        return;
+      }
+
+      const query = input.value.trim().toLowerCase();
+      const rows = Array.from(tbody.querySelectorAll('tr[data-row]'));
+
+      rows.forEach((row) => {
+        const text = row.textContent?.toLowerCase() ?? '';
+        row.style.display = text.includes(query) ? '' : 'none';
+      });
+    }
+
+    function notifyPendingFeature(message) {
+      alert(`${message} سيتم تطويرها قريباً`);
+    }
+
+    function viewProduct(id) { notifyPendingFeature('عرض الصنف'); }
+    function editProduct(id) { notifyPendingFeature('تعديل الصنف'); }
+    function deleteProduct(id) {
+      if (confirm('هل أنت متأكد من حذف هذا الصنف؟')) {
+        notifyPendingFeature('حذف الصنف');
+      }
+    }
+
+    function viewCategory(id) { notifyPendingFeature('عرض الفئة'); }
+    function editCategory(id) { notifyPendingFeature('تعديل الفئة'); }
+    function deleteCategory(id) {
+      if (confirm('هل أنت متأكد من حذف هذه الفئة؟')) {
+        notifyPendingFeature('حذف الفئة');
+      }
+    }
+
+    function viewWarehouse(id) { notifyPendingFeature('عرض المخزن'); }
+    function editWarehouse(id) { notifyPendingFeature('تعديل المخزن'); }
+    function deleteWarehouse(id) {
+      if (confirm('هل أنت متأكد من حذف هذا المخزن؟')) {
+        notifyPendingFeature('حذف المخزن');
+      }
+    }
+  </script>
+</body>
+</html>

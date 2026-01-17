@@ -1,0 +1,81 @@
+{
+  "module": "admin_modules.system_monitoring.views",
+  "imports": [
+    "django.utils",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.permissions",
+    "rest_framework.response",
+    "serializers",
+    "services.monitoring_service"
+  ],
+  "classes": [
+    {
+      "name": "SystemMetricViewSet",
+      "methods": [
+        "list"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "AlertViewSet",
+      "methods": [
+        "list",
+        "acknowledge",
+        "resolve"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "ModuleStatusViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "list",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "list",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "acknowledge",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

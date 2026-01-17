@@ -1,0 +1,76 @@
+{
+  "module": "admin_modules.system_monitoring.serializers",
+  "imports": [
+    "django.contrib.auth",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSimpleSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SystemMetricSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "AlertSerializer",
+      "methods": [],
+      "variables": [
+        "acknowledged_by",
+        "related_metric",
+        "severity_display",
+        "status_display"
+      ]
+    },
+    {
+      "name": "ModuleStatusSerializer",
+      "methods": [],
+      "variables": [
+        "status_display"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": [
+    "User"
+  ]
+}

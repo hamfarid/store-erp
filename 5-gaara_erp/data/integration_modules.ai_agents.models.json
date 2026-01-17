@@ -1,0 +1,695 @@
+{
+  "module": "integration_modules.ai_agents.models",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "json",
+    "logging",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "Agent",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "activate",
+        "deactivate",
+        "suspend",
+        "update_last_active",
+        "update_configuration",
+        "send_message",
+        "get_capabilities",
+        "has_capability",
+        "add_capability",
+        "remove_capability",
+        "get_roles",
+        "has_role",
+        "has_permission",
+        "regenerate_api_key",
+        "is_active",
+        "get_recent_activities",
+        "get_message_count"
+      ],
+      "variables": [
+        "AGENT_TYPES",
+        "STATUS_CHOICES",
+        "name",
+        "description",
+        "agent_type",
+        "owner",
+        "avatar",
+        "configuration",
+        "status",
+        "created_at",
+        "updated_at",
+        "last_active",
+        "api_key",
+        "version",
+        "is_system_agent"
+      ]
+    },
+    {
+      "name": "AgentCapability",
+      "methods": [
+        "__str__",
+        "clean",
+        "update_parameters",
+        "enable",
+        "disable"
+      ],
+      "variables": [
+        "agent",
+        "name",
+        "description",
+        "parameters",
+        "is_enabled",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Role",
+      "methods": [
+        "__str__",
+        "clean",
+        "get_permissions",
+        "add_permission",
+        "remove_permission",
+        "has_permission"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "is_system_role",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Permission",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "name",
+        "code_name",
+        "description",
+        "category",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "RolePermission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "role",
+        "permission",
+        "created_at"
+      ]
+    },
+    {
+      "name": "UserRole",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "role",
+        "assigned_at",
+        "assigned_by",
+        "is_active"
+      ]
+    },
+    {
+      "name": "AgentRole",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "agent",
+        "role",
+        "assigned_at",
+        "assigned_by",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Message",
+      "methods": [
+        "__str__",
+        "clean",
+        "mark_as_delivered",
+        "mark_as_read",
+        "mark_as_processed",
+        "mark_as_failed",
+        "get_content_as_dict",
+        "is_expired",
+        "can_retry"
+      ],
+      "variables": [
+        "MESSAGE_TYPES",
+        "STATUS_CHOICES",
+        "PRIORITY_CHOICES",
+        "sender",
+        "receiver",
+        "message_type",
+        "content",
+        "metadata",
+        "status",
+        "priority",
+        "created_at",
+        "delivered_at",
+        "read_at",
+        "processed_at",
+        "error_message",
+        "retry_count",
+        "expires_at"
+      ]
+    },
+    {
+      "name": "AgentActivity",
+      "methods": [
+        "__str__",
+        "log_activity",
+        "get_metadata_value"
+      ],
+      "variables": [
+        "ACTIVITY_TYPES",
+        "agent",
+        "activity_type",
+        "description",
+        "metadata",
+        "created_at",
+        "ip_address",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "ErrorLog",
+      "methods": [
+        "__str__",
+        "log_error",
+        "mark_as_resolved",
+        "is_critical",
+        "get_similar_errors"
+      ],
+      "variables": [
+        "ERROR_TYPES",
+        "SEVERITY_LEVELS",
+        "error_type",
+        "error_message",
+        "stack_trace",
+        "agent",
+        "message",
+        "severity",
+        "metadata",
+        "created_at",
+        "resolved",
+        "resolved_at",
+        "resolved_by",
+        "resolution_notes",
+        "error_code"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "activate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "deactivate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "suspend",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_last_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_configuration",
+      "parameters": [
+        "self",
+        "config_data"
+      ]
+    },
+    {
+      "name": "send_message",
+      "parameters": [
+        "self",
+        "receiver",
+        "content",
+        "message_type",
+        "metadata"
+      ]
+    },
+    {
+      "name": "get_capabilities",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "has_capability",
+      "parameters": [
+        "self",
+        "capability_name"
+      ]
+    },
+    {
+      "name": "add_capability",
+      "parameters": [
+        "self",
+        "name",
+        "description",
+        "parameters"
+      ]
+    },
+    {
+      "name": "remove_capability",
+      "parameters": [
+        "self",
+        "capability_name"
+      ]
+    },
+    {
+      "name": "get_roles",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "has_role",
+      "parameters": [
+        "self",
+        "role_name"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "permission_code"
+      ]
+    },
+    {
+      "name": "regenerate_api_key",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_recent_activities",
+      "parameters": [
+        "self",
+        "limit"
+      ]
+    },
+    {
+      "name": "get_message_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_parameters",
+      "parameters": [
+        "self",
+        "new_parameters"
+      ]
+    },
+    {
+      "name": "enable",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "disable",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "add_permission",
+      "parameters": [
+        "self",
+        "permission"
+      ]
+    },
+    {
+      "name": "remove_permission",
+      "parameters": [
+        "self",
+        "permission"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "permission_code"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_delivered",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_read",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_processed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_failed",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    },
+    {
+      "name": "get_content_as_dict",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "can_retry",
+      "parameters": [
+        "self",
+        "max_retries"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": [
+        "cls",
+        "agent",
+        "activity_type",
+        "description",
+        "metadata",
+        "ip_address",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "get_metadata_value",
+      "parameters": [
+        "self",
+        "key",
+        "default"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_error",
+      "parameters": [
+        "cls",
+        "error_type",
+        "error_message",
+        "agent",
+        "message",
+        "severity",
+        "stack_trace",
+        "metadata",
+        "error_code"
+      ]
+    },
+    {
+      "name": "mark_as_resolved",
+      "parameters": [
+        "self",
+        "user",
+        "notes"
+      ]
+    },
+    {
+      "name": "is_critical",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_similar_errors",
+      "parameters": [
+        "self",
+        "limit"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

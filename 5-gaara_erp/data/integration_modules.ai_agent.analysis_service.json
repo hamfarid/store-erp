@@ -1,0 +1,188 @@
+{
+  "module": "integration_modules.ai_agent.analysis_service",
+  "imports": [
+    "collections",
+    "dataclasses",
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "logging",
+    "models",
+    "shared.permissions.services",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "InteractionAnalysis",
+      "methods": [],
+      "variables": [
+        "interaction_id",
+        "user_id",
+        "username",
+        "interaction_type",
+        "required_permissions",
+        "has_permissions",
+        "missing_permissions",
+        "analysis_notes",
+        "risk_level",
+        "compliance_status",
+        "timestamp",
+        "additional_data"
+      ]
+    },
+    {
+      "name": "AIInteractionAnalyzer",
+      "methods": [
+        "__init__",
+        "get_required_permissions_for_interaction",
+        "_analyze_content_for_permissions",
+        "_get_data_scope_permissions",
+        "_is_historical_data",
+        "_contains_pii_request",
+        "analyze_interaction_permissions",
+        "_perform_security_analysis",
+        "_is_unusual_access_pattern",
+        "_check_data_exfiltration_risk",
+        "_is_after_hours_access",
+        "_is_sensitive_interaction",
+        "_is_cross_department_access",
+        "bulk_analyze_interactions",
+        "generate_compliance_report"
+      ],
+      "variables": [
+        "INTERACTION_PERMISSION_MAP"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_required_permissions_for_interaction",
+      "parameters": [
+        "interaction_type",
+        "content"
+      ]
+    },
+    {
+      "name": "analyze_interaction_permissions",
+      "parameters": [
+        "interaction_data"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_required_permissions_for_interaction",
+      "parameters": [
+        "self",
+        "interaction_type",
+        "content"
+      ]
+    },
+    {
+      "name": "_analyze_content_for_permissions",
+      "parameters": [
+        "self",
+        "interaction_type",
+        "content"
+      ]
+    },
+    {
+      "name": "_get_data_scope_permissions",
+      "parameters": [
+        "self",
+        "content"
+      ]
+    },
+    {
+      "name": "_is_historical_data",
+      "parameters": [
+        "self",
+        "date_range"
+      ]
+    },
+    {
+      "name": "_contains_pii_request",
+      "parameters": [
+        "self",
+        "content"
+      ]
+    },
+    {
+      "name": "analyze_interaction_permissions",
+      "parameters": [
+        "self",
+        "interaction_data"
+      ]
+    },
+    {
+      "name": "_perform_security_analysis",
+      "parameters": [
+        "self",
+        "user",
+        "interaction_type",
+        "content"
+      ]
+    },
+    {
+      "name": "_is_unusual_access_pattern",
+      "parameters": [
+        "self",
+        "user",
+        "interaction_type"
+      ]
+    },
+    {
+      "name": "_check_data_exfiltration_risk",
+      "parameters": [
+        "self",
+        "content"
+      ]
+    },
+    {
+      "name": "_is_after_hours_access",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_is_sensitive_interaction",
+      "parameters": [
+        "self",
+        "interaction_type"
+      ]
+    },
+    {
+      "name": "_is_cross_department_access",
+      "parameters": [
+        "self",
+        "user",
+        "content"
+      ]
+    },
+    {
+      "name": "bulk_analyze_interactions",
+      "parameters": [
+        "self",
+        "interactions_data"
+      ]
+    },
+    {
+      "name": "generate_compliance_report",
+      "parameters": [
+        "self",
+        "analyses",
+        "include_details"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "logger"
+  ]
+}

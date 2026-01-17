@@ -1,0 +1,17 @@
+{
+  "module": "core_modules.permissions.django_test_setup",
+  "imports": [
+    "django",
+    "django.conf",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "setup_django_test_environment",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

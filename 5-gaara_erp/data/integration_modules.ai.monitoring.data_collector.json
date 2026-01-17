@@ -1,0 +1,110 @@
+{
+  "module": "integration_modules.ai.monitoring.data_collector",
+  "imports": [
+    "datetime",
+    "django.utils",
+    "json",
+    "logging",
+    "os",
+    "pandas",
+    "time",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "DataCollector",
+      "methods": [
+        "__init__",
+        "fetch_langfuse_data",
+        "_generate_mock_data",
+        "_flatten_dict",
+        "save_data",
+        "run_collection_job",
+        "get_collection_stats"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "fetch_langfuse_data",
+      "parameters": [
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "save_data",
+      "parameters": [
+        "df",
+        "file_path",
+        "file_format"
+      ]
+    },
+    {
+      "name": "run_collection_job",
+      "parameters": [
+        "output_dir",
+        "days_to_collect",
+        "file_format"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "langfuse_client"
+      ]
+    },
+    {
+      "name": "fetch_langfuse_data",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "_generate_mock_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_flatten_dict",
+      "parameters": [
+        "self",
+        "data",
+        "prefix"
+      ]
+    },
+    {
+      "name": "save_data",
+      "parameters": [
+        "self",
+        "df",
+        "file_path",
+        "file_format"
+      ]
+    },
+    {
+      "name": "run_collection_job",
+      "parameters": [
+        "self",
+        "output_dir",
+        "days_to_collect",
+        "file_format"
+      ]
+    },
+    {
+      "name": "get_collection_stats",
+      "parameters": [
+        "self",
+        "output_dir"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

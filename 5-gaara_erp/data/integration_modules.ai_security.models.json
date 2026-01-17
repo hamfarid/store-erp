@@ -1,0 +1,681 @@
+{
+  "module": "integration_modules.ai_security.models",
+  "imports": [
+    "ai.models",
+    "ai_agents.models",
+    "datetime",
+    "django.conf",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SecurityPolicy",
+      "methods": [
+        "__str__",
+        "validate_against_model",
+        "validate_against_agent"
+      ],
+      "variables": [
+        "POLICY_TYPES",
+        "name",
+        "policy_type",
+        "description",
+        "rules",
+        "is_active",
+        "applies_to_models",
+        "applies_to_agents",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "SecurityAudit",
+      "methods": [
+        "__str__",
+        "start",
+        "complete",
+        "fail",
+        "cancel"
+      ],
+      "variables": [
+        "AUDIT_TYPES",
+        "STATUS_CHOICES",
+        "name",
+        "audit_type",
+        "description",
+        "status",
+        "scope",
+        "findings",
+        "recommendations",
+        "scheduled_at",
+        "started_at",
+        "completed_at",
+        "conducted_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "SecurityIncident",
+      "methods": [
+        "__str__",
+        "assign",
+        "start_investigation",
+        "mark_as_contained",
+        "resolve",
+        "close"
+      ],
+      "variables": [
+        "INCIDENT_TYPES",
+        "SEVERITY_LEVELS",
+        "STATUS_CHOICES",
+        "title",
+        "incident_type",
+        "description",
+        "severity",
+        "status",
+        "affected_systems",
+        "reported_by",
+        "assigned_to",
+        "reported_at",
+        "resolved_at",
+        "resolution",
+        "root_cause",
+        "lessons_learned"
+      ]
+    },
+    {
+      "name": "SecurityVulnerability",
+      "methods": [
+        "__str__",
+        "confirm",
+        "start_remediation",
+        "remediate",
+        "mark_as_false_positive",
+        "accept_risk"
+      ],
+      "variables": [
+        "VULNERABILITY_TYPES",
+        "SEVERITY_LEVELS",
+        "STATUS_CHOICES",
+        "title",
+        "vulnerability_type",
+        "description",
+        "severity",
+        "status",
+        "affected_models",
+        "affected_agents",
+        "discovered_by",
+        "assigned_to",
+        "discovered_at",
+        "remediated_at",
+        "remediation_steps",
+        "verification_steps"
+      ]
+    },
+    {
+      "name": "SecurityScan",
+      "methods": [
+        "__str__",
+        "start",
+        "complete",
+        "fail",
+        "cancel",
+        "create_vulnerabilities_from_results"
+      ],
+      "variables": [
+        "SCAN_TYPES",
+        "STATUS_CHOICES",
+        "name",
+        "scan_type",
+        "description",
+        "status",
+        "configuration",
+        "target_models",
+        "target_agents",
+        "results",
+        "scheduled_at",
+        "started_at",
+        "completed_at",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "SecurityAccessControl",
+      "methods": [
+        "__str__",
+        "check_access",
+        "_check_conditions"
+      ],
+      "variables": [
+        "RESOURCE_TYPES",
+        "ACCESS_LEVELS",
+        "name",
+        "description",
+        "resource_type",
+        "resource_id",
+        "access_level",
+        "roles",
+        "users",
+        "conditions",
+        "is_active",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "models",
+      "methods": [],
+      "variables": [
+        "SET_NULL"
+      ]
+    },
+    {
+      "name": "settings",
+      "methods": [],
+      "variables": [
+        "AUTH_USER_MODEL"
+      ]
+    },
+    {
+      "name": "MinValueValidator",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MaxValueValidator",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Model",
+      "methods": [
+        "__init__",
+        "save",
+        "delete"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CharField",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TextField",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BooleanField",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DateTimeField",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ForeignKey",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ManyToManyField",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "JSONField",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "is_security_models_available",
+      "parameters": []
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "validate_against_model",
+      "parameters": [
+        "self",
+        "model_id"
+      ]
+    },
+    {
+      "name": "validate_against_agent",
+      "parameters": [
+        "self",
+        "agent_id"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "self",
+        "findings",
+        "recommendations"
+      ]
+    },
+    {
+      "name": "fail",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "assign",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "start_investigation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_contained",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "self",
+        "resolution",
+        "root_cause",
+        "lessons_learned"
+      ]
+    },
+    {
+      "name": "close",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "confirm",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start_remediation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "remediate",
+      "parameters": [
+        "self",
+        "remediation_steps",
+        "verification_steps"
+      ]
+    },
+    {
+      "name": "mark_as_false_positive",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "accept_risk",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "self",
+        "results"
+      ]
+    },
+    {
+      "name": "fail",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_vulnerabilities_from_results",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_access",
+      "parameters": [
+        "self",
+        "user",
+        "context"
+      ]
+    },
+    {
+      "name": "_check_conditions",
+      "parameters": [
+        "self",
+        "context"
+      ]
+    },
+    {
+      "name": "_",
+      "parameters": [
+        "text"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "now",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "__all__"
+  ]
+}

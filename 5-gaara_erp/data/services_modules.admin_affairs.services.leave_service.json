@@ -1,0 +1,109 @@
+{
+  "module": "services_modules.admin_affairs.services.leave_service",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "LeaveService",
+      "methods": [
+        "get_all_leaves",
+        "get_leave_by_id",
+        "get_leaves_by_employee",
+        "get_leaves_by_type",
+        "search_leaves",
+        "create_leave",
+        "approve_leave",
+        "reject_leave",
+        "cancel_leave",
+        "get_leave_balance",
+        "get_leaves_by_date_range"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_all_leaves",
+      "parameters": [
+        "include_cancelled"
+      ]
+    },
+    {
+      "name": "get_leave_by_id",
+      "parameters": [
+        "leave_id"
+      ]
+    },
+    {
+      "name": "get_leaves_by_employee",
+      "parameters": [
+        "employee_id",
+        "status"
+      ]
+    },
+    {
+      "name": "get_leaves_by_type",
+      "parameters": [
+        "leave_type_id",
+        "status"
+      ]
+    },
+    {
+      "name": "search_leaves",
+      "parameters": [
+        "query"
+      ]
+    },
+    {
+      "name": "create_leave",
+      "parameters": [
+        "employee_id",
+        "leave_type_id",
+        "start_date",
+        "end_date",
+        "reason"
+      ]
+    },
+    {
+      "name": "approve_leave",
+      "parameters": [
+        "leave_id",
+        "approver"
+      ]
+    },
+    {
+      "name": "reject_leave",
+      "parameters": [
+        "leave_id",
+        "reason"
+      ]
+    },
+    {
+      "name": "cancel_leave",
+      "parameters": [
+        "leave_id"
+      ]
+    },
+    {
+      "name": "get_leave_balance",
+      "parameters": [
+        "employee_id",
+        "leave_type_id",
+        "year"
+      ]
+    },
+    {
+      "name": "get_leaves_by_date_range",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "department_id"
+      ]
+    }
+  ],
+  "variables": []
+}

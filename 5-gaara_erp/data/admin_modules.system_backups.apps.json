@@ -1,0 +1,18 @@
+{
+  "module": "admin_modules.system_backups.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "SystemBackupsConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

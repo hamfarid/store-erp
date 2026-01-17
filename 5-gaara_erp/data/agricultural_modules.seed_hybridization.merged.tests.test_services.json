@@ -1,0 +1,131 @@
+{
+  "module": "agricultural_modules.seed_hybridization.merged.tests.test_services",
+  "imports": [
+    "django.contrib.auth",
+    "django.utils",
+    "json",
+    "models",
+    "pytest",
+    "services",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "TestHybridizationService",
+      "methods": [
+        "test_create_simulation",
+        "test_run_simulation",
+        "test_get_simulation_results_incomplete",
+        "test_get_simulation_results_complete",
+        "test_create_hybridization_project",
+        "test_create_hybridization_experiment"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TestPyBrOpSClient",
+      "methods": [
+        "test_simulate_hybridization"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TestExternalProjectClient",
+      "methods": [
+        "test_get_external_data",
+        "test_send_data_to_external_project"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "user",
+      "parameters": []
+    },
+    {
+      "name": "plant_varieties",
+      "parameters": []
+    },
+    {
+      "name": "simulation",
+      "parameters": [
+        "user",
+        "plant_varieties"
+      ]
+    },
+    {
+      "name": "test_create_simulation",
+      "parameters": [
+        "self",
+        "user",
+        "plant_varieties"
+      ]
+    },
+    {
+      "name": "test_run_simulation",
+      "parameters": [
+        "self",
+        "mock_get_external_data",
+        "mock_simulate_hybridization",
+        "simulation",
+        "user"
+      ]
+    },
+    {
+      "name": "test_get_simulation_results_incomplete",
+      "parameters": [
+        "self",
+        "simulation"
+      ]
+    },
+    {
+      "name": "test_get_simulation_results_complete",
+      "parameters": [
+        "self",
+        "mock_simulate_hybridization",
+        "simulation",
+        "user"
+      ]
+    },
+    {
+      "name": "test_create_hybridization_project",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "test_create_hybridization_experiment",
+      "parameters": [
+        "self",
+        "user",
+        "plant_varieties"
+      ]
+    },
+    {
+      "name": "test_simulate_hybridization",
+      "parameters": [
+        "self",
+        "mock_post"
+      ]
+    },
+    {
+      "name": "test_get_external_data",
+      "parameters": [
+        "self",
+        "mock_get"
+      ]
+    },
+    {
+      "name": "test_send_data_to_external_project",
+      "parameters": [
+        "self",
+        "mock_post"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

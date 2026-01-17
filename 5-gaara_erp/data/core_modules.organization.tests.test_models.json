@@ -1,0 +1,119 @@
+{
+  "module": "core_modules.organization.tests.test_models",
+  "imports": [
+    "core_modules.core.models.branch",
+    "core_modules.core.models.company",
+    "core_modules.core.models.country",
+    "core_modules.core.models.department",
+    "core_modules.organization.models",
+    "decimal",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils"
+  ],
+  "classes": [
+    {
+      "name": "OrganizationModelsTestCase",
+      "methods": [
+        "setUp",
+        "test_currency_creation",
+        "test_exchange_rate_creation",
+        "test_country_creation",
+        "test_company_creation",
+        "test_branch_creation",
+        "test_department_creation_under_branch",
+        "test_department_creation_under_company",
+        "test_department_clean_method_no_branch_no_company",
+        "test_department_clean_method_branch_company_mismatch",
+        "test_company_unique_name",
+        "test_branch_unique_code_within_company",
+        "test_department_parent_child"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_currency_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_exchange_rate_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_country_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_branch_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_creation_under_branch",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_creation_under_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_clean_method_no_branch_no_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_clean_method_branch_company_mismatch",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_unique_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_branch_unique_code_within_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_parent_child",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

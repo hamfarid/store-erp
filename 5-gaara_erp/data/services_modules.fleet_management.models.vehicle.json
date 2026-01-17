@@ -1,0 +1,60 @@
+{
+  "module": "services_modules.fleet_management.models.vehicle",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "vehicle_type"
+  ],
+  "classes": [
+    {
+      "name": "Vehicle",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "name",
+        "vehicle_type",
+        "license_plate",
+        "vin",
+        "model",
+        "make",
+        "year",
+        "color",
+        "purchase_date",
+        "purchase_price",
+        "current_value",
+        "status",
+        "odometer",
+        "fuel_capacity",
+        "fuel_type",
+        "insurance_expiry",
+        "registration_expiry",
+        "gps_device_id",
+        "asset",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

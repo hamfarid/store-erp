@@ -1,0 +1,147 @@
+{
+  "module": "integration_modules.ai.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "models",
+    "models.conversations",
+    "models.learning_sources",
+    "models.memory_and_learning"
+  ],
+  "classes": [
+    {
+      "name": "AISettings",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "key",
+        "value",
+        "description",
+        "is_system",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "AIActivity",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ACTIVITY_TYPES",
+        "STATUS_CHOICES",
+        "activity_type",
+        "user",
+        "agent_name",
+        "service_name",
+        "action",
+        "details",
+        "status",
+        "created_at"
+      ]
+    },
+    {
+      "name": "AIIntegration",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "INTEGRATION_TYPES",
+        "STATUS_CHOICES",
+        "name",
+        "integration_type",
+        "module_path",
+        "configuration",
+        "status",
+        "last_sync",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "APIKey",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "KEY_TYPES",
+        "name",
+        "key_type",
+        "key_value",
+        "is_active",
+        "description",
+        "expires_at",
+        "created_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

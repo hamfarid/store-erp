@@ -1,0 +1,30 @@
+{
+  "module": "core_modules.setup.system_settings.apps",
+  "imports": [
+    "core_modules.setup.system_settings.signals",
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SetupSystemSettingsConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "name",
+        "label",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

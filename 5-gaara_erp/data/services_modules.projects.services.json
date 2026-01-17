@@ -1,0 +1,179 @@
+{
+  "module": "services_modules.projects.services",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "logging",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ProjectService",
+      "methods": [
+        "__init__",
+        "register_integration",
+        "create_project",
+        "update_project",
+        "get_project_details",
+        "list_projects",
+        "update_project_status",
+        "create_project_phase",
+        "update_project_phase",
+        "create_project_task",
+        "update_project_task",
+        "create_project_risk",
+        "update_project_risk",
+        "create_project_document",
+        "update_project_document",
+        "get_project_statistics",
+        "generate_project_report",
+        "_create_default_project_phases",
+        "_calculate_project_progress"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "register_integration",
+      "parameters": [
+        "self",
+        "integration_name",
+        "integration_instance"
+      ]
+    },
+    {
+      "name": "create_project",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_project",
+      "parameters": [
+        "self",
+        "project_id"
+      ]
+    },
+    {
+      "name": "get_project_details",
+      "parameters": [
+        "self",
+        "project_id"
+      ]
+    },
+    {
+      "name": "list_projects",
+      "parameters": [
+        "self",
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "update_project_status",
+      "parameters": [
+        "self",
+        "project_id",
+        "status",
+        "updated_by_id"
+      ]
+    },
+    {
+      "name": "create_project_phase",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_project_phase",
+      "parameters": [
+        "self",
+        "phase_id"
+      ]
+    },
+    {
+      "name": "create_project_task",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_project_task",
+      "parameters": [
+        "self",
+        "task_id"
+      ]
+    },
+    {
+      "name": "create_project_risk",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_project_risk",
+      "parameters": [
+        "self",
+        "risk_id"
+      ]
+    },
+    {
+      "name": "create_project_document",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_project_document",
+      "parameters": [
+        "self",
+        "document_id"
+      ]
+    },
+    {
+      "name": "get_project_statistics",
+      "parameters": [
+        "self",
+        "project_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "generate_project_report",
+      "parameters": [
+        "self",
+        "project_id",
+        "start_date",
+        "end_date",
+        "report_type"
+      ]
+    },
+    {
+      "name": "_create_default_project_phases",
+      "parameters": [
+        "self",
+        "project"
+      ]
+    },
+    {
+      "name": "_calculate_project_progress",
+      "parameters": [
+        "self",
+        "project"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

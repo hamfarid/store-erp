@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-01-16T10:52:24.203699",
+  "base_url": "http://localhost:8000",
+  "metrics": {
+    "system": {
+      "timestamp": "2026-01-16T10:52:24.203699",
+      "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+      "memory": {
+        "total_gb": 31.67,
+        "available_gb": 1.41,
+        "percent_used": 95.6
+      },
+      "cpu": {
+        "count": 20,
+        "percent_used": 99.0
+      },
+      "disk": {
+        "total_gb": 100.11,
+        "free_gb": 22.71,
+        "percent_used": 77.3
+      }
+    },
+    "database": {
+      "connection_test": false,
+      "query_times": {}
+    },
+    "static_assets": {
+      "total_size_mb": 0.0,
+      "by_type": {},
+      "largest_files": []
+    },
+    "django": {
+      "installed_apps": 0,
+      "models": 0,
+      "migrations": {}
+    },
+    "api_endpoints": {
+      "endpoints_tested": 0,
+      "response_times": {}
+    }
+  },
+  "warnings": [
+    "Database metrics failed: No module named 'gaara_erp.settings'",
+    "Django metrics failed: No module named 'gaara_erp.settings'",
+    "requests library not installed - skipping API metrics"
+  ],
+  "summary": {
+    "status": "warning",
+    "recommendations": [
+      "High memory usage detected"
+    ]
+  }
+}

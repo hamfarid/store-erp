@@ -1,0 +1,111 @@
+{
+  "module": "business_modules.assets.permissions",
+  "imports": [
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "AssetPermission",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AssetCategoryPermission",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AssetMaintenancePermission",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AssetTransferPermission",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,12 @@
+{
+  "module": "admin_modules.custom_admin.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns",
+    "app_name"
+  ]
+}

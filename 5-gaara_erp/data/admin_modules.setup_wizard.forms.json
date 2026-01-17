@@ -1,0 +1,108 @@
+{
+  "module": "admin_modules.setup_wizard.forms",
+  "imports": [
+    "core_modules.organization.models",
+    "django",
+    "django.contrib.auth.models",
+    "django.core.exceptions",
+    "django.utils.translation",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "CompanyInfoForm",
+      "methods": [
+        "__init__"
+      ],
+      "variables": [
+        "company_name",
+        "country",
+        "base_currency",
+        "company_address",
+        "company_phone",
+        "company_email",
+        "tax_number",
+        "company_logo"
+      ]
+    },
+    {
+      "name": "AdminUserForm",
+      "methods": [
+        "clean"
+      ],
+      "variables": [
+        "admin_username",
+        "admin_email",
+        "admin_password",
+        "admin_password_confirm"
+      ]
+    },
+    {
+      "name": "EmailSettingsForm",
+      "methods": [],
+      "variables": [
+        "email_host",
+        "email_port",
+        "email_host_user",
+        "email_host_password",
+        "email_use_tls",
+        "email_use_ssl",
+        "default_from_email"
+      ]
+    },
+    {
+      "name": "SystemSettingsForm",
+      "methods": [],
+      "variables": [
+        "language_choices",
+        "date_format_choices",
+        "timezone_choices",
+        "fiscal_year_choices",
+        "default_language",
+        "default_currency",
+        "timezone",
+        "date_format",
+        "fiscal_year_start"
+      ]
+    },
+    {
+      "name": "DatabaseConnectionForm",
+      "methods": [
+        "__init__"
+      ],
+      "variables": [
+        "db_engine_choices",
+        "db_alias",
+        "db_engine",
+        "db_name",
+        "db_user",
+        "db_password",
+        "db_host",
+        "db_port"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "FORMS"
+  ]
+}

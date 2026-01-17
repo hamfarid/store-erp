@@ -1,0 +1,238 @@
+{
+  "module": "integration_modules.ai.services.resource_manager",
+  "imports": [
+    "contextlib",
+    "datetime",
+    "django.conf",
+    "django.utils",
+    "logging",
+    "models",
+    "threading",
+    "time",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "ResourceManager",
+      "methods": [
+        "__new__",
+        "__init__",
+        "_load_resource_settings",
+        "_create_default_settings",
+        "_set_default_resources",
+        "_initialize_usage_stats",
+        "allocate_resources",
+        "release_resources",
+        "_check_resource_availability",
+        "_update_usage_stats",
+        "_update_average_response_time",
+        "_estimate_wait_time",
+        "_reset_usage_stats",
+        "acquire_resource",
+        "get_resource_usage",
+        "update_resource_settings",
+        "_validate_settings",
+        "get_health_status",
+        "_get_recommendations",
+        "_log_resource_allocation",
+        "_log_resource_release"
+      ],
+      "variables": [
+        "_instance",
+        "_lock"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "allocate_resources",
+      "parameters": [
+        "resource_type",
+        "amount",
+        "requester_id",
+        "priority"
+      ]
+    },
+    {
+      "name": "release_resources",
+      "parameters": [
+        "resource_type",
+        "amount",
+        "requester_id",
+        "allocation_id",
+        "response_time"
+      ]
+    },
+    {
+      "name": "get_resource_usage",
+      "parameters": []
+    },
+    {
+      "name": "get_health_status",
+      "parameters": []
+    },
+    {
+      "name": "__new__",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_load_resource_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_create_default_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_set_default_resources",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_initialize_usage_stats",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "allocate_resources",
+      "parameters": [
+        "self",
+        "resource_type",
+        "amount",
+        "requester_id",
+        "priority"
+      ]
+    },
+    {
+      "name": "release_resources",
+      "parameters": [
+        "self",
+        "resource_type",
+        "amount",
+        "requester_id",
+        "allocation_id",
+        "response_time"
+      ]
+    },
+    {
+      "name": "_check_resource_availability",
+      "parameters": [
+        "self",
+        "amount",
+        "priority"
+      ]
+    },
+    {
+      "name": "_update_usage_stats",
+      "parameters": [
+        "self",
+        "resource_type",
+        "amount",
+        "requester_id",
+        "operation"
+      ]
+    },
+    {
+      "name": "_update_average_response_time",
+      "parameters": [
+        "self",
+        "response_time"
+      ]
+    },
+    {
+      "name": "_estimate_wait_time",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_reset_usage_stats",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "acquire_resource",
+      "parameters": [
+        "self",
+        "resource_type",
+        "amount",
+        "requester_id",
+        "priority"
+      ]
+    },
+    {
+      "name": "get_resource_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_resource_settings",
+      "parameters": [
+        "self",
+        "new_settings"
+      ]
+    },
+    {
+      "name": "_validate_settings",
+      "parameters": [
+        "self",
+        "settings"
+      ]
+    },
+    {
+      "name": "get_health_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_get_recommendations",
+      "parameters": [
+        "self",
+        "concurrent_ratio",
+        "token_ratio",
+        "request_ratio"
+      ]
+    },
+    {
+      "name": "_log_resource_allocation",
+      "parameters": [
+        "self",
+        "resource_type",
+        "amount",
+        "requester_id",
+        "priority"
+      ]
+    },
+    {
+      "name": "_log_resource_release",
+      "parameters": [
+        "self",
+        "resource_type",
+        "amount",
+        "requester_id",
+        "allocation_id"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "resource_manager"
+  ]
+}

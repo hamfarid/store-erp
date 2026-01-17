@@ -1,0 +1,2285 @@
+{
+  "generatedAt": "2025-11-20T08:10:36.002216Z",
+  "schema": {
+    "tables": [
+      {
+        "name": "basic_model",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": []
+      },
+      {
+        "name": "categories",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "parent_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "parent_id"
+            ],
+            "referred_table": "categories",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "customers",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "customer_code",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "VARCHAR(200)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "email",
+            "type": "VARCHAR(120)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "phone",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "mobile",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "address",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "city",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "country",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "postal_code",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "company_name",
+            "type": "VARCHAR(200)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tax_number",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "credit_limit",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "payment_terms",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "currency",
+            "type": "VARCHAR(3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "discount_rate",
+            "type": "FLOAT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "category",
+            "type": "VARCHAR(10)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tags",
+            "type": "JSON",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "sales_engineer_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "sales_engineer_id"
+            ],
+            "referred_table": "sales_engineers",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "invoice_items",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "invoice_id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "product_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "product_name",
+            "type": "VARCHAR(200)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "product_sku",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "quantity",
+            "type": "NUMERIC(15, 3)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "price",
+            "type": "NUMERIC(15, 2)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "discount",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tax",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "total",
+            "type": "NUMERIC(15, 2)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "invoice_id"
+            ],
+            "referred_table": "invoices",
+            "referred_columns": [
+              "id"
+            ]
+          },
+          {
+            "constrained_columns": [
+              "product_id"
+            ],
+            "referred_table": "products",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "invoice_payments",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "invoice_id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "amount",
+            "type": "NUMERIC(15, 2)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "payment_date",
+            "type": "DATE",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "payment_method",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "reference",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_by",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "invoice_id"
+            ],
+            "referred_table": "invoices",
+            "referred_columns": [
+              "id"
+            ]
+          },
+          {
+            "constrained_columns": [
+              "created_by"
+            ],
+            "referred_table": "users",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "invoices",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "invoice_number",
+            "type": "VARCHAR(50)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "invoice_type",
+            "type": "VARCHAR(15)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "invoice_date",
+            "type": "DATE",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "due_date",
+            "type": "DATE",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "delivery_date",
+            "type": "DATE",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "customer_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "supplier_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "warehouse_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_by",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "subtotal",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tax_amount",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "discount_amount",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "shipping_cost",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "other_charges",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "total_amount",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "paid_amount",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "remaining_amount",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "discount_type",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "discount_value",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tax_rate",
+            "type": "NUMERIC(5, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_tax_inclusive",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "currency",
+            "type": "VARCHAR(3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "exchange_rate",
+            "type": "NUMERIC(10, 4)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "status",
+            "type": "VARCHAR(9)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "payment_status",
+            "type": "VARCHAR(7)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "payment_method",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "payment_terms",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "shipping_address",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "shipping_method",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tracking_number",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "internal_notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "terms_conditions",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "reference_number",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "po_number",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "confirmed_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "paid_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "cancelled_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "customer_id"
+            ],
+            "referred_table": "customers",
+            "referred_columns": [
+              "id"
+            ]
+          },
+          {
+            "constrained_columns": [
+              "supplier_id"
+            ],
+            "referred_table": "suppliers",
+            "referred_columns": [
+              "id"
+            ]
+          },
+          {
+            "constrained_columns": [
+              "warehouse_id"
+            ],
+            "referred_table": "warehouses",
+            "referred_columns": [
+              "id"
+            ]
+          },
+          {
+            "constrained_columns": [
+              "created_by"
+            ],
+            "referred_table": "users",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "lots",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "lot_number",
+            "type": "VARCHAR(50)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "product_id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "quantity",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "expiry_date",
+            "type": "DATE",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "product_id"
+            ],
+            "referred_table": "products",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "product_groups",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "category_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "category_id"
+            ],
+            "referred_table": "categories",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "products",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "VARCHAR(200)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "barcode",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "sku",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "category_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "cost_price",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "selling_price",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "current_stock",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "min_stock_level",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "max_stock_level",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "specifications",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_trackable",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "category_id"
+            ],
+            "referred_table": "categories",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "products_advanced",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "VARCHAR(255)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "name_en",
+            "type": "VARCHAR(255)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "description_en",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "sku",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "barcode",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "internal_reference",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "manufacturer_code",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "category_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "subcategory_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "brand_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "product_type",
+            "type": "VARCHAR(10)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tracking_type",
+            "type": "VARCHAR(6)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "cost_price",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "sale_price",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "wholesale_price",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "retail_price",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "minimum_price",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "unit_of_measure",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "purchase_unit",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "sale_unit",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "min_quantity",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "max_quantity",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "reorder_point",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "safety_stock",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "quality_grade",
+            "type": "VARCHAR(9)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "shelf_life_days",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "storage_temperature_min",
+            "type": "NUMERIC(5, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "storage_temperature_max",
+            "type": "NUMERIC(5, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "storage_humidity_max",
+            "type": "NUMERIC(5, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "plant_family",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "variety",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "origin_country",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "germination_rate",
+            "type": "NUMERIC(5, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "purity_rate",
+            "type": "NUMERIC(5, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "moisture_content",
+            "type": "NUMERIC(5, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "active_ingredient",
+            "type": "VARCHAR(255)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "concentration",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "npk_ratio",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "ph_level",
+            "type": "NUMERIC(4, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "weight",
+            "type": "NUMERIC(8, 3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "length",
+            "type": "NUMERIC(8, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "width",
+            "type": "NUMERIC(8, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "height",
+            "type": "NUMERIC(8, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "volume",
+            "type": "NUMERIC(10, 3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "default_supplier_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "lead_time_days",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "minimum_order_qty",
+            "type": "NUMERIC(10, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_purchasable",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_saleable",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_discontinued",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "discontinued_date",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "category_id"
+            ],
+            "referred_table": "categories",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "roles",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "permissions",
+            "type": "JSON",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": []
+      },
+      {
+        "name": "sales_engineers",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "VARCHAR(200)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "email",
+            "type": "VARCHAR(120)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "phone",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "mobile",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "user_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "employee_id",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "department",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "title",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "commission_rate",
+            "type": "FLOAT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "target_amount",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "current_sales",
+            "type": "NUMERIC(15, 2)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "user_id"
+            ],
+            "referred_table": "users",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "suppliers",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "VARCHAR(200)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "email",
+            "type": "VARCHAR(120)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "phone",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "mobile",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "website",
+            "type": "VARCHAR(200)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "address",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "city",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "country",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "postal_code",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "company_name",
+            "type": "VARCHAR(200)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tax_number",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "supplier_type",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "payment_terms",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "preferred_payment_method",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "currency",
+            "type": "VARCHAR(3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "bank_account",
+            "type": "VARCHAR(100)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "contact_person",
+            "type": "VARCHAR(200)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "contact_phone",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "contact_email",
+            "type": "VARCHAR(120)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "rating",
+            "type": "FLOAT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "quality_score",
+            "type": "FLOAT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "delivery_score",
+            "type": "FLOAT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_preferred",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tags",
+            "type": "JSON",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_by",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "created_by"
+            ],
+            "referred_table": "users",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "unified_invoice_items",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "invoice_id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "product_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "product_name",
+            "type": "VARCHAR(200)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "product_code",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "quantity",
+            "type": "NUMERIC(15, 3)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "unit_price",
+            "type": "NUMERIC(15, 3)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "discount_percentage",
+            "type": "FLOAT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "discount_amount",
+            "type": "NUMERIC(15, 3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tax_rate",
+            "type": "FLOAT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tax_amount",
+            "type": "NUMERIC(15, 3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "total_amount",
+            "type": "NUMERIC(15, 3)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "unit",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "invoice_id"
+            ],
+            "referred_table": "unified_invoices",
+            "referred_columns": [
+              "id"
+            ]
+          },
+          {
+            "constrained_columns": [
+              "product_id"
+            ],
+            "referred_table": "products",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "unified_invoices",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "invoice_number",
+            "type": "VARCHAR(50)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "reference_number",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "invoice_type",
+            "type": "VARCHAR(15)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "status",
+            "type": "VARCHAR(12)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "invoice_date",
+            "type": "DATE",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "due_date",
+            "type": "DATE",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "customer_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "supplier_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "subtotal",
+            "type": "NUMERIC(15, 3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tax_amount",
+            "type": "NUMERIC(15, 3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "discount_amount",
+            "type": "NUMERIC(15, 3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "shipping_cost",
+            "type": "NUMERIC(15, 3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "total_amount",
+            "type": "NUMERIC(15, 3)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "paid_amount",
+            "type": "NUMERIC(15, 3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "remaining_amount",
+            "type": "NUMERIC(15, 3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "payment_method",
+            "type": "VARCHAR(13)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "payment_terms",
+            "type": "VARCHAR(200)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "currency",
+            "type": "VARCHAR(3)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "tax_rate",
+            "type": "FLOAT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "internal_notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "terms_conditions",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_by",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "warehouse_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "extra_data",
+            "type": "JSON",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "customer_id"
+            ],
+            "referred_table": "customers",
+            "referred_columns": [
+              "id"
+            ]
+          },
+          {
+            "constrained_columns": [
+              "supplier_id"
+            ],
+            "referred_table": "suppliers",
+            "referred_columns": [
+              "id"
+            ]
+          },
+          {
+            "constrained_columns": [
+              "created_by"
+            ],
+            "referred_table": "users",
+            "referred_columns": [
+              "id"
+            ]
+          },
+          {
+            "constrained_columns": [
+              "warehouse_id"
+            ],
+            "referred_table": "warehouses",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "user_activities",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "user_id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "action",
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "ip_address",
+            "type": "VARCHAR(45)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "user_agent",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "user_id"
+            ],
+            "referred_table": "users",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "user_sessions",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "user_id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "session_id",
+            "type": "VARCHAR(255)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "ip_address",
+            "type": "VARCHAR(45)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "user_agent",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "last_activity",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "user_id"
+            ],
+            "referred_table": "users",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "users",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "username",
+            "type": "VARCHAR(80)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "password_hash",
+            "type": "VARCHAR(255)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "email",
+            "type": "VARCHAR(120)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "full_name",
+            "type": "VARCHAR(200)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "role_id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "last_login",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "login_count",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "phone",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "department",
+            "type": "VARCHAR(50)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "notes",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "constrained_columns": [
+              "role_id"
+            ],
+            "referred_table": "roles",
+            "referred_columns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "warehouses",
+        "primary_key": [
+          "id"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "VARCHAR(100)",
+            "nullable": false,
+            "default": null
+          },
+          {
+            "name": "code",
+            "type": "VARCHAR(20)",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "address",
+            "type": "TEXT",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "manager_id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "is_active",
+            "type": "BOOLEAN",
+            "nullable": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null
+          }
+        ],
+        "foreign_keys": []
+      }
+    ]
+  }
+}

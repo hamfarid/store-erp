@@ -1,0 +1,80 @@
+{
+  "module": "business_modules.contacts.activities",
+  "imports": [
+    "django.conf",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ActivityType",
+      "methods": [],
+      "variables": [
+        "CALL",
+        "EMAIL",
+        "MEETING",
+        "TASK",
+        "NOTE",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "ActivityStatus",
+      "methods": [],
+      "variables": [
+        "PLANNED",
+        "HELD",
+        "NOT_HELD",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "DEFERRED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "Activity",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "subject",
+        "activity_type",
+        "status",
+        "start_datetime",
+        "end_datetime",
+        "description",
+        "assigned_to",
+        "created_by",
+        "content_type",
+        "object_id",
+        "related_object",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "AUTH_USER_MODEL",
+    "__all__"
+  ]
+}

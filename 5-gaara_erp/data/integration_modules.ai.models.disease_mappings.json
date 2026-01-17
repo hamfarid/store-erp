@@ -1,0 +1,12 @@
+{
+  "module": "integration_modules.ai.models.disease_mappings",
+  "imports": [
+    "django.db"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "plant_diseases_mapping",
+    "__all__"
+  ]
+}

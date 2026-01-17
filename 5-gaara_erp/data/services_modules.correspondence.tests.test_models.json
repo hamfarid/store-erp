@@ -1,0 +1,73 @@
+{
+  "module": "services_modules.correspondence.tests.test_models",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CorrespondenceModelTest",
+      "methods": [
+        "setUpTestData",
+        "test_create_correspondence_category",
+        "test_create_correspondence",
+        "test_correspondence_reference_number_uniqueness",
+        "test_create_correspondence_attachment",
+        "test_create_correspondence_comment",
+        "test_create_correspondence_history"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_create_correspondence_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_correspondence",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_correspondence_reference_number_uniqueness",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_correspondence_attachment",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_correspondence_comment",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_correspondence_history",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "module": "services_modules.projects.services.project_risk_integration",
+  "imports": [
+    "django.contrib.contenttypes.models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "models.permissions",
+    "models.risk"
+  ],
+  "classes": [
+    {
+      "name": "ProjectRiskIntegrationService",
+      "methods": [
+        "create_project_risk",
+        "get_project_risks",
+        "update_project_risk",
+        "delete_project_risk",
+        "assess_project_risk",
+        "create_risk_response",
+        "get_project_risks_by_level",
+        "get_project_risks_by_status",
+        "get_project_risks_by_category",
+        "get_project_risk_statistics"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_project_risk",
+      "parameters": [
+        "project",
+        "risk_data",
+        "user"
+      ]
+    },
+    {
+      "name": "get_project_risks",
+      "parameters": [
+        "project",
+        "user",
+        "filters"
+      ]
+    },
+    {
+      "name": "update_project_risk",
+      "parameters": [
+        "risk",
+        "risk_data",
+        "user"
+      ]
+    },
+    {
+      "name": "delete_project_risk",
+      "parameters": [
+        "risk",
+        "user"
+      ]
+    },
+    {
+      "name": "assess_project_risk",
+      "parameters": [
+        "risk",
+        "assessment_data",
+        "user"
+      ]
+    },
+    {
+      "name": "create_risk_response",
+      "parameters": [
+        "risk",
+        "response_data",
+        "user"
+      ]
+    },
+    {
+      "name": "get_project_risks_by_level",
+      "parameters": [
+        "project",
+        "level",
+        "user"
+      ]
+    },
+    {
+      "name": "get_project_risks_by_status",
+      "parameters": [
+        "project",
+        "status",
+        "user"
+      ]
+    },
+    {
+      "name": "get_project_risks_by_category",
+      "parameters": [
+        "project",
+        "category",
+        "user"
+      ]
+    },
+    {
+      "name": "get_project_risk_statistics",
+      "parameters": [
+        "project",
+        "user"
+      ]
+    }
+  ],
+  "variables": []
+}

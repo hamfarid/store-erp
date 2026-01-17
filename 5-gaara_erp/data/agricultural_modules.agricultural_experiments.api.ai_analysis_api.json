@@ -1,0 +1,123 @@
+{
+  "module": "agricultural_modules.agricultural_experiments.api.ai_analysis_api",
+  "imports": [
+    "models.ai_analysis",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.permissions",
+    "rest_framework.response",
+    "services.ai_analysis_service"
+  ],
+  "classes": [
+    {
+      "name": "VarietyAIAnalysisSerializer",
+      "methods": [
+        "get_variety_name"
+      ],
+      "variables": [
+        "variety_name"
+      ]
+    },
+    {
+      "name": "AIAnalysisSerializer",
+      "methods": [],
+      "variables": [
+        "analysis_type_display",
+        "variety_analyses"
+      ]
+    },
+    {
+      "name": "AIAnalysisViewSet",
+      "methods": [
+        "get_queryset",
+        "analyze_variety_performance",
+        "compare_varieties",
+        "predict_variety_performance",
+        "analyze_trial_performance"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "VarietyAIAnalysisViewSet",
+      "methods": [
+        "get_queryset"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_variety_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "analyze_variety_performance",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "compare_varieties",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "predict_variety_performance",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "analyze_trial_performance",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

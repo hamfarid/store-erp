@@ -1,0 +1,346 @@
+{
+  "module": "services_modules.feasibility_studies.tests.test_feasibility_studies",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.financial",
+    "models.market",
+    "models.study",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "StudyTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_study_type",
+        "test_unique_code_per_company",
+        "test_deactivate_study_type"
+      ],
+      "variables": []
+    },
+    {
+      "name": "StudyStatusModelTest",
+      "methods": [
+        "setUp",
+        "test_create_study_status",
+        "test_unique_code_per_company",
+        "test_deactivate_study_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FeasibilityStudyModelTest",
+      "methods": [
+        "setUp",
+        "test_create_feasibility_study",
+        "test_unique_reference_number_per_company",
+        "test_update_study_status",
+        "test_calculate_roi",
+        "test_calculate_payback_period"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FinancialAnalysisModelTest",
+      "methods": [
+        "setUp",
+        "test_create_financial_analysis",
+        "test_calculate_npv",
+        "test_calculate_irr",
+        "test_calculate_roi"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CashFlowModelTest",
+      "methods": [
+        "setUp",
+        "test_create_cash_flow",
+        "test_calculate_net_cash_flow",
+        "test_calculate_discounted_cash_flow"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MarketAnalysisModelTest",
+      "methods": [
+        "setUp",
+        "test_create_market_analysis",
+        "test_calculate_target_market_value",
+        "test_calculate_projected_market_size"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CompetitorModelTest",
+      "methods": [
+        "setUp",
+        "test_create_competitor",
+        "test_calculate_market_value",
+        "test_get_relative_market_share"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_study_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_study_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_study_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_study_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_feasibility_study",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_reference_number_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_study_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_roi",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_payback_period",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_financial_analysis",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_npv",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_irr",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_roi",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_cash_flow",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_net_cash_flow",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_discounted_cash_flow",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_market_analysis",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_target_market_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_projected_market_size",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_competitor",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_market_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_relative_market_share",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_roi",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_payback_period",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_npv",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_irr",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_roi",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_net_cash_flow",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_discounted_cash_flow",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_target_market_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_projected_market_size",
+      "parameters": [
+        "self",
+        "years"
+      ]
+    },
+    {
+      "name": "mock_calculate_market_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_relative_market_share",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

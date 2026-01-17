@@ -1,0 +1,14 @@
+{
+  "module": "gaara_erp.settings.__init__",
+  "imports": [
+    "decouple",
+    "dev",
+    "prod",
+    "test"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "APP_MODE"
+  ]
+}

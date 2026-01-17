@@ -1,0 +1,11 @@
+{
+  "module": "core_modules.setup.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns"
+  ]
+}

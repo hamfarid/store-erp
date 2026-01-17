@@ -1,0 +1,12 @@
+{
+  "module": "integration_modules.ai_agent.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "app_name",
+    "urlpatterns"
+  ]
+}

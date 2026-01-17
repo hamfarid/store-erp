@@ -1,0 +1,108 @@
+{
+  "module": "business_modules.purchasing.receipts",
+  "imports": [
+    "business_modules.inventory.base",
+    "business_modules.inventory.products",
+    "contacts.models",
+    "decimal",
+    "django.conf",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "orders"
+  ],
+  "classes": [
+    {
+      "name": "GoodsReceiptNote",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "supplier",
+        "purchase_order",
+        "grn_date",
+        "status",
+        "received_by",
+        "store",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "GoodsReceiptNoteItem",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "grn",
+        "po_item",
+        "product",
+        "received_quantity",
+        "notes"
+      ]
+    },
+    {
+      "name": "StatusChoices",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "COMPLETED",
+        "INVOICED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

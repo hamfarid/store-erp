@@ -1,0 +1,46 @@
+{
+  "module": "integration_modules.ai_agent.models.activity_logs",
+  "imports": [
+    "agents",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "interactions"
+  ],
+  "classes": [
+    {
+      "name": "AgentActivityLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ACTION_CHOICES",
+        "STATUS_CHOICES",
+        "timestamp",
+        "agent",
+        "action",
+        "status",
+        "related_interaction",
+        "details"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,36 @@
+{
+  "module": "integration_modules.memory_ai.serializers",
+  "imports": [
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "HealthSerializer",
+      "methods": [
+        "create",
+        "update"
+      ],
+      "variables": [
+        "status"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "instance",
+        "validated_data"
+      ]
+    }
+  ],
+  "variables": []
+}

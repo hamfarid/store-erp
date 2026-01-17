@@ -1,0 +1,67 @@
+{
+  "module": "ai_modules.service",
+  "imports": [
+    "fastapi",
+    "logging",
+    "os",
+    "uvicorn"
+  ],
+  "classes": [
+    {
+      "name": "FastAPI",
+      "methods": [
+        "__init__",
+        "get"
+      ],
+      "variables": []
+    },
+    {
+      "name": "uvicorn",
+      "methods": [
+        "run"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "root",
+      "parameters": []
+    },
+    {
+      "name": "health_check",
+      "parameters": []
+    },
+    {
+      "name": "list_models",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "path"
+      ]
+    },
+    {
+      "name": "run",
+      "parameters": []
+    },
+    {
+      "name": "decorator",
+      "parameters": [
+        "func"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "app"
+  ]
+}

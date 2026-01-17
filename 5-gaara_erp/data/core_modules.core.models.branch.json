@@ -1,0 +1,47 @@
+{
+  "module": "core_modules.core.models.branch",
+  "imports": [
+    "base_models",
+    "company",
+    "country",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Branch",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "address",
+        "phone",
+        "email",
+        "country",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

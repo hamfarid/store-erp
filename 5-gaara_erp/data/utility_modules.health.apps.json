@@ -1,0 +1,18 @@
+{
+  "module": "utility_modules.health.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "HealthConfig",
+      "methods": [],
+      "variables": [
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

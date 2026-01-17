@@ -1,0 +1,10 @@
+{
+  "module": "business_modules.accounting.chart_of_accounts",
+  "imports": [
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

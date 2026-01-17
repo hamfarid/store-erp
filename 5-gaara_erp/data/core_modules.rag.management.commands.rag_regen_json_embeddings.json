@@ -1,0 +1,50 @@
+{
+  "module": "core_modules.rag.management.commands.rag_regen_json_embeddings",
+  "imports": [
+    "__future__",
+    "core_modules.rag.services.ingestion",
+    "django.core.management.base",
+    "django.db",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "Command",
+      "methods": [
+        "add_arguments",
+        "handle",
+        "_regen"
+      ],
+      "variables": [
+        "help"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "add_arguments",
+      "parameters": [
+        "self",
+        "parser"
+      ]
+    },
+    {
+      "name": "handle",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_regen",
+      "parameters": [
+        "self",
+        "adapter",
+        "table",
+        "text_col",
+        "batch_size",
+        "dry_run"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,32 @@
+[MASTER]
+ignore=migrations,alembic,venv,env,.venv,instance,build,dist,*.egg-info,unneed,unneeded,scripts_archive,test_files_archive,database_archive
+jobs=4
+
+[MESSAGES CONTROL]
+disable=
+    missing-docstring,
+    too-few-public-methods,
+    too-many-arguments,
+    too-many-instance-attributes,
+    too-many-locals,
+    too-many-branches,
+    too-many-statements,
+    import-error,
+    no-member,
+    broad-except,
+    fixme
+
+[FORMAT]
+max-line-length=120
+indent-string='    '
+
+[BASIC]
+good-names=i,j,k,ex,Run,_,id,db
+
+[DESIGN]
+max-args=10
+max-attributes=15
+max-locals=20
+max-branches=20
+max-statements=50
+

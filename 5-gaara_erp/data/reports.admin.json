@@ -1,0 +1,9 @@
+{
+  "module": "reports.admin",
+  "imports": [
+    "django.contrib"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

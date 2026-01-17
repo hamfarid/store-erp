@@ -1,0 +1,18 @@
+{
+  "module": "admin_modules.setup_wizard.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "SetupConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

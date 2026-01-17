@@ -1,0 +1,126 @@
+{
+  "timestamp": "2025-11-04T09:43:02.697436",
+  "repo_root": "D:\\APPS_AI\\store\\Store",
+  "checks": {
+    "documentation": {
+      "present": 4,
+      "missing": 20,
+      "present_files": [
+        "Inventory.md",
+        "Error_Catalog.md",
+        "DONT_DO_THIS_AGAIN.md",
+        "Imports_Map.md"
+      ],
+      "missing_files": [
+        "TechStack.md",
+        "Routes_FE.md",
+        "Routes_BE.md",
+        "Pages_Coverage.md",
+        "API_Contracts.md",
+        "DB_Schema.md",
+        "Permissions_Model.md",
+        "Env.md",
+        "Security.md",
+        "Threat_Model.md",
+        "Runbook.md",
+        "Remediation_Plan.md",
+        "Symbol_Index.md",
+        "UI_Design_System.md",
+        "Brand_Palette.json",
+        "CSP.md",
+        "Route_Obfuscation.md",
+        "Search.md",
+        "Resilience.md",
+        "Class_Registry.md"
+      ],
+      "status": "WARN"
+    },
+    "security_middleware": {
+      "present": 3,
+      "total": 3,
+      "files": [
+        "backend/src/security_headers.py",
+        "backend/src/middleware/csrf_protection.py",
+        "backend/src/middleware/rate_limiter.py"
+      ],
+      "status": "PASS"
+    },
+    "api_contracts": {
+      "present": 1,
+      "total": 1,
+      "files": [
+        "contracts/openapi.yaml"
+      ],
+      "status": "PASS"
+    },
+    "ci_workflows": {
+      "count": 12,
+      "workflows": [
+        "audit.yml",
+        "ci.yml",
+        "create_issues_from_task_list.yml",
+        "dast_zap.yml",
+        "deploy.yml",
+        "issues.yml",
+        "lighthouse_ci.yml",
+        "pages.yml",
+        "perf_k6.yml",
+        "sbom_supply_chain.yml",
+        "secret-scan.yml",
+        "secrets-scan.yml"
+      ],
+      "status": "PASS"
+    },
+    "database_models": {
+      "count": 39,
+      "models": [
+        "accounting_system.py",
+        "activity_log.py",
+        "crm_potential_customers.py",
+        "customer.py",
+        "enhanced_models.py",
+        "fix_all_files.py",
+        "fix_imports.py",
+        "invoices_clean.py",
+        "invoice_unified.py",
+        "lot_advanced.py",
+        "notifications.py",
+        "opening_balances_treasury.py",
+        "optimized_queries.py",
+        "partners.py",
+        "payment_management.py",
+        "permissions.py",
+        "pickup_delivery_orders.py",
+        "product_advanced.py",
+        "product_unified.py",
+        "profit_loss_system.py",
+        "region_warehouse.py",
+        "returns_management.py",
+        "sales_advanced.py",
+        "security_system.py",
+        "simple_fix.py",
+        "stock_movement_advanced.py",
+        "supplier.py",
+        "system_settings_advanced.py",
+        "test_all_files.py",
+        "test_entire_project.py",
+        "treasury_management.py",
+        "unified_models.py",
+        "user.py",
+        "user_management_advanced.py",
+        "warehouse_adjustments.py",
+        "warehouse_advanced.py",
+        "warehouse_constraints.py",
+        "warehouse_transfer.py",
+        "warehouse_unified.py"
+      ],
+      "status": "PASS"
+    }
+  },
+  "summary": {
+    "total_checks": 5,
+    "passed": 4,
+    "failed": 1,
+    "overall_status": "WARN"
+  }
+}

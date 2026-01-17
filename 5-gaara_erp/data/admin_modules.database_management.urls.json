@@ -1,0 +1,12 @@
+{
+  "module": "admin_modules.database_management.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns",
+    "app_name"
+  ]
+}

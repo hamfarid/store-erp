@@ -1,0 +1,30 @@
+{
+  "module": "core_modules.api_keys.apps",
+  "imports": [
+    "core_modules.api_keys.signals",
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ApiKeysConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

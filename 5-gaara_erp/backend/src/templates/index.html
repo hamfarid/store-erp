@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>نظام إدارة المخزون المتكامل v1.5</title>
+        <style>
+            body {
+                font-family: "Segoe UI", Tahoma, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: #fff;
+                min-height: 100vh;
+            }
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            .header,
+            .status {
+                background: rgba(255, 255, 255, 0.1);
+                padding: 25px;
+                border-radius: 15px;
+                backdrop-filter: blur(10px);
+            }
+            .header {
+                margin-bottom: 30px;
+            }
+            .success {
+                color: #4caf50;
+            }
+            .api-list {
+                text-align: right;
+                margin-top: 20px;
+            }
+            .api-item {
+                background: rgba(255, 255, 255, 0.05);
+                padding: 8px;
+                margin: 4px 0;
+                border-radius: 6px;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>🏪 نظام إدارة المخزون المتكامل v1.5</h1>
+                <p>Complete Inventory Management System</p>
+                <p class="success">✅ النظام يعمل بنجاح</p>
+            </div>
+            <div class="status">
+                <h2>📊 حالة النظام</h2>
+                <p><strong>الوقت:</strong> {{ current_time }}</p>
+                <p><strong>الإصدار:</strong> 1.5.0</p>
+                <p><strong>البيئة:</strong> {{ environment }}</p>
+                <div class="api-list">
+                    <h3>🔗 نقاط الوصول المتاحة:</h3>
+                    <div class="api-item">📈 /api/dashboard</div>
+                    <div class="api-item">📦 /api/products</div>
+                    <div class="api-item">👥 /api/customers</div>
+                    <div class="api-item">🏭 /api/suppliers</div>
+                    <div class="api-item">💰 /api/sales</div>
+                    <div class="api-item">📊 /api/reports</div>
+                    <div class="api-item">🔐 /api/auth</div>
+                    <div class="api-item">❤️ /api/health</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

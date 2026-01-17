@@ -1,0 +1,11 @@
+{
+  "module": "business_modules.accounting.tests.test_models",
+  "imports": [
+    "chart_of_accounts",
+    "django.db",
+    "models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

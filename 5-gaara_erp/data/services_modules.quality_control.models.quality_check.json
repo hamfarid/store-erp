@@ -1,0 +1,107 @@
+{
+  "module": "services_modules.quality_control.models.quality_check",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "QualityCheck",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "start_check",
+        "complete_check",
+        "cancel_check",
+        "get_duration",
+        "get_results_summary"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "TYPE_CHOICES",
+        "name",
+        "reference_number",
+        "description",
+        "check_type",
+        "status",
+        "template",
+        "product",
+        "responsible_user",
+        "scheduled_date",
+        "start_date",
+        "end_date",
+        "notes",
+        "is_critical",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start_check",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete_check",
+      "parameters": [
+        "self",
+        "passed"
+      ]
+    },
+    {
+      "name": "cancel_check",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_results_summary",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

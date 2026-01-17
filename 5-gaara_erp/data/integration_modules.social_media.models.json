@@ -1,0 +1,92 @@
+{
+  "module": "integration_modules.social_media.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "SocialMediaPlatform",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PLATFORM_TYPE_CHOICES",
+        "platform_id",
+        "name",
+        "platform_type",
+        "account_name",
+        "account_url",
+        "api_key",
+        "access_token",
+        "refresh_token",
+        "followers_count",
+        "posts_count",
+        "engagement_rate",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "SocialPost",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "POST_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "post_id",
+        "platform",
+        "content",
+        "post_type",
+        "media_urls",
+        "status",
+        "scheduled_time",
+        "published_time",
+        "likes_count",
+        "comments_count",
+        "shares_count",
+        "views_count",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

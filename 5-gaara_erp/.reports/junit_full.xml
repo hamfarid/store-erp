@@ -1,0 +1,1249 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="63" failures="0" skipped="5" tests="68" time="24.334" timestamp="2025-09-20T13:23:12.761827+03:00" hostname="Victus"><testcase classname="" name="agricultural_modules.seed_production.tests.test_services" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\seed_production\tests\test_services.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\agricultural_modules\seed_production\tests\test_services.py:14: in &lt;module&gt;
+    from ..models import (InventoryVerification, LotChangeLog, SeedLotTest,
+E   ImportError: cannot import name 'InventoryVerification' from 'agricultural_modules.seed_production.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\seed_production\models.py)</error></testcase><testcase classname="" name="agricultural_modules.seed_production.tests.test_views" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\seed_production\tests\test_views.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\agricultural_modules\seed_production\tests\test_views.py:17: in &lt;module&gt;
+    from ..models import (InventoryVerification, LotChangeLog, SeedLotTest,
+E   ImportError: cannot import name 'InventoryVerification' from 'agricultural_modules.seed_production.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\seed_production\models.py)</error></testcase><testcase classname="" name="agricultural_modules.variety_trials.tests.test_integration" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\variety_trials\tests\test_integration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\agricultural_modules\variety_trials\tests\test_integration.py:13: in &lt;module&gt;
+    from agricultural_modules.variety_trials.models import (CompetitorVariety,
+E   ImportError: cannot import name 'CompetitorVariety' from 'agricultural_modules.variety_trials.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\variety_trials\models.py)</error></testcase><testcase classname="" name="agricultural_modules.variety_trials.tests.test_models" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\variety_trials\tests\test_models.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\agricultural_modules\variety_trials\tests\test_models.py:14: in &lt;module&gt;
+    from ..models import (
+E   ImportError: cannot import name 'CompetitorVariety' from 'agricultural_modules.variety_trials.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\variety_trials\models.py)</error></testcase><testcase classname="" name="agricultural_modules.variety_trials.tests.test_services" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\variety_trials\tests\test_services.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\agricultural_modules\variety_trials\tests\test_services.py:15: in &lt;module&gt;
+    from ..models import (
+E   ImportError: cannot import name 'CompetitorVariety' from 'agricultural_modules.variety_trials.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\variety_trials\models.py)</error></testcase><testcase classname="" name="business_modules.accounting.tests.test_integration" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\accounting\tests\test_integration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\accounting\tests\test_integration.py:3: in &lt;module&gt;
+    from ..models import (
+E   ImportError: cannot import name 'Partner' from 'business_modules.accounting.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\accounting\models\__init__.py)</error></testcase><testcase classname="" name="business_modules.accounting.tests.test_runner" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\accounting\tests\test_runner.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\accounting\tests\test_runner.py:6: in &lt;module&gt;
+    from business_modules.accounting.tests.test_settlement_integration import SettlementIntegrationTestCase
+E   ImportError: cannot import name 'SettlementIntegrationTestCase' from 'business_modules.accounting.tests.test_settlement_integration' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\accounting\tests\test_settlement_integration.py)</error></testcase><testcase classname="" name="business_modules.contacts.tests.test_contacts" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\contacts\tests\test_contacts.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\contacts\tests\test_contacts.py:14: in &lt;module&gt;
+    from ..models.contact import Contact, ContactCategory, ContactTag
+E   ImportError: cannot import name 'ContactCategory' from 'business_modules.contacts.models.contact' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\contacts\models\contact.py)</error></testcase><testcase classname="" name="business_modules.contacts.tests.test_models" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\contacts\tests\test_models.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\contacts\tests\test_models.py:1: in &lt;module&gt;
+    from core_modules.purchasing.models import PaymentMethod
+E   ModuleNotFoundError: No module named 'core_modules.purchasing'</error></testcase><testcase classname="" name="business_modules.contacts.tests.test_settlement_logic" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\contacts\tests\test_settlement_logic.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\contacts\tests\test_settlement_logic.py:2: in &lt;module&gt;
+    from ..models import (
+E   ImportError: cannot import name 'SettlementTransaction' from 'business_modules.contacts.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\contacts\models\__init__.py)</error></testcase><testcase classname="" name="business_modules.inventory.tests.test_integration" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\inventory\tests\test_integration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\inventory\tests\test_integration.py:15: in &lt;module&gt;
+    from core_modules.inventory.models import (
+E   ModuleNotFoundError: No module named 'core_modules.inventory'</error></testcase><testcase classname="" name="business_modules.inventory.tests.test_product" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\inventory\tests\test_product.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\inventory\tests\test_product.py:8: in &lt;module&gt;
+    from ..models.product import (
+E   ImportError: cannot import name 'ProductTag' from 'business_modules.inventory.models.product' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\inventory\models\product.py)</error></testcase><testcase classname="" name="business_modules.inventory.tests.test_stock_move" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\inventory\tests\test_stock_move.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\inventory\tests\test_stock_move.py:13: in &lt;module&gt;
+    from core_modules.accounting.models import Account, AccountType
+E   ModuleNotFoundError: No module named 'core_modules.accounting.models'</error></testcase><testcase classname="" name="business_modules.pos.tests.test_pos_config" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\pos\tests\test_pos_config.py:7: in &lt;module&gt;
+    from ..models.pos_config import POSConfig, PaymentMethod
+gaara_erp\business_modules\pos\models\__init__.py:8: in &lt;module&gt;
+    from ..consolidated_models import (
+E     File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\pos\consolidated_models.py", line 51
+E       class Meta:
+E   IndentationError: unexpected indent</error></testcase><testcase classname="" name="business_modules.pos.tests.test_pos_order" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\pos\tests\test_pos_order.py:11: in &lt;module&gt;
+    from ..models.pos_order import POSOrder, POSOrderLine
+gaara_erp\business_modules\pos\models\__init__.py:8: in &lt;module&gt;
+    from ..consolidated_models import (
+E     File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\pos\consolidated_models.py", line 51
+E       class Meta:
+E   IndentationError: unexpected indent</error></testcase><testcase classname="" name="business_modules.pos.tests.test_pos_payment" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\pos\tests\test_pos_payment.py:11: in &lt;module&gt;
+    from ..models.pos_payment import POSPayment
+gaara_erp\business_modules\pos\models\__init__.py:8: in &lt;module&gt;
+    from ..consolidated_models import (
+E     File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\pos\consolidated_models.py", line 51
+E       class Meta:
+E   IndentationError: unexpected indent</error></testcase><testcase classname="" name="business_modules.pos.tests.test_pos_session" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\pos\tests\test_pos_session.py:11: in &lt;module&gt;
+    from ..models.pos_session import POSSession
+gaara_erp\business_modules\pos\models\__init__.py:8: in &lt;module&gt;
+    from ..consolidated_models import (
+E     File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\pos\consolidated_models.py", line 51
+E       class Meta:
+E   IndentationError: unexpected indent</error></testcase><testcase classname="" name="business_modules.pos.tests.test_services" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\pos\tests\test_services.py:4: in &lt;module&gt;
+    from business_modules.pos.services import (
+gaara_erp\business_modules\pos\services.py:11: in &lt;module&gt;
+    from business_modules.pos.models import (
+gaara_erp\business_modules\pos\models\__init__.py:8: in &lt;module&gt;
+    from ..consolidated_models import (
+E     File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\pos\consolidated_models.py", line 51
+E       class Meta:
+E   IndentationError: unexpected indent</error></testcase><testcase classname="" name="business_modules.production.tests.test_integration" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\production\tests\test_integration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\production\tests\test_integration.py:1: in &lt;module&gt;
+    from business_modules.production.services import (
+gaara_erp\business_modules\production\services.py:1: in &lt;module&gt;
+    from business_modules.inventory.models import Product, UnitOfMeasure
+E   ImportError: cannot import name 'UnitOfMeasure' from 'business_modules.inventory.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\inventory\models\__init__.py)</error></testcase><testcase classname="" name="business_modules.purchasing.tests.test_integration" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\purchasing\tests\test_integration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\purchasing\tests\test_integration.py:1: in &lt;module&gt;
+    from core_modules.purchasing.models import Supplier, PurchaseOrder, PurchaseOrderLine, GoodsReceipt, SupplierInvoice
+E   ModuleNotFoundError: No module named 'core_modules.purchasing'</error></testcase><testcase classname="" name="business_modules.purchasing.tests.test_purchase_order" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\purchasing\tests\test_purchase_order.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\purchasing\tests\test_purchase_order.py:17: in &lt;module&gt;
+    from services_modules.accounting.models import Account, AccountType, PaymentTerm
+E   ImportError: cannot import name 'PaymentTerm' from 'services_modules.accounting.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\accounting\models.py)</error></testcase><testcase classname="" name="business_modules.purchasing.tests.test_supplier" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\purchasing\tests\test_supplier.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\purchasing\tests\test_supplier.py:12: in &lt;module&gt;
+    from ..models.supplier import Supplier, SupplierCategory, SupplierTag
+E   ImportError: cannot import name 'SupplierCategory' from 'business_modules.purchasing.models.supplier' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\purchasing\models\supplier.py)</error></testcase><testcase classname="" name="business_modules.rent.tests.test_property" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\rent\tests\test_property.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\rent\tests\test_property.py:14: in &lt;module&gt;
+    from services_modules.core.models import Company, Branch, Currency, User
+E   ImportError: cannot import name 'User' from 'services_modules.core.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\core\models\__init__.py)</error></testcase><testcase classname="" name="business_modules.rent.tests.test_rental_contract" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\rent\tests\test_rental_contract.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\rent\tests\test_rental_contract.py:16: in &lt;module&gt;
+    from services_modules.core.models import Company, Branch, Currency, User, Partner
+E   ImportError: cannot import name 'User' from 'services_modules.core.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\core\models\__init__.py)</error></testcase><testcase classname="" name="business_modules.sales.tests.test_customer" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\sales\tests\test_customer.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\sales\tests\test_customer.py:12: in &lt;module&gt;
+    from ..models.customer import Customer, CustomerCategory, CustomerTag
+E   ImportError: cannot import name 'CustomerCategory' from 'business_modules.sales.models.customer' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\sales\models\customer.py)</error></testcase><testcase classname="" name="business_modules.sales.tests.test_sales_order" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\sales\tests\test_sales_order.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\sales\tests\test_sales_order.py:14: in &lt;module&gt;
+    from ..models.sales_order import SalesOrder, SalesOrderLine
+E   ImportError: cannot import name 'SalesOrderLine' from 'business_modules.sales.models.sales_order' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\sales\models\sales_order.py)</error></testcase><testcase classname="" name="business_modules.solar_stations.tests.test_integration" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\solar_stations\tests\test_integration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\solar_stations\tests\test_integration.py:4: in &lt;module&gt;
+    from business_modules.solar_station.models import (
+E   ImportError: cannot import name 'EnergyProductionLog' from 'business_modules.solar_station.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\solar_station\models.py)</error></testcase><testcase classname="" name="business_modules.solar_stations.tests.test_models" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\solar_stations\tests\test_models.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\solar_stations\tests\test_models.py:1: in &lt;module&gt;
+    from business_modules.solar_stations.models import (
+E   ImportError: cannot import name 'Inverter' from 'business_modules.solar_stations.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\solar_stations\models.py)</error></testcase><testcase classname="" name="business_modules.solar_stations.tests.test_solar_station" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\solar_stations\tests\test_solar_station.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\solar_stations\tests\test_solar_station.py:1: in &lt;module&gt;
+    from business_modules.solar_stations.models import (
+E   ImportError: cannot import name 'Inverter' from 'business_modules.solar_stations.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\solar_stations\models.py)</error></testcase><testcase classname="" name="business_modules.tests.test_models" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\tests\test_models.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\business_modules\tests\test_models.py:2: in &lt;module&gt;
+    from ..contacts.models import Contact, ContactPerson, ContactAddress, ContactBankAccount, ContactNote, ContactAttachment, ContactTag
+E   ImportError: cannot import name 'ContactPerson' from 'business_modules.contacts.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\business_modules\contacts\models\__init__.py)</error></testcase><testcase classname="" name="core_modules.setup.tests.test_integration" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\core_modules\setup\tests\test_integration.py:15: in &lt;module&gt;
+    from core_modules.setup.data_import_export.models import ImportExportOperation
+E     File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\core_modules\setup\data_import_export\models.py", line 113
+E       class Meta:
+E       ^^^^^
+E   SyntaxError: invalid syntax</error></testcase><testcase classname="" name="core_modules.setup.tests.test_models" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\core_modules\setup\tests\test_models.py:14: in &lt;module&gt;
+    from core_modules.setup.data_import_export.models import ImportExportOperation
+E     File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\core_modules\setup\data_import_export\models.py", line 113
+E       class Meta:
+E       ^^^^^
+E   SyntaxError: invalid syntax</error></testcase><testcase classname="" name="core_modules.system_settings.test_integration" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\core_modules\system_settings\test_integration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\core_modules\system_settings\test_integration.py:9: in &lt;module&gt;
+    from core_modules.system_settings.serializers import (
+gaara_erp\core_modules\system_settings\serializers.py:7: in &lt;module&gt;
+    from .models import SystemSetting, Country, Currency, EmailSetting, SetupWizardStatus
+E   ImportError: cannot import name 'Country' from 'core_modules.system_settings.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\core_modules\system_settings\models.py)</error></testcase><testcase classname="" name="core_modules.system_settings.tests.test_integration" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\core_modules\system_settings\tests\test_integration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\core_modules\system_settings\tests\test_integration.py:4: in &lt;module&gt;
+    from core_modules.system_settings.serializers import (
+gaara_erp\core_modules\system_settings\serializers.py:7: in &lt;module&gt;
+    from .models import SystemSetting, Country, Currency, EmailSetting, SetupWizardStatus
+E   ImportError: cannot import name 'Country' from 'core_modules.system_settings.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\core_modules\system_settings\models.py)</error></testcase><testcase classname="" name="core_modules.users.tests" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\core_modules\users\tests.py:18: in &lt;module&gt;
+    from .models import (
+E     File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\core_modules\users\models.py", line 570
+E       class Meta:
+E       ^^^^^
+E   SyntaxError: invalid syntax</error></testcase><testcase classname="" name="integration_modules.a2a_integration.tests.test_api" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\integration_modules\a2a_integration\tests\test_api.py:2: in &lt;module&gt;
+    from ..models import ExternalSystem, IntegrationConfig, APICredential, IntegrationLog
+E     File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\a2a_integration\models.py", line 145
+E       class Meta:
+E       ^^^^^
+E   SyntaxError: invalid syntax</error></testcase><testcase classname="" name="integration_modules.a2a_integration.tests.test_models" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\integration_modules\a2a_integration\tests\test_models.py:2: in &lt;module&gt;
+    from ..models import ExternalSystem, IntegrationConfig, APICredential, IntegrationLog
+E     File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\a2a_integration\models.py", line 145
+E       class Meta:
+E       ^^^^^
+E   SyntaxError: invalid syntax</error></testcase><testcase classname="" name="integration_modules.ai_analytics.tests.test_api" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'tests.test_api' has this __file__ attribute:
+  D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\ai_agriculture\tests\test_api.py
+which is not the same as the test file we want to collect:
+  D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\ai_analytics\tests\test_api.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="integration_modules.ai_analytics.tests.test_api_simple" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\ai_analytics\tests\test_api_simple.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1140: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'tests.test_api_simple'</error></testcase><testcase classname="" name="integration_modules.ai_analytics.tests.test_integration" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'tests.test_integration' has this __file__ attribute:
+  D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\ai_agriculture\tests\test_integration.py
+which is not the same as the test file we want to collect:
+  D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\ai_analytics\tests\test_integration.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="integration_modules.ai_analytics.tests.test_integration_simple" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\ai_analytics\tests\test_integration_simple.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1140: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'tests.test_integration_simple'</error></testcase><testcase classname="" name="integration_modules.ai_analytics.tests.test_models" time="0.000"><error message="collection failure">import file mismatch:
+imported module 'tests.test_models' has this __file__ attribute:
+  D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\ai_agriculture\tests\test_models.py
+which is not the same as the test file we want to collect:
+  D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\ai_analytics\tests\test_models.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules</error></testcase><testcase classname="" name="integration_modules.ai_analytics.tests.test_services" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\ai_analytics\tests\test_services.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1140: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'tests.test_services'</error></testcase><testcase classname="" name="integration_modules.ai_analytics.tests.test_services_simple" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\integration_modules\ai_analytics\tests\test_services_simple.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1140: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'tests.test_services_simple'</error></testcase><testcase classname="" name="services_modules.admin_affairs.tests.test_admin_affairs" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\admin_affairs\tests\test_admin_affairs.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1140: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'tests.test_admin_affairs'</error></testcase><testcase classname="" name="services_modules.assets.tests.test_asset" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\assets\tests\test_asset.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1140: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'tests.test_asset'</error></testcase><testcase classname="" name="services_modules.assets.tests.test_services" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\assets\tests\test_services.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1140: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'tests.test_services'</error></testcase><testcase classname="" name="services_modules.beneficiaries.tests.test_beneficiary" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\beneficiaries\tests\test_beneficiary.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\services_modules\beneficiaries\tests\test_beneficiary.py:16: in &lt;module&gt;
+    from services_modules.core.models import Company, Branch, Currency, User
+E   ImportError: cannot import name 'User' from 'services_modules.core.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\core\models\__init__.py)</error></testcase><testcase classname="" name="services_modules.beneficiaries.tests.test_services" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\beneficiaries\tests\test_services.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\services_modules\beneficiaries\tests\test_services.py:1: in &lt;module&gt;
+    from services_modules.beneficiaries.services import BeneficiaryService
+gaara_erp\services_modules\beneficiaries\services\__init__.py:7: in &lt;module&gt;
+    from .beneficiary_service import (
+gaara_erp\services_modules\beneficiaries\services\beneficiary_service.py:12: in &lt;module&gt;
+    from services_modules.notifications.models import Notification
+E   ModuleNotFoundError: No module named 'services_modules.notifications.models'</error></testcase><testcase classname="" name="services_modules.board_management.tests.test_board_management" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\board_management\tests\test_board_management.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1140: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'tests.test_board_management'</error></testcase><testcase classname="" name="services_modules.complaints_suggestions.tests.test_complaints_suggestions" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\complaints_suggestions\tests\test_complaints_suggestions.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1140: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'tests.test_complaints_suggestions'</error></testcase><testcase classname="" name="services_modules.correspondence.tests.test_correspondence" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\correspondence\tests\test_correspondence.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\services_modules\correspondence\tests\test_correspondence.py:14: in &lt;module&gt;
+    from ..models.correspondence import Correspondence, CorrespondenceType, CorrespondenceStatus
+E   ModuleNotFoundError: No module named 'services_modules.correspondence.models.correspondence'; 'services_modules.correspondence.models' is not a package</error></testcase><testcase classname="" name="services_modules.feasibility_studies.tests.test_feasibility_studies" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\feasibility_studies\tests\test_feasibility_studies.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\services_modules\feasibility_studies\tests\test_feasibility_studies.py:13: in &lt;module&gt;
+    from ..models.study import FeasibilityStudy, StudyStatus, StudyType
+gaara_erp\services_modules\feasibility_studies\models\__init__.py:1: in &lt;module&gt;
+    from .study import FeasibilityStudy, StudyType, StudyStatus
+gaara_erp\services_modules\feasibility_studies\models\study.py:8: in &lt;module&gt;
+    from services_modules.core.models import Company, Branch, User
+E   ImportError: cannot import name 'User' from 'services_modules.core.models' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\core\models\__init__.py)</error></testcase><testcase classname="" name="services_modules.forecast.tests.test_forecast" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\forecast\tests\test_forecast.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\services_modules\forecast\tests\test_forecast.py:14: in &lt;module&gt;
+    from ..models.forecast import Forecast, ForecastType, ForecastMethod
+E   ModuleNotFoundError: No module named 'services_modules.forecast.models.forecast'; 'services_modules.forecast.models' is not a package</error></testcase><testcase classname="" name="services_modules.projects.tests.test_project_task_integration" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\services_modules\projects\tests\test_project_task_integration.py:15: in &lt;module&gt;
+    from ..models.task import Task
+gaara_erp\services_modules\projects\models\__init__.py:18: in &lt;module&gt;
+    from .project_gantt import (
+gaara_erp\services_modules\projects\models\project_gantt.py:12: in &lt;module&gt;
+    import networkx as nx
+.venv\Lib\site-packages\networkx\__init__.py:19: in &lt;module&gt;
+    from networkx import utils
+.venv\Lib\site-packages\networkx\utils\__init__.py:4: in &lt;module&gt;
+    from networkx.utils.union_find import *
+E     File "D:\home\ubuntu\gaara_erp_v5\.venv\Lib\site-packages\networkx\utils\union_find.py", line 43
+E       self.weights[ ] = 1
+E                     ^
+E   SyntaxError: invalid syntax</error></testcase><testcase classname="" name="services_modules.projects.tests.test_projects" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\services_modules\projects\tests\test_projects.py:14: in &lt;module&gt;
+    from ..models.timesheet import Timesheet
+gaara_erp\services_modules\projects\models\__init__.py:18: in &lt;module&gt;
+    from .project_gantt import (
+gaara_erp\services_modules\projects\models\project_gantt.py:12: in &lt;module&gt;
+    import networkx as nx
+.venv\Lib\site-packages\networkx\__init__.py:19: in &lt;module&gt;
+    from networkx import utils
+.venv\Lib\site-packages\networkx\utils\__init__.py:4: in &lt;module&gt;
+    from networkx.utils.union_find import *
+E     File "D:\home\ubuntu\gaara_erp_v5\.venv\Lib\site-packages\networkx\utils\union_find.py", line 43
+E       self.weights[ ] = 1
+E                     ^
+E   SyntaxError: invalid syntax</error></testcase><testcase classname="" name="services_modules.projects.tests.test_risk_management_integration" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\services_modules\projects\tests\test_risk_management_integration.py:15: in &lt;module&gt;
+    from ..models.risk import Risk
+gaara_erp\services_modules\projects\models\__init__.py:18: in &lt;module&gt;
+    from .project_gantt import (
+gaara_erp\services_modules\projects\models\project_gantt.py:12: in &lt;module&gt;
+    import networkx as nx
+.venv\Lib\site-packages\networkx\__init__.py:19: in &lt;module&gt;
+    from networkx import utils
+.venv\Lib\site-packages\networkx\utils\__init__.py:4: in &lt;module&gt;
+    from networkx.utils.union_find import *
+E     File "D:\home\ubuntu\gaara_erp_v5\.venv\Lib\site-packages\networkx\utils\union_find.py", line 43
+E       self.weights[ ] = 1
+E                     ^
+E   SyntaxError: invalid syntax</error></testcase><testcase classname="" name="services_modules.projects.tests.test_services" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\projects\tests\test_services.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\services_modules\projects\tests\test_services.py:1: in &lt;module&gt;
+    from ..services import ProjectService
+E   ImportError: cannot import name 'ProjectService' from 'services_modules.projects.services' (D:\home\ubuntu\gaara_erp_v5\gaara_erp\services_modules\projects\services\__init__.py)</error></testcase><testcase classname="" name="services_modules.projects.tests.test_workflow_integration" time="0.000"><error message="collection failure">.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\services_modules\projects\tests\test_workflow_integration.py:15: in &lt;module&gt;
+    from ..models.workflow import Workflow, WorkflowStep, WorkflowTransition
+gaara_erp\services_modules\projects\models\__init__.py:18: in &lt;module&gt;
+    from .project_gantt import (
+gaara_erp\services_modules\projects\models\project_gantt.py:12: in &lt;module&gt;
+    import networkx as nx
+.venv\Lib\site-packages\networkx\__init__.py:19: in &lt;module&gt;
+    from networkx import utils
+.venv\Lib\site-packages\networkx\utils\__init__.py:4: in &lt;module&gt;
+    from networkx.utils.union_find import *
+E     File "D:\home\ubuntu\gaara_erp_v5\.venv\Lib\site-packages\networkx\utils\union_find.py", line 43
+E       self.weights[ ] = 1
+E                     ^
+E   SyntaxError: invalid syntax</error></testcase><testcase classname="" name="test_comprehensive_database" time="0.000"><skipped message="collection skipped">('D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\test_comprehensive_database.py', 9, 'Skipped: model_bakery not installed')</skipped></testcase><testcase classname="" name="test_comprehensive_integration" time="0.000"><skipped message="collection skipped">('D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\test_comprehensive_integration.py', 8, 'Skipped: model_bakery not installed')</skipped></testcase><testcase classname="" name="test_comprehensive_performance" time="0.000"><skipped message="collection skipped">('D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\test_comprehensive_performance.py', 11, 'Skipped: model_bakery not installed')</skipped></testcase><testcase classname="" name="test_db_invariants" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\test_db_invariants.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\test_db_invariants.py:4: in &lt;module&gt;
+    from model_bakery import baker
+E   ModuleNotFoundError: No module named 'model_bakery'</error></testcase><testcase classname="" name="test_integration_core" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\home\ubuntu\gaara_erp_v5\gaara_erp\test_integration_core.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\_pytest\python.py:493: in importtestmodule
+    mod = import_path(
+.venv\Lib\site-packages\_pytest\pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+C:\Users\hadym\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+&lt;frozen importlib._bootstrap&gt;:1204: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1176: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1147: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:690: in _load_unlocked
+    ???
+.venv\Lib\site-packages\_pytest\assertion\rewrite.py:184: in exec_module
+    exec(co, module.__dict__)
+gaara_erp\test_integration_core.py:3: in &lt;module&gt;
+    from model_bakery import baker
+E   ModuleNotFoundError: No module named 'model_bakery'</error></testcase><testcase classname="" name="test_module_specific_agricultural" time="0.000"><skipped message="collection skipped">('D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\test_module_specific_agricultural.py', 8, 'Skipped: model_bakery not installed')</skipped></testcase><testcase classname="" name="test_module_specific_business" time="0.000"><skipped message="collection skipped">('D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\test_module_specific_business.py', 8, 'Skipped: model_bakery not installed')</skipped></testcase><testcase classname="" name="utility_modules.utilities.tests.test_models" time="0.000"><error message="collection failure">gaara_erp\utility_modules\utilities\tests\test_models.py:9: in &lt;module&gt;
+    from .. import models
+gaara_erp\utility_modules\utilities\models.py:16: in &lt;module&gt;
+    from .monitoring import (
+gaara_erp\utility_modules\utilities\monitoring.py:62: in &lt;module&gt;
+    class UserStatistic(models.Model):
+.venv\Lib\site-packages\django\db\models\base.py:136: in __new__
+    raise RuntimeError(
+E   RuntimeError: Model class utility_modules.utilities.monitoring.UserStatistic doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.</error></testcase><testcase classname="" name="utility_modules.utilities.tests.test_views" time="0.000"><error message="collection failure">gaara_erp\utility_modules\utilities\tests\test_views.py:10: in &lt;module&gt;
+    from .. import models
+gaara_erp\utility_modules\utilities\models.py:16: in &lt;module&gt;
+    from .monitoring import (
+gaara_erp\utility_modules\utilities\monitoring.py:62: in &lt;module&gt;
+    class UserStatistic(models.Model):
+.venv\Lib\site-packages\django\db\models\base.py:136: in __new__
+    raise RuntimeError(
+E   RuntimeError: Model class utility_modules.utilities.monitoring.UserStatistic doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.</error></testcase></testsuite></testsuites>

@@ -1,0 +1,20 @@
+{
+  "module": "services_modules.projects.models.__init__",
+  "imports": [
+    "dependencies",
+    "project",
+    "project_gantt",
+    "project_member",
+    "project_phase",
+    "risk",
+    "task",
+    "timesheet",
+    "workflow"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "ProjectTask",
+    "__all__"
+  ]
+}

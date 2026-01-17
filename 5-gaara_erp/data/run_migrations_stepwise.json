@@ -1,0 +1,16 @@
+{
+  "module": "run_migrations_stepwise",
+  "imports": [
+    "django",
+    "django.core.management",
+    "io",
+    "os"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "names",
+    "base",
+    "log_path"
+  ]
+}

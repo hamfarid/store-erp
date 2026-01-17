@@ -1,0 +1,16 @@
+{
+  "module": "quick_test_verification",
+  "imports": [
+    "os",
+    "subprocess",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "quick_test",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

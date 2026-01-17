@@ -1,0 +1,11 @@
+{
+  "module": "services_modules.feasibility_studies.models.__init__",
+  "imports": [
+    "financial",
+    "market",
+    "study"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

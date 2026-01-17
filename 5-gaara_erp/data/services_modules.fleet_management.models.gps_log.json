@@ -1,0 +1,49 @@
+{
+  "module": "services_modules.fleet_management.models.gps_log",
+  "imports": [
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "vehicle"
+  ],
+  "classes": [
+    {
+      "name": "GPSLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "vehicle",
+        "timestamp",
+        "latitude",
+        "longitude",
+        "altitude",
+        "speed",
+        "direction",
+        "odometer",
+        "fuel_level",
+        "engine_status"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

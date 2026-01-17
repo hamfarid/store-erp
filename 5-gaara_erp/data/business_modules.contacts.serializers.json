@@ -1,0 +1,81 @@
+{
+  "module": "business_modules.contacts.serializers",
+  "imports": [
+    "admin_modules.communication.models",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "ContactCategorySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ContactTagSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ContactSerializer",
+      "methods": [
+        "to_representation"
+      ],
+      "variables": [
+        "category_name",
+        "contact_type_display",
+        "tags_names"
+      ]
+    },
+    {
+      "name": "CommunicationLogSerializer",
+      "methods": [],
+      "variables": [
+        "contact_name",
+        "communication_type_display"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "to_representation",
+      "parameters": [
+        "self",
+        "instance"
+      ]
+    }
+  ],
+  "variables": []
+}

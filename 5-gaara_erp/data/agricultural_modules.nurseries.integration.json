@@ -1,0 +1,61 @@
+{
+  "module": "agricultural_modules.nurseries.integration",
+  "imports": [
+    "django.db.models.signals",
+    "django.dispatch",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "handle_batch_completion_for_inventory",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "handle_resource_consumption_for_inventory",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "handle_nursery_activity_cost_for_accounting",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "transfer_batch_to_farm",
+      "parameters": [
+        "production_batch_id",
+        "farm_id",
+        "field_id",
+        "quantity_to_transfer"
+      ]
+    },
+    {
+      "name": "share_quality_data_with_research",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "share_growth_data_with_research",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,80 @@
+{
+  "module": "services_modules.tasks.models.task",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Task",
+      "methods": [
+        "__str__",
+        "archive",
+        "assign_to_user",
+        "remove_assignment"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "PRIORITY_CHOICES",
+        "project",
+        "parent_task",
+        "name",
+        "description",
+        "status",
+        "priority",
+        "assigned_to",
+        "creator",
+        "tags",
+        "due_date",
+        "start_date",
+        "estimated_effort",
+        "actual_effort",
+        "created_at",
+        "updated_at",
+        "requires_transport",
+        "transport_vehicle",
+        "related_nursery"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "archive",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "assign_to_user",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "remove_assignment",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    }
+  ],
+  "variables": []
+}

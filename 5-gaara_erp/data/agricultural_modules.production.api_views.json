@@ -1,0 +1,132 @@
+{
+  "module": "agricultural_modules.production.api_views",
+  "imports": [
+    "certificates_models",
+    "change_tracking",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "export_approval_models",
+    "farms.models",
+    "food_safety_models",
+    "integration_services",
+    "inventory.models",
+    "models",
+    "purchasing.models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers",
+    "supplier_integration"
+  ],
+  "classes": [
+    {
+      "name": "ProductionOrderViewSet",
+      "methods": [
+        "start_production",
+        "complete_production",
+        "create_from_farm_harvest",
+        "create_from_purchase_order"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "ProductionOperationViewSet",
+      "methods": [
+        "start_operation",
+        "complete_operation"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "ProductionBatchViewSet",
+      "methods": [
+        "trace_origin"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "start_production",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "complete_production",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "create_from_farm_harvest",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "create_from_purchase_order",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "start_operation",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "complete_operation",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "trace_origin",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

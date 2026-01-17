@@ -1,0 +1,123 @@
+{
+  "module": "ai_modules.ai_monitoring.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "PerformanceMetric",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "METRIC_TYPE_CHOICES",
+        "metric_id",
+        "name",
+        "metric_type",
+        "description",
+        "current_value",
+        "target_value",
+        "threshold_min",
+        "threshold_max",
+        "agent_id",
+        "module_name",
+        "created_at",
+        "updated_at",
+        "last_measured",
+        "is_active"
+      ]
+    },
+    {
+      "name": "SystemAlert",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SEVERITY_CHOICES",
+        "STATUS_CHOICES",
+        "alert_id",
+        "title",
+        "message",
+        "severity",
+        "status",
+        "source_type",
+        "source_id",
+        "triggered_at",
+        "acknowledged_at",
+        "resolved_at",
+        "acknowledged_by",
+        "resolved_by"
+      ]
+    },
+    {
+      "name": "PerformanceLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "log_id",
+        "metric",
+        "value",
+        "previous_value",
+        "change_percentage",
+        "context_data",
+        "measured_at",
+        "notes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

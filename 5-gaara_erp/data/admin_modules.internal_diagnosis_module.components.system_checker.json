@@ -1,0 +1,106 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.system_checker",
+  "imports": [
+    "django",
+    "django.conf",
+    "django.utils",
+    "models",
+    "os",
+    "platform",
+    "psutil",
+    "socket"
+  ],
+  "classes": [
+    {
+      "name": "SystemChecker",
+      "methods": [
+        "__init__",
+        "run_checks",
+        "check_os_info",
+        "check_python_info",
+        "check_django_info",
+        "check_disk_usage",
+        "check_memory_usage",
+        "check_cpu_usage",
+        "check_network_connectivity",
+        "check_required_directories",
+        "_create_result"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "session"
+      ]
+    },
+    {
+      "name": "run_checks",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_os_info",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_python_info",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_django_info",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_disk_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_memory_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_cpu_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_network_connectivity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_required_directories",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_create_result",
+      "parameters": [
+        "self",
+        "check_name",
+        "severity",
+        "message",
+        "details"
+      ]
+    }
+  ],
+  "variables": []
+}

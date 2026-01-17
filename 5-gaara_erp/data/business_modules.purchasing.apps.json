@@ -1,0 +1,19 @@
+{
+  "module": "business_modules.purchasing.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "PurchasingConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "label"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

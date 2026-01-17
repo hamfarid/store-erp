@@ -1,0 +1,92 @@
+{
+  "module": "core_modules.companies.integration",
+  "imports": [
+    "core_modules.notifications.models",
+    "core_modules.permissions.models",
+    "core_modules.setup.submodules.activity_logging.models",
+    "core_modules.system_settings.models",
+    "django.conf",
+    "django.contrib.auth",
+    "django.contrib.auth.models",
+    "django.db.models.signals",
+    "django.dispatch",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "register_company_in_system_settings",
+      "parameters": [
+        "company"
+      ]
+    },
+    {
+      "name": "register_company_in_permissions",
+      "parameters": [
+        "company",
+        "user"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": [
+        "user",
+        "action",
+        "description",
+        "severity"
+      ]
+    },
+    {
+      "name": "send_notification",
+      "parameters": [
+        "user",
+        "title",
+        "message",
+        "notification_type",
+        "entity_id",
+        "entity_type"
+      ]
+    },
+    {
+      "name": "company_post_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "branch_post_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "department_post_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "company_permission_post_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "company_post_delete",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    }
+  ],
+  "variables": []
+}

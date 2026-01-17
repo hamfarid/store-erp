@@ -1,0 +1,289 @@
+{
+  "module": "business_modules.rent.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "PropertySerializer",
+      "methods": [
+        "get_units_count",
+        "get_active_contracts_count"
+      ],
+      "variables": [
+        "units_count",
+        "active_contracts_count"
+      ]
+    },
+    {
+      "name": "PropertyUnitSerializer",
+      "methods": [
+        "get_is_rented"
+      ],
+      "variables": [
+        "property_name",
+        "is_rented"
+      ]
+    },
+    {
+      "name": "PropertyExpenseSerializer",
+      "methods": [],
+      "variables": [
+        "property_name",
+        "unit_number"
+      ]
+    },
+    {
+      "name": "UtilityConsumptionSerializer",
+      "methods": [],
+      "variables": [
+        "property_name",
+        "unit_number"
+      ]
+    },
+    {
+      "name": "RentalContractSerializer",
+      "methods": [
+        "get_is_active",
+        "get_days_until_expiry",
+        "get_total_payments",
+        "get_outstanding_amount"
+      ],
+      "variables": [
+        "property_name",
+        "unit_number",
+        "is_active",
+        "days_until_expiry",
+        "total_payments",
+        "outstanding_amount"
+      ]
+    },
+    {
+      "name": "RentalPaymentSerializer",
+      "methods": [
+        "get_is_overdue"
+      ],
+      "variables": [
+        "contract_number",
+        "tenant_name",
+        "is_overdue"
+      ]
+    },
+    {
+      "name": "MaintenanceRequestSerializer",
+      "methods": [],
+      "variables": [
+        "property_name",
+        "unit_number",
+        "contract_number"
+      ]
+    },
+    {
+      "name": "VehicleSerializer",
+      "methods": [
+        "get_is_available",
+        "get_active_contracts_count"
+      ],
+      "variables": [
+        "company_name",
+        "is_available",
+        "active_contracts_count"
+      ]
+    },
+    {
+      "name": "VehicleRentalContractSerializer",
+      "methods": [],
+      "variables": [
+        "vehicle_info"
+      ]
+    },
+    {
+      "name": "VehicleMaintenanceLogSerializer",
+      "methods": [],
+      "variables": [
+        "vehicle_info"
+      ]
+    },
+    {
+      "name": "PropertyDetailSerializer",
+      "methods": [],
+      "variables": [
+        "units",
+        "recent_expenses",
+        "active_contracts"
+      ]
+    },
+    {
+      "name": "RentalContractDetailSerializer",
+      "methods": [],
+      "variables": [
+        "payments",
+        "maintenance_requests"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_units_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_active_contracts_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_is_rented",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_is_active",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_days_until_expiry",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_total_payments",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_outstanding_amount",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_is_overdue",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_is_available",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_active_contracts_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

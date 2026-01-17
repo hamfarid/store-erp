@@ -1,0 +1,138 @@
+{
+  "module": "business_modules.inventory.tests.test_warehouse",
+  "imports": [
+    "core_modules.core.models",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "models.warehouse"
+  ],
+  "classes": [
+    {
+      "name": "WarehouseModelTest",
+      "methods": [
+        "setUp",
+        "test_create_warehouse",
+        "test_unique_code_per_company",
+        "test_warehouse_locations",
+        "test_deactivate_warehouse",
+        "test_get_stock_value"
+      ],
+      "variables": []
+    },
+    {
+      "name": "WarehouseLocationModelTest",
+      "methods": [
+        "setUp",
+        "test_create_location",
+        "test_unique_code_per_warehouse",
+        "test_location_hierarchy",
+        "test_deactivate_location",
+        "test_get_full_path",
+        "test_get_stock_quantity"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_warehouse",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_warehouse_locations",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_warehouse",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_stock_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_location",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_warehouse",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_location_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_location",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_full_path",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_stock_quantity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_stock_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_full_path",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_stock_quantity",
+      "parameters": [
+        "self",
+        "product"
+      ]
+    }
+  ],
+  "variables": []
+}

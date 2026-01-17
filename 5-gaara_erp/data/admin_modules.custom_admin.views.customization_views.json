@@ -1,0 +1,170 @@
+{
+  "module": "admin_modules.custom_admin.views.customization_views",
+  "imports": [
+    "django.utils",
+    "django_filters.rest_framework",
+    "json",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response"
+  ],
+  "classes": [
+    {
+      "name": "CustomUIElementViewSet",
+      "methods": [
+        "get_permissions",
+        "perform_create",
+        "toggle_active",
+        "get_by_page",
+        "preview"
+      ],
+      "variables": [
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "CustomReportViewSet",
+      "methods": [
+        "get_queryset",
+        "perform_create",
+        "generate",
+        "export",
+        "templates"
+      ],
+      "variables": [
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "CustomMenuViewSet",
+      "methods": [
+        "perform_create",
+        "tree_structure",
+        "reorder",
+        "reset_to_default"
+      ],
+      "variables": [
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "toggle_active",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_by_page",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "preview",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "generate",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "export",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "templates",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "tree_structure",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "reorder",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "reset_to_default",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

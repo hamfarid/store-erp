@@ -1,0 +1,94 @@
+{
+  "module": "agricultural_modules.farms.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "FarmAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "PlotAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "CropAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "PlantingAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "FarmActivityAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "HarvestAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "EquipmentAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "EquipmentMaintenanceAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

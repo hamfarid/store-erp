@@ -1,0 +1,54 @@
+{
+  "module": "services_modules.hr.contracts",
+  "imports": [
+    "core_modules.organization.models",
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "employee",
+    "structure",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "Contract",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "CONTRACT_TYPES",
+        "employee",
+        "contract_type",
+        "start_date",
+        "end_date",
+        "position",
+        "salary",
+        "salary_currency",
+        "working_hours_per_week",
+        "probation_period_months",
+        "is_active",
+        "contract_file",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

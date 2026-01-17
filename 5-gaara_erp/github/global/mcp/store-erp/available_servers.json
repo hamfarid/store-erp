@@ -1,0 +1,26 @@
+{
+  "available_servers": [
+    {
+      "name": "sentry",
+      "organization": "gaara-group",
+      "status": "ACTIVE",
+      "purpose": "Error monitoring and tracking"
+    },
+    {
+      "name": "playwright",
+      "status": "AVAILABLE",
+      "purpose": "Browser automation and testing"
+    },
+    {
+      "name": "cloudflare",
+      "status": "AVAILABLE",
+      "purpose": "D1, R2, KV, Workers"
+    },
+    {
+      "name": "serena",
+      "status": "AVAILABLE",
+      "purpose": "Semantic code retrieval"
+    }
+  ],
+  "last_checked": "2025-11-05T11:35:13.277026"
+}

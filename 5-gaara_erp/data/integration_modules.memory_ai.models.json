@@ -1,0 +1,436 @@
+{
+  "module": "integration_modules.memory_ai.models",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "json",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "BaseModel",
+      "methods": [],
+      "variables": [
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Memory",
+      "methods": [
+        "__str__",
+        "clean",
+        "access",
+        "update_content",
+        "is_expired"
+      ],
+      "variables": [
+        "MEMORY_TYPES",
+        "id",
+        "key",
+        "memory_type",
+        "content",
+        "metadata",
+        "expiry_date",
+        "user",
+        "agent_id",
+        "importance",
+        "embedding",
+        "last_accessed",
+        "access_count"
+      ]
+    },
+    {
+      "name": "MemoryCollection",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "id",
+        "name",
+        "description",
+        "user",
+        "agent_id",
+        "metadata",
+        "is_default"
+      ]
+    },
+    {
+      "name": "MemoryCollectionItem",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "collection",
+        "memory",
+        "added_at",
+        "order",
+        "metadata"
+      ]
+    },
+    {
+      "name": "ConversationMemory",
+      "methods": [
+        "__str__",
+        "add_message",
+        "update_summary",
+        "update_context",
+        "get_recent_messages",
+        "is_expired"
+      ],
+      "variables": [
+        "id",
+        "conversation_id",
+        "user",
+        "agent_id",
+        "summary",
+        "context",
+        "messages",
+        "metadata",
+        "last_updated",
+        "expiry_date"
+      ]
+    },
+    {
+      "name": "KnowledgeBase",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "id",
+        "name",
+        "description",
+        "user",
+        "is_public",
+        "metadata",
+        "vector_store_id",
+        "embedding_model",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "KnowledgeItem",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ITEM_TYPES",
+        "id",
+        "knowledge_base",
+        "title",
+        "content",
+        "item_type",
+        "source_url",
+        "metadata",
+        "embedding",
+        "embedding_model",
+        "vector_id",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "MemoryIndex",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "INDEX_TYPES",
+        "id",
+        "name",
+        "description",
+        "index_type",
+        "user",
+        "agent_id",
+        "config",
+        "metadata",
+        "external_id",
+        "created_at",
+        "updated_at",
+        "last_optimized"
+      ]
+    },
+    {
+      "name": "MemoryQuery",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "QUERY_TYPES",
+        "id",
+        "query_text",
+        "query_type",
+        "user",
+        "agent_id",
+        "index",
+        "parameters",
+        "results",
+        "execution_time_ms",
+        "timestamp",
+        "conversation_id",
+        "metadata"
+      ]
+    },
+    {
+      "name": "MemoryStatistics",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "id",
+        "user",
+        "agent_id",
+        "date",
+        "memory_count",
+        "query_count",
+        "avg_query_time_ms",
+        "storage_bytes",
+        "conversation_count",
+        "knowledge_item_count",
+        "statistics"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "abstract"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "access",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_content",
+      "parameters": [
+        "self",
+        "content"
+      ]
+    },
+    {
+      "name": "is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "add_message",
+      "parameters": [
+        "self",
+        "role",
+        "content",
+        "metadata"
+      ]
+    },
+    {
+      "name": "update_summary",
+      "parameters": [
+        "self",
+        "summary"
+      ]
+    },
+    {
+      "name": "update_context",
+      "parameters": [
+        "self",
+        "context"
+      ]
+    },
+    {
+      "name": "get_recent_messages",
+      "parameters": [
+        "self",
+        "limit"
+      ]
+    },
+    {
+      "name": "is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

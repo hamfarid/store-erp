@@ -1,0 +1,251 @@
+{
+  "module": "business_modules.production.services",
+  "imports": [
+    "business_modules.inventory.models",
+    "business_modules.inventory.services",
+    "django.contrib.auth.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_bom",
+      "parameters": [
+        "name",
+        "product_to_produce_id",
+        "quantity",
+        "unit_of_measure_id",
+        "is_active",
+        "notes",
+        "components_data",
+        "created_by"
+      ]
+    },
+    {
+      "name": "get_bom_by_id",
+      "parameters": [
+        "bom_id"
+      ]
+    },
+    {
+      "name": "get_all_boms",
+      "parameters": [
+        "is_active"
+      ]
+    },
+    {
+      "name": "update_bom",
+      "parameters": [
+        "bom_id",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "delete_bom",
+      "parameters": [
+        "bom_id"
+      ]
+    },
+    {
+      "name": "create_work_center",
+      "parameters": []
+    },
+    {
+      "name": "get_work_center_by_id",
+      "parameters": [
+        "wc_id"
+      ]
+    },
+    {
+      "name": "get_all_work_centers",
+      "parameters": []
+    },
+    {
+      "name": "update_work_center",
+      "parameters": [
+        "wc_id"
+      ]
+    },
+    {
+      "name": "delete_work_center",
+      "parameters": [
+        "wc_id"
+      ]
+    },
+    {
+      "name": "create_routing",
+      "parameters": [
+        "name",
+        "bom_id",
+        "notes",
+        "operations_data"
+      ]
+    },
+    {
+      "name": "get_routing_by_id",
+      "parameters": [
+        "routing_id"
+      ]
+    },
+    {
+      "name": "get_all_routings",
+      "parameters": []
+    },
+    {
+      "name": "update_routing",
+      "parameters": [
+        "routing_id"
+      ]
+    },
+    {
+      "name": "delete_routing",
+      "parameters": [
+        "routing_id"
+      ]
+    },
+    {
+      "name": "create_manufacturing_order",
+      "parameters": []
+    },
+    {
+      "name": "get_mo_by_id",
+      "parameters": [
+        "mo_id"
+      ]
+    },
+    {
+      "name": "get_all_mos",
+      "parameters": [
+        "status"
+      ]
+    },
+    {
+      "name": "update_mo",
+      "parameters": [
+        "mo_id"
+      ]
+    },
+    {
+      "name": "create_work_orders_for_mo",
+      "parameters": [
+        "mo"
+      ]
+    },
+    {
+      "name": "confirm_manufacturing_order",
+      "parameters": [
+        "mo_id",
+        "user"
+      ]
+    },
+    {
+      "name": "plan_manufacturing_order",
+      "parameters": [
+        "mo_id"
+      ]
+    },
+    {
+      "name": "start_manufacturing_order",
+      "parameters": [
+        "mo_id"
+      ]
+    },
+    {
+      "name": "complete_manufacturing_order",
+      "parameters": [
+        "mo_id",
+        "quantity_produced"
+      ]
+    },
+    {
+      "name": "cancel_manufacturing_order",
+      "parameters": [
+        "mo_id",
+        "reason"
+      ]
+    },
+    {
+      "name": "get_wo_by_id",
+      "parameters": [
+        "wo_id"
+      ]
+    },
+    {
+      "name": "update_wo",
+      "parameters": [
+        "wo_id"
+      ]
+    },
+    {
+      "name": "start_work_order",
+      "parameters": [
+        "wo_id",
+        "user"
+      ]
+    },
+    {
+      "name": "pause_work_order",
+      "parameters": [
+        "wo_id",
+        "reason",
+        "user"
+      ]
+    },
+    {
+      "name": "complete_work_order",
+      "parameters": [
+        "wo_id",
+        "quantity_produced",
+        "quantity_scrapped",
+        "user"
+      ]
+    },
+    {
+      "name": "find_next_work_order",
+      "parameters": [
+        "current_wo"
+      ]
+    },
+    {
+      "name": "create_production_log",
+      "parameters": []
+    },
+    {
+      "name": "get_logs_for_mo",
+      "parameters": [
+        "mo_id"
+      ]
+    },
+    {
+      "name": "get_logs_for_wo",
+      "parameters": [
+        "wo_id"
+      ]
+    },
+    {
+      "name": "log_material_consumption",
+      "parameters": [
+        "wo_id",
+        "product_id",
+        "quantity",
+        "unit_of_measure_id",
+        "user"
+      ]
+    },
+    {
+      "name": "log_quality_check",
+      "parameters": [
+        "wo_id",
+        "description",
+        "product_id",
+        "quantity",
+        "unit_of_measure_id",
+        "user"
+      ]
+    }
+  ],
+  "variables": []
+}

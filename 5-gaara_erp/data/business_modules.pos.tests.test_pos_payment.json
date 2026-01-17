@@ -1,0 +1,110 @@
+{
+  "module": "business_modules.pos.tests.test_pos_payment",
+  "imports": [
+    "decimal",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "models.pos_config",
+    "models.pos_order",
+    "models.pos_payment",
+    "models.pos_session",
+    "services_modules.accounting.models",
+    "services_modules.core.models",
+    "services_modules.inventory.models"
+  ],
+  "classes": [
+    {
+      "name": "POSPaymentModelTest",
+      "methods": [
+        "setUp",
+        "test_create_payment",
+        "test_validate_payment_amount",
+        "test_payment_workflow",
+        "test_payment_methods",
+        "test_get_payment_journal_entry",
+        "test_validate_payment_method",
+        "test_total_payments",
+        "test_get_payment_by_method"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_payment",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_payment_amount",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_payment_workflow",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_payment_methods",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_payment_journal_entry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_payment_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_total_payments",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_payment_by_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_journal_entry",
+      "parameters": [
+        "self_"
+      ]
+    },
+    {
+      "name": "mock_get_total_payments",
+      "parameters": [
+        "cls",
+        "order"
+      ]
+    },
+    {
+      "name": "mock_get_payments_by_method",
+      "parameters": [
+        "cls",
+        "order"
+      ]
+    }
+  ],
+  "variables": []
+}

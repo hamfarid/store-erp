@@ -1,0 +1,116 @@
+{
+  "module": "ai_modules.models.enhanced_ai_models",
+  "imports": [
+    "additional_models",
+    "datetime",
+    "detection_models",
+    "pydantic",
+    "sys",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "EnhancedDiagnosisRequest",
+      "methods": [],
+      "variables": [
+        "image_path",
+        "crop_type",
+        "user_id",
+        "request_id"
+      ]
+    },
+    {
+      "name": "EnhancedDiagnosisRequest",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DiseaseInfo",
+      "methods": [],
+      "variables": [
+        "name",
+        "scientific_name",
+        "description",
+        "symptoms",
+        "treatment_recommendations",
+        "prevention_tips",
+        "severity_level",
+        "affected_parts"
+      ]
+    },
+    {
+      "name": "DiseaseInfo",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "EnhancedDiagnosisResponse",
+      "methods": [],
+      "variables": [
+        "request_id",
+        "diagnosis_id",
+        "image_path",
+        "timestamp",
+        "detected_diseases",
+        "confidence_score",
+        "processing_time_ms",
+        "model_version",
+        "additional_notes"
+      ]
+    },
+    {
+      "name": "EnhancedDiagnosisResponse",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_enhanced_models",
+      "parameters": []
+    },
+    {
+      "name": "get_enhanced_model",
+      "parameters": [
+        "name"
+      ]
+    },
+    {
+      "name": "Field",
+      "parameters": [
+        "default"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "image_path",
+        "crop_type",
+        "user_id",
+        "request_id"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "_enhanced_models"
+  ]
+}

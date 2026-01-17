@@ -1,0 +1,9 @@
+{
+  "module": "business_modules.pos.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

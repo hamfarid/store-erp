@@ -1,0 +1,98 @@
+{
+  "module": "integration_modules.ai_analytics.api.usage_analytics_api",
+  "imports": [
+    "datetime",
+    "django.utils",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "services.usage_analytics_service"
+  ],
+  "classes": [
+    {
+      "name": "UsageAnalyticsViewSet",
+      "methods": [
+        "list",
+        "performance_metrics",
+        "generate_report",
+        "reports",
+        "report_details",
+        "delete_report",
+        "log_usage",
+        "record_metric",
+        "dashboard_summary"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "list",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "performance_metrics",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "generate_report",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "reports",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "report_details",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "delete_report",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "log_usage",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "record_metric",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "dashboard_summary",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

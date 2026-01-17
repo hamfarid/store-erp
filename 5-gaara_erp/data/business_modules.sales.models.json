@@ -1,0 +1,531 @@
+{
+  "module": "business_modules.sales.models",
+  "imports": [
+    "business_modules.inventory.models",
+    "core_modules.companies.models",
+    "core_modules.permissions.models",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "services_modules.accounting.models"
+  ],
+  "classes": [
+    {
+      "name": "Customer",
+      "methods": [
+        "__str__",
+        "clean",
+        "get_balance",
+        "check_credit_limit"
+      ],
+      "variables": [
+        "CUSTOMER_TYPES",
+        "name",
+        "customer_type",
+        "company",
+        "branch",
+        "address",
+        "city",
+        "country",
+        "phone",
+        "mobile",
+        "email",
+        "website",
+        "tax_id",
+        "credit_limit",
+        "payment_term",
+        "is_active",
+        "notes"
+      ]
+    },
+    {
+      "name": "PriceList",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "name",
+        "company",
+        "currency",
+        "is_active",
+        "start_date",
+        "end_date",
+        "notes"
+      ]
+    },
+    {
+      "name": "PriceListItem",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "price_list",
+        "product",
+        "price",
+        "min_quantity",
+        "discount_percentage"
+      ]
+    },
+    {
+      "name": "SalesQuotation",
+      "methods": [
+        "__str__",
+        "calculate_total",
+        "check_expiry",
+        "clean"
+      ],
+      "variables": [
+        "STATES",
+        "name",
+        "customer",
+        "company",
+        "branch",
+        "price_list",
+        "quotation_date",
+        "expiry_date",
+        "state",
+        "total_amount",
+        "notes"
+      ]
+    },
+    {
+      "name": "SalesQuotationItem",
+      "methods": [
+        "__str__",
+        "save",
+        "clean"
+      ],
+      "variables": [
+        "quotation",
+        "product",
+        "description",
+        "quantity",
+        "unit_price",
+        "discount_percentage",
+        "tax_rate",
+        "subtotal"
+      ]
+    },
+    {
+      "name": "SalesOrder",
+      "methods": [
+        "__str__",
+        "calculate_total",
+        "confirm_order",
+        "create_invoice",
+        "clean"
+      ],
+      "variables": [
+        "STATES",
+        "name",
+        "customer",
+        "company",
+        "branch",
+        "quotation",
+        "price_list",
+        "order_date",
+        "expected_delivery_date",
+        "state",
+        "total_amount",
+        "notes"
+      ]
+    },
+    {
+      "name": "SalesOrderItem",
+      "methods": [
+        "__str__",
+        "save",
+        "clean"
+      ],
+      "variables": [
+        "order",
+        "product",
+        "description",
+        "quantity",
+        "unit_price",
+        "discount_percentage",
+        "tax_rate",
+        "subtotal"
+      ]
+    },
+    {
+      "name": "SalesInvoice",
+      "methods": [
+        "__str__",
+        "calculate_total",
+        "post_invoice",
+        "register_payment",
+        "clean"
+      ],
+      "variables": [
+        "STATES",
+        "name",
+        "customer",
+        "company",
+        "branch",
+        "sales_order",
+        "invoice_date",
+        "due_date",
+        "state",
+        "total_amount",
+        "amount_paid",
+        "amount_due",
+        "price_list",
+        "notes"
+      ]
+    },
+    {
+      "name": "SalesInvoiceItem",
+      "methods": [
+        "__str__",
+        "save",
+        "clean"
+      ],
+      "variables": [
+        "invoice",
+        "product",
+        "description",
+        "quantity",
+        "unit_price",
+        "discount_percentage",
+        "tax_rate",
+        "subtotal"
+      ]
+    },
+    {
+      "name": "CustomerPayment",
+      "methods": [
+        "__str__",
+        "post_payment",
+        "clean"
+      ],
+      "variables": [
+        "STATES",
+        "name",
+        "customer",
+        "company",
+        "branch",
+        "invoice",
+        "payment_date",
+        "amount",
+        "journal",
+        "state",
+        "notes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_balance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_credit_limit",
+      "parameters": [
+        "self",
+        "amount"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_total",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_expiry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_total",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "confirm_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_invoice",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_total",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "post_invoice",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "register_payment",
+      "parameters": [
+        "self",
+        "payment_amount",
+        "payment_date",
+        "journal"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "post_payment",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

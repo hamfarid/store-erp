@@ -1,0 +1,101 @@
+{
+  "module": "integration_modules.ai_a2a.services.coordinator_service",
+  "imports": [
+    "ai_agents.models",
+    "django.db",
+    "django.utils",
+    "logging",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CoordinatorService",
+      "methods": [
+        "route_message",
+        "_determine_receiver_agent",
+        "_get_or_create_conversation",
+        "handle_agent_failure",
+        "get_agent_interactions",
+        "broadcast_message",
+        "register_agent",
+        "update_agent_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AIAgentDoesNotExist",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "route_message",
+      "parameters": [
+        "sender_agent_id",
+        "content",
+        "message_type",
+        "priority"
+      ]
+    },
+    {
+      "name": "_determine_receiver_agent",
+      "parameters": [
+        "content",
+        "message_type"
+      ]
+    },
+    {
+      "name": "_get_or_create_conversation",
+      "parameters": [
+        "sender_agent",
+        "receiver_agent"
+      ]
+    },
+    {
+      "name": "handle_agent_failure",
+      "parameters": [
+        "agent_id",
+        "error_type",
+        "error_message",
+        "details"
+      ]
+    },
+    {
+      "name": "get_agent_interactions",
+      "parameters": [
+        "agent_id",
+        "limit"
+      ]
+    },
+    {
+      "name": "broadcast_message",
+      "parameters": [
+        "sender_agent_id",
+        "content",
+        "receiver_agent_type",
+        "priority"
+      ]
+    },
+    {
+      "name": "register_agent",
+      "parameters": [
+        "agent_id",
+        "status",
+        "details"
+      ]
+    },
+    {
+      "name": "update_agent_status",
+      "parameters": [
+        "agent_id",
+        "status",
+        "load",
+        "details"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

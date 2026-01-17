@@ -1,0 +1,162 @@
+{
+  "module": "core_modules.tests.test_models",
+  "imports": [
+    "companies.models",
+    "core.models",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "organization.models",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "BaseModelTest",
+      "methods": [
+        "setUp",
+        "test_base_model_creation",
+        "test_base_model_update",
+        "test_base_model_soft_delete"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BaseModelWithCompanyTest",
+      "methods": [
+        "setUp",
+        "test_base_model_with_company_creation",
+        "test_base_model_with_company_validation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CompanyModelTest",
+      "methods": [
+        "setUp",
+        "test_company_creation",
+        "test_company_with_branches"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BranchModelTest",
+      "methods": [
+        "setUp",
+        "test_branch_creation",
+        "test_branch_with_departments"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DepartmentModelTest",
+      "methods": [
+        "setUp",
+        "test_department_creation",
+        "test_department_company_validation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_base_model_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_base_model_update",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_base_model_soft_delete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_base_model_with_company_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_base_model_with_company_validation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_with_branches",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_branch_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_branch_with_departments",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_company_validation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

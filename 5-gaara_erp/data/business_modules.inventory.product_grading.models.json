@@ -1,0 +1,360 @@
+{
+  "module": "business_modules.inventory.product_grading.models",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "GradeCategory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "rank",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "SizeCategory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "rank",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "MeasurementUnit",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "symbol",
+        "description",
+        "is_active",
+        "TYPE_LENGTH",
+        "TYPE_WEIGHT",
+        "TYPE_VOLUME",
+        "TYPE_COUNT",
+        "TYPE_PERCENTAGE",
+        "TYPE_OTHER",
+        "UNIT_TYPE_CHOICES",
+        "unit_type",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "GradingCriteria",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "TYPE_QUANTITATIVE",
+        "TYPE_QUALITATIVE",
+        "CRITERIA_TYPE_CHOICES",
+        "criteria_type",
+        "measurement_unit",
+        "IMPORTANCE_CRITICAL",
+        "IMPORTANCE_MAJOR",
+        "IMPORTANCE_MINOR",
+        "IMPORTANCE_CHOICES",
+        "importance",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "ProductSizeGrade",
+      "methods": [
+        "__str__",
+        "clean",
+        "save"
+      ],
+      "variables": [
+        "product",
+        "grade_category",
+        "size_category",
+        "size_measurement_unit",
+        "min_size_value",
+        "max_size_value",
+        "reference_price",
+        "MARKET_LOCAL",
+        "MARKET_EXPORT",
+        "MARKET_BOTH",
+        "MARKET_CHOICES",
+        "target_market",
+        "description",
+        "notes",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by",
+        "grading_criteria"
+      ]
+    },
+    {
+      "name": "ProductGradingCriteria",
+      "methods": [
+        "__str__",
+        "clean",
+        "save"
+      ],
+      "variables": [
+        "product_size_grade",
+        "criteria",
+        "min_value",
+        "max_value",
+        "QUALITATIVE_EXCELLENT",
+        "QUALITATIVE_GOOD",
+        "QUALITATIVE_ACCEPTABLE",
+        "QUALITATIVE_POOR",
+        "QUALITATIVE_UNACCEPTABLE",
+        "QUALITATIVE_CHOICES",
+        "qualitative_value",
+        "value_description",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ProductGradingResult",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "batch",
+        "product_size_grade",
+        "quantity",
+        "quantity_unit",
+        "STATUS_DRAFT",
+        "STATUS_CONFIRMED",
+        "STATUS_CANCELLED",
+        "STATUS_CHOICES",
+        "status",
+        "notes",
+        "grading_date",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "GradingCriteriaResult",
+      "methods": [
+        "__str__",
+        "clean",
+        "save"
+      ],
+      "variables": [
+        "grading_result",
+        "criteria",
+        "measured_value",
+        "measured_qualitative_value",
+        "is_compliant",
+        "non_compliance_notes",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "ProductionBatch"
+  ]
+}

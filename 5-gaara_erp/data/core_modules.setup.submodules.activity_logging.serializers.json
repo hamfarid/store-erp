@@ -1,0 +1,115 @@
+{
+  "module": "core_modules.setup.submodules.activity_logging.serializers",
+  "imports": [
+    "django.contrib.auth",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ActivityLogSerializer",
+      "methods": [],
+      "variables": [
+        "user",
+        "action_type_display"
+      ]
+    },
+    {
+      "name": "ActivityLogCreateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ErrorLogSerializer",
+      "methods": [],
+      "variables": [
+        "user",
+        "error_type_display"
+      ]
+    },
+    {
+      "name": "ErrorLogCreateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ActivityLogSettingSerializer",
+      "methods": [],
+      "variables": [
+        "created_by",
+        "updated_by",
+        "log_level_display"
+      ]
+    },
+    {
+      "name": "ActivityLogSettingUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": [
+    "User"
+  ]
+}

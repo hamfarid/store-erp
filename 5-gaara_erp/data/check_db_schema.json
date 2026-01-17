@@ -1,0 +1,23 @@
+{
+  "module": "check_db_schema",
+  "imports": [
+    "django",
+    "django.db",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "check_table_schema",
+      "parameters": [
+        "table_name"
+      ]
+    },
+    {
+      "name": "main",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

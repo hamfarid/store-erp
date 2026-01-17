@@ -1,0 +1,110 @@
+{
+  "module": "integration_modules.ai.tests.test_integration",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models",
+    "services.activity_logger",
+    "services.config_manager",
+    "services.coordinator",
+    "services.resource_manager"
+  ],
+  "classes": [
+    {
+      "name": "AIServicesIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_coordinator_with_resource_manager",
+        "test_coordinator_with_config_manager",
+        "test_coordinator_with_activity_logger",
+        "test_resource_manager_with_activity_logger",
+        "test_config_manager_with_activity_logger"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AIExternalModulesIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_integration_with_ai_monitoring",
+        "test_integration_with_ai_services",
+        "test_integration_with_memory_ai",
+        "test_integration_with_ai_agents"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_coordinator_with_resource_manager",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_coordinator_with_config_manager",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_coordinator_with_activity_logger",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_resource_manager_with_activity_logger",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_config_manager_with_activity_logger",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_ai_monitoring",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_ai_services",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_memory_ai",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_ai_agents",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

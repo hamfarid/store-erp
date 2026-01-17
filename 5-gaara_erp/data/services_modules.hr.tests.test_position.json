@@ -1,0 +1,50 @@
+{
+  "module": "services_modules.hr.tests.test_position",
+  "imports": [
+    "django.db",
+    "django.test",
+    "models.department",
+    "models.job_grade",
+    "models.position",
+    "services_modules.core.models.company"
+  ],
+  "classes": [
+    {
+      "name": "PositionModelTest",
+      "methods": [
+        "setUp",
+        "test_create_position",
+        "test_unique_title_per_department",
+        "test_reporting_hierarchy"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_position",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_title_per_department",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reporting_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,59 @@
+{
+  "module": "business_modules.purchasing.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "SupplierAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "PurchaseInvoiceAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy"
+      ]
+    },
+    {
+      "name": "PurchaseInvoiceItemAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "PurchaseOrderAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy"
+      ]
+    },
+    {
+      "name": "PurchaseReturnAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

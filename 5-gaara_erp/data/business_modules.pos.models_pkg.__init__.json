@@ -1,0 +1,11 @@
+{
+  "module": "business_modules.pos.models_pkg.__init__",
+  "imports": [
+    "_consolidated"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "module": "business_modules.rent.tests.test_property",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.property",
+    "services_modules.accounting.models",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "PropertyModelTest",
+      "methods": [
+        "setUp",
+        "test_create_property",
+        "test_unique_code_per_company",
+        "test_property_features",
+        "test_property_status",
+        "test_deactivate_property",
+        "test_property_images",
+        "test_get_annual_rent",
+        "test_get_roi",
+        "test_get_current_contract"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PropertyTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_property_type",
+        "test_unique_code_per_company",
+        "test_deactivate_property_type"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PropertyFeatureModelTest",
+      "methods": [
+        "setUp",
+        "test_create_property_feature",
+        "test_unique_code_per_company",
+        "test_deactivate_property_feature"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PropertyImageModelTest",
+      "methods": [
+        "setUp",
+        "test_create_property_image",
+        "test_main_image_constraint",
+        "test_deactivate_property_image"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_property",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_property_features",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_property_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_property",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_property_images",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_annual_rent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_roi",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_current_contract",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_property_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_property_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_property_feature",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_property_feature",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_property_image",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_main_image_constraint",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_property_image",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_roi",
+      "parameters": [
+        "self_"
+      ]
+    },
+    {
+      "name": "mock_get_current_contract",
+      "parameters": [
+        "self_"
+      ]
+    }
+  ],
+  "variables": []
+}

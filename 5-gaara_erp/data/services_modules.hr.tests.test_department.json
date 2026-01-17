@@ -1,0 +1,62 @@
+{
+  "module": "services_modules.hr.tests.test_department",
+  "imports": [
+    "core_modules.companies.models",
+    "django.db",
+    "django.test",
+    "models.department"
+  ],
+  "classes": [
+    {
+      "name": "DepartmentModelTest",
+      "methods": [
+        "setUp",
+        "test_create_department",
+        "test_unique_name_per_company",
+        "test_department_hierarchy",
+        "test_get_all_children",
+        "test_get_hierarchy_level"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_department",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_name_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_all_children",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_hierarchy_level",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

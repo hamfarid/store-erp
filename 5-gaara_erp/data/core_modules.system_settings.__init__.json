@@ -1,0 +1,9 @@
+{
+  "module": "core_modules.system_settings.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "default_app_config"
+  ]
+}

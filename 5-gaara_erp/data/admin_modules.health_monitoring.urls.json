@@ -1,0 +1,12 @@
+{
+  "module": "admin_modules.health_monitoring.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns",
+    "app_name"
+  ]
+}

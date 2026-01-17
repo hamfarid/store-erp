@@ -1,0 +1,135 @@
+{
+  "module": "business_modules.sales.models.sales_team",
+  "imports": [
+    "core_modules.companies.models",
+    "decimal",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SalesTeam",
+      "methods": [
+        "__str__",
+        "get_all_members",
+        "get_current_target",
+        "get_current_achievement"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "leader",
+        "members",
+        "is_active",
+        "description"
+      ]
+    },
+    {
+      "name": "SalesTarget",
+      "methods": [
+        "__str__",
+        "clean",
+        "_import_sales_invoice_model",
+        "get_achievement"
+      ],
+      "variables": [
+        "name",
+        "company",
+        "team",
+        "user",
+        "start_date",
+        "end_date",
+        "target_type",
+        "target_amount",
+        "description"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "TargetType",
+      "methods": [],
+      "variables": [
+        "REVENUE",
+        "QUANTITY"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_members",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_current_target",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_current_achievement",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_import_sales_invoice_model",
+      "parameters": []
+    },
+    {
+      "name": "get_achievement",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

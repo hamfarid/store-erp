@@ -1,0 +1,163 @@
+{
+  "module": "services_modules.quality_control.views",
+  "imports": [
+    "datetime",
+    "django.contrib",
+    "django.contrib.auth.decorators",
+    "django.core.paginator",
+    "django.db.models",
+    "django.http",
+    "django.shortcuts",
+    "django.urls",
+    "django.utils",
+    "django.utils.decorators",
+    "django.views",
+    "django.views.generic",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "QualityTemplateListView",
+      "methods": [
+        "get_queryset",
+        "get_context_data"
+      ],
+      "variables": [
+        "model",
+        "template_name",
+        "context_object_name",
+        "paginate_by"
+      ]
+    },
+    {
+      "name": "QualityTemplateDetailView",
+      "methods": [
+        "get_context_data"
+      ],
+      "variables": [
+        "model",
+        "template_name",
+        "context_object_name"
+      ]
+    },
+    {
+      "name": "QualityCheckListView",
+      "methods": [
+        "get_queryset",
+        "get_context_data"
+      ],
+      "variables": [
+        "model",
+        "template_name",
+        "context_object_name",
+        "paginate_by"
+      ]
+    },
+    {
+      "name": "QualityCheckDetailView",
+      "methods": [
+        "get_context_data"
+      ],
+      "variables": [
+        "model",
+        "template_name",
+        "context_object_name"
+      ]
+    },
+    {
+      "name": "QualityResultListView",
+      "methods": [
+        "get_queryset",
+        "get_context_data"
+      ],
+      "variables": [
+        "model",
+        "template_name",
+        "context_object_name",
+        "paginate_by"
+      ]
+    },
+    {
+      "name": "QualityCertificateListView",
+      "methods": [
+        "get_queryset",
+        "get_context_data"
+      ],
+      "variables": [
+        "model",
+        "template_name",
+        "context_object_name",
+        "paginate_by"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "quality_dashboard",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_context_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_context_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_context_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_context_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_context_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_context_data",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

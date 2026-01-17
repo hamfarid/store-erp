@@ -1,0 +1,136 @@
+{
+  "module": "integration_modules.ai_ui.api.chat_interface_api",
+  "imports": [
+    "django.db",
+    "django.shortcuts",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "services.chat_interface_service"
+  ],
+  "classes": [
+    {
+      "name": "ChatInterfaceViewSet",
+      "methods": [
+        "create",
+        "retrieve",
+        "list",
+        "update",
+        "default"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "ChatSessionViewSet",
+      "methods": [
+        "create",
+        "retrieve",
+        "list",
+        "add_message",
+        "messages",
+        "close",
+        "destroy"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "retrieve",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "list",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "default",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "retrieve",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "list",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "add_message",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "messages",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "close",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "destroy",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

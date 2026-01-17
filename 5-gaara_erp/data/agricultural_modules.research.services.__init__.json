@@ -1,0 +1,74 @@
+{
+  "module": "agricultural_modules.research.services.__init__",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.utils",
+    "models",
+    "research_experiment_service",
+    "research_patent_service",
+    "research_project_service",
+    "research_publication_service",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "_coerce_user",
+      "parameters": [
+        "user_or_id"
+      ]
+    },
+    {
+      "name": "create_research_project",
+      "parameters": []
+    },
+    {
+      "name": "update_research_project",
+      "parameters": []
+    },
+    {
+      "name": "add_team_member_to_project",
+      "parameters": []
+    },
+    {
+      "name": "remove_team_member_from_project",
+      "parameters": []
+    },
+    {
+      "name": "add_objective_to_project",
+      "parameters": []
+    },
+    {
+      "name": "update_project_status",
+      "parameters": []
+    },
+    {
+      "name": "calculate_project_progress",
+      "parameters": [
+        "project"
+      ]
+    },
+    {
+      "name": "generate_research_report",
+      "parameters": [
+        "project"
+      ]
+    },
+    {
+      "name": "get_project_resources_utilization",
+      "parameters": [
+        "project"
+      ]
+    },
+    {
+      "name": "get_project_timeline",
+      "parameters": [
+        "project"
+      ]
+    }
+  ],
+  "variables": [
+    "__all__"
+  ]
+}

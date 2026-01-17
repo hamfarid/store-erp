@@ -1,0 +1,99 @@
+{
+  "module": "integration_modules.ai_analytics.services.usage_analytics_service",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "UsageAnalyticsService",
+      "methods": [
+        "log_ai_usage",
+        "record_performance_metric",
+        "get_usage_statistics",
+        "get_performance_metrics",
+        "generate_usage_report",
+        "get_usage_report",
+        "get_recent_reports",
+        "delete_usage_report"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "log_ai_usage",
+      "parameters": [
+        "user_id",
+        "module_name",
+        "operation_type",
+        "request_data",
+        "response_data",
+        "execution_time",
+        "status_code",
+        "error_message",
+        "metadata"
+      ]
+    },
+    {
+      "name": "record_performance_metric",
+      "parameters": [
+        "module_name",
+        "metric_name",
+        "metric_value",
+        "context"
+      ]
+    },
+    {
+      "name": "get_usage_statistics",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "module_name",
+        "operation_type",
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_performance_metrics",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "module_name",
+        "metric_name"
+      ]
+    },
+    {
+      "name": "generate_usage_report",
+      "parameters": [
+        "report_name",
+        "start_date",
+        "end_date",
+        "report_type",
+        "filters"
+      ]
+    },
+    {
+      "name": "get_usage_report",
+      "parameters": [
+        "report_id"
+      ]
+    },
+    {
+      "name": "get_recent_reports",
+      "parameters": [
+        "limit"
+      ]
+    },
+    {
+      "name": "delete_usage_report",
+      "parameters": [
+        "report_id"
+      ]
+    }
+  ],
+  "variables": []
+}

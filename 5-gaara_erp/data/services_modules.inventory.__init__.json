@@ -1,0 +1,12 @@
+{
+  "module": "services_modules.inventory.__init__",
+  "imports": [
+    "importlib",
+    "types"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

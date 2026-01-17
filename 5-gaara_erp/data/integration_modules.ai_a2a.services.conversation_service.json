@@ -1,0 +1,122 @@
+{
+  "module": "integration_modules.ai_a2a.services.conversation_service",
+  "imports": [
+    "ai_agents.models",
+    "django.db",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ConversationService",
+      "methods": [
+        "create_conversation",
+        "get_conversation",
+        "get_active_conversations",
+        "close_conversation",
+        "reopen_conversation",
+        "get_conversation_messages",
+        "get_conversation_statistics"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MessageService",
+      "methods": [
+        "send_message",
+        "get_message",
+        "update_message_status",
+        "get_pending_messages_for_agent",
+        "log_message_error"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_conversation",
+      "parameters": [
+        "title",
+        "description",
+        "created_by"
+      ]
+    },
+    {
+      "name": "get_conversation",
+      "parameters": [
+        "conversation_id"
+      ]
+    },
+    {
+      "name": "get_active_conversations",
+      "parameters": []
+    },
+    {
+      "name": "close_conversation",
+      "parameters": [
+        "conversation_id"
+      ]
+    },
+    {
+      "name": "reopen_conversation",
+      "parameters": [
+        "conversation_id"
+      ]
+    },
+    {
+      "name": "get_conversation_messages",
+      "parameters": [
+        "conversation_id",
+        "limit",
+        "offset"
+      ]
+    },
+    {
+      "name": "get_conversation_statistics",
+      "parameters": [
+        "conversation_id"
+      ]
+    },
+    {
+      "name": "send_message",
+      "parameters": [
+        "conversation_id",
+        "sender_agent_id",
+        "receiver_agent_id",
+        "content",
+        "priority"
+      ]
+    },
+    {
+      "name": "get_message",
+      "parameters": [
+        "message_id"
+      ]
+    },
+    {
+      "name": "update_message_status",
+      "parameters": [
+        "message_id",
+        "new_status"
+      ]
+    },
+    {
+      "name": "get_pending_messages_for_agent",
+      "parameters": [
+        "agent_id",
+        "limit"
+      ]
+    },
+    {
+      "name": "log_message_error",
+      "parameters": [
+        "message_id",
+        "error_type",
+        "error_message",
+        "stack_trace",
+        "details"
+      ]
+    }
+  ],
+  "variables": []
+}

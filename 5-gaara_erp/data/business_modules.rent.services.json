@@ -1,0 +1,130 @@
+{
+  "module": "business_modules.rent.services",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "PropertyService",
+      "methods": [
+        "get_available_units"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LeaseService",
+      "methods": [
+        "create_lease_agreement",
+        "terminate_lease"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MaintenanceService",
+      "methods": [
+        "create_maintenance_request",
+        "update_maintenance_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "VehicleService",
+      "methods": [
+        "get_available_vehicles",
+        "create_vehicle_lease",
+        "complete_vehicle_lease"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_journal_entry",
+      "parameters": []
+    },
+    {
+      "name": "get_available_units",
+      "parameters": [
+        "property_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "create_lease_agreement",
+      "parameters": [
+        "property_id",
+        "tenant_id",
+        "start_date",
+        "end_date",
+        "rent_amount",
+        "payment_frequency",
+        "deposit_amount",
+        "terms",
+        "unit_id"
+      ]
+    },
+    {
+      "name": "terminate_lease",
+      "parameters": [
+        "lease_id"
+      ]
+    },
+    {
+      "name": "create_maintenance_request",
+      "parameters": [
+        "property_id",
+        "description",
+        "reported_by",
+        "tenant_reporter_id",
+        "unit_id",
+        "is_unit_specific_cost"
+      ]
+    },
+    {
+      "name": "update_maintenance_status",
+      "parameters": [
+        "request_id",
+        "status",
+        "completed_date",
+        "cost"
+      ]
+    },
+    {
+      "name": "get_available_vehicles",
+      "parameters": [
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "create_vehicle_lease",
+      "parameters": [
+        "vehicle_id",
+        "tenant_id",
+        "start_date",
+        "end_date",
+        "rent_rate",
+        "rate_unit",
+        "pickup_odometer",
+        "pickup_fuel_level",
+        "deposit_amount"
+      ]
+    },
+    {
+      "name": "complete_vehicle_lease",
+      "parameters": [
+        "lease_id",
+        "return_odometer",
+        "return_fuel_level",
+        "additional_charges",
+        "_additional_charges_description"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,271 @@
+{
+  "module": "agricultural_modules.research.views",
+  "imports": [
+    "django.db.models",
+    "django_filters.rest_framework",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers",
+    "services"
+  ],
+  "classes": [
+    {
+      "name": "ResearchProjectViewSet",
+      "methods": [
+        "get_serializer_class",
+        "get_permissions",
+        "perform_create",
+        "perform_update",
+        "add_team_member",
+        "remove_team_member",
+        "add_objective",
+        "update_status",
+        "generate_report",
+        "progress",
+        "timeline",
+        "resources_utilization",
+        "budget_status",
+        "publications_metrics"
+      ],
+      "variables": [
+        "queryset",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    },
+    {
+      "name": "ResearchObjectiveViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ResearchMethodologyViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ResearchTeamMemberViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ResearchResourceViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ResearchTaskViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ResearchResultViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ResearchPublicationViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ResearchCollaborationViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ResearchFundingViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ResearchDatasetViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ResearchAnalysisViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_serializer_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "perform_update",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "add_team_member",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "remove_team_member",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "add_objective",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "update_status",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "generate_report",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "progress",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "timeline",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "resources_utilization",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "budget_status",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "publications_metrics",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

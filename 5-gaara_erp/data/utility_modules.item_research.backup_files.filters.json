@@ -1,0 +1,273 @@
+{
+  "module": "utility_modules.item_research.backup_files.filters",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.contrib.auth",
+    "django.db.models",
+    "django.utils.translation",
+    "django_filters"
+  ],
+  "classes": [
+    {
+      "name": "DateRangeFilter",
+      "methods": [
+        "filter_last_days"
+      ],
+      "variables": [
+        "date_from",
+        "date_to",
+        "last_days"
+      ]
+    },
+    {
+      "name": "ItemResearchFilter",
+      "methods": [
+        "search_filter",
+        "filter_in_stock",
+        "filter_has_alternatives",
+        "filter_has_attachments",
+        "filter_tags"
+      ],
+      "variables": [
+        "search",
+        "item_code",
+        "item_name",
+        "barcode",
+        "sku",
+        "category",
+        "category_name",
+        "subcategory",
+        "brand",
+        "research_status",
+        "research_type",
+        "priority",
+        "price_min",
+        "price_max",
+        "price_range",
+        "cost_min",
+        "cost_max",
+        "margin_min",
+        "supplier",
+        "supplier_name",
+        "manufacturer",
+        "manufacturer_name",
+        "country_of_origin",
+        "quality_score_min",
+        "quality_score_max",
+        "rating_min",
+        "has_certification",
+        "certification_type",
+        "in_stock",
+        "stock_level_min",
+        "lead_time_max",
+        "moq_max",
+        "researcher",
+        "reviewed_by",
+        "department",
+        "is_active",
+        "is_approved",
+        "is_discontinued",
+        "requires_review",
+        "has_alternatives",
+        "has_attachments",
+        "market_demand",
+        "competition_level",
+        "tags",
+        "keywords",
+        "ordering"
+      ]
+    },
+    {
+      "name": "SupplierEvaluationFilter",
+      "methods": [],
+      "variables": [
+        "supplier",
+        "supplier_name",
+        "supplier_code",
+        "country",
+        "overall_rating_min",
+        "quality_rating_min",
+        "delivery_rating_min",
+        "price_rating_min",
+        "service_rating_min",
+        "is_certified",
+        "certification_expiry",
+        "compliance_status",
+        "on_time_delivery_rate_min",
+        "defect_rate_max",
+        "response_time_max",
+        "payment_terms",
+        "credit_limit_min",
+        "discount_rate_min",
+        "status",
+        "is_preferred",
+        "ordering"
+      ]
+    },
+    {
+      "name": "MarketAnalysisFilter",
+      "methods": [],
+      "variables": [
+        "analysis_type",
+        "market_segment",
+        "region",
+        "market_size_min",
+        "growth_rate_min",
+        "market_share_min",
+        "competitor_count_max",
+        "competition_intensity",
+        "status",
+        "is_current",
+        "confidence_level",
+        "ordering"
+      ]
+    },
+    {
+      "name": "PriceHistoryFilter",
+      "methods": [
+        "filter_price_change"
+      ],
+      "variables": [
+        "item",
+        "item_code",
+        "supplier",
+        "price_min",
+        "price_max",
+        "price_change_type",
+        "change_percentage_min",
+        "currency",
+        "price_source",
+        "ordering"
+      ]
+    },
+    {
+      "name": "CompetitorAnalysisFilter",
+      "methods": [],
+      "variables": [
+        "competitor_name",
+        "analysis_category",
+        "market_position",
+        "threat_level",
+        "competitive_advantage"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "abstract"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_dynamic_filter",
+      "parameters": [
+        "model_class",
+        "fields_config"
+      ]
+    },
+    {
+      "name": "filter_last_days",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "search_filter",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_in_stock",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_has_alternatives",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_has_attachments",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_tags",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_price_change",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

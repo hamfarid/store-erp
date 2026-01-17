@@ -1,0 +1,101 @@
+{
+  "module": "services_modules.hr.models.employee",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Employee",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "employee_number",
+        "first_name_ar",
+        "last_name_ar",
+        "first_name_en",
+        "last_name_en",
+        "gender",
+        "date_of_birth",
+        "nationality",
+        "national_id",
+        "marital_status",
+        "photo",
+        "personal_email",
+        "mobile_phone",
+        "work_email",
+        "work_phone",
+        "company_mobile",
+        "address",
+        "hire_date",
+        "termination_date",
+        "branch",
+        "department",
+        "position",
+        "manager",
+        "status",
+        "emergency_contact_name",
+        "emergency_contact_relation",
+        "emergency_contact_phone",
+        "bank_name",
+        "bank_account_number",
+        "bank_iban",
+        "company_car_details",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "GenderChoices",
+      "methods": [],
+      "variables": [
+        "MALE",
+        "FEMALE"
+      ]
+    },
+    {
+      "name": "MaritalStatusChoices",
+      "methods": [],
+      "variables": [
+        "SINGLE",
+        "MARRIED",
+        "DIVORCED",
+        "WIDOWED"
+      ]
+    },
+    {
+      "name": "EmployeeStatusChoices",
+      "methods": [],
+      "variables": [
+        "ACTIVE",
+        "INACTIVE",
+        "SUSPENDED",
+        "TERMINATED",
+        "PENDING_HIRE",
+        "BLACKLISTED",
+        "ON_LEAVE"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

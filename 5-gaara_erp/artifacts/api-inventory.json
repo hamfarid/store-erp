@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2025-11-20T08:10:33.712Z",
+  "api": [
+    {
+      "method": "POST",
+      "url": "/api/auth/login",
+      "status": 200,
+      "ok": true
+    }
+  ]
+}

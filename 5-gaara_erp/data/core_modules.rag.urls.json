@@ -1,0 +1,14 @@
+{
+  "module": "core_modules.rag.urls",
+  "imports": [
+    "__future__",
+    "core_modules.rag.api",
+    "core_modules.rag.api_memory",
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns"
+  ]
+}

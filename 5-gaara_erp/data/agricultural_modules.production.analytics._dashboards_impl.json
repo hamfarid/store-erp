@@ -1,0 +1,147 @@
+{
+  "module": "agricultural_modules.production.analytics._dashboards_impl",
+  "imports": [
+    "__future__",
+    "csv",
+    "io",
+    "json",
+    "pandas",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "DashboardBase",
+      "methods": [
+        "to_json",
+        "to_csv",
+        "to_excel"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductionDashboard",
+      "methods": [
+        "get_dashboard_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "QualityDashboard",
+      "methods": [
+        "get_dashboard_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ExportDashboard",
+      "methods": [
+        "get_dashboard_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "InventoryDashboard",
+      "methods": [
+        "get_dashboard_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProfitabilityDashboard",
+      "methods": [
+        "get_dashboard_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MainDashboard",
+      "methods": [
+        "get_dashboard_data"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "to_json",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "to_csv",
+      "parameters": [
+        "data",
+        "file_path"
+      ]
+    },
+    {
+      "name": "to_excel",
+      "parameters": [
+        "data",
+        "file_path"
+      ]
+    },
+    {
+      "name": "get_dashboard_data",
+      "parameters": [
+        "cls",
+        "start_date",
+        "end_date",
+        "year",
+        "period_type"
+      ]
+    },
+    {
+      "name": "get_dashboard_data",
+      "parameters": [
+        "cls",
+        "start_date",
+        "end_date",
+        "year",
+        "period_type"
+      ]
+    },
+    {
+      "name": "get_dashboard_data",
+      "parameters": [
+        "cls",
+        "start_date",
+        "end_date",
+        "year",
+        "period_type"
+      ]
+    },
+    {
+      "name": "get_dashboard_data",
+      "parameters": [
+        "cls",
+        "start_date",
+        "end_date",
+        "year",
+        "period_type"
+      ]
+    },
+    {
+      "name": "get_dashboard_data",
+      "parameters": [
+        "cls",
+        "start_date",
+        "end_date",
+        "year",
+        "period_type"
+      ]
+    },
+    {
+      "name": "get_dashboard_data",
+      "parameters": [
+        "cls",
+        "start_date",
+        "end_date",
+        "year",
+        "period_type"
+      ]
+    }
+  ],
+  "variables": []
+}

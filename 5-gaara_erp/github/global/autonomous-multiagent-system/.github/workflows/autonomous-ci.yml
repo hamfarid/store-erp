@@ -1,0 +1,228 @@
+name: Autonomous CI/CD
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+    inputs:
+      requirement:
+        description: 'Build requirement'
+        required: true
+        type: string
+      project_name:
+        description: 'Project name'
+        required: true
+        type: string
+
+env:
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  autonomous-review:
+    name: Autonomous Code Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+        working-directory: ${{ github.workspace }}
+      
+      - name: Run autonomous review
+        id: review
+        run: |
+          python augment_interface.py \
+            "Review the changes in this PR and identify issues" \
+            "pr-${{ github.event.pull_request.number }}-review"
+        working-directory: ${{ github.workspace }}
+      
+      - name: Post review comment
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reviewPath = 'output/pr-${{ github.event.pull_request.number }}-review/review.md';
+            
+            if (fs.existsSync(reviewPath)) {
+              const review = fs.readFileSync(reviewPath, 'utf8');
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `## 🤖 Autonomous Review\n\n${review}`
+              });
+            }
+  
+  autonomous-test:
+    name: Generate and Run Tests
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+        working-directory: ${{ github.workspace }}
+      
+      - name: Generate tests
+        id: generate_tests
+        run: |
+          python augment_interface.py \
+            "Generate comprehensive tests for the changes in this PR" \
+            "pr-${{ github.event.pull_request.number }}-tests"
+        working-directory: ${{ github.workspace }}
+      
+      - name: Run generated tests
+        id: run_tests
+        run: |
+          # Find and run test files
+          find output/pr-${{ github.event.pull_request.number }}-tests -name "test_*.py" -exec python {} \;
+        continue-on-error: true
+      
+      - name: Post test results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const testResult = '${{ steps.run_tests.outcome }}';
+            const emoji = testResult === 'success' ? '✅' : '❌';
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## ${emoji} Autonomous Tests\n\nTest execution: **${testResult}**`
+            });
+  
+  autonomous-build:
+    name: Autonomous Build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+        working-directory: ${{ github.workspace }}
+      
+      - name: Run autonomous build
+        id: build
+        run: |
+          python augment_interface.py \
+            "${{ github.event.inputs.requirement }}" \
+            "${{ github.event.inputs.project_name }}"
+        working-directory: ${{ github.workspace }}
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.inputs.project_name }}
+          path: output/${{ github.event.inputs.project_name }}/
+          retention-days: 30
+      
+      - name: Create summary
+        run: |
+          echo "## 🤖 Autonomous Build Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Project:** ${{ github.event.inputs.project_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Requirement:** ${{ github.event.inputs.requirement }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Artifacts uploaded successfully!" >> $GITHUB_STEP_SUMMARY
+  
+  coderabbit-integration:
+    name: CodeRabbit Integration
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Wait for CodeRabbit
+        run: |
+          echo "Waiting for CodeRabbit review..."
+          sleep 30
+      
+      - name: Check CodeRabbit status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const reviews = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            
+            const coderabbitReview = reviews.data.find(r => 
+              r.user.login === 'coderabbitai' || r.user.login === 'coderabbitai[bot]'
+            );
+            
+            if (coderabbitReview) {
+              console.log('CodeRabbit review found:', coderabbitReview.state);
+              
+              if (coderabbitReview.state === 'CHANGES_REQUESTED') {
+                console.log('CodeRabbit requested changes - triggering auto-fix');
+                // Trigger auto-fix via webhook or direct call
+              }
+            } else {
+              console.log('No CodeRabbit review found yet');
+            }
+  
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run security scan
+        uses: github/codeql-action/analyze@v3
+        continue-on-error: true
+      
+      - name: Post security results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '## 🔒 Security Scan\n\nSecurity scan completed. Check the Security tab for details.'
+            });
+

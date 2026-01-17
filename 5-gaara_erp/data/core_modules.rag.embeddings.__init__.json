@@ -1,0 +1,11 @@
+{
+  "module": "core_modules.rag.embeddings.__init__",
+  "imports": [
+    "__future__"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

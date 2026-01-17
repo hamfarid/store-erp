@@ -1,0 +1,49 @@
+{
+  "module": "agricultural_modules.production._purchasing_integration_impl",
+  "imports": [
+    "__future__",
+    "decimal",
+    "django.db",
+    "logging",
+    "purchasing",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "PurchasingIntegrationService",
+      "methods": [
+        "create_purchase_requisitions_for_materials",
+        "link_goods_receipt_to_production",
+        "get_purchase_orders_by_production_order"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_purchase_requisitions_for_materials",
+      "parameters": [
+        "cls",
+        "production_order"
+      ]
+    },
+    {
+      "name": "link_goods_receipt_to_production",
+      "parameters": [
+        "cls",
+        "goods_receipt",
+        "production_order"
+      ]
+    },
+    {
+      "name": "get_purchase_orders_by_production_order",
+      "parameters": [
+        "cls",
+        "production_order_id"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

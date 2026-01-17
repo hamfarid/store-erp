@@ -1,0 +1,190 @@
+{
+  "module": "admin_modules.notifications.models",
+  "imports": [
+    "django.contrib.auth",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "NotificationType",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "template",
+        "icon",
+        "color",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "NotificationChannel",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserNotificationPreference",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "notification_type",
+        "channel",
+        "is_enabled",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Notification",
+      "methods": [
+        "__str__",
+        "mark_as_read"
+      ],
+      "variables": [
+        "notification_type",
+        "recipient",
+        "sender",
+        "title",
+        "message",
+        "data",
+        "is_read",
+        "read_at",
+        "content_type",
+        "object_id",
+        "content_object",
+        "url",
+        "created_at"
+      ]
+    },
+    {
+      "name": "NotificationDelivery",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "notification",
+        "channel",
+        "status",
+        "delivered_at",
+        "error_message",
+        "retry_count",
+        "external_id",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_read",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

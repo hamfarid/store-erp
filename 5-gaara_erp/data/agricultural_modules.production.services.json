@@ -1,0 +1,437 @@
+{
+  "module": "agricultural_modules.production.services",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ProductionOrderService",
+      "methods": [
+        "create_production_order",
+        "update_production_order",
+        "confirm_production_order",
+        "start_production_order",
+        "complete_production_order",
+        "cancel_production_order",
+        "get_production_orders",
+        "get_production_order_by_id",
+        "get_production_order_by_number",
+        "_generate_order_number"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductionOperationService",
+      "methods": [
+        "create_operation",
+        "update_operation",
+        "start_operation",
+        "complete_operation",
+        "get_operations_by_order",
+        "get_operation_by_id"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductionBatchService",
+      "methods": [
+        "create_batch",
+        "update_batch",
+        "get_batches_by_order",
+        "get_batch_by_id",
+        "get_batch_by_number",
+        "get_batch_by_lot",
+        "_generate_batch_number",
+        "_generate_lot_number"
+      ],
+      "variables": []
+    },
+    {
+      "name": "QualityTestService",
+      "methods": [
+        "create_test",
+        "get_tests_by_batch",
+        "get_test_by_id"
+      ],
+      "variables": []
+    },
+    {
+      "name": "WasteSaleService",
+      "methods": [
+        "create_waste_sale",
+        "get_waste_sales_by_order",
+        "get_waste_sale_by_id"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BatchPackagingService",
+      "methods": [
+        "create_batch_packaging",
+        "add_packaging_material",
+        "get_packaging_by_batch",
+        "get_packaging_by_id"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BatchStorageService",
+      "methods": [
+        "create_batch_storage",
+        "get_storage_by_batch",
+        "get_storage_by_id"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductionReportService",
+      "methods": [
+        "get_production_summary",
+        "get_batch_summary_by_grade",
+        "get_waste_sales_summary",
+        "get_operation_efficiency"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_production_order",
+      "parameters": [
+        "product",
+        "product_type",
+        "source",
+        "input_quantity",
+        "input_unit",
+        "expected_output_quantity",
+        "output_unit",
+        "planned_start_date",
+        "planned_end_date",
+        "user"
+      ]
+    },
+    {
+      "name": "update_production_order",
+      "parameters": [
+        "order_id",
+        "user"
+      ]
+    },
+    {
+      "name": "confirm_production_order",
+      "parameters": [
+        "order_id",
+        "user"
+      ]
+    },
+    {
+      "name": "start_production_order",
+      "parameters": [
+        "order_id",
+        "actual_start_date",
+        "user"
+      ]
+    },
+    {
+      "name": "complete_production_order",
+      "parameters": [
+        "order_id",
+        "actual_end_date",
+        "actual_output_quantity",
+        "user"
+      ]
+    },
+    {
+      "name": "cancel_production_order",
+      "parameters": [
+        "order_id",
+        "reason",
+        "user"
+      ]
+    },
+    {
+      "name": "get_production_orders",
+      "parameters": [
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "get_production_order_by_id",
+      "parameters": [
+        "order_id"
+      ]
+    },
+    {
+      "name": "get_production_order_by_number",
+      "parameters": [
+        "order_number"
+      ]
+    },
+    {
+      "name": "_generate_order_number",
+      "parameters": [
+        "product_type"
+      ]
+    },
+    {
+      "name": "create_operation",
+      "parameters": [
+        "production_order",
+        "operation_type",
+        "sequence",
+        "input_quantity",
+        "planned_start_date",
+        "planned_end_date",
+        "responsible",
+        "user"
+      ]
+    },
+    {
+      "name": "update_operation",
+      "parameters": [
+        "operation_id",
+        "user"
+      ]
+    },
+    {
+      "name": "start_operation",
+      "parameters": [
+        "operation_id",
+        "actual_start_date",
+        "user"
+      ]
+    },
+    {
+      "name": "complete_operation",
+      "parameters": [
+        "operation_id",
+        "actual_end_date",
+        "output_quantity",
+        "waste_quantity",
+        "user"
+      ]
+    },
+    {
+      "name": "get_operations_by_order",
+      "parameters": [
+        "order_id",
+        "order_by"
+      ]
+    },
+    {
+      "name": "get_operation_by_id",
+      "parameters": [
+        "operation_id"
+      ]
+    },
+    {
+      "name": "create_batch",
+      "parameters": [
+        "production_order",
+        "product",
+        "grade",
+        "quantity",
+        "unit",
+        "unit_price",
+        "production_date",
+        "user"
+      ]
+    },
+    {
+      "name": "update_batch",
+      "parameters": [
+        "batch_id",
+        "user"
+      ]
+    },
+    {
+      "name": "get_batches_by_order",
+      "parameters": [
+        "order_id",
+        "order_by"
+      ]
+    },
+    {
+      "name": "get_batch_by_id",
+      "parameters": [
+        "batch_id"
+      ]
+    },
+    {
+      "name": "get_batch_by_number",
+      "parameters": [
+        "batch_number"
+      ]
+    },
+    {
+      "name": "get_batch_by_lot",
+      "parameters": [
+        "lot_number"
+      ]
+    },
+    {
+      "name": "_generate_batch_number",
+      "parameters": [
+        "production_order",
+        "grade"
+      ]
+    },
+    {
+      "name": "_generate_lot_number",
+      "parameters": [
+        "production_order",
+        "grade",
+        "size"
+      ]
+    },
+    {
+      "name": "create_test",
+      "parameters": [
+        "production_batch",
+        "test_type",
+        "result",
+        "passed",
+        "tester",
+        "user",
+        "notes"
+      ]
+    },
+    {
+      "name": "get_tests_by_batch",
+      "parameters": [
+        "batch_id",
+        "order_by"
+      ]
+    },
+    {
+      "name": "get_test_by_id",
+      "parameters": [
+        "test_id"
+      ]
+    },
+    {
+      "name": "create_waste_sale",
+      "parameters": [
+        "production_order",
+        "waste_type",
+        "quantity",
+        "unit",
+        "unit_price",
+        "sale_date",
+        "user"
+      ]
+    },
+    {
+      "name": "get_waste_sales_by_order",
+      "parameters": [
+        "order_id",
+        "order_by"
+      ]
+    },
+    {
+      "name": "get_waste_sale_by_id",
+      "parameters": [
+        "waste_sale_id"
+      ]
+    },
+    {
+      "name": "create_batch_packaging",
+      "parameters": [
+        "production_batch",
+        "packaging_type",
+        "quantity",
+        "packages_count",
+        "packaging_date",
+        "user",
+        "notes"
+      ]
+    },
+    {
+      "name": "add_packaging_material",
+      "parameters": [
+        "batch_packaging",
+        "packaging_material",
+        "quantity",
+        "user"
+      ]
+    },
+    {
+      "name": "get_packaging_by_batch",
+      "parameters": [
+        "batch_id",
+        "order_by"
+      ]
+    },
+    {
+      "name": "get_packaging_by_id",
+      "parameters": [
+        "packaging_id"
+      ]
+    },
+    {
+      "name": "create_batch_storage",
+      "parameters": [
+        "production_batch",
+        "warehouse",
+        "location",
+        "storage_condition",
+        "quantity",
+        "unit",
+        "storage_date",
+        "user"
+      ]
+    },
+    {
+      "name": "get_storage_by_batch",
+      "parameters": [
+        "batch_id",
+        "order_by"
+      ]
+    },
+    {
+      "name": "get_storage_by_id",
+      "parameters": [
+        "storage_id"
+      ]
+    },
+    {
+      "name": "get_production_summary",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "product_type"
+      ]
+    },
+    {
+      "name": "get_batch_summary_by_grade",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "product_type"
+      ]
+    },
+    {
+      "name": "get_waste_sales_summary",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "product_type"
+      ]
+    },
+    {
+      "name": "get_operation_efficiency",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "operation_type"
+      ]
+    }
+  ],
+  "variables": []
+}

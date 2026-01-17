@@ -1,0 +1,9 @@
+{
+  "module": "dashboard.tests",
+  "imports": [
+    "django.test"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

@@ -1,0 +1,72 @@
+{
+  "module": "integration_modules.ai.admin",
+  "imports": [
+    "django.contrib",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "LearningSourceAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "ReferenceFileAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "KeywordAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "KeywordFileAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "ConversationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "MessageAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

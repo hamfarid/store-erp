@@ -1,0 +1,9 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.filters",
+  "imports": [
+    "django_filters"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

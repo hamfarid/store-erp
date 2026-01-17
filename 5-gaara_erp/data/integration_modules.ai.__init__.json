@@ -1,0 +1,9 @@
+{
+  "module": "integration_modules.ai.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "default_app_config"
+  ]
+}

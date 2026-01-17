@@ -1,0 +1,23 @@
+{
+  "module": "business_modules.inventory.models.__init__",
+  "imports": [
+    "inventory_adjustment",
+    "lot",
+    "lot_batch",
+    "product",
+    "product_category",
+    "stock",
+    "stock_location",
+    "stock_move",
+    "store",
+    "uom",
+    "uom_category",
+    "warehouse",
+    "warehouse_location"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

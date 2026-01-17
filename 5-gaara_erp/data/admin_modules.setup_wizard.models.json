@@ -1,0 +1,52 @@
+{
+  "module": "admin_modules.setup_wizard.models",
+  "imports": [
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SetupConfiguration",
+      "methods": [
+        "__str__",
+        "get_config"
+      ],
+      "variables": [
+        "setup_complete",
+        "email_host",
+        "email_port",
+        "email_host_user",
+        "email_host_password",
+        "email_use_tls",
+        "email_use_ssl",
+        "default_from_email",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_config",
+      "parameters": [
+        "cls"
+      ]
+    }
+  ],
+  "variables": []
+}

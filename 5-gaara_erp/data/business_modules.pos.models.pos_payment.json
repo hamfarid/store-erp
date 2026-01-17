@@ -1,0 +1,10 @@
+{
+  "module": "business_modules.pos.models.pos_payment",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "POSPayment",
+    "__all__"
+  ]
+}

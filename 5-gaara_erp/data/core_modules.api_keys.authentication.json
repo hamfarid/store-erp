@@ -1,0 +1,48 @@
+{
+  "module": "core_modules.api_keys.authentication",
+  "imports": [
+    "django.utils",
+    "django.utils.translation",
+    "hashlib",
+    "models",
+    "rest_framework",
+    "rest_framework.authentication"
+  ],
+  "classes": [
+    {
+      "name": "APIKeyAuthentication",
+      "methods": [
+        "authenticate",
+        "authenticate_credentials",
+        "authenticate_header"
+      ],
+      "variables": [
+        "keyword"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "authenticate",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "authenticate_credentials",
+      "parameters": [
+        "self",
+        "key"
+      ]
+    },
+    {
+      "name": "authenticate_header",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

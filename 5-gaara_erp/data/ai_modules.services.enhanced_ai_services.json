@@ -1,0 +1,83 @@
+{
+  "module": "ai_modules.services.enhanced_ai_services",
+  "imports": [
+    "ai_modules.models.enhanced_ai_models",
+    "models.enhanced_ai_models",
+    "os",
+    "random",
+    "time",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "EnhancedDiseaseDetectionService",
+      "methods": [
+        "__init__",
+        "_load_disease_database",
+        "diagnose_disease"
+      ],
+      "variables": []
+    },
+    {
+      "name": "EnhancedDiagnosisRequest",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "EnhancedDiagnosisResponse",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DiseaseInfo",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_load_disease_database",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "diagnose_disease",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

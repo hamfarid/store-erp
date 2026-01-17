@@ -1,0 +1,106 @@
+{
+  "module": "ai_modules.ai_memory.tasks",
+  "imports": [
+    "celery",
+    "celery.schedules",
+    "datetime",
+    "django.conf",
+    "django.core.cache",
+    "django.db.models",
+    "django.utils",
+    "django_celery_beat.models",
+    "logging",
+    "models",
+    "services",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_automatic_associations",
+      "parameters": [
+        "self",
+        "memory_id"
+      ]
+    },
+    {
+      "name": "create_default_memory_types_for_context",
+      "parameters": [
+        "context_id"
+      ]
+    },
+    {
+      "name": "update_memory_relevance_scores",
+      "parameters": [
+        "source_memory_id",
+        "target_memory_id"
+      ]
+    },
+    {
+      "name": "index_knowledge_content",
+      "parameters": [
+        "knowledge_base_id"
+      ]
+    },
+    {
+      "name": "apply_pattern_to_existing_data",
+      "parameters": [
+        "pattern_id"
+      ]
+    },
+    {
+      "name": "cleanup_expired_memories",
+      "parameters": []
+    },
+    {
+      "name": "discover_learning_patterns",
+      "parameters": []
+    },
+    {
+      "name": "calculate_similarity",
+      "parameters": [
+        "memory1",
+        "memory2"
+      ]
+    },
+    {
+      "name": "extract_keywords_from_content",
+      "parameters": [
+        "content"
+      ]
+    },
+    {
+      "name": "check_pattern_applicability",
+      "parameters": [
+        "pattern",
+        "memory"
+      ]
+    },
+    {
+      "name": "apply_pattern_actions",
+      "parameters": [
+        "pattern",
+        "memory"
+      ]
+    },
+    {
+      "name": "register_periodic_tasks",
+      "parameters": []
+    },
+    {
+      "name": "extract_from_value",
+      "parameters": [
+        "value"
+      ]
+    },
+    {
+      "name": "shared_task",
+      "parameters": [
+        "func"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

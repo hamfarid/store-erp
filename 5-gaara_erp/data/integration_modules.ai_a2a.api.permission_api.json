@@ -1,0 +1,120 @@
+{
+  "module": "integration_modules.ai_a2a.api.permission_api",
+  "imports": [
+    "django.db",
+    "django.shortcuts",
+    "django.utils",
+    "logging",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "services.permission_service"
+  ],
+  "classes": [
+    {
+      "name": "PermissionSerializer",
+      "methods": [
+        "get_approver_role_name"
+      ],
+      "variables": [
+        "approver_role_name"
+      ]
+    },
+    {
+      "name": "PermissionViewSet",
+      "methods": [
+        "list",
+        "retrieve",
+        "create",
+        "update",
+        "destroy",
+        "check_permission",
+        "agent_permissions",
+        "bulk_create"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_approver_role_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "list",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "retrieve",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "destroy",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "check_permission",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "agent_permissions",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "bulk_create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

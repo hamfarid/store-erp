@@ -1,0 +1,89 @@
+{
+  "module": "business_modules.accounting.tests.test_integration",
+  "imports": [
+    "core_modules.companies.models",
+    "core_modules.permissions.models",
+    "django.contrib.auth",
+    "django.test",
+    "django.urls",
+    "models",
+    "rest_framework",
+    "rest_framework.test"
+  ],
+  "classes": [
+    {
+      "name": "AccountingIntegrationTestCase",
+      "methods": [
+        "setUp",
+        "_create_accounting_data",
+        "test_integration_with_companies_module",
+        "test_integration_with_permissions_module",
+        "test_journal_entry_creation_and_posting",
+        "test_account_balance_calculation",
+        "test_partner_balance_calculation",
+        "test_fiscal_year_and_period_management",
+        "test_tax_calculation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_create_accounting_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_companies_module",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_permissions_module",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_journal_entry_creation_and_posting",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_account_balance_calculation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_partner_balance_calculation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_fiscal_year_and_period_management",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_tax_calculation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

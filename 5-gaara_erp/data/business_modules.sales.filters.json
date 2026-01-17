@@ -1,0 +1,125 @@
+{
+  "module": "business_modules.sales.filters",
+  "imports": [
+    "django.utils.translation",
+    "django_filters",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CustomerProfileFilter",
+      "methods": [],
+      "variables": [
+        "contact_name",
+        "contact_email",
+        "contact_phone",
+        "salesperson"
+      ]
+    },
+    {
+      "name": "SalesDocumentFilter",
+      "methods": [],
+      "variables": [
+        "customer",
+        "customer_name",
+        "created_by",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "SalesQuotationFilter",
+      "methods": [],
+      "variables": [
+        "quotation_id",
+        "start_date",
+        "end_date",
+        "expiry_start_date",
+        "expiry_end_date"
+      ]
+    },
+    {
+      "name": "SalesOrderFilter",
+      "methods": [],
+      "variables": [
+        "order_id",
+        "quotation_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "DeliveryNoteFilter",
+      "methods": [],
+      "variables": [
+        "delivery_note_id",
+        "sales_order_id",
+        "store",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "SalesInvoiceFilter",
+      "methods": [],
+      "variables": [
+        "invoice_id",
+        "sales_order_id",
+        "start_date",
+        "end_date",
+        "due_start_date",
+        "due_end_date"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

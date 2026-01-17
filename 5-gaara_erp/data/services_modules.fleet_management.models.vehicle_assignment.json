@@ -1,0 +1,53 @@
+{
+  "module": "services_modules.fleet_management.models.vehicle_assignment",
+  "imports": [
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "driver",
+    "vehicle"
+  ],
+  "classes": [
+    {
+      "name": "VehicleAssignment",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "vehicle",
+        "driver",
+        "start_datetime",
+        "end_datetime",
+        "notes",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

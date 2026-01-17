@@ -1,0 +1,146 @@
+{
+  "module": "admin_modules.custom_admin.views.system_settings_views",
+  "imports": [
+    "django.conf",
+    "django.utils",
+    "django_filters.rest_framework",
+    "json",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response"
+  ],
+  "classes": [
+    {
+      "name": "SystemSettingViewSet",
+      "methods": [
+        "perform_create",
+        "perform_update",
+        "get_by_category",
+        "bulk_update",
+        "reset_to_default",
+        "export_settings",
+        "import_settings"
+      ],
+      "variables": [
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "UserPreferenceViewSet",
+      "methods": [
+        "get_queryset",
+        "perform_create",
+        "get_user_preferences",
+        "update_preference",
+        "reset_preferences",
+        "get_available_options"
+      ],
+      "variables": [
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "perform_update",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "get_by_category",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "bulk_update",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "reset_to_default",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "export_settings",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "import_settings",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "get_user_preferences",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "update_preference",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "reset_preferences",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_available_options",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

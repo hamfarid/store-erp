@@ -1,0 +1,208 @@
+{
+  "module": "integration_modules.external_apis.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "ExternalCRMSystem",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SYSTEM_TYPE_CHOICES",
+        "system_id",
+        "name",
+        "system_type",
+        "base_url",
+        "api_endpoint",
+        "api_key",
+        "access_token",
+        "refresh_token",
+        "sync_contacts",
+        "sync_leads",
+        "sync_opportunities",
+        "sync_activities",
+        "total_contacts",
+        "total_leads",
+        "last_sync",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "LocationService",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SERVICE_TYPE_CHOICES",
+        "service_id",
+        "name",
+        "service_type",
+        "api_key",
+        "api_endpoint",
+        "daily_quota",
+        "used_today",
+        "is_active",
+        "is_default",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TranslationService",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SERVICE_TYPE_CHOICES",
+        "service_id",
+        "name",
+        "service_type",
+        "api_key",
+        "api_endpoint",
+        "supported_languages",
+        "characters_translated",
+        "translation_requests",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "AnalyticsService",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SERVICE_TYPE_CHOICES",
+        "service_id",
+        "name",
+        "service_type",
+        "tracking_id",
+        "api_key",
+        "track_pageviews",
+        "track_events",
+        "track_conversions",
+        "total_events",
+        "total_pageviews",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ExternalAPI",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "API_TYPE_CHOICES",
+        "AUTH_TYPE_CHOICES",
+        "api_id",
+        "name",
+        "description",
+        "api_type",
+        "base_url",
+        "version",
+        "auth_type",
+        "api_key",
+        "username",
+        "password",
+        "timeout",
+        "retry_attempts",
+        "rate_limit",
+        "total_requests",
+        "successful_requests",
+        "failed_requests",
+        "average_response_time",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

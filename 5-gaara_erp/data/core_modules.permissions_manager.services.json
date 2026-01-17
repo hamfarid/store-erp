@@ -1,0 +1,150 @@
+{
+  "module": "core_modules.permissions_manager.services",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.cache",
+    "django.db",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "PermissionService",
+      "methods": [
+        "_build_user_perm_codes",
+        "_build_agent_perm_codes",
+        "check_user_permission",
+        "check_agent_permission",
+        "get_user_permissions",
+        "get_agent_permissions",
+        "clear_user_permission_cache",
+        "clear_agent_permission_cache",
+        "clear_role_permission_cache"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RoleService",
+      "methods": [
+        "assign_permissions_to_role",
+        "assign_roles_to_user",
+        "assign_roles_to_agent"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PermissionCacheService",
+      "methods": [
+        "refresh_all_caches",
+        "get_cache_stats"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "_user_perms_key",
+      "parameters": [
+        "user_id"
+      ]
+    },
+    {
+      "name": "_agent_perms_key",
+      "parameters": [
+        "agent_id"
+      ]
+    },
+    {
+      "name": "_build_user_perm_codes",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "_build_agent_perm_codes",
+      "parameters": [
+        "agent_id"
+      ]
+    },
+    {
+      "name": "check_user_permission",
+      "parameters": [
+        "user",
+        "permission_code"
+      ]
+    },
+    {
+      "name": "check_agent_permission",
+      "parameters": [
+        "agent_id",
+        "permission_code"
+      ]
+    },
+    {
+      "name": "get_user_permissions",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "get_agent_permissions",
+      "parameters": [
+        "agent_id"
+      ]
+    },
+    {
+      "name": "clear_user_permission_cache",
+      "parameters": [
+        "user_id"
+      ]
+    },
+    {
+      "name": "clear_agent_permission_cache",
+      "parameters": [
+        "agent_id"
+      ]
+    },
+    {
+      "name": "clear_role_permission_cache",
+      "parameters": [
+        "role_id"
+      ]
+    },
+    {
+      "name": "assign_permissions_to_role",
+      "parameters": [
+        "role",
+        "permission_ids",
+        "user"
+      ]
+    },
+    {
+      "name": "assign_roles_to_user",
+      "parameters": [
+        "user",
+        "role_ids",
+        "admin_user"
+      ]
+    },
+    {
+      "name": "assign_roles_to_agent",
+      "parameters": [
+        "agent_id",
+        "role_ids",
+        "admin_user"
+      ]
+    },
+    {
+      "name": "refresh_all_caches",
+      "parameters": []
+    },
+    {
+      "name": "get_cache_stats",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "User",
+    "_CACHE_TTL"
+  ]
+}

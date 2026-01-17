@@ -1,0 +1,423 @@
+{
+  "module": "integration_modules.ai_a2a.models",
+  "imports": [
+    "ai_agents.models",
+    "core_modules.permissions.models",
+    "core_modules.permissions.unified_permissions_model",
+    "datetime",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "logging"
+  ],
+  "classes": [
+    {
+      "name": "A2AConversation",
+      "methods": [
+        "__str__",
+        "close_conversation",
+        "reopen_conversation",
+        "pause_conversation",
+        "mark_as_failed",
+        "archive_conversation"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "title",
+        "description",
+        "status",
+        "created_by",
+        "created_at",
+        "updated_at",
+        "closed_at"
+      ]
+    },
+    {
+      "name": "A2AMessage",
+      "methods": [
+        "__str__",
+        "mark_as_delivered",
+        "mark_as_read",
+        "mark_as_processed",
+        "mark_as_failed"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "conversation",
+        "sender_agent",
+        "receiver_agent",
+        "content",
+        "status",
+        "priority",
+        "sent_at",
+        "delivered_at",
+        "read_at",
+        "processed_at"
+      ]
+    },
+    {
+      "name": "A2AAgentStatus",
+      "methods": [
+        "__str__",
+        "increment_error_count",
+        "reset_error_count",
+        "update_load",
+        "set_status",
+        "get_available_agents"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "agent",
+        "status",
+        "last_active",
+        "error_count",
+        "load",
+        "details",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "A2AErrorLog",
+      "methods": [
+        "__str__",
+        "mark_as_resolved",
+        "log_error"
+      ],
+      "variables": [
+        "ERROR_TYPES",
+        "message",
+        "agent",
+        "error_type",
+        "error_message",
+        "stack_trace",
+        "details",
+        "is_resolved",
+        "resolved_at",
+        "resolved_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "A2APermission",
+      "methods": [
+        "__str__",
+        "check_permission"
+      ],
+      "variables": [
+        "sender_agent_type",
+        "receiver_agent_type",
+        "action",
+        "is_allowed",
+        "requires_approval",
+        "approver_role",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "A2AApprovalRequest",
+      "methods": [
+        "__str__",
+        "approve",
+        "reject",
+        "check_expiry",
+        "create_approval_request"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "message",
+        "permission",
+        "status",
+        "requested_at",
+        "approved_at",
+        "approved_by",
+        "reason",
+        "response_note",
+        "expiry_date"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "get_latest_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Role",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name"
+      ]
+    },
+    {
+      "name": "Permission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "close_conversation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "reopen_conversation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "pause_conversation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_failed",
+      "parameters": [
+        "self",
+        "reason"
+      ]
+    },
+    {
+      "name": "archive_conversation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_delivered",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_read",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_processed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_failed",
+      "parameters": [
+        "self",
+        "reason"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "increment_error_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "reset_error_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_load",
+      "parameters": [
+        "self",
+        "new_load"
+      ]
+    },
+    {
+      "name": "set_status",
+      "parameters": [
+        "self",
+        "status",
+        "details"
+      ]
+    },
+    {
+      "name": "get_available_agents",
+      "parameters": [
+        "cls",
+        "agent_type"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_resolved",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "log_error",
+      "parameters": [
+        "cls",
+        "error_type",
+        "error_message",
+        "agent",
+        "message",
+        "stack_trace",
+        "details"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_permission",
+      "parameters": [
+        "cls",
+        "sender_agent",
+        "receiver_agent",
+        "action"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "approve",
+      "parameters": [
+        "self",
+        "user",
+        "note"
+      ]
+    },
+    {
+      "name": "reject",
+      "parameters": [
+        "self",
+        "user",
+        "note"
+      ]
+    },
+    {
+      "name": "check_expiry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_approval_request",
+      "parameters": [
+        "cls",
+        "message",
+        "permission",
+        "reason",
+        "expiry_hours"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

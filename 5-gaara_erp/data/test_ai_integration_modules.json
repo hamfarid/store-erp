@@ -1,0 +1,48 @@
+{
+  "module": "test_ai_integration_modules",
+  "imports": [
+    "anthropic",
+    "central_ai_app.models",
+    "chromadb",
+    "core_modules.rag.models",
+    "django",
+    "django.conf",
+    "django.test",
+    "django.test.utils",
+    "django.urls",
+    "faiss",
+    "integration_modules.ai_agent.models",
+    "integration_modules.ai_ui.models",
+    "integration_modules.memory_ai.models",
+    "json",
+    "openai",
+    "os",
+    "sentence_transformers",
+    "sys",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_ai_integration_modules",
+      "parameters": []
+    },
+    {
+      "name": "test_ai_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_ai_security_and_permissions",
+      "parameters": []
+    },
+    {
+      "name": "test_ai_functionality",
+      "parameters": []
+    },
+    {
+      "name": "test_rag_system",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

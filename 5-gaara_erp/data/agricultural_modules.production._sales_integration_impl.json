@@ -1,0 +1,70 @@
+{
+  "module": "agricultural_modules.production._sales_integration_impl",
+  "imports": [
+    "__future__",
+    "datetime",
+    "decimal",
+    "django.db",
+    "django.utils",
+    "logging",
+    "sales",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "SalesIntegrationService",
+      "methods": [
+        "create_saleable_product_from_batch",
+        "create_product_pricing",
+        "update_sales_order_status_with_export_approval",
+        "update_sales_order_certificates",
+        "get_sales_orders_by_production_batch"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_saleable_product_from_batch",
+      "parameters": [
+        "cls",
+        "production_batch"
+      ]
+    },
+    {
+      "name": "create_product_pricing",
+      "parameters": [
+        "cls",
+        "saleable_product",
+        "product_grade"
+      ]
+    },
+    {
+      "name": "update_sales_order_status_with_export_approval",
+      "parameters": [
+        "cls",
+        "sales_order",
+        "approved",
+        "approval_number"
+      ]
+    },
+    {
+      "name": "update_sales_order_certificates",
+      "parameters": [
+        "cls",
+        "sales_order",
+        "certificates"
+      ]
+    },
+    {
+      "name": "get_sales_orders_by_production_batch",
+      "parameters": [
+        "cls",
+        "batch_number"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

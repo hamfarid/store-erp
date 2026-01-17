@@ -1,0 +1,40 @@
+{
+  "module": "core_modules.users_accounts.admin",
+  "imports": [
+    "admin_modules.permissions_manager.admin",
+    "django.contrib",
+    "django.contrib.auth.admin",
+    "django.contrib.auth.models",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "UserAdmin",
+      "methods": [
+        "get_form"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "fieldsets",
+        "inlines",
+        "filter_horizontal",
+        "search_fields",
+        "ordering",
+        "readonly_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_form",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

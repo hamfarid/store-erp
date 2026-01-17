@@ -1,0 +1,9 @@
+{
+  "module": "core_modules.ai_permissions.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "default_app_config"
+  ]
+}

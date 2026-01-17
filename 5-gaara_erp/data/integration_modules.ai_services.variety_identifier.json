@@ -1,0 +1,99 @@
+{
+  "module": "integration_modules.ai_services.variety_identifier",
+  "imports": [
+    "PIL",
+    "django.db",
+    "logging",
+    "os",
+    "sys",
+    "time",
+    "torch",
+    "torchvision",
+    "traceback",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "VarietyIdentifier",
+      "methods": [
+        "__init__",
+        "_load_model",
+        "identify",
+        "get_supported_models",
+        "get_model_info",
+        "identify_batch",
+        "get_top_predictions"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_variety_identifier",
+      "parameters": [
+        "model_name"
+      ]
+    },
+    {
+      "name": "is_variety_identification_available",
+      "parameters": []
+    },
+    {
+      "name": "get_available_models",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "model_name"
+      ]
+    },
+    {
+      "name": "_load_model",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "identify",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    },
+    {
+      "name": "get_supported_models",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_model_info",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "identify_batch",
+      "parameters": [
+        "self",
+        "image_paths"
+      ]
+    },
+    {
+      "name": "get_top_predictions",
+      "parameters": [
+        "self",
+        "image_path",
+        "top_k"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "handler",
+    "formatter",
+    "__all__"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "module": "core_modules.permissions.models",
+  "imports": [
+    "core_modules.users_accounts.models",
+    "unified_permissions_model"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

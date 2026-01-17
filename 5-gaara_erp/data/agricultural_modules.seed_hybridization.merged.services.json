@@ -1,0 +1,197 @@
+{
+  "module": "agricultural_modules.seed_hybridization.merged.services",
+  "imports": [
+    "core_modules.api_keys.models",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "json",
+    "logging",
+    "models",
+    "os",
+    "requests",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "ExternalProjectClient",
+      "methods": [
+        "__init__",
+        "_log_api_request",
+        "get_external_data",
+        "send_data_to_external_project"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PyBrOpSClient",
+      "methods": [
+        "__init__",
+        "_log_api_request",
+        "simulate_hybridization",
+        "get_variety_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "HybridizationService",
+      "methods": [
+        "__init__",
+        "create_simulation",
+        "run_simulation",
+        "_prepare_parent_data",
+        "_enrich_parent_data_with_external_traits",
+        "_post_results_to_external",
+        "_create_hybrid_varieties",
+        "get_simulation_results"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "project_url",
+        "api_key"
+      ]
+    },
+    {
+      "name": "_log_api_request",
+      "parameters": [
+        "self",
+        "endpoint",
+        "request_data",
+        "response",
+        "start_time",
+        "user"
+      ]
+    },
+    {
+      "name": "get_external_data",
+      "parameters": [
+        "self",
+        "endpoint",
+        "params",
+        "user"
+      ]
+    },
+    {
+      "name": "send_data_to_external_project",
+      "parameters": [
+        "self",
+        "endpoint",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "api_key",
+        "api_url"
+      ]
+    },
+    {
+      "name": "_log_api_request",
+      "parameters": [
+        "self",
+        "endpoint",
+        "request_data",
+        "response",
+        "start_time",
+        "user"
+      ]
+    },
+    {
+      "name": "simulate_hybridization",
+      "parameters": [
+        "self",
+        "parent_data",
+        "target_traits",
+        "simulation_params",
+        "user"
+      ]
+    },
+    {
+      "name": "get_variety_data",
+      "parameters": [
+        "self",
+        "variety_id",
+        "user"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_simulation",
+      "parameters": [
+        "self",
+        "name",
+        "description",
+        "parent_variety_ids",
+        "target_traits",
+        "simulation_parameters",
+        "user"
+      ]
+    },
+    {
+      "name": "run_simulation",
+      "parameters": [
+        "self",
+        "simulation_id",
+        "user"
+      ]
+    },
+    {
+      "name": "_prepare_parent_data",
+      "parameters": [
+        "self",
+        "simulation"
+      ]
+    },
+    {
+      "name": "_enrich_parent_data_with_external_traits",
+      "parameters": [
+        "self",
+        "simulation",
+        "parent_data",
+        "user"
+      ]
+    },
+    {
+      "name": "_post_results_to_external",
+      "parameters": [
+        "self",
+        "simulation",
+        "results",
+        "hybrid_varieties",
+        "user"
+      ]
+    },
+    {
+      "name": "_create_hybrid_varieties",
+      "parameters": [
+        "self",
+        "simulation",
+        "hybrid_varieties_data"
+      ]
+    },
+    {
+      "name": "get_simulation_results",
+      "parameters": [
+        "self",
+        "simulation_id"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

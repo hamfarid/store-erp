@@ -1,0 +1,89 @@
+{
+  "module": "utility_modules.utilities.views",
+  "imports": [
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "IsAdminOrReadOnly",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SystemMetricViewSet",
+      "methods": [],
+      "variables": [
+        "permission_classes",
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "DatabaseStatusViewSet",
+      "methods": [],
+      "variables": [
+        "permission_classes",
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "UserStatisticViewSet",
+      "methods": [],
+      "variables": [
+        "permission_classes",
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "SystemAlertViewSet",
+      "methods": [
+        "perform_update"
+      ],
+      "variables": [
+        "permission_classes",
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "UserActivityLogViewSet",
+      "methods": [],
+      "variables": [
+        "permission_classes",
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "SystemErrorLogViewSet",
+      "methods": [],
+      "variables": [
+        "permission_classes",
+        "queryset",
+        "serializer_class"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "perform_update",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    }
+  ],
+  "variables": []
+}

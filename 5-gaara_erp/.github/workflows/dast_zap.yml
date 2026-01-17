@@ -1,0 +1,56 @@
+name: DAST - OWASP ZAP
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/dast_zap.yml'
+  pull_request:
+    paths:
+      - 'backend/**'
+      - '.github/workflows/dast_zap.yml'
+  workflow_dispatch:
+
+jobs:
+  zap-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: Start backend server
+        env:
+          ENVIRONMENT: development
+          PORT: 5001
+        run: |
+          nohup python backend/app.py > backend.log 2>&1 &
+          sleep 12
+          curl -sf http://127.0.0.1:5001/health || curl -sf http://127.0.0.1:5001/api/health || true
+
+      - name: Run ZAP Baseline Scan
+        run: |
+          docker run --network host -t owasp/zap2docker-stable zap-baseline.py \
+            -t http://127.0.0.1:5001 \
+            -r zap-baseline.html \
+            -J zap-baseline.json || true
+
+      - name: Upload ZAP reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-baseline
+          path: |
+            zap-baseline.html
+            zap-baseline.json
+          if-no-files-found: ignore
+

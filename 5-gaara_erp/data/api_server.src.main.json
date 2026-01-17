@@ -1,0 +1,33 @@
+{
+  "module": "api_server.src.main",
+  "imports": [
+    "flask",
+    "flask_cors",
+    "os",
+    "src.models.user",
+    "src.routes.business",
+    "src.routes.services",
+    "src.routes.user",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "serve",
+      "parameters": [
+        "path"
+      ]
+    },
+    {
+      "name": "health_check",
+      "parameters": []
+    },
+    {
+      "name": "send_from_directory",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "app"
+  ]
+}

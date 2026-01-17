@@ -1,0 +1,12 @@
+{
+  "module": "admin_modules.setup_wizard.urls",
+  "imports": [
+    "django.urls",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns"
+  ]
+}

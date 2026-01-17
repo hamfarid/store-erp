@@ -1,0 +1,145 @@
+{
+  "module": "business_modules.production.tests.test_integration",
+  "imports": [
+    "business_modules.inventory.models",
+    "business_modules.production.models",
+    "business_modules.production.services",
+    "django.contrib.auth.models",
+    "django.urls",
+    "django.utils",
+    "pytest",
+    "rest_framework",
+    "rest_framework.test"
+  ],
+  "classes": [
+    {
+      "name": "TestProductionIntegration",
+      "methods": [
+        "test_bom_creation_and_retrieval",
+        "test_manufacturing_order_workflow",
+        "test_work_order_api_operations",
+        "test_production_logs",
+        "test_work_center_capacity_utilization",
+        "test_bom_duplication",
+        "test_routing_duplication"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "api_client",
+      "parameters": []
+    },
+    {
+      "name": "user",
+      "parameters": []
+    },
+    {
+      "name": "authenticated_client",
+      "parameters": [
+        "api_client",
+        "user"
+      ]
+    },
+    {
+      "name": "product",
+      "parameters": []
+    },
+    {
+      "name": "component_product",
+      "parameters": []
+    },
+    {
+      "name": "unit_of_measure",
+      "parameters": []
+    },
+    {
+      "name": "work_center",
+      "parameters": []
+    },
+    {
+      "name": "bom",
+      "parameters": [
+        "product",
+        "component_product",
+        "unit_of_measure",
+        "user"
+      ]
+    },
+    {
+      "name": "routing",
+      "parameters": [
+        "bom",
+        "work_center"
+      ]
+    },
+    {
+      "name": "manufacturing_order",
+      "parameters": [
+        "product",
+        "bom",
+        "routing",
+        "unit_of_measure"
+      ]
+    },
+    {
+      "name": "test_bom_creation_and_retrieval",
+      "parameters": [
+        "self",
+        "authenticated_client",
+        "bom"
+      ]
+    },
+    {
+      "name": "test_manufacturing_order_workflow",
+      "parameters": [
+        "self",
+        "authenticated_client",
+        "manufacturing_order"
+      ]
+    },
+    {
+      "name": "test_work_order_api_operations",
+      "parameters": [
+        "self",
+        "authenticated_client",
+        "manufacturing_order"
+      ]
+    },
+    {
+      "name": "test_production_logs",
+      "parameters": [
+        "self",
+        "authenticated_client",
+        "manufacturing_order"
+      ]
+    },
+    {
+      "name": "test_work_center_capacity_utilization",
+      "parameters": [
+        "self",
+        "authenticated_client",
+        "work_center",
+        "manufacturing_order"
+      ]
+    },
+    {
+      "name": "test_bom_duplication",
+      "parameters": [
+        "self",
+        "authenticated_client",
+        "bom"
+      ]
+    },
+    {
+      "name": "test_routing_duplication",
+      "parameters": [
+        "self",
+        "authenticated_client",
+        "routing"
+      ]
+    }
+  ],
+  "variables": []
+}

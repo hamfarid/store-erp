@@ -1,0 +1,106 @@
+{
+  "module": "services_modules.legal_affairs.tests.test_legal_contract",
+  "imports": [
+    "core_modules.core.models.company",
+    "django.contrib.auth.models",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "services_modules.legal_affairs.models.legal_contract"
+  ],
+  "classes": [
+    {
+      "name": "LegalContractModelTest",
+      "methods": [
+        "setUp",
+        "test_contract_creation",
+        "test_string_representation",
+        "test_is_active",
+        "test_is_expired",
+        "test_days_until_expiry",
+        "test_sign_contract",
+        "test_terminate_contract",
+        "test_renew_contract",
+        "test_validation_error_on_invalid_dates",
+        "test_calculate_remaining_value",
+        "test_calculate_contract_duration_months"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contract_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_string_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_days_until_expiry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_sign_contract",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_terminate_contract",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_renew_contract",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_error_on_invalid_dates",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_remaining_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_contract_duration_months",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

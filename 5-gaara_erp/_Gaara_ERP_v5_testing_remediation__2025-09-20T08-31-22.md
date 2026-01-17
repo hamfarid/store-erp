@@ -1,0 +1,21 @@
+[ ] NAME:Current Task List DESCRIPTION:Root task for conversation __NEW_AGENT__
+-[/] NAME:Investigate/Triage/Understand the problem DESCRIPTION:Baseline discovery for Gaara ERP v5: confirm Django entry points (manage.py, settings), test config (pytest.ini/pyproject.toml), linter configs (.flake8/.pylintrc), and repo layout. Prepare a minimal, risk-free validation plan (django check, pytest -q, showmigrations) to identify blockers before remediation.
+-[ ] NAME:Investigate/Triage/Understand the problem DESCRIPTION:Establish current baseline: run Django system checks and the test suite; identify blockers (syntax/import/migration/auth issues) and summarize top failures.
+-[ ] NAME:Generate migrations for all Django apps DESCRIPTION:Create migrations across all apps (non-destructive where possible). Verify with --check and review migrate --plan. Do not apply migrations yet.
+-[ ] NAME:Comprehensive Testing & Remediation (Django ERP v5) DESCRIPTION:Execute end-to-end test and remediation per provided scope: DB layer, imports/deps, services, API, integrations, security, static analysis, FE/BE integration, performance, module-specific flows. Produce artifacts and documentation.
+--[/] NAME:Baseline: Test discovery & coverage DESCRIPTION:Ensure pytest collects tests from root and gaara_erp/; run coverage and produce junit/coverage artifacts.
+--[ ] NAME:Migrations Validation DESCRIPTION:Run makemigrations --check, showmigrations, migrate --plan; verify no destructive ops; document results.
+--[ ] NAME:Static Analysis Sweep DESCRIPTION:Run ruff/flake8/pylint/mypy; capture findings; fix critical errors; align with Black/isort and line-length 120.
+--[ ] NAME:Dependency & Import Audit DESCRIPTION:pip freeze; scan for import errors and circulars; verify third-party versions; note missing libs; propose shims if needed.
+--[ ] NAME:API Endpoint Smoke & AuthZ DESCRIPTION:Auth/authz checks; CRUD smoke; status codes; CORS; throttling; OpenAPI generation validation.
+--[ ] NAME:Cross-Module Integration Tests DESCRIPTION:Targeted flows (Agriculture→Inventory, Sales→Accounting, HR→Payroll, Projects→Resources, QC→Production, AI→Core, Notifications).
+--[ ] NAME:Security Tests DESCRIPTION:CSRF, XSS, SQLi, uploads, sessions, password policies, permissions, info disclosure, HTTPS/cookies, JWT rotation.
+--[ ] NAME:FE/BE Integration DESCRIPTION:Templates context, AJAX/JSON, forms, static/CDN, websockets, email templates, file up/download, pagination/infinite scroll.
+--[ ] NAME:Performance & N+1 Checks DESCRIPTION:select_related/prefetch_related, caching effectiveness, bulk memory, concurrency, queues, large file performance, API latency.
+--[ ] NAME:Server Boot & Commands DESCRIPTION:Start dev server; verify boot; smoke commands; capture logs; plan e2e API hits if feasible.
+--[ ] NAME:Database Layer Testing DESCRIPTION:Validate models across all apps: app_label in Meta, duplicate model registrations, FK/M2M/O2O relationships, constraints/indexes/unique_together, str() returns string, custom managers/querysets, signals, transaction boundaries/rollback.
+---[ ] NAME:Generate DB invariants tests DESCRIPTION:Add pytest-based generic tests to validate model Meta.app_label, FK/M2M/O2O relations, UniqueConstraint/unique_together, and __str__ returning str using model-bakery.
+---[ ] NAME:Run DB invariants tests with pytest DESCRIPTION:Execute pytest -q on the new test module with django_db marker and capture junitxml/coverage artifacts.
+--[ ] NAME:Service Layer Testing DESCRIPTION:Ensure services accept object or ID parameters, handle exceptions, manage transactions, log errors; mock external APIs; verify cache invalidation; test async/background tasks.
+--[ ] NAME:Module-Specific Testing DESCRIPTION:Agricultural, Business, Service modules workflows per scope; verify algorithms and integrations.
+--[/] NAME:Start dev server and smoke core endpoints DESCRIPTION:Start Django runserver in background, probe /admin/, /api/, /health/ with Django client and requests; capture logs.

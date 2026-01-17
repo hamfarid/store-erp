@@ -1,0 +1,9 @@
+{
+  "module": "core_modules.setup.user_management.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "default_app_config"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "module": "analysis.logs.api_endpoint_mapper",
+  "imports": [
+    "django",
+    "django.conf",
+    "django.contrib.auth.decorators",
+    "django.urls",
+    "inspect",
+    "json",
+    "os",
+    "pathlib",
+    "re",
+    "rest_framework.decorators",
+    "rest_framework.permissions",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "map_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "extract_url_patterns",
+      "parameters": [
+        "patterns",
+        "prefix"
+      ]
+    },
+    {
+      "name": "analyze_endpoint",
+      "parameters": [
+        "pattern_info"
+      ]
+    },
+    {
+      "name": "get_function_source",
+      "parameters": [
+        "func"
+      ]
+    }
+  ],
+  "variables": [
+    "project_root"
+  ]
+}

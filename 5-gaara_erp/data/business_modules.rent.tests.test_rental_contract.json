@@ -1,0 +1,161 @@
+{
+  "module": "business_modules.rent.tests.test_rental_contract",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.property",
+    "models.rental_contract",
+    "services_modules.accounting.models",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "RentalContractModelTest",
+      "methods": [
+        "setUp",
+        "test_create_rental_contract",
+        "test_unique_code_per_company",
+        "test_add_contract_lines",
+        "test_contract_workflow",
+        "test_validate_dates",
+        "test_compute_total_rent",
+        "test_get_payment_schedule",
+        "test_get_remaining_amount"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RentalContractLineModelTest",
+      "methods": [
+        "setUp",
+        "test_create_contract_line",
+        "test_validate_dates",
+        "test_validate_property_availability",
+        "test_compute_total_rent",
+        "test_get_rental_period"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_rental_contract",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_contract_lines",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contract_workflow",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_dates",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_total_rent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_payment_schedule",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_remaining_amount",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_contract_line",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_dates",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_property_availability",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_total_rent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_rental_period",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_payment_schedule",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_remaining_amount",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_compute_total_rent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_rental_period",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

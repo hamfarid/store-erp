@@ -1,0 +1,180 @@
+{
+  "timestamp": "2025-10-06T06:15:36.990189",
+  "tests": [
+    {
+      "name": "Flask App Creation",
+      "status": "PASS",
+      "message": "Flask app created successfully",
+      "timestamp": "2025-10-06T06:15:39.170124"
+    },
+    {
+      "name": "Database Connection",
+      "status": "PASS",
+      "message": "Database connection successful",
+      "timestamp": "2025-10-06T06:15:39.171165"
+    },
+    {
+      "name": "Database Tables",
+      "status": "PASS",
+      "message": "Created 9 tables",
+      "timestamp": "2025-10-06T06:15:39.172671",
+      "details": {
+        "tables": [
+          "customers",
+          "basic_model",
+          "sales_engineers",
+          "exchange_rates",
+          "sales_invoices",
+          "sales_invoice_items",
+          "customer_payments",
+          "customer_debts",
+          "sales_engineer_payments"
+        ]
+      }
+    },
+    {
+      "name": "Basic Model Imports",
+      "status": "PASS",
+      "message": "Basic models imported successfully",
+      "timestamp": "2025-10-06T06:15:39.172837"
+    },
+    {
+      "name": "Advanced Model Imports",
+      "status": "PASS",
+      "message": "Advanced models imported successfully",
+      "timestamp": "2025-10-06T06:15:39.172858"
+    },
+    {
+      "name": "Sales Model Imports",
+      "status": "PASS",
+      "message": "Sales models imported successfully",
+      "timestamp": "2025-10-06T06:15:39.172873"
+    },
+    {
+      "name": "User Model Instantiation",
+      "status": "PASS",
+      "message": "User model created successfully",
+      "timestamp": "2025-10-06T06:15:39.172984"
+    },
+    {
+      "name": "Customer Model Instantiation",
+      "status": "PASS",
+      "message": "Customer model created successfully",
+      "timestamp": "2025-10-06T06:15:39.189751"
+    },
+    {
+      "name": "Product Model Instantiation",
+      "status": "PASS",
+      "message": "Product model created successfully",
+      "timestamp": "2025-10-06T06:15:39.189857"
+    },
+    {
+      "name": "Category Model Instantiation",
+      "status": "PASS",
+      "message": "Category model created successfully",
+      "timestamp": "2025-10-06T06:15:39.189898"
+    },
+    {
+      "name": "Warehouse Model Instantiation",
+      "status": "PASS",
+      "message": "Warehouse model created successfully",
+      "timestamp": "2025-10-06T06:15:39.189924"
+    },
+    {
+      "name": "Authentication System",
+      "status": "FAIL",
+      "message": "Authentication test failed: name 'AuthManager' is not defined",
+      "timestamp": "2025-10-06T06:15:39.483220"
+    },
+    {
+      "name": "Database Operations",
+      "status": "FAIL",
+      "message": "Database operations test failed: Foreign key associated with column 'customers.created_by' could not find table 'users' with which to generate a foreign key to target column 'id'",
+      "timestamp": "2025-10-06T06:15:39.484157"
+    },
+    {
+      "name": "Frontend File package.json",
+      "status": "PASS",
+      "message": "File exists: package.json",
+      "timestamp": "2025-10-06T06:15:39.484252"
+    },
+    {
+      "name": "Frontend File src/App.jsx",
+      "status": "PASS",
+      "message": "File exists: src/App.jsx",
+      "timestamp": "2025-10-06T06:15:39.484285"
+    },
+    {
+      "name": "Frontend File src/main.jsx",
+      "status": "PASS",
+      "message": "File exists: src/main.jsx",
+      "timestamp": "2025-10-06T06:15:39.484305"
+    },
+    {
+      "name": "Frontend File index.html",
+      "status": "PASS",
+      "message": "File exists: index.html",
+      "timestamp": "2025-10-06T06:15:39.484331"
+    },
+    {
+      "name": "Frontend File vite.config.js",
+      "status": "PASS",
+      "message": "File exists: vite.config.js",
+      "timestamp": "2025-10-06T06:15:39.484350"
+    },
+    {
+      "name": "Flask Server Start",
+      "status": "PASS",
+      "message": "Flask server started successfully",
+      "timestamp": "2025-10-06T06:15:42.495968"
+    },
+    {
+      "name": "API Endpoint Health Check",
+      "status": "PASS",
+      "message": "Endpoint /api/health responded with status 200",
+      "timestamp": "2025-10-06T06:15:42.500423"
+    },
+    {
+      "name": "API Endpoint System Info",
+      "status": "PASS",
+      "message": "Endpoint /api/info responded with status 200",
+      "timestamp": "2025-10-06T06:15:42.504637"
+    },
+    {
+      "name": "API Endpoint Dashboard Stats",
+      "status": "PASS",
+      "message": "Endpoint /api/dashboard/stats responded with status 200",
+      "timestamp": "2025-10-06T06:15:42.508795"
+    },
+    {
+      "name": "API Endpoint Products API",
+      "status": "FAIL",
+      "message": "Endpoint /api/products responded with status 500",
+      "timestamp": "2025-10-06T06:15:42.518198"
+    },
+    {
+      "name": "API Endpoint Customers API",
+      "status": "FAIL",
+      "message": "Endpoint /api/customers responded with status 500",
+      "timestamp": "2025-10-06T06:15:42.523624"
+    },
+    {
+      "name": "API Endpoint Suppliers API",
+      "status": "FAIL",
+      "message": "Endpoint /api/suppliers responded with status 500",
+      "timestamp": "2025-10-06T06:15:42.527782"
+    }
+  ],
+  "summary": {
+    "total": 25,
+    "passed": 20,
+    "failed": 5,
+    "errors": [
+      "Authentication System: Authentication test failed: name 'AuthManager' is not defined",
+      "Database Operations: Database operations test failed: Foreign key associated with column 'customers.created_by' could not find table 'users' with which to generate a foreign key to target column 'id'",
+      "API Endpoint Products API: Endpoint /api/products responded with status 500",
+      "API Endpoint Customers API: Endpoint /api/customers responded with status 500",
+      "API Endpoint Suppliers API: Endpoint /api/suppliers responded with status 500"
+    ]
+  }
+}

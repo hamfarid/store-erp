@@ -1,0 +1,65 @@
+{
+  "module": "business_modules.sales.views",
+  "imports": [
+    "django_filters.rest_framework",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers"
+  ],
+  "classes": [
+    {
+      "name": "CustomerViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    },
+    {
+      "name": "SalesOrderViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    },
+    {
+      "name": "SalesInvoiceViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "list_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "detail_view",
+      "parameters": [
+        "request",
+        "item_id"
+      ]
+    }
+  ],
+  "variables": []
+}

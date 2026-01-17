@@ -1,0 +1,220 @@
+{
+  "module": "services_modules.projects.tests.test_services",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models",
+    "pytest",
+    "services"
+  ],
+  "classes": [
+    {
+      "name": "TestProjectService",
+      "methods": [
+        "project_service",
+        "test_user",
+        "test_project",
+        "test_phase",
+        "test_create_project",
+        "test_update_project",
+        "test_get_project_details",
+        "test_list_projects",
+        "test_update_project_status",
+        "test_create_project_phase",
+        "test_update_project_phase",
+        "test_create_project_task",
+        "test_update_project_task",
+        "test_create_project_risk",
+        "test_update_project_risk",
+        "test_create_project_document",
+        "test_update_project_document",
+        "test_get_project_statistics",
+        "test_generate_project_report_summary",
+        "test_generate_project_report_detailed",
+        "test_generate_project_report_specific_project"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "project_service",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_project",
+      "parameters": [
+        "self",
+        "db",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_phase",
+      "parameters": [
+        "self",
+        "db",
+        "test_project"
+      ]
+    },
+    {
+      "name": "test_create_project",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_update_project",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project"
+      ]
+    },
+    {
+      "name": "test_get_project_details",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project",
+        "test_user",
+        "test_phase"
+      ]
+    },
+    {
+      "name": "test_list_projects",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_update_project_status",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_create_project_phase",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project"
+      ]
+    },
+    {
+      "name": "test_update_project_phase",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_phase"
+      ]
+    },
+    {
+      "name": "test_create_project_task",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project",
+        "test_phase",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_update_project_task",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project",
+        "test_phase",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_create_project_risk",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project"
+      ]
+    },
+    {
+      "name": "test_update_project_risk",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project"
+      ]
+    },
+    {
+      "name": "test_create_project_document",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_update_project_document",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_get_project_statistics",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project"
+      ]
+    },
+    {
+      "name": "test_generate_project_report_summary",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project"
+      ]
+    },
+    {
+      "name": "test_generate_project_report_detailed",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project"
+      ]
+    },
+    {
+      "name": "test_generate_project_report_specific_project",
+      "parameters": [
+        "self",
+        "project_service",
+        "test_project"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

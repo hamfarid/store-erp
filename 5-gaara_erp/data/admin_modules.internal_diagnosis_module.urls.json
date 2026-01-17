@@ -1,0 +1,12 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns",
+    "app_name"
+  ]
+}

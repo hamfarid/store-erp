@@ -1,0 +1,39 @@
+{
+  "module": "api_server.src.routes.user",
+  "imports": [
+    "flask",
+    "src.models.user"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "get_users",
+      "parameters": []
+    },
+    {
+      "name": "create_user",
+      "parameters": []
+    },
+    {
+      "name": "get_user",
+      "parameters": [
+        "user_id"
+      ]
+    },
+    {
+      "name": "update_user",
+      "parameters": [
+        "user_id"
+      ]
+    },
+    {
+      "name": "delete_user",
+      "parameters": [
+        "user_id"
+      ]
+    }
+  ],
+  "variables": [
+    "user_bp"
+  ]
+}

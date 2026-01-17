@@ -1,0 +1,62 @@
+{
+  "module": "core_modules.core.apps",
+  "imports": [
+    "django.apps",
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "logging",
+    "models",
+    "sys",
+    "threading",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "CoreConfig",
+      "methods": [
+        "ready",
+        "check_database_configuration",
+        "setup_default_settings",
+        "_create_default_settings"
+      ],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "label",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_database_configuration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setup_default_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_create_default_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delayed_setup",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

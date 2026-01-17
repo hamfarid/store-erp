@@ -1,0 +1,120 @@
+{
+  "module": "services_modules.legal_affairs.tests.test_legal_template",
+  "imports": [
+    "core_modules.core.models.company",
+    "django.contrib.auth.models",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "services_modules.legal_affairs.models.legal_template"
+  ],
+  "classes": [
+    {
+      "name": "LegalTemplateModelTest",
+      "methods": [
+        "setUp",
+        "test_template_creation",
+        "test_string_representation",
+        "test_is_active",
+        "test_activate_template",
+        "test_deactivate_template",
+        "test_archive_template",
+        "test_create_revision",
+        "test_get_revision_history",
+        "test_get_latest_revision",
+        "test_get_variables_list",
+        "test_render_template",
+        "test_validation_error_on_missing_variables",
+        "test_validation_error_on_invalid_status_transition"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_template_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_string_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activate_template",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_template",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_archive_template",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_revision",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_revision_history",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_latest_revision",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_variables_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_render_template",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_error_on_missing_variables",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_error_on_invalid_status_transition",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

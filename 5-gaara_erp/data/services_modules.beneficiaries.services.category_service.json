@@ -1,0 +1,43 @@
+{
+  "module": "services_modules.beneficiaries.services.category_service",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_category",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "update_category",
+      "parameters": [
+        "category_id",
+        "data"
+      ]
+    },
+    {
+      "name": "get_category_by_id",
+      "parameters": [
+        "category_id"
+      ]
+    },
+    {
+      "name": "get_all_categories",
+      "parameters": [
+        "with_count"
+      ]
+    },
+    {
+      "name": "delete_category",
+      "parameters": [
+        "category_id"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,40 @@
+{
+  "module": "gaara_erp.settings.base",
+  "imports": [
+    "datetime",
+    "decouple",
+    "os",
+    "pathlib"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "BASE_DIR",
+    "SECRET_KEY",
+    "DEBUG",
+    "APP_MODE",
+    "APP_VERSION",
+    "ALLOWED_HOSTS",
+    "DJANGO_APPS",
+    "THIRD_PARTY_APPS",
+    "CORE_MODULES",
+    "BUSINESS_MODULES",
+    "ADMIN_MODULES",
+    "AGRICULTURAL_MODULES",
+    "INTEGRATION_MODULES",
+    "LOCAL_APPS",
+    "MIDDLEWARE",
+    "ROOT_URLCONF",
+    "TEMPLATES",
+    "WSGI_APPLICATION",
+    "ASGI_APPLICATION",
+    "STATIC_URL",
+    "STATIC_ROOT",
+    "STATICFILES_DIRS",
+    "MEDIA_URL",
+    "MEDIA_ROOT",
+    "DEFAULT_AUTO_FIELD",
+    "REST_FRAMEWORK",
+    "SIMPLE_JWT"
+  ]
+}

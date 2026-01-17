@@ -1,0 +1,28 @@
+{
+  "module": "core_modules.system_settings.signals",
+  "imports": [
+    "django.apps",
+    "django.db.models.signals",
+    "django.utils"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "_handle_currency_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "_handle_setup_wizard_status_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    }
+  ],
+  "variables": []
+}

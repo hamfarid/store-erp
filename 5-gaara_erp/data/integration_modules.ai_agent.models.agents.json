@@ -1,0 +1,43 @@
+{
+  "module": "integration_modules.ai_agent.models.agents",
+  "imports": [
+    "agent_types",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Agent",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "agent_type",
+        "description",
+        "is_active",
+        "config",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

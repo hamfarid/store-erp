@@ -1,0 +1,29 @@
+{
+  "module": "create_project_catalog",
+  "imports": [
+    "django",
+    "django.apps",
+    "django.conf",
+    "json",
+    "os",
+    "pathlib",
+    "sys",
+    "time"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_project_catalog",
+      "parameters": []
+    },
+    {
+      "name": "scan_directory",
+      "parameters": [
+        "path",
+        "max_depth",
+        "current_depth"
+      ]
+    }
+  ],
+  "variables": []
+}

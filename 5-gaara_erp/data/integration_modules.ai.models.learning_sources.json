@@ -1,0 +1,188 @@
+{
+  "module": "integration_modules.ai.models.learning_sources",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "LearningSource",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "source_type",
+        "url",
+        "file_path",
+        "reliability_score",
+        "description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ReferenceFile",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "file_path",
+        "file_type",
+        "description",
+        "uploaded_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Keyword",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "keyword",
+        "category",
+        "source",
+        "is_system_generated",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "KeywordFile",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "file_path",
+        "source_type",
+        "variety_name",
+        "description",
+        "uploaded_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "SourceType",
+      "methods": [],
+      "variables": [
+        "WEBSITE",
+        "ARTICLE",
+        "IMAGE",
+        "DATABASE",
+        "DOCUMENT",
+        "USER_INPUT",
+        "RESEARCH_PAPER",
+        "SEED_COMPANY",
+        "FERTILIZER_COMPANY",
+        "RESEARCH_LAB"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    },
+    {
+      "name": "FileType",
+      "methods": [],
+      "variables": [
+        "DISEASE",
+        "SOIL",
+        "VARIETY",
+        "PEST",
+        "TREATMENT",
+        "STANDARD_SPEC",
+        "GENERAL"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Category",
+      "methods": [],
+      "variables": [
+        "VARIETY",
+        "DISEASE",
+        "SOIL",
+        "PEST",
+        "TREATMENT",
+        "GENERAL"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Source",
+      "methods": [],
+      "variables": [
+        "SYSTEM",
+        "USER"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

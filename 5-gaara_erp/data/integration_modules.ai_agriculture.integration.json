@@ -1,0 +1,85 @@
+{
+  "module": "integration_modules.ai_agriculture.integration",
+  "imports": [
+    "agricultural_modules.farms.models",
+    "ai.models",
+    "ai.services.image_analysis_service",
+    "ai.services.model_service",
+    "core.events.models",
+    "django.db",
+    "django.utils",
+    "logging",
+    "notifications.services",
+    "weather_services.api"
+  ],
+  "classes": [
+    {
+      "name": "AIAgricultureIntegration",
+      "methods": [
+        "get_ai_model",
+        "get_farm",
+        "predict_with_ai_model",
+        "get_weather_data",
+        "analyze_crop_image",
+        "register_crop_analysis_event",
+        "send_notification"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_ai_model",
+      "parameters": [
+        "model_type"
+      ]
+    },
+    {
+      "name": "get_farm",
+      "parameters": [
+        "farm_id"
+      ]
+    },
+    {
+      "name": "predict_with_ai_model",
+      "parameters": [
+        "model_id",
+        "input_data"
+      ]
+    },
+    {
+      "name": "get_weather_data",
+      "parameters": [
+        "location",
+        "date"
+      ]
+    },
+    {
+      "name": "analyze_crop_image",
+      "parameters": [
+        "image_path",
+        "crop_type"
+      ]
+    },
+    {
+      "name": "register_crop_analysis_event",
+      "parameters": [
+        "farm_id",
+        "crop_type",
+        "analysis_result"
+      ]
+    },
+    {
+      "name": "send_notification",
+      "parameters": [
+        "user_id",
+        "title",
+        "message",
+        "data"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

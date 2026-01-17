@@ -1,0 +1,226 @@
+{
+  "module": "services_modules.quality_control.forms",
+  "imports": [
+    "django",
+    "django.core.exceptions",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "QualityTemplateForm",
+      "methods": [
+        "clean_code"
+      ],
+      "variables": []
+    },
+    {
+      "name": "QualityParameterForm",
+      "methods": [
+        "__init__",
+        "clean"
+      ],
+      "variables": []
+    },
+    {
+      "name": "QualityCheckForm",
+      "methods": [
+        "__init__",
+        "clean_reference_number"
+      ],
+      "variables": []
+    },
+    {
+      "name": "QualityResultForm",
+      "methods": [
+        "__init__",
+        "clean"
+      ],
+      "variables": []
+    },
+    {
+      "name": "QualityCertificateForm",
+      "methods": [
+        "__init__",
+        "get_certificate_type_from_check",
+        "clean",
+        "clean_certificate_number"
+      ],
+      "variables": []
+    },
+    {
+      "name": "QualityIssueForm",
+      "methods": [
+        "__init__",
+        "clean_reference_number"
+      ],
+      "variables": []
+    },
+    {
+      "name": "QualityImprovementForm",
+      "methods": [
+        "__init__",
+        "clean_reference_number"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "widgets",
+        "help_texts"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "widgets"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "widgets"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "widgets"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "widgets"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "widgets"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "widgets"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "clean_code",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean_reference_number",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_certificate_type_from_check",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean_certificate_number",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean_reference_number",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean_reference_number",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

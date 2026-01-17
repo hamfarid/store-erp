@@ -1,0 +1,65 @@
+{
+  "module": "integration_modules.ai_agriculture.api.crop_prediction_api",
+  "imports": [
+    "django.db",
+    "django.shortcuts",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "services.crop_prediction_service"
+  ],
+  "classes": [
+    {
+      "name": "CropPredictionViewSet",
+      "methods": [
+        "predict_yield",
+        "predict_problems",
+        "get_yield_prediction",
+        "get_crop_prediction",
+        "farm_predictions"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "predict_yield",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "predict_problems",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_yield_prediction",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_crop_prediction",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "farm_predictions",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

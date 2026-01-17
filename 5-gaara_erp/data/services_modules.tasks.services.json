@@ -1,0 +1,150 @@
+{
+  "module": "services_modules.tasks.services",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "logging",
+    "models.tag",
+    "models.task"
+  ],
+  "classes": [
+    {
+      "name": "TaskService",
+      "methods": [
+        "__init__",
+        "register_integration",
+        "create_task",
+        "update_task",
+        "get_task_details",
+        "list_tasks",
+        "update_task_status",
+        "assign_task",
+        "unassign_task",
+        "archive_task",
+        "create_tag",
+        "update_tag",
+        "list_tags",
+        "get_task_statistics",
+        "generate_task_report"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "register_integration",
+      "parameters": [
+        "self",
+        "integration_name",
+        "integration_instance"
+      ]
+    },
+    {
+      "name": "create_task",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_task",
+      "parameters": [
+        "self",
+        "task_id"
+      ]
+    },
+    {
+      "name": "get_task_details",
+      "parameters": [
+        "self",
+        "task_id"
+      ]
+    },
+    {
+      "name": "list_tasks",
+      "parameters": [
+        "self",
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "update_task_status",
+      "parameters": [
+        "self",
+        "task_id",
+        "status",
+        "updated_by_id"
+      ]
+    },
+    {
+      "name": "assign_task",
+      "parameters": [
+        "self",
+        "task_id",
+        "user_id"
+      ]
+    },
+    {
+      "name": "unassign_task",
+      "parameters": [
+        "self",
+        "task_id",
+        "user_id"
+      ]
+    },
+    {
+      "name": "archive_task",
+      "parameters": [
+        "self",
+        "task_id"
+      ]
+    },
+    {
+      "name": "create_tag",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_tag",
+      "parameters": [
+        "self",
+        "tag_id"
+      ]
+    },
+    {
+      "name": "list_tags",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_task_statistics",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "generate_task_report",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date",
+        "report_type"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

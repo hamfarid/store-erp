@@ -1,0 +1,11 @@
+{
+  "module": "business_modules.accounting.taxes",
+  "imports": [
+    "django.db",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

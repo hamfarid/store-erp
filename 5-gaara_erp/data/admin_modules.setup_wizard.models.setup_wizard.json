@@ -1,0 +1,212 @@
+{
+  "module": "admin_modules.setup_wizard.models.setup_wizard",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "json"
+  ],
+  "classes": [
+    {
+      "name": "SetupWizardState",
+      "methods": [
+        "__str__",
+        "mark_step_completed",
+        "save_step_data",
+        "get_step_data",
+        "mark_as_completed"
+      ],
+      "variables": [
+        "user",
+        "current_step",
+        "completed_steps",
+        "data",
+        "is_completed",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "SetupWizardStep",
+      "methods": [
+        "__str__",
+        "fields"
+      ],
+      "variables": [
+        "step_id",
+        "title",
+        "description",
+        "order",
+        "is_required",
+        "fields_definition",
+        "next_step",
+        "prev_step",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "SystemConfig",
+      "methods": [
+        "__str__",
+        "get_value",
+        "set_value"
+      ],
+      "variables": [
+        "key",
+        "value",
+        "description",
+        "is_sensitive",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "SetupWizardLog",
+      "methods": [
+        "__str__",
+        "log_action"
+      ],
+      "variables": [
+        "user",
+        "step_id",
+        "action",
+        "details",
+        "status",
+        "timestamp",
+        "ip_address"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_step_completed",
+      "parameters": [
+        "self",
+        "step_id"
+      ]
+    },
+    {
+      "name": "save_step_data",
+      "parameters": [
+        "self",
+        "step_id",
+        "data"
+      ]
+    },
+    {
+      "name": "get_step_data",
+      "parameters": [
+        "self",
+        "step_id"
+      ]
+    },
+    {
+      "name": "mark_as_completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_value",
+      "parameters": [
+        "cls",
+        "key",
+        "default"
+      ]
+    },
+    {
+      "name": "set_value",
+      "parameters": [
+        "cls",
+        "key",
+        "value",
+        "description",
+        "is_sensitive",
+        "user"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_action",
+      "parameters": [
+        "cls",
+        "user",
+        "step_id",
+        "action",
+        "status",
+        "details",
+        "ip_address"
+      ]
+    }
+  ],
+  "variables": []
+}

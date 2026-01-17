@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaara ERP v12 - تقرير تحليل المشروع الشامل</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1a365d;
+            font-size: 2.5em;
+            border-bottom: 4px solid #3182ce;
+            padding-bottom: 15px;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #2c5282;
+            font-size: 1.8em;
+            margin-top: 40px;
+            border-right: 5px solid #3182ce;
+            padding-right: 15px;
+            background: linear-gradient(to left, #ebf8ff, transparent);
+            padding: 10px 15px;
+        }
+        
+        h3 {
+            color: #2b6cb0;
+            font-size: 1.4em;
+            margin-top: 30px;
+        }
+        
+        h4 {
+            color: #3182ce;
+            font-size: 1.2em;
+            margin-top: 25px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 12px 15px;
+            text-align: right;
+        }
+        
+        th {
+            background: #3182ce;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tr:hover {
+            background: #ebf8ff;
+        }
+        
+        code {
+            background: #2d3748;
+            color: #68d391;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            direction: ltr;
+            display: inline-block;
+        }
+        
+        pre {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 2px;
+        }
+        
+        .badge-blue {
+            background: #3182ce;
+            color: white;
+        }
+        
+        .badge-green {
+            background: #38a169;
+            color: white;
+        }
+        
+        .badge-orange {
+            background: #dd6b20;
+            color: white;
+        }
+        
+        .badge-red {
+            background: #e53e3e;
+            color: white;
+        }
+        
+        .info-box {
+            background: #ebf8ff;
+            border-right: 4px solid #3182ce;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background: #fffaf0;
+            border-right: 4px solid #dd6b20;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .success-box {
+            background: #f0fff4;
+            border-right: 4px solid #38a169;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .header-info {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #4a5568;
+        }
+        
+        .toc {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            color: #2d3748;
+        }
+        
+        .toc ol {
+            columns: 2;
+            column-gap: 30px;
+        }
+        
+        .toc li {
+            margin: 8px 0;
+            color: #3182ce;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #3182ce, #2c5282);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 2em;
+            font-weight: 700;
+        }
+        
+        .stat-card .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to left, transparent, #3182ce, transparent);
+            margin: 40px 0;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            h2 {
+                page-break-after: avoid;
+            }
+            table {
+                page-break-inside: avoid;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <h1>🏢 Gaara ERP v12</h1>
+        <h2 style="border: none; background: none; padding: 0; margin-top: 0; font-size: 1.5em;">تقرير تحليل المشروع الشامل</h2>
+        <h3 style="color: #718096; margin-top: 5px;">نظام تخطيط موارد المؤسسات المتكامل</h3>
+        
+        <div class="header-info">
+            <span class="badge badge-blue">إصدار v12.0.0</span>
+            <span class="badge badge-green">جاهز للإنتاج ✅</span>
+            <span class="badge badge-orange">ديسمبر 2025</span>
+        </div>
+        
+        <hr>
+        
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>📋 الفهرس</h3>
+            <ol>
+                <li>نظرة عامة على المشروع</li>
+                <li>المتطلبات التقنية</li>
+                <li>هيكل المجلدات</li>
+                <li>الوحدات الأساسية</li>
+                <li>الوحدات التجارية</li>
+                <li>الوحدات الزراعية</li>
+                <li>وحدات الخدمات</li>
+                <li>وحدات الإدارة</li>
+                <li>وحدات الذكاء الاصطناعي</li>
+                <li>وحدات التكامل</li>
+                <li>وحدات المرافق</li>
+                <li>البنية التقنية</li>
+                <li>ميزات الأمان</li>
+                <li>إحصائيات المشروع</li>
+                <li>طريقة التشغيل</li>
+            </ol>
+        </div>
+        
+        <hr>
+        
+        <!-- Section 1: Overview -->
+        <h2>📌 نظرة عامة على المشروع</h2>
+        
+        <p><strong>Gaara ERP v12</strong> هو نظام تخطيط موارد المؤسسات (Enterprise Resource Planning) شامل ومتطور، مصمم لتلبية احتياجات المؤسسات التجارية والزراعية والخدمية. يوفر النظام حلولاً متكاملة لإدارة جميع جوانب الأعمال من خلال واجهة مستخدم حديثة ونظام خلفي قوي.</p>
+        
+        <div class="success-box">
+            <h4 style="margin-top: 0;">✅ الميزات الرئيسية:</h4>
+            <ul>
+                <li>نظام متعدد الشركات والفروع</li>
+                <li>نظام محاسبي متكامل</li>
+                <li>إدارة المخزون والمبيعات والمشتريات</li>
+                <li>وحدات زراعية متخصصة</li>
+                <li>ذكاء اصطناعي لتشخيص أمراض النباتات</li>
+                <li>نظام صلاحيات متقدم</li>
+                <li>دعم متعدد اللغات (العربية، الإنجليزية، التركية)</li>
+                <li>واجهة مستخدم حديثة مع دعم RTL</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <!-- Section 2: Technical Requirements -->
+        <h2>⚙️ المتطلبات التقنية</h2>
+        
+        <h3>متطلبات البرمجيات</h3>
+        <table>
+            <tr>
+                <th>التقنية</th>
+                <th>الإصدار المطلوب</th>
+                <th>الوصف</th>
+            </tr>
+            <tr>
+                <td>Python</td>
+                <td>3.11+</td>
+                <td>لغة البرمجة الأساسية</td>
+            </tr>
+            <tr>
+                <td>Django</td>
+                <td>4.2+ / 5.2</td>
+                <td>إطار العمل الخلفي</td>
+            </tr>
+            <tr>
+                <td>PostgreSQL</td>
+                <td>13+</td>
+                <td>قاعدة البيانات (للإنتاج)</td>
+            </tr>
+            <tr>
+                <td>SQLite</td>
+                <td>3+</td>
+                <td>قاعدة البيانات (للتطوير)</td>
+            </tr>
+            <tr>
+                <td>Redis</td>
+                <td>6+</td>
+                <td>التخزين المؤقت وقائمة المهام</td>
+            </tr>
+            <tr>
+                <td>Node.js</td>
+                <td>18+</td>
+                <td>لتشغيل الواجهة الأمامية</td>
+            </tr>
+            <tr>
+                <td>React</td>
+                <td>18+</td>
+                <td>مكتبة الواجهة الأمامية</td>
+            </tr>
+            <tr>
+                <td>Vite</td>
+                <td>5+</td>
+                <td>أداة البناء للواجهة الأمامية</td>
+            </tr>
+        </table>
+        
+        <h3>تكوين المنافذ</h3>
+        <table>
+            <tr>
+                <th>الخدمة</th>
+                <th>المنفذ</th>
+                <th>الوصف</th>
+            </tr>
+            <tr>
+                <td>Backend (Django)</td>
+                <td><code>3005</code></td>
+                <td>خادم API الخلفي</td>
+            </tr>
+            <tr>
+                <td>Frontend (React)</td>
+                <td><code>3505</code></td>
+                <td>خادم الواجهة الأمامية</td>
+            </tr>
+            <tr>
+                <td>PostgreSQL</td>
+                <td><code>5432</code></td>
+                <td>قاعدة البيانات</td>
+            </tr>
+            <tr>
+                <td>Redis</td>
+                <td><code>6379 / 9651</code></td>
+                <td>التخزين المؤقت</td>
+            </tr>
+        </table>
+        
+        <div class="info-box">
+            <h4 style="margin-top: 0;">🔐 بيانات الدخول الافتراضية</h4>
+            <pre>اسم المستخدم: admin
+البريد الإلكتروني: admin@gaara-erp.com
+كلمة المرور: Admin@123456</pre>
+        </div>
+        
+        <hr>
+        
+        <!-- Section 3: Folder Structure -->
+        <h2>📂 هيكل المجلدات</h2>
+        
+        <pre>Gaara_erp/
+│
+├── 📁 gaara_erp/                      # المشروع الرئيسي
+│   ├── 📁 gaara_erp/                  # إعدادات Django الأساسية
+│   ├── 📁 core_modules/               # الوحدات الأساسية (7 وحدات)
+│   ├── 📁 business_modules/           # الوحدات التجارية (10 وحدات)
+│   ├── 📁 agricultural_modules/       # الوحدات الزراعية (10 وحدات)
+│   ├── 📁 services_modules/           # وحدات الخدمات (26 وحدة)
+│   ├── 📁 admin_modules/              # وحدات الإدارة (14 وحدة)
+│   ├── 📁 ai_modules/                 # وحدات الذكاء الاصطناعي (14 وحدة)
+│   ├── 📁 integration_modules/        # وحدات التكامل (20+ وحدة)
+│   ├── 📁 utility_modules/            # وحدات المرافق (4 وحدات)
+│   ├── 📁 main-frontend/              # الواجهة الأمامية (React)
+│   ├── 📁 static/                     # الملفات الثابتة
+│   ├── 📁 media/                      # ملفات الوسائط
+│   └── 📁 templates/                  # قوالب HTML
+│
+├── 📁 ai_service/                     # خدمة الذكاء الاصطناعي
+├── 📁 ai_training/                    # تدريب نماذج AI
+├── 📁 ai_training_data/               # بيانات التدريب (300 صورة)
+├── 📁 docs/                           # الوثائق (1600+ ملف)
+├── 📁 scripts/                        # سكريبتات التشغيل
+├── 📁 e2e/                            # اختبارات End-to-End
+├── 📁 docker/                         # ملفات Docker
+└── 📁 nginx/                          # إعدادات Nginx</pre>
+        
+        <hr>
+        
+        <!-- Section 4: Core Modules -->
+        <h2>🔧 الوحدات الأساسية (Core Modules)</h2>
+        <p>تشكل هذه الوحدات النواة الأساسية للنظام وتوفر الخدمات المشتركة لجميع الوحدات الأخرى.</p>
+        
+        <table>
+            <tr>
+                <th>#</th>
+                <th>الوحدة</th>
+                <th>الوصف</th>
+                <th>الوظائف الرئيسية</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><strong>Core</strong></td>
+                <td>النواة الأساسية</td>
+                <td>الإعدادات، الثوابت، الخدمات المشتركة</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><strong>Organization</strong></td>
+                <td>الهيكل التنظيمي</td>
+                <td>إدارة الفروع والأقسام</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><strong>Companies</strong></td>
+                <td>إدارة الشركات</td>
+                <td>دعم تعدد الشركات</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><strong>Users</strong></td>
+                <td>إدارة المستخدمين</td>
+                <td>المصادقة، الملفات الشخصية</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><strong>Permissions</strong></td>
+                <td>نظام الصلاحيات</td>
+                <td>الأدوار، التحكم في الوصول</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><strong>Security</strong></td>
+                <td>الأمان والحماية</td>
+                <td>التحقق، رؤوس الأمان</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><strong>Setup</strong></td>
+                <td>الإعداد الأولي</td>
+                <td>معالج الإعداد، التكوين</td>
+            </tr>
+        </table>
+        
+        <hr>
+        
+        <!-- Section 5: Business Modules -->
+        <h2>💼 الوحدات التجارية (Business Modules)</h2>
+        <p>تغطي هذه الوحدات جميع العمليات التجارية للمؤسسة.</p>
+        
+        <table>
+            <tr>
+                <th>#</th>
+                <th>الوحدة</th>
+                <th>الوصف</th>
+                <th>الوظائف الرئيسية</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><strong>Accounting</strong></td>
+                <td>المحاسبة</td>
+                <td>دليل الحسابات، القيود، الفواتير، التقارير المالية</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><strong>Inventory</strong></td>
+                <td>المخزون</td>
+                <td>المنتجات، المخازن، حركات المخزون، التقييم</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><strong>Sales</strong></td>
+                <td>المبيعات</td>
+                <td>عروض الأسعار، أوامر البيع، الفواتير</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><strong>Purchasing</strong></td>
+                <td>المشتريات</td>
+                <td>طلبات الشراء، الموردين، الاستلام</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><strong>POS</strong></td>
+                <td>نقاط البيع</td>
+                <td>الكاشير، الصناديق، طرق الدفع</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><strong>Production</strong></td>
+                <td>الإنتاج</td>
+                <td>أوامر التصنيع، قائمة المواد</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><strong>Rent</strong></td>
+                <td>الإيجارات</td>
+                <td>عقود الإيجار، الفواتير الدورية</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td><strong>Solar Stations</strong></td>
+                <td>المحطات الشمسية</td>
+                <td>مشاريع الطاقة الشمسية</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td><strong>Assets</strong></td>
+                <td>الأصول</td>
+                <td>الأصول الثابتة، الإهلاك</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td><strong>Contacts</strong></td>
+                <td>جهات الاتصال</td>
+                <td>CRM، العملاء المحتملين</td>
+            </tr>
+        </table>
+        
+        <hr>
+        
+        <!-- Section 6: Agricultural Modules -->
+        <h2>🌾 الوحدات الزراعية (Agricultural Modules)</h2>
+        <p>وحدات متخصصة للقطاع الزراعي.</p>
+        
+        <table>
+            <tr>
+                <th>#</th>
+                <th>الوحدة</th>
+                <th>الوصف</th>
+                <th>الوظائف الرئيسية</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><strong>Farms</strong></td>
+                <td>إدارة المزارع</td>
+                <td>تسجيل المزارع، المساحات، الموقع</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><strong>Nurseries</strong></td>
+                <td>إدارة المشاتل</td>
+                <td>الشتلات، البذور، النمو</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><strong>Seed Production</strong></td>
+                <td>إنتاج البذور</td>
+                <td>تتبع الإنتاج، الجودة</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><strong>Seed Hybridization</strong></td>
+                <td>تهجين البذور</td>
+                <td>برامج التهجين، السجلات الوراثية</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><strong>Experiments</strong></td>
+                <td>التجارب الزراعية</td>
+                <td>تصميم التجارب، القياسات</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><strong>Research</strong></td>
+                <td>البحوث الزراعية</td>
+                <td>المشاريع البحثية، النتائج</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><strong>Plant Diagnosis</strong></td>
+                <td>تشخيص النباتات</td>
+                <td>تحليل الصور بـ AI، التوصيات</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td><strong>Production</strong></td>
+                <td>الإنتاج الزراعي</td>
+                <td>دورات الإنتاج، الحصاد</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td><strong>Variety Trials</strong></td>
+                <td>تجارب الأصناف</td>
+                <td>اختبار الأصناف الجديدة</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td><strong>Agricultural Experiments</strong></td>
+                <td>تجارب متقدمة</td>
+                <td>تحليل AI للتجارب</td>
+            </tr>
+        </table>
+        
+        <hr>
+        
+        <!-- Section 7: Services Modules -->
+        <h2>🛠️ وحدات الخدمات (Services Modules)</h2>
+        <p>وحدات الخدمات المساندة - 26 وحدة</p>
+        
+        <table>
+            <tr>
+                <th>الوحدة</th>
+                <th>الوصف</th>
+            </tr>
+            <tr><td><strong>HR</strong></td><td>الموارد البشرية - الموظفين، الرواتب، الحضور، الإجازات</td></tr>
+            <tr><td><strong>Projects</strong></td><td>إدارة المشاريع - المهام، المراحل، الفريق</td></tr>
+            <tr><td><strong>Tasks</strong></td><td>إدارة المهام - المهام اليومية، التعيينات</td></tr>
+            <tr><td><strong>Quality Control</strong></td><td>مراقبة الجودة - الفحوصات، المعايير</td></tr>
+            <tr><td><strong>Legal Affairs</strong></td><td>الشؤون القانونية - العقود، القضايا</td></tr>
+            <tr><td><strong>Fleet Management</strong></td><td>إدارة الأسطول - المركبات، الصيانة</td></tr>
+            <tr><td><strong>Forecast</strong></td><td>التنبؤ - توقعات المبيعات، الطلب</td></tr>
+            <tr><td><strong>Marketing</strong></td><td>التسويق - الحملات، العملاء المحتملين</td></tr>
+            <tr><td><strong>Training</strong></td><td>التدريب - الدورات، الشهادات</td></tr>
+            <tr><td><strong>Workflows</strong></td><td>سير العمل - الموافقات، العمليات الآلية</td></tr>
+            <tr><td><strong>Compliance</strong></td><td>الامتثال - المتطلبات التنظيمية</td></tr>
+            <tr><td><strong>Risk Management</strong></td><td>إدارة المخاطر - تقييم وتخفيف المخاطر</td></tr>
+            <tr><td><strong>Beneficiaries</strong></td><td>المستفيدين - برامج الدعم</td></tr>
+            <tr><td><strong>Board Management</strong></td><td>إدارة مجلس الإدارة</td></tr>
+            <tr><td><strong>Correspondence</strong></td><td>المراسلات - الصادر والوارد</td></tr>
+            <tr><td><strong>Feasibility Studies</strong></td><td>دراسات الجدوى</td></tr>
+            <tr><td><strong>Complaints & Suggestions</strong></td><td>الشكاوى والاقتراحات</td></tr>
+            <tr><td><strong>Archiving System</strong></td><td>نظام الأرشفة الإلكترونية</td></tr>
+            <tr><td><strong>Telegram Bot</strong></td><td>بوت تليجرام - إشعارات وأوامر</td></tr>
+        </table>
+        
+        <hr>
+        
+        <!-- Section 8: Admin Modules -->
+        <h2>👨‍💼 وحدات الإدارة (Admin Modules)</h2>
+        <p>وحدات إدارة وتكوين النظام - 14 وحدة</p>
+        
+        <table>
+            <tr>
+                <th>الوحدة</th>
+                <th>الوصف</th>
+                <th>الوظائف</th>
+            </tr>
+            <tr><td><strong>AI Dashboard</strong></td><td>لوحة تحكم AI</td><td>تحليلات ذكية، رسوم بيانية</td></tr>
+            <tr><td><strong>Custom Admin</strong></td><td>لوحة إدارة مخصصة</td><td>واجهة Django محسنة</td></tr>
+            <tr><td><strong>Dashboard</strong></td><td>لوحة القيادة</td><td>ملخصات، KPIs</td></tr>
+            <tr><td><strong>Data Import/Export</strong></td><td>استيراد/تصدير</td><td>Excel, CSV, JSON</td></tr>
+            <tr><td><strong>Database Management</strong></td><td>إدارة قاعدة البيانات</td><td>النسخ الاحتياطي، الاستعادة</td></tr>
+            <tr><td><strong>Health Monitoring</strong></td><td>مراقبة الصحة</td><td>حالة الخدمات</td></tr>
+            <tr><td><strong>Internal Diagnosis</strong></td><td>التشخيص الداخلي</td><td>فحص صحة النظام</td></tr>
+            <tr><td><strong>Notifications</strong></td><td>إدارة الإشعارات</td><td>البريد، Push، SMS</td></tr>
+            <tr><td><strong>Reports</strong></td><td>التقارير</td><td>تقارير مخصصة، جدولة</td></tr>
+            <tr><td><strong>Setup Wizard</strong></td><td>معالج الإعداد</td><td>إعداد النظام</td></tr>
+            <tr><td><strong>System Backups</strong></td><td>النسخ الاحتياطي</td><td>جدولة النسخ</td></tr>
+            <tr><td><strong>System Monitoring</strong></td><td>مراقبة النظام</td><td>الموارد، السجلات</td></tr>
+        </table>
+        
+        <hr>
+        
+        <!-- Section 9: AI Modules -->
+        <h2>🤖 وحدات الذكاء الاصطناعي (AI Modules)</h2>
+        <p>وحدات الذكاء الاصطناعي والتعلم الآلي - 14 وحدة</p>
+        
+        <table>
+            <tr>
+                <th>الوحدة</th>
+                <th>الوصف</th>
+                <th>التقنيات</th>
+            </tr>
+            <tr><td><strong>AI Agents</strong></td><td>وكلاء AI</td><td>وكلاء ذكية للمهام الآلية</td></tr>
+            <tr><td><strong>AI Memory</strong></td><td>ذاكرة AI</td><td>تخزين سياق المحادثات</td></tr>
+            <tr><td><strong>AI Models</strong></td><td>نماذج AI</td><td>إدارة النماذج المختلفة</td></tr>
+            <tr><td><strong>AI Training</strong></td><td>تدريب AI</td><td>تدريب وتحسين النماذج</td></tr>
+            <tr><td><strong>Intelligent Assistant</strong></td><td>المساعد الذكي</td><td>Chatbot، NLP</td></tr>
+            <tr><td><strong>Plant Disease Classifier</strong></td><td>مصنف الأمراض</td><td>تصنيف أمراض النباتات</td></tr>
+            <tr><td><strong>Simulated Tools</strong></td><td>أدوات المحاكاة</td><td>Plantix, Agrio, PlantVillage</td></tr>
+        </table>
+        
+        <hr>
+        
+        <!-- Section 10: Integration Modules -->
+        <h2>🔗 وحدات التكامل (Integration Modules)</h2>
+        <p>وحدات التكامل مع الأنظمة الخارجية - 20+ وحدة</p>
+        
+        <h3>تكامل الذكاء الاصطناعي</h3>
+        <p>AI, AI A2A, AI Agent, AI Agriculture, AI Analytics, AI Monitoring, AI Security, AI Services, AI UI, Memory AI</p>
+        
+        <h3>تكامل الخدمات الخارجية</h3>
+        <table>
+            <tr>
+                <th>الوحدة</th>
+                <th>الوصف</th>
+            </tr>
+            <tr><td><strong>Banking Payments</strong></td><td>التكامل مع البنوك وبوابات الدفع</td></tr>
+            <tr><td><strong>Cloud Services</strong></td><td>خدمات سحابية (AWS, GCP, Azure)</td></tr>
+            <tr><td><strong>E-commerce</strong></td><td>منصات التجارة الإلكترونية</td></tr>
+            <tr><td><strong>Email Messaging</strong></td><td>خدمات البريد الإلكتروني</td></tr>
+            <tr><td><strong>External APIs</strong></td><td>واجهات برمجة خارجية</td></tr>
+            <tr><td><strong>Maps Location</strong></td><td>خدمات الخرائط والموقع</td></tr>
+            <tr><td><strong>Social Media</strong></td><td>وسائل التواصل الاجتماعي</td></tr>
+            <tr><td><strong>Translation</strong></td><td>خدمات الترجمة</td></tr>
+        </table>
+        
+        <hr>
+        
+        <!-- Section 11: Security -->
+        <h2>🔐 ميزات الأمان</h2>
+        
+        <div class="success-box">
+            <h4 style="margin-top: 0;">✅ الميزات الأمنية المطبقة:</h4>
+            <ul>
+                <li>JWT Authentication (JSON Web Tokens)</li>
+                <li>Session Management</li>
+                <li>CORS Configuration</li>
+                <li>Rate Limiting</li>
+                <li>CSRF Protection</li>
+                <li>XSS Protection</li>
+                <li>SQL Injection Prevention</li>
+                <li>Input Validation & Sanitization</li>
+                <li>Security Headers</li>
+                <li>Password Hashing (bcrypt)</li>
+                <li>Role-Based Access Control (RBAC)</li>
+                <li>API Key Authentication</li>
+            </ul>
+        </div>
+        
+        <hr>
+        
+        <!-- Section 12: Statistics -->
+        <h2>📊 إحصائيات المشروع</h2>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="number">56+</div>
+                <div class="label">تطبيق Django</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">262+</div>
+                <div class="label">نموذج (Model)</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">1,800+</div>
+                <div class="label">ملف Python</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">1,600+</div>
+                <div class="label">ملف React/JSX</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">218+</div>
+                <div class="label">نقطة نهاية API</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">~105</div>
+                <div class="label">وحدة إجمالية</div>
+            </div>
+        </div>
+        
+        <h3>نتائج الاختبارات</h3>
+        <table>
+            <tr>
+                <th>نوع الاختبار</th>
+                <th>النتيجة</th>
+                <th>الحالة</th>
+            </tr>
+            <tr><td>Security Tests</td><td>24/24</td><td>✅ نجاح</td></tr>
+            <tr><td>AI Memory Tests</td><td>16/16</td><td>✅ نجاح</td></tr>
+            <tr><td>AI Integration Tests</td><td>53/53</td><td>✅ نجاح</td></tr>
+            <tr><td>Django System Check</td><td>0 issues</td><td>✅ نجاح</td></tr>
+        </table>
+        
+        <hr>
+        
+        <!-- Section 13: Running -->
+        <h2>🚀 طريقة التشغيل</h2>
+        
+        <h3>التشغيل السريع</h3>
+        <pre># 1. تفعيل البيئة الافتراضية
+cd gaara_erp
+venv\Scripts\activate     # Windows
+
+# 2. تثبيت المتطلبات
+pip install -r requirements.txt
+
+# 3. تشغيل الترحيلات
+python manage.py migrate
+
+# 4. إنشاء المستخدم الإداري
+python create_admin.py
+
+# 5. تشغيل الخادم الخلفي
+python manage.py runserver 0.0.0.0:3005
+
+# 6. تشغيل الواجهة الأمامية (في نافذة أخرى)
+cd main-frontend
+npm install
+npm run dev</pre>
+        
+        <h3>روابط الوصول للنظام</h3>
+        <table>
+            <tr>
+                <th>الخدمة</th>
+                <th>الرابط</th>
+            </tr>
+            <tr><td>التطبيق الرئيسي</td><td><code>http://localhost:3005/</code></td></tr>
+            <tr><td>لوحة الإدارة</td><td><code>http://localhost:3005/admin/</code></td></tr>
+            <tr><td>توثيق API</td><td><code>http://localhost:3005/api/docs/</code></td></tr>
+            <tr><td>الواجهة الأمامية</td><td><code>http://localhost:3505/</code></td></tr>
+        </table>
+        
+        <hr>
+        
+        <!-- Summary -->
+        <h2>📝 الخلاصة</h2>
+        
+        <div class="info-box">
+            <p><strong>Gaara ERP v12</strong> هو نظام ERP متكامل وشامل يوفر:</p>
+            <ul>
+                <li>🏢 <strong>إدارة شاملة للأعمال</strong> - محاسبة، مخزون، مبيعات، مشتريات</li>
+                <li>🌾 <strong>وحدات زراعية متخصصة</strong> - مزارع، مشاتل، تجارب، تشخيص AI</li>
+                <li>🤖 <strong>ذكاء اصطناعي متقدم</strong> - تشخيص أمراض، تحليلات، توصيات</li>
+                <li>🔐 <strong>أمان متعدد الطبقات</strong> - JWT، RBAC، حماية شاملة</li>
+                <li>🌍 <strong>دعم متعدد اللغات</strong> - العربية، الإنجليزية، التركية</li>
+                <li>📱 <strong>واجهة حديثة</strong> - React + Vite مع دعم RTL</li>
+            </ul>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>تم إعداد هذا التقرير في:</strong> ديسمبر 2025</p>
+            <p><strong>الإصدار:</strong> Gaara ERP v12.0.0</p>
+            <p><strong>الحالة:</strong> <span class="badge badge-green">جاهز للإنتاج ✅</span></p>
+            <hr>
+            <p>© 2025 Gaara ERP - جميع الحقوق محفوظة</p>
+        </div>
+        
+        <div class="no-print" style="margin-top: 30px; text-align: center; padding: 20px; background: #f7fafc; border-radius: 8px;">
+            <p><strong>💡 لتحويل هذا الملف إلى PDF:</strong></p>
+            <p>اضغط <code>Ctrl + P</code> (أو <code>Cmd + P</code> على Mac) واختر "حفظ كـ PDF"</p>
+        </div>
+    </div>
+</body>
+</html>
+

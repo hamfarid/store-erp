@@ -1,0 +1,15 @@
+{
+  "module": "scripts.inspect_account_model_to_file",
+  "imports": [
+    "django",
+    "django.apps",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "Account",
+    "content"
+  ]
+}

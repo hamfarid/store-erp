@@ -1,0 +1,12 @@
+{
+  "module": "core_modules.organization.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework.routers"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns"
+  ]
+}

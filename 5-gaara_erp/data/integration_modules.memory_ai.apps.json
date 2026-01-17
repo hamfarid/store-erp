@@ -1,0 +1,19 @@
+{
+  "module": "integration_modules.memory_ai.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "MemoryAiConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

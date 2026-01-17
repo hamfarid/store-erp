@@ -1,0 +1,72 @@
+{
+  "module": "agricultural_modules.nurseries.integration_assets",
+  "imports": [
+    "business_modules.assets.models",
+    "django.contrib.auth",
+    "django.db",
+    "django.shortcuts",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "NurseryAssetUsage",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "link_equipment_to_nursery_activity",
+      "parameters": [
+        "nursery_activity_id",
+        "asset_id",
+        "usage_duration_hours",
+        "notes"
+      ]
+    },
+    {
+      "name": "assign_assets_to_nursery_site",
+      "parameters": [
+        "nursery_site_id",
+        "asset_ids",
+        "assignment_date",
+        "notes"
+      ]
+    },
+    {
+      "name": "transfer_asset_between_nursery_sites",
+      "parameters": [
+        "asset_id",
+        "source_nursery_id",
+        "destination_nursery_id",
+        "transfer_date",
+        "notes"
+      ]
+    },
+    {
+      "name": "record_asset_maintenance_in_nursery",
+      "parameters": [
+        "asset_id",
+        "nursery_site_id",
+        "maintenance_date",
+        "description",
+        "cost",
+        "performed_by"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "asset",
+        "usage_hours",
+        "usage_date",
+        "notes"
+      ]
+    }
+  ],
+  "variables": []
+}

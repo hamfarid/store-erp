@@ -1,0 +1,238 @@
+{
+  "module": "admin_modules.dashboard.services.dashboard_service",
+  "imports": [
+    "core_modules.activity_log.services.audit_trail_service",
+    "datetime",
+    "django.contrib.auth.models",
+    "django.contrib.sessions.models",
+    "django.db",
+    "django.db.models",
+    "importlib",
+    "logging",
+    "random",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "DashboardService",
+      "methods": [
+        "__init__",
+        "_get_user",
+        "get_dashboard_by_id",
+        "get_dashboards_by_user",
+        "create_dashboard",
+        "update_dashboard",
+        "delete_dashboard",
+        "share_dashboard",
+        "get_available_widgets",
+        "get_widget_data",
+        "_check_dashboard_permissions",
+        "_serialize_dashboard",
+        "_create_widgets",
+        "_update_widgets",
+        "_get_widget_data_by_type",
+        "_get_stats_widget_data",
+        "_get_chart_widget_data",
+        "_get_users_stats",
+        "_get_tasks_stats",
+        "_get_general_stats",
+        "_get_sales_chart_data",
+        "_get_tasks_chart_data_stub",
+        "_get_tasks_widget_data_stub"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_get_user",
+      "parameters": [
+        "self",
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_dashboard_by_id",
+      "parameters": [
+        "self",
+        "dashboard_id",
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_dashboards_by_user",
+      "parameters": [
+        "self",
+        "user_id"
+      ]
+    },
+    {
+      "name": "create_dashboard",
+      "parameters": [
+        "self",
+        "user_id",
+        "dashboard_data"
+      ]
+    },
+    {
+      "name": "update_dashboard",
+      "parameters": [
+        "self",
+        "dashboard_id",
+        "user_id",
+        "dashboard_data"
+      ]
+    },
+    {
+      "name": "delete_dashboard",
+      "parameters": [
+        "self",
+        "dashboard_id",
+        "user_id"
+      ]
+    },
+    {
+      "name": "share_dashboard",
+      "parameters": [
+        "self",
+        "dashboard_id",
+        "owner_id",
+        "user_ids",
+        "permissions"
+      ]
+    },
+    {
+      "name": "get_available_widgets",
+      "parameters": [
+        "self",
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_widget_data",
+      "parameters": [
+        "self",
+        "widget_id",
+        "user_id",
+        "params"
+      ]
+    },
+    {
+      "name": "_check_dashboard_permissions",
+      "parameters": [
+        "self",
+        "dashboard",
+        "user_id",
+        "permission_type"
+      ]
+    },
+    {
+      "name": "_serialize_dashboard",
+      "parameters": [
+        "self",
+        "dashboard"
+      ]
+    },
+    {
+      "name": "_create_widgets",
+      "parameters": [
+        "self",
+        "dashboard_id",
+        "widgets_data"
+      ]
+    },
+    {
+      "name": "_update_widgets",
+      "parameters": [
+        "self",
+        "dashboard_id",
+        "widgets_data"
+      ]
+    },
+    {
+      "name": "_get_widget_data_by_type",
+      "parameters": [
+        "self",
+        "widget",
+        "params"
+      ]
+    },
+    {
+      "name": "_get_stats_widget_data",
+      "parameters": [
+        "self",
+        "config",
+        "params"
+      ]
+    },
+    {
+      "name": "_get_chart_widget_data",
+      "parameters": [
+        "self",
+        "config",
+        "params"
+      ]
+    },
+    {
+      "name": "_get_users_stats",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "_get_tasks_stats",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "_get_general_stats",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "_get_sales_chart_data",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "_get_tasks_chart_data_stub",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "_get_tasks_widget_data_stub",
+      "parameters": [
+        "self",
+        "params"
+      ]
+    }
+  ],
+  "variables": [
+    "Dashboard",
+    "DashboardAccess",
+    "WidgetType",
+    "Widget",
+    "Task",
+    "logger"
+  ]
+}

@@ -1,0 +1,29 @@
+
+> inventory-frontend@1.5.0 build
+> vite build
+
+[36mvite v7.1.12 [32mbuilding for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 13569 modules transformed.
+Γ£ù Build failed in 6.34s
+error during build:
+src/components/ui/theme-toggle.jsx (19:9): "Button" is not exported by "src/components/ui/button.jsx", imported by "src/components/ui/theme-toggle.jsx".
+file: E:/New folder/gaara_erp-Manus-14-12-2025 - Copy/frontend/src/components/ui/theme-toggle.jsx:19:9
+
+17: import * as React from 'react';
+18: import { Moon, Sun, Monitor } from 'lucide-react';
+19: import { Button } from './button';
+             ^
+20: import {
+21:   DropdownMenu,
+
+    at getRollupError (file:///E:/New%20folder/gaara_erp-Manus-14-12-2025%20-%20Copy/frontend/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+    at error (file:///E:/New%20folder/gaara_erp-Manus-14-12-2025%20-%20Copy/frontend/node_modules/rollup/dist/es/shared/parseAst.js:397:42)
+    at Module.error (file:///E:/New%20folder/gaara_erp-Manus-14-12-2025%20-%20Copy/frontend/node_modules/rollup/dist/es/shared/node-entry.js:16939:16)
+    at Module.traceVariable (file:///E:/New%20folder/gaara_erp-Manus-14-12-2025%20-%20Copy/frontend/node_modules/rollup/dist/es/shared/node-entry.js:17391:29)
+    at ModuleScope.findVariable (file:///E:/New%20folder/gaara_erp-Manus-14-12-2025%20-%20Copy/frontend/node_modules/rollup/dist/es/shared/node-entry.js:15061:39)
+    at FunctionScope.findVariable (file:///E:/New%20folder/gaara_erp-Manus-14-12-2025%20-%20Copy/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5642:38)
+    at FunctionBodyScope.findVariable (file:///E:/New%20folder/gaara_erp-Manus-14-12-2025%20-%20Copy/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5642:38)
+    at TrackingScope.findVariable (file:///E:/New%20folder/gaara_erp-Manus-14-12-2025%20-%20Copy/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5642:38)
+    at BlockScope.findVariable (file:///E:/New%20folder/gaara_erp-Manus-14-12-2025%20-%20Copy/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5642:38)
+    at Identifier.bind (file:///E:/New%20folder/gaara_erp-Manus-14-12-2025%20-%20Copy/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5413:40)

@@ -1,0 +1,73 @@
+{
+  "module": "agricultural_modules.research.tests.test_services",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models",
+    "services"
+  ],
+  "classes": [
+    {
+      "name": "ResearchProjectServicesTest",
+      "methods": [
+        "setUp",
+        "test_create_research_project",
+        "test_update_research_project",
+        "test_add_team_member_to_project",
+        "test_remove_team_member_from_project",
+        "test_add_objective_to_project",
+        "test_update_project_status"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_research_project",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_research_project",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_team_member_to_project",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_remove_team_member_from_project",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_objective_to_project",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_project_status",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

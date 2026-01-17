@@ -1,0 +1,192 @@
+{
+  "module": "admin_modules.communication.services.email_settings",
+  "imports": [
+    "core_modules.core.models",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "EmailSettings",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "get_connection_string",
+        "mask_password"
+      ],
+      "variables": [
+        "ENCRYPTION_CHOICES",
+        "name",
+        "description",
+        "host",
+        "port",
+        "encryption",
+        "username",
+        "password",
+        "from_email",
+        "from_name",
+        "timeout",
+        "max_connections",
+        "is_default",
+        "is_active",
+        "last_test_date",
+        "last_test_success",
+        "last_test_message"
+      ]
+    },
+    {
+      "name": "EmailTemplate",
+      "methods": [
+        "__str__",
+        "render"
+      ],
+      "variables": [
+        "TEMPLATE_TYPES",
+        "name",
+        "template_type",
+        "subject",
+        "body_html",
+        "body_text",
+        "variables",
+        "is_active"
+      ]
+    },
+    {
+      "name": "EmailLog",
+      "methods": [
+        "__str__",
+        "get_recipients_count",
+        "mark_as_sent",
+        "mark_as_failed"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "subject",
+        "from_email",
+        "to_emails",
+        "cc_emails",
+        "bcc_emails",
+        "body_html",
+        "body_text",
+        "attachments",
+        "email_settings",
+        "template",
+        "status",
+        "sent_at",
+        "error_message",
+        "retry_count",
+        "sent_by",
+        "metadata"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "permissions"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_connection_string",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mask_password",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "render",
+      "parameters": [
+        "self",
+        "context"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_recipients_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_sent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_failed",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

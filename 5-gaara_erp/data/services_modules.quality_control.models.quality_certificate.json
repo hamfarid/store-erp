@@ -1,0 +1,110 @@
+{
+  "module": "services_modules.quality_control.models.quality_certificate",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "QualityCertificate",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "issue_certificate",
+        "revoke_certificate",
+        "renew_certificate",
+        "is_valid",
+        "get_validity_days_remaining"
+      ],
+      "variables": [
+        "TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "name",
+        "certificate_number",
+        "description",
+        "certificate_type",
+        "status",
+        "quality_check",
+        "product",
+        "issue_date",
+        "expiry_date",
+        "issuing_authority",
+        "standards",
+        "notes",
+        "certificate_file",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "issued_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "issue_certificate",
+      "parameters": [
+        "self",
+        "issued_by"
+      ]
+    },
+    {
+      "name": "revoke_certificate",
+      "parameters": [
+        "self",
+        "reason"
+      ]
+    },
+    {
+      "name": "renew_certificate",
+      "parameters": [
+        "self",
+        "new_expiry_date"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_validity_days_remaining",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

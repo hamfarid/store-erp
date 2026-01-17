@@ -1,0 +1,123 @@
+{
+  "module": "core_modules.permissions_manager.tests",
+  "imports": [
+    "django.contrib.auth",
+    "django.contrib.auth.models",
+    "django.test",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "RoleTestCase",
+      "methods": [
+        "setUp",
+        "test_role_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PermissionTestCase",
+      "methods": [
+        "setUp",
+        "test_permission_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RolePermissionTestCase",
+      "methods": [
+        "setUp",
+        "test_role_permission_creation",
+        "test_get_permissions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserRoleTestCase",
+      "methods": [
+        "setUp",
+        "test_user_role_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PermissionAuditLogTestCase",
+      "methods": [
+        "setUp",
+        "test_audit_log_creation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_permission_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_permission_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_role_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_audit_log_creation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

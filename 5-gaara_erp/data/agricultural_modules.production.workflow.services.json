@@ -1,0 +1,196 @@
+{
+  "module": "agricultural_modules.production.workflow.services",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "inventory_integration",
+    "logging",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "WorkflowService",
+      "methods": [
+        "create_workflow_template",
+        "add_stage_to_template",
+        "add_quality_check_point",
+        "create_workflow_execution",
+        "start_workflow_execution",
+        "start_stage_execution",
+        "complete_stage_execution",
+        "record_quality_check_result",
+        "cancel_workflow_execution",
+        "put_workflow_execution_on_hold",
+        "resume_workflow_execution",
+        "get_workflow_execution_progress",
+        "get_stage_execution_details",
+        "get_workflow_templates_for_product",
+        "create_seed_workflow_template",
+        "create_vegetable_workflow_template",
+        "create_fruit_workflow_template"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_workflow_template",
+      "parameters": [
+        "name",
+        "code",
+        "product_type",
+        "description",
+        "notes",
+        "is_active",
+        "user"
+      ]
+    },
+    {
+      "name": "add_stage_to_template",
+      "parameters": [
+        "template",
+        "name",
+        "code",
+        "order",
+        "description",
+        "expected_duration",
+        "required_resources",
+        "instructions",
+        "notes",
+        "is_active",
+        "user"
+      ]
+    },
+    {
+      "name": "add_quality_check_point",
+      "parameters": [
+        "stage",
+        "name",
+        "check_type",
+        "acceptance_criteria",
+        "description",
+        "non_compliance_actions",
+        "instructions",
+        "is_mandatory",
+        "is_active",
+        "user"
+      ]
+    },
+    {
+      "name": "create_workflow_execution",
+      "parameters": [
+        "production_order",
+        "template",
+        "status",
+        "notes",
+        "user"
+      ]
+    },
+    {
+      "name": "start_workflow_execution",
+      "parameters": [
+        "workflow_execution",
+        "start_date",
+        "user"
+      ]
+    },
+    {
+      "name": "start_stage_execution",
+      "parameters": [
+        "stage_execution",
+        "start_date",
+        "input_quantity",
+        "quantity_unit",
+        "notes",
+        "user"
+      ]
+    },
+    {
+      "name": "complete_stage_execution",
+      "parameters": [
+        "stage_execution",
+        "end_date",
+        "output_quantity",
+        "waste_quantity",
+        "notes",
+        "user"
+      ]
+    },
+    {
+      "name": "record_quality_check_result",
+      "parameters": [
+        "stage_execution",
+        "check_point",
+        "is_passed",
+        "measurement_value",
+        "measurement_unit",
+        "notes",
+        "corrective_actions",
+        "user"
+      ]
+    },
+    {
+      "name": "cancel_workflow_execution",
+      "parameters": [
+        "workflow_execution",
+        "reason",
+        "user"
+      ]
+    },
+    {
+      "name": "put_workflow_execution_on_hold",
+      "parameters": [
+        "workflow_execution",
+        "reason",
+        "user"
+      ]
+    },
+    {
+      "name": "resume_workflow_execution",
+      "parameters": [
+        "workflow_execution",
+        "user"
+      ]
+    },
+    {
+      "name": "get_workflow_execution_progress",
+      "parameters": [
+        "workflow_execution"
+      ]
+    },
+    {
+      "name": "get_stage_execution_details",
+      "parameters": [
+        "stage_execution"
+      ]
+    },
+    {
+      "name": "get_workflow_templates_for_product",
+      "parameters": [
+        "product"
+      ]
+    },
+    {
+      "name": "create_seed_workflow_template",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "create_vegetable_workflow_template",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "create_fruit_workflow_template",
+      "parameters": [
+        "user"
+      ]
+    }
+  ],
+  "variables": []
+}

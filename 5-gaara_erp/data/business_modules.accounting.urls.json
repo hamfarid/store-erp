@@ -1,0 +1,14 @@
+{
+  "module": "business_modules.accounting.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework.routers"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "router",
+    "urlpatterns",
+    "app_name"
+  ]
+}

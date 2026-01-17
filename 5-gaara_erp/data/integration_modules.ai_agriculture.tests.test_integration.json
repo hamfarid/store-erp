@@ -1,0 +1,132 @@
+{
+  "module": "integration_modules.ai_agriculture.tests.test_integration",
+  "imports": [
+    "django.test",
+    "django.utils",
+    "integration_modules.ai_agriculture.integration",
+    "integration_modules.ai_agriculture.services.crop_analysis_service",
+    "integration_modules.ai_agriculture.services.crop_prediction_service",
+    "os",
+    "sys",
+    "unittest",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "AIAgricultureIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_get_ai_model",
+        "test_get_farm",
+        "test_predict_with_ai_model",
+        "test_get_weather_data",
+        "test_analyze_crop_image",
+        "test_register_crop_analysis_event",
+        "test_send_notification"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CropAnalysisServiceIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_analyze_crop_data_integration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CropPredictionServiceIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_predict_crop_yield_integration"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_ai_model",
+      "parameters": [
+        "self",
+        "mock_get_ai_model"
+      ]
+    },
+    {
+      "name": "test_get_farm",
+      "parameters": [
+        "self",
+        "mock_get_farm"
+      ]
+    },
+    {
+      "name": "test_predict_with_ai_model",
+      "parameters": [
+        "self",
+        "mock_predict_with_ai_model"
+      ]
+    },
+    {
+      "name": "test_get_weather_data",
+      "parameters": [
+        "self",
+        "mock_get_weather_data"
+      ]
+    },
+    {
+      "name": "test_analyze_crop_image",
+      "parameters": [
+        "self",
+        "mock_analyze_crop_image"
+      ]
+    },
+    {
+      "name": "test_register_crop_analysis_event",
+      "parameters": [
+        "self",
+        "mock_register_crop_analysis_event"
+      ]
+    },
+    {
+      "name": "test_send_notification",
+      "parameters": [
+        "self",
+        "mock_send_notification"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_analyze_crop_data_integration",
+      "parameters": [
+        "self",
+        "mock_get_ai_model",
+        "mock_get_farm"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_predict_crop_yield_integration",
+      "parameters": [
+        "self",
+        "mock_get_ai_model",
+        "mock_get_farm"
+      ]
+    }
+  ],
+  "variables": []
+}

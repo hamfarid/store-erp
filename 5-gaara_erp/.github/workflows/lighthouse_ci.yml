@@ -1,0 +1,73 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/lighthouse_ci.yml'
+  pull_request:
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/lighthouse_ci.yml'
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: |
+          npm ci || npm i --no-audit --no-fund
+
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+
+      - name: Start preview server
+        working-directory: frontend
+        run: |
+          npm run preview -- --port 4173 --host 0.0.0.0 &
+          sleep 5
+          curl -I http://127.0.0.1:4173 || true
+
+      - name: Create Lighthouse config
+        run: |
+          cat > lighthouserc.json <<'JSON'
+          {
+            "ci": {
+              "collect": {
+                "url": ["http://127.0.0.1:4173"],
+                "numberOfRuns": 2
+              },
+              "assert": {
+                "assertions": {
+                  "categories:performance": ["error", { "minScore": 0.90 }],
+                  "categories:accessibility": ["error", { "minScore": 0.95 }],
+                  "categories:best-practices": ["error", { "minScore": 0.90 }],
+                  "categories:seo": ["error", { "minScore": 0.90 }]
+                }
+              },
+              "upload": { "target": "temporary-public-storage" }
+            }
+          }
+          JSON
+
+      - name: Run Lighthouse CI
+        run: npx --yes @lhci/cli@0.13.x autorun --config=./lighthouserc.json
+
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: .lighthouseci
+

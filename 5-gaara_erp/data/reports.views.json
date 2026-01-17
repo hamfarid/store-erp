@@ -1,0 +1,9 @@
+{
+  "module": "reports.views",
+  "imports": [
+    "django.shortcuts"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

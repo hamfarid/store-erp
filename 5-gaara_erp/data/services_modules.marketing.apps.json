@@ -1,0 +1,18 @@
+{
+  "module": "services_modules.marketing.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "MarketingConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

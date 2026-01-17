@@ -1,0 +1,57 @@
+{
+  "module": "core_modules.ai_permissions.signals",
+  "imports": [
+    "django.db.models.signals",
+    "django.dispatch",
+    "django.utils"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "log_agent_changes",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "log_agent_deletion",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    },
+    {
+      "name": "log_agent_role_changes",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "log_agent_role_deletion",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    },
+    {
+      "name": "log_agent_permission_changes",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "log_agent_permission_deletion",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,67 @@
+{
+  "module": "services_modules.hr.models.department",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "django.utils.translation",
+    "employee"
+  ],
+  "classes": [
+    {
+      "name": "Department",
+      "methods": [
+        "__str__",
+        "get_all_children",
+        "get_all_employees",
+        "get_hierarchy_level"
+      ],
+      "variables": [
+        "name_ar",
+        "name_en",
+        "company",
+        "parent",
+        "manager",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_children",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_employees",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_hierarchy_level",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

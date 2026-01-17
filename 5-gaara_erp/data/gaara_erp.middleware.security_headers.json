@@ -1,0 +1,33 @@
+{
+  "module": "gaara_erp.middleware.security_headers",
+  "imports": [
+    "django.conf"
+  ],
+  "classes": [
+    {
+      "name": "SecurityHeadersMiddleware",
+      "methods": [
+        "__init__",
+        "__call__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "get_response"
+      ]
+    },
+    {
+      "name": "__call__",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

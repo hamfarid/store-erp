@@ -1,0 +1,10 @@
+{
+  "module": "utility_modules.utilities.tests.test_views",
+  "imports": [
+    "django.test",
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

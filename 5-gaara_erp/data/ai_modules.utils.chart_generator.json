@@ -1,0 +1,22 @@
+{
+  "module": "ai_modules.utils.chart_generator",
+  "imports": [
+    "logging",
+    "matplotlib.pyplot",
+    "os"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "generate_comparison_charts",
+      "parameters": [
+        "all_results",
+        "base_results_dir",
+        "simulators"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

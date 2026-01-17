@@ -1,0 +1,195 @@
+{
+  "module": "agricultural_modules.production.export_approval_models",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ApprovalStatus",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "SUBMITTED",
+        "UNDER_REVIEW",
+        "APPROVED",
+        "REJECTED",
+        "EXPIRED"
+      ]
+    },
+    {
+      "name": "ExportDestination",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "country_code",
+        "requires_import_permit",
+        "requires_phytosanitary",
+        "requires_food_safety",
+        "special_requirements",
+        "active",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ExportApproval",
+      "methods": [
+        "__str__",
+        "is_valid"
+      ],
+      "variables": [
+        "approval_number",
+        "production_batch",
+        "destination",
+        "application_date",
+        "approval_date",
+        "expiry_date",
+        "status",
+        "notes",
+        "expected_shipping_date",
+        "actual_shipping_date",
+        "shipping_method",
+        "has_phytosanitary_certificate",
+        "has_food_safety_approval",
+        "has_import_permit",
+        "has_export_declaration",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ImportApproval",
+      "methods": [
+        "__str__",
+        "is_valid"
+      ],
+      "variables": [
+        "approval_number",
+        "production_order",
+        "origin_country",
+        "application_date",
+        "approval_date",
+        "expiry_date",
+        "status",
+        "notes",
+        "expected_arrival_date",
+        "actual_arrival_date",
+        "shipping_method",
+        "has_phytosanitary_certificate",
+        "has_origin_certificate",
+        "has_import_permit",
+        "has_customs_declaration",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ApprovalDocument",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "content_type",
+        "object_id",
+        "content_object",
+        "document_type",
+        "document_number",
+        "issue_date",
+        "expiry_date",
+        "issuing_authority",
+        "file",
+        "notes",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

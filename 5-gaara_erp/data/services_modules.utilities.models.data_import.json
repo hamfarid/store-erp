@@ -1,0 +1,190 @@
+{
+  "module": "services_modules.utilities.models.data_import",
+  "imports": [
+    "datetime",
+    "django.apps",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "os"
+  ],
+  "classes": [
+    {
+      "name": "DataImport",
+      "methods": [
+        "__str__",
+        "get_model_class",
+        "get_field_names",
+        "start_processing",
+        "mark_completed",
+        "mark_failed",
+        "cancel",
+        "update_progress",
+        "add_error",
+        "is_completed",
+        "is_failed",
+        "is_processing",
+        "success_rate",
+        "duration",
+        "file_exists",
+        "get_user_imports",
+        "cleanup_old_imports"
+      ],
+      "variables": [
+        "IMPORT_FORMATS",
+        "STATUS_CHOICES",
+        "name",
+        "description",
+        "app_label",
+        "model_name",
+        "format",
+        "file_path",
+        "has_header",
+        "delimiter",
+        "encoding",
+        "field_mapping",
+        "status",
+        "progress",
+        "total_rows",
+        "processed_rows",
+        "successful_rows",
+        "failed_rows",
+        "user",
+        "created_at",
+        "started_at",
+        "completed_at",
+        "error_message",
+        "error_log",
+        "validate_data",
+        "skip_errors"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_model_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_field_names",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start_processing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_failed",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_progress",
+      "parameters": [
+        "self",
+        "processed_rows",
+        "successful_rows",
+        "failed_rows"
+      ]
+    },
+    {
+      "name": "add_error",
+      "parameters": [
+        "self",
+        "row_number",
+        "error_message",
+        "row_data"
+      ]
+    },
+    {
+      "name": "is_completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_failed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_processing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "success_rate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "file_exists",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_user_imports",
+      "parameters": [
+        "cls",
+        "user",
+        "status"
+      ]
+    },
+    {
+      "name": "cleanup_old_imports",
+      "parameters": [
+        "cls",
+        "days"
+      ]
+    }
+  ],
+  "variables": []
+}

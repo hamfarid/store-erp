@@ -1,0 +1,129 @@
+{
+  "module": "admin_modules.custom_admin.views.backup_restore_views",
+  "imports": [
+    "datetime",
+    "django.http",
+    "django.utils",
+    "django_filters.rest_framework",
+    "json",
+    "os",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response"
+  ],
+  "classes": [
+    {
+      "name": "BackupViewSet",
+      "methods": [
+        "perform_create",
+        "create_backup",
+        "download",
+        "restore",
+        "backup_status",
+        "schedule_backup"
+      ],
+      "variables": [
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "RestoreViewSet",
+      "methods": [
+        "perform_create",
+        "cancel_restore",
+        "restore_history",
+        "restore_log"
+      ],
+      "variables": [
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "create_backup",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "download",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "restore",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "backup_status",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "schedule_backup",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "cancel_restore",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "restore_history",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "restore_log",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

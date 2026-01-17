@@ -1,0 +1,23 @@
+{
+  "module": "services_modules.projects.models",
+  "imports": [
+    "__future__",
+    "importlib",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "_safe_import",
+      "parameters": [
+        "module_name",
+        "names"
+      ]
+    }
+  ],
+  "variables": [
+    "_SUBMODULE_EXPORTS",
+    "_exported",
+    "__all__"
+  ]
+}

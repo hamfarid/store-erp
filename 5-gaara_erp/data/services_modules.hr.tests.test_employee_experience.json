@@ -1,0 +1,61 @@
+{
+  "module": "services_modules.hr.tests.test_employee_experience",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.department",
+    "models.employee",
+    "models.employee_experience",
+    "models.position",
+    "services_modules.core.models.branch",
+    "services_modules.core.models.company"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeExperienceModelTest",
+      "methods": [
+        "setUp",
+        "test_create_employee_experience",
+        "test_get_duration_years",
+        "test_is_current",
+        "test_str_representation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_employee_experience",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_duration_years",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_current",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_str_representation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,179 @@
+{
+  "module": "agricultural_modules.production.certificates_models",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "export_approval_models",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CertificateType",
+      "methods": [],
+      "variables": [
+        "ANALYSIS",
+        "ORIGIN",
+        "QUALITY",
+        "ORGANIC",
+        "PHYTOSANITARY",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "Certificate",
+      "methods": [
+        "__str__",
+        "is_valid"
+      ],
+      "variables": [
+        "certificate_number",
+        "certificate_type",
+        "production_batch",
+        "production_order",
+        "issue_date",
+        "expiry_date",
+        "issuing_authority",
+        "status",
+        "description",
+        "notes",
+        "file",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "AnalysisCertificate",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "certificate",
+        "laboratory_name",
+        "sample_date",
+        "analysis_date",
+        "pesticide_residue_check",
+        "pesticide_residue_results",
+        "heavy_metals_check",
+        "heavy_metals_results",
+        "microbial_check",
+        "microbial_results",
+        "nutritional_check",
+        "nutritional_results",
+        "other_checks",
+        "passed",
+        "recommendations"
+      ]
+    },
+    {
+      "name": "OriginCertificate",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "certificate",
+        "country_of_origin",
+        "region",
+        "producer",
+        "product_description",
+        "hs_code",
+        "exporter",
+        "importer",
+        "destination_country",
+        "transport_details",
+        "packaging_details"
+      ]
+    },
+    {
+      "name": "CertificateRequirement",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "destination_country",
+        "product_type",
+        "requires_analysis",
+        "requires_origin",
+        "requires_phytosanitary",
+        "requires_quality",
+        "requires_organic",
+        "special_requirements",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

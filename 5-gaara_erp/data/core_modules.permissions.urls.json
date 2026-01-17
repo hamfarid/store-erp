@@ -1,0 +1,20 @@
+{
+  "module": "core_modules.permissions.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "_maybe_add",
+      "parameters": [
+        "route",
+        "view_name",
+        "name"
+      ]
+    }
+  ],
+  "variables": [
+    "urlpatterns"
+  ]
+}

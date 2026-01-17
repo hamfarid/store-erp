@@ -1,0 +1,57 @@
+{
+  "module": "business_modules.inventory.processes",
+  "imports": [
+    "base",
+    "compat",
+    "datetime",
+    "decimal",
+    "django.contrib.auth.models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "products",
+    "stock_updater",
+    "tracking",
+    "utils"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "process_stock_count",
+      "parameters": [
+        "store",
+        "count_date",
+        "user",
+        "counted_items"
+      ]
+    },
+    {
+      "name": "process_inventory_transfer",
+      "parameters": [
+        "from_store",
+        "to_store",
+        "transfer_date",
+        "user",
+        "transfer_items"
+      ]
+    },
+    {
+      "name": "reserve_stock",
+      "parameters": [
+        "order_id",
+        "items"
+      ]
+    },
+    {
+      "name": "dispense_stock",
+      "parameters": [
+        "delivery_id",
+        "items",
+        "store_id",
+        "user"
+      ]
+    }
+  ],
+  "variables": []
+}

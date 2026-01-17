@@ -1,0 +1,191 @@
+{
+  "module": "core_modules.setup.submodules.data_import_export.models",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ImportExportTemplate",
+      "methods": [
+        "__str__",
+        "set_as_default",
+        "get_default_template"
+      ],
+      "variables": [
+        "TEMPLATE_TYPES",
+        "FILE_FORMATS",
+        "name",
+        "description",
+        "module",
+        "entity",
+        "template_type",
+        "file_format",
+        "template_file",
+        "field_mapping",
+        "is_active",
+        "is_default",
+        "created_by",
+        "created_at",
+        "updated_at",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "ImportExportJob",
+      "methods": [
+        "__str__",
+        "start_processing",
+        "complete",
+        "fail",
+        "cancel"
+      ],
+      "variables": [
+        "JOB_TYPES",
+        "JOB_STATUSES",
+        "name",
+        "job_type",
+        "module",
+        "entity",
+        "template",
+        "file",
+        "result_file",
+        "status",
+        "records_processed",
+        "records_succeeded",
+        "records_failed",
+        "error_log",
+        "started_at",
+        "completed_at",
+        "created_by",
+        "created_at",
+        "updated_at",
+        "options"
+      ]
+    },
+    {
+      "name": "ImportExportSetting",
+      "methods": [
+        "__str__",
+        "get_settings"
+      ],
+      "variables": [
+        "max_file_size_mb",
+        "allowed_file_formats",
+        "default_batch_size",
+        "auto_delete_old_jobs",
+        "job_retention_days",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_as_default",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_default_template",
+      "parameters": [
+        "cls",
+        "module",
+        "entity",
+        "template_type"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start_processing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "self",
+        "records_processed",
+        "records_succeeded",
+        "records_failed",
+        "result_file",
+        "error_log"
+      ]
+    },
+    {
+      "name": "fail",
+      "parameters": [
+        "self",
+        "error_log"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_settings",
+      "parameters": [
+        "cls"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

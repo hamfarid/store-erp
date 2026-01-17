@@ -1,0 +1,255 @@
+{
+  "module": "admin_modules.data_import_export.modles.import_export_serializers",
+  "imports": [
+    "django.contrib.auth.models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserBasicSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ImportJobSerializer",
+      "methods": [
+        "get_duration",
+        "get_progress_percentage",
+        "get_file_size"
+      ],
+      "variables": [
+        "created_by_username",
+        "status_display",
+        "priority_display",
+        "file_type_display",
+        "import_mode_display",
+        "duration",
+        "progress_percentage",
+        "file_size"
+      ]
+    },
+    {
+      "name": "ExportJobSerializer",
+      "methods": [
+        "get_duration",
+        "get_progress_percentage",
+        "get_result_file_size"
+      ],
+      "variables": [
+        "created_by_username",
+        "status_display",
+        "priority_display",
+        "export_format_display",
+        "duration",
+        "progress_percentage",
+        "result_file_size"
+      ]
+    },
+    {
+      "name": "JobTemplateSerializer",
+      "methods": [],
+      "variables": [
+        "created_by_username",
+        "job_type_display"
+      ]
+    },
+    {
+      "name": "JobHistorySerializer",
+      "methods": [],
+      "variables": [
+        "user_username"
+      ]
+    },
+    {
+      "name": "JobNotificationSerializer",
+      "methods": [],
+      "variables": [
+        "notification_type_display",
+        "trigger_display"
+      ]
+    },
+    {
+      "name": "JobScheduleSerializer",
+      "methods": [],
+      "variables": [
+        "job_type_display",
+        "frequency_display",
+        "created_by_username"
+      ]
+    },
+    {
+      "name": "ImportJobCreateSerializer",
+      "methods": [
+        "validate_file"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ExportJobCreateSerializer",
+      "methods": [
+        "validate_fields_to_export"
+      ],
+      "variables": []
+    },
+    {
+      "name": "JobProgressSerializer",
+      "methods": [],
+      "variables": [
+        "job_id",
+        "status",
+        "progress",
+        "total_records",
+        "processed_records",
+        "success_records",
+        "error_records",
+        "error_details",
+        "estimated_time_remaining"
+      ]
+    },
+    {
+      "name": "JobStatsSerializer",
+      "methods": [],
+      "variables": [
+        "total_jobs",
+        "pending_jobs",
+        "running_jobs",
+        "completed_jobs",
+        "failed_jobs",
+        "success_rate",
+        "average_duration",
+        "total_records_processed",
+        "total_file_size"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_duration",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_progress_percentage",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_file_size",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_duration",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_progress_percentage",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_result_file_size",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate_file",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_fields_to_export",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,73 @@
+{
+  "module": "agricultural_modules.seed_hybridization.tests.test_cost_tracking",
+  "imports": [
+    "cost_tracking",
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "json"
+  ],
+  "classes": [
+    {
+      "name": "HybridizationCostTrackingTestCase",
+      "methods": [
+        "setUp",
+        "test_add_hybridization_cost",
+        "test_get_hybridization_costs",
+        "test_add_hybridization_budget",
+        "test_get_hybridization_budget_status",
+        "test_calculate_hybridization_cost_summary",
+        "test_remaining_budget_calculation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_hybridization_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_hybridization_costs",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_hybridization_budget",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_hybridization_budget_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_hybridization_cost_summary",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_remaining_budget_calculation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

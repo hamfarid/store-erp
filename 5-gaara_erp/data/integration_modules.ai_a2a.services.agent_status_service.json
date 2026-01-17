@@ -1,0 +1,92 @@
+{
+  "module": "integration_modules.ai_a2a.services.agent_status_service",
+  "imports": [
+    "ai_agents.models",
+    "core_modules.setup.submodules.activity_logging.models",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "AgentStatusService",
+      "methods": [
+        "update_agent_status",
+        "get_agent_status",
+        "get_agents_by_status",
+        "check_agent_health",
+        "reset_error_count",
+        "mark_agent_as_error",
+        "get_agent_status_history",
+        "_log_activity"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "update_agent_status",
+      "parameters": [
+        "agent_id",
+        "status",
+        "load",
+        "details",
+        "updated_by_id"
+      ]
+    },
+    {
+      "name": "get_agent_status",
+      "parameters": [
+        "agent_id"
+      ]
+    },
+    {
+      "name": "get_agents_by_status",
+      "parameters": [
+        "status"
+      ]
+    },
+    {
+      "name": "check_agent_health",
+      "parameters": [
+        "agent_id"
+      ]
+    },
+    {
+      "name": "reset_error_count",
+      "parameters": [
+        "agent_id",
+        "updated_by_id"
+      ]
+    },
+    {
+      "name": "mark_agent_as_error",
+      "parameters": [
+        "agent_id",
+        "error_message",
+        "updated_by_id"
+      ]
+    },
+    {
+      "name": "get_agent_status_history",
+      "parameters": [
+        "agent_id",
+        "limit"
+      ]
+    },
+    {
+      "name": "_log_activity",
+      "parameters": [
+        "action_type",
+        "entity_id",
+        "user_id",
+        "details"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

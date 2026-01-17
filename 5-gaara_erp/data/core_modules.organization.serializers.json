@@ -1,0 +1,202 @@
+{
+  "module": "core_modules.organization.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "CurrencySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ExchangeRateSerializer",
+      "methods": [],
+      "variables": [
+        "from_currency_name",
+        "to_currency_name"
+      ]
+    },
+    {
+      "name": "CountrySerializer",
+      "methods": [],
+      "variables": [
+        "default_currency_name"
+      ]
+    },
+    {
+      "name": "CompanySerializer",
+      "methods": [
+        "get_branches_count",
+        "get_departments_count"
+      ],
+      "variables": [
+        "country_name",
+        "base_currency_name",
+        "parent_company_name",
+        "branches_count",
+        "departments_count"
+      ]
+    },
+    {
+      "name": "BranchSerializer",
+      "methods": [
+        "get_departments_count"
+      ],
+      "variables": [
+        "company_name",
+        "manager_name",
+        "departments_count"
+      ]
+    },
+    {
+      "name": "DepartmentSerializer",
+      "methods": [
+        "get_sub_departments_count"
+      ],
+      "variables": [
+        "company_name",
+        "branch_name",
+        "parent_department_name",
+        "manager_name",
+        "sub_departments_count"
+      ]
+    },
+    {
+      "name": "CompanyListSerializer",
+      "methods": [
+        "get_branches_count"
+      ],
+      "variables": [
+        "country_name",
+        "branches_count"
+      ]
+    },
+    {
+      "name": "BranchListSerializer",
+      "methods": [],
+      "variables": [
+        "company_name"
+      ]
+    },
+    {
+      "name": "DepartmentListSerializer",
+      "methods": [],
+      "variables": [
+        "company_name",
+        "branch_name"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_branches_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_departments_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_departments_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_sub_departments_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_branches_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

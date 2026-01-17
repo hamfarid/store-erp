@@ -1,0 +1,176 @@
+{
+  "module": "core_modules.user_permissions.models",
+  "imports": [
+    "core.models",
+    "django.contrib.auth",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils.translation",
+    "permissions.models"
+  ],
+  "classes": [
+    {
+      "name": "UserPermission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SCOPE_GLOBAL",
+        "SCOPE_COMPANY",
+        "SCOPE_BRANCH",
+        "SCOPE_DEPARTMENT",
+        "SCOPE_CHOICES",
+        "user",
+        "permission",
+        "scope",
+        "content_type",
+        "object_id",
+        "content_object"
+      ]
+    },
+    {
+      "name": "UserRole",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "permissions",
+        "is_active"
+      ]
+    },
+    {
+      "name": "UserRoleAssignment",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SCOPE_GLOBAL",
+        "SCOPE_COMPANY",
+        "SCOPE_BRANCH",
+        "SCOPE_DEPARTMENT",
+        "SCOPE_CHOICES",
+        "user",
+        "role",
+        "scope",
+        "content_type",
+        "object_id",
+        "content_object"
+      ]
+    },
+    {
+      "name": "PermissionRequest",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_PENDING",
+        "STATUS_APPROVED",
+        "STATUS_REJECTED",
+        "STATUS_CHOICES",
+        "user",
+        "permission",
+        "reason",
+        "status",
+        "reviewed_by",
+        "reviewed_at",
+        "review_notes",
+        "content_type",
+        "object_id",
+        "content_object"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "check_user_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_user_permissions",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "get_users_with_permission",
+      "parameters": [
+        "permission_code",
+        "obj"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "module": "agricultural_modules.agricultural_experiments.services.ai_analysis_service",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.conf",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "json",
+    "logging",
+    "models.ai_analysis",
+    "models.experiment",
+    "models.harvest",
+    "models.variety"
+  ],
+  "classes": [
+    {
+      "name": "AIAnalysisService",
+      "methods": [
+        "analyze_variety_performance",
+        "compare_varieties",
+        "predict_variety_performance",
+        "analyze_trial_performance"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "analyze_variety_performance",
+      "parameters": [
+        "experiment_id",
+        "variety_id",
+        "user"
+      ]
+    },
+    {
+      "name": "compare_varieties",
+      "parameters": [
+        "experiment_id",
+        "variety_ids",
+        "external_variety_ids",
+        "user"
+      ]
+    },
+    {
+      "name": "predict_variety_performance",
+      "parameters": [
+        "experiment_id",
+        "variety_id",
+        "target_location_id",
+        "target_season_id",
+        "user"
+      ]
+    },
+    {
+      "name": "analyze_trial_performance",
+      "parameters": [
+        "experiment_id",
+        "user"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

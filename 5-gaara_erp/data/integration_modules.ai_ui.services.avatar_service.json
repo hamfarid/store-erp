@@ -1,0 +1,231 @@
+{
+  "module": "integration_modules.ai_ui.services.avatar_service",
+  "imports": [
+    "base64",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "importlib",
+    "json",
+    "logging",
+    "models",
+    "os",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "AvatarService",
+      "methods": [
+        "create_avatar",
+        "update_avatar",
+        "delete_avatar",
+        "get_avatar",
+        "list_avatars",
+        "add_animation",
+        "delete_animation",
+        "get_animation",
+        "set_user_avatar_preference",
+        "delete_user_avatar_preference",
+        "get_user_avatar_preference",
+        "_create_default_animations",
+        "_save_avatar_image",
+        "_log_activity",
+        "get_ai_models",
+        "create_ai_model",
+        "update_ai_model",
+        "delete_ai_model",
+        "get_ai_model",
+        "get_default_ai_model",
+        "load_ai_model_instance"
+      ],
+      "variables": [
+        "AVATAR_TYPES",
+        "ANIMATION_TYPES"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_avatar",
+      "parameters": [
+        "name",
+        "avatar_type",
+        "template_id",
+        "image_data",
+        "metadata",
+        "user_id",
+        "ai_model_id"
+      ]
+    },
+    {
+      "name": "update_avatar",
+      "parameters": [
+        "avatar_id",
+        "name",
+        "image_data",
+        "metadata",
+        "is_active",
+        "user_id",
+        "ai_model_id"
+      ]
+    },
+    {
+      "name": "delete_avatar",
+      "parameters": [
+        "avatar_id",
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_avatar",
+      "parameters": [
+        "avatar_id"
+      ]
+    },
+    {
+      "name": "list_avatars",
+      "parameters": [
+        "avatar_type",
+        "is_active",
+        "ai_model_id",
+        "limit",
+        "offset"
+      ]
+    },
+    {
+      "name": "add_animation",
+      "parameters": [
+        "avatar_id",
+        "animation_type",
+        "animation_data",
+        "duration",
+        "user_id"
+      ]
+    },
+    {
+      "name": "delete_animation",
+      "parameters": [
+        "avatar_id",
+        "animation_type",
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_animation",
+      "parameters": [
+        "avatar_id",
+        "animation_type"
+      ]
+    },
+    {
+      "name": "set_user_avatar_preference",
+      "parameters": [
+        "user_id",
+        "avatar_id"
+      ]
+    },
+    {
+      "name": "delete_user_avatar_preference",
+      "parameters": [
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_user_avatar_preference",
+      "parameters": [
+        "user_id"
+      ]
+    },
+    {
+      "name": "_create_default_animations",
+      "parameters": [
+        "avatar"
+      ]
+    },
+    {
+      "name": "_save_avatar_image",
+      "parameters": [
+        "image_data",
+        "name"
+      ]
+    },
+    {
+      "name": "_log_activity",
+      "parameters": [
+        "action",
+        "avatar_id",
+        "user_id",
+        "data"
+      ]
+    },
+    {
+      "name": "get_ai_models",
+      "parameters": [
+        "model_type",
+        "provider",
+        "is_active",
+        "limit",
+        "offset"
+      ]
+    },
+    {
+      "name": "create_ai_model",
+      "parameters": [
+        "name",
+        "model_id",
+        "provider",
+        "model_type",
+        "version",
+        "description",
+        "capabilities",
+        "config",
+        "api_key_name",
+        "is_active",
+        "is_default"
+      ]
+    },
+    {
+      "name": "update_ai_model",
+      "parameters": [
+        "model_id",
+        "name",
+        "version",
+        "description",
+        "capabilities",
+        "config",
+        "api_key_name",
+        "is_active",
+        "is_default"
+      ]
+    },
+    {
+      "name": "delete_ai_model",
+      "parameters": [
+        "model_id"
+      ]
+    },
+    {
+      "name": "get_ai_model",
+      "parameters": [
+        "model_id"
+      ]
+    },
+    {
+      "name": "get_default_ai_model",
+      "parameters": [
+        "model_type"
+      ]
+    },
+    {
+      "name": "load_ai_model_instance",
+      "parameters": [
+        "model_id"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "logger"
+  ]
+}

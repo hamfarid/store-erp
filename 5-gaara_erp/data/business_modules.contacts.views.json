@@ -1,0 +1,41 @@
+{
+  "module": "business_modules.contacts.views",
+  "imports": [
+    "django_filters.rest_framework",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers"
+  ],
+  "classes": [
+    {
+      "name": "ContactViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "list_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "detail_view",
+      "parameters": [
+        "request",
+        "item_id"
+      ]
+    }
+  ],
+  "variables": []
+}

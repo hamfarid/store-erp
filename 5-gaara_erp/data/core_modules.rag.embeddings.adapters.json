@@ -1,0 +1,68 @@
+{
+  "module": "core_modules.rag.embeddings.adapters",
+  "imports": [
+    "__future__",
+    "dataclasses",
+    "django.conf",
+    "math",
+    "openai",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "EmbeddingAdapter",
+      "methods": [
+        "embed"
+      ],
+      "variables": [
+        "dim"
+      ]
+    },
+    {
+      "name": "OpenAIEmbeddingAdapter",
+      "methods": [
+        "__init__",
+        "embed"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DevEmbeddingAdapter",
+      "methods": [
+        "embed"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "embed",
+      "parameters": [
+        "self",
+        "texts"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "dim"
+      ]
+    },
+    {
+      "name": "embed",
+      "parameters": [
+        "self",
+        "texts"
+      ]
+    },
+    {
+      "name": "embed",
+      "parameters": [
+        "self",
+        "texts"
+      ]
+    }
+  ],
+  "variables": []
+}

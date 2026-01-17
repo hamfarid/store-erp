@@ -1,0 +1,20 @@
+{
+  "module": "services_modules.archiving_system.apps",
+  "imports": [
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ArchivingSystemConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

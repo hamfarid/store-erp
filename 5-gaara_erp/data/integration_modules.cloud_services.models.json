@@ -1,0 +1,133 @@
+{
+  "module": "integration_modules.cloud_services.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "CloudProvider",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PROVIDER_TYPE_CHOICES",
+        "provider_id",
+        "name",
+        "provider_type",
+        "api_endpoint",
+        "access_key",
+        "secret_key",
+        "region",
+        "bucket_name",
+        "storage_quota",
+        "used_storage",
+        "total_files",
+        "total_uploads",
+        "total_downloads",
+        "is_active",
+        "is_default",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "CloudFile",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "FILE_TYPE_CHOICES",
+        "file_id",
+        "provider",
+        "filename",
+        "file_path",
+        "file_type",
+        "file_size",
+        "mime_type",
+        "public_url",
+        "download_url",
+        "is_public",
+        "upload_progress",
+        "checksum",
+        "download_count",
+        "last_accessed",
+        "uploaded_by",
+        "uploaded_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "CloudBackup",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "BACKUP_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "backup_id",
+        "provider",
+        "name",
+        "backup_type",
+        "status",
+        "source_path",
+        "backup_path",
+        "backup_size",
+        "started_at",
+        "completed_at",
+        "error_message",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

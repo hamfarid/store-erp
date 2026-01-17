@@ -1,0 +1,41 @@
+{
+  "module": "business_modules.inventory.models.warehouse",
+  "imports": [
+    "django.db",
+    "django.utils.translation",
+    "warehouse_location"
+  ],
+  "classes": [
+    {
+      "name": "Warehouse",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "address",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

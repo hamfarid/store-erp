@@ -1,0 +1,279 @@
+{
+  "module": "core_modules.core.tests.test_core",
+  "imports": [
+    "core_modules.core.models",
+    "core_modules.permissions.models",
+    "core_modules.users_accounts.models",
+    "django.db",
+    "django.test"
+  ],
+  "classes": [
+    {
+      "name": "PermissionModelTest",
+      "methods": [
+        "setUp",
+        "test_create_permission",
+        "test_unique_code"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RoleModelTest",
+      "methods": [
+        "setUp",
+        "test_create_role",
+        "test_unique_code",
+        "test_add_permissions_to_role",
+        "test_remove_permission_from_role"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserModelTest",
+      "methods": [
+        "setUp",
+        "test_create_user",
+        "test_create_superuser",
+        "test_add_roles_to_user",
+        "test_get_full_name",
+        "test_has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CompanyModelTest",
+      "methods": [
+        "setUp",
+        "test_create_company",
+        "test_unique_code",
+        "test_deactivate_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BranchModelTest",
+      "methods": [
+        "setUp",
+        "test_create_branch",
+        "test_unique_code_per_company",
+        "test_deactivate_branch"
+      ],
+      "variables": []
+    },
+    {
+      "name": "OrganizationModelTest",
+      "methods": [
+        "test_organization_skipped"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SettingCategoryModelTest",
+      "methods": [
+        "test_setting_category_skipped"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SystemSettingModelTest",
+      "methods": [
+        "setUp",
+        "test_create_system_setting",
+        "test_unique_key",
+        "test_get_setting_value",
+        "test_deactivate_setting"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_permission",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_role",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_permissions_to_role",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_remove_permission_from_role",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_user",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_superuser",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_roles_to_user",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_full_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_has_permission",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_branch",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_branch",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_organization_skipped",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_setting_category_skipped",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_system_setting",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_key",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_setting_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_setting",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_full_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_mock_user_has_perm",
+      "parameters": [
+        "self",
+        "permission_code"
+      ]
+    }
+  ],
+  "variables": []
+}

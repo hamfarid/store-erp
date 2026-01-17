@@ -1,0 +1,164 @@
+{
+  "module": "agricultural_modules.agricultural_experiments.models.harvest",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.validators",
+    "django.db",
+    "django.utils.translation",
+    "experiment"
+  ],
+  "classes": [
+    {
+      "name": "Harvest",
+      "methods": [
+        "__str__",
+        "average_fruit_weight"
+      ],
+      "variables": [
+        "experiment_variety",
+        "harvest_number",
+        "harvest_date",
+        "fruit_count",
+        "fruit_weight",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "HarvestQualityGrade",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "QUALITY_GRADE_CHOICES",
+        "harvest",
+        "grade",
+        "fruit_count",
+        "fruit_weight",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "FruitSpecification",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "experiment_variety",
+        "evaluation_date",
+        "length_cm",
+        "shape_uniformity_rating",
+        "fruit_deformity_rate",
+        "firmness_rating",
+        "color_description",
+        "color_rating",
+        "storage_transport_tolerance_rating",
+        "brix_value",
+        "notes",
+        "created_at"
+      ]
+    },
+    {
+      "name": "PlantSpecification",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "experiment_variety",
+        "evaluation_date",
+        "earliness_rating",
+        "plant_vigor_rating",
+        "leaf_shape_description",
+        "fruit_coverage_rating",
+        "fungal_resistance_rating",
+        "bacterial_resistance_rating",
+        "insect_resistance_rating",
+        "viral_resistance_rating",
+        "cold_tolerance_rating",
+        "heat_tolerance_rating",
+        "soil_salinity_tolerance_rating",
+        "water_salinity_tolerance_rating",
+        "drought_tolerance_rating",
+        "notes",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "average_fruit_weight",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "RATING_CHOICES"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "module": "core_modules.permissions_common.signals",
+  "imports": [
+    "__future__"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

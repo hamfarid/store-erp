@@ -1,0 +1,136 @@
+{
+  "module": "business_modules.purchasing.models.purchase_return",
+  "imports": [
+    "business_modules.inventory.models",
+    "core_modules.companies.models",
+    "core_modules.core.models.base_models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "purchase_invoice",
+    "services_modules.accounting.models",
+    "services_modules.inventory.models",
+    "supplier"
+  ],
+  "classes": [
+    {
+      "name": "PurchaseReturn",
+      "methods": [
+        "__str__",
+        "post",
+        "cancel",
+        "calculate_amounts",
+        "_create_accounting_entry",
+        "_update_inventory"
+      ],
+      "variables": [
+        "name",
+        "reference",
+        "company",
+        "supplier",
+        "purchase_invoice",
+        "date",
+        "warehouse",
+        "untaxed_amount",
+        "tax_amount",
+        "total_amount",
+        "state",
+        "return_reason",
+        "notes"
+      ]
+    },
+    {
+      "name": "PurchaseReturnLine",
+      "methods": [
+        "__str__",
+        "calculate_amounts"
+      ],
+      "variables": [
+        "return_doc",
+        "product",
+        "quantity",
+        "unit_price",
+        "tax_amount",
+        "subtotal",
+        "total",
+        "description",
+        "sequence",
+        "return_reason"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "post",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "calculate_amounts",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_create_accounting_entry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_update_inventory",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_amounts",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

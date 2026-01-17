@@ -1,0 +1,12 @@
+{
+  "module": "services_modules.archiving_system.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns",
+    "app_name"
+  ]
+}

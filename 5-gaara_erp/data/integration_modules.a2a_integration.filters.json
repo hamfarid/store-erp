@@ -1,0 +1,82 @@
+{
+  "module": "integration_modules.a2a_integration.filters",
+  "imports": [
+    "django_filters",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ExternalSystemFilter",
+      "methods": [],
+      "variables": [
+        "name",
+        "system_type",
+        "is_active"
+      ]
+    },
+    {
+      "name": "IntegrationConfigFilter",
+      "methods": [],
+      "variables": [
+        "name",
+        "external_system",
+        "integration_type",
+        "direction",
+        "is_active"
+      ]
+    },
+    {
+      "name": "APICredentialFilter",
+      "methods": [],
+      "variables": [
+        "name",
+        "external_system",
+        "auth_type",
+        "is_active"
+      ]
+    },
+    {
+      "name": "IntegrationLogFilter",
+      "methods": [],
+      "variables": [
+        "integration_config",
+        "status",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

@@ -1,0 +1,79 @@
+{
+  "module": "services_modules.feasibility_studies.models.market",
+  "imports": [
+    "__future__",
+    "decimal",
+    "django.db",
+    "django.utils.translation",
+    "services_modules.core.models",
+    "study"
+  ],
+  "classes": [
+    {
+      "name": "MarketAnalysis",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "study",
+        "market_size",
+        "target_market_share",
+        "market_growth_rate",
+        "target_segment",
+        "swot_analysis",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Competitor",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "market_analysis",
+        "name",
+        "market_share",
+        "strengths",
+        "weaknesses",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,281 @@
+{
+  "module": "services_modules.hr.tests.test_hr",
+  "imports": [
+    "core_modules.core.models.branch",
+    "core_modules.core.models.company",
+    "datetime",
+    "decimal",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.contract",
+    "models.department",
+    "models.employee",
+    "models.job",
+    "models.leave",
+    "models.payroll"
+  ],
+  "classes": [
+    {
+      "name": "DepartmentModelTest",
+      "methods": [
+        "setUp",
+        "test_create_department",
+        "test_unique_code_per_company",
+        "test_department_hierarchy"
+      ],
+      "variables": []
+    },
+    {
+      "name": "JobModelTest",
+      "methods": [
+        "setUp",
+        "test_create_job",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "EmployeeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_employee",
+        "test_unique_employee_number_per_company",
+        "test_calculate_age",
+        "test_calculate_service_years"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ContractModelTest",
+      "methods": [
+        "setUp",
+        "test_create_contract",
+        "test_unique_contract_number_per_company",
+        "test_calculate_contract_duration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LeaveModelTest",
+      "methods": [
+        "setUp",
+        "test_create_leave",
+        "test_calculate_leave_duration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PayrollModelTest",
+      "methods": [
+        "setUp",
+        "test_create_payroll",
+        "test_unique_payroll_number_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PayslipModelTest",
+      "methods": [
+        "setUp",
+        "test_create_payslip",
+        "test_unique_payslip_number_per_company",
+        "test_calculate_net_salary"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_department",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_job",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_employee",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_employee_number_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_age",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_service_years",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_contract",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_contract_number_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_contract_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_leave",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_leave_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_payroll",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_payroll_number_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_payslip",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_payslip_number_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_net_salary",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_age",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_service_years",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_net_salary",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

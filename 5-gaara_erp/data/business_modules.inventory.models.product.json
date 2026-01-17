@@ -1,0 +1,86 @@
+{
+  "module": "business_modules.inventory.models.product",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.utils.translation",
+    "product_category"
+  ],
+  "classes": [
+    {
+      "name": "Product",
+      "methods": [
+        "__str__",
+        "is_stockable",
+        "is_service"
+      ],
+      "variables": [
+        "name",
+        "sku",
+        "description",
+        "barcode",
+        "category",
+        "product_type",
+        "tracking_type",
+        "sale_price",
+        "list_price",
+        "cost_price",
+        "quantity_on_hand",
+        "is_active",
+        "can_be_sold",
+        "can_be_purchased",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ProductTypeChoices",
+      "methods": [],
+      "variables": [
+        "STORABLE",
+        "CONSUMABLE",
+        "SERVICE"
+      ]
+    },
+    {
+      "name": "TrackingTypeChoices",
+      "methods": [],
+      "variables": [
+        "NONE",
+        "LOT",
+        "SERIAL"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_stockable",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_service",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,128 @@
+{
+  "module": "core_modules.database_manager",
+  "imports": [
+    "datetime",
+    "django.conf",
+    "django.db",
+    "dotenv",
+    "logging",
+    "os",
+    "pathlib",
+    "psycopg2",
+    "subprocess"
+  ],
+  "classes": [
+    {
+      "name": "MultiDatabaseManager",
+      "methods": [
+        "__init__",
+        "_get_connection_params",
+        "connect",
+        "switch_database",
+        "get_current_database",
+        "backup_database",
+        "restore_database",
+        "list_backups",
+        "export_data",
+        "import_data",
+        "close_all_connections",
+        "__del__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "env_file"
+      ]
+    },
+    {
+      "name": "_get_connection_params",
+      "parameters": [
+        "self",
+        "db_type"
+      ]
+    },
+    {
+      "name": "connect",
+      "parameters": [
+        "self",
+        "db_type"
+      ]
+    },
+    {
+      "name": "switch_database",
+      "parameters": [
+        "self",
+        "db_type"
+      ]
+    },
+    {
+      "name": "get_current_database",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "backup_database",
+      "parameters": [
+        "self",
+        "db_type",
+        "backup_path"
+      ]
+    },
+    {
+      "name": "restore_database",
+      "parameters": [
+        "self",
+        "db_type",
+        "backup_path"
+      ]
+    },
+    {
+      "name": "list_backups",
+      "parameters": [
+        "self",
+        "db_type"
+      ]
+    },
+    {
+      "name": "export_data",
+      "parameters": [
+        "self",
+        "db_type",
+        "tables",
+        "output_format",
+        "output_dir"
+      ]
+    },
+    {
+      "name": "import_data",
+      "parameters": [
+        "self",
+        "db_type",
+        "input_dir",
+        "input_format"
+      ]
+    },
+    {
+      "name": "close_all_connections",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__del__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "db_manager"
+  ]
+}

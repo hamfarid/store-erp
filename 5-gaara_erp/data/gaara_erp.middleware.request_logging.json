@@ -1,0 +1,69 @@
+{
+  "module": "gaara_erp.middleware.request_logging",
+  "imports": [
+    "django.conf",
+    "django.utils.deprecation",
+    "json",
+    "logging",
+    "time",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "RequestLoggingMiddleware",
+      "methods": [
+        "process_request",
+        "process_response",
+        "process_exception",
+        "_filter_sensitive_data",
+        "_get_client_ip"
+      ],
+      "variables": [
+        "SENSITIVE_FIELDS",
+        "EXCLUDE_PATHS"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "process_request",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "process_response",
+      "parameters": [
+        "self",
+        "request",
+        "response"
+      ]
+    },
+    {
+      "name": "process_exception",
+      "parameters": [
+        "self",
+        "request",
+        "exception"
+      ]
+    },
+    {
+      "name": "_filter_sensitive_data",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "_get_client_ip",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

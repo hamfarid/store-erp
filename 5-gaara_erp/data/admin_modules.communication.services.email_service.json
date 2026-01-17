@@ -1,0 +1,193 @@
+{
+  "module": "admin_modules.communication.services.email_service",
+  "imports": [
+    "core_modules.activity_log.services.audit_trail_service",
+    "core_modules.permissions.services.permission_service",
+    "datetime",
+    "logging",
+    "re",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "FallbackPermissionService",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FallbackAuditTrailService",
+      "methods": [
+        "log_activity"
+      ],
+      "variables": []
+    },
+    {
+      "name": "EmailSettingsService",
+      "methods": [
+        "__init__",
+        "get_email_settings",
+        "create_email_settings",
+        "update_email_settings",
+        "delete_email_settings",
+        "set_default_settings",
+        "test_email_settings",
+        "_require_permission",
+        "_now_iso",
+        "_generate_new_id",
+        "_safe_user_identifier",
+        "_mask_value",
+        "_sanitize_settings_for_read",
+        "_get_email_settings_by_id",
+        "_get_all_email_settings",
+        "_validate_email_settings",
+        "_send_test_email"
+      ],
+      "variables": [
+        "_EMAIL_RE"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_permission",
+      "parameters": [
+        "user",
+        "permission",
+        "obj"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": [
+        "user",
+        "action"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "db_session",
+        "current_user_id",
+        "permission_service",
+        "audit_trail_service"
+      ]
+    },
+    {
+      "name": "get_email_settings",
+      "parameters": [
+        "self",
+        "settings_id"
+      ]
+    },
+    {
+      "name": "create_email_settings",
+      "parameters": [
+        "self",
+        "settings_data"
+      ]
+    },
+    {
+      "name": "update_email_settings",
+      "parameters": [
+        "self",
+        "settings_id",
+        "settings_data"
+      ]
+    },
+    {
+      "name": "delete_email_settings",
+      "parameters": [
+        "self",
+        "settings_id"
+      ]
+    },
+    {
+      "name": "set_default_settings",
+      "parameters": [
+        "self",
+        "settings_id"
+      ]
+    },
+    {
+      "name": "test_email_settings",
+      "parameters": [
+        "self",
+        "settings_id",
+        "test_email"
+      ]
+    },
+    {
+      "name": "_require_permission",
+      "parameters": [
+        "self",
+        "perm",
+        "obj"
+      ]
+    },
+    {
+      "name": "_now_iso",
+      "parameters": []
+    },
+    {
+      "name": "_generate_new_id",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_safe_user_identifier",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_mask_value",
+      "parameters": [
+        "value"
+      ]
+    },
+    {
+      "name": "_sanitize_settings_for_read",
+      "parameters": [
+        "self",
+        "settings"
+      ]
+    },
+    {
+      "name": "_get_email_settings_by_id",
+      "parameters": [
+        "self",
+        "settings_id"
+      ]
+    },
+    {
+      "name": "_get_all_email_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_validate_email_settings",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "_send_test_email",
+      "parameters": [
+        "self",
+        "settings",
+        "test_email"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "PermissionServiceClass",
+    "AuditTrailServiceClass"
+  ]
+}

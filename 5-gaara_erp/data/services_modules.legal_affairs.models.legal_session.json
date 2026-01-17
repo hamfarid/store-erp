@@ -1,0 +1,162 @@
+{
+  "module": "services_modules.legal_affairs.models.legal_session",
+  "imports": [
+    "core_modules.core.models.base_models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "LegalSession",
+      "methods": [
+        "__str__",
+        "is_upcoming",
+        "is_today",
+        "is_past",
+        "days_until_session",
+        "complete_session",
+        "cancel_session",
+        "postpone_session",
+        "reschedule_session",
+        "get_duration_str",
+        "get_related_documents"
+      ],
+      "variables": [
+        "session_number",
+        "title",
+        "description",
+        "session_type",
+        "status",
+        "session_date",
+        "start_time",
+        "end_time",
+        "duration_minutes",
+        "location",
+        "room",
+        "is_virtual",
+        "virtual_meeting_link",
+        "legal_case",
+        "assigned_lawyer",
+        "agenda",
+        "outcome",
+        "next_steps",
+        "notes"
+      ]
+    },
+    {
+      "name": "SessionTypeChoices",
+      "methods": [],
+      "variables": [
+        "COURT",
+        "ARBITRATION",
+        "MEDIATION",
+        "NEGOTIATION",
+        "MEETING",
+        "HEARING",
+        "DEPOSITION",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "SessionStatusChoices",
+      "methods": [],
+      "variables": [
+        "SCHEDULED",
+        "RESCHEDULED",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "CANCELLED",
+        "POSTPONED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_upcoming",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_today",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_past",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "days_until_session",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete_session",
+      "parameters": [
+        "self",
+        "outcome"
+      ]
+    },
+    {
+      "name": "cancel_session",
+      "parameters": [
+        "self",
+        "reason"
+      ]
+    },
+    {
+      "name": "postpone_session",
+      "parameters": [
+        "self",
+        "new_date",
+        "new_time",
+        "reason"
+      ]
+    },
+    {
+      "name": "reschedule_session",
+      "parameters": [
+        "self",
+        "new_date",
+        "new_time",
+        "reason"
+      ]
+    },
+    {
+      "name": "get_duration_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_related_documents",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

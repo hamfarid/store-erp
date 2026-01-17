@@ -1,0 +1,70 @@
+{
+  "module": "business_modules.accounting.services.journal_service",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "JournalService",
+      "methods": [
+        "create_journal_entry",
+        "update_journal_entry",
+        "post_journal_entry",
+        "cancel_journal_entry",
+        "get_account_ledger",
+        "get_journal_entries"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_journal_entry",
+      "parameters": [
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "update_journal_entry",
+      "parameters": [
+        "journal_entry",
+        "data"
+      ]
+    },
+    {
+      "name": "post_journal_entry",
+      "parameters": [
+        "journal_entry",
+        "user"
+      ]
+    },
+    {
+      "name": "cancel_journal_entry",
+      "parameters": [
+        "journal_entry",
+        "user"
+      ]
+    },
+    {
+      "name": "get_account_ledger",
+      "parameters": [
+        "account",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "get_journal_entries",
+      "parameters": [
+        "company",
+        "filters"
+      ]
+    }
+  ],
+  "variables": []
+}

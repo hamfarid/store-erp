@@ -1,0 +1,14 @@
+{
+  "module": "core_modules.setup.submodules.data_import_export.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework.routers",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "router",
+    "urlpatterns"
+  ]
+}

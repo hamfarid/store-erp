@@ -1,0 +1,138 @@
+{
+  "module": "core_modules.permissions.test_integration",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.test",
+    "django.urls",
+    "rest_framework",
+    "rest_framework.response",
+    "rest_framework.test",
+    "typing",
+    "unified_permissions_model"
+  ],
+  "classes": [
+    {
+      "name": "_FakeManager",
+      "methods": [
+        "__init__",
+        "create"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Company",
+      "methods": [
+        "__init__"
+      ],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "Branch",
+      "methods": [
+        "__init__"
+      ],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "UserProfile",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PermissionsIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_user_permissions_integration",
+        "test_role_inheritance",
+        "test_company_branch_scope",
+        "test_api_integration",
+        "test_user_role_assignment_api",
+        "has_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "cls"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "name",
+        "is_active"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "name",
+        "company",
+        "is_active"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_permissions_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_inheritance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_branch_scope",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_api_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_role_assignment_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "user",
+        "permission",
+        "company_id",
+        "branch_id"
+      ]
+    }
+  ],
+  "variables": []
+}

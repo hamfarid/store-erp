@@ -1,0 +1,188 @@
+{
+  "module": "services_modules.marketing.models.marketing_campaign",
+  "imports": [
+    "core_modules.core.models.company",
+    "core_modules.core.models.currency",
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "MarketingCampaign",
+      "methods": [
+        "__str__",
+        "clean",
+        "activate",
+        "pause",
+        "complete",
+        "cancel",
+        "get_roi",
+        "is_active_campaign",
+        "get_duration_days",
+        "get_days_remaining",
+        "get_progress_percentage",
+        "get_budget_utilization",
+        "get_conversion_rate",
+        "get_cost_per_lead",
+        "get_cost_per_acquisition",
+        "get_performance_metrics"
+      ],
+      "variables": [
+        "TYPE_DIGITAL",
+        "TYPE_PRINT",
+        "TYPE_TV",
+        "TYPE_RADIO",
+        "TYPE_OUTDOOR",
+        "TYPE_EVENT",
+        "TYPE_EMAIL",
+        "TYPE_SMS",
+        "TYPE_SOCIAL_MEDIA",
+        "TYPE_INFLUENCER",
+        "TYPE_OTHER",
+        "CAMPAIGN_TYPE_CHOICES",
+        "STATUS_DRAFT",
+        "STATUS_PLANNED",
+        "STATUS_ACTIVE",
+        "STATUS_PAUSED",
+        "STATUS_COMPLETED",
+        "STATUS_CANCELLED",
+        "CAMPAIGN_STATUS_CHOICES",
+        "name",
+        "code",
+        "campaign_type",
+        "description",
+        "company",
+        "start_date",
+        "end_date",
+        "planned_budget",
+        "actual_cost",
+        "currency",
+        "target_audience",
+        "target_leads",
+        "actual_leads",
+        "target_conversions",
+        "actual_conversions",
+        "actual_revenue",
+        "status",
+        "is_active",
+        "notes",
+        "tags"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "activate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "pause",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_roi",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active_campaign",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_duration_days",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_days_remaining",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_progress_percentage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_budget_utilization",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_conversion_rate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_cost_per_lead",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_cost_per_acquisition",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_performance_metrics",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

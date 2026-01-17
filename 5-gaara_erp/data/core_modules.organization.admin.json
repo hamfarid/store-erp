@@ -1,0 +1,68 @@
+{
+  "module": "core_modules.organization.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CompanyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "BranchAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "raw_id_fields"
+      ]
+    },
+    {
+      "name": "CountryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "raw_id_fields"
+      ]
+    },
+    {
+      "name": "CurrencyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ExchangeRateAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "raw_id_fields"
+      ]
+    },
+    {
+      "name": "DepartmentAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "raw_id_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

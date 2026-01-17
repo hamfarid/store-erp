@@ -1,0 +1,9 @@
+{
+  "module": "utility_modules.locale.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "default_app_config"
+  ]
+}

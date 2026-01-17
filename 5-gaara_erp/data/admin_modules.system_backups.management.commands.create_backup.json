@@ -1,0 +1,64 @@
+{
+  "module": "admin_modules.system_backups.management.commands.create_backup",
+  "imports": [
+    "django.conf",
+    "django.core.management.base",
+    "django.utils",
+    "os",
+    "pathlib",
+    "shutil",
+    "subprocess",
+    "system_backups.models",
+    "tarfile",
+    "zipfile"
+  ],
+  "classes": [
+    {
+      "name": "Command",
+      "methods": [
+        "add_arguments",
+        "_is_excluded",
+        "_backup_database",
+        "handle"
+      ],
+      "variables": [
+        "help"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "add_arguments",
+      "parameters": [
+        "self",
+        "parser"
+      ]
+    },
+    {
+      "name": "_is_excluded",
+      "parameters": [
+        "self",
+        "path",
+        "root",
+        "patterns"
+      ]
+    },
+    {
+      "name": "_backup_database",
+      "parameters": [
+        "self",
+        "db_alias",
+        "db_settings",
+        "target_dir",
+        "timestamp_str"
+      ]
+    },
+    {
+      "name": "handle",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

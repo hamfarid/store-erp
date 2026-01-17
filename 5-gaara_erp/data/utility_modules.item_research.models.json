@@ -1,0 +1,9 @@
+{
+  "module": "utility_modules.item_research.models",
+  "imports": [
+    "django.db"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

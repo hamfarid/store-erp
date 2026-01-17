@@ -1,0 +1,12 @@
+{
+  "module": "gaara_erp.settings_assets_mig",
+  "imports": [
+    "settings"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "INSTALLED_APPS",
+    "MIDDLEWARE"
+  ]
+}

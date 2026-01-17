@@ -1,0 +1,118 @@
+{
+  "module": "services_modules.hr.leave",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "employee"
+  ],
+  "classes": [
+    {
+      "name": "LeaveType",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name_ar",
+        "name_en",
+        "description",
+        "is_paid",
+        "max_days_per_year",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "LeaveRequest",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "LEAVE_STATUS_CHOICES",
+        "employee",
+        "leave_type",
+        "start_date",
+        "end_date",
+        "reason",
+        "status",
+        "replacement_employee",
+        "requested_at",
+        "current_approver",
+        "rejection_reason"
+      ]
+    },
+    {
+      "name": "LeaveBalance",
+      "methods": [],
+      "variables": [
+        "employee",
+        "leave_type",
+        "year",
+        "entitled_days",
+        "taken_days",
+        "balance_days"
+      ]
+    },
+    {
+      "name": "LeaveCancellationRequest",
+      "methods": [],
+      "variables": [
+        "leave_request",
+        "request_date",
+        "reason",
+        "status"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

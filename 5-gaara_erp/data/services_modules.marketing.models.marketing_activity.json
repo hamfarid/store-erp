@@ -1,0 +1,138 @@
+{
+  "module": "services_modules.marketing.models.marketing_activity",
+  "imports": [
+    "core_modules.core.models.base_models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "marketing_campaign",
+    "marketing_lead"
+  ],
+  "classes": [
+    {
+      "name": "MarketingActivity",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "complete",
+        "cancel",
+        "reschedule",
+        "start",
+        "is_overdue",
+        "get_duration_str"
+      ],
+      "variables": [
+        "TYPE_CALL",
+        "TYPE_EMAIL",
+        "TYPE_MEETING",
+        "TYPE_FOLLOW_UP",
+        "TYPE_SOCIAL",
+        "TYPE_SMS",
+        "TYPE_OTHER",
+        "TYPE_CHOICES",
+        "STATUS_PLANNED",
+        "STATUS_IN_PROGRESS",
+        "STATUS_COMPLETED",
+        "STATUS_CANCELLED",
+        "STATUS_CHOICES",
+        "RESULT_POSITIVE",
+        "RESULT_NEUTRAL",
+        "RESULT_NEGATIVE",
+        "RESULT_NONE",
+        "RESULT_CHOICES",
+        "name",
+        "description",
+        "activity_type",
+        "status",
+        "result",
+        "campaign",
+        "lead",
+        "scheduled_date",
+        "scheduled_time",
+        "duration",
+        "completion_date",
+        "completion_time",
+        "notes",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "self",
+        "completion_date",
+        "completion_time",
+        "result",
+        "notes"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self",
+        "notes"
+      ]
+    },
+    {
+      "name": "reschedule",
+      "parameters": [
+        "self",
+        "new_date",
+        "new_time",
+        "notes"
+      ]
+    },
+    {
+      "name": "start",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_duration_str",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

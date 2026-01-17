@@ -1,0 +1,66 @@
+{
+  "module": "business_modules.sales.models.sales_invoice_item",
+  "imports": [
+    "decimal",
+    "django.db",
+    "sales_invoice"
+  ],
+  "classes": [
+    {
+      "name": "SalesInvoiceItem",
+      "methods": [
+        "__str__",
+        "calculate_total",
+        "save",
+        "delete"
+      ],
+      "variables": [
+        "invoice",
+        "description",
+        "quantity",
+        "unit_price",
+        "discount",
+        "tax_rate",
+        "total_price",
+        "product_reference"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_total",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

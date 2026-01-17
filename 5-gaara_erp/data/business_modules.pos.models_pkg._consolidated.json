@@ -1,0 +1,221 @@
+{
+  "module": "business_modules.pos.models_pkg._consolidated",
+  "imports": [
+    "business_modules.accounting.models",
+    "business_modules.inventory.models",
+    "core_modules.companies.models",
+    "decimal",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "POSConfig",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "company",
+        "warehouse",
+        "journal",
+        "is_active",
+        "allow_discount",
+        "allow_price_change",
+        "allow_credit_sales",
+        "allow_returns",
+        "receipt_header",
+        "receipt_footer"
+      ]
+    },
+    {
+      "name": "POSSession",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATES",
+        "name",
+        "config",
+        "opening_date",
+        "closing_date",
+        "state",
+        "opening_balance",
+        "closing_balance",
+        "cash_register_balance",
+        "notes"
+      ]
+    },
+    {
+      "name": "POSOrder",
+      "methods": [
+        "__str__",
+        "recalculate_amounts",
+        "is_fully_paid"
+      ],
+      "variables": [
+        "STATES",
+        "name",
+        "session",
+        "date_order",
+        "state",
+        "amount_total",
+        "amount_tax",
+        "amount_paid",
+        "amount_return",
+        "note"
+      ]
+    },
+    {
+      "name": "POSOrderLine",
+      "methods": [
+        "__str__",
+        "_compute_subtotal",
+        "save",
+        "delete"
+      ],
+      "variables": [
+        "order",
+        "product",
+        "qty",
+        "price_unit",
+        "price_subtotal",
+        "discount"
+      ]
+    },
+    {
+      "name": "POSPayment",
+      "methods": [
+        "__str__",
+        "save",
+        "delete"
+      ],
+      "variables": [
+        "PAYMENT_METHODS",
+        "order",
+        "payment_method",
+        "amount",
+        "payment_date"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "recalculate_amounts",
+      "parameters": [
+        "self",
+        "save"
+      ]
+    },
+    {
+      "name": "is_fully_paid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_compute_subtotal",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

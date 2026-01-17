@@ -1,0 +1,177 @@
+{
+  "module": "business_modules.rent.models.rental_contract",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.utils.translation",
+    "property"
+  ],
+  "classes": [
+    {
+      "name": "RentalContract",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "branch",
+        "tenant",
+        "journal",
+        "start_date",
+        "end_date",
+        "payment_frequency",
+        "security_deposit",
+        "notes",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "RentalContractLine",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "contract",
+        "property",
+        "monthly_rent",
+        "start_date",
+        "end_date",
+        "is_active"
+      ]
+    },
+    {
+      "name": "LeaseAgreement",
+      "methods": [],
+      "variables": [
+        "property",
+        "unit",
+        "tenant",
+        "start_date",
+        "end_date",
+        "rent_amount",
+        "payment_frequency",
+        "deposit_amount",
+        "terms",
+        "is_active"
+      ]
+    },
+    {
+      "name": "MaintenanceStatus",
+      "methods": [],
+      "variables": [
+        "PENDING",
+        "IN_PROGRESS",
+        "COMPLETED"
+      ]
+    },
+    {
+      "name": "MaintenanceRequest",
+      "methods": [],
+      "variables": [
+        "property",
+        "unit",
+        "reported_by",
+        "tenant_reporter",
+        "description",
+        "status",
+        "reported_date",
+        "completed_date",
+        "cost",
+        "is_unit_specific_cost",
+        "journal_entry"
+      ]
+    },
+    {
+      "name": "Vehicle",
+      "methods": [],
+      "variables": [
+        "name",
+        "is_available"
+      ]
+    },
+    {
+      "name": "VehicleLeaseAgreement",
+      "methods": [],
+      "variables": [
+        "vehicle",
+        "tenant",
+        "start_date",
+        "end_date",
+        "rent_rate",
+        "rate_unit",
+        "pickup_odometer",
+        "pickup_fuel_level",
+        "return_odometer",
+        "return_fuel_level",
+        "deposit_amount",
+        "total_charge",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

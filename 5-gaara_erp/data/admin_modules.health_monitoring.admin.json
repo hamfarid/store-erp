@@ -1,0 +1,44 @@
+{
+  "module": "admin_modules.health_monitoring.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ServerMetricAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "date_hierarchy",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "UserActivityLogAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "raw_id_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "SystemEventLogAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

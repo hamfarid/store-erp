@@ -1,0 +1,180 @@
+{
+  "module": "core_modules.permissions.services",
+  "imports": [
+    "django.contrib.auth",
+    "django.contrib.contenttypes.models",
+    "django.db.models",
+    "django.utils",
+    "unified_permissions_model"
+  ],
+  "classes": [
+    {
+      "name": "AuthorizationService",
+      "methods": [
+        "check_permission",
+        "_check_direct_permission",
+        "_check_role_permission",
+        "_check_group_permission",
+        "_check_scope_match",
+        "grant_permission",
+        "revoke_permission",
+        "assign_role",
+        "revoke_role",
+        "add_user_to_group",
+        "remove_user_from_group",
+        "request_permission",
+        "approve_permission_request",
+        "reject_permission_request",
+        "get_user_permissions",
+        "get_user_roles",
+        "get_user_groups"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "check_permission",
+      "parameters": [
+        "user_id",
+        "permission_code",
+        "resource_type",
+        "resource_id",
+        "scope"
+      ]
+    },
+    {
+      "name": "_check_direct_permission",
+      "parameters": [
+        "user",
+        "permission",
+        "resource_type",
+        "resource_id",
+        "scope"
+      ]
+    },
+    {
+      "name": "_check_role_permission",
+      "parameters": [
+        "user",
+        "permission",
+        "resource_type",
+        "resource_id",
+        "scope"
+      ]
+    },
+    {
+      "name": "_check_group_permission",
+      "parameters": [
+        "user",
+        "permission",
+        "resource_type",
+        "resource_id",
+        "scope"
+      ]
+    },
+    {
+      "name": "_check_scope_match",
+      "parameters": [
+        "permission_scope",
+        "request_scope"
+      ]
+    },
+    {
+      "name": "grant_permission",
+      "parameters": [
+        "user_id",
+        "permission_code",
+        "scope",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "revoke_permission",
+      "parameters": [
+        "user_id",
+        "permission_code"
+      ]
+    },
+    {
+      "name": "assign_role",
+      "parameters": [
+        "user_id",
+        "role_code",
+        "scope",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "revoke_role",
+      "parameters": [
+        "user_id",
+        "role_code"
+      ]
+    },
+    {
+      "name": "add_user_to_group",
+      "parameters": [
+        "user_id",
+        "group_name",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "remove_user_from_group",
+      "parameters": [
+        "user_id",
+        "group_name"
+      ]
+    },
+    {
+      "name": "request_permission",
+      "parameters": [
+        "user_id",
+        "permission_code",
+        "role_code",
+        "group_name",
+        "reason"
+      ]
+    },
+    {
+      "name": "approve_permission_request",
+      "parameters": [
+        "request_id",
+        "approver_id"
+      ]
+    },
+    {
+      "name": "reject_permission_request",
+      "parameters": [
+        "request_id",
+        "rejector_id",
+        "reason"
+      ]
+    },
+    {
+      "name": "get_user_permissions",
+      "parameters": [
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_user_roles",
+      "parameters": [
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_user_groups",
+      "parameters": [
+        "user_id"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

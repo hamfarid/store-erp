@@ -1,0 +1,24 @@
+{
+  "module": "admin_modules.notifications.signals",
+  "imports": [
+    "django.conf",
+    "django.db.models.signals",
+    "django.dispatch",
+    "logging",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "log_notification_creation",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

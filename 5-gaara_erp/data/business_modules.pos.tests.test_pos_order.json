@@ -1,0 +1,143 @@
+{
+  "module": "business_modules.pos.tests.test_pos_order",
+  "imports": [
+    "decimal",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "models.pos_config",
+    "models.pos_order",
+    "models.pos_payment",
+    "models.pos_session",
+    "services_modules.accounting.models",
+    "services_modules.core.models",
+    "services_modules.inventory.models"
+  ],
+  "classes": [
+    {
+      "name": "POSOrderModelTest",
+      "methods": [
+        "setUpTestData",
+        "test_create_pos_order",
+        "test_add_order_lines",
+        "test_compute_amounts",
+        "test_order_workflow",
+        "test_validate_payment_amount",
+        "test_get_order_summary"
+      ],
+      "variables": []
+    },
+    {
+      "name": "POSOrderLineModelTest",
+      "methods": [
+        "setUpTestData",
+        "test_create_order_line",
+        "test_compute_subtotal",
+        "test_validate_quantity",
+        "test_validate_unit_price",
+        "test_validate_discount",
+        "test_get_cost_amount"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_create_pos_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_order_lines",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_amounts",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_order_workflow",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_payment_amount",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_order_summary",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_create_order_line",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_subtotal",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_quantity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_unit_price",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_discount",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_cost_amount",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_order_summary",
+      "parameters": [
+        "self_"
+      ]
+    },
+    {
+      "name": "mock_get_cost_amount",
+      "parameters": [
+        "self_"
+      ]
+    }
+  ],
+  "variables": []
+}

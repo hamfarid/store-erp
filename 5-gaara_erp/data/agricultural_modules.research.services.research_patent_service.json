@@ -1,0 +1,78 @@
+{
+  "module": "agricultural_modules.research.services.research_patent_service",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ResearchPatentService",
+      "methods": [
+        "create_patent",
+        "update_patent",
+        "get_patent",
+        "get_patents",
+        "change_patent_status",
+        "add_inventor",
+        "remove_inventor"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_patent",
+      "parameters": [
+        "data",
+        "created_by"
+      ]
+    },
+    {
+      "name": "update_patent",
+      "parameters": [
+        "patent_id",
+        "data",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "get_patent",
+      "parameters": [
+        "patent_id"
+      ]
+    },
+    {
+      "name": "get_patents",
+      "parameters": [
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "change_patent_status",
+      "parameters": [
+        "patent_id",
+        "new_status",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "add_inventor",
+      "parameters": [
+        "patent_id",
+        "inventor_data"
+      ]
+    },
+    {
+      "name": "remove_inventor",
+      "parameters": [
+        "patent_id",
+        "researcher_id"
+      ]
+    }
+  ],
+  "variables": []
+}

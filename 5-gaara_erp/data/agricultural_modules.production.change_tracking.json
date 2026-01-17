@@ -1,0 +1,161 @@
+{
+  "module": "agricultural_modules.production.change_tracking",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ChangeLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "content_type",
+        "object_id",
+        "content_object",
+        "change_type",
+        "field_name",
+        "old_value",
+        "new_value",
+        "change_date",
+        "changed_by",
+        "change_reason",
+        "lot_number",
+        "new_lot_created"
+      ]
+    },
+    {
+      "name": "LotNumberGenerator",
+      "methods": [
+        "generate_lot_number",
+        "should_create_new_lot"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ChangeTracker",
+      "methods": [
+        "log_creation",
+        "log_update",
+        "log_deletion",
+        "get_changes_by_object",
+        "get_lot_history",
+        "get_new_lots_created"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BatchTraceabilityService",
+      "methods": [
+        "trace_batch_origin",
+        "trace_lot_history",
+        "get_batch_by_lot"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "ordering",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "generate_lot_number",
+      "parameters": [
+        "production_order",
+        "grade",
+        "size",
+        "location",
+        "responsible"
+      ]
+    },
+    {
+      "name": "should_create_new_lot",
+      "parameters": [
+        "old_data",
+        "new_data"
+      ]
+    },
+    {
+      "name": "log_creation",
+      "parameters": [
+        "obj",
+        "user",
+        "reason"
+      ]
+    },
+    {
+      "name": "log_update",
+      "parameters": [
+        "obj",
+        "old_data",
+        "new_data",
+        "user",
+        "reason"
+      ]
+    },
+    {
+      "name": "log_deletion",
+      "parameters": [
+        "obj",
+        "user",
+        "reason"
+      ]
+    },
+    {
+      "name": "get_changes_by_object",
+      "parameters": [
+        "obj"
+      ]
+    },
+    {
+      "name": "get_lot_history",
+      "parameters": [
+        "lot_number"
+      ]
+    },
+    {
+      "name": "get_new_lots_created",
+      "parameters": [
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "trace_batch_origin",
+      "parameters": [
+        "batch"
+      ]
+    },
+    {
+      "name": "trace_lot_history",
+      "parameters": [
+        "lot_number"
+      ]
+    },
+    {
+      "name": "get_batch_by_lot",
+      "parameters": [
+        "lot_number"
+      ]
+    }
+  ],
+  "variables": []
+}

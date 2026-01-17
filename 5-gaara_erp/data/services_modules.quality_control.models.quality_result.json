@@ -1,0 +1,73 @@
+{
+  "module": "services_modules.quality_control.models.quality_result",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "QualityResult",
+      "methods": [
+        "__str__",
+        "save",
+        "get_deviation",
+        "get_deviation_percentage",
+        "get_formatted_value"
+      ],
+      "variables": [
+        "RESULT_STATUS_CHOICES",
+        "quality_test",
+        "actual_value",
+        "result_status",
+        "notes",
+        "evidence",
+        "created_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_deviation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_deviation_percentage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_formatted_value",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

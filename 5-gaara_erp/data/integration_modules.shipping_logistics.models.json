@@ -1,0 +1,254 @@
+{
+  "module": "integration_modules.shipping_logistics.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "ShippingProvider",
+      "methods": [
+        "__str__",
+        "get_success_rate"
+      ],
+      "variables": [
+        "PROVIDER_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "provider_id",
+        "name",
+        "provider_type",
+        "status",
+        "api_endpoint",
+        "api_version",
+        "tracking_url_template",
+        "api_key",
+        "username",
+        "password",
+        "supported_countries",
+        "supported_cities",
+        "service_types",
+        "base_rate",
+        "rate_per_kg",
+        "rate_per_km",
+        "max_weight",
+        "max_dimensions",
+        "configuration",
+        "total_shipments",
+        "successful_shipments",
+        "average_delivery_time",
+        "rating",
+        "created_at",
+        "updated_at",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Shipment",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SHIPMENT_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "shipment_id",
+        "tracking_number",
+        "provider",
+        "shipment_type",
+        "status",
+        "sender_name",
+        "sender_phone",
+        "sender_email",
+        "sender_address",
+        "sender_city",
+        "sender_country",
+        "sender_postal_code",
+        "recipient_name",
+        "recipient_phone",
+        "recipient_email",
+        "recipient_address",
+        "recipient_city",
+        "recipient_country",
+        "recipient_postal_code",
+        "weight",
+        "dimensions",
+        "description",
+        "declared_value",
+        "shipping_cost",
+        "insurance_cost",
+        "total_cost",
+        "currency",
+        "pickup_date",
+        "estimated_delivery",
+        "actual_delivery",
+        "special_instructions",
+        "requires_signature",
+        "is_fragile",
+        "related_model",
+        "related_object_id",
+        "raw_request",
+        "raw_response",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TrackingEvent",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "EVENT_TYPE_CHOICES",
+        "event_id",
+        "shipment",
+        "event_type",
+        "description",
+        "location",
+        "city",
+        "country",
+        "event_time",
+        "notes",
+        "raw_data",
+        "created_at"
+      ]
+    },
+    {
+      "name": "ShippingRate",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "rate_id",
+        "provider",
+        "origin_country",
+        "origin_city",
+        "destination_country",
+        "destination_city",
+        "service_type",
+        "min_weight",
+        "max_weight",
+        "base_rate",
+        "rate_per_kg",
+        "fuel_surcharge",
+        "estimated_days",
+        "is_active",
+        "effective_from",
+        "effective_to",
+        "created_at"
+      ]
+    },
+    {
+      "name": "DeliveryAttempt",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ATTEMPT_STATUS_CHOICES",
+        "FAILURE_REASON_CHOICES",
+        "attempt_id",
+        "shipment",
+        "attempt_number",
+        "attempt_date",
+        "status",
+        "failure_reason",
+        "failure_notes",
+        "delivered_to",
+        "signature",
+        "rescheduled_date",
+        "driver_name",
+        "driver_phone",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_success_rate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

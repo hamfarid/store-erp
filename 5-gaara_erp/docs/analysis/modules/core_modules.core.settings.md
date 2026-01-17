@@ -1,0 +1,25 @@
+# core_modules.core.settings
+
+## Imports
+- os
+- pathlib
+
+## Module Variables
+- `BASE_DIR`
+- `SECRET_KEY`
+- `DEBUG`
+- `ALLOWED_HOSTS`
+- `INSTALLED_APPS`
+- `MIDDLEWARE`
+- `ROOT_URLCONF`
+- `TEMPLATES`
+- `WSGI_APPLICATION`
+- `DATABASES`
+- `AUTH_PASSWORD_VALIDATORS`
+- `LANGUAGE_CODE`
+- `TIME_ZONE`
+- `USE_I18N`
+- `USE_TZ`
+- `STATIC_URL`
+- `DEFAULT_AUTO_FIELD`
+

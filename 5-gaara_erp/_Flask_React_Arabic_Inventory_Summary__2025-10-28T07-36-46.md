@@ -1,0 +1,42 @@
+[ ] NAME:Current Task List DESCRIPTION:Root task for conversation __NEW_AGENT__
+-[x] NAME:Investigate/Triage/Understand the problem DESCRIPTION:Read rules in .augment/rules, locate backend/frontend entry points, and identify files for P0 fixes (auth/login, security headers, secrets, error envelope).
+-[x] NAME:Phase 0: DCoT - Comprehensive Roadmap DESCRIPTION:Create numbered roadmap across FE/BE/DB/security/UI/.env/routing/duplication with risks, owners, and measurable metrics
+-[x] NAME:Phase 1-8: Execute OPERATIONAL_FRAMEWORK DESCRIPTION:Complete all phases (First-Principles, System & Forces, Probabilistic Behavior, Strategies, Stress-Test, Self-Correction, Principle Extraction, Final Review)
+-[x] NAME:P0.1: Login-Fix Blitz DESCRIPTION:JWT rotation on logout, lockout mechanism, MFA option, negative tests, e2e coverage
+-[x] NAME:P0.2: Unified Error Envelope DESCRIPTION:Standardize all API responses to {success, code, message, details?, traceId}
+-[x] NAME:P0.3-P0.6: Security Hardening Audit DESCRIPTION:Verify HTTPS/HSTS, CSP nonces, CSRF, rate limits, cookie flags, JWT TTLs
+-[x] NAME:P1: API Contracts & Validation DESCRIPTION:Refresh OpenAPI spec, add validators, drift tests, typed FE client
+-[x] NAME:P1: Database Hardening DESCRIPTION:Add FK/unique/check constraints, indexes, migrations (expand→backfill→switch→contract)
+-[x] NAME:P2: UI/Brand & WCAG AA DESCRIPTION:Derive tokens from Gaara/MagSeeds, WCAG AA contrast, light/dark, RTL, Command Palette
+-[x] NAME:P3: SBOM & Supply Chain DESCRIPTION:Generate SBOM (CycloneDX), scan with Grype/Trivy, pin dependencies, verify signatures
+-[x] NAME:P3: DAST & Frontend Quality Budgets DESCRIPTION:OWASP ZAP baseline, Lighthouse CI budgets for perf/accessibility/SEO/PWA
+-[x] NAME:P3: Circuit Breakers & Resilience DESCRIPTION:Implement circuit breakers for external APIs, DB, third-party services with fallbacks
+-[x] NAME:Secrets Management Audit DESCRIPTION:Identify all secrets, document migration to KMS/Vault for production, update /docs/Env.md
+-[x] NAME:Generate Comprehensive Audit Report DESCRIPTION:Create OUTPUT_PROTOCOL report with decision_trace, result, and summary
+-[x] NAME:P0.3-P0.6: Security Hardening Audit DESCRIPTION:Verify HTTPS/HSTS, CSRF, rate limiting, CSP, cookies, JWT TTLs - COMPLETE
+-[x] NAME:P0.7.1-P0.7.2: Secrets Audit & Migration Plan DESCRIPTION:Identify all secrets in .env, document KMS/Vault migration plan - COMPLETE
+-[x] NAME:P0.7.3: Create docs/Env.md DESCRIPTION:Document secret paths, Key IDs, rotation policies, IAM permissions
+-[x] NAME:P0.7.4: Update docs/Security.md DESCRIPTION:Add secrets lifecycle section (creation, access, rotation, revocation, monitoring)
+-[x] NAME:P0.7.5: Add CI Secret Scanning DESCRIPTION:Create .github/workflows/secret-scan.yml with gitleaks and trufflehog
+-[x] NAME:Investigate and fix SQLAlchemy Product↔InvoiceItem relationship resolution + address Pylint JWTRevocationList no-member alert DESCRIPTION:Verify that Product.invoice_items uses a resolvable target (direct class reference with safe fallback). Confirm that InvoiceItem is imported early enough without creating circular import. Ensure JWTRevocationList exposes cleanup_expired_tokens for linting. Validate by running MFA tests.
+-[x] NAME:Run MFA test suite and full backend test suite DESCRIPTION:Run: pytest backend/tests/test_mfa_p0.py -q; then pytest backend/tests -v --tb=short. Capture failures and logs, iterate until green.
+-[x] NAME:Set up CI pipeline (GitHub Actions) with lint, tests, coverage, and secret/security scans DESCRIPTION:Add .github/workflows/ci.yml with Python matrix, flake8, pytest+coverage, bandit, safety, and gitleaks. Store coverage and SBOM artifacts.
+-[x] NAME:Prepare KMS/Vault integration design and scaffolding DESCRIPTION:Draft /docs/Security.md section and minimal adapter for AWS KMS or HashiCorp Vault. Request permission to install boto3/hvac as needed. Wire secrets loading in create_app.
+-[x] NAME:Add initial k6 load test for auth flows DESCRIPTION:Create scripts/perf/k6_login.js to simulate login and token refresh. Document baselines in /docs/Performance.md and wire optional CI perf check.
+-[x] NAME:P3.1 - React Components & Pages (8 hours) DESCRIPTION:Create all React components and pages for the UI
+-[x] NAME:P3.2 - Styling & Branding (4 hours) DESCRIPTION:Apply Gaara/MagSeeds branding and Tailwind CSS styling
+-[x] NAME:P3.3 - Routing & Navigation (3 hours) DESCRIPTION:Set up React Router with protected routes and navigation
+-[x] NAME:P3.4 - State Management (3 hours) DESCRIPTION:Implement state management with Context API
+-[x] NAME:P3.5 - Forms & Validation (4 hours) DESCRIPTION:Create forms with validation using React Hook Form
+-[x] NAME:P3.6 - Testing & QA (3 hours) DESCRIPTION:Write tests for components and pages
+-[ ] NAME:Configure branch protection for main with required checks and 2 approvals DESCRIPTION:Repo admin: Settings → Branches → Add rule for main. Enable: Require pull request before merging, Require 2 approving reviews, Dismiss stale approvals, Require conversation resolution. Required status checks: SBOM & Supply Chain, DAST - OWASP ZAP, Lighthouse CI, K6 Performance (Auth Flow).
+-[ ] NAME:Verify branch protection is enforced on PRs DESCRIPTION:Open a test PR from a feature branch, confirm 2 approvals are required and the four required checks appear and gate merging. Capture screenshots/links.
+-[/] NAME:Run Day-1 CI workflows and collect artifacts DESCRIPTION:Ensure latest push triggered: SBOM, DAST, Lighthouse, K6. If not, dispatch manually. Download and review artifacts: sbom.cyclonedx.json, zap-baseline.html/json, .lighthouseci/*, k6-summary.json.
+-[ ] NAME:Triage and fix any CI failures from Day-1 runs DESCRIPTION:If SBOM finds HIGH/CRITICAL, add/upgrades/remediations. If Lighthouse budgets fail, optimize assets or adjust budgets with justification. If DAST flags, fix or suppress with rationale. Re-run until green.
+-[x] NAME:Backend: audit outdated packages and propose safe upgrades DESCRIPTION:Outdated reviewed; chosen safe bumps: Flask 3.1.2, Flask-Migrate 4.1.0, Flask-WTF 1.2.2, Flask-JWT-Extended 4.7.1, SQLAlchemy 2.0.44, PyJWT 2.10.1, Jinja2 3.1.6, requests 2.32.5, urllib3 2.5.0, python-dotenv 1.2.1, openpyxl 3.1.5, XlsxWriter 3.2.9, reportlab 4.4.4. Majors deferred.
+-[x] NAME:Backend: apply upgrades and run tests DESCRIPTION:Applied selected upgrades via pip; updated backend/requirements.txt accordingly; ran full backend tests: 93 passed, 4 skipped.
+-[x] NAME:Frontend: baseline install, build, and tests DESCRIPTION:frontend: npm install (Windows EPERM workaround), vitest run (19 passed), and vite build succeeded.
+-[ ] NAME:Frontend: apply minor/patch upgrades and run tests DESCRIPTION:Run npm update (non-major). Then npm test, eslint, and build. Fix any issues. Commit changes in a PR. Avoid major jumps (React 19, date-fns 4, zod 4) in this step.
+-[ ] NAME:Plan major frontend upgrades (React 19, date-fns 4, zod 4, vitest 4) DESCRIPTION:Draft a plan for incremental major upgrades with compatibility notes and migration steps. Open a tracking issue/PR with checklist.
+-[ ] NAME:Dependencies cleanup: verify and remove unused dependencies DESCRIPTION:Double-check for unused or legacy deps in backend/requirements.txt and frontend/package.json (e.g., pathlib2 removed). Update files via package managers; verify CI stays green.
+-[ ] NAME:CI performance: verify npm cache effectiveness DESCRIPTION:Confirm actions/setup-node cache is working (cache hit rates, install time improved). Record before/after timing in PR notes.

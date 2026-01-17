@@ -1,0 +1,11 @@
+{
+  "module": "gaara_erp.urls_minimal",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns"
+  ]
+}

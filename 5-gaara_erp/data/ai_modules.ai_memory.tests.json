@@ -1,0 +1,222 @@
+{
+  "module": "ai_modules.ai_memory.tests",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models",
+    "services",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "MemoryTypeTestCase",
+      "methods": [
+        "setUp",
+        "test_memory_type_creation",
+        "test_memory_type_str"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MemoryContextTestCase",
+      "methods": [
+        "setUp",
+        "test_context_creation",
+        "test_context_memory_count",
+        "test_context_duration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MemoryTestCase",
+      "methods": [
+        "setUp",
+        "test_memory_creation",
+        "test_memory_access_increment",
+        "test_memory_expiration",
+        "test_relevance_calculation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MemoryAssociationTestCase",
+      "methods": [
+        "setUp",
+        "test_association_creation",
+        "test_association_usage_increment"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MemoryServiceTestCase",
+      "methods": [
+        "setUp",
+        "test_create_memory",
+        "test_search_memories"
+      ],
+      "variables": []
+    },
+    {
+      "name": "KnowledgeServiceTestCase",
+      "methods": [
+        "setUp",
+        "test_search_knowledge",
+        "test_apply_knowledge"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LearningServiceTestCase",
+      "methods": [
+        "setUp",
+        "test_discover_patterns"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_memory_type_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_memory_type_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_context_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_context_memory_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_context_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_memory_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_memory_access_increment",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_memory_expiration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_relevance_calculation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_association_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_association_usage_increment",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_memory",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_search_memories",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_search_knowledge",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_apply_knowledge",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_discover_patterns",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

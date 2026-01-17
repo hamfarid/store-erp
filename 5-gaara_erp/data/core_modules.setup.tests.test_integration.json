@@ -1,0 +1,305 @@
+{
+  "module": "core_modules.setup.tests.test_integration",
+  "imports": [
+    "core_modules.setup.activity_log.models",
+    "core_modules.setup.data_import_export.models",
+    "core_modules.setup.models",
+    "core_modules.setup.security.models",
+    "django.contrib.auth",
+    "django.test",
+    "django.urls",
+    "rest_framework",
+    "rest_framework.test"
+  ],
+  "classes": [
+    {
+      "name": "SetupDashboardViewTest",
+      "methods": [
+        "setUp",
+        "test_dashboard_view_authenticated",
+        "test_dashboard_view_unauthenticated"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SetupWizardViewsTest",
+      "methods": [
+        "setUp",
+        "test_wizard_welcome_view",
+        "test_wizard_welcome_view_setup_completed",
+        "test_wizard_company_view_get",
+        "test_wizard_company_view_post",
+        "test_wizard_admin_user_view_get",
+        "test_wizard_admin_user_view_post_password_mismatch",
+        "test_wizard_localization_view_get",
+        "test_wizard_localization_view_post",
+        "test_wizard_database_view_get",
+        "test_wizard_database_view_post",
+        "test_wizard_security_view_get",
+        "test_wizard_security_view_post",
+        "test_wizard_completed_view"
+      ],
+      "variables": []
+    },
+    {
+      "name": "APIViewsTest",
+      "methods": [
+        "setUp",
+        "test_company_settings_list",
+        "test_company_settings_detail",
+        "test_system_settings_list",
+        "test_system_settings_by_category",
+        "test_system_settings_get_setting",
+        "test_activity_log_list",
+        "test_activity_log_by_user",
+        "test_activity_log_by_severity",
+        "test_security_setting_list",
+        "test_security_setting_by_category",
+        "test_security_event_list",
+        "test_security_event_by_severity",
+        "test_security_event_by_event_type",
+        "test_blocked_ip_list",
+        "test_blocked_ip_deactivate",
+        "test_blocked_ip_activate",
+        "test_import_export_operation_list",
+        "test_import_export_operation_cancel",
+        "test_import_export_operation_retry",
+        "test_api_permissions"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_dashboard_view_authenticated",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_dashboard_view_unauthenticated",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_welcome_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_welcome_view_setup_completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_company_view_get",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_company_view_post",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_admin_user_view_get",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_admin_user_view_post_password_mismatch",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_localization_view_get",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_localization_view_post",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_database_view_get",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_database_view_post",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_security_view_get",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_security_view_post",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_wizard_completed_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_settings_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_settings_detail",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_settings_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_settings_by_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_settings_get_setting",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_log_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_log_by_user",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_log_by_severity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_setting_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_setting_by_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_event_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_event_by_severity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_event_by_event_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_blocked_ip_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_blocked_ip_deactivate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_blocked_ip_activate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_import_export_operation_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_import_export_operation_cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_import_export_operation_retry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_api_permissions",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

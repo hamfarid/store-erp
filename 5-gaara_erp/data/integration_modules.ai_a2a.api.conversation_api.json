@@ -1,0 +1,234 @@
+{
+  "module": "integration_modules.ai_a2a.api.conversation_api",
+  "imports": [
+    "django.db",
+    "django.shortcuts",
+    "django.utils",
+    "logging",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "services.conversation_service"
+  ],
+  "classes": [
+    {
+      "name": "ConversationSerializer",
+      "methods": [
+        "get_created_by_username",
+        "get_status_display"
+      ],
+      "variables": [
+        "created_by_username",
+        "status_display"
+      ]
+    },
+    {
+      "name": "MessageSerializer",
+      "methods": [
+        "get_sender_agent_name",
+        "get_receiver_agent_name",
+        "get_status_display"
+      ],
+      "variables": [
+        "sender_agent_name",
+        "receiver_agent_name",
+        "status_display"
+      ]
+    },
+    {
+      "name": "ConversationViewSet",
+      "methods": [
+        "list",
+        "retrieve",
+        "create",
+        "close",
+        "reopen",
+        "pause",
+        "archive",
+        "messages",
+        "statistics"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "MessageViewSet",
+      "methods": [
+        "retrieve",
+        "create",
+        "update_status",
+        "pending_for_agent",
+        "log_error"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_created_by_username",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_status_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_sender_agent_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_receiver_agent_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_status_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "list",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "retrieve",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "close",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "reopen",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "pause",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "archive",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "messages",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "statistics",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "retrieve",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "update_status",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "pending_for_agent",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "log_error",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

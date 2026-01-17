@@ -1,0 +1,118 @@
+{
+  "module": "business_modules.accounting.serializers.settlement_serializers",
+  "imports": [
+    "business_modules.accounting.models.settlement",
+    "business_modules.accounting.serializers.invoice_serializers",
+    "business_modules.accounting.services.settlement_service",
+    "business_modules.contacts.serializers",
+    "business_modules.purchasing.models",
+    "business_modules.sales.models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "SettlementItemSerializer",
+      "methods": [],
+      "variables": [
+        "sales_invoice_details",
+        "purchase_invoice_details"
+      ]
+    },
+    {
+      "name": "SettlementTransactionSerializer",
+      "methods": [],
+      "variables": [
+        "contact_details",
+        "status_display"
+      ]
+    },
+    {
+      "name": "SettlementTransactionDetailSerializer",
+      "methods": [],
+      "variables": [
+        "contact_details",
+        "status_display",
+        "items",
+        "created_by_name",
+        "confirmed_by_name"
+      ]
+    },
+    {
+      "name": "SettlementTransactionCreateSerializer",
+      "methods": [
+        "create"
+      ],
+      "variables": [
+        "sales_invoices",
+        "purchase_invoices"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "SettlementItem",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SettlementStatus",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "CONFIRMED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "SettlementItemType",
+      "methods": [],
+      "variables": [
+        "SALES",
+        "PURCHASE"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "validated_data"
+      ]
+    }
+  ],
+  "variables": []
+}

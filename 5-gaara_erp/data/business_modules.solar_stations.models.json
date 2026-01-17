@@ -1,0 +1,72 @@
+{
+  "module": "business_modules.solar_stations.models",
+  "imports": [
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SolarStation",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "location",
+        "capacity",
+        "installation_date",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "SolarPanel",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "model_number",
+        "manufacturer",
+        "power_rating",
+        "efficiency",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

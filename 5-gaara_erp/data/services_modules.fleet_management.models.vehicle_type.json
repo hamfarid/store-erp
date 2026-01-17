@@ -1,0 +1,38 @@
+{
+  "module": "services_modules.fleet_management.models.vehicle_type",
+  "imports": [
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "VehicleType",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "icon"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

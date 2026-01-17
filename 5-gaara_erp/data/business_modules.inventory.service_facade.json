@@ -1,0 +1,77 @@
+{
+  "module": "business_modules.inventory.service_facade",
+  "imports": [
+    "decimal",
+    "django.utils",
+    "models",
+    "services",
+    "services.activity_log.services",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "InventoryService",
+      "methods": [
+        "get_product_stock",
+        "record_stock_movement"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductService",
+      "methods": [
+        "create_product",
+        "update_product"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_product_stock",
+      "parameters": [
+        "self",
+        "product_id",
+        "store_id"
+      ]
+    },
+    {
+      "name": "record_stock_movement",
+      "parameters": [
+        "self",
+        "user_id",
+        "product_id",
+        "store_id",
+        "movement_type",
+        "quantity",
+        "source_type",
+        "stock_lot_id",
+        "unit_cost"
+      ]
+    },
+    {
+      "name": "create_product",
+      "parameters": [
+        "self",
+        "user_id",
+        "name",
+        "sku",
+        "product_type",
+        "sale_price",
+        "cost_price",
+        "track_lot",
+        "track_batch",
+        "track_expiry"
+      ]
+    },
+    {
+      "name": "update_product",
+      "parameters": [
+        "self",
+        "user_id",
+        "product_id"
+      ]
+    }
+  ],
+  "variables": []
+}

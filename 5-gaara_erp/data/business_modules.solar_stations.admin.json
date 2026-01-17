@@ -1,0 +1,10 @@
+{
+  "module": "business_modules.solar_stations.admin",
+  "imports": [
+    "django.contrib",
+    "django.db"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

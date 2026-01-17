@@ -1,0 +1,66 @@
+{
+  "module": "business_modules.inventory.reports",
+  "imports": [
+    "compat",
+    "datetime",
+    "decimal",
+    "django.db",
+    "django.db.models",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "get_stock_balance_report",
+      "parameters": [
+        "as_of_date",
+        "store_ids",
+        "product_ids",
+        "group_by"
+      ]
+    },
+    {
+      "name": "get_inventory_valuation_report",
+      "parameters": [
+        "as_of_date",
+        "store_ids",
+        "product_ids"
+      ]
+    },
+    {
+      "name": "get_inventory_movement_report",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "store_ids",
+        "product_ids"
+      ]
+    },
+    {
+      "name": "get_items_nearing_expiry_report",
+      "parameters": [
+        "days_threshold",
+        "store_ids",
+        "product_ids"
+      ]
+    },
+    {
+      "name": "get_slow_moving_inventory_report",
+      "parameters": [
+        "days_threshold",
+        "as_of_date",
+        "store_ids"
+      ]
+    },
+    {
+      "name": "get_reorder_level_report",
+      "parameters": [
+        "store_ids"
+      ]
+    }
+  ],
+  "variables": [
+    "__all__"
+  ]
+}

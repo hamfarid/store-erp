@@ -1,0 +1,103 @@
+{
+  "module": "services_modules.admin_affairs.services.employee_service",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeService",
+      "methods": [
+        "get_all_employees",
+        "get_employee_by_id",
+        "get_employee_by_employee_id",
+        "get_employee_by_user_id",
+        "search_employees",
+        "create_employee",
+        "update_employee",
+        "terminate_employee",
+        "get_employees_by_department",
+        "get_employees_by_position",
+        "transfer_employee"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_all_employees",
+      "parameters": [
+        "include_inactive"
+      ]
+    },
+    {
+      "name": "get_employee_by_id",
+      "parameters": [
+        "employee_id"
+      ]
+    },
+    {
+      "name": "get_employee_by_employee_id",
+      "parameters": [
+        "employee_id_str"
+      ]
+    },
+    {
+      "name": "get_employee_by_user_id",
+      "parameters": [
+        "user_id"
+      ]
+    },
+    {
+      "name": "search_employees",
+      "parameters": [
+        "query"
+      ]
+    },
+    {
+      "name": "create_employee",
+      "parameters": [
+        "user",
+        "employee_id",
+        "position",
+        "department"
+      ]
+    },
+    {
+      "name": "update_employee",
+      "parameters": [
+        "employee_id"
+      ]
+    },
+    {
+      "name": "terminate_employee",
+      "parameters": [
+        "employee_id",
+        "end_date"
+      ]
+    },
+    {
+      "name": "get_employees_by_department",
+      "parameters": [
+        "department_id"
+      ]
+    },
+    {
+      "name": "get_employees_by_position",
+      "parameters": [
+        "position_id"
+      ]
+    },
+    {
+      "name": "transfer_employee",
+      "parameters": [
+        "employee_id",
+        "new_department_id",
+        "new_position_id"
+      ]
+    }
+  ],
+  "variables": []
+}

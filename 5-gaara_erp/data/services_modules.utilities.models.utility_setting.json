@@ -1,0 +1,59 @@
+{
+  "module": "services_modules.utilities.models.utility_setting",
+  "imports": [
+    "django.db",
+    "django.utils.translation",
+    "json"
+  ],
+  "classes": [
+    {
+      "name": "UtilitySetting",
+      "methods": [
+        "__str__",
+        "get_value",
+        "set_value"
+      ],
+      "variables": [
+        "key",
+        "value",
+        "value_type",
+        "description",
+        "module",
+        "is_system",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_value",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    }
+  ],
+  "variables": []
+}

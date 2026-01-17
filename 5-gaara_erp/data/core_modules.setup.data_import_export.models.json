@@ -1,0 +1,182 @@
+{
+  "module": "core_modules.setup.data_import_export.models",
+  "imports": [
+    "django.conf",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ImportExportTemplate",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "TYPE_CHOICES",
+        "FORMAT_CHOICES",
+        "name",
+        "description",
+        "type",
+        "format",
+        "content_type",
+        "field_mapping",
+        "is_default",
+        "header_row",
+        "delimiter",
+        "encoding",
+        "date_format",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ImportExportJob",
+      "methods": [
+        "__str__",
+        "start_processing",
+        "complete_processing",
+        "cancel_processing",
+        "update_progress",
+        "add_error_log"
+      ],
+      "variables": [
+        "TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "name",
+        "type",
+        "status",
+        "template",
+        "content_type",
+        "file",
+        "total_records",
+        "processed_records",
+        "successful_records",
+        "failed_records",
+        "error_log",
+        "created_by",
+        "started_at",
+        "completed_at",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ImportExportField",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "template",
+        "field_name",
+        "display_name",
+        "column_name",
+        "is_required",
+        "is_unique",
+        "is_key",
+        "default_value",
+        "validation_regex",
+        "order"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start_processing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete_processing",
+      "parameters": [
+        "self",
+        "successful"
+      ]
+    },
+    {
+      "name": "cancel_processing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_progress",
+      "parameters": [
+        "self",
+        "processed",
+        "successful",
+        "failed"
+      ]
+    },
+    {
+      "name": "add_error_log",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

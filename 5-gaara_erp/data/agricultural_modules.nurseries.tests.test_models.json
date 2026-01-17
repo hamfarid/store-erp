@@ -1,0 +1,112 @@
+{
+  "module": "agricultural_modules.nurseries.tests.test_models",
+  "imports": [
+    "decimal",
+    "django.contrib.auth.models",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "NurseryModelTests",
+      "methods": [
+        "setUp",
+        "test_nursery_creation",
+        "test_nursery_section_creation",
+        "test_plant_variety_creation",
+        "test_growth_stage_creation",
+        "test_production_batch_creation",
+        "test_batch_stage_log_creation",
+        "test_nursery_activity_type_creation",
+        "test_nursery_activity_creation",
+        "test_nursery_resource_creation",
+        "test_activity_resource_usage_creation",
+        "test_quality_check_creation",
+        "test_environmental_log_creation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_nursery_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_nursery_section_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_plant_variety_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_growth_stage_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_production_batch_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_batch_stage_log_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_nursery_activity_type_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_nursery_activity_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_nursery_resource_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_resource_usage_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_check_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_environmental_log_creation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

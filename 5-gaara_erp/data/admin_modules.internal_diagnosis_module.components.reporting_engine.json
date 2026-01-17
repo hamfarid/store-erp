@@ -1,0 +1,70 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.reporting_engine",
+  "imports": [
+    "csv",
+    "datetime",
+    "json",
+    "os"
+  ],
+  "classes": [
+    {
+      "name": "ReportingEngine",
+      "methods": [
+        "__init__",
+        "add_data_to_report",
+        "generate_report",
+        "export_report_to_file",
+        "generate_summary_report",
+        "clear_report_data"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "add_data_to_report",
+      "parameters": [
+        "self",
+        "component_name",
+        "data"
+      ]
+    },
+    {
+      "name": "generate_report",
+      "parameters": [
+        "self",
+        "diagnostic_data",
+        "report_format"
+      ]
+    },
+    {
+      "name": "export_report_to_file",
+      "parameters": [
+        "self",
+        "diagnostic_data",
+        "file_path",
+        "report_format"
+      ]
+    },
+    {
+      "name": "generate_summary_report",
+      "parameters": [
+        "self",
+        "report_format"
+      ]
+    },
+    {
+      "name": "clear_report_data",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

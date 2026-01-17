@@ -1,0 +1,375 @@
+{
+  "module": "ai_modules.ai_memory.models",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "json",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "MemoryType",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "TYPE_CHOICES",
+        "name",
+        "type_code",
+        "description",
+        "retention_period",
+        "max_capacity",
+        "priority",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "MemoryContext",
+      "methods": [
+        "__str__",
+        "get_memory_count",
+        "get_duration"
+      ],
+      "variables": [
+        "CONTEXT_TYPE_CHOICES",
+        "context_id",
+        "name",
+        "context_type",
+        "description",
+        "user",
+        "agent_id",
+        "metadata",
+        "tags",
+        "started_at",
+        "ended_at",
+        "last_accessed",
+        "is_active",
+        "is_archived"
+      ]
+    },
+    {
+      "name": "Memory",
+      "methods": [
+        "__str__",
+        "increment_access",
+        "is_expired",
+        "calculate_relevance"
+      ],
+      "variables": [
+        "IMPORTANCE_CHOICES",
+        "CONFIDENCE_CHOICES",
+        "memory_id",
+        "memory_type",
+        "context",
+        "title",
+        "content",
+        "summary",
+        "structured_data",
+        "keywords",
+        "entities",
+        "importance",
+        "confidence",
+        "relevance_score",
+        "access_count",
+        "last_accessed",
+        "learned_from",
+        "validation_status",
+        "expires_at",
+        "is_permanent",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "MemoryAssociation",
+      "methods": [
+        "__str__",
+        "increment_usage"
+      ],
+      "variables": [
+        "ASSOCIATION_TYPE_CHOICES",
+        "source_memory",
+        "target_memory",
+        "association_type",
+        "strength",
+        "description",
+        "learned_automatically",
+        "confidence",
+        "usage_count",
+        "last_used",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "KnowledgeBase",
+      "methods": [
+        "__str__",
+        "increment_usage"
+      ],
+      "variables": [
+        "KNOWLEDGE_TYPE_CHOICES",
+        "name",
+        "knowledge_type",
+        "domain",
+        "description",
+        "content",
+        "rules",
+        "examples",
+        "accuracy",
+        "completeness",
+        "reliability",
+        "usage_count",
+        "last_used",
+        "version",
+        "last_updated_by",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "LearningPattern",
+      "methods": [
+        "__str__",
+        "get_success_rate",
+        "record_application"
+      ],
+      "variables": [
+        "PATTERN_TYPE_CHOICES",
+        "pattern_id",
+        "name",
+        "pattern_type",
+        "description",
+        "user",
+        "agent_id",
+        "pattern_data",
+        "conditions",
+        "actions",
+        "confidence",
+        "support",
+        "frequency",
+        "applied_count",
+        "success_count",
+        "last_applied",
+        "is_active",
+        "discovered_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "MemoryCleanupLog",
+      "methods": [
+        "__str__",
+        "calculate_duration"
+      ],
+      "variables": [
+        "CLEANUP_TYPE_CHOICES",
+        "cleanup_id",
+        "cleanup_type",
+        "description",
+        "memories_processed",
+        "memories_deleted",
+        "memories_archived",
+        "space_freed",
+        "started_at",
+        "completed_at",
+        "duration",
+        "executed_by",
+        "is_successful",
+        "error_message"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_memory_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "increment_access",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_relevance",
+      "parameters": [
+        "self",
+        "query_keywords"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "increment_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "increment_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_success_rate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "record_application",
+      "parameters": [
+        "self",
+        "success"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_duration",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

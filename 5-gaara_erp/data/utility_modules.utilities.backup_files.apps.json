@@ -1,0 +1,19 @@
+{
+  "module": "utility_modules.utilities.backup_files.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "UtilitiesConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "label"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

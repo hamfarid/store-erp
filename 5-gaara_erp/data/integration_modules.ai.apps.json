@@ -1,0 +1,30 @@
+{
+  "module": "integration_modules.ai.apps",
+  "imports": [
+    "django.apps",
+    "django.utils.translation",
+    "integration_modules.ai.signals"
+  ],
+  "classes": [
+    {
+      "name": "AIConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "name",
+        "label",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

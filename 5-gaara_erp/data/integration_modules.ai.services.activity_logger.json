@@ -1,0 +1,96 @@
+{
+  "module": "integration_modules.ai.services.activity_logger",
+  "imports": [
+    "django.utils",
+    "logging",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ActivityLogger",
+      "methods": [
+        "log_activity",
+        "log_system_activity",
+        "log_user_activity",
+        "log_agent_activity",
+        "log_service_activity",
+        "get_recent_activities",
+        "get_activities_by_date_range"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "log_activity",
+      "parameters": [
+        "activity_type",
+        "action",
+        "details",
+        "status",
+        "user",
+        "agent_name",
+        "service_name"
+      ]
+    },
+    {
+      "name": "log_system_activity",
+      "parameters": [
+        "action",
+        "details",
+        "status"
+      ]
+    },
+    {
+      "name": "log_user_activity",
+      "parameters": [
+        "user",
+        "action",
+        "details",
+        "status"
+      ]
+    },
+    {
+      "name": "log_agent_activity",
+      "parameters": [
+        "agent_name",
+        "action",
+        "details",
+        "status",
+        "user"
+      ]
+    },
+    {
+      "name": "log_service_activity",
+      "parameters": [
+        "service_name",
+        "action",
+        "details",
+        "status",
+        "user"
+      ]
+    },
+    {
+      "name": "get_recent_activities",
+      "parameters": [
+        "limit",
+        "activity_type",
+        "status",
+        "user"
+      ]
+    },
+    {
+      "name": "get_activities_by_date_range",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "activity_type",
+        "status"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "activity_logger"
+  ]
+}

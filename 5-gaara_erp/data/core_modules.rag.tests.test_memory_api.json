@@ -1,0 +1,21 @@
+{
+  "module": "core_modules.rag.tests.test_memory_api",
+  "imports": [
+    "__future__",
+    "django.test",
+    "os",
+    "pytest"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_memory_crud_api",
+      "parameters": [
+        "client"
+      ]
+    }
+  ],
+  "variables": [
+    "pytestmark"
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "module": "business_modules.sales.permissions",
+  "imports": [
+    "django.contrib.auth",
+    "django.utils.translation",
+    "rest_framework",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "IsSalesManager",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "IsSalesEngineerUser",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "CanViewSalesData",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "CanManageQuotations",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "CanModifySalesOrder",
+      "methods": [
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "CanApproveSalesOrder",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "CanManageDeliveryNotes",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "CanManageInvoices",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "CanPostInvoices",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "_in_groups",
+      "parameters": [
+        "user",
+        "group_names"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "SALES_MANAGER_GROUPS",
+    "SALES_ENGINEER_GROUPS"
+  ]
+}

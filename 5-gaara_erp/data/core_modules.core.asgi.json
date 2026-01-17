@@ -1,0 +1,12 @@
+{
+  "module": "core_modules.core.asgi",
+  "imports": [
+    "django.core.asgi",
+    "os"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "application"
+  ]
+}

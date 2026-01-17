@@ -1,0 +1,68 @@
+{
+  "module": "business_modules.inventory.report_views",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.db.models",
+    "models",
+    "rest_framework",
+    "rest_framework.response",
+    "rest_framework.views",
+    "time",
+    "tracking",
+    "utils"
+  ],
+  "classes": [
+    {
+      "name": "InventoryTurnoverRateView",
+      "methods": [
+        "get"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "StockAgingReportView",
+      "methods": [
+        "get"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "LotDwellTimeReportView",
+      "methods": [
+        "get"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

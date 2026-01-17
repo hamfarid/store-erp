@@ -1,0 +1,39 @@
+{
+  "module": "business_modules.inventory.tracking_views",
+  "imports": [
+    "django_filters.rest_framework",
+    "rest_framework",
+    "serializers",
+    "tracking"
+  ],
+  "classes": [
+    {
+      "name": "LotViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    },
+    {
+      "name": "BatchViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

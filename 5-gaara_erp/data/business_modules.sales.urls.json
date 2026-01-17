@@ -1,0 +1,15 @@
+{
+  "module": "business_modules.sales.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework.routers",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "router",
+    "urlpatterns",
+    "app_name"
+  ]
+}

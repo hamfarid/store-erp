@@ -1,0 +1,109 @@
+{
+  "module": "services_modules.quality_control.tests.test_quality_check",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.quality_check",
+    "models.quality_template"
+  ],
+  "classes": [
+    {
+      "name": "QualityCheckModelTest",
+      "methods": [
+        "setUp",
+        "test_quality_check_creation",
+        "test_quality_check_str_representation",
+        "test_start_check",
+        "test_complete_check_pass",
+        "test_complete_check_fail",
+        "test_cancel_check",
+        "test_cannot_cancel_completed_check",
+        "test_get_duration",
+        "test_validation_end_date_before_start_date",
+        "test_validation_completed_without_end_date",
+        "test_get_results_summary_empty"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_check_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_check_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_start_check",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_complete_check_pass",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_complete_check_fail",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_cancel_check",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_cannot_cancel_completed_check",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_end_date_before_start_date",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_completed_without_end_date",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_results_summary_empty",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "module": "integration_modules.ai_agriculture.tests.test_ai_integration",
+  "imports": [
+    "django.test",
+    "django.utils",
+    "integration_modules.ai_agriculture.ai_integration",
+    "os",
+    "sys",
+    "unittest",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "AIAgricultureAIIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_register_with_central_ai",
+        "test_get_ai_model_for_task",
+        "test_store_analysis_in_memory",
+        "test_get_historical_analysis",
+        "test_create_conversation_with_agent",
+        "test_check_user_permissions",
+        "test_notify_ai_coordinator"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_register_with_central_ai",
+      "parameters": [
+        "self",
+        "mock_register_ai_module"
+      ]
+    },
+    {
+      "name": "test_get_ai_model_for_task",
+      "parameters": [
+        "self",
+        "mock_get_models_by_type"
+      ]
+    },
+    {
+      "name": "test_store_analysis_in_memory",
+      "parameters": [
+        "self",
+        "mock_store_memory"
+      ]
+    },
+    {
+      "name": "test_get_historical_analysis",
+      "parameters": [
+        "self",
+        "mock_query_memories"
+      ]
+    },
+    {
+      "name": "test_create_conversation_with_agent",
+      "parameters": [
+        "self",
+        "mock_create_conversation"
+      ]
+    },
+    {
+      "name": "test_check_user_permissions",
+      "parameters": [
+        "self",
+        "mock_check_permission"
+      ]
+    },
+    {
+      "name": "test_notify_ai_coordinator",
+      "parameters": [
+        "self",
+        "mock_notify_event"
+      ]
+    }
+  ],
+  "variables": []
+}

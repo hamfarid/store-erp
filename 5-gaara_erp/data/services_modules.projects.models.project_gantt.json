@@ -1,0 +1,249 @@
+{
+  "module": "services_modules.projects.models.project_gantt",
+  "imports": [
+    "datetime",
+    "dependencies",
+    "django.contrib.auth",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "networkx",
+    "project",
+    "services_modules.tasks.models.task"
+  ],
+  "classes": [
+    {
+      "name": "ProjectSchedule",
+      "methods": [
+        "__str__",
+        "get_working_days_list",
+        "is_working_day",
+        "add_working_days",
+        "subtract_working_days",
+        "get_working_days_between",
+        "calculate_critical_path"
+      ],
+      "variables": [
+        "project",
+        "name",
+        "description",
+        "schedule_type",
+        "start_date",
+        "end_date",
+        "working_days",
+        "working_hours_per_day",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TaskSchedule",
+      "methods": [
+        "__str__",
+        "update_progress"
+      ],
+      "variables": [
+        "task",
+        "earliest_start_date",
+        "earliest_finish_date",
+        "latest_start_date",
+        "latest_finish_date",
+        "actual_start_date",
+        "actual_finish_date",
+        "baseline_start_date",
+        "baseline_finish_date",
+        "slack",
+        "is_critical",
+        "progress_percentage",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "GanttSettings",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "project",
+        "show_critical_path",
+        "show_baseline",
+        "show_progress",
+        "show_dependencies",
+        "show_resources",
+        "show_milestones",
+        "zoom_level",
+        "color_scheme",
+        "custom_settings",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "GanttSnapshot",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "project",
+        "name",
+        "description",
+        "snapshot_data",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "ScheduleTypes",
+      "methods": [],
+      "variables": [
+        "STANDARD",
+        "AGILE",
+        "CRITICAL_PATH",
+        "RESOURCE_LEVELED",
+        "CUSTOM"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "ZoomLevel",
+      "methods": [],
+      "variables": [
+        "DAY",
+        "WEEK",
+        "MONTH",
+        "QUARTER",
+        "YEAR"
+      ]
+    },
+    {
+      "name": "ColorScheme",
+      "methods": [],
+      "variables": [
+        "DEFAULT",
+        "STATUS",
+        "PRIORITY",
+        "ASSIGNEE",
+        "CUSTOM"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_working_days_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_working_day",
+      "parameters": [
+        "self",
+        "date"
+      ]
+    },
+    {
+      "name": "add_working_days",
+      "parameters": [
+        "self",
+        "start_date",
+        "days_to_add"
+      ]
+    },
+    {
+      "name": "subtract_working_days",
+      "parameters": [
+        "self",
+        "start_date",
+        "days_to_subtract"
+      ]
+    },
+    {
+      "name": "get_working_days_between",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "calculate_critical_path",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_progress",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "__all__"
+  ]
+}

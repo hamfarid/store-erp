@@ -1,0 +1,93 @@
+{
+  "module": "agricultural_modules.production.tests.test_cost_tracking",
+  "imports": [
+    "cost_tracking",
+    "decimal",
+    "django.contrib.auth.models",
+    "django.test",
+    "django.utils",
+    "inventory.models",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CostTrackingTestCase",
+      "methods": [
+        "setUp",
+        "test_add_cost_to_batch",
+        "test_add_cost_to_operation",
+        "test_add_revenue_to_batch",
+        "test_add_revenue_to_waste_sale",
+        "test_calculate_batch_costs",
+        "test_calculate_batch_revenues",
+        "test_calculate_batch_profit_loss",
+        "test_generate_profit_loss_report",
+        "test_get_batch_profitability_analysis"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_cost_to_batch",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_cost_to_operation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_revenue_to_batch",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_revenue_to_waste_sale",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_batch_costs",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_batch_revenues",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_batch_profit_loss",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_profit_loss_report",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_batch_profitability_analysis",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

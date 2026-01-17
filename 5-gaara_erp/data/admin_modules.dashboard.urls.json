@@ -1,0 +1,13 @@
+{
+  "module": "admin_modules.dashboard.urls",
+  "imports": [
+    "django.urls",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "app_name",
+    "urlpatterns"
+  ]
+}

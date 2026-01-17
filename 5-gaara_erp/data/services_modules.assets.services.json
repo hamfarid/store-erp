@@ -1,0 +1,217 @@
+{
+  "module": "services_modules.assets.services",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "logging",
+    "models.asset",
+    "models.asset_category",
+    "models.depreciation",
+    "models.maintenance"
+  ],
+  "classes": [
+    {
+      "name": "AssetService",
+      "methods": [
+        "__init__",
+        "register_integration",
+        "create_asset",
+        "update_asset",
+        "get_asset_details",
+        "list_assets",
+        "update_asset_status",
+        "dispose_asset",
+        "create_asset_category",
+        "update_asset_category",
+        "list_asset_categories",
+        "create_depreciation_method",
+        "update_depreciation_method",
+        "list_depreciation_methods",
+        "create_depreciation_entry",
+        "calculate_depreciation",
+        "generate_depreciation_schedule",
+        "create_maintenance_record",
+        "update_maintenance_record",
+        "list_maintenance_records",
+        "get_asset_statistics",
+        "generate_asset_report",
+        "_build_category_hierarchy"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "register_integration",
+      "parameters": [
+        "self",
+        "integration_name",
+        "integration_instance"
+      ]
+    },
+    {
+      "name": "create_asset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_asset",
+      "parameters": [
+        "self",
+        "asset_id"
+      ]
+    },
+    {
+      "name": "get_asset_details",
+      "parameters": [
+        "self",
+        "asset_id"
+      ]
+    },
+    {
+      "name": "list_assets",
+      "parameters": [
+        "self",
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "update_asset_status",
+      "parameters": [
+        "self",
+        "asset_id",
+        "status",
+        "updated_by_id"
+      ]
+    },
+    {
+      "name": "dispose_asset",
+      "parameters": [
+        "self",
+        "asset_id",
+        "disposal_date",
+        "disposal_value",
+        "disposal_reason"
+      ]
+    },
+    {
+      "name": "create_asset_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_asset_category",
+      "parameters": [
+        "self",
+        "category_id"
+      ]
+    },
+    {
+      "name": "list_asset_categories",
+      "parameters": [
+        "self",
+        "include_hierarchy"
+      ]
+    },
+    {
+      "name": "create_depreciation_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_depreciation_method",
+      "parameters": [
+        "self",
+        "method_id"
+      ]
+    },
+    {
+      "name": "list_depreciation_methods",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_depreciation_entry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_depreciation",
+      "parameters": [
+        "self",
+        "asset_id",
+        "date"
+      ]
+    },
+    {
+      "name": "generate_depreciation_schedule",
+      "parameters": [
+        "self",
+        "asset_id"
+      ]
+    },
+    {
+      "name": "create_maintenance_record",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_maintenance_record",
+      "parameters": [
+        "self",
+        "record_id"
+      ]
+    },
+    {
+      "name": "list_maintenance_records",
+      "parameters": [
+        "self",
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "get_asset_statistics",
+      "parameters": [
+        "self",
+        "company_id",
+        "branch_id",
+        "category_id"
+      ]
+    },
+    {
+      "name": "generate_asset_report",
+      "parameters": [
+        "self",
+        "report_type",
+        "filters"
+      ]
+    },
+    {
+      "name": "_build_category_hierarchy",
+      "parameters": [
+        "self",
+        "category"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

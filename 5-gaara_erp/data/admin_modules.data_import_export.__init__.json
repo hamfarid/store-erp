@@ -1,0 +1,9 @@
+{
+  "module": "admin_modules.data_import_export.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "default_app_config"
+  ]
+}

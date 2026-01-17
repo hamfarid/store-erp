@@ -1,0 +1,117 @@
+{
+  "module": "integration_modules.ai_ui.api.avatar_api",
+  "imports": [
+    "django.shortcuts",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "services.avatar_service"
+  ],
+  "classes": [
+    {
+      "name": "AvatarViewSet",
+      "methods": [
+        "get_queryset",
+        "create",
+        "retrieve",
+        "list",
+        "update",
+        "destroy",
+        "record_interaction",
+        "interactions",
+        "_format_avatar_response",
+        "_format_avatar_basic_response",
+        "_format_interaction_response"
+      ],
+      "variables": [
+        "queryset",
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "retrieve",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "list",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "destroy",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "record_interaction",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "interactions",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "_format_avatar_response",
+      "parameters": [
+        "self",
+        "avatar"
+      ]
+    },
+    {
+      "name": "_format_avatar_basic_response",
+      "parameters": [
+        "self",
+        "avatar"
+      ]
+    },
+    {
+      "name": "_format_interaction_response",
+      "parameters": [
+        "self",
+        "interaction"
+      ]
+    }
+  ],
+  "variables": []
+}

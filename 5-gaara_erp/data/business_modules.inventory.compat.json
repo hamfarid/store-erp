@@ -1,0 +1,9 @@
+{
+  "module": "business_modules.inventory.compat",
+  "imports": [
+    "models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

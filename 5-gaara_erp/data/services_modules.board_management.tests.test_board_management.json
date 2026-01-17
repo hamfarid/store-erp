@@ -1,0 +1,300 @@
+{
+  "module": "services_modules.board_management.tests.test_board_management",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.board",
+    "models.decision",
+    "models.meeting",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "BoardModelTest",
+      "methods": [
+        "setUp",
+        "test_create_board",
+        "test_unique_code_per_company",
+        "test_deactivate_board",
+        "test_get_members",
+        "test_get_committees"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BoardMemberModelTest",
+      "methods": [
+        "setUp",
+        "test_create_board_member",
+        "test_unique_user_per_board_per_period",
+        "test_end_date_after_start_date",
+        "test_deactivate_member",
+        "test_get_membership_duration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BoardCommitteeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_committee",
+        "test_unique_code_per_board",
+        "test_deactivate_committee",
+        "test_add_remove_members"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MeetingModelTest",
+      "methods": [
+        "setUp",
+        "test_create_meeting",
+        "test_change_meeting_status",
+        "test_add_agenda_items",
+        "test_record_minutes",
+        "test_record_attendance"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DecisionStatusModelTest",
+      "methods": [
+        "setUp",
+        "test_create_decision_status",
+        "test_unique_code_per_company",
+        "test_deactivate_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DecisionModelTest",
+      "methods": [
+        "setUp",
+        "test_create_decision",
+        "test_unique_decision_number_per_meeting",
+        "test_change_decision_status"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_board",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_board",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_members",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_committees",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_board_member",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_user_per_board_per_period",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_end_date_after_start_date",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_member",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_membership_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_committee",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_board",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_committee",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_remove_members",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_meeting",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_change_meeting_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_agenda_items",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_minutes",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_attendance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_decision_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_decision",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_decision_number_per_meeting",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_change_decision_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_members",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_committees",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_membership_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_change_status",
+      "parameters": [
+        "self",
+        "new_status",
+        "effective_date",
+        "notes"
+      ]
+    }
+  ],
+  "variables": []
+}

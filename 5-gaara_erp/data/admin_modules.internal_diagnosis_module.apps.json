@@ -1,0 +1,19 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "InternalDiagnosisModuleConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

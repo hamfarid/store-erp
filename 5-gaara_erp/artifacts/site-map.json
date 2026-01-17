@@ -1,0 +1,131 @@
+{
+  "generatedAt": "2025-11-20T08:10:33.708Z",
+  "routes": [
+    {
+      "path": "/",
+      "type": "public",
+      "url": "http://localhost:5502/login",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 1133,
+      "browser": "chromium"
+    },
+    {
+      "path": "/login",
+      "type": "public",
+      "url": "http://localhost:5502/login",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 648,
+      "browser": "chromium"
+    },
+    {
+      "path": "/register",
+      "type": "public",
+      "url": "http://localhost:5502/register",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 668,
+      "browser": "chromium"
+    },
+    {
+      "path": "/dashboard",
+      "type": "protected",
+      "url": "http://localhost:5502/login",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 775,
+      "browser": "chromium"
+    },
+    {
+      "path": "/profile",
+      "type": "protected",
+      "url": "http://localhost:5502/profile",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 618,
+      "browser": "chromium"
+    },
+    {
+      "path": "/settings",
+      "type": "protected",
+      "url": "http://localhost:5502/login",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 842,
+      "browser": "chromium"
+    },
+    {
+      "path": "/products",
+      "type": "protected",
+      "url": "http://localhost:5502/login",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 801,
+      "browser": "chromium"
+    },
+    {
+      "path": "/invoices",
+      "type": "protected",
+      "url": "http://localhost:5502/login",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 779,
+      "browser": "chromium"
+    },
+    {
+      "path": "/customers",
+      "type": "protected",
+      "url": "http://localhost:5502/login",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 774,
+      "browser": "chromium"
+    },
+    {
+      "path": "/inventory",
+      "type": "protected",
+      "url": "http://localhost:5502/login",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 762,
+      "browser": "chromium"
+    },
+    {
+      "path": "/reports",
+      "type": "protected",
+      "url": "http://localhost:5502/login",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 720,
+      "browser": "chromium"
+    },
+    {
+      "path": "/admin",
+      "type": "admin",
+      "url": "http://localhost:5502/admin",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 603,
+      "browser": "chromium"
+    },
+    {
+      "path": "/admin/users",
+      "type": "admin",
+      "url": "http://localhost:5502/users",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 838,
+      "browser": "chromium"
+    },
+    {
+      "path": "/admin/settings",
+      "type": "admin",
+      "url": "http://localhost:5502/admin/settings",
+      "status": 200,
+      "title": "نظام إدارة المخزون المتقدم",
+      "loadTimeMs": 581,
+      "browser": "chromium"
+    }
+  ]
+}

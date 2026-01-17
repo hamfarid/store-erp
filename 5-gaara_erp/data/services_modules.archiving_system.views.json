@@ -1,0 +1,26 @@
+{
+  "module": "services_modules.archiving_system.views",
+  "imports": [
+    "django.http",
+    "django.shortcuts",
+    "rest_framework.decorators",
+    "rest_framework.response"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "list_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "detail_view",
+      "parameters": [
+        "request",
+        "item_id"
+      ]
+    }
+  ],
+  "variables": []
+}

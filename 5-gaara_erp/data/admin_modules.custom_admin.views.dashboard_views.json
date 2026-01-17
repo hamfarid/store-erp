@@ -1,0 +1,120 @@
+{
+  "module": "admin_modules.custom_admin.views.dashboard_views",
+  "imports": [
+    "django_filters.rest_framework",
+    "models.dashboard",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers.dashboard_serializers"
+  ],
+  "classes": [
+    {
+      "name": "DashboardWidgetViewSet",
+      "methods": [
+        "get_queryset",
+        "perform_create",
+        "toggle_visibility",
+        "update_position",
+        "refresh_data"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "DashboardLayoutViewSet",
+      "methods": [
+        "get_queryset",
+        "perform_create",
+        "get_default",
+        "set_as_default"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "toggle_visibility",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "update_position",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "refresh_data",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "get_default",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "set_as_default",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

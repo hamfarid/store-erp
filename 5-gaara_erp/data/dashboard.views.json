@@ -1,0 +1,40 @@
+{
+  "module": "dashboard.views",
+  "imports": [
+    "django.conf",
+    "django.contrib.auth",
+    "django.contrib.auth.decorators",
+    "django.db",
+    "django.http",
+    "django.shortcuts",
+    "platform"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "dashboard_home",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "api_dashboard_stats",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "health",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "api_system_info",
+      "parameters": [
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

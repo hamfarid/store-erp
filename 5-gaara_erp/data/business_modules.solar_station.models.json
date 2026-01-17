@@ -1,0 +1,9 @@
+{
+  "module": "business_modules.solar_station.models",
+  "imports": [
+    "solar_stations.models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

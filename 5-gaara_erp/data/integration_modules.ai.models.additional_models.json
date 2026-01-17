@@ -1,0 +1,249 @@
+{
+  "module": "integration_modules.ai.models.additional_models",
+  "imports": [
+    "abc",
+    "detection_models",
+    "disease_mappings",
+    "logging",
+    "os",
+    "random",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "_FallbackDetectionModelBase",
+      "methods": [
+        "__init__",
+        "detect_disease"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BaseDetectionModel",
+      "methods": [
+        "__init__",
+        "validate_image",
+        "_extract_disease_from_filename",
+        "_fallback_prediction",
+        "_apply_model_specific_adjustments",
+        "_get_analysis_time",
+        "detect_disease"
+      ],
+      "variables": []
+    },
+    {
+      "name": "EfficientNetModel",
+      "methods": [
+        "__init__",
+        "_apply_model_specific_adjustments",
+        "_get_analysis_time"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DenseNetModel",
+      "methods": [
+        "__init__",
+        "_apply_model_specific_adjustments",
+        "_get_analysis_time"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ViTModel",
+      "methods": [
+        "__init__",
+        "_apply_model_specific_adjustments",
+        "_get_analysis_time"
+      ],
+      "variables": []
+    },
+    {
+      "name": "InceptionV3Model",
+      "methods": [
+        "__init__",
+        "_get_analysis_time"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ResNetModel",
+      "methods": [
+        "__init__",
+        "_get_analysis_time"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_model_by_name",
+      "parameters": [
+        "model_name"
+      ]
+    },
+    {
+      "name": "get_available_models",
+      "parameters": []
+    },
+    {
+      "name": "get_models_info",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "name",
+        "description",
+        "version",
+        "model_type"
+      ]
+    },
+    {
+      "name": "detect_disease",
+      "parameters": [
+        "self",
+        "image_path",
+        "crop_type"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "name",
+        "description",
+        "version",
+        "model_type"
+      ]
+    },
+    {
+      "name": "validate_image",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    },
+    {
+      "name": "_extract_disease_from_filename",
+      "parameters": [
+        "self",
+        "filename"
+      ]
+    },
+    {
+      "name": "_fallback_prediction",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    },
+    {
+      "name": "_apply_model_specific_adjustments",
+      "parameters": [
+        "self",
+        "confidence"
+      ]
+    },
+    {
+      "name": "_get_analysis_time",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "detect_disease",
+      "parameters": [
+        "self",
+        "image_path",
+        "crop_type"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_apply_model_specific_adjustments",
+      "parameters": [
+        "self",
+        "confidence"
+      ]
+    },
+    {
+      "name": "_get_analysis_time",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_apply_model_specific_adjustments",
+      "parameters": [
+        "self",
+        "confidence"
+      ]
+    },
+    {
+      "name": "_get_analysis_time",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_apply_model_specific_adjustments",
+      "parameters": [
+        "self",
+        "confidence"
+      ]
+    },
+    {
+      "name": "_get_analysis_time",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_get_analysis_time",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_get_analysis_time",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "AVAILABLE_MODELS"
+  ]
+}

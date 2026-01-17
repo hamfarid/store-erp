@@ -1,0 +1,94 @@
+{
+  "module": "services_modules.workflows.signals",
+  "imports": [
+    "core_modules.tasks.models",
+    "django.contrib.auth",
+    "django.db.models.signals",
+    "django.dispatch",
+    "json",
+    "models",
+    "services",
+    "services_modules.tasks.models"
+  ],
+  "classes": [
+    {
+      "name": "WorkflowService",
+      "methods": [
+        "execute_workflow"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Task",
+      "methods": [],
+      "variables": [
+        "id",
+        "title",
+        "status",
+        "created_by"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "task_saved_handler",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "workflow_execution_created_handler",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "workflow_saved_handler",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "workflow_deleted_handler",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    },
+    {
+      "name": "task_status_changed_handler",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "track_model_changes",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    },
+    {
+      "name": "task_pre_save_handler",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    },
+    {
+      "name": "execute_workflow",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

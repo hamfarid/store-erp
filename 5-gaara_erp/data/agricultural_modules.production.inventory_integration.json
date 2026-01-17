@@ -1,0 +1,120 @@
+{
+  "module": "agricultural_modules.production.inventory_integration",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.db.models.signals",
+    "django.dispatch",
+    "django.utils",
+    "inventory.models",
+    "logging"
+  ],
+  "classes": [
+    {
+      "name": "InventoryIntegrationService",
+      "methods": [
+        "reserve_materials_for_production_order",
+        "issue_materials_for_production_operation",
+        "receive_finished_products",
+        "record_production_waste",
+        "update_waste_inventory",
+        "release_reserved_materials",
+        "check_material_availability",
+        "get_inventory_movements_by_production"
+      ],
+      "variables": []
+    },
+    {
+      "name": "InventoryItem",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "InventoryMovement",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "InventoryLocation",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "StockReservation",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "StockLevel",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "LotTracking",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "reserve_materials_for_production_order",
+      "parameters": [
+        "cls",
+        "production_order"
+      ]
+    },
+    {
+      "name": "issue_materials_for_production_operation",
+      "parameters": [
+        "cls",
+        "production_operation"
+      ]
+    },
+    {
+      "name": "receive_finished_products",
+      "parameters": [
+        "cls",
+        "production_batch"
+      ]
+    },
+    {
+      "name": "record_production_waste",
+      "parameters": [
+        "cls",
+        "production_waste"
+      ]
+    },
+    {
+      "name": "update_waste_inventory",
+      "parameters": [
+        "cls",
+        "production_waste"
+      ]
+    },
+    {
+      "name": "release_reserved_materials",
+      "parameters": [
+        "cls",
+        "production_order"
+      ]
+    },
+    {
+      "name": "check_material_availability",
+      "parameters": [
+        "cls",
+        "material_code",
+        "required_quantity"
+      ]
+    },
+    {
+      "name": "get_inventory_movements_by_production",
+      "parameters": [
+        "cls",
+        "production_id"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

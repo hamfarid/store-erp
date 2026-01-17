@@ -1,0 +1,27 @@
+{
+  "module": "gaara_erp.settings.test",
+  "imports": [
+    "base",
+    "os"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "_dedupe",
+      "parameters": [
+        "seq"
+      ]
+    }
+  ],
+  "variables": [
+    "DEBUG",
+    "ALLOWED_HOSTS",
+    "MINIMAL_TEST_APPS",
+    "BASE_MINIMAL_APPS",
+    "EXTRA_APPS",
+    "INSTALLED_APPS",
+    "DATABASES",
+    "PASSWORD_HASHERS",
+    "CORS_ALLOW_ALL_ORIGINS"
+  ]
+}

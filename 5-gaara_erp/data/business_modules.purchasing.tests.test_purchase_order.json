@@ -1,0 +1,158 @@
+{
+  "module": "business_modules.purchasing.tests.test_purchase_order",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.purchase_order",
+    "models.supplier",
+    "services_modules.accounting.models",
+    "services_modules.core.models",
+    "services_modules.inventory.models"
+  ],
+  "classes": [
+    {
+      "name": "PurchaseOrderModelTest",
+      "methods": [
+        "setUp",
+        "test_create_purchase_order",
+        "test_add_order_lines",
+        "test_compute_amount_all",
+        "test_confirm_purchase_order",
+        "test_cancel_purchase_order",
+        "test_reset_to_draft",
+        "test_order_line_price_subtotal",
+        "test_get_receipt_status",
+        "test_get_invoice_status",
+        "test_update_prices_from_supplier"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PurchaseOrderLineModelTest",
+      "methods": [
+        "setUp",
+        "test_create_order_line",
+        "test_compute_price_subtotal",
+        "test_get_receipt_status",
+        "test_get_invoice_status",
+        "test_get_amount_to_invoice"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_purchase_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_order_lines",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_amount_all",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_confirm_purchase_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_cancel_purchase_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reset_to_draft",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_order_line_price_subtotal",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_receipt_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_invoice_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_prices_from_supplier",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_order_line",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_price_subtotal",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_receipt_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_invoice_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_amount_to_invoice",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_update_prices",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

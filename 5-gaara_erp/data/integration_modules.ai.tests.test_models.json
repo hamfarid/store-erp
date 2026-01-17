@@ -1,0 +1,247 @@
+{
+  "module": "integration_modules.ai.tests.test_models",
+  "imports": [
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "AISettingsModelTest",
+      "methods": [
+        "setUp",
+        "test_setting_creation",
+        "test_setting_str_representation",
+        "test_setting_update"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AIActivityModelTest",
+      "methods": [
+        "setUp",
+        "test_activity_creation",
+        "test_activity_str_representation",
+        "test_activity_ordering"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AIIntegrationModelTest",
+      "methods": [
+        "setUp",
+        "test_integration_creation",
+        "test_integration_str_representation",
+        "test_integration_update"
+      ],
+      "variables": []
+    },
+    {
+      "name": "APIKeyModelTest",
+      "methods": [
+        "setUp",
+        "test_api_key_creation",
+        "test_api_key_str_representation",
+        "test_api_key_update"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LearningSourceModelTest",
+      "methods": [
+        "setUp",
+        "test_source_creation",
+        "test_source_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ConversationModelTest",
+      "methods": [
+        "setUp",
+        "test_conversation_creation",
+        "test_conversation_str_representation",
+        "test_add_message"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MessageModelTest",
+      "methods": [
+        "setUp",
+        "test_message_creation",
+        "test_message_str_representation",
+        "test_message_ordering"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_setting_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_setting_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_setting_update",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_ordering",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_update",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_api_key_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_api_key_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_api_key_update",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_source_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_source_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_conversation_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_conversation_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_message",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_message_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_message_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_message_ordering",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

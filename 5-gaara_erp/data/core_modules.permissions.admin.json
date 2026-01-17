@@ -1,0 +1,188 @@
+{
+  "module": "core_modules.permissions.admin",
+  "imports": [
+    "django.contrib",
+    "django.utils.html",
+    "django.utils.translation",
+    "unified_permissions_model"
+  ],
+  "classes": [
+    {
+      "name": "PermissionAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "RoleAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "GroupAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "UserRoleAdmin",
+      "methods": [
+        "get_scope"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "UserGroupAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "UserPermissionAdmin",
+      "methods": [
+        "get_scope"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "ResourcePermissionAdmin",
+      "methods": [
+        "get_resource",
+        "get_scope"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "PermissionRequestAdmin",
+      "methods": [
+        "get_request_type"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "TemporaryPermissionAdmin",
+      "methods": [
+        "get_permission_type"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "PermissionLogAdmin",
+      "methods": [
+        "get_target"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_scope",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_scope",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_resource",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_scope",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_request_type",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_permission_type",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_target",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

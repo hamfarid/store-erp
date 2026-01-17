@@ -1,0 +1,66 @@
+{
+  "module": "admin_modules.notifications.models.backup_files.notification",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Notification",
+      "methods": [
+        "__str__",
+        "mark_as_read",
+        "mark_as_unread"
+      ],
+      "variables": [
+        "LEVEL_CHOICES",
+        "IMPORTANCE_CHOICES",
+        "recipient",
+        "sender",
+        "level",
+        "importance",
+        "title",
+        "message",
+        "read",
+        "created_at",
+        "related_task_id",
+        "is_converted_to_task",
+        "link",
+        "module",
+        "data"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_read",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_unread",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,19 @@
+{
+  "module": "agricultural_modules.farms.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "FarmsConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

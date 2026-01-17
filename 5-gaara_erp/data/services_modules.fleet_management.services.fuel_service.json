@@ -1,0 +1,87 @@
+{
+  "module": "services_modules.fleet_management.services.fuel_service",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "FuelService",
+      "methods": [
+        "create_fuel_log",
+        "update_fuel_log",
+        "delete_fuel_log",
+        "search_fuel_logs",
+        "get_vehicle_fuel_history",
+        "get_vehicle_fuel_cost",
+        "calculate_fuel_efficiency",
+        "get_fleet_fuel_statistics"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_fuel_log",
+      "parameters": [
+        "vehicle",
+        "date",
+        "odometer_reading",
+        "liters_filled",
+        "price_per_liter"
+      ]
+    },
+    {
+      "name": "update_fuel_log",
+      "parameters": [
+        "fuel_log_id"
+      ]
+    },
+    {
+      "name": "delete_fuel_log",
+      "parameters": [
+        "fuel_log_id"
+      ]
+    },
+    {
+      "name": "search_fuel_logs",
+      "parameters": [
+        "vehicle",
+        "driver",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "get_vehicle_fuel_history",
+      "parameters": [
+        "vehicle_id"
+      ]
+    },
+    {
+      "name": "get_vehicle_fuel_cost",
+      "parameters": [
+        "vehicle_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "calculate_fuel_efficiency",
+      "parameters": [
+        "vehicle_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "get_fleet_fuel_statistics",
+      "parameters": [
+        "start_date",
+        "end_date"
+      ]
+    }
+  ],
+  "variables": []
+}

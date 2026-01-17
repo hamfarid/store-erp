@@ -1,0 +1,150 @@
+{
+  "module": "services_modules.legal_affairs.models.legal_template",
+  "imports": [
+    "core_modules.companies.models",
+    "core_modules.core.models.base_models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation",
+    "re"
+  ],
+  "classes": [
+    {
+      "name": "LegalTemplate",
+      "methods": [
+        "__str__",
+        "clean",
+        "approve_template",
+        "deprecate_template",
+        "archive_template",
+        "create_new_version",
+        "get_version_history",
+        "get_placeholders",
+        "render_template",
+        "get_tag_list"
+      ],
+      "variables": [
+        "title",
+        "description",
+        "template_type",
+        "status",
+        "content",
+        "file",
+        "version",
+        "previous_version",
+        "company",
+        "tags",
+        "language",
+        "jurisdiction",
+        "notes",
+        "is_confidential"
+      ]
+    },
+    {
+      "name": "TemplateTypeChoices",
+      "methods": [],
+      "variables": [
+        "CONTRACT",
+        "AGREEMENT",
+        "MEMORANDUM",
+        "LAWSUIT",
+        "LEGAL_OPINION",
+        "LETTER",
+        "NOTICE",
+        "POWER_OF_ATTORNEY",
+        "MINUTES",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "TemplateStatusChoices",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "UNDER_REVIEW",
+        "APPROVED",
+        "DEPRECATED",
+        "ARCHIVED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes",
+        "permissions"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "approve_template",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "deprecate_template",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "archive_template",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_new_version",
+      "parameters": [
+        "self",
+        "content",
+        "file",
+        "notes"
+      ]
+    },
+    {
+      "name": "get_version_history",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_placeholders",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "render_template",
+      "parameters": [
+        "self",
+        "context"
+      ]
+    },
+    {
+      "name": "get_tag_list",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

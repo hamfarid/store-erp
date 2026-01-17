@@ -1,0 +1,22 @@
+{
+  "module": "fix_database_warnings",
+  "imports": [
+    "glob",
+    "os",
+    "re"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "fix_database_warnings_in_file",
+      "parameters": [
+        "filepath"
+      ]
+    },
+    {
+      "name": "fix_all_database_warnings",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

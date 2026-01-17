@@ -1,0 +1,61 @@
+{
+  "module": "services_modules.hr.tests.test_employee_asset",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.department",
+    "models.employee",
+    "models.employee_asset",
+    "models.position",
+    "services_modules.core.models.branch",
+    "services_modules.core.models.company"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeAssetModelTest",
+      "methods": [
+        "setUp",
+        "test_create_employee_asset",
+        "test_unique_asset_tag",
+        "test_asset_return",
+        "test_str_representation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_employee_asset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_asset_tag",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_asset_return",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_str_representation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

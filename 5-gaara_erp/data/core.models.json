@@ -1,0 +1,14 @@
+{
+  "module": "core.models",
+  "imports": [
+    "core_modules.companies.models",
+    "core_modules.system_settings.models",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__",
+    "current_module"
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "module": "business_modules.accounting.models.payment_term",
+  "imports": [
+    "core_modules.core.models",
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "PaymentTerm",
+      "methods": [
+        "__str__",
+        "clean",
+        "calculate_due_date",
+        "calculate_down_payment"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "description",
+        "is_active",
+        "due_type",
+        "due_days",
+        "due_day",
+        "has_down_payment",
+        "down_payment_percent"
+      ]
+    },
+    {
+      "name": "PaymentTermLine",
+      "methods": [
+        "__str__",
+        "clean",
+        "calculate_amount",
+        "calculate_due_date"
+      ],
+      "variables": [
+        "payment_term",
+        "sequence",
+        "days",
+        "percent",
+        "description"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_due_date",
+      "parameters": [
+        "self",
+        "invoice_date"
+      ]
+    },
+    {
+      "name": "calculate_down_payment",
+      "parameters": [
+        "self",
+        "amount"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_amount",
+      "parameters": [
+        "self",
+        "total_amount"
+      ]
+    },
+    {
+      "name": "calculate_due_date",
+      "parameters": [
+        "self",
+        "invoice_date"
+      ]
+    }
+  ],
+  "variables": []
+}

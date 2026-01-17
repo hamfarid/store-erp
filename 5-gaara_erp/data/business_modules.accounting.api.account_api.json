@@ -1,0 +1,84 @@
+{
+  "module": "business_modules.accounting.api.account_api",
+  "imports": [
+    "core_modules.core.models",
+    "datetime",
+    "django.utils.translation",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers",
+    "services.account_service"
+  ],
+  "classes": [
+    {
+      "name": "AccountViewSet",
+      "methods": [
+        "get_queryset",
+        "perform_create",
+        "perform_update",
+        "perform_destroy",
+        "tree",
+        "balance_sheet",
+        "income_statement"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "perform_update",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "perform_destroy",
+      "parameters": [
+        "self",
+        "instance"
+      ]
+    },
+    {
+      "name": "tree",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "balance_sheet",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "income_statement",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

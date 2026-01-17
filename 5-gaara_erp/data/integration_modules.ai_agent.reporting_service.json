@@ -1,0 +1,167 @@
+{
+  "module": "integration_modules.ai_agent.reporting_service",
+  "imports": [
+    "analysis_service",
+    "collections",
+    "dataclasses",
+    "datetime",
+    "django.contrib.auth",
+    "django.core.paginator",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "json",
+    "logging",
+    "models",
+    "random",
+    "typing",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "UsageMetrics",
+      "methods": [],
+      "variables": [
+        "total_interactions",
+        "unique_users",
+        "avg_interactions_per_user",
+        "most_popular_interaction_types",
+        "peak_usage_hours",
+        "compliance_rate",
+        "risk_distribution"
+      ]
+    },
+    {
+      "name": "UserActivitySummary",
+      "methods": [],
+      "variables": [
+        "user_id",
+        "username",
+        "total_interactions",
+        "compliant_interactions",
+        "non_compliant_interactions",
+        "risk_score",
+        "most_used_interaction_types",
+        "last_interaction_date",
+        "compliance_rate"
+      ]
+    },
+    {
+      "name": "AIAgentReportingService",
+      "methods": [
+        "__init__",
+        "generate_usage_report",
+        "_get_interactions_from_db",
+        "_generate_mock_interactions",
+        "_generate_mock_content",
+        "get_usage_metrics",
+        "get_user_activity_summary",
+        "get_compliance_dashboard_data",
+        "export_audit_report",
+        "_generate_recommendations"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "generate_usage_report",
+      "parameters": [
+        "days_back"
+      ]
+    },
+    {
+      "name": "get_compliance_dashboard_data",
+      "parameters": [
+        "days_back"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "generate_usage_report",
+      "parameters": [
+        "self",
+        "days_back",
+        "user_id",
+        "interaction_type",
+        "include_content"
+      ]
+    },
+    {
+      "name": "_get_interactions_from_db",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date",
+        "user_id",
+        "interaction_type",
+        "include_content"
+      ]
+    },
+    {
+      "name": "_generate_mock_interactions",
+      "parameters": [
+        "self",
+        "days_back",
+        "user_id",
+        "interaction_type",
+        "include_content"
+      ]
+    },
+    {
+      "name": "_generate_mock_content",
+      "parameters": [
+        "self",
+        "interaction_type"
+      ]
+    },
+    {
+      "name": "get_usage_metrics",
+      "parameters": [
+        "self",
+        "days_back",
+        "department"
+      ]
+    },
+    {
+      "name": "get_user_activity_summary",
+      "parameters": [
+        "self",
+        "user_id",
+        "days_back"
+      ]
+    },
+    {
+      "name": "get_compliance_dashboard_data",
+      "parameters": [
+        "self",
+        "days_back"
+      ]
+    },
+    {
+      "name": "export_audit_report",
+      "parameters": [
+        "self",
+        "start_date",
+        "end_date",
+        "format_type"
+      ]
+    },
+    {
+      "name": "_generate_recommendations",
+      "parameters": [
+        "self",
+        "compliance_report"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "logger"
+  ]
+}

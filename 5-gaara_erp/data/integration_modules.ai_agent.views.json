@@ -1,0 +1,16 @@
+{
+  "module": "integration_modules.ai_agent.views",
+  "imports": [
+    "django.http"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "index",
+      "parameters": [
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

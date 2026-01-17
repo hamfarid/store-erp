@@ -1,0 +1,9 @@
+{
+  "module": "agricultural_modules.seed_hybridization.admin",
+  "imports": [
+    "django.contrib"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

@@ -1,0 +1,31 @@
+{
+  "module": "analysis.logs.frontend_security_scan",
+  "imports": [
+    "json",
+    "pathlib",
+    "re"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "scan_frontend_security",
+      "parameters": []
+    },
+    {
+      "name": "check_react_security",
+      "parameters": [
+        "content",
+        "file_path",
+        "findings"
+      ]
+    },
+    {
+      "name": "get_severity",
+      "parameters": [
+        "category",
+        "match_text"
+      ]
+    }
+  ],
+  "variables": []
+}

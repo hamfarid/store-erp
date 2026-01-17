@@ -1,0 +1,113 @@
+{
+  "module": "business_modules.sales.models.sales_invoice",
+  "imports": [
+    "customer",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "sales_invoice_status"
+  ],
+  "classes": [
+    {
+      "name": "SalesInvoice",
+      "methods": [
+        "__str__",
+        "status_display",
+        "is_overdue",
+        "days_overdue",
+        "confirm",
+        "mark_as_paid",
+        "cancel",
+        "recalculate_total",
+        "has_child_invoices",
+        "consolidate_child_invoices"
+      ],
+      "variables": [
+        "invoice_number",
+        "customer",
+        "invoice_date",
+        "due_date",
+        "status",
+        "total_amount",
+        "notes",
+        "created_at",
+        "created_by",
+        "parent_invoice",
+        "is_parent_consolidated"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "status_display",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "days_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "confirm",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_paid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "recalculate_total",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "has_child_invoices",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "consolidate_child_invoices",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,41 @@
+{
+  "module": "business_modules.inventory.models.stock_location",
+  "imports": [
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "StockLocation",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

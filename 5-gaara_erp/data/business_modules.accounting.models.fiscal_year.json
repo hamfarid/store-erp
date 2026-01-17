@@ -1,0 +1,15 @@
+{
+  "module": "business_modules.accounting.models.fiscal_year",
+  "imports": [
+    "business_modules.accounting"
+  ],
+  "classes": [
+    {
+      "name": "FiscalPeriod",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

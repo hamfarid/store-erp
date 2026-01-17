@@ -1,0 +1,131 @@
+{
+  "module": "services_modules.projects.api.project_task_api",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.shortcuts",
+    "models.project",
+    "models.task",
+    "permissions",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers.task_serializer",
+    "services.project_task_integration"
+  ],
+  "classes": [
+    {
+      "name": "ProjectTaskViewSet",
+      "methods": [
+        "get_project",
+        "get_task",
+        "list_project_tasks",
+        "create_project_task",
+        "get_project_task",
+        "update_project_task",
+        "delete_project_task",
+        "assign_task",
+        "get_project_tasks_statistics",
+        "get_project_overdue_tasks",
+        "get_project_completion_percentage"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_project",
+      "parameters": [
+        "self",
+        "project_id"
+      ]
+    },
+    {
+      "name": "get_task",
+      "parameters": [
+        "self",
+        "task_id"
+      ]
+    },
+    {
+      "name": "list_project_tasks",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "create_project_task",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_project_task",
+      "parameters": [
+        "self",
+        "request",
+        "pk",
+        "task_id"
+      ]
+    },
+    {
+      "name": "update_project_task",
+      "parameters": [
+        "self",
+        "request",
+        "pk",
+        "task_id"
+      ]
+    },
+    {
+      "name": "delete_project_task",
+      "parameters": [
+        "self",
+        "request",
+        "pk",
+        "task_id"
+      ]
+    },
+    {
+      "name": "assign_task",
+      "parameters": [
+        "self",
+        "request",
+        "pk",
+        "task_id"
+      ]
+    },
+    {
+      "name": "get_project_tasks_statistics",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_project_overdue_tasks",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_project_completion_percentage",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

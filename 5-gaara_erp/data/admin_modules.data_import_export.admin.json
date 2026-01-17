@@ -1,0 +1,61 @@
+{
+  "module": "admin_modules.data_import_export.admin",
+  "imports": [
+    "django.contrib",
+    "django.utils.html",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ImportJobAdmin",
+      "methods": [
+        "download_source_link",
+        "download_log_link"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "date_hierarchy"
+      ]
+    },
+    {
+      "name": "ExportJobAdmin",
+      "methods": [
+        "download_exported_link"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "date_hierarchy"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "download_source_link",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "download_log_link",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "download_exported_link",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

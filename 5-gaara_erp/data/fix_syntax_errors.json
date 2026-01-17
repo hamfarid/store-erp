@@ -1,0 +1,47 @@
+{
+  "module": "fix_syntax_errors",
+  "imports": [
+    "os",
+    "pathlib",
+    "re",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "fix_unterminated_strings",
+      "parameters": [
+        "content"
+      ]
+    },
+    {
+      "name": "fix_invalid_syntax",
+      "parameters": [
+        "content"
+      ]
+    },
+    {
+      "name": "fix_indentation_errors",
+      "parameters": [
+        "content"
+      ]
+    },
+    {
+      "name": "fix_imports",
+      "parameters": [
+        "content"
+      ]
+    },
+    {
+      "name": "fix_file",
+      "parameters": [
+        "file_path"
+      ]
+    },
+    {
+      "name": "main",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

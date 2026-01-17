@@ -1,0 +1,173 @@
+{
+  "module": "core_modules.setup.submodules.activity_logging.models",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ActivityLog",
+      "methods": [
+        "__str__",
+        "log_activity"
+      ],
+      "variables": [
+        "ACTION_TYPES",
+        "user",
+        "action_type",
+        "module",
+        "entity",
+        "entity_id",
+        "description",
+        "ip_address",
+        "user_agent",
+        "timestamp",
+        "data"
+      ]
+    },
+    {
+      "name": "ErrorLog",
+      "methods": [
+        "__str__",
+        "mark_as_resolved",
+        "log_error"
+      ],
+      "variables": [
+        "ERROR_TYPES",
+        "error_type",
+        "module",
+        "url",
+        "message",
+        "stack_trace",
+        "user",
+        "ip_address",
+        "user_agent",
+        "timestamp",
+        "data",
+        "is_resolved",
+        "resolved_by",
+        "resolved_at",
+        "resolution_notes"
+      ]
+    },
+    {
+      "name": "ActivityLogSetting",
+      "methods": [
+        "__str__",
+        "get_settings"
+      ],
+      "variables": [
+        "is_enabled",
+        "log_level",
+        "log_user_actions",
+        "log_system_actions",
+        "log_errors",
+        "retention_period",
+        "auto_archive",
+        "archive_period",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": [
+        "cls",
+        "user",
+        "action_type",
+        "module",
+        "entity",
+        "entity_id",
+        "description",
+        "ip_address",
+        "user_agent",
+        "data"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_resolved",
+      "parameters": [
+        "self",
+        "user",
+        "notes"
+      ]
+    },
+    {
+      "name": "log_error",
+      "parameters": [
+        "cls",
+        "error_type",
+        "module",
+        "message",
+        "stack_trace",
+        "url",
+        "user",
+        "ip_address",
+        "user_agent",
+        "data"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_settings",
+      "parameters": [
+        "cls"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

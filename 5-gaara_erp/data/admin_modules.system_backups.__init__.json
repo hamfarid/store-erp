@@ -1,0 +1,9 @@
+{
+  "module": "admin_modules.system_backups.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "default_app_config"
+  ]
+}

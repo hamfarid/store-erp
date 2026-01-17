@@ -1,0 +1,156 @@
+{
+  "module": "integration_modules.ai_services.risk_assessment",
+  "imports": [
+    "accounting.models",
+    "contacts.models",
+    "datetime",
+    "decimal",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "logging",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "RiskAssessmentResult",
+      "methods": [
+        "__init__",
+        "to_dict"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Contact",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CustomerFinancialMetrics",
+      "methods": [
+        "__init__"
+      ],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "filter",
+        "order_by",
+        "first"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "gather_customer_data_for_risk_assessment",
+      "parameters": [
+        "customer"
+      ]
+    },
+    {
+      "name": "assess_customer_credit_risk",
+      "parameters": [
+        "customer"
+      ]
+    },
+    {
+      "name": "call_ai_model_api",
+      "parameters": [
+        "input_data"
+      ]
+    },
+    {
+      "name": "batch_assess_customers",
+      "parameters": [
+        "customers"
+      ]
+    },
+    {
+      "name": "get_risk_thresholds",
+      "parameters": []
+    },
+    {
+      "name": "update_risk_thresholds",
+      "parameters": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    {
+      "name": "is_risk_assessment_available",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "score",
+        "category",
+        "reason"
+      ]
+    },
+    {
+      "name": "to_dict",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_",
+      "parameters": [
+        "text"
+      ]
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "filter",
+      "parameters": []
+    },
+    {
+      "name": "order_by",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "first",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "RiskCategory",
+    "__all__"
+  ]
+}

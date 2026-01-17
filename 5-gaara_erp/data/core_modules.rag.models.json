@@ -1,0 +1,105 @@
+{
+  "module": "core_modules.rag.models",
+  "imports": [
+    "__future__",
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Document",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "title",
+        "source",
+        "metadata",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Chunk",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "document",
+        "chunk_index",
+        "text",
+        "embedding",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Memory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "KIND_CONVERSATION",
+        "KIND_PROFILE",
+        "KIND_SYSTEM",
+        "KIND_CHOICES",
+        "user",
+        "key",
+        "value",
+        "kind",
+        "embedding",
+        "expires_at",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes",
+        "constraints"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

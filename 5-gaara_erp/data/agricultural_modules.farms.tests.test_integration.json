@@ -1,0 +1,129 @@
+{
+  "module": "agricultural_modules.farms.tests.test_integration",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.test",
+    "integration",
+    "models",
+    "services",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "FarmInventoryIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_consume_inventory_item",
+        "test_add_harvest_to_inventory"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmAccountingIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_record_activity_costs"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmNurseryIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_receive_seedlings_from_nursery"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmProductionIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_transfer_harvest_to_production"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmExperimentsIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_link_field_to_experiment"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_consume_inventory_item",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    },
+    {
+      "name": "test_add_harvest_to_inventory",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_activity_costs",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_receive_seedlings_from_nursery",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_transfer_harvest_to_production",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_link_field_to_experiment",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    }
+  ],
+  "variables": []
+}

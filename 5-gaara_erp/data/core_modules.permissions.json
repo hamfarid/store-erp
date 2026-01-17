@@ -1,0 +1,13 @@
+{
+  "module": "core_modules.permissions",
+  "imports": [
+    "authorization_service",
+    "core_modules.unified_permissions_model",
+    "django.utils.translation"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

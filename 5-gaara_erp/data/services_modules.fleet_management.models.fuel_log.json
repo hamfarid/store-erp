@@ -1,0 +1,59 @@
+{
+  "module": "services_modules.fleet_management.models.fuel_log",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "driver",
+    "vehicle"
+  ],
+  "classes": [
+    {
+      "name": "FuelLog",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "vehicle",
+        "driver",
+        "date",
+        "odometer_reading",
+        "liters_filled",
+        "price_per_liter",
+        "total_cost",
+        "fuel_station",
+        "notes",
+        "related_expense",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

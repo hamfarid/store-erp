@@ -1,0 +1,77 @@
+{
+  "module": "business_modules.inventory.filters",
+  "imports": [
+    "compat",
+    "django.db",
+    "django_filters",
+    "models",
+    "tracking"
+  ],
+  "classes": [
+    {
+      "name": "StoreFilter",
+      "methods": [],
+      "variables": [
+        "name",
+        "name_en"
+      ]
+    },
+    {
+      "name": "ProductFilter",
+      "methods": [],
+      "variables": [
+        "name",
+        "name_en"
+      ]
+    },
+    {
+      "name": "LotFilter",
+      "methods": [],
+      "variables": [
+        "production_date",
+        "expiry_date"
+      ]
+    },
+    {
+      "name": "InventoryTransactionFilter",
+      "methods": [],
+      "variables": [
+        "transaction_date"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

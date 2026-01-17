@@ -1,0 +1,100 @@
+{
+  "module": "business_modules.rent.integration",
+  "imports": [
+    "business_modules.accounting.services.journal_service",
+    "business_modules.assets.models",
+    "business_modules.assets.services",
+    "business_modules.contacts.models",
+    "business_modules.rent.models",
+    "django.db.models.signals",
+    "django.dispatch",
+    "django.utils"
+  ],
+  "classes": [
+    {
+      "name": "RentAccountingIntegration",
+      "methods": [
+        "create_lease_payment_entry",
+        "create_maintenance_expense_entry",
+        "create_vehicle_lease_entry"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RentAssetsIntegration",
+      "methods": [
+        "register_property_as_asset",
+        "register_vehicle_as_asset"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RentContactsIntegration",
+      "methods": [
+        "get_or_create_tenant_contact"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "handle_lease_payment_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "handle_maintenance_request_save",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    },
+    {
+      "name": "handle_vehicle_lease_save",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    },
+    {
+      "name": "create_lease_payment_entry",
+      "parameters": [
+        "lease_payment"
+      ]
+    },
+    {
+      "name": "create_maintenance_expense_entry",
+      "parameters": [
+        "maintenance_request"
+      ]
+    },
+    {
+      "name": "create_vehicle_lease_entry",
+      "parameters": [
+        "vehicle_lease"
+      ]
+    },
+    {
+      "name": "register_property_as_asset",
+      "parameters": [
+        "property_obj"
+      ]
+    },
+    {
+      "name": "register_vehicle_as_asset",
+      "parameters": [
+        "vehicle"
+      ]
+    },
+    {
+      "name": "get_or_create_tenant_contact",
+      "parameters": [
+        "tenant_data"
+      ]
+    }
+  ],
+  "variables": []
+}

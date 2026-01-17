@@ -1,0 +1,37 @@
+{
+  "module": "services_modules.beneficiaries.services.attachment_service",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "models",
+    "os",
+    "services_modules.audit_log.services"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "add_attachment",
+      "parameters": [
+        "beneficiary_id",
+        "file",
+        "description",
+        "uploaded_by"
+      ]
+    },
+    {
+      "name": "get_beneficiary_attachments",
+      "parameters": [
+        "beneficiary_id"
+      ]
+    },
+    {
+      "name": "delete_attachment",
+      "parameters": [
+        "attachment_id",
+        "deleted_by"
+      ]
+    }
+  ],
+  "variables": []
+}

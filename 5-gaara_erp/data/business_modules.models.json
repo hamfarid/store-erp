@@ -1,0 +1,11 @@
+{
+  "module": "business_modules.models",
+  "imports": [
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

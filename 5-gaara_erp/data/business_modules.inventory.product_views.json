@@ -1,0 +1,53 @@
+{
+  "module": "business_modules.inventory.product_views",
+  "imports": [
+    "base",
+    "django_filters.rest_framework",
+    "models",
+    "rest_framework",
+    "serializers"
+  ],
+  "classes": [
+    {
+      "name": "ProductCategoryViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    },
+    {
+      "name": "UOMViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    },
+    {
+      "name": "ProductViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

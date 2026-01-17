@@ -1,0 +1,38 @@
+{
+  "module": "core_modules.setup.signals",
+  "imports": [
+    "django.contrib.auth",
+    "django.db.models.signals",
+    "django.dispatch",
+    "django.utils",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "log_setup_wizard_session_activity",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "log_system_installation_status_change",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "log_installation_activity",
+      "parameters": [
+        "message"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

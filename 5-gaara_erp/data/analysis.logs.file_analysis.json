@@ -1,0 +1,19 @@
+{
+  "module": "analysis.logs.file_analysis",
+  "imports": [
+    "collections",
+    "csv",
+    "datetime",
+    "json",
+    "os",
+    "pathlib"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "analyze_files",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

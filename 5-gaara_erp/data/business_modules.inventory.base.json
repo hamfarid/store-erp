@@ -1,0 +1,174 @@
+{
+  "module": "business_modules.inventory.base",
+  "imports": [
+    "core_modules.organization.models",
+    "decimal",
+    "django.conf",
+    "django.contrib",
+    "django.contrib.auth.models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Site",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name_ar",
+        "name_en",
+        "company",
+        "address",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Store",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "STORE_CATEGORIES",
+        "STORE_SPECIFIC_TYPES",
+        "LOCATION_TYPES",
+        "site",
+        "branch",
+        "parent",
+        "name_ar",
+        "name_en",
+        "location_type",
+        "category",
+        "specific_type",
+        "description",
+        "requires_temp_control",
+        "temperature_min",
+        "temperature_max",
+        "storage_cost_per_day",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "StorePermission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ROLE_CHOICES",
+        "store",
+        "user",
+        "role",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UOM",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name_ar",
+        "name_en",
+        "code",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UOMConversion",
+      "methods": [],
+      "variables": [
+        "from_uom",
+        "to_uom",
+        "conversion_factor",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "unique_together",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

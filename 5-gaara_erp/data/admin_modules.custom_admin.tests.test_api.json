@@ -1,0 +1,192 @@
+{
+  "module": "admin_modules.custom_admin.tests.test_api",
+  "imports": [
+    "django.contrib.auth",
+    "rest_framework",
+    "rest_framework.test"
+  ],
+  "classes": [
+    {
+      "name": "DashboardAPITest",
+      "methods": [
+        "setUp",
+        "test_dashboard_widgets_list_authenticated",
+        "test_dashboard_widgets_list_unauthenticated",
+        "test_create_dashboard_widget",
+        "test_toggle_widget_visibility"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BackupRestoreAPITest",
+      "methods": [
+        "setUp",
+        "test_create_backup_admin_user",
+        "test_create_backup_regular_user",
+        "test_backup_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "NotificationsAPITest",
+      "methods": [
+        "setUp",
+        "test_get_unread_notifications_count",
+        "test_mark_all_notifications_as_read",
+        "test_get_recent_notifications"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SystemSettingsAPITest",
+      "methods": [
+        "setUp",
+        "test_get_settings_by_category_admin",
+        "test_get_settings_by_category_regular_user",
+        "test_get_user_preferences",
+        "test_update_user_preference"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CustomizationAPITest",
+      "methods": [
+        "setUp",
+        "test_get_ui_elements_by_page",
+        "test_get_report_templates"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_dashboard_widgets_list_authenticated",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_dashboard_widgets_list_unauthenticated",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_dashboard_widget",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_toggle_widget_visibility",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_backup_admin_user",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_backup_regular_user",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_backup_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_unread_notifications_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_mark_all_notifications_as_read",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_recent_notifications",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_settings_by_category_admin",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_settings_by_category_regular_user",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_user_preferences",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_user_preference",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_ui_elements_by_page",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_report_templates",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

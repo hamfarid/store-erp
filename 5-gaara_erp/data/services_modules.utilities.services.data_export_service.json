@@ -1,0 +1,117 @@
+{
+  "module": "services_modules.utilities.services.data_export_service",
+  "imports": [
+    "datetime",
+    "django.apps",
+    "django.conf",
+    "django.core.exceptions",
+    "django.core.serializers.json",
+    "django.db",
+    "django.utils",
+    "json",
+    "models.data_export",
+    "os",
+    "pandas"
+  ],
+  "classes": [
+    {
+      "name": "DataExportService",
+      "methods": [
+        "create_export",
+        "process_export",
+        "_export_to_excel",
+        "_export_to_csv",
+        "_export_to_json",
+        "get_export_status",
+        "cancel_export",
+        "delete_export",
+        "get_user_exports",
+        "cleanup_old_exports"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_export",
+      "parameters": [
+        "cls",
+        "name",
+        "model_name",
+        "app_label",
+        "format",
+        "query_params",
+        "user",
+        "description"
+      ]
+    },
+    {
+      "name": "process_export",
+      "parameters": [
+        "cls",
+        "export_id"
+      ]
+    },
+    {
+      "name": "_export_to_excel",
+      "parameters": [
+        "cls",
+        "queryset",
+        "export"
+      ]
+    },
+    {
+      "name": "_export_to_csv",
+      "parameters": [
+        "cls",
+        "queryset",
+        "export"
+      ]
+    },
+    {
+      "name": "_export_to_json",
+      "parameters": [
+        "cls",
+        "queryset",
+        "export"
+      ]
+    },
+    {
+      "name": "get_export_status",
+      "parameters": [
+        "cls",
+        "export_id"
+      ]
+    },
+    {
+      "name": "cancel_export",
+      "parameters": [
+        "cls",
+        "export_id"
+      ]
+    },
+    {
+      "name": "delete_export",
+      "parameters": [
+        "cls",
+        "export_id"
+      ]
+    },
+    {
+      "name": "get_user_exports",
+      "parameters": [
+        "cls",
+        "user",
+        "status"
+      ]
+    },
+    {
+      "name": "cleanup_old_exports",
+      "parameters": [
+        "cls",
+        "days"
+      ]
+    }
+  ],
+  "variables": []
+}

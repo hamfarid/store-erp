@@ -1,0 +1,102 @@
+{
+  "module": "services_modules.correspondence.tests.test_api",
+  "imports": [
+    "django.contrib.auth",
+    "django.test",
+    "django.urls",
+    "django.utils",
+    "models",
+    "rest_framework",
+    "rest_framework.test"
+  ],
+  "classes": [
+    {
+      "name": "CorrespondenceAPITestCase",
+      "methods": [
+        "setUp",
+        "test_list_correspondences_authenticated",
+        "test_list_correspondences_unauthenticated",
+        "test_create_correspondence",
+        "test_create_correspondence_missing_fields",
+        "test_retrieve_correspondence",
+        "test_retrieve_nonexistent_correspondence",
+        "test_update_correspondence",
+        "test_partial_update_correspondence",
+        "test_delete_correspondence",
+        "test_delete_nonexistent_correspondence"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_list_correspondences_authenticated",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_list_correspondences_unauthenticated",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_correspondence",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_correspondence_missing_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_retrieve_correspondence",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_retrieve_nonexistent_correspondence",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_correspondence",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_partial_update_correspondence",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_delete_correspondence",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_delete_nonexistent_correspondence",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

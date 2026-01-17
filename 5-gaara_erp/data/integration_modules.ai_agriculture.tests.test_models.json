@@ -1,0 +1,111 @@
+{
+  "module": "integration_modules.ai_agriculture.tests.test_models",
+  "imports": [
+    "django.test",
+    "django.utils",
+    "integration_modules.ai_agriculture.models",
+    "os",
+    "sys",
+    "unittest",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "CropAnalysisModelTest",
+      "methods": [
+        "setUp",
+        "test_crop_analysis_creation",
+        "test_crop_analysis_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CropRecommendationModelTest",
+      "methods": [
+        "setUp",
+        "test_crop_recommendation_creation",
+        "test_crop_recommendation_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CropPredictionModelTest",
+      "methods": [
+        "setUp",
+        "test_crop_prediction_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "YieldPredictionModelTest",
+      "methods": [
+        "setUp",
+        "test_yield_prediction_creation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_crop_analysis_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_crop_analysis_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_crop_recommendation_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_crop_recommendation_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_crop_prediction_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_yield_prediction_creation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

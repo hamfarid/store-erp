@@ -1,0 +1,98 @@
+{
+  "module": "services_modules.marketing.models.marketing_segment",
+  "imports": [
+    "core_modules.companies.models",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "MarketingSegment",
+      "methods": [
+        "__str__",
+        "clean",
+        "toggle_active",
+        "calculate_potential_revenue",
+        "calculate_roi",
+        "get_performance_metrics"
+      ],
+      "variables": [
+        "TYPE_DEMOGRAPHIC",
+        "TYPE_GEOGRAPHIC",
+        "TYPE_PSYCHOGRAPHIC",
+        "TYPE_BEHAVIORAL",
+        "TYPE_FIRMOGRAPHIC",
+        "TYPE_CUSTOM",
+        "SEGMENT_TYPE_CHOICES",
+        "name",
+        "code",
+        "segment_type",
+        "description",
+        "company",
+        "criteria",
+        "estimated_size",
+        "potential_value",
+        "conversion_rate",
+        "is_active",
+        "notes",
+        "tags"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "toggle_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_potential_revenue",
+      "parameters": [
+        "self",
+        "average_customer_value"
+      ]
+    },
+    {
+      "name": "calculate_roi",
+      "parameters": [
+        "self",
+        "marketing_cost",
+        "average_customer_value"
+      ]
+    },
+    {
+      "name": "get_performance_metrics",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

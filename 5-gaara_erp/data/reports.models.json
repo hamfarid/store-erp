@@ -1,0 +1,9 @@
+{
+  "module": "reports.models",
+  "imports": [
+    "django.db"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

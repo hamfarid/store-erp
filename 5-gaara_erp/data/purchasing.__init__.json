@@ -1,0 +1,12 @@
+{
+  "module": "purchasing.__init__",
+  "imports": [
+    "importlib"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "models",
+    "__all__"
+  ]
+}

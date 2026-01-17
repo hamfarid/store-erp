@@ -1,0 +1,137 @@
+{
+  "module": "business_modules.accounting.services.settlement_service",
+  "imports": [
+    "business_modules.accounting.models.settlement",
+    "business_modules.contacts.models",
+    "business_modules.purchasing.models",
+    "business_modules.purchasing.services",
+    "business_modules.sales.models",
+    "business_modules.sales.models.stub_minimal",
+    "business_modules.sales.services",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "_ManagerStub",
+      "methods": [
+        "create"
+      ],
+      "variables": []
+    },
+    {
+      "name": "_SettlementItemStub",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "_SettlementStatusStub",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "CONFIRMED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "SettlementService",
+      "methods": [
+        "get_settlements",
+        "get_settlement",
+        "get_eligible_contacts",
+        "get_contact_summary",
+        "create_settlement",
+        "confirm_settlement",
+        "cancel_settlement",
+        "get_settlement_report"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PurchaseInvoiceStatus",
+      "methods": [],
+      "variables": [
+        "CONFIRMED",
+        "PARTIALLY_PAID"
+      ]
+    },
+    {
+      "name": "SalesInvoiceService",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PurchaseInvoiceService",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_settlements",
+      "parameters": [
+        "filters"
+      ]
+    },
+    {
+      "name": "get_settlement",
+      "parameters": [
+        "settlement_id"
+      ]
+    },
+    {
+      "name": "get_eligible_contacts",
+      "parameters": []
+    },
+    {
+      "name": "get_contact_summary",
+      "parameters": [
+        "contact_id"
+      ]
+    },
+    {
+      "name": "create_settlement",
+      "parameters": [
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "confirm_settlement",
+      "parameters": [
+        "settlement_id",
+        "user"
+      ]
+    },
+    {
+      "name": "cancel_settlement",
+      "parameters": [
+        "settlement_id",
+        "user"
+      ]
+    },
+    {
+      "name": "get_settlement_report",
+      "parameters": [
+        "contact_id",
+        "start_date",
+        "end_date"
+      ]
+    }
+  ],
+  "variables": [
+    "Settlement",
+    "SettlementItem",
+    "SettlementStatus"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "module": "business_modules.contacts.filters",
+  "imports": [
+    "django_filters",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ContactFilter",
+      "methods": [],
+      "variables": [
+        "name",
+        "email",
+        "phone",
+        "city"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

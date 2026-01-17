@@ -1,0 +1,416 @@
+{
+  "module": "core_modules.users.models",
+  "imports": [
+    "django.conf",
+    "django.contrib.auth.models",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "secrets"
+  ],
+  "classes": [
+    {
+      "name": "UserManager",
+      "methods": [
+        "create_user",
+        "create_superuser"
+      ],
+      "variables": []
+    },
+    {
+      "name": "User",
+      "methods": [
+        "__str__",
+        "get_full_name",
+        "get_short_name",
+        "lock_account",
+        "unlock_account",
+        "is_account_locked",
+        "increment_failed_login",
+        "reset_failed_login"
+      ],
+      "variables": [
+        "email",
+        "username",
+        "first_name",
+        "last_name",
+        "is_active",
+        "is_staff",
+        "date_joined",
+        "last_login",
+        "phone",
+        "mobile",
+        "title",
+        "department",
+        "employee_id",
+        "email_verified",
+        "phone_verified",
+        "failed_login_attempts",
+        "last_failed_login",
+        "account_locked_until",
+        "password_changed_at",
+        "language",
+        "timezone",
+        "objects",
+        "USERNAME_FIELD",
+        "REQUIRED_FIELDS"
+      ]
+    },
+    {
+      "name": "UserProfile",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "avatar",
+        "bio",
+        "birth_date",
+        "gender",
+        "address",
+        "city",
+        "country",
+        "postal_code",
+        "website",
+        "social_links",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserSettings",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "theme",
+        "notifications_enabled",
+        "email_notifications",
+        "sms_notifications",
+        "push_notifications",
+        "dashboard_layout",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserDevice",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "device_id",
+        "device_name",
+        "device_type",
+        "os_name",
+        "os_version",
+        "browser_name",
+        "browser_version",
+        "app_version",
+        "push_token",
+        "is_active",
+        "last_login",
+        "created_at"
+      ]
+    },
+    {
+      "name": "UserSession",
+      "methods": [
+        "__str__",
+        "end_session"
+      ],
+      "variables": [
+        "user",
+        "session_key",
+        "device",
+        "ip_address",
+        "user_agent",
+        "login_time",
+        "last_activity",
+        "logout_time",
+        "is_active"
+      ]
+    },
+    {
+      "name": "UserActivity",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ACTIVITY_TYPES",
+        "user",
+        "session",
+        "activity_type",
+        "description",
+        "ip_address",
+        "content_type",
+        "object_id",
+        "content_object",
+        "data",
+        "timestamp"
+      ]
+    },
+    {
+      "name": "UserNotificationPreference",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "notification_type",
+        "email_enabled",
+        "sms_enabled",
+        "push_enabled",
+        "in_app_enabled",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserAPIKey",
+      "methods": [
+        "__str__",
+        "is_valid",
+        "update_last_used",
+        "generate_key"
+      ],
+      "variables": [
+        "user",
+        "name",
+        "key",
+        "is_active",
+        "created_at",
+        "expires_at",
+        "last_used_at",
+        "permissions",
+        "description"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_user",
+      "parameters": [
+        "self",
+        "email",
+        "username",
+        "password"
+      ]
+    },
+    {
+      "name": "create_superuser",
+      "parameters": [
+        "self",
+        "email",
+        "username",
+        "password"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_full_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_short_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "lock_account",
+      "parameters": [
+        "self",
+        "duration_minutes"
+      ]
+    },
+    {
+      "name": "unlock_account",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_account_locked",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "increment_failed_login",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "reset_failed_login",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "end_session",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_last_used",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "generate_key",
+      "parameters": [
+        "cls"
+      ]
+    }
+  ],
+  "variables": []
+}

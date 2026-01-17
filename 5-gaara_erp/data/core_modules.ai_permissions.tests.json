@@ -1,0 +1,135 @@
+{
+  "module": "core_modules.ai_permissions.tests",
+  "imports": [
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "AIAgentTestCase",
+      "methods": [
+        "setUp",
+        "test_agent_creation",
+        "test_update_last_activity"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AIRoleTestCase",
+      "methods": [
+        "setUp",
+        "test_role_creation",
+        "test_circular_reference_detection"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentRoleTestCase",
+      "methods": [
+        "setUp",
+        "test_agent_role_creation",
+        "test_is_valid"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AIPermissionAuditLogTestCase",
+      "methods": [
+        "setUp",
+        "test_audit_log_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AIModelPermissionTestCase",
+      "methods": [
+        "setUp",
+        "test_model_permission_creation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_agent_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_last_activity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_circular_reference_detection",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_agent_role_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_audit_log_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_model_permission_creation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,25 @@
+{
+  "module": "admin_modules.notifications.backup_files.signals",
+  "imports": [
+    "django.conf",
+    "django.db.models.signals",
+    "django.dispatch",
+    "logging",
+    "models",
+    "telegram_bot.services"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "send_important_notification_via_telegram",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "module": "admin_modules.custom_admin.admin",
+  "imports": [
+    "django.contrib"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

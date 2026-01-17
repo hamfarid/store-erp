@@ -1,0 +1,86 @@
+{
+  "module": "core_modules.system_settings.models",
+  "imports": [
+    "__future__",
+    "base64",
+    "cryptography.fernet",
+    "cryptography.hazmat.primitives",
+    "cryptography.hazmat.primitives.kdf.pbkdf2",
+    "datetime",
+    "django.apps",
+    "django.conf",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.utils.dateparse",
+    "django.utils.translation",
+    "json",
+    "logging",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "_currency_save_patched",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_derive_key_from_secret",
+      "parameters": [
+        "salt"
+      ]
+    },
+    {
+      "name": "_emailsetting_set_password",
+      "parameters": [
+        "self",
+        "password"
+      ]
+    },
+    {
+      "name": "_emailsetting_get_password",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_emailsetting_save_patched",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_systemsetting_clean_patched",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_systemsetting_get_value_as_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_systemsetting_cls_get_setting",
+      "parameters": [
+        "cls",
+        "key",
+        "default"
+      ]
+    },
+    {
+      "name": "_systemsetting_cls_set_setting",
+      "parameters": [
+        "cls",
+        "key",
+        "value",
+        "value_type"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

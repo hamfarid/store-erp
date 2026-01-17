@@ -1,0 +1,75 @@
+{
+  "module": "admin_modules.notifications.services.notification_service",
+  "imports": [
+    "django.conf",
+    "django.core.mail",
+    "django.template.loader",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "NotificationService",
+      "methods": [
+        "__init__",
+        "send_notification",
+        "_send_email",
+        "_log_notification",
+        "get_notification_history"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "_load_notification_settings",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "send_notification",
+      "parameters": [
+        "self",
+        "recipient",
+        "subject",
+        "message",
+        "notification_type",
+        "context"
+      ]
+    },
+    {
+      "name": "_send_email",
+      "parameters": [
+        "self",
+        "recipient_email",
+        "subject",
+        "message_text",
+        "context"
+      ]
+    },
+    {
+      "name": "_log_notification",
+      "parameters": [
+        "self",
+        "recipient",
+        "subject",
+        "message",
+        "notification_type",
+        "success"
+      ]
+    },
+    {
+      "name": "get_notification_history",
+      "parameters": [
+        "self",
+        "limit"
+      ]
+    }
+  ],
+  "variables": []
+}

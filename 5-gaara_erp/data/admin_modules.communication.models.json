@@ -1,0 +1,100 @@
+{
+  "module": "admin_modules.communication.models",
+  "imports": [
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "EmailTemplate",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "subject",
+        "body_html",
+        "body_text",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "CommunicationLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "communication_type",
+        "recipient",
+        "subject",
+        "message_body",
+        "status",
+        "sent_at",
+        "related_object_type",
+        "related_object_id",
+        "related_object",
+        "error_message",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "CommunicationTypes",
+      "methods": [],
+      "variables": [
+        "EMAIL",
+        "SMS",
+        "NOTIFICATION"
+      ]
+    },
+    {
+      "name": "StatusChoices",
+      "methods": [],
+      "variables": [
+        "SENT",
+        "FAILED",
+        "PENDING",
+        "PROCESSING"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

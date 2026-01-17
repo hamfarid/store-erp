@@ -1,0 +1,50 @@
+{
+  "module": "agricultural_modules.agricultural_experiments.models.location",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Location",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "address",
+        "coordinates",
+        "area",
+        "soil_type",
+        "is_active",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

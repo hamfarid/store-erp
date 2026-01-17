@@ -1,0 +1,124 @@
+{
+  "module": "services_modules.utilities.services.system_log_service",
+  "imports": [
+    "django.utils",
+    "models.system_log"
+  ],
+  "classes": [
+    {
+      "name": "SystemLogService",
+      "methods": [
+        "log",
+        "debug",
+        "info",
+        "warning",
+        "error",
+        "critical",
+        "get_logs",
+        "get_recent_logs",
+        "get_error_logs",
+        "get_critical_logs",
+        "clear_old_logs"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "log",
+      "parameters": [
+        "cls",
+        "message",
+        "level",
+        "module",
+        "function",
+        "details",
+        "user",
+        "request"
+      ]
+    },
+    {
+      "name": "debug",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    },
+    {
+      "name": "info",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    },
+    {
+      "name": "warning",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    },
+    {
+      "name": "error",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    },
+    {
+      "name": "critical",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    },
+    {
+      "name": "get_logs",
+      "parameters": [
+        "cls",
+        "level",
+        "module",
+        "user",
+        "start_date",
+        "end_date",
+        "limit"
+      ]
+    },
+    {
+      "name": "get_recent_logs",
+      "parameters": [
+        "cls",
+        "hours",
+        "level",
+        "module",
+        "limit"
+      ]
+    },
+    {
+      "name": "get_error_logs",
+      "parameters": [
+        "cls",
+        "hours",
+        "module",
+        "limit"
+      ]
+    },
+    {
+      "name": "get_critical_logs",
+      "parameters": [
+        "cls",
+        "hours",
+        "module",
+        "limit"
+      ]
+    },
+    {
+      "name": "clear_old_logs",
+      "parameters": [
+        "cls",
+        "days"
+      ]
+    }
+  ],
+  "variables": []
+}

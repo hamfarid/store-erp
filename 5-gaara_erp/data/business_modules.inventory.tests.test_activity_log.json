@@ -1,0 +1,70 @@
+{
+  "module": "business_modules.inventory.tests.test_activity_log",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.test",
+    "models",
+    "service_facade",
+    "tracking",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "ActivityLogIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_get_product_stock_logs_activity",
+        "test_record_stock_movement_logs_activity",
+        "test_create_product_logs_activity",
+        "test_update_product_logs_activity",
+        "test_error_handling_logs_activity"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_product_stock_logs_activity",
+      "parameters": [
+        "self",
+        "mock_log_activity"
+      ]
+    },
+    {
+      "name": "test_record_stock_movement_logs_activity",
+      "parameters": [
+        "self",
+        "mock_log_activity"
+      ]
+    },
+    {
+      "name": "test_create_product_logs_activity",
+      "parameters": [
+        "self",
+        "mock_log_activity"
+      ]
+    },
+    {
+      "name": "test_update_product_logs_activity",
+      "parameters": [
+        "self",
+        "mock_log_activity"
+      ]
+    },
+    {
+      "name": "test_error_handling_logs_activity",
+      "parameters": [
+        "self",
+        "mock_log_activity"
+      ]
+    }
+  ],
+  "variables": []
+}

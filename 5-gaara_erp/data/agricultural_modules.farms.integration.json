@@ -1,0 +1,96 @@
+{
+  "module": "agricultural_modules.farms.integration",
+  "imports": [
+    "models",
+    "services"
+  ],
+  "classes": [
+    {
+      "name": "FarmInventoryIntegrationService",
+      "methods": [
+        "consume_inventory_item",
+        "add_harvest_to_inventory"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmAccountingIntegrationService",
+      "methods": [
+        "record_activity_costs"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmNurseryIntegrationService",
+      "methods": [
+        "receive_seedlings_from_nursery"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmProductionIntegrationService",
+      "methods": [
+        "transfer_harvest_to_production"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmExperimentsIntegrationService",
+      "methods": [
+        "link_field_to_experiment"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "consume_inventory_item",
+      "parameters": [
+        "resource_id",
+        "quantity_consumed",
+        "inventory_item_id",
+        "notes"
+      ]
+    },
+    {
+      "name": "add_harvest_to_inventory",
+      "parameters": [
+        "harvest_id",
+        "target_inventory_location_id",
+        "product_code"
+      ]
+    },
+    {
+      "name": "record_activity_costs",
+      "parameters": [
+        "activity_id"
+      ]
+    },
+    {
+      "name": "receive_seedlings_from_nursery",
+      "parameters": [
+        "planting_season_id",
+        "nursery_batch_id",
+        "quantity_received",
+        "received_date"
+      ]
+    },
+    {
+      "name": "transfer_harvest_to_production",
+      "parameters": [
+        "harvest_id",
+        "production_order_id",
+        "notes"
+      ]
+    },
+    {
+      "name": "link_field_to_experiment",
+      "parameters": [
+        "field_id",
+        "experiment_id",
+        "notes"
+      ]
+    }
+  ],
+  "variables": []
+}

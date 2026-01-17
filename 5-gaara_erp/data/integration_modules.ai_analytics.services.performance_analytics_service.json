@@ -1,0 +1,372 @@
+{
+  "module": "integration_modules.ai_analytics.services.performance_analytics_service",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "logging",
+    "models",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "_DummyContext",
+      "methods": [
+        "__enter__",
+        "__exit__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PerformanceAnalyticsService",
+      "methods": [
+        "register_model_version",
+        "record_model_evaluation",
+        "get_model_versions",
+        "get_model_evaluations",
+        "compare_model_versions",
+        "get_model_performance_trend",
+        "activate_model_version",
+        "deactivate_model_version",
+        "delete_model_version"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "transaction",
+      "methods": [
+        "atomic"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Count",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Sum",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Avg",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "F",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Q",
+      "methods": [
+        "__init__",
+        "__and__",
+        "__or__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Case",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "When",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "IntegerField",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "AIModelVersion",
+      "methods": [
+        "save",
+        "delete"
+      ],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "create",
+        "get",
+        "filter",
+        "all",
+        "exclude",
+        "update",
+        "order_by",
+        "first",
+        "__iter__",
+        "__getitem__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DoesNotExist",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "is_performance_analytics_available",
+      "parameters": []
+    },
+    {
+      "name": "get_performance_analytics_service",
+      "parameters": []
+    },
+    {
+      "name": "__enter__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__exit__",
+      "parameters": [
+        "self",
+        "exc_type",
+        "exc_val",
+        "exc_tb"
+      ]
+    },
+    {
+      "name": "register_model_version",
+      "parameters": [
+        "model_name",
+        "version",
+        "description",
+        "parameters",
+        "training_data_info",
+        "metadata"
+      ]
+    },
+    {
+      "name": "record_model_evaluation",
+      "parameters": [
+        "model_version_id",
+        "metrics",
+        "dataset_info",
+        "evaluation_context"
+      ]
+    },
+    {
+      "name": "get_model_versions",
+      "parameters": [
+        "model_name",
+        "active_only"
+      ]
+    },
+    {
+      "name": "get_model_evaluations",
+      "parameters": [
+        "model_version_id",
+        "model_name",
+        "limit"
+      ]
+    },
+    {
+      "name": "compare_model_versions",
+      "parameters": [
+        "model_name",
+        "version_ids",
+        "metric_names"
+      ]
+    },
+    {
+      "name": "get_model_performance_trend",
+      "parameters": [
+        "model_name",
+        "version_id",
+        "metric_name",
+        "limit"
+      ]
+    },
+    {
+      "name": "activate_model_version",
+      "parameters": [
+        "version_id"
+      ]
+    },
+    {
+      "name": "deactivate_model_version",
+      "parameters": [
+        "version_id"
+      ]
+    },
+    {
+      "name": "delete_model_version",
+      "parameters": [
+        "version_id"
+      ]
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "atomic",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "field"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "field"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "field"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "field"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__and__",
+      "parameters": [
+        "self",
+        "other"
+      ]
+    },
+    {
+      "name": "__or__",
+      "parameters": [
+        "self",
+        "other"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": []
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "id"
+      ]
+    },
+    {
+      "name": "filter",
+      "parameters": []
+    },
+    {
+      "name": "all",
+      "parameters": []
+    },
+    {
+      "name": "exclude",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "order_by",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "first",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__iter__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__getitem__",
+      "parameters": [
+        "self",
+        "key"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "__all__"
+  ]
+}

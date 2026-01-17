@@ -1,0 +1,237 @@
+{
+  "module": "agricultural_modules.nurseries.serializers",
+  "imports": [
+    "django.contrib.auth.models",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "NurserySerializer",
+      "methods": [],
+      "variables": [
+        "manager",
+        "manager_id"
+      ]
+    },
+    {
+      "name": "NurserySectionSerializer",
+      "methods": [],
+      "variables": [
+        "nursery",
+        "nursery_id"
+      ]
+    },
+    {
+      "name": "PlantVarietySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "GrowthStageSerializer",
+      "methods": [],
+      "variables": [
+        "plant_variety",
+        "plant_variety_id"
+      ]
+    },
+    {
+      "name": "ProductionBatchSerializer",
+      "methods": [],
+      "variables": [
+        "plant_variety",
+        "plant_variety_id",
+        "nursery_section",
+        "nursery_section_id",
+        "current_growth_stage",
+        "current_growth_stage_id"
+      ]
+    },
+    {
+      "name": "BatchStageLogSerializer",
+      "methods": [],
+      "variables": [
+        "production_batch",
+        "production_batch_id",
+        "growth_stage",
+        "growth_stage_id"
+      ]
+    },
+    {
+      "name": "NurseryActivityTypeSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ActivityResourceUsageSerializer",
+      "methods": [],
+      "variables": [
+        "resource_id"
+      ]
+    },
+    {
+      "name": "NurseryActivitySerializer",
+      "methods": [
+        "create"
+      ],
+      "variables": [
+        "activity_type",
+        "activity_type_id",
+        "production_batch",
+        "production_batch_id",
+        "nursery_section",
+        "nursery_section_id",
+        "performed_by",
+        "performed_by_id",
+        "resource_usages"
+      ]
+    },
+    {
+      "name": "NurseryResourceSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "QualityCheckSerializer",
+      "methods": [],
+      "variables": [
+        "production_batch",
+        "production_batch_id",
+        "checked_by",
+        "checked_by_id"
+      ]
+    },
+    {
+      "name": "EnvironmentalLogSerializer",
+      "methods": [],
+      "variables": [
+        "nursery_section",
+        "nursery_section_id",
+        "recorded_by",
+        "recorded_by_id"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "validated_data"
+      ]
+    }
+  ],
+  "variables": [
+    "PYTEST_DONT_REWRITE"
+  ]
+}

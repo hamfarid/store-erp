@@ -1,0 +1,11 @@
+{
+  "module": "ai_modules.ai_memory.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "default_app_config",
+    "__version__",
+    "__author__"
+  ]
+}

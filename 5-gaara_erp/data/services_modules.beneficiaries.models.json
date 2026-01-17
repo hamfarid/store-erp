@@ -1,0 +1,315 @@
+{
+  "module": "services_modules.beneficiaries.models",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "os"
+  ],
+  "classes": [
+    {
+      "name": "BeneficiaryCategory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description"
+      ]
+    },
+    {
+      "name": "Beneficiary",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "MARITAL_STATUS_CHOICES",
+        "STATUS_CHOICES",
+        "code",
+        "name_ar",
+        "name_en",
+        "category",
+        "national_id",
+        "address",
+        "contact_info",
+        "marital_status",
+        "family_members_count",
+        "spouse_name",
+        "case_details",
+        "case_national_id",
+        "researcher_name",
+        "notes",
+        "status",
+        "first_payment_month",
+        "photo",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "BeneficiaryAttachment",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "beneficiary",
+        "file",
+        "description",
+        "uploaded_at",
+        "uploaded_by"
+      ]
+    },
+    {
+      "name": "BeneficiaryYearlyAmount",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "beneficiary",
+        "year",
+        "monthly_amount",
+        "created_at",
+        "updated_at",
+        "set_by"
+      ]
+    },
+    {
+      "name": "GrantRule",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "GRANT_TYPE_CHOICES",
+        "name",
+        "year",
+        "grant_type",
+        "fixed_amount",
+        "apply_after_month",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PaymentSession",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "SESSION_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "session_type",
+        "payment_year",
+        "payment_month",
+        "grant_rule",
+        "session_date",
+        "description",
+        "status",
+        "created_by",
+        "posted_by",
+        "posted_at",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PaymentRecord",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "session",
+        "beneficiary",
+        "payment_year",
+        "payment_month",
+        "is_grant",
+        "grant_name",
+        "amount",
+        "payment_date",
+        "paid_by",
+        "notes"
+      ]
+    },
+    {
+      "name": "AmountChangeLog",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "CHANGE_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "change_type",
+        "effective_year",
+        "beneficiary",
+        "category",
+        "old_amount",
+        "new_amount",
+        "percentage_change",
+        "status",
+        "created_by",
+        "posted_by",
+        "posted_at",
+        "created_at",
+        "notes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

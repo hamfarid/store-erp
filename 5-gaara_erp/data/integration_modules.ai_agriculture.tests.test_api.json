@@ -1,0 +1,96 @@
+{
+  "module": "integration_modules.ai_agriculture.tests.test_api",
+  "imports": [
+    "django.test",
+    "django.utils",
+    "integration_modules.ai_agriculture.models",
+    "integration_modules.ai_agriculture.services.crop_analysis_service",
+    "integration_modules.ai_agriculture.services.crop_prediction_service",
+    "json",
+    "os",
+    "rest_framework",
+    "rest_framework.test",
+    "sys",
+    "unittest",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "CropAnalysisAPITest",
+      "methods": [
+        "setUp",
+        "test_create_crop_analysis",
+        "test_get_crop_analysis",
+        "test_get_farm_analyses"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CropPredictionAPITest",
+      "methods": [
+        "setUp",
+        "test_predict_yield",
+        "test_predict_problems",
+        "test_get_farm_predictions"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_crop_analysis",
+      "parameters": [
+        "self",
+        "mock_analyze_crop_data"
+      ]
+    },
+    {
+      "name": "test_get_crop_analysis",
+      "parameters": [
+        "self",
+        "mock_get_crop_analysis"
+      ]
+    },
+    {
+      "name": "test_get_farm_analyses",
+      "parameters": [
+        "self",
+        "mock_get_farm_analyses"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_predict_yield",
+      "parameters": [
+        "self",
+        "mock_predict_crop_yield"
+      ]
+    },
+    {
+      "name": "test_predict_problems",
+      "parameters": [
+        "self",
+        "mock_predict_crop_problems"
+      ]
+    },
+    {
+      "name": "test_get_farm_predictions",
+      "parameters": [
+        "self",
+        "mock_get_farm_predictions"
+      ]
+    }
+  ],
+  "variables": []
+}

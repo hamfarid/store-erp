@@ -1,0 +1,90 @@
+{
+  "module": "business_modules.inventory.location_views",
+  "imports": [
+    "base",
+    "django.db",
+    "django_filters.rest_framework",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "SimpleSiteSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SimpleStoreSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SimpleStorePermissionSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SiteViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    },
+    {
+      "name": "StoreViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    },
+    {
+      "name": "StorePermissionViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "ordering_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

@@ -1,0 +1,100 @@
+{
+  "module": "business_modules.inventory.tests.test_services",
+  "imports": [
+    "business_modules.inventory.models",
+    "business_modules.inventory.services",
+    "datetime",
+    "decimal",
+    "django.contrib.auth.models",
+    "django.test",
+    "django.utils"
+  ],
+  "classes": [
+    {
+      "name": "InventoryServicesTestCase",
+      "methods": [
+        "setUp",
+        "test_increase_stock_for_storable_product",
+        "test_increase_stock_for_lot_tracked_product",
+        "test_increase_stock_for_lot_tracked_product_without_lot_name",
+        "test_decrease_stock_for_storable_product",
+        "test_decrease_stock_insufficient_quantity",
+        "test_transfer_stock_between_stores",
+        "test_adjust_stock",
+        "test_get_stock_level",
+        "test_get_stock_level_with_lots",
+        "test_perform_stock_count"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_increase_stock_for_storable_product",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_increase_stock_for_lot_tracked_product",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_increase_stock_for_lot_tracked_product_without_lot_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_decrease_stock_for_storable_product",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_decrease_stock_insufficient_quantity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_transfer_stock_between_stores",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_adjust_stock",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_stock_level",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_stock_level_with_lots",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_perform_stock_count",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

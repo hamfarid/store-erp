@@ -1,0 +1,52 @@
+{
+  "module": "test_security_permissions",
+  "imports": [
+    "django",
+    "django.conf",
+    "django.contrib.auth",
+    "django.contrib.auth.models",
+    "django.contrib.contenttypes.models",
+    "django.test",
+    "django.test.utils",
+    "django.urls",
+    "json",
+    "os",
+    "sys",
+    "uuid",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_authentication_security",
+      "parameters": []
+    },
+    {
+      "name": "test_api_security",
+      "parameters": []
+    },
+    {
+      "name": "test_csrf_protection",
+      "parameters": []
+    },
+    {
+      "name": "test_permission_system",
+      "parameters": []
+    },
+    {
+      "name": "test_security_headers",
+      "parameters": []
+    },
+    {
+      "name": "test_session_security",
+      "parameters": []
+    },
+    {
+      "name": "test_input_validation",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

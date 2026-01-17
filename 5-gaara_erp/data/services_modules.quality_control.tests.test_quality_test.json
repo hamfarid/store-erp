@@ -1,0 +1,111 @@
+{
+  "module": "services_modules.quality_control.tests.test_quality_test",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "models.quality_check",
+    "models.quality_parameter",
+    "models.quality_result",
+    "models.quality_template",
+    "models.quality_test"
+  ],
+  "classes": [
+    {
+      "name": "QualityTestModelTest",
+      "methods": [
+        "setUp",
+        "test_quality_test_creation",
+        "test_quality_test_str_representation",
+        "test_start_test",
+        "test_complete_test_pass",
+        "test_complete_test_fail",
+        "test_skip_test",
+        "test_cannot_skip_completed_test",
+        "test_get_duration",
+        "test_validation_end_date_before_start_date",
+        "test_is_value_acceptable",
+        "test_get_latest_result"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_test_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_test_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_start_test",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_complete_test_pass",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_complete_test_fail",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_skip_test",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_cannot_skip_completed_test",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_end_date_before_start_date",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_value_acceptable",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_latest_result",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

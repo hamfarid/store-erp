@@ -1,0 +1,42 @@
+{
+  "module": "agricultural_modules.farms.permissions",
+  "imports": [
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "IsAdminOrReadOnly",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "IsOwnerOrAdminElseReadOnly",
+      "methods": [
+        "has_object_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

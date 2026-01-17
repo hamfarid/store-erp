@@ -1,0 +1,181 @@
+{
+  "module": "integration_modules.ai.models.__init__",
+  "imports": [
+    "conversations",
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "learning_sources",
+    "memory_and_learning"
+  ],
+  "classes": [
+    {
+      "name": "AISettings",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "key",
+        "value",
+        "description",
+        "is_system",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "AIActivity",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ACTIVITY_TYPES",
+        "STATUS_CHOICES",
+        "activity_type",
+        "user",
+        "agent_name",
+        "service_name",
+        "action",
+        "details",
+        "status",
+        "created_at"
+      ]
+    },
+    {
+      "name": "AIIntegration",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "INTEGRATION_TYPES",
+        "STATUS_CHOICES",
+        "name",
+        "integration_type",
+        "module_path",
+        "configuration",
+        "status",
+        "last_sync",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "APIKey",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "KEY_TYPES",
+        "name",
+        "key_type",
+        "key_value",
+        "is_active",
+        "description",
+        "expires_at",
+        "created_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "AIModel",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "provider",
+        "model_identifier",
+        "is_active",
+        "description",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "LABEL_CREATED_AT",
+    "LABEL_UPDATED_AT",
+    "LABEL_DESCRIPTION",
+    "__all__"
+  ]
+}

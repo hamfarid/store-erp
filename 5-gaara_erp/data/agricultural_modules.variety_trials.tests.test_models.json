@@ -1,0 +1,159 @@
+{
+  "module": "agricultural_modules.variety_trials.tests.test_models",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "VarietyTrialModelTest",
+      "methods": [
+        "setUp",
+        "test_variety_trial_creation",
+        "test_variety_trial_str"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TrialLocationModelTest",
+      "methods": [
+        "setUp",
+        "test_trial_location_creation",
+        "test_trial_location_str"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TrialSeasonModelTest",
+      "methods": [
+        "setUp",
+        "test_trial_season_creation",
+        "test_trial_season_str"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CompetitorVarietyModelTest",
+      "methods": [
+        "setUp",
+        "test_competitor_variety_creation",
+        "test_competitor_variety_str"
+      ],
+      "variables": []
+    },
+    {
+      "name": "HarvestDataModelTest",
+      "methods": [
+        "setUp",
+        "test_harvest_data_creation",
+        "test_average_fruit_weight",
+        "test_marketable_percentage"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_variety_trial_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_variety_trial_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_trial_location_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_trial_location_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_trial_season_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_trial_season_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_competitor_variety_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_competitor_variety_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_harvest_data_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_average_fruit_weight",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_marketable_percentage",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

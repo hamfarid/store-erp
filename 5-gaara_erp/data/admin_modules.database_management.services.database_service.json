@@ -1,0 +1,84 @@
+{
+  "module": "admin_modules.database_management.services.database_service",
+  "imports": [
+    "datetime",
+    "django.conf",
+    "django.core.management",
+    "django.core.management.base",
+    "django.db",
+    "json",
+    "logging",
+    "os",
+    "pathlib",
+    "subprocess",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "DatabaseService",
+      "methods": [
+        "__init__",
+        "get_databases",
+        "get_database_info",
+        "create_backup",
+        "restore_backup",
+        "get_backup_list",
+        "delete_backup"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_databases",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_database_info",
+      "parameters": [
+        "self",
+        "database_id"
+      ]
+    },
+    {
+      "name": "create_backup",
+      "parameters": [
+        "self",
+        "database_name",
+        "backup_type"
+      ]
+    },
+    {
+      "name": "restore_backup",
+      "parameters": [
+        "self",
+        "backup_path"
+      ]
+    },
+    {
+      "name": "get_backup_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete_backup",
+      "parameters": [
+        "self",
+        "backup_filename"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

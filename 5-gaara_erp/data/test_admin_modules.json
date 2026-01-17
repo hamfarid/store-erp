@@ -1,0 +1,40 @@
+{
+  "module": "test_admin_modules",
+  "imports": [
+    "admin_modules.dashboard.models",
+    "admin_modules.database_management.models",
+    "admin_modules.health_monitoring.models",
+    "admin_modules.reports.models",
+    "admin_modules.system_monitoring.models",
+    "django",
+    "django.test",
+    "os",
+    "psutil",
+    "sys",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_admin_modules",
+      "parameters": []
+    },
+    {
+      "name": "test_admin_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_health_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_django_admin",
+      "parameters": []
+    },
+    {
+      "name": "test_system_monitoring",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

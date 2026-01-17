@@ -1,0 +1,597 @@
+{
+  "module": "services_modules.hr.models",
+  "imports": [
+    "core_modules.organization.models",
+    "datetime",
+    "django.conf",
+    "django.contrib.auth.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "models.job_grade"
+  ],
+  "classes": [
+    {
+      "name": "Department",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name_ar",
+        "name_en",
+        "company",
+        "parent",
+        "manager",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Position",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "title_ar",
+        "title_en",
+        "department",
+        "job_grade",
+        "job_description",
+        "required_qualifications",
+        "required_experience",
+        "reports_to",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Employee",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "employee_number",
+        "first_name_ar",
+        "last_name_ar",
+        "first_name_en",
+        "last_name_en",
+        "gender",
+        "date_of_birth",
+        "nationality",
+        "national_id",
+        "marital_status",
+        "photo",
+        "personal_email",
+        "mobile_phone",
+        "work_email",
+        "work_phone",
+        "company_mobile",
+        "address",
+        "hire_date",
+        "termination_date",
+        "branch",
+        "department",
+        "position",
+        "manager",
+        "status",
+        "emergency_contact_name",
+        "emergency_contact_relation",
+        "emergency_contact_phone",
+        "bank_name",
+        "bank_account_number",
+        "bank_iban",
+        "company_car_details",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "EmployeeAsset",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "employee",
+        "asset_type",
+        "description",
+        "serial_number",
+        "asset_tag",
+        "assignment_date",
+        "return_date",
+        "status",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "EmployeeDocument",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "employee",
+        "document_type",
+        "document_number",
+        "issue_date",
+        "expiry_date",
+        "file",
+        "notes",
+        "notify_before_days",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "EmployeeExperience",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "employee",
+        "company_name",
+        "position_title",
+        "start_date",
+        "end_date",
+        "description"
+      ]
+    },
+    {
+      "name": "EmployeeQualification",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "employee",
+        "institution_name",
+        "degree",
+        "field_of_study",
+        "start_date",
+        "completion_date",
+        "grade"
+      ]
+    },
+    {
+      "name": "EmployeeTraining",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "employee",
+        "course_name",
+        "provider",
+        "completion_date",
+        "duration_hours",
+        "certificate_file"
+      ]
+    },
+    {
+      "name": "Contract",
+      "methods": [],
+      "variables": [
+        "employee",
+        "contract_type",
+        "start_date",
+        "end_date",
+        "position",
+        "salary",
+        "salary_currency",
+        "working_hours_per_week",
+        "probation_period_months",
+        "is_active",
+        "contract_file",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PayrollPeriod",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "start_date",
+        "end_date",
+        "is_closed"
+      ]
+    },
+    {
+      "name": "SalaryStructure",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "is_active"
+      ]
+    },
+    {
+      "name": "SalaryRuleCategory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code"
+      ]
+    },
+    {
+      "name": "SalaryRule",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "category",
+        "structure",
+        "sequence",
+        "is_active",
+        "appears_on_payslip",
+        "condition_select",
+        "condition_range_min",
+        "condition_range_max",
+        "condition_python_code",
+        "amount_select",
+        "amount_fixed",
+        "amount_percentage_base",
+        "amount_percentage",
+        "amount_python_code"
+      ]
+    },
+    {
+      "name": "Payslip",
+      "methods": [
+        "save",
+        "__str__"
+      ],
+      "variables": [
+        "employee",
+        "period",
+        "contract",
+        "structure",
+        "name",
+        "status",
+        "date_from",
+        "date_to",
+        "net_pay",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PayslipLine",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "payslip",
+        "salary_rule",
+        "name",
+        "code",
+        "category",
+        "sequence",
+        "quantity",
+        "amount",
+        "total"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "GenderChoices",
+      "methods": [],
+      "variables": [
+        "MALE",
+        "FEMALE"
+      ]
+    },
+    {
+      "name": "MaritalStatusChoices",
+      "methods": [],
+      "variables": [
+        "SINGLE",
+        "MARRIED",
+        "DIVORCED",
+        "WIDOWED"
+      ]
+    },
+    {
+      "name": "EmployeeStatusChoices",
+      "methods": [],
+      "variables": [
+        "ACTIVE",
+        "INACTIVE",
+        "SUSPENDED",
+        "TERMINATED",
+        "PENDING_HIRE",
+        "BLACKLISTED",
+        "ON_LEAVE"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "AssetStatusChoices",
+      "methods": [],
+      "variables": [
+        "ASSIGNED",
+        "RETURNED",
+        "DAMAGED",
+        "LOST"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "ContractTypeChoices",
+      "methods": [],
+      "variables": [
+        "FULL_TIME",
+        "PART_TIME",
+        "FIXED_TERM",
+        "INTERNSHIP",
+        "DAILY_WAGE",
+        "PROJECT_BASED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "ConditionSelect",
+      "methods": [],
+      "variables": [
+        "ALWAYS",
+        "RANGE",
+        "PYTHON"
+      ]
+    },
+    {
+      "name": "AmountSelect",
+      "methods": [],
+      "variables": [
+        "FIXED",
+        "PERCENTAGE",
+        "PYTHON"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "PayslipStatus",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "CONFIRMED",
+        "PAID",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "AUTH_USER_MODEL",
+    "__all__"
+  ]
+}

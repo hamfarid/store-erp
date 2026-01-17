@@ -1,0 +1,130 @@
+{
+  "module": "services_modules.marketing.models.marketing_channel",
+  "imports": [
+    "core_modules.core.models.company",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation",
+    "marketing_campaign"
+  ],
+  "classes": [
+    {
+      "name": "MarketingChannel",
+      "methods": [
+        "__str__",
+        "clean",
+        "toggle_active",
+        "calculate_roi",
+        "calculate_expected_leads",
+        "calculate_expected_acquisitions",
+        "calculate_expected_revenue",
+        "get_active_campaigns",
+        "get_performance_metrics"
+      ],
+      "variables": [
+        "TYPE_WEBSITE",
+        "TYPE_SOCIAL_MEDIA",
+        "TYPE_EMAIL",
+        "TYPE_SMS",
+        "TYPE_SEARCH_ENGINE",
+        "TYPE_DISPLAY_ADS",
+        "TYPE_AFFILIATE",
+        "TYPE_DIRECT_MAIL",
+        "TYPE_TELEMARKETING",
+        "TYPE_EVENT",
+        "TYPE_OTHER",
+        "CHANNEL_TYPE_CHOICES",
+        "name",
+        "code",
+        "channel_type",
+        "description",
+        "company",
+        "platform",
+        "url",
+        "cost_per_lead",
+        "cost_per_acquisition",
+        "conversion_rate",
+        "is_active",
+        "campaigns",
+        "notes",
+        "tags"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "toggle_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_roi",
+      "parameters": [
+        "self",
+        "cost",
+        "revenue"
+      ]
+    },
+    {
+      "name": "calculate_expected_leads",
+      "parameters": [
+        "self",
+        "budget"
+      ]
+    },
+    {
+      "name": "calculate_expected_acquisitions",
+      "parameters": [
+        "self",
+        "leads"
+      ]
+    },
+    {
+      "name": "calculate_expected_revenue",
+      "parameters": [
+        "self",
+        "acquisitions",
+        "average_customer_value"
+      ]
+    },
+    {
+      "name": "get_active_campaigns",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_performance_metrics",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

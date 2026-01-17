@@ -1,0 +1,94 @@
+{
+  "module": "agricultural_modules.seed_hybridization.views",
+  "imports": [
+    "django.conf",
+    "permissions",
+    "requests",
+    "rest_framework",
+    "rest_framework.permissions",
+    "rest_framework.response",
+    "rest_framework.views",
+    "serializers"
+  ],
+  "classes": [
+    {
+      "name": "ExperimentListView",
+      "methods": [
+        "get"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "ExperimentDetailView",
+      "methods": [
+        "get"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "HybridVarietyListView",
+      "methods": [
+        "get"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "HybridVarietyDetailView",
+      "methods": [
+        "get"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "make_external_api_request",
+      "parameters": [
+        "endpoint",
+        "params"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request",
+        "experiment_id"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request",
+        "variety_id"
+      ]
+    }
+  ],
+  "variables": [
+    "EXTERNAL_API_BASE_URL",
+    "EXTERNAL_API_TIMEOUT"
+  ]
+}

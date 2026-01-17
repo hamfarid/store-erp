@@ -1,0 +1,79 @@
+{
+  "module": "agricultural_modules.nurseries.tests.test_integration",
+  "imports": [
+    "decimal",
+    "django.contrib.auth.models",
+    "django.test",
+    "django.utils",
+    "integration",
+    "models",
+    "services",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "NurseryIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_batch_completion_inventory_integration",
+        "test_resource_consumption_inventory_integration",
+        "test_nursery_activity_cost_accounting_integration",
+        "test_transfer_batch_to_farm_integration",
+        "test_quality_check_research_integration",
+        "test_batch_stage_log_research_integration"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_batch_completion_inventory_integration",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    },
+    {
+      "name": "test_resource_consumption_inventory_integration",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    },
+    {
+      "name": "test_nursery_activity_cost_accounting_integration",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    },
+    {
+      "name": "test_transfer_batch_to_farm_integration",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    },
+    {
+      "name": "test_quality_check_research_integration",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    },
+    {
+      "name": "test_batch_stage_log_research_integration",
+      "parameters": [
+        "self",
+        "mock_print"
+      ]
+    }
+  ],
+  "variables": []
+}

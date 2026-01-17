@@ -1,0 +1,99 @@
+{
+  "module": "services_modules.legal_affairs.tests.test_legal_case",
+  "imports": [
+    "core_modules.core.models.company",
+    "django.contrib.auth.models",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "services_modules.legal_affairs.models.legal_case"
+  ],
+  "classes": [
+    {
+      "name": "LegalCaseModelTest",
+      "methods": [
+        "setUp",
+        "test_case_creation",
+        "test_string_representation",
+        "test_is_active",
+        "test_close_case",
+        "test_reopen_case",
+        "test_update_status",
+        "test_days_since_filing",
+        "test_validation_error_on_invalid_dates",
+        "test_assign_lawyer",
+        "test_calculate_risk_level"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_case_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_string_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_close_case",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reopen_case",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_days_since_filing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_error_on_invalid_dates",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_assign_lawyer",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_risk_level",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

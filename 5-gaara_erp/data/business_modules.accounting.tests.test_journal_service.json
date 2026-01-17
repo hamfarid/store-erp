@@ -1,0 +1,73 @@
+{
+  "module": "business_modules.accounting.tests.test_journal_service",
+  "imports": [
+    "core_modules.core.models",
+    "datetime",
+    "decimal",
+    "django.test",
+    "django.utils",
+    "models.account",
+    "models.journal",
+    "services.journal_service"
+  ],
+  "classes": [
+    {
+      "name": "JournalServiceTest",
+      "methods": [
+        "setUp",
+        "test_create_journal_entry",
+        "test_post_journal_entry",
+        "test_reverse_journal_entry",
+        "test_get_journal_entries",
+        "test_generate_journal_report",
+        "test_validate_journal_entry"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_journal_entry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_post_journal_entry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reverse_journal_entry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_journal_entries",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_journal_report",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_journal_entry",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

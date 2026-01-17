@@ -1,0 +1,13 @@
+{
+  "module": "scripts.try_import_aa",
+  "imports": [
+    "business_modules.accounting.models",
+    "django",
+    "os",
+    "sys",
+    "traceback"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

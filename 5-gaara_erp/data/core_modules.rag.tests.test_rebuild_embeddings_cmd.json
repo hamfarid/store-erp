@@ -1,0 +1,28 @@
+{
+  "module": "core_modules.rag.tests.test_rebuild_embeddings_cmd",
+  "imports": [
+    "__future__",
+    "core_modules.rag.models",
+    "django.core.management",
+    "os",
+    "pytest"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_rebuild_embeddings_for_selected_ids",
+      "parameters": [
+        "settings"
+      ]
+    },
+    {
+      "name": "test_rebuild_embeddings_without_ids_processes_all",
+      "parameters": [
+        "settings"
+      ]
+    }
+  ],
+  "variables": [
+    "pytestmark"
+  ]
+}

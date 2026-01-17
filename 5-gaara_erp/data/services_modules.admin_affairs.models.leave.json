@@ -1,0 +1,102 @@
+{
+  "module": "services_modules.admin_affairs.models.leave",
+  "imports": [
+    "attendance_record",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "employee_profile",
+    "leave_type"
+  ],
+  "classes": [
+    {
+      "name": "Leave",
+      "methods": [
+        "__str__",
+        "days_count",
+        "approve",
+        "reject",
+        "cancel",
+        "create_attendance_records",
+        "delete_attendance_records",
+        "is_overlapping"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "employee",
+        "leave_type",
+        "start_date",
+        "end_date",
+        "reason",
+        "status",
+        "approved_by",
+        "approved_at",
+        "rejection_reason",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "days_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "approve",
+      "parameters": [
+        "self",
+        "approver"
+      ]
+    },
+    {
+      "name": "reject",
+      "parameters": [
+        "self",
+        "reason"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_attendance_records",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete_attendance_records",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_overlapping",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

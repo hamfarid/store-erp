@@ -1,0 +1,37 @@
+{
+  "module": "core_modules.users_accounts.forms",
+  "imports": [
+    "django"
+  ],
+  "classes": [
+    {
+      "name": "UserLoginForm",
+      "methods": [],
+      "variables": [
+        "username",
+        "password"
+      ]
+    },
+    {
+      "name": "UserRegistrationForm",
+      "methods": [
+        "clean_confirm_password"
+      ],
+      "variables": [
+        "username",
+        "email",
+        "password",
+        "confirm_password"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "clean_confirm_password",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

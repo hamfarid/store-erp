@@ -1,0 +1,58 @@
+{
+  "module": "core_modules.api_keys.permissions",
+  "imports": [
+    "rest_framework",
+    "rest_framework_api_key.permissions"
+  ],
+  "classes": [
+    {
+      "name": "BaseHasAPIKey",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "HasAPIKeyOrIsAdmin",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "IsOwnerOrAdmin",
+      "methods": [
+        "has_object_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

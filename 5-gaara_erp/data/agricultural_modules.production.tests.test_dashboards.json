@@ -1,0 +1,196 @@
+{
+  "module": "agricultural_modules.production.tests.test_dashboards",
+  "imports": [
+    "analytics.dashboards",
+    "certificates_models",
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.urls",
+    "django.utils",
+    "export_approval_models",
+    "json",
+    "models",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "DashboardDataTestCase",
+      "methods": [
+        "setUp",
+        "create_test_production_data",
+        "create_test_quality_data",
+        "create_test_export_data",
+        "test_production_dashboard_data",
+        "test_quality_dashboard_data",
+        "test_export_dashboard_data",
+        "test_main_dashboard_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DashboardAPITestCase",
+      "methods": [
+        "setUp",
+        "test_get_production_dashboard_api",
+        "test_export_dashboard_data_json",
+        "test_export_dashboard_data_csv",
+        "test_export_dashboard_data_excel"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DashboardPerformanceTestCase",
+      "methods": [
+        "setUp",
+        "test_dashboard_response_time",
+        "test_main_dashboard_response_time",
+        "test_export_large_dataset_performance"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductionOrder",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "ProductionBatch",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "ProductionActivity",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "QualityCheck",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_test_production_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_test_quality_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_test_export_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_production_dashboard_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_dashboard_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_export_dashboard_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_main_dashboard_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_production_dashboard_api",
+      "parameters": [
+        "self",
+        "mock_get_dashboard_data"
+      ]
+    },
+    {
+      "name": "test_export_dashboard_data_json",
+      "parameters": [
+        "self",
+        "mock_get_dashboard_data"
+      ]
+    },
+    {
+      "name": "test_export_dashboard_data_csv",
+      "parameters": [
+        "self",
+        "mock_get_dashboard_data"
+      ]
+    },
+    {
+      "name": "test_export_dashboard_data_excel",
+      "parameters": [
+        "self",
+        "mock_get_dashboard_data"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_dashboard_response_time",
+      "parameters": [
+        "self",
+        "mock_get_dashboard_data"
+      ]
+    },
+    {
+      "name": "test_main_dashboard_response_time",
+      "parameters": [
+        "self",
+        "mock_get_dashboard_data"
+      ]
+    },
+    {
+      "name": "test_export_large_dataset_performance",
+      "parameters": [
+        "self",
+        "mock_get_dashboard_data"
+      ]
+    }
+  ],
+  "variables": [
+    "missing_models",
+    "User"
+  ]
+}

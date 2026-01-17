@@ -1,0 +1,62 @@
+{
+  "module": "services_modules.admin_affairs.models.leave_type",
+  "imports": [
+    "django.db",
+    "django.utils",
+    "leave"
+  ],
+  "classes": [
+    {
+      "name": "LeaveType",
+      "methods": [
+        "__str__",
+        "get_leaves_count",
+        "is_available_for_employee"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "days_allowed",
+        "requires_approval",
+        "is_paid",
+        "description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_leaves_count",
+      "parameters": [
+        "self",
+        "year"
+      ]
+    },
+    {
+      "name": "is_available_for_employee",
+      "parameters": [
+        "self",
+        "employee",
+        "requested_days"
+      ]
+    }
+  ],
+  "variables": []
+}

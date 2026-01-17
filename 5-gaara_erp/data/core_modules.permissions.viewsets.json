@@ -1,0 +1,142 @@
+{
+  "module": "core_modules.permissions.viewsets",
+  "imports": [
+    "rest_framework",
+    "rest_framework.response",
+    "serializers",
+    "unified_permissions_model"
+  ],
+  "classes": [
+    {
+      "name": "BaseReadOnlyViewSet",
+      "methods": [
+        "list",
+        "retrieve"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "PermissionViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "RoleViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "GroupViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "UserPermissionViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "UserRoleViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "UserGroupViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "ResourcePermissionViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "PermissionRequestViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "PermissionLogViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "TemporaryPermissionViewSet",
+      "methods": [
+        "retrieve"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class"
+      ]
+    },
+    {
+      "name": "AuthorizationViewSet",
+      "methods": [
+        "list"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "list",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "retrieve",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "retrieve",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "list",
+      "parameters": [
+        "self",
+        "_request"
+      ]
+    }
+  ],
+  "variables": []
+}

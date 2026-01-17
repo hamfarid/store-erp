@@ -1,0 +1,110 @@
+# FILE: .github/workflows/pages.yml | PURPOSE: Publish docs/ to GitHub Pages | OWNER: DevOps | RELATED: docs/ | LAST-AUDITED: 2025-10-21
+
+name: Publish Docs (GitHub Pages)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "docs/**"
+      - ".github/workflows/pages.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare static site from docs/
+        run: |
+          mkdir -p public
+          cp -r docs/* public/ || true
+          
+          # Create index.html if not exists
+          if [ ! -f public/index.html ]; then
+            cat > public/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="ar" dir="rtl">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Gaara ERP - Documentation</title>
+            <style>
+              body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+              h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+              ul { list-style: none; padding: 0; }
+              li { margin: 10px 0; }
+              a { color: #3498db; text-decoration: none; font-size: 18px; }
+              a:hover { text-decoration: underline; }
+              .section { margin: 30px 0; }
+            </style>
+          </head>
+          <body>
+            <h1>📚 Gaara ERP - Documentation</h1>
+            
+            <div class="section">
+              <h2>🔒 Security</h2>
+              <ul>
+                <li><a href="Security.md">Security.md</a> - Security posture & vulnerabilities</li>
+                <li><a href="Threat_Model.md">Threat_Model.md</a> - OWASP/STRIDE threat analysis</li>
+                <li><a href="CSP.md">CSP.md</a> - Content Security Policy</li>
+                <li><a href="Permissions_Model.md">Permissions_Model.md</a> - RBAC model</li>
+              </ul>
+            </div>
+            
+            <div class="section">
+              <h2>🏗️ Architecture</h2>
+              <ul>
+                <li><a href="Class_Registry.md">Class_Registry.md</a> - Canonical class registry</li>
+                <li><a href="DB_Schema.md">DB_Schema.md</a> - Database schema</li>
+                <li><a href="TechStack.md">TechStack.md</a> - Technology stack</li>
+                <li><a href="Inventory.md">Inventory.md</a> - System inventory</li>
+              </ul>
+            </div>
+            
+            <div class="section">
+              <h2>📡 API</h2>
+              <ul>
+                <li><a href="API_Contracts.md">API_Contracts.md</a> - API contracts</li>
+                <li><a href="Routes_BE.md">Routes_BE.md</a> - Backend routes</li>
+                <li><a href="Error_Catalog.md">Error_Catalog.md</a> - Error codes</li>
+              </ul>
+            </div>
+            
+            <div class="section">
+              <h2>📋 Operations</h2>
+              <ul>
+                <li><a href="Task_List.md">Task_List.md</a> - Task backlog</li>
+                <li><a href="Remediation_Plan.md">Remediation_Plan.md</a> - Fix roadmap</li>
+                <li><a href="Status_Report.md">Status_Report.md</a> - System status</li>
+              </ul>
+            </div>
+          </body>
+          </html>
+          EOF
+          fi
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+

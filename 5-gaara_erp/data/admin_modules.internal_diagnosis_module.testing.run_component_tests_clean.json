@@ -1,0 +1,118 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.testing.run_component_tests_clean",
+  "imports": [
+    "alerting_system",
+    "data_integrity_checker",
+    "datetime",
+    "error_detection_logging_engine",
+    "io",
+    "json",
+    "module_integration_verifier",
+    "os",
+    "performance_monitor",
+    "reporting_engine",
+    "requests",
+    "suggestion_engine",
+    "sys",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "_Resp",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MR",
+      "methods": [
+        "__init__",
+        "json"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "print_test_result",
+      "parameters": [
+        "component_name",
+        "test_case_id",
+        "status",
+        "notes"
+      ]
+    },
+    {
+      "name": "mock_execute_query",
+      "parameters": [
+        "q"
+      ]
+    },
+    {
+      "name": "mock_execute_query_ok",
+      "parameters": [
+        "q"
+      ]
+    },
+    {
+      "name": "mock_get",
+      "parameters": [
+        "url",
+        "timeout"
+      ]
+    },
+    {
+      "name": "_mock_exec",
+      "parameters": [
+        "q"
+      ]
+    },
+    {
+      "name": "mock_get_ver",
+      "parameters": [
+        "url",
+        "timeout",
+        "headers"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "status_code",
+        "elapsed_ms"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "status_code",
+        "json_data",
+        "text_data",
+        "elapsed_ms"
+      ]
+    },
+    {
+      "name": "json",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "BASE_DIR",
+    "COMPONENTS_PATH",
+    "component_name",
+    "component_name",
+    "component_name",
+    "component_name",
+    "dummy_log_path_errors",
+    "dummy_log_path_no_errors",
+    "dummy_log_path_missing",
+    "component_name",
+    "component_name",
+    "component_name"
+  ]
+}

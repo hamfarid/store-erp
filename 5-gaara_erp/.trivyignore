@@ -1,0 +1,45 @@
+# =============================================================================
+# Trivy Ignore File for Gaara ERP v12
+# =============================================================================
+# Add CVEs or packages to ignore during Trivy scans
+# Documentation: https://aquasecurity.github.io/trivy/latest/docs/scanner/vulnerability/#by-trivyignore
+# =============================================================================
+
+# Format:
+# CVE-XXXX-XXXXX                    # Ignore specific CVE
+# pkg:pypi/package-name@version     # Ignore specific package
+# pkg:npm/package-name              # Ignore npm package
+
+# -----------------------------------------------------------------------------
+# Known False Positives
+# -----------------------------------------------------------------------------
+# Add confirmed false positives here with justification
+
+# Example (remove if not applicable):
+# CVE-2023-XXXXX  # False positive: Not affected due to our usage pattern
+
+# -----------------------------------------------------------------------------
+# Accepted Risks (with documented justification)
+# -----------------------------------------------------------------------------
+# Add vulnerabilities that have been reviewed and accepted
+
+# Example (remove if not applicable):
+# CVE-2023-YYYYY  # Accepted risk: Internal tool only, no external exposure
+
+# -----------------------------------------------------------------------------
+# Development Dependencies Only
+# -----------------------------------------------------------------------------
+# Packages only used in development, not in production
+
+# Example:
+# pkg:pypi/pytest
+# pkg:npm/@types/node
+
+# -----------------------------------------------------------------------------
+# Pending Fix (with timeline)
+# -----------------------------------------------------------------------------
+# Vulnerabilities waiting for upstream fix
+
+# Example:
+# CVE-2023-ZZZZZ  # Waiting for django-filter 24.x release (ETA: Q1 2025)
+

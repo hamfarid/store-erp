@@ -1,0 +1,426 @@
+{
+  "module": "agricultural_modules.nurseries.models",
+  "imports": [
+    "django.conf",
+    "django.db"
+  ],
+  "classes": [
+    {
+      "name": "Nursery",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "location",
+        "area",
+        "manager",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "NurserySection",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "nursery",
+        "name",
+        "section_type",
+        "area",
+        "capacity",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PlantVariety",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "scientific_name",
+        "description",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "GrowthStage",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "order",
+        "plant_variety"
+      ]
+    },
+    {
+      "name": "ProductionBatch",
+      "methods": [
+        "save",
+        "__str__"
+      ],
+      "variables": [
+        "batch_identifier",
+        "plant_variety",
+        "nursery_section",
+        "start_date",
+        "initial_quantity",
+        "current_quantity",
+        "current_growth_stage",
+        "status_choices",
+        "status",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "BatchStageLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "production_batch",
+        "growth_stage",
+        "entry_date",
+        "exit_date",
+        "notes"
+      ]
+    },
+    {
+      "name": "NurseryActivityType",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description"
+      ]
+    },
+    {
+      "name": "NurseryActivity",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "activity_type",
+        "production_batch",
+        "nursery_batch",
+        "nursery_section",
+        "performed_by",
+        "date_performed",
+        "cost",
+        "notes",
+        "created_at"
+      ]
+    },
+    {
+      "name": "NurseryResource",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "resource_type_choices",
+        "resource_type",
+        "unit_of_measure",
+        "description"
+      ]
+    },
+    {
+      "name": "ActivityResourceUsage",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "nursery_activity",
+        "resource",
+        "quantity_used",
+        "cost"
+      ]
+    },
+    {
+      "name": "QualityCheck",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "production_batch",
+        "check_date",
+        "checked_by",
+        "overall_quality_choices",
+        "overall_quality",
+        "parameters_checked",
+        "notes",
+        "created_at"
+      ]
+    },
+    {
+      "name": "EnvironmentalLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "nursery_section",
+        "log_datetime",
+        "temperature",
+        "humidity",
+        "light_intensity",
+        "recorded_by",
+        "notes"
+      ]
+    },
+    {
+      "name": "NurserySite",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "nursery_type",
+        "total_area",
+        "designed_capacity",
+        "created_by"
+      ]
+    },
+    {
+      "name": "NurseryArea",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "nursery_site",
+        "name",
+        "area_size",
+        "capacity"
+      ]
+    },
+    {
+      "name": "PlantSpecies",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "scientific_name",
+        "species_type"
+      ]
+    },
+    {
+      "name": "NurseryBatch",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "plant_species",
+        "nursery_site",
+        "nursery_area",
+        "initial_quantity",
+        "current_quantity",
+        "entry_date",
+        "created_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

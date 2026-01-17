@@ -1,0 +1,52 @@
+{
+  "module": "admin_modules.reports.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "AIAgentUsageLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ANALYSIS_STATUS_CHOICES",
+        "id",
+        "user",
+        "agent_name",
+        "session_id",
+        "query_text",
+        "response_text",
+        "timestamp",
+        "analysis_status",
+        "is_within_scope",
+        "analysis_details",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

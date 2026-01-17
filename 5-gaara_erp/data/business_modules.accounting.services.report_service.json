@@ -1,0 +1,71 @@
+{
+  "module": "business_modules.accounting.services.report_service",
+  "imports": [
+    "datetime",
+    "django.db.models",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ReportService",
+      "methods": [
+        "generate_balance_sheet",
+        "generate_income_statement",
+        "generate_cash_flow_statement",
+        "generate_trial_balance",
+        "_get_account_balance_at_date",
+        "_get_account_balance_for_period"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "generate_balance_sheet",
+      "parameters": [
+        "company",
+        "date"
+      ]
+    },
+    {
+      "name": "generate_income_statement",
+      "parameters": [
+        "company",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "generate_cash_flow_statement",
+      "parameters": [
+        "company",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "generate_trial_balance",
+      "parameters": [
+        "company",
+        "date"
+      ]
+    },
+    {
+      "name": "_get_account_balance_at_date",
+      "parameters": [
+        "account",
+        "date"
+      ]
+    },
+    {
+      "name": "_get_account_balance_for_period",
+      "parameters": [
+        "account",
+        "start_date",
+        "end_date"
+      ]
+    }
+  ],
+  "variables": []
+}

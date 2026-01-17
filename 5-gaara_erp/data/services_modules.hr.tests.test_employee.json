@@ -1,0 +1,60 @@
+{
+  "module": "services_modules.hr.tests.test_employee",
+  "imports": [
+    "core_modules.companies.models",
+    "datetime",
+    "django.conf",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.department",
+    "models.employee",
+    "models.position"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_employee",
+        "test_unique_employee_number",
+        "test_unique_national_id",
+        "test_str_representation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_employee",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_employee_number",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_national_id",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_str_representation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

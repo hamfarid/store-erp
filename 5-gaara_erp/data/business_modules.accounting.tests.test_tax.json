@@ -1,0 +1,92 @@
+{
+  "module": "business_modules.accounting.tests.test_tax",
+  "imports": [
+    "core_modules.core.models",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "models.tax"
+  ],
+  "classes": [
+    {
+      "name": "TaxModelTest",
+      "methods": [
+        "setUp",
+        "test_create_tax",
+        "test_unique_code_per_company",
+        "test_compute_tax",
+        "test_calculate_base_amount",
+        "test_tax_group",
+        "test_compute_taxes",
+        "test_compute_total_taxes",
+        "test_compute_total_amount",
+        "test_create_tax_group"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_tax",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_tax",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_base_amount",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_tax_group",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_taxes",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_total_taxes",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_total_amount",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_tax_group",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

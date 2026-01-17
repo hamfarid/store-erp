@@ -1,0 +1,322 @@
+{
+  "module": "services_modules.hr.services",
+  "imports": [
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_employee",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "get_employee",
+      "parameters": [
+        "employee_id"
+      ]
+    },
+    {
+      "name": "update_employee",
+      "parameters": [
+        "employee_id",
+        "data"
+      ]
+    },
+    {
+      "name": "delete_employee",
+      "parameters": [
+        "employee_id"
+      ]
+    },
+    {
+      "name": "list_employees",
+      "parameters": [
+        "filters"
+      ]
+    },
+    {
+      "name": "create_contract",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "get_contract",
+      "parameters": [
+        "contract_id"
+      ]
+    },
+    {
+      "name": "update_contract",
+      "parameters": [
+        "contract_id",
+        "data"
+      ]
+    },
+    {
+      "name": "delete_contract",
+      "parameters": [
+        "contract_id"
+      ]
+    },
+    {
+      "name": "list_contracts",
+      "parameters": [
+        "filters"
+      ]
+    },
+    {
+      "name": "create_attendance_log",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "get_attendance_log",
+      "parameters": [
+        "log_id"
+      ]
+    },
+    {
+      "name": "update_attendance_log",
+      "parameters": [
+        "log_id",
+        "data"
+      ]
+    },
+    {
+      "name": "delete_attendance_log",
+      "parameters": [
+        "log_id"
+      ]
+    },
+    {
+      "name": "list_attendance_logs",
+      "parameters": [
+        "filters"
+      ]
+    },
+    {
+      "name": "calculate_working_hours",
+      "parameters": [
+        "employee_id",
+        "date"
+      ]
+    },
+    {
+      "name": "create_leave_type",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "get_leave_type",
+      "parameters": [
+        "leave_type_id"
+      ]
+    },
+    {
+      "name": "update_leave_type",
+      "parameters": [
+        "leave_type_id",
+        "data"
+      ]
+    },
+    {
+      "name": "delete_leave_type",
+      "parameters": [
+        "leave_type_id"
+      ]
+    },
+    {
+      "name": "list_leave_types",
+      "parameters": [
+        "filters"
+      ]
+    },
+    {
+      "name": "create_leave_request",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "get_leave_request",
+      "parameters": [
+        "request_id"
+      ]
+    },
+    {
+      "name": "update_leave_request",
+      "parameters": [
+        "request_id",
+        "data"
+      ]
+    },
+    {
+      "name": "delete_leave_request",
+      "parameters": [
+        "request_id"
+      ]
+    },
+    {
+      "name": "list_leave_requests",
+      "parameters": [
+        "filters"
+      ]
+    },
+    {
+      "name": "approve_leave_request",
+      "parameters": [
+        "request_id",
+        "approver_user"
+      ]
+    },
+    {
+      "name": "reject_leave_request",
+      "parameters": [
+        "request_id",
+        "rejector_user",
+        "reason"
+      ]
+    },
+    {
+      "name": "create_leave_balance",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "get_leave_balance",
+      "parameters": [
+        "employee_id",
+        "leave_type_id"
+      ]
+    },
+    {
+      "name": "update_leave_balance",
+      "parameters": [
+        "employee_id",
+        "leave_type_id",
+        "data"
+      ]
+    },
+    {
+      "name": "list_leave_balances",
+      "parameters": [
+        "employee_id",
+        "filters"
+      ]
+    },
+    {
+      "name": "adjust_leave_balance",
+      "parameters": [
+        "employee_id",
+        "leave_type_id",
+        "adjustment_amount",
+        "reason"
+      ]
+    },
+    {
+      "name": "calculate_and_update_leave_balance_on_request_approval",
+      "parameters": [
+        "leave_request"
+      ]
+    },
+    {
+      "name": "create_payroll_period",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "get_payroll_period",
+      "parameters": [
+        "period_id"
+      ]
+    },
+    {
+      "name": "update_payroll_period",
+      "parameters": [
+        "period_id",
+        "data"
+      ]
+    },
+    {
+      "name": "delete_payroll_period",
+      "parameters": [
+        "period_id"
+      ]
+    },
+    {
+      "name": "list_payroll_periods",
+      "parameters": [
+        "filters"
+      ]
+    },
+    {
+      "name": "create_payslip",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "get_payslip",
+      "parameters": [
+        "payslip_id"
+      ]
+    },
+    {
+      "name": "update_payslip",
+      "parameters": [
+        "payslip_id",
+        "data"
+      ]
+    },
+    {
+      "name": "delete_payslip",
+      "parameters": [
+        "payslip_id"
+      ]
+    },
+    {
+      "name": "list_payslips",
+      "parameters": [
+        "filters"
+      ]
+    },
+    {
+      "name": "add_payslip_line",
+      "parameters": [
+        "payslip_id",
+        "line_data"
+      ]
+    },
+    {
+      "name": "remove_payslip_line",
+      "parameters": [
+        "line_id"
+      ]
+    },
+    {
+      "name": "calculate_payslip_totals",
+      "parameters": [
+        "payslip_id"
+      ]
+    },
+    {
+      "name": "generate_payslips_for_period",
+      "parameters": [
+        "payroll_period_id",
+        "employee_ids"
+      ]
+    }
+  ],
+  "variables": []
+}

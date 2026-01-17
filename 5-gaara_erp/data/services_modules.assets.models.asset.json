@@ -1,0 +1,160 @@
+{
+  "module": "services_modules.assets.models.asset",
+  "imports": [
+    "asset_category",
+    "decimal",
+    "depreciation",
+    "django.contrib.auth",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "math",
+    "services_modules.accounting.models",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "Asset",
+      "methods": [
+        "__str__",
+        "save",
+        "get_current_value",
+        "get_accumulated_depreciation",
+        "get_remaining_life",
+        "get_depreciation_percentage",
+        "calculate_monthly_depreciation",
+        "mark_as_maintenance",
+        "mark_as_active",
+        "mark_as_inactive",
+        "dispose",
+        "get_maintenance_history",
+        "get_depreciation_schedule"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "name",
+        "code",
+        "company",
+        "branch",
+        "category",
+        "purchase_date",
+        "purchase_value",
+        "salvage_value",
+        "asset_account",
+        "depreciation_account",
+        "depreciation_method",
+        "useful_life",
+        "responsible_user",
+        "location",
+        "serial_number",
+        "model",
+        "manufacturer",
+        "status",
+        "disposal_date",
+        "disposal_value",
+        "disposal_reason",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_current_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_accumulated_depreciation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_remaining_life",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_depreciation_percentage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_monthly_depreciation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_maintenance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_inactive",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "dispose",
+      "parameters": [
+        "self",
+        "disposal_date",
+        "disposal_value",
+        "disposal_reason"
+      ]
+    },
+    {
+      "name": "get_maintenance_history",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_depreciation_schedule",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

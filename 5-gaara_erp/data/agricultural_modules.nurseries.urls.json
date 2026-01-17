@@ -1,0 +1,14 @@
+{
+  "module": "agricultural_modules.nurseries.urls",
+  "imports": [
+    "api_views",
+    "django.urls",
+    "rest_framework.routers"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "router",
+    "urlpatterns"
+  ]
+}

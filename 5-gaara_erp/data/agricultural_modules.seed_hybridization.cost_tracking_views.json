@@ -1,0 +1,222 @@
+{
+  "module": "agricultural_modules.seed_hybridization.cost_tracking_views",
+  "imports": [
+    "cost_tracking_models",
+    "cost_tracking_serializers",
+    "cost_tracking_services",
+    "django.db",
+    "django.utils",
+    "permissions",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response"
+  ],
+  "classes": [
+    {
+      "name": "HybridizationProjectViewSet",
+      "methods": [
+        "get_serializer_class",
+        "get_permissions",
+        "create",
+        "cost_summary",
+        "generate_cost_report",
+        "expenses",
+        "cost_reports"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "ExpenseCategoryViewSet",
+      "methods": [
+        "get_permissions"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "ExpenseViewSet",
+      "methods": [
+        "get_permissions",
+        "create",
+        "update_status"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "InventoryConsumptionViewSet",
+      "methods": [
+        "get_permissions",
+        "create"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "LaborCostViewSet",
+      "methods": [
+        "get_permissions",
+        "create"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "EquipmentUsageViewSet",
+      "methods": [
+        "get_permissions",
+        "create"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "CostSummaryReportViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_serializer_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "cost_summary",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "generate_cost_report",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "expenses",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "cost_reports",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "update_status",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

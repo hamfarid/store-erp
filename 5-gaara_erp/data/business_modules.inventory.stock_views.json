@@ -1,0 +1,73 @@
+{
+  "module": "business_modules.inventory.stock_views",
+  "imports": [
+    "compat",
+    "datetime",
+    "decimal",
+    "django.db",
+    "django.utils.translation",
+    "django_filters.rest_framework",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers",
+    "utils"
+  ],
+  "classes": [
+    {
+      "name": "InventoryStockViewSet",
+      "methods": [
+        "valuation"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "ordering_fields"
+      ]
+    },
+    {
+      "name": "InventoryTransactionViewSet",
+      "methods": [
+        "perform_transfer",
+        "perform_adjustment"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "valuation",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "perform_transfer",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "perform_adjustment",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

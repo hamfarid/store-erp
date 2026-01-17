@@ -1,0 +1,74 @@
+{
+  "module": "business_modules.purchasing.tests.test_integration",
+  "imports": [
+    "core_modules.accounting.models",
+    "core_modules.companies.models",
+    "core_modules.inventory.models",
+    "core_modules.purchasing.models",
+    "django.contrib.auth.models",
+    "django.contrib.contenttypes.models",
+    "django.test",
+    "django.urls",
+    "rest_framework",
+    "rest_framework.test"
+  ],
+  "classes": [
+    {
+      "name": "PurchasingIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_purchase_order_creation",
+        "test_goods_receipt_inventory_integration",
+        "test_supplier_invoice_accounting_integration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PurchasingPermissionsIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_purchase_order_permissions"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_purchase_order_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_goods_receipt_inventory_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_supplier_invoice_accounting_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_purchase_order_permissions",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

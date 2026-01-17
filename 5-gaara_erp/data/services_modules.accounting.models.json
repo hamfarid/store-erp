@@ -1,0 +1,34 @@
+{
+  "module": "services_modules.accounting.models",
+  "imports": [
+    "__future__",
+    "business_modules.accounting.models",
+    "business_modules.accounting.models.journal",
+    "django.db"
+  ],
+  "classes": [
+    {
+      "name": "AccountTypeManager",
+      "methods": [
+        "create"
+      ],
+      "variables": [
+        "LEGACY_MAP"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "Journal",
+    "JournalEntry",
+    "JournalEntryLine",
+    "__all__"
+  ]
+}

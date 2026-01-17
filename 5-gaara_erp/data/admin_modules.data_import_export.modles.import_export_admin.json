@@ -1,0 +1,131 @@
+{
+  "module": "admin_modules.data_import_export.modles.import_export_admin",
+  "imports": [
+    "datetime",
+    "django.contrib",
+    "django.db",
+    "django.http",
+    "django.shortcuts",
+    "django.urls",
+    "django.utils",
+    "django.utils.html",
+    "django.utils.translation",
+    "os",
+    "rest_framework",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "JobHistoryInline",
+      "methods": [
+        "has_add_permission"
+      ],
+      "variables": [
+        "fields",
+        "readonly_fields",
+        "extra",
+        "max_num",
+        "ordering"
+      ]
+    },
+    {
+      "name": "JobNotificationInline",
+      "methods": [
+        "has_add_permission"
+      ],
+      "variables": [
+        "fields",
+        "readonly_fields",
+        "extra",
+        "max_num"
+      ]
+    },
+    {
+      "name": "ImportJobAdmin",
+      "methods": [
+        "get_queryset",
+        "has_add_permission",
+        "has_change_permission",
+        "has_delete_permission"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "ExportJobAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "JobTemplateAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "fieldsets",
+        "readonly_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_add_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_add_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "has_add_permission",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "has_change_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_delete_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

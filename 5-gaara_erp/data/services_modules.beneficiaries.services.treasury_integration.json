@@ -1,0 +1,53 @@
+{
+  "module": "services_modules.beneficiaries.services.treasury_integration",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.utils",
+    "models",
+    "services_modules.accounting.models",
+    "services_modules.accounting.services"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "get_treasury_for_payment",
+      "parameters": [
+        "payment_session"
+      ]
+    },
+    {
+      "name": "withdraw_from_treasury",
+      "parameters": [
+        "payment_session"
+      ]
+    },
+    {
+      "name": "get_treasury_balance",
+      "parameters": []
+    },
+    {
+      "name": "get_treasury_transactions",
+      "parameters": [
+        "treasury_id",
+        "filters",
+        "page",
+        "page_size"
+      ]
+    },
+    {
+      "name": "validate_treasury_balance",
+      "parameters": [
+        "treasury_id"
+      ]
+    },
+    {
+      "name": "link_payment_to_treasury",
+      "parameters": [
+        "payment_record_id",
+        "treasury_transaction_id"
+      ]
+    }
+  ],
+  "variables": []
+}

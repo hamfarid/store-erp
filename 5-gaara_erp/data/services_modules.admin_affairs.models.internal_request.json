@@ -1,0 +1,114 @@
+{
+  "module": "services_modules.admin_affairs.models.internal_request",
+  "imports": [
+    "department",
+    "django.db",
+    "django.utils",
+    "employee_profile",
+    "internal_request_type"
+  ],
+  "classes": [
+    {
+      "name": "InternalRequest",
+      "methods": [
+        "__str__",
+        "submit",
+        "approve",
+        "reject",
+        "complete",
+        "cancel",
+        "assign",
+        "is_overdue",
+        "days_until_due"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "PRIORITY_CHOICES",
+        "request_number",
+        "request_type",
+        "title",
+        "description",
+        "requester",
+        "department",
+        "priority",
+        "status",
+        "submission_date",
+        "due_date",
+        "completion_date",
+        "assigned_to",
+        "rejection_reason",
+        "attachments",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "submit",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "approve",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "reject",
+      "parameters": [
+        "self",
+        "reason"
+      ]
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "assign",
+      "parameters": [
+        "self",
+        "employee"
+      ]
+    },
+    {
+      "name": "is_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "days_until_due",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

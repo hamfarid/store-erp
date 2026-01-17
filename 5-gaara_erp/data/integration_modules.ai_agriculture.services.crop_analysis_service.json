@@ -1,0 +1,94 @@
+{
+  "module": "integration_modules.ai_agriculture.services.crop_analysis_service",
+  "imports": [
+    "agricultural_modules.farms.models",
+    "ai.models",
+    "ai.services.model_service",
+    "django.db",
+    "django.utils",
+    "logging",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CropAnalysisService",
+      "methods": [
+        "analyze_crop_data",
+        "_perform_ai_analysis",
+        "get_crop_analysis",
+        "get_farm_analyses",
+        "generate_crop_recommendations",
+        "get_crop_recommendations"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SimpleFarm",
+      "methods": [
+        "__init__",
+        "__str__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "analyze_crop_data",
+      "parameters": [
+        "farm_id",
+        "crop_type",
+        "planting_date",
+        "harvest_date",
+        "environmental_data",
+        "soil_data"
+      ]
+    },
+    {
+      "name": "_perform_ai_analysis",
+      "parameters": [
+        "crop_analysis"
+      ]
+    },
+    {
+      "name": "get_crop_analysis",
+      "parameters": [
+        "analysis_id"
+      ]
+    },
+    {
+      "name": "get_farm_analyses",
+      "parameters": [
+        "farm_id",
+        "limit"
+      ]
+    },
+    {
+      "name": "generate_crop_recommendations",
+      "parameters": [
+        "analysis_id"
+      ]
+    },
+    {
+      "name": "get_crop_recommendations",
+      "parameters": [
+        "analysis_id"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "id"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "module": "admin_modules.custom_admin.forms",
+  "imports": [
+    "django",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SystemSettingsForm",
+      "methods": [
+        "__init__",
+        "save"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

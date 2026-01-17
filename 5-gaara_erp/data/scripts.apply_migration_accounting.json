@@ -1,0 +1,15 @@
+{
+  "module": "scripts.apply_migration_accounting",
+  "imports": [
+    "django",
+    "django.core.management",
+    "io",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "log"
+  ]
+}

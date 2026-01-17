@@ -1,0 +1,85 @@
+{
+  "module": "core_modules.permissions.simplified_tests",
+  "imports": [
+    "core_modules.permissions.authorization_service",
+    "core_modules.permissions.serializers",
+    "core_modules.permissions.unified_permissions_model",
+    "core_modules.permissions.viewsets",
+    "json",
+    "os",
+    "rest_framework",
+    "sys",
+    "unittest"
+  ],
+  "classes": [
+    {
+      "name": "PermissionModelSimpleTests",
+      "methods": [
+        "test_permission_attributes",
+        "test_role_attributes",
+        "test_group_attributes"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AuthorizationServiceSimpleTests",
+      "methods": [
+        "test_service_methods"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SerializersSimpleTests",
+      "methods": [
+        "test_serializers_existence"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ViewsSimpleTests",
+      "methods": [
+        "test_viewsets_existence"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "test_permission_attributes",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_attributes",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_group_attributes",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_service_methods",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_serializers_existence",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_viewsets_existence",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

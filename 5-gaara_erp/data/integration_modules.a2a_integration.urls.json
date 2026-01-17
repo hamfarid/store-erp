@@ -1,0 +1,12 @@
+{
+  "module": "integration_modules.a2a_integration.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns",
+    "app_name"
+  ]
+}

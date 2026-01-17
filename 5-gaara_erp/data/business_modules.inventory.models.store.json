@@ -1,0 +1,48 @@
+{
+  "module": "business_modules.inventory.models.store",
+  "imports": [
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Store",
+      "methods": [
+        "__str__",
+        "is_available"
+      ],
+      "variables": [
+        "name",
+        "location_description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_available",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

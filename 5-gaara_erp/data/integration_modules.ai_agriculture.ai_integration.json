@@ -1,0 +1,85 @@
+{
+  "module": "integration_modules.ai_agriculture.ai_integration",
+  "imports": [
+    "ai.services.model_service",
+    "ai.services.registry_service",
+    "ai_a2a.api.conversation_api",
+    "ai_a2a.api.coordinator_api",
+    "ai_a2a.api.permission_api",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "logging",
+    "memory.services.memory_service"
+  ],
+  "classes": [
+    {
+      "name": "AIAgricultureAIIntegration",
+      "methods": [
+        "register_with_central_ai",
+        "get_ai_model_for_task",
+        "store_analysis_in_memory",
+        "get_historical_analysis",
+        "create_conversation_with_agent",
+        "check_user_permissions",
+        "notify_ai_coordinator"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "register_with_central_ai",
+      "parameters": []
+    },
+    {
+      "name": "get_ai_model_for_task",
+      "parameters": [
+        "task_type"
+      ]
+    },
+    {
+      "name": "store_analysis_in_memory",
+      "parameters": [
+        "farm_id",
+        "crop_type",
+        "analysis_data"
+      ]
+    },
+    {
+      "name": "get_historical_analysis",
+      "parameters": [
+        "farm_id",
+        "crop_type",
+        "limit"
+      ]
+    },
+    {
+      "name": "create_conversation_with_agent",
+      "parameters": [
+        "farm_id",
+        "user_id",
+        "topic",
+        "initial_message"
+      ]
+    },
+    {
+      "name": "check_user_permissions",
+      "parameters": [
+        "user_id",
+        "action",
+        "resource_id"
+      ]
+    },
+    {
+      "name": "notify_ai_coordinator",
+      "parameters": [
+        "event_type",
+        "event_data"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

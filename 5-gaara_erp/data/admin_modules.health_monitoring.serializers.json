@@ -1,0 +1,79 @@
+{
+  "module": "admin_modules.health_monitoring.serializers",
+  "imports": [
+    "models",
+    "rest_framework",
+    "users_accounts.serializers"
+  ],
+  "classes": [
+    {
+      "name": "ServerMetricSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserActivityLogSerializer",
+      "methods": [],
+      "variables": [
+        "user"
+      ]
+    },
+    {
+      "name": "SystemEventLogSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "UserSerializer",
+      "methods": [
+        "create",
+        "update"
+      ],
+      "variables": [
+        "username"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "instance",
+        "validated_data"
+      ]
+    }
+  ],
+  "variables": []
+}

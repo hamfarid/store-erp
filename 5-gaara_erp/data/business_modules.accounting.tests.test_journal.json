@@ -1,0 +1,80 @@
+{
+  "module": "business_modules.accounting.tests.test_journal",
+  "imports": [
+    "core_modules.core.models",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.account",
+    "models.journal"
+  ],
+  "classes": [
+    {
+      "name": "JournalModelTest",
+      "methods": [
+        "setUp",
+        "test_create_journal",
+        "test_unique_code_per_company",
+        "test_create_journal_entry",
+        "test_post_journal_entry",
+        "test_unbalanced_entry",
+        "test_reverse_journal_entry",
+        "test_copy_journal_entry"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_journal",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_journal_entry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_post_journal_entry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unbalanced_entry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reverse_journal_entry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_copy_journal_entry",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

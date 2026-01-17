@@ -1,0 +1,20 @@
+{
+  "module": "business_modules.purchasing.models.purchase_invoice_status",
+  "imports": [
+    "django.db"
+  ],
+  "classes": [
+    {
+      "name": "PurchaseInvoiceStatus",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "CONFIRMED",
+        "PAID",
+        "CANCELLED"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

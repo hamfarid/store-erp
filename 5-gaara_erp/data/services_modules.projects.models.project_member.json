@@ -1,0 +1,46 @@
+{
+  "module": "services_modules.projects.models.project_member",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils.translation",
+    "project"
+  ],
+  "classes": [
+    {
+      "name": "ProjectMember",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ROLE_CHOICES",
+        "project",
+        "user",
+        "role",
+        "joined_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "module": "services_modules.beneficiaries.models.__init__",
+  "imports": [
+    "aid",
+    "aid_type",
+    "beneficiary",
+    "beneficiary_category",
+    "beneficiary_status"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

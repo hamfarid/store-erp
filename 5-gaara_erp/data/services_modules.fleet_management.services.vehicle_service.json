@@ -1,0 +1,85 @@
+{
+  "module": "services_modules.fleet_management.services.vehicle_service",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "VehicleService",
+      "methods": [
+        "create_vehicle",
+        "update_vehicle",
+        "delete_vehicle",
+        "search_vehicles",
+        "assign_vehicle_to_driver",
+        "get_vehicle_current_driver",
+        "get_driver_current_vehicle",
+        "update_vehicle_status"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_vehicle",
+      "parameters": [
+        "name",
+        "vehicle_type",
+        "license_plate"
+      ]
+    },
+    {
+      "name": "update_vehicle",
+      "parameters": [
+        "vehicle_id"
+      ]
+    },
+    {
+      "name": "delete_vehicle",
+      "parameters": [
+        "vehicle_id"
+      ]
+    },
+    {
+      "name": "search_vehicles",
+      "parameters": [
+        "query",
+        "vehicle_type",
+        "status"
+      ]
+    },
+    {
+      "name": "assign_vehicle_to_driver",
+      "parameters": [
+        "vehicle_id",
+        "driver_id",
+        "start_datetime",
+        "end_datetime",
+        "notes"
+      ]
+    },
+    {
+      "name": "get_vehicle_current_driver",
+      "parameters": [
+        "vehicle_id"
+      ]
+    },
+    {
+      "name": "get_driver_current_vehicle",
+      "parameters": [
+        "driver_id"
+      ]
+    },
+    {
+      "name": "update_vehicle_status",
+      "parameters": [
+        "vehicle_id",
+        "status"
+      ]
+    }
+  ],
+  "variables": []
+}

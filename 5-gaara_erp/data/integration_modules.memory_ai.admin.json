@@ -1,0 +1,10 @@
+{
+  "module": "integration_modules.memory_ai.admin",
+  "imports": [
+    "django.contrib",
+    "django.db"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

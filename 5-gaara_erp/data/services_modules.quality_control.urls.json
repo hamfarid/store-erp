@@ -1,0 +1,12 @@
+{
+  "module": "services_modules.quality_control.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "app_name",
+    "urlpatterns"
+  ]
+}

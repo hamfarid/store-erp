@@ -1,0 +1,16 @@
+{
+  "module": "analysis.logs.syntax_errors_analysis",
+  "imports": [
+    "ast",
+    "json",
+    "pathlib"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "analyze_syntax_errors",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

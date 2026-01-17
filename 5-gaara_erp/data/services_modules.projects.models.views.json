@@ -1,0 +1,48 @@
+{
+  "module": "services_modules.projects.models.views",
+  "imports": [
+    "django.db",
+    "permissions.drf_permissions",
+    "permissions.services",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeViewSet",
+      "methods": [
+        "get_queryset"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "ProjectViewSet",
+      "methods": [
+        "add_member"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "add_member",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

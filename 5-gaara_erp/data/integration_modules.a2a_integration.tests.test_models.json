@@ -1,0 +1,130 @@
+{
+  "module": "integration_modules.a2a_integration.tests.test_models",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ExternalSystemModelTest",
+      "methods": [
+        "setUp",
+        "test_external_system_creation",
+        "test_external_system_str"
+      ],
+      "variables": []
+    },
+    {
+      "name": "IntegrationConfigModelTest",
+      "methods": [
+        "setUp",
+        "test_integration_config_creation",
+        "test_integration_config_str"
+      ],
+      "variables": []
+    },
+    {
+      "name": "APICredentialModelTest",
+      "methods": [
+        "setUp",
+        "test_api_credential_creation",
+        "test_api_credential_str",
+        "test_is_token_valid"
+      ],
+      "variables": []
+    },
+    {
+      "name": "IntegrationLogModelTest",
+      "methods": [
+        "setUp",
+        "test_integration_log_creation",
+        "test_integration_log_str"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_external_system_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_external_system_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_config_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_config_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_api_credential_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_api_credential_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_token_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_log_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_log_str",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

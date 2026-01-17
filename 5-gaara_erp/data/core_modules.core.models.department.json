@@ -1,0 +1,54 @@
+{
+  "module": "core_modules.core.models.department",
+  "imports": [
+    "base_models",
+    "branch",
+    "company",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Department",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "branch",
+        "company",
+        "parent_department",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

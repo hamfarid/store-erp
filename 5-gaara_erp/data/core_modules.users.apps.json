@@ -1,0 +1,30 @@
+{
+  "module": "core_modules.users.apps",
+  "imports": [
+    "core_modules.users.signals",
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "UsersConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

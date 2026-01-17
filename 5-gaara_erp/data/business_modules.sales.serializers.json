@@ -1,0 +1,72 @@
+{
+  "module": "business_modules.sales.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "CustomerSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SalesInvoiceItemSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SalesInvoiceSerializer",
+      "methods": [],
+      "variables": [
+        "customer_name",
+        "items"
+      ]
+    },
+    {
+      "name": "SalesOrderSerializer",
+      "methods": [],
+      "variables": [
+        "customer_name"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

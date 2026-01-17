@@ -1,0 +1,160 @@
+{
+  "module": "business_modules.rent.tests.test_services",
+  "imports": [
+    "decimal",
+    "django.http",
+    "django.test",
+    "models",
+    "pytest"
+  ],
+  "classes": [
+    {
+      "name": "PropertyServiceTests",
+      "methods": [
+        "setUp",
+        "test_create_property_success",
+        "test_get_property_by_id_success",
+        "test_get_property_by_id_not_found",
+        "test_update_property_success",
+        "test_update_property_not_found",
+        "test_delete_property_success",
+        "test_delete_property_not_found"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PropertyUnitServiceTests",
+      "methods": [
+        "setUp",
+        "test_create_property_unit_success",
+        "test_create_property_unit_for_villa_fails",
+        "test_create_property_unit_invalid_property_id",
+        "test_get_property_unit_by_id_success",
+        "test_get_property_unit_by_id_not_found",
+        "test_update_property_unit_success",
+        "test_update_property_unit_change_property_fails",
+        "test_update_property_unit_not_found",
+        "test_delete_property_unit_success",
+        "test_delete_property_unit_not_found"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_property_success",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_property_by_id_success",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_property_by_id_not_found",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_property_success",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_property_not_found",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_delete_property_success",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_delete_property_not_found",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_property_unit_success",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_property_unit_for_villa_fails",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_property_unit_invalid_property_id",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_property_unit_by_id_success",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_property_unit_by_id_not_found",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_property_unit_success",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_property_unit_change_property_fails",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_property_unit_not_found",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_delete_property_unit_success",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_delete_property_unit_not_found",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,56 @@
+name: K6 Performance (Auth Flow)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'scripts/perf/**'
+      - '.github/workflows/perf_k6.yml'
+  workflow_dispatch:
+
+jobs:
+  k6-auth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: Start backend server
+        env:
+          ENVIRONMENT: development
+          PORT: 5001
+        run: |
+          nohup python backend/app.py > backend.log 2>&1 &
+          sleep 12
+          curl -sf http://127.0.0.1:5001/health || curl -sf http://127.0.0.1:5001/api/health || true
+
+      - name: Setup k6
+        uses: grafana/setup-k6-action@v1
+        with:
+          k6-version: v0.49.0
+
+      - name: Run k6 auth flow
+        env:
+          BASE_URL: http://127.0.0.1:5001
+          USERS: 10
+          DURATION: 30s
+          RAMP_UP: 10s
+        run: |
+          k6 run --summary-export k6-summary.json scripts/perf/k6_login.js
+
+      - name: Upload k6 summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: k6-summary
+          path: k6-summary.json
+

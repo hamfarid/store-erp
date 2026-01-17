@@ -1,0 +1,454 @@
+{
+  "module": "services_modules.board_management.models.board_meeting",
+  "imports": [
+    "board",
+    "board_member",
+    "calendar",
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.urls",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "BoardMeetingQuerySet",
+      "methods": [
+        "upcoming",
+        "past",
+        "today",
+        "completed",
+        "cancelled",
+        "in_progress",
+        "by_board",
+        "by_year",
+        "by_month",
+        "with_minutes",
+        "without_minutes"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BoardMeetingManager",
+      "methods": [
+        "get_queryset",
+        "upcoming",
+        "past",
+        "today",
+        "completed",
+        "create_recurring"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BoardMeeting",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "generate_meeting_number",
+        "get_duration_minutes",
+        "get_duration_display",
+        "is_completed",
+        "is_upcoming",
+        "is_today",
+        "is_past",
+        "is_quorum_met",
+        "get_attendees_count",
+        "get_present_count",
+        "get_absent_count",
+        "get_excused_count",
+        "get_attendance_rate",
+        "get_decisions_count",
+        "get_pending_decisions_count",
+        "can_start",
+        "can_complete",
+        "start_meeting",
+        "complete_meeting",
+        "cancel_meeting",
+        "postpone_meeting",
+        "send_reminder_notifications",
+        "get_absolute_url",
+        "get_statistics"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "MEETING_TYPE_CHOICES",
+        "LOCATION_TYPE_CHOICES",
+        "board",
+        "title",
+        "meeting_number",
+        "meeting_type",
+        "date",
+        "start_time",
+        "end_time",
+        "actual_start_time",
+        "actual_end_time",
+        "location",
+        "location_type",
+        "virtual_meeting_link",
+        "virtual_meeting_id",
+        "virtual_meeting_password",
+        "status",
+        "agenda",
+        "minutes",
+        "quorum_required",
+        "attendees",
+        "external_attendees",
+        "attachments",
+        "send_reminder",
+        "reminder_days_before",
+        "reminder_sent",
+        "is_recorded",
+        "recording_url",
+        "minutes_approved",
+        "minutes_approved_date",
+        "minutes_approved_by",
+        "notes",
+        "cancellation_reason",
+        "postponement_reason",
+        "new_date",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at",
+        "objects"
+      ]
+    },
+    {
+      "name": "MeetingAttendance",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ATTENDANCE_STATUS_CHOICES",
+        "meeting",
+        "member",
+        "attendance_status",
+        "arrival_time",
+        "departure_time",
+        "proxy_member",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes",
+        "unique_together",
+        "permissions"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "upcoming",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "past",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "today",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "cancelled",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "in_progress",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "by_board",
+      "parameters": [
+        "self",
+        "board"
+      ]
+    },
+    {
+      "name": "by_year",
+      "parameters": [
+        "self",
+        "year"
+      ]
+    },
+    {
+      "name": "by_month",
+      "parameters": [
+        "self",
+        "year",
+        "month"
+      ]
+    },
+    {
+      "name": "with_minutes",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "without_minutes",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "upcoming",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "past",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "today",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_recurring",
+      "parameters": [
+        "self",
+        "board",
+        "frequency",
+        "count"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "generate_meeting_number",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_duration_minutes",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_duration_display",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_upcoming",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_today",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_past",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_quorum_met",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_attendees_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_present_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_absent_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_excused_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_attendance_rate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_decisions_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_pending_decisions_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "can_start",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "can_complete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start_meeting",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "complete_meeting",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "cancel_meeting",
+      "parameters": [
+        "self",
+        "reason",
+        "user"
+      ]
+    },
+    {
+      "name": "postpone_meeting",
+      "parameters": [
+        "self",
+        "new_date",
+        "reason",
+        "user"
+      ]
+    },
+    {
+      "name": "send_reminder_notifications",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_absolute_url",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_statistics",
+      "parameters": [
+        "cls",
+        "board",
+        "year"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

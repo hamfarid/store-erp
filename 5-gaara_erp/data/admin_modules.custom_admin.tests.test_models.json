@@ -1,0 +1,79 @@
+{
+  "module": "admin_modules.custom_admin.tests.test_models",
+  "imports": [
+    "django.contrib.auth",
+    "django.test"
+  ],
+  "classes": [
+    {
+      "name": "DashboardModelsTest",
+      "methods": [
+        "test_placeholder"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CustomizationModelsTest",
+      "methods": [
+        "test_placeholder"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SystemSettingsModelsTest",
+      "methods": [
+        "test_placeholder"
+      ],
+      "variables": []
+    },
+    {
+      "name": "NotificationsModelsTest",
+      "methods": [
+        "test_placeholder"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BackupRestoreModelsTest",
+      "methods": [
+        "test_placeholder"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "test_placeholder",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_placeholder",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_placeholder",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_placeholder",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_placeholder",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

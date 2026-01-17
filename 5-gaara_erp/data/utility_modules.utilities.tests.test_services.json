@@ -1,0 +1,9 @@
+{
+  "module": "utility_modules.utilities.tests.test_services",
+  "imports": [
+    "django.test"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

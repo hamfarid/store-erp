@@ -1,0 +1,71 @@
+{
+  "module": "integration_modules.ai.models.enhanced_ai_models",
+  "imports": [
+    "additional_models",
+    "datetime",
+    "detection_models",
+    "django.db",
+    "pydantic",
+    "sys",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "EnhancedDiagnosisRequest",
+      "methods": [],
+      "variables": [
+        "image_path",
+        "crop_type",
+        "user_id",
+        "request_id"
+      ]
+    },
+    {
+      "name": "DiseaseInfo",
+      "methods": [],
+      "variables": [
+        "name",
+        "scientific_name",
+        "description",
+        "symptoms",
+        "treatment_recommendations",
+        "prevention_tips",
+        "severity_level",
+        "affected_parts"
+      ]
+    },
+    {
+      "name": "EnhancedDiagnosisResponse",
+      "methods": [],
+      "variables": [
+        "request_id",
+        "diagnosis_id",
+        "image_path",
+        "timestamp",
+        "model_used",
+        "detected_disease",
+        "confidence_score",
+        "alternative_diagnoses",
+        "is_healthy",
+        "processing_time_ms",
+        "error_message",
+        "status"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_enhanced_models",
+      "parameters": []
+    },
+    {
+      "name": "get_enhanced_model",
+      "parameters": [
+        "name"
+      ]
+    }
+  ],
+  "variables": [
+    "_enhanced_models"
+  ]
+}

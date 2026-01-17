@@ -1,0 +1,10 @@
+{
+  "module": "agricultural_modules.production.analytics.__init__",
+  "imports": [
+    "importlib",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

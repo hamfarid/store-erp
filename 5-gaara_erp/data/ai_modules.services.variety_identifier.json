@@ -1,0 +1,52 @@
+{
+  "module": "ai_modules.services.variety_identifier",
+  "imports": [
+    "PIL",
+    "logging",
+    "os",
+    "sys",
+    "time",
+    "torch",
+    "torchvision",
+    "traceback"
+  ],
+  "classes": [
+    {
+      "name": "VarietyIdentifier",
+      "methods": [
+        "__init__",
+        "_load_model",
+        "identify"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "model_name",
+        "device"
+      ]
+    },
+    {
+      "name": "_load_model",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "identify",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "handler",
+    "formatter"
+  ]
+}

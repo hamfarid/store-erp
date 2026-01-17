@@ -1,0 +1,12 @@
+{
+  "module": "core_modules.companies.urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "app_name",
+    "urlpatterns"
+  ]
+}

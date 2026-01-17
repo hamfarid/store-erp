@@ -1,0 +1,104 @@
+{
+  "module": "business_modules.accounting.tests.test_settlement_integration",
+  "imports": [
+    "business_modules.accounting.models.settlement",
+    "business_modules.accounting.services.settlement_service",
+    "business_modules.accounting.views.integration_api",
+    "business_modules.contacts.models",
+    "business_modules.contacts.services",
+    "business_modules.purchasing.models",
+    "business_modules.sales.models",
+    "decimal",
+    "django.contrib.auth",
+    "django.utils",
+    "pytest"
+  ],
+  "classes": [
+    {
+      "name": "TestSettlementIntegration",
+      "methods": [
+        "test_create_settlement",
+        "test_confirm_settlement",
+        "test_cancel_settlement",
+        "test_parent_child_contact_settlement"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "test_user",
+      "parameters": []
+    },
+    {
+      "name": "dual_contact",
+      "parameters": []
+    },
+    {
+      "name": "parent_contact",
+      "parameters": []
+    },
+    {
+      "name": "child_contact",
+      "parameters": [
+        "parent_contact"
+      ]
+    },
+    {
+      "name": "sales_invoice",
+      "parameters": [
+        "dual_contact",
+        "test_user"
+      ]
+    },
+    {
+      "name": "purchase_invoice",
+      "parameters": [
+        "dual_contact",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_create_settlement",
+      "parameters": [
+        "self",
+        "dual_contact",
+        "sales_invoice",
+        "purchase_invoice",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_confirm_settlement",
+      "parameters": [
+        "self",
+        "dual_contact",
+        "sales_invoice",
+        "purchase_invoice",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_cancel_settlement",
+      "parameters": [
+        "self",
+        "dual_contact",
+        "sales_invoice",
+        "purchase_invoice",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_parent_child_contact_settlement",
+      "parameters": [
+        "self",
+        "parent_contact",
+        "child_contact",
+        "test_user"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

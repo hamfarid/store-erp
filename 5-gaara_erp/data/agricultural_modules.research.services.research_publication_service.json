@@ -1,0 +1,78 @@
+{
+  "module": "agricultural_modules.research.services.research_publication_service",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ResearchPublicationService",
+      "methods": [
+        "create_publication",
+        "update_publication",
+        "get_publication",
+        "get_publications",
+        "change_publication_status",
+        "add_author",
+        "remove_author"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_publication",
+      "parameters": [
+        "data",
+        "created_by"
+      ]
+    },
+    {
+      "name": "update_publication",
+      "parameters": [
+        "publication_id",
+        "data",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "get_publication",
+      "parameters": [
+        "publication_id"
+      ]
+    },
+    {
+      "name": "get_publications",
+      "parameters": [
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "change_publication_status",
+      "parameters": [
+        "publication_id",
+        "new_status",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "add_author",
+      "parameters": [
+        "publication_id",
+        "author_data"
+      ]
+    },
+    {
+      "name": "remove_author",
+      "parameters": [
+        "publication_id",
+        "researcher_id"
+      ]
+    }
+  ],
+  "variables": []
+}

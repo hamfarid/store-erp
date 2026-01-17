@@ -1,0 +1,243 @@
+{
+  "module": "business_modules.accounting.installments",
+  "imports": [
+    "business_modules.contacts.models",
+    "business_modules.inventory.models",
+    "core_modules.organization.models",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "invoices"
+  ],
+  "classes": [
+    {
+      "name": "InstallmentFrequency",
+      "methods": [],
+      "variables": [
+        "WEEKLY",
+        "MONTHLY",
+        "QUARTERLY",
+        "ANNUALLY"
+      ]
+    },
+    {
+      "name": "InstallmentPlanTemplate",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "company",
+        "name",
+        "product",
+        "number_of_installments",
+        "frequency",
+        "requires_down_payment",
+        "down_payment_percentage",
+        "down_payment_fixed_amount",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "InstallmentPlan",
+      "methods": [
+        "__str__",
+        "save",
+        "check_completion_status"
+      ],
+      "variables": [
+        "company",
+        "customer",
+        "sales_invoice",
+        "template",
+        "total_amount",
+        "down_payment_amount",
+        "installment_amount_total",
+        "number_of_installments",
+        "frequency",
+        "start_date",
+        "status",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "InstallmentSchedule",
+      "methods": [
+        "__str__",
+        "is_overdue",
+        "remaining_due",
+        "save"
+      ],
+      "variables": [
+        "plan",
+        "installment_number",
+        "due_date",
+        "amount_due",
+        "amount_paid",
+        "penalty_applied",
+        "status",
+        "payment_date",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "LatePaymentPolicy",
+      "methods": [
+        "__str__",
+        "calculate_penalty"
+      ],
+      "variables": [
+        "company",
+        "name",
+        "product",
+        "penalty_type",
+        "penalty_value",
+        "grace_period_days",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "PlanStatus",
+      "methods": [],
+      "variables": [
+        "ACTIVE",
+        "COMPLETED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "ScheduleStatus",
+      "methods": [],
+      "variables": [
+        "PENDING",
+        "PAID",
+        "OVERDUE",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "PenaltyType",
+      "methods": [],
+      "variables": [
+        "FIXED_AMOUNT",
+        "PERCENTAGE_OVERDUE",
+        "PERCENTAGE_TOTAL"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_completion_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "remaining_due",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_penalty",
+      "parameters": [
+        "self",
+        "installment_schedule"
+      ]
+    }
+  ],
+  "variables": []
+}

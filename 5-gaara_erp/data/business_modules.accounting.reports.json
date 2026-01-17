@@ -1,0 +1,112 @@
+{
+  "module": "business_modules.accounting.reports",
+  "imports": [
+    "__future__",
+    "business_modules.accounting.models.settlement",
+    "business_modules.contacts.models",
+    "business_modules.purchasing.models",
+    "business_modules.sales.models",
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "UnifiedFinancialReports",
+      "methods": [
+        "_prepare_date_filter",
+        "get_parent_child_financial_summary",
+        "_get_sales_data",
+        "_get_purchases_data",
+        "_get_settlement_data",
+        "_calculate_net_balance",
+        "get_settlement_opportunities_report",
+        "_serialize_invoices",
+        "get_settlement_history_report"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SettlementStatus",
+      "methods": [],
+      "variables": [
+        "CONFIRMED"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "_prepare_date_filter",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "date_field"
+      ]
+    },
+    {
+      "name": "get_parent_child_financial_summary",
+      "parameters": [
+        "contact_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "_get_sales_data",
+      "parameters": [
+        "contact",
+        "child_contacts",
+        "date_filter"
+      ]
+    },
+    {
+      "name": "_get_purchases_data",
+      "parameters": [
+        "contact",
+        "child_contacts",
+        "date_filter"
+      ]
+    },
+    {
+      "name": "_get_settlement_data",
+      "parameters": [
+        "contact",
+        "child_contacts",
+        "date_filter"
+      ]
+    },
+    {
+      "name": "_calculate_net_balance",
+      "parameters": [
+        "sales_data",
+        "purchases_data"
+      ]
+    },
+    {
+      "name": "get_settlement_opportunities_report",
+      "parameters": [
+        "contact_id"
+      ]
+    },
+    {
+      "name": "_serialize_invoices",
+      "parameters": [
+        "invoices",
+        "invoice_type"
+      ]
+    },
+    {
+      "name": "get_settlement_history_report",
+      "parameters": [
+        "contact_id",
+        "start_date",
+        "end_date"
+      ]
+    }
+  ],
+  "variables": []
+}

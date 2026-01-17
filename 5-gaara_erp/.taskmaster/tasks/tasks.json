@@ -1,0 +1,696 @@
+{
+  "meta": {
+    "projectName": "Gaara ERP v12",
+    "version": "12.0.0",
+    "generatedAt": "2026-01-16T09:50:00Z",
+    "totalTasks": 40,
+    "phases": 5,
+    "estimatedDuration": "8 weeks",
+    "requirements": {
+      "mfa": "all",
+      "jwt": "1h",
+      "password": "strong",
+      "tenant": "schema_based",
+      "accounting": "IFRS+GAAP",
+      "currency": "multi",
+      "ai": "external_allowed",
+      "deployment": "both"
+    }
+  },
+  "tags": {
+  "master": {
+      "createdAt": "2026-01-16T09:50:00Z",
+      "description": "Main task list for Gaara ERP v12"
+    }
+  },
+  "tasks": {
+    "master": [
+      {
+        "id": 1,
+        "title": "JWT Configuration (1h access / 24h refresh)",
+        "description": "Configure JWT tokens with 1-hour access and 24-hour refresh lifetime",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 1,
+        "dependencies": [],
+        "details": "Update SIMPLE_JWT settings with ACCESS_TOKEN_LIFETIME=1h, REFRESH_TOKEN_LIFETIME=24h, enable rotation and blacklist",
+        "testStrategy": "Test token generation, expiration, and refresh flow",
+        "subtasks": [
+          {"id": "1.1", "title": "Update SIMPLE_JWT settings in base.py", "status": "pending"},
+          {"id": "1.2", "title": "Implement token refresh endpoint", "status": "pending"},
+          {"id": "1.3", "title": "Add token blacklist on rotation", "status": "pending"},
+          {"id": "1.4", "title": "Write unit tests for JWT flow", "status": "pending"}
+        ]
+      },
+      {
+        "id": 2,
+        "title": "MFA - SMS OTP Implementation",
+        "description": "Implement SMS-based one-time password authentication",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 1,
+        "dependencies": [1],
+        "details": "Create SMS OTP service with Twilio integration, 6-digit codes, 5-minute expiry",
+        "testStrategy": "Test OTP generation, delivery, and verification",
+        "subtasks": [
+          {"id": "2.1", "title": "Create SMS provider service (Twilio)", "status": "pending"},
+          {"id": "2.2", "title": "Implement OTP generation and storage", "status": "pending"},
+          {"id": "2.3", "title": "Create SMS verification endpoint", "status": "pending"},
+          {"id": "2.4", "title": "Add rate limiting for SMS requests", "status": "pending"}
+        ]
+      },
+      {
+        "id": 3,
+        "title": "MFA - TOTP Implementation (Google Authenticator)",
+        "description": "Implement time-based OTP using authenticator apps",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 1,
+        "dependencies": [1],
+        "details": "Implement TOTP with pyotp library, QR code generation, backup codes",
+        "testStrategy": "Test TOTP setup, verification, and backup codes",
+        "subtasks": [
+          {"id": "3.1", "title": "Install and configure pyotp", "status": "pending"},
+          {"id": "3.2", "title": "Create TOTP secret generation", "status": "pending"},
+          {"id": "3.3", "title": "Implement QR code generation for setup", "status": "pending"},
+          {"id": "3.4", "title": "Generate backup codes", "status": "pending"},
+          {"id": "3.5", "title": "Create TOTP verification endpoint", "status": "pending"}
+        ]
+      },
+      {
+        "id": 4,
+        "title": "MFA - Email OTP Implementation",
+        "description": "Implement email-based one-time password authentication",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 1,
+        "dependencies": [1],
+        "details": "Create email OTP service with 6-digit codes, 10-minute expiry, resend functionality",
+        "testStrategy": "Test OTP email delivery and verification",
+        "subtasks": [
+          {"id": "4.1", "title": "Create email service for OTP delivery", "status": "pending"},
+          {"id": "4.2", "title": "Design OTP email template (Arabic)", "status": "pending"},
+          {"id": "4.3", "title": "Implement email verification endpoint", "status": "pending"},
+          {"id": "4.4", "title": "Add resend with cooldown", "status": "pending"}
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Password Policy (Strong - 12+ chars)",
+        "description": "Implement strong password policy validation",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 1,
+        "dependencies": [],
+        "details": "12+ characters, uppercase, lowercase, number, special character required",
+        "testStrategy": "Test various password combinations",
+        "subtasks": [
+          {"id": "5.1", "title": "Update AUTH_PASSWORD_VALIDATORS", "status": "pending"},
+          {"id": "5.2", "title": "Create custom password validator", "status": "pending"},
+          {"id": "5.3", "title": "Add password strength indicator (frontend)", "status": "pending"}
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Rate Limiting per Tenant",
+        "description": "Implement per-tenant rate limiting for API endpoints",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 1,
+        "dependencies": [7],
+        "details": "Use django-ratelimit with tenant-aware keys, Redis backend",
+        "testStrategy": "Test rate limit enforcement and tenant isolation",
+        "subtasks": [
+          {"id": "6.1", "title": "Configure django-ratelimit", "status": "pending"},
+          {"id": "6.2", "title": "Implement tenant-aware rate keys", "status": "pending"},
+          {"id": "6.3", "title": "Add rate limit headers to responses", "status": "pending"}
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Multi-tenant Models",
+        "description": "Create core multi-tenant data models",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 1,
+        "dependencies": [],
+        "details": "Tenant, TenantUser, TenantSettings, TenantPlan models with schema-based isolation",
+        "testStrategy": "Test tenant creation and schema isolation",
+        "subtasks": [
+          {"id": "7.1", "title": "Create Tenant model", "status": "pending"},
+          {"id": "7.2", "title": "Create TenantUser model", "status": "pending"},
+          {"id": "7.3", "title": "Create TenantSettings model", "status": "pending"},
+          {"id": "7.4", "title": "Create TenantPlan model", "status": "pending"},
+          {"id": "7.5", "title": "Run migrations", "status": "pending"}
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Schema Middleware",
+        "description": "Implement automatic PostgreSQL schema routing",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 1,
+        "dependencies": [7],
+        "details": "Middleware to automatically set schema search path based on tenant",
+        "testStrategy": "Test schema isolation between tenants",
+        "subtasks": [
+          {"id": "8.1", "title": "Create TenantMiddleware class", "status": "pending"},
+          {"id": "8.2", "title": "Implement schema search path setting", "status": "pending"},
+          {"id": "8.3", "title": "Handle public schema for shared data", "status": "pending"},
+          {"id": "8.4", "title": "Add schema creation on tenant signup", "status": "pending"}
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Tenant Router",
+        "description": "Implement multi-method tenant identification",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 1,
+        "dependencies": [7, 8],
+        "details": "Support subdomain, custom domain, and header-based tenant identification",
+        "testStrategy": "Test all identification methods",
+        "subtasks": [
+          {"id": "9.1", "title": "Implement subdomain detection", "status": "pending"},
+          {"id": "9.2", "title": "Implement custom domain lookup", "status": "pending"},
+          {"id": "9.3", "title": "Implement X-Tenant-ID header support", "status": "pending"},
+          {"id": "9.4", "title": "Add fallback chain", "status": "pending"}
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Accounting IFRS/GAAP Setup",
+        "description": "Configure dual accounting standards support",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 2,
+        "dependencies": [7],
+        "details": "Chart of accounts templates for IFRS and GAAP, per-tenant standard selection",
+        "testStrategy": "Test account creation under both standards",
+        "subtasks": [
+          {"id": "10.1", "title": "Create IFRS chart of accounts template", "status": "pending"},
+          {"id": "10.2", "title": "Create GAAP chart of accounts template", "status": "pending"},
+          {"id": "10.3", "title": "Add accounting standard field to TenantSettings", "status": "pending"},
+          {"id": "10.4", "title": "Implement account initialization on tenant creation", "status": "pending"}
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Multi-currency Support",
+        "description": "Implement full multi-currency accounting",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 2,
+        "dependencies": [10],
+        "details": "Currency model, exchange rates, automatic conversions, SAR as base",
+        "testStrategy": "Test currency conversions and reporting",
+        "subtasks": [
+          {"id": "11.1", "title": "Create Currency model", "status": "pending"},
+          {"id": "11.2", "title": "Create ExchangeRate model with history", "status": "pending"},
+          {"id": "11.3", "title": "Implement exchange rate API integration", "status": "pending"},
+          {"id": "11.4", "title": "Add currency conversion utilities", "status": "pending"},
+          {"id": "11.5", "title": "Update journal entries for multi-currency", "status": "pending"}
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Unit Test Suite",
+        "description": "Create comprehensive unit tests for all modules",
+        "status": "pending",
+        "priority": "critical",
+        "phase": 5,
+        "dependencies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "details": "80%+ coverage target, all models, views, and utilities",
+        "testStrategy": "Run coverage report",
+        "subtasks": [
+          {"id": "12.1", "title": "Security module tests", "status": "pending"},
+          {"id": "12.2", "title": "Multi-tenant tests", "status": "pending"},
+          {"id": "12.3", "title": "Accounting tests", "status": "pending"},
+          {"id": "12.4", "title": "MFA tests", "status": "pending"}
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Session Security Hardening",
+        "description": "Implement advanced session security measures",
+        "status": "pending",
+        "priority": "high",
+        "phase": 1,
+        "dependencies": [1],
+        "details": "Session hijacking protection, concurrent session limits, device tracking",
+        "testStrategy": "Test session security scenarios",
+        "subtasks": [
+          {"id": "13.1", "title": "Implement IP binding", "status": "pending"},
+          {"id": "13.2", "title": "Add user agent validation", "status": "pending"},
+          {"id": "13.3", "title": "Limit concurrent sessions (max 5)", "status": "pending"},
+          {"id": "13.4", "title": "Add session revocation on logout", "status": "pending"}
+        ]
+      },
+      {
+        "id": 14,
+        "title": "Tenant Admin UI",
+        "description": "Create admin interface for tenant management",
+        "status": "pending",
+        "priority": "high",
+        "phase": 1,
+        "dependencies": [7, 8, 9],
+        "details": "Django admin customization for tenant CRUD, plan management",
+        "testStrategy": "Test admin operations",
+        "subtasks": [
+          {"id": "14.1", "title": "Create TenantAdmin class", "status": "pending"},
+          {"id": "14.2", "title": "Add inline TenantSettings", "status": "pending"},
+          {"id": "14.3", "title": "Add tenant user management", "status": "pending"}
+        ]
+      },
+      {
+        "id": 15,
+        "title": "Journal Entries System",
+        "description": "Implement double-entry journal entries",
+        "status": "pending",
+        "priority": "high",
+        "phase": 2,
+        "dependencies": [10, 11],
+        "details": "JournalEntry, JournalLine models with debit/credit validation",
+        "testStrategy": "Test balanced entries and posting",
+        "subtasks": [
+          {"id": "15.1", "title": "Create JournalEntry model", "status": "pending"},
+          {"id": "15.2", "title": "Create JournalLine model", "status": "pending"},
+          {"id": "15.3", "title": "Implement balance validation", "status": "pending"},
+          {"id": "15.4", "title": "Add posting workflow", "status": "pending"}
+        ]
+      },
+      {
+        "id": 16,
+        "title": "Financial Reports",
+        "description": "Create standard financial reports",
+        "status": "pending",
+        "priority": "high",
+        "phase": 2,
+        "dependencies": [15],
+        "details": "Trial Balance, Income Statement, Balance Sheet with multi-currency",
+        "testStrategy": "Validate report accuracy",
+        "subtasks": [
+          {"id": "16.1", "title": "Implement Trial Balance report", "status": "pending"},
+          {"id": "16.2", "title": "Implement Income Statement (P&L)", "status": "pending"},
+          {"id": "16.3", "title": "Implement Balance Sheet", "status": "pending"},
+          {"id": "16.4", "title": "Add multi-currency conversion in reports", "status": "pending"}
+        ]
+      },
+      {
+        "id": 17,
+        "title": "Inventory Management",
+        "description": "Complete inventory management system",
+        "status": "pending",
+        "priority": "high",
+        "phase": 2,
+        "dependencies": [7],
+        "details": "Products, Warehouses, Stock movements, lot tracking",
+        "testStrategy": "Test stock movements and calculations",
+        "subtasks": [
+          {"id": "17.1", "title": "Verify Product model completeness", "status": "pending"},
+          {"id": "17.2", "title": "Verify Warehouse and Location models", "status": "pending"},
+          {"id": "17.3", "title": "Implement stock movement service", "status": "pending"},
+          {"id": "17.4", "title": "Add lot/batch tracking", "status": "pending"}
+        ]
+      },
+      {
+        "id": 18,
+        "title": "Sales Orders",
+        "description": "Implement sales order processing",
+        "status": "pending",
+        "priority": "high",
+        "phase": 2,
+        "dependencies": [17],
+        "details": "Sales orders with multi-currency, tax calculations, approval workflow",
+        "testStrategy": "Test order lifecycle",
+        "subtasks": [
+          {"id": "18.1", "title": "Create SalesOrder model", "status": "pending"},
+          {"id": "18.2", "title": "Create SalesOrderLine model", "status": "pending"},
+          {"id": "18.3", "title": "Implement order workflow", "status": "pending"},
+          {"id": "18.4", "title": "Add tax calculation", "status": "pending"}
+        ]
+      },
+      {
+        "id": 19,
+        "title": "Sales Invoices",
+        "description": "Implement sales invoicing",
+        "status": "pending",
+        "priority": "high",
+        "phase": 2,
+        "dependencies": [18],
+        "details": "Invoice generation from orders, payment tracking",
+        "testStrategy": "Test invoice creation and payment",
+        "subtasks": [
+          {"id": "19.1", "title": "Create SalesInvoice model", "status": "pending"},
+          {"id": "19.2", "title": "Link invoices to journal entries", "status": "pending"},
+          {"id": "19.3", "title": "Implement payment recording", "status": "pending"}
+        ]
+      },
+      {
+        "id": 20,
+        "title": "Purchase Orders",
+        "description": "Implement purchase order processing",
+        "status": "pending",
+        "priority": "high",
+        "phase": 2,
+        "dependencies": [17],
+        "details": "PO creation, approval, GRN, vendor invoice matching",
+        "testStrategy": "Test PO lifecycle",
+        "subtasks": [
+          {"id": "20.1", "title": "Create PurchaseOrder model", "status": "pending"},
+          {"id": "20.2", "title": "Create GoodsReceivedNote model", "status": "pending"},
+          {"id": "20.3", "title": "Implement three-way matching", "status": "pending"}
+        ]
+      },
+      {
+        "id": 21,
+        "title": "AI Service Layer",
+        "description": "Create unified AI service with provider abstraction",
+        "status": "pending",
+        "priority": "high",
+        "phase": 3,
+        "dependencies": [7],
+        "details": "OpenAI primary, graceful fallback, logging",
+        "testStrategy": "Test AI calls and fallback",
+        "subtasks": [
+          {"id": "21.1", "title": "Create AIService base class", "status": "pending"},
+          {"id": "21.2", "title": "Implement OpenAI provider", "status": "pending"},
+          {"id": "21.3", "title": "Implement fallback mechanism", "status": "pending"},
+          {"id": "21.4", "title": "Add request/response logging", "status": "pending"}
+        ]
+      },
+      {
+        "id": 22,
+        "title": "AI Usage Tracking",
+        "description": "Track AI API usage per tenant",
+        "status": "pending",
+        "priority": "high",
+        "phase": 3,
+        "dependencies": [21],
+        "details": "Track API calls, tokens, costs per tenant",
+        "testStrategy": "Verify usage tracking accuracy",
+        "subtasks": [
+          {"id": "22.1", "title": "Create AIUsage model", "status": "pending"},
+          {"id": "22.2", "title": "Implement usage tracking middleware", "status": "pending"},
+          {"id": "22.3", "title": "Create usage dashboard widget", "status": "pending"}
+        ]
+      },
+      {
+        "id": 23,
+        "title": "AI Quota Limits",
+        "description": "Implement tiered AI usage limits",
+        "status": "pending",
+        "priority": "high",
+        "phase": 3,
+        "dependencies": [22],
+        "details": "Free/Basic/Pro/Enterprise tiers with configurable limits",
+        "testStrategy": "Test quota enforcement",
+        "subtasks": [
+          {"id": "23.1", "title": "Add quota fields to TenantPlan", "status": "pending"},
+          {"id": "23.2", "title": "Implement quota checking service", "status": "pending"},
+          {"id": "23.3", "title": "Add quota exceeded notifications", "status": "pending"}
+        ]
+      },
+      {
+        "id": 24,
+        "title": "Farm Management",
+        "description": "Complete farm management module",
+        "status": "pending",
+        "priority": "high",
+        "phase": 3,
+        "dependencies": [7],
+        "details": "Farms, plots, activities, crop tracking",
+        "testStrategy": "Test farm operations",
+        "subtasks": [
+          {"id": "24.1", "title": "Verify Farm model completeness", "status": "pending"},
+          {"id": "24.2", "title": "Verify Plot model completeness", "status": "pending"},
+          {"id": "24.3", "title": "Implement activity logging", "status": "pending"},
+          {"id": "24.4", "title": "Add crop tracking", "status": "pending"}
+        ]
+      },
+      {
+        "id": 25,
+        "title": "Plant Diagnosis",
+        "description": "AI-powered plant disease detection",
+        "status": "pending",
+        "priority": "high",
+        "phase": 3,
+        "dependencies": [21, 24],
+        "details": "Image upload, AI analysis, treatment recommendations",
+        "testStrategy": "Test diagnosis accuracy",
+        "subtasks": [
+          {"id": "25.1", "title": "Create diagnosis upload endpoint", "status": "pending"},
+          {"id": "25.2", "title": "Integrate AI vision model", "status": "pending"},
+          {"id": "25.3", "title": "Implement treatment database", "status": "pending"},
+          {"id": "25.4", "title": "Create diagnosis history", "status": "pending"}
+        ]
+      },
+      {
+        "id": 26,
+        "title": "HR Module",
+        "description": "Human resources management",
+        "status": "pending",
+        "priority": "high",
+        "phase": 4,
+        "dependencies": [7],
+        "details": "Employees, departments, attendance, leave management",
+        "testStrategy": "Test HR operations",
+        "subtasks": [
+          {"id": "26.1", "title": "Verify Employee model", "status": "pending"},
+          {"id": "26.2", "title": "Verify Department model", "status": "pending"},
+          {"id": "26.3", "title": "Implement attendance tracking", "status": "pending"},
+          {"id": "26.4", "title": "Implement leave management", "status": "pending"}
+        ]
+      },
+      {
+        "id": 27,
+        "title": "Project Management",
+        "description": "Project and task management",
+        "status": "pending",
+        "priority": "high",
+        "phase": 4,
+        "dependencies": [7],
+        "details": "Projects, tasks, timelines, resource allocation",
+        "testStrategy": "Test project operations",
+        "subtasks": [
+          {"id": "27.1", "title": "Create Project model", "status": "pending"},
+          {"id": "27.2", "title": "Create Task model", "status": "pending"},
+          {"id": "27.3", "title": "Implement Gantt chart data", "status": "pending"},
+          {"id": "27.4", "title": "Add resource allocation", "status": "pending"}
+        ]
+      },
+      {
+        "id": 28,
+        "title": "Integration Tests",
+        "description": "API integration test suite",
+        "status": "pending",
+        "priority": "high",
+        "phase": 5,
+        "dependencies": [12],
+        "details": "Test all API endpoints end-to-end",
+        "testStrategy": "100% endpoint coverage",
+        "subtasks": [
+          {"id": "28.1", "title": "Auth API tests", "status": "pending"},
+          {"id": "28.2", "title": "Tenant API tests", "status": "pending"},
+          {"id": "28.3", "title": "Business module API tests", "status": "pending"},
+          {"id": "28.4", "title": "AI API tests", "status": "pending"}
+        ]
+      },
+      {
+        "id": 29,
+        "title": "AI Fallback Implementation",
+        "description": "Graceful degradation when AI unavailable",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 3,
+        "dependencies": [21],
+        "details": "Cache responses, provide fallback messages, degrade gracefully",
+        "testStrategy": "Test fallback scenarios",
+        "subtasks": [
+          {"id": "29.1", "title": "Implement response caching", "status": "pending"},
+          {"id": "29.2", "title": "Create fallback responses", "status": "pending"},
+          {"id": "29.3", "title": "Add circuit breaker", "status": "pending"}
+        ]
+      },
+      {
+        "id": 30,
+        "title": "Agricultural Experiments",
+        "description": "Experiment tracking module",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 3,
+        "dependencies": [24],
+        "details": "Track agricultural experiments, results, reports",
+        "testStrategy": "Test experiment workflow",
+        "subtasks": [
+          {"id": "30.1", "title": "Create Experiment model", "status": "pending"},
+          {"id": "30.2", "title": "Create ExperimentResult model", "status": "pending"},
+          {"id": "30.3", "title": "Implement experiment reports", "status": "pending"}
+        ]
+      },
+      {
+        "id": 31,
+        "title": "Quality Control",
+        "description": "Quality control and inspection",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 4,
+        "dependencies": [17],
+        "details": "Inspections, NCRs, quality reports",
+        "testStrategy": "Test QC workflow",
+        "subtasks": [
+          {"id": "31.1", "title": "Create Inspection model", "status": "pending"},
+          {"id": "31.2", "title": "Create NCR model", "status": "pending"},
+          {"id": "31.3", "title": "Implement quality reports", "status": "pending"}
+        ]
+      },
+      {
+        "id": 32,
+        "title": "Dashboard Module",
+        "description": "Real-time dashboard with charts",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 4,
+        "dependencies": [7],
+        "details": "Customizable widgets, real-time data, charts",
+        "testStrategy": "Test dashboard data accuracy",
+        "subtasks": [
+          {"id": "32.1", "title": "Create dashboard API endpoints", "status": "pending"},
+          {"id": "32.2", "title": "Implement widget system", "status": "pending"},
+          {"id": "32.3", "title": "Add chart data providers", "status": "pending"}
+        ]
+      },
+      {
+        "id": 33,
+        "title": "Backup System",
+        "description": "Automated backup system",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 4,
+        "dependencies": [7],
+        "details": "Scheduled backups, per-tenant, restore capability",
+        "testStrategy": "Test backup and restore",
+        "subtasks": [
+          {"id": "33.1", "title": "Implement backup service", "status": "pending"},
+          {"id": "33.2", "title": "Add backup scheduling", "status": "pending"},
+          {"id": "33.3", "title": "Implement restore functionality", "status": "pending"}
+        ]
+      },
+      {
+        "id": 34,
+        "title": "Health Monitoring",
+        "description": "System health monitoring",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 4,
+        "dependencies": [],
+        "details": "Health checks, alerts, performance monitoring",
+        "testStrategy": "Verify monitoring accuracy",
+        "subtasks": [
+          {"id": "34.1", "title": "Create health check endpoints", "status": "pending"},
+          {"id": "34.2", "title": "Implement alert system", "status": "pending"},
+          {"id": "34.3", "title": "Add performance metrics", "status": "pending"}
+        ]
+      },
+      {
+        "id": 35,
+        "title": "E2E Test Suite",
+        "description": "End-to-end tests with Playwright",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 5,
+        "dependencies": [28],
+        "details": "Critical user flows, Arabic RTL, multi-tenant scenarios",
+        "testStrategy": "Test all critical paths",
+        "subtasks": [
+          {"id": "35.1", "title": "Login/logout flow tests", "status": "pending"},
+          {"id": "35.2", "title": "MFA flow tests", "status": "pending"},
+          {"id": "35.3", "title": "Business operation tests", "status": "pending"},
+          {"id": "35.4", "title": "Multi-tenant switching tests", "status": "pending"}
+        ]
+      },
+      {
+        "id": 36,
+        "title": "Docker Configuration",
+        "description": "Production Docker setup",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 5,
+        "dependencies": [],
+        "details": "docker-compose.prod.yml, multi-stage builds, optimization",
+        "testStrategy": "Build and deploy test",
+        "subtasks": [
+          {"id": "36.1", "title": "Create production Dockerfile", "status": "pending"},
+          {"id": "36.2", "title": "Create docker-compose.prod.yml", "status": "pending"},
+          {"id": "36.3", "title": "Add health checks", "status": "pending"}
+        ]
+      },
+      {
+        "id": 37,
+        "title": "Kubernetes Configuration",
+        "description": "Kubernetes deployment manifests",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 5,
+        "dependencies": [36],
+        "details": "Deployments, Services, Ingress, HPA",
+        "testStrategy": "Deploy to test cluster",
+        "subtasks": [
+          {"id": "37.1", "title": "Create deployment manifests", "status": "pending"},
+          {"id": "37.2", "title": "Create service manifests", "status": "pending"},
+          {"id": "37.3", "title": "Create ingress configuration", "status": "pending"},
+          {"id": "37.4", "title": "Add horizontal pod autoscaler", "status": "pending"}
+        ]
+      },
+      {
+        "id": 38,
+        "title": "CI/CD Pipeline",
+        "description": "GitHub Actions workflow",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 5,
+        "dependencies": [36],
+        "details": "Build, test, deploy pipeline for both deployment targets",
+        "testStrategy": "Run pipeline end-to-end",
+        "subtasks": [
+          {"id": "38.1", "title": "Create CI workflow", "status": "pending"},
+          {"id": "38.2", "title": "Create CD workflow", "status": "pending"},
+          {"id": "38.3", "title": "Add security scanning", "status": "pending"}
+        ]
+      },
+      {
+        "id": 39,
+        "title": "API Documentation",
+        "description": "Complete API documentation",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 5,
+        "dependencies": [],
+        "details": "OpenAPI/Swagger, Arabic descriptions, examples",
+        "testStrategy": "Documentation review",
+        "subtasks": [
+          {"id": "39.1", "title": "Generate OpenAPI schema", "status": "pending"},
+          {"id": "39.2", "title": "Add Arabic descriptions", "status": "pending"},
+          {"id": "39.3", "title": "Create usage examples", "status": "pending"}
+        ]
+      },
+      {
+        "id": 40,
+        "title": "User Documentation",
+        "description": "End-user documentation",
+        "status": "pending",
+        "priority": "medium",
+        "phase": 5,
+        "dependencies": [],
+        "details": "User guides, admin guides, Arabic translations",
+        "testStrategy": "User testing",
+        "subtasks": [
+          {"id": "40.1", "title": "Create user guide", "status": "pending"},
+          {"id": "40.2", "title": "Create admin guide", "status": "pending"},
+          {"id": "40.3", "title": "Add Arabic translations", "status": "pending"}
+        ]
+      }
+    ]
+  }
+}

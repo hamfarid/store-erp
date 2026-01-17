@@ -1,0 +1,28 @@
+{
+  "module": "analysis.logs.fix_syntax_errors",
+  "imports": [
+    "json",
+    "pathlib",
+    "re"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "fix_syntax_errors",
+      "parameters": []
+    },
+    {
+      "name": "fix_unterminated_triple_quotes",
+      "parameters": [
+        "content"
+      ]
+    },
+    {
+      "name": "fix_unterminated_strings",
+      "parameters": [
+        "content"
+      ]
+    }
+  ],
+  "variables": []
+}

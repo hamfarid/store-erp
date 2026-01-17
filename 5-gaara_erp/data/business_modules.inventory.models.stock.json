@@ -1,0 +1,48 @@
+{
+  "module": "business_modules.inventory.models.stock",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.utils.translation",
+    "product",
+    "store"
+  ],
+  "classes": [
+    {
+      "name": "Stock",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "product",
+        "store",
+        "quantity",
+        "reserved_quantity",
+        "location",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

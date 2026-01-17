@@ -1,0 +1,202 @@
+{
+  "module": "agricultural_modules.production.food_safety_models",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "export_approval_models",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "FoodSafetyApproval",
+      "methods": [
+        "__str__",
+        "is_valid"
+      ],
+      "variables": [
+        "approval_number",
+        "production_batch",
+        "application_date",
+        "inspection_date",
+        "approval_date",
+        "expiry_date",
+        "status",
+        "notes",
+        "inspector_name",
+        "inspection_location",
+        "sample_taken",
+        "sample_results",
+        "pesticide_residue_check",
+        "pesticide_residue_results",
+        "heavy_metals_check",
+        "heavy_metals_results",
+        "microbial_check",
+        "microbial_results",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "FarmCodingType",
+      "methods": [],
+      "variables": [
+        "GLOBAL_GAP",
+        "ORGANIC",
+        "LOCAL",
+        "EXPORT",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "FarmCoding",
+      "methods": [
+        "__str__",
+        "is_valid"
+      ],
+      "variables": [
+        "farm",
+        "coding_type",
+        "code",
+        "issue_date",
+        "expiry_date",
+        "issuing_authority",
+        "status",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "FarmDiscountType",
+      "methods": [],
+      "variables": [
+        "EXPORT",
+        "LOCAL",
+        "SPECIAL",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "FarmDiscount",
+      "methods": [
+        "__str__",
+        "is_valid"
+      ],
+      "variables": [
+        "farm",
+        "discount_type",
+        "discount_code",
+        "start_date",
+        "end_date",
+        "discount_percentage",
+        "discount_amount",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "BatchFarmCoding",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "production_batch",
+        "farm_coding",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

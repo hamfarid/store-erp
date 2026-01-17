@@ -1,0 +1,76 @@
+{
+  "module": "integration_modules.ai_a2a.services.approval_service",
+  "imports": [
+    "ai_agents.models",
+    "django.db",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ApprovalService",
+      "methods": [
+        "create_approval_request",
+        "get_approval_request",
+        "approve_request",
+        "reject_request",
+        "cancel_request",
+        "get_pending_requests_for_agent",
+        "get_agent_approval_statistics"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_approval_request",
+      "parameters": [
+        "requester_agent_id",
+        "approver_agent_id",
+        "request_type",
+        "details",
+        "expires_at"
+      ]
+    },
+    {
+      "name": "get_approval_request",
+      "parameters": [
+        "request_id"
+      ]
+    },
+    {
+      "name": "approve_request",
+      "parameters": [
+        "request_id",
+        "comments"
+      ]
+    },
+    {
+      "name": "reject_request",
+      "parameters": [
+        "request_id",
+        "reason"
+      ]
+    },
+    {
+      "name": "cancel_request",
+      "parameters": [
+        "request_id"
+      ]
+    },
+    {
+      "name": "get_pending_requests_for_agent",
+      "parameters": [
+        "agent_id",
+        "limit"
+      ]
+    },
+    {
+      "name": "get_agent_approval_statistics",
+      "parameters": [
+        "agent_id"
+      ]
+    }
+  ],
+  "variables": []
+}

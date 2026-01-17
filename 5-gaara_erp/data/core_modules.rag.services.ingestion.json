@@ -1,0 +1,38 @@
+{
+  "module": "core_modules.rag.services.ingestion",
+  "imports": [
+    "__future__",
+    "core_modules.rag.embeddings.adapters",
+    "core_modules.rag.metrics",
+    "core_modules.rag.models",
+    "django.conf",
+    "django.db",
+    "os",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "get_adapter",
+      "parameters": []
+    },
+    {
+      "name": "yield_chunks",
+      "parameters": [
+        "text",
+        "chunk_size",
+        "overlap"
+      ]
+    },
+    {
+      "name": "ingest_text",
+      "parameters": [
+        "title",
+        "text",
+        "source",
+        "metadata"
+      ]
+    }
+  ],
+  "variables": []
+}

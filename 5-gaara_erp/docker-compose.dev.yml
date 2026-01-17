@@ -1,0 +1,190 @@
+# =============================================================================
+# Gaara ERP - Development Docker Compose
+# =============================================================================
+# Development environment with hot reload and debugging
+# =============================================================================
+
+version: '3.8'
+
+services:
+  # ===========================================================================
+  # PostgreSQL Database (Development)
+  # ===========================================================================
+  db:
+    image: postgres:15-alpine
+    container_name: gaara_db_dev
+    restart: unless-stopped
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./docker/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-gaara_erp_dev}
+      POSTGRES_USER: ${POSTGRES_USER:-gaara_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dev_password}
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=ar_SA.UTF-8"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-gaara_admin}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - gaara_network_dev
+
+  # ===========================================================================
+  # Redis Cache (Development)
+  # ===========================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: gaara_redis_dev
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_dev_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - gaara_network_dev
+
+  # ===========================================================================
+  # Django Backend (Development)
+  # ===========================================================================
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: gaara_backend_dev
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-gaara_admin}:${POSTGRES_PASSWORD:-dev_password}@db:5432/${POSTGRES_DB:-gaara_erp_dev}
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-key-change-in-production}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:-dev-encryption-key-change-in-production}
+      DEBUG: "true"
+      ALLOWED_HOSTS: localhost,127.0.0.1,backend,0.0.0.0
+      CORS_ALLOWED_ORIGINS: http://localhost:5173,http://localhost:4173,http://127.0.0.1:5173
+      DJANGO_SETTINGS_MODULE: gaara_erp.settings.dev
+      RUN_MIGRATIONS: "true"
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./gaara_erp:/app
+      - static_dev:/app/staticfiles
+      - media_dev:/app/media
+      - logs_dev:/app/logs
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    networks:
+      - gaara_network_dev
+
+  # ===========================================================================
+  # React Frontend (Development)
+  # ===========================================================================
+  frontend:
+    build:
+      context: ./gaara-erp-frontend
+      dockerfile: Dockerfile.dev
+    container_name: gaara_frontend_dev
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: http://localhost:8000/api
+      NODE_ENV: development
+      VITE_DEV_PORT: 5173
+    volumes:
+      - ./gaara-erp-frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+      - "4173:4173"
+    command: if [ -f "pnpm-lock.yaml" ]; then pnpm dev -- --host 0.0.0.0 --port 5173; else npm run dev -- --host 0.0.0.0 --port 5173; fi
+    networks:
+      - gaara_network_dev
+
+  # ===========================================================================
+  # Celery Worker (Development)
+  # ===========================================================================
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: gaara_celery_dev
+    restart: unless-stopped
+    command: celery -A gaara_erp worker -l DEBUG --concurrency=2
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-gaara_admin}:${POSTGRES_PASSWORD:-dev_password}@db:5432/${POSTGRES_DB:-gaara_erp_dev}
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-key-change-in-production}
+      DJANGO_SETTINGS_MODULE: gaara_erp.settings.dev
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./gaara_erp:/app
+      - media_dev:/app/media
+      - logs_dev:/app/logs
+    networks:
+      - gaara_network_dev
+
+  # ===========================================================================
+  # Celery Beat (Development)
+  # ===========================================================================
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: gaara_celery_beat_dev
+    restart: unless-stopped
+    command: celery -A gaara_erp beat -l DEBUG
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-gaara_admin}:${POSTGRES_PASSWORD:-dev_password}@db:5432/${POSTGRES_DB:-gaara_erp_dev}
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-key-change-in-production}
+      DJANGO_SETTINGS_MODULE: gaara_erp.settings.dev
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./gaara_erp:/app
+      - logs_dev:/app/logs
+    networks:
+      - gaara_network_dev
+
+# ===========================================================================
+# Volumes
+# ===========================================================================
+volumes:
+  postgres_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local
+  static_dev:
+    driver: local
+  media_dev:
+    driver: local
+  logs_dev:
+    driver: local
+
+# ===========================================================================
+# Networks
+# ===========================================================================
+networks:
+  gaara_network_dev:
+    driver: bridge

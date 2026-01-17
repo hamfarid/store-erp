@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "autonomous-builder": {
+      "command": "python3",
+      "args": ["C:\Users\hadym\.global\autonomous-multiagent-system/mcp_server.py"]
+    },
+    "sequential-thinking": {
+      "url": "https://server.smithery.ai/@smithery-ai/server-sequential-thinking/mcp"
+    },
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sentry"]
+    }
+  }
+}
+

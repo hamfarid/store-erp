@@ -1,0 +1,55 @@
+{
+  "module": "core_modules.users_accounts.views",
+  "imports": [
+    "admin_modules.permissions_manager.models",
+    "django.contrib",
+    "django.contrib.auth",
+    "django.contrib.auth.mixins",
+    "django.shortcuts",
+    "django.urls",
+    "django.utils.translation",
+    "django.views",
+    "forms",
+    "rest_framework",
+    "services.core.models"
+  ],
+  "classes": [
+    {
+      "name": "SelectDatabaseView",
+      "methods": [
+        "get",
+        "post"
+      ],
+      "variables": [
+        "template_name"
+      ]
+    },
+    {
+      "name": "UserViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "post",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "module": "business_modules.solar_stations.tests.test_solar_station",
+  "imports": [
+    "business_modules.solar_stations.models",
+    "django.contrib.auth.models",
+    "django.test",
+    "django.utils"
+  ],
+  "classes": [
+    {
+      "name": "SolarStationTests",
+      "methods": [
+        "setUp",
+        "test_station_creation",
+        "test_station_components",
+        "test_maintenance_schedule",
+        "test_maintenance_record"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_station_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_station_components",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_maintenance_schedule",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_maintenance_record",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

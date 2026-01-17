@@ -1,0 +1,100 @@
+{
+  "module": "services_modules.utilities.services.data_import_service",
+  "imports": [
+    "django.utils",
+    "models.data_import"
+  ],
+  "classes": [
+    {
+      "name": "DataImportService",
+      "methods": [
+        "create_import",
+        "validate_file",
+        "process_import",
+        "get_import",
+        "get_imports_by_user",
+        "get_recent_imports",
+        "delete_import",
+        "clear_old_imports",
+        "get_import_status"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_import",
+      "parameters": [
+        "cls",
+        "name",
+        "model_name",
+        "app_label",
+        "file_obj",
+        "format",
+        "field_mapping",
+        "update_existing",
+        "key_field",
+        "user"
+      ]
+    },
+    {
+      "name": "validate_file",
+      "parameters": [
+        "cls",
+        "import_id"
+      ]
+    },
+    {
+      "name": "process_import",
+      "parameters": [
+        "cls",
+        "import_id"
+      ]
+    },
+    {
+      "name": "get_import",
+      "parameters": [
+        "cls",
+        "import_id"
+      ]
+    },
+    {
+      "name": "get_imports_by_user",
+      "parameters": [
+        "cls",
+        "user",
+        "limit"
+      ]
+    },
+    {
+      "name": "get_recent_imports",
+      "parameters": [
+        "cls",
+        "days",
+        "limit"
+      ]
+    },
+    {
+      "name": "delete_import",
+      "parameters": [
+        "cls",
+        "import_id"
+      ]
+    },
+    {
+      "name": "clear_old_imports",
+      "parameters": [
+        "cls",
+        "days"
+      ]
+    },
+    {
+      "name": "get_import_status",
+      "parameters": [
+        "cls",
+        "import_id"
+      ]
+    }
+  ],
+  "variables": []
+}

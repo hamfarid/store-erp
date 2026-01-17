@@ -1,0 +1,147 @@
+{
+  "module": "utility_modules.locale.models",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Language",
+      "methods": [
+        "__str__",
+        "save",
+        "get_localized_name"
+      ],
+      "variables": [
+        "code",
+        "name",
+        "name_ar",
+        "name_en",
+        "name_tr",
+        "rtl",
+        "is_default",
+        "is_active",
+        "flag_icon",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TranslationKey",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "key",
+        "description",
+        "module",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Translation",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "key",
+        "language",
+        "value",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserLanguagePreference",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "language",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_localized_name",
+      "parameters": [
+        "self",
+        "language_code"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

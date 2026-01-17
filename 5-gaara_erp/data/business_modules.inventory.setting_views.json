@@ -1,0 +1,24 @@
+{
+  "module": "business_modules.inventory.setting_views",
+  "imports": [
+    "django_filters.rest_framework",
+    "rest_framework",
+    "serializers",
+    "settings_models"
+  ],
+  "classes": [
+    {
+      "name": "InventorySettingsViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

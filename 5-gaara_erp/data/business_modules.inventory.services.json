@@ -1,0 +1,87 @@
+{
+  "module": "business_modules.inventory.services",
+  "imports": [
+    "core_modules.activity_log.services",
+    "datetime",
+    "decimal",
+    "django.db",
+    "django.utils.translation",
+    "logging",
+    "models",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "_log_stock_activity",
+      "parameters": [
+        "product_id",
+        "quantity",
+        "reason",
+        "movement_type"
+      ]
+    },
+    {
+      "name": "increase_stock",
+      "parameters": [
+        "product_id",
+        "quantity",
+        "reason",
+        "store_id",
+        "lot_name",
+        "expiration_date"
+      ]
+    },
+    {
+      "name": "decrease_stock",
+      "parameters": [
+        "product_id",
+        "quantity",
+        "reason",
+        "store_id",
+        "lot_name"
+      ]
+    },
+    {
+      "name": "transfer_stock",
+      "parameters": [
+        "product_id",
+        "quantity",
+        "from_store_id",
+        "to_store_id",
+        "lot_name",
+        "reason"
+      ]
+    },
+    {
+      "name": "adjust_stock",
+      "parameters": [
+        "product_id",
+        "new_quantity",
+        "reason",
+        "store_id",
+        "lot_name"
+      ]
+    },
+    {
+      "name": "get_stock_level",
+      "parameters": [
+        "product_id",
+        "store_id",
+        "lot_name"
+      ]
+    },
+    {
+      "name": "perform_stock_count",
+      "parameters": [
+        "store_id",
+        "count_data",
+        "reason"
+      ]
+    }
+  ],
+  "variables": [
+    "ActivityLogService",
+    "logger"
+  ]
+}

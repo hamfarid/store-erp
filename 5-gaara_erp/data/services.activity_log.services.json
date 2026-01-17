@@ -1,0 +1,28 @@
+{
+  "module": "services.activity_log.services",
+  "imports": [
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "ActivityLogService",
+      "methods": [
+        "log_activity"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "log_activity",
+      "parameters": [
+        "user_id",
+        "action",
+        "object_type",
+        "object_id",
+        "metadata"
+      ]
+    }
+  ],
+  "variables": []
+}

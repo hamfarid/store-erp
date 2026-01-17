@@ -1,0 +1,50 @@
+{
+  "module": "test_utility_modules",
+  "imports": [
+    "communication_modules.email.models",
+    "datetime",
+    "decimal",
+    "django",
+    "django.conf",
+    "django.test",
+    "django.test.utils",
+    "django.urls",
+    "helper_modules.data_processing.models",
+    "json",
+    "os",
+    "psutil",
+    "service_modules.background_services.models",
+    "sys",
+    "utility_modules.health.models",
+    "utility_modules.utilities.models",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_utility_modules",
+      "parameters": []
+    },
+    {
+      "name": "test_utility_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_health_functionality",
+      "parameters": []
+    },
+    {
+      "name": "test_utility_functions",
+      "parameters": []
+    },
+    {
+      "name": "test_communication_services",
+      "parameters": []
+    },
+    {
+      "name": "test_background_services",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

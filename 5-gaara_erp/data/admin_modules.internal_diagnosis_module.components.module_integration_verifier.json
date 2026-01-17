@@ -1,0 +1,127 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.module_integration_verifier",
+  "imports": [
+    "datetime",
+    "json",
+    "requests",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "ModuleIntegrationVerifier",
+      "methods": [
+        "__init__",
+        "_get_timestamp",
+        "register_module_api",
+        "verify_api_endpoint",
+        "check_data_flow",
+        "get_results",
+        "clear_results"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MockResponse",
+      "methods": [
+        "__init__",
+        "json"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "module_registry"
+      ]
+    },
+    {
+      "name": "_get_timestamp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "register_module_api",
+      "parameters": [
+        "self",
+        "module_name",
+        "api_base_url"
+      ]
+    },
+    {
+      "name": "verify_api_endpoint",
+      "parameters": [
+        "self",
+        "module_name",
+        "endpoint",
+        "expected_status",
+        "method",
+        "data",
+        "headers",
+        "timeout"
+      ]
+    },
+    {
+      "name": "check_data_flow",
+      "parameters": [
+        "self",
+        "source_module",
+        "dest_module",
+        "data_item_id",
+        "get_endpoint",
+        "check_endpoint_template",
+        "source_method",
+        "dest_method"
+      ]
+    },
+    {
+      "name": "get_results",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clear_results",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_requests_get",
+      "parameters": [
+        "url",
+        "headers",
+        "timeout"
+      ]
+    },
+    {
+      "name": "mock_requests_post",
+      "parameters": [
+        "url",
+        "json",
+        "headers",
+        "timeout"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "status_code",
+        "json_data",
+        "text_data",
+        "elapsed_ms"
+      ]
+    },
+    {
+      "name": "json",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

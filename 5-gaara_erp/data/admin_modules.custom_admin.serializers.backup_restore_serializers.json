@@ -1,0 +1,47 @@
+{
+  "module": "admin_modules.custom_admin.serializers.backup_restore_serializers",
+  "imports": [
+    "models.backup_restore",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "BackupRecordSerializer",
+      "methods": [],
+      "variables": [
+        "created_by_username",
+        "backup_type_display",
+        "status_display"
+      ]
+    },
+    {
+      "name": "RestoreRecordSerializer",
+      "methods": [],
+      "variables": [
+        "created_by_username",
+        "status_display",
+        "backup_name"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

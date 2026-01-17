@@ -1,0 +1,27 @@
+{
+  "module": "ai_modules.ai_memory.settings",
+  "imports": [
+    "django.conf"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "get_setting",
+      "parameters": [
+        "key",
+        "default"
+      ]
+    }
+  ],
+  "variables": [
+    "AI_MEMORY_SETTINGS",
+    "CELERY_TASK_ROUTES",
+    "CELERY_BEAT_SCHEDULE",
+    "DATABASE_INDEXES",
+    "CACHE_SETTINGS",
+    "LOGGING_CONFIG",
+    "SECURITY_SETTINGS",
+    "EXTERNAL_SERVICES",
+    "TEST_SETTINGS"
+  ]
+}

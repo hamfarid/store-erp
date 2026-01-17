@@ -1,0 +1,101 @@
+{
+  "module": "agricultural_modules.seed_hybridization.permissions",
+  "imports": [
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "CanViewSeedHybridizationData",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CanEditSeedHybridizationData",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CanViewCostData",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CanEditCostData",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CanApproveExpenses",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CanViewSensitiveHybridizationData",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    }
+  ],
+  "variables": []
+}

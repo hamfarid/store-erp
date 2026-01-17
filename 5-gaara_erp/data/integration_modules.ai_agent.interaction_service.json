@@ -1,0 +1,218 @@
+{
+  "module": "integration_modules.ai_agent.interaction_service",
+  "imports": [
+    "datetime",
+    "django.apps",
+    "django.utils",
+    "error_service",
+    "logging",
+    "models",
+    "models.activity_logs",
+    "models.agents",
+    "models.interactions",
+    "traceback",
+    "typing",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "InteractionService",
+      "methods": [
+        "__init__",
+        "initiate",
+        "process"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "apps",
+      "methods": [
+        "get_model"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Agent",
+      "methods": [],
+      "variables": [
+        "objects",
+        "name",
+        "is_active",
+        "agent_type"
+      ]
+    },
+    {
+      "name": "AgentInteraction",
+      "methods": [
+        "save"
+      ],
+      "variables": [
+        "objects",
+        "id",
+        "status",
+        "error_details",
+        "completed_at",
+        "response_content",
+        "initiating_agent",
+        "responding_agent",
+        "interaction_type",
+        "content"
+      ]
+    },
+    {
+      "name": "AgentType",
+      "methods": [],
+      "variables": [
+        "name"
+      ]
+    },
+    {
+      "name": "AgentActivityLog",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "get"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DoesNotExist",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "create",
+        "select_related",
+        "get"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DoesNotExist",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "create"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "initiate_interaction",
+      "parameters": [
+        "initiating_agent",
+        "responding_agent_name",
+        "interaction_type",
+        "content",
+        "interaction_pattern",
+        "correlation_id",
+        "initiating_user"
+      ]
+    },
+    {
+      "name": "process_interaction",
+      "parameters": [
+        "interaction_id"
+      ]
+    },
+    {
+      "name": "is_interaction_service_available",
+      "parameters": []
+    },
+    {
+      "name": "get_interaction_service",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "initiate",
+      "parameters": [
+        "self",
+        "initiating_agent",
+        "responding_agent_name",
+        "interaction_type",
+        "content",
+        "interaction_pattern",
+        "correlation_id",
+        "initiating_user"
+      ]
+    },
+    {
+      "name": "process",
+      "parameters": [
+        "self",
+        "interaction_id"
+      ]
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "get_model",
+      "parameters": [
+        "app_label",
+        "model_name"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "name",
+        "is_active"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": []
+    },
+    {
+      "name": "select_related",
+      "parameters": []
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "id"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "logger",
+    "__all__"
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "module": "core_modules.setup.submodules.user_management.serializers",
+  "imports": [
+    "django.contrib.auth",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PermissionSerializer",
+      "methods": [],
+      "variables": [
+        "permission_type_display",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "PermissionCreateUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "RoleSerializer",
+      "methods": [],
+      "variables": [
+        "permissions",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "RoleCreateUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "RoleSimpleSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserProfileSerializer",
+      "methods": [],
+      "variables": [
+        "user",
+        "roles",
+        "language_display",
+        "theme_display"
+      ]
+    },
+    {
+      "name": "UserProfileCreateUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserGroupSerializer",
+      "methods": [],
+      "variables": [
+        "users",
+        "roles",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "UserGroupCreateUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": [
+    "User"
+  ]
+}

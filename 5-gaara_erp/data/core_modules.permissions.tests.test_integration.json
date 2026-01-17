@@ -1,0 +1,76 @@
+{
+  "module": "core_modules.permissions.tests.test_integration",
+  "imports": [
+    "companies.models",
+    "django.contrib.auth.models",
+    "django.test",
+    "django.urls",
+    "rest_framework",
+    "rest_framework.test",
+    "unified_permissions_model"
+  ],
+  "classes": [
+    {
+      "name": "PermissionsIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_user_permissions_integration",
+        "test_role_inheritance",
+        "test_company_branch_scope",
+        "test_api_integration",
+        "test_user_role_assignment_api",
+        "has_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_permissions_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_inheritance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_branch_scope",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_api_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_role_assignment_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "user",
+        "permission",
+        "company_id",
+        "branch_id"
+      ]
+    }
+  ],
+  "variables": []
+}

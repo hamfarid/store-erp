@@ -1,0 +1,116 @@
+{
+  "module": "business_modules.production.serializers",
+  "imports": [
+    "django.utils.translation",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "ProductionLineSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ProductionOperationSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "BillOfMaterialsSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "BOMItemSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "BOMOperationSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ProductionOrderSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ProductionOrderOperationSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ProductionOutputSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

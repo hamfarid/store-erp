@@ -1,0 +1,104 @@
+{
+  "module": "services_modules.fleet_management.services.predictive_maintenance_service",
+  "imports": [
+    "datetime",
+    "django.db.models",
+    "django.utils",
+    "logging",
+    "models",
+    "numpy"
+  ],
+  "classes": [
+    {
+      "name": "PredictiveMaintenanceService",
+      "methods": [
+        "__init__",
+        "predict_next_maintenance",
+        "_calculate_maintenance_intervals",
+        "_predict_maintenance_type",
+        "_estimate_maintenance_cost",
+        "_calculate_prediction_confidence",
+        "analyze_fleet_maintenance_patterns",
+        "identify_maintenance_anomalies",
+        "generate_maintenance_recommendations",
+        "_analyze_fuel_efficiency"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "predict_next_maintenance",
+      "parameters": [
+        "self",
+        "vehicle_id"
+      ]
+    },
+    {
+      "name": "_calculate_maintenance_intervals",
+      "parameters": [
+        "self",
+        "maintenance_logs"
+      ]
+    },
+    {
+      "name": "_predict_maintenance_type",
+      "parameters": [
+        "self",
+        "vehicle",
+        "maintenance_logs"
+      ]
+    },
+    {
+      "name": "_estimate_maintenance_cost",
+      "parameters": [
+        "self",
+        "vehicle",
+        "maintenance_type"
+      ]
+    },
+    {
+      "name": "_calculate_prediction_confidence",
+      "parameters": [
+        "self",
+        "vehicle",
+        "maintenance_logs"
+      ]
+    },
+    {
+      "name": "analyze_fleet_maintenance_patterns",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "identify_maintenance_anomalies",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "generate_maintenance_recommendations",
+      "parameters": [
+        "self",
+        "vehicle_id"
+      ]
+    },
+    {
+      "name": "_analyze_fuel_efficiency",
+      "parameters": [
+        "self",
+        "vehicle"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

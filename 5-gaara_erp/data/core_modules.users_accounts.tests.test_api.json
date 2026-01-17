@@ -1,0 +1,23 @@
+{
+  "module": "core_modules.users_accounts.tests.test_api",
+  "imports": [
+    "django.contrib.auth",
+    "pytest",
+    "rest_framework",
+    "rest_framework.test"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_admin_can_list_users",
+      "parameters": []
+    },
+    {
+      "name": "test_non_admin_cannot_list_users",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

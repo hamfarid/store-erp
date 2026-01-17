@@ -1,0 +1,30 @@
+{
+  "module": "core_modules.tests.__init__",
+  "imports": [
+    "companies.models",
+    "django.contrib.auth",
+    "test_models",
+    "test_services",
+    "test_views"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "setup_test_environment",
+      "parameters": []
+    },
+    {
+      "name": "teardown_test_environment",
+      "parameters": [
+        "env"
+      ]
+    }
+  ],
+  "variables": [
+    "TEST_TIMEOUT",
+    "TEST_USER_EMAIL",
+    "TEST_USER_PASSWORD",
+    "TEST_COMPANY_NAME",
+    "AUTO_TEST_MODULES"
+  ]
+}

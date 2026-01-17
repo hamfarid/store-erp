@@ -1,0 +1,107 @@
+{
+  "module": "integration_modules.ai_agents.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "AgentAdmin",
+      "methods": [
+        "activate_agents",
+        "deactivate_agents"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "actions"
+      ]
+    },
+    {
+      "name": "AgentCapabilityAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "RoleAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "PermissionAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "RolePermissionAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "UserRoleAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "AgentRoleAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "MessageAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "activate_agents",
+      "parameters": [
+        "self",
+        "request",
+        "queryset"
+      ]
+    },
+    {
+      "name": "deactivate_agents",
+      "parameters": [
+        "self",
+        "request",
+        "queryset"
+      ]
+    }
+  ],
+  "variables": []
+}

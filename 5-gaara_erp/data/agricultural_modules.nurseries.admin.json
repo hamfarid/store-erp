@@ -1,0 +1,105 @@
+{
+  "module": "agricultural_modules.nurseries.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "NurseryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "NurserySectionAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "PlantVarietyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ProductionBatchAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "date_hierarchy"
+      ]
+    },
+    {
+      "name": "BatchStageLogAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "date_hierarchy"
+      ]
+    },
+    {
+      "name": "NurseryActivityAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "date_hierarchy"
+      ]
+    },
+    {
+      "name": "NurseryResourceAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "ActivityResourceUsageAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "QualityCheckAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "date_hierarchy"
+      ]
+    },
+    {
+      "name": "EnvironmentalLogAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "date_hierarchy"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

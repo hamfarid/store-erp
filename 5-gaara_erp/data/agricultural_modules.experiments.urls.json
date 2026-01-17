@@ -1,0 +1,15 @@
+{
+  "module": "agricultural_modules.experiments.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework.routers",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "router",
+    "app_name",
+    "urlpatterns"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "module": "scripts.run_quick_test_capture",
+  "imports": [
+    "io",
+    "os",
+    "pathlib",
+    "subprocess",
+    "sys",
+    "traceback"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "ROOT",
+    "REPORTS"
+  ]
+}

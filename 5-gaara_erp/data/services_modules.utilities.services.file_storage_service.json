@@ -1,0 +1,107 @@
+{
+  "module": "services_modules.utilities.services.file_storage_service",
+  "imports": [
+    "django.conf",
+    "django.core.files.base",
+    "django.core.files.storage",
+    "mimetypes",
+    "models.file_storage",
+    "os",
+    "tempfile",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "FileStorageService",
+      "methods": [
+        "upload_file",
+        "get_file",
+        "get_file_content",
+        "delete_file",
+        "get_files_by_module",
+        "get_files_by_reference",
+        "create_temp_file",
+        "get_mime_type",
+        "get_file_type_from_mime"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "upload_file",
+      "parameters": [
+        "cls",
+        "file_obj",
+        "name",
+        "file_type",
+        "description",
+        "module",
+        "reference_model",
+        "reference_id",
+        "is_public",
+        "user"
+      ]
+    },
+    {
+      "name": "get_file",
+      "parameters": [
+        "cls",
+        "file_id"
+      ]
+    },
+    {
+      "name": "get_file_content",
+      "parameters": [
+        "cls",
+        "file_id"
+      ]
+    },
+    {
+      "name": "delete_file",
+      "parameters": [
+        "cls",
+        "file_id"
+      ]
+    },
+    {
+      "name": "get_files_by_module",
+      "parameters": [
+        "cls",
+        "module"
+      ]
+    },
+    {
+      "name": "get_files_by_reference",
+      "parameters": [
+        "cls",
+        "reference_model",
+        "reference_id"
+      ]
+    },
+    {
+      "name": "create_temp_file",
+      "parameters": [
+        "cls",
+        "content",
+        "extension",
+        "prefix"
+      ]
+    },
+    {
+      "name": "get_mime_type",
+      "parameters": [
+        "cls",
+        "file_path"
+      ]
+    },
+    {
+      "name": "get_file_type_from_mime",
+      "parameters": [
+        "cls",
+        "mime_type"
+      ]
+    }
+  ],
+  "variables": []
+}

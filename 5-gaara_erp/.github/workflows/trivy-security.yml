@@ -1,0 +1,347 @@
+# =============================================================================
+# Gaara ERP v12 - Trivy Security Scanning
+# =============================================================================
+# Comprehensive security scanning with Trivy:
+# - Container image vulnerabilities
+# - Filesystem/dependency vulnerabilities
+# - Infrastructure as Code (IaC) misconfigurations
+# - Secret detection
+# - SBOM generation
+# =============================================================================
+
+name: Trivy Security Scan
+
+on:
+  # Run on push to main branches
+  push:
+    branches: [main, develop]
+  
+  # Run on pull requests
+  pull_request:
+    branches: [main, develop]
+  
+  # Scheduled daily scan at 6 AM UTC
+  schedule:
+    - cron: '0 6 * * *'
+  
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      severity:
+        description: 'Minimum severity level to report'
+        required: false
+        default: 'HIGH,CRITICAL'
+        type: choice
+        options:
+          - 'CRITICAL'
+          - 'HIGH,CRITICAL'
+          - 'MEDIUM,HIGH,CRITICAL'
+          - 'LOW,MEDIUM,HIGH,CRITICAL'
+      fail_on_vuln:
+        description: 'Fail workflow if vulnerabilities found'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+env:
+  SEVERITY: ${{ github.event.inputs.severity || 'HIGH,CRITICAL' }}
+  FAIL_ON_VULN: ${{ github.event.inputs.fail_on_vuln || 'false' }}
+
+jobs:
+  # ===========================================================================
+  # Trivy Filesystem Scan
+  # ===========================================================================
+  filesystem-scan:
+    name: Filesystem Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy filesystem scan (Backend)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: 'gaara_erp/'
+          format: 'table'
+          exit-code: ${{ env.FAIL_ON_VULN == 'true' && '1' || '0' }}
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: ${{ env.SEVERITY }}
+
+      - name: Run Trivy filesystem scan (Frontend)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: 'gaara-erp-frontend/'
+          format: 'table'
+          exit-code: ${{ env.FAIL_ON_VULN == 'true' && '1' || '0' }}
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: ${{ env.SEVERITY }}
+
+      - name: Generate SARIF report (Backend)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: 'gaara_erp/'
+          format: 'sarif'
+          output: 'trivy-fs-backend.sarif'
+          severity: 'MEDIUM,HIGH,CRITICAL'
+
+      - name: Generate SARIF report (Frontend)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: 'gaara-erp-frontend/'
+          format: 'sarif'
+          output: 'trivy-fs-frontend.sarif'
+          severity: 'MEDIUM,HIGH,CRITICAL'
+
+      - name: Upload Backend results to Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-fs-backend.sarif'
+          category: 'trivy-backend'
+
+      - name: Upload Frontend results to Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-fs-frontend.sarif'
+          category: 'trivy-frontend'
+
+  # ===========================================================================
+  # Trivy Secret Scan
+  # ===========================================================================
+  secret-scan:
+    name: Secret Detection Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better secret detection
+
+      - name: Run Trivy secret scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          scanners: 'secret'
+          format: 'table'
+          exit-code: ${{ env.FAIL_ON_VULN == 'true' && '1' || '0' }}
+
+      - name: Generate secret scan SARIF
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          scanners: 'secret'
+          format: 'sarif'
+          output: 'trivy-secrets.sarif'
+
+      - name: Upload secret scan results
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-secrets.sarif'
+          category: 'trivy-secrets'
+
+  # ===========================================================================
+  # Trivy IaC Scan
+  # ===========================================================================
+  iac-scan:
+    name: Infrastructure as Code Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy IaC scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: '.'
+          format: 'table'
+          exit-code: ${{ env.FAIL_ON_VULN == 'true' && '1' || '0' }}
+          severity: ${{ env.SEVERITY }}
+
+      - name: Generate IaC scan SARIF
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-iac.sarif'
+          severity: 'MEDIUM,HIGH,CRITICAL'
+
+      - name: Upload IaC results
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-iac.sarif'
+          category: 'trivy-iac'
+
+  # ===========================================================================
+  # Trivy Container Image Scan
+  # ===========================================================================
+  container-scan:
+    name: Container Image Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          load: true
+          tags: gaara-erp:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Run Trivy container scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'gaara-erp:${{ github.sha }}'
+          format: 'table'
+          exit-code: ${{ env.FAIL_ON_VULN == 'true' && '1' || '0' }}
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: ${{ env.SEVERITY }}
+
+      - name: Generate container SARIF
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'gaara-erp:${{ github.sha }}'
+          format: 'sarif'
+          output: 'trivy-container.sarif'
+          ignore-unfixed: true
+          severity: 'MEDIUM,HIGH,CRITICAL'
+
+      - name: Upload container scan results
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-container.sarif'
+          category: 'trivy-container'
+
+      # -------------------------------------------------------------------------
+      # Generate SBOM (Software Bill of Materials)
+      # -------------------------------------------------------------------------
+      - name: Generate SBOM (CycloneDX)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'gaara-erp:${{ github.sha }}'
+          format: 'cyclonedx'
+          output: 'sbom-cyclonedx.json'
+
+      - name: Generate SBOM (SPDX)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'gaara-erp:${{ github.sha }}'
+          format: 'spdx-json'
+          output: 'sbom-spdx.json'
+
+      - name: Upload SBOMs
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-${{ github.sha }}
+          path: |
+            sbom-cyclonedx.json
+            sbom-spdx.json
+          retention-days: 90
+
+  # ===========================================================================
+  # Vulnerability Report
+  # ===========================================================================
+  vulnerability-report:
+    name: Generate Vulnerability Report
+    runs-on: ubuntu-latest
+    needs: [filesystem-scan, secret-scan, iac-scan, container-scan]
+    if: always()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Trivy
+        run: |
+          sudo apt-get install wget apt-transport-https gnupg lsb-release -y
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update
+          sudo apt-get install trivy -y
+
+      - name: Generate JSON reports
+        run: |
+          trivy fs --format json --output trivy-backend.json gaara_erp/ || true
+          trivy fs --format json --output trivy-frontend.json gaara-erp-frontend/ || true
+          trivy config --format json --output trivy-iac.json . || true
+
+      - name: Create summary report
+        run: |
+          echo "# 🔒 Trivy Security Scan Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Scan Date**: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          echo "## 📊 Scan Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Scan Type | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Filesystem (Backend) | ✅ Complete |" >> $GITHUB_STEP_SUMMARY
+          echo "| Filesystem (Frontend) | ✅ Complete |" >> $GITHUB_STEP_SUMMARY
+          echo "| Secret Detection | ✅ Complete |" >> $GITHUB_STEP_SUMMARY
+          echo "| IaC Configuration | ✅ Complete |" >> $GITHUB_STEP_SUMMARY
+          echo "| Container Image | ✅ Complete |" >> $GITHUB_STEP_SUMMARY
+          echo "| SBOM Generation | ✅ Complete |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          echo "## 🔗 Resources" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- View detailed results in the **Security** tab" >> $GITHUB_STEP_SUMMARY
+          echo "- Download SBOM from **Artifacts**" >> $GITHUB_STEP_SUMMARY
+          echo "- Review Trivy documentation: https://trivy.dev" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload vulnerability reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: vulnerability-reports-${{ github.sha }}
+          path: |
+            trivy-backend.json
+            trivy-frontend.json
+            trivy-iac.json
+          retention-days: 30
+
+  # ===========================================================================
+  # Notify on Critical Vulnerabilities (Optional)
+  # ===========================================================================
+  notify:
+    name: Notify on Critical Issues
+    runs-on: ubuntu-latest
+    needs: [vulnerability-report]
+    if: failure() && github.event_name == 'schedule'
+    steps:
+      - name: Send notification
+        run: |
+          echo "⚠️ Critical vulnerabilities detected in scheduled scan"
+          echo "Review the Security tab for details"
+          # Add Slack/Teams/Email notification here if needed
+          # Example: curl -X POST -H 'Content-type: application/json' \
+          #   --data '{"text":"Critical vulnerabilities detected!"}' \
+          #   ${{ secrets.SLACK_WEBHOOK_URL }}
+

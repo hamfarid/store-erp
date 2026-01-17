@@ -1,0 +1,71 @@
+{
+  "module": "admin_modules.notifications.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "NotificationAdmin",
+      "methods": [
+        "get_queryset"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "list_editable"
+      ]
+    },
+    {
+      "name": "NotificationTypeAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "NotificationChannelAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "UserNotificationPreferenceAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "NotificationDeliveryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,75 @@
+{
+  "module": "core_modules.core.tests.thread_locals",
+  "imports": [
+    "contextlib",
+    "threading"
+  ],
+  "classes": [
+    {
+      "name": "ThreadLocalStorage",
+      "methods": [
+        "get_active_database",
+        "set_active_database",
+        "clear_active_database",
+        "get_current_user",
+        "set_current_user",
+        "clear_current_user",
+        "clear_all"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "use_database",
+      "parameters": [
+        "db_alias"
+      ]
+    },
+    {
+      "name": "as_user",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "get_active_database",
+      "parameters": []
+    },
+    {
+      "name": "set_active_database",
+      "parameters": [
+        "db_alias"
+      ]
+    },
+    {
+      "name": "clear_active_database",
+      "parameters": []
+    },
+    {
+      "name": "get_current_user",
+      "parameters": []
+    },
+    {
+      "name": "set_current_user",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "clear_current_user",
+      "parameters": []
+    },
+    {
+      "name": "clear_all",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "_thread_locals",
+    "get_current_database",
+    "set_current_database",
+    "get_current_user",
+    "set_current_user"
+  ]
+}

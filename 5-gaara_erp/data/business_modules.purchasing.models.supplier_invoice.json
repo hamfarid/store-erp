@@ -1,0 +1,60 @@
+{
+  "module": "business_modules.purchasing.models.supplier_invoice",
+  "imports": [
+    "core_modules.companies.models",
+    "core_modules.core.models.base_models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "purchase_order",
+    "supplier"
+  ],
+  "classes": [
+    {
+      "name": "SupplierInvoice",
+      "methods": [
+        "__str__",
+        "remaining_amount"
+      ],
+      "variables": [
+        "STATES",
+        "name",
+        "supplier",
+        "purchase_order",
+        "company",
+        "branch",
+        "invoice_date",
+        "due_date",
+        "state",
+        "total_amount",
+        "paid_amount",
+        "notes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "remaining_amount",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,9 @@
+{
+  "module": "integration_modules.ai_services.urls",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns"
+  ]
+}

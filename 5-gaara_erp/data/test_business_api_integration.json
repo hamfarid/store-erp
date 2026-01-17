@@ -1,0 +1,41 @@
+{
+  "module": "test_business_api_integration",
+  "imports": [
+    "django",
+    "django.conf",
+    "django.contrib.auth",
+    "django.test",
+    "django.test.utils",
+    "django.urls",
+    "json",
+    "os",
+    "sys",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_all_business_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_api_authentication_flow",
+      "parameters": []
+    },
+    {
+      "name": "test_api_data_validation",
+      "parameters": []
+    },
+    {
+      "name": "test_api_cors_headers",
+      "parameters": []
+    },
+    {
+      "name": "test_api_error_handling",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

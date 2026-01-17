@@ -1,0 +1,140 @@
+{
+  "module": "business_modules.inventory.tests.test_stock_move",
+  "imports": [
+    "core_modules.accounting.models",
+    "core_modules.core.models",
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "models.product",
+    "models.stock_move",
+    "models.warehouse"
+  ],
+  "classes": [
+    {
+      "name": "StockMoveModelTest",
+      "methods": [
+        "setUp",
+        "test_create_stock_move",
+        "test_stock_move_types",
+        "test_validate_locations",
+        "test_compute_total_cost",
+        "test_stock_move_workflow",
+        "test_get_available_quantity",
+        "test_get_stock_valuation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "StockMoveTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_move_type",
+        "test_unique_code_per_company",
+        "test_direction_choices",
+        "test_deactivate_move_type"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_stock_move",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_stock_move_types",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_locations",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compute_total_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_stock_move_workflow",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_available_quantity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_stock_valuation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_move_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_direction_choices",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_move_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_available_quantity",
+      "parameters": [
+        "cls",
+        "product",
+        "location"
+      ]
+    },
+    {
+      "name": "mock_get_stock_valuation",
+      "parameters": [
+        "cls",
+        "product",
+        "location",
+        "date_to"
+      ]
+    }
+  ],
+  "variables": []
+}

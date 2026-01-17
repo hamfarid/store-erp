@@ -1,0 +1,139 @@
+{
+  "module": "ai_modules.ai_memory.admin",
+  "imports": [
+    "django.contrib",
+    "django.urls",
+    "django.utils.html",
+    "django.utils.safestring",
+    "django.utils.translation",
+    "json",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "MemoryTypeAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "MemoryContextAdmin",
+      "methods": [
+        "memory_count"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "MemoryAssociationInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "fk_name",
+        "extra",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "MemoryAdmin",
+      "methods": [
+        "get_queryset"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "readonly_fields",
+        "inlines",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "MemoryAssociationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "KnowledgeBaseAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "LearningPatternAdmin",
+      "methods": [
+        "success_rate"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "MemoryCleanupLogAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "memory_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "success_rate",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

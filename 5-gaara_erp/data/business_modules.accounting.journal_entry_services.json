@@ -1,0 +1,106 @@
+{
+  "module": "business_modules.accounting.journal_entry_services",
+  "imports": [
+    "core_modules.users.models",
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "models",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "JournalEntryService",
+      "methods": [
+        "get_next_entry_number",
+        "create_journal_entry_draft",
+        "validate_journal_entry",
+        "post_journal_entry",
+        "cancel_journal_entry",
+        "create_reversing_entry",
+        "update_journal_entry_draft",
+        "get_journal_entry_report"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_next_entry_number",
+      "parameters": [
+        "company_id",
+        "journal_id"
+      ]
+    },
+    {
+      "name": "create_journal_entry_draft",
+      "parameters": [
+        "company_id",
+        "journal_id",
+        "fiscal_period_id",
+        "entry_date",
+        "description",
+        "created_by",
+        "items_data",
+        "entry_number",
+        "branch_id",
+        "department_id",
+        "notes",
+        "content_type_id",
+        "object_id"
+      ]
+    },
+    {
+      "name": "validate_journal_entry",
+      "parameters": [
+        "entry"
+      ]
+    },
+    {
+      "name": "post_journal_entry",
+      "parameters": [
+        "entry",
+        "posted_by"
+      ]
+    },
+    {
+      "name": "cancel_journal_entry",
+      "parameters": [
+        "entry",
+        "cancelled_by",
+        "cancellation_reason"
+      ]
+    },
+    {
+      "name": "create_reversing_entry",
+      "parameters": [
+        "original_entry",
+        "reversed_by",
+        "reverse_date",
+        "reason"
+      ]
+    },
+    {
+      "name": "update_journal_entry_draft",
+      "parameters": [
+        "entry",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "get_journal_entry_report",
+      "parameters": [
+        "company_id",
+        "start_date",
+        "end_date",
+        "journal_id",
+        "status"
+      ]
+    }
+  ],
+  "variables": []
+}

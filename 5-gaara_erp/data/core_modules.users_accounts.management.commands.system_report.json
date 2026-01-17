@@ -1,0 +1,38 @@
+{
+  "module": "core_modules.users_accounts.management.commands.system_report",
+  "imports": [
+    "datetime",
+    "django.core.management.base",
+    "os",
+    "psutil",
+    "xlsxwriter"
+  ],
+  "classes": [
+    {
+      "name": "Command",
+      "methods": [
+        "add_arguments",
+        "handle"
+      ],
+      "variables": [
+        "help"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "add_arguments",
+      "parameters": [
+        "self",
+        "parser"
+      ]
+    },
+    {
+      "name": "handle",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

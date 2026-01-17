@@ -1,0 +1,70 @@
+{
+  "module": "agricultural_modules.farms.tests.test_performance",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.db",
+    "django.db.models",
+    "django.test",
+    "models",
+    "services",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "FarmPerformanceTests",
+      "methods": [
+        "setUpTestData",
+        "test_query_all_activities_performance",
+        "test_filter_activities_by_farm_performance",
+        "test_bulk_creation_performance_farms",
+        "test_service_get_all_farms_performance",
+        "test_api_endpoint_performance_placeholder"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_query_all_activities_performance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_filter_activities_by_farm_performance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_bulk_creation_performance_farms",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_service_get_all_farms_performance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_api_endpoint_performance_placeholder",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "NUM_FARMS_PERF",
+    "NUM_FIELDS_PER_FARM_PERF",
+    "NUM_SEASONS_PER_FIELD_PERF",
+    "NUM_ACTIVITIES_PER_SEASON_PERF"
+  ]
+}

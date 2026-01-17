@@ -1,0 +1,204 @@
+{
+  "module": "business_modules.production.merged.services",
+  "imports": [
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "logging",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ProductionOrderService",
+      "methods": [
+        "create_production_order",
+        "update_production_order",
+        "change_production_order_status",
+        "create_production_batch",
+        "create_quality_test"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BOMService",
+      "methods": [
+        "create_bom",
+        "update_bom"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RoutingService",
+      "methods": [
+        "create_routing",
+        "update_routing"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ManufacturingOrderService",
+      "methods": [
+        "create_manufacturing_order",
+        "update_manufacturing_order",
+        "change_mo_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "WorkOrderService",
+      "methods": [
+        "update_work_order",
+        "change_wo_status",
+        "record_production",
+        "record_scrap"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "_require",
+      "parameters": [
+        "data",
+        "required_keys"
+      ]
+    },
+    {
+      "name": "_safe_set",
+      "parameters": [
+        "obj",
+        "data",
+        "keys"
+      ]
+    },
+    {
+      "name": "create_production_order",
+      "parameters": [
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "update_production_order",
+      "parameters": [
+        "production_order_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "change_production_order_status",
+      "parameters": [
+        "production_order_id",
+        "new_status",
+        "user"
+      ]
+    },
+    {
+      "name": "create_production_batch",
+      "parameters": [
+        "production_order_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "create_quality_test",
+      "parameters": [
+        "batch_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "create_bom",
+      "parameters": [
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "update_bom",
+      "parameters": [
+        "bom_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "create_routing",
+      "parameters": [
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "update_routing",
+      "parameters": [
+        "routing_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "create_manufacturing_order",
+      "parameters": [
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "update_manufacturing_order",
+      "parameters": [
+        "mo_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "change_mo_status",
+      "parameters": [
+        "mo_id",
+        "new_status",
+        "user"
+      ]
+    },
+    {
+      "name": "update_work_order",
+      "parameters": [
+        "wo_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "change_wo_status",
+      "parameters": [
+        "wo_id",
+        "new_status",
+        "user"
+      ]
+    },
+    {
+      "name": "record_production",
+      "parameters": [
+        "wo_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "record_scrap",
+      "parameters": [
+        "wo_id",
+        "data",
+        "user"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

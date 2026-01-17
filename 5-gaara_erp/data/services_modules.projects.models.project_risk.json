@@ -1,0 +1,69 @@
+{
+  "module": "services_modules.projects.models.project_risk",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils.translation",
+    "project"
+  ],
+  "classes": [
+    {
+      "name": "ProjectRisk",
+      "methods": [
+        "__str__",
+        "get_risk_score",
+        "get_risk_level"
+      ],
+      "variables": [
+        "PROBABILITY_CHOICES",
+        "IMPACT_CHOICES",
+        "STATUS_CHOICES",
+        "project",
+        "title",
+        "description",
+        "probability",
+        "impact",
+        "status",
+        "mitigation_plan",
+        "owner",
+        "identified_date",
+        "resolution_date",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_risk_score",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_risk_level",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

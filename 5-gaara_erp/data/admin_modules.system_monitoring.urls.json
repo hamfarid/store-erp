@@ -1,0 +1,14 @@
+{
+  "module": "admin_modules.system_monitoring.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework.routers",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "router",
+    "urlpatterns"
+  ]
+}

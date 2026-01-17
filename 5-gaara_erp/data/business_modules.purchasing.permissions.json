@@ -1,0 +1,127 @@
+{
+  "module": "business_modules.purchasing.permissions",
+  "imports": [
+    "django.utils.translation",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "IsOwnerOrReadOnly",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "CanApprovePurchaseOrder",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "CanApprovePurchaseInvoice",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "CanApprovePurchaseReturn",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "_is_in_groups",
+      "parameters": [
+        "user",
+        "group_names"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

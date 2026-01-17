@@ -1,0 +1,188 @@
+{
+  "module": "utility_modules.utilities.backup_files.serializers",
+  "imports": [
+    "django.conf",
+    "django.contrib.auth",
+    "django.contrib.contenttypes.models",
+    "django.utils",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSerializer",
+      "methods": [
+        "get_name"
+      ],
+      "variables": [
+        "name"
+      ]
+    },
+    {
+      "name": "SystemMetricSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "DatabaseStatusSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserStatisticSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SystemAlertSerializer",
+      "methods": [
+        "update"
+      ],
+      "variables": [
+        "resolved_by_details",
+        "level_display"
+      ]
+    },
+    {
+      "name": "UserActivityLogSerializer",
+      "methods": [
+        "get_target_object_type"
+      ],
+      "variables": [
+        "user_details",
+        "action_type_display",
+        "target_object_type"
+      ]
+    },
+    {
+      "name": "SystemErrorLogSerializer",
+      "methods": [],
+      "variables": [
+        "user_details",
+        "activity_log_details",
+        "level_display"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "SystemMetric",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "DatabaseStatus",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserStatistic",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SystemAlert",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserActivityLog",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SystemErrorLog",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_name",
+      "parameters": [
+        "self",
+        "instance"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "instance",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "get_target_object_type",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": [
+    "AUTH_USER_MODEL",
+    "User"
+  ]
+}

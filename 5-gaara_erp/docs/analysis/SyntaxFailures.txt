@@ -1,0 +1,3146 @@
+gaara_erp_new\admin_modules\dashboard\services\dashboard_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\admin_modules\dashboard\services\dashboard_service.py", line 33
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 33)
+
+gaara_erp_new\admin_modules\database_management\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\admin_modules\database_management\serializers.py", line 303
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 329)
+
+gaara_erp_new\admin_modules\health_monitoring\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\admin_modules\health_monitoring\models.py", line 68
+    """Warning"),
+              ^
+SyntaxError: unterminated string literal (detected at line 68)
+
+gaara_erp_new\admin_modules\notifications\models\backup_files\notification.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\admin_modules\notifications\models\backup_files\notification.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\admin_modules\notifications\services\backup_files\notification_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\admin_modules\notifications\services\backup_files\notification_service.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\admin_modules\system_monitoring\models_improved.py :: PyCompileError: Sorry: IndentationError: expected an indented block after class definition on line 321 (models_improved.py, line 322)
+gaara_erp_new\admin_modules\system_monitoring\services\monitoring_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\admin_modules\system_monitoring\services\monitoring_service.py", line 14
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 14)
+
+gaara_erp_new\admin_modules\system_monitoring\services\monitoring_service_broken.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\admin_modules\system_monitoring\services\monitoring_service_broken.py", line 13
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 13)
+
+gaara_erp_new\business_modules\accounting\cashbox.py :: PyCompileError: Sorry: IndentationError: unexpected indent (cashbox.py, line 17)
+gaara_erp_new\business_modules\accounting\journal_entry_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\accounting\journal_entry_services.py", line 28
+    def create_journal_entry_draft()
+                                    ^
+SyntaxError: expected ':'
+
+gaara_erp_new\business_modules\accounting\reports.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\accounting\reports.py", line 8
+    /**
+    ^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\accounting\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\accounting\serializers.py", line 433
+    raise serializers.ValidationError(_("هناك تداخل مع سنة مالية أخرى."""))
+                                                                         ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\business_modules\accounting\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\accounting\services.py", line 1
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 460)
+
+gaara_erp_new\business_modules\accounting\serializers\settlement_serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\accounting\serializers\settlement_serializers.py", line 38
+    سيريالايزر لعمليات المقاصة.
+               ^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\accounting\tests\conftest.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\accounting\tests\conftest.py", line 19
+    """ENGINE": "django.db.backends.sqlite3",
+                                           ^
+SyntaxError: unterminated string literal (detected at line 19)
+
+gaara_erp_new\business_modules\accounting\tests\test_settlement_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\accounting\tests\test_settlement_integration.py", line 10
+    /**
+    ^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\accounting\views\integration_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\accounting\views\integration_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\accounting\views\settlement_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\accounting\views\settlement_views.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\contacts\campaigns.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\contacts\campaigns.py", line 188
+    """Unknown Campaign")
+                       ^
+SyntaxError: unterminated string literal (detected at line 188)
+
+gaara_erp_new\business_modules\contacts\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\contacts\filters.py", line 23
+    """country", "city", "region", "sales_engineer",
+                                                  ^
+SyntaxError: unterminated string literal (detected at line 23)
+
+gaara_erp_new\business_modules\contacts\leads.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\contacts\leads.py", line 148
+    """Returns the full name concatenated from first and last name."""
+                                                                   ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 158)
+
+gaara_erp_new\business_modules\contacts\opportunities.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\contacts\opportunities.py", line 43
+    """contacts.Contact",
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 114)
+
+gaara_erp_new\business_modules\contacts\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\contacts\serializers.py", line 16
+    """مسلسل وسوم جهات الاتصال"""
+       ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\contacts\tests\test_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\contacts\tests\test_api.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\business_modules\contacts\tests\test_contacts.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\contacts\tests\test_contacts.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\contacts\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\contacts\tests\test_models.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\business_modules\contacts\tests\test_settlement_logic.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\contacts\tests\test_settlement_logic.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\business_modules\inventory\base.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\base.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\business_modules\inventory\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\filters.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\location_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\location_views.py", line 7
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 7)
+
+gaara_erp_new\business_modules\inventory\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\permissions.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\business_modules\inventory\processes.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\processes.py", line 15
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 15)
+
+gaara_erp_new\business_modules\inventory\products.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\products.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\product_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\product_views.py", line 17
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 17)
+
+gaara_erp_new\business_modules\inventory\queries.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\queries.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\business_modules\inventory\reports.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\reports.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\report_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\report_views.py", line 12
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 12)
+
+gaara_erp_new\business_modules\inventory\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\settings_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\settings_models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\business_modules\inventory\setting_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\setting_views.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\business_modules\inventory\stock_updater.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\stock_updater.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\stock_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\stock_views.py", line 14
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 14)
+
+gaara_erp_new\business_modules\inventory\tracking.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\tracking.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\tracking_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\tracking_views.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\business_modules\inventory\transactions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\transactions.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\utils.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\utils.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\business_modules\inventory\product_grading\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\product_grading\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\product_grading\pricing.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\product_grading\pricing.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\tests\test_activity_log.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\tests\test_activity_log.py", line 10
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 10)
+
+gaara_erp_new\business_modules\inventory\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\tests\test_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\tests\test_product.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\tests\test_product.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\tests\test_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\tests\test_services.py", line 14
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 14)
+
+gaara_erp_new\business_modules\inventory\tests\test_stock_move.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\tests\test_stock_move.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\inventory\tests\test_warehouse.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\inventory\tests\test_warehouse.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\pos\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\pos\models.py", line 21
+    نموذج إعدادات نقطة البيع."""
+          ^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\pos\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\pos\serializers.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\business_modules\pos\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\pos\services.py", line 13
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 13)
+
+gaara_erp_new\business_modules\pos\tests\test_pos_config.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\pos\tests\test_pos_config.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\pos\tests\test_pos_order.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\pos\tests\test_pos_order.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\pos\tests\test_pos_payment.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\pos\tests\test_pos_payment.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\pos\tests\test_pos_session.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\pos\tests\test_pos_session.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\pos\tests\test_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\pos\tests\test_services.py", line 16
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 16)
+
+gaara_erp_new\business_modules\production\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\admin.py", line 65
+    """routing_operation",
+                        ^
+SyntaxError: unterminated string literal (detected at line 65)
+
+gaara_erp_new\business_modules\production\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\filters.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\production\forms.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\forms.py", line 21
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 33)
+
+gaara_erp_new\business_modules\production\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\models.py", line 244
+    {"unit_cost": _("تكلفة الوحدة لا يمكن أن تكون سالبة.""")})
+                                                           ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\business_modules\production\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\permissions.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\production\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\serializers.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\business_modules\production\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\services.py", line 13
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 13)
+
+gaara_erp_new\business_modules\production\merged\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\merged\admin.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\business_modules\production\merged\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\merged\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\business_modules\production\merged\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\merged\serializers.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\business_modules\production\merged\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\merged\services.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\business_modules\production\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\production\tests\test_integration.py", line 17
+    /**
+    ^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\purchasing\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\admin.py", line 24
+    """email",
+            ^
+SyntaxError: unterminated string literal (detected at line 24)
+
+gaara_erp_new\business_modules\purchasing\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\filters.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\purchasing\invoices.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\invoices.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\purchasing\orders.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\orders.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\purchasing\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\permissions.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\business_modules\purchasing\receipts.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\receipts.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\purchasing\requisitions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\requisitions.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\purchasing\returns.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\returns.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\purchasing\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\purchasing\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\purchasing\models\goods_receipt.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\models\goods_receipt.py", line 42
+    ordering = ["-receipt_date", "name]
+                                 ^
+SyntaxError: unterminated string literal (detected at line 42)
+
+gaara_erp_new\business_modules\purchasing\models\payment_method.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\models\payment_method.py", line 13
+    نموذج طرق الدفع المتاحة للموردين."""
+          ^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\purchasing\models\purchase_invoice.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\models\purchase_invoice.py", line 15
+    نموذج فاتورة المشتريات"""
+          ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\purchasing\models\purchase_invoice_item.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\models\purchase_invoice_item.py", line 12
+    نموذج بند فاتورة المشتريات"""
+          ^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\purchasing\models\purchase_invoice_status.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\models\purchase_invoice_status.py", line 11
+    تعريف حالات فاتورة المشتريات"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\purchasing\models\purchase_order.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\models\purchase_order.py", line 18
+    نموذج أوامر الشراء"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\purchasing\models\purchase_return.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\models\purchase_return.py", line 189
+    )
+    ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\business_modules\purchasing\models\supplier_invoice.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\models\supplier_invoice.py", line 43
+    ordering = ["-invoice_date", "name]
+                                 ^
+SyntaxError: unterminated string literal (detected at line 43)
+
+gaara_erp_new\business_modules\purchasing\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\tests\test_integration.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\business_modules\purchasing\tests\test_purchase_order.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\tests\test_purchase_order.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\purchasing\tests\test_supplier.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\purchasing\tests\test_supplier.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\rent\integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\rent\integration.py", line 324
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 324)
+
+gaara_erp_new\business_modules\rent\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\rent\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\rent\tests\test_property.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\rent\tests\test_property.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\rent\tests\test_rental_contract.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\rent\tests\test_rental_contract.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\rent\tests\test_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\rent\tests\test_services.py", line 7
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 7)
+
+gaara_erp_new\business_modules\sales\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\filters.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\business_modules\sales\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\models.py", line 12
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 12)
+
+gaara_erp_new\business_modules\sales\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\permissions.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\business_modules\sales\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\serializers.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\business_modules\sales\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\sales\models\price_list.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\models\price_list.py", line 110
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 131)
+
+gaara_erp_new\business_modules\sales\models\sales_invoice.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\models\sales_invoice.py", line 17
+    نموذج فاتورة المبيعات"""
+          ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\sales\models\sales_invoice_item.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\models\sales_invoice_item.py", line 13
+    نموذج بند فاتورة المبيعات"""
+          ^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\sales\models\sales_invoice_status.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\models\sales_invoice_status.py", line 11
+    تعريف حالات فاتورة المبيعات"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\sales\models\sales_order.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\models\sales_order.py", line 43
+    نموذج أوامر البيع"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\sales\models\sales_return.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\models\sales_return.py", line 16
+    نموذج مرتجعات المبيعات"""
+          ^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\sales\models\sales_team.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\models\sales_team.py", line 12
+    نموذج فرق المبيعات"""
+          ^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\business_modules\sales\tests\test_customer.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\tests\test_customer.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\sales\tests\test_sales_order.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\sales\tests\test_sales_order.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\solar_stations\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\solar_stations\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\solar_stations\api\station_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\solar_stations\api\station_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\solar_stations\services\maintenance_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\solar_stations\services\maintenance_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\solar_stations\services\monitoring_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\solar_stations\services\monitoring_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\solar_stations\services\reporting_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\solar_stations\services\reporting_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\business_modules\solar_stations\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\solar_stations\tests\test_integration.py", line 14
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 14)
+
+gaara_erp_new\business_modules\solar_stations\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\solar_stations\tests\test_models.py", line 11
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 11)
+
+gaara_erp_new\business_modules\solar_stations\tests\test_solar_station.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\solar_stations\tests\test_solar_station.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\business_modules\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\business_modules\tests\test_models.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\core_modules\authorization_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\authorization_service.py", line 21
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 21)
+
+gaara_erp_new\core_modules\database_manager.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\database_manager.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\models.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\core_modules\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions.py", line 21
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 21)
+
+gaara_erp_new\core_modules\task.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\task.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\task_notifications.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\task_notifications.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\test_authorization.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\test_authorization.py", line 25
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 25)
+
+gaara_erp_new\core_modules\test_workflow.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\test_workflow.py", line 15
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 15)
+
+gaara_erp_new\core_modules\views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\views.py", line 29
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 29)
+
+gaara_erp_new\core_modules\workflow.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\workflow.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\workflow_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\workflow_service.py", line 15
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 15)
+
+gaara_erp_new\core_modules\ai_permissions\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\ai_permissions\admin.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\ai_permissions\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\ai_permissions\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\ai_permissions\integrations.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\ai_permissions\integrations.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\ai_permissions\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\ai_permissions\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\core_modules\ai_permissions\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\ai_permissions\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\ai_permissions\signals.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\ai_permissions\signals.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\api_keys\authentication.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\api_keys\authentication.py", line 13
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 13)
+
+gaara_erp_new\core_modules\api_keys\middleware.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\api_keys\middleware.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\api_keys\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\api_keys\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\api_keys\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\api_keys\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\api_keys\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\api_keys\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\companies\integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\companies\integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\companies\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\companies\serializers.py", line 7
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 7)
+
+gaara_erp_new\core_modules\companies\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\companies\tests\test_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\core\tests\test_core.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\core\tests\test_core.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\core\tests\test_utils.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\core\tests\test_utils.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\master_data_excel\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\master_data_excel\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\master_data_excel\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\master_data_excel\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\organization\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\organization\serializers.py", line 2
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 2)
+
+gaara_erp_new\core_modules\organization\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\organization\services.py", line 27
+    """Retrieves a currency by its code."
+                                        ^
+SyntaxError: unterminated string literal (detected at line 27)
+
+gaara_erp_new\core_modules\permissions\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\admin.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\authorization_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\authorization_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\filters.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\models_fixed.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\models_fixed.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\permissions.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\services.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\core_modules\permissions\simplified_tests.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\simplified_tests.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\tests.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\tests.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\test_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\test_models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\test_serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\test_serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\unified_permissions_model.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\unified_permissions_model.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\tests\test_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\tests\test_models.py", line 17
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 17)
+
+gaara_erp_new\core_modules\permissions\tests\test_serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions\tests\test_serializers.py", line 25
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 25)
+
+gaara_erp_new\core_modules\permissions_manager\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions_manager\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions_manager\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions_manager\models.py", line 12
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 12)
+
+gaara_erp_new\core_modules\permissions_manager\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions_manager\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\permissions_manager\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\permissions_manager\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\signals.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\signals.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\activity_log\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\activity_log\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\activity_log\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\activity_log\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\activity_log\signals.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\activity_log\signals.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\data_import_export\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\data_import_export\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\data_import_export\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\data_import_export\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\data_import_export\signals.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\data_import_export\signals.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\security\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\security\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\security\middleware.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\security\middleware.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\security\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\security\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\security\signals.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\security\signals.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\submodules\activity_logging\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\submodules\activity_logging\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\submodules\activity_logging\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\submodules\activity_logging\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\submodules\data_import_export\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\submodules\data_import_export\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\submodules\data_import_export\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\submodules\data_import_export\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\submodules\security\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\submodules\security\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\submodules\security\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\submodules\security\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\submodules\user_management\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\submodules\user_management\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\submodules\user_management\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\submodules\user_management\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\system_settings\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\system_settings\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\system_settings\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\system_settings\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\tests\test_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\tests\test_models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\tests\test_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\tests\test_views.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\user_management\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\user_management\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\setup\user_management\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\setup\user_management\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\core_modules\system_settings\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\system_settings\admin.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\system_settings\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\system_settings\apps.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\core_modules\system_settings\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\system_settings\models.py", line 10
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 10)
+
+gaara_erp_new\core_modules\system_settings\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\system_settings\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\system_settings\signals.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\system_settings\signals.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\system_settings\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\system_settings\test_integration.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\core_modules\system_settings\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\system_settings\tests\test_integration.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\core_modules\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\tests\test_models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\tests\test_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\tests\test_services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\tests\test_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\tests\test_views.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\tests\__init__.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\tests\__init__.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\unified_permissions\abac_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\unified_permissions\abac_models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\unified_permissions\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\unified_permissions\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\users\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\users\filters.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\users\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\users\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\users\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\users\permissions.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\users\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\users\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\users\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\users\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\users\tests.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\users\tests.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\core_modules\users_accounts\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\users_accounts\admin.py", line 20
+    """Define admin model for custom User model."
+                                                ^
+SyntaxError: unterminated string literal (detected at line 20)
+
+gaara_erp_new\core_modules\users_accounts\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\users_accounts\models.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\core_modules\users_accounts\tests.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\users_accounts\tests.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\core_modules\user_permissions\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\user_permissions\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\core_modules\user_permissions\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\core_modules\user_permissions\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\gaara_erp\settings_backup.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\gaara_erp\settings_backup.py", line 2
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 2)
+
+gaara_erp_new\helper_modules\customization\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\helper_modules\customization\models.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\helper_modules\plugins\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\helper_modules\plugins\models.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\helper_modules\utilities\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\helper_modules\utilities\models.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\integration_modules\a2a_integration\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\a2a_integration\admin.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\integration_modules\a2a_integration\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\a2a_integration\filters.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\integration_modules\a2a_integration\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\a2a_integration\models.py", line 15
+    نموذج لتخزين معلومات الأنظمة الخارجية التي يتم التكامل معها"""
+          ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\integration_modules\a2a_integration\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\a2a_integration\serializers.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\integration_modules\a2a_integration\tests\test_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\a2a_integration\tests\test_api.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\integration_modules\a2a_integration\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\a2a_integration\tests\test_models.py", line 7
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 7)
+
+gaara_erp_new\integration_modules\ai\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\admin.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\integration_modules\ai\agents.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\agents.py", line 71
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 71)
+
+gaara_erp_new\integration_modules\ai\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\apps.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\integration_modules\ai\exceptions.py :: PyCompileError: Sorry: IndentationError: unexpected indent (exceptions.py, line 11)
+gaara_erp_new\integration_modules\ai\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\models.py", line 21
+    نموذج لتخزين مصادر التعلم للذكاء الاصطناعي."""
+          ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\integration_modules\ai\model_selector.py :: PyCompileError: Sorry: IndentationError: unexpected indent (model_selector.py, line 24)
+gaara_erp_new\integration_modules\ai\monitoring.py :: PyCompileError: Sorry: IndentationError: expected an indented block after 'try' statement on line 15 (monitoring.py, line 16)
+gaara_erp_new\integration_modules\ai\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\serializers.py", line 24
+    fields = ["id", "user", "title",
+             ^
+SyntaxError: '[' was never closed
+
+gaara_erp_new\integration_modules\ai\services.py :: PyCompileError: Sorry: IndentationError: unexpected indent (services.py, line 10)
+gaara_erp_new\integration_modules\ai\models\additional_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\models\additional_models.py", line 2
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 2)
+
+gaara_erp_new\integration_modules\ai\models\conversations.py :: PyCompileError: Sorry: IndentationError: unexpected indent (conversations.py, line 16)
+gaara_erp_new\integration_modules\ai\models\detection_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\models\detection_models.py", line 15
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 15)
+
+gaara_erp_new\integration_modules\ai\models\disease_mappings.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\models\disease_mappings.py", line 52
+    "(Early Blight"),
+                   ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\integration_modules\ai\models\enhanced_ai_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\models\enhanced_ai_models.py", line 3
+    from datetime import datetime
+    ^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\integration_modules\ai\models\learning_sources.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\models\learning_sources.py", line 4
+    from django.db.models import JSONField, ForeignKey, ManyToManyField,
+                                                                        ^
+SyntaxError: trailing comma not allowed without surrounding parentheses
+
+gaara_erp_new\integration_modules\ai\models\memory_and_learning.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\models\memory_and_learning.py", line 52
+    null = True, blank = True, related_name = "knowledge_entries", verbose_name = _("Related \")
+                                                                                    ^
+SyntaxError: unterminated string literal (detected at line 52)
+
+gaara_erp_new\integration_modules\ai\models\new_ai_tools.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\models\new_ai_tools.py", line 26
+    format = "%(asctimes - %(levelname)s - %(message)s")
+                                                       ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\integration_modules\ai\models\__init__.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\models\__init__.py", line 4
+    from .memory_and_learning import AIKnowledgeEntry, TrainingRun,
+                                                                   ^
+SyntaxError: trailing comma not allowed without surrounding parentheses
+
+gaara_erp_new\integration_modules\ai\monitoring\data_collector.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\monitoring\data_collector.py", line 168
+    """/home / ubuntu / gaara_erp_backend / ai / monitoring / collected_data":
+                                                                            ^
+SyntaxError: unterminated string literal (detected at line 168)
+
+gaara_erp_new\integration_modules\ai\monitoring\drift_analyzer.py :: PyCompileError: Sorry: IndentationError: unexpected indent (drift_analyzer.py, line 12)
+gaara_erp_new\integration_modules\ai\services\activity_logger.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\services\activity_logger.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai\services\config_manager.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\services\config_manager.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai\services\coordinator.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\services\coordinator.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai\services\resource_manager.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\services\resource_manager.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\tests\test_integration.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\integration_modules\ai\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\tests\test_models.py", line 10
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 10)
+
+gaara_erp_new\integration_modules\ai\tests\test_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai\tests\test_services.py", line 10
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 10)
+
+gaara_erp_new\integration_modules\ai_a2a\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_a2a\models.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\integration_modules\ai_a2a\api\conversation_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_a2a\api\conversation_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_a2a\api\coordinator_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_a2a\api\coordinator_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_a2a\api\permission_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_a2a\api\permission_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_a2a\services\agent_status_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_a2a\services\agent_status_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_a2a\services\approval_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_a2a\services\approval_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_a2a\services\conversation_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_a2a\services\conversation_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_a2a\services\coordinator_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_a2a\services\coordinator_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_a2a\services\permission_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_a2a\services\permission_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agent\analysis_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\analysis_service.py", line 65
+    """interaction_id": "uuid...",
+                                ^
+SyntaxError: unterminated string literal (detected at line 65)
+
+gaara_erp_new\integration_modules\ai_agent\error_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\error_service.py", line 43
+    """error_message": error_message,
+                    ^
+SyntaxError: unterminated string literal (detected at line 43)
+
+gaara_erp_new\integration_modules\ai_agent\interaction_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\interaction_service.py", line 65
+    """responding_agent_name": responding_agent_name,
+                            ^
+SyntaxError: unterminated string literal (detected at line 65)
+
+gaara_erp_new\integration_modules\ai_agent\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\models.py", line 16
+    نموذج أساسي يوفر حقول مشتركة لجميع النماذج"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\integration_modules\ai_agent\reporting_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\reporting_service.py", line 31
+    """user_id": 1,
+              ^
+SyntaxError: unterminated string literal (detected at line 31)
+
+gaara_erp_new\integration_modules\ai_agent\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\serializers.py", line 22
+    """Serializer لنموذج AgentType."""
+       ^^^^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\integration_modules\ai_agent\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\services.py", line 57
+    """status": "ok"}
+                   ^
+SyntaxError: unterminated string literal (detected at line 57)
+
+gaara_erp_new\integration_modules\ai_agent\models\activity_logs.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\models\activity_logs.py", line 83
+    """Additional details about the activity, e.g., target agent ID, data key, error message"))
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 93)
+
+gaara_erp_new\integration_modules\ai_agent\models\agents.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\models\agents.py", line 24
+    """Whether the agent is currently active and can process interactions"))
+                                                                         ^
+SyntaxError: unterminated string literal (detected at line 24)
+
+gaara_erp_new\integration_modules\ai_agent\models\agent_types.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\models\agent_types.py", line 18
+    """Description of the agent type and its capabilities"))
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 29)
+
+gaara_erp_new\integration_modules\ai_agent\models\interactions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agent\models\interactions.py", line 65
+    """Data/payload sent in the interaction"))
+                                           ^
+SyntaxError: unterminated string literal (detected at line 65)
+
+gaara_erp_new\integration_modules\ai_agents\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agents\admin.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\integration_modules\ai_agents\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agents\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agents\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agents\models.py", line 473
+    f"فشل في إضافة صلاحية {permission.name} للدور {self.name}: {str(e)}""")
+                                                                          ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\integration_modules\ai_agriculture\ai_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\ai_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agriculture\integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agriculture\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\models.py", line 17
+    نموذج بيانات المحاصيل الزراعية."""
+          ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\integration_modules\ai_agriculture\api\crop_analysis_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\api\crop_analysis_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agriculture\api\crop_prediction_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\api\crop_prediction_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agriculture\services\crop_analysis_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\services\crop_analysis_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agriculture\services\crop_prediction_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\services\crop_prediction_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agriculture\services\image_analysis_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\services\image_analysis_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agriculture\services\sensor_data_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\services\sensor_data_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agriculture\services\weather_data_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\services\weather_data_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agriculture\tests\conftest.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\tests\conftest.py", line 27
+    """ENGINE": "django.db.backends.sqlite3",
+                                           ^
+SyntaxError: unterminated string literal (detected at line 27)
+
+gaara_erp_new\integration_modules\ai_agriculture\tests\test_ai_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\tests\test_ai_integration.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\integration_modules\ai_agriculture\tests\test_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\tests\test_api.py", line 18
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 18)
+
+gaara_erp_new\integration_modules\ai_agriculture\tests\test_apis.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\tests\test_apis.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_agriculture\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\tests\test_integration.py", line 10
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 10)
+
+gaara_erp_new\integration_modules\ai_agriculture\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_agriculture\tests\test_models.py", line 13
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 13)
+
+gaara_erp_new\integration_modules\ai_analytics\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_analytics\models.py", line 482
+    """تحديث تقدم المهمة."""
+                         ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 485)
+
+gaara_erp_new\integration_modules\ai_analytics\api\performance_analytics_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_analytics\api\performance_analytics_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_analytics\api\usage_analytics_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_analytics\api\usage_analytics_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_analytics\services\performance_analytics_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_analytics\services\performance_analytics_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_analytics\services\usage_analytics_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_analytics\services\usage_analytics_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_analytics\tests\test_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_analytics\tests\test_api.py", line 15
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 15)
+
+gaara_erp_new\integration_modules\ai_analytics\tests\test_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_analytics\tests\test_integration.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\integration_modules\ai_analytics\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_analytics\tests\test_models.py", line 13
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 13)
+
+gaara_erp_new\integration_modules\ai_analytics\tests\test_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_analytics\tests\test_services.py", line 15
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 15)
+
+gaara_erp_new\integration_modules\ai_monitoring\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_monitoring\admin.py", line 14
+    """user_affected", "is_false_positive", "acknowledged"
+                                                         ^
+SyntaxError: unterminated string literal (detected at line 14)
+
+gaara_erp_new\integration_modules\ai_monitoring\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_monitoring\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_monitoring\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_monitoring\models.py", line 16
+    نموذج أساسي يوفر حقول مشتركة لجميع النماذج"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\integration_modules\ai_monitoring\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_monitoring\serializers.py", line 10
+    """timestamp",
+                ^
+SyntaxError: unterminated string literal (detected at line 10)
+
+gaara_erp_new\integration_modules\ai_security\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_security\models.py", line 16
+    نموذج سياسات أمن الذكاء الاصطناعي."""
+          ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\integration_modules\ai_services\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_services\admin.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\integration_modules\ai_services\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_services\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_services\enhanced_ai_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_services\enhanced_ai_services.py", line 31
+    """name": "اللفحة المبكرة",
+                             ^
+SyntaxError: unterminated string literal (detected at line 31)
+
+gaara_erp_new\integration_modules\ai_services\filters.py :: PyCompileError: Sorry: IndentationError: unexpected indent (filters.py, line 8)
+gaara_erp_new\integration_modules\ai_services\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_services\models.py", line 7
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 7)
+
+gaara_erp_new\integration_modules\ai_services\model_comparison_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_services\model_comparison_service.py", line 11
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 11)
+
+gaara_erp_new\integration_modules\ai_services\risk_assessment.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_services\risk_assessment.py", line 24
+    def __init__()
+                  ^
+SyntaxError: expected ':'
+
+gaara_erp_new\integration_modules\ai_services\serializers.py :: PyCompileError: Sorry: IndentationError: unexpected indent (serializers.py, line 9)
+gaara_erp_new\integration_modules\ai_services\variety_identifier.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_services\variety_identifier.py", line 11
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 11)
+
+gaara_erp_new\integration_modules\ai_ui\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_ui\models.py", line 16
+    نموذج نماذج الذكاء الاصطناعي."""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\integration_modules\ai_ui\api\avatar_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_ui\api\avatar_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_ui\api\chat_interface_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_ui\api\chat_interface_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_ui\services\avatar_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_ui\services\avatar_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\ai_ui\services\chat_interface_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ai_ui\services\chat_interface_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\integration_modules\banking_payments\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\banking_payments\models.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\integration_modules\cloud_services\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\cloud_services\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\integration_modules\ecommerce\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\ecommerce\models.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\integration_modules\email_messaging\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\email_messaging\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\integration_modules\external_apis\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\external_apis\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\integration_modules\external_crm\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\external_crm\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\integration_modules\external_erp\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\external_erp\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\integration_modules\maps_location\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\maps_location\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\integration_modules\memory_ai\filters.py :: PyCompileError: Sorry: IndentationError: unexpected indent (filters.py, line 8)
+gaara_erp_new\integration_modules\memory_ai\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\memory_ai\models.py", line 386
+    """content": content,
+              ^
+SyntaxError: unterminated string literal (detected at line 386)
+
+gaara_erp_new\integration_modules\memory_ai\serializers.py :: PyCompileError: Sorry: IndentationError: unexpected indent (serializers.py, line 7)
+gaara_erp_new\integration_modules\shipping_logistics\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\shipping_logistics\models.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\integration_modules\social_media\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\social_media\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\integration_modules\translation\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\integration_modules\translation\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\admin_affairs\models\administrative_decision.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\models\administrative_decision.py", line 14
+    نموذج القرارات الإدارية"""
+          ^^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\admin_affairs\models\attendance_record.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\models\attendance_record.py", line 123
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 137)
+
+gaara_erp_new\services_modules\admin_affairs\models\department.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\models\department.py", line 13
+    نموذج الأقسام/الإدارات في المؤسسة"""
+          ^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\admin_affairs\models\employee_profile.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\models\employee_profile.py", line 15
+    نموذج الملف الشخصي للموظف في الشؤون الإدارية"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\admin_affairs\models\internal_request.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\models\internal_request.py", line 202
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 208)
+
+gaara_erp_new\services_modules\admin_affairs\models\internal_request_type.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\models\internal_request_type.py", line 11
+    نموذج أنواع الطلبات الداخلية"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\admin_affairs\models\leave.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\models\leave.py", line 157
+    }
+    ^
+SyntaxError: unmatched '}'
+
+gaara_erp_new\services_modules\admin_affairs\models\leave_type.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\models\leave_type.py", line 73
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 95)
+
+gaara_erp_new\services_modules\admin_affairs\models\position.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\models\position.py", line 56
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 58)
+
+gaara_erp_new\services_modules\admin_affairs\services\attendance_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\services\attendance_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\admin_affairs\services\department_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\services\department_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\admin_affairs\services\employee_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\services\employee_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\admin_affairs\services\leave_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\services\leave_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\admin_affairs\tests\test_admin_affairs.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\admin_affairs\tests\test_admin_affairs.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\archiving_system\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\archiving_system\admin.py", line 18
+    """fields": ("created_at", "updated_at"),
+                                          ^
+SyntaxError: unterminated string literal (detected at line 18)
+
+gaara_erp_new\services_modules\archiving_system\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\archiving_system\models.py", line 44
+    """Represents an archived document or record."""
+                                                 ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 119)
+
+gaara_erp_new\services_modules\archiving_system\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\archiving_system\serializers.py", line 18
+    """name",
+           ^
+SyntaxError: unterminated string literal (detected at line 18)
+
+gaara_erp_new\services_modules\assets\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\assets\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\assets\models\asset.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\assets\models\asset.py", line 331
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 367)
+
+gaara_erp_new\services_modules\assets\models\asset_category.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\assets\models\asset_category.py", line 147
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 153)
+
+gaara_erp_new\services_modules\assets\models\depreciation.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\assets\models\depreciation.py", line 15
+    نموذج طرق الاستهلاك - يمثل طرق حساب استهلاك الأصول"""
+          ^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\assets\models\maintenance.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\assets\models\maintenance.py", line 17
+    نموذج أنواع الصيانة - يمثل أنواع صيانة الأصول"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\assets\tests\test_asset.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\assets\tests\test_asset.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\assets\tests\test_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\assets\tests\test_services.py", line 11
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 11)
+
+gaara_erp_new\services_modules\beneficiaries\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\admin.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\beneficiaries\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\models.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\services_modules\beneficiaries\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\serializers.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\beneficiaries\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\beneficiaries\models\aid.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\models\aid.py", line 20
+    نموذج المساعدات - يمثل المساعدات المقدمة للمستفيدين"""
+          ^^^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\beneficiaries\models\beneficiary.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\models\beneficiary.py", line 17
+    نموذج المستفيدين - يمثل المستفيدين من خدمات المؤسسة"""
+          ^^^^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\beneficiaries\models\beneficiary_category.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\models\beneficiary_category.py", line 50
+    ordering = ["name]
+                ^
+SyntaxError: unterminated string literal (detected at line 50)
+
+gaara_erp_new\services_modules\beneficiaries\models\beneficiary_status.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\models\beneficiary_status.py", line 41
+    ordering = ["name]
+                ^
+SyntaxError: unterminated string literal (detected at line 41)
+
+gaara_erp_new\services_modules\beneficiaries\services\accounting_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\services\accounting_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\beneficiaries\services\attachment_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\services\attachment_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\beneficiaries\services\beneficiary_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\services\beneficiary_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\beneficiaries\services\category_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\services\category_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\beneficiaries\services\grant_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\services\grant_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\beneficiaries\services\payment_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\services\payment_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\beneficiaries\services\treasury_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\services\treasury_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\beneficiaries\tests\test_beneficiary.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\tests\test_beneficiary.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\beneficiaries\tests\test_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\beneficiaries\tests\test_services.py", line 13
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 13)
+
+gaara_erp_new\services_modules\board_management\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\board_management\models.py", line 15
+    نموذج مجلس الإدارة - يمثل مجلساً إدارياً في المؤسسة"""
+          ^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\board_management\models\board.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\board_management\models\board.py", line 65
+    ordering = ["-created_at]
+                ^
+SyntaxError: unterminated string literal (detected at line 65)
+
+gaara_erp_new\services_modules\board_management\models\board_decision.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\board_management\models\board_decision.py", line 128
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 130)
+
+gaara_erp_new\services_modules\board_management\models\board_meeting.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\board_management\models\board_meeting.py", line 141
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 143)
+
+gaara_erp_new\services_modules\board_management\models\board_member.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\board_management\models\board_member.py", line 15
+    نموذج عضو مجلس الإدارة - يمثل عضواً في مجلس إدارة"""
+          ^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\board_management\tests\test_board_management.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\board_management\tests\test_board_management.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\complaints_suggestions\models\complaint.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\complaints_suggestions\models\complaint.py", line 17
+    نموذج الشكاوى - يمثل شكوى مقدمة من عميل أو مستخدم"""
+          ^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\complaints_suggestions\models\complaint_category.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\complaints_suggestions\models\complaint_category.py", line 12
+    نموذج فئات الشكاوى - يمثل تصنيفات الشكاوى المختلفة"""
+          ^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\complaints_suggestions\models\complaint_status.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\complaints_suggestions\models\complaint_status.py", line 58
+    الحصول على إحصائيات الشكاوى حسب الفئة
+           ^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\complaints_suggestions\models\feedback.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\complaints_suggestions\models\feedback.py", line 15
+    نموذج أنواع التغذية الراجعة - يمثل أنواع التغذية الراجعة المختلفة"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\complaints_suggestions\models\suggestion.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\complaints_suggestions\models\suggestion.py", line 17
+    نموذج الاقتراحات - يمثل اقتراحاً مقدماً من عميل أو مستخدم"""
+          ^^^^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\complaints_suggestions\models\suggestion_category.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\complaints_suggestions\models\suggestion_category.py", line 12
+    نموذج فئات الاقتراحات - يمثل تصنيفات الاقتراحات المختلفة"""
+          ^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\complaints_suggestions\models\suggestion_status.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\complaints_suggestions\models\suggestion_status.py", line 12
+    نموذج حالات الاقتراحات - يمثل الحالات المختلفة التي يمكن أن يكون عليها الاقتراح"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\complaints_suggestions\tests\test_complaints_suggestions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\complaints_suggestions\tests\test_complaints_suggestions.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\compliance\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\compliance\models.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\services_modules\correspondence\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\correspondence\admin.py", line 15
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 15)
+
+gaara_erp_new\services_modules\correspondence\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\correspondence\filters.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\services_modules\correspondence\forms.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\correspondence\forms.py", line 19
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 19)
+
+gaara_erp_new\services_modules\correspondence\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\correspondence\models.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\correspondence\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\correspondence\serializers.py", line 16
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 16)
+
+gaara_erp_new\services_modules\correspondence\tests\test_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\correspondence\tests\test_api.py", line 19
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 19)
+
+gaara_erp_new\services_modules\correspondence\tests\test_correspondence.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\correspondence\tests\test_correspondence.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\correspondence\tests\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\correspondence\tests\test_models.py", line 23
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 23)
+
+gaara_erp_new\services_modules\correspondence\tests\test_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\correspondence\tests\test_views.py", line 17
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 17)
+
+gaara_erp_new\services_modules\feasibility_studies\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\feasibility_studies\admin.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\feasibility_studies\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\feasibility_studies\apps.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\services_modules\feasibility_studies\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\feasibility_studies\models.py", line 51
+    """calculations.")
+                    ^
+SyntaxError: unterminated string literal (detected at line 51)
+
+gaara_erp_new\services_modules\feasibility_studies\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\feasibility_studies\serializers.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\services_modules\feasibility_studies\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\feasibility_studies\services.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\services_modules\feasibility_studies\tests\test_feasibility_studies.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\feasibility_studies\tests\test_feasibility_studies.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\fleet_management\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\apps.py", line 2
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 2)
+
+gaara_erp_new\services_modules\fleet_management\integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\integration.py", line 7
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 7)
+
+gaara_erp_new\services_modules\fleet_management\signals.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\signals.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\fleet_management\models\driver.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\models\driver.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\fleet_management\models\fuel_log.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\models\fuel_log.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\services_modules\fleet_management\models\gps_log.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\models\gps_log.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\fleet_management\models\maintenance_log.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\models\maintenance_log.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\fleet_management\models\vehicle.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\models\vehicle.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\fleet_management\models\vehicle_assignment.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\models\vehicle_assignment.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\services_modules\fleet_management\models\vehicle_type.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\models\vehicle_type.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\fleet_management\services\driver_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\services\driver_service.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\fleet_management\services\fuel_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\services\fuel_service.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\fleet_management\services\gps_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\services\gps_service.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\services_modules\fleet_management\services\maintenance_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\services\maintenance_service.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\fleet_management\services\predictive_maintenance_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\services\predictive_maintenance_service.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\fleet_management\services\vehicle_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\fleet_management\services\vehicle_service.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\forecast\forecast_management.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\forecast\forecast_management.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\forecast\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\forecast\models.py", line 16
+    نموذج التنبؤ - يمثل نموذجاً للتنبؤ بالبيانات المستقبلية"""
+          ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\forecast\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\forecast\services.py", line 14
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 14)
+
+gaara_erp_new\services_modules\forecast\tests\test_forecast.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\forecast\tests\test_forecast.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\hr\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\admin.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\services_modules\hr\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\apps.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\services_modules\hr\attendance.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\attendance.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\services_modules\hr\bonuses.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\bonuses.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\services_modules\hr\contracts.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\contracts.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\hr\details.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\details.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\hr\employee.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\employee.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\services_modules\hr\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\filters.py", line 17
+    This file will contain custom filters for the HR module's API views.
+                                                           ^
+SyntaxError: unterminated string literal (detected at line 17)
+
+gaara_erp_new\services_modules\hr\leave.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\leave.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\hr\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\models.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\hr\payroll.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\payroll.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\hr\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\permissions.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\services_modules\hr\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\serializers.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\services_modules\hr\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\services.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\services_modules\hr\settings.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\settings.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\services_modules\hr\structure.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\structure.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\hr\views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\views.py", line 39
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 39)
+
+gaara_erp_new\services_modules\hr\models\department.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\models\department.py", line 41
+    """Employee",
+               ^
+SyntaxError: unterminated string literal (detected at line 41)
+
+gaara_erp_new\services_modules\hr\models\employee.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\models\employee.py", line 164
+    """self",
+           ^
+SyntaxError: unterminated string literal (detected at line 164)
+
+gaara_erp_new\services_modules\hr\models\employee_asset.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\models\employee_asset.py", line 72
+    notes = models.TextField(_("Notes"""), blank = True, null = True)
+                                        ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\services_modules\hr\models\employee_document.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\models\employee_document.py", line 72
+    ordering = ["employee", "-expiry_date]
+                            ^
+SyntaxError: unterminated string literal (detected at line 72)
+
+gaara_erp_new\services_modules\hr\models\employee_experience.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\models\employee_experience.py", line 57
+    ordering = ["employee", "-start_date]
+                            ^
+SyntaxError: unterminated string literal (detected at line 57)
+
+gaara_erp_new\services_modules\hr\models\employee_qualification.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\models\employee_qualification.py", line 65
+    ordering = ["employee", "-completion_date]
+                            ^
+SyntaxError: unterminated string literal (detected at line 65)
+
+gaara_erp_new\services_modules\hr\models\job_grade.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\models\job_grade.py", line 93
+    return _("Not specified""")
+                              ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\services_modules\hr\models\position.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\models\position.py", line 55
+    is_active = models.BooleanField(_("Is Active"""), default = True)
+                                                                    ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\services_modules\hr\tests\test_department.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\tests\test_department.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\hr\tests\test_employee.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\tests\test_employee.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\hr\tests\test_employee_asset.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\tests\test_employee_asset.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\hr\tests\test_employee_document.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\tests\test_employee_document.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\hr\tests\test_employee_experience.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\tests\test_employee_experience.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\hr\tests\test_employee_qualification.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\tests\test_employee_qualification.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\hr\tests\test_hr.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\tests\test_hr.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\hr\tests\test_job_grade.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\tests\test_job_grade.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\hr\tests\test_position.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\hr\tests\test_position.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\legal_affairs\models\legal_case.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\models\legal_case.py", line 21
+    """خيارات نوع القضية
+       ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\legal_affairs\models\legal_consultation.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\models\legal_consultation.py", line 21
+    """خيارات نوع الاستشارة
+       ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\legal_affairs\models\legal_contract.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\models\legal_contract.py", line 21
+    """خيارات نوع العقد
+       ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\legal_affairs\models\legal_document.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\models\legal_document.py", line 20
+    """خيارات نوع المستند
+       ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\legal_affairs\models\legal_party.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\models\legal_party.py", line 20
+    """خيارات نوع الطرف
+       ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\legal_affairs\models\legal_session.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\models\legal_session.py", line 20
+    """خيارات نوع الجلسة
+       ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\legal_affairs\models\legal_task.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\models\legal_task.py", line 21
+    """خيارات نوع المهمة
+       ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\legal_affairs\models\legal_template.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\models\legal_template.py", line 21
+    """خيارات نوع القالب
+       ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\legal_affairs\tests\test_legal_affairs.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\tests\test_legal_affairs.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\legal_affairs\tests\test_legal_case.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\tests\test_legal_case.py", line 7
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 7)
+
+gaara_erp_new\services_modules\legal_affairs\tests\test_legal_consultation.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\tests\test_legal_consultation.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\legal_affairs\tests\test_legal_contract.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\tests\test_legal_contract.py", line 7
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 7)
+
+gaara_erp_new\services_modules\legal_affairs\tests\test_legal_document.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\tests\test_legal_document.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\legal_affairs\tests\test_legal_party.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\tests\test_legal_party.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\services_modules\legal_affairs\tests\test_legal_session.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\tests\test_legal_session.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\legal_affairs\tests\test_legal_task.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\tests\test_legal_task.py", line 9
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 9)
+
+gaara_erp_new\services_modules\legal_affairs\tests\test_legal_template.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\legal_affairs\tests\test_legal_template.py", line 7
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 7)
+
+gaara_erp_new\services_modules\marketing\forms.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\forms.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\marketing\models\marketing_activity.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\models\marketing_activity.py", line 333
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 343)
+
+gaara_erp_new\services_modules\marketing\models\marketing_analytics.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\models\marketing_analytics.py", line 17
+    نموذج التحليلات التسويقية."""
+          ^^^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\marketing\models\marketing_campaign.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\models\marketing_campaign.py", line 20
+    نموذج الحملة التسويقية."""
+          ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\marketing\models\marketing_channel.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\models\marketing_channel.py", line 284
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 290)
+
+gaara_erp_new\services_modules\marketing\models\marketing_content.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\models\marketing_content.py", line 390
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 407)
+
+gaara_erp_new\services_modules\marketing\models\marketing_lead.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\models\marketing_lead.py", line 21
+    نموذج العميل المحتمل التسويقي."""
+          ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\marketing\models\marketing_promotion.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\models\marketing_promotion.py", line 17
+    نموذج العروض الترويجية."""
+          ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\marketing\models\marketing_segment.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\models\marketing_segment.py", line 223
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 229)
+
+gaara_erp_new\services_modules\marketing\tests\test_marketing.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\tests\test_marketing.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\marketing\tests\test_marketing_campaign.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\tests\test_marketing_campaign.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\marketing\tests\test_marketing_channel.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\marketing\tests\test_marketing_channel.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\admin.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\services_modules\projects\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\apps.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\services_modules\projects\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\serializers.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\projects\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\signals.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\signals.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\api\project_task_api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\api\project_task_api.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\models\dependencies.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\dependencies.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\projects\models\financials.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\financials.py", line 64
+    """organization.Currency",  # Using string path
+                            ^
+SyntaxError: unterminated string literal (detected at line 64)
+
+gaara_erp_new\services_modules\projects\models\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\permissions.py", line 86
+    ordering = ["name]
+                ^
+SyntaxError: unterminated string literal (detected at line 86)
+
+gaara_erp_new\services_modules\projects\models\project.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\project.py", line 6
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 6)
+
+gaara_erp_new\services_modules\projects\models\project_gantt.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\project_gantt.py", line 10
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 10)
+
+gaara_erp_new\services_modules\projects\models\project_member.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\project_member.py", line 15
+    نموذج عضو المشروع - يمثل عضو فريق في مشروع معين ودوره"""
+          ^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\projects\models\project_phase.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\project_phase.py", line 12
+    نموذج مرحلة المشروع - يمثل مرحلة ضمن المشروع"""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\projects\models\project_risk.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\project_risk.py", line 107
+    """low": 1,
+          ^
+SyntaxError: unterminated string literal (detected at line 107)
+
+gaara_erp_new\services_modules\projects\models\risk.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\risk.py", line 36
+    ordering = ["name]
+                ^
+SyntaxError: unterminated string literal (detected at line 36)
+
+gaara_erp_new\services_modules\projects\models\task.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\task.py", line 69
+    ordering = ["order]
+                ^
+SyntaxError: unterminated string literal (detected at line 69)
+
+gaara_erp_new\services_modules\projects\models\workflow.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\workflow.py", line 45
+    ordering = ["name]
+                ^
+SyntaxError: unterminated string literal (detected at line 45)
+
+gaara_erp_new\services_modules\projects\models\__init__.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\models\__init__.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\services\project_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\services\project_integration.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\projects\services\project_risk_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\services\project_risk_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\services\project_task_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\services\project_task_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\tests\test_projects.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\tests\test_projects.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\tests\test_project_task_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\tests\test_project_task_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\tests\test_risk_management_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\tests\test_risk_management_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\tests\test_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\tests\test_services.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\projects\tests\test_workflow_integration.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\tests\test_workflow_integration.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\projects\utils\data_validators.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\projects\utils\data_validators.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\quality_control\models\quality_certificate.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\models\quality_certificate.py", line 14
+    نموذج شهادة الجودة - يستخدم لإصدار وإدارة شهادات الجودة للمنتجات أو الخدمات."""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\quality_control\models\quality_check.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\models\quality_check.py", line 14
+    نموذج فحص الجودة - يستخدم لتسجيل وتتبع عمليات فحص الجودة للمنتجات أو الخدمات."""
+          ^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\quality_control\models\quality_improvement.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\models\quality_improvement.py", line 13
+    نموذج تحسين الجودة - يستخدم لتسجيل وتتبع مبادرات تحسين الجودة."""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\quality_control\models\quality_issue.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\models\quality_issue.py", line 384
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 396)
+
+gaara_erp_new\services_modules\quality_control\models\quality_parameter.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\models\quality_parameter.py", line 262
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 268)
+
+gaara_erp_new\services_modules\quality_control\models\quality_result.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\models\quality_result.py", line 12
+    نموذج نتيجة الجودة - يستخدم لتسجيل نتائج اختبارات الجودة."""
+          ^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\quality_control\models\quality_template.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\models\quality_template.py", line 13
+    نموذج قالب الجودة - يستخدم لتعريف قوالب فحص الجودة القابلة لإعادة الاستخدام."""
+          ^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\quality_control\models\quality_test.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\models\quality_test.py", line 324
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 326)
+
+gaara_erp_new\services_modules\quality_control\tests\test_quality_certificate.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\tests\test_quality_certificate.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\quality_control\tests\test_quality_check.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\tests\test_quality_check.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\quality_control\tests\test_quality_improvement.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\tests\test_quality_improvement.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\quality_control\tests\test_quality_issue.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\tests\test_quality_issue.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\quality_control\tests\test_quality_parameter.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\tests\test_quality_parameter.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\quality_control\tests\test_quality_result.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\tests\test_quality_result.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\quality_control\tests\test_quality_template.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\tests\test_quality_template.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\quality_control\tests\test_quality_test.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\quality_control\tests\test_quality_test.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\risk_management\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\risk_management\models.py", line 156
+    """medium": 2,
+             ^
+SyntaxError: unterminated string literal (detected at line 156)
+
+gaara_erp_new\services_modules\tasks\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\tasks\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\tasks\models\task.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\tasks\models\task.py", line 96
+    """Tag",
+          ^
+SyntaxError: unterminated string literal (detected at line 96)
+
+gaara_erp_new\services_modules\telegram_bot\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\telegram_bot\admin.py", line 15
+    """telegram_id", "first_name", "last_name", "username")
+                                                         ^
+SyntaxError: unterminated string literal (detected at line 15)
+
+gaara_erp_new\services_modules\telegram_bot\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\telegram_bot\models.py", line 4
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 4)
+
+gaara_erp_new\services_modules\telegram_bot\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\telegram_bot\serializers.py", line 5
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 5)
+
+gaara_erp_new\services_modules\telegram_bot\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\telegram_bot\services.py", line 8
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 8)
+
+gaara_erp_new\services_modules\utilities\models\file_storage.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\utilities\models\file_storage.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\services_modules\utilities\models\system_log.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\services_modules\utilities\models\system_log.py", line 13
+    نموذج سجل النظام"""
+          ^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\services_modules\workflows\serializers.py :: PyCompileError: Sorry: IndentationError: unexpected indent (serializers.py, line 20)
+gaara_erp_new\unneed\admin_modules\dashboard\models\dashboard.py :: PyCompileError: Sorry: IndentationError: unexpected indent (dashboard.py, line 16)
+gaara_erp_new\unneed\admin_modules\dashboard\models\dashboard_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\admin_modules\dashboard\models\dashboard_models.py", line 151
+    _("فترة التحديث (بالثواني"), default = 300)""
+                                              ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\unneed\admin_modules\dashboard\models\widget.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\admin_modules\dashboard\models\widget.py", line 233
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 244)
+
+gaara_erp_new\unneed\admin_modules\dashboard\models\widget_models_fixed.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\admin_modules\dashboard\models\widget_models_fixed.py", line 21
+    """Custom queryset for widget types"""
+       ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\accounting\backup_files\analytics.py :: PyCompileError: Sorry: IndentationError: unexpected indent (analytics.py, line 24)
+gaara_erp_new\unneed\business_modules\accounting\backup_files\cashbox.py :: PyCompileError: Sorry: IndentationError: unexpected indent (cashbox.py, line 17)
+gaara_erp_new\unneed\business_modules\accounting\backup_files\installments.py :: PyCompileError: Sorry: IndentationError: unexpected indent (installments.py, line 18)
+gaara_erp_new\unneed\business_modules\accounting\backup_files\invoices.py :: PyCompileError: Sorry: IndentationError: unexpected indent (invoices.py, line 14)
+gaara_erp_new\unneed\business_modules\accounting\backup_files\journal_entry_services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\accounting\backup_files\journal_entry_services.py", line 31
+    def create_journal_entry_draft()
+                                    ^
+SyntaxError: expected ':'
+
+gaara_erp_new\unneed\business_modules\accounting\backup_files\services.py :: PyCompileError: Sorry: IndentationError: unexpected indent (services.py, line 22)
+gaara_erp_new\unneed\business_modules\accounting\backup_files\urls.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\accounting\backup_files\urls.py", line 11
+    - Updated by Manus AI on 2025 - 5 - 16 8: 49: 30
+              ^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\accounting\models\journal.py :: PyCompileError: Sorry: IndentationError: unexpected indent (journal.py, line 324)
+gaara_erp_new\unneed\business_modules\assets\backup_files\services.py :: PyCompileError: Sorry: IndentationError: unexpected indent (services.py, line 31)
+gaara_erp_new\unneed\business_modules\contacts\backup_files\reports.py :: PyCompileError: Sorry: IndentationError: unexpected indent (reports.py, line 30)
+gaara_erp_new\unneed\business_modules\inventory\backup_files\base.py :: PyCompileError: Sorry: IndentationError: unexpected indent (base.py, line 19)
+gaara_erp_new\unneed\business_modules\inventory\backup_files\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\backup_files\filters.py", line 24
+    field_name = 'name_ar', lookup_expr = 'icontains'  # Search by Arabic name
+    ^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+gaara_erp_new\unneed\business_modules\inventory\backup_files\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\backup_files\permissions.py", line 17
+    This module includes permissions to control access to inventory - related
+         ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\inventory\backup_files\processes.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\backup_files\processes.py", line 83
+    ).format(
+    ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\unneed\business_modules\inventory\backup_files\products.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\backup_files\products.py", line 40
+    ,
+    ^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\inventory\backup_files\queries.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\backup_files\queries.py", line 56
+    ).aggregate(total=models.Sum('quantity'))['total'] or Decimal("0.0"
+    ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\unneed\business_modules\inventory\backup_files\reports.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\backup_files\reports.py", line 21
+    def get_stock_balance_report()
+                                  ^
+SyntaxError: expected ':'
+
+gaara_erp_new\unneed\business_modules\inventory\backup_files\report_views.py :: PyCompileError: Sorry: IndentationError: unexpected indent (report_views.py, line 8)
+gaara_erp_new\unneed\business_modules\inventory\backup_files\serializers.py :: PyCompileError: Sorry: IndentationError: unexpected indent (serializers.py, line 14)
+gaara_erp_new\unneed\business_modules\inventory\backup_files\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\backup_files\services.py", line 25
+    activity_log_enabled = True
+    ^^^^^^^^^^^^^^^^^^^^
+SyntaxError: expected 'except' or 'finally' block
+
+gaara_erp_new\unneed\business_modules\inventory\backup_files\settings_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\backup_files\settings_models.py", line 14
+    - Updated by Manus AI(update_imports.py) on 2025 - 5 - 14 16: 32: 39
+              ^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\inventory\backup_files\stock_updater.py :: PyCompileError: Sorry: IndentationError: unexpected indent (stock_updater.py, line 47)
+gaara_erp_new\unneed\business_modules\inventory\backup_files\stock_views.py :: PyCompileError: Sorry: IndentationError: unexpected indent (stock_views.py, line 39)
+gaara_erp_new\unneed\business_modules\inventory\backup_files\tracking.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\backup_files\tracking.py", line 55
+    default = False, help_text = _()
+    ^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+gaara_erp_new\unneed\business_modules\inventory\backup_files\transactions.py :: PyCompileError: Sorry: IndentationError: unexpected indent (transactions.py, line 33)
+gaara_erp_new\unneed\business_modules\inventory\backup_files\urls.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\backup_files\urls.py", line 38
+    - products", SupplierProductViewSet # Commented out registration for undefined ViewSet"
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\inventory\backup_files\views.py :: PyCompileError: Sorry: IndentationError: unexpected indent (views.py, line 25)
+gaara_erp_new\unneed\business_modules\inventory\product_grading\backup_files\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\inventory\product_grading\backup_files\models.py", line 471
+    raise ValidationError({)}
+                           ^
+SyntaxError: closing parenthesis ')' does not match opening parenthesis '{'
+
+gaara_erp_new\unneed\business_modules\inventory\product_grading\backup_files\pricing.py :: PyCompileError: Sorry: IndentationError: unexpected indent (pricing.py, line 48)
+gaara_erp_new\unneed\business_modules\inventory\tests\backup_files\test_activity_log.py :: PyCompileError: Sorry: IndentationError: unexpected indent (test_activity_log.py, line 29)
+gaara_erp_new\unneed\business_modules\pos\backup_files\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\pos\backup_files\models.py", line 47
+    _("Start Time"), default = timezone.now
+                     ^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+gaara_erp_new\unneed\business_modules\pos\backup_files\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\pos\backup_files\serializers.py", line 45
+    account_details = AccountSerializer(source="account", read_only=True)""
+                                                                         ^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\pos\backup_files\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\pos\backup_files\services.py", line 32
+    def open_pos_session()
+                          ^
+SyntaxError: expected ':'
+
+gaara_erp_new\unneed\business_modules\pos\backup_files\views.py :: PyCompileError: Sorry: IndentationError: expected an indented block after 'if' statement on line 71 (views.py, line 74)
+gaara_erp_new\unneed\business_modules\production\backup_files\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\production\backup_files\admin.py", line 56
+    (None, {)}
+            ^
+SyntaxError: closing parenthesis ')' does not match opening parenthesis '{'
+
+gaara_erp_new\unneed\business_modules\production\backup_files\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\production\backup_files\filters.py", line 39
+    "name": ["exact", "icontains"],
+    ^^^^^^
+SyntaxError: illegal target for annotation
+
+gaara_erp_new\unneed\business_modules\production\backup_files\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\production\backup_files\models.py", line 95
+    return f"{self.name} (Produces {self.quantity} of {self.product_to_produce.name if /""")}
+                                                                                            ^
+SyntaxError: unmatched '}'
+
+gaara_erp_new\unneed\business_modules\production\backup_files\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\production\backup_files\permissions.py", line 9
+    - Updated by Manus AI(update_imports.py) on 2025 - 5 - 14 16: 32: 39
+              ^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\production\backup_files\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\production\backup_files\serializers.py", line 12
+    - Updated by Manus AI(update_imports.py) on 2025 - 5 - 14 16: 32: 39
+              ^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\production\backup_files\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\production\backup_files\services.py", line 113
+    "components").get(pk=bom_id
+                ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\unneed\business_modules\production\backup_files\views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\production\backup_files\views.py", line 161
+    "bom", "routing").prefetch_related(
+                    ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\unneed\business_modules\production\merged\backup_files\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\production\merged\backup_files\admin.py", line 77
+    (_('معلومات أساسية'), {)}
+                           ^
+SyntaxError: closing parenthesis ')' does not match opening parenthesis '{'
+
+gaara_erp_new\unneed\business_modules\production\merged\backup_files\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\production\merged\backup_files\models.py", line 129
+    on_delete = models.PROTECT, null = True, blank = True
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+gaara_erp_new\unneed\business_modules\production\merged\backup_files\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\production\merged\backup_files\serializers.py", line 36
+    source = 'get_operation_type_display', read_only = True
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+gaara_erp_new\unneed\business_modules\production\merged\backup_files\services.py :: PyCompileError: Sorry: IndentationError: expected an indented block after 'with' statement on line 48 (services.py, line 50)
+gaara_erp_new\unneed\business_modules\production\merged\backup_files\views.py :: PyCompileError: Sorry: IndentationError: unexpected indent (views.py, line 37)
+gaara_erp_new\unneed\business_modules\purchasing\backup_files\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\purchasing\backup_files\filters.py", line 114
+    field_name = "contact__name", lookup_expr = "icontains"
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
+
+gaara_erp_new\unneed\business_modules\purchasing\backup_files\invoices.py :: PyCompileError: Sorry: IndentationError: unexpected indent (invoices.py, line 17)
+gaara_erp_new\unneed\business_modules\purchasing\backup_files\orders.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\purchasing\backup_files\orders.py", line 17
+    - Updated by Manus AI(update_imports.py) on 2025 - 5 - 14 16: 32: 39
+              ^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\purchasing\backup_files\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\purchasing\backup_files\permissions.py", line 113
+    """Check if the user can approve a specific purchase return object."""
+                                                                       ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 121)
+
+gaara_erp_new\unneed\business_modules\purchasing\backup_files\receipts.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\purchasing\backup_files\receipts.py", line 17
+    - Updated by Manus AI(update_imports.py) on 2025 - 5 - 14 16: 32: 39
+              ^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\purchasing\backup_files\requisitions.py :: PyCompileError: Sorry: IndentationError: unexpected indent (requisitions.py, line 8)
+gaara_erp_new\unneed\business_modules\purchasing\backup_files\returns.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\purchasing\backup_files\returns.py", line 20
+    - Updated by Manus AI(update_imports.py) on 2025 - 5 - 14 16: 32: 39
+              ^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\purchasing\backup_files\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\purchasing\backup_files\serializers.py", line 757
+    """Update an existing PurchaseInvoice and its items."""
+                                                        ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 868)
+
+gaara_erp_new\unneed\business_modules\purchasing\backup_files\services.py :: PyCompileError: Sorry: IndentationError: unexpected indent (services.py, line 30)
+gaara_erp_new\unneed\business_modules\rent\backup_files\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\rent\backup_files\serializers.py", line 8
+    from .models import Property, PropertyUnit, LeaseAgreement, Vehicle,
+                                                                        ^
+SyntaxError: trailing comma not allowed without surrounding parentheses
+
+gaara_erp_new\unneed\business_modules\rent\backup_files\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\rent\backup_files\services.py", line 28
+    def create_property()
+                         ^
+SyntaxError: expected ':'
+
+gaara_erp_new\unneed\business_modules\rent\backup_files\views.py :: PyCompileError: Sorry: IndentationError: unexpected indent (views.py, line 27)
+gaara_erp_new\unneed\business_modules\rent\tests\backup_files\test_services.py :: PyCompileError: Sorry: IndentationError: unexpected indent (test_services.py, line 41)
+gaara_erp_new\unneed\business_modules\sales\backup_files\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\sales\backup_files\filters.py", line 65
+    """Base FilterSet for common sales document fields (Quotation,""")
+                                                                     ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\unneed\business_modules\sales\backup_files\permissions.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\sales\backup_files\permissions.py", line 15
+    This module defines custom permission classes to control access to various
+         ^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\sales\backup_files\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\sales\backup_files\serializers.py", line 13
+    Handles serialization and deserialization of sales - related models like
+            ^^^^^^^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\sales\backup_files\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\sales\backup_files\services.py", line 13
+    Contains functions for handling complex operations, calculations,
+             ^^^^^^^^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\business_modules\sales\backup_files\views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\sales\backup_files\views.py", line 217
+    ).prefetch_related(
+    ^
+SyntaxError: unmatched ')'
+
+gaara_erp_new\unneed\business_modules\solar_stations\backup_files\services.py :: PyCompileError: Sorry: IndentationError: unexpected indent (services.py, line 17)
+gaara_erp_new\unneed\business_modules\solar_stations\tests\backup_files\test_models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\business_modules\solar_stations\tests\backup_files\test_models.py", line 51
+    self.assertEqual(station.name, "Test Station Alpha")""
+                                                        ^^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\core_modules\backup_files\authorization_service.py :: PyCompileError: Sorry: IndentationError: unexpected indent (authorization_service.py, line 28)
+gaara_erp_new\unneed\core_modules\backup_files\task.py :: PyCompileError: Sorry: IndentationError: unexpected indent (task.py, line 117)
+gaara_erp_new\unneed\core_modules\backup_files\workflow.py :: PyCompileError: Sorry: IndentationError: unexpected indent (workflow.py, line 356)
+gaara_erp_new\unneed\core_modules\backup_files\workflow_service.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\core_modules\backup_files\workflow_service.py", line 73
+    return workflow.states.filter(is_initial=True.first()
+                                 ^
+SyntaxError: '(' was never closed
+
+gaara_erp_new\unneed\core_modules\permissions\backup_files\api.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\core_modules\permissions\backup_files\api.py", line 784
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 784)
+
+gaara_erp_new\unneed\core_modules\permissions\backup_files\authorization_service.py :: PyCompileError: Sorry: IndentationError: unexpected indent (authorization_service.py, line 32)
+gaara_erp_new\unneed\core_modules\permissions\backup_files\services.py :: PyCompileError: Sorry: IndentationError: unexpected indent (services.py, line 29)
+gaara_erp_new\unneed\core_modules\permissions\backup_files\tests.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\core_modules\permissions\backup_files\tests.py", line 1003
+    """
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 1003)
+
+gaara_erp_new\unneed\core_modules\setup\activity_log\backup_files\models.py :: PyCompileError: Sorry: IndentationError: unexpected indent (models.py, line 198)
+gaara_erp_new\unneed\core_modules\setup\backup_files\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\core_modules\setup\backup_files\models.py", line 200
+    if country:
+              ^
+SyntaxError: invalid syntax
+
+gaara_erp_new\unneed\core_modules\setup\backup_files\views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\core_modules\setup\backup_files\views.py", line 111
+    session = SetupWizardSession.objects.filter(
+                                               ^
+SyntaxError: '(' was never closed
+
+gaara_erp_new\unneed\core_modules\setup\data_import_export\backup_files\models.py :: PyCompileError: Sorry: IndentationError: unexpected indent (models.py, line 193)
+gaara_erp_new\unneed\core_modules\setup\security\backup_files\models.py :: PyCompileError: Sorry: IndentationError: unexpected indent (models.py, line 689)
+gaara_erp_new\unneed\core_modules\setup\system_settings\backup_files\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\core_modules\setup\system_settings\backup_files\models.py", line 381
+    theme = cls.objects.filter(is_system=True.first()
+                              ^
+SyntaxError: '(' was never closed
+
+gaara_erp_new\unneed\core_modules\setup\tests\backup_files\test_views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\core_modules\setup\tests\backup_files\test_views.py", line 104
+    user = User.objects.filter(username='superadmin'.first()
+                                        
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+
+gaara_erp_new\unneed\services_modules\beneficiaries\backup_files\admin.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\unneed\services_modules\beneficiaries\backup_files\admin.py", line 69
+    (_("Basic Info"), {"fields": ("code", "name_ar"))}
+                                                    ^
+SyntaxError: closing parenthesis ')' does not match opening parenthesis '{'
+
+gaara_erp_new\unneed\services_modules\beneficiaries\backup_files\models.py :: PyCompileError: Sorry: IndentationError: unexpected indent (models.py, line 95)
+gaara_erp_new\unneed\services_modules\fleet_management\backup_files\integration.py :: PyCompileError: Sorry: IndentationError: unexpected indent (integration.py, line 40)
+gaara_erp_new\unneed\services_modules\fleet_management\models\backup_files\vehicle.py :: PyCompileError: Sorry: IndentationError: unexpected indent (vehicle.py, line 92)
+gaara_erp_new\unneed\services_modules\fleet_management\services\backup_files\driver_service.py :: PyCompileError: Sorry: IndentationError: unexpected indent (driver_service.py, line 19)
+gaara_erp_new\unneed\services_modules\fleet_management\services\backup_files\fuel_service.py :: PyCompileError: Sorry: IndentationError: unexpected indent (fuel_service.py, line 19)
+gaara_erp_new\unneed\services_modules\fleet_management\services\backup_files\gps_service.py :: PyCompileError: Sorry: IndentationError: unexpected indent (gps_service.py, line 20)
+gaara_erp_new\unneed\services_modules\fleet_management\services\backup_files\maintenance_service.py :: PyCompileError: Sorry: IndentationError: unexpected indent (maintenance_service.py, line 19)
+gaara_erp_new\unneed\services_modules\fleet_management\services\backup_files\vehicle_service.py :: PyCompileError: Sorry: IndentationError: unexpected indent (vehicle_service.py, line 19)
+gaara_erp_new\unneed\services_modules\forecast\backup_files\forecast_management.py :: PyCompileError: Sorry: IndentationError: unexpected indent (forecast_management.py, line 390)
+gaara_erp_new\unneed\services_modules\projects\models\backup_files\project.py :: PyCompileError: Sorry: IndentationError: unexpected indent (project.py, line 73)
+gaara_erp_new\unneed\services_modules\projects\services\backup_files\project_integration.py :: PyCompileError: Sorry: IndentationError: expected an indented block after class definition on line 90 (project_integration.py, line 93)
+gaara_erp_new\unneed\services_modules\workflows\backup_files\services.py :: PyCompileError: Sorry: IndentationError: unexpected indent (services.py, line 60)
+gaara_erp_new\unneed\services_modules\workflows\backup_files\views.py :: PyCompileError: Sorry: IndentationError: expected an indented block after class definition on line 40 (views.py, line 43)
+gaara_erp_new\unneed\services_modules\workflows\models\backup_files\workflow.py :: PyCompileError: Sorry: IndentationError: unexpected indent (workflow.py, line 54)
+gaara_erp_new\unneed\services_modules\workflows\services\backup_files\workflow_integration.py :: PyCompileError: Sorry: IndentationError: unexpected indent (workflow_integration.py, line 128)
+gaara_erp_new\utility_modules\item_research\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\item_research\filters.py", line 2
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 2)
+
+gaara_erp_new\utility_modules\item_research\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\item_research\serializers.py", line 2
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 2)
+
+gaara_erp_new\utility_modules\item_research\backup_files\filters.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\item_research\backup_files\filters.py", line 2
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 2)
+
+gaara_erp_new\utility_modules\item_research\backup_files\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\item_research\backup_files\serializers.py", line 2
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 2)
+
+gaara_erp_new\utility_modules\locale\apps.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\locale\apps.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\locale\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\locale\models.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\locale\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\locale\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\locale\services.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\locale\services.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\locale\signals.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\locale\signals.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\locale\views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\locale\views.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\activity_log.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\activity_log.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\models.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\models.py", line 11
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 11)
+
+gaara_erp_new\utility_modules\utilities\monitoring.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\monitoring.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\serializers.py :: PyCompileError: Sorry: IndentationError: unexpected indent (serializers.py, line 1)
+gaara_erp_new\utility_modules\utilities\settings_model.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\settings_model.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\urls.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\urls.py", line 3
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+gaara_erp_new\utility_modules\utilities\utils.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\utils.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\views.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\backup_files\activity_log.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\backup_files\activity_log.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\backup_files\monitoring.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\backup_files\monitoring.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\backup_files\serializers.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\backup_files\serializers.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\backup_files\settings_model.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\backup_files\settings_model.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\backup_files\utils.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\backup_files\utils.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+gaara_erp_new\utility_modules\utilities\backup_files\views.py :: PyCompileError:   File "D:\home\ubuntu\gaara_erp_v4\gaara_erp_new\utility_modules\utilities\backup_files\views.py", line 1
+    "
+    ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+
+Total failures: 680

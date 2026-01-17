@@ -1,0 +1,24 @@
+{
+  "module": "scripts.check_tables",
+  "imports": [
+    "django",
+    "django.apps",
+    "django.db",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "desc",
+      "parameters": [
+        "table"
+      ]
+    }
+  ],
+  "variables": [
+    "tables",
+    "lines",
+    "cur"
+  ]
+}

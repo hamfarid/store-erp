@@ -1,0 +1,303 @@
+{
+  "module": "core_modules.permissions_manager.serializers",
+  "imports": [
+    "core_modules.permissions.unified_permissions_model",
+    "django.contrib.auth",
+    "django.utils.translation",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "PermissionSerializer",
+      "methods": [
+        "validate_code"
+      ],
+      "variables": [
+        "permission_type_display"
+      ]
+    },
+    {
+      "name": "RoleSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RolePermissionSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserRoleSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentRoleSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PermissionAuditLogSerializer",
+      "methods": [
+        "get_user_display"
+      ],
+      "variables": [
+        "action_display",
+        "user_display"
+      ]
+    },
+    {
+      "name": "RoleDetailSerializer",
+      "methods": [
+        "get_permissions",
+        "get_country_name",
+        "get_company_name",
+        "get_branch_name"
+      ],
+      "variables": [
+        "permissions",
+        "country_name",
+        "company_name",
+        "branch_name"
+      ]
+    },
+    {
+      "name": "UserPermissionsSerializer",
+      "methods": [
+        "get_roles",
+        "get_permissions"
+      ],
+      "variables": [
+        "roles",
+        "permissions"
+      ]
+    },
+    {
+      "name": "AgentPermissionsSerializer",
+      "methods": [
+        "get_roles",
+        "get_permissions"
+      ],
+      "variables": [
+        "roles",
+        "permissions"
+      ]
+    },
+    {
+      "name": "BulkRolePermissionSerializer",
+      "methods": [
+        "validate_role_id",
+        "validate_permission_ids"
+      ],
+      "variables": [
+        "role_id",
+        "permission_ids"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "validate_code",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "get_user_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_country_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_company_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_branch_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_roles",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_roles",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_permissions",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate_role_id",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_permission_ids",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

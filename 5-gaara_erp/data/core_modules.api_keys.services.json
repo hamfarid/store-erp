@@ -1,0 +1,118 @@
+{
+  "module": "core_modules.api_keys.services",
+  "imports": [
+    "django.core.exceptions",
+    "django.utils",
+    "django.utils.translation",
+    "ipaddress",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "APIKeyService",
+      "methods": [
+        "create_api_key",
+        "get_api_key",
+        "validate_api_key",
+        "revoke_api_key",
+        "extend_api_key_expiry",
+        "log_api_key_usage",
+        "_get_client_ip",
+        "_is_ip_allowed",
+        "_is_referer_allowed",
+        "_get_request_data",
+        "_get_response_data"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_api_key",
+      "parameters": [
+        "self",
+        "request",
+        "data"
+      ]
+    },
+    {
+      "name": "get_api_key",
+      "parameters": [
+        "self",
+        "key_prefix"
+      ]
+    },
+    {
+      "name": "validate_api_key",
+      "parameters": [
+        "self",
+        "key",
+        "request"
+      ]
+    },
+    {
+      "name": "revoke_api_key",
+      "parameters": [
+        "self",
+        "api_key_id",
+        "reason"
+      ]
+    },
+    {
+      "name": "extend_api_key_expiry",
+      "parameters": [
+        "self",
+        "api_key_id",
+        "days"
+      ]
+    },
+    {
+      "name": "log_api_key_usage",
+      "parameters": [
+        "self",
+        "api_key",
+        "request",
+        "response",
+        "execution_time"
+      ]
+    },
+    {
+      "name": "_get_client_ip",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "_is_ip_allowed",
+      "parameters": [
+        "self",
+        "client_ip",
+        "allowed_ips"
+      ]
+    },
+    {
+      "name": "_is_referer_allowed",
+      "parameters": [
+        "self",
+        "referer",
+        "allowed_referers"
+      ]
+    },
+    {
+      "name": "_get_request_data",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "_get_response_data",
+      "parameters": [
+        "self",
+        "response"
+      ]
+    }
+  ],
+  "variables": []
+}

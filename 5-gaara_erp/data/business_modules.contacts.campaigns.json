@@ -1,0 +1,133 @@
+{
+  "module": "business_modules.contacts.campaigns",
+  "imports": [
+    "core_modules.organization.models",
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation",
+    "leads"
+  ],
+  "classes": [
+    {
+      "name": "CampaignType",
+      "methods": [],
+      "variables": [
+        "EMAIL",
+        "WEBINAR",
+        "CONFERENCE",
+        "TRADE_SHOW",
+        "ADVERTISEMENT",
+        "DIRECT_MAIL",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "CampaignStatus",
+      "methods": [],
+      "variables": [
+        "PLANNING",
+        "ACTIVE",
+        "COMPLETED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "Campaign",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "company",
+        "branch",
+        "name",
+        "campaign_type",
+        "status",
+        "start_date",
+        "end_date",
+        "expected_revenue",
+        "budgeted_cost",
+        "actual_cost",
+        "currency",
+        "expected_response_rate",
+        "description",
+        "owner",
+        "created_by",
+        "num_sent",
+        "num_responses",
+        "num_leads_converted",
+        "num_opportunities_created",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "CampaignMemberStatus",
+      "methods": [],
+      "variables": [
+        "PLANNED",
+        "SENT",
+        "RESPONDED"
+      ]
+    },
+    {
+      "name": "CampaignMember",
+      "methods": [
+        "clean",
+        "__str__"
+      ],
+      "variables": [
+        "campaign",
+        "lead",
+        "contact",
+        "status",
+        "first_responded_date",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "AUTH_USER_MODEL",
+    "__all__"
+  ]
+}

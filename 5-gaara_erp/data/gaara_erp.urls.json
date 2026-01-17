@@ -1,0 +1,17 @@
+{
+  "module": "gaara_erp.urls",
+  "imports": [
+    "core_modules.core.views",
+    "django.conf",
+    "django.conf.urls.static",
+    "django.urls",
+    "rest_framework.routers"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "public_router",
+    "urlpatterns",
+    "MIGRATION_MINIMAL_MODE"
+  ]
+}

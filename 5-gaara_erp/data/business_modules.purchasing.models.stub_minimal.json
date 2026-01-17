@@ -1,0 +1,40 @@
+{
+  "module": "business_modules.purchasing.models.stub_minimal",
+  "imports": [
+    "__future__"
+  ],
+  "classes": [
+    {
+      "name": "PurchaseInvoiceStatus",
+      "methods": [],
+      "variables": [
+        "CONFIRMED",
+        "PARTIALLY_PAID"
+      ]
+    },
+    {
+      "name": "_BaseInvoice",
+      "methods": [],
+      "variables": [
+        "id",
+        "remaining_balance",
+        "objects",
+        "is_settlement"
+      ]
+    },
+    {
+      "name": "PurchaseInvoice",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PurchaseReturn",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

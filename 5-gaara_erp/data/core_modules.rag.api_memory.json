@@ -1,0 +1,89 @@
+{
+  "module": "core_modules.rag.api_memory",
+  "imports": [
+    "__future__",
+    "core_modules.rag.services.memory",
+    "datetime",
+    "django.conf",
+    "rest_framework",
+    "rest_framework.response",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "MemoryCreateSerializer",
+      "methods": [],
+      "variables": [
+        "user_id",
+        "key",
+        "value",
+        "kind",
+        "expires_at"
+      ]
+    },
+    {
+      "name": "MemoryDeleteSerializer",
+      "methods": [],
+      "variables": [
+        "user_id",
+        "key",
+        "kind"
+      ]
+    },
+    {
+      "name": "MemorySearchSerializer",
+      "methods": [],
+      "variables": [
+        "query",
+        "user_id",
+        "top_k",
+        "threshold"
+      ]
+    },
+    {
+      "name": "MemoryCreateView",
+      "methods": [
+        "post"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MemoryDeleteView",
+      "methods": [
+        "delete"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MemorySearchView",
+      "methods": [
+        "get"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "post",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

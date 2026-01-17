@@ -1,0 +1,239 @@
+{
+  "module": "services_modules.workflows.models.workflow_documentation",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils.translation",
+    "json"
+  ],
+  "classes": [
+    {
+      "name": "WorkflowDocumentation",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "workflow",
+        "title",
+        "description",
+        "version",
+        "author",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "WorkflowDocumentationSection",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SECTION_TYPES",
+        "documentation",
+        "title",
+        "section_type",
+        "content",
+        "order"
+      ]
+    },
+    {
+      "name": "WorkflowExecutionLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "LOG_LEVELS",
+        "workflow_execution",
+        "action_execution",
+        "branch_execution",
+        "alert_instance",
+        "timestamp",
+        "level",
+        "message",
+        "details"
+      ]
+    },
+    {
+      "name": "WorkflowExecutionSnapshot",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SNAPSHOT_TYPES",
+        "workflow_execution",
+        "snapshot_type",
+        "timestamp",
+        "title",
+        "description",
+        "state_data"
+      ]
+    },
+    {
+      "name": "WorkflowActionDocumentation",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "action",
+        "description",
+        "expected_inputs",
+        "expected_outputs",
+        "examples",
+        "notes"
+      ]
+    },
+    {
+      "name": "WorkflowExecutionReport",
+      "methods": [
+        "__str__",
+        "generate_report_content",
+        "_generate_html_report",
+        "_generate_markdown_report",
+        "_generate_json_report",
+        "_generate_text_report"
+      ],
+      "variables": [
+        "REPORT_FORMATS",
+        "workflow_execution",
+        "title",
+        "format",
+        "content",
+        "include_logs",
+        "include_snapshots",
+        "include_alerts",
+        "generated_at",
+        "generated_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "generate_report_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_generate_html_report",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_generate_markdown_report",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_generate_json_report",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_generate_text_report",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

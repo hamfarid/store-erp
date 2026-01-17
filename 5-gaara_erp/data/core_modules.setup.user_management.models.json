@@ -1,0 +1,201 @@
+{
+  "module": "core_modules.setup.user_management.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "UserCompanyPermission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PERMISSION_TYPE_VIEWER",
+        "PERMISSION_TYPE_EDITOR",
+        "PERMISSION_TYPE_ADMIN",
+        "PERMISSION_TYPE_OWNER",
+        "PERMISSION_TYPE_CHOICES",
+        "user",
+        "company_id",
+        "permission_type",
+        "is_active",
+        "start_date",
+        "end_date",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "UserModulePermission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "module",
+        "model",
+        "can_read",
+        "can_edit",
+        "can_create",
+        "can_delete",
+        "is_admin",
+        "is_active",
+        "start_date",
+        "end_date",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "UserPreference",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "key",
+        "value",
+        "category",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserSession",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SESSION_STATUS_ACTIVE",
+        "SESSION_STATUS_EXPIRED",
+        "SESSION_STATUS_TERMINATED",
+        "SESSION_STATUS_CHOICES",
+        "user",
+        "session_key",
+        "ip_address",
+        "user_agent",
+        "status",
+        "login_time",
+        "last_activity",
+        "logout_time",
+        "device_info",
+        "location_info"
+      ]
+    },
+    {
+      "name": "UserNotificationSetting",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "NOTIFICATION_CHANNEL_EMAIL",
+        "NOTIFICATION_CHANNEL_SMS",
+        "NOTIFICATION_CHANNEL_PUSH",
+        "NOTIFICATION_CHANNEL_SYSTEM",
+        "NOTIFICATION_CHANNEL_CHOICES",
+        "user",
+        "notification_type",
+        "channel",
+        "enabled",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,247 @@
+{
+  "module": "admin_modules.data_import_export.modles.import_export_permissions",
+  "imports": [
+    "datetime",
+    "django.contrib.auth.models",
+    "django.core.cache",
+    "pytz",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "ImportExportPermission",
+      "methods": [
+        "has_permission",
+        "has_object_permission",
+        "has_view_permission",
+        "has_add_permission",
+        "has_change_permission",
+        "has_delete_permission",
+        "has_custom_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ImportJobPermission",
+      "methods": [
+        "has_view_permission",
+        "has_add_permission",
+        "has_change_permission",
+        "has_delete_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ExportJobPermission",
+      "methods": [
+        "has_view_permission",
+        "has_add_permission",
+        "has_change_permission",
+        "has_delete_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "JobTemplatePermission",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "JobSchedulePermission",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AdminOnlyPermission",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RateLimitPermission",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_user_permissions",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "check_file_access_permission",
+      "parameters": [
+        "user",
+        "file_path"
+      ]
+    },
+    {
+      "name": "check_job_ownership",
+      "parameters": [
+        "user",
+        "job"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_view_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_add_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_change_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_delete_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_custom_permission",
+      "parameters": [
+        "self",
+        "user",
+        "action"
+      ]
+    },
+    {
+      "name": "has_view_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_add_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_change_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_delete_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_view_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_add_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_change_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_delete_permission",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,195 @@
+{
+  "module": "agricultural_modules.production.product_grading.services",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ProductGradingService",
+      "methods": [
+        "create_grade_category",
+        "create_size_category",
+        "create_measurement_unit",
+        "create_grading_criteria",
+        "create_product_size_grade",
+        "add_criteria_to_product_size_grade",
+        "create_grading_result",
+        "add_criteria_result",
+        "update_grading_result_status",
+        "get_product_size_grades",
+        "get_batch_grading_results",
+        "get_grading_result_details",
+        "calculate_batch_grading_summary",
+        "get_product_grading_history",
+        "validate_grading_criteria_compliance",
+        "get_available_product_size_grades_for_market",
+        "get_product_size_grade_pricing"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_grade_category",
+      "parameters": [
+        "name",
+        "code",
+        "description",
+        "rank",
+        "is_active",
+        "user"
+      ]
+    },
+    {
+      "name": "create_size_category",
+      "parameters": [
+        "name",
+        "code",
+        "description",
+        "rank",
+        "is_active",
+        "user"
+      ]
+    },
+    {
+      "name": "create_measurement_unit",
+      "parameters": [
+        "name",
+        "symbol",
+        "unit_type",
+        "description",
+        "is_active"
+      ]
+    },
+    {
+      "name": "create_grading_criteria",
+      "parameters": [
+        "name",
+        "criteria_type",
+        "measurement_unit",
+        "importance",
+        "description",
+        "is_active",
+        "user"
+      ]
+    },
+    {
+      "name": "create_product_size_grade",
+      "parameters": [
+        "product",
+        "grade_category",
+        "size_category",
+        "size_measurement_unit",
+        "min_size_value",
+        "max_size_value",
+        "reference_price",
+        "target_market",
+        "description",
+        "notes",
+        "is_active",
+        "user"
+      ]
+    },
+    {
+      "name": "add_criteria_to_product_size_grade",
+      "parameters": [
+        "product_size_grade",
+        "criteria",
+        "min_value",
+        "max_value",
+        "qualitative_value",
+        "value_description"
+      ]
+    },
+    {
+      "name": "create_grading_result",
+      "parameters": [
+        "batch",
+        "product_size_grade",
+        "quantity",
+        "quantity_unit",
+        "status",
+        "notes",
+        "user"
+      ]
+    },
+    {
+      "name": "add_criteria_result",
+      "parameters": [
+        "grading_result",
+        "criteria",
+        "measured_value",
+        "measured_qualitative_value",
+        "is_compliant",
+        "non_compliance_notes",
+        "user"
+      ]
+    },
+    {
+      "name": "update_grading_result_status",
+      "parameters": [
+        "grading_result",
+        "status",
+        "user"
+      ]
+    },
+    {
+      "name": "get_product_size_grades",
+      "parameters": [
+        "product",
+        "active_only"
+      ]
+    },
+    {
+      "name": "get_batch_grading_results",
+      "parameters": [
+        "batch",
+        "status"
+      ]
+    },
+    {
+      "name": "get_grading_result_details",
+      "parameters": [
+        "grading_result"
+      ]
+    },
+    {
+      "name": "calculate_batch_grading_summary",
+      "parameters": [
+        "batch"
+      ]
+    },
+    {
+      "name": "get_product_grading_history",
+      "parameters": [
+        "product",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "validate_grading_criteria_compliance",
+      "parameters": [
+        "grading_result"
+      ]
+    },
+    {
+      "name": "get_available_product_size_grades_for_market",
+      "parameters": [
+        "product",
+        "target_market"
+      ]
+    },
+    {
+      "name": "get_product_size_grade_pricing",
+      "parameters": [
+        "product_size_grade"
+      ]
+    }
+  ],
+  "variables": []
+}

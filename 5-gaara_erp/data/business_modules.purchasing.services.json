@@ -1,0 +1,100 @@
+{
+  "module": "business_modules.purchasing.services",
+  "imports": [
+    "business_modules.accounting.models.settlement",
+    "business_modules.contacts.models",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "PurchaseInvoiceService",
+      "methods": [
+        "get_invoices",
+        "get_invoice",
+        "create_invoice",
+        "update_invoice",
+        "confirm_invoice",
+        "cancel_invoice",
+        "add_payment",
+        "get_supplier_invoices_summary",
+        "get_supplier_settlement_eligible_invoices",
+        "process_settlement_payment"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_invoices",
+      "parameters": [
+        "filters"
+      ]
+    },
+    {
+      "name": "get_invoice",
+      "parameters": [
+        "invoice_id"
+      ]
+    },
+    {
+      "name": "create_invoice",
+      "parameters": [
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "update_invoice",
+      "parameters": [
+        "invoice_id",
+        "data"
+      ]
+    },
+    {
+      "name": "confirm_invoice",
+      "parameters": [
+        "invoice_id",
+        "user"
+      ]
+    },
+    {
+      "name": "cancel_invoice",
+      "parameters": [
+        "invoice_id",
+        "user"
+      ]
+    },
+    {
+      "name": "add_payment",
+      "parameters": [
+        "invoice_id",
+        "payment_data",
+        "user"
+      ]
+    },
+    {
+      "name": "get_supplier_invoices_summary",
+      "parameters": [
+        "supplier_id",
+        "include_children"
+      ]
+    },
+    {
+      "name": "get_supplier_settlement_eligible_invoices",
+      "parameters": [
+        "supplier_id"
+      ]
+    },
+    {
+      "name": "process_settlement_payment",
+      "parameters": [
+        "settlement_id",
+        "user"
+      ]
+    }
+  ],
+  "variables": []
+}

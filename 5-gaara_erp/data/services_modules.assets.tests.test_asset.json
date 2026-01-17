@@ -1,0 +1,236 @@
+{
+  "module": "services_modules.assets.tests.test_asset",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.asset",
+    "models.depreciation",
+    "models.maintenance",
+    "services_modules.accounting.models",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "AssetCategoryModelTest",
+      "methods": [
+        "setUp",
+        "test_create_asset_category",
+        "test_unique_code_per_company",
+        "test_category_hierarchy",
+        "test_deactivate_category",
+        "test_get_all_assets"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AssetModelTest",
+      "methods": [
+        "setUp",
+        "test_create_asset",
+        "test_unique_code_per_company",
+        "test_calculate_depreciation",
+        "test_dispose_asset",
+        "test_transfer_asset",
+        "test_get_maintenance_records"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DepreciationMethodModelTest",
+      "methods": [
+        "setUp",
+        "test_create_depreciation_method",
+        "test_unique_code_per_company",
+        "test_deactivate_method"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MaintenanceRecordModelTest",
+      "methods": [
+        "setUp",
+        "test_create_maintenance_record",
+        "test_maintenance_record_asset_relation",
+        "test_get_total_maintenance_cost"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_asset_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_category_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_all_assets",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_asset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_depreciation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_dispose_asset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_transfer_asset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_maintenance_records",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_depreciation_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_maintenance_record",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_maintenance_record_asset_relation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_total_maintenance_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_all_assets",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_depreciation",
+      "parameters": [
+        "self",
+        "as_of_date"
+      ]
+    },
+    {
+      "name": "mock_dispose",
+      "parameters": [
+        "self",
+        "disposal_date",
+        "disposal_value",
+        "disposal_reason"
+      ]
+    },
+    {
+      "name": "mock_transfer",
+      "parameters": [
+        "self",
+        "new_branch",
+        "new_location",
+        "new_responsible_user"
+      ]
+    },
+    {
+      "name": "mock_get_maintenance_records",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_total_maintenance_cost",
+      "parameters": [
+        "cls",
+        "asset"
+      ]
+    }
+  ],
+  "variables": []
+}

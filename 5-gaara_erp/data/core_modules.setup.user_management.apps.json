@@ -1,0 +1,29 @@
+{
+  "module": "core_modules.setup.user_management.apps",
+  "imports": [
+    "core_modules.setup.user_management.signals",
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "UserManagementConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

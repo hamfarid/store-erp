@@ -1,0 +1,134 @@
+{
+  "module": "agricultural_modules.research.tests.test_integration",
+  "imports": [
+    "agricultural_modules.experiments.models",
+    "agricultural_modules.experiments.services",
+    "agricultural_modules.farms.models",
+    "agricultural_modules.farms.services",
+    "agricultural_modules.nurseries.models",
+    "agricultural_modules.nurseries.services",
+    "agricultural_modules.production.models",
+    "agricultural_modules.production.services",
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models",
+    "services"
+  ],
+  "classes": [
+    {
+      "name": "ResearchFarmIntegrationTest",
+      "methods": [
+        "setUpClass",
+        "setUp",
+        "test_research_farm_integration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ResearchNurseryIntegrationTest",
+      "methods": [
+        "setUpClass",
+        "setUp",
+        "test_research_nursery_integration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ResearchProductionIntegrationTest",
+      "methods": [
+        "setUpClass",
+        "setUp",
+        "test_research_production_integration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ResearchExperimentIntegrationTest",
+      "methods": [
+        "setUpClass",
+        "setUp",
+        "test_research_experiment_integration"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUpClass",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_research_farm_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpClass",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_research_nursery_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpClass",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_research_production_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpClass",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_research_experiment_integration",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

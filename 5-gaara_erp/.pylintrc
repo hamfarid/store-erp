@@ -1,0 +1,156 @@
+# =============================================================================
+# Pylint Configuration for Gaara ERP
+# =============================================================================
+
+[MASTER]
+# Load plugins
+load-plugins=pylint_django
+
+# Django settings module
+django-settings-module=gaara_erp.settings.dev
+
+[MESSAGES CONTROL]
+# Disable specific warnings
+disable=
+    missing-docstring,
+    too-few-public-methods,
+    too-many-public-methods,
+    too-many-instance-attributes,
+    too-many-arguments,
+    too-many-locals,
+    too-many-branches,
+    too-many-statements,
+    too-many-return-statements,
+    too-many-boolean-expressions,
+    import-outside-toplevel,
+    unused-import,
+    unused-variable,
+    unused-argument,
+    redefined-outer-name,
+    reimported,
+    duplicate-code,
+    django-settings-module-not-found,
+    # Django ORM false positives (when pylint-django is not installed)
+    no-member,
+    invalid-str-returned,
+    unrecognized-option,
+    bad-plugin-value,
+    # Environment-specific (Django not in PYTHONPATH)
+    import-error,
+    django-not-available
+
+[FORMAT]
+# Maximum number of characters on a single line
+max-line-length=120
+
+# Indentation
+indent-string='    '
+indent-after-paren=4
+
+[DESIGN]
+# Maximum number of arguments for function / method
+max-args=10
+
+# Maximum number of attributes for a class
+max-attributes=15
+
+# Maximum number of boolean expressions in an if statement
+max-bool-expr=5
+
+# Maximum number of branch for function / method body
+max-branches=15
+
+# Maximum number of locals for function / method body
+max-locals=20
+
+# Maximum number of parents for a class
+max-parents=7
+
+# Maximum number of public methods for a class
+max-public-methods=30
+
+# Maximum number of return / yield for function / method body
+max-returns=8
+
+# Maximum number of statements in function / method body
+max-statements=60
+
+[IMPORTS]
+# Allow wildcard imports
+allow-wildcard-with-all=yes
+
+# Ignore imports
+ignored-modules=tensorflow
+
+[TYPECHECK]
+# Ignore missing imports
+ignored-modules=tensorflow
+
+# Django generated members (reverse relations, get_*_display methods, etc.)
+generated-members=
+    REQUEST,
+    acl_users,
+    aq_parent,
+    objects,
+    DoesNotExist,
+    id,
+    pk,
+    _meta,
+    _default_manager,
+    _base_manager,
+    save,
+    delete,
+    full_clean,
+    clean,
+    clean_fields,
+    validate_unique,
+    get_*_display,
+    set_*,
+    add_*,
+    remove_*,
+    clear,
+    create,
+    bulk_create,
+    filter,
+    exclude,
+    get,
+    all,
+    first,
+    last,
+    count,
+    exists,
+    aggregate,
+    annotate,
+    order_by,
+    reverse,
+    distinct,
+    values,
+    values_list,
+    dates,
+    datetimes,
+    none,
+    union,
+    intersection,
+    difference,
+    select_related,
+    prefetch_related,
+    extra,
+    defer,
+    only,
+    using,
+    select_for_update,
+    raw,
+    update,
+    bulk_update,
+    delete,
+    as_manager,
+    iterator,
+    latest,
+    earliest,
+    output_batches,
+    operations,
+    quality_tests,
+    components,
+    work_orders,
+    direct_logs,
+    logs

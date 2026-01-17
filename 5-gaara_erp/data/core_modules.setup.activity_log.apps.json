@@ -1,0 +1,29 @@
+{
+  "module": "core_modules.setup.activity_log.apps",
+  "imports": [
+    "core_modules.setup.activity_log.signals",
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ActivityLogConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

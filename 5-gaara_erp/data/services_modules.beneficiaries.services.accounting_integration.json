@@ -1,0 +1,39 @@
+{
+  "module": "services_modules.beneficiaries.services.accounting_integration",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.utils",
+    "models",
+    "services_modules.accounting.models",
+    "services_modules.accounting.services",
+    "treasury_integration"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_accounting_entry",
+      "parameters": [
+        "data",
+        "created_by"
+      ]
+    },
+    {
+      "name": "post_payment_to_accounting",
+      "parameters": [
+        "payment_session"
+      ]
+    },
+    {
+      "name": "get_accounting_entries_for_payment",
+      "parameters": [
+        "payment_session_id"
+      ]
+    },
+    {
+      "name": "reconcile_payments",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,252 @@
+{
+  "module": "services_modules.forecast.tests.test_forecast",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.forecast",
+    "models.forecast_item",
+    "models.forecast_result",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "ForecastTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_forecast_type",
+        "test_unique_code_per_company",
+        "test_deactivate_forecast_type"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ForecastMethodModelTest",
+      "methods": [
+        "setUp",
+        "test_create_forecast_method",
+        "test_unique_code_per_company",
+        "test_deactivate_forecast_method"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ForecastModelTest",
+      "methods": [
+        "setUp",
+        "test_create_forecast",
+        "test_unique_reference_number_per_company",
+        "test_calculate_periods_count",
+        "test_get_period_name"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ForecastItemModelTest",
+      "methods": [
+        "setUp",
+        "test_create_forecast_item",
+        "test_unique_item_code_per_forecast",
+        "test_get_historical_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ForecastResultModelTest",
+      "methods": [
+        "setUp",
+        "test_create_forecast_result",
+        "test_unique_period_per_item",
+        "test_calculate_lower_bound",
+        "test_calculate_upper_bound",
+        "test_calculate_error_metrics"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_forecast_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_forecast_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_forecast_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_forecast_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_forecast",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_reference_number_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_periods_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_period_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_forecast_item",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_item_code_per_forecast",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_historical_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_forecast_result",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_period_per_item",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_lower_bound",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_upper_bound",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_error_metrics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_periods_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_period_name",
+      "parameters": [
+        "self",
+        "period_index"
+      ]
+    },
+    {
+      "name": "mock_get_historical_data",
+      "parameters": [
+        "self",
+        "periods_count"
+      ]
+    },
+    {
+      "name": "mock_calculate_lower_bound",
+      "parameters": [
+        "self",
+        "confidence_interval"
+      ]
+    },
+    {
+      "name": "mock_calculate_upper_bound",
+      "parameters": [
+        "self",
+        "confidence_interval"
+      ]
+    },
+    {
+      "name": "mock_calculate_error_metrics",
+      "parameters": [
+        "self",
+        "actual_value"
+      ]
+    }
+  ],
+  "variables": []
+}

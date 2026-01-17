@@ -1,0 +1,188 @@
+{
+  "module": "services_modules.correspondence.filters",
+  "imports": [
+    "django.contrib.auth",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "django_filters",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CorrespondenceFilter",
+      "methods": [
+        "filter_has_attachments",
+        "filter_is_read",
+        "filter_has_response",
+        "filter_overdue",
+        "universal_search"
+      ],
+      "variables": [
+        "subject",
+        "content",
+        "reference_number",
+        "date_from",
+        "date_to",
+        "date_range",
+        "correspondence_type",
+        "status",
+        "priority",
+        "status_in",
+        "priority_in",
+        "category",
+        "category_id",
+        "tags",
+        "is_confidential",
+        "is_archived",
+        "has_attachments",
+        "is_read",
+        "created_at_from",
+        "created_at_to",
+        "created_at_range",
+        "created_by",
+        "created_by_username",
+        "assigned_to",
+        "response_required",
+        "has_response",
+        "response_deadline",
+        "overdue",
+        "search",
+        "ordering"
+      ]
+    },
+    {
+      "name": "CorrespondenceCategoryFilter",
+      "methods": [
+        "filter_is_root",
+        "search_filter"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "is_active",
+        "parent",
+        "is_root",
+        "min_usage_count",
+        "max_usage_count",
+        "created_after",
+        "created_before",
+        "search",
+        "ordering"
+      ]
+    },
+    {
+      "name": "CorrespondenceStatisticsFilter",
+      "methods": [
+        "apply_grouping"
+      ],
+      "variables": [
+        "period_start",
+        "period_end",
+        "group_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "filter_has_attachments",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_is_read",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_has_response",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_overdue",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "universal_search",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_is_root",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "search_filter",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "apply_grouping",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

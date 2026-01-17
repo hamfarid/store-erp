@@ -1,0 +1,150 @@
+{
+  "module": "services_modules.legal_affairs.models.legal_document",
+  "imports": [
+    "core_modules.core.models.base_models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "LegalDocument",
+      "methods": [
+        "__str__",
+        "is_valid",
+        "is_expired",
+        "days_until_expiry",
+        "approve_document",
+        "reject_document",
+        "archive_document",
+        "get_file_extension",
+        "is_pdf",
+        "get_related_case_or_contract"
+      ],
+      "variables": [
+        "document_number",
+        "title",
+        "description",
+        "document_type",
+        "status",
+        "issue_date",
+        "expiry_date",
+        "file",
+        "file_name",
+        "file_type",
+        "file_size",
+        "legal_case",
+        "legal_contract",
+        "reference_number",
+        "issuing_authority",
+        "notes",
+        "is_confidential"
+      ]
+    },
+    {
+      "name": "DocumentTypeChoices",
+      "methods": [],
+      "variables": [
+        "CONTRACT",
+        "AGREEMENT",
+        "MEMORANDUM",
+        "LAWSUIT",
+        "JUDGMENT",
+        "POWER_OF_ATTORNEY",
+        "LEGAL_OPINION",
+        "MINUTES",
+        "CORRESPONDENCE",
+        "REPORT",
+        "CERTIFICATE",
+        "LICENSE",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "DocumentStatusChoices",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "UNDER_REVIEW",
+        "APPROVED",
+        "REJECTED",
+        "EXPIRED",
+        "ARCHIVED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "days_until_expiry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "approve_document",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "reject_document",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "archive_document",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_file_extension",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_pdf",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_related_case_or_contract",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

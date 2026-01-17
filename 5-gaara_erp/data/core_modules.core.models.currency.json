@@ -1,0 +1,51 @@
+{
+  "module": "core_modules.core.models.currency",
+  "imports": [
+    "base_models",
+    "decimal",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Currency",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "symbol",
+        "exchange_rate",
+        "is_base",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

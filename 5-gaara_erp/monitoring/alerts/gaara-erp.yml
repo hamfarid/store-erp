@@ -1,0 +1,336 @@
+# Gaara ERP Alert Rules
+# ======================
+
+groups:
+  # ==================================
+  # Application Health Alerts
+  # ==================================
+  - name: gaara-application
+    rules:
+      - alert: HighErrorRate
+        expr: |
+          rate(django_http_responses_total_by_status_total{status=~"5.."}[5m]) 
+          / rate(django_http_responses_total_by_status_total[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          service: application
+          category: availability
+        annotations:
+          summary: "High error rate detected in Gaara ERP"
+          description: "Error rate is {{ $value | printf \"%.2f\" }}% for the last 5 minutes"
+          runbook_url: "https://docs.gaara-erp.com/runbooks/high-error-rate"
+
+      - alert: SlowResponseTime
+        expr: |
+          histogram_quantile(0.95, rate(django_http_requests_latency_seconds_bucket[5m])) > 3
+        for: 5m
+        labels:
+          severity: warning
+          service: application
+          category: performance
+        annotations:
+          summary: "Slow response times detected"
+          description: "95th percentile response time is {{ $value | printf \"%.2f\" }} seconds"
+
+      - alert: ApplicationDown
+        expr: up{job="gaara-erp"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: application
+          category: availability
+        annotations:
+          summary: "Gaara ERP application is down"
+          description: "The main application has been unreachable for more than 1 minute"
+
+      - alert: HighRequestLatency
+        expr: |
+          histogram_quantile(0.99, rate(django_http_requests_latency_seconds_bucket[5m])) > 5
+        for: 10m
+        labels:
+          severity: warning
+          service: application
+          category: performance
+        annotations:
+          summary: "Very high request latency"
+          description: "99th percentile latency is {{ $value | printf \"%.2f\" }} seconds"
+
+  # ==================================
+  # Security Alerts
+  # ==================================
+  - name: gaara-security
+    rules:
+      - alert: HighFailedLoginAttempts
+        expr: |
+          rate(django_auth_login_failed_total[5m]) > 10
+        for: 2m
+        labels:
+          severity: critical
+          service: security
+          category: security
+        annotations:
+          summary: "High number of failed login attempts"
+          description: "More than 10 failed login attempts per minute detected. Possible brute force attack."
+
+      - alert: AccountLockouts
+        expr: |
+          increase(gaara_account_lockouts_total[1h]) > 5
+        for: 5m
+        labels:
+          severity: warning
+          service: security
+          category: security
+        annotations:
+          summary: "Multiple account lockouts detected"
+          description: "{{ $value }} accounts have been locked in the last hour"
+
+      - alert: SuspiciousAPIActivity
+        expr: |
+          rate(django_http_requests_total{status="403"}[5m]) > 50
+        for: 5m
+        labels:
+          severity: warning
+          service: security
+          category: security
+        annotations:
+          summary: "Suspicious API activity detected"
+          description: "High rate of 403 Forbidden responses"
+
+      - alert: RateLimitExceeded
+        expr: |
+          rate(django_ratelimit_blocked_total[5m]) > 100
+        for: 2m
+        labels:
+          severity: warning
+          service: security
+          category: security
+        annotations:
+          summary: "Rate limit frequently exceeded"
+          description: "High number of rate-limited requests detected"
+
+  # ==================================
+  # Database Alerts
+  # ==================================
+  - name: gaara-database
+    rules:
+      - alert: DatabaseConnectionPoolExhausted
+        expr: |
+          pg_stat_activity_count / pg_settings_max_connections > 0.9
+        for: 5m
+        labels:
+          severity: critical
+          service: database
+          category: availability
+        annotations:
+          summary: "Database connection pool nearly exhausted"
+          description: "{{ $value | printf \"%.0f\" }}% of database connections are in use"
+
+      - alert: DatabaseSlowQueries
+        expr: |
+          rate(pg_stat_statements_seconds_total[5m]) > 2
+        for: 10m
+        labels:
+          severity: warning
+          service: database
+          category: performance
+        annotations:
+          summary: "Slow database queries detected"
+          description: "Average query time is {{ $value | printf \"%.2f\" }} seconds"
+
+      - alert: DatabaseHighCPU
+        expr: |
+          rate(process_cpu_seconds_total{job="postgresql"}[5m]) > 0.8
+        for: 10m
+        labels:
+          severity: warning
+          service: database
+          category: performance
+        annotations:
+          summary: "High database CPU usage"
+          description: "Database CPU usage is {{ $value | printf \"%.0f\" }}%"
+
+      - alert: DatabaseDiskSpaceLow
+        expr: |
+          pg_database_size_bytes / (1024*1024*1024) > 10
+        for: 1h
+        labels:
+          severity: warning
+          service: database
+          category: capacity
+        annotations:
+          summary: "Database size growing"
+          description: "Database size is {{ $value | printf \"%.2f\" }} GB"
+
+  # ==================================
+  # Redis/Cache Alerts
+  # ==================================
+  - name: gaara-redis
+    rules:
+      - alert: RedisDown
+        expr: redis_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: redis
+          category: availability
+        annotations:
+          summary: "Redis is down"
+          description: "Redis cache server is unreachable"
+
+      - alert: RedisMemoryHigh
+        expr: |
+          redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 10m
+        labels:
+          severity: warning
+          service: redis
+          category: capacity
+        annotations:
+          summary: "Redis memory usage high"
+          description: "Redis is using {{ $value | printf \"%.0f\" }}% of available memory"
+
+      - alert: RedisTooManyConnections
+        expr: redis_connected_clients > 100
+        for: 5m
+        labels:
+          severity: warning
+          service: redis
+          category: performance
+        annotations:
+          summary: "Too many Redis connections"
+          description: "{{ $value }} clients connected to Redis"
+
+  # ==================================
+  # AI/ML Service Alerts
+  # ==================================
+  - name: gaara-ai
+    rules:
+      - alert: AIServiceDown
+        expr: up{job=~"ai.*"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: ai
+          category: availability
+        annotations:
+          summary: "AI service is down"
+          description: "AI/ML service {{ $labels.job }} is unreachable"
+
+      - alert: AIModelPredictionErrors
+        expr: |
+          rate(gaara_ai_prediction_errors_total[5m]) > 5
+        for: 5m
+        labels:
+          severity: warning
+          service: ai
+          category: reliability
+        annotations:
+          summary: "AI model prediction errors"
+          description: "High rate of AI prediction errors: {{ $value | printf \"%.0f\" }}/minute"
+
+      - alert: AIModelLatency
+        expr: |
+          histogram_quantile(0.95, rate(gaara_ai_prediction_latency_seconds_bucket[5m])) > 5
+        for: 10m
+        labels:
+          severity: warning
+          service: ai
+          category: performance
+        annotations:
+          summary: "High AI model latency"
+          description: "AI model predictions taking {{ $value | printf \"%.2f\" }} seconds"
+
+  # ==================================
+  # Celery/Background Jobs Alerts
+  # ==================================
+  - name: gaara-celery
+    rules:
+      - alert: CeleryWorkerDown
+        expr: flower_workers_number == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: celery
+          category: availability
+        annotations:
+          summary: "No Celery workers available"
+          description: "All Celery workers are down"
+
+      - alert: CeleryQueueBacklog
+        expr: |
+          celery_queue_length > 100
+        for: 10m
+        labels:
+          severity: warning
+          service: celery
+          category: performance
+        annotations:
+          summary: "Celery queue backlog"
+          description: "{{ $value }} tasks waiting in queue"
+
+      - alert: CeleryTaskFailureRate
+        expr: |
+          rate(celery_task_failed_total[5m]) / rate(celery_task_received_total[5m]) > 0.1
+        for: 10m
+        labels:
+          severity: warning
+          service: celery
+          category: reliability
+        annotations:
+          summary: "High Celery task failure rate"
+          description: "{{ $value | printf \"%.0f\" }}% of Celery tasks are failing"
+
+  # ==================================
+  # System Resource Alerts
+  # ==================================
+  - name: gaara-system
+    rules:
+      - alert: HighCPUUsage
+        expr: |
+          100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+        for: 10m
+        labels:
+          severity: warning
+          service: system
+          category: capacity
+        annotations:
+          summary: "High CPU usage"
+          description: "CPU usage is {{ $value | printf \"%.0f\" }}% on {{ $labels.instance }}"
+
+      - alert: HighMemoryUsage
+        expr: |
+          (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90
+        for: 10m
+        labels:
+          severity: warning
+          service: system
+          category: capacity
+        annotations:
+          summary: "High memory usage"
+          description: "Memory usage is {{ $value | printf \"%.0f\" }}% on {{ $labels.instance }}"
+
+      - alert: DiskSpaceRunningLow
+        expr: |
+          (1 - (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes)) * 100 > 85
+        for: 30m
+        labels:
+          severity: warning
+          service: system
+          category: capacity
+        annotations:
+          summary: "Disk space running low"
+          description: "{{ $value | printf \"%.0f\" }}% disk used on {{ $labels.mountpoint }}"
+
+      - alert: CriticalDiskSpace
+        expr: |
+          (1 - (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes)) * 100 > 95
+        for: 5m
+        labels:
+          severity: critical
+          service: system
+          category: capacity
+        annotations:
+          summary: "Critical disk space"
+          description: "Only {{ printf \"%.0f\" (100 - $value) }}% disk space remaining on {{ $labels.mountpoint }}"
+

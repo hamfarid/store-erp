@@ -1,0 +1,74 @@
+{
+  "module": "services_modules.projects.models.financials",
+  "imports": [
+    "decimal",
+    "django.conf",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ProjectFinancialTransaction",
+      "methods": [
+        "clean",
+        "save",
+        "__str__"
+      ],
+      "variables": [
+        "TRANSACTION_TYPES",
+        "project",
+        "transaction_date",
+        "amount",
+        "currency",
+        "description",
+        "content_type",
+        "object_id",
+        "source_document",
+        "transaction_type",
+        "company",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "limit_financial_models",
+      "parameters": []
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

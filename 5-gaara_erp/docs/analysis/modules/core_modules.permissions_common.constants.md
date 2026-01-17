@@ -1,0 +1,28 @@
+# core_modules.permissions_common.constants
+
+## Imports
+- django.utils.translation
+
+## Module Variables
+- `TYPE_VIEW`
+- `TYPE_CREATE`
+- `TYPE_EDIT`
+- `TYPE_DELETE`
+- `TYPE_APPROVE`
+- `TYPE_ADMIN`
+- `TYPE_SPECIAL`
+- `TYPE_READ`
+- `TYPE_MODIFY`
+- `PERMISSION_TYPES`
+- `SCOPE_SYSTEM`
+- `SCOPE_COUNTRY`
+- `SCOPE_COMPANY`
+- `SCOPE_BRANCH`
+- `SCOPE_TYPES`
+- `CREATED_AT_LABEL`
+- `UPDATED_AT_LABEL`
+- `ACTIVE_LABEL`
+- `NAME_LABEL`
+- `DESCRIPTION_LABEL`
+- `CODE_LABEL`
+

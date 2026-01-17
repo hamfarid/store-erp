@@ -1,0 +1,57 @@
+[flake8]
+max-line-length = 120
+max-complexity = 10
+ignore = 
+    # Line length (handled by max-line-length)
+    E501,
+    # Imported but unused (common in Django)
+    F401,
+    # Line break before binary operator
+    W503,
+    # Whitespace before ':'
+    E203,
+    # Block comment should start with '# '
+    E266,
+    # Module level import not at top of file
+    E402,
+    # Trailing whitespace
+    W291,
+    # No newline at end of file
+    W292,
+    # Blank line contains whitespace
+    W293,
+    # Local variable is assigned to but never used
+    F841,
+    # Do not use bare except
+    E722,
+    # Do not assign a lambda expression
+    E731,
+    # Line too long (handled by max-line-length)
+    E501
+exclude = 
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    migrations,
+    .env,
+    node_modules,
+    staticfiles,
+    static,
+    media,
+    .pytest_cache,
+    .coverage,
+    htmlcov,
+    build,
+    dist,
+    *.egg-info
+per-file-ignores =
+    # Django settings files
+    */settings/*.py:E501,F401,F403,F405
+    # Django migrations
+    */migrations/*.py:E501,F401,F403,F405
+    # Test files
+    */tests/*.py:F401,F403,F405
+    # __init__.py files
+    */__init__.py:F401,F403
+

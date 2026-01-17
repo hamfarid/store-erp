@@ -1,0 +1,638 @@
+{
+  "module": "business_modules.production.merged.models",
+  "imports": [
+    "__future__",
+    "decimal",
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ProductionSource",
+      "methods": [],
+      "variables": [
+        "INTERNAL",
+        "EXTERNAL",
+        "MIXED"
+      ]
+    },
+    {
+      "name": "ProductType",
+      "methods": [],
+      "variables": [
+        "SEED",
+        "VEGETABLE",
+        "FRUIT",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "ProductionOrderStatus",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "CONFIRMED",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "CANCELLED",
+        "TO_CLOSE",
+        "DONE"
+      ]
+    },
+    {
+      "name": "OperationType",
+      "methods": [],
+      "variables": [
+        "SEED_SORTING",
+        "SEED_DRYING",
+        "SEED_CLEANING",
+        "SEED_TREATMENT",
+        "SEED_TESTING",
+        "SEED_PACKAGING",
+        "SEED_LABELING",
+        "INITIAL_SORTING",
+        "MANUAL_SORTING",
+        "MECHANICAL_SORTING",
+        "WASHING",
+        "PACKAGING",
+        "REFRIGERATION",
+        "FREEZING",
+        "PALLETIZING",
+        "QUALITY_CONTROL"
+      ]
+    },
+    {
+      "name": "ProductGrade",
+      "methods": [],
+      "variables": [
+        "PREMIUM",
+        "GRADE_1",
+        "GRADE_1_5",
+        "GRADE_2",
+        "GRADE_3",
+        "SORTING"
+      ]
+    },
+    {
+      "name": "ProductionOrder",
+      "methods": [
+        "__str__",
+        "calculate_waste_percentage",
+        "calculate_profit",
+        "calculate_total_cost",
+        "get_input_unit_cost",
+        "get_purchase_price",
+        "get_farm_production_cost",
+        "get_seed_production_cost"
+      ],
+      "variables": [
+        "order_number",
+        "product_type",
+        "product",
+        "source",
+        "supplier_name",
+        "farm",
+        "seed_production_batch_id",
+        "planned_start_date",
+        "actual_start_date",
+        "planned_end_date",
+        "actual_end_date",
+        "input_quantity",
+        "input_unit",
+        "expected_output_quantity",
+        "actual_output_quantity",
+        "output_unit",
+        "status",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ProductionOperation",
+      "methods": [
+        "__str__",
+        "calculate_waste_percentage",
+        "calculate_cost"
+      ],
+      "variables": [
+        "production_order",
+        "operation_type",
+        "sequence",
+        "planned_start_date",
+        "actual_start_date",
+        "planned_end_date",
+        "actual_end_date",
+        "input_quantity",
+        "output_quantity",
+        "waste_quantity",
+        "status",
+        "notes",
+        "labor_cost",
+        "equipment_cost",
+        "material_cost",
+        "responsible",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ProductionBatch",
+      "methods": [
+        "__str__",
+        "save",
+        "calculate_value"
+      ],
+      "variables": [
+        "production_order",
+        "batch_number",
+        "lot_number",
+        "product_name",
+        "grade",
+        "size",
+        "quantity",
+        "unit",
+        "unit_price",
+        "total_value",
+        "production_date",
+        "expiry_date",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "QualityTest",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "production_batch",
+        "test_type",
+        "test_date",
+        "result",
+        "passed",
+        "tester",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "BillOfMaterials",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "product_to_produce",
+        "product_variant_to_produce",
+        "quantity",
+        "unit_of_measure",
+        "is_active",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "BOMComponent",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "bom",
+        "component_product_variant",
+        "quantity",
+        "unit_of_measure",
+        "scrap_factor",
+        "operation",
+        "notes"
+      ]
+    },
+    {
+      "name": "WorkCenter",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "capacity_hours_per_day",
+        "time_efficiency",
+        "oee_target",
+        "setup_time",
+        "cleanup_time",
+        "cost_per_hour",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Routing",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "bom",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "RoutingOperation",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "routing",
+        "name",
+        "sequence",
+        "work_center",
+        "setup_time",
+        "duration_per_unit",
+        "instructions"
+      ]
+    },
+    {
+      "name": "ManufacturingOrder",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "product_to_produce",
+        "product_variant_to_produce",
+        "bom",
+        "routing",
+        "quantity_to_produce",
+        "quantity_produced",
+        "unit_of_measure",
+        "scheduled_start_date",
+        "scheduled_end_date",
+        "actual_start_date",
+        "actual_end_date",
+        "status",
+        "responsible_user",
+        "source_document",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "WorkOrder",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "manufacturing_order",
+        "routing_operation",
+        "work_center",
+        "quantity_to_produce",
+        "quantity_produced",
+        "quantity_scrapped",
+        "scheduled_start_date",
+        "scheduled_duration_hours",
+        "actual_start_date",
+        "actual_duration_hours",
+        "status",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ProductionLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "manufacturing_order",
+        "work_order",
+        "log_type",
+        "timestamp",
+        "logged_by",
+        "description",
+        "quantity",
+        "product",
+        "unit_of_measure",
+        "duration_hours"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Status",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "CONFIRMED",
+        "PLANNED",
+        "IN_PROGRESS",
+        "TO_CLOSE",
+        "DONE",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Status",
+      "methods": [],
+      "variables": [
+        "PENDING",
+        "READY",
+        "IN_PROGRESS",
+        "PAUSED",
+        "DONE",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "LogType",
+      "methods": [],
+      "variables": [
+        "NOTE",
+        "PRODUCTION",
+        "CONSUMPTION",
+        "SCRAP",
+        "QUALITY",
+        "TIME",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_waste_percentage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_profit",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_total_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_input_unit_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_purchase_price",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_farm_production_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_seed_production_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_waste_percentage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

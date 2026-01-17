@@ -1,0 +1,78 @@
+{
+  "module": "services_modules.admin_affairs.models.attendance_record",
+  "imports": [
+    "django.db",
+    "django.utils",
+    "employee_profile",
+    "leave"
+  ],
+  "classes": [
+    {
+      "name": "AttendanceRecord",
+      "methods": [
+        "__str__",
+        "hours_worked",
+        "status",
+        "is_late",
+        "is_early_departure"
+      ],
+      "variables": [
+        "employee",
+        "date",
+        "check_in",
+        "check_out",
+        "is_absent",
+        "is_leave",
+        "leave",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "hours_worked",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_late",
+      "parameters": [
+        "self",
+        "threshold_minutes"
+      ]
+    },
+    {
+      "name": "is_early_departure",
+      "parameters": [
+        "self",
+        "threshold_minutes"
+      ]
+    }
+  ],
+  "variables": []
+}

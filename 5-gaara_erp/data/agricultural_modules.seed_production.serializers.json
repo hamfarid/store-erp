@@ -1,0 +1,320 @@
+{
+  "module": "agricultural_modules.seed_production.serializers",
+  "imports": [
+    "django.utils.translation",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "SeedProductionOrderSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedProductionOrderCreateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedProductionOrderUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "InventoryVerificationSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CreateLotFromOrderSerializer",
+      "methods": [],
+      "variables": [
+        "lot_number",
+        "expected_seed_quantity_kg"
+      ]
+    },
+    {
+      "name": "SeedProductionLotSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedProductionLotDetailSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedProductionLotCreateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedProductionLotUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PlantingRecordSerializer",
+      "methods": [],
+      "variables": [
+        "actual_planting_date",
+        "notes"
+      ]
+    },
+    {
+      "name": "HarvestRecordSerializer",
+      "methods": [],
+      "variables": [
+        "actual_harvest_date",
+        "harvested_quantity_kg",
+        "notes"
+      ]
+    },
+    {
+      "name": "SeedProductionPlanSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedProductionPlanCreateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedProductionPlanUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedLotTestSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedLotTestCreateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedLotTestUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "GerminationTestSerializer",
+      "methods": [],
+      "variables": [
+        "germination_rate_percent",
+        "test_date",
+        "notes"
+      ]
+    },
+    {
+      "name": "PurityTestSerializer",
+      "methods": [],
+      "variables": [
+        "purity_percent",
+        "test_date",
+        "notes"
+      ]
+    },
+    {
+      "name": "SeedTreatmentLogSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedTreatmentLogCreateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedPackagingSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SeedPackagingCreateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CompletePackagingSerializer",
+      "methods": [],
+      "variables": [
+        "actual_packaging_date",
+        "actual_quantity_kg",
+        "notes"
+      ]
+    },
+    {
+      "name": "LotChangeLogSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

@@ -1,0 +1,90 @@
+{
+  "module": "services_modules.utilities.models.file_storage",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.urls",
+    "django.utils.translation",
+    "magic",
+    "os",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "FileStorage",
+      "methods": [
+        "__str__",
+        "save",
+        "get_absolute_url",
+        "get_file_extension",
+        "get_file_icon"
+      ],
+      "variables": [
+        "FILE_TYPES",
+        "name",
+        "file",
+        "file_type",
+        "mime_type",
+        "size",
+        "description",
+        "module",
+        "reference_model",
+        "reference_id",
+        "is_public",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "file_upload_path",
+      "parameters": [
+        "instance",
+        "filename"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_absolute_url",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_file_extension",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_file_icon",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

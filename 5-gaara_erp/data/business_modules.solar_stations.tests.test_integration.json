@@ -1,0 +1,187 @@
+{
+  "module": "business_modules.solar_stations.tests.test_integration",
+  "imports": [
+    "business_modules.contacts.models",
+    "business_modules.solar_station.models",
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.urls",
+    "json",
+    "rest_framework",
+    "rest_framework.test"
+  ],
+  "classes": [
+    {
+      "name": "SolarStationIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_get_solar_stations_list",
+        "test_get_solar_station_detail",
+        "test_create_solar_station",
+        "test_update_solar_station",
+        "test_get_production_logs",
+        "test_create_production_log",
+        "test_get_customers_list",
+        "test_get_customer_detail",
+        "test_get_pricing_tiers",
+        "test_get_sale_agreements",
+        "test_get_billing_invoices",
+        "test_mark_invoice_as_paid",
+        "test_get_expense_logs",
+        "test_get_maintenance_records",
+        "test_create_maintenance_record",
+        "test_get_production_stats",
+        "test_get_financial_report"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SolarStationIntegrationWithOtherModulesTests",
+      "methods": [
+        "setUp",
+        "test_integration_with_contacts_module",
+        "test_integration_with_accounting_module",
+        "test_integration_with_inventory_module"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_solar_stations_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_solar_station_detail",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_solar_station",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_solar_station",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_production_logs",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_production_log",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_customers_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_customer_detail",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_pricing_tiers",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_sale_agreements",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_billing_invoices",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_mark_invoice_as_paid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_expense_logs",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_maintenance_records",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_maintenance_record",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_production_stats",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_financial_report",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_contacts_module",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_accounting_module",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_inventory_module",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

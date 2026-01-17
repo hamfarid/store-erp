@@ -1,0 +1,641 @@
+{
+  "module": "integration_modules.ai_agent.models",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "BaseModel",
+      "methods": [],
+      "variables": [
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Agent",
+      "methods": [
+        "__str__",
+        "clean",
+        "activate",
+        "deactivate",
+        "suspend",
+        "update_last_active"
+      ],
+      "variables": [
+        "AGENT_TYPES",
+        "AGENT_STATUS",
+        "id",
+        "name",
+        "description",
+        "agent_type",
+        "status",
+        "owner",
+        "avatar",
+        "ai_model",
+        "system_prompt",
+        "capabilities",
+        "config",
+        "memory_enabled",
+        "last_active"
+      ]
+    },
+    {
+      "name": "AgentRole",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "permissions",
+        "is_system_role"
+      ]
+    },
+    {
+      "name": "AgentRoleAssignment",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "agent",
+        "role",
+        "assigned_by",
+        "assigned_at",
+        "expires_at",
+        "is_active"
+      ]
+    },
+    {
+      "name": "AgentMessage",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "MESSAGE_TYPES",
+        "id",
+        "conversation",
+        "message_type",
+        "sender",
+        "agent",
+        "content",
+        "timestamp",
+        "metadata",
+        "tokens_used",
+        "parent_message"
+      ]
+    },
+    {
+      "name": "AgentConversation",
+      "methods": [
+        "__str__",
+        "archive",
+        "delete_conversation",
+        "add_message"
+      ],
+      "variables": [
+        "CONVERSATION_TYPES",
+        "CONVERSATION_STATUS",
+        "id",
+        "title",
+        "conversation_type",
+        "status",
+        "creator",
+        "participants",
+        "agents",
+        "created_at",
+        "updated_at",
+        "metadata",
+        "memory_key"
+      ]
+    },
+    {
+      "name": "AgentConversationParticipant",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "conversation",
+        "user",
+        "joined_at",
+        "is_active",
+        "last_read_message",
+        "permissions"
+      ]
+    },
+    {
+      "name": "AgentConversationAgent",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "conversation",
+        "agent",
+        "joined_at",
+        "is_active",
+        "role",
+        "permissions"
+      ]
+    },
+    {
+      "name": "AgentTask",
+      "methods": [
+        "__str__",
+        "start",
+        "complete",
+        "fail",
+        "cancel"
+      ],
+      "variables": [
+        "TASK_STATUS",
+        "TASK_PRIORITY",
+        "id",
+        "title",
+        "description",
+        "agent",
+        "creator",
+        "status",
+        "priority",
+        "created_at",
+        "started_at",
+        "completed_at",
+        "due_date",
+        "parameters",
+        "result",
+        "error_message",
+        "conversation"
+      ]
+    },
+    {
+      "name": "AgentWorkflow",
+      "methods": [
+        "__str__",
+        "activate",
+        "deactivate",
+        "archive",
+        "create_new_version"
+      ],
+      "variables": [
+        "WORKFLOW_STATUS",
+        "name",
+        "description",
+        "status",
+        "creator",
+        "agents",
+        "workflow_definition",
+        "version",
+        "is_template"
+      ]
+    },
+    {
+      "name": "AgentWorkflowStep",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STEP_TYPES",
+        "workflow",
+        "agent",
+        "step_order",
+        "step_type",
+        "step_config"
+      ]
+    },
+    {
+      "name": "AgentWorkflowExecution",
+      "methods": [
+        "__str__",
+        "start",
+        "complete",
+        "fail",
+        "cancel"
+      ],
+      "variables": [
+        "EXECUTION_STATUS",
+        "id",
+        "workflow",
+        "initiator",
+        "status",
+        "started_at",
+        "completed_at",
+        "current_step",
+        "input_data",
+        "output_data",
+        "error_message",
+        "conversation"
+      ]
+    },
+    {
+      "name": "AgentWorkflowStepExecution",
+      "methods": [
+        "__str__",
+        "start",
+        "complete",
+        "fail",
+        "skip"
+      ],
+      "variables": [
+        "STEP_EXECUTION_STATUS",
+        "id",
+        "workflow_execution",
+        "step",
+        "status",
+        "started_at",
+        "completed_at",
+        "input_data",
+        "output_data",
+        "error_message",
+        "execution_time_ms"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "abstract"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "activate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "deactivate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "suspend",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_last_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "archive",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete_conversation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "add_message",
+      "parameters": [
+        "self",
+        "message_type",
+        "content",
+        "sender",
+        "agent",
+        "parent_message",
+        "metadata"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "self",
+        "result"
+      ]
+    },
+    {
+      "name": "fail",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "activate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "deactivate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "archive",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_new_version",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "self",
+        "output_data"
+      ]
+    },
+    {
+      "name": "fail",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "self",
+        "output_data"
+      ]
+    },
+    {
+      "name": "fail",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    },
+    {
+      "name": "skip",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

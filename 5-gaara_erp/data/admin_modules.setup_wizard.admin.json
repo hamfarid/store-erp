@@ -1,0 +1,42 @@
+{
+  "module": "admin_modules.setup_wizard.admin",
+  "imports": [
+    "django.contrib",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "SetupConfigurationAdmin",
+      "methods": [
+        "has_add_permission",
+        "has_delete_permission"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_add_permission",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "has_delete_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

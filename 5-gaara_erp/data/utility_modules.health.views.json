@@ -1,0 +1,24 @@
+{
+  "module": "utility_modules.health.views",
+  "imports": [
+    "django.db",
+    "django.http",
+    "django.views.decorators.http"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "healthz",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "healthz_db",
+      "parameters": [
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

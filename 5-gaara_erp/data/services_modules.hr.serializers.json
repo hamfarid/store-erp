@@ -1,0 +1,608 @@
+{
+  "module": "services_modules.hr.serializers",
+  "imports": [
+    "core_modules.organization.models",
+    "django.contrib.auth",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserRepresentationSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "DepartmentSerializer",
+      "methods": [],
+      "variables": [
+        "company_id",
+        "company",
+        "parent_id",
+        "parent",
+        "manager_id",
+        "manager"
+      ]
+    },
+    {
+      "name": "JobGradeSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PositionSerializer",
+      "methods": [],
+      "variables": [
+        "department_id",
+        "department",
+        "job_grade_id",
+        "job_grade",
+        "reports_to_id",
+        "reports_to"
+      ]
+    },
+    {
+      "name": "EmployeeDocumentSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "EmployeeExperienceSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "EmployeeQualificationSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "EmployeeTrainingSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "EmployeeAssetSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "EmployeeSerializer",
+      "methods": [],
+      "variables": [
+        "user",
+        "user_id",
+        "nationality",
+        "nationality_id",
+        "branch",
+        "branch_id",
+        "department",
+        "department_id",
+        "position",
+        "position_id",
+        "manager",
+        "manager_id",
+        "documents",
+        "experience",
+        "qualifications",
+        "trainings",
+        "assigned_assets"
+      ]
+    },
+    {
+      "name": "ContractSerializer",
+      "methods": [],
+      "variables": [
+        "employee",
+        "employee_id",
+        "position",
+        "position_id",
+        "salary_currency",
+        "salary_currency_id"
+      ]
+    },
+    {
+      "name": "AttendanceRecordSerializer",
+      "methods": [],
+      "variables": [
+        "employee",
+        "employee_id"
+      ]
+    },
+    {
+      "name": "LeaveTypeSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "LeaveBalanceSerializer",
+      "methods": [],
+      "variables": [
+        "employee",
+        "employee_id",
+        "leave_type",
+        "leave_type_id"
+      ]
+    },
+    {
+      "name": "LeaveRequestSerializer",
+      "methods": [],
+      "variables": [
+        "employee",
+        "employee_id",
+        "leave_type",
+        "leave_type_id",
+        "replacement_employee",
+        "replacement_employee_id",
+        "current_approver"
+      ]
+    },
+    {
+      "name": "PayrollPeriodSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SalaryComponentSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PayrollRunSerializer",
+      "methods": [],
+      "variables": [
+        "payroll_period",
+        "payroll_period_id",
+        "created_by",
+        "approved_by",
+        "paid_by"
+      ]
+    },
+    {
+      "name": "PayslipDetailSerializer",
+      "methods": [],
+      "variables": [
+        "component",
+        "component_id"
+      ]
+    },
+    {
+      "name": "PayslipSerializer",
+      "methods": [
+        "create"
+      ],
+      "variables": [
+        "employee",
+        "employee_id",
+        "payroll_run",
+        "payroll_run_id",
+        "details"
+      ]
+    },
+    {
+      "name": "HRSettingSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "BonusRuleSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "EndOfServiceBenefitSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "LeaveCancellationRequestSerializer",
+      "methods": [],
+      "variables": [
+        "leave_request",
+        "leave_request_id"
+      ]
+    },
+    {
+      "name": "PenaltyRuleSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "OvertimeRuleSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SalaryAdvanceRequestSerializer",
+      "methods": [],
+      "variables": [
+        "employee",
+        "employee_id",
+        "approved_by"
+      ]
+    },
+    {
+      "name": "SalaryIncreaseRequestSerializer",
+      "methods": [],
+      "variables": [
+        "employee",
+        "employee_id",
+        "approved_by"
+      ]
+    },
+    {
+      "name": "PromotionSerializer",
+      "methods": [],
+      "variables": [
+        "employee",
+        "employee_id",
+        "old_position",
+        "old_position_id",
+        "new_position",
+        "new_position_id",
+        "approved_by"
+      ]
+    },
+    {
+      "name": "PerformanceReviewSerializer",
+      "methods": [],
+      "variables": [
+        "employee",
+        "employee_id",
+        "reviewer",
+        "reviewer_id"
+      ]
+    },
+    {
+      "name": "MissionSerializer",
+      "methods": [],
+      "variables": [
+        "employee",
+        "employee_id",
+        "approved_by"
+      ]
+    },
+    {
+      "name": "MissionExpenseSerializer",
+      "methods": [],
+      "variables": [
+        "mission",
+        "mission_id",
+        "approved_by"
+      ]
+    },
+    {
+      "name": "TaxBracketSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SocialInsuranceSettingSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "EmployeeSalaryStructureSerializer",
+      "methods": [],
+      "variables": [
+        "employee",
+        "employee_id"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "validated_data"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

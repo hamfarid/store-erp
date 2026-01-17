@@ -1,0 +1,11 @@
+{
+  "module": "core_modules.unified_permissions.models",
+  "imports": [
+    "core_modules.permissions.unified_permissions_model"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "module": "services_modules.admin_affairs.models.employee_profile",
+  "imports": [
+    "department",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "position"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeProfile",
+      "methods": [
+        "__str__",
+        "full_name",
+        "years_of_service",
+        "age",
+        "terminate_employment"
+      ],
+      "variables": [
+        "GENDER_CHOICES",
+        "MARITAL_STATUS_CHOICES",
+        "user",
+        "employee_id",
+        "position",
+        "department",
+        "date_of_birth",
+        "gender",
+        "marital_status",
+        "national_id",
+        "address",
+        "phone_number",
+        "emergency_contact",
+        "emergency_phone",
+        "hire_date",
+        "end_date",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "full_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "years_of_service",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "age",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "terminate_employment",
+      "parameters": [
+        "self",
+        "end_date"
+      ]
+    }
+  ],
+  "variables": []
+}

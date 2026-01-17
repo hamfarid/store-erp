@@ -1,0 +1,90 @@
+{
+  "module": "services_modules.board_management.models.board",
+  "imports": [
+    "__future__",
+    "django.contrib.auth",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "services_modules.board_management.models"
+  ],
+  "classes": [
+    {
+      "name": "Board",
+      "methods": [
+        "__str__",
+        "get_active_members_count",
+        "is_active",
+        "get_upcoming_meetings",
+        "get_recent_decisions"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "start_date",
+        "end_date",
+        "status",
+        "chairman",
+        "secretary",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Status",
+      "methods": [],
+      "variables": [
+        "ACTIVE",
+        "INACTIVE",
+        "DISSOLVED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_active_members_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_upcoming_meetings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_recent_decisions",
+      "parameters": [
+        "self",
+        "limit"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

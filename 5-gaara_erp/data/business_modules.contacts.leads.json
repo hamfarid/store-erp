@@ -1,0 +1,96 @@
+{
+  "module": "business_modules.contacts.leads",
+  "imports": [
+    "core_modules.organization.models",
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "LeadStatus",
+      "methods": [],
+      "variables": [
+        "NEW",
+        "CONTACTED",
+        "QUALIFIED",
+        "LOST",
+        "CONVERTED"
+      ]
+    },
+    {
+      "name": "LeadSource",
+      "methods": [],
+      "variables": [
+        "WEBSITE",
+        "PHONE_INQUIRY",
+        "REFERRAL",
+        "PARTNER",
+        "PUBLIC_RELATIONS",
+        "TRADE_SHOW",
+        "CAMPAIGN",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "Lead",
+      "methods": [
+        "__str__",
+        "full_name"
+      ],
+      "variables": [
+        "company",
+        "branch",
+        "first_name",
+        "last_name",
+        "title",
+        "organization_name",
+        "email",
+        "phone",
+        "mobile_phone",
+        "website",
+        "address_line_1",
+        "address_line_2",
+        "city",
+        "state_province",
+        "postal_code",
+        "country",
+        "status",
+        "source",
+        "description",
+        "assigned_to",
+        "created_by",
+        "converted_contact",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "full_name",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "AUTH_USER_MODEL",
+    "__all__"
+  ]
+}

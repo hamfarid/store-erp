@@ -1,0 +1,77 @@
+{
+  "module": "services_modules.board_management.models.board_member",
+  "imports": [
+    "board",
+    "django.contrib.auth",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "BoardMember",
+      "methods": [
+        "__str__",
+        "is_active"
+      ],
+      "variables": [
+        "board",
+        "user",
+        "name",
+        "role",
+        "status",
+        "start_date",
+        "end_date",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Role",
+      "methods": [],
+      "variables": [
+        "CHAIRMAN",
+        "MEMBER",
+        "SECRETARY",
+        "OBSERVER"
+      ]
+    },
+    {
+      "name": "Status",
+      "methods": [],
+      "variables": [
+        "ACTIVE",
+        "INACTIVE",
+        "RESIGNED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "module": "agricultural_modules.nurseries.permissions",
+  "imports": [
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "IsAdminOrReadOnly",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CanManageNurseryData",
+      "methods": [
+        "has_permission",
+        "has_object_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

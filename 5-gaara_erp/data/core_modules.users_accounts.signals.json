@@ -1,0 +1,13 @@
+{
+  "module": "core_modules.users_accounts.signals",
+  "imports": [
+    "django.dispatch"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "password_reset_pending_approval_signal",
+    "password_reset_approved_signal",
+    "password_reset_rejected_signal"
+  ]
+}

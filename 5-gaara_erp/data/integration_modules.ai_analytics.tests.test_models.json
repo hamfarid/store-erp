@@ -1,0 +1,288 @@
+{
+  "module": "integration_modules.ai_analytics.tests.test_models",
+  "imports": [
+    "django",
+    "django.conf",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "integration_modules.ai_analytics.models",
+    "os",
+    "sys",
+    "unittest"
+  ],
+  "classes": [
+    {
+      "name": "AnalyticsDataSourceTestCase",
+      "methods": [
+        "setUp",
+        "test_data_source_creation",
+        "test_data_source_str_representation",
+        "test_get_connection_status",
+        "test_refresh_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AnalyticsDatasetTestCase",
+      "methods": [
+        "setUp",
+        "test_dataset_creation",
+        "test_dataset_str_representation",
+        "test_dataset_data_sources_relationship",
+        "test_dataset_source_relationship"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AnalyticsModelTestCase",
+      "methods": [
+        "setUp",
+        "test_model_creation",
+        "test_model_str_representation",
+        "test_model_train",
+        "test_model_deploy",
+        "test_model_archive"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AnalyticsReportTestCase",
+      "methods": [
+        "setUp",
+        "test_report_creation",
+        "test_report_str_representation",
+        "test_report_generate",
+        "test_report_schedule_generation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AnalyticsInsightTestCase",
+      "methods": [
+        "setUp",
+        "test_insight_creation",
+        "test_insight_str_representation",
+        "test_insight_mark_as_read",
+        "test_insight_archive"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AnalyticsJobTestCase",
+      "methods": [
+        "setUp",
+        "test_job_creation",
+        "test_job_str_representation",
+        "test_job_start",
+        "test_job_complete",
+        "test_job_fail",
+        "test_job_cancel"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_data_source_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_data_source_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_connection_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_refresh_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_dataset_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_dataset_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_dataset_data_sources_relationship",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_dataset_source_relationship",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_model_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_model_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_model_train",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_model_deploy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_model_archive",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_report_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_report_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_report_generate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_report_schedule_generation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_insight_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_insight_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_insight_mark_as_read",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_insight_archive",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_job_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_job_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_job_start",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_job_complete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_job_fail",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_job_cancel",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "module": "core_modules.core.models.role_database_permission",
+  "imports": [
+    "base_models",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "RoleDatabasePermission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "database_alias",
+        "can_access"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

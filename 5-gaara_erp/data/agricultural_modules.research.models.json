@@ -1,0 +1,933 @@
+{
+  "module": "agricultural_modules.research.models",
+  "imports": [
+    "django.conf",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "random",
+    "string"
+  ],
+  "classes": [
+    {
+      "name": "ResearchProject",
+      "methods": [
+        "save",
+        "_generate_code",
+        "__str__",
+        "duration",
+        "is_active",
+        "is_completed",
+        "get_duration_days",
+        "get_team_members",
+        "get_experiments",
+        "get_publications",
+        "get_patents"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "objectives",
+        "status",
+        "start_date",
+        "expected_end_date",
+        "actual_end_date",
+        "budget",
+        "funding_source",
+        "principal_investigator",
+        "collaborating_institutions",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at",
+        "STATUS_PLANNING",
+        "STATUS_IN_PROGRESS",
+        "STATUS_COMPLETED",
+        "STATUS_CANCELLED",
+        "PRIORITY_LOW",
+        "PRIORITY_MEDIUM",
+        "PRIORITY_HIGH",
+        "PRIORITY_CHOICES",
+        "title",
+        "priority",
+        "keywords",
+        "status_notes",
+        "end_date"
+      ]
+    },
+    {
+      "name": "ProjectTeamMember",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "project",
+        "researcher",
+        "ROLE_CHOICES",
+        "role",
+        "responsibilities",
+        "join_date",
+        "end_date",
+        "is_active",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ResearchExperiment",
+      "methods": [
+        "__str__",
+        "is_active",
+        "is_completed",
+        "get_duration_days",
+        "get_participants",
+        "get_results"
+      ],
+      "variables": [
+        "title",
+        "code",
+        "project",
+        "description",
+        "protocol",
+        "status",
+        "start_date",
+        "end_date",
+        "lead_researcher",
+        "location",
+        "equipment_used",
+        "materials_used",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ExperimentParticipant",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "experiment",
+        "researcher",
+        "ROLE_CHOICES",
+        "role",
+        "responsibilities",
+        "notes",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "ExperimentResult",
+      "methods": [
+        "__str__",
+        "is_verified"
+      ],
+      "variables": [
+        "experiment",
+        "title",
+        "description",
+        "date_recorded",
+        "numeric_data",
+        "observations",
+        "conclusions",
+        "VERIFICATION_STATUS_CHOICES",
+        "verification_status",
+        "verified_by",
+        "verification_date",
+        "recorded_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Researcher",
+      "methods": [
+        "__str__",
+        "get_full_name",
+        "get_projects",
+        "get_led_projects",
+        "get_experiments",
+        "get_led_experiments",
+        "get_publications",
+        "get_patents",
+        "update_counts"
+      ],
+      "variables": [
+        "user",
+        "employee_id",
+        "title",
+        "specialization",
+        "department",
+        "bio",
+        "education",
+        "experience",
+        "skills",
+        "publications_count",
+        "patents_count",
+        "projects_count",
+        "join_date",
+        "is_active",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Publication",
+      "methods": [
+        "__str__",
+        "get_authors",
+        "get_citation"
+      ],
+      "variables": [
+        "title",
+        "abstract",
+        "publication_type",
+        "status",
+        "journal_or_conference",
+        "volume",
+        "issue",
+        "pages",
+        "doi",
+        "url",
+        "publisher",
+        "publication_date",
+        "submission_date",
+        "acceptance_date",
+        "keywords",
+        "projects",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PublicationAuthor",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "publication",
+        "researcher",
+        "order",
+        "is_corresponding",
+        "contribution",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Patent",
+      "methods": [
+        "__str__",
+        "get_inventors",
+        "is_granted",
+        "is_active"
+      ],
+      "variables": [
+        "title",
+        "description",
+        "patent_number",
+        "application_number",
+        "filing_date",
+        "grant_date",
+        "expiry_date",
+        "status",
+        "patent_office",
+        "country",
+        "url",
+        "projects",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PatentInventor",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "patent",
+        "researcher",
+        "order",
+        "contribution",
+        "created_at"
+      ]
+    },
+    {
+      "name": "ResearchGrant",
+      "methods": [
+        "__str__",
+        "is_active",
+        "get_duration_months"
+      ],
+      "variables": [
+        "title",
+        "description",
+        "grant_id",
+        "funding_agency",
+        "amount",
+        "currency",
+        "status",
+        "submission_date",
+        "start_date",
+        "end_date",
+        "projects",
+        "principal_investigator",
+        "co_investigators",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ResearchEquipment",
+      "methods": [
+        "__str__",
+        "is_operational",
+        "needs_maintenance",
+        "needs_calibration",
+        "get_experiments"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "model",
+        "manufacturer",
+        "serial_number",
+        "acquisition_date",
+        "acquisition_cost",
+        "currency",
+        "location",
+        "status",
+        "last_maintenance_date",
+        "next_maintenance_date",
+        "last_calibration_date",
+        "next_calibration_date",
+        "responsible_person",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ResearchReport",
+      "methods": [
+        "__str__",
+        "is_approved",
+        "is_under_review",
+        "get_period_days"
+      ],
+      "variables": [
+        "title",
+        "project",
+        "report_type",
+        "status",
+        "submission_date",
+        "period_start",
+        "period_end",
+        "content",
+        "summary",
+        "conclusions",
+        "recommendations",
+        "reviewer",
+        "review_date",
+        "review_comments",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ResearchObjective",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "project",
+        "title",
+        "description",
+        "success_criteria",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "ResearchTeamMember",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ROLE_RESEARCHER",
+        "ROLE_CHOICES",
+        "project",
+        "user",
+        "role",
+        "responsibilities",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "ResearchTask",
+      "methods": [
+        "__str__",
+        "duration"
+      ],
+      "variables": [
+        "STATUS_TODO",
+        "STATUS_IN_PROGRESS",
+        "STATUS_DONE",
+        "STATUS_CHOICES",
+        "PRIORITY_LOW",
+        "PRIORITY_MEDIUM",
+        "PRIORITY_HIGH",
+        "PRIORITY_CHOICES",
+        "project",
+        "title",
+        "description",
+        "start_date",
+        "due_date",
+        "status",
+        "priority",
+        "assigned_to",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "unique_together",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_generate_code",
+      "parameters": []
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_duration_days",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_team_members",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_experiments",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_publications",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_patents",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_duration_days",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_participants",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_results",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_verified",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_full_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_projects",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_led_projects",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_experiments",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_led_experiments",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_publications",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_patents",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_counts",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_authors",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_citation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_inventors",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_granted",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_duration_months",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_operational",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "needs_maintenance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "needs_calibration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_experiments",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_approved",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_under_review",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_period_days",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "duration",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "PROJECT_STATUS_CHOICES",
+    "EXPERIMENT_STATUS_CHOICES",
+    "PUBLICATION_TYPE_CHOICES",
+    "PUBLICATION_STATUS_CHOICES",
+    "PATENT_STATUS_CHOICES",
+    "GRANT_STATUS_CHOICES",
+    "EQUIPMENT_STATUS_CHOICES",
+    "REPORT_TYPE_CHOICES",
+    "REPORT_STATUS_CHOICES",
+    "ResearchPublication",
+    "ResearchResult",
+    "ResearchResource",
+    "ResearchDataset",
+    "ResearchAnalysis",
+    "ResearchFunding",
+    "ResearchMethodology",
+    "ResearchCollaboration"
+  ]
+}

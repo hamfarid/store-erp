@@ -1,0 +1,134 @@
+{
+  "module": "agricultural_modules.experiments.admin",
+  "imports": [
+    "django.contrib"
+  ],
+  "classes": [
+    {
+      "name": "LocationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "SeasonAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "VarietyTypeAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "VarietyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ExperimentAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ExperimentVarietyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "HarvestAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "HarvestQualityGradeAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "VarietyEvaluationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "FertilizationProgramAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "FertilizationApplicationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "PesticideProgramAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "PesticideApplicationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "ExperimentCostAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "VarietyPriceRecommendationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

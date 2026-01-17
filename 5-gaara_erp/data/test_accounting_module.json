@@ -1,0 +1,39 @@
+{
+  "module": "test_accounting_module",
+  "imports": [
+    "business_modules.accounting.models",
+    "datetime",
+    "decimal",
+    "django",
+    "django.apps",
+    "django.conf",
+    "django.test",
+    "django.test.utils",
+    "django.urls",
+    "json",
+    "os",
+    "sys",
+    "uuid",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_accounting_models",
+      "parameters": []
+    },
+    {
+      "name": "test_journal_entries",
+      "parameters": []
+    },
+    {
+      "name": "test_accounting_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_financial_calculations",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

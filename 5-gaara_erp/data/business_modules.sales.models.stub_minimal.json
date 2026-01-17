@@ -1,0 +1,56 @@
+{
+  "module": "business_modules.sales.models.stub_minimal",
+  "imports": [
+    "__future__"
+  ],
+  "classes": [
+    {
+      "name": "_BaseStub",
+      "methods": [
+        "__init__",
+        "__repr__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SalesInvoiceStatus",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "CONFIRMED",
+        "PARTIALLY_PAID",
+        "PAID"
+      ]
+    },
+    {
+      "name": "SalesInvoice",
+      "methods": [],
+      "variables": [
+        "objects",
+        "remaining_balance"
+      ]
+    },
+    {
+      "name": "SalesReturn",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__repr__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "__all__"
+  ]
+}

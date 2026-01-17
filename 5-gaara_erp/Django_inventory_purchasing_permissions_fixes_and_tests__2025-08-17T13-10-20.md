@@ -1,0 +1,91 @@
+[ ] NAME:Current Task List DESCRIPTION:Root task for conversation __NEW_AGENT__
+-[ ] NAME:Investigate/Triage/Understand the problem DESCRIPTION:Review the current state of the targeted modules and tests to scope the fixes: 1) inventory/tracking.py models (StockLot, StockMovement); 2) purchasing/models/purchase_order.py for quote/Decimal issues; 3) core_modules/permissions/models.py for embedded non-code text; 4) tests under inventory/tests and purchasing/tests referencing these modules. Identify exact edit points and impacts.
+-[ ] NAME:Fix backup product_grading/models.py import for ProductionBatch DESCRIPTION:Replace direct import of ProductionBatch with a string reference to avoid unknown symbol errors for Pylance.
+-[ ] NAME:Fix __str__ and fields in inventory models to avoid Pylance id warnings and link Lot to Product DESCRIPTION:Update __str__ in Lot, UoM, Stock, LotBatch to use meaningful fields; add product ForeignKey to Lot so queries can filter by product.
+-[ ] NAME:Rewrite inventory/permissions.py into a minimal, valid DRF permission class DESCRIPTION:Replace broken content with a clean implementation: import Store and StorePermission, define helper to fetch roles, implement HasStorePermission.has_permission and has_object_permission.
+-[ ] NAME:Fix Decimal/float multiplication in product_grading/pricing.py DESCRIPTION:Use Decimal for margin computation and return Decimal instead of float.
+-[ ] NAME:Rewrite inventory/products.py into valid Django models DESCRIPTION:Replace malformed file with clean models: ProductAttribute, ProductAttributeValue, ProductVariant, SupplierProduct, UOMConversion using correct fields and Decimal defaults.
+-[ ] NAME:Fix inventory/queries.py imports and adjust to current models DESCRIPTION:Import from .models instead of .base/.products; alias StockLot as InventoryStock; import date; adjust code to use available fields and avoid Optional arithmetic.
+-[ ] NAME:Fix Pylance issues in report_views, reports, serializers, services, stock_updater, stock_views DESCRIPTION:Adjust imports and field references to match current models; fix ExpressionWrapper date-F arithmetic; correct serializer imports; ensure Decimal arithmetic; correct unknown import symbols by aliasing to existing classes.
+-[ ] NAME:Investigate failing tests and referenced interfaces DESCRIPTION:Open failing files to identify exact indentation errors and inventory API mismatches. Inspect tests to see expected services methods and models (ProductCategory, WarehouseLocation, StockMoveType). Review audit_trail_service.py and ai_permissions modules for Pylance errors.
+-[/] NAME:Django 5 Migration & Documentation Project DESCRIPTION:Comprehensive Django 5 / Python 3.11 repository migration, error fixing, and documentation generation project
+--[/] NAME:App discovery & ordering across all modules DESCRIPTION:Enumerate all Django apps under core_modules, business_modules, admin_modules, services_modules, integration_modules, utility_modules, dashboard, reports; detect apps via apps.py and models.py; compute topological order by FK deps to avoid circular migrations.
+--[ ] NAME:Batch: Process admin_modules/*DESCRIPTION:Discover Django apps in admin_modules, create/apply migrations, fix code/test issues, document changes.
+--[ ] NAME:Batch: Process core_modules/* DESCRIPTION:Discover Django apps in core_modules, create/apply migrations, fix code/test issues, document changes.
+--[ ] NAME:Batch: Process business_modules/*DESCRIPTION:Discover Django apps in business_modules, create/apply migrations, fix code/test issues, document changes.
+--[ ] NAME:Batch: Process services_modules/* DESCRIPTION:Discover Django apps in services_modules, create/apply migrations, fix code/test issues, document changes.
+--[ ] NAME:Batch: Process integration_modules/*DESCRIPTION:Discover Django apps in integration_modules, create/apply migrations, fix code/test issues, document changes.
+--[ ] NAME:Batch: Process utility_modules/* DESCRIPTION:Discover Django apps in utility_modules, create/apply migrations, fix code/test issues, document changes.
+--[ ] NAME:Batch: Process dashboard & reports DESCRIPTION:Ensure dashboard and reports apps have valid AppConfig, apply migrations if models added; update docs.
+--[ ] NAME:Process App: admin_modules.system_monitoring DESCRIPTION:Run check, makemigrations, migrate; fix errors; add notes; run app tests.
+--[ ] NAME:Process App: core_modules.core DESCRIPTION:Run check, makemigrations, migrate; fix errors; add notes; run app tests.
+--[ ] NAME:Process App: core_modules.companies DESCRIPTION:Run check, makemigrations, migrate; fix errors; add notes; run app tests.
+--[ ] NAME:Process App: core_modules.organization DESCRIPTION:Run check, makemigrations, migrate; fix errors; add notes; run app tests.
+--[ ] NAME:Process App: business_modules.inventory DESCRIPTION:Inventory already partially processed. Re-run checks; ensure no pending migrations; finish tests; document changes fully.
+--[ ] NAME:Process App: business_modules.contacts DESCRIPTION:Run check, makemigrations, migrate; fix errors; add notes; run app tests.
+--[ ] NAME:Process App: business_modules.sales DESCRIPTION:Run check, makemigrations, migrate; fix errors; add notes; run app tests. Stub/mocking for accounting/permissions if needed.
+--[ ] NAME:Process App: business_modules.rent DESCRIPTION:Run check, makemigrations, migrate; fix errors; add notes; run app tests.
+--[ ] NAME:Process App: business_modules.solar_stations DESCRIPTION:Run check, makemigrations, migrate; fix errors; add notes; run app tests.
+--[ ] NAME:Process App: dashboard DESCRIPTION:Confirm no models or add minimal models/migrations if needed; ensure tests/docs.
+--[ ] NAME:Process App: reports DESCRIPTION:Confirm no models or add minimal models/migrations if needed; ensure tests/docs.
+--[ ] NAME:Automated syntax sweep (safe patterns only) DESCRIPTION:Repo-wide pass to fix malformed docstrings, unterminated strings, trivial indent issues in active apps; do not touch backup_files/ unless required.
+--[ ] NAME:Per-app test run & fixes DESCRIPTION:pytest -k per app; fix broken imports, wrong base classes in tests, router names, choices/enums, signals ready loops.
+--[ ] NAME:Definitions Index generator (AST) DESCRIPTION:Implement AST script/management command to collect models, serializers, views, services, tasks, signals, commands, settings and update docs/DEFINITIONS_INDEX.md.
+--[ ] NAME:Migration docs updater DESCRIPTION:Append to docs/migrations/MIGRATIONS_NOTES.md and update docs/migrations/SUMMARY.md with each app’s changes.
+--[ ] NAME:Process App: admin_modules.communication DESCRIPTION:Scan for Django app config/models; fix syntax/import issues; create/apply migrations; add notes; run tests if present.
+--[ ] NAME:Process App: admin_modules.custom_admin DESCRIPTION:Same per-app migration workflow and fixes.
+--[ ] NAME:Process App: admin_modules.dashboard DESCRIPTION:Same per-app migration workflow and fixes.
+--[ ] NAME:Process App: admin_modules.database_management DESCRIPTION:Same per-app migration workflow and fixes.
+--[ ] NAME:Process App: admin_modules.health_monitoring DESCRIPTION:Same per-app migration workflow and fixes.
+--[ ] NAME:Process App: admin_modules.internal_diagnosis_module DESCRIPTION:Same per-app migration workflow and fixes.
+--[ ] NAME:Process App: admin_modules.notifications DESCRIPTION:Same per-app migration workflow and fixes. Exclude backup_files from INSTALLED_APPS; fix syntax in active package.
+--[ ] NAME:Handle backup_files* packages DESCRIPTION:Identify backup_files packages under modules; exclude from app processing or quarantine; fix only if gate-kept by active apps.
+--[ ] NAME:Process App: admin_modules.setup_wizard DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: admin_modules.system_backups DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: business_modules.accounting DESCRIPTION:Per-app migration workflow and fixes. Create minimal stubs if cross-app tests require.
+--[ ] NAME:Process App: business_modules.assets DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: business_modules.pos DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: business_modules.production DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: business_modules.purchasing DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: core_modules.ai_permissions DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: core_modules.api_keys DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: core_modules.permissions DESCRIPTION:Per-app migration workflow and fixes. Ensure app_label on models and add to INSTALLED_APPS when processing.
+--[ ] NAME:Process App: core_modules.permissions_common DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: core_modules.permissions_manager DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: core_modules.setup DESCRIPTION:Per-app migration workflow and fixes for umbrella setup app.
+--[ ] NAME:Process App: core_modules.setup.activity_log DESCRIPTION:Per-app migration workflow and fixes for activity_log.
+--[ ] NAME:Process App: core_modules.setup.data_import_export DESCRIPTION:Per-app migration workflow and fixes for data_import_export.
+--[ ] NAME:Process App: core_modules.setup.security DESCRIPTION:Per-app migration workflow and fixes for security.
+--[ ] NAME:Process App: core_modules.setup.submodules.activity_logging DESCRIPTION:Per-app migration workflow and fixes for submodule.
+--[ ] NAME:Process App: core_modules.setup.submodules.data_import_export DESCRIPTION:Per-app migration workflow and fixes for submodule.
+--[ ] NAME:Process App: core_modules.setup.submodules.security DESCRIPTION:Per-app migration workflow and fixes for submodule.
+--[ ] NAME:Process App: core_modules.setup.submodules.user_management DESCRIPTION:Per-app migration workflow and fixes for submodule.
+--[ ] NAME:Process App: core_modules.setup.system_settings DESCRIPTION:Per-app migration workflow and fixes for system_settings under setup.
+--[ ] NAME:Process App: core_modules.setup.user_management DESCRIPTION:Per-app migration workflow and fixes for user_management under setup.
+--[ ] NAME:Process App: core_modules.system_settings DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: core_modules.unified_permissions DESCRIPTION:Per-app migration workflow and fixes; ensure explicit app_label and INSTALLED_APPS inclusion during processing.
+--[ ] NAME:Process App: core_modules.users DESCRIPTION:Per-app migration workflow and fixes; handle custom USER if present.
+--[ ] NAME:Process App: core_modules.users_accounts DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: integration_modules.a2a_integration DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: integration_modules.ai DESCRIPTION:Per-app migration workflow and fixes. Many syntax fixes expected.
+--[ ] NAME:Process App: integration_modules.ai_agent DESCRIPTION:Per-app migration workflow and fixes. Many syntax fixes expected.
+--[ ] NAME:Process App: integration_modules.ai_agents DESCRIPTION:Per-app migration workflow and fixes. Many syntax fixes expected.
+--[ ] NAME:Process App: integration_modules.ai_monitoring DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: integration_modules.ai_services DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: integration_modules.memory_ai DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.archiving_system DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.beneficiaries DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.correspondence DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.feasibility_studies DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.fleet_management DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.forecast DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.hr DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.legal_affairs DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.marketing DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.projects DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.telegram_bot DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.utilities DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: services_modules.workflows DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: utility_modules.item_research DESCRIPTION:Per-app migration workflow and fixes. Exclude backup_files.
+--[ ] NAME:Process App: utility_modules.locale DESCRIPTION:Per-app migration workflow and fixes.
+--[ ] NAME:Process App: utility_modules.utilities DESCRIPTION:Per-app migration workflow and fixes. Exclude backup_files.

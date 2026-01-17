@@ -1,0 +1,353 @@
+{
+  "module": "services_modules.board_management.models.board_decision",
+  "imports": [
+    "board_meeting",
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.urls",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "BoardDecisionQuerySet",
+      "methods": [
+        "pending",
+        "in_progress",
+        "completed",
+        "active",
+        "overdue",
+        "upcoming",
+        "by_responsible",
+        "by_board",
+        "by_year"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BoardDecisionManager",
+      "methods": [
+        "get_queryset",
+        "pending",
+        "in_progress",
+        "completed",
+        "active",
+        "overdue",
+        "upcoming"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BoardDecision",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "generate_decision_number",
+        "is_completed",
+        "is_pending",
+        "is_in_progress",
+        "is_active",
+        "is_overdue",
+        "get_days_until_implementation",
+        "get_days_overdue",
+        "get_board",
+        "get_budget_usage_percentage",
+        "can_edit",
+        "can_view",
+        "update_status",
+        "get_absolute_url",
+        "get_status_color",
+        "get_priority_color",
+        "is_budget_exceeded",
+        "get_statistics"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "PRIORITY_CHOICES",
+        "CATEGORY_CHOICES",
+        "meeting",
+        "decision_number",
+        "title",
+        "description",
+        "category",
+        "priority",
+        "status",
+        "decision_date",
+        "implementation_date",
+        "actual_implementation_date",
+        "responsible",
+        "assigned_team",
+        "budget_allocated",
+        "budget_spent",
+        "progress_percentage",
+        "attachments",
+        "related_decisions",
+        "notes",
+        "is_confidential",
+        "requires_follow_up",
+        "follow_up_date",
+        "completion_notes",
+        "cancellation_reason",
+        "created_by",
+        "updated_by",
+        "created_at",
+        "updated_at",
+        "objects"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes",
+        "permissions"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "pending",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "in_progress",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "upcoming",
+      "parameters": [
+        "self",
+        "days"
+      ]
+    },
+    {
+      "name": "by_responsible",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "by_board",
+      "parameters": [
+        "self",
+        "board"
+      ]
+    },
+    {
+      "name": "by_year",
+      "parameters": [
+        "self",
+        "year"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "pending",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "in_progress",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "upcoming",
+      "parameters": [
+        "self",
+        "days"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "generate_decision_number",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_pending",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_in_progress",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_days_until_implementation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_days_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_board",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_budget_usage_percentage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "can_edit",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "can_view",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "update_status",
+      "parameters": [
+        "self",
+        "new_status",
+        "user",
+        "notes"
+      ]
+    },
+    {
+      "name": "get_absolute_url",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_status_color",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_priority_color",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_budget_exceeded",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_statistics",
+      "parameters": [
+        "cls",
+        "board",
+        "year"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

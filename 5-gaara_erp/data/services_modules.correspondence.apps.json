@@ -1,0 +1,20 @@
+{
+  "module": "services_modules.correspondence.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "CorrespondenceConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "label",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

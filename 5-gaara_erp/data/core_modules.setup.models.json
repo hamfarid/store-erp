@@ -1,0 +1,192 @@
+{
+  "module": "core_modules.setup.models",
+  "imports": [
+    "core_modules.system_settings.models",
+    "django.conf",
+    "django.contrib.auth",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "system_settings.models",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "CompanySettings",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "email",
+        "phone",
+        "address",
+        "tax_id",
+        "base_currency",
+        "default_language",
+        "timezone"
+      ]
+    },
+    {
+      "name": "SetupWizardSession",
+      "methods": [
+        "__str__",
+        "mark_step_completed",
+        "go_to_next_step",
+        "go_to_previous_step",
+        "save_step_data",
+        "get_step_data",
+        "apply_settings"
+      ],
+      "variables": [
+        "SETUP_STEPS",
+        "id",
+        "user",
+        "current_step",
+        "completed_steps",
+        "session_data",
+        "is_active",
+        "is_completed",
+        "started_at",
+        "updated_at",
+        "completed_at"
+      ]
+    },
+    {
+      "name": "SystemInstallationStatus",
+      "methods": [
+        "__str__",
+        "is_installed",
+        "mark_as_installed",
+        "mark_as_in_progress",
+        "log_installation_step"
+      ],
+      "variables": [
+        "INSTALLATION_STATUSES",
+        "status",
+        "version",
+        "installed_at",
+        "installed_by",
+        "last_upgrade_at",
+        "installation_log"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_step_completed",
+      "parameters": [
+        "self",
+        "step"
+      ]
+    },
+    {
+      "name": "go_to_next_step",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "go_to_previous_step",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save_step_data",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "get_step_data",
+      "parameters": [
+        "self",
+        "step"
+      ]
+    },
+    {
+      "name": "apply_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_installed",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "mark_as_installed",
+      "parameters": [
+        "cls",
+        "user"
+      ]
+    },
+    {
+      "name": "mark_as_in_progress",
+      "parameters": [
+        "cls",
+        "user"
+      ]
+    },
+    {
+      "name": "log_installation_step",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

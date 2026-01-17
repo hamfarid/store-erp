@@ -1,0 +1,86 @@
+{
+  "module": "business_modules.accounting.models.settlement",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SettlementStatus",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "CONFIRMED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "Settlement",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "status",
+        "settlement_date",
+        "created_by",
+        "confirmed_by",
+        "cancelled_by",
+        "created_at",
+        "updated_at",
+        "confirmed_at",
+        "cancelled_at"
+      ]
+    },
+    {
+      "name": "SettlementItem",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "settlement",
+        "item_type",
+        "amount",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

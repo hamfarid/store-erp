@@ -1,0 +1,61 @@
+{
+  "module": "integration_modules.ai_services.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "AIModelAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "AIModelCapabilityAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "AIServiceRequestAdmin",
+      "methods": [
+        "mark_as_completed",
+        "mark_as_failed"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "actions"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "mark_as_completed",
+      "parameters": [
+        "self",
+        "request",
+        "queryset"
+      ]
+    },
+    {
+      "name": "mark_as_failed",
+      "parameters": [
+        "self",
+        "request",
+        "queryset"
+      ]
+    }
+  ],
+  "variables": []
+}

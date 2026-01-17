@@ -1,0 +1,24 @@
+{
+  "module": "core_modules.activity_log.services.__init__",
+  "imports": [
+    "audit_trail_service"
+  ],
+  "classes": [
+    {
+      "name": "ActivityLogService",
+      "methods": [
+        "log_activity"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "log_activity",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "__all__"
+  ]
+}

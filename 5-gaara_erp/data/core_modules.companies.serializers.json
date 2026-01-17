@@ -1,0 +1,117 @@
+{
+  "module": "core_modules.companies.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "CountrySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "RegionSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CompanySerializer",
+      "methods": [
+        "get_branches_count"
+      ],
+      "variables": [
+        "country_name",
+        "branches_count"
+      ]
+    },
+    {
+      "name": "BranchSerializer",
+      "methods": [],
+      "variables": [
+        "company_name"
+      ]
+    },
+    {
+      "name": "CompanyListSerializer",
+      "methods": [
+        "get_branches_count"
+      ],
+      "variables": [
+        "branches_count"
+      ]
+    },
+    {
+      "name": "BranchListSerializer",
+      "methods": [],
+      "variables": [
+        "company_name"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_branches_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_branches_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

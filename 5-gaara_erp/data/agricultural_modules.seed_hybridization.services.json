@@ -1,0 +1,140 @@
+{
+  "module": "agricultural_modules.seed_hybridization.services",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "json",
+    "logging",
+    "models",
+    "os",
+    "requests",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "PyBrOpSClient",
+      "methods": [
+        "__init__",
+        "_log_api_request",
+        "simulate_hybridization",
+        "get_variety_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "HybridizationService",
+      "methods": [
+        "__init__",
+        "create_simulation",
+        "run_simulation",
+        "_create_hybrid_varieties",
+        "get_simulation_results"
+      ],
+      "variables": []
+    },
+    {
+      "name": "_HybridizationServiceProxy",
+      "methods": [
+        "__getattr__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_hybridization_service",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "api_key",
+        "api_url"
+      ]
+    },
+    {
+      "name": "_log_api_request",
+      "parameters": [
+        "self",
+        "endpoint",
+        "request_data",
+        "response",
+        "start_time",
+        "user"
+      ]
+    },
+    {
+      "name": "simulate_hybridization",
+      "parameters": [
+        "self",
+        "parent_data",
+        "target_traits",
+        "simulation_params",
+        "user"
+      ]
+    },
+    {
+      "name": "get_variety_data",
+      "parameters": [
+        "self",
+        "variety_id",
+        "user"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_simulation",
+      "parameters": [
+        "self",
+        "name",
+        "description",
+        "parent_variety_ids",
+        "target_traits",
+        "simulation_parameters",
+        "user"
+      ]
+    },
+    {
+      "name": "run_simulation",
+      "parameters": [
+        "self",
+        "simulation_id",
+        "user"
+      ]
+    },
+    {
+      "name": "_create_hybrid_varieties",
+      "parameters": [
+        "self",
+        "simulation",
+        "hybrid_varieties_data"
+      ]
+    },
+    {
+      "name": "get_simulation_results",
+      "parameters": [
+        "self",
+        "simulation_id"
+      ]
+    },
+    {
+      "name": "__getattr__",
+      "parameters": [
+        "self",
+        "item"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "_singleton_cache",
+    "hybridization_service"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "module": "core_modules.users_accounts.serializers",
+  "imports": [
+    "admin_modules.permissions_manager.models",
+    "admin_modules.permissions_manager.serializers",
+    "django.contrib.auth",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserRoleAssignmentSerializer",
+      "methods": [],
+      "variables": [
+        "role_name",
+        "role_id"
+      ]
+    },
+    {
+      "name": "UserSerializer",
+      "methods": [
+        "create",
+        "update"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BasicRoleSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "BasicPermissionSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "instance",
+        "validated_data"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "module": "business_modules.contacts.tests.test_contacts",
+  "imports": [
+    "core_modules.core.models",
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.address",
+    "models.communication",
+    "models.contact"
+  ],
+  "classes": [
+    {
+      "name": "ContactCategoryModelTest",
+      "methods": [
+        "setUp",
+        "test_create_category",
+        "test_unique_code_per_company",
+        "test_deactivate_category"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ContactTagModelTest",
+      "methods": [
+        "setUp",
+        "test_create_tag",
+        "test_unique_code_per_company",
+        "test_deactivate_tag"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CountryModelTest",
+      "methods": [
+        "setUp",
+        "test_create_country",
+        "test_unique_code",
+        "test_deactivate_country"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CityModelTest",
+      "methods": [
+        "setUp",
+        "test_create_city",
+        "test_unique_code_per_country",
+        "test_deactivate_city"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AddressModelTest",
+      "methods": [
+        "setUp",
+        "test_create_address",
+        "test_default_address_constraint",
+        "test_get_full_address"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ContactModelTest",
+      "methods": [
+        "setUp",
+        "test_create_contact",
+        "test_add_categories_and_tags",
+        "test_deactivate_contact",
+        "test_get_primary_address",
+        "test_get_communication_logs"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CommunicationTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_communication_type",
+        "test_unique_code_per_company",
+        "test_deactivate_communication_type"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CommunicationLogModelTest",
+      "methods": [
+        "setUp",
+        "test_create_communication_log",
+        "test_log_with_duration_and_outcome",
+        "test_get_user_full_name",
+        "test_get_formatted_date"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_tag",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_tag",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_country",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_country",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_city",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_country",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_city",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_address",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_default_address_constraint",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_full_address",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_contact",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_categories_and_tags",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_contact",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_primary_address",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_communication_logs",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_communication_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_communication_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_communication_log",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_log_with_duration_and_outcome",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_user_full_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_formatted_date",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_set_as_default",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_full_address",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_primary_address",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_communication_logs",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_user_full_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_formatted_date",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

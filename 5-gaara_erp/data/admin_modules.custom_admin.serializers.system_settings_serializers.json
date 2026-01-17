@@ -1,0 +1,40 @@
+{
+  "module": "admin_modules.custom_admin.serializers.system_settings_serializers",
+  "imports": [
+    "models.system_settings",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "SystemSettingSerializer",
+      "methods": [
+        "get_typed_value"
+      ],
+      "variables": [
+        "updated_by_username",
+        "setting_type_display",
+        "data_type_display",
+        "typed_value"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_typed_value",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,177 @@
+{
+  "module": "admin_modules.performance_management.serializers",
+  "imports": [
+    "admin_modules.system_monitoring.models_improved",
+    "integration_modules.ai_monitoring.models",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "KeyPerformanceIndicatorSerializer",
+      "methods": [],
+      "variables": [
+        "responsible_user_username"
+      ]
+    },
+    {
+      "name": "KpiRecordSerializer",
+      "methods": [],
+      "variables": [
+        "kpi_name",
+        "recorded_by_username"
+      ]
+    },
+    {
+      "name": "PerformanceGoalSerializer",
+      "methods": [
+        "get_kpi_names"
+      ],
+      "variables": [
+        "user_name",
+        "created_by_name",
+        "kpi_names"
+      ]
+    },
+    {
+      "name": "PerformanceReviewSerializer",
+      "methods": [
+        "get_goal_titles"
+      ],
+      "variables": [
+        "user_name",
+        "reviewer_name",
+        "goal_titles"
+      ]
+    },
+    {
+      "name": "PerformanceMetricSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "AIAgentMetricSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ModuleStatusSerializer",
+      "methods": [],
+      "variables": [
+        "status_display"
+      ]
+    },
+    {
+      "name": "AIModelPerformanceReportSerializer",
+      "methods": [],
+      "variables": [
+        "model_name"
+      ]
+    },
+    {
+      "name": "AlertSerializer",
+      "methods": [],
+      "variables": [
+        "acknowledged_by_username"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_kpi_names",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_goal_titles",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

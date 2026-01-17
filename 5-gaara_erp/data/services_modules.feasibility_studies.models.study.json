@@ -1,0 +1,114 @@
+{
+  "module": "services_modules.feasibility_studies.models.study",
+  "imports": [
+    "__future__",
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "StudyType",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "description",
+        "is_active"
+      ]
+    },
+    {
+      "name": "StudyStatus",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "description",
+        "is_active"
+      ]
+    },
+    {
+      "name": "FeasibilityStudy",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "title",
+        "reference_number",
+        "study_type",
+        "status",
+        "start_date",
+        "expected_end_date",
+        "completion_date",
+        "client_name",
+        "project_cost",
+        "expected_annual_revenue",
+        "company",
+        "branch",
+        "created_by",
+        "executive_summary",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "unique_together",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "unique_together",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "unique_together",
+        "ordering",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,119 @@
+{
+  "module": "core_modules.permissions.filters",
+  "imports": [
+    "django.db.models",
+    "django.utils.translation",
+    "django_filters",
+    "unified_permissions_model"
+  ],
+  "classes": [
+    {
+      "name": "PermissionFilter",
+      "methods": [],
+      "variables": [
+        "codename",
+        "name",
+        "module",
+        "category",
+        "is_active",
+        "created_after",
+        "created_before",
+        "updated_after",
+        "updated_before"
+      ]
+    },
+    {
+      "name": "RoleFilter",
+      "methods": [
+        "filter_has_parent"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "is_system_role",
+        "is_active",
+        "parent_role",
+        "has_parent",
+        "permission",
+        "created_after",
+        "created_before",
+        "updated_after",
+        "updated_before"
+      ]
+    },
+    {
+      "name": "UserRoleFilter",
+      "methods": [],
+      "variables": [
+        "user",
+        "role",
+        "is_active",
+        "valid_from_after",
+        "valid_from_before",
+        "valid_to_after",
+        "valid_to_before",
+        "created_after",
+        "created_before",
+        "updated_after",
+        "updated_before"
+      ]
+    },
+    {
+      "name": "GroupRoleFilter",
+      "methods": [],
+      "variables": [
+        "group",
+        "role",
+        "is_active",
+        "created_after",
+        "created_before",
+        "updated_after",
+        "updated_before"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "filter_has_parent",
+      "parameters": [
+        "self",
+        "queryset",
+        "_name",
+        "value"
+      ]
+    }
+  ],
+  "variables": []
+}

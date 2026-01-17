@@ -1,0 +1,145 @@
+{
+  "module": "agricultural_modules.seed_hybridization.cost_tracking",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.db.models",
+    "django.utils"
+  ],
+  "classes": [
+    {
+      "name": "HybridizationCost",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "COST_TYPE_CHOICES",
+        "external_experiment_id",
+        "external_variety_id",
+        "cost_type",
+        "description",
+        "amount",
+        "currency",
+        "date_incurred",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by",
+        "notes"
+      ]
+    },
+    {
+      "name": "HybridizationBudget",
+      "methods": [
+        "__str__",
+        "get_remaining_budget"
+      ],
+      "variables": [
+        "external_experiment_id",
+        "external_variety_id",
+        "title",
+        "description",
+        "total_amount",
+        "currency",
+        "start_date",
+        "end_date",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "add_hybridization_cost",
+      "parameters": [
+        "external_experiment_id",
+        "external_variety_id",
+        "cost_type",
+        "description",
+        "amount",
+        "currency",
+        "date_incurred",
+        "notes",
+        "user"
+      ]
+    },
+    {
+      "name": "get_hybridization_costs",
+      "parameters": [
+        "external_experiment_id",
+        "external_variety_id",
+        "start_date",
+        "end_date",
+        "cost_type"
+      ]
+    },
+    {
+      "name": "add_hybridization_budget",
+      "parameters": [
+        "external_experiment_id",
+        "external_variety_id",
+        "title",
+        "description",
+        "total_amount",
+        "currency",
+        "start_date",
+        "end_date",
+        "user"
+      ]
+    },
+    {
+      "name": "get_hybridization_budget_status",
+      "parameters": [
+        "external_experiment_id",
+        "external_variety_id",
+        "budget_id"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_remaining_budget",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

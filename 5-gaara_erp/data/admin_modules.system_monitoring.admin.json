@@ -1,0 +1,73 @@
+{
+  "module": "admin_modules.system_monitoring.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "SystemMetricAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "date_hierarchy"
+      ]
+    },
+    {
+      "name": "AlertAdmin",
+      "methods": [
+        "message_summary",
+        "mark_acknowledged",
+        "mark_resolved"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "date_hierarchy",
+        "actions"
+      ]
+    },
+    {
+      "name": "ModuleStatusAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "message_summary",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "mark_acknowledged",
+      "parameters": [
+        "self",
+        "request",
+        "queryset"
+      ]
+    },
+    {
+      "name": "mark_resolved",
+      "parameters": [
+        "self",
+        "request",
+        "queryset"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,9 @@
+{
+  "module": "inventory.__init__",
+  "imports": [
+    "business_modules.inventory"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

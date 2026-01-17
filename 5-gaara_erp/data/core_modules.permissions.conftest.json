@@ -1,0 +1,19 @@
+{
+  "module": "core_modules.permissions.conftest",
+  "imports": [
+    "django",
+    "django.conf",
+    "django.contrib.auth.models",
+    "django.contrib.contenttypes.models",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "setup_django_settings",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

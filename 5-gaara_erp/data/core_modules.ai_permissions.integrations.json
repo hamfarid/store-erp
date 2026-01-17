@@ -1,0 +1,113 @@
+{
+  "module": "core_modules.ai_permissions.integrations",
+  "imports": [
+    "config",
+    "django.core.exceptions",
+    "django.utils",
+    "json",
+    "logging",
+    "models",
+    "services",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "CentralAIIntegration",
+      "methods": [
+        "_check_models_availability",
+        "validate_agent_request",
+        "select_ai_model",
+        "log_ai_activity"
+      ],
+      "variables": []
+    },
+    {
+      "name": "A2AIntegration",
+      "methods": [
+        "validate_a2a_interaction",
+        "handle_a2a_message",
+        "register_error_handler"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AIMemoryIntegration",
+      "methods": [
+        "validate_memory_access"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "_check_models_availability",
+      "parameters": []
+    },
+    {
+      "name": "validate_agent_request",
+      "parameters": [
+        "agent_code",
+        "user",
+        "permission_code",
+        "module",
+        "context"
+      ]
+    },
+    {
+      "name": "select_ai_model",
+      "parameters": [
+        "request_type",
+        "module",
+        "language",
+        "resource_constraints"
+      ]
+    },
+    {
+      "name": "log_ai_activity",
+      "parameters": [
+        "agent",
+        "user",
+        "action",
+        "details"
+      ]
+    },
+    {
+      "name": "validate_a2a_interaction",
+      "parameters": [
+        "source_agent_code",
+        "target_agent_code",
+        "interaction_type",
+        "context"
+      ]
+    },
+    {
+      "name": "handle_a2a_message",
+      "parameters": [
+        "source_agent_code",
+        "target_agent_code",
+        "message_type",
+        "message_content",
+        "metadata"
+      ]
+    },
+    {
+      "name": "register_error_handler",
+      "parameters": [
+        "error_type",
+        "handler_agent_code"
+      ]
+    },
+    {
+      "name": "validate_memory_access",
+      "parameters": [
+        "agent_code",
+        "memory_type",
+        "access_type",
+        "context"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

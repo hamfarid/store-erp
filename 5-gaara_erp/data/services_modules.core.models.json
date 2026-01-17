@@ -1,0 +1,74 @@
+{
+  "module": "services_modules.core.models",
+  "imports": [
+    "__future__",
+    "django.apps",
+    "django.core.exceptions",
+    "importlib",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "_LazyModel",
+      "methods": [
+        "__init__",
+        "_resolve",
+        "__getattr__",
+        "__call__",
+        "__repr__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "_bind_eager",
+      "parameters": []
+    },
+    {
+      "name": "_upgrade_lazy_models",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "app_label",
+        "model_name"
+      ]
+    },
+    {
+      "name": "_resolve",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__getattr__",
+      "parameters": [
+        "self",
+        "item"
+      ]
+    },
+    {
+      "name": "__call__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__repr__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "__all__",
+    "Company",
+    "Branch",
+    "Currency",
+    "User",
+    "Partner"
+  ]
+}

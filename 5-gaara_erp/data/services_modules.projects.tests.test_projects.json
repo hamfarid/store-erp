@@ -1,0 +1,320 @@
+{
+  "module": "services_modules.projects.tests.test_projects",
+  "imports": [
+    "core_modules.organization.models",
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.project",
+    "models.task",
+    "models.timesheet"
+  ],
+  "classes": [
+    {
+      "name": "ProjectCategoryModelTest",
+      "methods": [
+        "setUp",
+        "test_create_project_category",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProjectStatusModelTest",
+      "methods": [
+        "setUp",
+        "test_create_project_status",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProjectTagModelTest",
+      "methods": [
+        "setUp",
+        "test_create_project_tag",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProjectModelTest",
+      "methods": [
+        "setUp",
+        "test_create_project",
+        "test_unique_code_per_company",
+        "test_add_tag_to_project",
+        "test_remove_tag_from_project",
+        "test_calculate_progress"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TaskStatusModelTest",
+      "methods": [
+        "setUp",
+        "test_create_task_status",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TaskPriorityModelTest",
+      "methods": [
+        "setUp",
+        "test_create_task_priority",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TaskTagModelTest",
+      "methods": [
+        "setUp",
+        "test_create_task_tag",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TaskModelTest",
+      "methods": [
+        "setUp",
+        "test_create_task",
+        "test_add_tag_to_task",
+        "test_remove_tag_from_task",
+        "test_change_task_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TimesheetModelTest",
+      "methods": [
+        "setUp",
+        "test_create_timesheet",
+        "test_hours_validation",
+        "test_calculate_total_hours_for_task"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_project_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_project_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_project_tag",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_project",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_tag_to_project",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_remove_tag_from_project",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_progress",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_task_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_task_priority",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_task_tag",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_task",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_tag_to_task",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_remove_tag_from_task",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_change_task_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_timesheet",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_hours_validation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_total_hours_for_task",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_progress",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_total_hours",
+      "parameters": [
+        "cls",
+        "task"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

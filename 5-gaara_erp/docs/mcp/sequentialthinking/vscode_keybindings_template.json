@@ -1,0 +1,20 @@
+[
+  {
+    "key": "ctrl+alt+m",
+    "command": "workbench.action.tasks.runTask",
+    "args": "MCP: Build sequentialthinking image",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+n",
+    "command": "workbench.action.tasks.runTask",
+    "args": "MCP: Run sequentialthinking image",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+shift+n",
+    "command": "workbench.action.tasks.runTask",
+    "args": "MCP: Build & Run sequentialthinking",
+    "when": "editorTextFocus"
+  }
+]

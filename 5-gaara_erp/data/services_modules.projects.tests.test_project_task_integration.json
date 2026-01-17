@@ -1,0 +1,105 @@
+{
+  "module": "services_modules.projects.tests.test_project_task_integration",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "models.project",
+    "models.task",
+    "services.project_task_integration",
+    "unittest",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "ProjectTaskIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_create_project_task",
+        "test_create_project_task_without_permission",
+        "test_get_project_tasks",
+        "test_update_project_task",
+        "test_delete_project_task",
+        "test_assign_task_to_project_member",
+        "test_get_project_tasks_statistics",
+        "test_get_project_overdue_tasks",
+        "test_get_project_completion_percentage"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_project_task",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_create_project_task_without_permission",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_get_project_tasks",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_update_project_task",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_delete_project_task",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_assign_task_to_project_member",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_get_project_tasks_statistics",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_get_project_overdue_tasks",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    },
+    {
+      "name": "test_get_project_completion_percentage",
+      "parameters": [
+        "self",
+        "mock_has_perm"
+      ]
+    }
+  ],
+  "variables": []
+}

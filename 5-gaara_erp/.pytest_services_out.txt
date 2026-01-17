@@ -1,0 +1,10 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.4.1, pluggy-1.6.0 -- D:\home\ubuntu\gaara_erp_v5\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+django: version: 5.2.5, settings: gaara_erp.settings (from ini)
+rootdir: D:\home\ubuntu\gaara_erp_v5\gaara_erp
+configfile: pyproject.toml
+plugins: cov-6.2.1, django-4.11.1
+collecting ... collected 13 items
+
+gaara_erp\agricultural_modules\farms\tests\test_services.py::FarmServiceTest::test_create_farm 

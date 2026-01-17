@@ -1,0 +1,9 @@
+{
+  "module": "core_modules.api_keys.admin",
+  "imports": [
+    "django.contrib"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

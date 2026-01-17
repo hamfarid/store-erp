@@ -1,0 +1,42 @@
+{
+  "module": "services_modules.hr.bonuses",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "BonusRule",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "BONUS_TYPES",
+        "name",
+        "bonus_type",
+        "percentage",
+        "fixed_amount",
+        "applicable_year",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

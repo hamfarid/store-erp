@@ -1,0 +1,105 @@
+{
+  "module": "business_modules.sales.models.price_list",
+  "imports": [
+    "business_modules.inventory.models",
+    "core_modules.companies.models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "PriceList",
+      "methods": [
+        "__str__",
+        "clean",
+        "is_valid_for_date",
+        "get_price"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "price_list_type",
+        "start_date",
+        "end_date",
+        "is_active",
+        "description"
+      ]
+    },
+    {
+      "name": "PriceListItem",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "price_list",
+        "product",
+        "price",
+        "min_quantity",
+        "notes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid_for_date",
+      "parameters": [
+        "self",
+        "date"
+      ]
+    },
+    {
+      "name": "get_price",
+      "parameters": [
+        "self",
+        "product",
+        "quantity"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

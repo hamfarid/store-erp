@@ -1,0 +1,176 @@
+{
+  "module": "core_modules.organization.services",
+  "imports": [
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_currency",
+      "parameters": [
+        "code",
+        "name",
+        "symbol"
+      ]
+    },
+    {
+      "name": "get_currency_by_code",
+      "parameters": [
+        "code"
+      ]
+    },
+    {
+      "name": "get_all_currencies",
+      "parameters": []
+    },
+    {
+      "name": "create_exchange_rate",
+      "parameters": [
+        "from_currency_code",
+        "to_currency_code",
+        "rate",
+        "date",
+        "source"
+      ]
+    },
+    {
+      "name": "get_exchange_rate",
+      "parameters": [
+        "from_currency_code",
+        "to_currency_code",
+        "date"
+      ]
+    },
+    {
+      "name": "create_country",
+      "parameters": [
+        "name",
+        "code",
+        "default_currency_code"
+      ]
+    },
+    {
+      "name": "get_country_by_code",
+      "parameters": [
+        "code"
+      ]
+    },
+    {
+      "name": "get_all_countries",
+      "parameters": []
+    },
+    {
+      "name": "create_company",
+      "parameters": [
+        "name",
+        "code",
+        "country_code",
+        "base_currency_code",
+        "address",
+        "tax_id",
+        "phone",
+        "email",
+        "website",
+        "parent_company_code",
+        "is_active"
+      ]
+    },
+    {
+      "name": "get_company_by_code",
+      "parameters": [
+        "code"
+      ]
+    },
+    {
+      "name": "get_companies_by_country",
+      "parameters": [
+        "country_code"
+      ]
+    },
+    {
+      "name": "get_all_companies",
+      "parameters": []
+    },
+    {
+      "name": "create_branch",
+      "parameters": [
+        "name",
+        "company_code",
+        "code",
+        "address",
+        "phone",
+        "email",
+        "manager_id",
+        "is_active"
+      ]
+    },
+    {
+      "name": "get_branch_by_company_and_code",
+      "parameters": [
+        "company_code",
+        "branch_code"
+      ]
+    },
+    {
+      "name": "get_branches_by_company",
+      "parameters": [
+        "company_code"
+      ]
+    },
+    {
+      "name": "create_department",
+      "parameters": [
+        "name",
+        "code",
+        "company_code",
+        "branch_code",
+        "parent_department_id",
+        "manager_id",
+        "is_active"
+      ]
+    },
+    {
+      "name": "get_department_by_id",
+      "parameters": [
+        "department_id"
+      ]
+    },
+    {
+      "name": "get_departments_by_branch",
+      "parameters": [
+        "company_code",
+        "branch_code"
+      ]
+    },
+    {
+      "name": "get_departments_by_company",
+      "parameters": [
+        "company_code"
+      ]
+    },
+    {
+      "name": "get_all_companies_for_user_country_permission",
+      "parameters": [
+        "user",
+        "country"
+      ]
+    },
+    {
+      "name": "get_all_branches_for_user_company_permission",
+      "parameters": [
+        "user",
+        "company"
+      ]
+    },
+    {
+      "name": "get_company_hierarchy",
+      "parameters": [
+        "company_code"
+      ]
+    }
+  ],
+  "variables": []
+}

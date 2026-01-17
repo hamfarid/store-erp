@@ -1,0 +1,251 @@
+{
+  "module": "core_modules.setup.tests.test_models",
+  "imports": [
+    "core_modules.setup.activity_log.models",
+    "core_modules.setup.data_import_export.models",
+    "core_modules.setup.models",
+    "core_modules.setup.security.models",
+    "core_modules.setup.user_management.models",
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils"
+  ],
+  "classes": [
+    {
+      "name": "CompanySettingsModelTest",
+      "methods": [
+        "setUp",
+        "test_company_settings_creation",
+        "test_company_settings_fields"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SystemSettingsModelTest",
+      "methods": [
+        "setUp",
+        "test_system_settings_creation",
+        "test_system_settings_fields"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SecuritySettingModelTest",
+      "methods": [
+        "setUp",
+        "test_security_setting_creation",
+        "test_security_setting_fields"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SecurityEventModelTest",
+      "methods": [
+        "setUp",
+        "test_security_event_creation",
+        "test_security_event_fields"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BlockedIPModelTest",
+      "methods": [
+        "setUp",
+        "test_blocked_ip_creation",
+        "test_blocked_ip_fields"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ActivityLogModelTest",
+      "methods": [
+        "setUp",
+        "test_activity_log_creation",
+        "test_activity_log_fields"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ImportExportOperationModelTest",
+      "methods": [
+        "setUp",
+        "test_import_export_operation_creation",
+        "test_import_export_operation_fields"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserPermissionModelsTest",
+      "methods": [
+        "setUp",
+        "test_user_company_permission_creation",
+        "test_user_company_permission_fields",
+        "test_user_module_permission_creation",
+        "test_user_module_permission_fields"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_settings_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_settings_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_settings_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_settings_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_setting_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_setting_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_event_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_event_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_blocked_ip_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_blocked_ip_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_log_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_log_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_import_export_operation_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_import_export_operation_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_company_permission_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_company_permission_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_module_permission_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_module_permission_fields",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

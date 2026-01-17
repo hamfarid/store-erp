@@ -1,0 +1,46 @@
+{
+  "module": "core_modules.companies.tests.test_models_basic",
+  "imports": [
+    "django.test",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CompaniesBasicModelTest",
+      "methods": [
+        "setUp",
+        "test_models_created",
+        "test_company_str",
+        "test_branch_relation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_models_created",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_branch_relation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,131 @@
+{
+  "module": "integration_modules.ai_a2a.services.permission_service",
+  "imports": [
+    "core_modules.activity_log.models",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "PermissionService",
+      "methods": [
+        "check_permission",
+        "create_permission",
+        "update_permission",
+        "delete_permission",
+        "get_permissions_for_agent_type",
+        "get_required_approvals",
+        "create_approval_request",
+        "approve_request",
+        "reject_request",
+        "get_pending_approvals",
+        "_log_activity"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "check_permission",
+      "parameters": [
+        "sender_agent_id",
+        "receiver_agent_id",
+        "action"
+      ]
+    },
+    {
+      "name": "create_permission",
+      "parameters": [
+        "sender_agent_type",
+        "receiver_agent_type",
+        "action",
+        "is_allowed",
+        "requires_approval",
+        "approver_role_id",
+        "sender_agent_id",
+        "receiver_agent_id",
+        "created_by_id"
+      ]
+    },
+    {
+      "name": "update_permission",
+      "parameters": [
+        "permission_id",
+        "is_allowed",
+        "requires_approval",
+        "approver_role_id",
+        "is_active",
+        "updated_by_id"
+      ]
+    },
+    {
+      "name": "delete_permission",
+      "parameters": [
+        "permission_id",
+        "deleted_by_id"
+      ]
+    },
+    {
+      "name": "get_permissions_for_agent_type",
+      "parameters": [
+        "agent_type"
+      ]
+    },
+    {
+      "name": "get_required_approvals",
+      "parameters": [
+        "sender_agent_id",
+        "receiver_agent_id",
+        "action"
+      ]
+    },
+    {
+      "name": "create_approval_request",
+      "parameters": [
+        "message_id",
+        "permission_id",
+        "reason",
+        "created_by_id"
+      ]
+    },
+    {
+      "name": "approve_request",
+      "parameters": [
+        "approval_id",
+        "user_id",
+        "note"
+      ]
+    },
+    {
+      "name": "reject_request",
+      "parameters": [
+        "approval_id",
+        "user_id",
+        "note"
+      ]
+    },
+    {
+      "name": "get_pending_approvals",
+      "parameters": [
+        "approver_role_id",
+        "limit",
+        "offset"
+      ]
+    },
+    {
+      "name": "_log_activity",
+      "parameters": [
+        "action_type",
+        "entity_id",
+        "user_id",
+        "details"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

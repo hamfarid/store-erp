@@ -1,0 +1,88 @@
+{
+  "module": "business_modules.accounting.tests.test_report_service",
+  "imports": [
+    "core_modules.core.models",
+    "datetime",
+    "decimal",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.account",
+    "models.journal",
+    "services.report_service"
+  ],
+  "classes": [
+    {
+      "name": "ReportServiceTest",
+      "methods": [
+        "setUp",
+        "test_generate_trial_balance",
+        "test_generate_balance_sheet",
+        "test_generate_income_statement",
+        "test_generate_cash_flow_statement",
+        "test_generate_accounts_receivable_aging",
+        "test_generate_accounts_payable_aging",
+        "test_generate_general_ledger",
+        "test_generate_partner_statement"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_trial_balance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_balance_sheet",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_income_statement",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_cash_flow_statement",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_accounts_receivable_aging",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_accounts_payable_aging",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_general_ledger",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_partner_statement",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

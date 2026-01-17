@@ -1,0 +1,285 @@
+{
+  "module": "core_modules.core.serializers",
+  "imports": [
+    "django.conf",
+    "django.contrib.auth",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSummarySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CountrySerializer",
+      "methods": [
+        "validate_code"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CompanySerializer",
+      "methods": [],
+      "variables": [
+        "country_detail",
+        "created_by_detail",
+        "updated_by_detail"
+      ]
+    },
+    {
+      "name": "BranchSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "company_detail",
+        "created_by_detail",
+        "updated_by_detail"
+      ]
+    },
+    {
+      "name": "CurrencySerializer",
+      "methods": [
+        "validate_code",
+        "validate"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DepartmentSerializer",
+      "methods": [
+        "get_parent_department_detail",
+        "get_children_count",
+        "validate",
+        "_would_create_cycle"
+      ],
+      "variables": [
+        "company_detail",
+        "branch_detail",
+        "parent_department_detail",
+        "children_count",
+        "created_by_detail",
+        "updated_by_detail"
+      ]
+    },
+    {
+      "name": "SystemSettingSerializer",
+      "methods": [
+        "validate_key"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RoleDatabasePermissionSerializer",
+      "methods": [
+        "validate_database_alias"
+      ],
+      "variables": [
+        "created_by_detail",
+        "updated_by_detail"
+      ]
+    },
+    {
+      "name": "DocumentSequenceSerializer",
+      "methods": [
+        "get_next_number_preview",
+        "validate_code",
+        "validate_padding",
+        "validate"
+      ],
+      "variables": [
+        "company_detail",
+        "created_by_detail",
+        "updated_by_detail",
+        "next_number_preview"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "validate_code",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate_code",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "get_parent_department_detail",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_children_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "_would_create_cycle",
+      "parameters": [
+        "self",
+        "department",
+        "new_parent"
+      ]
+    },
+    {
+      "name": "validate_key",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_database_alias",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "get_next_number_preview",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate_code",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_padding",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

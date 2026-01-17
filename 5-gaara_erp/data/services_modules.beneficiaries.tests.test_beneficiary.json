@@ -1,0 +1,279 @@
+{
+  "module": "services_modules.beneficiaries.tests.test_beneficiary",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.test",
+    "django.utils",
+    "models.aid",
+    "models.beneficiary",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "BeneficiaryCategoryModelTest",
+      "methods": [
+        "setUp",
+        "test_create_beneficiary_category",
+        "test_unique_code_per_company",
+        "test_category_hierarchy",
+        "test_deactivate_category",
+        "test_get_all_beneficiaries"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BeneficiaryStatusModelTest",
+      "methods": [
+        "setUp",
+        "test_create_beneficiary_status",
+        "test_unique_code_per_company",
+        "test_deactivate_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BeneficiaryModelTest",
+      "methods": [
+        "setUp",
+        "test_create_beneficiary",
+        "test_unique_code_per_company",
+        "test_unique_national_id_per_company",
+        "test_calculate_age",
+        "test_change_status",
+        "test_get_aid_history"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AidTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_aid_type",
+        "test_unique_code_per_company",
+        "test_deactivate_aid_type"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AidModelTest",
+      "methods": [
+        "setUp",
+        "test_create_aid",
+        "test_unique_code_per_company",
+        "test_deactivate_aid",
+        "test_get_total_distributions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AidDistributionModelTest",
+      "methods": [
+        "setUp",
+        "test_create_aid_distribution",
+        "test_total_distributed_amount",
+        "test_get_beneficiary_distributions",
+        "test_get_aid_distributions"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_beneficiary_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_category_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_all_beneficiaries",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_beneficiary_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_beneficiary",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_national_id_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_age",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_change_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_aid_history",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_aid_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_aid_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_aid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_aid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_total_distributions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_aid_distribution",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_total_distributed_amount",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_beneficiary_distributions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_aid_distributions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_all_beneficiaries",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

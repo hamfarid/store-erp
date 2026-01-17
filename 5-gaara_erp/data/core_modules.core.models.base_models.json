@@ -1,0 +1,73 @@
+{
+  "module": "core_modules.core.models.base_models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "TimestampedModel",
+      "methods": [],
+      "variables": [
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserTrackedModel",
+      "methods": [],
+      "variables": [
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "BaseModel",
+      "methods": [],
+      "variables": [
+        "is_active"
+      ]
+    },
+    {
+      "name": "BaseModelWithCompany",
+      "methods": [],
+      "variables": [
+        "company"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "abstract",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "abstract"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "abstract"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "abstract",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

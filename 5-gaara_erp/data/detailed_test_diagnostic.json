@@ -1,0 +1,17 @@
+{
+  "module": "detailed_test_diagnostic",
+  "imports": [
+    "datetime",
+    "os",
+    "subprocess",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "run_detailed_diagnostic",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

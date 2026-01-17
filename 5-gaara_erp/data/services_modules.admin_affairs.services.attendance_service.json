@@ -1,0 +1,87 @@
+{
+  "module": "services_modules.admin_affairs.services.attendance_service",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "AttendanceService",
+      "methods": [
+        "get_all_attendance_records",
+        "get_attendance_record_by_id",
+        "get_attendance_records_by_employee",
+        "get_attendance_records_by_date_range",
+        "record_check_in",
+        "record_check_out",
+        "mark_absent",
+        "get_attendance_statistics"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_all_attendance_records",
+      "parameters": [
+        "date"
+      ]
+    },
+    {
+      "name": "get_attendance_record_by_id",
+      "parameters": [
+        "record_id"
+      ]
+    },
+    {
+      "name": "get_attendance_records_by_employee",
+      "parameters": [
+        "employee_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "get_attendance_records_by_date_range",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "department_id"
+      ]
+    },
+    {
+      "name": "record_check_in",
+      "parameters": [
+        "employee_id",
+        "check_in_time"
+      ]
+    },
+    {
+      "name": "record_check_out",
+      "parameters": [
+        "employee_id",
+        "check_out_time"
+      ]
+    },
+    {
+      "name": "mark_absent",
+      "parameters": [
+        "employee_id",
+        "date",
+        "reason"
+      ]
+    },
+    {
+      "name": "get_attendance_statistics",
+      "parameters": [
+        "employee_id",
+        "start_date",
+        "end_date"
+      ]
+    }
+  ],
+  "variables": []
+}

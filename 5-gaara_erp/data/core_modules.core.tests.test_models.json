@@ -1,0 +1,9 @@
+{
+  "module": "core_modules.core.tests.test_models",
+  "imports": [
+    "django.test"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

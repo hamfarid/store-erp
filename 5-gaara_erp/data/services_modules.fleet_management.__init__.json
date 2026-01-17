@@ -1,0 +1,9 @@
+{
+  "module": "services_modules.fleet_management.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "default_app_config"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "module": "core_modules.test_workflow",
+  "imports": [
+    "core_modules.authorization.models",
+    "core_modules.authorization.services.authorization_service",
+    "core_modules.permissions.authorization_service",
+    "core_modules.permissions.unified_permissions_model",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "services_modules.tasks.models.task",
+    "services_modules.tasks.models.workflow",
+    "services_modules.tasks.services.workflow_service",
+    "unittest"
+  ],
+  "classes": [
+    {
+      "name": "WorkflowModelsTestCase",
+      "methods": [
+        "setUp",
+        "test_workflow_states",
+        "test_workflow_transitions",
+        "test_transition_conditions_and_actions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "WorkflowServiceTestCase",
+      "methods": [
+        "setUp",
+        "test_initialize_workflow",
+        "test_execute_transition",
+        "test_transition_with_approval",
+        "test_permission_based_transition",
+        "test_get_available_transitions"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_workflow_states",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_workflow_transitions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_transition_conditions_and_actions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_initialize_workflow",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_execute_transition",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_transition_with_approval",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_permission_based_transition",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_available_transitions",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

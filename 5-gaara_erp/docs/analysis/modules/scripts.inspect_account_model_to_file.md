@@ -1,0 +1,12 @@
+# scripts.inspect_account_model_to_file
+
+## Imports
+- django
+- django.apps
+- os
+- sys
+
+## Module Variables
+- `Account`
+- `content`
+

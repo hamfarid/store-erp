@@ -1,0 +1,80 @@
+{
+  "module": "admin_modules.custom_admin.serializers.notifications_serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "AdminNotificationSerializer",
+      "methods": [],
+      "variables": [
+        "user_username",
+        "notification_type_display",
+        "level_display"
+      ]
+    },
+    {
+      "name": "AIUsageReportSerializer",
+      "methods": [],
+      "variables": [
+        "user_username"
+      ]
+    },
+    {
+      "name": "SystemAlertSerializer",
+      "methods": [],
+      "variables": [
+        "alert_type_display",
+        "severity_display",
+        "resolved_by_username"
+      ]
+    },
+    {
+      "name": "AuditLogSerializer",
+      "methods": [],
+      "variables": [
+        "user_username",
+        "action_display"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

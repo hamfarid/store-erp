@@ -1,0 +1,65 @@
+{
+  "module": "agricultural_modules.plant_diagnosis.crypto",
+  "imports": [
+    "base64",
+    "cryptography.hazmat.backends",
+    "cryptography.hazmat.primitives.ciphers",
+    "django.conf",
+    "json",
+    "logging",
+    "os"
+  ],
+  "classes": [
+    {
+      "name": "CryptoService",
+      "methods": [
+        "__init__",
+        "encrypt",
+        "decrypt",
+        "_pad",
+        "_unpad"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "encrypt",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "decrypt",
+      "parameters": [
+        "self",
+        "encrypted_data_b64",
+        "iv_b64"
+      ]
+    },
+    {
+      "name": "_pad",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "_unpad",
+      "parameters": [
+        "self",
+        "padded_data"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

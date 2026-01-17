@@ -1,0 +1,10 @@
+{
+  "module": "services_modules.legal_affairs.admin",
+  "imports": [
+    "django.contrib",
+    "django.db"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

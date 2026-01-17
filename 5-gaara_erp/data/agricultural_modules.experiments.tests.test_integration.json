@@ -1,0 +1,142 @@
+{
+  "module": "agricultural_modules.experiments.tests.test_integration",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "integration",
+    "models",
+    "unittest",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "ExperimentNurseryIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_link_experiment_to_nursery",
+        "test_get_nursery_seedlings_for_experiment"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ExperimentFarmIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_link_experiment_to_farm",
+        "test_register_experiment_harvest_to_farm"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ExperimentInventoryIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_allocate_inventory_to_experiment",
+        "test_register_experiment_harvest_to_inventory"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ExperimentAssetIntegrationTests",
+      "methods": [
+        "setUp",
+        "test_allocate_asset_to_experiment",
+        "test_get_experiment_asset_allocations"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_link_experiment_to_nursery",
+      "parameters": [
+        "self",
+        "mock_nursery_model"
+      ]
+    },
+    {
+      "name": "test_get_nursery_seedlings_for_experiment",
+      "parameters": [
+        "self",
+        "mock_seedling_batch",
+        "mock_nursery_model"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_link_experiment_to_farm",
+      "parameters": [
+        "self",
+        "mock_farm_plot",
+        "mock_farm"
+      ]
+    },
+    {
+      "name": "test_register_experiment_harvest_to_farm",
+      "parameters": [
+        "self",
+        "mock_record_harvest"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_allocate_inventory_to_experiment",
+      "parameters": [
+        "self",
+        "mock_create_movement",
+        "mock_product"
+      ]
+    },
+    {
+      "name": "test_register_experiment_harvest_to_inventory",
+      "parameters": [
+        "self",
+        "mock_create_movement",
+        "mock_product"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_allocate_asset_to_experiment",
+      "parameters": [
+        "self",
+        "mock_allocate_asset",
+        "mock_asset"
+      ]
+    },
+    {
+      "name": "test_get_experiment_asset_allocations",
+      "parameters": [
+        "self",
+        "mock_asset_allocation"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "module": "business_modules.accounting.models.account_type",
+  "imports": [
+    "__future__"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

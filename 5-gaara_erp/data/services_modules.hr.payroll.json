@@ -1,0 +1,175 @@
+{
+  "module": "services_modules.hr.payroll",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "employee"
+  ],
+  "classes": [
+    {
+      "name": "PayrollPeriod",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "start_date",
+        "end_date",
+        "is_closed"
+      ]
+    },
+    {
+      "name": "SalaryComponent",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "COMPONENT_TYPES",
+        "name",
+        "type",
+        "is_taxable",
+        "is_active"
+      ]
+    },
+    {
+      "name": "EmployeeSalaryStructure",
+      "methods": [],
+      "variables": [
+        "employee",
+        "component",
+        "amount",
+        "formula",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "PayrollRun",
+      "methods": [],
+      "variables": [
+        "PAYROLL_RUN_STATUS_CHOICES",
+        "payroll_period",
+        "run_date",
+        "status",
+        "notes",
+        "created_by",
+        "approved_by",
+        "paid_by",
+        "paid_at"
+      ]
+    },
+    {
+      "name": "Payslip",
+      "methods": [],
+      "variables": [
+        "payroll_run",
+        "employee",
+        "gross_salary",
+        "total_deductions",
+        "total_earnings",
+        "net_salary",
+        "payment_method"
+      ]
+    },
+    {
+      "name": "PayslipDetail",
+      "methods": [],
+      "variables": [
+        "payslip",
+        "component",
+        "amount",
+        "notes"
+      ]
+    },
+    {
+      "name": "EndOfServiceBenefit",
+      "methods": [],
+      "variables": [
+        "employee",
+        "calculation_date",
+        "service_years",
+        "last_salary",
+        "benefit_amount",
+        "notes",
+        "is_paid",
+        "payment_date"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

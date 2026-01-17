@@ -1,0 +1,85 @@
+{
+  "module": "core_modules.companies.views",
+  "imports": [
+    "django.shortcuts",
+    "django.template",
+    "django.template.response",
+    "django.urls",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "company_list_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "company_detail_view",
+      "parameters": [
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "company_create_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "company_update_view",
+      "parameters": [
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "company_delete_view",
+      "parameters": [
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "branch_list_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "branch_detail_view",
+      "parameters": [
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "branch_create_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "department_list_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "department_detail_view",
+      "parameters": [
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "department_create_view",
+      "parameters": [
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

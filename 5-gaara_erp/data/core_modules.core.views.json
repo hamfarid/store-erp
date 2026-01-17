@@ -1,0 +1,219 @@
+{
+  "module": "core_modules.core.views",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "logging",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers"
+  ],
+  "classes": [
+    {
+      "name": "CoreModelViewSet",
+      "methods": [
+        "perform_create",
+        "perform_update"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "CountryViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "CompanyViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "BranchViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "CurrencyViewSet",
+      "methods": [
+        "set_as_base"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "DepartmentViewSet",
+      "methods": [
+        "hierarchy"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "SystemSettingViewSet",
+      "methods": [
+        "by_prefix"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "lookup_field",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "PublicCountryViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "PublicCompanyViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "PublicCurrencyViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "RoleDatabasePermissionViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filterset_fields",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "DocumentSequenceViewSet",
+      "methods": [
+        "get_next_number",
+        "reset",
+        "by_company"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "filterset_fields",
+        "search_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "perform_update",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "set_as_base",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "hierarchy",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "by_prefix",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_next_number",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "reset",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "by_company",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_hierarchy",
+      "parameters": [
+        "dept"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

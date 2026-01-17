@@ -1,0 +1,201 @@
+{
+  "module": "business_modules.production.merged.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "ProductionOperationSerializer",
+      "methods": [],
+      "variables": [
+        "operation_type_display",
+        "status_display"
+      ]
+    },
+    {
+      "name": "QualityTestSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ProductionBatchSerializer",
+      "methods": [],
+      "variables": [
+        "quality_tests",
+        "grade_display"
+      ]
+    },
+    {
+      "name": "ProductionOrderSerializer",
+      "methods": [],
+      "variables": [
+        "operations",
+        "product_type_display",
+        "source_display",
+        "status_display"
+      ]
+    },
+    {
+      "name": "BOMComponentSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "BillOfMaterialsSerializer",
+      "methods": [],
+      "variables": [
+        "components"
+      ]
+    },
+    {
+      "name": "WorkCenterSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "RoutingOperationSerializer",
+      "methods": [],
+      "variables": [
+        "work_center_name"
+      ]
+    },
+    {
+      "name": "RoutingSerializer",
+      "methods": [],
+      "variables": [
+        "operations"
+      ]
+    },
+    {
+      "name": "WorkOrderSerializer",
+      "methods": [],
+      "variables": [
+        "work_center_name",
+        "status_display"
+      ]
+    },
+    {
+      "name": "ProductionLogSerializer",
+      "methods": [],
+      "variables": [
+        "log_type_display"
+      ]
+    },
+    {
+      "name": "ManufacturingOrderSerializer",
+      "methods": [],
+      "variables": [
+        "work_orders",
+        "status_display"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "servers": {
+    "cloudflare": {
+      "enabled": false,
+      "description": "Cloudflare Workers, D1, R2, KV",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@cloudflare/mcp-server-cloudflare"
+      ]
+    },
+    "playwright": {
+      "enabled": false,
+      "description": "Browser automation",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp-server"
+      ]
+    },
+    "sentry": {
+      "enabled": false,
+      "description": "Error monitoring",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sentry/mcp-server"
+      ]
+    },
+    "github": {
+      "enabled": false,
+      "description": "GitHub integration",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ]
+    }
+  },
+  "notes": [
+    "Enable servers by setting 'enabled': true",
+    "Configure environment variables as needed",
+    "See global/prompts/02_mcp.txt for details"
+  ]
+}

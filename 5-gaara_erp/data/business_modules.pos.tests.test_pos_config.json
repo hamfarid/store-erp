@@ -1,0 +1,106 @@
+{
+  "module": "business_modules.pos.tests.test_pos_config",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "models.pos_config",
+    "services_modules.accounting.models",
+    "services_modules.core.models",
+    "services_modules.inventory.models"
+  ],
+  "classes": [
+    {
+      "name": "POSConfigModelTest",
+      "methods": [
+        "setUpTestData",
+        "test_create_pos_config",
+        "test_unique_code_per_company",
+        "test_payment_methods",
+        "test_deactivate_pos_config",
+        "test_pos_config_permissions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PaymentMethodModelTest",
+      "methods": [
+        "setUpTestData",
+        "test_create_payment_method",
+        "test_unique_code_per_company",
+        "test_payment_types",
+        "test_deactivate_payment_method"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_create_pos_config",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_payment_methods",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_pos_config",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_pos_config_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_create_payment_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_payment_types",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_payment_method",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

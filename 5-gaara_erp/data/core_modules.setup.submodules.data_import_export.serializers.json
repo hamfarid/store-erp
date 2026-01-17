@@ -1,0 +1,131 @@
+{
+  "module": "core_modules.setup.submodules.data_import_export.serializers",
+  "imports": [
+    "django.contrib.auth",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ImportExportTemplateSerializer",
+      "methods": [],
+      "variables": [
+        "created_by",
+        "updated_by",
+        "template_type_display",
+        "file_format_display"
+      ]
+    },
+    {
+      "name": "ImportExportTemplateCreateUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ImportExportJobSerializer",
+      "methods": [],
+      "variables": [
+        "created_by",
+        "template",
+        "job_type_display",
+        "status_display"
+      ]
+    },
+    {
+      "name": "ImportExportJobCreateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ImportExportJobUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ImportExportSettingSerializer",
+      "methods": [],
+      "variables": [
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "ImportExportSettingUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": [
+    "User"
+  ]
+}

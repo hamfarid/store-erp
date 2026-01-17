@@ -1,0 +1,60 @@
+{
+  "module": "agricultural_modules.nurseries.integration_tests",
+  "imports": [
+    "agricultural_modules.farms.models",
+    "agricultural_modules.nurseries.models",
+    "business_modules.inventory.models",
+    "django.contrib.auth",
+    "django.db",
+    "django.test",
+    "os",
+    "sys"
+  ],
+  "classes": [
+    {
+      "name": "NurseryInventoryIntegrationTestCase",
+      "methods": [
+        "setUp",
+        "test_nursery_batch_to_inventory_integration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "NurseryFarmIntegrationTestCase",
+      "methods": [
+        "setUp",
+        "test_nursery_to_farm_transfer"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_nursery_batch_to_inventory_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_nursery_to_farm_transfer",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

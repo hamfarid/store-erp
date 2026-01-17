@@ -1,0 +1,49 @@
+{
+  "module": "business_modules.inventory.queries",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "models",
+    "tracking",
+    "utils"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "check_stock",
+      "parameters": [
+        "product_id",
+        "store_id",
+        "required_quantity",
+        "uom_id"
+      ]
+    },
+    {
+      "name": "get_stock_by_location",
+      "parameters": [
+        "product_id"
+      ]
+    },
+    {
+      "name": "get_low_stock_items",
+      "parameters": [
+        "threshold_percentage"
+      ]
+    },
+    {
+      "name": "get_expiring_lots",
+      "parameters": [
+        "days_ahead"
+      ]
+    },
+    {
+      "name": "get_stock_value_by_store",
+      "parameters": [
+        "store_id"
+      ]
+    }
+  ],
+  "variables": []
+}

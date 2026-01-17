@@ -1,0 +1,180 @@
+name: ✨ Feature Request - طلب ميزة جديدة
+description: Suggest a new feature for the Arabic Inventory Management System
+title: "[FEATURE] "
+labels: ["enhancement", "needs-discussion"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## شكراً لك على اقتراح ميزة جديدة!
+        Thank you for suggesting a new feature!
+        
+        يرجى ملء النموذج التالي لمساعدتنا في فهم اقتراحك وتقييم إمكانية تنفيذه.
+        Please fill out the following form to help us understand your suggestion and evaluate its feasibility.
+
+  - type: input
+    id: feature-title
+    attributes:
+      label: عنوان الميزة - Feature Title
+      description: عنوان مختصر وواضح للميزة المقترحة - A brief and clear title for the proposed feature
+      placeholder: "مثال - Example: إضافة تقارير المبيعات الشهرية - Add monthly sales reports"
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: وصف الميزة - Feature Description
+      description: وصف مفصل للميزة المقترحة - Detailed description of the proposed feature
+      placeholder: |
+        اشرح الميزة المقترحة بالتفصيل...
+        Explain the proposed feature in detail...
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: المشكلة التي تحلها - Problem Statement
+      description: ما المشكلة التي ستحلها هذه الميزة؟ - What problem would this feature solve?
+      placeholder: |
+        اشرح المشكلة الحالية...
+        Explain the current problem...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: الحل المقترح - Proposed Solution
+      description: كيف تقترح حل هذه المشكلة؟ - How do you propose to solve this problem?
+      placeholder: |
+        اشرح الحل المقترح...
+        Explain the proposed solution...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-category
+    attributes:
+      label: فئة الميزة - Feature Category
+      description: إلى أي فئة تنتمي هذه الميزة؟ - Which category does this feature belong to?
+      options:
+        - User Interface - واجهة المستخدم
+        - Inventory Management - إدارة المخزون
+        - Sales Management - إدارة المبيعات
+        - Customer Management - إدارة العملاء
+        - Product Management - إدارة المنتجات
+        - Reporting - التقارير
+        - Analytics - التحليلات
+        - Security - الأمان
+        - Performance - الأداء
+        - Integration - التكامل
+        - Mobile Support - دعم الهاتف المحمول
+        - API - واجهة برمجة التطبيقات
+        - Other - أخرى
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: الأولوية - Priority
+      description: ما مدى أهمية هذه الميزة؟ - How important is this feature?
+      options:
+        - Critical - حرجة (ضرورية للعمل)
+        - High - عالية (مهمة جداً)
+        - Medium - متوسطة (مفيدة)
+        - Low - منخفضة (تحسين بسيط)
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-story
+    attributes:
+      label: قصة المستخدم - User Story
+      description: اكتب قصة المستخدم بصيغة "كمستخدم، أريد..." - Write a user story in the format "As a user, I want..."
+      placeholder: |
+        كمستخدم، أريد...
+        As a user, I want...
+        
+        حتى أتمكن من...
+        So that I can...
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: معايير القبول - Acceptance Criteria
+      description: ما هي المعايير التي يجب تحقيقها لاعتبار هذه الميزة مكتملة؟ - What criteria must be met to consider this feature complete?
+      placeholder: |
+        - [ ] المعيار الأول - First criterion
+        - [ ] المعيار الثاني - Second criterion
+        - [ ] المعيار الثالث - Third criterion
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: نماذج أولية أو رسوم توضيحية - Mockups or Wireframes
+      description: أضف أي نماذج أولية أو رسوم توضيحية - Add any mockups or wireframes
+      placeholder: اسحب وأفلت الصور هنا أو الصق الروابط - Drag and drop images here or paste links
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: البدائل المدروسة - Alternatives Considered
+      description: ما البدائل الأخرى التي فكرت فيها؟ - What other alternatives have you considered?
+      placeholder: |
+        اشرح البدائل الأخرى...
+        Explain other alternatives...
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: التعقيد المتوقع - Expected Complexity
+      description: ما مدى تعقيد تنفيذ هذه الميزة؟ - How complex do you think implementing this feature would be?
+      options:
+        - Simple - بسيط (بضع ساعات)
+        - Medium - متوسط (بضعة أيام)
+        - Complex - معقد (بضعة أسابيع)
+        - Very Complex - معقد جداً (بضعة أشهر)
+        - Unknown - غير معروف
+
+  - type: textarea
+    id: business-value
+    attributes:
+      label: القيمة التجارية - Business Value
+      description: ما القيمة التجارية لهذه الميزة؟ - What is the business value of this feature?
+      placeholder: |
+        اشرح كيف ستفيد هذه الميزة المستخدمين والأعمال...
+        Explain how this feature would benefit users and business...
+
+  - type: input
+    id: target-users
+    attributes:
+      label: المستخدمون المستهدفون - Target Users
+      description: من سيستفيد من هذه الميزة؟ - Who would benefit from this feature?
+      placeholder: "مثال - Example: مديرو المخازن، محاسبون، مندوبو المبيعات - Warehouse managers, accountants, sales representatives"
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: معلومات إضافية - Additional Context
+      description: أي معلومات أخرى مفيدة - Any other useful information
+      placeholder: أضف أي تفاصيل إضافية... - Add any additional details...
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: التأكيدات - Confirmations
+      description: يرجى التأكيد على النقاط التالية - Please confirm the following points
+      options:
+        - label: لقد بحثت في Issues الموجودة ولم أجد طلباً مشابهاً - I have searched existing issues and found no similar request
+          required: true
+        - label: هذه الميزة تتماشى مع أهداف المشروع - This feature aligns with the project goals
+          required: true
+        - label: أنا مستعد للمساعدة في تطوير هذه الميزة إن أمكن - I am willing to help develop this feature if possible
+          required: false

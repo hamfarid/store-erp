@@ -1,0 +1,35 @@
+{
+  "module": "agricultural_modules.experiments.tests.test_constraints",
+  "imports": [
+    "agricultural_modules.experiments",
+    "django.db",
+    "django.utils",
+    "pytest"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_unique_experiment_variety_pair",
+      "parameters": []
+    },
+    {
+      "name": "test_unique_experiment_entry_number",
+      "parameters": []
+    },
+    {
+      "name": "test_unique_harvest_number_per_experiment_variety",
+      "parameters": []
+    },
+    {
+      "name": "test_unique_grade_per_harvest",
+      "parameters": []
+    },
+    {
+      "name": "test_unique_variety_price_recommendation",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "pytestmark"
+  ]
+}

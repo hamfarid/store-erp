@@ -1,0 +1,99 @@
+{
+  "module": "core_modules.core.tests.test_utils",
+  "imports": [
+    "django.contrib.auth",
+    "django.test",
+    "models",
+    "utils"
+  ],
+  "classes": [
+    {
+      "name": "CoreUtilsTests",
+      "methods": [
+        "setUpTestData",
+        "test_generate_unique_slug_simple",
+        "test_generate_unique_slug_empty_name",
+        "test_generate_unique_slug_collision",
+        "test_generate_unique_slug_with_existing_slug",
+        "test_get_document_next_sequence_invoice",
+        "test_get_document_next_sequence_sales_order",
+        "test_get_document_next_sequence_non_existent",
+        "test_get_document_next_sequence_inactive",
+        "test_get_document_next_sequence_no_company",
+        "test_slug_model_save_integration"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_generate_unique_slug_simple",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_unique_slug_empty_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_unique_slug_collision",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_unique_slug_with_existing_slug",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_document_next_sequence_invoice",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_document_next_sequence_sales_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_document_next_sequence_non_existent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_document_next_sequence_inactive",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_document_next_sequence_no_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_slug_model_save_integration",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

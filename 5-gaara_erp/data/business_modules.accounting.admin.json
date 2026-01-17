@@ -1,0 +1,10 @@
+{
+  "module": "business_modules.accounting.admin",
+  "imports": [
+    "django.contrib",
+    "django.utils.translation"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

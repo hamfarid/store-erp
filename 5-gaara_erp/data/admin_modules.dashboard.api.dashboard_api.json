@@ -1,0 +1,43 @@
+{
+  "module": "admin_modules.dashboard.api.dashboard_api",
+  "imports": [
+    "django.contrib.auth.decorators",
+    "django.http",
+    "django.views.decorators.csrf",
+    "django.views.decorators.http",
+    "json",
+    "logging"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "get_dashboards",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "create_dashboard",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "update_dashboard",
+      "parameters": [
+        "request",
+        "dashboard_id"
+      ]
+    },
+    {
+      "name": "delete_dashboard",
+      "parameters": [
+        "request",
+        "dashboard_id"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

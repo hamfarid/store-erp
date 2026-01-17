@@ -1,0 +1,153 @@
+{
+  "module": "admin_modules.custom_admin.views.notifications_views",
+  "imports": [
+    "datetime",
+    "django.db.models",
+    "django.utils",
+    "django_filters.rest_framework",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response"
+  ],
+  "classes": [
+    {
+      "name": "AdminNotificationViewSet",
+      "methods": [
+        "get_queryset",
+        "perform_create",
+        "mark_as_read",
+        "mark_all_as_read",
+        "unread_count",
+        "recent"
+      ],
+      "variables": [
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "SystemAlertViewSet",
+      "methods": [
+        "perform_create",
+        "resolve",
+        "active_alerts",
+        "alert_summary"
+      ],
+      "variables": [
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "AuditLogViewSet",
+      "methods": [
+        "user_activity",
+        "system_activity"
+      ],
+      "variables": [
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "mark_as_read",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "mark_all_as_read",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "unread_count",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "recent",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "active_alerts",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "alert_summary",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "user_activity",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "system_activity",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

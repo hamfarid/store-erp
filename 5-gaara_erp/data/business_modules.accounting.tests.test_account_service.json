@@ -1,0 +1,73 @@
+{
+  "module": "business_modules.accounting.tests.test_account_service",
+  "imports": [
+    "core_modules.core.models",
+    "datetime",
+    "decimal",
+    "django.test",
+    "django.utils",
+    "models.account",
+    "models.journal",
+    "services.account_service"
+  ],
+  "classes": [
+    {
+      "name": "AccountServiceTest",
+      "methods": [
+        "setUp",
+        "test_calculate_account_balance",
+        "test_generate_account_statement",
+        "test_reconcile_account",
+        "test_generate_trial_balance",
+        "test_generate_balance_sheet",
+        "test_generate_income_statement"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_account_balance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_account_statement",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reconcile_account",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_trial_balance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_balance_sheet",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_income_statement",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

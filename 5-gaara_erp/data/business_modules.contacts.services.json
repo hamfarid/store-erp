@@ -1,0 +1,215 @@
+{
+  "module": "business_modules.contacts.services",
+  "imports": [
+    "business_modules.accounting.models",
+    "business_modules.accounting.services.journal_service",
+    "business_modules.contacts.models",
+    "business_modules.purchasing.models",
+    "business_modules.sales.models",
+    "decimal",
+    "django.db",
+    "django.db.models",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ContactService",
+      "methods": [
+        "get_contacts",
+        "get_contact_by_id",
+        "create_contact_with_details",
+        "update_contact",
+        "get_contact_hierarchy",
+        "get_contact_financial_summary"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SettlementService",
+      "methods": [
+        "create_settlement",
+        "update_settlement_status",
+        "get_settlements_by_contact",
+        "_create_settlement_accounting_entries",
+        "_reverse_settlement_accounting_entries"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ContactReportService",
+      "methods": [
+        "get_parent_child_financial_report",
+        "get_customer_supplier_settlement_report",
+        "get_invoices_report"
+      ],
+      "variables": []
+    },
+    {
+      "name": "_QuerySetStub",
+      "methods": [
+        "filter",
+        "select_related",
+        "order_by",
+        "aggregate",
+        "count"
+      ],
+      "variables": []
+    },
+    {
+      "name": "_ModelStub",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "_ContactTypeFallback",
+      "methods": [],
+      "variables": [
+        "CUSTOMER",
+        "SUPPLIER",
+        "BOTH"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_journal_entry",
+      "parameters": []
+    },
+    {
+      "name": "get_contacts",
+      "parameters": [
+        "filters"
+      ]
+    },
+    {
+      "name": "get_contact_by_id",
+      "parameters": [
+        "contact_id"
+      ]
+    },
+    {
+      "name": "create_contact_with_details",
+      "parameters": [
+        "contact_data",
+        "addresses",
+        "contact_details",
+        "contact_persons"
+      ]
+    },
+    {
+      "name": "update_contact",
+      "parameters": [
+        "contact",
+        "contact_data"
+      ]
+    },
+    {
+      "name": "get_contact_hierarchy",
+      "parameters": [
+        "contact_id",
+        "include_inactive"
+      ]
+    },
+    {
+      "name": "get_contact_financial_summary",
+      "parameters": [
+        "contact_id"
+      ]
+    },
+    {
+      "name": "create_settlement",
+      "parameters": [
+        "settlement_data",
+        "user"
+      ]
+    },
+    {
+      "name": "update_settlement_status",
+      "parameters": [
+        "settlement_id",
+        "new_status",
+        "user"
+      ]
+    },
+    {
+      "name": "get_settlements_by_contact",
+      "parameters": [
+        "contact_id",
+        "status"
+      ]
+    },
+    {
+      "name": "_create_settlement_accounting_entries",
+      "parameters": [
+        "settlement"
+      ]
+    },
+    {
+      "name": "_reverse_settlement_accounting_entries",
+      "parameters": [
+        "settlement"
+      ]
+    },
+    {
+      "name": "get_parent_child_financial_report",
+      "parameters": [
+        "parent_id",
+        "include_inactive"
+      ]
+    },
+    {
+      "name": "get_customer_supplier_settlement_report",
+      "parameters": [
+        "contact_id"
+      ]
+    },
+    {
+      "name": "get_invoices_report",
+      "parameters": [
+        "contact_id",
+        "include_children"
+      ]
+    },
+    {
+      "name": "filter",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "select_related",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "order_by",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "aggregate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "count",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "ContactDetail",
+    "SupplierContactPerson",
+    "AddressType",
+    "ContactDetailType",
+    "SettlementTransaction",
+    "__all__"
+  ]
+}

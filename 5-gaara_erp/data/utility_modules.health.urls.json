@@ -1,0 +1,12 @@
+{
+  "module": "utility_modules.health.urls",
+  "imports": [
+    "django.urls",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns"
+  ]
+}

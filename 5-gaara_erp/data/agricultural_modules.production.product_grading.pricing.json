@@ -1,0 +1,271 @@
+{
+  "module": "agricultural_modules.production.product_grading.pricing",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "PricingPolicy",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "TYPE_FIXED",
+        "TYPE_PERCENTAGE",
+        "TYPE_FORMULA",
+        "TYPE_MARKET_BASED",
+        "POLICY_TYPE_CHOICES",
+        "policy_type",
+        "formula",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "PriceList",
+      "methods": [
+        "__str__",
+        "is_valid"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "TYPE_STANDARD",
+        "TYPE_PROMOTIONAL",
+        "TYPE_SEASONAL",
+        "TYPE_CUSTOMER_SPECIFIC",
+        "LIST_TYPE_CHOICES",
+        "list_type",
+        "valid_from",
+        "valid_to",
+        "currency",
+        "notes",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "ProductSizeGradePrice",
+      "methods": [
+        "__str__",
+        "get_final_price"
+      ],
+      "variables": [
+        "product_size_grade",
+        "price_list",
+        "pricing_policy",
+        "price",
+        "min_quantity",
+        "discount_percentage",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "MarketPriceRecord",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "product_size_grade",
+        "price_date",
+        "market_price",
+        "currency",
+        "SOURCE_MANUAL",
+        "SOURCE_API",
+        "SOURCE_MARKET_REPORT",
+        "SOURCE_CHOICES",
+        "price_source",
+        "notes",
+        "created_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "DynamicPricingService",
+      "methods": [
+        "create_pricing_policy",
+        "create_price_list",
+        "set_product_price",
+        "record_market_price",
+        "get_product_price",
+        "calculate_price_based_on_policy",
+        "bulk_update_prices"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self",
+        "date"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_final_price",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_pricing_policy",
+      "parameters": [
+        "name",
+        "code",
+        "policy_type",
+        "description",
+        "formula",
+        "is_active",
+        "user"
+      ]
+    },
+    {
+      "name": "create_price_list",
+      "parameters": [
+        "name",
+        "code",
+        "list_type",
+        "currency",
+        "valid_from",
+        "valid_to",
+        "description",
+        "notes",
+        "is_active",
+        "user"
+      ]
+    },
+    {
+      "name": "set_product_price",
+      "parameters": [
+        "product_size_grade",
+        "price_list",
+        "price",
+        "pricing_policy",
+        "min_quantity",
+        "discount_percentage",
+        "notes",
+        "user"
+      ]
+    },
+    {
+      "name": "record_market_price",
+      "parameters": [
+        "product_size_grade",
+        "price_date",
+        "market_price",
+        "currency",
+        "price_source",
+        "notes",
+        "user"
+      ]
+    },
+    {
+      "name": "get_product_price",
+      "parameters": [
+        "product_size_grade",
+        "price_list",
+        "quantity",
+        "date"
+      ]
+    },
+    {
+      "name": "calculate_price_based_on_policy",
+      "parameters": [
+        "product_size_grade",
+        "pricing_policy",
+        "date"
+      ]
+    },
+    {
+      "name": "bulk_update_prices",
+      "parameters": [
+        "price_list",
+        "pricing_policy",
+        "user"
+      ]
+    }
+  ],
+  "variables": []
+}

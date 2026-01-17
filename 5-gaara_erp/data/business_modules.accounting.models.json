@@ -1,0 +1,556 @@
+{
+  "module": "business_modules.accounting.models",
+  "imports": [
+    "core_modules.companies.models",
+    "core_modules.core.models",
+    "decimal",
+    "django.contrib.auth",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "services",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "AccountType",
+      "methods": [
+        "__str__",
+        "__init__",
+        "clean",
+        "_validate_hierarchy",
+        "get_all_children"
+      ],
+      "variables": [
+        "TYPE_ASSET",
+        "TYPE_LIABILITY",
+        "TYPE_EQUITY",
+        "TYPE_REVENUE",
+        "TYPE_EXPENSE",
+        "TYPE_CHOICES",
+        "name",
+        "code",
+        "type",
+        "parent",
+        "description",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Currency",
+      "methods": [
+        "__str__",
+        "clean",
+        "save"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "symbol",
+        "is_base",
+        "exchange_rate",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Account",
+      "methods": [
+        "__str__",
+        "clean",
+        "_validate_hierarchy",
+        "get_all_children",
+        "get_balance",
+        "update_balance"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "balance",
+        "account_type",
+        "parent",
+        "description",
+        "is_active",
+        "is_reconcilable",
+        "opening_debit",
+        "opening_credit",
+        "current_debit",
+        "current_credit",
+        "currency",
+        "branch",
+        "department"
+      ]
+    },
+    {
+      "name": "FiscalYear",
+      "methods": [
+        "__str__",
+        "clean",
+        "get_periods"
+      ],
+      "variables": [
+        "name",
+        "start_date",
+        "end_date",
+        "is_closed",
+        "is_active"
+      ]
+    },
+    {
+      "name": "FiscalPeriod",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "TYPE_MONTHLY",
+        "TYPE_QUARTERLY",
+        "TYPE_HALF_YEARLY",
+        "TYPE_YEARLY",
+        "TYPE_CHOICES",
+        "name",
+        "fiscal_year",
+        "type",
+        "start_date",
+        "end_date",
+        "is_closed"
+      ]
+    },
+    {
+      "name": "Journal",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "TYPE_GENERAL",
+        "TYPE_SALES",
+        "TYPE_PURCHASES",
+        "TYPE_CASH",
+        "TYPE_BANK",
+        "TYPE_PAYROLL",
+        "TYPE_FIXED_ASSETS",
+        "TYPE_OPENING",
+        "TYPE_CLOSING",
+        "TYPE_CHOICES",
+        "name",
+        "code",
+        "type",
+        "description",
+        "is_active",
+        "branch",
+        "department"
+      ]
+    },
+    {
+      "name": "JournalEntry",
+      "methods": [
+        "__str__",
+        "clean",
+        "post",
+        "cancel",
+        "update_totals"
+      ],
+      "variables": [
+        "STATUS_DRAFT",
+        "STATUS_POSTED",
+        "STATUS_CANCELLED",
+        "STATUS_CHOICES",
+        "reference",
+        "date",
+        "journal",
+        "description",
+        "status",
+        "fiscal_period",
+        "total_debit",
+        "total_credit",
+        "content_type",
+        "object_id",
+        "content_object",
+        "branch",
+        "department",
+        "posted_by",
+        "posted_at"
+      ]
+    },
+    {
+      "name": "JournalEntryLine",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "entry",
+        "account",
+        "description",
+        "debit",
+        "credit",
+        "partner_content_type",
+        "partner_object_id",
+        "partner",
+        "analytic_account",
+        "tax",
+        "tax_amount"
+      ]
+    },
+    {
+      "name": "AnalyticAccount",
+      "methods": [
+        "__str__",
+        "clean",
+        "_validate_hierarchy",
+        "get_all_children"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "parent",
+        "description",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Tax",
+      "methods": [
+        "__str__",
+        "clean",
+        "calculate_tax"
+      ],
+      "variables": [
+        "TYPE_PERCENTAGE",
+        "TYPE_FIXED",
+        "TYPE_CHOICES",
+        "name",
+        "code",
+        "type",
+        "rate",
+        "description",
+        "is_active",
+        "account"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "constraints",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_validate_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_children",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_validate_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_children",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_balance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_balance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_periods",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "post",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "update_totals",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_validate_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_children",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_tax",
+      "parameters": [
+        "self",
+        "amount"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

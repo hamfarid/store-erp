@@ -1,0 +1,140 @@
+{
+  "module": "core_modules.workflow_service",
+  "imports": [
+    "__future__",
+    "core_modules.permissions.authorization_service",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "json",
+    "models.task",
+    "models.task_notifications",
+    "models.workflow",
+    "task",
+    "task_notifications",
+    "typing",
+    "workflow"
+  ],
+  "classes": [
+    {
+      "name": "WorkflowService",
+      "methods": [
+        "__init__",
+        "get_workflow_definition",
+        "get_initial_state",
+        "get_available_transitions",
+        "_check_transition_conditions",
+        "initialize_workflow",
+        "execute_transition",
+        "_create_approval_steps",
+        "_notify_next_approvers",
+        "_execute_transition_actions",
+        "_send_transition_notifications"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_workflow_definition",
+      "parameters": [
+        "self",
+        "code"
+      ]
+    },
+    {
+      "name": "get_initial_state",
+      "parameters": [
+        "self",
+        "workflow"
+      ]
+    },
+    {
+      "name": "get_available_transitions",
+      "parameters": [
+        "self",
+        "task",
+        "user"
+      ]
+    },
+    {
+      "name": "_check_transition_conditions",
+      "parameters": [
+        "self",
+        "transition",
+        "task",
+        "user"
+      ]
+    },
+    {
+      "name": "initialize_workflow",
+      "parameters": [
+        "self",
+        "task",
+        "workflow_code",
+        "user"
+      ]
+    },
+    {
+      "name": "execute_transition",
+      "parameters": [
+        "self",
+        "task",
+        "transition_id",
+        "user",
+        "comments"
+      ]
+    },
+    {
+      "name": "_create_approval_steps",
+      "parameters": [
+        "self",
+        "task",
+        "transition",
+        "user"
+      ]
+    },
+    {
+      "name": "_notify_next_approvers",
+      "parameters": [
+        "self",
+        "task",
+        "transition"
+      ]
+    },
+    {
+      "name": "_execute_transition_actions",
+      "parameters": [
+        "self",
+        "transition",
+        "task",
+        "user"
+      ]
+    },
+    {
+      "name": "_send_transition_notifications",
+      "parameters": [
+        "self",
+        "task",
+        "transition",
+        "from_state",
+        "to_state",
+        "user"
+      ]
+    },
+    {
+      "name": "_notify",
+      "parameters": [
+        "recipient"
+      ]
+    }
+  ],
+  "variables": []
+}

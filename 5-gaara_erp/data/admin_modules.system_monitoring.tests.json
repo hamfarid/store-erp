@@ -1,0 +1,320 @@
+{
+  "module": "admin_modules.system_monitoring.tests",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.test",
+    "django.urls",
+    "django.utils",
+    "json",
+    "models",
+    "rest_framework",
+    "rest_framework.test",
+    "services.monitoring_service",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "MockPermissionService",
+      "methods": [
+        "__init__",
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MockAuditTrailService",
+      "methods": [
+        "__init__",
+        "log_activity"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SystemMonitoringModelTests",
+      "methods": [
+        "setUpTestData",
+        "setUp",
+        "test_system_metric_creation",
+        "test_alert_creation",
+        "test_alert_acknowledge",
+        "test_alert_resolve",
+        "test_module_status_creation",
+        "test_module_status_update_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SystemMonitoringServiceTests",
+      "methods": [
+        "setUpTestData",
+        "setUp",
+        "test_collect_and_save_system_metrics",
+        "test_analyze_metrics_and_alert_no_alert",
+        "test_analyze_metrics_and_alert_warning_alert",
+        "test_analyze_metrics_and_alert_critical_alert",
+        "test_alert_cooldown",
+        "test_cleanup_old_data",
+        "test_acknowledge_alert_service",
+        "test_acknowledge_alert_permission_denied",
+        "test_resolve_alert_service"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SystemMonitoringAPITests",
+      "methods": [
+        "setUpTestData",
+        "setUp",
+        "test_unauthenticated_access_api",
+        "test_non_admin_access_restricted_api",
+        "test_non_admin_access_allowed_api",
+        "test_list_system_metrics_api",
+        "test_retrieve_system_metric_api",
+        "test_list_alerts_api",
+        "test_acknowledge_alert_api",
+        "test_resolve_alert_api",
+        "test_resolve_alert_already_resolved_api",
+        "test_list_module_status_api",
+        "test_retrieve_module_status_api"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "user_id"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "user_id",
+        "permission_name",
+        "scope_id"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "user_id"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": [
+        "self",
+        "module",
+        "action",
+        "entity_type",
+        "entity_id",
+        "description",
+        "data"
+      ]
+    },
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_metric_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_alert_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_alert_acknowledge",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_alert_resolve",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_module_status_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_module_status_update_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_collect_and_save_system_metrics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_analyze_metrics_and_alert_no_alert",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_analyze_metrics_and_alert_warning_alert",
+      "parameters": [
+        "self",
+        "mock_send_notification"
+      ]
+    },
+    {
+      "name": "test_analyze_metrics_and_alert_critical_alert",
+      "parameters": [
+        "self",
+        "mock_send_notification"
+      ]
+    },
+    {
+      "name": "test_alert_cooldown",
+      "parameters": [
+        "self",
+        "mock_send_notification"
+      ]
+    },
+    {
+      "name": "test_cleanup_old_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_acknowledge_alert_service",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_acknowledge_alert_permission_denied",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_resolve_alert_service",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unauthenticated_access_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_non_admin_access_restricted_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_non_admin_access_allowed_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_list_system_metrics_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_retrieve_system_metric_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_list_alerts_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_acknowledge_alert_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_resolve_alert_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_resolve_alert_already_resolved_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_list_module_status_api",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_retrieve_module_status_api",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "module": "integration_modules.ai.tests.test_services",
+  "imports": [
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "json",
+    "models",
+    "services.activity_logger",
+    "services.config_manager",
+    "services.coordinator",
+    "services.resource_manager"
+  ],
+  "classes": [
+    {
+      "name": "AICoordinatorTest",
+      "methods": [
+        "setUp",
+        "test_load_integrations",
+        "test_route_request_success",
+        "test_route_request_invalid_type",
+        "test_register_integration"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ResourceManagerTest",
+      "methods": [
+        "setUp",
+        "test_load_resource_settings",
+        "test_allocate_resources_success",
+        "test_allocate_resources_invalid_type",
+        "test_release_resources",
+        "test_get_resource_usage"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ConfigManagerTest",
+      "methods": [
+        "setUp",
+        "test_load_settings",
+        "test_get_setting_existing",
+        "test_get_setting_nonexistent",
+        "test_set_setting_new",
+        "test_set_setting_update",
+        "test_delete_setting",
+        "test_get_all_settings"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ActivityLoggerTest",
+      "methods": [
+        "setUp",
+        "test_log_activity",
+        "test_log_activity_with_string_details",
+        "test_log_system_activity",
+        "test_log_user_activity",
+        "test_log_agent_activity",
+        "test_log_service_activity",
+        "test_get_recent_activities",
+        "test_get_activities_by_date_range"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_load_integrations",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_route_request_success",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_route_request_invalid_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_register_integration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_load_resource_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_allocate_resources_success",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_allocate_resources_invalid_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_release_resources",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_resource_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_load_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_setting_existing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_setting_nonexistent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_set_setting_new",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_set_setting_update",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_delete_setting",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_all_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_log_activity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_log_activity_with_string_details",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_log_system_activity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_log_user_activity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_log_agent_activity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_log_service_activity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_recent_activities",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_activities_by_date_range",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

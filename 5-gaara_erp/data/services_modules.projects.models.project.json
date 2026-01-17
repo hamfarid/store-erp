@@ -1,0 +1,296 @@
+{
+  "module": "services_modules.projects.models.project",
+  "imports": [
+    "core_modules.organization.models",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Project",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "PRIORITY_CHOICES",
+        "name",
+        "code",
+        "description",
+        "start_date",
+        "end_date",
+        "actual_start_date",
+        "actual_end_date",
+        "status",
+        "priority",
+        "budget",
+        "owner",
+        "company",
+        "currency",
+        "workflow",
+        "workflow_step",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ProjectCategory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "description",
+        "is_active"
+      ]
+    },
+    {
+      "name": "ProjectStatus",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "description",
+        "is_active"
+      ]
+    },
+    {
+      "name": "ProjectTag",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "color",
+        "is_active"
+      ]
+    },
+    {
+      "name": "ProjectTask",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "PRIORITY_CHOICES",
+        "project",
+        "phase",
+        "title",
+        "description",
+        "status",
+        "priority",
+        "assignee",
+        "reporter",
+        "due_date",
+        "estimated_hours",
+        "actual_hours",
+        "start_date",
+        "end_date",
+        "parent_task",
+        "created_at",
+        "updated_at",
+        "task"
+      ]
+    },
+    {
+      "name": "ProjectTaskDependency",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "DEPENDENCY_TYPE_CHOICES",
+        "task",
+        "dependency",
+        "dependency_type",
+        "lag_days"
+      ]
+    },
+    {
+      "name": "ProjectDocument",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "project",
+        "task",
+        "name",
+        "description",
+        "file",
+        "uploaded_by",
+        "uploaded_at"
+      ]
+    },
+    {
+      "name": "ProjectRisk",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PROBABILITY_CHOICES",
+        "IMPACT_CHOICES",
+        "STATUS_CHOICES",
+        "project",
+        "description",
+        "probability",
+        "impact",
+        "status",
+        "mitigation_plan",
+        "owner",
+        "identified_date",
+        "resolution_date"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "constraints"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "constraints"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "constraints"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

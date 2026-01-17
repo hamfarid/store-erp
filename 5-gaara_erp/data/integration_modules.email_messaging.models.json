@@ -1,0 +1,134 @@
+{
+  "module": "integration_modules.email_messaging.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "EmailProvider",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PROVIDER_TYPE_CHOICES",
+        "provider_id",
+        "name",
+        "provider_type",
+        "smtp_host",
+        "smtp_port",
+        "smtp_username",
+        "smtp_password",
+        "use_tls",
+        "api_key",
+        "api_secret",
+        "emails_sent",
+        "emails_delivered",
+        "emails_bounced",
+        "is_active",
+        "is_default",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "EmailCampaign",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "campaign_id",
+        "provider",
+        "name",
+        "subject",
+        "content",
+        "sender_name",
+        "sender_email",
+        "reply_to",
+        "recipient_list",
+        "status",
+        "scheduled_time",
+        "sent_time",
+        "total_recipients",
+        "emails_sent",
+        "emails_delivered",
+        "emails_opened",
+        "links_clicked",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "SMSProvider",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PROVIDER_TYPE_CHOICES",
+        "provider_id",
+        "name",
+        "provider_type",
+        "api_key",
+        "api_secret",
+        "sender_id",
+        "sms_sent",
+        "sms_delivered",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

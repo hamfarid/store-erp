@@ -1,0 +1,144 @@
+{
+  "module": "integration_modules.ai.exceptions",
+  "imports": [
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "AgentError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentNotFoundError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentExecutionError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentConfigurationError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentTimeoutError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentAuthenticationError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentValidationError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentRateLimitError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentResponseError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "message"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "agent_key"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "agent_name",
+        "original_exception"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "agent_name",
+        "config_key"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "agent_name",
+        "timeout_seconds"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "agent_name",
+        "service"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "agent_name",
+        "validation_errors"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "agent_name",
+        "retry_after"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "agent_name",
+        "response_issue"
+      ]
+    }
+  ],
+  "variables": []
+}

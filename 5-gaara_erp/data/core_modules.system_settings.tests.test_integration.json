@@ -1,0 +1,169 @@
+{
+  "module": "core_modules.system_settings.tests.test_integration",
+  "imports": [
+    "core_modules.system_settings.models",
+    "core_modules.system_settings.serializers",
+    "django.contrib.auth",
+    "django.test",
+    "django.urls",
+    "json",
+    "os",
+    "rest_framework",
+    "rest_framework.test",
+    "sys",
+    "unittest"
+  ],
+  "classes": [
+    {
+      "name": "SystemSettingsIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_system_settings_api_list",
+        "test_system_settings_api_create",
+        "test_system_settings_api_update",
+        "test_system_settings_api_delete",
+        "test_system_settings_api_reset_to_default",
+        "test_countries_api_list",
+        "test_regions_api_list",
+        "test_currencies_api_list",
+        "test_languages_api_list",
+        "test_timezones_api_list",
+        "test_email_settings_api_list",
+        "test_ui_settings_api_my_settings",
+        "test_ui_settings_api_update_my_settings",
+        "test_web_general_settings_page",
+        "test_web_countries_page",
+        "test_web_currencies_page",
+        "test_web_languages_page",
+        "test_web_email_settings_page",
+        "test_web_appearance_page"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_settings_api_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_settings_api_create",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_settings_api_update",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_settings_api_delete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_system_settings_api_reset_to_default",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_countries_api_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_regions_api_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_currencies_api_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_languages_api_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_timezones_api_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_email_settings_api_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_ui_settings_api_my_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_ui_settings_api_update_my_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_web_general_settings_page",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_web_countries_page",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_web_currencies_page",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_web_languages_page",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_web_email_settings_page",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_web_appearance_page",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "module": "services_modules.quality_control.models.quality_test",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "quality_result"
+  ],
+  "classes": [
+    {
+      "name": "QualityTest",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "start_test",
+        "complete_test",
+        "skip_test",
+        "get_duration",
+        "is_value_acceptable",
+        "get_latest_result"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "name",
+        "description",
+        "status",
+        "quality_check",
+        "parameter",
+        "test_method",
+        "expected_value",
+        "min_value",
+        "max_value",
+        "unit",
+        "sequence",
+        "is_critical",
+        "notes",
+        "scheduled_date",
+        "start_date",
+        "end_date",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start_test",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete_test",
+      "parameters": [
+        "self",
+        "actual_value",
+        "notes"
+      ]
+    },
+    {
+      "name": "skip_test",
+      "parameters": [
+        "self",
+        "reason"
+      ]
+    },
+    {
+      "name": "get_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_value_acceptable",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "get_latest_result",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,92 @@
+{
+  "module": "core_modules.permissions.services.permission_service",
+  "imports": [
+    "django.contrib.auth",
+    "django.contrib.contenttypes.models",
+    "django.db.models",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "PermissionService",
+      "methods": [
+        "has_permission",
+        "check_permission",
+        "_check_internal",
+        "has_module_permission",
+        "get_user_permissions",
+        "can_access_object",
+        "filter_queryset_by_permissions",
+        "log_permission_check"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_permission",
+      "parameters": [
+        "user",
+        "permission_name",
+        "obj"
+      ]
+    },
+    {
+      "name": "check_permission",
+      "parameters": [
+        "user",
+        "permission",
+        "obj"
+      ]
+    },
+    {
+      "name": "_check_internal",
+      "parameters": [
+        "user",
+        "permission",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_module_permission",
+      "parameters": [
+        "user",
+        "module_name"
+      ]
+    },
+    {
+      "name": "get_user_permissions",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "can_access_object",
+      "parameters": [
+        "user",
+        "obj",
+        "action"
+      ]
+    },
+    {
+      "name": "filter_queryset_by_permissions",
+      "parameters": [
+        "user",
+        "queryset",
+        "action"
+      ]
+    },
+    {
+      "name": "log_permission_check",
+      "parameters": [
+        "user",
+        "permission_name",
+        "obj",
+        "granted"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "module": "core_modules.setup.tests.test_views",
+  "imports": [
+    "core_modules.setup.activity_log.models",
+    "core_modules.setup.models",
+    "core_modules.setup.security.models",
+    "django.contrib.auth",
+    "django.test",
+    "django.urls"
+  ],
+  "classes": [
+    {
+      "name": "SetupWizardViewsTest",
+      "methods": [
+        "setUp",
+        "test_welcome_view",
+        "test_company_settings_view",
+        "test_admin_user_view",
+        "test_localization_view",
+        "test_security_settings_view",
+        "test_completed_view"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ActivityLogViewsTest",
+      "methods": [
+        "setUp",
+        "test_activity_log_list_view",
+        "test_activity_log_detail_view"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SecurityViewsTest",
+      "methods": [
+        "setUp",
+        "test_security_dashboard_view",
+        "test_security_settings_list_view",
+        "test_security_events_list_view",
+        "test_blocked_ips_list_view",
+        "test_firewall_rules_list_view"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ImportExportViewsTest",
+      "methods": [
+        "setUp",
+        "test_import_export_dashboard_view",
+        "test_import_form_view",
+        "test_export_form_view",
+        "test_import_export_history_view"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserManagementViewsTest",
+      "methods": [
+        "setUp",
+        "test_users_list_view",
+        "test_user_create_view",
+        "test_user_edit_view"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_welcome_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_settings_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_admin_user_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_localization_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_settings_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_completed_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_log_list_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_log_detail_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_dashboard_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_settings_list_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_security_events_list_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_blocked_ips_list_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_firewall_rules_list_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_import_export_dashboard_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_import_form_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_export_form_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_import_export_history_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_users_list_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_create_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_edit_view",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

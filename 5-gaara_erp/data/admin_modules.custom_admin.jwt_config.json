@@ -1,0 +1,30 @@
+{
+  "module": "admin_modules.custom_admin.jwt_config",
+  "imports": [
+    "datetime",
+    "rest_framework_simplejwt.exceptions",
+    "rest_framework_simplejwt.tokens"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "get_jwt_settings",
+      "parameters": []
+    },
+    {
+      "name": "validate_token",
+      "parameters": [
+        "token"
+      ]
+    },
+    {
+      "name": "get_user_id_from_token",
+      "parameters": [
+        "token"
+      ]
+    }
+  ],
+  "variables": [
+    "JWT_SETTINGS"
+  ]
+}

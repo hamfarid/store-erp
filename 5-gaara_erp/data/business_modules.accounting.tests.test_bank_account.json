@@ -1,0 +1,73 @@
+{
+  "module": "business_modules.accounting.tests.test_bank_account",
+  "imports": [
+    "core_modules.core.models",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.account",
+    "models.bank_account"
+  ],
+  "classes": [
+    {
+      "name": "BankAccountModelTest",
+      "methods": [
+        "setUp",
+        "test_create_bank_account",
+        "test_unique_account_number_per_company",
+        "test_set_default_bank_account",
+        "test_update_balance",
+        "test_bank_transaction",
+        "test_bank_reconciliation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_bank_account",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_account_number_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_set_default_bank_account",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_balance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_bank_transaction",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_bank_reconciliation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

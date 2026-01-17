@@ -1,0 +1,30 @@
+{
+  "module": "core_modules.organization.apps",
+  "imports": [
+    "core_modules.organization.signals",
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "OrganizationConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

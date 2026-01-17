@@ -1,0 +1,38 @@
+{
+  "module": "test_sales_module",
+  "imports": [
+    "business_modules.inventory.models",
+    "business_modules.sales.models",
+    "datetime",
+    "decimal",
+    "django",
+    "django.conf",
+    "django.test",
+    "django.test.utils",
+    "django.urls",
+    "json",
+    "os",
+    "sys",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_sales_models",
+      "parameters": []
+    },
+    {
+      "name": "test_sales_order_workflow",
+      "parameters": []
+    },
+    {
+      "name": "test_sales_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_sales_calculations",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

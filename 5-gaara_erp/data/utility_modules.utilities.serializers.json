@@ -1,0 +1,257 @@
+{
+  "module": "utility_modules.utilities.serializers",
+  "imports": [
+    "django.conf",
+    "django.contrib.auth",
+    "django.contrib.contenttypes.models",
+    "django.utils",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSerializer",
+      "methods": [
+        "get_name"
+      ],
+      "variables": [
+        "name"
+      ]
+    },
+    {
+      "name": "SystemMetricSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "DatabaseStatusSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserStatisticSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SystemAlertSerializer",
+      "methods": [
+        "update"
+      ],
+      "variables": [
+        "resolved_by_details",
+        "level_display"
+      ]
+    },
+    {
+      "name": "UserActivityLogSerializer",
+      "methods": [
+        "get_target_object_type"
+      ],
+      "variables": [
+        "user_details",
+        "action_type_display",
+        "target_object_type"
+      ]
+    },
+    {
+      "name": "SystemErrorLogSerializer",
+      "methods": [],
+      "variables": [
+        "user_details",
+        "activity_log_details",
+        "level_display"
+      ]
+    },
+    {
+      "name": "BulkUpdateListSerializer",
+      "methods": [
+        "update"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ContentTypeSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SystemHealthSerializer",
+      "methods": [],
+      "variables": [
+        "timestamp",
+        "status",
+        "checks",
+        "metrics",
+        "alerts"
+      ]
+    },
+    {
+      "name": "AuditLogSerializer",
+      "methods": [],
+      "variables": [
+        "timestamp",
+        "user",
+        "action",
+        "model_name",
+        "object_id",
+        "object_repr",
+        "changes",
+        "ip_address",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "FilteredListSerializer",
+      "methods": [
+        "to_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "SystemMetric",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "DatabaseStatus",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserStatistic",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SystemAlert",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserActivityLog",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SystemErrorLog",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_name",
+      "parameters": [
+        "self",
+        "instance"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "instance",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "get_target_object_type",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "instance",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "to_representation",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    }
+  ],
+  "variables": [
+    "AUTH_USER_MODEL",
+    "User"
+  ]
+}

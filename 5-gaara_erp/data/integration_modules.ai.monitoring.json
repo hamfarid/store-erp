@@ -1,0 +1,115 @@
+{
+  "module": "integration_modules.ai.monitoring",
+  "imports": [
+    "atexit",
+    "django.conf",
+    "langfuse",
+    "logging",
+    "utilities.utils"
+  ],
+  "classes": [
+    {
+      "name": "LangfuseTrace",
+      "methods": [
+        "__init__",
+        "__enter__",
+        "__exit__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_langfuse_client",
+      "parameters": []
+    },
+    {
+      "name": "schedule_drift_detection_task",
+      "parameters": [
+        "model_deployment_id",
+        "current_data_info"
+      ]
+    },
+    {
+      "name": "start_trace",
+      "parameters": []
+    },
+    {
+      "name": "start_span",
+      "parameters": [
+        "trace_id"
+      ]
+    },
+    {
+      "name": "log_generation",
+      "parameters": [
+        "trace_id"
+      ]
+    },
+    {
+      "name": "log_event",
+      "parameters": [
+        "trace_id",
+        "name"
+      ]
+    },
+    {
+      "name": "score_trace",
+      "parameters": [
+        "trace_id",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "shutdown_langfuse",
+      "parameters": []
+    },
+    {
+      "name": "trace_function",
+      "parameters": [
+        "name"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "name"
+      ]
+    },
+    {
+      "name": "__enter__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__exit__",
+      "parameters": [
+        "self",
+        "exc_type",
+        "exc_val",
+        "exc_tb"
+      ]
+    },
+    {
+      "name": "decorator",
+      "parameters": [
+        "func"
+      ]
+    },
+    {
+      "name": "log_system_error",
+      "parameters": []
+    },
+    {
+      "name": "wrapper",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "logger",
+    "langfuse_client"
+  ]
+}

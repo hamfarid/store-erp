@@ -1,0 +1,12 @@
+{
+  "module": "gaara_erp.asgi",
+  "imports": [
+    "django.core.asgi",
+    "os"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "application"
+  ]
+}

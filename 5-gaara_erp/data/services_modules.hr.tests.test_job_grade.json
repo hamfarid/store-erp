@@ -1,0 +1,55 @@
+{
+  "module": "services_modules.hr.tests.test_job_grade",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.test",
+    "models.job_grade"
+  ],
+  "classes": [
+    {
+      "name": "JobGradeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_job_grade",
+        "test_unique_name",
+        "test_is_salary_in_range",
+        "test_get_salary_range_text"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_job_grade",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_salary_in_range",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_salary_range_text",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

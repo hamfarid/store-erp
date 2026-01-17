@@ -1,0 +1,17 @@
+{
+  "module": "integration_modules.ai_agriculture.tests.conftest",
+  "imports": [
+    "django",
+    "django.conf",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "setup_django_settings",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

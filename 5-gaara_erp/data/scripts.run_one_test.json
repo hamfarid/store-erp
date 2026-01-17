@@ -1,0 +1,24 @@
+{
+  "module": "scripts.run_one_test",
+  "imports": [
+    "contextlib",
+    "django",
+    "django.apps",
+    "django.core.management",
+    "django.db",
+    "importlib",
+    "inspect",
+    "io",
+    "os",
+    "sys",
+    "traceback"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "main",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

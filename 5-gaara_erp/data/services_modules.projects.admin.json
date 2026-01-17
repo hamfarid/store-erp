@@ -1,0 +1,302 @@
+{
+  "module": "services_modules.projects.admin",
+  "imports": [
+    "django.contrib",
+    "django.contrib.contenttypes.admin",
+    "django.contrib.contenttypes.models",
+    "django.utils.translation",
+    "models.dependencies",
+    "models.financials",
+    "models.project",
+    "models.project_gantt",
+    "models.project_member",
+    "models.project_phase"
+  ],
+  "classes": [
+    {
+      "name": "ProjectMemberInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "raw_id_fields",
+        "fields",
+        "verbose_name",
+        "verbose_name_plural",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectPhaseInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields",
+        "ordering",
+        "verbose_name",
+        "verbose_name_plural",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectTaskInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields",
+        "readonly_fields",
+        "raw_id_fields",
+        "ordering",
+        "verbose_name",
+        "verbose_name_plural",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectDocumentInline",
+      "methods": [
+        "formfield_for_foreignkey"
+      ],
+      "variables": [
+        "model",
+        "extra",
+        "fields",
+        "readonly_fields",
+        "raw_id_fields",
+        "verbose_name",
+        "verbose_name_plural",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectRiskInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields",
+        "readonly_fields",
+        "raw_id_fields",
+        "verbose_name",
+        "verbose_name_plural",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectFinancialTransactionInline",
+      "methods": [
+        "formfield_for_foreignkey"
+      ],
+      "variables": [
+        "model",
+        "extra",
+        "fields",
+        "readonly_fields",
+        "raw_id_fields",
+        "verbose_name",
+        "verbose_name_plural",
+        "ct_field",
+        "ct_fk_field",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields",
+        "raw_id_fields",
+        "fieldsets",
+        "inlines",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectPhaseAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "autocomplete_fields",
+        "ordering",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectTaskAdmin",
+      "methods": [
+        "save_model"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields",
+        "raw_id_fields",
+        "fieldsets",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectTaskDependencyAdmin",
+      "methods": [
+        "get_task_title",
+        "get_dependency_title"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "raw_id_fields",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "TaskDependencyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "autocomplete_fields",
+        "date_hierarchy",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectDocumentAdmin",
+      "methods": [
+        "save_model"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields",
+        "raw_id_fields",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectRiskAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields",
+        "raw_id_fields",
+        "fieldsets",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "GanttSettingsAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "raw_id_fields",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "GanttSnapshotAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "raw_id_fields",
+        "list_per_page"
+      ]
+    },
+    {
+      "name": "ProjectFinancialTransactionAdmin",
+      "methods": [
+        "source_document_display"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "raw_id_fields",
+        "date_hierarchy",
+        "list_per_page"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "formfield_for_foreignkey",
+      "parameters": [
+        "self",
+        "db_field",
+        "request"
+      ]
+    },
+    {
+      "name": "formfield_for_foreignkey",
+      "parameters": [
+        "self",
+        "db_field",
+        "request"
+      ]
+    },
+    {
+      "name": "save_model",
+      "parameters": [
+        "self",
+        "request",
+        "obj",
+        "form",
+        "change"
+      ]
+    },
+    {
+      "name": "get_task_title",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_dependency_title",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "save_model",
+      "parameters": [
+        "self",
+        "request",
+        "obj",
+        "form",
+        "change"
+      ]
+    },
+    {
+      "name": "source_document_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

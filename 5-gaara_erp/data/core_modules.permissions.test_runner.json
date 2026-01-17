@@ -1,0 +1,11 @@
+{
+  "module": "core_modules.permissions.test_runner",
+  "imports": [
+    "django_test_setup",
+    "importlib",
+    "unittest"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

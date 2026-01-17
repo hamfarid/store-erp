@@ -1,0 +1,21 @@
+{
+  "module": "core_modules.setup.data_import_export.signals",
+  "imports": [
+    "activity_log.models",
+    "django.db.models.signals",
+    "django.dispatch",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "log_import_export_job",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,16 @@
+{
+  "module": "scripts.show_migrations_accounting",
+  "imports": [
+    "django",
+    "django.core.management",
+    "io",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "buf",
+    "text"
+  ]
+}

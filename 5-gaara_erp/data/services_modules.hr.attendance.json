@@ -1,0 +1,99 @@
+{
+  "module": "services_modules.hr.attendance",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "employee",
+    "leave"
+  ],
+  "classes": [
+    {
+      "name": "ReturnToWork",
+      "methods": [],
+      "variables": [
+        "leave_request",
+        "return_date",
+        "notes",
+        "recorded_by",
+        "recorded_at"
+      ]
+    },
+    {
+      "name": "AttendanceRecord",
+      "methods": [],
+      "variables": [
+        "ATTENDANCE_SOURCE",
+        "employee",
+        "attendance_date",
+        "check_in_time",
+        "check_out_time",
+        "source",
+        "latitude",
+        "longitude",
+        "notes"
+      ]
+    },
+    {
+      "name": "PenaltyRule",
+      "methods": [],
+      "variables": [
+        "PENALTY_TYPES",
+        "name",
+        "penalty_type",
+        "rate_multiplier",
+        "unit",
+        "is_active"
+      ]
+    },
+    {
+      "name": "OvertimeRule",
+      "methods": [],
+      "variables": [
+        "name",
+        "apply_before_hours",
+        "apply_after_hours",
+        "apply_weekends",
+        "apply_holidays",
+        "rate_multiplier",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

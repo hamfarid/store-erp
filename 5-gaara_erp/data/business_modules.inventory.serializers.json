@@ -1,0 +1,190 @@
+{
+  "module": "business_modules.inventory.serializers",
+  "imports": [
+    "django.db",
+    "models",
+    "rest_framework",
+    "settings_models"
+  ],
+  "classes": [
+    {
+      "name": "ProductCategorySerializer",
+      "methods": [],
+      "variables": [
+        "parent_name"
+      ]
+    },
+    {
+      "name": "UOMSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "InventorySettingsSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ProductListSerializer",
+      "methods": [
+        "get_current_stock"
+      ],
+      "variables": [
+        "category_name",
+        "uom_name",
+        "current_stock"
+      ]
+    },
+    {
+      "name": "ProductSerializer",
+      "methods": [],
+      "variables": [
+        "category_name",
+        "uom_name"
+      ]
+    },
+    {
+      "name": "StoreSerializer",
+      "methods": [
+        "get_total_products"
+      ],
+      "variables": [
+        "total_products"
+      ]
+    },
+    {
+      "name": "StockLocationSerializer",
+      "methods": [],
+      "variables": [
+        "store_name",
+        "parent_name"
+      ]
+    },
+    {
+      "name": "StockMoveSerializer",
+      "methods": [],
+      "variables": [
+        "product_name",
+        "from_location_name",
+        "to_location_name"
+      ]
+    },
+    {
+      "name": "StockSerializer",
+      "methods": [],
+      "variables": [
+        "product_name",
+        "product_code",
+        "location_name"
+      ]
+    },
+    {
+      "name": "InventoryStockSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "InventoryTransactionSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_current_stock",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_total_products",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

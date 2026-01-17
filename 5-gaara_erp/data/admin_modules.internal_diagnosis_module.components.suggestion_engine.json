@@ -1,0 +1,62 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.suggestion_engine",
+  "imports": [
+    "datetime"
+  ],
+  "classes": [
+    {
+      "name": "SuggestionEngine",
+      "methods": [
+        "__init__",
+        "_default_knowledge_base",
+        "analyze_and_suggest",
+        "generate_suggestions",
+        "get_suggestions",
+        "clear_suggestions"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "knowledge_base"
+      ]
+    },
+    {
+      "name": "_default_knowledge_base",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "analyze_and_suggest",
+      "parameters": [
+        "self",
+        "diagnostic_data"
+      ]
+    },
+    {
+      "name": "generate_suggestions",
+      "parameters": [
+        "self",
+        "diagnostic_data"
+      ]
+    },
+    {
+      "name": "get_suggestions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clear_suggestions",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

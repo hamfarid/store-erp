@@ -1,0 +1,231 @@
+{
+  "module": "helper_modules.customization.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "CustomField",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "FIELD_TYPE_CHOICES",
+        "VALIDATION_TYPE_CHOICES",
+        "field_id",
+        "name",
+        "label",
+        "description",
+        "field_type",
+        "model_name",
+        "app_label",
+        "default_value",
+        "choices",
+        "help_text",
+        "validation_type",
+        "validation_value",
+        "validation_message",
+        "is_required",
+        "is_visible",
+        "is_searchable",
+        "is_sortable",
+        "order",
+        "group",
+        "is_active",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "CustomView",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "VIEW_TYPE_CHOICES",
+        "view_id",
+        "name",
+        "title",
+        "description",
+        "view_type",
+        "model_name",
+        "app_label",
+        "fields",
+        "filters",
+        "sorting",
+        "grouping",
+        "layout",
+        "styling",
+        "is_public",
+        "allowed_users",
+        "is_active",
+        "is_default",
+        "usage_count",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "CustomWorkflow",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "TRIGGER_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "workflow_id",
+        "name",
+        "description",
+        "trigger_type",
+        "trigger_conditions",
+        "steps",
+        "timeout",
+        "retry_attempts",
+        "status",
+        "total_executions",
+        "successful_executions",
+        "failed_executions",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "CustomTheme",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "THEME_TYPE_CHOICES",
+        "theme_id",
+        "name",
+        "description",
+        "theme_type",
+        "primary_color",
+        "secondary_color",
+        "success_color",
+        "warning_color",
+        "danger_color",
+        "info_color",
+        "font_family",
+        "font_size",
+        "sidebar_width",
+        "header_height",
+        "custom_css",
+        "is_active",
+        "is_default",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserCustomization",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "customization_id",
+        "user",
+        "theme",
+        "language",
+        "timezone",
+        "items_per_page",
+        "default_view",
+        "dashboard_widgets",
+        "dashboard_layout",
+        "email_notifications",
+        "push_notifications",
+        "sms_notifications",
+        "custom_settings",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,178 @@
+{
+  "module": "admin_modules.notifications.tests.test_notifications",
+  "imports": [
+    "core_modules.core.models",
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "NotificationTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_notification_type",
+        "test_unique_code",
+        "test_deactivate_notification_type"
+      ],
+      "variables": []
+    },
+    {
+      "name": "NotificationChannelModelTest",
+      "methods": [
+        "setUp",
+        "test_create_notification_channel",
+        "test_unique_code"
+      ],
+      "variables": []
+    },
+    {
+      "name": "NotificationModelTest",
+      "methods": [
+        "setUp",
+        "test_create_notification",
+        "test_mark_as_sent",
+        "test_create_from_template",
+        "setUp",
+        "test_create_notification_preference",
+        "test_unique_user_type_channel_per_company",
+        "test_toggle_preference",
+        "test_get_user_preferences"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_notification_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_notification_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_notification_channel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_notification",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_mark_as_sent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_from_template",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_notification_preference",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_user_type_channel_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_toggle_preference",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_user_preferences",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_mark_as_sent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_create_from_template",
+      "parameters": [
+        "cls",
+        "template",
+        "context"
+      ]
+    },
+    {
+      "name": "mock_toggle",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_user_preferences",
+      "parameters": [
+        "cls",
+        "user",
+        "company"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

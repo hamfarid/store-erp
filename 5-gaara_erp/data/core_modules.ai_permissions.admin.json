@@ -1,0 +1,163 @@
+{
+  "module": "core_modules.ai_permissions.admin",
+  "imports": [
+    "django.contrib",
+    "django.utils.html",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "AIModelAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "AIAgentAdmin",
+      "methods": [
+        "ai_model_display",
+        "owner_display"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "AgentRoleAdmin",
+      "methods": [
+        "scope_display"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "AIRoleAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "AIModelPermissionAdmin",
+      "methods": [
+        "permissions_display"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "AIPermissionDependencyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "A2APermissionAdmin",
+      "methods": [
+        "permissions_display"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "AIPermissionAuditLogAdmin",
+      "methods": [
+        "has_add_permission",
+        "has_change_permission"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ai_model_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "owner_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "scope_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "permissions_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "permissions_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_add_permission",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "has_change_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

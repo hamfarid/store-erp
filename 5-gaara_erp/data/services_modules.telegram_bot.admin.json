@@ -1,0 +1,22 @@
+{
+  "module": "services_modules.telegram_bot.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "TelegramUserAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "raw_id_fields",
+        "readonly_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

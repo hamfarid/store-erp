@@ -1,0 +1,9 @@
+{
+  "module": "accounting.models",
+  "imports": [
+    "business_modules.accounting.models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

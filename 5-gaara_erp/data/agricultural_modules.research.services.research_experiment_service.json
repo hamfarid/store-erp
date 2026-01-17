@@ -1,0 +1,80 @@
+{
+  "module": "agricultural_modules.research.services.research_experiment_service",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ResearchExperimentService",
+      "methods": [
+        "create_experiment",
+        "update_experiment",
+        "get_experiment",
+        "get_experiments",
+        "change_experiment_status",
+        "add_participant",
+        "remove_participant"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_experiment",
+      "parameters": [
+        "data",
+        "created_by"
+      ]
+    },
+    {
+      "name": "update_experiment",
+      "parameters": [
+        "experiment_id",
+        "data",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "get_experiment",
+      "parameters": [
+        "experiment_id"
+      ]
+    },
+    {
+      "name": "get_experiments",
+      "parameters": [
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "change_experiment_status",
+      "parameters": [
+        "experiment_id",
+        "new_status",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "add_participant",
+      "parameters": [
+        "experiment_id",
+        "participant_data",
+        "created_by"
+      ]
+    },
+    {
+      "name": "remove_participant",
+      "parameters": [
+        "experiment_id",
+        "researcher_id"
+      ]
+    }
+  ],
+  "variables": []
+}

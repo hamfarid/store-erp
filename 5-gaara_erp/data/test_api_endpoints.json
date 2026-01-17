@@ -1,0 +1,51 @@
+{
+  "module": "test_api_endpoints",
+  "imports": [
+    "django",
+    "django.conf",
+    "django.contrib.auth",
+    "django.test",
+    "django.test.utils",
+    "json",
+    "os",
+    "requests",
+    "sys",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_api_authentication",
+      "parameters": []
+    },
+    {
+      "name": "test_core_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_business_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_ai_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_agricultural_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_admin_api_endpoints",
+      "parameters": []
+    },
+    {
+      "name": "test_api_data_validation",
+      "parameters": []
+    },
+    {
+      "name": "main",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

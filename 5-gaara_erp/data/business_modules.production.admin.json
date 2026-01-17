@@ -1,0 +1,77 @@
+{
+  "module": "business_modules.production.admin",
+  "imports": [
+    "django.contrib",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "BOMItemInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields"
+      ]
+    },
+    {
+      "name": "BillOfMaterialsAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "inlines"
+      ]
+    },
+    {
+      "name": "ProductionLineAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ProductionOrderItemInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "ordering"
+      ]
+    },
+    {
+      "name": "ProductionOrderAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "inlines"
+      ]
+    },
+    {
+      "name": "ProductionOutputAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ProductionWasteAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

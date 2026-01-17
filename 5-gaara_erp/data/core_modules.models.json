@@ -1,0 +1,95 @@
+{
+  "module": "core_modules.models",
+  "imports": [
+    "django.conf",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils.translation",
+    "magic"
+  ],
+  "classes": [
+    {
+      "name": "ArchiveCategory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "parent",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ArchivedDocument",
+      "methods": [
+        "__str__",
+        "get_mime_type",
+        "save"
+      ],
+      "variables": [
+        "title",
+        "description",
+        "file",
+        "category",
+        "archived_at",
+        "archived_by",
+        "content_type",
+        "object_id",
+        "content_object",
+        "original_filename",
+        "file_size",
+        "mime_type"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_mime_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

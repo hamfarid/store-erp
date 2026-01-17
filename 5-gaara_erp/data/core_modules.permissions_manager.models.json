@@ -1,0 +1,227 @@
+{
+  "module": "core_modules.permissions_manager.models",
+  "imports": [
+    "ai_agents.models",
+    "core_modules.permissions.unified_permissions_model",
+    "core_modules.permissions_common.constants",
+    "django.conf",
+    "django.contrib.auth",
+    "django.contrib.auth.models",
+    "django.db",
+    "django.test",
+    "django.utils.translation",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "Permission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "code",
+        "name",
+        "description",
+        "module",
+        "permission_type",
+        "is_system",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Role",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "is_system",
+        "scope_type",
+        "created_at",
+        "updated_at",
+        "country",
+        "company",
+        "branch"
+      ]
+    },
+    {
+      "name": "AgentRole",
+      "methods": [
+        "__str__",
+        "check_dependency"
+      ],
+      "variables": [
+        "role",
+        "created_at"
+      ]
+    },
+    {
+      "name": "RoleTestCase",
+      "methods": [
+        "setUp",
+        "test_role_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PermissionTestCase",
+      "methods": [
+        "setUp",
+        "test_permission_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RolePermissionTestCase",
+      "methods": [
+        "setUp",
+        "test_role_permission_creation",
+        "test_get_permissions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserRoleTestCase",
+      "methods": [
+        "setUp",
+        "test_user_role_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PermissionAuditLogTestCase",
+      "methods": [
+        "setUp",
+        "test_audit_log_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_dependency",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_permission_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_permission_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_role_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_audit_log_creation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "module": "services_modules.fleet_management.services.maintenance_service",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "MaintenanceService",
+      "methods": [
+        "create_maintenance_log",
+        "update_maintenance_log",
+        "delete_maintenance_log",
+        "search_maintenance_logs",
+        "get_vehicle_maintenance_history",
+        "get_vehicle_maintenance_cost",
+        "complete_maintenance",
+        "get_upcoming_maintenance"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_maintenance_log",
+      "parameters": [
+        "vehicle",
+        "maintenance_type",
+        "description",
+        "date"
+      ]
+    },
+    {
+      "name": "update_maintenance_log",
+      "parameters": [
+        "maintenance_log_id"
+      ]
+    },
+    {
+      "name": "delete_maintenance_log",
+      "parameters": [
+        "maintenance_log_id"
+      ]
+    },
+    {
+      "name": "search_maintenance_logs",
+      "parameters": [
+        "vehicle",
+        "maintenance_type",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "get_vehicle_maintenance_history",
+      "parameters": [
+        "vehicle_id"
+      ]
+    },
+    {
+      "name": "get_vehicle_maintenance_cost",
+      "parameters": [
+        "vehicle_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "complete_maintenance",
+      "parameters": [
+        "maintenance_log_id"
+      ]
+    },
+    {
+      "name": "get_upcoming_maintenance",
+      "parameters": [
+        "days"
+      ]
+    }
+  ],
+  "variables": []
+}

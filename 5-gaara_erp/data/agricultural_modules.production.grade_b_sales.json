@@ -1,0 +1,152 @@
+{
+  "module": "agricultural_modules.production.grade_b_sales",
+  "imports": [
+    "business_modules.partners.models",
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "models",
+    "product_grading.models",
+    "workflow.models"
+  ],
+  "classes": [
+    {
+      "name": "GradeBSale",
+      "methods": [
+        "__str__",
+        "save",
+        "confirm",
+        "invoice",
+        "mark_as_paid",
+        "cancel"
+      ],
+      "variables": [
+        "STATUS_DRAFT",
+        "STATUS_CONFIRMED",
+        "STATUS_INVOICED",
+        "STATUS_PAID",
+        "STATUS_CANCELLED",
+        "STATUS_CHOICES",
+        "sale_number",
+        "product",
+        "production_batch",
+        "workflow_execution",
+        "stage_execution",
+        "quantity",
+        "unit",
+        "unit_price",
+        "total_price",
+        "customer",
+        "sale_date",
+        "invoice_number",
+        "invoice_date",
+        "status",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_by",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "GradeBSaleService",
+      "methods": [
+        "create_grade_b_sale",
+        "get_grade_b_sales",
+        "calculate_grade_b_profitability",
+        "generate_grade_b_sales_report"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "confirm",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "invoice",
+      "parameters": [
+        "self",
+        "user",
+        "invoice_number"
+      ]
+    },
+    {
+      "name": "mark_as_paid",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "create_grade_b_sale",
+      "parameters": [
+        "product_id",
+        "quantity",
+        "unit_price",
+        "unit",
+        "user"
+      ]
+    },
+    {
+      "name": "get_grade_b_sales",
+      "parameters": [
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "calculate_grade_b_profitability",
+      "parameters": [
+        "product_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "generate_grade_b_sales_report",
+      "parameters": [
+        "product_id",
+        "start_date",
+        "end_date",
+        "format"
+      ]
+    }
+  ],
+  "variables": []
+}

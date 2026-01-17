@@ -1,0 +1,11 @@
+{
+  "module": "gaara_erp.accounting_migration_urls",
+  "imports": [
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "urlpatterns"
+  ]
+}

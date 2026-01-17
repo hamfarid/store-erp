@@ -1,0 +1,11 @@
+{
+  "module": "utility_modules.utilities.constants",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "SENDER_USER",
+    "SENDER_AGENT",
+    "SENDER_CHOICES"
+  ]
+}

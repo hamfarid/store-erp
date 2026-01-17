@@ -1,0 +1,229 @@
+{
+  "module": "business_modules.inventory.tests.test_product",
+  "imports": [
+    "core_modules.accounting.models",
+    "core_modules.core.models",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "models.product"
+  ],
+  "classes": [
+    {
+      "name": "ProductModelTest",
+      "methods": [
+        "setUp",
+        "test_create_product",
+        "test_unique_code_per_company",
+        "test_product_category",
+        "test_product_tags",
+        "test_product_attributes",
+        "test_product_type",
+        "test_get_margin",
+        "test_get_profit"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductCategoryModelTest",
+      "methods": [
+        "setUp",
+        "test_create_category",
+        "test_unique_code_per_company",
+        "test_category_hierarchy"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductTagModelTest",
+      "methods": [
+        "setUp",
+        "test_create_tag",
+        "test_unique_name_per_company",
+        "test_default_color"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductAttributeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_attribute",
+        "test_unique_code_per_company",
+        "test_attribute_values",
+        "test_attribute_types"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProductAttributeValueModelTest",
+      "methods": [
+        "setUp",
+        "test_create_attribute_value",
+        "test_unique_name_per_attribute",
+        "test_ordering_by_sequence"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_product",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_product_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_product_tags",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_product_attributes",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_product_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_margin",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_profit",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_category_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_tag",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_name_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_default_color",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_attribute",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_attribute_values",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_attribute_types",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_attribute_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_name_per_attribute",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_ordering_by_sequence",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

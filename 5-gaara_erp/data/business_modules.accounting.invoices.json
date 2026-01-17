@@ -1,0 +1,137 @@
+{
+  "module": "business_modules.accounting.invoices",
+  "imports": [
+    "business_modules.accounting.models.tax",
+    "business_modules.contacts.models",
+    "business_modules.purchasing.models",
+    "core_modules.organization.models",
+    "decimal",
+    "django.db",
+    "django.utils.translation",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "SalesInvoice",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "invoice_number",
+        "customer",
+        "branch",
+        "invoice_date",
+        "due_date",
+        "currency",
+        "total_amount",
+        "tax_amount",
+        "net_amount",
+        "paid_amount",
+        "status",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "SalesInvoiceItem",
+      "methods": [],
+      "variables": [
+        "sales_invoice",
+        "product_description",
+        "quantity",
+        "unit_price",
+        "discount_amount",
+        "tax",
+        "tax_amount",
+        "line_total"
+      ]
+    },
+    {
+      "name": "PurchaseInvoice",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "invoice_number",
+        "purchase_order",
+        "supplier",
+        "branch",
+        "invoice_date",
+        "due_date",
+        "currency",
+        "total_amount",
+        "tax_amount",
+        "net_amount",
+        "paid_amount",
+        "status",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PurchaseInvoiceItem",
+      "methods": [],
+      "variables": [
+        "purchase_invoice",
+        "product_description",
+        "quantity",
+        "unit_price",
+        "discount_amount",
+        "tax",
+        "tax_amount",
+        "line_total"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

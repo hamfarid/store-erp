@@ -1,0 +1,23 @@
+{
+  "module": "core_modules.rag.tests.test_hybrid_search_pg",
+  "imports": [
+    "__future__",
+    "core_modules.rag.models",
+    "django.core.management",
+    "django.db",
+    "os",
+    "pytest"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_hybrid_search_executes_without_error",
+      "parameters": [
+        "client"
+      ]
+    }
+  ],
+  "variables": [
+    "pytestmark"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "module": "services_modules.quality_control.models.quality_parameter",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "QualityParameter",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "get_unit_display_value",
+        "get_selection_options_list",
+        "is_value_within_range",
+        "is_valid_selection"
+      ],
+      "variables": [
+        "TYPE_CHOICES",
+        "UNIT_CHOICES",
+        "name",
+        "description",
+        "parameter_type",
+        "template",
+        "test_method",
+        "expected_value",
+        "min_value",
+        "max_value",
+        "unit",
+        "custom_unit",
+        "selection_options",
+        "sequence",
+        "is_critical",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_unit_display_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_selection_options_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_value_within_range",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "is_valid_selection",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    }
+  ],
+  "variables": []
+}

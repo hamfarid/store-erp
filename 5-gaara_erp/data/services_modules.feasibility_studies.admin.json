@@ -1,0 +1,70 @@
+{
+  "module": "services_modules.feasibility_studies.admin",
+  "imports": [
+    "django.contrib",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CashFlowInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "ordering",
+        "fields",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "FeasibilityStudyAdmin",
+      "methods": [
+        "get_project_name",
+        "save_model"
+      ],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "inlines",
+        "readonly_fields",
+        "autocomplete_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "CashFlowAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "autocomplete_fields",
+        "ordering",
+        "fieldsets"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_project_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "save_model",
+      "parameters": [
+        "self",
+        "request",
+        "obj",
+        "form",
+        "change"
+      ]
+    }
+  ],
+  "variables": []
+}

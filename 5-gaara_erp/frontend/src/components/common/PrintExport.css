@@ -1,0 +1,363 @@
+/* Print and Export Styles */
+
+/* Printable Component */
+.printable-component {
+  background: white;
+  color: black;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.4;
+}
+
+.print-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #333;
+}
+
+.print-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.print-date {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+.print-content {
+  margin: 20px 0;
+  min-height: 400px;
+}
+
+.print-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+.company-info {
+  font-size: 10px;
+  color: #666;
+}
+
+.company-info p {
+  margin: 2px 0;
+}
+
+/* Export Buttons */
+.export-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.export-button--excel {
+  background-color: #217346;
+  color: white;
+}
+
+.export-button--excel:hover {
+  background-color: #1a5c37;
+}
+
+.export-button--pdf {
+  background-color: #dc3545;
+  color: white;
+}
+
+.export-button--pdf:hover {
+  background-color: #bd2130;
+}
+
+.export-button--csv {
+  background-color: #6c757d;
+  color: white;
+}
+
+.export-button--csv:hover {
+  background-color: #545b62;
+}
+
+/* Print Export Toolbar */
+.print-export-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.toolbar-section {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Print Styles */
+@media print {
+  /* Hide non-printable elements */
+  .no-print,
+  .print-export-toolbar,
+  .sidebar,
+  .navbar,
+  .btn,
+  button,
+  .pagination,
+  .modal,
+  .tooltip,
+  .dropdown-menu {
+    display: none !important;
+  }
+
+  /* Show print-only elements */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Page setup */
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  /* Body styles */
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    color: black;
+    background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Printable component */
+  .printable-component {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    page-break-inside: avoid;
+  }
+
+  /* Headers */
+  .print-title {
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 10pt;
+  }
+
+  .print-date {
+    font-size: 10pt;
+    margin-bottom: 15pt;
+  }
+
+  /* Tables */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 10pt 0 !important;
+    font-size: 9pt !important;
+  }
+
+  table th,
+  table td {
+    border: 1pt solid #333 !important;
+    padding: 4pt !important;
+    text-align: right !important;
+  }
+
+  table th {
+    background-color: #f0f0f0 !important;
+    font-weight: bold !important;
+  }
+
+  /* Page breaks */
+  .page-break {
+    page-break-before: always;
+  }
+
+  .page-break-inside {
+    page-break-inside: avoid;
+  }
+
+  /* Charts and images */
+  .recharts-wrapper,
+  .chart-container {
+    page-break-inside: avoid;
+    margin: 10pt 0;
+  }
+
+  /* Footer */
+  .print-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 8pt;
+    text-align: center;
+    border-top: 1pt solid #333;
+    padding-top: 5pt;
+  }
+}
+
+/* Print preview styles */
+.print-preview {
+  background: #f5f5f5;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.print-preview .printable-component {
+  max-width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 15mm;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .print-export-toolbar {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .toolbar-section {
+    justify-content: center;
+  }
+
+  .export-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .print-header,
+[dir="rtl"] .print-footer {
+  text-align: center;
+}
+
+[dir="rtl"] .print-content {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] table th,
+[dir="rtl"] table td {
+  text-align: right !important;
+}
+
+/* Dark mode (for screen only) */
+@media screen and (prefers-color-scheme: dark) {
+  .print-export-toolbar {
+    background-color: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .print-header {
+    border-bottom-width: 3px;
+  }
+  
+  .print-footer {
+    border-top-width: 2px;
+  }
+  
+  @media print {
+    table th,
+    table td {
+      border-width: 2pt !important;
+    }
+  }
+}
+
+/* Loading states for export buttons */
+.export-buttons .enhanced-button--loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Export progress indicator */
+.export-progress {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+  min-width: 300px;
+  text-align: center;
+}
+
+.export-progress h3 {
+  margin: 0 0 16px 0;
+  color: #2c3e50;
+}
+
+.export-progress .progress-bar {
+  margin-bottom: 12px;
+}
+
+.export-progress .progress-message {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Print button specific styles */
+.print-button {
+  background-color: #495057;
+  color: white;
+}
+
+.print-button:hover {
+  background-color: #343a40;
+}
+
+.print-button i {
+  margin-right: 6px;
+}
+
+/* Export format icons */
+.export-button--excel::before {
+  content: '📊';
+  margin-right: 6px;
+}
+
+.export-button--pdf::before {
+  content: '📄';
+  margin-right: 6px;
+}
+
+.export-button--csv::before {
+  content: '📋';
+  margin-right: 6px;
+}
+
+/* Animation for export buttons */
+.export-buttons .enhanced-button {
+  transition: all 0.2s ease;
+}
+
+.export-buttons .enhanced-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

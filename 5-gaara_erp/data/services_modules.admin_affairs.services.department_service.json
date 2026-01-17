@@ -1,0 +1,113 @@
+{
+  "module": "services_modules.admin_affairs.services.department_service",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "DepartmentService",
+      "methods": [
+        "get_all_departments",
+        "get_department_by_id",
+        "get_department_by_code",
+        "search_departments",
+        "create_department",
+        "update_department",
+        "delete_department",
+        "deactivate_department",
+        "activate_department",
+        "get_department_hierarchy",
+        "_get_sub_departments_recursive",
+        "get_departments_by_manager",
+        "get_employees_count_by_department"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_all_departments",
+      "parameters": [
+        "include_inactive"
+      ]
+    },
+    {
+      "name": "get_department_by_id",
+      "parameters": [
+        "department_id"
+      ]
+    },
+    {
+      "name": "get_department_by_code",
+      "parameters": [
+        "code"
+      ]
+    },
+    {
+      "name": "search_departments",
+      "parameters": [
+        "query"
+      ]
+    },
+    {
+      "name": "create_department",
+      "parameters": [
+        "name",
+        "code",
+        "parent",
+        "manager",
+        "description"
+      ]
+    },
+    {
+      "name": "update_department",
+      "parameters": [
+        "department_id"
+      ]
+    },
+    {
+      "name": "delete_department",
+      "parameters": [
+        "department_id"
+      ]
+    },
+    {
+      "name": "deactivate_department",
+      "parameters": [
+        "department_id"
+      ]
+    },
+    {
+      "name": "activate_department",
+      "parameters": [
+        "department_id"
+      ]
+    },
+    {
+      "name": "get_department_hierarchy",
+      "parameters": []
+    },
+    {
+      "name": "_get_sub_departments_recursive",
+      "parameters": [
+        "department"
+      ]
+    },
+    {
+      "name": "get_departments_by_manager",
+      "parameters": [
+        "manager_id"
+      ]
+    },
+    {
+      "name": "get_employees_count_by_department",
+      "parameters": [
+        "department_id"
+      ]
+    }
+  ],
+  "variables": []
+}

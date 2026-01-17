@@ -1,0 +1,270 @@
+{
+  "module": "services_modules.correspondence.admin",
+  "imports": [
+    "django.contrib",
+    "django.urls",
+    "django.utils.html",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CorrespondenceAttachmentInline",
+      "methods": [
+        "has_change_permission"
+      ],
+      "variables": [
+        "model",
+        "extra",
+        "readonly_fields",
+        "fields"
+      ]
+    },
+    {
+      "name": "CorrespondenceCommentInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "readonly_fields",
+        "fields"
+      ]
+    },
+    {
+      "name": "CorrespondenceHistoryInline",
+      "methods": [
+        "has_add_permission",
+        "has_change_permission"
+      ],
+      "variables": [
+        "model",
+        "extra",
+        "can_delete",
+        "readonly_fields",
+        "fields"
+      ]
+    },
+    {
+      "name": "CorrespondenceCategoryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "CorrespondenceAdmin",
+      "methods": [
+        "correspondence_type_display",
+        "status_display",
+        "priority_display",
+        "save_model",
+        "save_formset"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "date_hierarchy",
+        "inlines",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "CorrespondenceAttachmentAdmin",
+      "methods": [
+        "correspondence_link",
+        "save_model"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fields"
+      ]
+    },
+    {
+      "name": "CorrespondenceCommentAdmin",
+      "methods": [
+        "content_preview",
+        "correspondence_link",
+        "save_model"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fields"
+      ]
+    },
+    {
+      "name": "CorrespondenceHistoryAdmin",
+      "methods": [
+        "description_preview",
+        "correspondence_link",
+        "has_add_permission",
+        "has_change_permission",
+        "has_delete_permission"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "date_hierarchy"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_change_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_add_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_change_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    },
+    {
+      "name": "correspondence_type_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "status_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "priority_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "save_model",
+      "parameters": [
+        "self",
+        "request",
+        "obj",
+        "form",
+        "change"
+      ]
+    },
+    {
+      "name": "save_formset",
+      "parameters": [
+        "self",
+        "request",
+        "form",
+        "formset",
+        "change"
+      ]
+    },
+    {
+      "name": "correspondence_link",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "save_model",
+      "parameters": [
+        "self",
+        "request",
+        "obj",
+        "form",
+        "change"
+      ]
+    },
+    {
+      "name": "content_preview",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "correspondence_link",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "save_model",
+      "parameters": [
+        "self",
+        "request",
+        "obj",
+        "form",
+        "change"
+      ]
+    },
+    {
+      "name": "description_preview",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "correspondence_link",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_add_permission",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "has_change_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_delete_permission",
+      "parameters": [
+        "self",
+        "request",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

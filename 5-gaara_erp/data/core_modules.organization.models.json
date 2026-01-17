@@ -1,0 +1,264 @@
+{
+  "module": "core_modules.organization.models",
+  "imports": [
+    "decimal",
+    "django.conf",
+    "django.contrib.contenttypes.models",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Currency",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "code",
+        "name",
+        "symbol",
+        "decimal_places",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ExchangeRate",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "from_currency",
+        "to_currency",
+        "rate",
+        "date",
+        "source",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Country",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "default_currency",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "City",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "country",
+        "name",
+        "code",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Company",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "legal_name",
+        "code",
+        "country",
+        "base_currency",
+        "registration_number",
+        "tax_id",
+        "address",
+        "phone",
+        "email",
+        "website",
+        "logo",
+        "parent_company",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Branch",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "company",
+        "name",
+        "code",
+        "address",
+        "phone",
+        "email",
+        "manager",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Department",
+      "methods": [
+        "clean",
+        "save",
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "branch",
+        "company",
+        "code",
+        "parent_department",
+        "manager",
+        "description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

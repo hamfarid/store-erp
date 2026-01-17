@@ -1,0 +1,114 @@
+{
+  "module": "core_modules.permissions.permissions",
+  "imports": [
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "rest_framework",
+    "unified_permissions_model"
+  ],
+  "classes": [
+    {
+      "name": "IsAdminUser",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "IsAuthenticatedAndVerified",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": [
+        "message"
+      ]
+    },
+    {
+      "name": "HasPermissionOrReadOnly",
+      "methods": [
+        "__init__",
+        "has_permission",
+        "_check_user_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "HasRolePermission",
+      "methods": [
+        "has_permission",
+        "_get_required_permission",
+        "_check_user_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "required_permission"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "_check_user_permission",
+      "parameters": [
+        "self",
+        "user",
+        "permission_codename"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "_get_required_permission",
+      "parameters": [
+        "self",
+        "view",
+        "method"
+      ]
+    },
+    {
+      "name": "_check_user_permission",
+      "parameters": [
+        "self",
+        "user",
+        "permission_codename"
+      ]
+    }
+  ],
+  "variables": []
+}

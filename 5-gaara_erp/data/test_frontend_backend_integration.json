@@ -1,0 +1,41 @@
+{
+  "module": "test_frontend_backend_integration",
+  "imports": [
+    "django",
+    "django.conf",
+    "django.test",
+    "json",
+    "os",
+    "pathlib",
+    "sys",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_frontend_structure",
+      "parameters": []
+    },
+    {
+      "name": "test_api_frontend_connectivity",
+      "parameters": []
+    },
+    {
+      "name": "test_cors_configuration",
+      "parameters": []
+    },
+    {
+      "name": "test_authentication_flow",
+      "parameters": []
+    },
+    {
+      "name": "test_data_flow_validation",
+      "parameters": []
+    },
+    {
+      "name": "test_static_files_serving",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

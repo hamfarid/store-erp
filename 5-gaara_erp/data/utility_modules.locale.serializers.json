@@ -1,0 +1,158 @@
+{
+  "module": "utility_modules.locale.serializers",
+  "imports": [
+    "django.utils.translation",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "LanguageSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LanguageListSerializer",
+      "methods": [
+        "get_name_localized"
+      ],
+      "variables": [
+        "name_localized"
+      ]
+    },
+    {
+      "name": "TranslationKeySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TranslationSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "key_name",
+        "language_code"
+      ]
+    },
+    {
+      "name": "TranslationDetailSerializer",
+      "methods": [],
+      "variables": [
+        "key",
+        "language"
+      ]
+    },
+    {
+      "name": "TranslationBulkCreateSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "key_id",
+        "translations"
+      ]
+    },
+    {
+      "name": "UserLanguagePreferenceSerializer",
+      "methods": [],
+      "variables": [
+        "language_code",
+        "language_name"
+      ]
+    },
+    {
+      "name": "SetUserLanguageSerializer",
+      "methods": [],
+      "variables": [
+        "language_code"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "get_name_localized",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    }
+  ],
+  "variables": []
+}

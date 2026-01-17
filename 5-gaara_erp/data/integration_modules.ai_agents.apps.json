@@ -1,0 +1,29 @@
+{
+  "module": "integration_modules.ai_agents.apps",
+  "imports": [
+    "django.apps",
+    "integration_modules.ai_agents.signals"
+  ],
+  "classes": [
+    {
+      "name": "AiAgentsConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,9 @@
+{
+  "module": "sales.models",
+  "imports": [
+    "business_modules.sales.models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

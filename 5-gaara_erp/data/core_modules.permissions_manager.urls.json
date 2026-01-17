@@ -1,0 +1,24 @@
+{
+  "module": "core_modules.permissions_manager.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework",
+    "rest_framework.routers",
+    "typing",
+    "views"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "_maybe_register",
+      "parameters": [
+        "prefix",
+        "vs_name"
+      ]
+    }
+  ],
+  "variables": [
+    "router",
+    "urlpatterns"
+  ]
+}

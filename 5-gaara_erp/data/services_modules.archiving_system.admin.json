@@ -1,0 +1,63 @@
+{
+  "module": "services_modules.archiving_system.admin",
+  "imports": [
+    "django.contrib",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ArchiveCategoryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "fieldsets",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "ArchivedDocumentAdmin",
+      "methods": [
+        "save_model",
+        "file_size_display",
+        "related_object_display"
+      ],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "save_model",
+      "parameters": [
+        "self",
+        "request",
+        "obj",
+        "form",
+        "change"
+      ]
+    },
+    {
+      "name": "file_size_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "related_object_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

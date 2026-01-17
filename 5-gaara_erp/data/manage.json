@@ -1,0 +1,17 @@
+{
+  "module": "manage",
+  "imports": [
+    "decouple",
+    "django.core.management",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "main",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

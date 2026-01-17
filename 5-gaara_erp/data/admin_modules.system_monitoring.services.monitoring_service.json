@@ -1,0 +1,216 @@
+{
+  "module": "admin_modules.system_monitoring.services.monitoring_service",
+  "imports": [
+    "core_modules.activity_log.services.audit_trail_service",
+    "core_modules.permissions.services.permission_service",
+    "datetime",
+    "django.conf",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db.models",
+    "django.utils",
+    "json",
+    "logging",
+    "models",
+    "os",
+    "psutil",
+    "threading",
+    "time",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "SystemMonitoringService",
+      "methods": [
+        "__init__",
+        "_load_config",
+        "_check_permission",
+        "start_monitoring",
+        "stop_monitoring",
+        "_monitoring_loop",
+        "_collect_and_save_system_metrics",
+        "_analyze_metrics_and_alert",
+        "_send_notification",
+        "_cleanup_old_data",
+        "get_system_metrics",
+        "get_active_alerts",
+        "acknowledge_alert",
+        "resolve_alert",
+        "update_module_status",
+        "get_module_statuses"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AuditTrailService",
+      "methods": [
+        "__init__",
+        "log_activity"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PermissionService",
+      "methods": [
+        "__init__",
+        "has_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "config_path",
+        "current_user_id"
+      ]
+    },
+    {
+      "name": "_load_config",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_check_permission",
+      "parameters": [
+        "self",
+        "permission_name",
+        "scope_id"
+      ]
+    },
+    {
+      "name": "start_monitoring",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "stop_monitoring",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_monitoring_loop",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_collect_and_save_system_metrics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_analyze_metrics_and_alert",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_send_notification",
+      "parameters": [
+        "self",
+        "alert"
+      ]
+    },
+    {
+      "name": "_cleanup_old_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_system_metrics",
+      "parameters": [
+        "self",
+        "metric_type",
+        "start_time",
+        "end_time",
+        "limit"
+      ]
+    },
+    {
+      "name": "get_active_alerts",
+      "parameters": [
+        "self",
+        "severity"
+      ]
+    },
+    {
+      "name": "acknowledge_alert",
+      "parameters": [
+        "self",
+        "alert_id",
+        "comment"
+      ]
+    },
+    {
+      "name": "resolve_alert",
+      "parameters": [
+        "self",
+        "alert_id",
+        "notes",
+        "resolution_note"
+      ]
+    },
+    {
+      "name": "update_module_status",
+      "parameters": [
+        "self",
+        "module_name",
+        "status",
+        "details"
+      ]
+    },
+    {
+      "name": "get_module_statuses",
+      "parameters": [
+        "self",
+        "status_filter"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": [
+        "self",
+        "module",
+        "action",
+        "entity_type",
+        "entity_id",
+        "description",
+        "data"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "user_id",
+        "permission_name",
+        "scope_id"
+      ]
+    }
+  ],
+  "variables": [
+    "log_dir",
+    "log_file",
+    "logger"
+  ]
+}

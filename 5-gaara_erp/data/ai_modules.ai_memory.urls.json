@@ -1,0 +1,44 @@
+{
+  "module": "ai_modules.ai_memory.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework.routers",
+    "views"
+  ],
+  "classes": [
+    {
+      "name": "DefaultRouter",
+      "methods": [
+        "__init__",
+        "register",
+        "urls"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "register",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "urls",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "app_name",
+    "router",
+    "urlpatterns"
+  ]
+}

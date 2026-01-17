@@ -1,0 +1,396 @@
+{
+  "module": "integration_modules.ai_ui.models",
+  "imports": [
+    "django.conf",
+    "django.core.validators",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "AIModel",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "MODEL_TYPES",
+        "PROVIDERS",
+        "name",
+        "model_id",
+        "provider",
+        "model_type",
+        "version",
+        "description",
+        "capabilities",
+        "config",
+        "api_key_name",
+        "is_active",
+        "is_default",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UIAvatar",
+      "methods": [
+        "__str__",
+        "save",
+        "get_animation_url"
+      ],
+      "variables": [
+        "ANIMATION_SETS",
+        "user",
+        "name",
+        "image_url",
+        "animation_set",
+        "voice_id",
+        "is_default",
+        "custom_animations",
+        "settings",
+        "ai_model",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UIChatHistory",
+      "methods": [
+        "__str__",
+        "get_attachment_urls"
+      ],
+      "variables": [
+        "user",
+        "avatar",
+        "message",
+        "is_user",
+        "attachments",
+        "metadata",
+        "created_at",
+        "conversation_id",
+        "ai_model"
+      ]
+    },
+    {
+      "name": "UIWorkflow",
+      "methods": [
+        "__str__",
+        "activate",
+        "deactivate",
+        "archive",
+        "duplicate"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "name",
+        "description",
+        "content",
+        "status",
+        "created_by",
+        "is_template",
+        "is_public",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UIWorkflowNode",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "NODE_TYPES",
+        "workflow",
+        "node_type",
+        "position_x",
+        "position_y",
+        "config",
+        "created_at",
+        "updated_at",
+        "ai_model"
+      ]
+    },
+    {
+      "name": "UIDashboard",
+      "methods": [
+        "__str__",
+        "save",
+        "duplicate"
+      ],
+      "variables": [
+        "user",
+        "name",
+        "description",
+        "layout",
+        "is_default",
+        "is_public",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UIComponent",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "COMPONENT_TYPES",
+        "dashboard",
+        "type",
+        "title",
+        "position_x",
+        "position_y",
+        "size_x",
+        "size_y",
+        "config",
+        "data_source",
+        "refresh_interval",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UITheme",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "colors",
+        "fonts",
+        "is_system",
+        "is_dark",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UIUserPreference",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "theme",
+        "default_avatar",
+        "default_dashboard",
+        "settings",
+        "created_at",
+        "updated_at",
+        "default_ai_model"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_animation_url",
+      "parameters": [
+        "self",
+        "animation_name"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_attachment_urls",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "activate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "deactivate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "archive",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "duplicate",
+      "parameters": [
+        "self",
+        "new_name"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "duplicate",
+      "parameters": [
+        "self",
+        "new_name"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

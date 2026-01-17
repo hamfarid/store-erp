@@ -1,0 +1,15 @@
+{
+  "module": "scripts.column_dump",
+  "imports": [
+    "django",
+    "django.db",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "cur",
+    "rows"
+  ]
+}

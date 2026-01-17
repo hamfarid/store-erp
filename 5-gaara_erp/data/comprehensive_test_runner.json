@@ -1,0 +1,18 @@
+{
+  "module": "comprehensive_test_runner",
+  "imports": [
+    "os",
+    "pathlib",
+    "subprocess",
+    "sys",
+    "time"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "run_comprehensive_tests",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

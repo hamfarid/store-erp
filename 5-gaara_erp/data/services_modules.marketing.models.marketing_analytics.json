@@ -1,0 +1,131 @@
+{
+  "module": "services_modules.marketing.models.marketing_analytics",
+  "imports": [
+    "core_modules.core.models.base_models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "marketing_campaign",
+    "marketing_channel"
+  ],
+  "classes": [
+    {
+      "name": "MarketingAnalytics",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "run_analysis",
+        "get_period_display_with_dates",
+        "get_key_metrics",
+        "get_kpi_status",
+        "schedule_analysis",
+        "cancel_schedule"
+      ],
+      "variables": [
+        "TYPE_CAMPAIGN",
+        "TYPE_CHANNEL",
+        "TYPE_CONTENT",
+        "TYPE_LEAD",
+        "TYPE_CONVERSION",
+        "TYPE_ENGAGEMENT",
+        "TYPE_ROI",
+        "TYPE_CUSTOM",
+        "TYPE_CHOICES",
+        "PERIOD_DAILY",
+        "PERIOD_WEEKLY",
+        "PERIOD_MONTHLY",
+        "PERIOD_QUARTERLY",
+        "PERIOD_YEARLY",
+        "PERIOD_CUSTOM",
+        "PERIOD_CHOICES",
+        "name",
+        "analytics_type",
+        "description",
+        "campaign",
+        "channel",
+        "period",
+        "start_date",
+        "end_date",
+        "metrics",
+        "kpis",
+        "insights",
+        "recommendations",
+        "is_automated",
+        "schedule",
+        "last_run",
+        "is_active"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "run_analysis",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_period_display_with_dates",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_key_metrics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_kpi_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "schedule_analysis",
+      "parameters": [
+        "self",
+        "schedule"
+      ]
+    },
+    {
+      "name": "cancel_schedule",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

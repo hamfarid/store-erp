@@ -1,0 +1,46 @@
+{
+  "module": "services_modules.hr.models.position",
+  "imports": [
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Position",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "title_ar",
+        "title_en",
+        "department",
+        "job_grade",
+        "job_description",
+        "required_qualifications",
+        "required_experience",
+        "reports_to",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

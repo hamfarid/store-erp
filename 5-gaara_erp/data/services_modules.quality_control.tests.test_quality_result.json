@@ -1,0 +1,83 @@
+{
+  "module": "services_modules.quality_control.tests.test_quality_result",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.quality_check",
+    "models.quality_parameter",
+    "models.quality_result",
+    "models.quality_template",
+    "models.quality_test"
+  ],
+  "classes": [
+    {
+      "name": "QualityResultModelTest",
+      "methods": [
+        "setUp",
+        "test_quality_result_creation",
+        "test_quality_result_str_representation",
+        "test_failed_critical_test_updates_check_status",
+        "test_non_critical_test_failure_doesnt_update_check_status",
+        "test_get_deviation",
+        "test_get_deviation_percentage",
+        "test_get_formatted_value"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_result_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_result_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_failed_critical_test_updates_check_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_non_critical_test_failure_doesnt_update_check_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_deviation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_deviation_percentage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_formatted_value",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

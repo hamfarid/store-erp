@@ -1,0 +1,158 @@
+{
+  "template_name": "erp_system",
+  "version": "1.0.0",
+  "description": "Complete Enterprise Resource Planning system",
+  "author": "Global Guidelines",
+  "license": "MIT",
+  
+  "variables": {
+    "PROJECT_NAME": "{{PROJECT_NAME}}",
+    "PROJECT_SLUG": "{{PROJECT_SLUG}}",
+    "DATABASE_NAME": "{{DATABASE_NAME}}",
+    "DATABASE_USER": "{{DATABASE_USER}}",
+    "DATABASE_PASSWORD": "{{DATABASE_PASSWORD}}",
+    "FRONTEND_PORT": "{{FRONTEND_PORT}}",
+    "BACKEND_PORT": "{{BACKEND_PORT}}",
+    "ADMIN_EMAIL": "{{ADMIN_EMAIL}}",
+    "ADMIN_PASSWORD": "{{ADMIN_PASSWORD}}",
+    "SECRET_KEY": "{{SECRET_KEY}}",
+    "REDIS_PORT": "{{REDIS_PORT}}"
+  },
+  
+  "defaults": {
+    "PROJECT_NAME": "My ERP System",
+    "PROJECT_SLUG": "my_erp",
+    "DATABASE_NAME": "erp_db",
+    "DATABASE_USER": "postgres",
+    "DATABASE_PASSWORD": "postgres123",
+    "FRONTEND_PORT": "3000",
+    "BACKEND_PORT": "5000",
+    "ADMIN_EMAIL": "admin@example.com",
+    "ADMIN_PASSWORD": "admin123",
+    "SECRET_KEY": "django-insecure-change-this-in-production",
+    "REDIS_PORT": "6379"
+  },
+  
+  "modules": [
+    {
+      "name": "inventory",
+      "enabled": true,
+      "description": "Inventory management module",
+      "models": ["Product", "Category", "Warehouse", "Stock", "Supplier"]
+    },
+    {
+      "name": "sales",
+      "enabled": true,
+      "description": "Sales and purchases module",
+      "models": ["Customer", "SalesOrder", "Invoice", "Payment"]
+    },
+    {
+      "name": "accounting",
+      "enabled": true,
+      "description": "Accounting and finance module",
+      "models": ["Account", "JournalEntry", "Transaction", "FiscalYear"]
+    },
+    {
+      "name": "hr",
+      "enabled": true,
+      "description": "HR and payroll module",
+      "models": ["Employee", "Department", "Attendance", "Payroll"]
+    }
+  ],
+  
+  "features": {
+    "multi_warehouse": true,
+    "multi_currency": true,
+    "multi_language": false,
+    "reporting": true,
+    "api": true,
+    "mobile_app": false,
+    "email_notifications": true,
+    "sms_notifications": false,
+    "barcode_scanning": true,
+    "document_management": true
+  },
+  
+  "tech_stack": {
+    "frontend": {
+      "framework": "React",
+      "version": "18.2.0",
+      "language": "TypeScript",
+      "state_management": "Redux Toolkit",
+      "ui_library": "Material-UI",
+      "routing": "React Router v6"
+    },
+    "backend": {
+      "framework": "Django",
+      "version": "4.2",
+      "language": "Python",
+      "api_framework": "Django REST Framework",
+      "authentication": "JWT",
+      "task_queue": "Celery"
+    },
+    "database": {
+      "primary": "PostgreSQL",
+      "version": "15",
+      "cache": "Redis",
+      "cache_version": "7"
+    },
+    "infrastructure": {
+      "containerization": "Docker",
+      "orchestration": "Docker Compose",
+      "web_server": "Nginx",
+      "wsgi": "Gunicorn"
+    }
+  },
+  
+  "requirements": {
+    "docker": ">=20.10",
+    "docker_compose": ">=2.0",
+    "node": ">=18.0",
+    "python": ">=3.9",
+    "postgresql": ">=14.0",
+    "redis": ">=7.0"
+  },
+  
+  "ports": {
+    "frontend": "{{FRONTEND_PORT}}",
+    "backend": "{{BACKEND_PORT}}",
+    "database": "5432",
+    "redis": "{{REDIS_PORT}}",
+    "nginx": "80"
+  },
+  
+  "directories": {
+    "frontend": "frontend/",
+    "backend": "backend/",
+    "database": "database/",
+    "docker": "docker/",
+    "tests": "tests/",
+    "docs": "docs/"
+  },
+  
+  "scripts": {
+    "setup": "scripts/setup.sh",
+    "start": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "migrate": "docker-compose exec backend python manage.py migrate",
+    "test": "docker-compose exec backend python manage.py test",
+    "build": "docker-compose build"
+  },
+  
+  "post_generation": [
+    "npm install --prefix frontend",
+    "pip install -r backend/requirements.txt",
+    "python backend/manage.py makemigrations",
+    "python backend/manage.py migrate",
+    "python backend/manage.py createsuperuser --noinput"
+  ],
+  
+  "documentation": {
+    "readme": "README.md",
+    "setup": "docs/setup.md",
+    "api": "docs/api.md",
+    "modules": "docs/modules.md",
+    "deployment": "docs/deployment.md"
+  }
+}
+

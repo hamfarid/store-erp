@@ -1,0 +1,33 @@
+{
+  "module": "utility_modules.locale.signals",
+  "imports": [
+    "django.conf",
+    "django.contrib.auth",
+    "django.db.models.signals",
+    "django.dispatch",
+    "django.utils",
+    "models",
+    "services"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_user_language_preference",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "update_default_language",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

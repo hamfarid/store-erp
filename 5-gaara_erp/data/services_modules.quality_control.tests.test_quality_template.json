@@ -1,0 +1,81 @@
+{
+  "module": "services_modules.quality_control.tests.test_quality_template",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "models.quality_parameter",
+    "models.quality_template"
+  ],
+  "classes": [
+    {
+      "name": "QualityTemplateModelTest",
+      "methods": [
+        "setUp",
+        "test_quality_template_creation",
+        "test_quality_template_str_representation",
+        "test_get_parameters_count",
+        "test_get_critical_parameters_count",
+        "test_duplicate_template",
+        "test_create_check",
+        "test_validation_no_parameters"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_template_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_template_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_parameters_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_critical_parameters_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_duplicate_template",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_check",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_no_parameters",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

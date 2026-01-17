@@ -1,0 +1,9 @@
+{
+  "module": "reports.test_smoke_reports",
+  "imports": [
+    "django.test"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

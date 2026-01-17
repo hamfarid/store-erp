@@ -1,0 +1,203 @@
+{
+  "module": "services_modules.hr.filters",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.utils",
+    "django_filters",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeFilter",
+      "methods": [
+        "filter_by_min_age",
+        "filter_by_max_age",
+        "filter_by_min_years_of_service",
+        "filter_by_max_years_of_service",
+        "filter_by_search"
+      ],
+      "variables": [
+        "hire_date_from",
+        "hire_date_to",
+        "age_min",
+        "age_max",
+        "min_years_of_service",
+        "max_years_of_service",
+        "search"
+      ]
+    },
+    {
+      "name": "ContractFilter",
+      "methods": [
+        "filter_expiring_soon"
+      ],
+      "variables": [
+        "expiring_soon",
+        "start_date_from",
+        "start_date_to",
+        "end_date_from",
+        "end_date_to"
+      ]
+    },
+    {
+      "name": "LeaveRequestFilter",
+      "methods": [
+        "filter_by_min_duration",
+        "filter_by_max_duration",
+        "filter_current_year"
+      ],
+      "variables": [
+        "leave_date_from",
+        "leave_date_to",
+        "min_duration",
+        "max_duration",
+        "current_year"
+      ]
+    },
+    {
+      "name": "PayslipFilter",
+      "methods": [],
+      "variables": [
+        "basic_salary_min",
+        "basic_salary_max",
+        "net_salary_min",
+        "net_salary_max",
+        "pay_period_year",
+        "pay_period_month"
+      ]
+    },
+    {
+      "name": "DateRangeFilter",
+      "methods": [],
+      "variables": [
+        "date_from",
+        "date_to"
+      ]
+    },
+    {
+      "name": "DepartmentFilter",
+      "methods": [],
+      "variables": [
+        "department",
+        "department_contains"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "filter_by_min_age",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_by_max_age",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_by_min_years_of_service",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_by_max_years_of_service",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_by_search",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_expiring_soon",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_by_min_duration",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_by_max_duration",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_current_year",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    }
+  ],
+  "variables": []
+}

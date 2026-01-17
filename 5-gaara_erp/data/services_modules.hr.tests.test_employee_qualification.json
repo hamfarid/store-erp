@@ -1,0 +1,61 @@
+{
+  "module": "services_modules.hr.tests.test_employee_qualification",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.department",
+    "models.employee",
+    "models.employee_qualification",
+    "models.position",
+    "services_modules.core.models.branch",
+    "services_modules.core.models.company"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeQualificationModelTest",
+      "methods": [
+        "setUp",
+        "test_create_employee_qualification",
+        "test_get_duration_years",
+        "test_is_recent",
+        "test_str_representation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_employee_qualification",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_duration_years",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_recent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_str_representation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

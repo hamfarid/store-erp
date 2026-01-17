@@ -1,0 +1,256 @@
+{
+  "module": "business_modules.solar_stations.serializers",
+  "imports": [
+    "django.utils",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "SolarStationSerializer",
+      "methods": [
+        "get_total_production_today",
+        "get_total_production_month",
+        "get_panels_count",
+        "get_active_agreements_count"
+      ],
+      "variables": [
+        "company_name",
+        "total_production_today",
+        "total_production_month",
+        "panels_count",
+        "active_agreements_count"
+      ]
+    },
+    {
+      "name": "SolarPanelSerializer",
+      "methods": [],
+      "variables": [
+        "station_name"
+      ]
+    },
+    {
+      "name": "EnergyProductionSerializer",
+      "methods": [
+        "get_efficiency_rating"
+      ],
+      "variables": [
+        "station_name",
+        "efficiency_rating"
+      ]
+    },
+    {
+      "name": "EnergyProductionLogSerializer",
+      "methods": [],
+      "variables": [
+        "station_name"
+      ]
+    },
+    {
+      "name": "SolarExpenseLogSerializer",
+      "methods": [],
+      "variables": [
+        "station_name"
+      ]
+    },
+    {
+      "name": "SolarCustomerSerializer",
+      "methods": [
+        "get_agreements_count",
+        "get_total_energy_purchased"
+      ],
+      "variables": [
+        "agreements_count",
+        "total_energy_purchased"
+      ]
+    },
+    {
+      "name": "SolarSaleAgreementSerializer",
+      "methods": [
+        "get_is_active",
+        "get_days_remaining"
+      ],
+      "variables": [
+        "station_name",
+        "customer_name",
+        "is_active",
+        "days_remaining"
+      ]
+    },
+    {
+      "name": "MaintenanceRecordSerializer",
+      "methods": [
+        "get_is_overdue"
+      ],
+      "variables": [
+        "station_name",
+        "panel_id",
+        "is_overdue"
+      ]
+    },
+    {
+      "name": "SolarStationDetailSerializer",
+      "methods": [],
+      "variables": [
+        "panels",
+        "recent_production",
+        "active_agreements",
+        "pending_maintenance"
+      ]
+    },
+    {
+      "name": "SolarCustomerDetailSerializer",
+      "methods": [],
+      "variables": [
+        "agreements"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_total_production_today",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_total_production_month",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_panels_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_active_agreements_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_efficiency_rating",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_agreements_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_total_energy_purchased",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_is_active",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_days_remaining",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_is_overdue",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

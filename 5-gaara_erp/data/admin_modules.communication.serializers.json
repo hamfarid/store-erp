@@ -1,0 +1,64 @@
+{
+  "module": "admin_modules.communication.serializers",
+  "imports": [
+    "django.utils.translation",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "EmailTemplateSerializer",
+      "methods": [
+        "validate_name"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CommunicationLogSerializer",
+      "methods": [
+        "get_related_object_repr"
+      ],
+      "variables": [
+        "communication_type_display",
+        "status_display",
+        "related_object_repr"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "validate_name",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "get_related_object_repr",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

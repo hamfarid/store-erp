@@ -1,0 +1,277 @@
+{
+  "module": "integration_modules.ai_monitoring.models",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "BaseModel",
+      "methods": [],
+      "variables": [
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by",
+        "is_active"
+      ]
+    },
+    {
+      "name": "AIMonitoringSettings",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "data_collection_interval",
+        "alert_enabled",
+        "alert_threshold_cpu",
+        "alert_threshold_memory",
+        "alert_threshold_disk",
+        "alert_threshold_error_rate",
+        "alert_threshold_latency",
+        "notification_email",
+        "notification_webhook_url",
+        "config"
+      ]
+    },
+    {
+      "name": "AIModelMonitoring",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "MODEL_TYPES",
+        "model_id",
+        "model_name",
+        "model_type",
+        "provider",
+        "version",
+        "settings",
+        "ai_service"
+      ]
+    },
+    {
+      "name": "AIModelMetric",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "METRIC_TYPES",
+        "id",
+        "model",
+        "timestamp",
+        "metric_type",
+        "metric_name",
+        "metric_value",
+        "unit",
+        "dimensions"
+      ]
+    },
+    {
+      "name": "AIModelAlert",
+      "methods": [
+        "__str__",
+        "resolve"
+      ],
+      "variables": [
+        "ALERT_LEVELS",
+        "ALERT_TYPES",
+        "id",
+        "model",
+        "timestamp",
+        "alert_level",
+        "alert_type",
+        "title",
+        "description",
+        "metric",
+        "threshold_value",
+        "actual_value",
+        "is_resolved",
+        "resolved_at",
+        "resolved_by",
+        "resolution_notes",
+        "notification_sent"
+      ]
+    },
+    {
+      "name": "AIModelPerformanceReport",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "REPORT_PERIODS",
+        "id",
+        "model",
+        "report_name",
+        "report_period",
+        "start_date",
+        "end_date",
+        "generated_at",
+        "summary",
+        "metrics_summary",
+        "alerts_summary",
+        "report_data",
+        "report_file"
+      ]
+    },
+    {
+      "name": "AIActivityLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ACTIVITY_TYPES",
+        "id",
+        "timestamp",
+        "activity_type",
+        "model",
+        "user",
+        "agent_id",
+        "description",
+        "details",
+        "related_alert",
+        "related_report"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "abstract"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "self",
+        "user",
+        "notes"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

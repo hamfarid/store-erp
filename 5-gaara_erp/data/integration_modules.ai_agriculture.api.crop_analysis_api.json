@@ -1,0 +1,68 @@
+{
+  "module": "integration_modules.ai_agriculture.api.crop_analysis_api",
+  "imports": [
+    "django.db",
+    "django.shortcuts",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "services.crop_analysis_service"
+  ],
+  "classes": [
+    {
+      "name": "CropAnalysisViewSet",
+      "methods": [
+        "create",
+        "retrieve",
+        "farm_analyses",
+        "generate_recommendations",
+        "recommendations"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "retrieve",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "farm_analyses",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "generate_recommendations",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "recommendations",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

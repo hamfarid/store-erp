@@ -1,0 +1,58 @@
+{
+  "module": "api_server.src.routes.business",
+  "imports": [
+    "datetime",
+    "flask",
+    "random"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "sales_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "sales_orders",
+      "parameters": []
+    },
+    {
+      "name": "purchasing_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "inventory_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "accounting_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "production_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "rent_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "solar_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "pos_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "pos_products",
+      "parameters": []
+    },
+    {
+      "name": "business_summary",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "business_bp"
+  ]
+}

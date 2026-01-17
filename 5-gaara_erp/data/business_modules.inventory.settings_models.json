@@ -1,0 +1,42 @@
+{
+  "module": "business_modules.inventory.settings_models",
+  "imports": [
+    "core_modules.organization.models",
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "InventorySettings",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "company",
+        "default_costing_method",
+        "allow_negative_stock",
+        "auto_create_lots",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

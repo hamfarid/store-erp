@@ -1,0 +1,25 @@
+{
+  "module": "analysis.logs.database_security_scan",
+  "imports": [
+    "ast",
+    "json",
+    "os",
+    "pathlib",
+    "re"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "scan_database_security",
+      "parameters": []
+    },
+    {
+      "name": "analyze_django_models",
+      "parameters": [
+        "content",
+        "file_path"
+      ]
+    }
+  ],
+  "variables": []
+}

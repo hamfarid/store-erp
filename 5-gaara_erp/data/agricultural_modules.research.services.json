@@ -1,0 +1,57 @@
+{
+  "module": "agricultural_modules.research.services",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.db.models.functions",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_research_project",
+      "parameters": []
+    },
+    {
+      "name": "update_research_project",
+      "parameters": []
+    },
+    {
+      "name": "add_team_member_to_project",
+      "parameters": []
+    },
+    {
+      "name": "remove_team_member_from_project",
+      "parameters": []
+    },
+    {
+      "name": "add_objective_to_project",
+      "parameters": []
+    },
+    {
+      "name": "update_project_status",
+      "parameters": []
+    },
+    {
+      "name": "calculate_project_progress",
+      "parameters": []
+    },
+    {
+      "name": "generate_research_report",
+      "parameters": []
+    },
+    {
+      "name": "get_project_resources_utilization",
+      "parameters": []
+    },
+    {
+      "name": "get_project_timeline",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,85 @@
+{
+  "module": "admin_modules.custom_admin.models.dashboard",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "DashboardWidget",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "WIDGET_TYPES",
+        "name",
+        "title",
+        "widget_type",
+        "data_source",
+        "refresh_interval",
+        "position_x",
+        "position_y",
+        "width",
+        "height",
+        "is_visible",
+        "config",
+        "user",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "DashboardLayout",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "is_default",
+        "user",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

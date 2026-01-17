@@ -1,0 +1,101 @@
+{
+  "module": "services_modules.quality_control.tests.test_quality_parameter",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "models.quality_parameter",
+    "models.quality_template"
+  ],
+  "classes": [
+    {
+      "name": "QualityParameterModelTest",
+      "methods": [
+        "setUp",
+        "test_quality_parameter_creation",
+        "test_quality_parameter_str_representation",
+        "test_get_unit_display_value",
+        "test_get_selection_options_list",
+        "test_is_value_within_range",
+        "test_is_valid_selection",
+        "test_validation_min_greater_than_max",
+        "test_validation_selection_without_options",
+        "test_validation_custom_unit_required",
+        "test_boolean_parameter_auto_clean"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_parameter_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_parameter_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_unit_display_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_selection_options_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_value_within_range",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_valid_selection",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_min_greater_than_max",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_selection_without_options",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_custom_unit_required",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_boolean_parameter_auto_clean",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

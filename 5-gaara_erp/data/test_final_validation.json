@@ -1,0 +1,49 @@
+{
+  "module": "test_final_validation",
+  "imports": [
+    "django",
+    "django.apps",
+    "django.conf",
+    "django.contrib.auth.models",
+    "django.core.management",
+    "django.db",
+    "django.test",
+    "django.test.utils",
+    "django.urls",
+    "io",
+    "json",
+    "os",
+    "psutil",
+    "sys",
+    "time",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_end_to_end_functionality",
+      "parameters": []
+    },
+    {
+      "name": "test_system_performance",
+      "parameters": []
+    },
+    {
+      "name": "test_database_performance",
+      "parameters": []
+    },
+    {
+      "name": "test_error_handling",
+      "parameters": []
+    },
+    {
+      "name": "create_project_references_catalog",
+      "parameters": []
+    },
+    {
+      "name": "test_final_system_validation",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,15 @@
+{
+  "module": "agricultural_modules.seed_hybridization.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework",
+    "rest_framework.routers"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "app_name",
+    "router",
+    "urlpatterns"
+  ]
+}

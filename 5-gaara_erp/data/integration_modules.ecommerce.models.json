@@ -1,0 +1,128 @@
+{
+  "module": "integration_modules.ecommerce.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "EcommercePlatform",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PLATFORM_TYPE_CHOICES",
+        "platform_id",
+        "name",
+        "platform_type",
+        "store_url",
+        "api_endpoint",
+        "api_key",
+        "secret_key",
+        "auto_sync_products",
+        "auto_sync_orders",
+        "auto_sync_inventory",
+        "sync_frequency",
+        "total_products",
+        "total_orders",
+        "last_sync",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "OnlineOrder",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "order_id",
+        "platform",
+        "external_order_id",
+        "customer_name",
+        "customer_email",
+        "customer_phone",
+        "status",
+        "total_amount",
+        "currency",
+        "shipping_address",
+        "billing_address",
+        "shipping_method",
+        "tracking_number",
+        "raw_data",
+        "order_date",
+        "synced_at"
+      ]
+    },
+    {
+      "name": "ProductSync",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SYNC_STATUS_CHOICES",
+        "sync_id",
+        "platform",
+        "internal_product_id",
+        "external_product_id",
+        "sync_status",
+        "last_sync",
+        "error_message",
+        "sync_data"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

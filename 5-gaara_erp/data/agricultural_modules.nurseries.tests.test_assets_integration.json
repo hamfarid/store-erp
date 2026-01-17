@@ -1,0 +1,69 @@
+{
+  "module": "agricultural_modules.nurseries.tests.test_assets_integration",
+  "imports": [
+    "agricultural_modules.nurseries.integration_assets",
+    "agricultural_modules.nurseries.models",
+    "business_modules.assets.models",
+    "django.contrib.auth",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "os",
+    "sys"
+  ],
+  "classes": [
+    {
+      "name": "NurseryAssetsIntegrationTestCase",
+      "methods": [
+        "setUp",
+        "test_link_equipment_to_nursery_activity",
+        "test_assign_assets_to_nursery_site",
+        "test_transfer_asset_between_nursery_sites",
+        "test_record_asset_maintenance_in_nursery",
+        "test_asset_disposal_handling"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_link_equipment_to_nursery_activity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_assign_assets_to_nursery_site",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_transfer_asset_between_nursery_sites",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_asset_maintenance_in_nursery",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_asset_disposal_handling",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

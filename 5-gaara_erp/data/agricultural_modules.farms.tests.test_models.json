@@ -1,0 +1,173 @@
+{
+  "module": "agricultural_modules.farms.tests.test_models",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.test",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "FarmModelTest",
+      "methods": [
+        "setUp",
+        "test_farm_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FieldModelTest",
+      "methods": [
+        "setUp",
+        "test_field_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CropModelTest",
+      "methods": [
+        "setUp",
+        "test_crop_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PlantingSeasonModelTest",
+      "methods": [
+        "setUp",
+        "test_planting_season_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgriculturalActivityTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_activity_type_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgriculturalActivityModelTest",
+      "methods": [
+        "setUp",
+        "test_activity_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "HarvestModelTest",
+      "methods": [
+        "setUp",
+        "test_harvest_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmResourceModelTest",
+      "methods": [
+        "setUp",
+        "test_farm_resource_creation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_farm_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_field_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_crop_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_planting_season_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_type_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_harvest_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_farm_resource_creation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

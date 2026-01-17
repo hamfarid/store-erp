@@ -1,0 +1,83 @@
+{
+  "module": "integration_modules.ai.models.conversations",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Conversation",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "title",
+        "start_time",
+        "last_updated",
+        "summary"
+      ]
+    },
+    {
+      "name": "Message",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "conversation",
+        "sender_type",
+        "text_content",
+        "timestamp",
+        "feedback_score",
+        "feedback_notes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "ordering",
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Sender",
+      "methods": [],
+      "variables": [
+        "USER",
+        "AI"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "ordering",
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

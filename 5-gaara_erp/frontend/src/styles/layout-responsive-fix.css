@@ -1,0 +1,489 @@
+/* ========================================
+   LAYOUT RESPONSIVE FIX
+   إصلاح شامل للتخطيط وResponsive Design
+   ======================================== */
+
+/* ===== 1. RTL Direction ===== */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ===== 2. Fixed/Sticky Header ===== */
+header.fixed-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 100 !important;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 64px;
+}
+
+/* Search Bar - Always Visible */
+header .search-container {
+  position: relative;
+  min-width: 200px;
+  max-width: 400px;
+  flex: 1;
+}
+
+header .search-container input {
+  width: 100%;
+  padding: 8px 12px 8px 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+header .search-container input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ===== 3. Body Layout with Fixed Header ===== */
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 64px; /* Header height */
+}
+
+/* ===== 4. Sidebar Responsive ===== */
+aside.sidebar {
+  position: fixed;
+  right: 0;
+  top: 64px; /* Below header */
+  width: 280px;
+  height: calc(100vh - 64px);
+  background-color: white;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 50;
+  transition: transform 0.3s ease;
+}
+
+aside.sidebar.collapsed {
+  transform: translateX(100%);
+}
+
+/* ===== 5. Main Content Area ===== */
+main.main-content {
+  flex: 1;
+  padding: 24px;
+  margin-right: 280px; /* Sidebar width */
+  min-height: calc(100vh - 64px);
+  background-color: #f9fafb;
+  transition: margin-right 0.3s ease;
+}
+
+main.main-content.full-width {
+  margin-right: 0;
+}
+
+/* ===== 6. Responsive Breakpoints ===== */
+
+/* Large Desktops (1920px+) */
+@media (min-width: 1920px) {
+  .app-container {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+  
+  header .search-container {
+    max-width: 600px;
+  }
+  
+  main.main-content {
+    padding: 32px;
+  }
+}
+
+/* Medium Desktops (1440px - 1920px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  header .search-container {
+    max-width: 500px;
+  }
+}
+
+/* Small Desktops (1024px - 1440px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  aside.sidebar {
+    width: 240px;
+  }
+  
+  main.main-content {
+    margin-right: 240px;
+  }
+  
+  header .search-container {
+    max-width: 350px;
+  }
+}
+
+/* Tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  aside.sidebar {
+    width: 240px;
+    transform: translateX(100%);
+  }
+  
+  aside.sidebar.open {
+    transform: translateX(0);
+  }
+  
+  main.main-content {
+    margin-right: 0;
+  }
+  
+  header .search-container {
+    min-width: 150px;
+    max-width: 250px;
+  }
+  
+  /* Overlay for sidebar */
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    top: 64px;
+  }
+}
+
+/* Mobile (320px - 768px) */
+@media (max-width: 767px) {
+  header.fixed-header {
+    height: 56px;
+    padding: 8px 12px;
+  }
+  
+  .app-container {
+    padding-top: 56px;
+  }
+  
+  aside.sidebar {
+    width: 80%;
+    max-width: 280px;
+    top: 56px;
+    height: calc(100vh - 56px);
+    transform: translateX(100%);
+  }
+  
+  aside.sidebar.open {
+    transform: translateX(0);
+  }
+  
+  main.main-content {
+    margin-right: 0;
+    padding: 16px;
+  }
+  
+  header .search-container {
+    min-width: 120px;
+    max-width: 200px;
+  }
+  
+  header .search-container input {
+    font-size: 12px;
+    padding: 6px 10px 6px 32px;
+  }
+  
+  /* Hide some header items on mobile */
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 40;
+    top: 56px;
+  }
+}
+
+/* Extra Small Mobile (320px - 480px) */
+@media (max-width: 480px) {
+  header .search-container {
+    min-width: 100px;
+  }
+  
+  main.main-content {
+    padding: 12px;
+  }
+  
+  aside.sidebar {
+    width: 90%;
+  }
+}
+
+/* ===== 7. Font Scaling ===== */
+html {
+  font-size: 16px; /* Base font size */
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* ===== 8. Prevent Zoom on Input Focus (iOS) ===== */
+input,
+textarea,
+select {
+  font-size: 16px !important; /* Prevents iOS zoom */
+}
+
+@media (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* ===== 9. Scrollbar Styling ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* ===== 10. Better Spacing and Alignment ===== */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ===== 11. Card Responsive ===== */
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+  }
+}
+
+/* ===== 12. Grid Responsive ===== */
+.grid-responsive {
+  display: grid;
+  gap: 24px;
+}
+
+/* 4 columns on large screens */
+@media (min-width: 1440px) {
+  .grid-responsive {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 3 columns on medium screens */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 2 columns on tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+/* 1 column on mobile */
+@media (max-width: 767px) {
+  .grid-responsive {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* ===== 13. Button Responsive ===== */
+button,
+.btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  button,
+  .btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
+/* ===== 14. Table Responsive ===== */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    margin: 0 -16px;
+    border-radius: 0;
+  }
+}
+
+/* ===== 15. Print Styles ===== */
+@media print {
+  header.fixed-header,
+  aside.sidebar,
+  .sidebar-overlay,
+  .no-print {
+    display: none !important;
+  }
+  
+  main.main-content {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .app-container {
+    padding-top: 0;
+  }
+}
+
+/* ===== 16. Dark Mode Support ===== */
+@media (prefers-color-scheme: dark) {
+  .dark-mode-auto {
+    background-color: #1f2937;
+    color: #f9fafb;
+  }
+  
+  .dark-mode-auto header.fixed-header {
+    background-color: #111827;
+    border-bottom: 1px solid #374151;
+  }
+  
+  .dark-mode-auto aside.sidebar {
+    background-color: #111827;
+  }
+  
+  .dark-mode-auto .card {
+    background-color: #1f2937;
+  }
+}
+
+/* ===== 17. Utility Classes ===== */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== 18. Animation Classes ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+/* ===== 19. Accessibility ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* ===== 20. Performance Optimizations ===== */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* GPU Acceleration for smooth animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}

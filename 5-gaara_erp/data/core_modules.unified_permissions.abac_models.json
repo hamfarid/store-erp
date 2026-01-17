@@ -1,0 +1,229 @@
+{
+  "module": "core_modules.unified_permissions.abac_models",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "json",
+    "re"
+  ],
+  "classes": [
+    {
+      "name": "Attribute",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "TYPE_USER",
+        "TYPE_RESOURCE",
+        "TYPE_ACTION",
+        "TYPE_ENVIRONMENT",
+        "TYPE_AI_AGENT",
+        "ATTRIBUTE_TYPES",
+        "DATA_TYPE_STRING",
+        "DATA_TYPE_INTEGER",
+        "DATA_TYPE_BOOLEAN",
+        "DATA_TYPE_DATETIME",
+        "DATA_TYPE_FLOAT",
+        "DATA_TYPE_JSON",
+        "DATA_TYPES",
+        "name",
+        "description",
+        "attribute_type",
+        "data_type",
+        "module",
+        "is_active",
+        "is_system",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Policy",
+      "methods": [
+        "__str__",
+        "is_valid"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "effect",
+        "priority",
+        "module",
+        "is_active",
+        "is_system",
+        "created_at",
+        "updated_at",
+        "valid_from",
+        "valid_until"
+      ]
+    },
+    {
+      "name": "AccessCondition",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "OPERATOR_EQUALS",
+        "OPERATOR_NOT_EQUALS",
+        "OPERATOR_GREATER_THAN",
+        "OPERATOR_GREATER_THAN_OR_EQUALS",
+        "OPERATOR_LESS_THAN",
+        "OPERATOR_LESS_THAN_OR_EQUALS",
+        "OPERATOR_IN",
+        "OPERATOR_NOT_IN",
+        "OPERATOR_CONTAINS",
+        "OPERATOR_NOT_CONTAINS",
+        "OPERATOR_REGEX",
+        "OPERATOR_EXISTS",
+        "OPERATORS",
+        "policy",
+        "attribute",
+        "operator",
+        "value",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PolicyGroup",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "policies",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "AttributeValue",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "attribute",
+        "entity_type",
+        "entity_id",
+        "value",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "CREATED_AT_LABEL",
+    "UPDATED_AT_LABEL",
+    "ACTIVE_LABEL",
+    "NAME_LABEL",
+    "DESCRIPTION_LABEL"
+  ]
+}

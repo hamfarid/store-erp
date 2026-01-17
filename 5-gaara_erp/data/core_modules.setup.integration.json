@@ -1,0 +1,109 @@
+{
+  "module": "core_modules.setup.integration",
+  "imports": [
+    "core_modules.setup.submodules.activity_logging.models",
+    "core_modules.setup.submodules.security.models",
+    "core_modules.setup.submodules.user_management.models",
+    "django.apps",
+    "django.conf",
+    "django.contrib.auth",
+    "django.contrib.auth.signals",
+    "django.db.models.signals",
+    "django.dispatch"
+  ],
+  "classes": [
+    {
+      "name": "SetupIntegration",
+      "methods": [
+        "register_activity_logging_for_model",
+        "register_security_audit_for_auth_events",
+        "register_password_history_for_user_model",
+        "register_user_profile_for_user_model",
+        "register_all_integrations"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "register_activity_logging_for_model",
+      "parameters": [
+        "model",
+        "actions"
+      ]
+    },
+    {
+      "name": "register_security_audit_for_auth_events",
+      "parameters": []
+    },
+    {
+      "name": "register_password_history_for_user_model",
+      "parameters": []
+    },
+    {
+      "name": "register_user_profile_for_user_model",
+      "parameters": []
+    },
+    {
+      "name": "register_all_integrations",
+      "parameters": []
+    },
+    {
+      "name": "log_user_login",
+      "parameters": [
+        "sender",
+        "request",
+        "user"
+      ]
+    },
+    {
+      "name": "log_user_logout",
+      "parameters": [
+        "sender",
+        "request",
+        "user"
+      ]
+    },
+    {
+      "name": "log_user_login_failed",
+      "parameters": [
+        "sender",
+        "credentials",
+        "request"
+      ]
+    },
+    {
+      "name": "save_password_history",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    },
+    {
+      "name": "create_user_profile",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "log_model_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "log_model_delete",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "module": "core_modules.setup.activity_log.models",
+  "imports": [
+    "django.conf",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ActivityCategory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "icon",
+        "color",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ActivityLog",
+      "methods": [
+        "__str__",
+        "log_activity",
+        "_get_client_ip"
+      ],
+      "variables": [
+        "SEVERITY_CHOICES",
+        "user",
+        "category",
+        "action",
+        "description",
+        "severity",
+        "content_type",
+        "object_id",
+        "content_object",
+        "extra_data",
+        "ip_address",
+        "user_agent",
+        "session_id",
+        "created_at"
+      ]
+    },
+    {
+      "name": "SystemAuditLog",
+      "methods": [
+        "__str__",
+        "log_system_change"
+      ],
+      "variables": [
+        "user",
+        "action",
+        "module",
+        "description",
+        "before_value",
+        "after_value",
+        "ip_address",
+        "user_agent",
+        "created_at"
+      ]
+    },
+    {
+      "name": "LoginAttempt",
+      "methods": [
+        "__str__",
+        "log_login_attempt"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "username",
+        "user",
+        "status",
+        "reason",
+        "ip_address",
+        "user_agent",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": [
+        "cls",
+        "user",
+        "action",
+        "description",
+        "severity",
+        "category",
+        "content_object",
+        "extra_data",
+        "request"
+      ]
+    },
+    {
+      "name": "_get_client_ip",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_system_change",
+      "parameters": [
+        "cls",
+        "user",
+        "action",
+        "module",
+        "description",
+        "before_value",
+        "after_value",
+        "request"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_login_attempt",
+      "parameters": [
+        "cls",
+        "username",
+        "status",
+        "user",
+        "reason",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

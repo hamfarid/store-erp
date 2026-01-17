@@ -1,0 +1,80 @@
+{
+  "module": "services_modules.fleet_management.services.driver_service",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "DriverService",
+      "methods": [
+        "create_driver",
+        "update_driver",
+        "delete_driver",
+        "search_drivers",
+        "get_driver_assignments",
+        "get_drivers_with_expiring_licenses",
+        "deactivate_driver",
+        "activate_driver"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_driver",
+      "parameters": [
+        "user",
+        "license_number",
+        "license_expiry_date"
+      ]
+    },
+    {
+      "name": "update_driver",
+      "parameters": [
+        "driver_id"
+      ]
+    },
+    {
+      "name": "delete_driver",
+      "parameters": [
+        "driver_id"
+      ]
+    },
+    {
+      "name": "search_drivers",
+      "parameters": [
+        "query",
+        "is_active"
+      ]
+    },
+    {
+      "name": "get_driver_assignments",
+      "parameters": [
+        "driver_id",
+        "active_only"
+      ]
+    },
+    {
+      "name": "get_drivers_with_expiring_licenses",
+      "parameters": [
+        "days"
+      ]
+    },
+    {
+      "name": "deactivate_driver",
+      "parameters": [
+        "driver_id"
+      ]
+    },
+    {
+      "name": "activate_driver",
+      "parameters": [
+        "driver_id"
+      ]
+    }
+  ],
+  "variables": []
+}

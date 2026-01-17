@@ -1,0 +1,755 @@
+{
+  "module": "integration_modules.ai_agent.services",
+  "imports": [
+    "celery",
+    "celery.exceptions",
+    "contextlib",
+    "dataclasses",
+    "datetime",
+    "django.conf",
+    "django.contrib.auth",
+    "django.core.cache",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django_redis",
+    "enum",
+    "json",
+    "logging",
+    "models",
+    "permissions",
+    "random",
+    "redis",
+    "signal",
+    "time",
+    "traceback",
+    "typing",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "InteractionStatus",
+      "methods": [],
+      "variables": [
+        "QUEUED",
+        "PROCESSING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELLED",
+        "RETRY",
+        "TIMEOUT"
+      ]
+    },
+    {
+      "name": "AgentType",
+      "methods": [],
+      "variables": [
+        "SYSTEM",
+        "USER",
+        "ERROR_HANDLER",
+        "ORCHESTRATOR",
+        "WORKER",
+        "MONITOR",
+        "SPECIALIZED"
+      ]
+    },
+    {
+      "name": "Priority",
+      "methods": [],
+      "variables": [
+        "LOW",
+        "NORMAL",
+        "HIGH",
+        "URGENT",
+        "CRITICAL"
+      ]
+    },
+    {
+      "name": "InteractionResult",
+      "methods": [],
+      "variables": [
+        "success",
+        "data",
+        "error",
+        "status",
+        "execution_time",
+        "metadata"
+      ]
+    },
+    {
+      "name": "MockRedis",
+      "methods": [
+        "__init__",
+        "ping",
+        "get",
+        "set",
+        "setex",
+        "delete"
+      ],
+      "variables": []
+    },
+    {
+      "name": "_DummyContext",
+      "methods": [
+        "__enter__",
+        "__exit__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentServiceError",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "AgentNotFoundError",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PermissionError",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "InteractionError",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "AgentLogicDispatcher",
+      "methods": [
+        "__init__",
+        "_register_default_handlers",
+        "register_handler",
+        "dispatch",
+        "_default_handler",
+        "_handle_error_report",
+        "_handle_orchestration_start",
+        "_handle_worker_task",
+        "_handle_monitor_check",
+        "_find_suitable_workers",
+        "_create_subtasks",
+        "_create_subtask_interaction",
+        "_simulate_task_execution",
+        "_perform_monitoring_check",
+        "_notify_admin"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SharedMemoryManager",
+      "methods": [
+        "__init__",
+        "_initialize_redis",
+        "set_data",
+        "get_data",
+        "delete_data",
+        "_check_memory_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "transaction",
+      "methods": [
+        "atomic"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PermissionDenied",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ObjectDoesNotExist",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ValidationError",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "cache",
+      "methods": [
+        "get",
+        "set"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Retry",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "redis",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Agent",
+      "methods": [
+        "__init__",
+        "is_active"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Message",
+      "methods": [
+        "__init__",
+        "save"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentActivity",
+      "methods": [
+        "log_activity"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ErrorLog",
+      "methods": [
+        "log_error"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentCapability",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "AgentPermissionManager",
+      "methods": [
+        "has_permission",
+        "check_agent_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "User",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "exceptions",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "get",
+        "filter",
+        "first"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DoesNotExist",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "create"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DoesNotExist",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ConnectionError",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "RedisError",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "call_actual_agent_logic",
+      "parameters": [
+        "agent",
+        "content",
+        "interaction_type",
+        "timeout"
+      ]
+    },
+    {
+      "name": "_execute_with_timeout",
+      "parameters": [
+        "func",
+        "timeout_seconds"
+      ]
+    },
+    {
+      "name": "log_ai_activity",
+      "parameters": [
+        "agent",
+        "action",
+        "target",
+        "details",
+        "status",
+        "interaction_id",
+        "correlation_id"
+      ]
+    },
+    {
+      "name": "_serialize_target",
+      "parameters": [
+        "target"
+      ]
+    },
+    {
+      "name": "initiate_agent_interaction",
+      "parameters": [
+        "initiating_agent",
+        "responding_agent",
+        "interaction_type",
+        "content",
+        "priority",
+        "correlation_id",
+        "expires_at"
+      ]
+    },
+    {
+      "name": "_validate_agent",
+      "parameters": [
+        "agent"
+      ]
+    },
+    {
+      "name": "process_agent_interaction",
+      "parameters": [
+        "self",
+        "interaction_id"
+      ]
+    },
+    {
+      "name": "_get_interaction",
+      "parameters": [
+        "interaction_id"
+      ]
+    },
+    {
+      "name": "_update_interaction_status",
+      "parameters": [
+        "interaction_id",
+        "status",
+        "response_data",
+        "error_message"
+      ]
+    },
+    {
+      "name": "get_agent_by_id",
+      "parameters": [
+        "agent_id"
+      ]
+    },
+    {
+      "name": "get_active_agents",
+      "parameters": [
+        "agent_type"
+      ]
+    },
+    {
+      "name": "register_agent_handler",
+      "parameters": [
+        "agent_type",
+        "interaction_type",
+        "handler_func"
+      ]
+    },
+    {
+      "name": "is_service_healthy",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "ping",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "key"
+      ]
+    },
+    {
+      "name": "set",
+      "parameters": [
+        "self",
+        "key",
+        "value"
+      ]
+    },
+    {
+      "name": "setex",
+      "parameters": [
+        "self",
+        "key",
+        "seconds",
+        "value"
+      ]
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "self",
+        "key"
+      ]
+    },
+    {
+      "name": "__enter__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__exit__",
+      "parameters": [
+        "self",
+        "exc_type",
+        "exc_val",
+        "exc_tb"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_register_default_handlers",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "register_handler",
+      "parameters": [
+        "self",
+        "agent_type",
+        "interaction_type",
+        "handler_func"
+      ]
+    },
+    {
+      "name": "dispatch",
+      "parameters": [
+        "self",
+        "agent",
+        "content",
+        "interaction_type"
+      ]
+    },
+    {
+      "name": "_default_handler",
+      "parameters": [
+        "self",
+        "agent",
+        "content",
+        "interaction_type"
+      ]
+    },
+    {
+      "name": "_handle_error_report",
+      "parameters": [
+        "self",
+        "agent",
+        "content",
+        "interaction_type"
+      ]
+    },
+    {
+      "name": "_handle_orchestration_start",
+      "parameters": [
+        "self",
+        "agent",
+        "content",
+        "interaction_type"
+      ]
+    },
+    {
+      "name": "_handle_worker_task",
+      "parameters": [
+        "self",
+        "agent",
+        "content",
+        "interaction_type"
+      ]
+    },
+    {
+      "name": "_handle_monitor_check",
+      "parameters": [
+        "self",
+        "agent",
+        "content",
+        "interaction_type"
+      ]
+    },
+    {
+      "name": "_find_suitable_workers",
+      "parameters": [
+        "self",
+        "task_description",
+        "initial_data"
+      ]
+    },
+    {
+      "name": "_create_subtasks",
+      "parameters": [
+        "self",
+        "task_description",
+        "initial_data",
+        "workers"
+      ]
+    },
+    {
+      "name": "_create_subtask_interaction",
+      "parameters": [
+        "self",
+        "subtask"
+      ]
+    },
+    {
+      "name": "_simulate_task_execution",
+      "parameters": [
+        "self",
+        "agent",
+        "instruction",
+        "task_data"
+      ]
+    },
+    {
+      "name": "_perform_monitoring_check",
+      "parameters": [
+        "self",
+        "check_type",
+        "target"
+      ]
+    },
+    {
+      "name": "_notify_admin",
+      "parameters": [
+        "self",
+        "message",
+        "severity"
+      ]
+    },
+    {
+      "name": "timeout_handler",
+      "parameters": [
+        "signum",
+        "frame"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_initialize_redis",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_data",
+      "parameters": [
+        "self",
+        "agent",
+        "key",
+        "value",
+        "ttl",
+        "namespace"
+      ]
+    },
+    {
+      "name": "get_data",
+      "parameters": [
+        "self",
+        "agent",
+        "key",
+        "namespace",
+        "default"
+      ]
+    },
+    {
+      "name": "delete_data",
+      "parameters": [
+        "self",
+        "agent",
+        "key",
+        "namespace"
+      ]
+    },
+    {
+      "name": "_check_memory_permission",
+      "parameters": [
+        "self",
+        "agent",
+        "operation",
+        "namespace"
+      ]
+    },
+    {
+      "name": "get_user_model",
+      "parameters": []
+    },
+    {
+      "name": "get_redis_connection",
+      "parameters": [
+        "name"
+      ]
+    },
+    {
+      "name": "shared_task",
+      "parameters": [
+        "bind",
+        "max_retries",
+        "default_retry_delay"
+      ]
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "atomic",
+      "parameters": []
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "key",
+        "default"
+      ]
+    },
+    {
+      "name": "set",
+      "parameters": [
+        "key",
+        "value",
+        "timeout"
+      ]
+    },
+    {
+      "name": "decorator",
+      "parameters": [
+        "func"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": []
+    },
+    {
+      "name": "log_error",
+      "parameters": []
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "subject",
+        "permission",
+        "target"
+      ]
+    },
+    {
+      "name": "check_agent_permission",
+      "parameters": [
+        "agent",
+        "action",
+        "target_agent"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": []
+    },
+    {
+      "name": "filter",
+      "parameters": []
+    },
+    {
+      "name": "first",
+      "parameters": []
+    },
+    {
+      "name": "create",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "logger",
+    "User",
+    "dispatcher",
+    "memory_manager",
+    "__all__"
+  ]
+}

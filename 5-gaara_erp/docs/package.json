@@ -1,0 +1,14 @@
+{
+  "name": "store-docs",
+  "version": "1.0.0",
+  "description": "Documentation site for Arabic Inventory Management System",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0-rc.31",
+    "@vitepress/theme-default": "^1.0.0-rc.31"
+  }
+}

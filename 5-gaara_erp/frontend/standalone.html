@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة المخزون المتكامل</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .status-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .status-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .status-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .status-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .status-value.success {
+            color: #28a745;
+        }
+
+        .status-value.error {
+            color: #dc3545;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .api-test {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .api-test h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .api-result {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .install-guide {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .install-guide h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .install-guide ol {
+            margin-right: 20px;
+        }
+
+        .install-guide li {
+            margin: 10px 0;
+            color: #856404;
+        }
+
+        .install-guide code {
+            background: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏪 نظام إدارة المخزون المتكامل</h1>
+            <p>Complete Inventory Management System v1.5</p>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="status-label">حالة Backend</div>
+                <div class="status-value" id="backendStatus">جاري التحقق...</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">حالة Frontend</div>
+                <div class="status-value error">⚠️ يتطلب Node.js</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">عدد APIs</div>
+                <div class="status-value success">41</div>
+            </div>
+            <div class="status-item">
+                <div class="status-label">قاعدة البيانات</div>
+                <div class="status-value success">✅ جاهزة</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('overview')">نظرة عامة</button>
+                <button class="tab" onclick="showTab('apis')">اختبار APIs</button>
+                <button class="tab" onclick="showTab('install')">تثبيت Frontend</button>
+            </div>
+
+            <div id="overview" class="tab-content active">
+                <h2>مرحباً بك في نظام إدارة المخزون المتكامل</h2>
+                
+                <div class="alert alert-success" id="successAlert" style="display: none;"></div>
+                <div class="alert alert-error" id="errorAlert" style="display: none;"></div>
+                
+                <div style="margin: 30px 0;">
+                    <h3>✅ ما تم إنجازه:</h3>
+                    <ul style="margin-right: 30px; line-height: 2;">
+                        <li>✅ Backend يعمل على http://127.0.0.1:5002</li>
+                        <li>✅ 18 Blueprints مسجلة</li>
+                        <li>✅ 41 مسار API متاح</li>
+                        <li>✅ قاعدة البيانات جاهزة</li>
+                        <li>✅ نظام الأمان مفعّل (JWT, RBAC, Rate Limiting)</li>
+                        <li>✅ نظام معالجة الأخطاء</li>
+                        <li>✅ نظام التسجيل (Logging)</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 30px 0;">
+                    <h3>⏳ ما يحتاج إلى عمل:</h3>
+                    <ul style="margin-right: 30px; line-height: 2;">
+                        <li>⏳ تثبيت Node.js لتشغيل Frontend</li>
+                        <li>⏳ تشغيل Frontend على http://localhost:5502</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 30px 0;">
+                    <button class="btn" onclick="testBackend()">اختبار الاتصال بـ Backend</button>
+                    <button class="btn btn-secondary" onclick="showTab('apis')">اختبار APIs</button>
+                    <button class="btn btn-success" onclick="showTab('install')">دليل تثبيت Frontend</button>
+                </div>
+            </div>
+
+            <div id="apis" class="tab-content">
+                <h2>اختبار APIs</h2>
+                
+                <div class="api-test">
+                    <h3>1. حالة النظام</h3>
+                    <button class="btn" onclick="testAPI('/api/status', 'status')">اختبار</button>
+                    <div class="api-result" id="result-status"></div>
+                </div>
+
+                <div class="api-test">
+                    <h3>2. الصحة (Health Check)</h3>
+                    <button class="btn" onclick="testAPI('/api/health', 'health')">اختبار</button>
+                    <div class="api-result" id="result-health"></div>
+                </div>
+
+                <div class="api-test">
+                    <h3>3. لوحة التحكم</h3>
+                    <button class="btn" onclick="testAPI('/api/dashboard', 'dashboard')">اختبار</button>
+                    <div class="api-result" id="result-dashboard"></div>
+                </div>
+
+                <div class="api-test">
+                    <h3>4. تسجيل الدخول</h3>
+                    <button class="btn" onclick="testLogin()">اختبار تسجيل الدخول</button>
+                    <div class="api-result" id="result-login"></div>
+                </div>
+            </div>
+
+            <div id="install" class="tab-content">
+                <h2>دليل تثبيت وتشغيل Frontend</h2>
+                
+                <div class="install-guide">
+                    <h3>⚠️ Frontend يتطلب Node.js</h3>
+                    <p>لتشغيل Frontend الكامل (React + Vite)، يجب تثبيت Node.js أولاً.</p>
+                </div>
+
+                <h3>خطوات التثبيت:</h3>
+                <ol style="margin-right: 30px; line-height: 2.5;">
+                    <li>
+                        <strong>تحميل Node.js:</strong><br>
+                        افتح <a href="https://nodejs.org/" target="_blank">https://nodejs.org/</a><br>
+                        حمّل النسخة <strong>LTS</strong> (الموصى بها)
+                    </li>
+                    <li>
+                        <strong>تثبيت Node.js:</strong><br>
+                        قم بتشغيل ملف التثبيت واتبع التعليمات
+                    </li>
+                    <li>
+                        <strong>التحقق من التثبيت:</strong><br>
+                        افتح PowerShell جديد واكتب:<br>
+                        <code>node --version</code><br>
+                        <code>npm --version</code>
+                    </li>
+                    <li>
+                        <strong>تثبيت متطلبات Frontend:</strong><br>
+                        <code>cd D:\APPS_AI\store\store_v1.6\frontend</code><br>
+                        <code>npm install</code>
+                    </li>
+                    <li>
+                        <strong>تشغيل Frontend:</strong><br>
+                        <code>npm run dev</code>
+                    </li>
+                    <li>
+                        <strong>فتح المتصفح:</strong><br>
+                        <code>http://localhost:5502</code>
+                    </li>
+                </ol>
+
+                <div style="margin-top: 30px;">
+                    <h3>📚 الموارد:</h3>
+                    <ul style="margin-right: 30px; line-height: 2;">
+                        <li>📄 <code>FRONTEND_SETUP_GUIDE.md</code> - دليل مفصل</li>
+                        <li>📄 <code>SERVER_STARTUP_GUIDE.md</code> - دليل الخوادم</li>
+                        <li>📄 <code>PROJECT_COMPLETION_REPORT.md</code> - تقرير المشروع</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:5002';
+
+        // Check backend status on load
+        window.addEventListener('load', () => {
+            testBackend();
+        });
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        async function testBackend() {
+            try {
+                const response = await fetch(`${API_URL}/api/status`);
+                const data = await response.json();
+                
+                document.getElementById('backendStatus').textContent = '✅ يعمل';
+                document.getElementById('backendStatus').classList.add('success');
+                
+                showSuccess('Backend متصل ويعمل بنجاح!');
+            } catch (error) {
+                document.getElementById('backendStatus').textContent = '❌ غير متصل';
+                document.getElementById('backendStatus').classList.add('error');
+                
+                showError('تعذر الاتصال بـ Backend. تأكد من تشغيله.');
+            }
+        }
+
+        async function testAPI(endpoint, resultId) {
+            const resultDiv = document.getElementById(`result-${resultId}`);
+            resultDiv.innerHTML = '<div class="spinner"></div>جاري الاختبار...';
+            
+            try {
+                const response = await fetch(`${API_URL}${endpoint}`);
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <strong>الحالة:</strong> ${response.status} ${response.statusText}<br>
+                    <strong>النتيجة:</strong><br>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <strong style="color: red;">خطأ:</strong> ${error.message}
+                `;
+            }
+        }
+
+        async function testLogin() {
+            const resultDiv = document.getElementById('result-login');
+            resultDiv.innerHTML = '<div class="spinner"></div>جاري تسجيل الدخول...';
+            
+            try {
+                const response = await fetch(`${API_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: 'admin',
+                        password: 'admin123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <strong>الحالة:</strong> ${response.status} ${response.statusText}<br>
+                    <strong>النتيجة:</strong><br>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <strong style="color: red;">خطأ:</strong> ${error.message}
+                `;
+            }
+        }
+
+        function showSuccess(message) {
+            const alert = document.getElementById('successAlert');
+            alert.textContent = message;
+            alert.style.display = 'block';
+            setTimeout(() => alert.style.display = 'none', 5000);
+        }
+
+        function showError(message) {
+            const alert = document.getElementById('errorAlert');
+            alert.textContent = message;
+            alert.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+

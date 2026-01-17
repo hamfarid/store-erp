@@ -1,0 +1,43 @@
+{
+  "module": "admin_modules.custom_admin.serializers.dashboard_serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "DashboardWidgetSerializer",
+      "methods": [],
+      "variables": [
+        "user_username"
+      ]
+    },
+    {
+      "name": "DashboardLayoutSerializer",
+      "methods": [],
+      "variables": [
+        "user_username"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

@@ -1,0 +1,13 @@
+{
+  "module": "business_modules.accounting.models.tax",
+  "imports": [
+    "business_modules.accounting"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "Tax",
+    "TaxGroup",
+    "TaxGroupLine"
+  ]
+}

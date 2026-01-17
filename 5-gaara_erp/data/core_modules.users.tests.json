@@ -1,0 +1,318 @@
+{
+  "module": "core_modules.users.tests",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.contrib.contenttypes.models",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "UserModelTests",
+      "methods": [
+        "setUp",
+        "test_create_user",
+        "test_create_superuser",
+        "test_get_full_name",
+        "test_get_short_name",
+        "test_lock_account",
+        "test_unlock_account",
+        "test_increment_failed_login",
+        "test_reset_failed_login",
+        "test_account_lock_after_five_failed_attempts"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserProfileTests",
+      "methods": [
+        "setUp",
+        "test_create_profile",
+        "test_profile_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserSettingsTests",
+      "methods": [
+        "setUp",
+        "test_create_settings",
+        "test_settings_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserDeviceTests",
+      "methods": [
+        "setUp",
+        "test_create_device",
+        "test_device_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserSessionTests",
+      "methods": [
+        "setUp",
+        "test_create_session",
+        "test_end_session",
+        "test_session_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserActivityTests",
+      "methods": [
+        "setUp",
+        "test_create_activity",
+        "test_activity_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserNotificationPreferenceTests",
+      "methods": [
+        "setUp",
+        "test_create_notification_preference",
+        "test_notification_preference_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserAPIKeyTests",
+      "methods": [
+        "setUp",
+        "test_create_api_key",
+        "test_generate_key",
+        "test_verify_key",
+        "test_is_expired",
+        "test_has_permission",
+        "test_api_key_str_representation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_user",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_superuser",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_full_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_short_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_lock_account",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unlock_account",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_increment_failed_login",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reset_failed_login",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_account_lock_after_five_failed_attempts",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_profile",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_profile_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_settings_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_device",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_device_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_session",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_end_session",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_session_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_activity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activity_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_notification_preference",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_notification_preference_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_api_key",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_generate_key",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_verify_key",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_has_permission",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_api_key_str_representation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

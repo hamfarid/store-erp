@@ -1,0 +1,93 @@
+{
+  "module": "core_modules.core.routers",
+  "imports": [
+    "django.conf",
+    "thread_locals"
+  ],
+  "classes": [
+    {
+      "name": "GaaraERPDBRouter",
+      "methods": [
+        "_is_global_app",
+        "_get_active_database",
+        "db_for_read",
+        "db_for_write",
+        "allow_relation",
+        "allow_migrate"
+      ],
+      "variables": [
+        "global_apps"
+      ]
+    },
+    {
+      "name": "ActiveDatabaseMiddleware",
+      "methods": [
+        "__init__",
+        "__call__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "_is_global_app",
+      "parameters": [
+        "self",
+        "app_label"
+      ]
+    },
+    {
+      "name": "_get_active_database",
+      "parameters": [
+        "self",
+        "model"
+      ]
+    },
+    {
+      "name": "db_for_read",
+      "parameters": [
+        "self",
+        "model"
+      ]
+    },
+    {
+      "name": "db_for_write",
+      "parameters": [
+        "self",
+        "model"
+      ]
+    },
+    {
+      "name": "allow_relation",
+      "parameters": [
+        "self",
+        "obj1",
+        "obj2"
+      ]
+    },
+    {
+      "name": "allow_migrate",
+      "parameters": [
+        "self",
+        "db",
+        "app_label",
+        "model_name"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "get_response"
+      ]
+    },
+    {
+      "name": "__call__",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

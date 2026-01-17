@@ -1,0 +1,167 @@
+{
+  "module": "services_modules.legal_affairs.models.legal_consultation",
+  "imports": [
+    "core_modules.companies.models",
+    "core_modules.core.models.base_models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "LegalConsultation",
+      "methods": [
+        "__str__",
+        "is_overdue",
+        "days_until_due",
+        "complete_consultation",
+        "cancel_consultation",
+        "assign_lawyer",
+        "calculate_billing_amount",
+        "get_related_documents",
+        "clean"
+      ],
+      "variables": [
+        "consultation_number",
+        "title",
+        "description",
+        "consultation_type",
+        "status",
+        "priority",
+        "request_date",
+        "due_date",
+        "completion_date",
+        "requester_name",
+        "requester_department",
+        "requester_contact",
+        "company",
+        "assigned_lawyer",
+        "legal_case",
+        "question",
+        "answer",
+        "legal_basis",
+        "recommendations",
+        "is_billable",
+        "billing_amount",
+        "time_spent_hours",
+        "notes",
+        "is_confidential"
+      ]
+    },
+    {
+      "name": "ConsultationTypeChoices",
+      "methods": [],
+      "variables": [
+        "INTERNAL",
+        "EXTERNAL",
+        "VERBAL",
+        "WRITTEN",
+        "EMPLOYMENT",
+        "COMMERCIAL",
+        "CIVIL",
+        "CRIMINAL",
+        "ADMINISTRATIVE",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "ConsultationStatusChoices",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "PENDING",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "CANCELLED",
+        "REFERRED"
+      ]
+    },
+    {
+      "name": "ConsultationPriorityChoices",
+      "methods": [],
+      "variables": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "URGENT"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes",
+        "permissions"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "days_until_due",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete_consultation",
+      "parameters": [
+        "self",
+        "answer",
+        "legal_basis",
+        "recommendations",
+        "time_spent_hours"
+      ]
+    },
+    {
+      "name": "cancel_consultation",
+      "parameters": [
+        "self",
+        "reason"
+      ]
+    },
+    {
+      "name": "assign_lawyer",
+      "parameters": [
+        "self",
+        "lawyer"
+      ]
+    },
+    {
+      "name": "calculate_billing_amount",
+      "parameters": [
+        "self",
+        "hourly_rate"
+      ]
+    },
+    {
+      "name": "get_related_documents",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

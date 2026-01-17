@@ -1,0 +1,126 @@
+{
+  "module": "agricultural_modules.seed_hybridization.serializers",
+  "imports": [
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "ExperimentSummarySerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name",
+        "objective",
+        "status",
+        "start_date",
+        "lead_researcher_name"
+      ]
+    },
+    {
+      "name": "ParentVarietySerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "name": "ExperimentNoteSerializer",
+      "methods": [],
+      "variables": [
+        "date",
+        "author",
+        "text"
+      ]
+    },
+    {
+      "name": "AssociatedDocumentSerializer",
+      "methods": [],
+      "variables": [
+        "name",
+        "link"
+      ]
+    },
+    {
+      "name": "ExperimentDetailSerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name",
+        "objective",
+        "status",
+        "start_date",
+        "expected_end_date",
+        "parent_varieties",
+        "protocols_summary",
+        "current_results_summary",
+        "location",
+        "lead_researcher_name",
+        "team_members",
+        "notes",
+        "associated_documents"
+      ]
+    },
+    {
+      "name": "HybridVarietySummarySerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name",
+        "source_experiment_name",
+        "status",
+        "generation",
+        "key_phenotypic_traits_summary"
+      ]
+    },
+    {
+      "name": "PhenotypicTraitsSerializer",
+      "methods": [],
+      "variables": [
+        "plant_height_cm",
+        "yield_potential_kg_ha",
+        "protein_content_percentage",
+        "disease_resistance_summary"
+      ]
+    },
+    {
+      "name": "EvaluationStageSerializer",
+      "methods": [],
+      "variables": [
+        "stage_name",
+        "status",
+        "date",
+        "summary"
+      ]
+    },
+    {
+      "name": "VarietyImageSerializer",
+      "methods": [],
+      "variables": [
+        "description",
+        "url"
+      ]
+    },
+    {
+      "name": "HybridVarietyDetailSerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name",
+        "source_experiment_id",
+        "source_experiment_name",
+        "status",
+        "generation",
+        "date_created",
+        "genetic_markers",
+        "phenotypic_traits",
+        "evaluation_stages",
+        "quantity_available_seeds_kg",
+        "storage_location",
+        "images"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

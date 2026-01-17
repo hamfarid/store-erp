@@ -1,0 +1,130 @@
+{
+  "module": "business_modules.tests.test_models",
+  "imports": [
+    "assets.models",
+    "contacts.models",
+    "core_modules.organization.models",
+    "decimal",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils"
+  ],
+  "classes": [
+    {
+      "name": "AssetModelsTestCase",
+      "methods": [
+        "setUp",
+        "test_asset_category_creation",
+        "test_fixed_asset_creation",
+        "test_asset_maintenance_creation",
+        "test_asset_transfer_creation",
+        "test_asset_depreciation_creation",
+        "test_asset_validation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ContactModelsTestCase",
+      "methods": [
+        "setUp",
+        "test_contact_tag_creation",
+        "test_contact_creation",
+        "test_contact_person_creation",
+        "test_contact_address_creation",
+        "test_contact_bank_account_creation",
+        "test_contact_validation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_asset_category_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_fixed_asset_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_asset_maintenance_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_asset_transfer_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_asset_depreciation_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_asset_validation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contact_tag_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contact_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contact_person_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contact_address_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contact_bank_account_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contact_validation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

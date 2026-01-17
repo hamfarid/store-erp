@@ -1,0 +1,15 @@
+{
+  "module": "gaara_erp.settings_accounting_minimal",
+  "imports": [
+    "settings"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "INSTALLED_APPS",
+    "ROOT_URLCONF",
+    "DATABASE_ROUTERS",
+    "MIDDLEWARE",
+    "PASSWORD_HASHERS"
+  ]
+}

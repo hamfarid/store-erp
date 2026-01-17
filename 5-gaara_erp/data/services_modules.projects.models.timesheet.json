@@ -1,0 +1,62 @@
+{
+  "module": "services_modules.projects.models.timesheet",
+  "imports": [
+    "__future__",
+    "core_modules.organization.models",
+    "django.contrib.auth",
+    "django.db",
+    "django.utils.translation",
+    "project",
+    "task"
+  ],
+  "classes": [
+    {
+      "name": "Timesheet",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "user",
+        "project",
+        "task",
+        "date",
+        "hours",
+        "description",
+        "company",
+        "branch",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

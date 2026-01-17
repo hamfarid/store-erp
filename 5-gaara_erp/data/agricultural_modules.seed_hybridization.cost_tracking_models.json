@@ -1,0 +1,282 @@
+{
+  "module": "agricultural_modules.seed_hybridization.cost_tracking_models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "HybridizationProject",
+      "methods": [
+        "__str__",
+        "total_expenses",
+        "budget_remaining",
+        "budget_utilization_percentage"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "external_project_id",
+        "name",
+        "description",
+        "status",
+        "start_date",
+        "end_date",
+        "actual_end_date",
+        "budget",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ExpenseCategory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "parent"
+      ]
+    },
+    {
+      "name": "Expense",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PAYMENT_STATUS_CHOICES",
+        "project",
+        "category",
+        "description",
+        "amount",
+        "date",
+        "payment_status",
+        "reference_number",
+        "notes",
+        "created_by",
+        "approved_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "InventoryConsumption",
+      "methods": [
+        "__str__",
+        "total_cost"
+      ],
+      "variables": [
+        "project",
+        "inventory_item_id",
+        "inventory_item_name",
+        "quantity",
+        "unit_cost",
+        "date",
+        "notes",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "LaborCost",
+      "methods": [
+        "__str__",
+        "total_cost"
+      ],
+      "variables": [
+        "project",
+        "employee_id",
+        "employee_name",
+        "hours",
+        "hourly_rate",
+        "date",
+        "description",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "EquipmentUsage",
+      "methods": [
+        "__str__",
+        "total_cost"
+      ],
+      "variables": [
+        "project",
+        "equipment_id",
+        "equipment_name",
+        "hours",
+        "hourly_rate",
+        "date",
+        "notes",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "CostSummaryReport",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "project",
+        "report_date",
+        "total_expenses",
+        "total_inventory_cost",
+        "total_labor_cost",
+        "total_equipment_cost",
+        "grand_total",
+        "budget_utilization_percentage",
+        "notes",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "total_expenses",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "budget_remaining",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "budget_utilization_percentage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "total_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "total_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "total_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

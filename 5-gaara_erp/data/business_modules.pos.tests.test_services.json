@@ -1,0 +1,253 @@
+{
+  "module": "business_modules.pos.tests.test_services",
+  "imports": [
+    "business_modules.contacts.models",
+    "business_modules.inventory.models",
+    "business_modules.pos.models",
+    "business_modules.pos.services",
+    "decimal",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.utils",
+    "organization.models",
+    "pytest"
+  ],
+  "classes": [
+    {
+      "name": "TestPOSSessionService",
+      "methods": [
+        "test_create_session",
+        "test_create_session_with_existing_open_session",
+        "test_close_session",
+        "test_close_session_with_draft_receipts",
+        "test_suspend_and_resume_session",
+        "test_get_session_summary"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TestPOSReceiptService",
+      "methods": [
+        "test_create_receipt",
+        "test_add_item_to_receipt",
+        "test_update_item_quantity",
+        "test_remove_item_from_receipt",
+        "test_add_payment_to_receipt",
+        "test_confirm_receipt",
+        "test_cancel_receipt",
+        "test_process_return"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TestPOSReportService",
+      "methods": [
+        "test_get_sales_report",
+        "test_get_returns_report",
+        "test_get_customer_sales_report"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "test_user",
+      "parameters": []
+    },
+    {
+      "name": "test_branch",
+      "parameters": []
+    },
+    {
+      "name": "test_store",
+      "parameters": []
+    },
+    {
+      "name": "test_customer",
+      "parameters": []
+    },
+    {
+      "name": "test_product",
+      "parameters": []
+    },
+    {
+      "name": "test_payment_method",
+      "parameters": []
+    },
+    {
+      "name": "test_session",
+      "parameters": [
+        "test_user",
+        "test_branch",
+        "test_store"
+      ]
+    },
+    {
+      "name": "test_receipt",
+      "parameters": [
+        "test_session",
+        "test_customer"
+      ]
+    },
+    {
+      "name": "test_receipt_item",
+      "parameters": [
+        "test_receipt",
+        "test_product"
+      ]
+    },
+    {
+      "name": "test_payment",
+      "parameters": [
+        "test_receipt",
+        "test_payment_method"
+      ]
+    },
+    {
+      "name": "test_create_session",
+      "parameters": [
+        "self",
+        "test_user",
+        "test_branch",
+        "test_store"
+      ]
+    },
+    {
+      "name": "test_create_session_with_existing_open_session",
+      "parameters": [
+        "self",
+        "test_session",
+        "test_user",
+        "test_branch",
+        "test_store"
+      ]
+    },
+    {
+      "name": "test_close_session",
+      "parameters": [
+        "self",
+        "test_session"
+      ]
+    },
+    {
+      "name": "test_close_session_with_draft_receipts",
+      "parameters": [
+        "self",
+        "test_session",
+        "test_receipt"
+      ]
+    },
+    {
+      "name": "test_suspend_and_resume_session",
+      "parameters": [
+        "self",
+        "test_session"
+      ]
+    },
+    {
+      "name": "test_get_session_summary",
+      "parameters": [
+        "self",
+        "test_session",
+        "test_receipt",
+        "test_receipt_item",
+        "test_payment"
+      ]
+    },
+    {
+      "name": "test_create_receipt",
+      "parameters": [
+        "self",
+        "test_session",
+        "test_customer",
+        "test_product",
+        "test_payment_method"
+      ]
+    },
+    {
+      "name": "test_add_item_to_receipt",
+      "parameters": [
+        "self",
+        "test_receipt",
+        "test_product"
+      ]
+    },
+    {
+      "name": "test_update_item_quantity",
+      "parameters": [
+        "self",
+        "test_receipt_item"
+      ]
+    },
+    {
+      "name": "test_remove_item_from_receipt",
+      "parameters": [
+        "self",
+        "test_receipt",
+        "test_receipt_item"
+      ]
+    },
+    {
+      "name": "test_add_payment_to_receipt",
+      "parameters": [
+        "self",
+        "test_receipt",
+        "test_payment_method"
+      ]
+    },
+    {
+      "name": "test_confirm_receipt",
+      "parameters": [
+        "self",
+        "test_receipt",
+        "test_receipt_item",
+        "test_payment"
+      ]
+    },
+    {
+      "name": "test_cancel_receipt",
+      "parameters": [
+        "self",
+        "test_receipt",
+        "test_receipt_item"
+      ]
+    },
+    {
+      "name": "test_process_return",
+      "parameters": [
+        "self",
+        "test_receipt",
+        "test_receipt_item"
+      ]
+    },
+    {
+      "name": "test_get_sales_report",
+      "parameters": [
+        "self",
+        "test_receipt",
+        "test_receipt_item",
+        "test_payment"
+      ]
+    },
+    {
+      "name": "test_get_returns_report",
+      "parameters": [
+        "self",
+        "test_receipt",
+        "test_receipt_item"
+      ]
+    },
+    {
+      "name": "test_get_customer_sales_report",
+      "parameters": [
+        "self",
+        "test_receipt",
+        "test_receipt_item",
+        "test_customer"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "module": "core_modules.rag.serializers",
+  "imports": [
+    "__future__",
+    "core_modules.rag.models",
+    "django.contrib.auth",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "DocumentSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ChunkSerializer",
+      "methods": [],
+      "variables": [
+        "document_title"
+      ]
+    },
+    {
+      "name": "MemorySerializer",
+      "methods": [],
+      "variables": [
+        "user_username"
+      ]
+    },
+    {
+      "name": "IngestRequestSerializer",
+      "methods": [],
+      "variables": [
+        "title",
+        "text",
+        "source",
+        "metadata"
+      ]
+    },
+    {
+      "name": "SearchRequestSerializer",
+      "methods": [],
+      "variables": [
+        "query",
+        "top_k",
+        "threshold"
+      ]
+    },
+    {
+      "name": "SearchResultSerializer",
+      "methods": [],
+      "variables": [
+        "chunk_id",
+        "document_id",
+        "document_title",
+        "text",
+        "score",
+        "chunk_index"
+      ]
+    },
+    {
+      "name": "SearchResponseSerializer",
+      "methods": [],
+      "variables": [
+        "query",
+        "results",
+        "total_results"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "module": "core_modules.system_settings.admin",
+  "imports": [
+    "core_modules.setup.system_settings.models",
+    "django.contrib",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "SystemSettingAdmin",
+      "methods": [
+        "save_model"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "CountryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "CurrencyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "EmailSettingAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "SetupWizardStatusAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "save_model",
+      "parameters": [
+        "self",
+        "request",
+        "obj",
+        "form",
+        "change"
+      ]
+    }
+  ],
+  "variables": []
+}

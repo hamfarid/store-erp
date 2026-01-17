@@ -1,0 +1,134 @@
+{
+  "module": "integration_modules.ai_analytics.tests.test_services",
+  "imports": [
+    "datetime",
+    "django",
+    "django.conf",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "integration_modules.ai_analytics.models",
+    "integration_modules.ai_analytics.services.performance_analytics_service",
+    "integration_modules.ai_analytics.services.usage_analytics_service",
+    "os",
+    "sys",
+    "unittest"
+  ],
+  "classes": [
+    {
+      "name": "PerformanceAnalyticsServiceTestCase",
+      "methods": [
+        "setUp",
+        "test_register_model_version",
+        "test_record_model_evaluation",
+        "test_get_model_versions",
+        "test_get_model_evaluations",
+        "test_compare_model_versions",
+        "test_activate_deactivate_model_version",
+        "test_delete_model_version"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UsageAnalyticsServiceTestCase",
+      "methods": [
+        "setUp",
+        "test_record_usage",
+        "test_record_performance_metric",
+        "test_get_usage_statistics",
+        "test_get_performance_metrics",
+        "test_create_usage_report"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_register_model_version",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_model_evaluation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_model_versions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_model_evaluations",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_compare_model_versions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_activate_deactivate_model_version",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_delete_model_version",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_performance_metric",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_usage_statistics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_performance_metrics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_usage_report",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

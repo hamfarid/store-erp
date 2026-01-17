@@ -1,0 +1,360 @@
+{
+  "module": "services_modules.complaints_suggestions.tests.test_complaints_suggestions",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.complaint",
+    "models.feedback",
+    "models.suggestion",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "ComplaintCategoryModelTest",
+      "methods": [
+        "setUp",
+        "test_create_category",
+        "test_unique_code_per_company",
+        "test_deactivate_category"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ComplaintStatusModelTest",
+      "methods": [
+        "setUp",
+        "test_create_status",
+        "test_unique_code_per_company",
+        "test_deactivate_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ComplaintModelTest",
+      "methods": [
+        "setUp",
+        "test_create_complaint",
+        "test_change_complaint_status",
+        "test_resolve_complaint",
+        "test_get_complaint_history"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SuggestionCategoryModelTest",
+      "methods": [
+        "setUp",
+        "test_create_category",
+        "test_unique_code_per_company",
+        "test_deactivate_category"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SuggestionStatusModelTest",
+      "methods": [
+        "setUp",
+        "test_create_status",
+        "test_unique_code_per_company",
+        "test_deactivate_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SuggestionModelTest",
+      "methods": [
+        "setUp",
+        "test_create_suggestion",
+        "test_change_suggestion_status",
+        "test_implement_suggestion",
+        "test_get_suggestion_history"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FeedbackTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_feedback_type",
+        "test_unique_code_per_company",
+        "test_deactivate_feedback_type"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FeedbackModelTest",
+      "methods": [
+        "setUp",
+        "test_create_feedback",
+        "test_respond_to_feedback",
+        "test_validate_rating_range"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_complaint",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_change_complaint_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_resolve_complaint",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_complaint_history",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_category",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_suggestion",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_change_suggestion_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_implement_suggestion",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_suggestion_history",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_feedback_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_feedback_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_feedback",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_respond_to_feedback",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_rating_range",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_change_status",
+      "parameters": [
+        "self",
+        "new_status",
+        "assigned_to",
+        "notes"
+      ]
+    },
+    {
+      "name": "mock_resolve",
+      "parameters": [
+        "self",
+        "resolution_notes",
+        "resolution_date"
+      ]
+    },
+    {
+      "name": "mock_get_history",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_change_status",
+      "parameters": [
+        "self",
+        "new_status",
+        "assigned_to",
+        "notes"
+      ]
+    },
+    {
+      "name": "mock_implement",
+      "parameters": [
+        "self",
+        "implementation_notes",
+        "implementation_date"
+      ]
+    },
+    {
+      "name": "mock_get_history",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_respond",
+      "parameters": [
+        "self",
+        "response",
+        "responded_by"
+      ]
+    }
+  ],
+  "variables": []
+}

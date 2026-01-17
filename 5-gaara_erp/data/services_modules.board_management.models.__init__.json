@@ -1,0 +1,14 @@
+{
+  "module": "services_modules.board_management.models.__init__",
+  "imports": [
+    "board",
+    "board_decision",
+    "board_meeting",
+    "board_member"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

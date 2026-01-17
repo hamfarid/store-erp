@@ -1,0 +1,522 @@
+=================================================================================
+SECURITY - Authentication, Authorization, Best Practices
+=================================================================================
+
+Version: 5.0.0
+Type: Security
+
+Comprehensive security guidance for web applications.
+
+=================================================================================
+AUTHENTICATION
+=================================================================================
+
+## Password Security
+
+**Hashing:**
+```python
+import bcrypt
+
+# Hash password
+password = "user_password"
+hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+# Verify password
+if bcrypt.checkpw(password.encode('utf-8'), hashed):
+    print("Password correct")
+```
+
+**Django:**
+```python
+from django.contrib.auth.hashers import make_password, check_password
+
+hashed = make_password("password123")
+is_correct = check_password("password123", hashed)
+```
+
+## JWT Tokens
+
+**Generate:**
+```python
+import jwt
+from datetime import datetime, timedelta
+
+def create_access_token(user_id):
+    payload = {
+        'user_id': user_id,
+        'exp': datetime.utcnow() + timedelta(hours=1),
+        'iat': datetime.utcnow()
+    }
+    return jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+```
+
+**Verify:**
+```python
+def verify_token(token):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        return payload['user_id']
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
+```
+
+## Session Management
+
+```python
+# Django
+request.session['user_id'] = user.id
+request.session.set_expiry(3600)  # 1 hour
+
+# Flask
+from flask import session
+session['user_id'] = user.id
+session.permanent = True
+app.permanent_session_lifetime = timedelta(hours=1)
+```
+
+=================================================================================
+AUTHORIZATION
+=================================================================================
+
+## Role-Based Access Control (RBAC)
+
+```python
+class User(models.Model):
+    ROLES = (
+        ('admin', 'Administrator'),
+        ('manager', 'Manager'),
+        ('user', 'Regular User'),
+    )
+    role = models.CharField(max_length=20, choices=ROLES, default='user')
+    
+    def has_permission(self, permission):
+        permissions = {
+            'admin': ['create', 'read', 'update', 'delete'],
+            'manager': ['create', 'read', 'update'],
+            'user': ['read'],
+        }
+        return permission in permissions.get(self.role, [])
+```
+
+## Permission Decorators
+
+```python
+from functools import wraps
+from flask import abort
+
+def require_role(role):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            if current_user.role != role:
+                abort(403)
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@app.route('/admin')
+@require_role('admin')
+def admin_panel():
+    return "Admin Panel"
+```
+
+=================================================================================
+INPUT VALIDATION
+=================================================================================
+
+## SQL Injection Prevention
+
+**Bad:**
+```python
+# NEVER DO THIS
+query = f"SELECT * FROM users WHERE email = '{email}'"
+cursor.execute(query)
+```
+
+**Good:**
+```python
+# Use parameterized queries
+cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+
+# Or use ORM
+User.objects.filter(email=email)
+```
+
+## XSS Prevention
+
+```python
+from markupsafe import escape
+
+# Escape user input
+safe_text = escape(user_input)
+
+# Django templates auto-escape
+{{ user_input }}  # Automatically escaped
+
+# To mark as safe (use carefully)
+from django.utils.safestring import mark_safe
+safe_html = mark_safe(trusted_html)
+```
+
+## CSRF Protection
+
+**Django:**
+```python
+# In forms
+{% csrf_token %}
+
+# In views
+from django.views.decorators.csrf import csrf_protect
+
+@csrf_protect
+def my_view(request):
+    pass
+```
+
+**Flask:**
+```python
+from flask_wtf.csrf import CSRFProtect
+
+csrf = CSRFProtect(app)
+```
+
+=================================================================================
+HTTPS & TLS
+=================================================================================
+
+## Force HTTPS
+
+**Django:**
+```python
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+```
+
+**Flask:**
+```python
+from flask_talisman import Talisman
+
+Talisman(app, force_https=True)
+```
+
+## Security Headers
+
+```python
+# Django
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+
+# Flask
+@app.after_request
+def set_security_headers(response):
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'DENY'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    return response
+```
+
+=================================================================================
+RATE LIMITING
+=================================================================================
+
+```python
+from functools import wraps
+import time
+
+# Simple rate limiter
+rate_limit_storage = {}
+
+def rate_limit(max_requests=5, window=60):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            client_id = request.remote_addr
+            now = time.time()
+            
+            if client_id not in rate_limit_storage:
+                rate_limit_storage[client_id] = []
+            
+            # Remove old requests
+            rate_limit_storage[client_id] = [
+                req_time for req_time in rate_limit_storage[client_id]
+                if now - req_time < window
+            ]
+            
+            if len(rate_limit_storage[client_id]) >= max_requests:
+                abort(429, "Too many requests")
+            
+            rate_limit_storage[client_id].append(now)
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@app.route('/api/login')
+@rate_limit(max_requests=5, window=300)  # 5 requests per 5 minutes
+def login():
+    pass
+```
+
+=================================================================================
+FILE UPLOAD SECURITY
+=================================================================================
+
+```python
+import os
+from werkzeug.utils import secure_filename
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf'}
+MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
+
+def allowed_file(filename):
+    return '.' in filename and            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        return "No file", 400
+    
+    file = request.files['file']
+    
+    if file.filename == '':
+        return "No file selected", 400
+    
+    if not allowed_file(file.filename):
+        return "File type not allowed", 400
+    
+    # Check file size
+    file.seek(0, os.SEEK_END)
+    file_size = file.tell()
+    if file_size > MAX_FILE_SIZE:
+        return "File too large", 400
+    file.seek(0)
+    
+    # Secure filename
+    filename = secure_filename(file.filename)
+    
+    # Save file
+    file.save(os.path.join(UPLOAD_FOLDER, filename))
+    
+    return "File uploaded", 200
+```
+
+=================================================================================
+SECRETS MANAGEMENT
+=================================================================================
+
+## Environment Variables
+
+```python
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+DATABASE_URL = os.getenv('DATABASE_URL')
+API_KEY = os.getenv('API_KEY')
+```
+
+## Never Commit Secrets
+
+**.gitignore:**
+```
+.env
+.env.local
+secrets.json
+*.key
+*.pem
+```
+
+=================================================================================
+SECURITY CHECKLIST
+=================================================================================
+
+## Before Deployment
+
+- [ ] All passwords hashed with bcrypt/Argon2
+- [ ] JWT tokens with expiration
+- [ ] HTTPS enabled
+- [ ] Security headers configured
+- [ ] CSRF protection enabled
+- [ ] SQL injection prevented (parameterized queries)
+- [ ] XSS prevented (input escaping)
+- [ ] Rate limiting implemented
+- [ ] File upload validation
+- [ ] Secrets in environment variables
+- [ ] Dependencies up to date
+- [ ] Security audit completed
+
+=================================================================================
+END OF SECURITY PROMPT
+=================================================================================
+
+
+================================================================================
+RECOVERED CONTENT FROM v4.2.0 (Phase 2)
+================================================================================
+
+omplexity: uppercase, lowercase, number, symbol
+- Hashing: bcrypt (cost 12) or argon2
+- No password reuse (last 5)
+- Expiry: 90 days (optional for high-security)
+- Reset flow: email link (1-hour TTL)
+
+C) Authorization (RBAC)
+- Roles: ADMIN, MANAGER, USER, GUEST
+- Permissions: granular (read, write, delete, export)
+- Role hierarchy: ADMIN > MANAGER > USER > GUEST
+- Permission checks: backend + frontend
+- Audit log: all permission checks
+
+D) Security Headers
+- Content-Security-Policy: nonce-based
+- Strict-Transport-Security: max-age=31536000
+- X-Frame-Options: DENY
+- X-Content-Type-Options: nosniff
+- Referrer-Policy: strict-origin-when-cross-origin
+- Permissions-Policy: restrictive
+
+E) Secrets Management
+- KMS/Vault for all secrets
+- No secrets in code/env files
+- Rotation: ≤90 days
+- Access control: least privilege
+- Audit log: all secret access
+
+F) Threat Mitigation
+- SQL Injection: parameterized queries
+- XSS: DOMPurify, CSP nonces
+- CSRF: tokens for state-changing ops
+- SSRF: URL val
+cident Response
+1. Detect: monitoring alerts
+2. Assess: severity (P0-P3)
+3. Notify: on-call team
+4. Mitigate: immediate fix or rollback
+5. Communicate: status updates
+6. Resolve: root cause fix
+7. Post-mortem: blameless, actionable
+
+B) Severity Levels
+- P0: Complete outage, data loss
+- P1: Major feature broken
+- P2: Minor feature broken
+- P3: Cosmetic issue
+
+C) Rollback Procedure
+- Automated: kubectl rollout undo
+- Manual: deploy previous version
+- Database: restore from backup if needed
+- Verify: smoke tests
+
+⸻
+
+20) FINAL CHECKLIST (before production)
+
+Security:
+- [ ] All secrets in KMS/Vault
+- [ ] HTTPS enforced
+- [ ] Security headers configured
+- [ ] SAST/DAST passed
+- [ ] Dependency scan clean
+- [ ] Penetration test done
+
+Code Quality:
+- [ ] Linting passed
+- [ ] Type checking passed
+- [ ] No code duplication >5%
+- [ ] Cyclomatic complexity <10
+
+Testing:
+- [ ] Unit tests >80% coverage
+- [ ] Integration tests pass
+- [ ] E2E tests pass
+- [ ] Performance tests pass
+- [ ] Accessibility 
+  - Detailed logging: ON
+   - CORS: Permissive
+   - Sample data: Available
+
+2. **Database:**
+   - Can drop/recreate freely
+   - Sample data can be added
+   - Migrations run automatically
+   - Backup optional
+
+3. **Security:**
+   - Relaxed (for development only)
+   - Test credentials allowed
+   - HTTPS optional
+   - CSRF optional (for testing)
+
+4. **Monitoring:**
+   - Console logging
+   - Detailed error messages
+   - Stack traces visible
+   - Performance profiling
+
+5. **Commands Available:**
+   - `reset-db` - Drop and recreate database
+   - `seed-data` - Add sample data
+   - `clear-cache` - Clear all caches
+   - `start deploy` - Begin deployment process
+
+---
+
+### 64.5 Production Phase Behavior
+
+**When `phase: "production"`:**
+
+1. **Configuration:**
+   - Debug mode: OFF
+   - Hot reload: Disabled
+   - Minimal logging: ON
+   - CORS: Strict
+   - Sample data: NOT available
+
+2. **Database:**
+   - Data preservation: MANDATORY
+   - Backups: Automatic
+   - Migrations: Careful, with backups
+   - 
+No destructive operations
+
+3. **Security:**
+   - Strict security policies
+   - Strong credentials required
+   - HTTPS: MANDATORY
+   - CSRF protection: ON
+   - Rate limiting: ON
+
+4. **Monitoring:**
+   - Production logging
+   - Error tracking (Sentry, etc.)
+   - Performance monitoring
+   - Uptime monitoring
+
+5. **Commands Available:**
+   - `backup-db` - Create database backup
+   - `restore-db` - Restore from backup
+   - `rollback` - Rollback to previous version
+   - `health-check` - Check system health
+
+---
+
+### 64.6 The `start deploy` Command
+
+**Purpose:** Transition from Development to Production
+
+**Workflow:**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│              START DEPLOY WORKFLOW                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Step 1: Pre-Deployment Checks                              │
+│  ─────────────────────────────                        

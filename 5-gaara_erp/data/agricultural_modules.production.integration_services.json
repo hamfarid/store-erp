@@ -1,0 +1,142 @@
+{
+  "module": "agricultural_modules.production.integration_services",
+  "imports": [
+    "certificates_models",
+    "django.contrib.auth.models",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "export_approval_models",
+    "farms.models",
+    "food_safety_models",
+    "inventory.models",
+    "models",
+    "purchasing.models"
+  ],
+  "classes": [
+    {
+      "name": "ProductType",
+      "methods": [],
+      "variables": [
+        "VEGETABLE",
+        "FRUIT",
+        "SEED",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "InventoryProductionIntegration",
+      "methods": [
+        "register_batch_to_inventory",
+        "register_waste_to_inventory",
+        "check_inventory_for_export",
+        "reserve_inventory_for_export"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmProductionIntegration",
+      "methods": [
+        "register_farm_harvest_for_production",
+        "get_farm_codings_for_export",
+        "check_farm_eligibility_for_export"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SupplierProductionIntegration",
+      "methods": [
+        "register_supplier_purchase_for_production",
+        "check_supplier_certifications"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CertificateIntegrationService",
+      "methods": [
+        "get_required_certificates_for_export"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "register_batch_to_inventory",
+      "parameters": [
+        "production_batch",
+        "warehouse",
+        "location",
+        "user"
+      ]
+    },
+    {
+      "name": "register_waste_to_inventory",
+      "parameters": [
+        "waste_sale",
+        "warehouse",
+        "location",
+        "user"
+      ]
+    },
+    {
+      "name": "check_inventory_for_export",
+      "parameters": [
+        "production_batch",
+        "quantity"
+      ]
+    },
+    {
+      "name": "reserve_inventory_for_export",
+      "parameters": [
+        "production_batch",
+        "quantity",
+        "export_approval",
+        "user"
+      ]
+    },
+    {
+      "name": "register_farm_harvest_for_production",
+      "parameters": [
+        "farm_harvest",
+        "user"
+      ]
+    },
+    {
+      "name": "get_farm_codings_for_export",
+      "parameters": [
+        "farm",
+        "export_destination"
+      ]
+    },
+    {
+      "name": "check_farm_eligibility_for_export",
+      "parameters": [
+        "farm",
+        "export_destination"
+      ]
+    },
+    {
+      "name": "register_supplier_purchase_for_production",
+      "parameters": [
+        "purchase_order",
+        "user"
+      ]
+    },
+    {
+      "name": "check_supplier_certifications",
+      "parameters": [
+        "supplier",
+        "product_type"
+      ]
+    },
+    {
+      "name": "get_required_certificates_for_export",
+      "parameters": [
+        "production_batch",
+        "export_destination"
+      ]
+    }
+  ],
+  "variables": []
+}

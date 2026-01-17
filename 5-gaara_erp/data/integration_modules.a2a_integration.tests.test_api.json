@@ -1,0 +1,91 @@
+{
+  "module": "integration_modules.a2a_integration.tests.test_api",
+  "imports": [
+    "django.contrib.auth",
+    "django.test",
+    "django.urls",
+    "models",
+    "rest_framework",
+    "rest_framework.test"
+  ],
+  "classes": [
+    {
+      "name": "ExternalSystemAPITest",
+      "methods": [
+        "setUp",
+        "test_get_external_systems_list",
+        "test_get_external_system_detail",
+        "test_create_external_system",
+        "test_update_external_system",
+        "test_delete_external_system"
+      ],
+      "variables": []
+    },
+    {
+      "name": "IntegrationConfigAPITest",
+      "methods": [
+        "setUp",
+        "test_get_integration_configs_list",
+        "test_execute_integration"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_external_systems_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_external_system_detail",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_external_system",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_external_system",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_delete_external_system",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_integration_configs_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_execute_integration",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,233 @@
+{
+  "module": "core_modules.setup.submodules.security.models",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SecuritySetting",
+      "methods": [
+        "__str__",
+        "get_settings",
+        "validate_password",
+        "is_ip_allowed"
+      ],
+      "variables": [
+        "password_min_length",
+        "password_require_uppercase",
+        "password_require_lowercase",
+        "password_require_digit",
+        "password_require_special",
+        "password_expiry_days",
+        "password_history_count",
+        "max_login_attempts",
+        "lockout_duration_minutes",
+        "session_timeout_minutes",
+        "remember_me_days",
+        "force_ssl",
+        "ssl_certificate",
+        "ssl_key",
+        "enable_ip_filtering",
+        "allowed_ips",
+        "enable_2fa",
+        "enable_captcha",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "BlockedIP",
+      "methods": [
+        "__str__",
+        "is_active",
+        "is_ip_blocked",
+        "block_ip"
+      ],
+      "variables": [
+        "ip_address",
+        "reason",
+        "blocked_at",
+        "blocked_until",
+        "is_permanent",
+        "blocked_by"
+      ]
+    },
+    {
+      "name": "SecurityAudit",
+      "methods": [
+        "__str__",
+        "log_audit"
+      ],
+      "variables": [
+        "AUDIT_TYPES",
+        "audit_type",
+        "user",
+        "ip_address",
+        "user_agent",
+        "description",
+        "timestamp",
+        "data",
+        "success"
+      ]
+    },
+    {
+      "name": "PasswordHistory",
+      "methods": [
+        "__str__",
+        "add_password_to_history",
+        "is_password_used_before"
+      ],
+      "variables": [
+        "user",
+        "password_hash",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_settings",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "validate_password",
+      "parameters": [
+        "self",
+        "password"
+      ]
+    },
+    {
+      "name": "is_ip_allowed",
+      "parameters": [
+        "self",
+        "ip_address"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_ip_blocked",
+      "parameters": [
+        "cls",
+        "ip_address"
+      ]
+    },
+    {
+      "name": "block_ip",
+      "parameters": [
+        "cls",
+        "ip_address",
+        "reason",
+        "duration_hours",
+        "is_permanent",
+        "blocked_by"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_audit",
+      "parameters": [
+        "cls",
+        "audit_type",
+        "description",
+        "user",
+        "ip_address",
+        "user_agent",
+        "data",
+        "success"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "add_password_to_history",
+      "parameters": [
+        "cls",
+        "user",
+        "password_hash"
+      ]
+    },
+    {
+      "name": "is_password_used_before",
+      "parameters": [
+        "cls",
+        "user",
+        "password_hash"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

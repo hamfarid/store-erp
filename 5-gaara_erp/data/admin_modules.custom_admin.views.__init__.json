@@ -1,0 +1,28 @@
+{
+  "module": "admin_modules.custom_admin.views.__init__",
+  "imports": [
+    "dashboard_views",
+    "django.contrib.auth.decorators",
+    "django.shortcuts",
+    "system_settings_views"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "list_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "detail_view",
+      "parameters": [
+        "request",
+        "item_id"
+      ]
+    }
+  ],
+  "variables": [
+    "__all__"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "module": "business_modules.inventory.stock_updater",
+  "imports": [
+    "__future__",
+    "compat",
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation",
+    "models",
+    "tracking",
+    "typing",
+    "utils"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "_validate_tracking_requirements",
+      "parameters": [
+        "product",
+        "lot",
+        "batch_number"
+      ]
+    },
+    {
+      "name": "_calculate_expiry_date",
+      "parameters": [
+        "product",
+        "lot",
+        "transaction_date"
+      ]
+    },
+    {
+      "name": "update_inventory_stock",
+      "parameters": [
+        "transaction_instance"
+      ]
+    }
+  ],
+  "variables": [
+    "INCOMING_TYPES",
+    "OUTGOING_TYPES"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "module": "services_modules.feasibility_studies.serializers",
+  "imports": [
+    "django.utils.translation",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "CashFlowSerializer",
+      "methods": [
+        "validate_year",
+        "validate"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FeasibilityStudySerializer",
+      "methods": [
+        "validate_discount_rate",
+        "validate_initial_investment",
+        "validate",
+        "create",
+        "update"
+      ],
+      "variables": [
+        "cash_flows",
+        "project",
+        "project_name"
+      ]
+    },
+    {
+      "name": "FeasibilityStudySimpleSerializer",
+      "methods": [],
+      "variables": [
+        "project",
+        "project_name",
+        "cash_flows_count"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "validate_year",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "validate_discount_rate",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_initial_investment",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "instance",
+        "validated_data"
+      ]
+    }
+  ],
+  "variables": []
+}

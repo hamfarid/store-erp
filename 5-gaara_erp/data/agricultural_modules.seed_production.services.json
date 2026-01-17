@@ -1,0 +1,161 @@
+{
+  "module": "agricultural_modules.seed_production.services",
+  "imports": [
+    "business_modules.inventory.services",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "SeedProductionOrderService",
+      "methods": [
+        "create_production_order",
+        "approve_production_order",
+        "verify_inventory",
+        "check_inventory_availability",
+        "start_production",
+        "complete_production",
+        "cancel_production_order",
+        "create_lot_from_order"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SeedProductionService",
+      "methods": [
+        "create_production_lot",
+        "update_production_lot",
+        "record_planting",
+        "record_harvest"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_production_order",
+      "parameters": [
+        "order_number",
+        "product",
+        "target_quantity_kg",
+        "parent_male_code",
+        "parent_male_quantity_kg",
+        "parent_female_code",
+        "parent_female_quantity_kg",
+        "production_location_code",
+        "planned_start_date",
+        "planned_end_date",
+        "branch",
+        "notes",
+        "created_by",
+        "assigned_to"
+      ]
+    },
+    {
+      "name": "approve_production_order",
+      "parameters": [
+        "order_id",
+        "user"
+      ]
+    },
+    {
+      "name": "verify_inventory",
+      "parameters": [
+        "order_id",
+        "user",
+        "male_parent_available",
+        "female_parent_available",
+        "male_parent_inventory_id",
+        "female_parent_inventory_id",
+        "notes"
+      ]
+    },
+    {
+      "name": "check_inventory_availability",
+      "parameters": [
+        "order_id"
+      ]
+    },
+    {
+      "name": "start_production",
+      "parameters": [
+        "order_id",
+        "user"
+      ]
+    },
+    {
+      "name": "complete_production",
+      "parameters": [
+        "order_id",
+        "user"
+      ]
+    },
+    {
+      "name": "cancel_production_order",
+      "parameters": [
+        "order_id",
+        "user",
+        "reason"
+      ]
+    },
+    {
+      "name": "create_lot_from_order",
+      "parameters": [
+        "order_id",
+        "lot_number",
+        "user",
+        "expected_seed_quantity_kg"
+      ]
+    },
+    {
+      "name": "create_production_lot",
+      "parameters": [
+        "lot_number",
+        "product",
+        "branch",
+        "parent_male_code",
+        "parent_female_code",
+        "production_location_code",
+        "planned_planting_date",
+        "expected_production_date",
+        "expected_seed_quantity_kg",
+        "responsible_person",
+        "created_by",
+        "is_parent_info_restricted",
+        "production_order"
+      ]
+    },
+    {
+      "name": "update_production_lot",
+      "parameters": [
+        "lot_id",
+        "user"
+      ]
+    },
+    {
+      "name": "record_planting",
+      "parameters": [
+        "lot_id",
+        "actual_planting_date",
+        "user",
+        "notes"
+      ]
+    },
+    {
+      "name": "record_harvest",
+      "parameters": [
+        "lot_id",
+        "actual_harvest_date",
+        "harvested_quantity_kg",
+        "user",
+        "notes"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

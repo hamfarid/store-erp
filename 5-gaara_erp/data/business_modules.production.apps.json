@@ -1,0 +1,18 @@
+{
+  "module": "business_modules.production.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "ProductionConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

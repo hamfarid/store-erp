@@ -1,0 +1,37 @@
+{
+  "module": "api_server.src.models.user",
+  "imports": [
+    "flask_sqlalchemy"
+  ],
+  "classes": [
+    {
+      "name": "User",
+      "methods": [
+        "__repr__",
+        "to_dict"
+      ],
+      "variables": [
+        "id",
+        "username",
+        "email"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__repr__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "to_dict",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "db"
+  ]
+}

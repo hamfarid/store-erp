@@ -1,0 +1,197 @@
+{
+  "module": "core_modules.setup.security.middleware",
+  "imports": [
+    "core_modules.setup.user_management.models",
+    "django.conf",
+    "django.core.cache",
+    "django.http",
+    "django.utils",
+    "django.utils.deprecation",
+    "json",
+    "models",
+    "re"
+  ],
+  "classes": [
+    {
+      "name": "SecurityMiddleware",
+      "methods": [
+        "__init__",
+        "load_security_settings",
+        "process_request",
+        "process_response",
+        "is_ip_blocked",
+        "apply_firewall_rules",
+        "apply_rate_limiting",
+        "check_sql_injection",
+        "check_xss",
+        "enforce_ssl",
+        "add_security_headers",
+        "contains_sql_injection",
+        "contains_sql_injection_in_dict",
+        "contains_xss",
+        "contains_xss_in_dict",
+        "get_client_ip"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CSRFMiddleware",
+      "methods": [
+        "process_view"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PrivilegeEscalationMiddleware",
+      "methods": [
+        "process_view",
+        "check_privilege_escalation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "get_response"
+      ]
+    },
+    {
+      "name": "load_security_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "process_request",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "process_response",
+      "parameters": [
+        "self",
+        "request",
+        "response"
+      ]
+    },
+    {
+      "name": "is_ip_blocked",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "apply_firewall_rules",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "apply_rate_limiting",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "check_sql_injection",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "check_xss",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "enforce_ssl",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "add_security_headers",
+      "parameters": [
+        "self",
+        "request",
+        "response"
+      ]
+    },
+    {
+      "name": "contains_sql_injection",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "contains_sql_injection_in_dict",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "contains_xss",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "contains_xss_in_dict",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    },
+    {
+      "name": "get_client_ip",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "process_view",
+      "parameters": [
+        "self",
+        "request",
+        "callback",
+        "callback_args",
+        "callback_kwargs"
+      ]
+    },
+    {
+      "name": "process_view",
+      "parameters": [
+        "self",
+        "request",
+        "callback",
+        "callback_args",
+        "callback_kwargs"
+      ]
+    },
+    {
+      "name": "check_privilege_escalation",
+      "parameters": [
+        "self",
+        "request",
+        "callback_kwargs"
+      ]
+    }
+  ],
+  "variables": []
+}

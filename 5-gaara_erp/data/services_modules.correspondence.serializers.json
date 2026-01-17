@@ -1,0 +1,172 @@
+{
+  "module": "services_modules.correspondence.serializers",
+  "imports": [
+    "django.contrib.auth",
+    "django.utils.translation",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CorrespondenceCategorySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CorrespondenceAttachmentSerializer",
+      "methods": [],
+      "variables": [
+        "uploaded_by"
+      ]
+    },
+    {
+      "name": "CorrespondenceCommentSerializer",
+      "methods": [],
+      "variables": [
+        "created_by"
+      ]
+    },
+    {
+      "name": "CorrespondenceHistorySerializer",
+      "methods": [],
+      "variables": [
+        "performed_by"
+      ]
+    },
+    {
+      "name": "CorrespondenceSerializer",
+      "methods": [
+        "get_correspondence_type_display",
+        "get_status_display",
+        "get_priority_display",
+        "get_attachments_count",
+        "get_comments_count",
+        "validate_reference_number",
+        "validate"
+      ],
+      "variables": [
+        "created_by",
+        "category",
+        "category_id",
+        "correspondence_type_display",
+        "status_display",
+        "priority_display",
+        "attachments_count",
+        "comments_count"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_correspondence_type_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_status_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_priority_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_attachments_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_comments_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate_reference_number",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "data"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

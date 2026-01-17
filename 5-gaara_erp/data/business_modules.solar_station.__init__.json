@@ -1,0 +1,9 @@
+{
+  "module": "business_modules.solar_station.__init__",
+  "imports": [
+    "solar_stations"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

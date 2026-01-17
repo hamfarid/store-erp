@@ -1,0 +1,54 @@
+{
+  "module": "agricultural_modules.farms.integration_assets",
+  "imports": [
+    "business_modules.assets.models",
+    "django.contrib.auth",
+    "django.db",
+    "django.shortcuts",
+    "django.utils",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "link_equipment_to_farm_activity",
+      "parameters": [
+        "farm_activity_id",
+        "asset_id",
+        "usage_duration_hours",
+        "notes"
+      ]
+    },
+    {
+      "name": "assign_assets_to_farm",
+      "parameters": [
+        "farm_id",
+        "asset_ids",
+        "assignment_date",
+        "notes"
+      ]
+    },
+    {
+      "name": "transfer_asset_between_farms",
+      "parameters": [
+        "asset_id",
+        "source_farm_id",
+        "destination_farm_id",
+        "transfer_date",
+        "notes"
+      ]
+    },
+    {
+      "name": "record_asset_maintenance_activity",
+      "parameters": [
+        "asset_id",
+        "farm_id",
+        "maintenance_date",
+        "description",
+        "cost",
+        "performed_by"
+      ]
+    }
+  ],
+  "variables": []
+}

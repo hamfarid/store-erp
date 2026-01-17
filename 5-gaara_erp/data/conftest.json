@@ -1,0 +1,11 @@
+{
+  "module": "conftest",
+  "imports": [
+    "django",
+    "django.conf",
+    "os"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

@@ -1,0 +1,169 @@
+{
+  "module": "admin_modules.setup_wizard.services.setup_wizard_service",
+  "imports": [
+    "datetime",
+    "django.utils",
+    "json",
+    "logging",
+    "os",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "SetupWizardService",
+      "methods": [
+        "__init__",
+        "_load_setup_steps",
+        "_create_default_steps",
+        "get_setup_steps",
+        "get_step",
+        "save_step_data",
+        "_save_current_state",
+        "load_current_state",
+        "complete_setup",
+        "_apply_settings",
+        "_create_company",
+        "_create_admin_user",
+        "_apply_system_settings",
+        "_activate_modules",
+        "_configure_email",
+        "_configure_database",
+        "_configure_backup",
+        "is_setup_completed",
+        "reset_setup"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "db_connection",
+        "config_path"
+      ]
+    },
+    {
+      "name": "_load_setup_steps",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_create_default_steps",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_setup_steps",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_step",
+      "parameters": [
+        "self",
+        "step_id"
+      ]
+    },
+    {
+      "name": "save_step_data",
+      "parameters": [
+        "self",
+        "step_id",
+        "data"
+      ]
+    },
+    {
+      "name": "_save_current_state",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "load_current_state",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete_setup",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_apply_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_create_company",
+      "parameters": [
+        "self",
+        "company_data"
+      ]
+    },
+    {
+      "name": "_create_admin_user",
+      "parameters": [
+        "self",
+        "admin_data"
+      ]
+    },
+    {
+      "name": "_apply_system_settings",
+      "parameters": [
+        "self",
+        "settings_data"
+      ]
+    },
+    {
+      "name": "_activate_modules",
+      "parameters": [
+        "self",
+        "modules_data"
+      ]
+    },
+    {
+      "name": "_configure_email",
+      "parameters": [
+        "self",
+        "email_data"
+      ]
+    },
+    {
+      "name": "_configure_database",
+      "parameters": [
+        "self",
+        "db_data"
+      ]
+    },
+    {
+      "name": "_configure_backup",
+      "parameters": [
+        "self",
+        "backup_data"
+      ]
+    },
+    {
+      "name": "is_setup_completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "reset_setup",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

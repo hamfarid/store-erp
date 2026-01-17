@@ -1,0 +1,9 @@
+{
+  "module": "ai_modules.models.disease_mappings",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "plant_diseases_mapping"
+  ]
+}

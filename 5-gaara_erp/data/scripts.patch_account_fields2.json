@@ -1,0 +1,25 @@
+{
+  "module": "scripts.patch_account_fields2",
+  "imports": [
+    "django",
+    "django.apps",
+    "django.db",
+    "os",
+    "sys",
+    "traceback"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "add_col",
+      "parameters": [
+        "model",
+        "field",
+        "name"
+      ]
+    }
+  ],
+  "variables": [
+    "log_path"
+  ]
+}

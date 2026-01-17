@@ -1,0 +1,140 @@
+{
+  "module": "business_modules.assets.services",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.db",
+    "django.db.models",
+    "django.db.models.functions",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "AssetDepreciationService",
+      "methods": [
+        "calculate_monthly_depreciation",
+        "calculate_and_post_depreciation",
+        "run_depreciation_for_period"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AssetReportService",
+      "methods": [
+        "get_dashboard_data",
+        "generate_asset_register_report",
+        "generate_depreciation_forecast_report"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AssetTransferService",
+      "methods": [
+        "transfer_asset"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AssetMaintenanceService",
+      "methods": [
+        "schedule_maintenance",
+        "complete_maintenance",
+        "get_maintenance_due_assets"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "calculate_monthly_depreciation",
+      "parameters": [
+        "asset"
+      ]
+    },
+    {
+      "name": "calculate_and_post_depreciation",
+      "parameters": [
+        "asset",
+        "depreciation_date",
+        "user"
+      ]
+    },
+    {
+      "name": "run_depreciation_for_period",
+      "parameters": [
+        "company_id",
+        "period_date",
+        "user"
+      ]
+    },
+    {
+      "name": "get_dashboard_data",
+      "parameters": [
+        "company_id",
+        "user"
+      ]
+    },
+    {
+      "name": "generate_asset_register_report",
+      "parameters": [
+        "company_id",
+        "category_id",
+        "location",
+        "as_of_date"
+      ]
+    },
+    {
+      "name": "generate_depreciation_forecast_report",
+      "parameters": [
+        "company_id",
+        "category_id",
+        "months"
+      ]
+    },
+    {
+      "name": "transfer_asset",
+      "parameters": [
+        "asset",
+        "to_location",
+        "to_department",
+        "to_responsible",
+        "transfer_date",
+        "reason",
+        "notes",
+        "user"
+      ]
+    },
+    {
+      "name": "schedule_maintenance",
+      "parameters": [
+        "asset",
+        "maintenance_type",
+        "scheduled_date",
+        "description",
+        "user"
+      ]
+    },
+    {
+      "name": "complete_maintenance",
+      "parameters": [
+        "maintenance",
+        "completion_date",
+        "performed_by",
+        "cost",
+        "next_due_date",
+        "notes",
+        "user"
+      ]
+    },
+    {
+      "name": "get_maintenance_due_assets",
+      "parameters": [
+        "company_id",
+        "days_ahead"
+      ]
+    }
+  ],
+  "variables": []
+}

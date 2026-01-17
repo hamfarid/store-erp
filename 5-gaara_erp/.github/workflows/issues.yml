@@ -1,0 +1,45 @@
+# FILE: .github/workflows/issues.yml | PURPOSE: Auto-create GitHub Issues from Task_List.md | OWNER: DevOps | RELATED: scripts/issues_from_tasklist.py, docs/Task_List.md | LAST-AUDITED: 2025-10-21
+
+name: Create Issues from Task_List
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (do not create issues)'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  create_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pyyaml
+
+      - name: Run issue generator
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: |
+          chmod +x scripts/issues_from_tasklist.py || true
+          python scripts/issues_from_tasklist.py docs/Task_List.md
+
+      - name: Summary
+        run: |
+          echo "✅ Issues created from docs/Task_List.md"
+          echo "Check: https://github.com/${{ github.repository }}/issues"
+

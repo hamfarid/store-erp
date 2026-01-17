@@ -1,0 +1,111 @@
+{
+  "module": "services_modules.beneficiaries.models.aid_type",
+  "imports": [
+    "core_modules.companies.models",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "AidType",
+      "methods": [
+        "__str__",
+        "activate",
+        "deactivate",
+        "get_active_types",
+        "get_by_code",
+        "can_be_deleted",
+        "get_statistics",
+        "full_name",
+        "status_display",
+        "save"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "activate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "deactivate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_active_types",
+      "parameters": [
+        "cls",
+        "company"
+      ]
+    },
+    {
+      "name": "get_by_code",
+      "parameters": [
+        "cls",
+        "code",
+        "company"
+      ]
+    },
+    {
+      "name": "can_be_deleted",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_statistics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "full_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "status_display",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

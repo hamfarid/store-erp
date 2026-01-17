@@ -1,0 +1,47 @@
+{
+  "module": "core_modules.core.models.system_setting",
+  "imports": [
+    "base_models",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SystemSetting",
+      "methods": [
+        "__str__",
+        "get_value"
+      ],
+      "variables": [
+        "key",
+        "value",
+        "description"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_value",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

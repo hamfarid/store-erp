@@ -1,0 +1,53 @@
+{
+  "module": "integration_modules.a2a_integration.admin",
+  "imports": [
+    "django.contrib",
+    "django.db",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ExternalSystemAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "IntegrationConfigAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "APICredentialAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "exclude"
+      ]
+    },
+    {
+      "name": "IntegrationLogAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

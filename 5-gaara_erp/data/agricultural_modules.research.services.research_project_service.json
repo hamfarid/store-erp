@@ -1,0 +1,87 @@
+{
+  "module": "agricultural_modules.research.services.research_project_service",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ResearchProjectService",
+      "methods": [
+        "create_project",
+        "update_project",
+        "get_project",
+        "get_projects",
+        "change_project_status",
+        "add_team_member",
+        "remove_team_member",
+        "get_project_statistics"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_project",
+      "parameters": [
+        "data",
+        "created_by"
+      ]
+    },
+    {
+      "name": "update_project",
+      "parameters": [
+        "project_id",
+        "data",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "get_project",
+      "parameters": [
+        "project_id"
+      ]
+    },
+    {
+      "name": "get_projects",
+      "parameters": [
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "change_project_status",
+      "parameters": [
+        "project_id",
+        "new_status",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "add_team_member",
+      "parameters": [
+        "project_id",
+        "member_data",
+        "created_by"
+      ]
+    },
+    {
+      "name": "remove_team_member",
+      "parameters": [
+        "project_id",
+        "researcher_id"
+      ]
+    },
+    {
+      "name": "get_project_statistics",
+      "parameters": [
+        "project_id"
+      ]
+    }
+  ],
+  "variables": []
+}

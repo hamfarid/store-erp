@@ -1,0 +1,190 @@
+{
+  "module": "agricultural_modules.seed_hybridization.cost_tracking_services",
+  "imports": [
+    "assets.models",
+    "cost_tracking_models",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "hr.models",
+    "inventory.models",
+    "inventory.services"
+  ],
+  "classes": [
+    {
+      "name": "HybridizationProjectService",
+      "methods": [
+        "create_project",
+        "update_project",
+        "get_project_by_external_id",
+        "get_project_cost_summary",
+        "generate_cost_summary_report"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ExpenseService",
+      "methods": [
+        "create_expense",
+        "update_expense_status",
+        "get_project_expenses"
+      ],
+      "variables": []
+    },
+    {
+      "name": "InventoryConsumptionService",
+      "methods": [
+        "record_inventory_consumption"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LaborCostService",
+      "methods": [
+        "record_labor_cost"
+      ],
+      "variables": []
+    },
+    {
+      "name": "EquipmentUsageService",
+      "methods": [
+        "record_equipment_usage"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CostReportService",
+      "methods": [
+        "get_project_cost_reports",
+        "get_latest_cost_report"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_project",
+      "parameters": [
+        "external_project_id",
+        "name",
+        "description",
+        "start_date",
+        "end_date",
+        "budget",
+        "created_by"
+      ]
+    },
+    {
+      "name": "update_project",
+      "parameters": [
+        "project_id"
+      ]
+    },
+    {
+      "name": "get_project_by_external_id",
+      "parameters": [
+        "external_project_id"
+      ]
+    },
+    {
+      "name": "get_project_cost_summary",
+      "parameters": [
+        "project_id"
+      ]
+    },
+    {
+      "name": "generate_cost_summary_report",
+      "parameters": [
+        "project_id",
+        "report_date",
+        "notes",
+        "created_by"
+      ]
+    },
+    {
+      "name": "create_expense",
+      "parameters": [
+        "project_id",
+        "category_id",
+        "description",
+        "amount",
+        "date",
+        "payment_status",
+        "reference_number",
+        "notes",
+        "created_by"
+      ]
+    },
+    {
+      "name": "update_expense_status",
+      "parameters": [
+        "expense_id",
+        "payment_status",
+        "approved_by"
+      ]
+    },
+    {
+      "name": "get_project_expenses",
+      "parameters": [
+        "project_id",
+        "category_id",
+        "start_date",
+        "end_date",
+        "payment_status"
+      ]
+    },
+    {
+      "name": "record_inventory_consumption",
+      "parameters": [
+        "project_id",
+        "inventory_item_id",
+        "quantity",
+        "unit_cost",
+        "date",
+        "notes",
+        "created_by"
+      ]
+    },
+    {
+      "name": "record_labor_cost",
+      "parameters": [
+        "project_id",
+        "employee_id",
+        "hours",
+        "hourly_rate",
+        "date",
+        "description",
+        "created_by"
+      ]
+    },
+    {
+      "name": "record_equipment_usage",
+      "parameters": [
+        "project_id",
+        "equipment_id",
+        "hours",
+        "hourly_rate",
+        "date",
+        "notes",
+        "created_by"
+      ]
+    },
+    {
+      "name": "get_project_cost_reports",
+      "parameters": [
+        "project_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "get_latest_cost_report",
+      "parameters": [
+        "project_id"
+      ]
+    }
+  ],
+  "variables": []
+}

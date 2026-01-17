@@ -1,0 +1,51 @@
+{
+  "module": "services_modules.beneficiaries.services.grant_service",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models",
+    "services_modules.notifications.services"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_grant_rule",
+      "parameters": [
+        "data",
+        "created_by"
+      ]
+    },
+    {
+      "name": "update_grant_rule",
+      "parameters": [
+        "rule_id",
+        "data",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "get_grant_rules",
+      "parameters": [
+        "filters",
+        "page",
+        "page_size"
+      ]
+    },
+    {
+      "name": "get_active_grant_rules",
+      "parameters": [
+        "year"
+      ]
+    },
+    {
+      "name": "deactivate_grant_rule",
+      "parameters": [
+        "rule_id",
+        "reason",
+        "deactivated_by"
+      ]
+    }
+  ],
+  "variables": []
+}

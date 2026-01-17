@@ -1,0 +1,139 @@
+{
+  "module": "business_modules.accounting.models.bank_account",
+  "imports": [
+    "account",
+    "account_type",
+    "business_modules.accounting.models",
+    "core_modules.core.models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "BankAccount",
+      "methods": [
+        "__str__",
+        "clean",
+        "get_balance",
+        "update_balance",
+        "set_as_default"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "account",
+        "currency",
+        "bank_name",
+        "branch_name",
+        "account_number",
+        "iban",
+        "swift_code",
+        "partner",
+        "is_active",
+        "is_default",
+        "notes"
+      ]
+    },
+    {
+      "name": "BankTransaction",
+      "methods": [
+        "__str__",
+        "clean",
+        "reconcile",
+        "unreconcile"
+      ],
+      "variables": [
+        "TRANSACTION_TYPE_CHOICES",
+        "bank_account",
+        "transaction_date",
+        "transaction_type",
+        "amount",
+        "reference",
+        "description",
+        "partner",
+        "is_reconciled"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_balance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_balance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_as_default",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "reconcile",
+      "parameters": [
+        "self",
+        "journal_entry"
+      ]
+    },
+    {
+      "name": "unreconcile",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

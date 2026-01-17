@@ -1,0 +1,173 @@
+{
+  "module": "services_modules.utilities.models.data_export",
+  "imports": [
+    "datetime",
+    "django.apps",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "os"
+  ],
+  "classes": [
+    {
+      "name": "DataExport",
+      "methods": [
+        "__str__",
+        "get_model_class",
+        "get_queryset",
+        "start_processing",
+        "mark_completed",
+        "mark_failed",
+        "cancel",
+        "update_progress",
+        "is_completed",
+        "is_failed",
+        "is_processing",
+        "duration",
+        "file_exists",
+        "delete_file",
+        "cleanup_old_exports",
+        "get_user_exports"
+      ],
+      "variables": [
+        "EXPORT_FORMATS",
+        "STATUS_CHOICES",
+        "name",
+        "description",
+        "app_label",
+        "model_name",
+        "format",
+        "query_params",
+        "status",
+        "progress",
+        "file_path",
+        "file_size",
+        "user",
+        "created_at",
+        "started_at",
+        "completed_at",
+        "error_message",
+        "is_scheduled",
+        "schedule_time"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_model_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "start_processing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_completed",
+      "parameters": [
+        "self",
+        "file_path",
+        "file_size"
+      ]
+    },
+    {
+      "name": "mark_failed",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_progress",
+      "parameters": [
+        "self",
+        "progress"
+      ]
+    },
+    {
+      "name": "is_completed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_failed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_processing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "file_exists",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete_file",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "cleanup_old_exports",
+      "parameters": [
+        "cls",
+        "days"
+      ]
+    },
+    {
+      "name": "get_user_exports",
+      "parameters": [
+        "cls",
+        "user",
+        "status"
+      ]
+    }
+  ],
+  "variables": []
+}

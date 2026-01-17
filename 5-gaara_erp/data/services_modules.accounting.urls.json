@@ -1,0 +1,27 @@
+{
+  "module": "services_modules.accounting.urls",
+  "imports": [
+    "django.http",
+    "django.urls"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "list_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "detail_view",
+      "parameters": [
+        "request",
+        "item_id"
+      ]
+    }
+  ],
+  "variables": [
+    "urlpatterns",
+    "app_name"
+  ]
+}

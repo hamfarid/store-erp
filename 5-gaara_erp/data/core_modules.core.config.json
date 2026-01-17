@@ -1,0 +1,79 @@
+{
+  "module": "core_modules.core.config",
+  "imports": [
+    "os",
+    "pathlib",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "Settings",
+      "methods": [
+        "__init__",
+        "load_from_env",
+        "DATABASE_URL",
+        "REDIS_URL"
+      ],
+      "variables": [
+        "SECRET_KEY",
+        "DEBUG",
+        "ALLOWED_HOSTS",
+        "DB_NAME",
+        "DB_USER",
+        "DB_PASSWORD",
+        "DB_HOST",
+        "DB_PORT",
+        "REPLICA_DB_NAME",
+        "REPLICA_DB_USER",
+        "REPLICA_DB_PASSWORD",
+        "REPLICA_DB_HOST",
+        "REPLICA_DB_PORT",
+        "REDIS_HOST",
+        "REDIS_PORT",
+        "REDIS_DB",
+        "REDIS_PASSWORD",
+        "EMAIL_HOST",
+        "EMAIL_PORT",
+        "EMAIL_USE_TLS",
+        "EMAIL_HOST_USER",
+        "EMAIL_HOST_PASSWORD",
+        "CORS_ALLOWED_ORIGINS",
+        "OPENAI_API_KEY",
+        "ANTHROPIC_API_KEY",
+        "MAX_UPLOAD_SIZE",
+        "ALLOWED_FILE_TYPES"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "load_from_env",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "DATABASE_URL",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "REDIS_URL",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "BASE_DIR",
+    "ENV_FILE_PATH",
+    "settings"
+  ]
+}

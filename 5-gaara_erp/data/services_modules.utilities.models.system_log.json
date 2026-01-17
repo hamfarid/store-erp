@@ -1,0 +1,103 @@
+{
+  "module": "services_modules.utilities.models.system_log",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SystemLog",
+      "methods": [
+        "__str__",
+        "log",
+        "debug",
+        "info",
+        "warning",
+        "error",
+        "critical"
+      ],
+      "variables": [
+        "LOG_LEVELS",
+        "timestamp",
+        "level",
+        "module",
+        "function",
+        "message",
+        "details",
+        "user",
+        "ip_address",
+        "user_agent",
+        "request_path",
+        "request_method"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log",
+      "parameters": [
+        "cls",
+        "message",
+        "level",
+        "module",
+        "function",
+        "details",
+        "user",
+        "request"
+      ]
+    },
+    {
+      "name": "debug",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    },
+    {
+      "name": "info",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    },
+    {
+      "name": "warning",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    },
+    {
+      "name": "error",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    },
+    {
+      "name": "critical",
+      "parameters": [
+        "cls",
+        "message"
+      ]
+    }
+  ],
+  "variables": []
+}

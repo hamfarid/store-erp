@@ -1,0 +1,157 @@
+{
+  "module": "services_modules.workflows.services.workflow_integration",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils.translation",
+    "gaara_erp_new.core_modules.activity_log.models",
+    "gaara_erp_new.core_modules.tasks.models.task",
+    "gaara_erp_new.core_modules.tasks.models.task_notifications",
+    "gaara_erp_new.services_modules.workflows.models.workflow",
+    "gaara_erp_new.services_modules.workflows.models.workflow_alerts",
+    "gaara_erp_new.services_modules.workflows.models.workflow_conditional",
+    "gaara_erp_new.services_modules.workflows.models.workflow_documentation",
+    "logging"
+  ],
+  "classes": [
+    {
+      "name": "WorkflowTaskIntegration",
+      "methods": [
+        "update_task_from_workflow",
+        "get_tasks_for_workflow",
+        "trigger_workflow_from_task"
+      ],
+      "variables": []
+    },
+    {
+      "name": "WorkflowNotificationService",
+      "methods": [
+        "create_notification_from_workflow",
+        "create_workflow_alert_notification"
+      ],
+      "variables": []
+    },
+    {
+      "name": "WorkflowTaskRelation",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "RELATION_TYPES",
+        "task",
+        "workflow_execution",
+        "action_execution",
+        "relation_type",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "WorkflowExecution",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "WorkflowActionExecution",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ConditionalBranch",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "WorkflowAlert",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "WorkflowExecutionLog",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Task",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TaskNotification",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ActivityLog",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_task_from_workflow",
+      "parameters": [
+        "workflow_execution",
+        "action_execution",
+        "task_data"
+      ]
+    },
+    {
+      "name": "update_task_from_workflow",
+      "parameters": [
+        "workflow_execution",
+        "action_execution",
+        "task_id",
+        "update_data"
+      ]
+    },
+    {
+      "name": "get_tasks_for_workflow",
+      "parameters": [
+        "workflow_execution"
+      ]
+    },
+    {
+      "name": "trigger_workflow_from_task",
+      "parameters": [
+        "task",
+        "event_type",
+        "user",
+        "context_data"
+      ]
+    },
+    {
+      "name": "create_notification_from_workflow",
+      "parameters": [
+        "workflow_execution",
+        "action_execution",
+        "notification_data"
+      ]
+    },
+    {
+      "name": "create_workflow_alert_notification",
+      "parameters": [
+        "alert_instance"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

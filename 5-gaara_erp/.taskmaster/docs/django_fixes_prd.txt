@@ -1,0 +1,101 @@
+# Django ERP System Complete Repair Project
+
+## Project Overview
+Comprehensive repair and restoration of a Django 5.2.5 ERP system with multiple modules experiencing critical syntax errors, import errors, model relationship conflicts, and broken test suite. The goal is to achieve 100% functional Django system with zero test failures.
+
+## Current System State
+- Django 5.2.5 framework with REST API
+- Multi-module architecture: admin_modules, agricultural_modules, ai_modules, core_modules, integration_modules, services_modules, utility_modules
+- Virtual environment at D:/home/ubuntu/gaara_erp_v5/.venv/
+- PostgreSQL/SQLite database support
+- Multiple critical blocking errors preventing Django startup
+
+## Critical Issues Identified
+
+### 1. Import Errors and Model Mismatches
+- agricultural_modules/variety_trials/admin.py: Cannot import 'FertilizationProgram' from models
+- services_modules/hr/admin.py: Cannot import 'EmployeeTraining' from models
+- Multiple missing model references causing admin autodiscovery failures
+
+### 2. Syntax Errors
+- services_modules/feasibility_studies/admin.py: Unterminated string literal at line 58
+- Multiple unterminated strings and malformed code blocks
+- Indentation errors across various modules
+
+### 3. Model Relationship Conflicts
+- core.Department.company vs hr.Department.company: Reverse accessor clashes
+- experiments.Variety.created_by vs seed_hybridization.PlantVariety.created_by: Accessor conflicts
+- Multiple related_name conflicts requiring resolution
+
+### 4. Missing Dependencies and Apps
+- assets.FixedAsset.project: References non-existent 'projects.Project'
+- feasibility_studies.FeasibilityStudy.project: Missing projects app
+- variety_trials.VarietyTrial.farm_plot: Missing farms app
+- Missing polib dependency for locale module
+
+### 5. Database Relationship Issues
+- Foreign key references to non-existent models
+- Lazy reference failures across multiple apps
+- Abstract model relationship errors
+
+## Technical Requirements
+
+### Phase 1: Critical Infrastructure Fixes
+1. Fix all syntax errors preventing Django startup
+2. Resolve import errors in admin modules
+3. Install missing dependencies (polib)
+4. Correct model import statements
+5. Fix unterminated strings and indentation issues
+
+### Phase 2: Model Relationship Resolution
+1. Add proper related_name attributes to resolve accessor conflicts
+2. Fix foreign key references to non-existent models
+3. Create missing model stubs or remove invalid references
+4. Ensure all lazy references resolve correctly
+
+### Phase 3: Admin Interface Restoration
+1. Verify all admin imports are valid
+2. Test admin autodiscovery functionality
+3. Ensure all registered models exist
+4. Fix admin configuration conflicts
+
+### Phase 4: Database Schema Validation
+1. Run Django system checks without errors
+2. Validate all model relationships
+3. Ensure migration compatibility
+4. Test database operations
+
+### Phase 5: Complete Testing Suite
+1. Fix all failing tests
+2. Ensure 100% test coverage where possible
+3. Validate API endpoints functionality
+4. Test frontend-backend integration
+
+## Success Criteria
+- Django manages.py check returns zero errors
+- Admin interface loads without import errors
+- All tests pass with zero failures
+- API endpoints functional
+- Database operations working correctly
+- Complete system operational at 100%
+
+## Technical Constraints
+- Must maintain Django 5.2.5 compatibility
+- Preserve existing database schema where possible
+- Maintain multi-module architecture
+- Keep virtual environment configuration
+- Support both PostgreSQL and SQLite databases
+
+## Delivery Timeline
+- Phase 1: Immediate (critical blocking fixes)
+- Phase 2: High priority (model relationship fixes)
+- Phase 3: High priority (admin interface restoration)
+- Phase 4: Medium priority (database validation)
+- Phase 5: Medium priority (complete testing)
+
+## Risk Mitigation
+- Create backups before major changes
+- Test fixes incrementally
+- Maintain rollback capability
+- Document all changes made
+- Validate each fix before proceeding

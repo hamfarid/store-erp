@@ -1,0 +1,137 @@
+{
+  "module": "agricultural_modules.variety_trials.tests.test_services",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models",
+    "services",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "VarietyTrialServicesTest",
+      "methods": [
+        "setUp",
+        "test_create_variety_trial",
+        "test_update_variety_trial",
+        "test_delete_variety_trial"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TrialVarietyServicesTest",
+      "methods": [
+        "setUp",
+        "test_add_variety_to_trial",
+        "test_add_competitor_variety_to_trial",
+        "test_remove_variety_from_trial"
+      ],
+      "variables": []
+    },
+    {
+      "name": "HarvestDataServicesTest",
+      "methods": [
+        "setUp",
+        "test_record_harvest_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CharacteristicsServicesTest",
+      "methods": [
+        "setUp",
+        "test_record_fruit_characteristics",
+        "test_record_plant_characteristics"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_variety_trial",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_variety_trial",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_delete_variety_trial",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_add_variety_to_trial",
+      "parameters": [
+        "self",
+        "mock_get_variety"
+      ]
+    },
+    {
+      "name": "test_add_competitor_variety_to_trial",
+      "parameters": [
+        "self",
+        "mock_get_variety"
+      ]
+    },
+    {
+      "name": "test_remove_variety_from_trial",
+      "parameters": [
+        "self",
+        "mock_get_variety"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_harvest_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_fruit_characteristics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_plant_characteristics",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

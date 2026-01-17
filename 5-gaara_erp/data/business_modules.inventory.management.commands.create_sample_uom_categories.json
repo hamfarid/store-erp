@@ -1,0 +1,28 @@
+{
+  "module": "business_modules.inventory.management.commands.create_sample_uom_categories",
+  "imports": [
+    "business_modules.inventory.models",
+    "django.core.management.base",
+    "django.db"
+  ],
+  "classes": [
+    {
+      "name": "Command",
+      "methods": [
+        "handle"
+      ],
+      "variables": [
+        "help"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "handle",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

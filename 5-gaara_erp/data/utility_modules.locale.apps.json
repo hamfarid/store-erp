@@ -1,0 +1,29 @@
+{
+  "module": "utility_modules.locale.apps",
+  "imports": [
+    "django.apps",
+    "django.utils.translation",
+    "utility_modules.locale.signals"
+  ],
+  "classes": [
+    {
+      "name": "LocaleConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

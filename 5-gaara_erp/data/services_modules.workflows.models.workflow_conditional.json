@@ -1,0 +1,117 @@
+{
+  "module": "services_modules.workflows.models.workflow_conditional",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils.translation",
+    "json"
+  ],
+  "classes": [
+    {
+      "name": "ConditionalBranch",
+      "methods": [
+        "__str__",
+        "evaluate_condition"
+      ],
+      "variables": [
+        "OPERATOR_CHOICES",
+        "workflow",
+        "name",
+        "description",
+        "source_action",
+        "condition_field",
+        "condition_operator",
+        "condition_value",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ConditionalBranchTarget",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "branch",
+        "target_action",
+        "condition_result",
+        "order"
+      ]
+    },
+    {
+      "name": "ConditionalBranchExecution",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "branch",
+        "workflow_execution",
+        "condition_result",
+        "context_data",
+        "executed_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "evaluate_condition",
+      "parameters": [
+        "self",
+        "context_data"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

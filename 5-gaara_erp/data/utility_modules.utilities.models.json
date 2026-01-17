@@ -1,0 +1,45 @@
+{
+  "module": "utility_modules.utilities.models",
+  "imports": [
+    "activity_log",
+    "audit_model",
+    "cache_model",
+    "django.apps",
+    "file_storage_model",
+    "logging",
+    "monitoring",
+    "notification_model",
+    "scheduler_model",
+    "settings_model"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "get_available_models",
+      "parameters": []
+    },
+    {
+      "name": "get_model_by_name",
+      "parameters": [
+        "model_name"
+      ]
+    },
+    {
+      "name": "list_all_models",
+      "parameters": []
+    },
+    {
+      "name": "initialize_utilities_models",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "__all__",
+    "MODEL_REGISTRY",
+    "__version__",
+    "__author__",
+    "__maintainer__",
+    "__email__",
+    "logger"
+  ]
+}

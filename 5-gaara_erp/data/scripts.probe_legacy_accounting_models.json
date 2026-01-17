@@ -1,0 +1,17 @@
+{
+  "module": "scripts.probe_legacy_accounting_models",
+  "imports": [
+    "importlib.util",
+    "os",
+    "pathlib",
+    "traceback"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "ROOT",
+    "legacy",
+    "report",
+    "info"
+  ]
+}

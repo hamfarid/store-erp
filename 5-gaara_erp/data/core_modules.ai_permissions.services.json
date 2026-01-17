@@ -1,0 +1,123 @@
+{
+  "module": "core_modules.ai_permissions.services",
+  "imports": [
+    "core_modules.permissions.unified_permissions_model",
+    "django.conf",
+    "django.core.exceptions",
+    "django.db.models",
+    "django.utils",
+    "models",
+    "unified_permissions.services"
+  ],
+  "classes": [
+    {
+      "name": "AIPermissionService",
+      "methods": [
+        "check_agent_permission",
+        "check_user_permission",
+        "check_a2a_permission",
+        "assign_role_to_agent",
+        "assign_permission_to_agent",
+        "set_module_permissions",
+        "set_a2a_permission",
+        "add_permission_dependency",
+        "log_permission_use"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "check_agent_permission",
+      "parameters": [
+        "agent",
+        "permission_code",
+        "module",
+        "context"
+      ]
+    },
+    {
+      "name": "check_user_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "module"
+      ]
+    },
+    {
+      "name": "check_a2a_permission",
+      "parameters": [
+        "source_agent",
+        "target_agent",
+        "permission_type"
+      ]
+    },
+    {
+      "name": "assign_role_to_agent",
+      "parameters": [
+        "agent",
+        "role",
+        "scope_country",
+        "scope_company",
+        "scope_branch",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "assign_permission_to_agent",
+      "parameters": [
+        "agent",
+        "permission",
+        "scope",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "set_module_permissions",
+      "parameters": [
+        "ai_model",
+        "module",
+        "can_read",
+        "can_write",
+        "can_execute",
+        "can_delegate",
+        "additional_permissions"
+      ]
+    },
+    {
+      "name": "set_a2a_permission",
+      "parameters": [
+        "source_agent",
+        "target_agent",
+        "can_query",
+        "can_instruct",
+        "can_delegate",
+        "can_override",
+        "additional_permissions"
+      ]
+    },
+    {
+      "name": "add_permission_dependency",
+      "parameters": [
+        "ai_permission",
+        "user_permission_code",
+        "dependency_type",
+        "description"
+      ]
+    },
+    {
+      "name": "log_permission_use",
+      "parameters": [
+        "agent",
+        "action",
+        "entity_type",
+        "entity_id",
+        "details",
+        "user"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,59 @@
+# ملفات البيئة والأمان
+.env
+.env.local
+.env.production
+*.key
+*.pem
+
+# قواعد البيانات
+*.db
+*.sqlite
+*.sqlite3
+instance/
+
+# ملفات Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ملفات IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ملفات النظام
+.DS_Store
+Thumbs.db
+
+# ملفات السجلات
+*.log
+logs/
+
+# ملفات مؤقتة
+tmp/
+temp/
+.tmp/
+
+# ملفات النسخ الاحتياطية
+*.backup
+*.bak
+*_backup*

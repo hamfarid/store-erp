@@ -1,0 +1,83 @@
+{
+  "module": "services_modules.hr.tests.test_employee_document",
+  "imports": [
+    "datetime",
+    "django.core.files.uploadedfile",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.department",
+    "models.employee",
+    "models.employee_document",
+    "models.position",
+    "services_modules.core.models.branch",
+    "services_modules.core.models.company"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeDocumentModelTest",
+      "methods": [
+        "setUp",
+        "test_create_employee_document",
+        "test_is_expiring_soon",
+        "test_is_expired",
+        "test_str_representation",
+        "test_unique_document_type_per_employee",
+        "test_document_file_handling",
+        "tearDown"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_employee_document",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_expiring_soon",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_document_type_per_employee",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_document_file_handling",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "tearDown",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

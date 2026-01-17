@@ -1,0 +1,29 @@
+{
+  "module": "integration_modules.ai_monitoring.apps",
+  "imports": [
+    "django.apps",
+    "integration_modules.ai_monitoring.signals"
+  ],
+  "classes": [
+    {
+      "name": "AiMonitoringConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

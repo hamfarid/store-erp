@@ -1,0 +1,203 @@
+{
+  "module": "core_modules.permissions.api",
+  "imports": [
+    "abc",
+    "datetime",
+    "django.conf",
+    "django.contrib.auth",
+    "django.utils",
+    "exceptions",
+    "forex_python.converter",
+    "langfuse",
+    "langfuse.model",
+    "logging",
+    "os",
+    "time",
+    "traceback",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "StatusChoices",
+      "methods": [],
+      "variables": [
+        "PROCESSING",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
+    {
+      "name": "BaseAIAgent",
+      "methods": [
+        "__init__",
+        "execute",
+        "_handle_execution_error",
+        "run"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SalesDataAnalyzerAgent",
+      "methods": [
+        "__init__",
+        "execute"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ExchangeRateAgent",
+      "methods": [
+        "__init__",
+        "execute"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MockExchangeRateAgent",
+      "methods": [
+        "__init__",
+        "execute"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LocationDetectionAgent",
+      "methods": [
+        "__init__",
+        "execute"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentError",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "AgentExecutionError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgentConfigurationError",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "log_system_error",
+      "parameters": [
+        "level",
+        "source_module",
+        "message",
+        "exc_info",
+        "user",
+        "request_info_extra"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "agent_name",
+        "default_model_id",
+        "user"
+      ]
+    },
+    {
+      "name": "execute",
+      "parameters": [
+        "self",
+        "input_data"
+      ]
+    },
+    {
+      "name": "_handle_execution_error",
+      "parameters": [
+        "self",
+        "input_data",
+        "exception",
+        "trace",
+        "duration_ms"
+      ]
+    },
+    {
+      "name": "run",
+      "parameters": [
+        "self",
+        "input_data"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "execute",
+      "parameters": [
+        "self",
+        "input_data"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "execute",
+      "parameters": [
+        "self",
+        "input_data"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "execute",
+      "parameters": [
+        "self",
+        "input_data"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "execute",
+      "parameters": [
+        "self",
+        "input_data"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "agent_name",
+        "original_exception"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "User"
+  ]
+}

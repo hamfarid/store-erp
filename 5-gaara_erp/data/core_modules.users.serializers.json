@@ -1,0 +1,312 @@
+{
+  "module": "core_modules.users.serializers",
+  "imports": [
+    "django.contrib.auth",
+    "django.utils.translation",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserProfileSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserSettingsSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserDeviceSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserSessionSerializer",
+      "methods": [],
+      "variables": [
+        "device"
+      ]
+    },
+    {
+      "name": "UserActivitySerializer",
+      "methods": [],
+      "variables": [
+        "activity_type_display"
+      ]
+    },
+    {
+      "name": "UserNotificationPreferenceSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserAPIKeySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserSerializer",
+      "methods": [],
+      "variables": [
+        "full_name",
+        "profile",
+        "settings"
+      ]
+    },
+    {
+      "name": "UserCreateSerializer",
+      "methods": [
+        "validate",
+        "create"
+      ],
+      "variables": [
+        "password",
+        "password_confirm"
+      ]
+    },
+    {
+      "name": "UserUpdateSerializer",
+      "methods": [
+        "validate_email",
+        "validate_username"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ChangePasswordSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "current_password",
+        "new_password",
+        "new_password_confirm"
+      ]
+    },
+    {
+      "name": "ResetPasswordSerializer",
+      "methods": [],
+      "variables": [
+        "email"
+      ]
+    },
+    {
+      "name": "SetNewPasswordSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "token",
+        "uidb64",
+        "password",
+        "password_confirm"
+      ]
+    },
+    {
+      "name": "LoginSerializer",
+      "methods": [],
+      "variables": [
+        "email",
+        "password",
+        "remember_me"
+      ]
+    },
+    {
+      "name": "UserProfileUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserSettingsUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "UserNotificationPreferenceUpdateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CreateAPIKeySerializer",
+      "methods": [],
+      "variables": [
+        "name",
+        "expires_in_days"
+      ]
+    },
+    {
+      "name": "RegisterDeviceSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "validate_email",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_username",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

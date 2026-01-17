@@ -1,0 +1,156 @@
+{
+  "module": "admin_modules.data_import_export.modles.import_export_tasks",
+  "imports": [
+    "celery",
+    "csv",
+    "datetime",
+    "django.apps",
+    "django.conf",
+    "django.core.files.storage",
+    "django.core.mail",
+    "django.db",
+    "django.utils",
+    "gzip",
+    "json",
+    "logging",
+    "os",
+    "pandas",
+    "pathlib",
+    "requests",
+    "typing",
+    "uuid",
+    "xml.etree.ElementTree",
+    "zipfile"
+  ],
+  "classes": [
+    {
+      "name": "CallbackTask",
+      "methods": [
+        "on_success",
+        "on_failure",
+        "on_retry"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "process_import_job",
+      "parameters": [
+        "self",
+        "job_id"
+      ]
+    },
+    {
+      "name": "process_import_file",
+      "parameters": [
+        "job"
+      ]
+    },
+    {
+      "name": "read_import_file",
+      "parameters": [
+        "job"
+      ]
+    },
+    {
+      "name": "read_csv_file",
+      "parameters": [
+        "file_path",
+        "job"
+      ]
+    },
+    {
+      "name": "read_excel_file",
+      "parameters": [
+        "file_path",
+        "job"
+      ]
+    },
+    {
+      "name": "process_export_job",
+      "parameters": [
+        "self",
+        "job_id"
+      ]
+    },
+    {
+      "name": "cleanup_old_files",
+      "parameters": []
+    },
+    {
+      "name": "cleanup_old_history",
+      "parameters": []
+    },
+    {
+      "name": "send_job_notifications",
+      "parameters": [
+        "job",
+        "trigger"
+      ]
+    },
+    {
+      "name": "send_email_notification",
+      "parameters": [
+        "job",
+        "notification"
+      ]
+    },
+    {
+      "name": "read_json_file",
+      "parameters": [
+        "file_path",
+        "job"
+      ]
+    },
+    {
+      "name": "read_xml_file",
+      "parameters": [
+        "file_path",
+        "job"
+      ]
+    },
+    {
+      "name": "read_tsv_file",
+      "parameters": [
+        "file_path",
+        "job"
+      ]
+    },
+    {
+      "name": "on_success",
+      "parameters": [
+        "self",
+        "retval",
+        "task_id",
+        "args",
+        "kwargs"
+      ]
+    },
+    {
+      "name": "on_failure",
+      "parameters": [
+        "self",
+        "exc",
+        "task_id",
+        "args",
+        "kwargs",
+        "einfo"
+      ]
+    },
+    {
+      "name": "on_retry",
+      "parameters": [
+        "self",
+        "exc",
+        "task_id",
+        "args",
+        "kwargs",
+        "einfo"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

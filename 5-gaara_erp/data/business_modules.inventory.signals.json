@@ -1,0 +1,28 @@
+{
+  "module": "business_modules.inventory.signals",
+  "imports": [
+    "compat",
+    "decimal",
+    "django.db.models.signals",
+    "django.dispatch"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "handle_stockmove_saved",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "handle_stockmove_deleted",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    }
+  ],
+  "variables": []
+}

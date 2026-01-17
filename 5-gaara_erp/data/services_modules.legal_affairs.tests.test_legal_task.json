@@ -1,0 +1,122 @@
+{
+  "module": "services_modules.legal_affairs.tests.test_legal_task",
+  "imports": [
+    "core_modules.core.models.company",
+    "django.contrib.auth.models",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "services_modules.legal_affairs.models.legal_case",
+    "services_modules.legal_affairs.models.legal_contract",
+    "services_modules.legal_affairs.models.legal_task"
+  ],
+  "classes": [
+    {
+      "name": "LegalTaskModelTest",
+      "methods": [
+        "setUp",
+        "test_task_creation",
+        "test_string_representation",
+        "test_validation_error_on_no_relation",
+        "test_is_overdue",
+        "test_days_until_due",
+        "test_complete_task",
+        "test_cancel_task",
+        "test_reassign_task",
+        "test_update_progress",
+        "test_calculate_efficiency",
+        "test_get_related_entity",
+        "test_validation_error_on_invalid_dates",
+        "test_validation_error_on_negative_values"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_task_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_string_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_error_on_no_relation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_days_until_due",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_complete_task",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_cancel_task",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reassign_task",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_progress",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_efficiency",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_related_entity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_error_on_invalid_dates",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_error_on_negative_values",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

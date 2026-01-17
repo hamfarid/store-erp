@@ -1,0 +1,112 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.data_integrity_checker",
+  "imports": [],
+  "classes": [
+    {
+      "name": "DataIntegrityChecker",
+      "methods": [
+        "__init__",
+        "execute_query",
+        "add_rule",
+        "check_all_rules",
+        "check_data_consistency",
+        "verify_relationships",
+        "identify_orphaned_data",
+        "get_results",
+        "clear_results"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MockDBConnection",
+      "methods": [
+        "execute_query"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "db_connection",
+        "db_connection_mock"
+      ]
+    },
+    {
+      "name": "execute_query",
+      "parameters": [
+        "self",
+        "query_sql"
+      ]
+    },
+    {
+      "name": "add_rule",
+      "parameters": [
+        "self",
+        "name",
+        "query",
+        "expected_result",
+        "severity"
+      ]
+    },
+    {
+      "name": "check_all_rules",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_data_consistency",
+      "parameters": [
+        "self",
+        "table_name",
+        "column_name",
+        "expected_type",
+        "value_range",
+        "allowed_values"
+      ]
+    },
+    {
+      "name": "verify_relationships",
+      "parameters": [
+        "self",
+        "primary_table",
+        "primary_key_column",
+        "foreign_table",
+        "foreign_key_column"
+      ]
+    },
+    {
+      "name": "identify_orphaned_data",
+      "parameters": [
+        "self",
+        "table_name",
+        "parent_table",
+        "parent_key_column",
+        "child_foreign_key_column"
+      ]
+    },
+    {
+      "name": "get_results",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clear_results",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "execute_query",
+      "parameters": [
+        "self",
+        "query_sql"
+      ]
+    }
+  ],
+  "variables": []
+}

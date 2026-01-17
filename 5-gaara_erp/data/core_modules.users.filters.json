@@ -1,0 +1,133 @@
+{
+  "module": "core_modules.users.filters",
+  "imports": [
+    "django.contrib.auth",
+    "django.utils.translation",
+    "django_filters",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "UserFilter",
+      "methods": [],
+      "variables": [
+        "email",
+        "username",
+        "first_name",
+        "last_name",
+        "is_active",
+        "is_staff",
+        "date_joined_after",
+        "date_joined_before",
+        "last_login_after",
+        "last_login_before"
+      ]
+    },
+    {
+      "name": "UserProfileFilter",
+      "methods": [],
+      "variables": [
+        "user_email",
+        "user_username",
+        "city",
+        "country",
+        "gender",
+        "birth_date_after",
+        "birth_date_before",
+        "created_at_after",
+        "created_at_before"
+      ]
+    },
+    {
+      "name": "UserDeviceFilter",
+      "methods": [],
+      "variables": [
+        "user_email",
+        "user_username",
+        "device_name",
+        "device_id",
+        "device_type",
+        "os_name",
+        "browser_name",
+        "is_active",
+        "created_at_after",
+        "created_at_before",
+        "last_login_after",
+        "last_login_before"
+      ]
+    },
+    {
+      "name": "UserSessionFilter",
+      "methods": [],
+      "variables": [
+        "user_email",
+        "user_username",
+        "ip_address",
+        "is_active",
+        "login_time_after",
+        "login_time_before",
+        "last_activity_after",
+        "last_activity_before",
+        "logout_time_after",
+        "logout_time_before"
+      ]
+    },
+    {
+      "name": "UserActivityFilter",
+      "methods": [],
+      "variables": [
+        "user_email",
+        "user_username",
+        "activity_type",
+        "description",
+        "ip_address",
+        "timestamp_after",
+        "timestamp_before"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": [
+    "User"
+  ]
+}

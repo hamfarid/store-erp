@@ -1,0 +1,309 @@
+{
+  "module": "core_modules.workflow",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "json",
+    "task"
+  ],
+  "classes": [
+    {
+      "name": "WorkflowDefinition",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "module",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "WorkflowState",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "workflow",
+        "name",
+        "code",
+        "description",
+        "is_initial",
+        "is_final",
+        "ui_color",
+        "ui_icon",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "WorkflowTransition",
+      "methods": [
+        "__str__",
+        "get_conditions",
+        "set_conditions",
+        "get_actions",
+        "set_actions",
+        "clean"
+      ],
+      "variables": [
+        "workflow",
+        "name",
+        "description",
+        "source_state",
+        "target_state",
+        "permission_codename",
+        "conditions",
+        "actions",
+        "requires_approval",
+        "approval_levels",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ApprovalStep",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "transition",
+        "level",
+        "name",
+        "description",
+        "permission_codename",
+        "skip_if_approver_is_creator",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TaskWorkflowHistory",
+      "methods": [
+        "__str__",
+        "get_additional_data",
+        "set_additional_data"
+      ],
+      "variables": [
+        "task",
+        "workflow",
+        "transition",
+        "from_state",
+        "to_state",
+        "executed_by",
+        "executed_at",
+        "comments",
+        "additional_data"
+      ]
+    },
+    {
+      "name": "TaskApproval",
+      "methods": [
+        "__str__",
+        "approve",
+        "reject",
+        "skip"
+      ],
+      "variables": [
+        "task",
+        "transition",
+        "approval_step",
+        "status",
+        "actioned_by",
+        "actioned_at",
+        "comments",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Status",
+      "methods": [],
+      "variables": [
+        "PENDING",
+        "APPROVED",
+        "REJECTED",
+        "SKIPPED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_conditions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_conditions",
+      "parameters": [
+        "self",
+        "conditions_dict"
+      ]
+    },
+    {
+      "name": "get_actions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_actions",
+      "parameters": [
+        "self",
+        "actions_dict"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_additional_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_additional_data",
+      "parameters": [
+        "self",
+        "data_dict"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "approve",
+      "parameters": [
+        "self",
+        "user",
+        "comments"
+      ]
+    },
+    {
+      "name": "reject",
+      "parameters": [
+        "self",
+        "user",
+        "comments"
+      ]
+    },
+    {
+      "name": "skip",
+      "parameters": [
+        "self",
+        "user",
+        "comments"
+      ]
+    }
+  ],
+  "variables": []
+}

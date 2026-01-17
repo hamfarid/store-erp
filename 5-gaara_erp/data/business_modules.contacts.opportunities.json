@@ -1,0 +1,78 @@
+{
+  "module": "business_modules.contacts.opportunities",
+  "imports": [
+    "core_modules.organization.models",
+    "decimal",
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "leads"
+  ],
+  "classes": [
+    {
+      "name": "OpportunityStage",
+      "methods": [],
+      "variables": [
+        "PROSPECTING",
+        "QUALIFICATION",
+        "NEEDS_ANALYSIS",
+        "VALUE_PROPOSITION",
+        "ID_DECISION_MAKERS",
+        "PERCEPTION_ANALYSIS",
+        "PROPOSAL_PRICE_QUOTE",
+        "NEGOTIATION_REVIEW",
+        "CLOSED_WON",
+        "CLOSED_LOST"
+      ]
+    },
+    {
+      "name": "Opportunity",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "company",
+        "branch",
+        "name",
+        "contact",
+        "stage",
+        "amount",
+        "currency",
+        "probability",
+        "expected_revenue",
+        "close_date",
+        "description",
+        "lead_source",
+        "assigned_to",
+        "created_by",
+        "originating_lead",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

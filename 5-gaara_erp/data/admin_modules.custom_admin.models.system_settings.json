@@ -1,0 +1,113 @@
+{
+  "module": "admin_modules.custom_admin.models.system_settings",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.db",
+    "django.utils.translation",
+    "json"
+  ],
+  "classes": [
+    {
+      "name": "SystemSetting",
+      "methods": [
+        "__str__",
+        "get_typed_value",
+        "set_typed_value"
+      ],
+      "variables": [
+        "SETTING_TYPES",
+        "DATA_TYPES",
+        "key",
+        "value",
+        "data_type",
+        "setting_type",
+        "description",
+        "is_active",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserPreference",
+      "methods": [
+        "__str__",
+        "get_typed_value",
+        "set_typed_value"
+      ],
+      "variables": [
+        "user",
+        "key",
+        "value",
+        "data_type",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_typed_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_typed_value",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_typed_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_typed_value",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

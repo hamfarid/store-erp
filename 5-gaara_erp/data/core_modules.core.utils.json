@@ -1,0 +1,87 @@
+{
+  "module": "core_modules.core.utils",
+  "imports": [
+    "django.core.cache",
+    "django.db",
+    "django.db.models",
+    "django.utils.text",
+    "logging",
+    "models",
+    "re"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "generate_unique_slug",
+      "parameters": [
+        "instance",
+        "field_name",
+        "slug_field_name",
+        "max_length"
+      ]
+    },
+    {
+      "name": "format_currency",
+      "parameters": [
+        "amount",
+        "currency_symbol",
+        "decimal_places",
+        "position"
+      ]
+    },
+    {
+      "name": "get_system_setting",
+      "parameters": [
+        "key",
+        "default",
+        "use_cache"
+      ]
+    },
+    {
+      "name": "set_system_setting",
+      "parameters": [
+        "key",
+        "value",
+        "description"
+      ]
+    },
+    {
+      "name": "get_next_sequence_number",
+      "parameters": [
+        "sequence_code",
+        "company"
+      ]
+    },
+    {
+      "name": "parse_bool",
+      "parameters": [
+        "value",
+        "default"
+      ]
+    },
+    {
+      "name": "get_client_ip",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "truncate_string",
+      "parameters": [
+        "text",
+        "length",
+        "suffix"
+      ]
+    },
+    {
+      "name": "get_document_next_sequence",
+      "parameters": [
+        "sequence_code",
+        "company"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

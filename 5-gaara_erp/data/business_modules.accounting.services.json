@@ -1,0 +1,12 @@
+{
+  "module": "business_modules.accounting.services",
+  "imports": [],
+  "classes": [],
+  "functions": [
+    {
+      "name": "placeholder_service",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

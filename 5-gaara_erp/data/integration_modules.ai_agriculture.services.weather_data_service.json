@@ -1,0 +1,115 @@
+{
+  "module": "integration_modules.ai_agriculture.services.weather_data_service",
+  "imports": [
+    "core_modules.activity_log.models",
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "json",
+    "models",
+    "numpy",
+    "pandas",
+    "requests"
+  ],
+  "classes": [
+    {
+      "name": "WeatherDataService",
+      "methods": [
+        "store_weather_data",
+        "get_weather_data",
+        "fetch_weather_forecast",
+        "analyze_weather_impact",
+        "generate_weather_alerts",
+        "_fetch_weather_from_api",
+        "_analyze_weather_impact",
+        "_generate_weather_alerts",
+        "_log_activity"
+      ],
+      "variables": [
+        "WEATHER_DATA_TYPES"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "store_weather_data",
+      "parameters": [
+        "farm_id",
+        "data",
+        "data_type",
+        "source",
+        "timestamp",
+        "user_id"
+      ]
+    },
+    {
+      "name": "get_weather_data",
+      "parameters": [
+        "farm_id",
+        "data_type",
+        "start_date",
+        "end_date",
+        "limit"
+      ]
+    },
+    {
+      "name": "fetch_weather_forecast",
+      "parameters": [
+        "farm_id",
+        "days",
+        "user_id"
+      ]
+    },
+    {
+      "name": "analyze_weather_impact",
+      "parameters": [
+        "farm_id",
+        "crop_data_id",
+        "days_back",
+        "user_id"
+      ]
+    },
+    {
+      "name": "generate_weather_alerts",
+      "parameters": [
+        "farm_id",
+        "user_id"
+      ]
+    },
+    {
+      "name": "_fetch_weather_from_api",
+      "parameters": [
+        "latitude",
+        "longitude",
+        "days"
+      ]
+    },
+    {
+      "name": "_analyze_weather_impact",
+      "parameters": [
+        "weather_data",
+        "crop_type"
+      ]
+    },
+    {
+      "name": "_generate_weather_alerts",
+      "parameters": [
+        "forecast"
+      ]
+    },
+    {
+      "name": "_log_activity",
+      "parameters": [
+        "action_type",
+        "entity_id",
+        "user_id",
+        "details"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

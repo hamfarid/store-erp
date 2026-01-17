@@ -1,0 +1,14 @@
+{
+  "module": "utility_modules.locale.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework.routers",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "router",
+    "urlpatterns"
+  ]
+}

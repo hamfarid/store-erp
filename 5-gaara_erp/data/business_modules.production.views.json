@@ -1,0 +1,50 @@
+{
+  "module": "business_modules.production.views",
+  "imports": [
+    "agricultural_modules.production.analytics",
+    "csv",
+    "django.http",
+    "django.utils",
+    "io",
+    "json",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "list_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "detail_view",
+      "parameters": [
+        "request",
+        "item_id"
+      ]
+    },
+    {
+      "name": "production_dashboard",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "main_dashboard",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "export_dashboard_data",
+      "parameters": [
+        "request",
+        "dashboard_type"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,76 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "DiagnosisResultSerializer",
+      "methods": [],
+      "variables": [
+        "severity_display"
+      ]
+    },
+    {
+      "name": "DiagnosisSessionSerializer",
+      "methods": [
+        "get_duration_seconds",
+        "get_results_count"
+      ],
+      "variables": [
+        "status_display",
+        "initiated_by_username",
+        "duration_seconds",
+        "results_count"
+      ]
+    },
+    {
+      "name": "DiagnosisResultSummarySerializer",
+      "methods": [],
+      "variables": [
+        "total_results",
+        "info_count",
+        "warning_count",
+        "error_count",
+        "critical_count",
+        "components"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_duration_seconds",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_results_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

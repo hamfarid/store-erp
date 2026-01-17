@@ -1,0 +1,97 @@
+{
+  "module": "integration_modules.ai_analytics.api.performance_analytics_api",
+  "imports": [
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "services.performance_analytics_service"
+  ],
+  "classes": [
+    {
+      "name": "PerformanceAnalyticsViewSet",
+      "methods": [
+        "register_model_version",
+        "record_evaluation",
+        "model_versions",
+        "model_evaluations",
+        "compare_versions",
+        "performance_trend",
+        "activate",
+        "deactivate",
+        "delete_version"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "register_model_version",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "record_evaluation",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "model_versions",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "model_evaluations",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "compare_versions",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "performance_trend",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "activate",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "deactivate",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "delete_version",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

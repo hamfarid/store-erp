@@ -1,0 +1,58 @@
+{
+  "module": "services_modules.correspondence.tests.test_views",
+  "imports": [
+    "django.contrib.auth",
+    "django.test",
+    "django.urls",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CorrespondenceViewTest",
+      "methods": [
+        "setUpTestData",
+        "test_correspondence_list_view_authenticated",
+        "test_correspondence_list_view_unauthenticated",
+        "test_correspondence_detail_view_authenticated",
+        "test_correspondence_detail_view_unauthenticated"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_correspondence_list_view_authenticated",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_correspondence_list_view_unauthenticated",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_correspondence_detail_view_authenticated",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_correspondence_detail_view_unauthenticated",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

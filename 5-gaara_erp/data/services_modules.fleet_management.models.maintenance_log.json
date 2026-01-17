@@ -1,0 +1,52 @@
+{
+  "module": "services_modules.fleet_management.models.maintenance_log",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "vehicle"
+  ],
+  "classes": [
+    {
+      "name": "MaintenanceLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "MAINTENANCE_TYPE_CHOICES",
+        "vehicle",
+        "maintenance_type",
+        "description",
+        "date",
+        "odometer_reading",
+        "cost",
+        "service_provider",
+        "notes",
+        "inventory_items_used",
+        "related_expense",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

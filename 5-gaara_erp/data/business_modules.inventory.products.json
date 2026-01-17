@@ -1,0 +1,182 @@
+{
+  "module": "business_modules.inventory.products",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ProductAttribute",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "DISPLAY_CHOICES",
+        "name",
+        "description",
+        "display_type",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ProductAttributeValue",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "attribute",
+        "name",
+        "html_color",
+        "sequence",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ProductVariant",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "product",
+        "name",
+        "sku",
+        "barcode",
+        "attribute_values",
+        "sale_price",
+        "cost_price",
+        "quantity_on_hand",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "SupplierProduct",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "product",
+        "supplier_id",
+        "supplier_name",
+        "supplier_product_code",
+        "supplier_product_name",
+        "purchase_price",
+        "purchase_uom",
+        "min_order_qty",
+        "lead_time_days",
+        "is_preferred",
+        "notes",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UOMConversion",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "product",
+        "from_uom",
+        "to_uom",
+        "factor",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

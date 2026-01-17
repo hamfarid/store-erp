@@ -1,0 +1,130 @@
+{
+  "module": "agricultural_modules.agricultural_experiments.models.external_variety",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.validators",
+    "django.db",
+    "django.utils.translation",
+    "variety"
+  ],
+  "classes": [
+    {
+      "name": "ExternalVariety",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "variety",
+        "source",
+        "reference_code",
+        "market_price",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ExternalVarietySpecification",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "external_variety",
+        "specification_date",
+        "length_cm",
+        "shape_uniformity_rating",
+        "fruit_deformity_rate",
+        "firmness_rating",
+        "color_description",
+        "color_rating",
+        "storage_transport_tolerance_rating",
+        "brix_value",
+        "earliness_rating",
+        "plant_vigor_rating",
+        "leaf_shape_description",
+        "fruit_coverage_rating",
+        "fungal_resistance_rating",
+        "bacterial_resistance_rating",
+        "insect_resistance_rating",
+        "viral_resistance_rating",
+        "cold_tolerance_rating",
+        "heat_tolerance_rating",
+        "soil_salinity_tolerance_rating",
+        "water_salinity_tolerance_rating",
+        "drought_tolerance_rating",
+        "notes",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "ExternalVarietyYieldData",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "external_variety",
+        "data_source",
+        "data_year",
+        "average_yield",
+        "max_yield",
+        "min_yield",
+        "notes",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "RATING_CHOICES"
+  ]
+}

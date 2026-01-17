@@ -1,0 +1,71 @@
+{
+  "module": "business_modules.accounting.journal_entry_services_simple",
+  "imports": [
+    "core_modules.users.models",
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "models",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "JournalEntryService",
+      "methods": [
+        "get_next_entry_number",
+        "create_journal_entry",
+        "post_journal_entry",
+        "cancel_journal_entry",
+        "get_account_balance"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_next_entry_number",
+      "parameters": [
+        "company_id"
+      ]
+    },
+    {
+      "name": "create_journal_entry",
+      "parameters": [
+        "company_id",
+        "journal_id",
+        "entry_date",
+        "description",
+        "lines",
+        "fiscal_period_id",
+        "reference",
+        "notes",
+        "content_type_id",
+        "object_id"
+      ]
+    },
+    {
+      "name": "post_journal_entry",
+      "parameters": [
+        "entry_id"
+      ]
+    },
+    {
+      "name": "cancel_journal_entry",
+      "parameters": [
+        "entry_id"
+      ]
+    },
+    {
+      "name": "get_account_balance",
+      "parameters": [
+        "account_id",
+        "date_to"
+      ]
+    }
+  ],
+  "variables": []
+}

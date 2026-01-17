@@ -1,0 +1,60 @@
+{
+  "module": "business_modules.inventory.utils",
+  "imports": [
+    "__future__",
+    "compat",
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db.models",
+    "django.utils.translation",
+    "models",
+    "products",
+    "tracking",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "get_conversion_factor",
+      "parameters": [
+        "from_uom",
+        "to_uom"
+      ]
+    },
+    {
+      "name": "_validate_tracking_requirements",
+      "parameters": [
+        "product",
+        "lot",
+        "batch_number"
+      ]
+    },
+    {
+      "name": "_calculate_expiry_date",
+      "parameters": [
+        "product",
+        "lot",
+        "transaction_date"
+      ]
+    },
+    {
+      "name": "calculate_cogs",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "product",
+        "store"
+      ]
+    },
+    {
+      "name": "calculate_inventory_value",
+      "parameters": [
+        "valuation_date",
+        "product",
+        "store"
+      ]
+    }
+  ],
+  "variables": []
+}

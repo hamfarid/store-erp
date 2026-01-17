@@ -1,0 +1,139 @@
+{
+  "module": "business_modules.accounting.api.serializers",
+  "imports": [
+    "django.db",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "AccountSerializer",
+      "methods": [],
+      "variables": [
+        "type_name",
+        "parent_name",
+        "current_balance"
+      ]
+    },
+    {
+      "name": "AccountTreeSerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name",
+        "code",
+        "type",
+        "balance",
+        "is_active",
+        "children"
+      ]
+    },
+    {
+      "name": "BalanceSheetSerializer",
+      "methods": [],
+      "variables": [
+        "company",
+        "date",
+        "assets",
+        "total_assets",
+        "liabilities",
+        "total_liabilities",
+        "equity",
+        "total_equity",
+        "total_liabilities_equity"
+      ]
+    },
+    {
+      "name": "IncomeStatementSerializer",
+      "methods": [],
+      "variables": [
+        "company",
+        "start_date",
+        "end_date",
+        "revenues",
+        "total_revenues",
+        "expenses",
+        "total_expenses",
+        "net_income"
+      ]
+    },
+    {
+      "name": "JournalSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TaxSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PaymentTermSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "BankAccountSerializer",
+      "methods": [],
+      "variables": [
+        "account_name",
+        "currency_name"
+      ]
+    },
+    {
+      "name": "FiscalYearSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

@@ -1,0 +1,113 @@
+version: '3.8'
+
+services:
+  # Autonomous Orchestrator Service
+  orchestrator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: autonomous-orchestrator
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    volumes:
+      - ./output:/app/output
+      - ./workspace:/app/workspace
+      - ./logs:/app/logs
+    networks:
+      - autonomous-network
+    restart: unless-stopped
+
+  # MCP Server
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    container_name: autonomous-mcp-server
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./output:/app/output
+      - ./workspace:/app/workspace
+    ports:
+      - "3000:3000"
+    networks:
+      - autonomous-network
+    depends_on:
+      - orchestrator
+    restart: unless-stopped
+
+  # CodeRabbit Webhook Handler
+  webhook-handler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: coderabbit-webhook
+    command: python coderabbit_webhook.py --host 0.0.0.0 --port 8000
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - CODERABBIT_WEBHOOK_SECRET=${CODERABBIT_WEBHOOK_SECRET}
+    volumes:
+      - ./output:/app/output
+      - ./workspace:/app/workspace
+      - ./logs:/app/logs
+    ports:
+      - "8000:8000"
+    networks:
+      - autonomous-network
+    depends_on:
+      - orchestrator
+    restart: unless-stopped
+
+  # Continue CLI Service (optional)
+  continue-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: continue-cli
+    command: python continue_cli_wrapper.py
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./output:/app/output
+      - ./workspace:/app/workspace
+    networks:
+      - autonomous-network
+    depends_on:
+      - orchestrator
+    stdin_open: true
+    tty: true
+    restart: "no"
+
+  # Web UI (optional - for future)
+  # web-ui:
+  #   build:
+  #     context: ./webui
+  #     dockerfile: Dockerfile
+  #   container_name: autonomous-webui
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - autonomous-network
+  #   depends_on:
+  #     - mcp-server
+  #   restart: unless-stopped
+
+networks:
+  autonomous-network:
+    driver: bridge
+
+volumes:
+  output:
+  workspace:
+  logs:
+

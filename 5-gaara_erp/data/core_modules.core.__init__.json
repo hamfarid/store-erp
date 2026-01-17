@@ -1,0 +1,15 @@
+{
+  "module": "core_modules.core.__init__",
+  "imports": [
+    "routers",
+    "thread_locals",
+    "utils"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__version__",
+    "__author__",
+    "default_app_config"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "module": "business_modules.sales.models.sales_invoice_status",
+  "imports": [
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SalesInvoiceStatus",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "CONFIRMED",
+        "PAID",
+        "CANCELLED"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

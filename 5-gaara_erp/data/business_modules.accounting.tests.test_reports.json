@@ -1,0 +1,91 @@
+{
+  "module": "business_modules.accounting.tests.test_reports",
+  "imports": [
+    "business_modules.accounting.models.settlement",
+    "business_modules.accounting.reports",
+    "business_modules.contacts.models",
+    "business_modules.purchasing.models",
+    "business_modules.sales.models",
+    "datetime",
+    "decimal",
+    "django.contrib.auth",
+    "django.utils",
+    "pytest"
+  ],
+  "classes": [
+    {
+      "name": "TestUnifiedFinancialReports",
+      "methods": [
+        "test_parent_child_financial_summary",
+        "test_settlement_opportunities_report",
+        "test_settlement_history_report"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "test_user",
+      "parameters": []
+    },
+    {
+      "name": "parent_contact",
+      "parameters": []
+    },
+    {
+      "name": "child_contact_1",
+      "parameters": [
+        "parent_contact"
+      ]
+    },
+    {
+      "name": "child_contact_2",
+      "parameters": [
+        "parent_contact"
+      ]
+    },
+    {
+      "name": "child_contact_3",
+      "parameters": [
+        "parent_contact"
+      ]
+    },
+    {
+      "name": "setup_invoices",
+      "parameters": [
+        "parent_contact",
+        "child_contact_1",
+        "child_contact_2",
+        "child_contact_3",
+        "test_user"
+      ]
+    },
+    {
+      "name": "test_parent_child_financial_summary",
+      "parameters": [
+        "self",
+        "parent_contact",
+        "setup_invoices"
+      ]
+    },
+    {
+      "name": "test_settlement_opportunities_report",
+      "parameters": [
+        "self",
+        "parent_contact",
+        "setup_invoices"
+      ]
+    },
+    {
+      "name": "test_settlement_history_report",
+      "parameters": [
+        "self",
+        "parent_contact",
+        "setup_invoices"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "timestamp": "2025-09-09T15:08:42.478357",
+  "tests": [
+    {
+      "test_name": "Python Version Check",
+      "status": "pass",
+      "duration_seconds": 0.0,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-09T15:08:42.478357"
+    },
+    {
+      "test_name": "Virtual Environment",
+      "status": "pass",
+      "duration_seconds": 0.0,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-09T15:08:42.478357"
+    },
+    {
+      "test_name": "Project Structure",
+      "status": "pass",
+      "duration_seconds": 0.0005133152008056641,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-09T15:08:42.478870"
+    },
+    {
+      "test_name": "Django System Check",
+      "status": "fail",
+      "duration_seconds": 1.2317092418670654,
+      "details": null,
+      "error": "SystemCheckError: System check identified some issues:\n\nERRORS:\n<class 'agricultural_modules.variety_trials.admin.TrialFertilizationProgramInline'>: (admin.E202) 'variety_trials.TrialFertilizationProgram' has no ForeignKey to 'variety_trials.TrialVariety'.\n<class 'agricultural_modules.variety_trials.admin.TrialPesticideProgramInline'>: (admin.E202) 'variety_trials.TrialPesticideProgram' has no ForeignKey to 'variety_trials.TrialVariety'.\n<class 'services_modules.projects.admin.ProjectAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectDocumentAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectDocumentAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectDocumentInline'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectDocumentInline.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectFinancialTransactionAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectFinancialTransactionAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectFinancialTransactionInline'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectFinancialTransactionInline.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectMemberInline'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectMemberInline.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectRiskAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectRiskAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectRiskInline'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectRiskInline.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectTaskAdmin'>: (admin.E039) An admin for model \"Task\" has to be registered to be referenced by ProjectTaskAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectTaskAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectTaskAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectTaskAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectTaskAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectTaskInline'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectTaskInline.autocomplete_fields.\ncore.AccountType.parent: (fields.E307) The field core.AccountType.parent was declared with a lazy reference to 'core.accounttype', but app 'core' doesn't provide model 'accounttype'.\ncore.Department.company: (fields.E304) Reverse accessor 'Company.department_set' for 'core.Department.company' clashes with reverse accessor for 'hr.Department.company'.\n\tHINT: Add or change a related_name argument to the definition for 'core.Department.company' or 'hr.Department.company'.\nexperiments.Variety.created_by: (fields.E304) Reverse accessor 'User.created_varieties' for 'experiments.Variety.created_by' clashes with reverse accessor for 'seed_hybridization.PlantVariety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'experiments.Variety.created_by' or 'seed_hybridization.PlantVariety.created_by'.\nexperiments.Variety.created_by: (fields.E305) Reverse query name for 'experiments.Variety.created_by' clashes with reverse query name for 'seed_hybridization.PlantVariety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'experiments.Variety.created_by' or 'seed_hybridization.PlantVariety.created_by'.\nhr.Department.company: (fields.E304) Reverse accessor 'Company.department_set' for 'hr.Department.company' clashes with reverse accessor for 'core.Department.company'.\n\tHINT: Add or change a related_name argument to the definition for 'hr.Department.company' or 'core.Department.company'.\nseed_hybridization.PlantVariety.created_by: (fields.E304) Reverse accessor 'User.created_varieties' for 'seed_hybridization.PlantVariety.created_by' clashes with reverse accessor for 'experiments.Variety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'seed_hybridization.PlantVariety.created_by' or 'experiments.Variety.created_by'.\nseed_hybridization.PlantVariety.created_by: (fields.E305) Reverse query name for 'seed_hybridization.PlantVariety.created_by' clashes with reverse query name for 'experiments.Variety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'seed_hybridization.PlantVariety.created_by' or 'experiments.Variety.created_by'.\nservices_projects.TaskSchedule.task: (fields.E300) Field defines a relation with model 'Task', which is either not installed, or is abstract.\ntasks.Task.tags: (fields.E307) The field tasks.Task.tags was declared with a lazy reference to 'tasks.tag', but app 'tasks' isn't installed.\ntasks.Task.transport_vehicle: (fields.E307) The field tasks.Task.transport_vehicle was declared with a lazy reference to 'fleet_management.vehicle', but app 'fleet_management' isn't installed.\ntasks.Task_tags.tag: (fields.E307) The field tasks.Task_tags.tag was declared with a lazy reference to 'tasks.tag', but app 'tasks' isn't installed.\nvariety_trials.VarietyTrial.farm_plot: (fields.E300) Field defines a relation with model 'farms.FarmPlot', which is either not installed, or is abstract.\nvariety_trials.VarietyTrial.farm_plot: (fields.E307) The field variety_trials.VarietyTrial.farm_plot was declared with a lazy reference to 'farms.farmplot', but app 'farms' doesn't provide model 'farmplot'.\n\nSystem check identified 27 issues (0 silenced).\n",
+      "timestamp": "2025-09-09T15:08:43.710579"
+    },
+    {
+      "test_name": "Migration Status",
+      "status": "fail",
+      "duration_seconds": 1.2332983016967773,
+      "details": null,
+      "error": "D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\db\\backends\\utils.py:98: RuntimeWarning: Accessing the database during app initialization is discouraged. To fix this warning, avoid executing queries in AppConfig.ready() or when your app modules are imported.\n  warnings.warn(self.APPS_NOT_READY_WARNING_MSG, category=RuntimeWarning)\nSystemCheckError: System check identified some issues:\n\nERRORS:\n<class 'agricultural_modules.variety_trials.admin.TrialFertilizationProgramInline'>: (admin.E202) 'variety_trials.TrialFertilizationProgram' has no ForeignKey to 'variety_trials.TrialVariety'.\n<class 'agricultural_modules.variety_trials.admin.TrialPesticideProgramInline'>: (admin.E202) 'variety_trials.TrialPesticideProgram' has no ForeignKey to 'variety_trials.TrialVariety'.\n<class 'services_modules.projects.admin.ProjectAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectDocumentAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectDocumentAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectDocumentInline'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectDocumentInline.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectFinancialTransactionAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectFinancialTransactionAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectFinancialTransactionInline'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectFinancialTransactionInline.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectMemberInline'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectMemberInline.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectRiskAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectRiskAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectRiskInline'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectRiskInline.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectTaskAdmin'>: (admin.E039) An admin for model \"Task\" has to be registered to be referenced by ProjectTaskAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectTaskAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectTaskAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectTaskAdmin'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectTaskAdmin.autocomplete_fields.\n<class 'services_modules.projects.admin.ProjectTaskInline'>: (admin.E039) An admin for model \"User\" has to be registered to be referenced by ProjectTaskInline.autocomplete_fields.\ncore.AccountType.parent: (fields.E307) The field core.AccountType.parent was declared with a lazy reference to 'core.accounttype', but app 'core' doesn't provide model 'accounttype'.\ncore.Department.company: (fields.E304) Reverse accessor 'Company.department_set' for 'core.Department.company' clashes with reverse accessor for 'hr.Department.company'.\n\tHINT: Add or change a related_name argument to the definition for 'core.Department.company' or 'hr.Department.company'.\nexperiments.Variety.created_by: (fields.E304) Reverse accessor 'User.created_varieties' for 'experiments.Variety.created_by' clashes with reverse accessor for 'seed_hybridization.PlantVariety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'experiments.Variety.created_by' or 'seed_hybridization.PlantVariety.created_by'.\nexperiments.Variety.created_by: (fields.E305) Reverse query name for 'experiments.Variety.created_by' clashes with reverse query name for 'seed_hybridization.PlantVariety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'experiments.Variety.created_by' or 'seed_hybridization.PlantVariety.created_by'.\nhr.Department.company: (fields.E304) Reverse accessor 'Company.department_set' for 'hr.Department.company' clashes with reverse accessor for 'core.Department.company'.\n\tHINT: Add or change a related_name argument to the definition for 'hr.Department.company' or 'core.Department.company'.\nseed_hybridization.PlantVariety.created_by: (fields.E304) Reverse accessor 'User.created_varieties' for 'seed_hybridization.PlantVariety.created_by' clashes with reverse accessor for 'experiments.Variety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'seed_hybridization.PlantVariety.created_by' or 'experiments.Variety.created_by'.\nseed_hybridization.PlantVariety.created_by: (fields.E305) Reverse query name for 'seed_hybridization.PlantVariety.created_by' clashes with reverse query name for 'experiments.Variety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'seed_hybridization.PlantVariety.created_by' or 'experiments.Variety.created_by'.\nservices_projects.TaskSchedule.task: (fields.E300) Field defines a relation with model 'Task', which is either not installed, or is abstract.\ntasks.Task.tags: (fields.E307) The field tasks.Task.tags was declared with a lazy reference to 'tasks.tag', but app 'tasks' isn't installed.\ntasks.Task.transport_vehicle: (fields.E307) The field tasks.Task.transport_vehicle was declared with a lazy reference to 'fleet_management.vehicle', but app 'fleet_management' isn't installed.\ntasks.Task_tags.tag: (fields.E307) The field tasks.Task_tags.tag was declared with a lazy reference to 'tasks.tag', but app 'tasks' isn't installed.\nvariety_trials.VarietyTrial.farm_plot: (fields.E300) Field defines a relation with model 'farms.FarmPlot', which is either not installed, or is abstract.\nvariety_trials.VarietyTrial.farm_plot: (fields.E307) The field variety_trials.VarietyTrial.farm_plot was declared with a lazy reference to 'farms.farmplot', but app 'farms' doesn't provide model 'farmplot'.\n",
+      "timestamp": "2025-09-09T15:08:44.943878"
+    },
+    {
+      "test_name": "Database Connectivity",
+      "status": "pass",
+      "duration_seconds": 0.7937319278717041,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-09T15:08:45.738481"
+    },
+    {
+      "test_name": "Model Loading",
+      "status": "pass",
+      "duration_seconds": 0.7949671745300293,
+      "details": "Loaded models successfully",
+      "error": null,
+      "timestamp": "2025-09-09T15:08:46.533448"
+    },
+    {
+      "test_name": "Admin Interface",
+      "status": "pass",
+      "duration_seconds": 0.7872104644775391,
+      "details": "Admin models registered",
+      "error": null,
+      "timestamp": "2025-09-09T15:08:47.320659"
+    },
+    {
+      "test_name": "Static Files Collection",
+      "status": "pass",
+      "duration_seconds": 0.83316969871521,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-09T15:08:48.153828"
+    },
+    {
+      "test_name": "API - Admin Interface",
+      "status": "skip",
+      "duration_seconds": 4.090080738067627,
+      "details": "Server not running or not accessible",
+      "error": null,
+      "timestamp": "2025-09-09T15:08:52.244411"
+    },
+    {
+      "test_name": "API - API Root",
+      "status": "skip",
+      "duration_seconds": 4.047601222991943,
+      "details": "Server not running or not accessible",
+      "error": null,
+      "timestamp": "2025-09-09T15:08:56.292013"
+    },
+    {
+      "test_name": "API - Authentication API",
+      "status": "skip",
+      "duration_seconds": 4.0841383934021,
+      "details": "Server not running or not accessible",
+      "error": null,
+      "timestamp": "2025-09-09T15:09:00.377163"
+    },
+    {
+      "test_name": "API - Core API",
+      "status": "skip",
+      "duration_seconds": 4.1210713386535645,
+      "details": "Server not running or not accessible",
+      "error": null,
+      "timestamp": "2025-09-09T15:09:04.499119"
+    },
+    {
+      "test_name": "Frontend Package Config",
+      "status": "pass",
+      "duration_seconds": 0.0,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-09T15:09:04.499824"
+    },
+    {
+      "test_name": "Frontend Build",
+      "status": "skip",
+      "duration_seconds": 0.0011167526245117188,
+      "details": "npm not available or timeout",
+      "error": null,
+      "timestamp": "2025-09-09T15:09:04.500940"
+    },
+    {
+      "test_name": "Performance Analysis",
+      "status": "warning",
+      "duration_seconds": 0.38045668601989746,
+      "details": "Performance check had issues",
+      "error": null,
+      "timestamp": "2025-09-09T15:09:04.882397"
+    },
+    {
+      "test_name": "Security Analysis",
+      "status": "warning",
+      "duration_seconds": 0.09848952293395996,
+      "details": "Security check found issues",
+      "error": null,
+      "timestamp": "2025-09-09T15:09:04.980886"
+    }
+  ],
+  "summary": {
+    "total_tests": 17,
+    "passed_tests": 8,
+    "failed_tests": 2,
+    "warning_tests": 2,
+    "skipped_tests": 5,
+    "success_rate": 47.05882352941176,
+    "overall_status": "fair"
+  }
+}

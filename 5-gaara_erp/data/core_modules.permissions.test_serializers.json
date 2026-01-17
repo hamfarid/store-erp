@@ -1,0 +1,290 @@
+{
+  "module": "core_modules.permissions.test_serializers",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.contrib.auth.models",
+    "django.contrib.contenttypes.models",
+    "django.test",
+    "django.utils",
+    "json",
+    "rest_framework.exceptions",
+    "serializers",
+    "unified_permissions_model"
+  ],
+  "classes": [
+    {
+      "name": "PermissionSerializerTest",
+      "methods": [
+        "setUp",
+        "test_contains_expected_fields",
+        "test_name_field_content",
+        "test_code_field_content",
+        "test_description_field_content",
+        "test_category_field_content",
+        "test_is_active_field_content"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RoleSerializerTest",
+      "methods": [
+        "setUp",
+        "test_contains_expected_fields",
+        "test_name_field_content",
+        "test_code_field_content",
+        "test_description_field_content",
+        "test_is_system_role_field_content",
+        "test_is_active_field_content",
+        "test_permissions_field_content"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserRoleSerializerTest",
+      "methods": [
+        "setUp",
+        "test_contains_expected_fields",
+        "test_user_field_content",
+        "test_role_field_content",
+        "test_is_active_field_content"
+      ],
+      "variables": []
+    },
+    {
+      "name": "GroupRoleSerializerTest",
+      "methods": [
+        "setUp",
+        "test_contains_expected_fields",
+        "test_group_field_content",
+        "test_role_field_content",
+        "test_is_active_field_content"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ResourcePermissionSerializerTest",
+      "methods": [
+        "setUp",
+        "test_contains_expected_fields",
+        "test_permission_field_content",
+        "test_content_type_field_content",
+        "test_object_id_field_content",
+        "test_user_field_content",
+        "test_is_active_field_content",
+        "test_validation_one_target_required",
+        "test_validation_only_one_target_allowed"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contains_expected_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_name_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_code_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_description_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_category_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_active_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contains_expected_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_name_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_code_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_description_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_system_role_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_active_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_permissions_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contains_expected_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_active_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contains_expected_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_group_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_active_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contains_expected_fields",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_permission_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_content_type_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_object_id_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_active_field_content",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_one_target_required",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validation_only_one_target_allowed",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "module": "services_modules.fleet_management.services.__init__",
+  "imports": [
+    "driver_service",
+    "fuel_service",
+    "gps_service",
+    "maintenance_service",
+    "vehicle_service"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

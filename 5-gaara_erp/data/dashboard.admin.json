@@ -1,0 +1,9 @@
+{
+  "module": "dashboard.admin",
+  "imports": [
+    "django.contrib"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

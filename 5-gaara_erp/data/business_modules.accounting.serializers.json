@@ -1,0 +1,547 @@
+{
+  "module": "business_modules.accounting.serializers",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "models",
+    "rest_framework",
+    "services",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "AccountTypeSerializer",
+      "methods": [
+        "get_accounts_count",
+        "validate_code"
+      ],
+      "variables": [
+        "parent_name",
+        "accounts_count"
+      ]
+    },
+    {
+      "name": "AccountTypeDetailSerializer",
+      "methods": [
+        "get_children",
+        "get_full_path"
+      ],
+      "variables": [
+        "children",
+        "full_path"
+      ]
+    },
+    {
+      "name": "CurrencySerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AccountListSerializer",
+      "methods": [
+        "get_balance"
+      ],
+      "variables": [
+        "account_type_name",
+        "parent_name",
+        "currency_code",
+        "balance"
+      ]
+    },
+    {
+      "name": "AccountDetailSerializer",
+      "methods": [
+        "get_currency_info",
+        "get_children",
+        "get_balance_details",
+        "get_full_path",
+        "validate"
+      ],
+      "variables": [
+        "account_type_name",
+        "parent_name",
+        "company_name",
+        "currency_info",
+        "children",
+        "balance_details",
+        "full_path"
+      ]
+    },
+    {
+      "name": "AccountSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "AnalyticAccountSerializer",
+      "methods": [],
+      "variables": [
+        "company_name",
+        "parent_name"
+      ]
+    },
+    {
+      "name": "AnalyticAccountDetailSerializer",
+      "methods": [
+        "get_children",
+        "get_full_path"
+      ],
+      "variables": [
+        "children",
+        "full_path"
+      ]
+    },
+    {
+      "name": "JournalSerializer",
+      "methods": [
+        "get_entries_count"
+      ],
+      "variables": [
+        "company_name",
+        "entries_count"
+      ]
+    },
+    {
+      "name": "JournalEntryLineSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "account_name",
+        "account_code",
+        "analytic_account_name"
+      ]
+    },
+    {
+      "name": "JournalEntryListSerializer",
+      "methods": [
+        "get_is_balanced"
+      ],
+      "variables": [
+        "journal_name",
+        "status_display",
+        "is_balanced"
+      ]
+    },
+    {
+      "name": "JournalEntryDetailSerializer",
+      "methods": [
+        "get_total_debit",
+        "get_total_credit",
+        "get_is_balanced"
+      ],
+      "variables": [
+        "journal_name",
+        "company_name",
+        "branch_name",
+        "fiscal_period_name",
+        "posted_by_name",
+        "lines",
+        "total_debit",
+        "total_credit",
+        "is_balanced"
+      ]
+    },
+    {
+      "name": "JournalEntryCreateSerializer",
+      "methods": [
+        "validate",
+        "create",
+        "update"
+      ],
+      "variables": [
+        "lines"
+      ]
+    },
+    {
+      "name": "JournalEntrySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TaxSerializer",
+      "methods": [
+        "validate_rate"
+      ],
+      "variables": [
+        "company_name",
+        "account_name"
+      ]
+    },
+    {
+      "name": "FiscalYearSerializer",
+      "methods": [
+        "get_periods_count",
+        "validate"
+      ],
+      "variables": [
+        "company_name",
+        "periods_count"
+      ]
+    },
+    {
+      "name": "FiscalYearDetailSerializer",
+      "methods": [
+        "get_periods"
+      ],
+      "variables": [
+        "periods"
+      ]
+    },
+    {
+      "name": "FiscalPeriodSerializer",
+      "methods": [
+        "get_entries_count",
+        "validate"
+      ],
+      "variables": [
+        "fiscal_year_name",
+        "entries_count"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_accounts_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate_code",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "get_children",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_full_path",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "get_balance",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_currency_info",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_children",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_balance_details",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_full_path",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "get_children",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_full_path",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_entries_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "get_is_balanced",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_total_debit",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_total_credit",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_is_balanced",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "instance",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "validate_rate",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "get_periods_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "get_periods",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_entries_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    }
+  ],
+  "variables": []
+}

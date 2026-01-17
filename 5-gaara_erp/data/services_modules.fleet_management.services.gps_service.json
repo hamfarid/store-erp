@@ -1,0 +1,88 @@
+{
+  "module": "services_modules.fleet_management.services.gps_service",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "GPSService",
+      "methods": [
+        "create_gps_log",
+        "batch_create_gps_logs",
+        "get_vehicle_last_location",
+        "get_vehicle_route",
+        "get_vehicle_distance_traveled",
+        "get_vehicles_in_area",
+        "get_vehicle_idle_time",
+        "clean_old_gps_logs"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_gps_log",
+      "parameters": [
+        "vehicle",
+        "latitude",
+        "longitude",
+        "timestamp"
+      ]
+    },
+    {
+      "name": "batch_create_gps_logs",
+      "parameters": [
+        "logs_data"
+      ]
+    },
+    {
+      "name": "get_vehicle_last_location",
+      "parameters": [
+        "vehicle_id"
+      ]
+    },
+    {
+      "name": "get_vehicle_route",
+      "parameters": [
+        "vehicle_id",
+        "start_datetime",
+        "end_datetime"
+      ]
+    },
+    {
+      "name": "get_vehicle_distance_traveled",
+      "parameters": [
+        "vehicle_id",
+        "start_datetime",
+        "end_datetime"
+      ]
+    },
+    {
+      "name": "get_vehicles_in_area",
+      "parameters": [
+        "latitude",
+        "longitude",
+        "radius_km"
+      ]
+    },
+    {
+      "name": "get_vehicle_idle_time",
+      "parameters": [
+        "vehicle_id",
+        "start_datetime",
+        "end_datetime"
+      ]
+    },
+    {
+      "name": "clean_old_gps_logs",
+      "parameters": [
+        "days"
+      ]
+    }
+  ],
+  "variables": []
+}

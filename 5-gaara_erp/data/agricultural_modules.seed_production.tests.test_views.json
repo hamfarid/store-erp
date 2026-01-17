@@ -1,0 +1,141 @@
+{
+  "module": "agricultural_modules.seed_production.tests.test_views",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.contrib.auth.models",
+    "django.contrib.contenttypes.models",
+    "django.test",
+    "django.urls",
+    "django.utils",
+    "json",
+    "models",
+    "rest_framework",
+    "rest_framework.test",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "SeedProductionOrderViewSetTestCase",
+      "methods": [
+        "setUp",
+        "test_list_orders",
+        "test_create_order",
+        "test_approve_order",
+        "test_approve_order_permission_denied",
+        "test_verify_inventory",
+        "test_start_production",
+        "test_complete_production",
+        "test_cancel_production",
+        "test_create_lot_from_order"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SeedProductionLotViewSetTestCase",
+      "methods": [
+        "setUp",
+        "test_list_lots",
+        "test_retrieve_lot_with_parent_info_permission",
+        "test_retrieve_lot_without_parent_info_permission",
+        "test_create_lot"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_list_orders",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_approve_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_approve_order_permission_denied",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_verify_inventory",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_start_production",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_complete_production",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_cancel_production",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_lot_from_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_list_lots",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_retrieve_lot_with_parent_info_permission",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_retrieve_lot_without_parent_info_permission",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_lot",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

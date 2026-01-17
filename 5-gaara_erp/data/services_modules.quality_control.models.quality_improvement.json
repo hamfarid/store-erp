@@ -1,0 +1,131 @@
+{
+  "module": "services_modules.quality_control.models.quality_improvement",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "QualityImprovement",
+      "methods": [
+        "__str__",
+        "save",
+        "approve",
+        "start",
+        "complete",
+        "cancel",
+        "is_overdue",
+        "get_progress_percentage",
+        "get_duration",
+        "get_related_documents"
+      ],
+      "variables": [
+        "TYPE_CHOICES",
+        "PRIORITY_CHOICES",
+        "STATUS_CHOICES",
+        "title",
+        "reference_number",
+        "description",
+        "improvement_type",
+        "priority",
+        "status",
+        "related_issue",
+        "product",
+        "implementation_plan",
+        "expected_benefits",
+        "resources_required",
+        "success_criteria",
+        "proposed_date",
+        "approval_date",
+        "start_date",
+        "completion_date",
+        "target_completion_date",
+        "notes",
+        "attachments",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "approved_by",
+        "assigned_to"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "approve",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "start",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "complete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self",
+        "reason"
+      ]
+    },
+    {
+      "name": "is_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_progress_percentage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_related_documents",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

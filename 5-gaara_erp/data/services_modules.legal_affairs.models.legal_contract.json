@@ -1,0 +1,158 @@
+{
+  "module": "services_modules.legal_affairs.models.legal_contract",
+  "imports": [
+    "core_modules.core.models.base_models",
+    "core_modules.core.models.company",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "LegalContract",
+      "methods": [
+        "__str__",
+        "is_active",
+        "is_expired",
+        "days_until_expiry",
+        "needs_renewal_notice",
+        "renew_contract",
+        "terminate_contract",
+        "get_duration_months",
+        "get_related_documents",
+        "get_related_parties"
+      ],
+      "variables": [
+        "contract_number",
+        "title",
+        "description",
+        "contract_type",
+        "status",
+        "signing_date",
+        "effective_date",
+        "expiry_date",
+        "termination_date",
+        "first_party_name",
+        "second_party_name",
+        "company",
+        "legal_case",
+        "assigned_lawyer",
+        "value",
+        "currency",
+        "auto_renewal",
+        "renewal_period_months",
+        "notice_period_days",
+        "notes",
+        "is_confidential"
+      ]
+    },
+    {
+      "name": "ContractTypeChoices",
+      "methods": [],
+      "variables": [
+        "EMPLOYMENT",
+        "LEASE",
+        "SALE",
+        "PURCHASE",
+        "SERVICE",
+        "PARTNERSHIP",
+        "DISTRIBUTION",
+        "LICENSING",
+        "CONFIDENTIALITY",
+        "SETTLEMENT",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "ContractStatusChoices",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "UNDER_REVIEW",
+        "PENDING_APPROVAL",
+        "APPROVED",
+        "ACTIVE",
+        "EXPIRED",
+        "TERMINATED",
+        "RENEWED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "days_until_expiry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "needs_renewal_notice",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "renew_contract",
+      "parameters": [
+        "self",
+        "new_expiry_date"
+      ]
+    },
+    {
+      "name": "terminate_contract",
+      "parameters": [
+        "self",
+        "termination_date"
+      ]
+    },
+    {
+      "name": "get_duration_months",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_related_documents",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_related_parties",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

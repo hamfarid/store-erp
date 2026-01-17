@@ -1,0 +1,45 @@
+{
+  "module": "utility_modules.utilities.utils",
+  "imports": [
+    "django.utils",
+    "logging",
+    "models",
+    "sys",
+    "traceback"
+  ],
+  "classes": [
+    {
+      "name": "LogLevel",
+      "methods": [],
+      "variables": [
+        "ERROR"
+      ]
+    },
+    {
+      "name": "SystemErrorLog",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "log_system_error",
+      "parameters": [
+        "level",
+        "source_module",
+        "error_type",
+        "message",
+        "exc_info",
+        "user",
+        "request",
+        "activity_log",
+        "request_info_extra"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

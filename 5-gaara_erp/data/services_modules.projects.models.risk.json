@@ -1,0 +1,186 @@
+{
+  "module": "services_modules.projects.models.risk",
+  "imports": [
+    "django.contrib.auth",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "RiskCategory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "color_code",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Risk",
+      "methods": [
+        "__str__",
+        "get_risk_score",
+        "get_risk_level",
+        "is_project_risk",
+        "is_task_risk"
+      ],
+      "variables": [
+        "PROBABILITY_CHOICES",
+        "IMPACT_CHOICES",
+        "STATUS_CHOICES",
+        "title",
+        "description",
+        "category",
+        "probability",
+        "impact",
+        "status",
+        "mitigation_plan",
+        "contingency_plan",
+        "owner",
+        "identified_date",
+        "resolution_date",
+        "content_type",
+        "object_id",
+        "content_object",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "RiskReview",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "risk",
+        "reviewer",
+        "review_date",
+        "previous_status",
+        "new_status",
+        "previous_probability",
+        "new_probability",
+        "previous_impact",
+        "new_impact",
+        "comments"
+      ]
+    },
+    {
+      "name": "RiskResponse",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "RESPONSE_TYPE_CHOICES",
+        "EFFECTIVENESS_CHOICES",
+        "risk",
+        "response_type",
+        "description",
+        "action_taken",
+        "responder",
+        "response_date",
+        "effectiveness",
+        "cost"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_risk_score",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_risk_level",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_project_risk",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_task_risk",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

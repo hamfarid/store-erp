@@ -1,0 +1,155 @@
+{
+  "module": "integration_modules.ai_services.enhanced_ai_services",
+  "imports": [
+    "logging",
+    "models.enhanced_ai_models",
+    "os",
+    "random",
+    "time",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "EnhancedDiseaseDetectionService",
+      "methods": [
+        "__init__",
+        "_load_disease_database",
+        "diagnose_disease",
+        "_simulate_diagnosis",
+        "_generate_alternative_diagnoses",
+        "get_available_diseases",
+        "get_disease_info",
+        "validate_image_path"
+      ],
+      "variables": []
+    },
+    {
+      "name": "EnhancedDiagnosisRequest",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DiseaseInfo",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "EnhancedDiagnosisResponse",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_enhanced_disease_detection_service",
+      "parameters": []
+    },
+    {
+      "name": "is_enhanced_services_available",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_load_disease_database",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "diagnose_disease",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "_simulate_diagnosis",
+      "parameters": [
+        "self",
+        "filename",
+        "image_path"
+      ]
+    },
+    {
+      "name": "_generate_alternative_diagnoses",
+      "parameters": [
+        "self",
+        "primary_disease_key",
+        "primary_confidence"
+      ]
+    },
+    {
+      "name": "get_available_diseases",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_disease_info",
+      "parameters": [
+        "self",
+        "disease_key"
+      ]
+    },
+    {
+      "name": "validate_image_path",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "request_id",
+        "image_path"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "name",
+        "scientific_name",
+        "description",
+        "symptoms",
+        "treatment_recommendations",
+        "prevention_tips",
+        "severity_level",
+        "affected_parts"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "request_id",
+        "image_path",
+        "model_used",
+        "detected_disease",
+        "confidence_score",
+        "alternative_diagnoses",
+        "is_healthy",
+        "processing_time_ms",
+        "status",
+        "error_message"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "__all__"
+  ]
+}

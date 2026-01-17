@@ -1,0 +1,135 @@
+{
+  "module": "services_modules.quality_control.models.quality_issue",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "quality_improvement"
+  ],
+  "classes": [
+    {
+      "name": "QualityIssue",
+      "methods": [
+        "__str__",
+        "save",
+        "assign_to",
+        "start_investigation",
+        "start_resolution",
+        "resolve",
+        "close",
+        "reopen",
+        "get_resolution_time",
+        "create_improvement"
+      ],
+      "variables": [
+        "SOURCE_CHOICES",
+        "SEVERITY_CHOICES",
+        "STATUS_CHOICES",
+        "title",
+        "reference_number",
+        "description",
+        "source",
+        "severity",
+        "status",
+        "quality_check",
+        "product",
+        "root_cause",
+        "corrective_action",
+        "preventive_action",
+        "reported_date",
+        "investigation_date",
+        "resolution_date",
+        "closure_date",
+        "notes",
+        "attachments",
+        "created_at",
+        "updated_at",
+        "reported_by",
+        "assigned_to",
+        "resolved_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "assign_to",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "start_investigation",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "start_resolution",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        "self",
+        "user",
+        "corrective_action",
+        "preventive_action"
+      ]
+    },
+    {
+      "name": "close",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "reopen",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_resolution_time",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_improvement",
+      "parameters": [
+        "self",
+        "title",
+        "description",
+        "user"
+      ]
+    }
+  ],
+  "variables": []
+}

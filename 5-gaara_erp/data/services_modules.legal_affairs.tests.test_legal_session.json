@@ -1,0 +1,114 @@
+{
+  "module": "services_modules.legal_affairs.tests.test_legal_session",
+  "imports": [
+    "core_modules.core.models.company",
+    "django.contrib.auth.models",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "services_modules.legal_affairs.models.legal_case",
+    "services_modules.legal_affairs.models.legal_session"
+  ],
+  "classes": [
+    {
+      "name": "LegalSessionModelTest",
+      "methods": [
+        "setUp",
+        "test_session_creation",
+        "test_string_representation",
+        "test_is_upcoming",
+        "test_is_today",
+        "test_is_past",
+        "test_days_until_session",
+        "test_complete_session",
+        "test_cancel_session",
+        "test_postpone_session",
+        "test_reschedule_session",
+        "test_get_duration_str",
+        "test_get_related_documents"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_session_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_string_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_upcoming",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_today",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_past",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_days_until_session",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_complete_session",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_cancel_session",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_postpone_session",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reschedule_session",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_duration_str",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_related_documents",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

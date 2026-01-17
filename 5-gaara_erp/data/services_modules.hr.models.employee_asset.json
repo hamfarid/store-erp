@@ -1,0 +1,89 @@
+{
+  "module": "services_modules.hr.models.employee_asset",
+  "imports": [
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeAsset",
+      "methods": [
+        "__str__",
+        "is_currently_assigned",
+        "return_asset",
+        "mark_as_damaged",
+        "mark_as_lost"
+      ],
+      "variables": [
+        "employee",
+        "asset_type",
+        "description",
+        "serial_number",
+        "asset_tag",
+        "assignment_date",
+        "return_date",
+        "status",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "AssetStatusChoices",
+      "methods": [],
+      "variables": [
+        "ASSIGNED",
+        "RETURNED",
+        "DAMAGED",
+        "LOST"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_currently_assigned",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "return_asset",
+      "parameters": [
+        "self",
+        "return_date"
+      ]
+    },
+    {
+      "name": "mark_as_damaged",
+      "parameters": [
+        "self",
+        "notes"
+      ]
+    },
+    {
+      "name": "mark_as_lost",
+      "parameters": [
+        "self",
+        "notes"
+      ]
+    }
+  ],
+  "variables": []
+}

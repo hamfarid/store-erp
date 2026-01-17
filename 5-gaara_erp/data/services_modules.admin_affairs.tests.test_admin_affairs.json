@@ -1,0 +1,204 @@
+{
+  "module": "services_modules.admin_affairs.tests.test_admin_affairs",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.department",
+    "models.employee",
+    "models.position",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "DepartmentModelTest",
+      "methods": [
+        "setUp",
+        "test_create_department",
+        "test_unique_code_per_company",
+        "test_department_hierarchy",
+        "test_deactivate_department",
+        "test_get_all_employees"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PositionModelTest",
+      "methods": [
+        "setUp",
+        "test_create_position",
+        "test_unique_code_per_company",
+        "test_validate_salary_range",
+        "test_deactivate_position",
+        "test_get_all_employees"
+      ],
+      "variables": []
+    },
+    {
+      "name": "EmployeeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_employee",
+        "test_unique_code_per_company",
+        "test_validate_salary",
+        "test_terminate_employee",
+        "test_calculate_service_period",
+        "test_calculate_age"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_department",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_department",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_all_employees",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_position",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_salary_range",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_position",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_all_employees",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_employee",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_validate_salary",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_terminate_employee",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_service_period",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_age",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_all_employees",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_all_employees",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_terminate",
+      "parameters": [
+        "self",
+        "termination_date",
+        "reason"
+      ]
+    },
+    {
+      "name": "mock_calculate_service_period",
+      "parameters": [
+        "self",
+        "end_date"
+      ]
+    },
+    {
+      "name": "mock_calculate_age",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

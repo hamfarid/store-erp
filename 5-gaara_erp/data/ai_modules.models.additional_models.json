@@ -1,0 +1,108 @@
+{
+  "module": "ai_modules.models.additional_models",
+  "imports": [
+    "detection_models",
+    "disease_mappings",
+    "os",
+    "random",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "EfficientNetModel",
+      "methods": [
+        "__init__",
+        "detect_disease"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DenseNetModel",
+      "methods": [
+        "__init__",
+        "detect_disease"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ViTModel",
+      "methods": [
+        "__init__",
+        "detect_disease"
+      ],
+      "variables": []
+    },
+    {
+      "name": "InceptionV3Model",
+      "methods": [
+        "__init__",
+        "detect_disease"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "detect_disease",
+      "parameters": [
+        "self",
+        "image_path",
+        "crop_type"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "detect_disease",
+      "parameters": [
+        "self",
+        "image_path",
+        "crop_type"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "detect_disease",
+      "parameters": [
+        "self",
+        "image_path",
+        "crop_type"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "detect_disease",
+      "parameters": [
+        "self",
+        "image_path",
+        "crop_type"
+      ]
+    }
+  ],
+  "variables": [
+    "UNKNOWN_DISEASE_NAME",
+    "UNKNOWN_DISEASE_SCIENTIFIC",
+    "UNKNOWN_DISEASE_DESCRIPTION",
+    "IMAGE_NOT_FOUND_ERROR"
+  ]
+}

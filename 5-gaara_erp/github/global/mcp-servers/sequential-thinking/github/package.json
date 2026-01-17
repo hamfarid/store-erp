@@ -1,0 +1,26 @@
+{
+	"name": "@smithery/mcp-github",
+	"version": "1.0.0",
+	"description": "MCP server for interacting with Github",
+	"license": "MIT",
+	"author": "Smithery",
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "smithery build",
+		"dev": "smithery dev",
+		"check": "npx @biomejs/biome check --write --unsafe"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.18.2",
+		"@smithery/sdk": "^1.6.4",
+		"octokit": "^4.1.3",
+		"zod": "^3.25.46"
+	},
+	"module": "src/index.ts",
+	"devDependencies": {
+		"@smithery/cli": "^1.6.2"
+	}
+}

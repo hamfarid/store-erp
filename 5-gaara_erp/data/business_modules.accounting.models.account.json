@@ -1,0 +1,11 @@
+{
+  "module": "business_modules.accounting.models.account",
+  "imports": [
+    "__future__"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

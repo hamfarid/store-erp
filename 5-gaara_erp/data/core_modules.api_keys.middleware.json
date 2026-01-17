@@ -1,0 +1,44 @@
+{
+  "module": "core_modules.api_keys.middleware",
+  "imports": [
+    "django.http",
+    "django.utils.translation",
+    "services",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "APIKeyMiddleware",
+      "methods": [
+        "__init__",
+        "__call__",
+        "_requires_api_key"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "get_response"
+      ]
+    },
+    {
+      "name": "__call__",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "_requires_api_key",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

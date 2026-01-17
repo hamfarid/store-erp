@@ -1,0 +1,9 @@
+{
+  "module": "services_modules.legal_affairs.serializers",
+  "imports": [
+    "rest_framework"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

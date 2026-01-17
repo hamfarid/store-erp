@@ -1,0 +1,139 @@
+{
+  "module": "agricultural_modules.seed_production.tests.test_services",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.contrib.auth.models",
+    "django.contrib.contenttypes.models",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "models",
+    "services",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "SeedProductionOrderServiceTestCase",
+      "methods": [
+        "setUp",
+        "test_create_production_order",
+        "test_create_production_order_permission_denied",
+        "test_approve_production_order",
+        "test_approve_production_order_permission_denied",
+        "test_verify_inventory",
+        "test_start_production",
+        "test_complete_production",
+        "test_cancel_production_order",
+        "test_create_lot_from_order"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SeedProductionServiceTestCase",
+      "methods": [
+        "setUp",
+        "test_create_production_lot",
+        "test_update_production_lot",
+        "test_record_planting",
+        "test_record_harvest"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_production_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_production_order_permission_denied",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_approve_production_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_approve_production_order_permission_denied",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_verify_inventory",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_start_production",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_complete_production",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_cancel_production_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_lot_from_order",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_production_lot",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_production_lot",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_planting",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_record_harvest",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

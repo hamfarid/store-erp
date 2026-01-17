@@ -1,0 +1,17 @@
+{
+  "module": "core_modules.users_accounts.tests.test_models",
+  "imports": [
+    "django.contrib.auth",
+    "pytest"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_create_user",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

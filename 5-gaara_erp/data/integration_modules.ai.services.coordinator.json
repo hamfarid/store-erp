@@ -1,0 +1,72 @@
+{
+  "module": "integration_modules.ai.services.coordinator",
+  "imports": [
+    "django.conf",
+    "logging",
+    "models",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "AICoordinator",
+      "methods": [
+        "__init__",
+        "_load_integrations",
+        "route_request",
+        "_log_activity",
+        "register_integration"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_load_integrations",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "route_request",
+      "parameters": [
+        "self",
+        "request_type",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "_log_activity",
+      "parameters": [
+        "self",
+        "activity_type",
+        "action",
+        "details_str",
+        "status",
+        "user",
+        "agent_name",
+        "service_name"
+      ]
+    },
+    {
+      "name": "register_integration",
+      "parameters": [
+        "self",
+        "name",
+        "integration_type",
+        "module_path",
+        "configuration"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "ai_coordinator"
+  ]
+}

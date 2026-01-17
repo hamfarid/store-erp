@@ -1,0 +1,95 @@
+{
+  "module": "services_modules.quality_control.models.quality_template",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "quality_check",
+    "quality_test"
+  ],
+  "classes": [
+    {
+      "name": "QualityTemplate",
+      "methods": [
+        "__str__",
+        "clean",
+        "duplicate",
+        "get_parameters_count",
+        "get_critical_parameters_count",
+        "create_check"
+      ],
+      "variables": [
+        "TYPE_CHOICES",
+        "name",
+        "code",
+        "description",
+        "template_type",
+        "is_active",
+        "product_category",
+        "version",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "duplicate",
+      "parameters": [
+        "self",
+        "new_code",
+        "new_name",
+        "new_version"
+      ]
+    },
+    {
+      "name": "get_parameters_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_critical_parameters_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_check",
+      "parameters": [
+        "self",
+        "product",
+        "scheduled_date",
+        "responsible_user"
+      ]
+    }
+  ],
+  "variables": []
+}

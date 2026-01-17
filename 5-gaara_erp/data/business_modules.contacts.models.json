@@ -1,0 +1,329 @@
+{
+  "module": "business_modules.contacts.models",
+  "imports": [
+    "decimal",
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ContactType",
+      "methods": [],
+      "variables": [
+        "CUSTOMER",
+        "SUPPLIER",
+        "BOTH",
+        "PARTNER",
+        "EMPLOYEE",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "ContactTag",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "company",
+        "name",
+        "color",
+        "description"
+      ]
+    },
+    {
+      "name": "Contact",
+      "methods": [
+        "__str__",
+        "clean",
+        "save"
+      ],
+      "variables": [
+        "company",
+        "contact_type",
+        "name",
+        "code",
+        "email",
+        "phone",
+        "mobile",
+        "website",
+        "tax_id",
+        "notes",
+        "is_active",
+        "tags",
+        "address_line_1",
+        "address_line_2",
+        "city",
+        "state_province",
+        "postal_code",
+        "country",
+        "sales_person",
+        "credit_limit",
+        "payment_term_days",
+        "CUSTOMER_STATUS_CHOICES",
+        "CUSTOMER_GRADE_CHOICES",
+        "CUSTOMER_STRUCTURE_TYPE_CHOICES",
+        "customer_status",
+        "customer_grade",
+        "customer_structure_type",
+        "SUPPLIER_RATING_CHOICES",
+        "supplier_rating",
+        "bank_name",
+        "bank_account_name",
+        "bank_account_number",
+        "bank_swift_code",
+        "bank_iban",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "ContactPerson",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "contact",
+        "name",
+        "position",
+        "department",
+        "email",
+        "phone",
+        "mobile",
+        "is_primary",
+        "notes",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ContactAddress",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "ADDRESS_TYPE_CHOICES",
+        "contact",
+        "address_type",
+        "name",
+        "address_line_1",
+        "address_line_2",
+        "city",
+        "state_province",
+        "postal_code",
+        "country",
+        "is_default",
+        "phone",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ContactBankAccount",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "contact",
+        "bank_name",
+        "account_name",
+        "account_number",
+        "swift_code",
+        "iban",
+        "branch",
+        "currency",
+        "is_default",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ContactNote",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "contact",
+        "title",
+        "content",
+        "created_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "ContactAttachment",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ATTACHMENT_TYPE_CHOICES",
+        "contact",
+        "title",
+        "attachment_type",
+        "file",
+        "description",
+        "created_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

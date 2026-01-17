@@ -1,0 +1,130 @@
+{
+  "module": "services_modules.beneficiaries.serializers",
+  "imports": [
+    "django.contrib.auth.models",
+    "django.db",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "BeneficiaryCategorySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "BeneficiaryStatusSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "BeneficiarySerializer",
+      "methods": [],
+      "variables": [
+        "category",
+        "category_id",
+        "status",
+        "status_id",
+        "case_manager",
+        "case_manager_id",
+        "registered_by",
+        "registered_by_id"
+      ]
+    },
+    {
+      "name": "BeneficiaryDocumentSerializer",
+      "methods": [],
+      "variables": [
+        "beneficiary",
+        "beneficiary_id",
+        "uploaded_by",
+        "uploaded_by_id"
+      ]
+    },
+    {
+      "name": "BeneficiaryContactSerializer",
+      "methods": [],
+      "variables": [
+        "beneficiary",
+        "beneficiary_id",
+        "added_by",
+        "added_by_id"
+      ]
+    },
+    {
+      "name": "BeneficiaryServiceSerializer",
+      "methods": [],
+      "variables": [
+        "beneficiary",
+        "beneficiary_id",
+        "provided_by",
+        "provided_by_id",
+        "recorded_by",
+        "recorded_by_id"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

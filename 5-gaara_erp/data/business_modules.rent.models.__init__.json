@@ -1,0 +1,12 @@
+{
+  "module": "business_modules.rent.models.__init__",
+  "imports": [
+    "property",
+    "rental_contract"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

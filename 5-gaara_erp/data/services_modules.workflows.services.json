@@ -1,0 +1,166 @@
+{
+  "module": "services_modules.workflows.services",
+  "imports": [
+    "core_modules.activity_log.services",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "json",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "WorkflowService",
+      "methods": [
+        "get_workflows_for_user",
+        "get_workflow_details",
+        "create_workflow",
+        "update_workflow",
+        "delete_workflow",
+        "activate_workflow",
+        "deactivate_workflow",
+        "create_trigger",
+        "update_trigger",
+        "delete_trigger",
+        "create_action",
+        "update_action",
+        "delete_action",
+        "execute_workflow",
+        "_execute_action"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MockActivityLogService",
+      "methods": [
+        "log_activity"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_workflows_for_user",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "get_workflow_details",
+      "parameters": [
+        "workflow_id",
+        "user"
+      ]
+    },
+    {
+      "name": "create_workflow",
+      "parameters": [
+        "name",
+        "description",
+        "user"
+      ]
+    },
+    {
+      "name": "update_workflow",
+      "parameters": [
+        "workflow_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "delete_workflow",
+      "parameters": [
+        "workflow_id",
+        "user"
+      ]
+    },
+    {
+      "name": "activate_workflow",
+      "parameters": [
+        "workflow_id",
+        "user"
+      ]
+    },
+    {
+      "name": "deactivate_workflow",
+      "parameters": [
+        "workflow_id",
+        "user"
+      ]
+    },
+    {
+      "name": "create_trigger",
+      "parameters": [
+        "workflow_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "update_trigger",
+      "parameters": [
+        "trigger_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "delete_trigger",
+      "parameters": [
+        "trigger_id",
+        "user"
+      ]
+    },
+    {
+      "name": "create_action",
+      "parameters": [
+        "workflow_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "update_action",
+      "parameters": [
+        "action_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "delete_action",
+      "parameters": [
+        "action_id",
+        "user"
+      ]
+    },
+    {
+      "name": "execute_workflow",
+      "parameters": [
+        "workflow_id",
+        "context",
+        "trigger_id",
+        "user"
+      ]
+    },
+    {
+      "name": "_execute_action",
+      "parameters": [
+        "action",
+        "context",
+        "user"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

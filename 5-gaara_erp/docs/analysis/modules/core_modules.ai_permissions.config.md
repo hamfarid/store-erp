@@ -1,0 +1,9 @@
+# core_modules.ai_permissions.config
+
+## Module Variables
+- `AI_MODELS`
+- `AI_MODEL_MODULE_PERMISSIONS`
+- `AI_MODEL_SELECTION_RULES`
+- `DEFAULT_AGENT_CONFIGURATIONS`
+- `DEFAULT_A2A_PERMISSIONS`
+

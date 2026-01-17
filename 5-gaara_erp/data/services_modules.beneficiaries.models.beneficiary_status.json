@@ -1,0 +1,83 @@
+{
+  "module": "services_modules.beneficiaries.models.beneficiary_status",
+  "imports": [
+    "beneficiary",
+    "core_modules.companies.models",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "BeneficiaryStatus",
+      "methods": [
+        "__str__",
+        "activate",
+        "deactivate",
+        "get_beneficiaries_count",
+        "get_active_status",
+        "get_inactive_status"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "activate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "deactivate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_beneficiaries_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_active_status",
+      "parameters": [
+        "cls",
+        "company"
+      ]
+    },
+    {
+      "name": "get_inactive_status",
+      "parameters": [
+        "cls",
+        "company"
+      ]
+    }
+  ],
+  "variables": []
+}

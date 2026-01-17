@@ -1,0 +1,186 @@
+{
+  "module": "business_modules.pos.serializers",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.db.models",
+    "django.utils.translation",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "POSConfigSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "POSSessionSerializer",
+      "methods": [
+        "get_state_display"
+      ],
+      "variables": [
+        "state_display"
+      ]
+    },
+    {
+      "name": "POSOrderLineSerializer",
+      "methods": [
+        "validate_qty",
+        "validate_discount"
+      ],
+      "variables": [
+        "product_name",
+        "price_subtotal"
+      ]
+    },
+    {
+      "name": "POSPaymentSerializer",
+      "methods": [
+        "get_payment_method_display",
+        "validate_amount"
+      ],
+      "variables": [
+        "payment_method_display"
+      ]
+    },
+    {
+      "name": "POSOrderSerializer",
+      "methods": [
+        "get_state_display",
+        "get_amount_due",
+        "validate",
+        "create",
+        "update",
+        "_recalculate_order_totals"
+      ],
+      "variables": [
+        "lines",
+        "payments",
+        "state_display",
+        "amount_due"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_state_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate_qty",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_discount",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "get_payment_method_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate_amount",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "get_state_display",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_amount_due",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": [
+        "self",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        "self",
+        "instance",
+        "validated_data"
+      ]
+    },
+    {
+      "name": "_recalculate_order_totals",
+      "parameters": [
+        "self",
+        "order"
+      ]
+    }
+  ],
+  "variables": []
+}

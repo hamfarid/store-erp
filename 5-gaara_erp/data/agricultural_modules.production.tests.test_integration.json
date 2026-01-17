@@ -1,0 +1,302 @@
+{
+  "module": "agricultural_modules.production.tests.test_integration",
+  "imports": [
+    "agricultural_modules.production.accounting_integration",
+    "agricultural_modules.production.inventory_integration",
+    "agricultural_modules.production.purchasing_integration",
+    "agricultural_modules.production.sales_integration",
+    "datetime",
+    "decimal",
+    "django.test",
+    "django.utils",
+    "models",
+    "unittest",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "AccountingIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_create_production_cost_journal_entry",
+        "test_create_revenue_journal_entry",
+        "test_create_waste_sale_journal_entry",
+        "test_create_production_order_cost_center",
+        "test_create_production_batch_inventory_entry",
+        "test_update_profit_loss_report"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SalesIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_create_saleable_product_from_batch",
+        "test_create_product_pricing",
+        "test_update_sales_order_status_with_export_approval",
+        "test_update_sales_order_certificates",
+        "test_get_sales_orders_by_production_batch"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PurchasingIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_create_purchase_request_from_production_order",
+        "test_link_purchase_order_to_production_order",
+        "test_update_production_order_on_material_receipt",
+        "test_get_purchase_orders_by_production_order"
+      ],
+      "variables": []
+    },
+    {
+      "name": "InventoryIntegrationTest",
+      "methods": [
+        "setUp",
+        "test_reserve_materials_for_production_order",
+        "test_issue_materials_for_production_operation",
+        "test_receive_finished_products",
+        "test_update_waste_inventory",
+        "test_release_reserved_materials",
+        "test_check_material_availability",
+        "test_get_inventory_movements_by_production"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_production_cost_journal_entry",
+      "parameters": [
+        "self",
+        "mock_get_account",
+        "mock_create_journal_item",
+        "mock_create_journal_entry",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_create_revenue_journal_entry",
+      "parameters": [
+        "self",
+        "mock_get_account",
+        "mock_create_journal_item",
+        "mock_create_journal_entry",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_create_waste_sale_journal_entry",
+      "parameters": [
+        "self",
+        "mock_get_account",
+        "mock_create_journal_item",
+        "mock_create_journal_entry",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_create_production_order_cost_center",
+      "parameters": [
+        "self",
+        "mock_create_cost_center",
+        "mock_filter_cost_center",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_create_production_batch_inventory_entry",
+      "parameters": [
+        "self",
+        "mock_filter_production_cost",
+        "mock_get_account",
+        "mock_create_journal_item",
+        "mock_create_journal_entry",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_update_profit_loss_report",
+      "parameters": [
+        "self",
+        "mock_update_or_create",
+        "mock_filter_waste_sale",
+        "mock_filter_revenue",
+        "mock_filter_production_cost"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_saleable_product_from_batch",
+      "parameters": [
+        "self",
+        "mock_create_saleable_product",
+        "mock_filter_saleable_product",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_create_product_pricing",
+      "parameters": [
+        "self",
+        "mock_create_product_pricing",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_update_sales_order_status_with_export_approval",
+      "parameters": [
+        "self",
+        "mock_create_sales_order_status",
+        "mock_create_sales_order_approval",
+        "mock_filter_sales_order_line",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_update_sales_order_certificates",
+      "parameters": [
+        "self",
+        "mock_create_sales_order_status",
+        "mock_create_sales_order_approval",
+        "mock_filter_sales_order_line",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_get_sales_orders_by_production_batch",
+      "parameters": [
+        "self",
+        "mock_filter_sales_order_line"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_purchase_request_from_production_order",
+      "parameters": [
+        "self",
+        "mock_create_purchase_request",
+        "mock_filter_material_requirement",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_link_purchase_order_to_production_order",
+      "parameters": [
+        "self",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_update_production_order_on_material_receipt",
+      "parameters": [
+        "self",
+        "mock_filter_production_order",
+        "mock_filter_purchase_order_line",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_get_purchase_orders_by_production_order",
+      "parameters": [
+        "self",
+        "mock_filter_purchase_order_line"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reserve_materials_for_production_order",
+      "parameters": [
+        "self",
+        "mock_create_stock_reservation",
+        "mock_filter_stock_level",
+        "mock_filter_material_requirement",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_issue_materials_for_production_operation",
+      "parameters": [
+        "self",
+        "mock_get_stock_level",
+        "mock_create_inventory_movement",
+        "mock_filter_stock_reservation",
+        "mock_filter_material_requirement",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_receive_finished_products",
+      "parameters": [
+        "self",
+        "mock_create_lot_tracking",
+        "mock_get_or_create_stock_level",
+        "mock_create_inventory_movement",
+        "mock_create_inventory_location",
+        "mock_filter_inventory_location",
+        "mock_create_inventory_item",
+        "mock_filter_inventory_item",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_update_waste_inventory",
+      "parameters": [
+        "self",
+        "mock_get_or_create_stock_level",
+        "mock_create_inventory_movement",
+        "mock_create_inventory_location",
+        "mock_filter_inventory_location",
+        "mock_create_inventory_item",
+        "mock_filter_inventory_item",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_release_reserved_materials",
+      "parameters": [
+        "self",
+        "mock_get_stock_level",
+        "mock_filter_stock_reservation",
+        "mock_atomic"
+      ]
+    },
+    {
+      "name": "test_check_material_availability",
+      "parameters": [
+        "self",
+        "mock_filter_stock_level"
+      ]
+    },
+    {
+      "name": "test_get_inventory_movements_by_production",
+      "parameters": [
+        "self",
+        "mock_filter_inventory_movement"
+      ]
+    }
+  ],
+  "variables": []
+}

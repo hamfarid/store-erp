@@ -1,0 +1,64 @@
+{
+  "module": "ai_modules.simulated_tools.agrio_app_simulator",
+  "imports": [
+    "base_simulator",
+    "logging",
+    "os",
+    "utils.image_processing"
+  ],
+  "classes": [
+    {
+      "name": "AgrioAppSimulator",
+      "methods": [
+        "__init__",
+        "analyze"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BaseDiseaseSimulator",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "api_keys"
+      ]
+    },
+    {
+      "name": "analyze",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    },
+    {
+      "name": "read_image",
+      "parameters": [
+        "path"
+      ]
+    },
+    {
+      "name": "calculate_yellow_percentage",
+      "parameters": [
+        "image"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "api_keys"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

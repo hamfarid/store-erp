@@ -1,0 +1,335 @@
+[ ] NAME:Current Task List DESCRIPTION:Root task for conversation __NEW_AGENT__
+-[ ] NAME:Investigate/Triage/Understand the problem DESCRIPTION:Run safe diagnostics to determine current server readiness and errors: Python/Django versions, manage.py location, Django system check, migration plan, and attempt to start server.
+-[ ] NAME:Apply migrations for all apps DESCRIPTION:Run Django migrations for all apps in correct order. Fix any migration errors encountered. Use non-destructive approach first; if blocked, proceed to local DB reset per approval.
+-[ ] NAME:Handle migration failures (reset DB if needed) DESCRIPTION:If migrations are blocked by inconsistent state, back up then reset local DB (drop and recreate), re-run makemigrations if needed, then migrate cleanly.
+-[ ] NAME:Verify server runs and document migrations DESCRIPTION:Start Django server without warnings; verify basic endpoints. Create/update MIGRATIONS_NOTES.md with applied migrations and any manual steps.
+-[ ] NAME:Expand minimal app set to include agricultural modules and apply migrations DESCRIPTION:Keep MIGRATION_MINIMAL_MODE=True to avoid cross-app conflicts. Add agricultural_modules.research and agricultural_experiments to INSTALLED_APPS minimal set, run migrate, then verify.
+-[ ] NAME:Create inventory import alias for legacy imports DESCRIPTION:Add gaara_erp/inventory package that re-exports business_modules.inventory for compatibility with 'inventory.models' imports.
+-[ ] NAME:Run full test suite and capture failures DESCRIPTION:Execute Django tests across all modules; collect summary of failures and errors for triage.
+-[ ] NAME:Fix failing tests incrementally DESCRIPTION:Address import issues, __str__ return types, relative import problems, and other test failures; re-run tests until green.
+-[ ] NAME:Global setup and safety checks DESCRIPTION:Stabilize settings, middleware, env, and dependencies before enabling all modules.
+--[ ] NAME:Global setup: settings and middleware hardening DESCRIPTION:Review and fix MIDDLEWARE ordering, security headers, CSRF, CORS, Session/Auth, StaticFiles, WhiteNoise, and logging. Verify DEBUG/ALLOWED_HOSTS per env.
+--[ ] NAME:Global setup: environment and config files DESCRIPTION:Create .env.example; document required env vars; verify decouple/dotenv loading; ensure secret settings not hard-coded.
+--[ ] NAME:Global setup: tooling and linters DESCRIPTION:Configure Black/flake8 (ignore F401, line length 120), Ruff, mypy (as feasible); add/align pyproject.toml; ensure consistent formatting.
+--[ ] NAME:Global setup: database schema sanity DESCRIPTION:Run makemigrations --check, detect drift; plan non-destructive fixes; ensure test DB setup stable.
+-[ ] NAME:Resolve research/agricultural_experiments model collisions DESCRIPTION:Fix reverse accessor/name clashes between research and agricultural_experiments app models.
+-[ ] NAME:Module enablement plan (topological) DESCRIPTION:Enable apps group-by-group; run checks; fix model/name collisions; makemigrations+migrate; then run targeted tests per group.
+--[ ] NAME:Module group: Agricultural – Research DESCRIPTION:Enable research app, run checks, fix collisions, makemigrations, migrate, run tests, fix to green.
+--[ ] NAME:Module group: Agricultural – Experiments DESCRIPTION:Enable agricultural_experiments app, run checks, fix collisions (related_name done), makemigrations, migrate, run tests.
+--[ ] NAME:Module group: Agricultural – Farms DESCRIPTION:Enable farms app, resolve system check errors, migrate, run tests and fix failures.
+--[ ] NAME:Module group: Agricultural – Nurseries DESCRIPTION:Enable nurseries app, resolve errors, migrate, run tests and fix.
+--[ ] NAME:Module group: Agricultural – Plant Diagnosis DESCRIPTION:Enable plant_diagnosis app, resolve errors, migrate, run tests and fix.
+--[/] NAME:Module group: Agricultural – Production DESCRIPTION:Enable production app, resolve errors, migrate, run tests and fix.
+--[ ] NAME:Module group: Agricultural – Seed Hybridization DESCRIPTION:Enable seed_hybridization (and merged) apps; resolve model/app_label conflicts; migrate; run tests.
+--[ ] NAME:Module group: Agricultural – Seed Production DESCRIPTION:Enable seed_production app; resolve errors; migrate; run tests.
+--[ ] NAME:Module group: Agricultural – Variety Trials DESCRIPTION:Enable variety_trials app; resolve errors; migrate; run tests.
+--[ ] NAME:Module group: Business – Inventory DESCRIPTION:Ensure inventory fully enabled; fix tests (integration, product, stock_move).
+--[ ] NAME:Module group: Business – Contacts DESCRIPTION:Enable contacts; run tests (contacts, models, settlement logic).
+--[ ] NAME:Module group: Business – POS DESCRIPTION:Enable pos; address config/order/payment/session/services tests.
+--[ ] NAME:Module group: Business – Production DESCRIPTION:Enable business production app; fix integration tests.
+--[ ] NAME:Module group: Business – Purchasing DESCRIPTION:Enable purchasing; fix integration, purchase_order, supplier tests.
+--[ ] NAME:Module group: Business – Rent DESCRIPTION:Enable rent; fix property, rental_contract, services tests; resolve company FK reverse clashes.
+--[ ] NAME:Module group: Business – Sales DESCRIPTION:Enable sales; fix customer and sales_order tests.
+--[ ] NAME:Module group: Business – Solar Stations DESCRIPTION:Enable solar_stations; run integration/model tests and fix.
+--[ ] NAME:Module group: Core – Setup/System Settings/Permissions DESCRIPTION:Enable core setup, system_settings, permissions suites; fix app_label/related_name conflicts; migrate; run tests.
+--[ ] NAME:Module group: Integration – AI DESCRIPTION:Enable integration_modules.ai; resolve model registration RuntimeError; migrate; run ai tests.
+--[ ] NAME:Module group: Integration – AI Agriculture DESCRIPTION:Enable integration_modules.ai_agriculture; run tests and fix.
+--[ ] NAME:Module group: Integration – AI Analytics DESCRIPTION:Enable integration_modules.ai_analytics; fix AnalyticsReport created_by clashes with research; run tests.
+--[ ] NAME:Module group: Integration – A2A Integration DESCRIPTION:Enable a2a_integration; run tests and fix models+API.
+--[ ] NAME:Module group: Services – HR DESCRIPTION:Enable services_modules.hr; resolve JobGrade model conflicts and run HR tests.
+--[ ] NAME:Module group: Services – Correspondence DESCRIPTION:Enable services_modules.correspondence; resolve conflicting CorrespondenceCategory models; run tests.
+--[ ] NAME:Module group: Services – Projects DESCRIPTION:Enable services_modules.projects; resolve conflicting Project models (app_label); run tests.
+--[ ] NAME:Module group: Services – Marketing DESCRIPTION:Enable marketing; resolve conflicting marketing models; run tests.
+--[ ] NAME:Module group: Services – Legal Affairs DESCRIPTION:Enable legal_affairs; resolve conflicting models; run tests.
+--[ ] NAME:Module group: Services – Quality Control DESCRIPTION:Enable quality_control; resolve quality_template/quality_test conflicts; run tests.
+--[ ] NAME:Module group: Services – Board Management DESCRIPTION:Enable board_management; ensure BoardDocument models exist; fix ManyToMany through ambiguity; run tests.
+--[ ] NAME:Module group: Utility – Utilities DESCRIPTION:Enable utility modules; resolve SystemMetric conflicting models; run tests.
+-[ ] NAME:End-to-end test battery and integration verification DESCRIPTION:Run all tests (unit, integration, e2e if present), verify APIs/FE/BE/routing, and fix remaining defects to zero failures.
+--[ ] NAME:API verification DESCRIPTION:test_api_endpoints across enabled modules; confirm routing and permissions; document in api_map.yaml.
+--[ ] NAME:Service layer verification DESCRIPTION:test_services across modules; idempotency; transaction boundaries.
+--[ ] NAME:Permissions verification DESCRIPTION:test permissions across core/permissions apps; deny-by-default; object-level checks.
+--[ ] NAME:Frontend link and routing sanity DESCRIPTION:Validate frontend routing/components linked to backend endpoints; fix broken links.
+--[ ] NAME:Triaged failing tests (from user list) DESCRIPTION:Work through the provided failing test files one by one until zero failures remain.
+--[ ] NAME:Fix: agricultural_modules/experiments/tests/test_integration.py DESCRIPTION:Investigate and fix failures in experiments integration tests.
+--[ ] NAME:Fix: agricultural_modules/farms/tests/test_integration.py DESCRIPTION:Investigate and fix farms integration tests.
+--[ ] NAME:Fix: agricultural_modules/farms/tests/test_models.py DESCRIPTION:Investigate and fix farms model tests.
+--[ ] NAME:Fix: agricultural_modules/farms/tests/test_performance.py DESCRIPTION:Investigate and fix farms performance tests.
+--[ ] NAME:Fix: agricultural_modules/farms/tests/test_services.py DESCRIPTION:Investigate and fix farms service tests.
+--[ ] NAME:Fix: agricultural_modules/nurseries/tests/test_api_views.py DESCRIPTION:Investigate and fix nurseries API views tests.
+--[ ] NAME:Fix: agricultural_modules/nurseries/tests/test_assets_integration.py DESCRIPTION:Investigate and fix nurseries assets integration tests.
+--[ ] NAME:Fix: agricultural_modules/nurseries/tests/test_integration.py DESCRIPTION:Investigate and fix nurseries integration tests.
+--[ ] NAME:Fix: agricultural_modules/nurseries/tests/test_models.py DESCRIPTION:Investigate and fix nurseries models tests.
+--[ ] NAME:Fix: agricultural_modules/plant_diagnosis/tests/test_integration.py DESCRIPTION:Investigate and fix plant_diagnosis integration tests.
+--[ ] NAME:Fix: agricultural_modules/production/tests/test_cost_tracking.py DESCRIPTION:Investigate and fix agricultural production cost tracking tests.
+--[ ] NAME:Fix: agricultural_modules/production/tests/test_dashboards.py DESCRIPTION:Investigate and fix agricultural production dashboard tests.
+--[ ] NAME:Fix: agricultural_modules/production/tests/test_integration.py DESCRIPTION:Investigate and fix agricultural production integration tests.
+--[ ] NAME:Fix: agricultural_modules/research/tests/test_integration.py DESCRIPTION:Investigate and fix research integration tests.
+--[ ] NAME:Fix: agricultural_modules/research/tests/test_models.py DESCRIPTION:Investigate and fix research model tests.
+--[ ] NAME:Fix: agricultural_modules/research/tests/test_services.py DESCRIPTION:Make research.services importable and provide the standalone functions expected by tests: create_research_project, update_research_project, add_team_member_to_project, remove_team_member_from_project, add_objective_to_project, update_project_status; stub others to satisfy imports. Disable legacy, malformed class-based content safely.
+--[ ] NAME:Fix: agricultural_modules/seed_hybridization/merged/tests/test_services.py DESCRIPTION:Investigate and fix merged seed_hybridization services tests.
+--[ ] NAME:Fix: agricultural_modules/seed_hybridization/tests/test_cost_tracking.py DESCRIPTION:Investigate and fix seed_hybridization cost tracking tests.
+--[ ] NAME:Fix: agricultural_modules/seed_hybridization/tests/test_services.py DESCRIPTION:Investigate and fix seed_hybridization services tests.
+--[ ] NAME:Fix: agricultural_modules/seed_production/tests/test_services.py DESCRIPTION:Investigate and fix seed_production service tests.
+--[ ] NAME:Fix: agricultural_modules/seed_production/tests/test_views.py DESCRIPTION:Investigate and fix seed_production views tests.
+--[ ] NAME:Fix: agricultural_modules/variety_trials/tests/test_integration.py DESCRIPTION:Investigate and fix variety_trials integration tests.
+--[ ] NAME:Fix: agricultural_modules/variety_trials/tests/test_models.py DESCRIPTION:Investigate and fix variety_trials model tests.
+--[ ] NAME:Fix: agricultural_modules/variety_trials/tests/test_services.py DESCRIPTION:Investigate and fix variety_trials services tests.
+--[ ] NAME:Fix: business_modules/accounting/tests/test_integration.py DESCRIPTION:Investigate and fix accounting integration tests.
+--[ ] NAME:Fix: business_modules/accounting/tests/test_runner.py DESCRIPTION:Investigate and fix accounting custom test runner issues.
+--[ ] NAME:Fix: business_modules/contacts/tests/test_contacts.py DESCRIPTION:Investigate and fix contacts tests.
+--[ ] NAME:Fix: business_modules/contacts/tests/test_models.py DESCRIPTION:Investigate and fix contacts model tests.
+--[ ] NAME:Fix: business_modules/contacts/tests/test_settlement_logic.py DESCRIPTION:Investigate and fix contacts settlement logic tests.
+--[ ] NAME:Fix: business_modules/inventory/tests/test_integration.py DESCRIPTION:Investigate and fix inventory integration tests.
+--[ ] NAME:Fix: business_modules/inventory/tests/test_product.py DESCRIPTION:Investigate and fix inventory product tests.
+--[ ] NAME:Fix: business_modules/inventory/tests/test_stock_move.py DESCRIPTION:Investigate and fix inventory stock move tests.
+--[ ] NAME:Fix: business_modules/pos/tests/test_pos_config.py DESCRIPTION:Investigate and fix POS config tests.
+--[ ] NAME:Fix: business_modules/pos/tests/test_pos_order.py DESCRIPTION:Investigate and fix POS order tests.
+--[ ] NAME:Fix: business_modules/pos/tests/test_pos_payment.py DESCRIPTION:Investigate and fix POS payment tests.
+--[ ] NAME:Fix: business_modules/pos/tests/test_pos_session.py DESCRIPTION:Investigate and fix POS session tests.
+--[ ] NAME:Fix: business_modules/pos/tests/test_services.py DESCRIPTION:Investigate and fix POS services tests.
+--[ ] NAME:Fix: business_modules/production/tests/test_integration.py DESCRIPTION:Investigate and fix business production integration tests.
+--[ ] NAME:Fix: business_modules/purchasing/tests/test_integration.py DESCRIPTION:Investigate and fix purchasing integration tests.
+--[ ] NAME:Fix: business_modules/purchasing/tests/test_purchase_order.py DESCRIPTION:Investigate and fix purchasing purchase_order tests.
+--[ ] NAME:Fix: business_modules/purchasing/tests/test_supplier.py DESCRIPTION:Investigate and fix purchasing supplier tests.
+--[ ] NAME:Fix: business_modules/rent/tests/test_property.py DESCRIPTION:Investigate and fix rent property tests.
+--[ ] NAME:Fix: business_modules/rent/tests/test_rental_contract.py DESCRIPTION:Investigate and fix rent rental_contract tests.
+--[ ] NAME:Fix: business_modules/rent/tests/test_services.py DESCRIPTION:Investigate and fix rent services tests.
+--[ ] NAME:Fix: business_modules/sales/tests/test_customer.py DESCRIPTION:Investigate and fix sales customer tests.
+--[ ] NAME:Fix: business_modules/sales/tests/test_sales_order.py DESCRIPTION:Investigate and fix sales order tests.
+--[ ] NAME:Fix: business_modules/solar_stations/tests/test_integration.py DESCRIPTION:Investigate and fix solar_stations integration tests.
+--[ ] NAME:Fix: business_modules/solar_stations/tests/test_models.py DESCRIPTION:Investigate and fix solar_stations model tests.
+--[ ] NAME:Fix: business_modules/solar_stations/tests/test_solar_station.py DESCRIPTION:Investigate and fix solar_stations tests.
+--[ ] NAME:Fix: business_modules/tests/test_models.py DESCRIPTION:Investigate and fix umbrella business modules tests.
+--[ ] NAME:Fix: core_modules/setup/tests/test_integration.py DESCRIPTION:Investigate and fix core setup integration tests.
+--[ ] NAME:Fix: core_modules/setup/tests/test_models.py DESCRIPTION:Investigate and fix core setup model tests.
+--[ ] NAME:Fix: core_modules/system_settings/test_integration.py DESCRIPTION:Investigate and fix core system_settings integration tests (path variant).
+--[ ] NAME:Fix: core_modules/system_settings/tests/test_integration.py DESCRIPTION:Investigate and fix core system_settings integration tests.
+--[ ] NAME:Fix: core_modules/tests/test_models.py DESCRIPTION:Investigate and fix core modules model tests.
+--[ ] NAME:Fix: core_modules/tests/test_services.py DESCRIPTION:Investigate and fix core modules service tests.
+--[ ] NAME:Fix: core_modules/tests/test_views.py DESCRIPTION:Investigate and fix core modules view tests.
+--[ ] NAME:Fix: integration_modules/a2a_integration/tests/test_api.py DESCRIPTION:Investigate and fix a2a_integration API tests.
+--[ ] NAME:Fix: integration_modules/a2a_integration/tests/test_models.py DESCRIPTION:Investigate and fix a2a_integration model tests.
+--[ ] NAME:Fix: integration_modules/ai/tests/test_integration.py DESCRIPTION:Fix integration_modules.ai RuntimeError (model registration) and related tests.
+--[ ] NAME:Fix: integration_modules/ai/tests/test_models.py DESCRIPTION:Fix integration_modules.ai RuntimeError for models and stabilize tests.
+--[ ] NAME:Fix: integration_modules/ai/tests/test_services.py DESCRIPTION:Fix integration_modules.ai RuntimeError for services tests.
+--[ ] NAME:Fix: integration_modules/ai_agriculture/tests/test_ai_integration.py DESCRIPTION:Investigate and fix ai_agriculture integration issues.
+--[ ] NAME:Fix: integration_modules/ai_agriculture/tests/test_api.py DESCRIPTION:Fix ai_agriculture API tests.
+--[ ] NAME:Fix: integration_modules/ai_agriculture/tests/test_apis.py DESCRIPTION:Fix ai_agriculture APIs tests.
+--[ ] NAME:Fix: integration_modules/ai_agriculture/tests/test_integration.py DESCRIPTION:Fix ai_agriculture integration tests.
+--[ ] NAME:Fix: integration_modules/ai_agriculture/tests/test_models.py DESCRIPTION:Fix ai_agriculture model tests.
+--[ ] NAME:Fix: integration_modules/ai_analytics/tests/test_api.py DESCRIPTION:Fix ai_analytics API tests.
+--[ ] NAME:Fix: integration_modules/ai_analytics/tests/test_integration.py DESCRIPTION:Fix ai_analytics integration tests.
+--[ ] NAME:Fix: integration_modules/ai_analytics/tests/test_models.py DESCRIPTION:Fix ai_analytics model tests.
+--[ ] NAME:Fix: integration_modules/ai_analytics/tests/test_services.py DESCRIPTION:Fix ai_analytics services tests.
+--[ ] NAME:Fix: services_modules/admin_affairs/tests/test_admin_affairs.py DESCRIPTION:Investigate and fix admin_affairs tests.
+--[ ] NAME:Fix: services_modules/assets/tests/test_asset.py DESCRIPTION:Investigate and fix assets tests.
+--[ ] NAME:Fix: services_modules/assets/tests/test_services.py DESCRIPTION:Investigate and fix assets services tests.
+--[ ] NAME:Fix: services_modules/beneficiaries/tests/test_beneficiary.py DESCRIPTION:Investigate and fix beneficiaries tests.
+--[ ] NAME:Fix: services_modules/beneficiaries/tests/test_services.py DESCRIPTION:Investigate and fix beneficiaries services tests.
+--[ ] NAME:Fix: services_modules/board_management/tests/test_board_management.py DESCRIPTION:Investigate and fix board_management tests.
+--[ ] NAME:Fix: services_modules/complaints_suggestions/tests/test_complaints_suggestions.py DESCRIPTION:Investigate and fix complaints_suggestions tests.
+--[ ] NAME:Fix: services_modules/correspondence/tests/test_api.py DESCRIPTION:Resolve conflicting correspondence models; fix API tests.
+--[ ] NAME:Fix: services_modules/correspondence/tests/test_correspondence.py DESCRIPTION:Resolve conflicting correspondence models; fix tests.
+--[ ] NAME:Fix: services_modules/correspondence/tests/test_models.py DESCRIPTION:Resolve conflicting correspondence models; fix model tests.
+--[ ] NAME:Fix: services_modules/correspondence/tests/test_views.py DESCRIPTION:Resolve conflicting correspondence models; fix view tests.
+--[ ] NAME:Fix: services_modules/feasibility_studies/tests/test_feasibility_studies.py DESCRIPTION:Investigate and fix feasibility_studies tests.
+--[ ] NAME:Fix: services_modules/forecast/tests/test_forecast.py DESCRIPTION:Investigate and fix forecast tests.
+--[ ] NAME:Fix: services_modules/hr/tests/test_department.py DESCRIPTION:Resolve HR JobGrade model conflicts; fix department tests.
+--[ ] NAME:Fix: services_modules/hr/tests/test_employee.py DESCRIPTION:Resolve HR JobGrade conflicts; fix employee tests.
+--[ ] NAME:Fix: services_modules/hr/tests/test_employee_asset.py DESCRIPTION:Resolve HR JobGrade conflicts; fix employee_asset tests.
+--[ ] NAME:Fix: services_modules/hr/tests/test_employee_document.py DESCRIPTION:Resolve HR JobGrade conflicts; fix employee_document tests.
+--[ ] NAME:Fix: services_modules/hr/tests/test_employee_experience.py DESCRIPTION:Resolve HR JobGrade conflicts; fix employee_experience tests.
+--[ ] NAME:Fix: services_modules/hr/tests/test_employee_qualification.py DESCRIPTION:Resolve HR JobGrade conflicts; fix employee_qualification tests.
+--[ ] NAME:Fix: services_modules/hr/tests/test_hr.py DESCRIPTION:Resolve HR JobGrade conflicts; fix hr tests.
+--[ ] NAME:Fix: services_modules/hr/tests/test_job_grade.py DESCRIPTION:Resolve HR JobGrade conflicts; fix job_grade tests.
+--[ ] NAME:Fix: services_modules/hr/tests/test_position.py DESCRIPTION:Resolve HR JobGrade conflicts; fix position tests.
+--[ ] NAME:Fix: services_modules/legal_affairs/tests/test_legal_affairs.py DESCRIPTION:Resolve legal_affairs model conflicts; fix tests.
+--[ ] NAME:Fix: services_modules/marketing/tests/test_marketing.py DESCRIPTION:Resolve marketing conflicts; fix tests.
+--[ ] NAME:Fix: services_modules/marketing/tests/test_marketing_campaign.py DESCRIPTION:Resolve marketing conflicts; fix marketing_campaign tests.
+--[ ] NAME:Fix: services_modules/marketing/tests/test_marketing_channel.py DESCRIPTION:Resolve marketing conflicts; fix marketing_channel tests.
+--[ ] NAME:Fix: services_modules/projects/tests/test_project_task_integration.py DESCRIPTION:Resolve Project model conflicts; fix task integration tests.
+--[ ] NAME:Fix: services_modules/projects/tests/test_projects.py DESCRIPTION:Resolve Project model conflicts; fix projects tests.
+--[ ] NAME:Fix: services_modules/projects/tests/test_risk_management_integration.py DESCRIPTION:Resolve Project model conflicts; fix risk management tests.
+--[ ] NAME:Fix: services_modules/projects/tests/test_services.py DESCRIPTION:Resolve Project model conflicts; fix services tests.
+--[ ] NAME:Fix: services_modules/projects/tests/test_workflow_integration.py DESCRIPTION:Resolve Project model conflicts; fix workflow integration tests.
+--[ ] NAME:Fix: services_modules/quality_control/models/quality_test.py DESCRIPTION:Resolve quality_template/quality_test model conflicts; fix models.
+--[ ] NAME:Fix: services_modules/quality_control/tests/test_quality_certificate.py DESCRIPTION:Investigate and fix quality certificate tests.
+--[ ] NAME:Fix: services_modules/quality_control/tests/test_quality_check.py DESCRIPTION:Investigate and fix quality check tests.
+--[ ] NAME:Fix: services_modules/quality_control/tests/test_quality_improvement.py DESCRIPTION:Investigate and fix quality improvement tests.
+--[ ] NAME:Fix: services_modules/quality_control/tests/test_quality_issue.py DESCRIPTION:Investigate and fix quality issue tests.
+--[ ] NAME:Fix: services_modules/quality_control/tests/test_quality_parameter.py DESCRIPTION:Investigate and fix quality parameter tests.
+--[ ] NAME:Fix: services_modules/quality_control/tests/test_quality_result.py DESCRIPTION:Investigate and fix quality result tests.
+--[ ] NAME:Fix: services_modules/quality_control/tests/test_quality_template.py DESCRIPTION:Investigate and fix quality template tests.
+--[ ] NAME:Fix: services_modules/quality_control/tests/test_quality_test.py DESCRIPTION:Investigate and fix quality test tests.
+--[ ] NAME:Fix: gaara_erp/test_final_validation.py DESCRIPTION:Investigate and fix final validation test ensuring system-wide readiness.
+--[ ] NAME:Fix: utility_modules/utilities/tests/test_models.py DESCRIPTION:Resolve SystemMetric conflicts; fix utility models tests.
+--[ ] NAME:Fix: utility_modules/utilities/tests/test_views.py DESCRIPTION:Resolve SystemMetric conflicts; fix utility views tests.
+-[ ] NAME:Documentation and indices DESCRIPTION:Maintain MIGRATIONS_NOTES.md, DEFINITIONS_INDEX.md, variable_map.yaml, function_map.md, api_map.yaml.
+--[ ] NAME:Docs: definitions index DESCRIPTION:Generate DEFINITIONS_INDEX.md listing modules, classes, functions; cross-link to files.
+--[ ] NAME:Docs: variable/function maps DESCRIPTION:Produce variable_map.yaml and function_map.md with naming improvements.
+--[ ] NAME:Docs: API map DESCRIPTION:Create api_map.yaml mapping components to endpoints with schemas and errors.
+-[ ] NAME:Security and DB audit DESCRIPTION:Middleware ordering, security headers/CSRF/CORS; DB schema drift and constraints; generate db_audit.yaml.
+--[ ] NAME:DB audit and constraints DESCRIPTION:Generate db_audit.yaml with entities, FKs, indexes; review for duplicates/conflicts (app_label issues).
+--[ ] NAME:Security audit and headers DESCRIPTION:Review SecurityMiddleware, custom security middleware, CORS, CSP; produce security_audit.yaml with findings and remediations.
+-[ ] NAME:Add missing .env and dependency alignment DESCRIPTION:Create .env.example, validate required envs, audit/install missing deps after approval.
+--[ ] NAME:Global deps audit DESCRIPTION:pip check/freeze; detect missing packages; propose installs; after approval, install and lock; update requirements*.txt.
+-[ ] NAME:Manual file-by-file scan (no scripts) DESCRIPTION:Manual review and fixes across apps; check __init__.py, class/defs; address syntax and import errors.
+-[ ] NAME:Project: Gaara ERP v5 — 100% working, no skipped tests DESCRIPTION:Goal: Reach 100% working state — no skipped tests, no failures, full coverage. Mode: Step-by-step execution (fix, run, validate). Acceptance: Full suite green and coverage >= 80%; APIs return 2xx; DB schema consistent; security/middleware sane; documentation updated.
+--[ ] NAME:1) Environment & Dependencies DESCRIPTION:Verify Python 3.11.9 venv, installed packages vs requirements, pytest config, and env variables; ensure test discovery works.
+---[ ] NAME:Check .venv Python 3.11.9 activation DESCRIPTION:Ensure virtual environment exists and uses Python 3.11.9. Acceptance: `python --version` shows 3.11.x and site-packages resolves correctly.
+---[ ] NAME:Verify requirements vs installed DESCRIPTION:Compare requirements.txt/pyproject with installed packages. Acceptance: discrepancies listed and resolved plan prepared.
+---[ ] NAME:Align env and dependencies DESCRIPTION:Add missing deps and env vars (.env.example, pyproject). Do not install without approval. Typical: Django, pytest-django, Faker, coverage.
+---[ ] NAME:Ensure pytest configuration DESCRIPTION:Verify pytest.ini or pyproject.toml includes DJANGO_SETTINGS_MODULE and test file patterns. Acceptance: pytest config detected.
+---[ ] NAME:Test discovery check DESCRIPTION:Run: `pytest --collect-only` to confirm all tests are detected. Acceptance: collection completes without errors.
+--[ ] NAME:2) Core Project Structure DESCRIPTION:Check __init__.py presence, enable apps in INSTALLED_APPS (one by one), fix MIDDLEWARE & security, run system checks.
+---[ ] NAME:Scan __init__.py across modules DESCRIPTION:Ensure each Python package has __init__.py. Acceptance: missing ones added without side effects.
+---[ ] NAME:Enable apps one by one DESCRIPTION:Progressively add apps to INSTALLED_APPS with MIGRATION_MINIMAL_MODE strategy. Acceptance: no system-check collisions at each step.
+---[ ] NAME:Fix MIDDLEWARE & security DESCRIPTION:Order SecurityMiddleware, Session/Auth, CSRF, CORS; add WhiteNoise if needed. Acceptance: manage.py check shows no middleware warnings.
+---[ ] NAME:Run Django system checks DESCRIPTION:Run `python gaara_erp/manage.py check`. Acceptance: 0 errors; warnings triaged.
+--[ ] NAME:3) Database Schema DESCRIPTION:Validate makemigrations --check, apply migrations, resolve model conflicts, ensure FK and relationship alignment.
+---[ ] NAME:makemigrations sanity DESCRIPTION:Run `python gaara_erp/manage.py makemigrations --check`. Acceptance: no pending or drift identified (or tasks filed).
+---[ ] NAME:Apply migrations DESCRIPTION:Run `python gaara_erp/manage.py migrate`. Acceptance: completes without errors.
+---[ ] NAME:Resolve model conflicts DESCRIPTION:Fix conflicting models (Project, LegalCase, SystemMetric, etc.) by app_label/related_name adjustments. Acceptance: system checks pass.
+---[ ] NAME:Align FKs & relationships DESCRIPTION:Ensure FK targets exist, on_delete semantics, related_names unique. Acceptance: makemigrations --check clean.
+--[ ] NAME:4) Tests Repair (Iterative) DESCRIPTION:Per failing test file: fix imports/defs, run file-specific pytest until green. Use existing per-file tasks under suites.
+--[ ] NAME:5) API & Routing DESCRIPTION:Verify urls inclusion, DRF endpoints, serializers/views; ensure endpoints return 2xx; add missing pieces.
+---[ ] NAME:Verify urls inclusion DESCRIPTION:Ensure all module urls.py included in gaara_erp/urls.py. Acceptance: reversing routes works in tests.
+---[ ] NAME:DRF endpoints smoke DESCRIPTION:Run minimal API tests with pytest and reuse-db. Acceptance: key endpoints return 2xx.
+---[ ] NAME:Fix serializers & views DESCRIPTION:Add/repair serializers and views backing endpoints. Acceptance: API tests pass.
+---[ ] NAME:2xx responses guarantee DESCRIPTION:Ensure all documented endpoints return 2xx on happy paths. Acceptance: green API tests.
+--[ ] NAME:6) Permissions & Security DESCRIPTION:Validate permissions and authorization services; unify permission models; RBAC tests across roles.
+---[ ] NAME:Validate permissions modules DESCRIPTION:Confirm permissions.py classes exist and load. Acceptance: import and system-check clean.
+---[ ] NAME:Unify authorization services DESCRIPTION:Fix authorization_service inconsistencies; deny-by-default. Acceptance: unit tests reflect RBAC rules.
+---[ ] NAME:RBAC tests DESCRIPTION:Run core permissions tests. Acceptance: green across roles and object-level checks.
+---[ ] NAME:Security headers & CSRF/CORS DESCRIPTION:Verify security headers and CSRF/CORS settings. Acceptance: security_audit.yaml updated with pass/fail.
+--[ ] NAME:7) Services & Utilities DESCRIPTION:Verify services layer and utility modules; mocks for external calls; ensure working behavior.
+---[ ] NAME:Service layer verification DESCRIPTION:Audit services.py and service/* for each app; ensure transactions, idempotency where needed. Acceptance: test_services pass.
+---[ ] NAME:Utility modules health DESCRIPTION:Check file_storage, system_log, etc. Acceptance: tests for utilities pass.
+---[ ] NAME:Mocks for external calls DESCRIPTION:Write/repair mocks for external services. Acceptance: deterministic tests without network calls.
+--[ ] NAME:8) AI & Integration DESCRIPTION:Fix integration_modules/ai RuntimeErrors; deduplicate models like JobGrade/Project; ensure single registration.
+---[ ] NAME:Fix AI RuntimeErrors DESCRIPTION:Resolve duplicate model registration and app conflicts in integration_modules/ai.*. Acceptance: ai tests import and run.
+---[ ] NAME:Deduplicate conflicting models DESCRIPTION:JobGrade, Project, CorrespondenceCategory, etc. ensure single source of truth. Acceptance: no duplicate model errors.
+---[ ] NAME:Ensure app registration once DESCRIPTION:Django AppConfig registrations unique; no circular imports. Acceptance: manage.py check clean.
+--[ ] NAME:9) Final Validation DESCRIPTION:Run full test suite and coverage; verify >80% coverage; green build; no skips; finalize documentation.
+---[ ] NAME:Run full suite DESCRIPTION:Command: `pytest gaara_erp -vv --disable-warnings --maxfail=1`. Acceptance: 0 failures, 0 errors, 0 skipped (unless explicitly marked and justified).
+---[ ] NAME:Coverage >= 80% DESCRIPTION:Command: `coverage run -m pytest && coverage html`. Acceptance: htmlcov/index.html shows >=80% lines; document gaps.
+-[ ] NAME:Finish production dashboard endpoints and unblock tests DESCRIPTION:Implement minimal dashboards shim, wire business_modules.production URLs and views for production_dashboard, main_dashboard, and export_dashboard_data; run dashboard tests to verify collection and execution.
+-[/] NAME:Run full Agricultural – Production test suite and fix any remaining failures DESCRIPTION:Execute pytest for agricultural_modules/production tests; capture failures; make minimal safe fixes (URLs, views, data structures) until all production tests pass.
+-[ ] NAME:Plan and begin Business Modules stabilization (Contacts, Inventory, Purchasing, Rent, Sales, Solar Stations) DESCRIPTION:Prioritize critical low-coverage/error-prone files (e.g., inventory/signals.py, purchasing/sales invoice models); run any existing tests; add missing URLs/endpoints; fix import/model errors; ensure migrations and basic API responses work.
+-[/] NAME:Investigate/Triage diagnostics across modules (imports, params, models) DESCRIPTION:Aggregate IDE diagnostics and pytest signals; classify by module and type (missing imports, mismatched parameters, model errors, lint-only vs test failures). Produce a fix plan with owners/acceptance criteria.
+--[ ] NAME:Production analytics: make analytics.dashboards importable to static analyzers DESCRIPTION:Ensure agricultural_modules.production.analytics.dashboards resolves without runtime aliasing tricks. Actions: keep dashboards.py as re-export shim, add explicit __all__ in analytics/__init__.py and dashboards.py, and add a no-op type stub if needed so Pylance/Pylint stop flagging E0401/E0611.
+--[ ] NAME:Production models: provide missing names used by tests DESCRIPTION:Add/confirm placeholder models or exports so from agricultural_modules.production.models import ProductionActivity, QualityCheck works for static analyzers. If tests actually import different names, add aliases. Acceptance: Pylint E0611 resolved and tests still pass.
+--[ ] NAME:Inventory: ActivityLogService availability for logging warnings DESCRIPTION:Provide a minimal core_modules.activity_log.services.ActivityLogService with log_activity() no-op when real service not present, or feature-flag usage in inventory.services to silence runtime warnings and satisfy activity log integration tests. Acceptance: inventory tests collect and run without warnings; activity log tests validate calls.
+--[ ] NAME:Inventory: compat mapping and signals safety DESCRIPTION:Verify business_modules.inventory.compat maps StockMove→InventoryTransaction and Stock→InventoryStock and signals use safe fields. Add runtime guards/types to prevent crashes. Acceptance: inventory tests green; no signal crashes on save/delete.
+--[ ] NAME:Research services: fix parameter mismatches expected by tests DESCRIPTION:Tests call service functions with project/user/added_by and*_id arguments. Implement adapter wrappers or update signatures to accept these names, map to actual models, and provide defaults. Acceptance: Pylance reportCallIssue diagnostics cleared; tests pass with both id and object forms.
+--[ ] NAME:Research services: ensure functions accept project_id/user_id/member_id/title/success_criteria DESCRIPTION:Add keyword-only parameters and flexible **kwargs handling to research service functions so extra named args are accepted. Validate presence where required and raise clear ValueError otherwise. Acceptance: no reportCallIssue in lines 126–233; tests pass.
+--[ ] NAME:Variety/Seed Hybridization models: __str__ must return str DESCRIPTION:Fix __str__ implementations to return a string in (a) agricultural_experiments/models/variety.py:71 and (b) seed_hybridization/merged/models.py:79,154. Acceptance: Pylint E0307 gone; unit tests unaffected.
+--[ ] NAME:Seed Hybridization services: ApiKey import fix DESCRIPTION:In seed_hybridization/merged/services.py, correct the import of ApiKey to the actual module (likely core.api_keys or similar). Add fallback protocol/interface for typing if needed. Acceptance: Pylance reportAttributeAccessIssue resolved.
+--[ ] NAME:Seed Hybridization tests: ManyToMany access and optional members DESCRIPTION:Fix test_services.py improper usage of ManyToMany manager (use .all(), not .all). Address Optional member access (lines ~206–208). If changing tests is not allowed, expose read-only properties in the model/service to satisfy expectations. Acceptance: diagnostics on assertIn(container) resolved; tests pass.
+--[ ] NAME:Production tests: imported-auth-user warning DESCRIPTION:Update tests to use django.contrib.auth.get_user_model instead of direct User import, or add local allowlist in pylintrc for tests. Acceptance: Pylint E5142 removed in production tests without altering behavior.
+--[ ] NAME:Variety Trials models: fix Pylint astroid fatal DESCRIPTION:Open agricultural_modules/variety_trials/models.py and correct constructs causing astroid crash (dynamic exec/import or malformed annotations). Acceptance: Pylint no longer crashes; module imports cleanly.
+--[ ] NAME:Complexity: final_system_test.main too complex (C901) DESCRIPTION:Refactor final_system_test.py:main into smaller functions; maintain behavior. Acceptance: flake8 C901 for main eliminated; add unit smoke where feasible.
+--[ ] NAME:Complexity: HybridizationService.run_simulation too complex (C901) DESCRIPTION:Refactor run_simulation into cohesive helpers; preserve functionality and add tests. Acceptance: C901 eliminated and tests pass.
+--[ ] NAME:Settings sanity and module enablement DESCRIPTION:Review gaara_erp/settings.py for MIGRATION_MINIMAL_MODE toggling; ensure full app registry during tests; confirm middleware/security per project preferences. Acceptance: settings reach 90%+ health review and tests run with full app set.
+--[ ] NAME:Scripts coverage and smoke tests DESCRIPTION:Add minimal smoke tests for scripts/* (list_accounting_tables.py, performance_analyzer.py, etc.) or refactor into callable functions to allow testing. Acceptance: basic tests exist; zero runtime errors on import/--help.
+-[ ] NAME:Global Module Scan & Remediation (All 60 Project Modules) DESCRIPTION:Perform a comprehensive scan and remediation across all first‑party modules (~60). Scope: imports/exports, missing libs, required/optional params, service signatures, model fields/relations, migrations, URLs, and tests. Deliver per‑module fixes and documentation updates (MIGRATIONS_NOTES.md, DEFINITIONS_INDEX.md). Acceptance: zero import errors, tests collect/run for each module group, no critical static analyzer errors (Pylance/Pylint), migrations clean.
+--[ ] NAME:Agricultural Modules: Group scan and remediation DESCRIPTION:Modules: research, agricultural_experiments, farms, nurseries, plant_diagnosis, production, seed_hybridization (incl. merged), seed_production, variety_trials. Acceptance: group collects with pytest; imports OK; parameter/argument adapters in place; __str__ and model defs validated; URLs/views up; tests pass or are triaged.
+---[ ] NAME:Diagnostics scan (imports/params/models) DESCRIPTION:Run static analyzers (flake8, pylint, pylance), pytest --collect-only, and Django system checks to enumerate issues: missing libs/imports, argument/parameter mismatches, model field/FK/M2M errors, migration drift. Output a per-module checklist.
+---[ ] NAME:Fix imports/exports/compat DESCRIPTION:Add/repair __init__.py exports; create compatibility shims for legacy import paths; resolve circular imports with deferred imports; ensure URLs and views import cleanly.
+---[ ] NAME:Fix models/services/signatures DESCRIPTION:Correct model fields/FKs/related_names; ensure __str__ returns str; align service signatures with tests (accept **id, user_id, project_id); add adapters where needed; create/revise migrations.
+---[ ] NAME:Tests + docs DESCRIPTION:Run targeted tests to green; document changes in MIGRATIONS_NOTES.md and DEFINITIONS_INDEX.md; ensure group passes collection and critical tests.
+---[ ] NAME:Agricultural – Research DESCRIPTION:Scan & remediate module: imports/exports, required params/argument names in services, models (fields/FKs/related_names, __str__), migrations, URLs/views. Acceptance: pytest collection for research tests OK; key tests green/triaged; makemigrations --check clean; docs updated.
+---[ ] NAME:Agricultural – Experiments DESCRIPTION:Same remediation scope as above for agricultural_experiments. Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Agricultural – Farms DESCRIPTION:Remediate farms app (imports, params, models, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Agricultural – Nurseries DESCRIPTION:Remediate nurseries app (imports, params, models, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Agricultural – Plant Diagnosis DESCRIPTION:Remediate plant_diagnosis (imports, params, models, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Agricultural – Production DESCRIPTION:Remediate agricultural production app; dashboards/analytics imports, services signatures, models, migrations, URLs. Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Agricultural – Seed Hybridization DESCRIPTION:Remediate seed_hybridization (services signatures incl. ApiKey references, models, migrations). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Agricultural – Seed Hybridization (Merged) DESCRIPTION:Remediate seed_hybridization.merged (services/models/__str__/M2M, migrations). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Agricultural – Seed Production DESCRIPTION:Remediate seed_production (imports, params, models, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Agricultural – Variety Trials DESCRIPTION:Remediate variety_trials (imports, models, services, migrations). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+--[ ] NAME:Business Modules: Group scan and remediation DESCRIPTION:Modules: inventory, contacts, pos, business production, purchasing, rent, sales, solar_stations, accounting. Acceptance: group collects with pytest; imports/compat OK; services API stable; signals safe; tests pass/triaged.
+---[ ] NAME:Diagnostics scan (imports/params/models) DESCRIPTION:Run static analyzers and pytest --collect-only for business modules; inventory signals/services; purchasing/sales/production endpoints; accounting models.
+---[ ] NAME:Fix imports/exports/compat DESCRIPTION:Stabilize import paths; add compat modules for inventory/purchasing/sales; ensure URL names resolve; create service adapters for ActivityLogService, etc.
+---[ ] NAME:Fix models/services/signatures DESCRIPTION:Repair model constraints, related_names; align function/class signatures used by tests; guard optional attrs; add missing models if tests import them.
+---[ ] NAME:Tests + docs DESCRIPTION:Green unit/integration tests per app; update docs (MIGRATIONS_NOTES.md, DEFINITIONS_INDEX.md).
+---[ ] NAME:Business – Inventory DESCRIPTION:Remediate inventory (compat imports, ActivityLogService adapters, models, signals, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Business – Contacts DESCRIPTION:Remediate contacts (imports, models, services, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Business – POS DESCRIPTION:Remediate pos (config/order/payment/session/services; imports, models, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Business – Production DESCRIPTION:Remediate business production app (imports, services, models, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Business – Purchasing DESCRIPTION:Remediate purchasing (imports, services signatures, models, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Business – Rent DESCRIPTION:Remediate rent (property, rental_contract, services; model FKs, related_name clashes). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Business – Sales DESCRIPTION:Remediate sales (imports, services, models, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Business – Solar Stations DESCRIPTION:Remediate solar_stations (imports, models, services, migrations, URLs). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Business – Accounting DESCRIPTION:Remediate accounting (imports, models, migrations, custom test runner issues). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+--[ ] NAME:Core Modules: Group scan and remediation DESCRIPTION:Modules: setup, system_settings, permissions, user_management, core. Acceptance: system checks clean; migrations consistent; permissions tests pass; settings split verified.
+---[ ] NAME:Diagnostics scan (imports/params/models) DESCRIPTION:Run system checks; scan for settings/middleware/security misconfig; verify permissions app registrations and migrations.
+---[ ] NAME:Fix imports/exports/compat DESCRIPTION:Stabilize settings split and module exports; ensure management commands and URLs import; resolve circulars.
+---[ ] NAME:Fix models/services/signatures DESCRIPTION:Correct core models (users/permissions); validate constraints and admin registration; adjust service boundaries.
+---[ ] NAME:Tests + docs DESCRIPTION:Run core test suites; document any migrations and definitions.
+---[ ] NAME:Core – Setup DESCRIPTION:Remediate core_modules.setup (imports, models, migrations). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Core – System Settings DESCRIPTION:Remediate core_modules.system_settings (imports, models, migrations). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Core – Permissions DESCRIPTION:Remediate permissions (registrations, models, migrations). Acceptance: system checks OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Core – User Management DESCRIPTION:Remediate user_management (imports, models, migrations, admin). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Core – Core DESCRIPTION:Remediate core app (imports, models, services, migrations). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Core – Core Modules (umbrella) DESCRIPTION:Ensure umbrella core_modules tests and shared utilities import cleanly; resolve circulars; document shared definitions.
+--[ ] NAME:Integration Modules: Group scan and remediation DESCRIPTION:Modules: ai, ai_agriculture, ai_analytics, a2a_integration, rag. Acceptance: model registration/runtime errors resolved; APIs importable; tests pass/triaged.
+---[ ] NAME:Diagnostics scan (imports/params/models) DESCRIPTION:Collect issues across AI/RAG/a2a integration; verify importability without heavy deps; map external calls behind interfaces.
+---[ ] NAME:Fix imports/exports/compat DESCRIPTION:Create light-weight compat shims; lazy-import heavy libs; guard optional dependencies.
+---[ ] NAME:Fix models/services/signatures DESCRIPTION:Align integration service signatures with tests; parameter adapters; mockable boundaries.
+---[ ] NAME:Tests + docs DESCRIPTION:Green integration module tests; update docs.
+---[ ] NAME:Integration – AI DESCRIPTION:Remediate integration_modules.ai (RuntimeError: model registration; imports; services). Acceptance: collection OK; tests green/triaged; migrations clean; docs updated.
+---[ ] NAME:Integration – AI Agriculture DESCRIPTION:Remediate integration_modules.ai_agriculture (imports, tests, models, migrations). Acceptance criteria as standard.
+---[ ] NAME:Integration – AI Analytics DESCRIPTION:Remediate integration_modules.ai_analytics (AnalyticsReport conflicts; imports; models; migrations). Acceptance criteria as standard.
+---[ ] NAME:Integration – A2A Integration DESCRIPTION:Remediate a2a_integration (API endpoints, models, migrations). Acceptance criteria as standard.
+---[ ] NAME:Integration – RAG DESCRIPTION:Add/verify RAG module integration behind feature flag; permission-restricted endpoints in non-test env; vector DB config optional. Acceptance: imports OK; stub endpoints guarded; tests/feature flags documented.
+--[ ] NAME:Services Modules: Group scan and remediation DESCRIPTION:Modules: hr, correspondence, projects, marketing, legal_affairs, quality_control, board_management, admin_affairs, assets, beneficiaries, complaints_suggestions, feasibility_studies, forecast. Acceptance: imports clean; model conflicts resolved; tests pass/triaged.
+---[ ] NAME:Diagnostics scan (imports/params/models) DESCRIPTION:Run analyzers and collection for services apps (HR, correspondence, projects, etc.).
+---[ ] NAME:Fix imports/exports/compat DESCRIPTION:Normalize exports; compat modules for legacy paths; fix URL/view imports.
+---[ ] NAME:Fix models/services/signatures DESCRIPTION:Correct model fields/relations; service signatures and adapters; migrations as needed.
+---[ ] NAME:Tests + docs DESCRIPTION:Green tests across services; document changes.
+---[ ] NAME:Services – HR DESCRIPTION:Remediate services_modules.hr (JobGrade conflicts, models, services, migrations). Acceptance criteria as standard.
+---[ ] NAME:Services – Correspondence DESCRIPTION:Remediate services_modules.correspondence (category conflicts; API/view tests; models; migrations). Acceptance criteria as standard.
+---[ ] NAME:Services – Projects DESCRIPTION:Remediate services_modules.projects (Project model conflicts; imports; services; migrations). Acceptance criteria as standard.
+---[ ] NAME:Services – Marketing DESCRIPTION:Remediate marketing module (imports; models; migrations; tests). Acceptance criteria as standard.
+---[ ] NAME:Services – Legal Affairs DESCRIPTION:Remediate legal_affairs (imports; models; migrations; tests). Acceptance criteria as standard.
+---[ ] NAME:Services – Quality Control DESCRIPTION:Remediate quality_control (quality_template/test conflicts; imports; models; migrations). Acceptance criteria as standard.
+---[ ] NAME:Services – Board Management DESCRIPTION:Remediate board_management (BoardDocument; M2M throughs; imports; migrations). Acceptance criteria as standard.
+---[ ] NAME:Services – Admin Affairs DESCRIPTION:Remediate admin_affairs (imports; models; migrations; tests). Acceptance criteria as standard.
+---[ ] NAME:Services – Assets DESCRIPTION:Remediate services_modules.assets (imports; models; services; migrations). Acceptance criteria as standard.
+---[ ] NAME:Services – Beneficiaries DESCRIPTION:Remediate beneficiaries (imports; models; services; migrations). Acceptance criteria as standard.
+---[ ] NAME:Services – Complaints & Suggestions DESCRIPTION:Remediate complaints_suggestions (imports; models; services; migrations). Acceptance criteria as standard.
+---[ ] NAME:Services – Feasibility Studies DESCRIPTION:Remediate feasibility_studies (imports; models; services; migrations). Acceptance criteria as standard.
+---[ ] NAME:Services – Forecast DESCRIPTION:Remediate forecast (imports; models; services; migrations). Acceptance criteria as standard.
+--[ ] NAME:Organization/Company/User Accounts & Notifications DESCRIPTION:Modules: companies, organization, users_accounts, notifications, health_monitoring, internal_diagnosis_module. Acceptance: imports and migrations clean; basic tests pass/triaged.
+---[ ] NAME:Diagnostics scan (imports/params/models) DESCRIPTION:Collect issues in companies/organization/users_accounts/notifications/health_monitoring/internal_diagnosis_module.
+---[ ] NAME:Fix imports/exports/compat DESCRIPTION:Ensure admin/URLs import; compat shims where necessary.
+---[ ] NAME:Fix models/services/signatures DESCRIPTION:Address model constraints, __str__, related_names; services arg alignment.
+---[ ] NAME:Tests + docs DESCRIPTION:Green tests; update docs.
+---[ ] NAME:Org – Companies DESCRIPTION:Remediate companies app (imports; models; migrations; admin). Acceptance criteria as standard.
+---[ ] NAME:Org – Organization DESCRIPTION:Remediate organization app (imports; models; migrations; admin). Acceptance criteria as standard.
+---[ ] NAME:Org – Users Accounts DESCRIPTION:Remediate users_accounts app (imports; models; migrations; admin). Acceptance criteria as standard.
+---[ ] NAME:Org – Notifications DESCRIPTION:Remediate notifications app (imports; models; migrations; admin). Acceptance criteria as standard.
+---[ ] NAME:Org – Health Monitoring DESCRIPTION:Remediate health_monitoring app (imports; models; migrations; admin). Acceptance criteria as standard.
+---[ ] NAME:Org – Internal Diagnosis Module DESCRIPTION:Remediate internal_diagnosis_module (imports; models; migrations; admin). Acceptance criteria as standard.
+--[ ] NAME:Custom Admin & Database Management DESCRIPTION:Modules: custom_admin, database_management. Acceptance: admin registry checks; management commands import and run --help; tests pass/triaged.
+---[ ] NAME:Diagnostics scan (imports/params/models) DESCRIPTION:Check custom_admin and database_management for registry/command issues.
+---[ ] NAME:Fix imports/exports/compat DESCRIPTION:Stabilize admin registrations; fix management command imports.
+---[ ] NAME:Fix models/services/signatures DESCRIPTION:Adjust any models or services used by admin/database tools.
+---[ ] NAME:Tests + docs DESCRIPTION:Smoke tests for admin and commands; document outcomes.
+---[ ] NAME:Admin – Custom Admin DESCRIPTION:Remediate custom_admin (admin registry; URLs; commands). Acceptance criteria as standard.
+---[ ] NAME:Admin – Database Management DESCRIPTION:Remediate database_management (commands, admin, models). Acceptance criteria as standard.
+--[ ] NAME:Utility & Setup Submodules DESCRIPTION:Modules: utilities, setup_submodules** (activity_logging, data_import_export, security, user_management), core_modules_system_settings, api_keys. Acceptance: imports/registrations OK; tests pass/triaged.
+---[ ] NAME:Diagnostics scan (imports/params/models) DESCRIPTION:Scan utilities and setup submodules; ensure optional deps guarded; verify api_keys usage.
+---[ ] NAME:Fix imports/exports/compat DESCRIPTION:Normalize exports; create guards for optional libs; compat for legacy paths.
+---[ ] NAME:Fix models/services/signatures DESCRIPTION:Align any service function signatures; ensure models and migrations consistent.
+---[ ] NAME:Tests + docs DESCRIPTION:Green tests for utilities/setup; update docs.
+---[ ] NAME:Utilities – Utilities DESCRIPTION:Remediate utilities package (monitoring, settings_model); imports; optional deps guards. Acceptance criteria as standard.
+---[ ] NAME:Utilities – Setup: Activity Logging DESCRIPTION:Remediate setup_submodules.activity_logging (imports, models, migrations). Acceptance criteria as standard.
+---[ ] NAME:Utilities – Setup: Data Import Export DESCRIPTION:Remediate setup_submodules.data_import_export (imports, models, migrations). Acceptance criteria as standard.
+---[ ] NAME:Utilities – Setup: Security DESCRIPTION:Remediate setup_submodules.security (imports, models, migrations). Acceptance criteria as standard.
+---[ ] NAME:Utilities – Setup: User Management DESCRIPTION:Remediate setup_submodules.user_management (imports, models, migrations). Acceptance criteria as standard.
+---[ ] NAME:Utilities – Core Modules System Settings DESCRIPTION:Remediate core_modules_system_settings (imports, models, migrations). Acceptance criteria as standard.
+---[ ] NAME:Utilities – API Keys DESCRIPTION:Remediate api_keys (imports, models, migrations). Acceptance criteria as standard.
+---[ ] NAME:Utilities – Communication DESCRIPTION:Remediate communication module (if present): imports; services; URLs. Acceptance criteria as standard.
+---[ ] NAME:Utilities – Activity Log DESCRIPTION:Remediate activity_log (core_modules.activity_log) ensuring adapters exist for consumers (e.g., inventory). Acceptance criteria as standard.

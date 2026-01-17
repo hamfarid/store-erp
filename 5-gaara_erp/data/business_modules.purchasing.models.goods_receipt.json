@@ -1,0 +1,83 @@
+{
+  "module": "business_modules.purchasing.models.goods_receipt",
+  "imports": [
+    "business_modules.inventory.models",
+    "core_modules.companies.models",
+    "core_modules.core.models.base_models",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "purchase_order",
+    "supplier"
+  ],
+  "classes": [
+    {
+      "name": "GoodsReceipt",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATES",
+        "name",
+        "purchase_order",
+        "supplier",
+        "company",
+        "branch",
+        "warehouse",
+        "receipt_date",
+        "state",
+        "notes"
+      ]
+    },
+    {
+      "name": "GoodsReceiptItem",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "goods_receipt",
+        "product",
+        "ordered_quantity",
+        "received_quantity",
+        "unit_of_measure",
+        "notes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,92 @@
+{
+  "module": "ai_modules.ai_memory.signals",
+  "imports": [
+    "django.core.cache",
+    "django.db.models.signals",
+    "django.dispatch",
+    "django.utils",
+    "models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "memory_post_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "memory_post_delete",
+      "parameters": [
+        "sender",
+        "instance"
+      ]
+    },
+    {
+      "name": "context_post_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "association_post_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "knowledge_base_post_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "learning_pattern_post_save",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "create_automatic_associations",
+      "parameters": [
+        "memory_id"
+      ]
+    },
+    {
+      "name": "create_default_memory_types_for_context",
+      "parameters": [
+        "context_id"
+      ]
+    },
+    {
+      "name": "update_memory_relevance_scores",
+      "parameters": [
+        "source_memory_id",
+        "target_memory_id"
+      ]
+    },
+    {
+      "name": "index_knowledge_content",
+      "parameters": [
+        "knowledge_base_id"
+      ]
+    },
+    {
+      "name": "apply_pattern_to_existing_data",
+      "parameters": [
+        "pattern_id"
+      ]
+    }
+  ],
+  "variables": []
+}

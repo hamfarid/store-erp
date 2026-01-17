@@ -1,0 +1,90 @@
+{
+  "module": "ai_modules.utils.image_processing",
+  "imports": [
+    "PIL",
+    "cv2",
+    "logging",
+    "numpy",
+    "os",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "check_dependencies",
+      "parameters": []
+    },
+    {
+      "name": "read_image",
+      "parameters": [
+        "image_path"
+      ]
+    },
+    {
+      "name": "_read_image_with_pil",
+      "parameters": [
+        "image_path"
+      ]
+    },
+    {
+      "name": "calculate_yellow_percentage",
+      "parameters": [
+        "img"
+      ]
+    },
+    {
+      "name": "_calculate_yellow_percentage_opencv",
+      "parameters": [
+        "img"
+      ]
+    },
+    {
+      "name": "_calculate_yellow_percentage_pil",
+      "parameters": [
+        "img"
+      ]
+    },
+    {
+      "name": "_rgb_to_hsv",
+      "parameters": [
+        "rgb_array"
+      ]
+    },
+    {
+      "name": "resize_image",
+      "parameters": [
+        "img",
+        "target_size",
+        "maintain_aspect_ratio"
+      ]
+    },
+    {
+      "name": "detect_leaf_curling",
+      "parameters": [
+        "img"
+      ]
+    },
+    {
+      "name": "preprocess_for_model",
+      "parameters": [
+        "img",
+        "model_input_size",
+        "normalize"
+      ]
+    },
+    {
+      "name": "enhance_image_quality",
+      "parameters": [
+        "img"
+      ]
+    },
+    {
+      "name": "is_image_processing_available",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "logger",
+    "__all__"
+  ]
+}

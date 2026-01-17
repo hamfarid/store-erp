@@ -1,0 +1,189 @@
+{
+  "module": "services_modules.legal_affairs.models.legal_task",
+  "imports": [
+    "core_modules.core.models.base_models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "LegalTask",
+      "methods": [
+        "__str__",
+        "clean",
+        "is_overdue",
+        "days_until_due",
+        "complete_task",
+        "cancel_task",
+        "start_task",
+        "update_progress",
+        "defer_task",
+        "get_related_entity",
+        "get_all_subtasks",
+        "has_subtasks",
+        "get_task_path"
+      ],
+      "variables": [
+        "title",
+        "description",
+        "task_type",
+        "status",
+        "priority",
+        "due_date",
+        "start_date",
+        "completion_date",
+        "assigned_to",
+        "legal_case",
+        "legal_contract",
+        "legal_consultation",
+        "parent_task",
+        "estimated_hours",
+        "actual_hours",
+        "completion_percentage",
+        "notes"
+      ]
+    },
+    {
+      "name": "TaskTypeChoices",
+      "methods": [],
+      "variables": [
+        "RESEARCH",
+        "DOCUMENT_PREPARATION",
+        "DOCUMENT_REVIEW",
+        "COURT_FILING",
+        "COURT_APPEARANCE",
+        "CLIENT_MEETING",
+        "NEGOTIATION",
+        "CONSULTATION",
+        "FOLLOW_UP",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "TaskStatusChoices",
+      "methods": [],
+      "variables": [
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "WAITING",
+        "COMPLETED",
+        "CANCELLED",
+        "DEFERRED"
+      ]
+    },
+    {
+      "name": "TaskPriorityChoices",
+      "methods": [],
+      "variables": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "URGENT"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes",
+        "permissions"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_overdue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "days_until_due",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "complete_task",
+      "parameters": [
+        "self",
+        "completion_date",
+        "actual_hours",
+        "notes"
+      ]
+    },
+    {
+      "name": "cancel_task",
+      "parameters": [
+        "self",
+        "reason"
+      ]
+    },
+    {
+      "name": "start_task",
+      "parameters": [
+        "self",
+        "start_date"
+      ]
+    },
+    {
+      "name": "update_progress",
+      "parameters": [
+        "self",
+        "percentage",
+        "notes"
+      ]
+    },
+    {
+      "name": "defer_task",
+      "parameters": [
+        "self",
+        "new_due_date",
+        "reason"
+      ]
+    },
+    {
+      "name": "get_related_entity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_subtasks",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "has_subtasks",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_task_path",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

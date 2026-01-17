@@ -1,0 +1,9 @@
+{
+  "module": "utility_modules.item_research.serializers",
+  "imports": [
+    "rest_framework"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

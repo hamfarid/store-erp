@@ -1,0 +1,34 @@
+{
+  "module": "core_modules.rag.services.retriever",
+  "imports": [
+    "__future__",
+    "core_modules.rag.metrics",
+    "core_modules.rag.models",
+    "django.conf",
+    "django.db",
+    "math",
+    "pgvector.psycopg",
+    "pgvector.psycopg2",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "search",
+      "parameters": [
+        "query_embedding",
+        "top_k",
+        "threshold",
+        "query_text"
+      ]
+    },
+    {
+      "name": "cos",
+      "parameters": [
+        "a",
+        "b"
+      ]
+    }
+  ],
+  "variables": []
+}

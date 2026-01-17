@@ -1,0 +1,151 @@
+{
+  "module": "admin_modules.data_import_export.modles.import_export_filters",
+  "imports": [
+    "datetime",
+    "django",
+    "django.utils",
+    "django_filters"
+  ],
+  "classes": [
+    {
+      "name": "DateRangeFilter",
+      "methods": [
+        "filter"
+      ],
+      "variables": []
+    },
+    {
+      "name": "StatusFilter",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PriorityFilter",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FileTypeFilter",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProgressFilter",
+      "methods": [
+        "__init__",
+        "filter"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ImportJobFilter",
+      "methods": [],
+      "variables": [
+        "status",
+        "priority",
+        "file_type",
+        "progress",
+        "date_range",
+        "created_at",
+        "model_name",
+        "file_name",
+        "created_by"
+      ]
+    },
+    {
+      "name": "ExportJobFilter",
+      "methods": [],
+      "variables": [
+        "status",
+        "priority",
+        "export_format",
+        "progress",
+        "date_range",
+        "created_at",
+        "model_name",
+        "created_by"
+      ]
+    },
+    {
+      "name": "JobTemplateFilter",
+      "methods": [],
+      "variables": [
+        "job_type",
+        "is_active",
+        "model_name",
+        "name",
+        "created_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "filter",
+      "parameters": [
+        "self",
+        "qs",
+        "value"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "filter",
+      "parameters": [
+        "self",
+        "qs",
+        "value"
+      ]
+    }
+  ],
+  "variables": []
+}

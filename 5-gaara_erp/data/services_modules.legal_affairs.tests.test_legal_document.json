@@ -1,0 +1,93 @@
+{
+  "module": "services_modules.legal_affairs.tests.test_legal_document",
+  "imports": [
+    "core_modules.core.models.company",
+    "django.contrib.auth.models",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "services_modules.legal_affairs.models.legal_case",
+    "services_modules.legal_affairs.models.legal_document"
+  ],
+  "classes": [
+    {
+      "name": "LegalDocumentModelTest",
+      "methods": [
+        "setUp",
+        "test_document_creation",
+        "test_string_representation",
+        "test_is_final",
+        "test_finalize_document",
+        "test_archive_document",
+        "test_create_revision",
+        "test_get_revision_history",
+        "test_get_latest_revision",
+        "test_get_related_entity"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_document_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_string_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_final",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_finalize_document",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_archive_document",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_revision",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_revision_history",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_latest_revision",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_related_entity",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

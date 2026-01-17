@@ -1,0 +1,110 @@
+{
+  "module": "agricultural_modules.agricultural_experiments.models.experiment",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "location",
+    "season",
+    "variety"
+  ],
+  "classes": [
+    {
+      "name": "Experiment",
+      "methods": [
+        "__str__",
+        "duration_days",
+        "total_area"
+      ],
+      "variables": [
+        "EXPERIMENT_STATUS_CHOICES",
+        "title",
+        "code",
+        "description",
+        "location",
+        "season",
+        "start_date",
+        "end_date",
+        "actual_end_date",
+        "status",
+        "replications",
+        "plot_size",
+        "plants_per_plot",
+        "row_spacing",
+        "plant_spacing",
+        "objectives",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "ExperimentVariety",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "experiment",
+        "variety",
+        "entry_number",
+        "planting_date",
+        "number_of_plants",
+        "area_planted_sqm",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "duration_days",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "total_area",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

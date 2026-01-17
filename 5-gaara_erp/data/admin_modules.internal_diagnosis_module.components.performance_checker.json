@@ -1,0 +1,93 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.performance_checker",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.test",
+    "django.urls",
+    "django.utils",
+    "models",
+    "psutil",
+    "requests",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "PerformanceChecker",
+      "methods": [
+        "__init__",
+        "run_checks",
+        "check_system_load",
+        "check_response_times",
+        "check_memory_usage",
+        "check_api_performance",
+        "check_static_files_loading",
+        "check_database_queries_count",
+        "_create_result"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "session"
+      ]
+    },
+    {
+      "name": "run_checks",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_system_load",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_response_times",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_memory_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_api_performance",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_static_files_loading",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_database_queries_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_create_result",
+      "parameters": [
+        "self",
+        "check_name",
+        "severity",
+        "message",
+        "details"
+      ]
+    }
+  ],
+  "variables": []
+}

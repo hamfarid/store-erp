@@ -1,0 +1,215 @@
+{
+  "module": "services_modules.projects.utils.data_validators",
+  "imports": [
+    "datetime",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation",
+    "re"
+  ],
+  "classes": [
+    {
+      "name": "DataValidators",
+      "methods": [
+        "validate_date_range",
+        "validate_future_date",
+        "validate_past_date",
+        "validate_phone_number",
+        "validate_email",
+        "validate_percentage",
+        "validate_positive_number",
+        "validate_text_length",
+        "validate_url",
+        "validate_alphanumeric",
+        "validate_password_strength"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ProjectValidators",
+      "methods": [
+        "validate_project_dates",
+        "validate_project_budget"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TaskValidators",
+      "methods": [
+        "validate_task_dates",
+        "validate_task_priority",
+        "validate_task_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RiskValidators",
+      "methods": [
+        "validate_risk_level",
+        "validate_risk_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "WorkflowValidators",
+      "methods": [
+        "validate_workflow_steps",
+        "validate_workflow_transitions"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "validate_date_range",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "allow_equal"
+      ]
+    },
+    {
+      "name": "validate_future_date",
+      "parameters": [
+        "value",
+        "allow_today",
+        "required"
+      ]
+    },
+    {
+      "name": "validate_past_date",
+      "parameters": [
+        "value",
+        "allow_today",
+        "required"
+      ]
+    },
+    {
+      "name": "validate_phone_number",
+      "parameters": [
+        "value",
+        "required"
+      ]
+    },
+    {
+      "name": "validate_email",
+      "parameters": [
+        "value",
+        "required"
+      ]
+    },
+    {
+      "name": "validate_percentage",
+      "parameters": [
+        "value",
+        "min_value",
+        "max_value",
+        "required"
+      ]
+    },
+    {
+      "name": "validate_positive_number",
+      "parameters": [
+        "value",
+        "allow_zero",
+        "required"
+      ]
+    },
+    {
+      "name": "validate_text_length",
+      "parameters": [
+        "value",
+        "min_length",
+        "max_length",
+        "required"
+      ]
+    },
+    {
+      "name": "validate_url",
+      "parameters": [
+        "value",
+        "required"
+      ]
+    },
+    {
+      "name": "validate_alphanumeric",
+      "parameters": [
+        "value",
+        "allow_spaces",
+        "required"
+      ]
+    },
+    {
+      "name": "validate_password_strength",
+      "parameters": [
+        "value"
+      ]
+    },
+    {
+      "name": "validate_project_dates",
+      "parameters": [
+        "start_date",
+        "expected_end_date",
+        "actual_end_date"
+      ]
+    },
+    {
+      "name": "validate_project_budget",
+      "parameters": [
+        "budget",
+        "expenses"
+      ]
+    },
+    {
+      "name": "validate_task_dates",
+      "parameters": [
+        "start_date",
+        "due_date",
+        "completion_date"
+      ]
+    },
+    {
+      "name": "validate_task_priority",
+      "parameters": [
+        "priority",
+        "valid_priorities"
+      ]
+    },
+    {
+      "name": "validate_task_status",
+      "parameters": [
+        "status",
+        "valid_statuses"
+      ]
+    },
+    {
+      "name": "validate_risk_level",
+      "parameters": [
+        "probability",
+        "impact",
+        "risk_level"
+      ]
+    },
+    {
+      "name": "validate_risk_status",
+      "parameters": [
+        "status",
+        "valid_statuses"
+      ]
+    },
+    {
+      "name": "validate_workflow_steps",
+      "parameters": [
+        "steps"
+      ]
+    },
+    {
+      "name": "validate_workflow_transitions",
+      "parameters": [
+        "transitions",
+        "steps"
+      ]
+    }
+  ],
+  "variables": []
+}

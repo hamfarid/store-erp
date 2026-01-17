@@ -1,0 +1,78 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.alerting_system",
+  "imports": [
+    "datetime",
+    "smtplib"
+  ],
+  "classes": [
+    {
+      "name": "AlertingSystem",
+      "methods": [
+        "__init__",
+        "add_alert_rule",
+        "_send_email_alert",
+        "_send_sms_alert",
+        "_send_telegram_alert",
+        "trigger_alerts"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "smtp_server",
+        "smtp_port",
+        "smtp_user",
+        "smtp_password",
+        "from_email"
+      ]
+    },
+    {
+      "name": "add_alert_rule",
+      "parameters": [
+        "self",
+        "condition_type",
+        "threshold",
+        "channel",
+        "recipient",
+        "message_template"
+      ]
+    },
+    {
+      "name": "_send_email_alert",
+      "parameters": [
+        "self",
+        "recipient",
+        "subject",
+        "body"
+      ]
+    },
+    {
+      "name": "_send_sms_alert",
+      "parameters": [
+        "self",
+        "recipient",
+        "body"
+      ]
+    },
+    {
+      "name": "_send_telegram_alert",
+      "parameters": [
+        "self",
+        "chat_id",
+        "body"
+      ]
+    },
+    {
+      "name": "trigger_alerts",
+      "parameters": [
+        "self",
+        "diagnostic_data"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,16 @@
+{
+  "module": "scripts.create_accounttype_table",
+  "imports": [
+    "django",
+    "django.apps",
+    "django.db",
+    "os",
+    "sys",
+    "traceback"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "log_path"
+  ]
+}

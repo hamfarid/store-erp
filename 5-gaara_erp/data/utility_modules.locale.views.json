@@ -1,0 +1,363 @@
+{
+  "module": "utility_modules.locale.views",
+  "imports": [
+    "django.conf",
+    "django.core.cache",
+    "django.db",
+    "django.db.models",
+    "django.http",
+    "django.utils",
+    "django.utils.translation",
+    "django_filters",
+    "logging",
+    "models",
+    "os",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.exceptions",
+    "rest_framework.pagination",
+    "rest_framework.response",
+    "rest_framework.views",
+    "serializers",
+    "services",
+    "tempfile",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "StandardResultsSetPagination",
+      "methods": [],
+      "variables": [
+        "page_size",
+        "page_size_query_param",
+        "max_page_size"
+      ]
+    },
+    {
+      "name": "LanguageFilter",
+      "methods": [],
+      "variables": [
+        "name",
+        "code",
+        "is_active",
+        "is_default",
+        "rtl"
+      ]
+    },
+    {
+      "name": "TranslationKeyFilter",
+      "methods": [],
+      "variables": [
+        "key",
+        "module",
+        "description"
+      ]
+    },
+    {
+      "name": "LanguageViewSet",
+      "methods": [
+        "get_serializer_class",
+        "get_queryset",
+        "set_default",
+        "toggle_active",
+        "statistics"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filterset_class",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "TranslationKeyViewSet",
+      "methods": [
+        "get_queryset",
+        "translations",
+        "add_translations",
+        "missing_translations",
+        "bulk_create"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filterset_class",
+        "search_fields",
+        "ordering_fields",
+        "ordering",
+        "pagination_class"
+      ]
+    },
+    {
+      "name": "TranslationViewSet",
+      "methods": [
+        "get_queryset",
+        "get_serializer_class",
+        "by_language",
+        "by_module",
+        "bulk_update"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "search_fields",
+        "ordering_fields",
+        "ordering",
+        "pagination_class"
+      ]
+    },
+    {
+      "name": "UserLanguagePreferenceViewSet",
+      "methods": [
+        "get_queryset",
+        "my_preference",
+        "set_language"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "LocaleAPIView",
+      "methods": [
+        "get",
+        "post",
+        "current_language",
+        "switch_language",
+        "available_languages",
+        "translations_bundle",
+        "translation_statistics",
+        "import_po",
+        "export_po",
+        "sync_languages"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_serializer_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_default",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "toggle_active",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "statistics",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "translations",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "add_translations",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "missing_translations",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "bulk_create",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_serializer_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "by_language",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "by_module",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "bulk_update",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "my_preference",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "set_language",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "post",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "current_language",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "switch_language",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "available_languages",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "translations_bundle",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "translation_statistics",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "import_po",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "export_po",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "sync_languages",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

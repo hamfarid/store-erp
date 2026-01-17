@@ -1,0 +1,652 @@
+{
+  "module": "agricultural_modules.experiments.models",
+  "imports": [
+    "agricultural_modules.farms.models",
+    "agricultural_modules.nurseries.models",
+    "django.contrib.auth",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "Location",
+      "methods": [
+        "nursery",
+        "nursery",
+        "farm",
+        "farm",
+        "farm_plot",
+        "farm_plot",
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "location_type",
+        "address",
+        "coordinates",
+        "area",
+        "nursery_ref",
+        "farm_ref",
+        "farm_plot_ref",
+        "soil_type",
+        "is_active",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "Season",
+      "methods": [
+        "__str__",
+        "is_current"
+      ],
+      "variables": [
+        "SEASON_TYPE_CHOICES",
+        "name",
+        "code",
+        "season_type",
+        "start_date",
+        "end_date",
+        "is_active",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "VarietyType",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "scientific_name",
+        "description",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Variety",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "VARIETY_STATUS_CHOICES",
+        "name",
+        "code",
+        "lot_number",
+        "variety_type",
+        "is_competitor",
+        "competitor_name",
+        "status",
+        "description",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "Experiment",
+      "methods": [
+        "__str__",
+        "duration_days",
+        "total_area"
+      ],
+      "variables": [
+        "EXPERIMENT_STATUS_CHOICES",
+        "title",
+        "code",
+        "description",
+        "location",
+        "season",
+        "start_date",
+        "end_date",
+        "actual_end_date",
+        "status",
+        "replications",
+        "plot_size",
+        "plants_per_plot",
+        "row_spacing",
+        "plant_spacing",
+        "objectives",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "ExperimentVariety",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "experiment",
+        "variety",
+        "entry_number",
+        "planting_date",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Harvest",
+      "methods": [
+        "__str__",
+        "average_fruit_weight"
+      ],
+      "variables": [
+        "experiment_variety",
+        "harvest_number",
+        "harvest_date",
+        "fruit_count",
+        "fruit_weight",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "HarvestQualityGrade",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "QUALITY_GRADE_CHOICES",
+        "harvest",
+        "grade",
+        "fruit_count",
+        "fruit_weight",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "VarietyEvaluation",
+      "methods": [
+        "__str__",
+        "fruit_quality_score",
+        "plant_quality_score",
+        "disease_resistance_score",
+        "environmental_tolerance_score",
+        "overall_score"
+      ],
+      "variables": [
+        "experiment_variety",
+        "evaluation_date",
+        "fruit_length",
+        "fruit_shape_regularity",
+        "fruit_deformity_rate",
+        "fruit_firmness",
+        "fruit_color",
+        "storage_ability",
+        "transport_ability",
+        "earliness",
+        "leaf_shape",
+        "fruit_coverage",
+        "fungal_resistance",
+        "bacterial_resistance",
+        "insect_resistance",
+        "viral_resistance",
+        "cold_tolerance",
+        "heat_tolerance",
+        "soil_salinity_tolerance",
+        "water_salinity_tolerance",
+        "drought_tolerance",
+        "strengths",
+        "weaknesses",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "FertilizationProgram",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "experiment",
+        "name",
+        "description",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "FertilizationApplication",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "program",
+        "application_date",
+        "fertilizer_name",
+        "fertilizer_type",
+        "quantity",
+        "unit",
+        "application_method",
+        "cost",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PesticideProgram",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "experiment",
+        "name",
+        "description",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "PesticideApplication",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "program",
+        "application_date",
+        "pesticide_name",
+        "pesticide_type",
+        "target_pest",
+        "quantity",
+        "unit",
+        "application_method",
+        "cost",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ExperimentCost",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "COST_TYPE_CHOICES",
+        "experiment",
+        "cost_type",
+        "description",
+        "amount",
+        "date_incurred",
+        "notes",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "VarietyPriceRecommendation",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "variety",
+        "experiment",
+        "competitor_price",
+        "recommended_price",
+        "justification",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "nursery",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "nursery",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "farm",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "farm",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "farm_plot",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "farm_plot",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_current",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "duration_days",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "total_area",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "average_fruit_weight",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "fruit_quality_score",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "plant_quality_score",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "disease_resistance_score",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "environmental_tolerance_score",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "overall_score",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "_LOCATION_NURSERY_OVERRIDES",
+    "_LOCATION_FARM_OVERRIDES",
+    "_LOCATION_PLOT_OVERRIDES"
+  ]
+}

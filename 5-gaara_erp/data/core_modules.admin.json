@@ -1,0 +1,9 @@
+{
+  "module": "core_modules.admin",
+  "imports": [
+    "django.contrib"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

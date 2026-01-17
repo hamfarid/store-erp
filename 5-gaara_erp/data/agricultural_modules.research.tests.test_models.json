@@ -1,0 +1,146 @@
+{
+  "module": "agricultural_modules.research.tests.test_models",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ResearchProjectModelTest",
+      "methods": [
+        "setUp",
+        "test_project_creation",
+        "test_project_str_method",
+        "test_project_code_generation",
+        "test_project_duration_calculation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ResearchObjectiveModelTest",
+      "methods": [
+        "setUp",
+        "test_objective_creation",
+        "test_objective_str_method"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ResearchTeamMemberModelTest",
+      "methods": [
+        "setUp",
+        "test_team_member_creation",
+        "test_team_member_str_method"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ResearchTaskModelTest",
+      "methods": [
+        "setUp",
+        "test_task_creation",
+        "test_task_str_method",
+        "test_task_duration_calculation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_project_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_project_str_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_project_code_generation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_project_duration_calculation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_objective_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_objective_str_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_team_member_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_team_member_str_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_task_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_task_str_method",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_task_duration_calculation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

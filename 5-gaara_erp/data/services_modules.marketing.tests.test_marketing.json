@@ -1,0 +1,343 @@
+{
+  "module": "services_modules.marketing.tests.test_marketing",
+  "imports": [
+    "core_modules.core.models",
+    "datetime",
+    "decimal",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.marketing_campaign",
+    "models.marketing_channel",
+    "models.marketing_lead"
+  ],
+  "classes": [
+    {
+      "name": "CampaignTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_campaign_type",
+        "test_unique_code_per_company",
+        "test_deactivate_campaign_type"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CampaignStatusModelTest",
+      "methods": [
+        "setUp",
+        "test_create_campaign_status",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CampaignModelTest",
+      "methods": [
+        "setUp",
+        "test_create_campaign",
+        "test_unique_code_per_company",
+        "test_calculate_campaign_duration",
+        "test_is_active"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LeadSourceModelTest",
+      "methods": [
+        "setUp",
+        "test_create_lead_source",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LeadStatusModelTest",
+      "methods": [
+        "setUp",
+        "test_create_lead_status",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LeadModelTest",
+      "methods": [
+        "setUp",
+        "test_create_lead",
+        "test_lead_conversion",
+        "test_calculate_lead_age"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MarketingChannelModelTest",
+      "methods": [
+        "setUp",
+        "test_create_marketing_channel",
+        "test_unique_code_per_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SocialMediaAccountModelTest",
+      "methods": [
+        "setUp",
+        "test_create_social_media_account",
+        "test_unique_username_per_platform_and_company"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SocialMediaPostModelTest",
+      "methods": [
+        "setUp",
+        "test_create_social_media_post",
+        "test_is_published",
+        "test_update_metrics"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_campaign_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_campaign_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_campaign_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_campaign",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_campaign_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_lead_source",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_lead_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_lead",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_lead_conversion",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_lead_age",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_marketing_channel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_social_media_account",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_username_per_platform_and_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_social_media_post",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_published",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_metrics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_calculate_duration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_convert_to_customer",
+      "parameters": [
+        "self",
+        "customer_type"
+      ]
+    },
+    {
+      "name": "mock_calculate_age",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_is_published",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_update_metrics",
+      "parameters": [
+        "self",
+        "likes",
+        "shares",
+        "comments",
+        "clicks",
+        "impressions"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

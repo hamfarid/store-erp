@@ -1,0 +1,255 @@
+{
+  "module": "services_modules.beneficiaries.services",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.contrib.auth",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "logging",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "BeneficiaryService",
+      "methods": [
+        "__init__",
+        "register_integration",
+        "create_beneficiary_category",
+        "update_beneficiary_category",
+        "list_beneficiary_categories",
+        "create_beneficiary",
+        "update_beneficiary",
+        "get_beneficiary_details",
+        "list_beneficiaries",
+        "add_beneficiary_attachment",
+        "delete_beneficiary_attachment",
+        "set_beneficiary_yearly_amount",
+        "get_beneficiary_yearly_amount",
+        "create_grant_rule",
+        "update_grant_rule",
+        "list_grant_rules",
+        "create_payment_session",
+        "post_payment_session",
+        "_generate_monthly_payment_records",
+        "_generate_grant_payment_records",
+        "list_payment_sessions",
+        "get_payment_session_details",
+        "log_amount_change",
+        "apply_amount_change",
+        "get_beneficiary_statistics",
+        "generate_beneficiary_report"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "register_integration",
+      "parameters": [
+        "self",
+        "integration_name",
+        "integration_instance"
+      ]
+    },
+    {
+      "name": "create_beneficiary_category",
+      "parameters": [
+        "self",
+        "name",
+        "description"
+      ]
+    },
+    {
+      "name": "update_beneficiary_category",
+      "parameters": [
+        "self",
+        "category_id",
+        "name",
+        "description"
+      ]
+    },
+    {
+      "name": "list_beneficiary_categories",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_beneficiary",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_beneficiary",
+      "parameters": [
+        "self",
+        "beneficiary_id"
+      ]
+    },
+    {
+      "name": "get_beneficiary_details",
+      "parameters": [
+        "self",
+        "beneficiary_id"
+      ]
+    },
+    {
+      "name": "list_beneficiaries",
+      "parameters": [
+        "self",
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "add_beneficiary_attachment",
+      "parameters": [
+        "self",
+        "beneficiary_id",
+        "file",
+        "uploaded_by_id",
+        "description"
+      ]
+    },
+    {
+      "name": "delete_beneficiary_attachment",
+      "parameters": [
+        "self",
+        "attachment_id"
+      ]
+    },
+    {
+      "name": "set_beneficiary_yearly_amount",
+      "parameters": [
+        "self",
+        "beneficiary_id",
+        "year",
+        "monthly_amount",
+        "set_by_id"
+      ]
+    },
+    {
+      "name": "get_beneficiary_yearly_amount",
+      "parameters": [
+        "self",
+        "beneficiary_id",
+        "year"
+      ]
+    },
+    {
+      "name": "create_grant_rule",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_grant_rule",
+      "parameters": [
+        "self",
+        "rule_id"
+      ]
+    },
+    {
+      "name": "list_grant_rules",
+      "parameters": [
+        "self",
+        "year",
+        "is_active"
+      ]
+    },
+    {
+      "name": "create_payment_session",
+      "parameters": [
+        "self",
+        "session_type",
+        "created_by_id",
+        "payment_year",
+        "payment_month",
+        "grant_rule_id",
+        "description"
+      ]
+    },
+    {
+      "name": "post_payment_session",
+      "parameters": [
+        "self",
+        "session_id",
+        "posted_by_id"
+      ]
+    },
+    {
+      "name": "_generate_monthly_payment_records",
+      "parameters": [
+        "self",
+        "session"
+      ]
+    },
+    {
+      "name": "_generate_grant_payment_records",
+      "parameters": [
+        "self",
+        "session"
+      ]
+    },
+    {
+      "name": "list_payment_sessions",
+      "parameters": [
+        "self",
+        "filters",
+        "order_by"
+      ]
+    },
+    {
+      "name": "get_payment_session_details",
+      "parameters": [
+        "self",
+        "session_id"
+      ]
+    },
+    {
+      "name": "log_amount_change",
+      "parameters": [
+        "self",
+        "change_type",
+        "effective_year",
+        "created_by_id"
+      ]
+    },
+    {
+      "name": "apply_amount_change",
+      "parameters": [
+        "self",
+        "log_id",
+        "posted_by_id"
+      ]
+    },
+    {
+      "name": "get_beneficiary_statistics",
+      "parameters": [
+        "self",
+        "filters"
+      ]
+    },
+    {
+      "name": "generate_beneficiary_report",
+      "parameters": [
+        "self",
+        "report_type",
+        "filters"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "logger"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "module": "agricultural_modules.seed_hybridization.merged.apps",
+  "imports": [
+    "agricultural_modules.seed_hybridization.merged.signals",
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SeedHybridizationConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

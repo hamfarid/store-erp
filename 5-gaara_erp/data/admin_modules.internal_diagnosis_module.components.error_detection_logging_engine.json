@@ -1,0 +1,107 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.error_detection_logging_engine",
+  "imports": [
+    "datetime",
+    "logging",
+    "os",
+    "re"
+  ],
+  "classes": [
+    {
+      "name": "ErrorDetectionLoggingEngine",
+      "methods": [
+        "__init__",
+        "add_log_source",
+        "_parse_log_line",
+        "scan_logs_for_errors",
+        "collect_log_entry",
+        "collect_logs_from_sources",
+        "analyze_logs",
+        "classify_error_severity",
+        "get_collected_logs",
+        "get_detected_errors",
+        "clear_logs_and_errors"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "log_sources"
+      ]
+    },
+    {
+      "name": "add_log_source",
+      "parameters": [
+        "self",
+        "source_path"
+      ]
+    },
+    {
+      "name": "_parse_log_line",
+      "parameters": [
+        "self",
+        "line",
+        "source_path",
+        "default_severity"
+      ]
+    },
+    {
+      "name": "scan_logs_for_errors",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "collect_log_entry",
+      "parameters": [
+        "self",
+        "source_identifier",
+        "log_entry_str",
+        "timestamp"
+      ]
+    },
+    {
+      "name": "collect_logs_from_sources",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "analyze_logs",
+      "parameters": [
+        "self",
+        "error_patterns"
+      ]
+    },
+    {
+      "name": "classify_error_severity",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    },
+    {
+      "name": "get_collected_logs",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_detected_errors",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clear_logs_and_errors",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,95 @@
+{
+  "module": "business_modules.contacts.tests.test_models",
+  "imports": [
+    "core.models",
+    "core_modules.accounting.models",
+    "core_modules.contacts.models",
+    "core_modules.purchasing.models",
+    "decimal",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.test"
+  ],
+  "classes": [
+    {
+      "name": "ContactModelTest",
+      "methods": [
+        "setUpTestData",
+        "test_create_customer_contact",
+        "test_create_supplier_contact",
+        "test_create_both_contact",
+        "test_negative_credit_limit_validation",
+        "test_contact_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SupplierContactPersonTest",
+      "methods": [
+        "setUpTestData",
+        "test_create_supplier_contact_person",
+        "test_supplier_contact_person_str_representation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_create_customer_contact",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_supplier_contact",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_both_contact",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_negative_credit_limit_validation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_contact_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUpTestData",
+      "parameters": [
+        "cls"
+      ]
+    },
+    {
+      "name": "test_create_supplier_contact_person",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_supplier_contact_person_str_representation",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "module": "core_modules.tests.test_views",
+  "imports": [
+    "companies.models",
+    "core.models",
+    "django.contrib.auth",
+    "django.test",
+    "django.urls",
+    "django.utils",
+    "organization.models"
+  ],
+  "classes": [
+    {
+      "name": "BaseViewTest",
+      "methods": [
+        "setUp"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CompanyViewTest",
+      "methods": [
+        "test_company_list_view",
+        "test_company_detail_view",
+        "test_company_create_view",
+        "test_company_update_view",
+        "test_company_delete_view"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BranchViewTest",
+      "methods": [
+        "test_branch_list_view",
+        "test_branch_detail_view",
+        "test_branch_create_view"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DepartmentViewTest",
+      "methods": [
+        "setUp",
+        "test_department_list_view",
+        "test_department_detail_view",
+        "test_department_create_view"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_list_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_detail_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_create_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_update_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_company_delete_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_branch_list_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_branch_detail_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_branch_create_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_list_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_detail_view",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_department_create_view",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

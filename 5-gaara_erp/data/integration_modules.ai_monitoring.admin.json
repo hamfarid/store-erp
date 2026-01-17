@@ -1,0 +1,66 @@
+{
+  "module": "integration_modules.ai_monitoring.admin",
+  "imports": [
+    "django.contrib",
+    "django.db",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "SecurityEventAdmin",
+      "methods": [
+        "mark_acknowledged",
+        "mark_false_positive_action"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields",
+        "actions"
+      ]
+    },
+    {
+      "name": "PerformanceAnomalyAdmin",
+      "methods": [
+        "mark_resolved"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "date_hierarchy",
+        "readonly_fields",
+        "actions"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "mark_acknowledged",
+      "parameters": [
+        "self",
+        "request",
+        "queryset"
+      ]
+    },
+    {
+      "name": "mark_false_positive_action",
+      "parameters": [
+        "self",
+        "request",
+        "queryset"
+      ]
+    },
+    {
+      "name": "mark_resolved",
+      "parameters": [
+        "self",
+        "request",
+        "queryset"
+      ]
+    }
+  ],
+  "variables": []
+}

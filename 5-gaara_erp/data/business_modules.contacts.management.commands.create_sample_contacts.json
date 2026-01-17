@@ -1,0 +1,38 @@
+{
+  "module": "business_modules.contacts.management.commands.create_sample_contacts",
+  "imports": [
+    "business_modules.contacts.models",
+    "core_modules.companies.models",
+    "django.core.management.base",
+    "django.utils",
+    "random"
+  ],
+  "classes": [
+    {
+      "name": "Command",
+      "methods": [
+        "add_arguments",
+        "handle"
+      ],
+      "variables": [
+        "help"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "add_arguments",
+      "parameters": [
+        "self",
+        "parser"
+      ]
+    },
+    {
+      "name": "handle",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

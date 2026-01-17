@@ -1,0 +1,24 @@
+{
+  "module": "admin_modules.custom_admin.tests.test_integration",
+  "imports": [
+    "django.test"
+  ],
+  "classes": [
+    {
+      "name": "TestPlaceholder",
+      "methods": [
+        "test_placeholder"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "test_placeholder",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,398 @@
+{
+  "module": "core_modules.permissions.serializers",
+  "imports": [
+    "django.contrib.auth",
+    "django.contrib.contenttypes.models",
+    "rest_framework",
+    "unified_permissions_model"
+  ],
+  "classes": [
+    {
+      "name": "PermissionSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "RoleSerializer",
+      "methods": [],
+      "variables": [
+        "permissions"
+      ]
+    },
+    {
+      "name": "RolePermissionSerializer",
+      "methods": [],
+      "variables": [
+        "role",
+        "permission",
+        "role_id",
+        "permission_id"
+      ]
+    },
+    {
+      "name": "GroupSerializer",
+      "methods": [],
+      "variables": [
+        "roles"
+      ]
+    },
+    {
+      "name": "GroupRoleSerializer",
+      "methods": [],
+      "variables": [
+        "group",
+        "role",
+        "group_id",
+        "role_id"
+      ]
+    },
+    {
+      "name": "UserRoleSerializer",
+      "methods": [],
+      "variables": [
+        "user",
+        "role",
+        "role_id"
+      ]
+    },
+    {
+      "name": "UserGroupSerializer",
+      "methods": [],
+      "variables": [
+        "user",
+        "group",
+        "group_id"
+      ]
+    },
+    {
+      "name": "UserPermissionSerializer",
+      "methods": [],
+      "variables": [
+        "user",
+        "permission",
+        "permission_id"
+      ]
+    },
+    {
+      "name": "ResourcePermissionSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "permission",
+        "permission_id",
+        "content_type",
+        "user",
+        "group",
+        "role"
+      ]
+    },
+    {
+      "name": "PermissionRequestSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "user",
+        "permission",
+        "permission_id",
+        "role",
+        "role_id",
+        "group",
+        "group_id",
+        "content_type"
+      ]
+    },
+    {
+      "name": "PermissionLogSerializer",
+      "methods": [],
+      "variables": [
+        "user",
+        "action_user",
+        "permission",
+        "role",
+        "group"
+      ]
+    },
+    {
+      "name": "TemporaryPermissionSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "user",
+        "permission",
+        "permission_id",
+        "role",
+        "role_id",
+        "group",
+        "group_id",
+        "granted_by"
+      ]
+    },
+    {
+      "name": "CheckPermissionSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "user_id",
+        "permission_code",
+        "resource_type",
+        "resource_id",
+        "scope"
+      ]
+    },
+    {
+      "name": "GrantPermissionSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "user_id",
+        "permission_code",
+        "scope",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "RevokePermissionSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "user_id",
+        "permission_code"
+      ]
+    },
+    {
+      "name": "AssignRoleSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "user_id",
+        "role_code",
+        "scope",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "RemoveRoleSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "user_id",
+        "role_code"
+      ]
+    },
+    {
+      "name": "AddToGroupSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "user_id",
+        "group_name",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "RemoveFromGroupSerializer",
+      "methods": [
+        "validate"
+      ],
+      "variables": [
+        "user_id",
+        "group_name"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        "self",
+        "attrs"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

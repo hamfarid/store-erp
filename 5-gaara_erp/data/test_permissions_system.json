@@ -1,0 +1,32 @@
+{
+  "module": "test_permissions_system",
+  "imports": [
+    "django",
+    "django.contrib.auth",
+    "django.contrib.auth.models",
+    "django.contrib.contenttypes.models",
+    "django.test",
+    "os",
+    "services_modules.workflows.models",
+    "sys",
+    "warnings"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_permissions_system",
+      "parameters": []
+    },
+    {
+      "name": "test_workflow_permissions",
+      "parameters": []
+    },
+    {
+      "name": "test_api_permissions",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

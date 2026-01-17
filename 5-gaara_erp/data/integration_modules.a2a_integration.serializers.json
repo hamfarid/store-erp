@@ -1,0 +1,74 @@
+{
+  "module": "integration_modules.a2a_integration.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "ExternalSystemSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "IntegrationConfigSerializer",
+      "methods": [],
+      "variables": [
+        "external_system_name"
+      ]
+    },
+    {
+      "name": "APICredentialSerializer",
+      "methods": [],
+      "variables": [
+        "external_system_name",
+        "is_token_valid"
+      ]
+    },
+    {
+      "name": "IntegrationLogSerializer",
+      "methods": [],
+      "variables": [
+        "integration_config_name"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "exclude",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

@@ -1,0 +1,72 @@
+{
+  "module": "services_modules.hr.models.job_grade",
+  "imports": [
+    "decimal",
+    "django.db",
+    "django.utils.translation",
+    "employee",
+    "position"
+  ],
+  "classes": [
+    {
+      "name": "JobGrade",
+      "methods": [
+        "__str__",
+        "is_salary_in_range",
+        "get_salary_range_text",
+        "get_positions",
+        "get_employees_count"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "min_salary",
+        "max_salary",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_salary_in_range",
+      "parameters": [
+        "self",
+        "salary"
+      ]
+    },
+    {
+      "name": "get_salary_range_text",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_positions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_employees_count",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,57 @@
+{
+  "module": "core_modules.users.permissions",
+  "imports": [
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "IsOwnerOrAdmin",
+      "methods": [
+        "has_object_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "IsAdminUser",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "IsAuthenticatedAndVerified",
+      "methods": [
+        "has_permission"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_object_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "self",
+        "request",
+        "view"
+      ]
+    }
+  ],
+  "variables": []
+}

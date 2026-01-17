@@ -1,0 +1,317 @@
+{
+  "module": "agricultural_modules.seed_production.models",
+  "imports": [
+    "business_modules.inventory.models",
+    "core_modules.core.models",
+    "core_modules.organization.models",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SeedProductionOrder",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "order_number",
+        "product",
+        "target_quantity_kg",
+        "parent_male_code",
+        "parent_male_quantity_kg",
+        "parent_female_code",
+        "parent_female_quantity_kg",
+        "branch",
+        "production_location_code",
+        "planned_start_date",
+        "planned_end_date",
+        "status",
+        "notes",
+        "inventory_verified",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "assigned_to"
+      ]
+    },
+    {
+      "name": "SeedProductionLot",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "lot_number",
+        "production_order",
+        "product",
+        "branch",
+        "status",
+        "parent_male_code",
+        "parent_female_code",
+        "is_parent_info_restricted",
+        "production_location_code",
+        "planned_planting_date",
+        "expected_production_date",
+        "expected_seed_quantity_kg",
+        "actual_planting_date",
+        "actual_harvest_date",
+        "harvested_quantity_kg",
+        "seeds_per_gram",
+        "treatment_material",
+        "treatment_date",
+        "germination_rate_percent",
+        "hybrid_purity_percent",
+        "passed_all_tests",
+        "origin_country",
+        "agricultural_certificate_number",
+        "final_lot_number",
+        "packaged_product_name",
+        "packaging_date",
+        "responsible_person",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "SeedLotTest",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "seed_lot",
+        "test_type",
+        "test_date",
+        "result",
+        "notes",
+        "result_value",
+        "tested_by"
+      ]
+    },
+    {
+      "name": "SeedProductionPlan",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "start_date",
+        "end_date",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "SeedProductionActivity",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "seed_lot",
+        "activity_type",
+        "activity_date",
+        "description",
+        "performed_by",
+        "materials_used",
+        "quantity_used",
+        "notes",
+        "created_at"
+      ]
+    },
+    {
+      "name": "SeedInventoryMovement",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "seed_lot",
+        "movement_type",
+        "movement_date",
+        "quantity_kg",
+        "reference_lot",
+        "notes",
+        "performed_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "OrderStatus",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "APPROVED",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "permissions"
+      ]
+    },
+    {
+      "name": "ProductionStatus",
+      "methods": [],
+      "variables": [
+        "PLANNED",
+        "PLANTED",
+        "HARVESTING",
+        "DRYING_TREATING",
+        "TESTING",
+        "PACKAGING",
+        "COMPLETED",
+        "DISCARDED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "permissions"
+      ]
+    },
+    {
+      "name": "TestType",
+      "methods": [],
+      "variables": [
+        "VIRAL",
+        "BACTERIAL",
+        "FUNGAL",
+        "STONE_RESIDUE",
+        "GERMINATION",
+        "PURITY",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "TestResult",
+      "methods": [],
+      "variables": [
+        "PENDING",
+        "PASS",
+        "FAIL"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "ActivityType",
+      "methods": [],
+      "variables": [
+        "PLANTING",
+        "IRRIGATION",
+        "FERTILIZATION",
+        "PEST_CONTROL",
+        "POLLINATION",
+        "ROGUING",
+        "HARVESTING",
+        "DRYING",
+        "CLEANING",
+        "TREATING",
+        "TESTING",
+        "PACKAGING",
+        "INSPECTION",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "MovementType",
+      "methods": [],
+      "variables": [
+        "PARENT_SEED_OUT",
+        "HARVEST_IN",
+        "PROCESSING_LOSS",
+        "SAMPLE_OUT",
+        "FINAL_PRODUCT_IN",
+        "DISCARD"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

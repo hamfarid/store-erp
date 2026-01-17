@@ -1,0 +1,77 @@
+{
+  "module": "agricultural_modules.plant_diagnosis.services",
+  "imports": [
+    "api_client",
+    "django.conf",
+    "django.db",
+    "logging",
+    "models",
+    "os"
+  ],
+  "classes": [
+    {
+      "name": "DiagnosisService",
+      "methods": [
+        "__init__",
+        "create_diagnosis_request",
+        "check_diagnosis_status",
+        "get_diagnosis_result",
+        "_create_diagnosis_result",
+        "_update_diagnosis_result"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create_diagnosis_request",
+      "parameters": [
+        "self",
+        "user",
+        "image",
+        "plant_type",
+        "symptoms_description",
+        "location"
+      ]
+    },
+    {
+      "name": "check_diagnosis_status",
+      "parameters": [
+        "self",
+        "diagnosis_request"
+      ]
+    },
+    {
+      "name": "get_diagnosis_result",
+      "parameters": [
+        "self",
+        "diagnosis_request"
+      ]
+    },
+    {
+      "name": "_create_diagnosis_result",
+      "parameters": [
+        "self",
+        "diagnosis_request",
+        "result_data"
+      ]
+    },
+    {
+      "name": "_update_diagnosis_result",
+      "parameters": [
+        "self",
+        "diagnosis_result",
+        "result_data"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

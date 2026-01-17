@@ -1,0 +1,152 @@
+/**
+ * Icons Fix - Proper alignment and spacing for Lucide icons
+ * 
+ * Fixes:
+ * - Icon alignment in buttons
+ * - Icon spacing in RTL layout
+ * - Icon size consistency
+ * - Icon color inheritance
+ */
+
+/* ===== Icon Base Styles ===== */
+svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ===== Button Icon Alignment ===== */
+button svg,
+a svg {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/* Fix icon spacing in RTL buttons */
+button.flex svg,
+a.flex svg {
+  flex-shrink: 0;
+}
+
+/* Icon spacing in RTL - margin-left for icons before text */
+button svg + *,
+a svg + * {
+  margin-right: 0.5rem;
+}
+
+/* Icon spacing in RTL - margin-right for icons after text */
+button * + svg,
+a * + svg {
+  margin-left: 0.5rem;
+}
+
+/* ===== Icon Size Classes ===== */
+.icon-xs {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.icon-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.icon-md {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.icon-lg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon-xl {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* ===== Icon Color Inheritance ===== */
+svg {
+  color: inherit;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+/* ===== Fix for Empty Elements with Background ===== */
+/* Ensure all interactive elements have visible content */
+button:empty::before,
+a:empty::before {
+  content: '⚠️';
+  color: red;
+  font-size: 1rem;
+}
+
+/* Fix for elements with background but no foreground */
+[class*="bg-"]:not([class*="text-"]) {
+  color: inherit;
+}
+
+/* Ensure buttons have proper text color */
+button[class*="bg-primary"] {
+  color: white !important;
+}
+
+button[class*="bg-secondary"] {
+  color: white !important;
+}
+
+button[class*="bg-accent"] {
+  color: white !important;
+}
+
+button[class*="bg-purple"] {
+  color: white !important;
+}
+
+button[class*="bg-green"] {
+  color: white !important;
+}
+
+button[class*="bg-blue"] {
+  color: white !important;
+}
+
+button[class*="bg-red"] {
+  color: white !important;
+}
+
+/* ===== Dark Mode Icon Fixes ===== */
+.dark svg {
+  color: inherit;
+}
+
+.dark button svg {
+  color: currentColor;
+}
+
+/* ===== Flex Container Icon Alignment ===== */
+.flex.items-center svg {
+  vertical-align: baseline;
+}
+
+/* ===== Icon in Input Fields ===== */
+.relative svg {
+  pointer-events: none;
+}
+
+input + svg,
+svg + input {
+  position: absolute;
+}
+
+/* ===== Icon Button Specific ===== */
+button[class*="p-2"] svg {
+  margin: 0;
+}
+
+/* ===== Ensure Proper Icon Rendering ===== */
+svg path {
+  vector-effect: non-scaling-stroke;
+}
+

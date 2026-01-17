@@ -1,0 +1,127 @@
+{
+  "module": "core_modules.views",
+  "imports": [
+    "django.contrib",
+    "django.contrib.auth.decorators",
+    "django.core.paginator",
+    "django.db.models",
+    "django.shortcuts",
+    "django.utils.translation",
+    "django.views.decorators.http",
+    "permissions",
+    "permissions.authorization_service",
+    "permissions.unified_permissions_model",
+    "typing",
+    "unified_permissions.abac_models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "permission_list",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "permission_detail",
+      "parameters": [
+        "request",
+        "permission_id"
+      ]
+    },
+    {
+      "name": "role_list",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "role_detail",
+      "parameters": [
+        "request",
+        "role_id"
+      ]
+    },
+    {
+      "name": "role_create",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "role_edit",
+      "parameters": [
+        "request",
+        "role_id"
+      ]
+    },
+    {
+      "name": "role_delete",
+      "parameters": [
+        "request",
+        "role_id"
+      ]
+    },
+    {
+      "name": "group_list",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "group_detail",
+      "parameters": [
+        "request",
+        "group_id"
+      ]
+    },
+    {
+      "name": "group_create",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "group_edit",
+      "parameters": [
+        "request",
+        "group_id"
+      ]
+    },
+    {
+      "name": "group_delete",
+      "parameters": [
+        "request",
+        "group_id"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "_perm"
+      ]
+    },
+    {
+      "name": "_decorator",
+      "parameters": [
+        "fn"
+      ]
+    }
+  ],
+  "variables": [
+    "Permission",
+    "Role",
+    "Group",
+    "GroupRole",
+    "UserRole",
+    "UserGroup",
+    "UserDirectPermission",
+    "Policy",
+    "AccessCondition",
+    "PermissionPolicy",
+    "ResourcePermission",
+    "Scope",
+    "PermissionLog",
+    "PermissionRequest"
+  ]
+}

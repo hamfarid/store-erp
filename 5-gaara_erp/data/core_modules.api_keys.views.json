@@ -1,0 +1,87 @@
+{
+  "module": "core_modules.api_keys.views",
+  "imports": [
+    "django.http",
+    "django.shortcuts",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "rest_framework.views"
+  ],
+  "classes": [
+    {
+      "name": "APIKeyAPIView",
+      "methods": [
+        "get",
+        "post"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "api_key_list",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "api_key_create",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "api_key_detail",
+      "parameters": [
+        "request",
+        "key_id"
+      ]
+    },
+    {
+      "name": "api_key_revoke",
+      "parameters": [
+        "request",
+        "key_id"
+      ]
+    },
+    {
+      "name": "api_key_extend",
+      "parameters": [
+        "request",
+        "key_id"
+      ]
+    },
+    {
+      "name": "api_key_logs",
+      "parameters": [
+        "request",
+        "key_id"
+      ]
+    },
+    {
+      "name": "validate_api_key",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "post",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": [
+    "__all__"
+  ]
+}

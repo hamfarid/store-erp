@@ -1,0 +1,136 @@
+{
+  "module": "services_modules.marketing.models.marketing_promotion",
+  "imports": [
+    "core_modules.core.models.base_models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "marketing_campaign"
+  ],
+  "classes": [
+    {
+      "name": "MarketingPromotion",
+      "methods": [
+        "__str__",
+        "clean",
+        "save",
+        "is_valid",
+        "calculate_discount",
+        "use_promotion",
+        "activate",
+        "deactivate",
+        "get_remaining_uses",
+        "get_days_remaining"
+      ],
+      "variables": [
+        "TYPE_DISCOUNT",
+        "TYPE_COUPON",
+        "TYPE_GIFT",
+        "TYPE_BUNDLE",
+        "TYPE_LOYALTY",
+        "TYPE_REFERRAL",
+        "TYPE_OTHER",
+        "TYPE_CHOICES",
+        "STATUS_DRAFT",
+        "STATUS_PLANNED",
+        "STATUS_ACTIVE",
+        "STATUS_EXPIRED",
+        "STATUS_CANCELLED",
+        "STATUS_CHOICES",
+        "name",
+        "code",
+        "promotion_type",
+        "description",
+        "campaign",
+        "start_date",
+        "end_date",
+        "discount_value",
+        "discount_type",
+        "minimum_order_value",
+        "maximum_discount",
+        "usage_limit",
+        "usage_count",
+        "is_public",
+        "status",
+        "is_active",
+        "terms_and_conditions"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_discount",
+      "parameters": [
+        "self",
+        "order_value"
+      ]
+    },
+    {
+      "name": "use_promotion",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "activate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "deactivate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_remaining_uses",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_days_remaining",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

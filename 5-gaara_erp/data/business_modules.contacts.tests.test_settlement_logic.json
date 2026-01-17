@@ -1,0 +1,73 @@
+{
+  "module": "business_modules.contacts.tests.test_settlement_logic",
+  "imports": [
+    "decimal",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models",
+    "services"
+  ],
+  "classes": [
+    {
+      "name": "SettlementLogicTestCase",
+      "methods": [
+        "setUp",
+        "test_create_settlement",
+        "test_update_settlement_status",
+        "test_get_settlements_by_contact",
+        "test_customer_supplier_settlement_report",
+        "test_invalid_settlement_for_customer_only",
+        "test_settlement_with_zero_amount"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_settlement",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_settlement_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_settlements_by_contact",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_customer_supplier_settlement_report",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_invalid_settlement_for_customer_only",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_settlement_with_zero_amount",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

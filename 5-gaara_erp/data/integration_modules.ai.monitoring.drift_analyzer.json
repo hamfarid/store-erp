@@ -1,0 +1,32 @@
+{
+  "module": "integration_modules.ai.monitoring.drift_analyzer",
+  "imports": [
+    "datetime",
+    "evidently.metric_preset",
+    "evidently.report",
+    "logging",
+    "os",
+    "pandas",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "load_data",
+      "parameters": [
+        "file_path"
+      ]
+    },
+    {
+      "name": "run_drift_analysis",
+      "parameters": [
+        "reference_data_path",
+        "current_data_path",
+        "output_report_path"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

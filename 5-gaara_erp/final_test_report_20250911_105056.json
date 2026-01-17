@@ -1,0 +1,150 @@
+{
+  "timestamp": "2025-09-11T10:50:32.988264",
+  "tests": [
+    {
+      "test_name": "Python Version Check",
+      "status": "pass",
+      "duration_seconds": 0.0,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-11T10:50:32.989279"
+    },
+    {
+      "test_name": "Virtual Environment",
+      "status": "pass",
+      "duration_seconds": 0.0,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-11T10:50:32.989279"
+    },
+    {
+      "test_name": "Project Structure",
+      "status": "pass",
+      "duration_seconds": 0.0,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-11T10:50:32.989279"
+    },
+    {
+      "test_name": "Django System Check",
+      "status": "fail",
+      "duration_seconds": 1.4729835987091064,
+      "details": null,
+      "error": "SystemCheckError: System check identified some issues:\n\nERRORS:\ncore.AccountType.parent: (fields.E307) The field core.AccountType.parent was declared with a lazy reference to 'core.accounttype', but app 'core' doesn't provide model 'accounttype'.\ncore.Department.company: (fields.E304) Reverse accessor 'Company.department_set' for 'core.Department.company' clashes with reverse accessor for 'hr.Department.company'.\n\tHINT: Add or change a related_name argument to the definition for 'core.Department.company' or 'hr.Department.company'.\nexperiments.Variety.created_by: (fields.E304) Reverse accessor 'User.created_varieties' for 'experiments.Variety.created_by' clashes with reverse accessor for 'seed_hybridization.PlantVariety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'experiments.Variety.created_by' or 'seed_hybridization.PlantVariety.created_by'.\nexperiments.Variety.created_by: (fields.E305) Reverse query name for 'experiments.Variety.created_by' clashes with reverse query name for 'seed_hybridization.PlantVariety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'experiments.Variety.created_by' or 'seed_hybridization.PlantVariety.created_by'.\nhr.Department.company: (fields.E304) Reverse accessor 'Company.department_set' for 'hr.Department.company' clashes with reverse accessor for 'core.Department.company'.\n\tHINT: Add or change a related_name argument to the definition for 'hr.Department.company' or 'core.Department.company'.\nseed_hybridization.PlantVariety.created_by: (fields.E304) Reverse accessor 'User.created_varieties' for 'seed_hybridization.PlantVariety.created_by' clashes with reverse accessor for 'experiments.Variety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'seed_hybridization.PlantVariety.created_by' or 'experiments.Variety.created_by'.\nseed_hybridization.PlantVariety.created_by: (fields.E305) Reverse query name for 'seed_hybridization.PlantVariety.created_by' clashes with reverse query name for 'experiments.Variety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'seed_hybridization.PlantVariety.created_by' or 'experiments.Variety.created_by'.\nservices_projects.TaskSchedule.task: (fields.E300) Field defines a relation with model 'Task', which is either not installed, or is abstract.\ntasks.Task.tags: (fields.E307) The field tasks.Task.tags was declared with a lazy reference to 'tasks.tag', but app 'tasks' isn't installed.\ntasks.Task.transport_vehicle: (fields.E307) The field tasks.Task.transport_vehicle was declared with a lazy reference to 'fleet_management.vehicle', but app 'fleet_management' isn't installed.\ntasks.Task_tags.tag: (fields.E307) The field tasks.Task_tags.tag was declared with a lazy reference to 'tasks.tag', but app 'tasks' isn't installed.\nvariety_trials.VarietyTrial.farm_plot: (fields.E300) Field defines a relation with model 'farms.FarmPlot', which is either not installed, or is abstract.\nvariety_trials.VarietyTrial.farm_plot: (fields.E307) The field variety_trials.VarietyTrial.farm_plot was declared with a lazy reference to 'farms.farmplot', but app 'farms' doesn't provide model 'farmplot'.\n\nSystem check identified 13 issues (0 silenced).\n",
+      "timestamp": "2025-09-11T10:50:34.462262"
+    },
+    {
+      "test_name": "Migration Status",
+      "status": "fail",
+      "duration_seconds": 1.5870647430419922,
+      "details": null,
+      "error": "D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\db\\backends\\utils.py:98: RuntimeWarning: Accessing the database during app initialization is discouraged. To fix this warning, avoid executing queries in AppConfig.ready() or when your app modules are imported.\n  warnings.warn(self.APPS_NOT_READY_WARNING_MSG, category=RuntimeWarning)\nSystemCheckError: System check identified some issues:\n\nERRORS:\ncore.AccountType.parent: (fields.E307) The field core.AccountType.parent was declared with a lazy reference to 'core.accounttype', but app 'core' doesn't provide model 'accounttype'.\ncore.Department.company: (fields.E304) Reverse accessor 'Company.department_set' for 'core.Department.company' clashes with reverse accessor for 'hr.Department.company'.\n\tHINT: Add or change a related_name argument to the definition for 'core.Department.company' or 'hr.Department.company'.\nexperiments.Variety.created_by: (fields.E304) Reverse accessor 'User.created_varieties' for 'experiments.Variety.created_by' clashes with reverse accessor for 'seed_hybridization.PlantVariety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'experiments.Variety.created_by' or 'seed_hybridization.PlantVariety.created_by'.\nexperiments.Variety.created_by: (fields.E305) Reverse query name for 'experiments.Variety.created_by' clashes with reverse query name for 'seed_hybridization.PlantVariety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'experiments.Variety.created_by' or 'seed_hybridization.PlantVariety.created_by'.\nhr.Department.company: (fields.E304) Reverse accessor 'Company.department_set' for 'hr.Department.company' clashes with reverse accessor for 'core.Department.company'.\n\tHINT: Add or change a related_name argument to the definition for 'hr.Department.company' or 'core.Department.company'.\nseed_hybridization.PlantVariety.created_by: (fields.E304) Reverse accessor 'User.created_varieties' for 'seed_hybridization.PlantVariety.created_by' clashes with reverse accessor for 'experiments.Variety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'seed_hybridization.PlantVariety.created_by' or 'experiments.Variety.created_by'.\nseed_hybridization.PlantVariety.created_by: (fields.E305) Reverse query name for 'seed_hybridization.PlantVariety.created_by' clashes with reverse query name for 'experiments.Variety.created_by'.\n\tHINT: Add or change a related_name argument to the definition for 'seed_hybridization.PlantVariety.created_by' or 'experiments.Variety.created_by'.\nservices_projects.TaskSchedule.task: (fields.E300) Field defines a relation with model 'Task', which is either not installed, or is abstract.\ntasks.Task.tags: (fields.E307) The field tasks.Task.tags was declared with a lazy reference to 'tasks.tag', but app 'tasks' isn't installed.\ntasks.Task.transport_vehicle: (fields.E307) The field tasks.Task.transport_vehicle was declared with a lazy reference to 'fleet_management.vehicle', but app 'fleet_management' isn't installed.\ntasks.Task_tags.tag: (fields.E307) The field tasks.Task_tags.tag was declared with a lazy reference to 'tasks.tag', but app 'tasks' isn't installed.\nvariety_trials.VarietyTrial.farm_plot: (fields.E300) Field defines a relation with model 'farms.FarmPlot', which is either not installed, or is abstract.\nvariety_trials.VarietyTrial.farm_plot: (fields.E307) The field variety_trials.VarietyTrial.farm_plot was declared with a lazy reference to 'farms.farmplot', but app 'farms' doesn't provide model 'farmplot'.\n",
+      "timestamp": "2025-09-11T10:50:36.049327"
+    },
+    {
+      "test_name": "Database Connectivity",
+      "status": "pass",
+      "duration_seconds": 0.9573297500610352,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-11T10:50:37.006657"
+    },
+    {
+      "test_name": "Model Loading",
+      "status": "pass",
+      "duration_seconds": 0.9351568222045898,
+      "details": "Loaded models successfully",
+      "error": null,
+      "timestamp": "2025-09-11T10:50:37.941814"
+    },
+    {
+      "test_name": "Admin Interface",
+      "status": "pass",
+      "duration_seconds": 0.9942796230316162,
+      "details": "Admin models registered",
+      "error": null,
+      "timestamp": "2025-09-11T10:50:38.936093"
+    },
+    {
+      "test_name": "Static Files Collection",
+      "status": "pass",
+      "duration_seconds": 1.0102033615112305,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-11T10:50:39.947297"
+    },
+    {
+      "test_name": "API - Admin Interface",
+      "status": "skip",
+      "duration_seconds": 4.09234619140625,
+      "details": "Server not running or not accessible",
+      "error": null,
+      "timestamp": "2025-09-11T10:50:44.040311"
+    },
+    {
+      "test_name": "API - API Root",
+      "status": "skip",
+      "duration_seconds": 4.099883556365967,
+      "details": "Server not running or not accessible",
+      "error": null,
+      "timestamp": "2025-09-11T10:50:48.140896"
+    },
+    {
+      "test_name": "API - Authentication API",
+      "status": "skip",
+      "duration_seconds": 4.128133058547974,
+      "details": "Server not running or not accessible",
+      "error": null,
+      "timestamp": "2025-09-11T10:50:52.269029"
+    },
+    {
+      "test_name": "API - Core API",
+      "status": "skip",
+      "duration_seconds": 4.09406590461731,
+      "details": "Server not running or not accessible",
+      "error": null,
+      "timestamp": "2025-09-11T10:50:56.363095"
+    },
+    {
+      "test_name": "Frontend Package Config",
+      "status": "pass",
+      "duration_seconds": 0.0,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-11T10:50:56.364116"
+    },
+    {
+      "test_name": "Frontend Build",
+      "status": "skip",
+      "duration_seconds": 0.006707429885864258,
+      "details": "npm not available or timeout",
+      "error": null,
+      "timestamp": "2025-09-11T10:50:56.372686"
+    },
+    {
+      "test_name": "Performance Analysis",
+      "status": "warning",
+      "duration_seconds": 0.3857436180114746,
+      "details": "Performance check had issues",
+      "error": null,
+      "timestamp": "2025-09-11T10:50:56.759430"
+    },
+    {
+      "test_name": "Security Analysis",
+      "status": "warning",
+      "duration_seconds": 0.10467290878295898,
+      "details": "Security check found issues",
+      "error": null,
+      "timestamp": "2025-09-11T10:50:56.864103"
+    }
+  ],
+  "summary": {
+    "total_tests": 17,
+    "passed_tests": 8,
+    "failed_tests": 2,
+    "warning_tests": 2,
+    "skipped_tests": 5,
+    "success_rate": 47.05882352941176,
+    "overall_status": "fair"
+  }
+}

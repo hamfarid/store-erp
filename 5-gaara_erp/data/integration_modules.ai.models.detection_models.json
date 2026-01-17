@@ -1,0 +1,329 @@
+{
+  "module": "integration_modules.ai.models.detection_models",
+  "imports": [
+    "PIL",
+    "cv2",
+    "disease_mappings",
+    "json",
+    "numpy",
+    "os",
+    "pydantic",
+    "tensorflow",
+    "time",
+    "torch",
+    "torchvision",
+    "traceback",
+    "typing",
+    "ultralytics"
+  ],
+  "classes": [
+    {
+      "name": "DetectionModelBase",
+      "methods": [
+        "load_model_and_preprocessing",
+        "preprocess_image",
+        "detect_disease",
+        "_run_inference",
+        "_process_output",
+        "_fallback_detection",
+        "_map_prediction_to_disease_info"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "version",
+        "model_type",
+        "model_path",
+        "model_instance",
+        "transforms",
+        "class_names"
+      ]
+    },
+    {
+      "name": "TorchVisionClassificationModel",
+      "methods": [
+        "load_model_and_preprocessing",
+        "preprocess_image",
+        "_run_inference",
+        "_process_output"
+      ],
+      "variables": [
+        "model_loader",
+        "weights_loader"
+      ]
+    },
+    {
+      "name": "ResNet50Model",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MobileNetV3LargeModel",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "KerasClassificationModel",
+      "methods": [
+        "load_model_and_preprocessing",
+        "preprocess_image",
+        "_run_inference",
+        "_process_output"
+      ],
+      "variables": [
+        "target_size"
+      ]
+    },
+    {
+      "name": "SimpleKerasModel",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "YOLOModel",
+      "methods": [
+        "load_model_and_preprocessing",
+        "preprocess_image",
+        "_run_inference",
+        "_process_output"
+      ],
+      "variables": []
+    },
+    {
+      "name": "YOLOV8nModel",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Config",
+      "methods": [],
+      "variables": [
+        "arbitrary_types_allowed"
+      ]
+    },
+    {
+      "name": "DummyModel",
+      "methods": [
+        "load_model_and_preprocessing",
+        "_run_inference",
+        "_process_output"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BaseModel",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_available_models",
+      "parameters": []
+    },
+    {
+      "name": "get_model_instance",
+      "parameters": [
+        "model_name"
+      ]
+    },
+    {
+      "name": "load_model_and_preprocessing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "preprocess_image",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    },
+    {
+      "name": "detect_disease",
+      "parameters": [
+        "self",
+        "image_path",
+        "crop_type"
+      ]
+    },
+    {
+      "name": "_run_inference",
+      "parameters": [
+        "self",
+        "processed_input"
+      ]
+    },
+    {
+      "name": "_process_output",
+      "parameters": [
+        "self",
+        "output",
+        "image_path"
+      ]
+    },
+    {
+      "name": "_fallback_detection",
+      "parameters": [
+        "self",
+        "image_path",
+        "start_time",
+        "error"
+      ]
+    },
+    {
+      "name": "_map_prediction_to_disease_info",
+      "parameters": [
+        "self",
+        "predicted_class_name"
+      ]
+    },
+    {
+      "name": "load_model_and_preprocessing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "preprocess_image",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    },
+    {
+      "name": "_run_inference",
+      "parameters": [
+        "self",
+        "processed_input"
+      ]
+    },
+    {
+      "name": "_process_output",
+      "parameters": [
+        "self",
+        "output",
+        "image_path"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "load_model_and_preprocessing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "preprocess_image",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    },
+    {
+      "name": "_run_inference",
+      "parameters": [
+        "self",
+        "processed_input"
+      ]
+    },
+    {
+      "name": "_process_output",
+      "parameters": [
+        "self",
+        "output",
+        "image_path"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "load_model_and_preprocessing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "preprocess_image",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    },
+    {
+      "name": "_run_inference",
+      "parameters": [
+        "self",
+        "processed_input"
+      ]
+    },
+    {
+      "name": "_process_output",
+      "parameters": [
+        "self",
+        "output",
+        "image_path"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "Field",
+      "parameters": [
+        "default_factory"
+      ]
+    },
+    {
+      "name": "load_model_and_preprocessing",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_run_inference",
+      "parameters": [
+        "self",
+        "processed_input"
+      ]
+    },
+    {
+      "name": "_process_output",
+      "parameters": [
+        "self",
+        "output",
+        "image_path"
+      ]
+    }
+  ],
+  "variables": [
+    "AVAILABLE_MODELS"
+  ]
+}

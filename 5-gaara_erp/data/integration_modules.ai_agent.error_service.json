@@ -1,0 +1,199 @@
+{
+  "module": "integration_modules.ai_agent.error_service",
+  "imports": [
+    "datetime",
+    "django.utils",
+    "logging",
+    "models.activity_logs",
+    "models.agents",
+    "models.interactions",
+    "traceback",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "ErrorHandlingService",
+      "methods": [
+        "__init__",
+        "report",
+        "log_error",
+        "send_alert"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Agent",
+      "methods": [],
+      "variables": [
+        "objects",
+        "name"
+      ]
+    },
+    {
+      "name": "AgentActivityLog",
+      "methods": [],
+      "variables": [
+        "objects",
+        "details"
+      ]
+    },
+    {
+      "name": "AgentInteraction",
+      "methods": [
+        "save"
+      ],
+      "variables": [
+        "objects",
+        "status",
+        "error_details"
+      ]
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "get"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DoesNotExist",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "create"
+      ],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "get"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DoesNotExist",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "log_agent_error",
+      "parameters": [
+        "error_message",
+        "originating_agent",
+        "related_interaction",
+        "details",
+        "status",
+        "log_level"
+      ]
+    },
+    {
+      "name": "send_admin_alert",
+      "parameters": [
+        "subject",
+        "message",
+        "important"
+      ]
+    },
+    {
+      "name": "report_error",
+      "parameters": [
+        "error_message",
+        "originating_agent_name",
+        "related_interaction_id",
+        "details",
+        "alert_admin",
+        "is_critical"
+      ]
+    },
+    {
+      "name": "is_error_handling_available",
+      "parameters": []
+    },
+    {
+      "name": "get_error_service",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "report",
+      "parameters": [
+        "self",
+        "error_message",
+        "originating_agent_name",
+        "related_interaction_id",
+        "details",
+        "alert_admin",
+        "is_critical"
+      ]
+    },
+    {
+      "name": "log_error",
+      "parameters": [
+        "self",
+        "error_message",
+        "originating_agent",
+        "related_interaction",
+        "details",
+        "status",
+        "log_level"
+      ]
+    },
+    {
+      "name": "send_alert",
+      "parameters": [
+        "self",
+        "subject",
+        "message",
+        "important"
+      ]
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "name"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": []
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "id"
+      ]
+    }
+  ],
+  "variables": [
+    "logger",
+    "__all__"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "module": "debug_company",
+  "imports": [
+    "core_modules.core.models",
+    "django",
+    "os",
+    "sys",
+    "traceback"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "debug_company_model",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

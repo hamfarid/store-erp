@@ -1,0 +1,104 @@
+{
+  "module": "integration_modules.ai_services.model_comparison_service",
+  "imports": [
+    "datetime",
+    "django.db",
+    "json",
+    "logging",
+    "models.detection_models",
+    "os",
+    "time",
+    "typing",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "ModelComparisonService",
+      "methods": [
+        "__init__",
+        "compare_models",
+        "get_model_performance_stats",
+        "get_model_categories",
+        "get_model_details",
+        "get_available_models",
+        "is_model_available",
+        "run_batch_comparison"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "is_comparison_service_available",
+      "parameters": []
+    },
+    {
+      "name": "create_model_comparison_service",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "compare_models",
+      "parameters": [
+        "self",
+        "image_path",
+        "crop_type"
+      ]
+    },
+    {
+      "name": "get_model_performance_stats",
+      "parameters": [
+        "self",
+        "results_count"
+      ]
+    },
+    {
+      "name": "get_model_categories",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_model_details",
+      "parameters": [
+        "self",
+        "model_name"
+      ]
+    },
+    {
+      "name": "get_available_models",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_model_available",
+      "parameters": [
+        "self",
+        "model_name"
+      ]
+    },
+    {
+      "name": "run_batch_comparison",
+      "parameters": [
+        "self",
+        "image_paths",
+        "crop_type"
+      ]
+    },
+    {
+      "name": "get_all_models",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "logger",
+    "model_comparison_service",
+    "__all__"
+  ]
+}

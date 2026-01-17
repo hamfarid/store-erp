@@ -1,0 +1,61 @@
+{
+  "module": "services_modules.hr.models.employee_document",
+  "imports": [
+    "datetime",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "EmployeeDocument",
+      "methods": [
+        "__str__",
+        "is_expiring_soon",
+        "is_expired"
+      ],
+      "variables": [
+        "employee",
+        "document_type",
+        "document_number",
+        "issue_date",
+        "expiry_date",
+        "file",
+        "notes",
+        "notify_before_days",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_expiring_soon",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_expired",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

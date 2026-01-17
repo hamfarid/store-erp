@@ -1,0 +1,71 @@
+{
+  "module": "services_modules.feasibility_studies.services",
+  "imports": [
+    "collections",
+    "decimal",
+    "django.db.models",
+    "django.db.models.functions",
+    "models",
+    "numpy",
+    "numpy_financial",
+    "services_modules.projects.models"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "calculate_npv",
+      "parameters": [
+        "study"
+      ]
+    },
+    {
+      "name": "calculate_irr",
+      "parameters": [
+        "study"
+      ]
+    },
+    {
+      "name": "calculate_payback_period",
+      "parameters": [
+        "study"
+      ]
+    },
+    {
+      "name": "calculate_roi",
+      "parameters": [
+        "study"
+      ]
+    },
+    {
+      "name": "calculate_pv",
+      "parameters": [
+        "rate",
+        "nper",
+        "pmt",
+        "fv"
+      ]
+    },
+    {
+      "name": "calculate_fv",
+      "parameters": [
+        "rate",
+        "nper",
+        "pmt",
+        "pv"
+      ]
+    },
+    {
+      "name": "compare_projects",
+      "parameters": [
+        "study_ids"
+      ]
+    },
+    {
+      "name": "compare_forecast_vs_actual",
+      "parameters": [
+        "study_id"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,57 @@
+{
+  "module": "agricultural_modules.plant_diagnosis.api_client",
+  "imports": [
+    "base64",
+    "crypto",
+    "django.conf",
+    "json",
+    "logging",
+    "requests",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "DiagnosisAPIClient",
+      "methods": [
+        "__init__",
+        "send_diagnosis_request",
+        "check_diagnosis_status",
+        "get_diagnosis_result"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "send_diagnosis_request",
+      "parameters": [
+        "self",
+        "image_path",
+        "metadata"
+      ]
+    },
+    {
+      "name": "check_diagnosis_status",
+      "parameters": [
+        "self",
+        "request_id"
+      ]
+    },
+    {
+      "name": "get_diagnosis_result",
+      "parameters": [
+        "self",
+        "request_id"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

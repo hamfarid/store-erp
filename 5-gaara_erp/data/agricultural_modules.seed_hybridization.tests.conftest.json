@@ -1,0 +1,11 @@
+{
+  "module": "agricultural_modules.seed_hybridization.tests.conftest",
+  "imports": [
+    "django",
+    "django.conf",
+    "os"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

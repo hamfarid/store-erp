@@ -1,0 +1,490 @@
+
+> inventory-frontend@1.5.0 lint
+> eslint . --fix
+
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\About.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\AccountingSystem.jsx
+  27:6  warning  React Hook useEffect has a missing dependency: 'loadAccountingData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\AdminRoles.jsx
+  35:6  warning  React Hook useEffect has a missing dependency: 'loadRoles'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+  39:6  warning  React Hook useEffect has a missing dependency: 'filterRoles'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\AdminSecurity.jsx
+  21:6  warning  React Hook useEffect has a missing dependency: 'filterLogs'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\AdminUsers.jsx
+  18:6  warning  React Hook useEffect has a missing dependency: 'loadUsers'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+  22:6  warning  React Hook useEffect has a missing dependency: 'filterUsers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\AdvancedPermissions.jsx
+  69:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\AdvancedReportsSystem.jsx
+  151:6  warning  React Hook useEffect has a missing dependency: 'generateReport'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\AdvancedSettings.jsx
+  153:9  warning  The 'loadSettings' function makes the dependencies of useEffect Hook (at line 151) change on every render. To fix this, wrap the definition of 'loadSettings' in its own useCallback() Hook  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\CashBoxes.jsx
+  22:6  warning  React Hook useEffect has a missing dependency: 'filterCashBoxes'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\CategoriesManagement.jsx
+  22:6  warning  React Hook useEffect has a missing dependency: 'filterCategories'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\CustomerDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\CustomersAdvanced.jsx
+  21:6  warning  React Hook useEffect has a missing dependency: 'loadCustomers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\DashboardNew.jsx
+  78:6  warning  React Hook useEffect has a missing dependency: 'fetchDashboardData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\FinancialReports.jsx
+  34:6  warning  React Hook useEffect has a missing dependency: 'loadFinancialReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\Help.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\IntegratedDashboard.jsx
+   44:6  warning  React Hook useEffect has a missing dependency: 'loadDashboardData'. Either include it or remove the dependency array                     react-hooks/exhaustive-deps
+  135:6  warning  React Hook useEffect has missing dependencies: 'mockAlerts' and 'mockDashboardData'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\IntegratedReports.jsx
+  115:6  warning  React Hook useEffect has a missing dependency: 'loadReportData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\IntegrationManager.jsx
+  103:6  warning  React Hook useEffect has missing dependencies: 'mockIntegrationStatus' and 'mockSyncHistory'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\InventoryDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\InventoryReports.jsx
+  18:6  warning  React Hook useEffect has a missing dependency: 'loadReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\InvoiceManagementComplete.jsx
+  158:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\InvoicesAdvanced.jsx
+  28:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\LotManagement.jsx
+  23:6  warning  React Hook useEffect has a missing dependency: 'filterLots'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\LotManagementAdvanced.jsx
+  86:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\NetworkErrorPage.jsx
+  34:6  warning  React Hook useEffect has a missing dependency: 'handleCheckServer'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\NotificationSystem.jsx
+  12:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  41:6   warning  React Hook useEffect has a missing dependency: 'checkForNewNotifications'. Either include it or remove the dependency array     react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\NotificationSystemAdvanced.jsx
+  91:6  warning  React Hook useEffect has a missing dependency: 'loadNotifications'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\PaymentVouchers.jsx
+  31:6  warning  React Hook useEffect has a missing dependency: 'filterVouchers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ProductDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ProductManagementComplete.jsx
+  34:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ProductsAdvanced.jsx
+  88:6  warning  React Hook useEffect has a missing dependency: 'mockProducts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ProfitLoss.jsx
+  58:6  warning  React Hook useEffect has a missing dependency: 'loadProfitLossData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ReportDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ReportsSystem.jsx
+  26:6  warning  React Hook useEffect has a missing dependency: 'loadReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\RolePermissionsManager.jsx
+  27:6  warning  React Hook useEffect has a missing dependency: 'loadPermissions'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\SecureAuth.jsx
+  34:6  warning  React Hook useEffect has missing dependencies: 'checkExistingAuth' and 'checkLockoutStatus'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\SecurityMonitoring.jsx
+  18:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\Settings.jsx
+  23:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\StockMovements.jsx
+  20:6  warning  React Hook useEffect has a missing dependency: 'filterMovements'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\StockMovementsAdvanced.jsx
+  113:6  warning  React Hook useEffect has a missing dependency: 'loadMovements'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  117:6  warning  React Hook useEffect has a missing dependency: 'applyFilters'. Either include it or remove the dependency array   react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\SupplierDetails.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\SuppliersAdvanced.jsx
+  18:6  warning  React Hook useEffect has a missing dependency: 'loadSuppliers'. Either include it or remove the dependency array    react-hooks/exhaustive-deps
+  22:6  warning  React Hook useEffect has a missing dependency: 'filterSuppliers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\SystemSettings.jsx
+  23:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\TrainingCenter.jsx
+   15:10  error    'userProgress' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                         no-unused-vars
+  163:6   warning  React Hook useEffect has a missing dependency: 'loadTrainingData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\UnifiedDashboard.jsx
+   72:43  error  'IconComponent' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  100:56  error  'IconComponent' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\UnifiedProductsManager.jsx
+  30:10  error  'showImportModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\UserManagementAdvanced.jsx
+  28:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\UserProfile.jsx
+  19:6  warning  React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\WarehouseManagement.jsx
+   99:6   warning  React Hook useEffect has a missing dependency: 'mockWarehouses'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  153:28  error    'setShowAddModal' is not defined                                                                                   no-undef
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\WarehousesManagement.jsx
+  21:6  warning  React Hook useEffect has a missing dependency: 'filterWarehouses'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\__tests__\Dashboard.test.jsx
+  1:11  error  'global' is already defined as a built-in global variable  no-redeclare
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\auth\ProtectedRoute.jsx
+  348:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  405:3   warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\common\ConfirmationDialog.jsx
+  205:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  214:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  214:34  error    'Component' is defined but never used. Allowed unused args must match /^_/u                                                     no-unused-vars
+  222:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\common\EnhancedToast.jsx
+   32:6   warning  React Hook useCallback has a missing dependency: 'removeToast'. Either include it or remove the dependency array                react-hooks/exhaustive-deps
+  212:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  221:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\common\ErrorBoundary.jsx
+  168:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\common\FormValidation.jsx
+    6:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  110:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  419:16  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\common\LoadingSpinner.jsx
+  97:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\common\NotificationCenter.jsx
+   37:6   warning  React Hook useCallback has a missing dependency: 'removeNotification'. Either include it or remove the dependency array         react-hooks/exhaustive-deps
+  346:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\common\PermissionSystem.jsx
+   21:6   warning  React Hook useEffect has a missing dependency: 'loadUserPermissions'. Either include it or remove the dependency array                      react-hooks/exhaustive-deps
+   77:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components              react-refresh/only-export-components
+  243:6   warning  React Hook useEffect has missing dependencies: 'defaultPermissions' and 'defaultRoles'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  362:6   warning  React Hook useEffect has a missing dependency: 'mockUsers'. Either include it or remove the dependency array                                react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\common\PrintExport.jsx
+  33:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  75:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\common\ProgressBar.jsx
+  282:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  291:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\common\Toast.jsx
+  100:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\modals\CategoryViewModal.jsx
+  49:27  warning  The ref value 'modalRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'modalRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\modals\CustomerViewModal.jsx
+  61:27  warning  The ref value 'modalRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'modalRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\modals\SupplierViewModal.jsx
+  49:27  warning  The ref value 'modalRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'modalRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\modals\WarehouseViewModal.jsx
+  49:27  warning  The ref value 'modalRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'modalRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\EnhancedStates.jsx
+  58:9  error  'IconComponent' is assigned a value but never used. Allowed unused args must match /^_/u  no-unused-vars
+  91:9  error  'IconComponent' is assigned a value but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\EnhancedToast.jsx
+  35:7   warning  Fast refresh only works when a file only exports components. Move your component(s) to a separate file  react-refresh/only-export-components
+  35:31  error    'Icon' is defined but never used. Allowed unused args must match /^_/u                                  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\ModernButton.jsx
+  100:9  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  178:9  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\Notification.jsx
+  25:6  warning  React Hook useEffect has a missing dependency: 'handleDismiss'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\PermissionsGuard.jsx
+   98:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  267:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  331:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\SearchFilter.jsx
+  29:6  warning  React Hook useEffect has a missing dependency: 'onFilter'. Either include it or remove the dependency array. If 'onFilter' changes too often, find the parent component that defines it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\ThemedIcon.jsx
+  16:9   error    'Icon' is defined but never used. Allowed unused args must match /^_/u                                                          no-unused-vars
+  34:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\Validation.jsx
+    5:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  157:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  169:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  399:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\alert.jsx
+  123:47  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\badge.jsx
+  84:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\command-palette.jsx
+  60:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\form.jsx
+  187:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\input.jsx
+  92:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\navigation-menu.jsx
+  151:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\sidebar.jsx
+  688:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\sonner.jsx
+  150:19  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\theme-toggle.jsx
+  33:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\components\ui\toggle.jsx
+  43:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\context\AppContext.jsx
+   7:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  69:6   warning  React Hook useCallback has a missing dependency: 'removeNotification'. Either include it or remove the dependency array         react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\context\AuthContext.jsx
+  5:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\contexts\AppContext.jsx
+  385:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\contexts\AuthContext.jsx
+   7:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  16:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  95:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\contexts\PermissionContext.jsx
+   13:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  302:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  320:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\contexts\ThemeContext.jsx
+   17:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                react-refresh/only-export-components
+  167:6   warning  React Hook useEffect has missing dependencies: 'applyTheme', 'resolveTheme', and 'theme'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  193:6   warning  React Hook useEffect has a missing dependency: 'applyTheme'. Either include it or remove the dependency array                                 react-hooks/exhaustive-deps
+  221:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                react-refresh/only-export-components
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\hooks\useObservability.js
+  38:56  warning  The ref value 'mountTimeRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'mountTimeRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\hooks\usePerformance.js
+  274:10  warning  React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead  react-hooks/exhaustive-deps
+  285:10  warning  React Hook useMemo received a function whose dependencies are unknown. Pass an inline function instead      react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\hooks\usePermissions.js
+  95:6   warning  React Hook useEffect has a missing dependency: 'permissionCodes'. Either include it or remove the dependency array                        react-hooks/exhaustive-deps
+  95:30  warning  React Hook useEffect has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\AccountingVouchers.jsx
+  114:6  warning  React Hook useEffect has a missing dependency: 'fetchVouchers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\AdminDashboard.jsx
+  39:51  error  'IconComponent' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  60:50  error  'IconComponent' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\AdvancedReports.jsx
+   15:10  error    'selectedReport' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  166:6   warning  React Hook useEffect has a missing dependency: 'sampleReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\AdvancedUserManagement.jsx
+  165:6  warning  React Hook useEffect has missing dependencies: 'loadGroups' and 'loadUsers'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\AuditLogs.jsx
+  182:6  warning  React Hook useEffect has a missing dependency: 'fetchLogs'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\AutomationTasks.jsx
+   32:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+   33:10  error    'selectedTask' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+  134:6   warning  React Hook useEffect has a missing dependency: 'fetchTasks'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\BackupRestore.jsx
+  92:6  warning  React Hook useEffect has a missing dependency: 'fetchBackups'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\ComprehensiveReports.jsx
+   15:10  error    'selectedReport' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  161:6   warning  React Hook useEffect has a missing dependency: 'sampleReports'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\CustomerCredit.jsx
+   33:10  error    'selectedAccount' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                         no-unused-vars
+   34:10  error    'showStatement' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                           no-unused-vars
+   35:10  error    'showEditModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                           no-unused-vars
+  113:6   warning  React Hook useEffect has a missing dependency: 'fetchCreditAccounts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\CustomerDetails.jsx
+  52:6  warning  React Hook useEffect has a missing dependency: 'loadCustomerData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\Dashboard.jsx
+  41:61  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  88:30  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\DashboardEnhanced.jsx
+  68:43  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  89:39  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\DiscountManagement.jsx
+  173:6  warning  React Hook useEffect has a missing dependency: 'fetchDiscounts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\InventoryAlerts.jsx
+  147:6  warning  React Hook useEffect has missing dependencies: 'fetchAlerts' and 'fetchSummary'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\InvoicesPage.jsx
+  136:8  error  Parsing error: Unexpected token `}`. Did you mean `&rbrace;` or `{"}"}`?
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\LoginPage.jsx
+  24:30  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\LotBatchManagement.jsx
+   32:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+   33:10  error    'selectedLot' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+  154:6   warning  React Hook useEffect has a missing dependency: 'fetchLots'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\NotificationsCenter.jsx
+  137:6  warning  React Hook useEffect has a missing dependency: 'fetchNotifications'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\POSSystem.jsx
+  15:15  error  'setTax' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\PaymentDebtManagement.jsx
+   33:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+  121:6   warning  React Hook useEffect has a missing dependency: 'fetchDebts'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\PickupDeliveryOrders.jsx
+   31:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+   32:10  error    'selectedOrder' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+  137:6   warning  React Hook useEffect has a missing dependency: 'sampleOrders'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\PotentialCustomers.jsx
+  170:6  warning  React Hook useEffect has a missing dependency: 'fetchCustomers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\PriceHistory.jsx
+  153:6  warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\ProductDetails.jsx
+  49:6  warning  React Hook useEffect has a missing dependency: 'loadProductData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\ProfitLossReports.jsx
+  81:6  warning  React Hook useEffect has a missing dependency: 'fetchReportData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\PurchaseOrders.jsx
+  123:6  warning  React Hook useEffect has a missing dependency: 'fetchOrders'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  188:9  error    'handleDelete' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                    no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\PurchaseOrdersManagement.jsx
+  56:6  warning  React Hook useEffect has a missing dependency: 'loadPurchaseOrders'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\ReportsPage.jsx
+  13:49  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  26:61  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\ReportsSetupPage.jsx
+  146:10  error  'showCreateModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u   no-unused-vars
+  147:10  error  'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u      no-unused-vars
+  147:24  error  'setShowAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u   no-unused-vars
+  148:10  error  'activeSection' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+  148:25  error  'setActiveSection' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\ReportsSystem.jsx
+    9:10  error  'activeTab' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+    9:21  error  'setActiveTab' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  103:31  error  'report' is defined but never used. Allowed unused args must match /^_/u                      no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\ReturnsManagement.jsx
+  123:6  warning  React Hook useEffect has a missing dependency: 'fetchReturns'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  209:5  error    'setShowAddModal' is not defined                                                                                 no-undef
+  215:5  error    'setShowAddModal' is not defined                                                                                 no-undef
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\SalesEngineers.jsx
+   31:10  error    'showAddModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                       no-unused-vars
+   32:10  error    'selectedEngineer' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                   no-unused-vars
+  104:6   warning  React Hook useEffect has a missing dependency: 'fetchEngineers'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\SecurityDashboard.jsx
+  138:6  warning  React Hook useEffect has a missing dependency: 'fetchSecurityData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\Settings.jsx
+   24:27  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+   64:38  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  111:30  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\SettingsPage.jsx
+  12:33  error  'Icon' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\SetupWizard.jsx
+  3:27  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\SystemStatus.jsx
+   6:10  error    'toast' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                    no-unused-vars
+  81:6   warning  React Hook useEffect has a missing dependency: 'fetchStatus'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\TreasuryManagement.jsx
+   35:10  error    'showTransactionModal' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u          no-unused-vars
+  142:6   warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\UserManagement.jsx
+    8:10  error  'usePermissions' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+   27:10  error  'permissionsDialogOpen' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  578:68  error  'index' is defined but never used. Allowed unused args must match /^_/u                                no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\UserRightsConfigPage.jsx
+  29:10  error  'useAuth' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\WarehouseAdjustments.jsx
+  124:6  warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\WarehouseConstraints.jsx
+  102:6  warning  React Hook useEffect has a missing dependency: 'sampleConstraints'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+E:\New folder\gaara_erp-Manus-14-12-2025 - Copy\frontend\src\pages\WarehouseTransfer.jsx
+  131:6  warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Γ£û 211 problems (60 errors, 151 warnings)
+

@@ -1,0 +1,227 @@
+{
+  "module": "agricultural_modules.variety_trials.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "TrialVarietyInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "suit_classes"
+      ]
+    },
+    {
+      "name": "HarvestLogInLine",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "suit_classes"
+      ]
+    },
+    {
+      "name": "HarvestQualityLogInLine",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra"
+      ]
+    },
+    {
+      "name": "FruitSpecificationInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "suit_classes"
+      ]
+    },
+    {
+      "name": "PlantSpecificationInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "suit_classes"
+      ]
+    },
+    {
+      "name": "TrialCostInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "suit_classes"
+      ]
+    },
+    {
+      "name": "TrialFertilizationProgramInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "suit_classes"
+      ]
+    },
+    {
+      "name": "TrialPesticideProgramInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "suit_classes"
+      ]
+    },
+    {
+      "name": "AIAnalysisInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "readonly_fields",
+        "can_delete",
+        "max_num",
+        "suit_classes"
+      ]
+    },
+    {
+      "name": "VarietyTrialAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets",
+        "inlines",
+        "suit_form_tabs"
+      ]
+    },
+    {
+      "name": "TrialVarietyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "raw_id_fields",
+        "fieldsets",
+        "inlines",
+        "suit_form_tabs"
+      ]
+    },
+    {
+      "name": "HarvestLogAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "autocomplete_fields",
+        "readonly_fields",
+        "inlines"
+      ]
+    },
+    {
+      "name": "HarvestQualityLogAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "autocomplete_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "FruitSpecificationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "autocomplete_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "PlantSpecificationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "autocomplete_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "TrialCostAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "autocomplete_fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "TrialFertilizationProgramAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "autocomplete_fields"
+      ]
+    },
+    {
+      "name": "TrialPesticideProgramAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "autocomplete_fields"
+      ]
+    },
+    {
+      "name": "AIAnalysisAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "raw_id_fields"
+      ]
+    },
+    {
+      "name": "TrialReportAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "raw_id_fields"
+      ]
+    },
+    {
+      "name": "VarietyRecommendationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "raw_id_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

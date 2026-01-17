@@ -1,0 +1,573 @@
+{
+  "module": "core_modules.permissions.unified_permissions_model",
+  "imports": [
+    "django.contrib.auth",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "json",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "PermissionsBase",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Permission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "category",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Role",
+      "methods": [
+        "__str__",
+        "get_all_permissions"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "permissions",
+        "parent_role",
+        "is_system_role",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "RolePermission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "role",
+        "permission",
+        "scope",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Group",
+      "methods": [
+        "__str__",
+        "get_all_roles",
+        "get_all_permissions"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "roles",
+        "parent_group",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "GroupRole",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "group",
+        "role",
+        "scope",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserRole",
+      "methods": [
+        "__str__",
+        "_is_valid",
+        "is_valid"
+      ],
+      "variables": [
+        "user",
+        "role",
+        "scope",
+        "valid_from",
+        "valid_to",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserGroup",
+      "methods": [
+        "__str__",
+        "_is_valid",
+        "is_valid"
+      ],
+      "variables": [
+        "user",
+        "group",
+        "valid_from",
+        "valid_to",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserPermission",
+      "methods": [
+        "__str__",
+        "is_valid"
+      ],
+      "variables": [
+        "user",
+        "permission",
+        "scope",
+        "valid_from",
+        "valid_to",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ResourcePermission",
+      "methods": [
+        "__str__",
+        "is_valid"
+      ],
+      "variables": [
+        "permission",
+        "content_type",
+        "object_id",
+        "content_object",
+        "user",
+        "group",
+        "role",
+        "scope",
+        "valid_from",
+        "valid_to",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PermissionRequest",
+      "methods": [
+        "__str__",
+        "approve",
+        "reject",
+        "cancel"
+      ],
+      "variables": [
+        "REQUEST_STATUS",
+        "user",
+        "permission",
+        "role",
+        "group",
+        "content_type",
+        "object_id",
+        "content_object",
+        "reason",
+        "status",
+        "approved_by",
+        "rejected_by",
+        "approval_reason",
+        "rejection_reason",
+        "valid_from",
+        "valid_to",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PermissionLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ACTION_TYPES",
+        "user",
+        "action_type",
+        "action_user",
+        "permission",
+        "role",
+        "group",
+        "content_type",
+        "object_id",
+        "details",
+        "ip_address",
+        "user_agent",
+        "created_at"
+      ]
+    },
+    {
+      "name": "PermissionScope",
+      "methods": [
+        "__str__",
+        "get_child_scopes"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "parent_scope",
+        "scope_type",
+        "metadata",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TemporaryPermission",
+      "methods": [
+        "__str__",
+        "is_valid",
+        "revoke"
+      ],
+      "variables": [
+        "user",
+        "permission",
+        "role",
+        "group",
+        "content_type",
+        "object_id",
+        "content_object",
+        "reason",
+        "granted_by",
+        "valid_from",
+        "valid_to",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "abstract",
+        "app_label"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_roles",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "approve",
+      "parameters": [
+        "self",
+        "approver",
+        "reason"
+      ]
+    },
+    {
+      "name": "reject",
+      "parameters": [
+        "self",
+        "rejector",
+        "reason"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_child_scopes",
+      "parameters": [
+        "self",
+        "include_inactive"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_valid",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "revoke",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "CREATED_AT_LABEL",
+    "UPDATED_AT_LABEL",
+    "ACTIVE_LABEL",
+    "NAME_LABEL",
+    "DESCRIPTION_LABEL",
+    "CODE_LABEL"
+  ]
+}

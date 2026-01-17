@@ -1,0 +1,86 @@
+{
+  "timestamp": "2025-09-20T12:35:45.955792",
+  "tests": [
+    {
+      "test_name": "Python Version Check",
+      "status": "pass",
+      "duration_seconds": 0.0,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-20T12:35:45.956387"
+    },
+    {
+      "test_name": "Virtual Environment",
+      "status": "pass",
+      "duration_seconds": 0.0,
+      "details": null,
+      "error": null,
+      "timestamp": "2025-09-20T12:35:45.956387"
+    },
+    {
+      "test_name": "Project Structure",
+      "status": "fail",
+      "duration_seconds": 0.0,
+      "details": null,
+      "error": "Missing files: ['D:\\\\home\\\\ubuntu\\\\gaara_erp_v5\\\\gaara_erp\\\\gaara_erp\\\\settings.py']",
+      "timestamp": "2025-09-20T12:35:45.956387"
+    },
+    {
+      "test_name": "Django System Check",
+      "status": "fail",
+      "duration_seconds": 0.18379426002502441,
+      "details": null,
+      "error": "Traceback (most recent call last):\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 23, in <module>\n    main()\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 14, in main\n    from django.core.management import execute_from_command_line\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\__init__.py\", line 19, in <module>\n    from django.core.management.base import (\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\base.py\", line 16, in <module>\n    from django.core.management.color import color_style, no_style\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\color.py\", line 9, in <module>\n    from django.utils import termcolors\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\utils\\termcolors.py\", line 6\n    foreground = {color_names[ ]: \"3%s\" % x for x in range(8)}\n                  ^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?\n",
+      "timestamp": "2025-09-20T12:35:46.140764"
+    },
+    {
+      "test_name": "Migration Status",
+      "status": "fail",
+      "duration_seconds": 0.18403959274291992,
+      "details": null,
+      "error": "Traceback (most recent call last):\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 23, in <module>\n    main()\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 14, in main\n    from django.core.management import execute_from_command_line\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\__init__.py\", line 19, in <module>\n    from django.core.management.base import (\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\base.py\", line 16, in <module>\n    from django.core.management.color import color_style, no_style\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\color.py\", line 9, in <module>\n    from django.utils import termcolors\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\utils\\termcolors.py\", line 6\n    foreground = {color_names[ ]: \"3%s\" % x for x in range(8)}\n                  ^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?\n",
+      "timestamp": "2025-09-20T12:35:46.325379"
+    },
+    {
+      "test_name": "Database Connectivity",
+      "status": "fail",
+      "duration_seconds": 0.17914891242980957,
+      "details": null,
+      "error": "Traceback (most recent call last):\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 23, in <module>\n    main()\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 14, in main\n    from django.core.management import execute_from_command_line\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\__init__.py\", line 19, in <module>\n    from django.core.management.base import (\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\base.py\", line 16, in <module>\n    from django.core.management.color import color_style, no_style\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\color.py\", line 9, in <module>\n    from django.utils import termcolors\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\utils\\termcolors.py\", line 6\n    foreground = {color_names[ ]: \"3%s\" % x for x in range(8)}\n                  ^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?\n",
+      "timestamp": "2025-09-20T12:35:46.505098"
+    },
+    {
+      "test_name": "Model Loading",
+      "status": "fail",
+      "duration_seconds": 0.17915916442871094,
+      "details": null,
+      "error": "Traceback (most recent call last):\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 23, in <module>\n    main()\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 14, in main\n    from django.core.management import execute_from_command_line\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\__init__.py\", line 19, in <module>\n    from django.core.management.base import (\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\base.py\", line 16, in <module>\n    from django.core.management.color import color_style, no_style\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\color.py\", line 9, in <module>\n    from django.utils import termcolors\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\utils\\termcolors.py\", line 6\n    foreground = {color_names[ ]: \"3%s\" % x for x in range(8)}\n                  ^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?\n",
+      "timestamp": "2025-09-20T12:35:46.684257"
+    },
+    {
+      "test_name": "Admin Interface",
+      "status": "fail",
+      "duration_seconds": 0.192230224609375,
+      "details": null,
+      "error": "Traceback (most recent call last):\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 23, in <module>\n    main()\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 14, in main\n    from django.core.management import execute_from_command_line\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\__init__.py\", line 19, in <module>\n    from django.core.management.base import (\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\base.py\", line 16, in <module>\n    from django.core.management.color import color_style, no_style\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\color.py\", line 9, in <module>\n    from django.utils import termcolors\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\utils\\termcolors.py\", line 6\n    foreground = {color_names[ ]: \"3%s\" % x for x in range(8)}\n                  ^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?\n",
+      "timestamp": "2025-09-20T12:35:46.877241"
+    },
+    {
+      "test_name": "Static Files Collection",
+      "status": "fail",
+      "duration_seconds": 0.19573760032653809,
+      "details": null,
+      "error": "Traceback (most recent call last):\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 23, in <module>\n    main()\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\manage.py\", line 14, in main\n    from django.core.management import execute_from_command_line\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\__init__.py\", line 19, in <module>\n    from django.core.management.base import (\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\base.py\", line 16, in <module>\n    from django.core.management.color import color_style, no_style\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\core\\management\\color.py\", line 9, in <module>\n    from django.utils import termcolors\n  File \"D:\\home\\ubuntu\\gaara_erp_v5\\.venv\\Lib\\site-packages\\django\\utils\\termcolors.py\", line 6\n    foreground = {color_names[ ]: \"3%s\" % x for x in range(8)}\n                  ^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?\n",
+      "timestamp": "2025-09-20T12:35:47.072978"
+    }
+  ],
+  "summary": {
+    "total_tests": 9,
+    "passed_tests": 2,
+    "failed_tests": 7,
+    "warning_tests": 0,
+    "skipped_tests": 0,
+    "success_rate": 22.22222222222222,
+    "overall_status": "poor"
+  }
+}

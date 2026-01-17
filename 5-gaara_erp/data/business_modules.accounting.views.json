@@ -1,0 +1,55 @@
+{
+  "module": "business_modules.accounting.views",
+  "imports": [
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.permissions",
+    "rest_framework.response",
+    "serializers"
+  ],
+  "classes": [
+    {
+      "name": "AccountViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "JournalViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "TaxViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "reports_view",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "dashboard_view",
+      "parameters": [
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

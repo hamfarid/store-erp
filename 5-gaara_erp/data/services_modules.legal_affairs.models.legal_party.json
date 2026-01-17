@@ -1,0 +1,142 @@
+{
+  "module": "services_modules.legal_affairs.models.legal_party",
+  "imports": [
+    "core_modules.core.models.base_models",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "LegalParty",
+      "methods": [
+        "__str__",
+        "clean",
+        "get_contact_info",
+        "get_identification_info",
+        "is_individual",
+        "is_company",
+        "is_government",
+        "get_related_case_or_contract",
+        "get_related_documents"
+      ],
+      "variables": [
+        "name",
+        "party_type",
+        "entity_type",
+        "address",
+        "phone",
+        "email",
+        "id_number",
+        "id_type",
+        "nationality",
+        "registration_number",
+        "tax_number",
+        "representative_name",
+        "legal_case",
+        "legal_contract",
+        "notes",
+        "is_confidential"
+      ]
+    },
+    {
+      "name": "PartyTypeChoices",
+      "methods": [],
+      "variables": [
+        "PLAINTIFF",
+        "DEFENDANT",
+        "WITNESS",
+        "EXPERT",
+        "LAWYER",
+        "JUDGE",
+        "ARBITRATOR",
+        "MEDIATOR",
+        "CONSULTANT",
+        "FIRST_PARTY",
+        "SECOND_PARTY",
+        "THIRD_PARTY",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "PartyEntityTypeChoices",
+      "methods": [],
+      "variables": [
+        "INDIVIDUAL",
+        "COMPANY",
+        "GOVERNMENT",
+        "ORGANIZATION",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes",
+        "permissions"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_contact_info",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_identification_info",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_individual",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_government",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_related_case_or_contract",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_related_documents",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

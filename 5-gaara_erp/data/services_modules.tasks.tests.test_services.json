@@ -1,0 +1,77 @@
+{
+  "module": "services_modules.tasks.tests.test_services",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "pytest"
+  ],
+  "classes": [
+    {
+      "name": "TaskServiceTest",
+      "methods": [
+        "setUp",
+        "test_placeholder"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TaskTagTest",
+      "methods": [
+        "setUp",
+        "test_placeholder_tags"
+      ],
+      "variables": []
+    },
+    {
+      "name": "TaskNotificationTest",
+      "methods": [
+        "setUp",
+        "test_placeholder_notifications"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_placeholder",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_placeholder_tags",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_placeholder_notifications",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

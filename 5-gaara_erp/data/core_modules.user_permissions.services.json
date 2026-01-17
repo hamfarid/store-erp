@@ -1,0 +1,184 @@
+{
+  "module": "core_modules.user_permissions.services",
+  "imports": [
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "models",
+    "permissions.models",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "UserPermissionService",
+      "methods": [
+        "assign_permission",
+        "revoke_permission",
+        "has_permission",
+        "get_user_permissions",
+        "get_users_with_permission"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserRoleService",
+      "methods": [
+        "create_role",
+        "update_role",
+        "delete_role",
+        "assign_role_to_user",
+        "revoke_role_from_user",
+        "get_user_roles",
+        "get_users_with_role"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PermissionRequestService",
+      "methods": [
+        "create_request",
+        "approve_request",
+        "reject_request",
+        "get_pending_requests",
+        "get_user_requests"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "assign_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "obj",
+        "created_by"
+      ]
+    },
+    {
+      "name": "revoke_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_user_permissions",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "get_users_with_permission",
+      "parameters": [
+        "permission_code",
+        "obj"
+      ]
+    },
+    {
+      "name": "create_role",
+      "parameters": [
+        "name",
+        "description",
+        "permissions",
+        "company",
+        "created_by"
+      ]
+    },
+    {
+      "name": "update_role",
+      "parameters": [
+        "role_id",
+        "name",
+        "description",
+        "permissions",
+        "is_active"
+      ]
+    },
+    {
+      "name": "delete_role",
+      "parameters": [
+        "role_id"
+      ]
+    },
+    {
+      "name": "assign_role_to_user",
+      "parameters": [
+        "user",
+        "role_id",
+        "obj",
+        "created_by"
+      ]
+    },
+    {
+      "name": "revoke_role_from_user",
+      "parameters": [
+        "user",
+        "role_id",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_user_roles",
+      "parameters": [
+        "user"
+      ]
+    },
+    {
+      "name": "get_users_with_role",
+      "parameters": [
+        "role_id",
+        "obj"
+      ]
+    },
+    {
+      "name": "create_request",
+      "parameters": [
+        "user",
+        "permission_code",
+        "reason",
+        "obj"
+      ]
+    },
+    {
+      "name": "approve_request",
+      "parameters": [
+        "request_id",
+        "reviewer",
+        "notes"
+      ]
+    },
+    {
+      "name": "reject_request",
+      "parameters": [
+        "request_id",
+        "reviewer",
+        "notes"
+      ]
+    },
+    {
+      "name": "get_pending_requests",
+      "parameters": [
+        "company"
+      ]
+    },
+    {
+      "name": "get_user_requests",
+      "parameters": [
+        "user",
+        "status"
+      ]
+    }
+  ],
+  "variables": []
+}

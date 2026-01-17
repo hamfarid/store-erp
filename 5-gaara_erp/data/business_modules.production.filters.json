@@ -1,0 +1,138 @@
+{
+  "module": "business_modules.production.filters",
+  "imports": [
+    "django.db",
+    "django_filters",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "BillOfMaterialsFilter",
+      "methods": [],
+      "variables": [
+        "name"
+      ]
+    },
+    {
+      "name": "BOMComponentFilter",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ManufacturingOrderFilter",
+      "methods": [],
+      "variables": [
+        "name",
+        "scheduled_start_date",
+        "scheduled_end_date",
+        "actual_start_date",
+        "actual_end_date"
+      ]
+    },
+    {
+      "name": "WorkOrderFilter",
+      "methods": [],
+      "variables": [
+        "name",
+        "scheduled_start_date",
+        "actual_start_date"
+      ]
+    },
+    {
+      "name": "WorkCenterFilter",
+      "methods": [],
+      "variables": [
+        "name",
+        "code"
+      ]
+    },
+    {
+      "name": "RoutingFilter",
+      "methods": [],
+      "variables": [
+        "name"
+      ]
+    },
+    {
+      "name": "RoutingOperationFilter",
+      "methods": [],
+      "variables": [
+        "name"
+      ]
+    },
+    {
+      "name": "ProductionLogFilter",
+      "methods": [],
+      "variables": [
+        "timestamp",
+        "log_type"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

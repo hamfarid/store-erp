@@ -1,0 +1,71 @@
+{
+  "module": "admin_modules.custom_admin.serializers.customization_serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "CustomUIElementSerializer",
+      "methods": [],
+      "variables": [
+        "created_by_username"
+      ]
+    },
+    {
+      "name": "CustomReportSerializer",
+      "methods": [],
+      "variables": [
+        "created_by_username"
+      ]
+    },
+    {
+      "name": "CustomMenuSerializer",
+      "methods": [
+        "get_children"
+      ],
+      "variables": [
+        "created_by_username",
+        "parent_title",
+        "children"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_children",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

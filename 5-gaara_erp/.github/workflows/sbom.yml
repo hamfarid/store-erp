@@ -1,0 +1,133 @@
+# SBOM (Software Bill of Materials) Generation Workflow
+# Created: 2025-12-01
+# Purpose: Automatically generate SBOM on every PR for security compliance
+
+name: Generate SBOM
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main ]
+  schedule:
+    # Weekly scan every Sunday at midnight
+    - cron: '0 0 * * 0'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  generate-sbom:
+    name: Generate Software Bill of Materials
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Generate Python SBOM using CycloneDX
+      - name: Install CycloneDX Python
+        run: pip install cyclonedx-bom
+
+      - name: Generate Python SBOM
+        run: |
+          if [ -f requirements.txt ]; then
+            cyclonedx-py requirements -i requirements.txt -o sbom-python.json --format json
+          fi
+          if [ -f gaara_erp/requirements.txt ]; then
+            cyclonedx-py requirements -i gaara_erp/requirements.txt -o sbom-gaara-python.json --format json
+          fi
+
+      # Generate NPM SBOM if package.json exists
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install CycloneDX Node
+        run: npm install -g @cyclonedx/cyclonedx-npm
+
+      - name: Generate NPM SBOM
+        run: |
+          if [ -f gaara_erp/main-frontend/package.json ]; then
+            cd gaara_erp/main-frontend
+            npm install --package-lock-only 2>/dev/null || true
+            cyclonedx-npm --output-file ../../sbom-frontend.json 2>/dev/null || echo "NPM SBOM generation skipped"
+            cd ../..
+          fi
+
+      # Scan Docker images with Trivy
+      - name: Install Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update
+          sudo apt-get install -y trivy
+
+      - name: Generate Docker SBOM (if Dockerfile exists)
+        run: |
+          if [ -f api_gateway/Dockerfile ]; then
+            trivy fs --format cyclonedx --output sbom-docker.json api_gateway/ 2>/dev/null || echo "Docker SBOM skipped"
+          fi
+
+      # Scan for vulnerabilities
+      - name: Scan Python dependencies for vulnerabilities
+        run: |
+          pip install safety
+          if [ -f requirements.txt ]; then
+            safety check -r requirements.txt --json > vulnerability-report-python.json 2>/dev/null || true
+          fi
+
+      - name: Trivy Vulnerability Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy scan results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      # Upload SBOMs as artifacts
+      - name: Upload SBOM artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-files
+          path: |
+            sbom-*.json
+            vulnerability-report-*.json
+          retention-days: 90
+
+      # Create summary
+      - name: Create SBOM Summary
+        run: |
+          echo "## SBOM Generation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| File | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          for f in sbom-*.json; do
+            if [ -f "$f" ]; then
+              echo "| $f | ✅ Generated |" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Vulnerability Scan" >> $GITHUB_STEP_SUMMARY
+          if [ -f vulnerability-report-python.json ]; then
+            echo "Python safety scan completed. Check artifacts for details." >> $GITHUB_STEP_SUMMARY
+          fi
+

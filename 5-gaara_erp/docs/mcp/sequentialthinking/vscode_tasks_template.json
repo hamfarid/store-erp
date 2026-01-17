@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "MCP: Build sequentialthinking image",
+      "type": "shell",
+      "command": "${workspaceFolder}\\scripts\\mcp_build_sequentialthinking.ps1",
+      "presentation": {
+        "reveal": "always",
+        "focus": false
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "MCP: Run sequentialthinking image",
+      "type": "shell",
+      "command": "${workspaceFolder}\\scripts\\mcp_run_sequentialthinking.ps1",
+      "presentation": {
+        "reveal": "always",
+        "focus": false
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "MCP: Build & Run sequentialthinking",
+      "dependsOn": [
+        "MCP: Build sequentialthinking image",
+        "MCP: Run sequentialthinking image"
+      ],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    }
+  ]
+}

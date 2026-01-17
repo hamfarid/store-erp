@@ -1,0 +1,74 @@
+{
+  "module": "api_server.src.routes.services",
+  "imports": [
+    "datetime",
+    "flask",
+    "random"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "workflows_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "workflows_list",
+      "parameters": []
+    },
+    {
+      "name": "hr_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "hr_employees",
+      "parameters": []
+    },
+    {
+      "name": "tasks_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "tasks_list",
+      "parameters": []
+    },
+    {
+      "name": "projects_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "projects_list",
+      "parameters": []
+    },
+    {
+      "name": "forecast_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "forecast_models",
+      "parameters": []
+    },
+    {
+      "name": "board_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "board_meetings",
+      "parameters": []
+    },
+    {
+      "name": "risk_dashboard",
+      "parameters": []
+    },
+    {
+      "name": "risk_list",
+      "parameters": []
+    },
+    {
+      "name": "services_summary",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "services_bp"
+  ]
+}

@@ -1,0 +1,275 @@
+./admin_modules/system_monitoring/services/monitoring_service_broken.py:160:19: F821 undefined name 'PermissionDenied'
+            raise PermissionDenied("User context required for permission check.")
+                  ^
+./admin_modules/system_monitoring/services/monitoring_service_broken.py:164:19: F821 undefined name 'PermissionDenied'
+            raise PermissionDenied(f"User does not have permission '{full_permission_name}'")
+                  ^
+./agricultural_modules/farms/tests/test_integration.py:51:30: F821 undefined name 'AgriculturalActivityTypeService'
+        self.activity_type = AgriculturalActivityTypeService.create_activity_type(name="نشاط تكامل")
+                             ^
+./agricultural_modules/farms/tests/test_integration.py:95:30: F821 undefined name 'AgriculturalActivityTypeService'
+        self.activity_type = AgriculturalActivityTypeService.create_activity_type(name="نشاط محاسبي")
+                             ^
+./agricultural_modules/production/workflow/models.py:231:17: E999 IndentationError: unexpected indent
+./business_modules/accounting/models/__init__.py:66:29: F821 undefined name '__all__'
+        if 'Partner' not in __all__:
+                            ^
+./business_modules/accounting/models/__init__.py:67:13: F821 undefined name '__all__'
+            __all__.append('Partner')
+            ^
+./business_modules/accounting/tests/test_account_service.py:110:23: F821 undefined name 'JournalEntry'
+        self.entry1 = JournalEntry.objects.create(
+                      ^
+./business_modules/accounting/tests/test_account_service.py:121:9: F821 undefined name 'JournalItem'
+        JournalItem.objects.create(
+        ^
+./business_modules/accounting/tests/test_account_service.py:129:9: F821 undefined name 'JournalItem'
+        JournalItem.objects.create(
+        ^
+./business_modules/accounting/tests/test_account_service.py:140:23: F821 undefined name 'JournalEntry'
+        self.entry2 = JournalEntry.objects.create(
+                      ^
+./business_modules/accounting/tests/test_account_service.py:151:9: F821 undefined name 'JournalItem'
+        JournalItem.objects.create(
+        ^
+./business_modules/accounting/tests/test_account_service.py:159:9: F821 undefined name 'JournalItem'
+        JournalItem.objects.create(
+        ^
+./business_modules/accounting/tests/test_account_service.py:240:18: F821 undefined name 'JournalEntry'
+        entry3 = JournalEntry.objects.create(
+                 ^
+./business_modules/accounting/tests/test_account_service.py:251:9: F821 undefined name 'JournalItem'
+        JournalItem.objects.create(
+        ^
+./business_modules/accounting/tests/test_account_service.py:255:9: F821 undefined name 'JournalItem'
+        JournalItem.objects.create(
+        ^
+./business_modules/accounting/views/integration_api.py:216:36: F821 undefined name 'models'
+class SettlementIntegrationViewSet(models.Model):
+                                   ^
+./business_modules/contacts/tests/test_contacts.py:602:20: F821 undefined name 'CommunicationLog'
+            return CommunicationLog.objects.filter(contact=self).order_by("-date")
+                   ^
+./business_modules/contacts/tests/test_contacts.py:610:25: F821 undefined name 'CommunicationType'
+            comm_type = CommunicationType.objects.create(name="مكالمة هاتفية", code="PHONE", company=self.company)
+                        ^
+./business_modules/contacts/tests/test_contacts.py:616:20: F821 undefined name 'CommunicationLog'
+            log1 = CommunicationLog.objects.create(
+                   ^
+./business_modules/contacts/tests/test_contacts.py:623:20: F821 undefined name 'CommunicationLog'
+            log2 = CommunicationLog.objects.create(
+                   ^
+./business_modules/contacts/tests/test_contacts.py:659:26: F821 undefined name 'CommunicationType'
+        self.comm_type = CommunicationType.objects.create(
+                         ^
+./business_modules/contacts/tests/test_contacts.py:668:21: F821 undefined name 'CommunicationType'
+        comm_type = CommunicationType.objects.create(
+                    ^
+./business_modules/contacts/tests/test_contacts.py:685:13: F821 undefined name 'CommunicationType'
+            CommunicationType.objects.create(
+            ^
+./business_modules/contacts/tests/test_contacts.py:693:22: F821 undefined name 'CommunicationType'
+        comm_type2 = CommunicationType.objects.create(
+                     ^
+./business_modules/contacts/tests/test_contacts.py:742:26: F821 undefined name 'CommunicationType'
+        self.comm_type = CommunicationType.objects.create(name="مكالمة هاتفية", code="PHONE", company=self.company)
+                         ^
+./business_modules/contacts/tests/test_contacts.py:750:20: F821 undefined name 'CommunicationLog'
+        self.log = CommunicationLog.objects.create(
+                   ^
+./business_modules/contacts/tests/test_contacts.py:763:22: F821 undefined name 'CommunicationType'
+        email_type = CommunicationType.objects.create(name="بريد إلكتروني", code="EMAIL", company=self.company)
+                     ^
+./business_modules/contacts/tests/test_contacts.py:766:15: F821 undefined name 'CommunicationLog'
+        log = CommunicationLog.objects.create(
+              ^
+./business_modules/contacts/tests/test_contacts.py:790:15: F821 undefined name 'CommunicationLog'
+        log = CommunicationLog.objects.create(
+              ^
+./business_modules/contacts/tests/test_contacts.py:822:47: F821 undefined name 'CommunicationLog'
+        original_get_user_full_name = getattr(CommunicationLog, "get_user_full_name", None)
+                                              ^
+./business_modules/contacts/tests/test_contacts.py:823:9: F821 undefined name 'CommunicationLog'
+        CommunicationLog.get_user_full_name = mock_get_user_full_name
+        ^
+./business_modules/contacts/tests/test_contacts.py:833:27: F821 undefined name 'CommunicationLog'
+            log_no_user = CommunicationLog.objects.create(
+                          ^
+./business_modules/contacts/tests/test_contacts.py:845:17: F821 undefined name 'CommunicationLog'
+                CommunicationLog.get_user_full_name = original_get_user_full_name
+                ^
+./business_modules/contacts/tests/test_contacts.py:847:25: F821 undefined name 'CommunicationLog'
+                delattr(CommunicationLog, "get_user_full_name")
+                        ^
+./business_modules/contacts/tests/test_contacts.py:861:47: F821 undefined name 'CommunicationLog'
+        original_get_formatted_date = getattr(CommunicationLog, "get_formatted_date", None)
+                                              ^
+./business_modules/contacts/tests/test_contacts.py:862:9: F821 undefined name 'CommunicationLog'
+        CommunicationLog.get_formatted_date = mock_get_formatted_date
+        ^
+./business_modules/contacts/tests/test_contacts.py:874:17: F821 undefined name 'CommunicationLog'
+                CommunicationLog.get_formatted_date = original_get_formatted_date
+                ^
+./business_modules/contacts/tests/test_contacts.py:876:25: F821 undefined name 'CommunicationLog'
+                delattr(CommunicationLog, "get_formatted_date")
+                        ^
+./business_modules/contacts/tests/test_models.py:67:30: F821 undefined name 'PaymentMethod'
+        cls.payment_method = PaymentMethod.objects.create(name="تحويل بنكي", code="BANK")
+                             ^
+./business_modules/contacts/tests/test_models.py:74:26: F821 undefined name 'ContactType'
+            contact_type=ContactType.CUSTOMER,
+                         ^
+./business_modules/contacts/tests/test_models.py:91:49: F821 undefined name 'ContactType'
+        self.assertEqual(customer.contact_type, ContactType.CUSTOMER)
+                                                ^
+./business_modules/contacts/tests/test_models.py:106:26: F821 undefined name 'ContactType'
+            contact_type=ContactType.SUPPLIER,
+                         ^
+./business_modules/contacts/tests/test_models.py:120:49: F821 undefined name 'ContactType'
+        self.assertEqual(supplier.contact_type, ContactType.SUPPLIER)
+                                                ^
+./business_modules/contacts/tests/test_models.py:133:26: F821 undefined name 'ContactType'
+            contact_type=ContactType.BOTH,
+                         ^
+./business_modules/contacts/tests/test_models.py:151:45: F821 undefined name 'ContactType'
+        self.assertEqual(both.contact_type, ContactType.BOTH)
+                                            ^
+./business_modules/contacts/tests/test_models.py:167:30: F821 undefined name 'ContactType'
+                contact_type=ContactType.CUSTOMER,
+                             ^
+./business_modules/contacts/tests/test_models.py:182:26: F821 undefined name 'ContactType'
+            contact_type=ContactType.CUSTOMER,
+                         ^
+./business_modules/contacts/tests/test_models.py:201:26: F821 undefined name 'ContactType'
+            contact_type=ContactType.SUPPLIER,
+                         ^
+./business_modules/contacts/tests/test_models.py:208:26: F821 undefined name 'SupplierContactPerson'
+        contact_person = SupplierContactPerson.objects.create(
+                         ^
+./business_modules/contacts/tests/test_models.py:227:26: F821 undefined name 'SupplierContactPerson'
+        contact_person = SupplierContactPerson.objects.create(
+                         ^
+./business_modules/contacts/tests/test_settlement_logic.py:36:26: F821 undefined name 'ContactType'
+            contact_type=ContactType.BOTH,
+                         ^
+./business_modules/contacts/tests/test_settlement_logic.py:68:22: F821 undefined name 'SettlementService'
+        settlement = SettlementService.create_settlement(settlement_data, self.user)
+                     ^
+./business_modules/contacts/tests/test_settlement_logic.py:80:22: F821 undefined name 'SettlementTransaction'
+        settlement = SettlementTransaction.objects.create(
+                     ^
+./business_modules/contacts/tests/test_settlement_logic.py:95:30: F821 undefined name 'SettlementService'
+        updated_settlement = SettlementService.update_settlement_status(settlement.id, "confirmed", self.user)
+                             ^
+./business_modules/contacts/tests/test_settlement_logic.py:102:30: F821 undefined name 'SettlementService'
+        updated_settlement = SettlementService.update_settlement_status(settlement.id, "cancelled", self.user)
+                             ^
+./business_modules/contacts/tests/test_settlement_logic.py:111:13: F821 undefined name 'SettlementTransaction'
+            SettlementTransaction.objects.create(
+            ^
+./business_modules/contacts/tests/test_settlement_logic.py:126:23: F821 undefined name 'SettlementService'
+        settlements = SettlementService.get_settlements_by_contact(self.contact.id)
+                      ^
+./business_modules/contacts/tests/test_settlement_logic.py:132:9: F821 undefined name 'SettlementService'
+        SettlementService.update_settlement_status(settlements[0].id, "confirmed", self.user)
+        ^
+./business_modules/contacts/tests/test_settlement_logic.py:134:33: F821 undefined name 'SettlementService'
+        confirmed_settlements = SettlementService.get_settlements_by_contact(self.contact.id, status="confirmed")
+                                ^
+./business_modules/contacts/tests/test_settlement_logic.py:143:26: F821 undefined name 'SettlementTransaction'
+            settlement = SettlementTransaction.objects.create(
+                         ^
+./business_modules/contacts/tests/test_settlement_logic.py:158:13: F821 undefined name 'SettlementService'
+            SettlementService.update_settlement_status(settlement.id, "confirmed", self.user)
+            ^
+./business_modules/contacts/tests/test_settlement_logic.py:161:18: F821 undefined name 'ContactReportService'
+        report = ContactReportService.get_customer_supplier_settlement_report(self.contact.id)
+                 ^
+./business_modules/contacts/tests/test_settlement_logic.py:174:26: F821 undefined name 'ContactType'
+            contact_type=ContactType.CUSTOMER,
+                         ^
+./business_modules/contacts/tests/test_settlement_logic.py:195:13: F821 undefined name 'SettlementService'
+            SettlementService.create_settlement(settlement_data, self.user)
+            ^
+./business_modules/contacts/tests/test_settlement_logic.py:214:13: F821 undefined name 'SettlementService'
+            SettlementService.create_settlement(settlement_data, self.user)
+            ^
+./business_modules/inventory/product_grading/models.py:345:5: F821 undefined name 'gradin'
+    gradin
+    ^
+./business_modules/production/merged/models.py:608:74: E999 SyntaxError: unterminated string literal (detected at line 608)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("تاريخ ا
+                                                                         ^
+./business_modules/purchasing/tests/test_integration.py:319:24: F821 undefined name 'ContentType'
+        content_type = ContentType.objects.get_for_model(PurchaseOrder)
+                       ^
+./business_modules/purchasing/tests/test_integration.py:320:22: F821 undefined name 'Permission'
+        permission = Permission.objects.get(content_type=content_type, codename="view_purchaseorder")
+                     ^
+./business_modules/purchasing/tests/test_integration.py:342:22: F821 undefined name 'Permission'
+        permission = Permission.objects.get(content_type=content_type, codename="add_purchaseorder")
+                     ^
+./business_modules/sales/tests/test_customer.py:38:25: F821 undefined name 'Currency'
+        self.currency = Currency.objects.create(name="جنيه مصري", code="EGP", symbol="ر.س")
+                        ^
+./business_modules/sales/tests/test_customer.py:41:24: F821 undefined name 'Country'
+        self.country = Country.objects.create(name="المملكة العربية السعودية", code="SA")
+                       ^
+./business_modules/sales/tests/test_customer.py:43:22: F821 undefined name 'State'
+        self.state = State.objects.create(name="القاهرة", code="RD", country=self.country)
+                     ^
+./business_modules/sales/tests/test_customer.py:45:21: F821 undefined name 'City'
+        self.city = City.objects.create(name="القاهرة", code="RD01", state=self.state)
+                    ^
+./business_modules/sales/tests/test_customer.py:60:29: F821 undefined name 'PaymentTerm'
+        self.payment_term = PaymentTerm.objects.create(
+                            ^
+./business_modules/solar_stations/services/monitoring_service.py:19:25: F821 undefined name 'models'
+class MonitoringService(models.Model):
+                        ^
+./config/performance_config.py:39:5: F821 undefined name 'LOGGING'
+    LOGGING['loggers']['django.db.backends'] = {
+    ^
+./core_modules/database_optimization/analyzers.py:623:25: F821 undefined name 'models'
+                    avg=models.Avg('value')
+                        ^
+./core_modules/performance/monitoring.py:561:35: F821 undefined name 'models'
+            ).aggregate(avg_value=models.Avg('value'))['avg_value'] or 0
+                                  ^
+./core_modules/performance/monitoring.py:571:38: F821 undefined name 'models'
+            ).aggregate(avg_hit_rate=models.Avg('hit_rate'))['avg_hit_rate'] or 0
+                                     ^
+./core_modules/permissions/tests/test_integration.py:114:39: F821 undefined name 'UserRoleAssignment'
+        self.normal_user_assignment = UserRoleAssignment.objects.create(
+                                      ^
+./core_modules/permissions/tests/test_integration.py:118:43: F821 undefined name 'UserRoleAssignment'
+        self.manager_company_assignment = UserRoleAssignment.objects.create(
+                                          ^
+./core_modules/permissions/tests/test_integration.py:125:42: F821 undefined name 'UserRoleAssignment'
+        self.manager_branch_assignment = UserRoleAssignment.objects.create(
+                                         ^
+./core_modules/permissions/tests/test_integration.py:181:9: F821 undefined name 'UserRoleAssignment'
+        UserRoleAssignment.objects.create(
+        ^
+./core_modules/permissions/tests/test_integration.py:253:13: F821 undefined name 'UserRoleAssignment'
+            UserRoleAssignment.objects.filter(
+            ^
+./core_modules/permissions/tests/test_integration.py:266:23: F821 undefined name 'UserRoleAssignment'
+        assignments = UserRoleAssignment.objects.filter(user=user, is_active=True)
+                      ^
+./core_modules/setup/submodules/data_import_export/models.py:360:16: F821 undefined name 'Tru'
+        return Tru
+               ^
+./core_modules/setup/submodules/data_import_export/models.py:363:1: F821 undefined name 'e'
+e
+^
+./core_modules/user_permissions/services.py:94:43: F823 local variable '_' defined in enclosing scope on line 13 referenced before assignment
+            raise Permission.DoesNotExist(_("الصلاحية {code} غير موجودة").format(code=permission_code))
+                                          ^
+./core_modules/user_permissions/services.py:283:41: F823 local variable '_' defined in enclosing scope on line 13 referenced before assignment
+            raise UserRole.DoesNotExist(_("الدور {id} غير موجود").format(id=role_id))
+                                        ^
+./gaara_erp/settings_backup2.py:394:25: E999 SyntaxError: '[' was never closed
+3     E999 IndentationError: unexpected indent
+87    F821 undefined name 'PermissionDenied'
+2     F823 local variable '_' defined in enclosing scope on line 13 referenced before assignment

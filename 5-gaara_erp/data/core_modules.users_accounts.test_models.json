@@ -1,0 +1,26 @@
+{
+  "module": "core_modules.users_accounts.test_models",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "pytest"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "test_create_user",
+      "parameters": []
+    },
+    {
+      "name": "test_create_superuser",
+      "parameters": []
+    },
+    {
+      "name": "test_create_user_without_username",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

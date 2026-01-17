@@ -1,0 +1,21 @@
+{
+  "module": "core_modules.setup.submodules.security.apps",
+  "imports": [
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SetupSubmodulesSecurityConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "label",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

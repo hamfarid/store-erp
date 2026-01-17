@@ -1,0 +1,46 @@
+{
+  "module": "ai_modules.simulated_tools.base_simulator",
+  "imports": [
+    "abc",
+    "logging"
+  ],
+  "classes": [
+    {
+      "name": "BaseDiseaseSimulator",
+      "methods": [
+        "__init__",
+        "analyze",
+        "_handle_error"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "tool_name",
+        "api_keys"
+      ]
+    },
+    {
+      "name": "analyze",
+      "parameters": [
+        "self",
+        "image_path"
+      ]
+    },
+    {
+      "name": "_handle_error",
+      "parameters": [
+        "self",
+        "error",
+        "image_path"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

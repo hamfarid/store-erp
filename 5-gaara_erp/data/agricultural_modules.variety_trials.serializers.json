@@ -1,0 +1,216 @@
+{
+  "module": "agricultural_modules.variety_trials.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "TrialLocationSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TrialSeasonSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CompetitorVarietySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TrialVarietySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TrialReplicateSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "HarvestDataSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "FruitCharacteristicSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PlantCharacteristicSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TrialFertilizationProgramSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TrialPesticideProgramSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TrialCostSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TrialReportSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "VarietyTrialListSerializer",
+      "methods": [
+        "get_variety_count"
+      ],
+      "variables": [
+        "location_name",
+        "season_name",
+        "variety_count"
+      ]
+    },
+    {
+      "name": "VarietyTrialDetailSerializer",
+      "methods": [],
+      "variables": [
+        "location",
+        "season",
+        "varieties",
+        "fertilization_programs",
+        "pesticide_programs",
+        "costs",
+        "reports"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "depth"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_variety_count",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

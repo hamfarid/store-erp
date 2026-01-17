@@ -1,0 +1,310 @@
+{
+  "module": "services_modules.workflows.serializers",
+  "imports": [
+    "django.contrib.auth",
+    "json",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "UserSerializer",
+      "methods": [
+        "get_name"
+      ],
+      "variables": [
+        "name"
+      ]
+    },
+    {
+      "name": "WorkflowSerializer",
+      "methods": [],
+      "variables": [
+        "created_by",
+        "status_display"
+      ]
+    },
+    {
+      "name": "WorkflowTriggerSerializer",
+      "methods": [
+        "validate_conditions"
+      ],
+      "variables": [
+        "trigger_type_display"
+      ]
+    },
+    {
+      "name": "WorkflowActionSerializer",
+      "methods": [
+        "validate_parameters"
+      ],
+      "variables": [
+        "action_type_display"
+      ]
+    },
+    {
+      "name": "WorkflowActionExecutionSerializer",
+      "methods": [],
+      "variables": [
+        "action",
+        "status_display"
+      ]
+    },
+    {
+      "name": "WorkflowExecutionSerializer",
+      "methods": [],
+      "variables": [
+        "workflow",
+        "trigger",
+        "action_executions",
+        "status_display"
+      ]
+    },
+    {
+      "name": "ConditionalBranchSerializer",
+      "methods": [],
+      "variables": [
+        "condition_operator_display"
+      ]
+    },
+    {
+      "name": "ConditionalBranchTargetSerializer",
+      "methods": [],
+      "variables": [
+        "target_action"
+      ]
+    },
+    {
+      "name": "ConditionalBranchExecutionSerializer",
+      "methods": [],
+      "variables": [
+        "branch"
+      ]
+    },
+    {
+      "name": "WorkflowAlertConditionSerializer",
+      "methods": [],
+      "variables": [
+        "condition_type_display",
+        "operator_display"
+      ]
+    },
+    {
+      "name": "WorkflowAlertActionSerializer",
+      "methods": [],
+      "variables": [
+        "action_type_display"
+      ]
+    },
+    {
+      "name": "WorkflowAlertSerializer",
+      "methods": [],
+      "variables": [
+        "alert_type_display",
+        "severity_display",
+        "conditions",
+        "actions"
+      ]
+    },
+    {
+      "name": "WorkflowAlertInstanceSerializer",
+      "methods": [],
+      "variables": [
+        "alert",
+        "status_display",
+        "acknowledged_by",
+        "resolved_by"
+      ]
+    },
+    {
+      "name": "WorkflowAlertActionExecutionSerializer",
+      "methods": [],
+      "variables": [
+        "alert_action",
+        "status_display"
+      ]
+    },
+    {
+      "name": "WorkflowDetailSerializer",
+      "methods": [],
+      "variables": [
+        "triggers",
+        "actions",
+        "conditional_branches",
+        "alerts"
+      ]
+    },
+    {
+      "name": "WorkflowExecutionDetailSerializer",
+      "methods": [],
+      "variables": [
+        "branch_executions",
+        "alert_instances"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_name",
+      "parameters": [
+        "self",
+        "instance"
+      ]
+    },
+    {
+      "name": "validate_conditions",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_parameters",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

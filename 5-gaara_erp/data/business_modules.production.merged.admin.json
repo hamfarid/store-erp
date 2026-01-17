@@ -1,0 +1,208 @@
+{
+  "module": "business_modules.production.merged.admin",
+  "imports": [
+    "django.contrib",
+    "django.db",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "ProductionOperationInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields"
+      ]
+    },
+    {
+      "name": "ProductionBatchInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "ProductionOrderAdmin",
+      "methods": [
+        "save_model"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets",
+        "inlines"
+      ]
+    },
+    {
+      "name": "QualityTestInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields"
+      ]
+    },
+    {
+      "name": "ProductionBatchAdmin",
+      "methods": [
+        "save_model"
+      ],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets",
+        "inlines"
+      ]
+    },
+    {
+      "name": "QualityTestAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "BOMComponentInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields"
+      ]
+    },
+    {
+      "name": "BillOfMaterialsAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets",
+        "inlines"
+      ]
+    },
+    {
+      "name": "WorkCenterAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "RoutingOperationInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields"
+      ]
+    },
+    {
+      "name": "RoutingAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets",
+        "inlines"
+      ]
+    },
+    {
+      "name": "WorkOrderInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "ProductionLogInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields",
+        "readonly_fields"
+      ]
+    },
+    {
+      "name": "ManufacturingOrderAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets",
+        "inlines"
+      ]
+    },
+    {
+      "name": "WorkOrderAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets",
+        "inlines"
+      ]
+    },
+    {
+      "name": "ProductionLogAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "save_model",
+      "parameters": [
+        "self",
+        "request",
+        "obj",
+        "form",
+        "change"
+      ]
+    },
+    {
+      "name": "save_model",
+      "parameters": [
+        "self",
+        "request",
+        "obj",
+        "form",
+        "change"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,86 @@
+{
+  "module": "core_modules.system_settings.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "SystemSettingSerializer",
+      "methods": [],
+      "variables": [
+        "category_display",
+        "value_type_display"
+      ]
+    },
+    {
+      "name": "CountrySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CurrencySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "EmailSettingSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SetupWizardStatusSerializer",
+      "methods": [],
+      "variables": [
+        "current_step_display"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

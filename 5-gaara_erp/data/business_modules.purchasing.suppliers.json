@@ -1,0 +1,44 @@
+{
+  "module": "business_modules.purchasing.suppliers",
+  "imports": [
+    "contacts.models",
+    "core_modules.organization.models",
+    "decimal",
+    "django.core.validators",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "SupplierProfile",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "contact",
+        "payment_methods",
+        "tax_id",
+        "bank_account_details",
+        "credit_limit",
+        "default_currency"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

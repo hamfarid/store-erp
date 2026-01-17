@@ -1,0 +1,15 @@
+{
+  "module": "utility_modules.utilities.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework",
+    "rest_framework.routers",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "router",
+    "urlpatterns"
+  ]
+}

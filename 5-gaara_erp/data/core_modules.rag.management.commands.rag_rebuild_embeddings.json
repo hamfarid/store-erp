@@ -1,0 +1,39 @@
+{
+  "module": "core_modules.rag.management.commands.rag_rebuild_embeddings",
+  "imports": [
+    "__future__",
+    "core_modules.rag.services.ingestion",
+    "django.apps",
+    "django.core.management.base",
+    "django.db",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "Command",
+      "methods": [
+        "add_arguments",
+        "handle"
+      ],
+      "variables": [
+        "help"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "add_arguments",
+      "parameters": [
+        "self",
+        "parser"
+      ]
+    },
+    {
+      "name": "handle",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

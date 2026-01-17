@@ -1,0 +1,59 @@
+{
+  "module": "services_modules.beneficiaries.services.beneficiary_service",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "models",
+    "services_modules.notifications.models",
+    "services_modules.notifications.services"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_beneficiary",
+      "parameters": [
+        "data",
+        "created_by"
+      ]
+    },
+    {
+      "name": "update_beneficiary",
+      "parameters": [
+        "beneficiary_id",
+        "data",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "get_beneficiary_by_id",
+      "parameters": [
+        "beneficiary_id"
+      ]
+    },
+    {
+      "name": "get_beneficiaries",
+      "parameters": [
+        "filters",
+        "page",
+        "page_size"
+      ]
+    },
+    {
+      "name": "search_beneficiaries",
+      "parameters": [
+        "search_term",
+        "limit"
+      ]
+    },
+    {
+      "name": "deactivate_beneficiary",
+      "parameters": [
+        "beneficiary_id",
+        "reason",
+        "deactivated_by"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,9 @@
+{
+  "module": "integration_modules.memory_ai.filters",
+  "imports": [
+    "django_filters"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

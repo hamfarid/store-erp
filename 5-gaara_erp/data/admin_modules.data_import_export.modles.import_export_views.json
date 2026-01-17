@@ -1,0 +1,196 @@
+{
+  "module": "admin_modules.data_import_export.modles.import_export_views",
+  "imports": [
+    "django.core.files.storage",
+    "django.db.models",
+    "django.http",
+    "django.shortcuts",
+    "django.utils",
+    "django_filters.rest_framework",
+    "json",
+    "logging",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.filters",
+    "rest_framework.permissions",
+    "rest_framework.response"
+  ],
+  "classes": [
+    {
+      "name": "ImportJobViewSet",
+      "methods": [
+        "get_serializer_class",
+        "perform_create",
+        "start",
+        "cancel",
+        "progress",
+        "download_source",
+        "download_log"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "ExportJobViewSet",
+      "methods": [
+        "get_serializer_class",
+        "perform_create",
+        "start",
+        "download_file"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "JobTemplateViewSet",
+      "methods": [
+        "perform_create"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "JobHistoryViewSet",
+      "methods": [],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "JobNotificationViewSet",
+      "methods": [],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "JobScheduleViewSet",
+      "methods": [
+        "perform_create"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "PlaceholderSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "PlaceholderSerializer",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "import_export_stats",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "get_serializer_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "start",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "cancel",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "progress",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "download_source",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "download_log",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_serializer_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "start",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "download_file",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

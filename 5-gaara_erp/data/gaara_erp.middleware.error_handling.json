@@ -1,0 +1,58 @@
+{
+  "module": "gaara_erp.middleware.error_handling",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.http",
+    "logging",
+    "traceback",
+    "typing",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "ErrorHandlingMiddleware",
+      "methods": [
+        "__init__",
+        "__call__",
+        "_wants_json",
+        "_json_error_response"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "get_response"
+      ]
+    },
+    {
+      "name": "__call__",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "_wants_json",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "_json_error_response",
+      "parameters": [
+        "self",
+        "request",
+        "exc"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

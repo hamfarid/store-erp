@@ -1,0 +1,238 @@
+{
+  "module": "integration_modules.ai_services.models",
+  "imports": [
+    "core_modules.base_models.models",
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "AIModel",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "MODEL_TYPES",
+        "name",
+        "description",
+        "model_type",
+        "provider",
+        "model_identifier",
+        "is_active",
+        "config",
+        "cost_per_token",
+        "usage_limit"
+      ]
+    },
+    {
+      "name": "AIService",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "SERVICE_TYPES",
+        "name",
+        "description",
+        "service_type",
+        "models",
+        "is_active",
+        "config"
+      ]
+    },
+    {
+      "name": "AIServiceModel",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "service",
+        "model",
+        "is_default",
+        "config_override"
+      ]
+    },
+    {
+      "name": "AIUsageLog",
+      "methods": [
+        "__str__",
+        "calculate_cost",
+        "save"
+      ],
+      "variables": [
+        "service",
+        "model",
+        "user",
+        "agent_id",
+        "timestamp",
+        "request_data",
+        "response_data",
+        "tokens_input",
+        "tokens_output",
+        "cost",
+        "status",
+        "error_message"
+      ]
+    },
+    {
+      "name": "AIUsageSummary",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PERIOD_TYPES",
+        "period_type",
+        "period_start",
+        "period_end",
+        "service",
+        "model",
+        "user",
+        "request_count",
+        "success_count",
+        "error_count",
+        "tokens_input",
+        "tokens_output",
+        "total_cost"
+      ]
+    },
+    {
+      "name": "AIMemoryIntegration",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "service",
+        "memory_enabled",
+        "short_term_memory_ttl",
+        "long_term_memory_enabled",
+        "memory_config"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_cost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

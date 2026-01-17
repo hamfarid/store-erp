@@ -1,0 +1,290 @@
+{
+  "module": "services_modules.assets.tests.test_services",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.contrib.auth",
+    "django.utils",
+    "pytest",
+    "services_modules.accounting.models",
+    "services_modules.assets.models.asset",
+    "services_modules.assets.models.asset_category",
+    "services_modules.assets.models.depreciation",
+    "services_modules.assets.models.maintenance",
+    "services_modules.assets.services",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "TestAssetService",
+      "methods": [
+        "asset_service",
+        "company",
+        "branch",
+        "asset_account",
+        "depreciation_account",
+        "depreciation_method",
+        "asset_category",
+        "user",
+        "asset_data",
+        "test_create_asset",
+        "test_update_asset",
+        "test_get_asset_details",
+        "test_list_assets",
+        "test_update_asset_status",
+        "test_dispose_asset",
+        "test_create_asset_category",
+        "test_update_asset_category",
+        "test_list_asset_categories",
+        "test_create_depreciation_method",
+        "test_update_depreciation_method",
+        "test_list_depreciation_methods",
+        "test_create_depreciation_entry",
+        "test_calculate_depreciation",
+        "test_generate_depreciation_schedule",
+        "test_create_maintenance_record",
+        "test_update_maintenance_record",
+        "test_list_maintenance_records",
+        "test_get_asset_statistics",
+        "test_generate_asset_report"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "asset_service",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "company",
+      "parameters": [
+        "self",
+        "db"
+      ]
+    },
+    {
+      "name": "branch",
+      "parameters": [
+        "self",
+        "db",
+        "company"
+      ]
+    },
+    {
+      "name": "asset_account",
+      "parameters": [
+        "self",
+        "db"
+      ]
+    },
+    {
+      "name": "depreciation_account",
+      "parameters": [
+        "self",
+        "db"
+      ]
+    },
+    {
+      "name": "depreciation_method",
+      "parameters": [
+        "self",
+        "db"
+      ]
+    },
+    {
+      "name": "asset_category",
+      "parameters": [
+        "self",
+        "db",
+        "depreciation_method"
+      ]
+    },
+    {
+      "name": "user",
+      "parameters": [
+        "self",
+        "db"
+      ]
+    },
+    {
+      "name": "asset_data",
+      "parameters": [
+        "self",
+        "company",
+        "branch",
+        "asset_category",
+        "asset_account",
+        "depreciation_account",
+        "depreciation_method",
+        "user"
+      ]
+    },
+    {
+      "name": "test_create_asset",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_update_asset",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_get_asset_details",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_list_assets",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_update_asset_status",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data",
+        "user"
+      ]
+    },
+    {
+      "name": "test_dispose_asset",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_create_asset_category",
+      "parameters": [
+        "self",
+        "asset_service",
+        "depreciation_method"
+      ]
+    },
+    {
+      "name": "test_update_asset_category",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_category"
+      ]
+    },
+    {
+      "name": "test_list_asset_categories",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_category",
+        "depreciation_method"
+      ]
+    },
+    {
+      "name": "test_create_depreciation_method",
+      "parameters": [
+        "self",
+        "asset_service"
+      ]
+    },
+    {
+      "name": "test_update_depreciation_method",
+      "parameters": [
+        "self",
+        "asset_service",
+        "depreciation_method"
+      ]
+    },
+    {
+      "name": "test_list_depreciation_methods",
+      "parameters": [
+        "self",
+        "asset_service",
+        "depreciation_method"
+      ]
+    },
+    {
+      "name": "test_create_depreciation_entry",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_calculate_depreciation",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_generate_depreciation_schedule",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_create_maintenance_record",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_update_maintenance_record",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_list_maintenance_records",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_get_asset_statistics",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    },
+    {
+      "name": "test_generate_asset_report",
+      "parameters": [
+        "self",
+        "asset_service",
+        "asset_data"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

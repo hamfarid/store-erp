@@ -1,0 +1,535 @@
+{
+  "module": "ai_modules.ai_memory.services",
+  "imports": [
+    "datetime",
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "json",
+    "models",
+    "typing",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "MemoryService",
+      "methods": [
+        "create_memory",
+        "search_memories",
+        "create_association",
+        "find_related_memories",
+        "update_relevance_scores"
+      ],
+      "variables": []
+    },
+    {
+      "name": "KnowledgeService",
+      "methods": [
+        "create_knowledge_base",
+        "search_knowledge",
+        "apply_knowledge",
+        "_check_rule_conditions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LearningService",
+      "methods": [
+        "discover_patterns",
+        "_discover_temporal_patterns",
+        "_discover_preference_patterns"
+      ],
+      "variables": []
+    },
+    {
+      "name": "User",
+      "methods": [],
+      "variables": [
+        "is_staff"
+      ]
+    },
+    {
+      "name": "Q",
+      "methods": [
+        "__init__",
+        "__or__",
+        "__and__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Count",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Avg",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "F",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ValidationError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "timezone",
+      "methods": [
+        "now"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MemoryType",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "MemoryContext",
+      "methods": [
+        "save"
+      ],
+      "variables": [
+        "objects",
+        "last_accessed",
+        "memories"
+      ]
+    },
+    {
+      "name": "Memory",
+      "methods": [
+        "calculate_relevance",
+        "save"
+      ],
+      "variables": [
+        "objects",
+        "outgoing_associations",
+        "incoming_associations",
+        "relevance_score"
+      ]
+    },
+    {
+      "name": "MemoryAssociation",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "KnowledgeBase",
+      "methods": [
+        "increment_usage"
+      ],
+      "variables": [
+        "objects",
+        "rules",
+        "name",
+        "domain",
+        "accuracy"
+      ]
+    },
+    {
+      "name": "LearningPattern",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "MemoryCleanupLog",
+      "methods": [],
+      "variables": [
+        "objects"
+      ]
+    },
+    {
+      "name": "User",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "get"
+      ],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "get"
+      ],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "create",
+        "all",
+        "filter",
+        "order_by",
+        "__getitem__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "outgoing_associations",
+      "methods": [
+        "select_related",
+        "order_by"
+      ],
+      "variables": []
+    },
+    {
+      "name": "incoming_associations",
+      "methods": [
+        "select_related",
+        "order_by"
+      ],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "create",
+        "filter",
+        "first"
+      ],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "create",
+        "filter",
+        "order_by",
+        "__getitem__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "objects",
+      "methods": [
+        "create"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "are_services_available",
+      "parameters": []
+    },
+    {
+      "name": "create_memory",
+      "parameters": [
+        "self",
+        "title",
+        "content",
+        "memory_type",
+        "context"
+      ]
+    },
+    {
+      "name": "search_memories",
+      "parameters": [
+        "self",
+        "query",
+        "context_id",
+        "memory_type",
+        "user",
+        "limit"
+      ]
+    },
+    {
+      "name": "create_association",
+      "parameters": [
+        "self",
+        "source_memory",
+        "target_memory",
+        "association_type",
+        "strength"
+      ]
+    },
+    {
+      "name": "find_related_memories",
+      "parameters": [
+        "self",
+        "memory",
+        "max_results"
+      ]
+    },
+    {
+      "name": "update_relevance_scores",
+      "parameters": [
+        "self",
+        "context",
+        "keywords"
+      ]
+    },
+    {
+      "name": "create_knowledge_base",
+      "parameters": [
+        "self",
+        "name",
+        "knowledge_type",
+        "domain",
+        "content"
+      ]
+    },
+    {
+      "name": "search_knowledge",
+      "parameters": [
+        "self",
+        "query",
+        "domain",
+        "knowledge_type",
+        "min_accuracy",
+        "limit"
+      ]
+    },
+    {
+      "name": "apply_knowledge",
+      "parameters": [
+        "self",
+        "knowledge",
+        "input_data"
+      ]
+    },
+    {
+      "name": "_check_rule_conditions",
+      "parameters": [
+        "self",
+        "rule",
+        "input_data"
+      ]
+    },
+    {
+      "name": "discover_patterns",
+      "parameters": [
+        "self",
+        "user_id",
+        "agent_id",
+        "pattern_type",
+        "min_support"
+      ]
+    },
+    {
+      "name": "_discover_temporal_patterns",
+      "parameters": [
+        "self",
+        "memories",
+        "min_support"
+      ]
+    },
+    {
+      "name": "_discover_preference_patterns",
+      "parameters": [
+        "self",
+        "memories",
+        "min_support"
+      ]
+    },
+    {
+      "name": "_",
+      "parameters": [
+        "text"
+      ]
+    },
+    {
+      "name": "get_user_model",
+      "parameters": []
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__or__",
+      "parameters": [
+        "self",
+        "other"
+      ]
+    },
+    {
+      "name": "__and__",
+      "parameters": [
+        "self",
+        "other"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "field"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "field"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "field"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "message"
+      ]
+    },
+    {
+      "name": "now",
+      "parameters": []
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self",
+        "update_fields"
+      ]
+    },
+    {
+      "name": "calculate_relevance",
+      "parameters": [
+        "self",
+        "keywords"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self",
+        "update_fields"
+      ]
+    },
+    {
+      "name": "increment_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "type_code"
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [
+        "context_id"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": []
+    },
+    {
+      "name": "all",
+      "parameters": []
+    },
+    {
+      "name": "filter",
+      "parameters": []
+    },
+    {
+      "name": "order_by",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__getitem__",
+      "parameters": [
+        "self",
+        "key"
+      ]
+    },
+    {
+      "name": "select_related",
+      "parameters": []
+    },
+    {
+      "name": "order_by",
+      "parameters": []
+    },
+    {
+      "name": "select_related",
+      "parameters": []
+    },
+    {
+      "name": "order_by",
+      "parameters": []
+    },
+    {
+      "name": "create",
+      "parameters": []
+    },
+    {
+      "name": "filter",
+      "parameters": []
+    },
+    {
+      "name": "first",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": []
+    },
+    {
+      "name": "filter",
+      "parameters": []
+    },
+    {
+      "name": "order_by",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__getitem__",
+      "parameters": [
+        "self",
+        "key"
+      ]
+    },
+    {
+      "name": "create",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "__all__"
+  ]
+}

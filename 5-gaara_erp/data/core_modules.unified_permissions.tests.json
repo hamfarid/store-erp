@@ -1,0 +1,98 @@
+{
+  "module": "core_modules.unified_permissions.tests",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.exceptions",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "PermissionTestCase",
+      "methods": [
+        "setUp",
+        "test_permission_creation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RoleTestCase",
+      "methods": [
+        "setUp",
+        "test_role_creation",
+        "test_circular_reference_detection",
+        "test_get_all_permissions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserPermissionTestCase",
+      "methods": [
+        "setUp",
+        "test_user_permission_creation",
+        "test_is_valid"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_permission_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_circular_reference_detection",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_all_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_permission_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_valid",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

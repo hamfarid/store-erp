@@ -1,0 +1,11 @@
+{
+  "module": "agricultural_modules.production.analytics.dashboards",
+  "imports": [
+    "_dashboards_impl"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

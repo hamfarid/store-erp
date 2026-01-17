@@ -1,0 +1,18 @@
+{
+  "module": "debug_uom",
+  "imports": [
+    "business_modules.inventory.models",
+    "django",
+    "os",
+    "sys",
+    "traceback"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "debug_uom_category",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

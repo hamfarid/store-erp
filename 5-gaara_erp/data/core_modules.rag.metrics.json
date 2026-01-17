@@ -1,0 +1,21 @@
+{
+  "module": "core_modules.rag.metrics",
+  "imports": [
+    "__future__",
+    "contextlib",
+    "logging",
+    "time"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "timed",
+      "parameters": [
+        "operation"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.security_checker",
+  "imports": [
+    "django.conf",
+    "django.contrib.auth.models",
+    "django.db.models",
+    "django.utils",
+    "models",
+    "os",
+    "pkg_resources",
+    "re",
+    "socket",
+    "ssl",
+    "subprocess"
+  ],
+  "classes": [
+    {
+      "name": "SecurityChecker",
+      "methods": [
+        "__init__",
+        "run_checks",
+        "check_debug_mode",
+        "check_secret_key",
+        "check_admin_users",
+        "check_ssl_configuration",
+        "check_allowed_hosts",
+        "check_installed_packages",
+        "check_file_permissions",
+        "check_cors_settings",
+        "check_csrf_protection",
+        "_create_result"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "session"
+      ]
+    },
+    {
+      "name": "run_checks",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_debug_mode",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_secret_key",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_admin_users",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_ssl_configuration",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_allowed_hosts",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_installed_packages",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_file_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_cors_settings",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "check_csrf_protection",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_create_result",
+      "parameters": [
+        "self",
+        "check_name",
+        "severity",
+        "message",
+        "details"
+      ]
+    }
+  ],
+  "variables": []
+}

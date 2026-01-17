@@ -1,0 +1,147 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.performance_monitor",
+  "imports": [
+    "datetime",
+    "psutil",
+    "requests",
+    "time"
+  ],
+  "classes": [
+    {
+      "name": "PerformanceMonitor",
+      "methods": [
+        "__init__",
+        "_get_timestamp",
+        "execute_query",
+        "measure_server_response_time",
+        "measure_query_speed",
+        "get_cpu_usage",
+        "get_memory_usage",
+        "get_disk_usage",
+        "get_system_resource_usage",
+        "get_network_stats",
+        "get_all_metrics",
+        "clear_metrics"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MockDBConnection",
+      "methods": [
+        "execute_query"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MockResponse",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "db_connection",
+        "db_connection_mock"
+      ]
+    },
+    {
+      "name": "_get_timestamp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "execute_query",
+      "parameters": [
+        "self",
+        "query_sql"
+      ]
+    },
+    {
+      "name": "measure_server_response_time",
+      "parameters": [
+        "self",
+        "url",
+        "timeout"
+      ]
+    },
+    {
+      "name": "measure_query_speed",
+      "parameters": [
+        "self",
+        "query_sql"
+      ]
+    },
+    {
+      "name": "get_cpu_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_memory_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_disk_usage",
+      "parameters": [
+        "self",
+        "path"
+      ]
+    },
+    {
+      "name": "get_system_resource_usage",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_network_stats",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_all_metrics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clear_metrics",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_requests_get",
+      "parameters": [
+        "url",
+        "timeout"
+      ]
+    },
+    {
+      "name": "execute_query",
+      "parameters": [
+        "self",
+        "query"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "status_code",
+        "elapsed_ms"
+      ]
+    }
+  ],
+  "variables": []
+}

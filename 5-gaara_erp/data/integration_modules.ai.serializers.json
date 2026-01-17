@@ -1,0 +1,190 @@
+{
+  "module": "integration_modules.ai.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "MessageSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ConversationSerializer",
+      "methods": [],
+      "variables": [
+        "messages"
+      ]
+    },
+    {
+      "name": "ConversationListSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "LearningSourceSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ReferenceFileSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "KeywordSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "AIKnowledgeEntrySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "TrainingRunSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ModelDeploymentSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "AIPerformanceLogSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "DataDriftReportSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "KeywordFileSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "A2ARequestSerializer",
+      "methods": [],
+      "variables": [
+        "target_agent_name",
+        "target_agent_version",
+        "capability",
+        "payload"
+      ]
+    },
+    {
+      "name": "A2AResponseSerializer",
+      "methods": [],
+      "variables": [
+        "status",
+        "result",
+        "error_message"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

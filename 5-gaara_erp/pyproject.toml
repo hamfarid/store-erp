@@ -1,0 +1,90 @@
+# =============================================================================
+# Python Project Configuration for Gaara ERP
+# =============================================================================
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | venv
+  | env
+  | _build
+  | buck-out
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+[tool.pylint]
+load-plugins = ["pylint_django"]
+django-settings-module = "gaara_erp.settings.dev"
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-docstring",
+    "too-few-public-methods",
+    "too-many-public-methods",
+    "too-many-instance-attributes",
+    "too-many-arguments",
+    "too-many-locals",
+    "too-many-branches",
+    "too-many-statements",
+    "too-many-return-statements",
+    "too-many-boolean-expressions",
+    "import-outside-toplevel",
+    "unused-import",
+    "unused-variable",
+    "unused-argument",
+    "redefined-outer-name",
+    "reimported",
+    "duplicate-code",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+exclude = [
+    ".git",
+    "__pycache__",
+    "migrations",
+    "venv",
+    "env",
+    ".venv",
+    "node_modules",
+    "build",
+    "dist",
+    "*.egg-info",
+]
+
+[tool.ruff.lint]
+ignore = [
+    "E302",  # expected 2 blank lines
+    "E305",  # expected 2 blank lines after class or function definition
+    "E501",  # line too long
+    "W503",  # line break before binary operator
+]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "tensorflow.*",
+    "django.*",
+    "rest_framework.*",
+]
+ignore_missing_imports = true

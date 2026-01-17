@@ -1,0 +1,31 @@
+{
+  "module": "services_modules.quality_control.apps",
+  "imports": [
+    "django.apps",
+    "django.utils.translation",
+    "services_modules.quality_control.signals"
+  ],
+  "classes": [
+    {
+      "name": "QualityControlConfig",
+      "methods": [
+        "ready"
+      ],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "label",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ready",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

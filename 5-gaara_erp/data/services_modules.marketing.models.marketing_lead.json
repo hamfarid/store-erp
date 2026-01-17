@@ -1,0 +1,217 @@
+{
+  "module": "services_modules.marketing.models.marketing_lead",
+  "imports": [
+    "core_modules.companies.models",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "services_modules.marketing.models.marketing_campaign",
+    "services_modules.marketing.models.marketing_channel",
+    "services_modules.marketing.models.marketing_segment"
+  ],
+  "classes": [
+    {
+      "name": "MarketingLead",
+      "methods": [
+        "__str__",
+        "clean",
+        "get_full_name",
+        "get_full_address",
+        "mark_as_contacted",
+        "mark_as_qualified",
+        "mark_as_unqualified",
+        "mark_as_converted",
+        "mark_as_lost",
+        "update_priority",
+        "schedule_next_contact",
+        "record_contact",
+        "calculate_days_since_acquisition",
+        "calculate_days_since_last_contact",
+        "calculate_days_until_next_contact",
+        "is_overdue_for_contact",
+        "get_status_display_value",
+        "get_source_display_value",
+        "get_priority_display_value"
+      ],
+      "variables": [
+        "SOURCE_WEBSITE",
+        "SOURCE_SOCIAL_MEDIA",
+        "SOURCE_EMAIL",
+        "SOURCE_PHONE",
+        "SOURCE_EVENT",
+        "SOURCE_REFERRAL",
+        "SOURCE_ADVERTISEMENT",
+        "SOURCE_OTHER",
+        "LEAD_SOURCE_CHOICES",
+        "STATUS_NEW",
+        "STATUS_CONTACTED",
+        "STATUS_QUALIFIED",
+        "STATUS_UNQUALIFIED",
+        "STATUS_CONVERTED",
+        "STATUS_LOST",
+        "LEAD_STATUS_CHOICES",
+        "PRIORITY_LOW",
+        "PRIORITY_MEDIUM",
+        "PRIORITY_HIGH",
+        "LEAD_PRIORITY_CHOICES",
+        "first_name",
+        "last_name",
+        "email",
+        "phone",
+        "company_name",
+        "job_title",
+        "address",
+        "city",
+        "state",
+        "country",
+        "postal_code",
+        "source",
+        "status",
+        "priority",
+        "acquisition_date",
+        "last_contact_date",
+        "next_contact_date",
+        "conversion_date",
+        "estimated_value",
+        "acquisition_cost",
+        "company",
+        "campaign",
+        "channel",
+        "segment",
+        "notes",
+        "tags"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_full_name",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_full_address",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_contacted",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_qualified",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_unqualified",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_converted",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_lost",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_priority",
+      "parameters": [
+        "self",
+        "priority"
+      ]
+    },
+    {
+      "name": "schedule_next_contact",
+      "parameters": [
+        "self",
+        "next_contact_date"
+      ]
+    },
+    {
+      "name": "record_contact",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_days_since_acquisition",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_days_since_last_contact",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_days_until_next_contact",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_overdue_for_contact",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_status_display_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_source_display_value",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_priority_display_value",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

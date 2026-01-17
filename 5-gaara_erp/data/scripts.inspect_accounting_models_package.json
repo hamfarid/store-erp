@@ -1,0 +1,15 @@
+{
+  "module": "scripts.inspect_accounting_models_package",
+  "imports": [
+    "importlib",
+    "json",
+    "os",
+    "sys"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "pkg",
+    "keys"
+  ]
+}

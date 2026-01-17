@@ -1,0 +1,113 @@
+{
+  "module": "core_modules.permissions.tests.test_models",
+  "imports": [
+    "core_modules.unified_permissions.models",
+    "datetime",
+    "django.contrib.auth",
+    "django.contrib.auth.models",
+    "django.test",
+    "django.utils"
+  ],
+  "classes": [
+    {
+      "name": "PermissionModelTest",
+      "methods": [
+        "setUp",
+        "test_permission_creation",
+        "test_permission_str_representation"
+      ],
+      "variables": []
+    },
+    {
+      "name": "RoleModelTest",
+      "methods": [
+        "setUp",
+        "test_role_creation",
+        "test_role_str_representation",
+        "test_get_all_permissions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "UserRoleTest",
+      "methods": [
+        "setUp",
+        "test_user_role_creation",
+        "test_user_role_str_representation",
+        "test_is_valid"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_permission_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_permission_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_all_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_role_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_role_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_is_valid",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

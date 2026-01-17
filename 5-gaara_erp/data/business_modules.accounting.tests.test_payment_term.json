@@ -1,0 +1,80 @@
+{
+  "module": "business_modules.accounting.tests.test_payment_term",
+  "imports": [
+    "core_modules.core.models",
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.payment_term"
+  ],
+  "classes": [
+    {
+      "name": "PaymentTermModelTest",
+      "methods": [
+        "setUp",
+        "test_create_payment_term",
+        "test_unique_code_per_company",
+        "test_calculate_due_date",
+        "test_payment_term_lines",
+        "test_calculate_payment_schedule",
+        "test_calculate_down_payment",
+        "test_get_term_lines"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_payment_term",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_due_date",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_payment_term_lines",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_payment_schedule",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_calculate_down_payment",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_term_lines",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

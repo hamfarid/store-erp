@@ -1,0 +1,306 @@
+{
+  "module": "core_modules.task_notifications",
+  "imports": [
+    "django.conf",
+    "django.contrib.auth",
+    "django.contrib.contenttypes.fields",
+    "django.contrib.contenttypes.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "task"
+  ],
+  "classes": [
+    {
+      "name": "NotificationChannel",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "UserNotificationSetting",
+      "methods": [
+        "__str__",
+        "get_channels",
+        "is_in_quiet_hours",
+        "get_notification_data"
+      ],
+      "variables": [
+        "user",
+        "email_enabled",
+        "push_enabled",
+        "sms_enabled",
+        "telegram_enabled",
+        "email",
+        "phone",
+        "telegram_chat_id",
+        "quiet_hours_start",
+        "quiet_hours_end",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TaskActivityNotifier",
+      "methods": [
+        "__str__",
+        "get_notification_recipients",
+        "process_activity",
+        "_create_and_send_notifications",
+        "_generate_notification_message"
+      ],
+      "variables": [
+        "ACTIVITY_TYPES",
+        "board",
+        "task",
+        "activity_type",
+        "notify_creator",
+        "notify_assignees",
+        "notify_followers",
+        "notify_board_members",
+        "additional_users",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TaskNotification",
+      "methods": [
+        "__str__",
+        "mark_as_read",
+        "send",
+        "_send_email",
+        "_send_push",
+        "_send_sms",
+        "_send_telegram"
+      ],
+      "variables": [
+        "user",
+        "task",
+        "activity_log",
+        "title",
+        "message",
+        "is_read",
+        "sent_email",
+        "sent_push",
+        "sent_sms",
+        "sent_telegram",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TaskActivityLog",
+      "methods": [
+        "__str__",
+        "log_activity",
+        "_trigger_notifications"
+      ],
+      "variables": [
+        "ACTION_TYPES",
+        "user",
+        "action_type",
+        "content_type",
+        "object_id",
+        "content_object",
+        "details",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_channels",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_in_quiet_hours",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_notification_data",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_notification_recipients",
+      "parameters": [
+        "self",
+        "task"
+      ]
+    },
+    {
+      "name": "process_activity",
+      "parameters": [
+        "self",
+        "activity_log"
+      ]
+    },
+    {
+      "name": "_create_and_send_notifications",
+      "parameters": [
+        "self",
+        "task",
+        "activity_log",
+        "recipients"
+      ]
+    },
+    {
+      "name": "_generate_notification_message",
+      "parameters": [
+        "self",
+        "task",
+        "activity_log"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_as_read",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "send",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_send_email",
+      "parameters": [
+        "self",
+        "email"
+      ]
+    },
+    {
+      "name": "_send_push",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_send_sms",
+      "parameters": [
+        "self",
+        "phone"
+      ]
+    },
+    {
+      "name": "_send_telegram",
+      "parameters": [
+        "self",
+        "telegram_chat_id"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": [
+        "cls",
+        "user",
+        "action_type",
+        "obj",
+        "details"
+      ]
+    },
+    {
+      "name": "_trigger_notifications",
+      "parameters": [
+        "cls",
+        "activity_log"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "CREATED_AT_LABEL",
+    "UPDATED_AT_LABEL"
+  ]
+}

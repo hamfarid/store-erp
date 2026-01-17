@@ -1,0 +1,105 @@
+{
+  "module": "agricultural_modules.seed_hybridization.merged.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "PlantVarietyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "HybridVarietyInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "readonly_fields",
+        "fields",
+        "can_delete",
+        "show_change_link"
+      ]
+    },
+    {
+      "name": "HybridizationSimulationAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "inlines",
+        "fieldsets",
+        "filter_horizontal"
+      ]
+    },
+    {
+      "name": "HybridVarietyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets",
+        "filter_horizontal"
+      ]
+    },
+    {
+      "name": "ExternalApiRequestLogAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets"
+      ]
+    },
+    {
+      "name": "HybridizationExperimentInline",
+      "methods": [],
+      "variables": [
+        "model",
+        "extra",
+        "fields",
+        "show_change_link"
+      ]
+    },
+    {
+      "name": "HybridizationProjectAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "inlines",
+        "fieldsets",
+        "filter_horizontal"
+      ]
+    },
+    {
+      "name": "HybridizationExperimentAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "readonly_fields",
+        "fieldsets",
+        "filter_horizontal"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

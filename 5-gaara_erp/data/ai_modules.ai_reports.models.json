@@ -1,0 +1,186 @@
+{
+  "module": "ai_modules.ai_reports.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "AIReport",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "REPORT_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "FORMAT_CHOICES",
+        "report_id",
+        "title",
+        "description",
+        "report_type",
+        "status",
+        "start_date",
+        "end_date",
+        "filters",
+        "criteria",
+        "data_sources",
+        "summary_data",
+        "detailed_data",
+        "output_format",
+        "file_path",
+        "file_size",
+        "generation_time",
+        "generated_by",
+        "is_scheduled",
+        "schedule_frequency",
+        "next_generation",
+        "created_at",
+        "completed_at"
+      ]
+    },
+    {
+      "name": "ReportTemplate",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "template_id",
+        "name",
+        "description",
+        "report_type",
+        "template_config",
+        "default_filters",
+        "chart_configs",
+        "layout_config",
+        "style_config",
+        "usage_count",
+        "last_used",
+        "created_by",
+        "is_public",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "ReportInsight",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "INSIGHT_TYPE_CHOICES",
+        "CONFIDENCE_CHOICES",
+        "insight_id",
+        "report",
+        "title",
+        "description",
+        "insight_type",
+        "supporting_data",
+        "metrics",
+        "confidence",
+        "importance_score",
+        "recommendations",
+        "action_items",
+        "discovered_at",
+        "is_acknowledged",
+        "acknowledged_by",
+        "acknowledged_at"
+      ]
+    },
+    {
+      "name": "ReportSchedule",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "FREQUENCY_CHOICES",
+        "schedule_id",
+        "name",
+        "template",
+        "frequency",
+        "custom_cron",
+        "start_time",
+        "timezone",
+        "recipients",
+        "email_subject",
+        "email_body",
+        "is_active",
+        "last_run",
+        "next_run",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

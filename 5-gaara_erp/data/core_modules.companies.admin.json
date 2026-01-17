@@ -1,0 +1,38 @@
+{
+  "module": "core_modules.companies.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CountryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "CompanyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter"
+      ]
+    },
+    {
+      "name": "BranchAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "list_filter"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

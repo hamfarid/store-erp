@@ -1,0 +1,107 @@
+{
+  "module": "core_modules.rag.views",
+  "imports": [
+    "__future__",
+    "core_modules.rag.models",
+    "core_modules.rag.serializers",
+    "core_modules.rag.services.ingestion",
+    "core_modules.rag.services.retriever",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "logging",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.permissions",
+    "rest_framework.request",
+    "rest_framework.response",
+    "rest_framework.throttling",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "RAGRateThrottle",
+      "methods": [],
+      "variables": [
+        "scope",
+        "rate"
+      ]
+    },
+    {
+      "name": "DocumentViewSet",
+      "methods": [
+        "ingest",
+        "search"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "throttle_classes"
+      ]
+    },
+    {
+      "name": "ChunkViewSet",
+      "methods": [
+        "get_queryset"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "throttle_classes"
+      ]
+    },
+    {
+      "name": "MemoryViewSet",
+      "methods": [
+        "get_queryset",
+        "perform_create"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "throttle_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "ingest",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "search",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

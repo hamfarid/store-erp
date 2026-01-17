@@ -1,0 +1,162 @@
+{
+  "module": "agricultural_modules.agricultural_experiments.models.variety_comparison_report",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils.translation",
+    "experiment",
+    "external_variety",
+    "variety"
+  ],
+  "classes": [
+    {
+      "name": "VarietyComparisonReport",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "REPORT_TYPE_CHOICES",
+        "title",
+        "experiment",
+        "report_date",
+        "report_type",
+        "time_period_start",
+        "time_period_end",
+        "criteria",
+        "results",
+        "summary",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "VarietyComparisonReportItem",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "report",
+        "experiment_variety",
+        "external_variety",
+        "variety",
+        "is_external",
+        "performance_data",
+        "pricing_data",
+        "sales_data",
+        "inventory_data",
+        "customer_data",
+        "engineer_data"
+      ]
+    },
+    {
+      "name": "InventoryVarietyComparisonReport",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "title",
+        "report_date",
+        "time_period_start",
+        "time_period_end",
+        "varieties",
+        "criteria",
+        "results",
+        "summary",
+        "created_by",
+        "created_at"
+      ]
+    },
+    {
+      "name": "InventoryVarietyComparisonItem",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "report",
+        "variety",
+        "purchase_price",
+        "selling_price",
+        "purchase_quantity",
+        "sales_quantity",
+        "purchase_volume",
+        "sales_volume",
+        "inventory_turnover_rate",
+        "capital_recovery_rate",
+        "sales_recovery_rate",
+        "engineers_count",
+        "engineers_sales_percentage",
+        "customers_count",
+        "customers_sales_percentage",
+        "additional_data"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

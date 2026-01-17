@@ -1,0 +1,130 @@
+{
+  "module": "integration_modules.ai_agriculture.services.crop_prediction_service",
+  "imports": [
+    "agricultural_modules.farms.models",
+    "ai.models",
+    "ai.services.model_service",
+    "django.db",
+    "django.utils",
+    "logging",
+    "models",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "CropPredictionService",
+      "methods": [
+        "_get_farm",
+        "predict_crop_yield",
+        "_perform_yield_prediction",
+        "predict_crop_problems",
+        "_perform_problem_prediction",
+        "get_yield_prediction",
+        "get_crop_prediction",
+        "get_farm_predictions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Farm",
+      "methods": [
+        "__str__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Farm",
+      "methods": [
+        "__str__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "_get_farm",
+      "parameters": [
+        "farm_id"
+      ]
+    },
+    {
+      "name": "predict_crop_yield",
+      "parameters": [
+        "farm_id",
+        "crop_type",
+        "planting_date",
+        "area_size",
+        "soil_type",
+        "historical_data",
+        "weather_forecast"
+      ]
+    },
+    {
+      "name": "_perform_yield_prediction",
+      "parameters": [
+        "yield_prediction",
+        "historical_data",
+        "weather_forecast"
+      ]
+    },
+    {
+      "name": "predict_crop_problems",
+      "parameters": [
+        "farm_id",
+        "crop_type",
+        "planting_date",
+        "current_growth_stage",
+        "symptoms",
+        "images"
+      ]
+    },
+    {
+      "name": "_perform_problem_prediction",
+      "parameters": [
+        "crop_prediction"
+      ]
+    },
+    {
+      "name": "get_yield_prediction",
+      "parameters": [
+        "prediction_id"
+      ]
+    },
+    {
+      "name": "get_crop_prediction",
+      "parameters": [
+        "prediction_id"
+      ]
+    },
+    {
+      "name": "get_farm_predictions",
+      "parameters": [
+        "farm_id",
+        "crop_type",
+        "limit"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

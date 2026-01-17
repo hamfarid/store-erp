@@ -1,0 +1,165 @@
+{
+  "module": "business_modules.purchasing.invoices",
+  "imports": [
+    "business_modules.inventory.products",
+    "contacts.models",
+    "core_modules.organization.models",
+    "decimal",
+    "django.conf",
+    "django.core.validators",
+    "django.db",
+    "django.utils.translation",
+    "goods_receipt"
+  ],
+  "classes": [
+    {
+      "name": "PurchaseInvoice",
+      "methods": [
+        "__str__",
+        "calculate_totals"
+      ],
+      "variables": [
+        "supplier",
+        "invoice_date",
+        "approval_date",
+        "due_date",
+        "supplier_invoice_number",
+        "status",
+        "total_amount",
+        "tax_amount",
+        "discount_amount",
+        "additional_costs_total",
+        "currency",
+        "exchange_rate_at_approval",
+        "notes",
+        "created_by",
+        "approved_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PurchaseInvoiceItem",
+      "methods": [
+        "__str__",
+        "save",
+        "delete"
+      ],
+      "variables": [
+        "purchase_invoice",
+        "grn_item",
+        "product",
+        "quantity",
+        "unit_price",
+        "tax_rate",
+        "discount_percentage",
+        "total_price",
+        "notes"
+      ]
+    },
+    {
+      "name": "PurchaseInvoiceExpense",
+      "methods": [
+        "__str__",
+        "save",
+        "delete"
+      ],
+      "variables": [
+        "purchase_invoice",
+        "expense_description",
+        "amount",
+        "currency",
+        "is_payable_to_supplier",
+        "distribute_to_item_cost"
+      ]
+    },
+    {
+      "name": "StatusChoices",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "PENDING_APPROVAL",
+        "APPROVED",
+        "PARTIALLY_PAID",
+        "FULLY_PAID",
+        "REJECTED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_totals",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

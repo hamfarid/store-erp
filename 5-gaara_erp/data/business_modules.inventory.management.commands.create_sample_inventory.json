@@ -1,0 +1,39 @@
+{
+  "module": "business_modules.inventory.management.commands.create_sample_inventory",
+  "imports": [
+    "business_modules.inventory.models",
+    "core_modules.companies.models",
+    "decimal",
+    "django.core.management.base",
+    "django.db",
+    "random"
+  ],
+  "classes": [
+    {
+      "name": "Command",
+      "methods": [
+        "add_arguments",
+        "handle"
+      ],
+      "variables": [
+        "help"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "add_arguments",
+      "parameters": [
+        "self",
+        "parser"
+      ]
+    },
+    {
+      "name": "handle",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

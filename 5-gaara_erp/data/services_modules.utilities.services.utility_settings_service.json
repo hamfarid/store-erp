@@ -1,0 +1,108 @@
+{
+  "module": "services_modules.utilities.services.utility_settings_service",
+  "imports": [
+    "django.core.cache",
+    "django.core.exceptions",
+    "models.utility_setting"
+  ],
+  "classes": [
+    {
+      "name": "UtilitySettingsService",
+      "methods": [
+        "get_setting",
+        "set_setting",
+        "get_module_settings",
+        "delete_setting",
+        "clear_cache",
+        "get_all_settings",
+        "validate_setting",
+        "reset_to_defaults",
+        "export_settings",
+        "import_settings"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_setting",
+      "parameters": [
+        "cls",
+        "key",
+        "default",
+        "use_cache"
+      ]
+    },
+    {
+      "name": "set_setting",
+      "parameters": [
+        "cls",
+        "key",
+        "value",
+        "module",
+        "description"
+      ]
+    },
+    {
+      "name": "get_module_settings",
+      "parameters": [
+        "cls",
+        "module",
+        "use_cache"
+      ]
+    },
+    {
+      "name": "delete_setting",
+      "parameters": [
+        "cls",
+        "key"
+      ]
+    },
+    {
+      "name": "clear_cache",
+      "parameters": [
+        "cls",
+        "key",
+        "module"
+      ]
+    },
+    {
+      "name": "get_all_settings",
+      "parameters": [
+        "cls",
+        "use_cache"
+      ]
+    },
+    {
+      "name": "validate_setting",
+      "parameters": [
+        "cls",
+        "key",
+        "value"
+      ]
+    },
+    {
+      "name": "reset_to_defaults",
+      "parameters": [
+        "cls",
+        "module"
+      ]
+    },
+    {
+      "name": "export_settings",
+      "parameters": [
+        "cls",
+        "module"
+      ]
+    },
+    {
+      "name": "import_settings",
+      "parameters": [
+        "cls",
+        "settings_data",
+        "overwrite"
+      ]
+    }
+  ],
+  "variables": []
+}

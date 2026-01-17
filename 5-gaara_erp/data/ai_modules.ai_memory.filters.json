@@ -1,0 +1,337 @@
+{
+  "module": "ai_modules.ai_memory.filters",
+  "imports": [
+    "django.db.models",
+    "django.utils.translation",
+    "django_filters",
+    "models",
+    "types",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "MemoryFilter",
+      "methods": [
+        "filter_search",
+        "filter_expired",
+        "filter_keywords"
+      ],
+      "variables": [
+        "search",
+        "created_after",
+        "created_before",
+        "importance",
+        "confidence",
+        "validation_status",
+        "is_expired",
+        "has_keywords"
+      ]
+    },
+    {
+      "name": "MemoryContextFilter",
+      "methods": [
+        "filter_search",
+        "filter_ended",
+        "filter_min_memories"
+      ],
+      "variables": [
+        "search",
+        "started_after",
+        "started_before",
+        "has_ended",
+        "min_memories"
+      ]
+    },
+    {
+      "name": "KnowledgeBaseFilter",
+      "methods": [
+        "filter_search"
+      ],
+      "variables": [
+        "search",
+        "min_accuracy",
+        "min_completeness",
+        "min_reliability",
+        "min_usage",
+        "updated_after"
+      ]
+    },
+    {
+      "name": "LearningPatternFilter",
+      "methods": [
+        "filter_search",
+        "filter_success_rate"
+      ],
+      "variables": [
+        "search",
+        "min_confidence",
+        "min_success_rate",
+        "min_applied",
+        "discovered_after"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "FilterSet",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CharFilter",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DateTimeFilter",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "BooleanFilter",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ChoiceFilter",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "MultipleChoiceFilter",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "NumberFilter",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "_Q",
+      "methods": [
+        "__init__",
+        "__or__",
+        "__and__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "Memory",
+      "methods": [],
+      "variables": [
+        "IMPORTANCE_CHOICES",
+        "CONFIDENCE_CHOICES"
+      ]
+    },
+    {
+      "name": "MemoryContext",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "KnowledgeBase",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "LearningPattern",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "are_filters_available",
+      "parameters": []
+    },
+    {
+      "name": "filter_search",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_expired",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_keywords",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_search",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_ended",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_min_memories",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_search",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_search",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "filter_success_rate",
+      "parameters": [
+        "self",
+        "queryset",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "_",
+      "parameters": [
+        "text"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__or__",
+      "parameters": [
+        "self",
+        "other"
+      ]
+    },
+    {
+      "name": "__and__",
+      "parameters": [
+        "self",
+        "other"
+      ]
+    }
+  ],
+  "variables": [
+    "__all__"
+  ]
+}

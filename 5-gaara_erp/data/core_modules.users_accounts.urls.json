@@ -1,0 +1,16 @@
+{
+  "module": "core_modules.users_accounts.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework",
+    "rest_framework.routers",
+    "rest_framework_simplejwt.views",
+    "views"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "router",
+    "urlpatterns"
+  ]
+}

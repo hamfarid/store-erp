@@ -1,0 +1,211 @@
+{
+  "module": "core_modules.permissions.authorization_service",
+  "imports": [
+    "django.contrib.auth",
+    "django.contrib.contenttypes.models",
+    "django.db.models",
+    "django.utils",
+    "json",
+    "logging",
+    "unified_permissions_model"
+  ],
+  "classes": [
+    {
+      "name": "AuthorizationService",
+      "methods": [
+        "has_permission",
+        "get_user_permissions",
+        "get_user_roles",
+        "get_user_groups",
+        "grant_permission",
+        "revoke_permission",
+        "assign_role",
+        "remove_role",
+        "add_to_group",
+        "remove_from_group",
+        "grant_resource_permission",
+        "revoke_resource_permission",
+        "request_permission",
+        "approve_permission_request",
+        "reject_permission_request",
+        "grant_temporary_permission",
+        "revoke_temporary_permission",
+        "_check_scope_match"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "has_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "resource",
+        "scope"
+      ]
+    },
+    {
+      "name": "get_user_permissions",
+      "parameters": [
+        "user",
+        "include_roles",
+        "include_groups",
+        "include_temporary"
+      ]
+    },
+    {
+      "name": "get_user_roles",
+      "parameters": [
+        "user",
+        "include_groups",
+        "include_temporary"
+      ]
+    },
+    {
+      "name": "get_user_groups",
+      "parameters": [
+        "user",
+        "include_temporary"
+      ]
+    },
+    {
+      "name": "grant_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "granted_by",
+        "scope",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "revoke_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "revoked_by"
+      ]
+    },
+    {
+      "name": "assign_role",
+      "parameters": [
+        "user",
+        "role_code",
+        "assigned_by",
+        "scope",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "remove_role",
+      "parameters": [
+        "user",
+        "role_code",
+        "removed_by"
+      ]
+    },
+    {
+      "name": "add_to_group",
+      "parameters": [
+        "user",
+        "group_name",
+        "added_by",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "remove_from_group",
+      "parameters": [
+        "user",
+        "group_name",
+        "removed_by"
+      ]
+    },
+    {
+      "name": "grant_resource_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "resource",
+        "granted_by",
+        "scope",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "revoke_resource_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "resource",
+        "revoked_by"
+      ]
+    },
+    {
+      "name": "request_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "role_code",
+        "group_name",
+        "resource",
+        "reason",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "approve_permission_request",
+      "parameters": [
+        "request_id",
+        "approver",
+        "reason"
+      ]
+    },
+    {
+      "name": "reject_permission_request",
+      "parameters": [
+        "request_id",
+        "rejector",
+        "reason"
+      ]
+    },
+    {
+      "name": "grant_temporary_permission",
+      "parameters": [
+        "user",
+        "permission_code",
+        "role_code",
+        "group_name",
+        "resource",
+        "granted_by",
+        "reason",
+        "valid_from",
+        "valid_to"
+      ]
+    },
+    {
+      "name": "revoke_temporary_permission",
+      "parameters": [
+        "temp_permission_id",
+        "revoked_by"
+      ]
+    },
+    {
+      "name": "_check_scope_match",
+      "parameters": [
+        "permission_scope",
+        "request_scope"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "logger"
+  ]
+}

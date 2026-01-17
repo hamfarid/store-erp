@@ -1,0 +1,236 @@
+{
+  "module": "core_modules.master_data_excel.services",
+  "imports": [
+    "accounting.models",
+    "customers.models",
+    "datetime",
+    "django.core.files.base",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "employees.models",
+    "inventory.models",
+    "models",
+    "numpy",
+    "os",
+    "pandas",
+    "products.models",
+    "suppliers.models"
+  ],
+  "classes": [
+    {
+      "name": "MasterDataExcelService",
+      "methods": [
+        "__init__",
+        "import_data",
+        "export_data",
+        "create_template",
+        "update_template",
+        "delete_template",
+        "get_template",
+        "get_templates",
+        "get_default_template",
+        "_handle_products",
+        "_handle_customers",
+        "_handle_suppliers",
+        "_handle_employees",
+        "_handle_inventory",
+        "_handle_chart_of_accounts",
+        "_handle_custom",
+        "_get_export_handler",
+        "_export_products",
+        "_export_customers",
+        "_apply_transformation"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "import_data",
+      "parameters": [
+        "self",
+        "template_id",
+        "file_path",
+        "user"
+      ]
+    },
+    {
+      "name": "export_data",
+      "parameters": [
+        "self",
+        "template_id",
+        "filters",
+        "user"
+      ]
+    },
+    {
+      "name": "create_template",
+      "parameters": [
+        "self",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "update_template",
+      "parameters": [
+        "self",
+        "template_id",
+        "data",
+        "user"
+      ]
+    },
+    {
+      "name": "delete_template",
+      "parameters": [
+        "self",
+        "template_id"
+      ]
+    },
+    {
+      "name": "get_template",
+      "parameters": [
+        "self",
+        "template_id"
+      ]
+    },
+    {
+      "name": "get_templates",
+      "parameters": [
+        "self",
+        "company_id",
+        "data_type",
+        "template_type"
+      ]
+    },
+    {
+      "name": "get_default_template",
+      "parameters": [
+        "self",
+        "company_id",
+        "data_type",
+        "template_type"
+      ]
+    },
+    {
+      "name": "_handle_products",
+      "parameters": [
+        "self",
+        "df",
+        "mappings",
+        "template",
+        "log",
+        "user"
+      ]
+    },
+    {
+      "name": "_handle_customers",
+      "parameters": [
+        "self",
+        "df",
+        "mappings",
+        "template",
+        "log",
+        "user"
+      ]
+    },
+    {
+      "name": "_handle_suppliers",
+      "parameters": [
+        "self",
+        "df",
+        "mappings",
+        "template",
+        "log",
+        "user"
+      ]
+    },
+    {
+      "name": "_handle_employees",
+      "parameters": [
+        "self",
+        "df",
+        "mappings",
+        "template",
+        "log",
+        "user"
+      ]
+    },
+    {
+      "name": "_handle_inventory",
+      "parameters": [
+        "self",
+        "df",
+        "mappings",
+        "template",
+        "log",
+        "user"
+      ]
+    },
+    {
+      "name": "_handle_chart_of_accounts",
+      "parameters": [
+        "self",
+        "df",
+        "mappings",
+        "template",
+        "log",
+        "user"
+      ]
+    },
+    {
+      "name": "_handle_custom",
+      "parameters": [
+        "self",
+        "df",
+        "mappings",
+        "template",
+        "log",
+        "user"
+      ]
+    },
+    {
+      "name": "_get_export_handler",
+      "parameters": [
+        "self",
+        "data_type"
+      ]
+    },
+    {
+      "name": "_export_products",
+      "parameters": [
+        "self",
+        "mappings",
+        "template",
+        "filters",
+        "user"
+      ]
+    },
+    {
+      "name": "_export_customers",
+      "parameters": [
+        "self",
+        "mappings",
+        "template",
+        "filters",
+        "user"
+      ]
+    },
+    {
+      "name": "_apply_transformation",
+      "parameters": [
+        "self",
+        "value",
+        "transformation"
+      ]
+    }
+  ],
+  "variables": []
+}

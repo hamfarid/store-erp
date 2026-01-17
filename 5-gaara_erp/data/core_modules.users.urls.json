@@ -1,0 +1,24 @@
+{
+  "module": "core_modules.users.urls",
+  "imports": [
+    "django.urls",
+    "rest_framework",
+    "rest_framework.routers",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "_maybe_register",
+      "parameters": [
+        "prefix",
+        "vs_name"
+      ]
+    }
+  ],
+  "variables": [
+    "router",
+    "app_name",
+    "urlpatterns"
+  ]
+}

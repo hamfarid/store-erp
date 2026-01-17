@@ -1,0 +1,14 @@
+{
+  "module": "services_modules.inventory.models",
+  "imports": [
+    "__future__",
+    "importlib"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "_canonical",
+    "_EXPORTED_NAMES",
+    "__all__"
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "module": "agricultural_modules.plant_diagnosis.tests.test_integration",
+  "imports": [
+    "agricultural_modules.plant_diagnosis.api_client",
+    "agricultural_modules.plant_diagnosis.crypto",
+    "agricultural_modules.plant_diagnosis.models",
+    "agricultural_modules.plant_diagnosis.services",
+    "base64",
+    "django.conf",
+    "django.contrib.auth",
+    "django.core.files.uploadedfile",
+    "django.test",
+    "json",
+    "os",
+    "tempfile",
+    "unittest",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "CryptoServiceTest",
+      "methods": [
+        "setUp",
+        "tearDown",
+        "test_encrypt_decrypt_text",
+        "test_encrypt_decrypt_dict"
+      ],
+      "variables": []
+    },
+    {
+      "name": "APIClientTest",
+      "methods": [
+        "setUp",
+        "tearDown",
+        "test_send_diagnosis_request"
+      ],
+      "variables": []
+    },
+    {
+      "name": "DiagnosisServiceTest",
+      "methods": [
+        "setUp",
+        "test_create_diagnosis_request",
+        "test_check_diagnosis_status",
+        "test_get_diagnosis_result"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "tearDown",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_encrypt_decrypt_text",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_encrypt_decrypt_dict",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "tearDown",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_send_diagnosis_request",
+      "parameters": [
+        "self",
+        "mock_crypto_service",
+        "mock_post"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_diagnosis_request",
+      "parameters": [
+        "self",
+        "mock_api_client_class"
+      ]
+    },
+    {
+      "name": "test_check_diagnosis_status",
+      "parameters": [
+        "self",
+        "mock_api_client_class"
+      ]
+    },
+    {
+      "name": "test_get_diagnosis_result",
+      "parameters": [
+        "self",
+        "mock_api_client_class"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

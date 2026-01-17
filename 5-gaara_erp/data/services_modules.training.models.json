@@ -1,0 +1,444 @@
+{
+  "module": "services_modules.training.models",
+  "imports": [
+    "django.contrib.auth",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "TrainingCategory",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Trainer",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "QUALIFICATION_CHOICES",
+        "user",
+        "employee_id",
+        "specialization",
+        "qualification",
+        "experience_years",
+        "bio",
+        "phone",
+        "email",
+        "hourly_rate",
+        "is_internal",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TrainingProgram",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "LEVEL_CHOICES",
+        "name",
+        "code",
+        "category",
+        "description",
+        "objectives",
+        "target_audience",
+        "prerequisites",
+        "level",
+        "duration_hours",
+        "max_participants",
+        "cost_per_participant",
+        "status",
+        "is_mandatory",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TrainingCourse",
+      "methods": [
+        "__str__",
+        "available_seats",
+        "is_full"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "program",
+        "course_number",
+        "trainer",
+        "start_date",
+        "end_date",
+        "location",
+        "room",
+        "max_participants",
+        "enrolled_count",
+        "status",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Trainee",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "employee_id",
+        "department",
+        "position",
+        "phone",
+        "email",
+        "manager",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TrainingEnrollment",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "course",
+        "trainee",
+        "enrollment_date",
+        "status",
+        "approved_by",
+        "approval_date",
+        "completion_date",
+        "final_grade",
+        "certificate_issued",
+        "notes"
+      ]
+    },
+    {
+      "name": "TrainingSession",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "course",
+        "session_number",
+        "title",
+        "date",
+        "start_time",
+        "end_time",
+        "topics",
+        "materials",
+        "homework",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "TrainingAttendance",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "session",
+        "trainee",
+        "status",
+        "check_in_time",
+        "check_out_time",
+        "notes",
+        "recorded_by",
+        "recorded_at"
+      ]
+    },
+    {
+      "name": "TrainingEvaluation",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "EVALUATION_TYPE_CHOICES",
+        "course",
+        "trainee",
+        "evaluation_type",
+        "rating",
+        "feedback",
+        "suggestions",
+        "would_recommend",
+        "submitted_at"
+      ]
+    },
+    {
+      "name": "TrainingCertificate",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "enrollment",
+        "certificate_number",
+        "issue_date",
+        "expiry_date",
+        "grade",
+        "is_valid",
+        "issued_by",
+        "template_used",
+        "digital_signature",
+        "verification_code"
+      ]
+    },
+    {
+      "name": "TrainingBudget",
+      "methods": [
+        "__str__",
+        "remaining_budget",
+        "budget_utilization_percentage"
+      ],
+      "variables": [
+        "year",
+        "department",
+        "allocated_budget",
+        "spent_budget",
+        "notes",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "available_seats",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_full",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "remaining_budget",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "budget_utilization_percentage",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

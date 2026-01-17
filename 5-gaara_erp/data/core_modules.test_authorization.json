@@ -1,0 +1,128 @@
+{
+  "module": "core_modules.test_authorization",
+  "imports": [
+    "core_modules.authorization.models",
+    "core_modules.authorization.permissions",
+    "core_modules.authorization.services.authorization_service",
+    "core_modules.permissions.authorization_service",
+    "core_modules.permissions.unified_permissions_model",
+    "core_modules.unified_permissions.abac_models",
+    "django.contrib.auth",
+    "django.test",
+    "unittest"
+  ],
+  "classes": [
+    {
+      "name": "AuthorizationModelsTestCase",
+      "methods": [
+        "setUp",
+        "test_role_hierarchy",
+        "test_group_roles",
+        "test_scope_hierarchy"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AuthorizationServiceTestCase",
+      "methods": [
+        "setUp",
+        "test_check_permission",
+        "test_get_user_permissions",
+        "test_direct_permissions",
+        "test_scoped_permissions"
+      ],
+      "variables": []
+    },
+    {
+      "name": "SystemPermissionsTestCase",
+      "methods": [
+        "test_register_system_permissions",
+        "test_setup_system_roles_and_groups"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_role_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_group_roles",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_scope_hierarchy",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_check_permission",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_user_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_direct_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_scoped_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_register_system_permissions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_setup_system_roles_and_groups",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "has_permission",
+      "parameters": []
+    },
+    {
+      "name": "register_system_permissions",
+      "parameters": []
+    },
+    {
+      "name": "setup_system_roles_and_groups",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

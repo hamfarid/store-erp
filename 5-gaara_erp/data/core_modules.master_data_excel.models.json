@@ -1,0 +1,156 @@
+{
+  "module": "core_modules.master_data_excel.models",
+  "imports": [
+    "companies.models",
+    "core.models",
+    "django.core.validators",
+    "django.db",
+    "django.utils.translation",
+    "users.models"
+  ],
+  "classes": [
+    {
+      "name": "ExcelTemplate",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "TYPE_IMPORT",
+        "TYPE_EXPORT",
+        "TYPE_CHOICES",
+        "DATA_TYPE_PRODUCTS",
+        "DATA_TYPE_CUSTOMERS",
+        "DATA_TYPE_SUPPLIERS",
+        "DATA_TYPE_EMPLOYEES",
+        "DATA_TYPE_INVENTORY",
+        "DATA_TYPE_CHART_OF_ACCOUNTS",
+        "DATA_TYPE_CUSTOM",
+        "DATA_TYPE_CHOICES",
+        "name",
+        "description",
+        "type",
+        "data_type",
+        "file",
+        "header_row",
+        "data_start_row",
+        "sheet_name",
+        "mapping",
+        "is_default"
+      ]
+    },
+    {
+      "name": "ImportExportLog",
+      "methods": [
+        "__str__",
+        "progress",
+        "success_rate"
+      ],
+      "variables": [
+        "OPERATION_IMPORT",
+        "OPERATION_EXPORT",
+        "OPERATION_CHOICES",
+        "STATUS_PENDING",
+        "STATUS_PROCESSING",
+        "STATUS_COMPLETED",
+        "STATUS_FAILED",
+        "STATUS_CHOICES",
+        "template",
+        "operation",
+        "status",
+        "file",
+        "result_file",
+        "total_rows",
+        "processed_rows",
+        "successful_rows",
+        "failed_rows",
+        "errors",
+        "started_at",
+        "completed_at"
+      ]
+    },
+    {
+      "name": "FieldMapping",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "template",
+        "excel_field",
+        "system_field",
+        "is_required",
+        "default_value",
+        "column_index",
+        "transformation"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "progress",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "success_rate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

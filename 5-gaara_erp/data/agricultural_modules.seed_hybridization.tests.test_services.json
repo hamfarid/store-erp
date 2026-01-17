@@ -1,0 +1,90 @@
+{
+  "module": "agricultural_modules.seed_hybridization.tests.test_services",
+  "imports": [
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "json",
+    "models",
+    "services",
+    "unittest",
+    "unittest.mock"
+  ],
+  "classes": [
+    {
+      "name": "PyBrOpSClientTests",
+      "methods": [
+        "setUp",
+        "test_simulate_hybridization",
+        "test_get_variety_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "HybridizationServiceTests",
+      "methods": [
+        "setUp",
+        "test_create_simulation",
+        "test_run_simulation",
+        "test_get_simulation_results_incomplete",
+        "test_get_simulation_results_complete"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_simulate_hybridization",
+      "parameters": [
+        "self",
+        "mock_post"
+      ]
+    },
+    {
+      "name": "test_get_variety_data",
+      "parameters": [
+        "self",
+        "mock_get"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_simulation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_run_simulation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_simulation_results_incomplete",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_simulation_results_complete",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

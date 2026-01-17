@@ -1,0 +1,88 @@
+{
+  "module": "agricultural_modules.plant_diagnosis.models",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation",
+    "os",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "PlantDiagnosisRequest",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "id",
+        "user",
+        "image",
+        "plant_type",
+        "symptoms_description",
+        "location",
+        "status",
+        "created_at",
+        "updated_at",
+        "external_request_id"
+      ]
+    },
+    {
+      "name": "DiagnosisResult",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "diagnosis_request",
+        "disease_name",
+        "scientific_name",
+        "confidence_score",
+        "is_healthy",
+        "description",
+        "treatment",
+        "prevention",
+        "received_at",
+        "additional_data"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "plant_image_upload_path",
+      "parameters": [
+        "instance",
+        "filename"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

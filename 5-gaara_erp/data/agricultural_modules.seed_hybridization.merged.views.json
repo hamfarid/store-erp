@@ -1,0 +1,229 @@
+{
+  "module": "agricultural_modules.seed_hybridization.merged.views",
+  "imports": [
+    "django.conf",
+    "django.contrib",
+    "django.contrib.auth.decorators",
+    "django.http",
+    "django.shortcuts",
+    "django.urls",
+    "django.utils.decorators",
+    "django.views",
+    "django.views.decorators.csrf",
+    "json",
+    "logging",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers",
+    "services"
+  ],
+  "classes": [
+    {
+      "name": "PlantVarietyViewSet",
+      "methods": [
+        "perform_create"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "HybridizationSimulationViewSet",
+      "methods": [
+        "get_queryset",
+        "perform_create",
+        "run",
+        "results"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "HybridVarietyViewSet",
+      "methods": [
+        "get_queryset"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "HybridizationProjectViewSet",
+      "methods": [
+        "get_queryset",
+        "perform_create"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "HybridizationExperimentViewSet",
+      "methods": [
+        "get_queryset",
+        "perform_create"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    },
+    {
+      "name": "ExternalIntegrationView",
+      "methods": [
+        "post"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "dashboard",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "variety_list",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "variety_detail",
+      "parameters": [
+        "request",
+        "variety_id"
+      ]
+    },
+    {
+      "name": "simulation_list",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "simulation_detail",
+      "parameters": [
+        "request",
+        "simulation_id"
+      ]
+    },
+    {
+      "name": "create_simulation",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "run_simulation",
+      "parameters": [
+        "request",
+        "simulation_id"
+      ]
+    },
+    {
+      "name": "project_list",
+      "parameters": [
+        "request"
+      ]
+    },
+    {
+      "name": "project_detail",
+      "parameters": [
+        "request",
+        "project_id"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "run",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "results",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "post",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

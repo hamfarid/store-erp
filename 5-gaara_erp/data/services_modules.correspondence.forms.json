@@ -1,0 +1,78 @@
+{
+  "module": "services_modules.correspondence.forms",
+  "imports": [
+    "django",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CorrespondenceForm",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CorrespondenceAttachmentForm",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CorrespondenceCommentForm",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "CorrespondenceFilterForm",
+      "methods": [],
+      "variables": [
+        "search",
+        "correspondence_type",
+        "status",
+        "priority",
+        "category",
+        "date_from",
+        "date_to",
+        "is_confidential",
+        "is_archived"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "widgets"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "widgets"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "widgets"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

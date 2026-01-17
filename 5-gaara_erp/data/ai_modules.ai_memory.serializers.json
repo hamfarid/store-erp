@@ -1,0 +1,357 @@
+{
+  "module": "ai_modules.ai_memory.serializers",
+  "imports": [
+    "django.utils.translation",
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "MemoryTypeSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "MemoryContextSerializer",
+      "methods": [],
+      "variables": [
+        "memory_count",
+        "duration"
+      ]
+    },
+    {
+      "name": "MemoryAssociationSerializer",
+      "methods": [],
+      "variables": [
+        "source_memory_title",
+        "target_memory_title"
+      ]
+    },
+    {
+      "name": "MemorySerializer",
+      "methods": [
+        "validate_keywords",
+        "validate_entities"
+      ],
+      "variables": [
+        "memory_type_name",
+        "context_name",
+        "is_expired",
+        "outgoing_associations",
+        "incoming_associations"
+      ]
+    },
+    {
+      "name": "KnowledgeBaseSerializer",
+      "methods": [
+        "validate_content",
+        "validate_rules"
+      ],
+      "variables": []
+    },
+    {
+      "name": "LearningPatternSerializer",
+      "methods": [
+        "validate_pattern_data"
+      ],
+      "variables": [
+        "success_rate"
+      ]
+    },
+    {
+      "name": "MemoryCleanupLogSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "MemoryListSerializer",
+      "methods": [],
+      "variables": [
+        "memory_type_name",
+        "context_name"
+      ]
+    },
+    {
+      "name": "MemoryContextListSerializer",
+      "methods": [],
+      "variables": [
+        "memory_count"
+      ]
+    },
+    {
+      "name": "KnowledgeBaseListSerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "ValidationError",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ReadOnlyField",
+      "methods": [
+        "__init__"
+      ],
+      "variables": []
+    },
+    {
+      "name": "ModelSerializer",
+      "methods": [
+        "__init__",
+        "validate_keywords",
+        "validate_entities",
+        "validate_content",
+        "validate_rules",
+        "validate_pattern_data"
+      ],
+      "variables": []
+    },
+    {
+      "name": "serializers",
+      "methods": [],
+      "variables": [
+        "ModelSerializer",
+        "ReadOnlyField",
+        "ValidationError"
+      ]
+    },
+    {
+      "name": "MemoryType",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "MemoryContext",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Memory",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "MemoryAssociation",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "KnowledgeBase",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "LearningPattern",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "MemoryCleanupLog",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "are_serializers_available",
+      "parameters": []
+    },
+    {
+      "name": "validate_keywords",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_entities",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_content",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_rules",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_pattern_data",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "_",
+      "parameters": [
+        "text"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self",
+        "message"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__init__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "validate_keywords",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_entities",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_content",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_rules",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    },
+    {
+      "name": "validate_pattern_data",
+      "parameters": [
+        "self",
+        "value"
+      ]
+    }
+  ],
+  "variables": [
+    "__all__"
+  ]
+}

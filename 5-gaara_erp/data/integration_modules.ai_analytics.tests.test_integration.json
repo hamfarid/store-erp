@@ -1,0 +1,94 @@
+{
+  "module": "integration_modules.ai_analytics.tests.test_integration",
+  "imports": [
+    "django",
+    "django.conf",
+    "django.test",
+    "importlib",
+    "integration_modules.ai.models",
+    "integration_modules.ai_a2a.models",
+    "integration_modules.ai_agents.models",
+    "integration_modules.ai_analytics.api.performance_analytics_api",
+    "integration_modules.ai_analytics.api.usage_analytics_api",
+    "integration_modules.ai_analytics.models",
+    "integration_modules.ai_analytics.services.performance_analytics_service",
+    "integration_modules.ai_analytics.services.usage_analytics_service",
+    "os",
+    "sys",
+    "unittest"
+  ],
+  "classes": [
+    {
+      "name": "AIAnalyticsIntegrationTestCase",
+      "methods": [
+        "test_import_ai_module",
+        "test_import_ai_agents_module",
+        "test_import_ai_a2a_module",
+        "test_ai_analytics_models_import",
+        "test_ai_analytics_services_import",
+        "test_ai_analytics_api_import",
+        "test_integration_with_ai_module",
+        "test_integration_with_ai_agents_module",
+        "test_integration_with_ai_a2a_module"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "test_import_ai_module",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_import_ai_agents_module",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_import_ai_a2a_module",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_ai_analytics_models_import",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_ai_analytics_services_import",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_ai_analytics_api_import",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_ai_module",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_ai_agents_module",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_integration_with_ai_a2a_module",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

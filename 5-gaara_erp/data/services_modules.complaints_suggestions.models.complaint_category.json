@@ -1,0 +1,81 @@
+{
+  "module": "services_modules.complaints_suggestions.models.complaint_category",
+  "imports": [
+    "django.db",
+    "django.db.models",
+    "django.utils.translation",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "ComplaintCategory",
+      "methods": [
+        "__str__",
+        "get_active_complaints_count",
+        "get_resolved_complaints_count",
+        "get_complaints_by_status",
+        "deactivate",
+        "activate"
+      ],
+      "variables": [
+        "name",
+        "code",
+        "company",
+        "description",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_active_complaints_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_resolved_complaints_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_complaints_by_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "deactivate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "activate",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

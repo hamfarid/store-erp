@@ -1,0 +1,42 @@
+{
+  "module": "business_modules.accounting.api.journal_api",
+  "imports": [
+    "django.utils.translation",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "serializers"
+  ],
+  "classes": [
+    {
+      "name": "JournalViewSet",
+      "methods": [
+        "get_queryset",
+        "entries"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "entries",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    }
+  ],
+  "variables": []
+}

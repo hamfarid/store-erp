@@ -1,0 +1,106 @@
+{
+  "module": "services_modules.beneficiaries.models.beneficiary",
+  "imports": [
+    "aid",
+    "beneficiary_category",
+    "beneficiary_status",
+    "core_modules.core.models",
+    "decimal",
+    "django.core.validators",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Beneficiary",
+      "methods": [
+        "__str__",
+        "get_age",
+        "change_status",
+        "get_aid_history",
+        "get_total_aid_amount",
+        "get_last_aid_date",
+        "is_eligible_for_aid"
+      ],
+      "variables": [
+        "GENDER_CHOICES",
+        "name",
+        "code",
+        "company",
+        "branch",
+        "category",
+        "status",
+        "national_id",
+        "gender",
+        "date_of_birth",
+        "phone",
+        "address",
+        "email",
+        "family_members",
+        "monthly_income",
+        "notes",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_age",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "change_status",
+      "parameters": [
+        "self",
+        "new_status"
+      ]
+    },
+    {
+      "name": "get_aid_history",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_total_aid_amount",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_last_aid_date",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_eligible_for_aid",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

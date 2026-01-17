@@ -1,0 +1,50 @@
+{
+  "module": "core_modules.rag.admin",
+  "imports": [
+    "__future__",
+    "core_modules.rag.models",
+    "django.contrib",
+    "django.db"
+  ],
+  "classes": [
+    {
+      "name": "DocumentAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "ChunkAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "actions"
+      ]
+    },
+    {
+      "name": "MemoryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "actions"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "backfill_vectors",
+      "parameters": [
+        "modeladmin",
+        "request",
+        "queryset"
+      ]
+    }
+  ],
+  "variables": []
+}

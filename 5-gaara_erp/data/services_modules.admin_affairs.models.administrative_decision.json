@@ -1,0 +1,81 @@
+{
+  "module": "services_modules.admin_affairs.models.administrative_decision",
+  "imports": [
+    "department",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "employee_profile"
+  ],
+  "classes": [
+    {
+      "name": "AdministrativeDecision",
+      "methods": [
+        "__str__",
+        "is_expired",
+        "get_affected_employees_count",
+        "get_affected_departments_count",
+        "deactivate"
+      ],
+      "variables": [
+        "DECISION_TYPE_CHOICES",
+        "decision_number",
+        "decision_type",
+        "title",
+        "description",
+        "issue_date",
+        "effective_date",
+        "end_date",
+        "issued_by",
+        "affected_employees",
+        "departments",
+        "is_active",
+        "attachment",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_affected_employees_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_affected_departments_count",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "deactivate",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

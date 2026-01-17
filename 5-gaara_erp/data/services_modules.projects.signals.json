@@ -1,0 +1,38 @@
+{
+  "module": "services_modules.projects.signals",
+  "imports": [
+    "core_modules.notifications.models",
+    "core_modules.projects.models",
+    "django.db",
+    "django.db.models.signals",
+    "django.dispatch"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "project_created_or_updated",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "project_task_created_or_updated",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    },
+    {
+      "name": "project_member_added",
+      "parameters": [
+        "sender",
+        "instance",
+        "created"
+      ]
+    }
+  ],
+  "variables": []
+}

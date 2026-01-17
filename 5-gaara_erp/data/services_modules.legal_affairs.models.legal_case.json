@@ -1,0 +1,156 @@
+{
+  "module": "services_modules.legal_affairs.models.legal_case",
+  "imports": [
+    "core_modules.companies.models",
+    "core_modules.core.models.base_models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "LegalCase",
+      "methods": [
+        "__str__",
+        "is_active",
+        "is_closed",
+        "close_case",
+        "get_duration_days",
+        "get_related_documents",
+        "get_related_sessions",
+        "get_related_parties",
+        "get_next_session"
+      ],
+      "variables": [
+        "case_number",
+        "title",
+        "description",
+        "case_type",
+        "status",
+        "priority",
+        "filing_date",
+        "closing_date",
+        "court_name",
+        "court_case_number",
+        "jurisdiction",
+        "company",
+        "assigned_lawyer",
+        "estimated_cost",
+        "actual_cost",
+        "notes",
+        "is_confidential"
+      ]
+    },
+    {
+      "name": "CaseTypeChoices",
+      "methods": [],
+      "variables": [
+        "LITIGATION",
+        "ARBITRATION",
+        "MEDIATION",
+        "ADMINISTRATIVE",
+        "LABOR",
+        "COMMERCIAL",
+        "CIVIL",
+        "CRIMINAL",
+        "OTHER"
+      ]
+    },
+    {
+      "name": "CaseStatusChoices",
+      "methods": [],
+      "variables": [
+        "DRAFT",
+        "OPEN",
+        "PENDING",
+        "IN_PROGRESS",
+        "CLOSED",
+        "WON",
+        "LOST",
+        "SETTLED",
+        "APPEALED",
+        "WITHDRAWN"
+      ]
+    },
+    {
+      "name": "CasePriorityChoices",
+      "methods": [],
+      "variables": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "URGENT"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_active",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_closed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "close_case",
+      "parameters": [
+        "self",
+        "status",
+        "closing_date"
+      ]
+    },
+    {
+      "name": "get_duration_days",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_related_documents",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_related_sessions",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_related_parties",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_next_session",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,111 @@
+{
+  "module": "business_modules.purchasing.requisitions",
+  "imports": [
+    "business_modules.inventory.products",
+    "decimal",
+    "django.conf",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "hr.models"
+  ],
+  "classes": [
+    {
+      "name": "AnnualPurchaseRequisition",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "year",
+        "department",
+        "status",
+        "creation_date",
+        "created_by",
+        "notes"
+      ]
+    },
+    {
+      "name": "AnnualPurchaseRequisitionItem",
+      "methods": [
+        "__str__",
+        "remaining_quantity",
+        "clean"
+      ],
+      "variables": [
+        "annual_requisition",
+        "product",
+        "total_required_quantity",
+        "consumed_quantity",
+        "notes"
+      ]
+    },
+    {
+      "name": "StatusChoices",
+      "methods": [],
+      "variables": [
+        "OPEN",
+        "CLOSED"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "remaining_quantity",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

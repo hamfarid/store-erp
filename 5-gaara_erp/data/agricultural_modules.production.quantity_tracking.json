@@ -1,0 +1,98 @@
+{
+  "module": "agricultural_modules.production.quantity_tracking",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "models",
+    "workflow.models"
+  ],
+  "classes": [
+    {
+      "name": "QuantityTrackingService",
+      "methods": [
+        "calculate_waste_by_product",
+        "calculate_waste_by_workflow",
+        "calculate_waste_by_period",
+        "calculate_waste_trends",
+        "calculate_waste_comparison",
+        "calculate_waste_by_batch",
+        "calculate_waste_by_stage_type",
+        "calculate_waste_summary",
+        "calculate_waste_for_grade_b_sales"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "calculate_waste_by_product",
+      "parameters": [
+        "product_id",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "calculate_waste_by_workflow",
+      "parameters": [
+        "workflow_execution_id"
+      ]
+    },
+    {
+      "name": "calculate_waste_by_period",
+      "parameters": [
+        "start_date",
+        "end_date",
+        "product_type"
+      ]
+    },
+    {
+      "name": "calculate_waste_trends",
+      "parameters": [
+        "product_id",
+        "period",
+        "months"
+      ]
+    },
+    {
+      "name": "calculate_waste_comparison",
+      "parameters": [
+        "product_ids",
+        "start_date",
+        "end_date"
+      ]
+    },
+    {
+      "name": "calculate_waste_by_batch",
+      "parameters": [
+        "batch_id"
+      ]
+    },
+    {
+      "name": "calculate_waste_by_stage_type",
+      "parameters": [
+        "stage_type",
+        "start_date",
+        "end_date",
+        "product_type"
+      ]
+    },
+    {
+      "name": "calculate_waste_summary",
+      "parameters": []
+    },
+    {
+      "name": "calculate_waste_for_grade_b_sales",
+      "parameters": [
+        "product_id",
+        "start_date",
+        "end_date"
+      ]
+    }
+  ],
+  "variables": []
+}

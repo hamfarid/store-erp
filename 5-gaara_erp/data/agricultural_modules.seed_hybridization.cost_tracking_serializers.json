@@ -1,0 +1,310 @@
+{
+  "module": "agricultural_modules.seed_hybridization.cost_tracking_serializers",
+  "imports": [
+    "cost_tracking_models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "ExpenseCategorySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "ExpenseSerializer",
+      "methods": [
+        "get_category_name",
+        "get_created_by_name",
+        "get_approved_by_name"
+      ],
+      "variables": [
+        "category_name",
+        "created_by_name",
+        "approved_by_name"
+      ]
+    },
+    {
+      "name": "InventoryConsumptionSerializer",
+      "methods": [
+        "get_inventory_item_name",
+        "get_total_cost",
+        "get_created_by_name"
+      ],
+      "variables": [
+        "inventory_item_name",
+        "total_cost",
+        "created_by_name"
+      ]
+    },
+    {
+      "name": "LaborCostSerializer",
+      "methods": [
+        "get_employee_name",
+        "get_total_cost",
+        "get_created_by_name"
+      ],
+      "variables": [
+        "employee_name",
+        "total_cost",
+        "created_by_name"
+      ]
+    },
+    {
+      "name": "EquipmentUsageSerializer",
+      "methods": [
+        "get_equipment_name",
+        "get_total_cost",
+        "get_created_by_name"
+      ],
+      "variables": [
+        "equipment_name",
+        "total_cost",
+        "created_by_name"
+      ]
+    },
+    {
+      "name": "CostSummaryReportSerializer",
+      "methods": [
+        "get_project_name",
+        "get_created_by_name"
+      ],
+      "variables": [
+        "project_name",
+        "created_by_name"
+      ]
+    },
+    {
+      "name": "HybridizationProjectSerializer",
+      "methods": [
+        "get_total_expenses",
+        "get_budget_remaining",
+        "get_budget_utilization_percentage",
+        "get_created_by_name"
+      ],
+      "variables": [
+        "total_expenses",
+        "budget_remaining",
+        "budget_utilization_percentage",
+        "created_by_name"
+      ]
+    },
+    {
+      "name": "HybridizationProjectDetailSerializer",
+      "methods": [],
+      "variables": [
+        "expenses",
+        "inventory_consumptions",
+        "labor_costs",
+        "equipment_usages",
+        "cost_reports"
+      ]
+    },
+    {
+      "name": "ProjectCostSummarySerializer",
+      "methods": [],
+      "variables": [
+        "project",
+        "total_expenses",
+        "inventory_costs",
+        "labor_costs",
+        "equipment_costs",
+        "grand_total",
+        "budget",
+        "budget_remaining",
+        "budget_utilization"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "fields"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_category_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_created_by_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_approved_by_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_inventory_item_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_total_cost",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_created_by_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_employee_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_total_cost",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_created_by_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_equipment_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_total_cost",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_created_by_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_project_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_created_by_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_total_expenses",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_budget_remaining",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_budget_utilization_percentage",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_created_by_name",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

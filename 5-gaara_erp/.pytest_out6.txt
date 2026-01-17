@@ -1,0 +1,17 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.4.1, pluggy-1.6.0 -- D:\home\ubuntu\gaara_erp_v5\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+django: version: 5.2.5
+rootdir: D:\home\ubuntu\gaara_erp_v5
+configfile: pyproject.toml
+testpaths: gaara_erp
+plugins: cov-6.2.1, django-4.11.1
+collecting ... collected 87 items / 1 error
+
+=================================== ERRORS ====================================
+_ ERROR collecting gaara_erp/agricultural_modules/nurseries/tests/test_api_views.py _
+.venv\\Lib\\site-packages\\_pytest\\python.py:498: in importtestmodule\n    mod = import_path(\n.venv\\Lib\\site-packages\\_pytest\\pathlib.py:587: in import_path\n    importlib.import_module(module_name)\nC:\\Users\\hadym\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\importlib\\__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n<frozen importlib._bootstrap>:1204: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1176: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1147: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:690: in _load_unlocked\n    ???\n.venv\\Lib\\site-packages\\_pytest\\assertion\\rewrite.py:177: in exec_module\n    source_stat, co = _rewrite_test(fn, self.config)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n.venv\\Lib\\site-packages\\_pytest\\assertion\\rewrite.py:357: in _rewrite_test\n    tree = ast.parse(source, filename=strfn)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nC:\\Users\\hadym\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ast.py:50: in parse\n    return compile(source, filename, mode, flags,\nE     File "D:\\home\\ubuntu\\gaara_erp_v5\\gaara_erp\\agricultural_modules\\nurseries\\tests\\test_api_views.py", line 63\nE       self.assertTrue(Nursery.objects.filter(name="\u0645\u0634\u062a\u0644 \u062c\u062f\u064a\u062f API").exists)\nE   IndentationError: unexpected indent
+=========================== short test summary info ===========================
+ERROR gaara_erp/agricultural_modules/nurseries/tests/test_api_views.py
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+========================= 1 warning, 1 error in 0.89s =========================

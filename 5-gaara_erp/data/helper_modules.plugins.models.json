@@ -1,0 +1,172 @@
+{
+  "module": "helper_modules.plugins.models",
+  "imports": [
+    "decimal",
+    "django.conf",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "Plugin",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PLUGIN_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "plugin_id",
+        "name",
+        "slug",
+        "description",
+        "plugin_type",
+        "version",
+        "author",
+        "author_email",
+        "website",
+        "package_name",
+        "install_path",
+        "main_file",
+        "requirements",
+        "dependencies",
+        "min_system_version",
+        "configuration",
+        "default_settings",
+        "status",
+        "is_system_plugin",
+        "requires_restart",
+        "license",
+        "is_free",
+        "price",
+        "download_count",
+        "rating",
+        "review_count",
+        "installed_at",
+        "installed_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "PluginHook",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "HOOK_TYPE_CHOICES",
+        "hook_id",
+        "plugin",
+        "name",
+        "hook_type",
+        "callback_function",
+        "priority",
+        "conditions",
+        "is_active",
+        "created_at"
+      ]
+    },
+    {
+      "name": "PluginLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "LOG_LEVEL_CHOICES",
+        "log_id",
+        "plugin",
+        "level",
+        "message",
+        "details",
+        "function_name",
+        "line_number",
+        "created_at"
+      ]
+    },
+    {
+      "name": "PluginMarketplace",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "CATEGORY_CHOICES",
+        "marketplace_id",
+        "plugin",
+        "category",
+        "tags",
+        "screenshots",
+        "featured",
+        "promoted",
+        "views",
+        "downloads_this_month",
+        "published_at",
+        "last_updated"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

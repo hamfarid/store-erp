@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-01-16T12:04:32.546789",
+  "backend_url": "http://localhost:9551",
+  "frontend_url": "http://localhost:3505",
+  "tests": [
+    {
+      "name": "Backend Health Endpoint",
+      "status": "partial",
+      "response_code": 503
+    },
+    {
+      "name": "API Endpoints",
+      "status": "pass",
+      "passed": 4,
+      "total": 7
+    },
+    {
+      "name": "API Documentation",
+      "status": "skip",
+      "code": 404
+    },
+    {
+      "name": "Frontend Application",
+      "status": "skip",
+      "error": "Page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3505/\nCall log:\n  - navigating to \"http://localhost:3505/\", waiting until \"load\"\n"
+    },
+    {
+      "name": "Responsive Views",
+      "status": "pass",
+      "passed": 2,
+      "total": 3
+    }
+  ],
+  "screenshots": [
+    "D:\\Ai_Project\\5-gaara_erp\\tests\\screenshots\\health_endpoint_20260116_120439.png",
+    "D:\\Ai_Project\\5-gaara_erp\\tests\\screenshots\\api_accounting_api_20260116_120441.png",
+    "D:\\Ai_Project\\5-gaara_erp\\tests\\screenshots\\api_organization_api_20260116_120442.png",
+    "D:\\Ai_Project\\5-gaara_erp\\tests\\screenshots\\api_security_api_20260116_120443.png",
+    "D:\\Ai_Project\\5-gaara_erp\\tests\\screenshots\\api_inventory_api_20260116_120443.png",
+    "D:\\Ai_Project\\5-gaara_erp\\tests\\screenshots\\api_sales_api_20260116_120444.png",
+    "D:\\Ai_Project\\5-gaara_erp\\tests\\screenshots\\api_companies_20260116_120446.png",
+    "D:\\Ai_Project\\5-gaara_erp\\tests\\screenshots\\api_currencies_20260116_120446.png",
+    "D:\\Ai_Project\\5-gaara_erp\\tests\\screenshots\\responsive_tablet_20260116_120459.png",
+    "D:\\Ai_Project\\5-gaara_erp\\tests\\screenshots\\responsive_desktop_20260116_120500.png"
+  ]
+}

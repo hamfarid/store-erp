@@ -1,0 +1,257 @@
+{
+  "module": "admin_modules.system_backups.models",
+  "imports": [
+    "calendar",
+    "django.conf",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "BackupConfiguration",
+      "methods": [
+        "__str__",
+        "clean",
+        "save"
+      ],
+      "variables": [
+        "STORAGE_TYPE_CHOICES",
+        "CLOUD_PROVIDER_CHOICES",
+        "COMPRESSION_CHOICES",
+        "name",
+        "description",
+        "is_active",
+        "is_default",
+        "storage_type",
+        "local_storage_path",
+        "cloud_provider",
+        "cloud_bucket",
+        "cloud_prefix",
+        "cloud_credentials",
+        "compression_type",
+        "encryption_enabled",
+        "encryption_key",
+        "retention_days",
+        "max_backups",
+        "notify_on_success",
+        "notify_on_failure",
+        "notification_emails",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "BackupSchedule",
+      "methods": [
+        "__str__",
+        "clean",
+        "calculate_next_run",
+        "save"
+      ],
+      "variables": [
+        "FREQUENCY_CHOICES",
+        "BACKUP_TYPE_CHOICES",
+        "DAY_OF_WEEK_CHOICES",
+        "name",
+        "description",
+        "configuration",
+        "backup_type",
+        "frequency",
+        "hour",
+        "minute",
+        "day_of_week",
+        "day_of_month",
+        "cron_expression",
+        "is_active",
+        "last_run",
+        "next_run",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "BackupLog",
+      "methods": [
+        "__str__",
+        "file_size_human_readable",
+        "save"
+      ],
+      "variables": [
+        "BACKUP_TYPE_CHOICES",
+        "TRIGGER_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "STORAGE_LOCATION_CHOICES",
+        "name",
+        "configuration",
+        "schedule",
+        "backup_type",
+        "trigger_type",
+        "status",
+        "storage_location",
+        "started_at",
+        "completed_at",
+        "duration_seconds",
+        "local_path",
+        "cloud_url",
+        "file_size",
+        "message",
+        "is_encrypted",
+        "is_compressed",
+        "compression_type",
+        "expiry_date",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "RestoreLog",
+      "methods": [
+        "__str__",
+        "save"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "RESTORE_TYPE_CHOICES",
+        "TRIGGER_TYPE_CHOICES",
+        "name",
+        "source_backup",
+        "restore_type",
+        "trigger_type",
+        "status",
+        "started_at",
+        "completed_at",
+        "duration_seconds",
+        "message",
+        "is_overwrite",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_next_run",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "file_size_human_readable",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "save",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

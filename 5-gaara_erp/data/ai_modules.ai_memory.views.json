@@ -1,0 +1,302 @@
+{
+  "module": "ai_modules.ai_memory.views",
+  "imports": [
+    "django.db.models",
+    "django.utils",
+    "django.utils.translation",
+    "django_filters.rest_framework",
+    "filters",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.filters",
+    "rest_framework.response",
+    "serializers",
+    "services"
+  ],
+  "classes": [
+    {
+      "name": "MemoryTypeViewSet",
+      "methods": [],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "MemoryContextViewSet",
+      "methods": [
+        "get_serializer_class",
+        "get_queryset",
+        "end_context",
+        "archive_context"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_class",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "MemoryViewSet",
+      "methods": [
+        "get_serializer_class",
+        "get_queryset",
+        "perform_create",
+        "access_memory",
+        "associations",
+        "search_memories",
+        "calculate_relevance"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_class",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "MemoryAssociationViewSet",
+      "methods": [
+        "use_association"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "KnowledgeBaseViewSet",
+      "methods": [
+        "get_serializer_class",
+        "perform_update",
+        "use_knowledge",
+        "search_knowledge"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_class",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "LearningPatternViewSet",
+      "methods": [
+        "get_queryset",
+        "apply_pattern",
+        "discover_patterns"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "MemoryCleanupLogViewSet",
+      "methods": [
+        "statistics"
+      ],
+      "variables": [
+        "queryset",
+        "serializer_class",
+        "permission_classes",
+        "filter_backends",
+        "filterset_fields",
+        "search_fields",
+        "ordering_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "DjangoFilterBackend",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "SearchFilter",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "OrderingFilter",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_serializer_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "end_context",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "archive_context",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_serializer_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_create",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "access_memory",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "associations",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "search_memories",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "calculate_relevance",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "use_association",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "get_serializer_class",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "perform_update",
+      "parameters": [
+        "self",
+        "serializer"
+      ]
+    },
+    {
+      "name": "use_knowledge",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "search_knowledge",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "get_queryset",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "apply_pattern",
+      "parameters": [
+        "self",
+        "request",
+        "pk"
+      ]
+    },
+    {
+      "name": "discover_patterns",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "statistics",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,117 @@
+{
+  "module": "services_modules.quality_control.tests.test_quality_issue",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.quality_check",
+    "models.quality_improvement",
+    "models.quality_issue",
+    "models.quality_template"
+  ],
+  "classes": [
+    {
+      "name": "QualityIssueModelTest",
+      "methods": [
+        "setUp",
+        "test_quality_issue_creation",
+        "test_quality_issue_str_representation",
+        "test_auto_reference_number_generation",
+        "test_assign_to",
+        "test_start_investigation",
+        "test_start_resolution",
+        "test_resolve",
+        "test_close",
+        "test_cannot_close_unresolved_issue",
+        "test_reopen",
+        "test_get_resolution_time",
+        "test_create_improvement"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_issue_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_quality_issue_str_representation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_auto_reference_number_generation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_assign_to",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_start_investigation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_start_resolution",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_resolve",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_close",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_cannot_close_unresolved_issue",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_reopen",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_resolution_time",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_improvement",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

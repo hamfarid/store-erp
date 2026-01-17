@@ -1,0 +1,11 @@
+{
+  "module": "services_modules.core.models.currency",
+  "imports": [
+    "core_modules.core.models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "module": "purchasing.models",
+  "imports": [
+    "business_modules.purchasing.models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

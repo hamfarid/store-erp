@@ -1,0 +1,92 @@
+{
+  "module": "agricultural_modules.seed_hybridization.merged.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "PlantVarietySerializer",
+      "methods": [],
+      "variables": []
+    },
+    {
+      "name": "HybridVarietySerializer",
+      "methods": [],
+      "variables": [
+        "parent_varieties"
+      ]
+    },
+    {
+      "name": "HybridizationSimulationSerializer",
+      "methods": [],
+      "variables": [
+        "parent_varieties",
+        "hybrid_varieties"
+      ]
+    },
+    {
+      "name": "HybridizationExperimentSerializer",
+      "methods": [],
+      "variables": [
+        "parent_varieties"
+      ]
+    },
+    {
+      "name": "HybridizationProjectSerializer",
+      "methods": [],
+      "variables": [
+        "team_members",
+        "simulations",
+        "experiments"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

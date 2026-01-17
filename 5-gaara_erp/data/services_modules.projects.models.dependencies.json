@@ -1,0 +1,53 @@
+{
+  "module": "services_modules.projects.models.dependencies",
+  "imports": [
+    "django.core.exceptions",
+    "django.db",
+    "django.utils.translation",
+    "services_modules.tasks.models.task"
+  ],
+  "classes": [
+    {
+      "name": "TaskDependency",
+      "methods": [
+        "__str__",
+        "clean"
+      ],
+      "variables": [
+        "DEPENDENCY_TYPES",
+        "task",
+        "dependency",
+        "dependency_type",
+        "lag",
+        "is_mandatory",
+        "created_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "clean",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

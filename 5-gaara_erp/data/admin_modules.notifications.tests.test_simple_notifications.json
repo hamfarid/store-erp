@@ -1,0 +1,97 @@
+{
+  "module": "admin_modules.notifications.tests.test_simple_notifications",
+  "imports": [
+    "django.contrib.auth",
+    "django.test",
+    "django.utils",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "NotificationModelTest",
+      "methods": [
+        "setUp",
+        "test_notification_creation",
+        "test_notification_mark_as_read",
+        "test_notification_delivery",
+        "test_user_notification_preference"
+      ],
+      "variables": []
+    },
+    {
+      "name": "NotificationTypeModelTest",
+      "methods": [
+        "test_notification_type_creation",
+        "test_notification_type_unique_code"
+      ],
+      "variables": []
+    },
+    {
+      "name": "NotificationChannelModelTest",
+      "methods": [
+        "test_notification_channel_creation",
+        "test_notification_channel_unique_code"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_notification_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_notification_mark_as_read",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_notification_delivery",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_user_notification_preference",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_notification_type_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_notification_type_unique_code",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_notification_channel_creation",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_notification_channel_unique_code",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

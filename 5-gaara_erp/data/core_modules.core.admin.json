@@ -1,0 +1,88 @@
+{
+  "module": "core_modules.core.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "CountryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "CompanyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "BranchAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "CurrencyAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "DepartmentAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "SystemSettingAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "RoleDatabasePermissionAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields",
+        "ordering"
+      ]
+    },
+    {
+      "name": "DocumentSequenceAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields",
+        "ordering"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

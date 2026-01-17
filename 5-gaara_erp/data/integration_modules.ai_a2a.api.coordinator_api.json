@@ -1,0 +1,84 @@
+{
+  "module": "integration_modules.ai_a2a.api.coordinator_api",
+  "imports": [
+    "conversation_api",
+    "django.shortcuts",
+    "logging",
+    "models",
+    "rest_framework",
+    "rest_framework.decorators",
+    "rest_framework.response",
+    "services.coordinator_service"
+  ],
+  "classes": [
+    {
+      "name": "CoordinatorViewSet",
+      "methods": [
+        "route_message",
+        "handle_agent_failure",
+        "agent_interactions",
+        "available_agents",
+        "broadcast_message",
+        "register_agent",
+        "update_agent_status"
+      ],
+      "variables": [
+        "permission_classes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "route_message",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "handle_agent_failure",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "agent_interactions",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "available_agents",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "broadcast_message",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "register_agent",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    },
+    {
+      "name": "update_agent_status",
+      "parameters": [
+        "self",
+        "request"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "module": "core_modules.rag.services.memory",
+  "imports": [
+    "__future__",
+    "core_modules.rag.models",
+    "core_modules.rag.services.ingestion",
+    "django.conf",
+    "django.db",
+    "math",
+    "typing"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "create_or_update_memory",
+      "parameters": [
+        "user_id",
+        "key",
+        "value",
+        "kind",
+        "expires_at"
+      ]
+    },
+    {
+      "name": "delete_memory",
+      "parameters": [
+        "user_id",
+        "key",
+        "kind"
+      ]
+    },
+    {
+      "name": "find_similar_memories",
+      "parameters": [
+        "query",
+        "user_id",
+        "top_k",
+        "threshold"
+      ]
+    },
+    {
+      "name": "cos",
+      "parameters": [
+        "a",
+        "b"
+      ]
+    }
+  ],
+  "variables": []
+}

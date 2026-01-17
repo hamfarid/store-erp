@@ -1,0 +1,46 @@
+{
+  "module": "services_modules.fleet_management.models.driver",
+  "imports": [
+    "django.conf",
+    "django.db",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "Driver",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "license_number",
+        "license_expiry_date",
+        "date_of_birth",
+        "phone_number",
+        "emergency_contact_name",
+        "emergency_contact_phone",
+        "is_active",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "app_label"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,247 @@
+{
+  "module": "business_modules.assets.serializers",
+  "imports": [
+    "models",
+    "rest_framework"
+  ],
+  "classes": [
+    {
+      "name": "AccountSerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name",
+        "code"
+      ]
+    },
+    {
+      "name": "UserSerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "username",
+        "full_name"
+      ]
+    },
+    {
+      "name": "CompanySerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "name": "BranchSerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "name": "DepartmentSerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "name": "ContactSerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "name": "CurrencySerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name",
+        "code"
+      ]
+    },
+    {
+      "name": "ProjectSerializer",
+      "methods": [],
+      "variables": [
+        "id",
+        "name"
+      ]
+    },
+    {
+      "name": "AssetCategorySerializer",
+      "methods": [],
+      "variables": [
+        "company_details",
+        "default_asset_account_details",
+        "default_accumulated_depreciation_account_details",
+        "default_depreciation_expense_account_details"
+      ]
+    },
+    {
+      "name": "FixedAssetSerializer",
+      "methods": [],
+      "variables": [
+        "category_details",
+        "company_details",
+        "branch_details",
+        "department_details",
+        "currency_details",
+        "supplier_details",
+        "project_details",
+        "asset_account_details",
+        "accumulated_depreciation_account_details",
+        "depreciation_expense_account_details",
+        "responsible_person_details",
+        "created_by_details",
+        "updated_by_details",
+        "age_in_years",
+        "depreciation_status",
+        "depreciation_percentage"
+      ]
+    },
+    {
+      "name": "DepreciationLogSerializer",
+      "methods": [],
+      "variables": [
+        "asset_details",
+        "created_by_details"
+      ]
+    },
+    {
+      "name": "AssetTransferSerializer",
+      "methods": [],
+      "variables": [
+        "asset_details",
+        "from_department_details",
+        "to_department_details",
+        "from_responsible_details",
+        "to_responsible_details",
+        "created_by_details"
+      ]
+    },
+    {
+      "name": "AssetMaintenanceSerializer",
+      "methods": [],
+      "variables": [
+        "asset_details",
+        "created_by_details",
+        "maintenance_type_display"
+      ]
+    },
+    {
+      "name": "AssetAttachmentSerializer",
+      "methods": [
+        "get_file_url"
+      ],
+      "variables": [
+        "asset_details",
+        "created_by_details",
+        "attachment_type_display",
+        "file_url"
+      ]
+    },
+    {
+      "name": "AssetRevaluationSerializer",
+      "methods": [
+        "get_value_change"
+      ],
+      "variables": [
+        "asset_details",
+        "created_by_details",
+        "value_change"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "model",
+        "fields",
+        "read_only_fields",
+        "extra_kwargs"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_file_url",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "get_value_change",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    }
+  ],
+  "variables": []
+}

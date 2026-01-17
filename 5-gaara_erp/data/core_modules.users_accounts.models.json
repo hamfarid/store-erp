@@ -1,0 +1,81 @@
+{
+  "module": "core_modules.users_accounts.models",
+  "imports": [
+    "core_modules.organization.models",
+    "core_modules.permissions_manager.models",
+    "django.conf",
+    "django.contrib.auth.models",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "logging"
+  ],
+  "classes": [
+    {
+      "name": "User",
+      "methods": [
+        "_is_within_max_scope",
+        "has_perm",
+        "has_module_perms",
+        "__str__"
+      ],
+      "variables": [
+        "mobile",
+        "groups",
+        "user_permissions",
+        "user_countries",
+        "user_companies",
+        "user_branches",
+        "PASSWORD_RESET_STATUS_CHOICES",
+        "pending_password",
+        "password_reset_status",
+        "password_reset_requested_at",
+        "password_reset_approved_at",
+        "password_reset_approved_by"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "_is_within_max_scope",
+      "parameters": [
+        "self",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_perm",
+      "parameters": [
+        "self",
+        "perm",
+        "obj"
+      ]
+    },
+    {
+      "name": "has_module_perms",
+      "parameters": [
+        "self",
+        "app_label"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

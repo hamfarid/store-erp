@@ -1,0 +1,486 @@
+{
+  "module": "ai_modules.ai_agents.models",
+  "imports": [
+    "django.conf",
+    "django.core.exceptions",
+    "django.core.validators",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "json",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "AIRole",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ROLE_TYPE_CHOICES",
+        "name",
+        "description",
+        "role_type",
+        "is_active",
+        "priority",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "AIPermission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "PERMISSION_TYPE_CHOICES",
+        "SCOPE_CHOICES",
+        "name",
+        "codename",
+        "description",
+        "permission_type",
+        "scope",
+        "module_name",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "AIAgent",
+      "methods": [
+        "__str__",
+        "get_success_rate",
+        "update_performance_stats"
+      ],
+      "variables": [
+        "AGENT_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "MODEL_TYPE_CHOICES",
+        "name",
+        "code",
+        "description",
+        "agent_type",
+        "status",
+        "model_type",
+        "model_config",
+        "module_name",
+        "specializations",
+        "capabilities",
+        "avatar_url",
+        "avatar_config",
+        "total_interactions",
+        "successful_interactions",
+        "average_response_time",
+        "last_interaction",
+        "owner",
+        "is_system_agent",
+        "is_public",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ]
+    },
+    {
+      "name": "UserRole",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "user",
+        "role",
+        "assigned_at",
+        "assigned_by",
+        "is_active"
+      ]
+    },
+    {
+      "name": "AgentRole",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "agent",
+        "role",
+        "assigned_at",
+        "assigned_by",
+        "is_active"
+      ]
+    },
+    {
+      "name": "RolePermission",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "role",
+        "permission",
+        "granted_at",
+        "granted_by",
+        "is_active"
+      ]
+    },
+    {
+      "name": "AgentInteraction",
+      "methods": [
+        "__str__",
+        "calculate_response_time",
+        "mark_completed",
+        "mark_failed"
+      ],
+      "variables": [
+        "INTERACTION_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "interaction_id",
+        "user",
+        "source_agent",
+        "target_agent",
+        "interaction_type",
+        "status",
+        "input_message",
+        "output_message",
+        "context_data",
+        "started_at",
+        "completed_at",
+        "response_time",
+        "session_id",
+        "parent_interaction",
+        "metadata"
+      ]
+    },
+    {
+      "name": "AgentMessage",
+      "methods": [
+        "__str__",
+        "mark_sent",
+        "mark_delivered",
+        "mark_processed",
+        "mark_failed",
+        "can_retry",
+        "is_expired"
+      ],
+      "variables": [
+        "MESSAGE_TYPE_CHOICES",
+        "PRIORITY_CHOICES",
+        "STATUS_CHOICES",
+        "message_id",
+        "sender_agent",
+        "receiver_agent",
+        "message_type",
+        "priority",
+        "status",
+        "subject",
+        "content",
+        "payload",
+        "created_at",
+        "sent_at",
+        "delivered_at",
+        "processed_at",
+        "expires_at",
+        "interaction",
+        "parent_message",
+        "retry_count",
+        "max_retries",
+        "error_message"
+      ]
+    },
+    {
+      "name": "AgentWorkflow",
+      "methods": [
+        "__str__",
+        "get_success_rate"
+      ],
+      "variables": [
+        "WORKFLOW_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "name",
+        "description",
+        "workflow_type",
+        "status",
+        "workflow_definition",
+        "participating_agents",
+        "trigger_conditions",
+        "execution_count",
+        "success_count",
+        "last_execution",
+        "owner",
+        "is_system_workflow",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "AgentActivityLog",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ACTIVITY_TYPE_CHOICES",
+        "SEVERITY_CHOICES",
+        "activity_type",
+        "severity",
+        "description",
+        "user",
+        "agent",
+        "interaction",
+        "workflow",
+        "metadata",
+        "ip_address",
+        "user_agent",
+        "timestamp"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "unique_together",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_success_rate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "update_performance_stats",
+      "parameters": [
+        "self",
+        "success",
+        "response_time"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "calculate_response_time",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_completed",
+      "parameters": [
+        "self",
+        "output_message"
+      ]
+    },
+    {
+      "name": "mark_failed",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_sent",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_delivered",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_processed",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mark_failed",
+      "parameters": [
+        "self",
+        "error_message"
+      ]
+    },
+    {
+      "name": "can_retry",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "is_expired",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_success_rate",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

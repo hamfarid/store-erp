@@ -1,0 +1,97 @@
+name: Create Issues from Task List
+
+on:
+    workflow_dispatch:
+        inputs:
+            dry_run:
+                description: "Print plan without creating issues"
+                required: false
+                default: "false"
+            reopen_closed:
+                description: "Reopen and update closed issues that match TL-ID"
+                required: false
+                default: "false"
+            priority:
+                description: "Optional priorities to include (e.g., P0 or P0,P1)"
+                required: false
+                default: ""
+            limit:
+                description: "Optional limit (first N tasks after filtering)"
+                required: false
+                default: ""
+    push:
+        paths:
+            - "docs/Task_List.md"
+
+permissions:
+    contents: read
+    issues: write
+
+jobs:
+    create-issues:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.11"
+
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  python - <<'PY'
+                  import sys
+                  try:
+                    import requests  # noqa
+                  except Exception:
+                    import subprocess
+                    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'requests'])
+                  PY
+
+            - name: Create or update issues from docs/Task_List.md
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_REPOSITORY: ${{ github.repository }}
+                  DRY_RUN: ${{ github.event.inputs.dry_run }}
+                  REOPEN_CLOSED: ${{ github.event.inputs.reopen_closed }}
+                  PRIORITY: ${{ github.event.inputs.priority }}
+                  LIMIT: ${{ github.event.inputs.limit }}
+              run: |
+                  python scripts/create_issues_from_task_list.py \
+                    $([ "${DRY_RUN}" = "true" ] && echo "--dry-run") \
+                    $([ "${REOPEN_CLOSED}" = "true" ] && echo "--reopen-closed") \
+                    $([ -n "${PRIORITY}" ] && echo "--priority ${PRIORITY}") \
+                    $([ -n "${LIMIT}" ] && echo "--limit ${LIMIT}") \
+                    --output issue_results.json
+
+            - name: Job summary
+              if: always()
+              run: |
+                  echo "## Create Issues from Task List" >> $GITHUB_STEP_SUMMARY
+                  if [ -f issue_results.json ]; then
+                    echo "" >> $GITHUB_STEP_SUMMARY
+                    echo "Results summary:" >> $GITHUB_STEP_SUMMARY
+                    python - <<'PY' >> $GITHUB_STEP_SUMMARY
+                    import json
+                    with open('issue_results.json','r', encoding='utf-8') as f:
+                        d = json.load(f)
+                    print(f"Count: {d.get('count')}")
+                    res = d.get('results', [])[:20]
+                    print("First 20 results:")
+                    for r in res:
+                        print(r)
+                    PY
+                  else
+                    echo "No results file found." >> $GITHUB_STEP_SUMMARY
+                  fi
+
+            - name: Upload results artifact
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: issue-results
+                  path: issue_results.json
+                  if-no-files-found: warn

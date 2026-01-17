@@ -1,0 +1,206 @@
+{
+  "module": "services_modules.correspondence.tests.test_correspondence",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.core.exceptions",
+    "django.db",
+    "django.test",
+    "django.utils",
+    "models.attachment",
+    "models.correspondence",
+    "services_modules.core.models"
+  ],
+  "classes": [
+    {
+      "name": "CorrespondenceTypeModelTest",
+      "methods": [
+        "setUp",
+        "test_create_correspondence_type",
+        "test_unique_code_per_company",
+        "test_deactivate_correspondence_type"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CorrespondenceStatusModelTest",
+      "methods": [
+        "setUp",
+        "test_create_correspondence_status",
+        "test_unique_code_per_company",
+        "test_deactivate_correspondence_status"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CorrespondenceModelTest",
+      "methods": [
+        "setUp",
+        "test_create_correspondence",
+        "test_unique_reference_number_per_company",
+        "test_update_correspondence_status",
+        "test_get_direction_display",
+        "test_get_formatted_date"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AttachmentModelTest",
+      "methods": [
+        "setUp",
+        "test_create_attachment",
+        "test_get_file_extension",
+        "test_get_formatted_file_size",
+        "test_get_upload_date_formatted"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_correspondence_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_correspondence_type",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_correspondence_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_code_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_deactivate_correspondence_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_correspondence",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_unique_reference_number_per_company",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_update_correspondence_status",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_direction_display",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_formatted_date",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "setUp",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_create_attachment",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_file_extension",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_formatted_file_size",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "test_get_upload_date_formatted",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_direction_display",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_formatted_date",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_file_extension",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_formatted_file_size",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "mock_get_upload_date_formatted",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

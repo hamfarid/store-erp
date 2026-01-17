@@ -1,0 +1,18 @@
+{
+  "module": "business_modules.rent.apps",
+  "imports": [
+    "django.apps"
+  ],
+  "classes": [
+    {
+      "name": "RentConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

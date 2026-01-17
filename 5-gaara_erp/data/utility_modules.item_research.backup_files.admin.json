@@ -1,0 +1,10 @@
+{
+  "module": "utility_modules.item_research.backup_files.admin",
+  "imports": [
+    "django.contrib",
+    "django.db"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

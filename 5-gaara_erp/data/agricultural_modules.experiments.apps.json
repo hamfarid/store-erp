@@ -1,0 +1,20 @@
+{
+  "module": "agricultural_modules.experiments.apps",
+  "imports": [
+    "django.apps",
+    "django.utils.translation"
+  ],
+  "classes": [
+    {
+      "name": "ExperimentsConfig",
+      "methods": [],
+      "variables": [
+        "default_auto_field",
+        "name",
+        "verbose_name"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

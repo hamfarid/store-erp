@@ -1,0 +1,376 @@
+{
+  "module": "admin_modules.system_monitoring.models.monitoring",
+  "imports": [
+    "django.contrib.auth",
+    "django.db",
+    "django.utils",
+    "json"
+  ],
+  "classes": [
+    {
+      "name": "SystemResource",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "timestamp",
+        "cpu_usage",
+        "memory_usage",
+        "disk_usage",
+        "active_connections",
+        "system_load"
+      ]
+    },
+    {
+      "name": "SystemAlert",
+      "methods": [
+        "__str__",
+        "acknowledge"
+      ],
+      "variables": [
+        "SEVERITY_CHOICES",
+        "RESOURCE_TYPE_CHOICES",
+        "timestamp",
+        "alert_type",
+        "severity",
+        "message",
+        "resource_type",
+        "resource_value",
+        "threshold",
+        "notified",
+        "acknowledged",
+        "acknowledged_by",
+        "acknowledged_at"
+      ]
+    },
+    {
+      "name": "ModuleStatus",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "STATUS_CHOICES",
+        "timestamp",
+        "module_name",
+        "status",
+        "resource_usage",
+        "is_active",
+        "details"
+      ]
+    },
+    {
+      "name": "ModuleRecovery",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "ACTION_CHOICES",
+        "timestamp",
+        "module_name",
+        "action",
+        "reason",
+        "success",
+        "details",
+        "initiated_by",
+        "user"
+      ]
+    },
+    {
+      "name": "MonitoringConfig",
+      "methods": [
+        "__str__",
+        "get_modules_config",
+        "set_modules_config",
+        "get_notification_channels",
+        "set_notification_channels"
+      ],
+      "variables": [
+        "name",
+        "description",
+        "monitoring_interval",
+        "cpu_threshold_warning",
+        "cpu_threshold_critical",
+        "memory_threshold_warning",
+        "memory_threshold_critical",
+        "disk_threshold_warning",
+        "disk_threshold_critical",
+        "alert_cooldown",
+        "history_retention_days",
+        "modules_config",
+        "notification_channels",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "PerformanceMetric",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "timestamp",
+        "module_name",
+        "metric_name",
+        "metric_value",
+        "metric_unit",
+        "context"
+      ]
+    },
+    {
+      "name": "AIModuleMetric",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "timestamp",
+        "module_name",
+        "requests_count",
+        "average_response_time",
+        "max_response_time",
+        "error_count",
+        "memory_usage",
+        "cpu_usage",
+        "tokens_used"
+      ]
+    },
+    {
+      "name": "ResourcePolicy",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "POLICY_TYPE_CHOICES",
+        "ACTION_CHOICES",
+        "policy_name",
+        "description",
+        "policy_type",
+        "target_module",
+        "condition",
+        "action",
+        "priority",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "created_by",
+        "updated_by"
+      ]
+    },
+    {
+      "name": "RecoveryLog",
+      "methods": [
+        "__str__",
+        "get_modules_list",
+        "set_modules_list"
+      ],
+      "variables": [
+        "RECOVERY_TYPE_CHOICES",
+        "STATUS_CHOICES",
+        "timestamp",
+        "recovery_type",
+        "modules",
+        "initiated_by",
+        "initiated_at",
+        "completed_at",
+        "status",
+        "error_message",
+        "notes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "indexes"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "acknowledge",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_modules_config",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_modules_config",
+      "parameters": [
+        "self",
+        "config"
+      ]
+    },
+    {
+      "name": "get_notification_channels",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_notification_channels",
+      "parameters": [
+        "self",
+        "channels"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_modules_list",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "set_modules_list",
+      "parameters": [
+        "self",
+        "modules_list"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

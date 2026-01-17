@@ -1,0 +1,113 @@
+{
+  "module": "core_modules.activity_log.services.audit_trail_service",
+  "imports": [
+    "django.contrib.auth",
+    "django.contrib.contenttypes.models",
+    "django.utils",
+    "json",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "AuditTrailService",
+      "methods": [
+        "log_action",
+        "log_activity",
+        "_log_internal",
+        "log_login",
+        "log_logout",
+        "log_permission_denied",
+        "log_data_export",
+        "log_data_import"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "log_action",
+      "parameters": [
+        "user",
+        "action",
+        "obj",
+        "changes",
+        "ip_address",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "log_activity",
+      "parameters": [
+        "user",
+        "action",
+        "obj",
+        "changes",
+        "ip_address",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "_log_internal",
+      "parameters": [
+        "user",
+        "action",
+        "obj",
+        "changes",
+        "ip_address",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "log_login",
+      "parameters": [
+        "user",
+        "ip_address",
+        "user_agent",
+        "success"
+      ]
+    },
+    {
+      "name": "log_logout",
+      "parameters": [
+        "user",
+        "ip_address",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "log_permission_denied",
+      "parameters": [
+        "user",
+        "permission",
+        "obj",
+        "ip_address",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "log_data_export",
+      "parameters": [
+        "user",
+        "export_type",
+        "record_count",
+        "ip_address",
+        "user_agent"
+      ]
+    },
+    {
+      "name": "log_data_import",
+      "parameters": [
+        "user",
+        "import_type",
+        "record_count",
+        "success_count",
+        "error_count",
+        "ip_address",
+        "user_agent"
+      ]
+    }
+  ],
+  "variables": [
+    "User"
+  ]
+}

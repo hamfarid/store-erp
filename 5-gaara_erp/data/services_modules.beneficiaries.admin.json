@@ -1,0 +1,30 @@
+{
+  "module": "services_modules.beneficiaries.admin",
+  "imports": [
+    "django.contrib",
+    "django.utils.translation",
+    "models.beneficiary",
+    "models.beneficiary_category"
+  ],
+  "classes": [
+    {
+      "name": "BeneficiaryCategoryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "search_fields"
+      ]
+    },
+    {
+      "name": "BeneficiaryAdmin",
+      "methods": [],
+      "variables": [
+        "list_display",
+        "list_filter",
+        "search_fields"
+      ]
+    }
+  ],
+  "functions": [],
+  "variables": []
+}

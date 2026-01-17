@@ -1,0 +1,10 @@
+{
+  "module": "business_modules.sales.admin",
+  "imports": [
+    "django.contrib",
+    "models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

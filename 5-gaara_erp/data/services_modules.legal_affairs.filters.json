@@ -1,0 +1,9 @@
+{
+  "module": "services_modules.legal_affairs.filters",
+  "imports": [
+    "django_filters"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

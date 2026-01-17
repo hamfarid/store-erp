@@ -1,0 +1,75 @@
+{
+  "module": "business_modules.accounting.services.account_service",
+  "imports": [
+    "datetime",
+    "django.core.exceptions",
+    "django.db",
+    "django.db.models",
+    "django.utils.translation",
+    "models"
+  ],
+  "classes": [
+    {
+      "name": "AccountService",
+      "methods": [
+        "create_account",
+        "update_account",
+        "delete_account",
+        "get_account_tree",
+        "_build_account_tree_node",
+        "get_account_balance_sheet",
+        "get_account_income_statement"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_account",
+      "parameters": [
+        "data"
+      ]
+    },
+    {
+      "name": "update_account",
+      "parameters": [
+        "account",
+        "data"
+      ]
+    },
+    {
+      "name": "delete_account",
+      "parameters": [
+        "account"
+      ]
+    },
+    {
+      "name": "get_account_tree",
+      "parameters": [
+        "company"
+      ]
+    },
+    {
+      "name": "_build_account_tree_node",
+      "parameters": [
+        "account"
+      ]
+    },
+    {
+      "name": "get_account_balance_sheet",
+      "parameters": [
+        "company",
+        "date"
+      ]
+    },
+    {
+      "name": "get_account_income_statement",
+      "parameters": [
+        "company",
+        "start_date",
+        "end_date"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,15 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.components.__init__",
+  "imports": [
+    "ai_integration_checker",
+    "database_checker",
+    "performance_checker",
+    "security_checker",
+    "system_checker"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

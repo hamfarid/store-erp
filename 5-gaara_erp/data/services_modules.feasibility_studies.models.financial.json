@@ -1,0 +1,82 @@
+{
+  "module": "services_modules.feasibility_studies.models.financial",
+  "imports": [
+    "__future__",
+    "decimal",
+    "django.db",
+    "django.utils.translation",
+    "services_modules.core.models",
+    "study"
+  ],
+  "classes": [
+    {
+      "name": "FinancialAnalysis",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "study",
+        "initial_investment",
+        "annual_revenue",
+        "annual_expenses",
+        "discount_rate",
+        "analysis_period",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "CashFlow",
+      "methods": [
+        "__str__"
+      ],
+      "variables": [
+        "financial_analysis",
+        "year",
+        "revenue",
+        "expenses",
+        "net_cash_flow",
+        "discounted_cash_flow",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural"
+      ]
+    },
+    {
+      "name": "Meta",
+      "methods": [],
+      "variables": [
+        "app_label",
+        "verbose_name",
+        "verbose_name_plural",
+        "ordering",
+        "unique_together"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "__str__",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": []
+}

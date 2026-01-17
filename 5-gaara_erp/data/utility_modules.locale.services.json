@@ -1,0 +1,148 @@
+{
+  "module": "utility_modules.locale.services",
+  "imports": [
+    "datetime",
+    "django.conf",
+    "django.contrib.auth",
+    "django.core.cache",
+    "django.db",
+    "django.utils",
+    "django.utils.translation",
+    "json",
+    "logging",
+    "models",
+    "os",
+    "polib",
+    "typing"
+  ],
+  "classes": [
+    {
+      "name": "LocaleService",
+      "methods": [
+        "get_available_languages",
+        "get_default_language",
+        "get_user_language",
+        "set_user_language",
+        "get_translations_bundle",
+        "import_translations_from_po",
+        "export_translations_to_po",
+        "sync_translations_between_languages",
+        "get_missing_translations",
+        "get_translation_statistics",
+        "initialize_system_languages",
+        "_clear_translations_cache",
+        "_clear_all_caches"
+      ],
+      "variables": [
+        "CACHE_TIMEOUT"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_available_languages",
+      "parameters": [
+        "self",
+        "include_inactive"
+      ]
+    },
+    {
+      "name": "get_default_language",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "get_user_language",
+      "parameters": [
+        "self",
+        "user"
+      ]
+    },
+    {
+      "name": "set_user_language",
+      "parameters": [
+        "self",
+        "user",
+        "language_code"
+      ]
+    },
+    {
+      "name": "get_translations_bundle",
+      "parameters": [
+        "self",
+        "language_code",
+        "module",
+        "use_cache"
+      ]
+    },
+    {
+      "name": "import_translations_from_po",
+      "parameters": [
+        "self",
+        "po_file_path",
+        "language_code",
+        "module",
+        "overwrite"
+      ]
+    },
+    {
+      "name": "export_translations_to_po",
+      "parameters": [
+        "self",
+        "output_file_path",
+        "language_code",
+        "module",
+        "include_empty"
+      ]
+    },
+    {
+      "name": "sync_translations_between_languages",
+      "parameters": [
+        "self",
+        "source_language_code",
+        "target_language_code",
+        "only_missing"
+      ]
+    },
+    {
+      "name": "get_missing_translations",
+      "parameters": [
+        "self",
+        "language_code"
+      ]
+    },
+    {
+      "name": "get_translation_statistics",
+      "parameters": [
+        "self",
+        "language_code"
+      ]
+    },
+    {
+      "name": "initialize_system_languages",
+      "parameters": [
+        "self"
+      ]
+    },
+    {
+      "name": "_clear_translations_cache",
+      "parameters": [
+        "self",
+        "language_code",
+        "module"
+      ]
+    },
+    {
+      "name": "_clear_all_caches",
+      "parameters": [
+        "self"
+      ]
+    }
+  ],
+  "variables": [
+    "User",
+    "logger",
+    "locale_service"
+  ]
+}

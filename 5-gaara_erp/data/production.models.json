@@ -1,0 +1,9 @@
+{
+  "module": "production.models",
+  "imports": [
+    "agricultural_modules.production.models"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

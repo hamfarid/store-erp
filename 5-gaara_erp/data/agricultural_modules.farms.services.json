@@ -1,0 +1,211 @@
+{
+  "module": "agricultural_modules.farms.services",
+  "imports": [
+    "datetime",
+    "models",
+    "uuid"
+  ],
+  "classes": [
+    {
+      "name": "FarmService",
+      "methods": [
+        "create_farm",
+        "get_farm_by_id",
+        "get_all_farms",
+        "update_farm",
+        "delete_farm"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FieldService",
+      "methods": [
+        "create_field",
+        "get_fields_for_farm"
+      ],
+      "variables": []
+    },
+    {
+      "name": "CropService",
+      "methods": [
+        "create_crop"
+      ],
+      "variables": []
+    },
+    {
+      "name": "PlantingSeasonService",
+      "methods": [
+        "create_planting_season"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgriculturalActivityTypeService",
+      "methods": [
+        "create_activity_type"
+      ],
+      "variables": []
+    },
+    {
+      "name": "AgriculturalActivityService",
+      "methods": [
+        "create_activity"
+      ],
+      "variables": []
+    },
+    {
+      "name": "HarvestService",
+      "methods": [
+        "create_harvest"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmResourceService",
+      "methods": [
+        "add_resource_to_activity"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmWorkerLogService",
+      "methods": [
+        "log_worker_activity"
+      ],
+      "variables": []
+    },
+    {
+      "name": "FarmEquipmentLogService",
+      "methods": [
+        "log_equipment_usage"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_farm",
+      "parameters": [
+        "name",
+        "total_area",
+        "owner",
+        "location_description"
+      ]
+    },
+    {
+      "name": "get_farm_by_id",
+      "parameters": [
+        "farm_id"
+      ]
+    },
+    {
+      "name": "get_all_farms",
+      "parameters": []
+    },
+    {
+      "name": "update_farm",
+      "parameters": [
+        "farm_id"
+      ]
+    },
+    {
+      "name": "delete_farm",
+      "parameters": [
+        "farm_id"
+      ]
+    },
+    {
+      "name": "create_field",
+      "parameters": [
+        "farm",
+        "name",
+        "area",
+        "soil_type",
+        "irrigation_system"
+      ]
+    },
+    {
+      "name": "get_fields_for_farm",
+      "parameters": [
+        "farm_id"
+      ]
+    },
+    {
+      "name": "create_crop",
+      "parameters": [
+        "name",
+        "variety",
+        "description"
+      ]
+    },
+    {
+      "name": "create_planting_season",
+      "parameters": [
+        "field",
+        "crop",
+        "start_date",
+        "expected_harvest_date",
+        "notes"
+      ]
+    },
+    {
+      "name": "create_activity_type",
+      "parameters": [
+        "name",
+        "description"
+      ]
+    },
+    {
+      "name": "create_activity",
+      "parameters": [
+        "planting_season",
+        "activity_type",
+        "activity_date",
+        "description",
+        "cost"
+      ]
+    },
+    {
+      "name": "create_harvest",
+      "parameters": [
+        "planting_season",
+        "harvest_date",
+        "quantity_harvested",
+        "unit_of_measure",
+        "quality_grade",
+        "notes"
+      ]
+    },
+    {
+      "name": "add_resource_to_activity",
+      "parameters": [
+        "activity",
+        "product_name_temp",
+        "quantity_used",
+        "unit_of_measure",
+        "cost_per_unit"
+      ]
+    },
+    {
+      "name": "log_worker_activity",
+      "parameters": [
+        "activity",
+        "worker_name_temp",
+        "hours_worked",
+        "log_date",
+        "cost"
+      ]
+    },
+    {
+      "name": "log_equipment_usage",
+      "parameters": [
+        "activity",
+        "equipment_name_temp",
+        "hours_used",
+        "log_date",
+        "cost"
+      ]
+    }
+  ],
+  "variables": []
+}

@@ -1,0 +1,10 @@
+{
+  "module": "business_modules.production.forms",
+  "imports": [
+    "django.contrib",
+    "rest_framework"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": []
+}

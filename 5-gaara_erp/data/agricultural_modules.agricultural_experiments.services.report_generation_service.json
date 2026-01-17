@@ -1,0 +1,59 @@
+{
+  "module": "agricultural_modules.agricultural_experiments.services.report_generation_service",
+  "imports": [
+    "datetime",
+    "decimal",
+    "django.db",
+    "django.db.models",
+    "django.utils",
+    "json",
+    "logging",
+    "models.experiment",
+    "models.external_variety",
+    "models.harvest",
+    "models.variety",
+    "models.variety_comparison_report",
+    "services.variety_comparison_service"
+  ],
+  "classes": [
+    {
+      "name": "ReportGenerationService",
+      "methods": [
+        "generate_variety_comparison_report",
+        "generate_inventory_comparison_report",
+        "get_report_types"
+      ],
+      "variables": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "generate_variety_comparison_report",
+      "parameters": [
+        "experiment_id",
+        "title",
+        "report_type",
+        "criteria",
+        "external_variety_ids",
+        "user"
+      ]
+    },
+    {
+      "name": "generate_inventory_comparison_report",
+      "parameters": [
+        "variety_ids",
+        "title",
+        "time_period_start",
+        "time_period_end",
+        "user"
+      ]
+    },
+    {
+      "name": "get_report_types",
+      "parameters": []
+    }
+  ],
+  "variables": [
+    "logger"
+  ]
+}

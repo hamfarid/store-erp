@@ -1,0 +1,16 @@
+{
+  "module": "business_modules.accounting.tests.conftest",
+  "imports": [
+    "django",
+    "django.conf",
+    "os"
+  ],
+  "classes": [],
+  "functions": [
+    {
+      "name": "setup_django_settings",
+      "parameters": []
+    }
+  ],
+  "variables": []
+}

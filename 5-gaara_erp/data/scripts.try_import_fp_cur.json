@@ -1,0 +1,16 @@
+{
+  "module": "scripts.try_import_fp_cur",
+  "imports": [
+    "business_modules.accounting.models",
+    "django",
+    "os",
+    "pathlib",
+    "sys",
+    "traceback"
+  ],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "p"
+  ]
+}

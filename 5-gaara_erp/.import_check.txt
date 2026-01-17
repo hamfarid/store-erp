@@ -1,0 +1,22 @@
+ERR
+Traceback (most recent call last):
+  File "D:\home\ubuntu\gaara_erp_v5\.tmp_import_check.py", line 5, in <module>
+    import gaara_erp.agricultural_modules.farms.integration as m
+  File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\farms\integration.py", line 15, in <module>
+    from .models import (AgriculturalActivity, FarmResource, Field, Harvest,
+  File "D:\home\ubuntu\gaara_erp_v5\gaara_erp\agricultural_modules\farms\models.py", line 14, in <module>
+    from mptt.models import MPTTModel, TreeForeignKey
+  File "D:\home\ubuntu\gaara_erp_v5\.venv\Lib\site-packages\mptt\models.py", line 16, in <module>
+    from mptt.fields import TreeForeignKey, TreeManyToManyField, TreeOneToOneField
+  File "D:\home\ubuntu\gaara_erp_v5\.venv\Lib\site-packages\mptt\fields.py", line 7, in <module>
+    from mptt.forms import TreeNodeChoiceField, TreeNodeMultipleChoiceField
+  File "D:\home\ubuntu\gaara_erp_v5\.venv\Lib\site-packages\mptt\forms.py", line 12, in <module>
+    from mptt.settings import DEFAULT_LEVEL_INDICATOR
+  File "D:\home\ubuntu\gaara_erp_v5\.venv\Lib\site-packages\mptt\settings.py", line 5, in <module>
+    DEFAULT_LEVEL_INDICATOR = getattr(settings, "MPTT_DEFAULT_LEVEL_INDICATOR", "---")
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\home\ubuntu\gaara_erp_v5\.venv\Lib\site-packages\django\conf\__init__.py", line 81, in __getattr__
+    self._setup(name)
+  File "D:\home\ubuntu\gaara_erp_v5\.venv\Lib\site-packages\django\conf\__init__.py", line 61, in _setup
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Requested setting MPTT_DEFAULT_LEVEL_INDICATOR, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.

@@ -1,0 +1,17 @@
+{
+  "module": "services_modules.core.__init__",
+  "imports": [
+    "importlib"
+  ],
+  "classes": [
+    {
+      "name": "_Dummy",
+      "methods": [],
+      "variables": []
+    }
+  ],
+  "functions": [],
+  "variables": [
+    "__all__"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "module": "business_modules.pos.models.pos_config",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "POSConfig",
+    "PaymentMethod",
+    "__all__"
+  ]
+}

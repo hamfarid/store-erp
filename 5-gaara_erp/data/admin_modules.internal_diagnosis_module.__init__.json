@@ -1,0 +1,9 @@
+{
+  "module": "admin_modules.internal_diagnosis_module.__init__",
+  "imports": [],
+  "classes": [],
+  "functions": [],
+  "variables": [
+    "default_app_config"
+  ]
+}
