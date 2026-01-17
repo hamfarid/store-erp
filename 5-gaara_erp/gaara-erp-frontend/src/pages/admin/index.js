@@ -4,8 +4,6 @@
  */
 
 export { default as AdminDashboardPage } from './AdminDashboardPage'
-
-// Placeholder exports for remaining pages
-export const SystemLogsPage = () => null
-export const SecuritySettingsPage = () => null
-export const ModulesManagementPage = () => null
+export { default as SystemLogsPage } from './SystemLogsPage'
+export { default as SecuritySettingsPage } from './SecuritySettingsPage'
+export { default as ModulesManagementPage } from './ModulesManagementPage'

@@ -5,9 +5,7 @@
 
 export { default as NotificationsPage } from './NotificationsPage'
 export { default as IntegrationsPage } from './IntegrationsPage'
-
-// Placeholder exports for remaining pages
-export const EmailPage = () => null
-export const SMSPage = () => null
-export const PrintingPage = () => null
-export const SchedulerPage = () => null
+export { default as EmailPage } from './EmailPage'
+export { default as SMSPage } from './SMSPage'
+export { default as PrintingPage } from './PrintingPage'
+export { default as SchedulerPage } from './SchedulerPage'

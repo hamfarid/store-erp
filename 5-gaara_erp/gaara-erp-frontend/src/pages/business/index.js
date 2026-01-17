@@ -8,8 +8,6 @@ export { default as InventoryPage } from './InventoryPage'
 export { default as AccountingPage } from './AccountingPage'
 export { default as PurchasingPage } from './PurchasingPage'
 export { default as ContactsPage } from './ContactsPage'
-
-// Placeholder exports for remaining pages
-export const ReportsPage = () => null
-export const WarehousePage = () => null
-export const POSPage = () => null
+export { default as BusinessReportsPage } from './BusinessReportsPage'
+export { default as WarehousePage } from './WarehousePage'
+export { default as POSPage } from './POSPage'

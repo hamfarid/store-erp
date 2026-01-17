@@ -4,10 +4,8 @@
  */
 
 export { default as ReportsPage } from './ReportsPage'
-
-// Placeholder exports for remaining pages
-export const AuditLogsPage = () => null
-export const DataExportPage = () => null
-export const DataImportPage = () => null
-export const CachePage = () => null
-export const QueuePage = () => null
+export { default as AuditLogsPage } from './AuditLogsPage'
+export { default as DataExportPage } from './DataExportPage'
+export { default as DataImportPage } from './DataImportPage'
+export { default as CachePage } from './CachePage'
+export { default as QueuePage } from './QueuePage'
