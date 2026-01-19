@@ -11,16 +11,16 @@ class Sale(db.Model):
     __tablename__ = 'sales'
     
     id = Column(Integer, primary_key=True)
-    invoice_number = Column(String(50), unique=True, nullable=False)
+    invoice_number = Column(String(50), unique=True, nullable=False, index=True)
     
     # معلومات العميل
-    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=True)
+    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=True, index=True)
     customer_name = Column(String(200), nullable=True)
     
     # معلومات الوردية والفرع
-    shift_id = Column(Integer, ForeignKey('shifts.id'), nullable=True)
-    branch_id = Column(Integer, ForeignKey('branches.id'), nullable=True)
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    shift_id = Column(Integer, ForeignKey('shifts.id'), nullable=True, index=True)
+    branch_id = Column(Integer, ForeignKey('branches.id'), nullable=True, index=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False, index=True)
     
     # المبالغ
     subtotal = Column(Float, nullable=False, default=0.0)
@@ -36,7 +36,7 @@ class Sale(db.Model):
     change_amount = Column(Float, nullable=False, default=0.0)
     
     # الحالة
-    status = Column(String(20), nullable=False, default='completed')  # completed, refunded, partial_refund
+    status = Column(String(20), nullable=False, default='completed', index=True)  # completed, refunded, partial_refund
     is_refund = Column(Boolean, default=False)
     refund_of_sale_id = Column(Integer, ForeignKey('sales.id'), nullable=True)
     
@@ -44,8 +44,8 @@ class Sale(db.Model):
     notes = Column(Text, nullable=True)
     
     # التواريخ
-    sale_date = Column(DateTime, nullable=False, default=datetime.utcnow)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    sale_date = Column(DateTime, nullable=False, default=datetime.utcnow, index=True)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # العلاقات - disabled user relationship to avoid mapper conflicts

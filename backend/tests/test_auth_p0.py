@@ -26,9 +26,9 @@ class TestAuthenticationNegative:
     def setup(self):
         """Setup before each test"""
         # Clear revocation list and lockout manager
-        jwt_revocation_list._revoked_tokens.clear()
+        jwt_revocation_list.clear()
         login_lockout_manager._failed_attempts.clear()
-        login_lockout_manager._locked_accounts.clear()
+        login_lockout_manager._lockout_times.clear()
         yield
 
     def test_invalid_credentials(self, client):

@@ -31,6 +31,10 @@ try:
     from src.database import db
     from src.models.user import User, Role
     from src.models.inventory import Product
+    # Import models with FK dependencies to ensure proper table creation order
+    from src.models.sales_engineer import SalesEngineer  # noqa: F401
+    from src.models.customer import Customer  # noqa: F401
+    from src.models.product_variant import ProductVariant  # noqa: F401
 
     SMOREST_AVAILABLE = True
 except Exception:

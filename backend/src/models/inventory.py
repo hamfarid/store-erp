@@ -216,6 +216,11 @@ class Product(db.Model):
         batches = relationship(
             "Lot", backref="product", lazy="dynamic", foreign_keys="Lot.product_id"
         )
+        
+        # Variants relationship for ProductVariant model
+        variants = relationship(
+            "ProductVariant", back_populates="product", lazy="dynamic"
+        )
 
         # Compatibility aliases expected by tests / some routes
         unit_price = synonym("selling_price")

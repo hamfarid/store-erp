@@ -1,0 +1,134 @@
+# =============================================================================
+# Store ERP Backend - Production Multi-Stage Dockerfile
+# =============================================================================
+# Stage 1: Builder - Install dependencies
+# Stage 2: Production - Minimal runtime image
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Stage 1: Builder
+# -----------------------------------------------------------------------------
+FROM python:3.11-slim-bookworm AS builder
+
+# Build arguments
+ARG BUILD_VERSION=latest
+ARG BUILD_DATE=unknown
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create virtual environment
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install Python dependencies
+WORKDIR /build
+COPY requirements.txt .
+RUN pip install --upgrade pip setuptools wheel && \
+    pip install -r requirements.txt && \
+    pip install gunicorn[gevent]
+
+# -----------------------------------------------------------------------------
+# Stage 2: Production
+# -----------------------------------------------------------------------------
+FROM python:3.11-slim-bookworm AS production
+
+# Labels
+LABEL maintainer="Store ERP Team" \
+      version="${BUILD_VERSION}" \
+      description="Store ERP Backend - Production Image" \
+      build_date="${BUILD_DATE}"
+
+# Build arguments
+ARG BUILD_VERSION=latest
+ARG BUILD_DATE=unknown
+
+# Environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONFAULTHANDLER=1 \
+    FLASK_ENV=production \
+    BUILD_VERSION=${BUILD_VERSION} \
+    BUILD_DATE=${BUILD_DATE} \
+    # Application paths
+    APP_HOME=/app \
+    # Gunicorn settings
+    GUNICORN_WORKERS=4 \
+    GUNICORN_THREADS=2 \
+    GUNICORN_TIMEOUT=120 \
+    GUNICORN_KEEPALIVE=5
+
+# Install runtime dependencies only
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 \
+    curl \
+    tini \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean \
+    && rm -rf /var/cache/apt/archives/*
+
+# Create non-root user
+RUN groupadd --gid 1000 appgroup && \
+    useradd --uid 1000 --gid appgroup --shell /bin/bash --create-home appuser
+
+# Copy virtual environment from builder
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Set working directory
+WORKDIR ${APP_HOME}
+
+# Create necessary directories
+RUN mkdir -p uploads logs backups flask_session && \
+    chown -R appuser:appgroup ${APP_HOME}
+
+# Copy application code
+COPY --chown=appuser:appgroup src/ ./src/
+COPY --chown=appuser:appgroup app.py ./
+COPY --chown=appuser:appgroup gunicorn.conf.py ./
+
+# Create gunicorn config if not exists
+RUN if [ ! -f gunicorn.conf.py ]; then \
+    echo 'import multiprocessing\n\
+workers = int(__import__("os").environ.get("GUNICORN_WORKERS", multiprocessing.cpu_count() * 2 + 1))\n\
+threads = int(__import__("os").environ.get("GUNICORN_THREADS", 2))\n\
+timeout = int(__import__("os").environ.get("GUNICORN_TIMEOUT", 120))\n\
+keepalive = int(__import__("os").environ.get("GUNICORN_KEEPALIVE", 5))\n\
+bind = "0.0.0.0:5000"\n\
+worker_class = "gthread"\n\
+worker_tmp_dir = "/dev/shm"\n\
+accesslog = "-"\n\
+errorlog = "-"\n\
+loglevel = "info"\n\
+capture_output = True\n\
+enable_stdio_inheritance = True\n\
+preload_app = True\n\
+max_requests = 1000\n\
+max_requests_jitter = 50' > gunicorn.conf.py; \
+    fi
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:5000/api/health || exit 1
+
+# Switch to non-root user
+USER appuser
+
+# Expose port
+EXPOSE 5000
+
+# Use tini as init system
+ENTRYPOINT ["/usr/bin/tini", "--"]
+
+# Start gunicorn
+CMD ["gunicorn", "--config", "gunicorn.conf.py", "app:app"]

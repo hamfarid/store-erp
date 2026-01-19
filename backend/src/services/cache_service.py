@@ -152,14 +152,20 @@ class JWTRevocationList:
     """In-memory JWT revocation list (development-safe)."""
 
     def __init__(self):
-        self._revoked: set[str] = set()
+        self._revoked_tokens: set[str] = set()
 
     def revoke(self, jti: str) -> None:
+        """Revoke a JWT token by its JTI."""
         if jti:
-            self._revoked.add(jti)
+            self._revoked_tokens.add(jti)
 
     def is_revoked(self, jti: str) -> bool:
-        return bool(jti and jti in self._revoked)
+        """Check if a token is revoked."""
+        return bool(jti and jti in self._revoked_tokens)
+    
+    def clear(self) -> None:
+        """Clear all revoked tokens (for testing)."""
+        self._revoked_tokens.clear()
 
 
 jwt_revocation_list = JWTRevocationList()

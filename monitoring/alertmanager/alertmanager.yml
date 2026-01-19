@@ -1,0 +1,130 @@
+# =============================================================================
+# Store ERP - AlertManager Configuration
+# =============================================================================
+
+global:
+  # SMTP settings for email alerts
+  smtp_smarthost: 'smtp.example.com:587'
+  smtp_from: 'alerts@store-erp.example.com'
+  smtp_auth_username: 'alerts@store-erp.example.com'
+  smtp_auth_password: '${SMTP_PASSWORD}'
+  smtp_require_tls: true
+
+  # Slack settings
+  slack_api_url: '${SLACK_WEBHOOK_URL}'
+
+  # Default resolve timeout
+  resolve_timeout: 5m
+
+# Templates for notifications
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# Routing tree
+route:
+  # Default receiver
+  receiver: 'team-notifications'
+  
+  # Group alerts by these labels
+  group_by: ['alertname', 'severity', 'team']
+  
+  # Wait before sending first notification
+  group_wait: 30s
+  
+  # Wait before sending subsequent notifications
+  group_interval: 5m
+  
+  # Wait before repeating notifications
+  repeat_interval: 4h
+
+  # Route based on severity and team
+  routes:
+    # Critical alerts - immediate notification
+    - match:
+        severity: critical
+      receiver: 'critical-alerts'
+      repeat_interval: 15m
+      continue: true
+
+    # Backend team alerts
+    - match:
+        team: backend
+      receiver: 'backend-team'
+      
+    # Infrastructure team alerts
+    - match:
+        team: infrastructure
+      receiver: 'infra-team'
+
+    # Security alerts
+    - match:
+        team: security
+      receiver: 'security-team'
+      repeat_interval: 1h
+
+    # Database alerts
+    - match:
+        team: database
+      receiver: 'database-team'
+
+# Inhibition rules
+inhibit_rules:
+  # If critical alert fires, suppress warnings
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'instance']
+
+# Receivers
+receivers:
+  # Default notifications
+  - name: 'team-notifications'
+    email_configs:
+      - to: 'team@store-erp.example.com'
+        send_resolved: true
+    slack_configs:
+      - channel: '#store-erp-alerts'
+        send_resolved: true
+        title: '{{ template "slack.default.title" . }}'
+        text: '{{ template "slack.default.text" . }}'
+
+  # Critical alerts - multiple channels
+  - name: 'critical-alerts'
+    email_configs:
+      - to: 'oncall@store-erp.example.com'
+        send_resolved: true
+    slack_configs:
+      - channel: '#store-erp-critical'
+        send_resolved: true
+        color: '{{ if eq .Status "firing" }}danger{{ else }}good{{ end }}'
+    # PagerDuty for critical
+    # pagerduty_configs:
+    #   - service_key: '${PAGERDUTY_SERVICE_KEY}'
+
+  # Backend team
+  - name: 'backend-team'
+    slack_configs:
+      - channel: '#backend-alerts'
+        send_resolved: true
+
+  # Infrastructure team
+  - name: 'infra-team'
+    slack_configs:
+      - channel: '#infra-alerts'
+        send_resolved: true
+
+  # Security team
+  - name: 'security-team'
+    email_configs:
+      - to: 'security@store-erp.example.com'
+        send_resolved: true
+    slack_configs:
+      - channel: '#security-alerts'
+        send_resolved: true
+
+  # Database team
+  - name: 'database-team'
+    slack_configs:
+      - channel: '#database-alerts'
+        send_resolved: true
