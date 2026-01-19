@@ -1,0 +1,248 @@
+# =============================================================================
+# Prometheus Alerting Rules - Gaara Scan AI
+# =============================================================================
+# 
+# Alert definitions for monitoring system health
+#
+# Last Updated: 2026-01-19
+# =============================================================================
+
+groups:
+  # ==========================================================================
+  # Service Availability Alerts
+  # ==========================================================================
+  - name: service_availability
+    rules:
+      - alert: BackendDown
+        expr: up{job="gaara-backend"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "Backend API is down"
+          description: "Backend API has been down for more than 2 minutes."
+
+      - alert: MLServiceDown
+        expr: up{job="gaara-ml-service"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: ml-service
+        annotations:
+          summary: "ML Service is down"
+          description: "ML Service has been down for more than 2 minutes."
+
+      - alert: AIServiceDown
+        expr: up{job="gaara-ai-service"} == 0
+        for: 5m
+        labels:
+          severity: warning
+          service: ai-service
+        annotations:
+          summary: "AI Service (Crawler) is down"
+          description: "AI Service has been down for more than 5 minutes."
+
+      - alert: PostgreSQLDown
+        expr: up{job="postgresql"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: "PostgreSQL database is down"
+          description: "PostgreSQL has been down for more than 1 minute."
+
+      - alert: RedisDown
+        expr: up{job="redis"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: cache
+        annotations:
+          summary: "Redis is down"
+          description: "Redis has been down for more than 2 minutes."
+
+  # ==========================================================================
+  # Performance Alerts
+  # ==========================================================================
+  - name: performance
+    rules:
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="gaara-backend"}[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "High API response time"
+          description: "95th percentile response time is above 2 seconds for 5 minutes."
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{job="gaara-backend",status=~"5.."}[5m]) / rate(http_requests_total{job="gaara-backend"}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "High error rate on backend"
+          description: "Error rate is above 5% for the last 5 minutes."
+
+      - alert: CriticalErrorRate
+        expr: rate(http_requests_total{job="gaara-backend",status=~"5.."}[5m]) / rate(http_requests_total{job="gaara-backend"}[5m]) > 0.10
+        for: 2m
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "Critical error rate on backend"
+          description: "Error rate is above 10% for the last 2 minutes."
+
+      - alert: MLModelLatency
+        expr: histogram_quantile(0.95, rate(ml_inference_duration_seconds_bucket[5m])) > 5
+        for: 5m
+        labels:
+          severity: warning
+          service: ml-service
+        annotations:
+          summary: "High ML inference latency"
+          description: "ML model inference time is above 5 seconds."
+
+  # ==========================================================================
+  # Resource Alerts
+  # ==========================================================================
+  - name: resources
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage"
+          description: "CPU usage is above 80% for 10 minutes on {{ $labels.instance }}."
+
+      - alert: CriticalCPUUsage
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 95
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical CPU usage"
+          description: "CPU usage is above 95% for 5 minutes on {{ $labels.instance }}."
+
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage"
+          description: "Memory usage is above 85% for 10 minutes on {{ $labels.instance }}."
+
+      - alert: CriticalMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 95
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical memory usage"
+          description: "Memory usage is above 95% for 5 minutes on {{ $labels.instance }}."
+
+      - alert: HighDiskUsage
+        expr: (1 - (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"})) * 100 > 80
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High disk usage"
+          description: "Disk usage is above 80% on {{ $labels.instance }}."
+
+      - alert: CriticalDiskUsage
+        expr: (1 - (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"})) * 100 > 90
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical disk usage"
+          description: "Disk usage is above 90% on {{ $labels.instance }}."
+
+  # ==========================================================================
+  # Database Alerts
+  # ==========================================================================
+  - name: database
+    rules:
+      - alert: PostgreSQLHighConnections
+        expr: pg_stat_activity_count{datname="gaara_scan_ai"} > 90
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "High PostgreSQL connections"
+          description: "PostgreSQL has more than 90 active connections."
+
+      - alert: PostgreSQLReplicationLag
+        expr: pg_replication_lag > 60
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "PostgreSQL replication lag"
+          description: "Replication lag is more than 60 seconds."
+
+      - alert: RedisHighMemory
+        expr: redis_memory_used_bytes / redis_memory_max_bytes * 100 > 80
+        for: 10m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "High Redis memory usage"
+          description: "Redis is using more than 80% of max memory."
+
+  # ==========================================================================
+  # Application-specific Alerts
+  # ==========================================================================
+  - name: application
+    rules:
+      - alert: HighDiagnosisQueueDepth
+        expr: diagnosis_queue_depth > 100
+        for: 10m
+        labels:
+          severity: warning
+          service: ml-service
+        annotations:
+          summary: "High diagnosis queue depth"
+          description: "More than 100 diagnoses waiting to be processed."
+
+      - alert: LowMLModelAccuracy
+        expr: ml_model_accuracy < 0.85
+        for: 1h
+        labels:
+          severity: warning
+          service: ml-service
+        annotations:
+          summary: "Low ML model accuracy"
+          description: "ML model accuracy has dropped below 85%."
+
+      - alert: HighCrawlerFailureRate
+        expr: rate(crawler_request_failures_total[15m]) / rate(crawler_requests_total[15m]) > 0.20
+        for: 15m
+        labels:
+          severity: warning
+          service: ai-service
+        annotations:
+          summary: "High crawler failure rate"
+          description: "Image crawler failure rate is above 20%."
+
+      - alert: UserAuthenticationFailures
+        expr: rate(auth_login_failures_total[10m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "High authentication failure rate"
+          description: "More than 10 authentication failures per minute - possible brute force attack."

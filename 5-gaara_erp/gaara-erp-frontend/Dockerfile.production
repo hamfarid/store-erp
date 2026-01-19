@@ -1,0 +1,104 @@
+# =============================================================================
+# Gaara ERP Frontend - Production Dockerfile
+# ملف Docker للواجهة الأمامية - الإنتاج
+#
+# Multi-stage build for optimal image size and security
+# Author: Global v35.0 Singularity
+# Created: 2026-01-17
+# =============================================================================
+
+# ===========================================================================
+# Stage 1: Dependencies
+# ===========================================================================
+FROM node:20-alpine AS deps
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-lock.yaml* ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile --ignore-scripts
+
+# ===========================================================================
+# Stage 2: Builder
+# ===========================================================================
+FROM node:20-alpine AS builder
+
+# Build arguments
+ARG VITE_API_URL=https://api.gaara-erp.com
+ARG VITE_APP_VERSION=1.0.0
+ARG VITE_ENABLE_ANALYTICS=true
+
+# Set environment variables for build
+ENV VITE_API_URL=$VITE_API_URL \
+    VITE_APP_VERSION=$VITE_APP_VERSION \
+    VITE_ENABLE_ANALYTICS=$VITE_ENABLE_ANALYTICS \
+    NODE_ENV=production
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+WORKDIR /app
+
+# Copy dependencies from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+
+# Copy source code
+COPY . .
+
+# Build the application
+RUN pnpm run build
+
+# ===========================================================================
+# Stage 3: Production (Nginx)
+# ===========================================================================
+FROM nginx:1.25-alpine AS production
+
+# Labels
+LABEL maintainer="Gaara ERP Team" \
+      version="1.0.0" \
+      description="Gaara ERP Frontend - Production" \
+      org.opencontainers.image.source="https://github.com/gaara-erp/gaara-erp"
+
+# Install additional tools
+RUN apk add --no-cache \
+    curl \
+    tzdata \
+    && rm -rf /var/cache/apk/*
+
+# Create non-root user
+RUN addgroup -g 1001 -S nginx-group && \
+    adduser -u 1001 -S -D -H -G nginx-group nginx-user
+
+# Copy Nginx config
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Copy built assets from builder
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Set permissions
+RUN chown -R nginx-user:nginx-group /usr/share/nginx/html && \
+    chown -R nginx-user:nginx-group /var/cache/nginx && \
+    chown -R nginx-user:nginx-group /var/log/nginx && \
+    touch /var/run/nginx.pid && \
+    chown -R nginx-user:nginx-group /var/run/nginx.pid
+
+# Security: Remove server tokens
+RUN sed -i 's/# server_tokens off;/server_tokens off;/g' /etc/nginx/nginx.conf || true
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost/health || exit 1
+
+# Expose port
+EXPOSE 80
+
+# Switch to non-root user
+USER nginx-user
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

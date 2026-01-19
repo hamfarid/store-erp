@@ -1,0 +1,187 @@
+---
+alwaysApply: true
+description: Speckit MCP usage rules - API specification lookup and validation
+globs:
+  - "**/*"
+---
+
+# Speckit MCP Rules
+
+## Overview
+Speckit is for API SPECIFICATION lookup and validation. Use when working with REST APIs, OpenAPI/Swagger specs, and API integrations.
+
+## Tool Functions
+
+### speckit_search
+Search for API specifications in the Speckit database.
+
+**When to use:**
+- Discovering APIs for a service
+- Finding API endpoints
+- Looking up API documentation
+- Comparing API versions
+
+**Query Format:**
+```
+[service/company name] [API type] [version]
+```
+
+**Example Queries:**
+```
+"Stripe payment API v2"
+"GitHub REST API"
+"OpenAI completions API"
+"AWS S3 API operations"
+```
+
+### speckit_get_spec
+Retrieve the full OpenAPI/Swagger specification for an API.
+
+**When to use:**
+- Need complete endpoint documentation
+- Want all request/response schemas
+- Building API client code
+- Understanding full API surface
+
+**Parameters:**
+- `spec_id`: ID from speckit_search results
+- `version`: Specific version (optional)
+
+### speckit_validate
+Validate API requests and responses against specifications.
+
+**When to use:**
+- Debugging API integration issues
+- Verifying request format
+- Checking response schema
+- Testing API compliance
+
+**Parameters:**
+- `spec_id`: API specification ID
+- `endpoint`: API endpoint path
+- `method`: HTTP method
+- `request`: Request body to validate
+- `response`: Response to validate
+
+## Priority in Workflow
+
+```
+Exa (code context) → Speckit (API specs) → Ref (docs verification)
+```
+
+### Use Speckit When:
+1. Working with external REST APIs
+2. Need OpenAPI/Swagger documentation
+3. Validating API request/response schemas
+4. Building API integrations
+5. Debugging API-related errors
+
+### Skip Speckit When:
+1. Not working with REST APIs
+2. Need general code examples (use Exa)
+3. Need framework documentation (use Ref)
+4. Working with internal APIs without specs
+
+## Workflow Examples
+
+### Example 1: New API Integration
+```
+1. speckit_search "ServiceName API"
+2. Review available specs
+3. speckit_get_spec for chosen API
+4. Extract endpoint details
+5. Implement integration
+6. speckit_validate during development
+```
+
+### Example 2: API Debugging
+```
+1. Identify failing API call
+2. speckit_search for the API
+3. speckit_get_spec for endpoint details
+4. speckit_validate request format
+5. Compare against spec
+6. Fix discrepancies
+```
+
+### Example 3: API Version Migration
+```
+1. speckit_search "ServiceName API v2"
+2. speckit_get_spec for both versions
+3. Compare endpoint changes
+4. Identify breaking changes
+5. Update implementation
+```
+
+## Code Generation from Specs
+
+When generating code from Speckit results:
+
+```python
+# API Specification Reference:
+# Service: Stripe Payment API
+# Version: 2023-10-16
+# Endpoint: POST /v1/payment_intents
+# Spec ID: stripe-api-v2023-10-16
+# Generated: 2026-01-12
+
+def create_payment_intent(amount: int, currency: str) -> dict:
+    """
+    Create a payment intent.
+    
+    Schema validated against OpenAPI spec.
+    """
+    pass
+```
+
+## Integration with Exa and Ref
+
+### Exa → Speckit Flow:
+```
+1. Exa: Find code examples for API usage
+2. Speckit: Verify endpoint schemas
+3. Combine: Use Exa patterns with Speckit validation
+```
+
+### Speckit → Ref Flow:
+```
+1. Speckit: Get API specification
+2. Ref: Read official guides/tutorials
+3. Combine: Spec accuracy + implementation guidance
+```
+
+## Best Practices
+
+### DO:
+- ✅ Search before assuming API structure
+- ✅ Validate requests during development
+- ✅ Include spec version in code comments
+- ✅ Check for API version updates
+- ✅ Use exact endpoint paths from specs
+
+### DON'T:
+- ❌ Assume API structure without checking
+- ❌ Ignore validation errors
+- ❌ Mix versions in single integration
+- ❌ Skip spec lookup for "simple" APIs
+
+## Error Handling
+
+### Spec Not Found:
+1. Try alternative service names
+2. Check for API versioning in name
+3. Fall back to Exa for documentation
+4. Use Ref for official API docs
+
+### Validation Failures:
+1. Check request field types
+2. Verify required fields present
+3. Check enum values
+4. Validate nested objects
+5. Compare against spec exactly
+
+### Version Mismatch:
+1. Identify spec version
+2. Check API version in use
+3. Update to matching versions
+4. Document version requirements

@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+
+{% block title %}الإعدادات - نظام جعاره الزراعي الذكي{% endblock %}
+
+{% block page_title %}الإعدادات{% endblock %}
+
+{% block content %}
+<div class="settings-grid">
+    <div class="settings-card">
+        <div class="settings-header">
+            <h3>إعدادات النظام</h3>
+            <div class="settings-icon">
+                <i class="material-icons">settings</i>
+            </div>
+        </div>
+        <form class="settings-form">
+            <div class="form-group">
+                <label>اسم النظام</label>
+                <input type="text" value="نظام جعاره الزراعي الذكي" />
+            </div>
+            <div class="form-group">
+                <label>المنطقة الزمنية</label>
+                <select>
+                    <option>توقيت الرياض (GMT+3)</option>
+                    <option>توقيت مكة المكرمة (GMT+3)</option>
+                    <option>توقيت القاهرة (GMT+2)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>اللغة</label>
+                <select>
+                    <option>العربية</option>
+                    <option>English</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>وضع العرض</label>
+                <div class="theme-toggle">
+                    <button class="theme-btn active">
+                        <i class="material-icons">light_mode</i>
+                        فاتح
+                    </button>
+                    <button class="theme-btn">
+                        <i class="material-icons">dark_mode</i>
+                        داكن
+                    </button>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary">
+                <i class="material-icons">save</i>
+                حفظ التغييرات
+            </button>
+        </form>
+    </div>
+
+    <div class="settings-card">
+        <div class="settings-header">
+            <h3>إعدادات التنبيهات</h3>
+            <div class="settings-icon">
+                <i class="material-icons">notifications</i>
+            </div>
+        </div>
+        <form class="settings-form">
+            <div class="form-group">
+                <label>تنبيهات البريد الإلكتروني</label>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="email-alerts" checked />
+                    <label for="email-alerts"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>تنبيهات النظام</label>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="system-alerts" checked />
+                    <label for="system-alerts"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>تنبيهات النباتات</label>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="plant-alerts" checked />
+                    <label for="plant-alerts"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>تنبيهات الأمان</label>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="security-alerts" checked />
+                    <label for="security-alerts"></label>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary">
+                <i class="material-icons">save</i>
+                حفظ التغييرات
+            </button>
+        </form>
+    </div>
+
+    <div class="settings-card">
+        <div class="settings-header">
+            <h3>إعدادات الأمان</h3>
+            <div class="settings-icon">
+                <i class="material-icons">security</i>
+            </div>
+        </div>
+        <form class="settings-form">
+            <div class="form-group">
+                <label>تغيير كلمة المرور</label>
+                <input type="password" placeholder="كلمة المرور الحالية" />
+                <input type="password" placeholder="كلمة المرور الجديدة" />
+                <input type="password" placeholder="تأكيد كلمة المرور الجديدة" />
+            </div>
+            <div class="form-group">
+                <label>المصادقة الثنائية</label>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="2fa" />
+                    <label for="2fa"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>جلسات تسجيل الدخول</label>
+                <button class="btn-secondary">
+                    <i class="material-icons">devices</i>
+                    عرض الجلسات النشطة
+                </button>
+            </div>
+            <button type="submit" class="btn-primary">
+                <i class="material-icons">save</i>
+                حفظ التغييرات
+            </button>
+        </form>
+    </div>
+
+    <div class="settings-card">
+        <div class="settings-header">
+            <h3>النسخ الاحتياطي</h3>
+            <div class="settings-icon">
+                <i class="material-icons">backup</i>
+            </div>
+        </div>
+        <form class="settings-form">
+            <div class="form-group">
+                <label>النسخ الاحتياطي التلقائي</label>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="auto-backup" checked />
+                    <label for="auto-backup"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>تكرار النسخ الاحتياطي</label>
+                <select>
+                    <option>يومي</option>
+                    <option>أسبوعي</option>
+                    <option>شهري</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>النسخ الاحتياطي اليدوي</label>
+                <button class="btn-secondary">
+                    <i class="material-icons">download</i>
+                    إنشاء نسخة احتياطية
+                </button>
+            </div>
+            <div class="form-group">
+                <label>استعادة النسخ الاحتياطي</label>
+                <button class="btn-secondary">
+                    <i class="material-icons">upload</i>
+                    استعادة من نسخة احتياطية
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .settings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 1.5rem;
+    }
+    .settings-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .settings-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    .settings-header h3 {
+        color: #333;
+        font-size: 1.2rem;
+    }
+    .settings-icon {
+        width: 40px;
+        height: 40px;
+        background: #E8F5E9;
+        color: #2E7D32;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .settings-icon i {
+        font-size: 24px;
+    }
+    .settings-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .form-group label {
+        color: #666;
+        font-size: 0.9rem;
+    }
+    .form-group input,
+    .form-group select {
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: white;
+    }
+    .theme-toggle {
+        display: flex;
+        gap: 1rem;
+    }
+    .theme-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: white;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .theme-btn.active {
+        background: #E8F5E9;
+        color: #2E7D32;
+        border-color: #2E7D32;
+    }
+    .toggle-switch {
+        position: relative;
+        width: 60px;
+        height: 34px;
+    }
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .toggle-switch label {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+    .toggle-switch label:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+    .toggle-switch input:checked + label {
+        background-color: #2E7D32;
+    }
+    .toggle-switch input:checked + label:before {
+        transform: translateX(26px);
+    }
+    .btn-primary {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        background: #2E7D32;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .btn-primary:hover {
+        background: #1B5E20;
+    }
+    .btn-secondary {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        border: 1px solid #2E7D32;
+        border-radius: 5px;
+        background: white;
+        color: #2E7D32;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .btn-secondary:hover {
+        background: #E8F5E9;
+    }
+    @media (max-width: 768px) {
+        .settings-grid {
+            grid-template-columns: 1fr;
+        }
+        .theme-toggle {
+            flex-direction: column;
+        }
+        .theme-btn {
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-primary,
+        .btn-secondary {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<script>
+    // Theme toggle functionality
+    const themeBtns = document.querySelectorAll('.theme-btn');
+    themeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            themeBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+</script>
+{% endblock %} 

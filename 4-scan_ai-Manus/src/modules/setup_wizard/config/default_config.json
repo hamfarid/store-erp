@@ -1,0 +1,125 @@
+{
+    "system_settings": {
+        "app_name": "نظام الذكاء الاصطناعي الزراعي",
+        "language": "ar",
+        "timezone": "Africa/Cairo",
+        "date_format": "YYYY-MM-DD",
+        "time_format": "HH:mm:ss",
+        "theme": "light",
+        "debug_mode": false,
+        "setup_completed": false,
+        "setup_date": null
+    },
+    "database_settings": {
+        "db_type": "postgresql",
+        "db_host": "localhost",
+        "db_port": 5432,
+        "db_name": "agri_ai_db",
+        "db_user": "postgres",
+        "db_password": "",
+        "connection_pool_size": 10,
+        "connection_timeout": 30
+    },
+    "user_settings": {
+        "admin_username": "admin",
+        "admin_password": "",
+        "admin_email": "",
+        "default_role": "admin",
+        "available_roles": [
+            "admin",
+            "manager",
+            "user",
+            "viewer"
+        ],
+        "password_policy": {
+            "min_length": 8,
+            "require_uppercase": true,
+            "require_lowercase": true,
+            "require_numbers": true,
+            "require_special_chars": true
+        }
+    },
+    "agricultural_modules": {
+        "disease_diagnosis": {
+            "enabled": true,
+            "knowledge_base_path": "data/disease_knowledge_base.json",
+            "model_path": "models/disease_model.pkl",
+            "confidence_threshold": 0.75
+        },
+        "image_processing": {
+            "enabled": true,
+            "model_path": "models/image_model.h5",
+            "supported_formats": [
+                "jpg",
+                "jpeg",
+                "png"
+            ],
+            "max_image_size": 10485760
+        },
+        "plant_hybridization": {
+            "enabled": true,
+            "data_path": "data/plant_varieties.json",
+            "simulation_iterations": 1000,
+            "parallel_processing": false,
+            "max_generations": 10
+        }
+    },
+    "ai_settings": {
+        "central_ai": {
+            "enabled": true,
+            "model_type": "local",
+            "api_key": "",
+            "max_tokens": 2000,
+            "temperature": 0.7,
+            "request_timeout": 60
+        },
+        "agents": {
+            "max_agents": 10,
+            "default_permissions": [
+                "read",
+                "analyze"
+            ],
+            "memory_enabled": true,
+            "memory_retention_days": 30
+        },
+        "vector_db": {
+            "enabled": true,
+            "db_type": "milvus",
+            "host": "localhost",
+            "port": 19530
+        }
+    },
+    "notification_settings": {
+        "email": {
+            "enabled": false,
+            "smtp_server": "",
+            "smtp_port": 587,
+            "smtp_user": "",
+            "smtp_password": "",
+            "from_email": "",
+            "use_tls": true
+        },
+        "sms": {
+            "enabled": false,
+            "provider": "",
+            "api_key": ""
+        },
+        "in_app": {
+            "enabled": true,
+            "max_notifications": 100,
+            "retention_days": 30
+        }
+    },
+    "backup_settings": {
+        "auto_backup": {
+            "enabled": true,
+            "frequency": "daily",
+            "time": "02:00",
+            "retention_count": 7
+        },
+        "backup_path": "backups/",
+        "include_uploads": true,
+        "include_logs": false,
+        "compress": true
+    }
+}

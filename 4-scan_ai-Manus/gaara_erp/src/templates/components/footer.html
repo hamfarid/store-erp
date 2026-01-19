@@ -1,0 +1,114 @@
+<!-- 
+مكون Footer لنظام Gaara ERP
+يحتوي على معلومات حقوق النشر، روابط مفيدة، ومعلومات الإصدار
+-->
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Component - Gaara ERP</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="/static/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <style>
+        .footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            padding: 1.5rem 0;
+            color: #6c757d;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-copyright {
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-copyright img {
+            height: 30px;
+            margin-left: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .footer-version {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-version .badge {
+            background-color: #3498db;
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-copyright">
+                    <img src="/static/images/logo-small.png" alt="Gaara ERP Logo">
+                    <span>© 2025 نظام Gaara ERP. جميع الحقوق محفوظة.</span>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="/about">عن النظام</a>
+                    <a href="/privacy">سياسة الخصوصية</a>
+                    <a href="/terms">شروط الاستخدام</a>
+                    <a href="/contact">اتصل بنا</a>
+                    <a href="/help">المساعدة</a>
+                </div>
+                
+                <div class="footer-version">
+                    <span>الإصدار:</span>
+                    <span class="badge">1.0.0</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // يمكن إضافة أي سلوك JavaScript إضافي هنا
+    </script>
+</body>
+</html>

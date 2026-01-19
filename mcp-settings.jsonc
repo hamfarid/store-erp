@@ -1,0 +1,160 @@
+{
+  // VS Code MCP Configuration
+  // Add to your ~/.config/Code/User/settings.json or .vscode/settings.json
+  
+  "mcp.servers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "Dynamic and reflective problem-solving through thought sequences"
+    },
+
+    "exa": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-exa"],
+      "env": {
+        "EXA_API_KEY": "${env:EXA_API_KEY}"
+      },
+      "description": "Primary research - Code context search and web research"
+    },
+
+    "speckit": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-speckit"],
+      "description": "API specification lookup and validation"
+    },
+
+    "ref": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-ref"],
+      "env": {
+        "REF_API_KEY": "${env:REF_API_KEY}"
+      },
+      "description": "Documentation verification"
+    },
+
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server"],
+      "env": {
+        "SUPABASE_URL": "${env:SUPABASE_URL}",
+        "SUPABASE_ANON_KEY": "${env:SUPABASE_ANON_KEY}",
+        "SUPABASE_SERVICE_ROLE_KEY": "${env:SUPABASE_SERVICE_ROLE_KEY}"
+      },
+      "description": "Database queries"
+    },
+
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "${env:SENTRY_AUTH_TOKEN}",
+        "SENTRY_ORG": "${env:SENTRY_ORG}",
+        "SENTRY_PROJECT": "${env:SENTRY_PROJECT}"
+      },
+      "description": "Error tracking"
+    },
+
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "description": "Code management"
+    },
+
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${env:FIRECRAWL_API_KEY}"
+      },
+      "description": "Data scraping"
+    },
+
+    "pinecone": {
+      "command": "npx",
+      "args": ["-y", "@pinecone-database/mcp-server"],
+      "env": {
+        "PINECONE_API_KEY": "${env:PINECONE_API_KEY}",
+        "PINECONE_ENVIRONMENT": "${env:PINECONE_ENVIRONMENT}",
+        "PINECONE_INDEX_NAME": "${env:PINECONE_INDEX_NAME}"
+      },
+      "description": "Vector search"
+    },
+
+    "vectara": {
+      "command": "npx",
+      "args": ["-y", "@vectara/mcp-server"],
+      "env": {
+        "VECTARA_CUSTOMER_ID": "${env:VECTARA_CUSTOMER_ID}",
+        "VECTARA_CORPUS_ID": "${env:VECTARA_CORPUS_ID}",
+        "VECTARA_API_KEY": "${env:VECTARA_API_KEY}"
+      },
+      "description": "RAG engine"
+    },
+
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp-server"],
+      "description": "Browser automation"
+    },
+
+    "magic-ui": {
+      "command": "npx",
+      "args": ["-y", "@magicui/mcp-server"],
+      "description": "UI components"
+    },
+
+    "datadog": {
+      "command": "npx",
+      "args": ["-y", "@datadog/mcp-server"],
+      "env": {
+        "DD_API_KEY": "${env:DD_API_KEY}",
+        "DD_APP_KEY": "${env:DD_APP_KEY}",
+        "DD_SITE": "${env:DD_SITE}"
+      },
+      "description": "Observability"
+    },
+
+    "snyk": {
+      "command": "npx",
+      "args": ["-y", "@snyk/mcp-server"],
+      "env": {
+        "SNYK_TOKEN": "${env:SNYK_TOKEN}",
+        "SNYK_ORG_ID": "${env:SNYK_ORG_ID}"
+      },
+      "description": "Security scanning"
+    },
+
+    "shadcn": {
+      "command": "npx",
+      "args": ["-y", "@shadcn/mcp-server"],
+      "description": "Professional UI components"
+    },
+
+    "railway": {
+      "command": "npx",
+      "args": ["-y", "@railway/mcp-server"],
+      "env": {
+        "RAILWAY_TOKEN": "${env:RAILWAY_TOKEN}"
+      },
+      "description": "Django/Python deployment"
+    },
+
+    "vercel": {
+      "command": "npx",
+      "args": ["-y", "@vercel/mcp-server"],
+      "env": {
+        "VERCEL_TOKEN": "${env:VERCEL_TOKEN}"
+      },
+      "description": "Frontend deployment"
+    }
+  },
+
+  // MCP Extension Settings
+  "mcp.enabled": true,
+  "mcp.autoStart": true,
+  "mcp.logLevel": "info"
+}

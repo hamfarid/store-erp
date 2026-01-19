@@ -1,0 +1,43 @@
+#!/bin/bash
+
+echo "========================================"
+echo "TypeScript Fixes for Admin Panel"
+echo "========================================"
+echo
+
+echo "🔧 Step 1: Running TypeScript fixes..."
+node fix-typescript.js
+if [ $? -ne 0 ]; then
+    echo "❌ Error running TypeScript fixes"
+    exit 1
+fi
+echo
+
+echo "📦 Step 2: Installing/updating dependencies..."
+npm install
+if [ $? -ne 0 ]; then
+    echo "❌ Error installing dependencies"
+    exit 1
+fi
+echo
+
+echo "🔍 Step 3: Running TypeScript type check..."
+npm run type-check
+if [ $? -ne 0 ]; then
+    echo "⚠️  TypeScript type check found issues"
+    echo "This is normal if there are issues in your source code"
+    echo "The node_modules issues should be resolved"
+else
+    echo "✅ TypeScript type check passed!"
+fi
+echo
+
+echo "🎉 TypeScript fixes completed!"
+echo
+echo "Next steps:"
+echo "1. Run: npm start (to start development server)"
+echo "2. Run: npm run build (to test production build)"
+echo
+echo "If you see TypeScript errors, they should now be limited to your source code only."
+echo "Check TYPESCRIPT_FIXES.md for troubleshooting information."
+echo

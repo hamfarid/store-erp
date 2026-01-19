@@ -1,86 +1,112 @@
-# Docker Compose for Gaara ERP Monitoring Stack
+# =============================================================================
+# Gaara ERP - Monitoring Stack (Docker Compose)
+# مكدس المراقبة
+#
 # Includes: Prometheus, Grafana, AlertManager, Node Exporter
+#
+# Author: Global v35.0 Singularity
+# Created: 2026-01-17
+#
+# Usage:
+#   docker-compose -f docker-compose.monitoring.yml up -d
+# =============================================================================
 
 version: '3.8'
 
+networks:
+  monitoring:
+    driver: bridge
+  gaara-network:
+    external: true
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  alertmanager_data:
+
 services:
-  # ==================================
+  # ===========================================================================
   # Prometheus - Metrics Collection
-  # ==================================
+  # ===========================================================================
   prometheus:
     image: prom/prometheus:v2.48.0
-    container_name: gaara_prometheus
+    container_name: gaara-prometheus
     restart: unless-stopped
-    ports:
-      - "9090:9090"
+    user: "1000:1000"
     volumes:
-      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - ./monitoring/alerts:/etc/prometheus/alerts:ro
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/prometheus/rules:/etc/prometheus/rules:ro
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention.time=30d'
+      - '--storage.tsdb.retention.size=10GB'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
       - '--web.enable-lifecycle'
       - '--web.enable-admin-api'
+    ports:
+      - "9090:9090"
     networks:
       - monitoring
+      - gaara-network
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost:9090/-/healthy"]
       interval: 30s
       timeout: 10s
       retries: 3
 
-  # ==================================
+  # ===========================================================================
   # Grafana - Visualization
-  # ==================================
+  # ===========================================================================
   grafana:
     image: grafana/grafana:10.2.2
-    container_name: gaara_grafana
+    container_name: gaara-grafana
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    user: "1000:1000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_ROOT_URL=https://grafana.gaara-erp.com
+      - GF_SMTP_ENABLED=true
+      - GF_SMTP_HOST=${SMTP_HOST:-smtp.gmail.com:587}
+      - GF_SMTP_USER=${SMTP_USER}
+      - GF_SMTP_PASSWORD=${SMTP_PASSWORD}
+      - GF_SMTP_FROM_ADDRESS=grafana@gaara-erp.com
     volumes:
       - grafana_data:/var/lib/grafana
       - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
       - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
-    environment:
-      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-GaaraERP2024!}
-      - GF_USERS_ALLOW_SIGN_UP=false
-      - GF_SERVER_ROOT_URL=http://localhost:3000
-      - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-clock-panel
-      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/gaara-overview.json
-      # Arabic RTL Support
-      - GF_DATE_FORMATS_DEFAULT_TIMEZONE=Asia/Riyadh
+    ports:
+      - "3030:3000"
     networks:
       - monitoring
     depends_on:
       - prometheus
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://localhost:3000/api/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
 
-  # ==================================
-  # AlertManager - Alert Management
-  # ==================================
+  # ===========================================================================
+  # AlertManager - Alert Handling
+  # ===========================================================================
   alertmanager:
     image: prom/alertmanager:v0.26.0
-    container_name: gaara_alertmanager
+    container_name: gaara-alertmanager
     restart: unless-stopped
-    ports:
-      - "9093:9093"
     volumes:
-      - ./monitoring/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - ./monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
       - alertmanager_data:/alertmanager
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
-      - '--web.external-url=http://localhost:9093'
+      - '--web.external-url=https://alerts.gaara-erp.com'
+    ports:
+      - "9093:9093"
     networks:
       - monitoring
     healthcheck:
@@ -89,15 +115,13 @@ services:
       timeout: 10s
       retries: 3
 
-  # ==================================
+  # ===========================================================================
   # Node Exporter - System Metrics
-  # ==================================
+  # ===========================================================================
   node-exporter:
     image: prom/node-exporter:v1.7.0
-    container_name: gaara_node_exporter
+    container_name: gaara-node-exporter
     restart: unless-stopped
-    ports:
-      - "9100:9100"
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -107,51 +131,89 @@ services:
       - '--path.sysfs=/host/sys'
       - '--path.rootfs=/rootfs'
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    ports:
+      - "9100:9100"
     networks:
       - monitoring
 
-  # ==================================
-  # Redis Exporter - Redis Metrics
-  # ==================================
+  # ===========================================================================
+  # cAdvisor - Container Metrics
+  # ===========================================================================
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    container_name: gaara-cadvisor
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - monitoring
+
+  # ===========================================================================
+  # Redis Exporter
+  # ===========================================================================
   redis-exporter:
     image: oliver006/redis_exporter:v1.55.0
-    container_name: gaara_redis_exporter
+    container_name: gaara-redis-exporter
     restart: unless-stopped
-    ports:
-      - "9121:9121"
     environment:
       - REDIS_ADDR=redis://redis:6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+    ports:
+      - "9121:9121"
     networks:
       - monitoring
-    depends_on:
-      - prometheus
+      - gaara-network
 
-  # ==================================
-  # Postgres Exporter - Database Metrics
-  # ==================================
+  # ===========================================================================
+  # PostgreSQL Exporter
+  # ===========================================================================
   postgres-exporter:
     image: prometheuscommunity/postgres-exporter:v0.15.0
-    container_name: gaara_postgres_exporter
+    container_name: gaara-postgres-exporter
     restart: unless-stopped
+    environment:
+      - DATA_SOURCE_NAME=postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@postgres:5432/${DB_NAME:-gaara}?sslmode=disable
     ports:
       - "9187:9187"
-    environment:
-      - DATA_SOURCE_NAME=postgresql://${DB_USER:-gaara}:${DB_PASSWORD:-password}@postgres:5432/${DB_NAME:-gaara_erp}?sslmode=disable
+    networks:
+      - monitoring
+      - gaara-network
+
+  # ===========================================================================
+  # Loki - Log Aggregation
+  # ===========================================================================
+  loki:
+    image: grafana/loki:2.9.2
+    container_name: gaara-loki
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/loki/loki-config.yml:/etc/loki/local-config.yaml:ro
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - monitoring
+
+  # ===========================================================================
+  # Promtail - Log Collector
+  # ===========================================================================
+  promtail:
+    image: grafana/promtail:2.9.2
+    container_name: gaara-promtail
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/promtail/promtail-config.yml:/etc/promtail/config.yml:ro
+      - /var/log:/var/log:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    command: -config.file=/etc/promtail/config.yml
     networks:
       - monitoring
     depends_on:
-      - prometheus
-
-networks:
-  monitoring:
-    driver: bridge
-    name: gaara_monitoring
-
-volumes:
-  prometheus_data:
-    name: gaara_prometheus_data
-  grafana_data:
-    name: gaara_grafana_data
-  alertmanager_data:
-    name: gaara_alertmanager_data
-
+      - loki

@@ -1,0 +1,207 @@
+{
+  "tomato": {
+    "varieties": {
+      "roma": {
+        "name": "روما",
+        "scientific_name": "Solanum lycopersicum 'Roma'",
+        "traits": {
+          "yield": 0.8,
+          "disease_resistance": 0.7,
+          "drought_tolerance": 0.6,
+          "fruit_size": 0.5,
+          "maturity_days": 75
+        },
+        "genetic_markers": {
+          "yield": [
+            "Y1",
+            "Y2"
+          ],
+          "disease_resistance": [
+            "DR1",
+            "DR3"
+          ],
+          "drought_tolerance": [
+            "DT2"
+          ],
+          "fruit_size": [
+            "FS1"
+          ],
+          "maturity_days": [
+            "MD2",
+            "MD3"
+          ]
+        }
+      },
+      "beefsteak": {
+        "name": "بيفستيك",
+        "scientific_name": "Solanum lycopersicum 'Beefsteak'",
+        "traits": {
+          "yield": 0.7,
+          "disease_resistance": 0.5,
+          "drought_tolerance": 0.4,
+          "fruit_size": 0.9,
+          "maturity_days": 85
+        },
+        "genetic_markers": {
+          "yield": [
+            "Y2",
+            "Y3"
+          ],
+          "disease_resistance": [
+            "DR2"
+          ],
+          "drought_tolerance": [
+            "DT1"
+          ],
+          "fruit_size": [
+            "FS2",
+            "FS3"
+          ],
+          "maturity_days": [
+            "MD1"
+          ]
+        }
+      },
+      "cherry": {
+        "name": "كرزية",
+        "scientific_name": "Solanum lycopersicum var. cerasiforme",
+        "traits": {
+          "yield": 0.9,
+          "disease_resistance": 0.8,
+          "drought_tolerance": 0.7,
+          "fruit_size": 0.2,
+          "maturity_days": 65
+        },
+        "genetic_markers": {
+          "yield": [
+            "Y1",
+            "Y4"
+          ],
+          "disease_resistance": [
+            "DR1",
+            "DR4"
+          ],
+          "drought_tolerance": [
+            "DT3",
+            "DT4"
+          ],
+          "fruit_size": [
+            "FS4"
+          ],
+          "maturity_days": [
+            "MD4"
+          ]
+        }
+      }
+    },
+    "trait_inheritance": {
+      "yield": {
+        "type": "polygenic",
+        "heritability": 0.6
+      },
+      "disease_resistance": {
+        "type": "polygenic",
+        "heritability": 0.7
+      },
+      "drought_tolerance": {
+        "type": "polygenic",
+        "heritability": 0.5
+      },
+      "fruit_size": {
+        "type": "polygenic",
+        "heritability": 0.8
+      },
+      "maturity_days": {
+        "type": "polygenic",
+        "heritability": 0.7
+      }
+    }
+  },
+  "wheat": {
+    "varieties": {
+      "hard_red": {
+        "name": "قمح أحمر صلب",
+        "scientific_name": "Triticum aestivum",
+        "traits": {
+          "yield": 0.75,
+          "disease_resistance": 0.65,
+          "drought_tolerance": 0.7,
+          "protein_content": 0.8,
+          "maturity_days": 120
+        },
+        "genetic_markers": {
+          "yield": [
+            "WY1",
+            "WY2"
+          ],
+          "disease_resistance": [
+            "WDR1"
+          ],
+          "drought_tolerance": [
+            "WDT1",
+            "WDT2"
+          ],
+          "protein_content": [
+            "WP1",
+            "WP2"
+          ],
+          "maturity_days": [
+            "WMD1"
+          ]
+        }
+      },
+      "soft_white": {
+        "name": "قمح أبيض طري",
+        "scientific_name": "Triticum aestivum",
+        "traits": {
+          "yield": 0.85,
+          "disease_resistance": 0.6,
+          "drought_tolerance": 0.5,
+          "protein_content": 0.6,
+          "maturity_days": 110
+        },
+        "genetic_markers": {
+          "yield": [
+            "WY2",
+            "WY3"
+          ],
+          "disease_resistance": [
+            "WDR2"
+          ],
+          "drought_tolerance": [
+            "WDT3"
+          ],
+          "protein_content": [
+            "WP3"
+          ],
+          "maturity_days": [
+            "WMD2",
+            "WMD3"
+          ]
+        }
+      }
+    },
+    "trait_inheritance": {
+      "yield": {
+        "type": "polygenic",
+        "heritability": 0.5
+      },
+      "disease_resistance": {
+        "type": "polygenic",
+        "heritability": 0.6
+      },
+      "drought_tolerance": {
+        "type": "polygenic",
+        "heritability": 0.7
+      },
+      "protein_content": {
+        "type": "polygenic",
+        "heritability": 0.8
+      },
+      "maturity_days": {
+        "type": "polygenic",
+        "heritability": 0.7
+      }
+    }
+  }
+}

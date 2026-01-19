@@ -1,0 +1,1 @@
+# FILE: backend/tests/integration/__init__.py | PURPOSE: Make integration tests a package to avoid import name collisions | OWNER: QA Team | RELATED: backend/tests/unit/__init__.py | LAST-AUDITED: 2025-12-13

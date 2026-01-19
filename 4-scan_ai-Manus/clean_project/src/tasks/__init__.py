@@ -1,0 +1,7 @@
+"""
+from flask import g
+مهام Celery لنظام الزراعة الذكية
+"""
+from .basic_tasks import *  # noqa: F403, F401
+from .module_tasks import *  # noqa: F403, F401
+from .monitoring_tasks import *  # noqa: F403, F401

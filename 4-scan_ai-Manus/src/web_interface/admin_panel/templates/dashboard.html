@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}لوحة التحكم - نظام جعاره الزراعي الذكي{% endblock %}
+
+{% block page_title %}لوحة التحكم{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+        <!-- AI Stats -->
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="material-icons">psychology</i>
+            </div>
+            <div class="stat-content">
+                <h3>الذكاء الاصطناعي</h3>
+                <div class="stat-values">
+                    <div class="stat-value">
+                        <span class="value">95%</span>
+                        <span class="label">دقة النموذج</span>
+                    </div>
+                    <div class="stat-value">
+                        <span class="value">12</span>
+                        <span class="label">النماذج النشطة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Stats -->
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="material-icons">memory</i>
+            </div>
+            <div class="stat-content">
+                <h3>الموارد</h3>
+                <div class="stat-values">
+                    <div class="stat-value">
+                        <span class="value">75%</span>
+                        <span class="label">استخدام المعالج</span>
+                    </div>
+                    <div class="stat-value">
+                        <span class="value">4.2GB</span>
+                        <span class="label">استخدام الذاكرة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Stats -->
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="material-icons">analytics</i>
+            </div>
+            <div class="stat-content">
+                <h3>الاستخدام</h3>
+                <div class="stat-values">
+                    <div class="stat-value">
+                        <span class="value">1.2K</span>
+                        <span class="label">الطلبات اليومية</span>
+                    </div>
+                    <div class="stat-value">
+                        <span class="value">98%</span>
+                        <span class="label">متوسط الاستجابة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts Stats -->
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="material-icons">notifications</i>
+            </div>
+            <div class="stat-content">
+                <h3>التنبيهات</h3>
+                <div class="stat-values">
+                    <div class="stat-value">
+                        <span class="value">3</span>
+                        <span class="label">تنبيهات جديدة</span>
+                    </div>
+                    <div class="stat-value">
+                        <span class="value">12</span>
+                        <span class="label">تنبيهات اليوم</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+        <!-- System Usage Chart -->
+        <div class="chart-card">
+            <h3>استخدام النظام</h3>
+            <canvas id="systemUsageChart"></canvas>
+        </div>
+
+        <!-- Model Accuracy Chart -->
+        <div class="chart-card">
+            <h3>دقة النماذج</h3>
+            <canvas id="modelAccuracyChart"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .dashboard {
+        padding: 1rem;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--primary-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .stat-icon i {
+        color: var(--primary-color);
+        font-size: 24px;
+    }
+
+    .stat-content {
+        flex: 1;
+    }
+
+    .stat-content h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+        color: var(--text-light);
+    }
+
+    .stat-values {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .stat-value {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stat-value .value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    .stat-value .label {
+        font-size: 0.875rem;
+        color: var(--text-light);
+    }
+
+    .charts-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .chart-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .chart-card h3 {
+        margin: 0 0 1rem 0;
+        font-size: 1.1rem;
+        color: var(--text-color);
+    }
+
+    @media (max-width: 768px) {
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .charts-section {
+            grid-template-columns: 1fr;
+        }
+
+        .stat-card {
+            padding: 1rem;
+        }
+
+        .stat-values {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // System Usage Chart
+    const systemUsageCtx = document.getElementById('systemUsageChart').getContext('2d');
+    new Chart(systemUsageCtx, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+            datasets: [{
+                label: 'استخدام المعالج',
+                data: [65, 59, 80, 81, 56, 55],
+                borderColor: '#2E7D32',
+                tension: 0.4
+            }, {
+                label: 'استخدام الذاكرة',
+                data: [28, 48, 40, 19, 86, 27],
+                borderColor: '#1976D2',
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+
+    // Model Accuracy Chart
+    const modelAccuracyCtx = document.getElementById('modelAccuracyChart').getContext('2d');
+    new Chart(modelAccuracyCtx, {
+        type: 'bar',
+        data: {
+            labels: ['النموذج 1', 'النموذج 2', 'النموذج 3', 'النموذج 4', 'النموذج 5'],
+            datasets: [{
+                label: 'دقة النموذج',
+                data: [95, 88, 92, 85, 90],
+                backgroundColor: '#2E7D32'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+</script>
+{% endblock %} 
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
+

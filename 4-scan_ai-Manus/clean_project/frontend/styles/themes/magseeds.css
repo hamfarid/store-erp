@@ -1,0 +1,325 @@
+/* ألوان Magseeds.com الرسمية */
+:root {
+  /* الألوان الأساسية */
+  --magseeds-primary: #2E7D32;        /* أخضر داكن */
+  --magseeds-primary-light: #4CAF50;   /* أخضر فاتح */
+  --magseeds-primary-dark: #1B5E20;    /* أخضر غامق */
+  
+  --magseeds-secondary: #FF9800;       /* برتقالي */
+  --magseeds-secondary-light: #FFB74D; /* برتقالي فاتح */
+  --magseeds-secondary-dark: #F57C00;  /* برتقالي غامق */
+  
+  --magseeds-accent: #8BC34A;          /* أخضر ليموني */
+  --magseeds-accent-light: #AED581;    /* أخضر ليموني فاتح */
+  --magseeds-accent-dark: #689F38;     /* أخضر ليموني غامق */
+  
+  /* ألوان الحالة */
+  --magseeds-success: #4CAF50;         /* نجاح */
+  --magseeds-warning: #FF9800;         /* تحذير */
+  --magseeds-error: #F44336;           /* خطأ */
+  --magseeds-info: #2196F3;            /* معلومات */
+  
+  /* ألوان النص */
+  --magseeds-text-primary: #2E2E2E;    /* نص أساسي */
+  --magseeds-text-secondary: #757575;  /* نص ثانوي */
+  --magseeds-text-light: #FFFFFF;      /* نص فاتح */
+  --magseeds-text-muted: #9E9E9E;      /* نص خافت */
+  
+  /* ألوان الخلفية */
+  --magseeds-bg-primary: #FFFFFF;      /* خلفية أساسية */
+  --magseeds-bg-secondary: #F5F5F5;    /* خلفية ثانوية */
+  --magseeds-bg-dark: #2E2E2E;         /* خلفية داكنة */
+  --magseeds-bg-light: #FAFAFA;        /* خلفية فاتحة */
+  
+  /* ألوان الحدود */
+  --magseeds-border-light: #E0E0E0;    /* حدود فاتحة */
+  --magseeds-border-medium: #BDBDBD;   /* حدود متوسطة */
+  --magseeds-border-dark: #757575;     /* حدود داكنة */
+  
+  /* الظلال */
+  --magseeds-shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+  --magseeds-shadow-medium: 0 4px 8px rgba(0,0,0,0.15);
+  --magseeds-shadow-heavy: 0 8px 16px rgba(0,0,0,0.2);
+  
+  /* التدرجات */
+  --magseeds-gradient-primary: linear-gradient(135deg, var(--magseeds-primary) 0%, var(--magseeds-primary-light) 100%);
+  --magseeds-gradient-secondary: linear-gradient(135deg, var(--magseeds-secondary) 0%, var(--magseeds-secondary-light) 100%);
+  --magseeds-gradient-accent: linear-gradient(135deg, var(--magseeds-accent) 0%, var(--magseeds-accent-light) 100%);
+  
+  /* أحجام الخط */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  
+  /* المسافات */
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  --spacing-3xl: 4rem;     /* 64px */
+  
+  /* نصف القطر */
+  --border-radius-sm: 0.25rem;  /* 4px */
+  --border-radius-md: 0.5rem;   /* 8px */
+  --border-radius-lg: 0.75rem;  /* 12px */
+  --border-radius-xl: 1rem;     /* 16px */
+  --border-radius-full: 50%;
+  
+  /* الانتقالات */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+}
+
+/* إعادة تعيين Bootstrap للألوان */
+.btn-primary {
+  background: var(--magseeds-gradient-primary);
+  border-color: var(--magseeds-primary);
+  color: var(--magseeds-text-light);
+}
+
+.btn-primary:hover {
+  background: var(--magseeds-primary-dark);
+  border-color: var(--magseeds-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--magseeds-shadow-medium);
+}
+
+.btn-secondary {
+  background: var(--magseeds-gradient-secondary);
+  border-color: var(--magseeds-secondary);
+  color: var(--magseeds-text-light);
+}
+
+.btn-secondary:hover {
+  background: var(--magseeds-secondary-dark);
+  border-color: var(--magseeds-secondary-dark);
+}
+
+.btn-success {
+  background-color: var(--magseeds-success);
+  border-color: var(--magseeds-success);
+}
+
+.btn-warning {
+  background-color: var(--magseeds-warning);
+  border-color: var(--magseeds-warning);
+}
+
+.btn-danger {
+  background-color: var(--magseeds-error);
+  border-color: var(--magseeds-error);
+}
+
+.btn-info {
+  background-color: var(--magseeds-info);
+  border-color: var(--magseeds-info);
+}
+
+/* ألوان النص */
+.text-primary {
+  color: var(--magseeds-primary) !important;
+}
+
+.text-secondary {
+  color: var(--magseeds-secondary) !important;
+}
+
+.text-success {
+  color: var(--magseeds-success) !important;
+}
+
+.text-warning {
+  color: var(--magseeds-warning) !important;
+}
+
+.text-danger {
+  color: var(--magseeds-error) !important;
+}
+
+.text-info {
+  color: var(--magseeds-info) !important;
+}
+
+/* ألوان الخلفية */
+.bg-primary {
+  background: var(--magseeds-gradient-primary) !important;
+}
+
+.bg-secondary {
+  background: var(--magseeds-gradient-secondary) !important;
+}
+
+.bg-success {
+  background-color: var(--magseeds-success) !important;
+}
+
+.bg-warning {
+  background-color: var(--magseeds-warning) !important;
+}
+
+.bg-danger {
+  background-color: var(--magseeds-error) !important;
+}
+
+.bg-info {
+  background-color: var(--magseeds-info) !important;
+}
+
+/* ألوان الحدود */
+.border-primary {
+  border-color: var(--magseeds-primary) !important;
+}
+
+.border-secondary {
+  border-color: var(--magseeds-secondary) !important;
+}
+
+/* فئات مخصصة لـ Magseeds */
+.magseeds-card {
+  background: var(--magseeds-bg-primary);
+  border: 1px solid var(--magseeds-border-light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--magseeds-shadow-light);
+  transition: var(--transition-normal);
+}
+
+.magseeds-card:hover {
+  box-shadow: var(--magseeds-shadow-medium);
+  transform: translateY(-2px);
+}
+
+.magseeds-gradient-text {
+  background: var(--magseeds-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.magseeds-badge {
+  background: var(--magseeds-gradient-accent);
+  color: var(--magseeds-text-light);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.magseeds-divider {
+  height: 2px;
+  background: var(--magseeds-gradient-primary);
+  border: none;
+  margin: var(--spacing-lg) 0;
+}
+
+/* أنماط الحالة */
+.status-healthy {
+  color: var(--magseeds-success);
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.status-warning {
+  color: var(--magseeds-warning);
+  background-color: rgba(255, 152, 0, 0.1);
+}
+
+.status-critical {
+  color: var(--magseeds-error);
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.status-info {
+  color: var(--magseeds-info);
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+/* أنماط التفاعل */
+.interactive-element {
+  transition: var(--transition-normal);
+  cursor: pointer;
+}
+
+.interactive-element:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--magseeds-shadow-medium);
+}
+
+.interactive-element:active {
+  transform: translateY(0);
+  box-shadow: var(--magseeds-shadow-light);
+}
+
+/* أنماط التحميل */
+.loading-spinner {
+  border: 3px solid var(--magseeds-border-light);
+  border-top: 3px solid var(--magseeds-primary);
+  border-radius: var(--border-radius-full);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* أنماط الرسوم المتحركة */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.5s ease-in-out;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* أنماط الاستجابة */
+@media (max-width: 768px) {
+  :root {
+    --font-size-base: 0.875rem;
+    --spacing-md: 0.75rem;
+    --spacing-lg: 1rem;
+  }
+  
+  .magseeds-card {
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+/* أنماط الطباعة */
+@media print {
+  .magseeds-card {
+    box-shadow: none;
+    border: 1px solid var(--magseeds-border-medium);
+  }
+  
+  .btn {
+    display: none;
+  }
+}
+

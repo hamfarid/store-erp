@@ -1,0 +1,207 @@
+{
+  "registry_version": "2.0",
+  "last_updated": "2026-01-19",
+  "total_files": 75,
+  "categories": {
+    "backend": {
+      "models": [
+        "backend/src/models/__init__.py",
+        "backend/src/models/user.py",
+        "backend/src/models/farm.py",
+        "backend/src/models/crop.py",
+        "backend/src/models/diagnosis.py",
+        "backend/src/models/disease.py",
+        "backend/src/models/equipment.py",
+        "backend/src/models/inventory.py",
+        "backend/src/models/sensor.py",
+        "backend/src/models/report.py",
+        "backend/src/models/company.py",
+        "backend/src/models/breeding.py",
+        "backend/src/models/relationships.py"
+      ],
+      "schemas": [
+        "backend/src/schemas/__init__.py",
+        "backend/src/schemas/common.py",
+        "backend/src/schemas/user.py",
+        "backend/src/schemas/farm.py",
+        "backend/src/schemas/crop.py",
+        "backend/src/schemas/diagnosis.py",
+        "backend/src/schemas/disease.py",
+        "backend/src/schemas/equipment.py",
+        "backend/src/schemas/inventory.py",
+        "backend/src/schemas/sensor.py",
+        "backend/src/schemas/report.py",
+        "backend/src/schemas/company.py",
+        "backend/src/schemas/breeding.py"
+      ],
+      "services": [
+        "backend/src/services/lockout_service.py",
+        "backend/src/services/health_service.py",
+        "backend/src/services/file_upload_service.py",
+        "backend/src/services/cache_service.py"
+      ],
+      "middleware": [
+        "backend/src/middleware/rate_limiter.py",
+        "backend/src/middleware/error_handler.py"
+      ],
+      "api": [
+        "backend/src/api/v1/auth.py",
+        "backend/src/api/v1/farms.py",
+        "backend/src/api/v1/crops.py",
+        "backend/src/api/v1/diagnosis.py",
+        "backend/src/api/v1/users.py",
+        "backend/src/api/v1/settings.py",
+        "backend/src/api/v1/setup.py",
+        "backend/src/api/v1/analytics.py",
+        "backend/src/api/v1/breeding.py",
+        "backend/src/api/v1/companies.py",
+        "backend/src/api/v1/diseases.py",
+        "backend/src/api/v1/equipment.py",
+        "backend/src/api/v1/inventory.py",
+        "backend/src/api/v1/reports.py",
+        "backend/src/api/v1/sensors.py"
+      ],
+      "utils": [
+        "backend/src/utils/response_handler.py"
+      ],
+      "core": [
+        "backend/src/core/db_manager.py"
+      ]
+    },
+    "frontend": {
+      "pages": [
+        "frontend/pages/Dashboard.jsx",
+        "frontend/pages/Login.jsx",
+        "frontend/pages/Register.jsx",
+        "frontend/pages/Farms.jsx",
+        "frontend/pages/Crops.jsx",
+        "frontend/pages/Diagnosis.jsx",
+        "frontend/pages/Equipment.jsx",
+        "frontend/pages/Inventory.jsx",
+        "frontend/pages/Users.jsx",
+        "frontend/pages/Analytics.jsx",
+        "frontend/pages/Settings.jsx",
+        "frontend/pages/Profile.jsx",
+        "frontend/pages/Sensors.jsx",
+        "frontend/pages/Reports.jsx",
+        "frontend/pages/Diseases.jsx",
+        "frontend/pages/Companies.jsx",
+        "frontend/pages/Breeding.jsx",
+        "frontend/pages/ForgotPassword.jsx",
+        "frontend/pages/ResetPassword.jsx",
+        "frontend/pages/SetupWizard.jsx"
+      ],
+      "components": [
+        "frontend/src/components/index.js",
+        "frontend/src/components/Button/index.jsx",
+        "frontend/src/components/Form/index.jsx",
+        "frontend/src/components/Modal/index.jsx",
+        "frontend/src/components/Card/index.jsx",
+        "frontend/src/components/DataTable/index.jsx",
+        "frontend/src/components/Navigation/index.js",
+        "frontend/src/components/Navigation/Sidebar.jsx",
+        "frontend/src/components/Navigation/Header.jsx",
+        "frontend/src/components/Layout/MainLayout.jsx",
+        "frontend/src/components/LanguageToggle.jsx",
+        "frontend/src/components/Skeleton.jsx",
+        "frontend/src/components/Toast.jsx"
+      ],
+      "hooks": [
+        "frontend/src/hooks/useApi.js",
+        "frontend/src/hooks/useAuth.js"
+      ],
+      "services": [
+        "frontend/services/ApiService.js"
+      ],
+      "routes": [
+        "frontend/src/routes/index.jsx"
+      ],
+      "i18n": [
+        "frontend/src/i18n/translations.js"
+      ],
+      "styles": [
+        "frontend/src/styles/rtl.css"
+      ],
+      "core": [
+        "frontend/src/App.jsx"
+      ]
+    },
+    "ml_service": [
+      "ml_service/model_manager.py",
+      "ml_service/confidence_calibrator.py",
+      "ml_service/Dockerfile"
+    ],
+    "image_crawler": [
+      "image_crawler/ssrf_protection.py",
+      "image_crawler/image_validator.py",
+      "image_crawler/Dockerfile"
+    ],
+    "monitoring": [
+      "monitoring/prometheus/prometheus.yml",
+      "monitoring/prometheus/rules/alerts.yml",
+      "monitoring/grafana/provisioning/dashboards/dashboards.yml",
+      "monitoring/grafana/provisioning/datasources/datasources.yml",
+      "monitoring/alertmanager/alertmanager.yml",
+      "monitoring/docker-compose.monitoring.yml"
+    ],
+    "ci_cd": [
+      ".github/workflows/ci.yml",
+      ".github/workflows/deploy.yml"
+    ],
+    "docker": [
+      "docker-compose.yml",
+      "backend/Dockerfile",
+      "frontend/Dockerfile"
+    ],
+    "config": [
+      "env.example",
+      "env.production.example",
+      "env.staging.example",
+      ".gitignore"
+    ],
+    "documentation": [
+      "CONSTITUTION.md",
+      "gaara_scan_ai.spec.md",
+      "todo.md",
+      "project_memory.md",
+      "plans/gaara_scan_ai.plan.md",
+      "tasks/gaara_scan_ai_tasks.md"
+    ],
+    "memory": [
+      ".memory/file_registry.json",
+      ".memory/code_structure.json",
+      ".memory/analysis_report.md",
+      ".memory/shadow_critique.md"
+    ],
+    "scripts": [
+      "scripts/archive_legacy.py",
+      "global/tools/lifecycle.py",
+      "global/tools/code_indexer.py"
+    ]
+  },
+  "frontend_pages_summary": {
+    "total": 20,
+    "auth_pages": ["Login.jsx", "Register.jsx", "ForgotPassword.jsx", "ResetPassword.jsx"],
+    "main_pages": ["Dashboard.jsx", "Farms.jsx", "Crops.jsx", "Diagnosis.jsx"],
+    "management_pages": ["Equipment.jsx", "Inventory.jsx", "Users.jsx", "Companies.jsx"],
+    "data_pages": ["Analytics.jsx", "Sensors.jsx", "Reports.jsx", "Diseases.jsx", "Breeding.jsx"],
+    "utility_pages": ["Settings.jsx", "Profile.jsx", "SetupWizard.jsx"]
+  },
+  "backend_models_summary": {
+    "total": 12,
+    "core_models": ["User", "Farm", "Crop", "Diagnosis", "Disease"],
+    "management_models": ["Equipment", "Inventory", "Sensor", "Report"],
+    "business_models": ["Company", "BreedingProgram"],
+    "relationships_file": "relationships.py"
+  },
+  "completion_status": {
+    "frontend_pages": "100%",
+    "backend_models": "100%",
+    "backend_schemas": "100%",
+    "model_relationships": "100%",
+    "ui_components": "100%",
+    "ci_cd": "100%",
+    "monitoring": "100%",
+    "security": "100%"
+  }
+}

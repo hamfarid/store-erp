@@ -1,0 +1,94 @@
+---
+alwaysApply: true
+description: Exa MCP usage rules - Primary research tool
+globs:
+  - "**/*"
+---
+
+# Exa MCP Rules
+
+## Overview
+Exa is the PRIMARY research tool. Always start here before other MCP servers.
+
+## Tool Priority
+
+### 1. get_code_context_exa (FIRST CHOICE)
+Use for all code-related queries. This tool understands code context better than general search.
+
+**When to use:**
+- Looking for implementation examples
+- Finding code patterns
+- Understanding library usage
+- Debugging external dependencies
+
+**Query Format:**
+```
+[library] [version] [specific feature] [language] [context]
+```
+
+**Example Queries:**
+```
+"Django 5.0 async class-based views Python example"
+"React 18 useCallback memoization TypeScript pattern"
+"SQLAlchemy 2.0 async session management Python"
+"Pydantic v2 model validation custom types"
+"FastAPI 0.100+ dependency injection patterns"
+```
+
+### 2. web_search_exa (FALLBACK)
+Use only when get_code_context_exa doesn't return useful results.
+
+**When to use:**
+- Code context search returned no results
+- Need broader technical context
+- Looking for comparison articles
+- Finding tutorials or guides
+
+**Query Format:**
+```
+[topic] [specific aspect] [year/version] site:[trusted-domain]
+```
+
+## Query Best Practices
+
+### DO:
+- ✅ Include version numbers: "Django 5.0" not "Django"
+- ✅ Specify language: "Python implementation" not just "implementation"
+- ✅ Use specific function names: "useEffect cleanup" not "React hooks"
+- ✅ Add date context: Include current year for recency
+- ✅ Use multiple small queries vs one large query
+
+### DON'T:
+- ❌ Use vague queries: "how to do X"
+- ❌ Omit version numbers
+- ❌ Mix multiple topics in one query
+- ❌ Assume latest version without specifying
+
+## Response Handling
+
+### Good Results:
+1. Extract relevant code snippets
+2. Note the source URL
+3. Verify version compatibility
+4. Document in code comments if used
+
+### Insufficient Results:
+1. Refine query with more specific terms
+2. Try alternative terminology
+3. Move to web_search_exa
+4. If still insufficient, proceed to Speckit or Ref
+
+## Integration with Other MCPs
+
+```
+Exa (insufficient) → Speckit (for APIs) → Ref (for docs verification)
+```
+
+## Date Verification Requirement
+
+ALWAYS run system date check before queries:
+```bash
+date +"%Y-%m-%d"
+```
+
+Include date context in queries for better temporal relevance.

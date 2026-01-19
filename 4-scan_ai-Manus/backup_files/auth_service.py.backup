@@ -1,0 +1,454 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/auth/auth_service.py
+"""
+
+خدمة المصادقة والتحقق من الهوية
+توفر هذه الوحدة خدمات المصادقة وإدارة الجلسات والتحقق من الصلاحيات
+"""
+
+import os
+import json
+import uuid
+from datetime import datetime, timedelta
+import hashlib
+import jwt
+from flask import current_app, request, g
+from functools import wraps
+
+# مسار ملفات البيانات المؤقتة (في التطبيق الحقيقي سيتم استخدام قاعدة بيانات)
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+USERS_FILE = os.path.join(DATA_DIR, 'users.json')
+SESSIONS_FILE = os.path.join(DATA_DIR, 'sessions.json')
+ROLES_FILE = os.path.join(DATA_DIR, 'roles.json')
+PERMISSIONS_FILE = os.path.join(DATA_DIR, 'permissions.json')
+
+# ثوابت رسائل الخطأ
+USER_NOT_FOUND = "User not found"
+BEARER_PREFIX = "Bearer "
+
+# التأكد من وجود مجلد البيانات
+os.makedirs(DATA_DIR, exist_ok=True)
+
+# دالة مساعدة لتحميل البيانات من ملف JSON
+
+
+def load_data(file_path, default_data=None):
+    if default_data is None:
+        default_data = {}
+
+    if not os.path.exists(file_path):
+        with open(file_path, 'wENCODINGutf-8') as f:
+            json.dump(default_data, f, ensure_ascii=False, indent=2)
+        return default_data
+
+    try:
+        with open(file_path, 'rENCODINGutf-8') as f:
+            return json.load(f)
+    except (json.JSONDecodeError, FileNotFoundError):
+        return default_data
+
+# دالة مساعدة لحفظ البيانات في ملف JSON
+
+
+def save_data(file_path, data):
+    with open(file_path, 'wENCODINGutf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+# تهيئة البيانات الافتراضية إذا لم تكن موجودة
+
+
+def init_default_data():
+    # التأكد من وجود مجلد البيانات
+    os.makedirs(DATA_DIR, exist_ok=True)
+
+    # البيانات الافتراضية للمستخدمين
+    default_users = {
+        "users""id": "user1""username": "admin""password_hashHASHLIBSHA256admin123ENCODEHEXDIGESTname_ar": "مدير النظام""name_en": "System Admin""email": "admin@example.com""is_activeTRUEis_adminTRUEcreated_at": (datetime.now() - timedelta(days=30)).isoformat(),
+                "last_login": datetime.now().isoformat()
+            },
+            {
+                "id": "user2""username": "manager""password_hashHASHLIBSHA256manager123ENCODEHEXDIGESTname_ar": "مدير""name_en": "Manager""email": "manager@example.com""is_activeTRUEis_admin": False,
+                "created_at": (datetime.now() - timedelta(days=20)).isoformat(),
+                "last_login": datetime.now().isoformat()
+            },
+            {
+                "id": "user3""username": "user""password_hashHASHLIBSHA256user123ENCODEHEXDIGESTname_ar": "مستخدم""name_en": "User""email": "user@example.com""is_activeTRUEis_admin": False,
+                "created_at": (datetime.now() - timedelta(days=10)).isoformat(),
+                "last_login": datetime.now().isoformat()
+            }
+        ]
+    }
+
+    # البيانات الافتراضية للجلسات
+    default_sessions = {
+        "sessions": []
+    }
+
+    # البيانات الافتراضية للأدوار
+    default_roles = {
+        "roles""id": "admin""name_ar": "مدير""name_en": "Admin""description_ar": "صلاحيات كاملة للنظام""description_en": "Full system permissions""id": "manager""name_ar": "مشرف""name_en": "Manager""description_ar": "صلاحيات إدارة المديولات والمستخدمين""description_en": "Module and user management permissions""id": "user""name_ar": "مستخدم""name_en": "User""description_ar": "صلاحيات استخدام النظام الأساسية""description_en": "Basic system usage permissions"
+            }
+        ],
+        "user_roles": [
+            {"user_id": "user1", "role_id": "admin""user_id": "user2", "role_id": "manager""user_id": "user3", "role_id": "user"}
+        ]
+    }
+
+    # البيانات الافتراضية للصلاحيات
+    default_permissions = {
+        "permissions""id": "view_dashboard""name_ar": "عرض لوحة التحكم""name_en": "View Dashboard""module": "core""id": "manage_users""name_ar": "إدارة المستخدمين""name_en": "Manage Users""module": "core""id": "manage_roles""name_ar": "إدارة الأدوار""name_en": "Manage Roles""module": "core""id": "manage_modules""name_ar": "إدارة المديولات""name_en": "Manage Modules""module": "module_management""id": "view_resources""name_ar": "عرض الموارد""name_en": "View Resources""module": "resource_monitoring""id": "manage_alerts""name_ar": "إدارة التنبيهات""name_en": "Manage Alerts""module": "alert_management""id": "manage_ai_agents""name_ar": "إدارة وكلاء الذكاء الصناعي""name_en": "Manage AI Agents""module": "ai_management""id": "view_ai_stats""name_ar": "عرض إحصائيات الذكاء الصناعي""name_en": "View AI Stats""module": "ai_management""id": "manage_backups""name_ar": "إدارة النسخ الاحتياطي""name_en": "Manage Backups""module": "backup_module""id": "manage_data_validation""name_ar": "إدارة التحقق من صحة البيانات""name_en": "Manage Data Validation""module": "data_validation""id": "manage_settings""name_ar": "إدارة الإعدادات""name_en": "Manage Settings""module": "core"
+            }
+        ],
+        "role_permissions": [
+            {"role_id": "admin", PERMISSION_ID: "view_dashboard""role_id": "admin", PERMISSION_ID: "manage_users""role_id": "admin", PERMISSION_ID: "manage_roles""role_id": "admin", PERMISSION_ID: "manage_modules""role_id": "admin", PERMISSION_ID: "view_resources""role_id": "admin", PERMISSION_ID: "manage_alerts""role_id": "admin", PERMISSION_ID: "manage_ai_agents""role_id": "admin", PERMISSION_ID: "view_ai_stats""role_id": "admin", PERMISSION_ID: "manage_backups""role_id": "admin", PERMISSION_ID: "manage_data_validation""role_id": "admin", PERMISSION_ID: "manage_settings"},
+
+            {"role_id": "manager", PERMISSION_ID: "view_dashboard""role_id": "manager", PERMISSION_ID: "manage_modules""role_id": "manager", PERMISSION_ID: "view_resources""role_id": "manager", PERMISSION_ID: "manage_alerts""role_id": "manager", PERMISSION_ID: "manage_ai_agents""role_id": "manager", PERMISSION_ID: VIEW_AI_STATS},
+
+            {"role_id": "user", PERMISSION_ID: "view_dashboard""role_id": "user", PERMISSION_ID: "view_resources""role_id": "user", PERMISSION_ID: VIEW_AI_STATS}
+        ],
+        "company_permissions": [
+            {"user_id": "user1", COMPANY_ID: "all""user_id": "user2", COMPANY_ID: "company1""user_id": "user3", COMPANY_ID: "company1"}
+        ],
+        "country_permissions": [
+            {"user_id": "user1", COUNTRY_ID: "all""user_id": "user2", COUNTRY_ID: "country1""user_id": "user3", COUNTRY_ID: "country1"}
+        ]
+    }
+
+    # حفظ البيانات الافتراضية إذا لم تكن الملفات موجودة
+    if not os.path.exists(USERS_FILE):
+        save_data(USERS_FILE, default_users)
+
+    if not os.path.exists(SESSIONS_FILE):
+        save_data(SESSIONS_FILE, default_sessions)
+
+    if not os.path.exists(ROLES_FILE):
+        save_data(ROLES_FILE, default_roles)
+
+    if not os.path.exists(PERMISSIONS_FILE):
+        save_data(PERMISSIONS_FILE, default_permissions)
+
+
+class AuthService:
+    """خدمة المصادقة والتحقق من الهوية"""
+
+    @staticmethod
+    def authenticate(username, password):
+        """التحقق من صحة بيانات المستخدم"""
+        users_data = load_data(USERS_FILE)
+        password_hash = hashlib.sha256(password.encode()).hexdigest()
+
+        for user in users_data['users']:
+            if user['username'] == username and user['password_hash'] == password_hash and user['is_active']:
+                # تحديث وقت آخر تسجيل دخول
+                user['last_login'] = datetime.now().isoformat()
+                save_data(USERS_FILE, users_data)
+
+                # إنشاء جلسة جديدة
+                session_id = str(uuid.uuid4())
+                token = AuthService.generate_token(user['id'], session_id)
+
+                # حفظ الجلسة
+                sessions_data = load_data(SESSIONS_FILE)
+                sessions_data['sessions'].append({
+                    'id': session_id,
+                    'user_id': user['id'],
+                    'created_at': datetime.now().isoformat(),
+                    'expires_at': (datetime.now() + timedelta(hours=24)).isoformat(),
+                    'is_active': True
+                })
+                save_data(SESSIONS_FILE, sessions_data)
+
+                return {
+                    'token': token,
+                    'user': {
+                        'id': user['id""username': user['username""name_ar': user['name_ar""name_en': user['name_en""email': user['email""is_admin': user['is_admin']
+                    }
+                }
+
+        return None
+
+    @staticmethod
+    def generate_token(user_id, session_id):
+        """إنشاء رمز المصادقة JWT"""
+        secret_key = current_app.config.get('SECRET_KEY', DEFAULT_SECRET_KEY)
+        payload = {
+            'user_id': user_id,
+            'session_id': session_id,
+            'exp': datetime.utcnow() + timedelta(hours=24)
+        }
+        return jwt.encode(payload, secret_key, algorithm='HS256')
+
+    @staticmethod
+    def verify_token(token):
+        """التحقق من صحة رمز المصادقة"""
+        secret_key = current_app.config.get('SECRET_KEY', DEFAULT_SECRET_KEY)
+        try:
+            payload = jwt.decode(token, secret_key, algorithms=['HS256'])
+            user_id = payload['user_id']
+            session_id = payload['session_id']
+
+            # التحقق من وجود الجلسة ونشاطها
+            sessions_data = load_data(SESSIONS_FILE)
+            session = next((s for s in sessions_data['sessions'] if s['id'] == session_id and s['is_active']), None)
+
+            if session:
+                # التحقق من وجود المستخدم ونشاطه
+                users_data = load_data(USERS_FILE)
+                user = next((u for u in users_data['users'] if u['id'] == user_id and u['is_active']), None)
+
+                if user:
+                    return user
+
+            return None
+        except jwt.ExpiredSignatureError:
+            return None
+        except jwt.InvalidTokenError:
+            return None
+
+    @staticmethod
+    def logout(token):
+        """تسجيل الخروج وإلغاء تنشيط الجلسة"""
+        secret_key = current_app.config.get('SECRET_KEY', DEFAULT_SECRET_KEY)
+        try:
+            payload = jwt.decode(token, secret_key, algorithms=['HS256'])
+            session_id = payload['session_id']
+
+            # إلغاء تنشيط الجلسة
+            sessions_data = load_data(SESSIONS_FILE)
+            for session in sessions_data['sessions']:
+                if session['id'] == session_id:
+                    session['is_active'] = False
+                    save_data(SESSIONS_FILE, sessions_data)
+                    return True
+
+            return False
+        except BaseException:
+            return False
+
+    @staticmethod
+    def get_user_permissions(user_id):
+        """الحصول على صلاحيات المستخدم"""
+        roles_data = load_data(ROLES_FILE)
+        permissions_data = load_data(PERMISSIONS_FILE)
+
+        # الحصول على أدوار المستخدم
+        user_roles = [ur['role_id'] for ur in roles_data['user_roles'] if ur['user_id'] == user_id]
+
+        # الحصول على صلاحيات الأدوار
+        user_permissions = []
+        for role_id in user_roles:
+            role_perms = [rp[PERMISSION_ID] for rp in permissions_data['role_permissions'] if rp['role_id'] == role_id]
+            user_permissions.extend(role_perms)
+
+        # إزالة التكرارات
+        user_permissions = list(set(user_permissions))
+
+        # الحصول على تفاصيل الصلاحيات
+        permissions = []
+        for perm_id in user_permissions:
+            perm = next((p for p in permissions_data['permissions'] if p['id'] == perm_id), None)
+            if perm:
+                permissions.append(perm)
+
+        return permissions
+
+    @staticmethod
+    def get_user_companies(user_id):
+        """الحصول على الشركات المسموح بها للمستخدم"""
+        permissions_data = load_data(PERMISSIONS_FILE)
+
+        # التحقق من وجود صلاحية لجميع الشركات
+        all_companies = next((cp[COMPANY_ID] for cp in permissions_data['company_permissions'] if cp['user_id'] == user_id and cp[COMPANY_ID] == 'all'), None)
+
+        if all_companies:
+            return ['all']
+
+        # الحصول على الشركات المحددة
+        companies = [cp[COMPANY_ID] for cp in permissions_data['company_permissions'] if cp['user_id'] == user_id]
+
+        return companies
+
+    @staticmethod
+    def get_user_countries(user_id):
+        """الحصول على الدول المسموح بها للمستخدم"""
+        permissions_data = load_data(PERMISSIONS_FILE)
+
+        # التحقق من وجود صلاحية لجميع الدول
+        all_countries = next((cp[COUNTRY_ID] for cp in permissions_data['country_permissions'] if cp['user_id'] == user_id and cp[COUNTRY_ID] == 'all'), None)
+
+        if all_countries:
+            return ['all']
+
+        # الحصول على الدول المحددة
+        countries = [cp[COUNTRY_ID] for cp in permissions_data['country_permissions'] if cp['user_id'] == user_id]
+
+        return countries
+
+    @staticmethod
+    def has_permission(user_id, permission_id):
+        """التحقق من وجود صلاحية معينة"""
+        permissions = AuthService.get_user_permissions(user_id)
+        return any(p['id'] == permission_id for p in permissions)
+
+    @staticmethod
+    def has_company_access(user_id, company_id):
+        """التحقق من وجود صلاحية للشركة المحددة"""
+        companies = AuthService.get_user_companies(user_id)
+        return 'all' in companies or company_id in companies
+
+    @staticmethod
+    def has_country_access(user_id, country_id):
+        """التحقق من وجود صلاحية للدولة المحددة"""
+        countries = AuthService.get_user_countries(user_id)
+        return 'all' in countries or country_id in countries
+
+# دالة للحصول على المستخدم الحالي من التوكن
+
+
+def get_current_user():
+    """
+    الحصول على بيانات المستخدم الحالي من التوكن المرسل في الطلب
+    """
+    auth_header = request.headers.get('Authorization')
+    if not auth_header or not auth_header.startswith('Bearer '):
+        return None
+
+    token = auth_header.split(' ')[1]
+    try:
+        decoded = AuthService.verify_token(token)
+        if not decoded:
+            return None
+
+        user_id = decoded.get('user_id')
+        if not user_id:
+            return None
+
+        users_data = load_data(USERS_FILE, {"users": []})
+        for user in users_data.get("users", []):
+            if user.get("id") == user_id:
+                # تحديث بيانات المستخدم الحالي في المتغير العام
+                return user
+
+        return None
+    except Exception as e:
+        print(f"Error getting current user: {e}")
+        return None
+
+# دالة للتحقق من صلاحيات المستخدم
+
+
+def has_permission(user_id, permission_id):
+    """
+    التحقق مما إذا كان المستخدم يملك صلاحية معينة
+    """
+    return AuthService.has_permission(user_id, permission_id)
+
+# دالة للتحقق من الصلاحيات (مطلوبة للاستيراد في المديولات الأخرى)
+
+
+def check_permission(user_id, permission_id):
+    """
+    التحقق مما إذا كان المستخدم يملك صلاحية معينة
+    """
+    return AuthService.has_permission(user_id, permission_id)
+
+# دالة للتحقق من تسجيل الدخول (مطلوبة للاستيراد في api.py)
+
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        auth_header = request.headers.get('Authorization')
+
+        if not auth_header or not auth_header.startswith('Bearer '):
+            return {'error': 'تسجيل الدخول مطلوب'}, 401
+
+        token = auth_header.split(' ')[1]
+        user = AuthService.verify_token(token)
+
+        if not user:
+            return {'error': 'جلسة غير صالحة أو منتهية'}, 401
+
+        g.user = user
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+# دالة للتحقق من الصلاحيات (مطلوبة للاستيراد في api.py)
+
+
+def permission_required(permission_id):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            if not g.user or not AuthService.has_permission(g.user['id'], permission_id):
+                return {'error': 'ليس لديك صلاحية للوصول إلى هذا المورد'}, 403
+
+            return f(*args, **kwargs)
+
+        return decorated_function
+
+    return decorator
+
+# دالة للتحقق من الصلاحيات (مطلوبة للاستيراد في api.py)
+
+
+def auth_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        auth_header = request.headers.get('Authorization')
+
+        if not auth_header or not auth_header.startswith('Bearer '):
+            return {'error': 'تسجيل الدخول مطلوب'}, 401
+
+        token = auth_header.split(' ')[1]
+        user = AuthService.verify_token(token)
+
+        if not user:
+            return {'error': 'جلسة غير صالحة أو منتهية'}, 401
+
+        g.user = user
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+# دالة للتحقق من صلاحية الوصول للشركة (مطلوبة للاستيراد في api.py)
+
+
+def company_access_required(company_id_param=COMPANY_ID):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            company_id = kwargs.get(company_id_param) or request.args.get(company_id_param)
+
+            if not company_id:
+                return {'error': 'معرف الشركة مطلوب'}, 400
+
+            if not g.user or not AuthService.has_company_access(g.user['id'], company_id):
+                return {'error': 'ليس لديك صلاحية للوصول إلى هذه الشركة'}, 403
+
+            return f(*args, **kwargs)
+
+        return decorated_function
+
+    return decorator
+
+# دالة للتحقق من صلاحية الوصول للدولة (مطلوبة للاستيراد في api.py)
+
+
+def country_access_required(country_id_param=COUNTRY_ID):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            country_id = kwargs.get(country_id_param) or request.args.get(country_id_param)
+
+            if not country_id:
+                return {'error': 'معرف الدولة مطلوب'}, 400
+
+            if not g.user or not AuthService.has_country_access(g.user['id'], country_id):
+                return {'error': 'ليس لديك صلاحية للوصول إلى هذه الدولة'}, 403
+
+            return f(*args, **kwargs)
+
+        return decorated_function
+
+    return decorator

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaara AI - نظام الزراعة الذكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main {
+            padding: 4rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            color: white;
+            margin-bottom: 4rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #2ecc71;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .docs-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .docs-section h2 {
+            color: #2ecc71;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .doc-link {
+            display: block;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border-left: 4px solid #2ecc71;
+        }
+
+        .doc-link:hover {
+            background: #e9ecef;
+            transform: translateX(-5px);
+        }
+
+        .doc-link h3 {
+            color: #2ecc71;
+            margin-bottom: 0.5rem;
+        }
+
+        .doc-link p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .quick-start {
+            background: rgba(46, 204, 113, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .quick-start h3 {
+            color: #27ae60;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            direction: ltr;
+            font-family: 'Courier New', monospace;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2ecc71;
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer a {
+            color: #2ecc71;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .docs-site {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">🌱</div>
+            <h1>Gaara AI</h1>
+            <p>نظام الزراعة الذكية المتطور</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <h2>مستقبل الزراعة الذكية</h2>
+                <p>نظام متطور يجمع بين الذكاء الاصطناعي وإنترنت الأشياء لتحسين الإنتاجية الزراعية وتحقيق الاستدامة</p>
+            </section>
+
+            <section class="stats">
+                <div class="stat-card">
+                    <span class="stat-number">85+</span>
+                    <span class="stat-label">API Endpoint</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">51</span>
+                    <span class="stat-label">مكون React</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">17</span>
+                    <span class="stat-label">صفحة متكاملة</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">95%+</span>
+                    <span class="stat-label">دقة التشخيص</span>
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>الذكاء الاصطناعي</h3>
+                    <p>تشخيص أمراض النباتات باستخدام الرؤية الحاسوبية والتعلم العميق مع دقة تزيد عن 95%</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>إنترنت الأشياء</h3>
+                    <p>مراقبة البيئة الزراعية في الوقت الفعلي مع أجهزة الاستشعار المتطورة والتحكم الآلي</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>التحليلات المتقدمة</h3>
+                    <p>تقارير شاملة وتحليلات ذكية لتحسين الأداء الزراعي واتخاذ قرارات مدروسة</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💧</div>
+                    <h3>الري الذكي</h3>
+                    <p>نظام ري آلي يعتمد على بيانات أجهزة الاستشعار والذكاء الاصطناعي لتوفير المياه</p>
+                </div>
+            </section>
+
+            <section class="quick-start">
+                <h3>🚀 البدء السريع</h3>
+                <div class="code-block">
+# استنساخ المشروع
+git clone https://github.com/hamfarid/gaara-ai-system.git
+cd gaara-ai-system
+
+# التشغيل باستخدام Docker
+docker-compose up -d
+
+# الوصول للنظام
+# الواجهة الأمامية: http://localhost:3000
+# الواجهة الخلفية: http://localhost:5000
+# المستخدم الافتراضي: admin / admin123
+                </div>
+            </section>
+
+            <section class="docs-section">
+                <h2>📚 التوثيق والأدلة</h2>
+                <div class="docs-grid">
+                    <a href="Home.md" class="doc-link">
+                        <h3>🏠 الصفحة الرئيسية</h3>
+                        <p>نظرة عامة شاملة على النظام وميزاته</p>
+                    </a>
+                    <a href="Installation-Guide.md" class="doc-link">
+                        <h3>🚀 دليل التثبيت</h3>
+                        <p>تعلم كيفية تثبيت النظام بطرق مختلفة</p>
+                    </a>
+                    <a href="API-Reference.md" class="doc-link">
+                        <h3>🔌 مرجع APIs</h3>
+                        <p>توثيق شامل لجميع واجهات البرمجة</p>
+                    </a>
+                    <a href="https://github.com/hamfarid/gaara-ai-system" class="doc-link">
+                        <h3>💻 الكود المصدري</h3>
+                        <p>تصفح الكود على GitHub</p>
+                    </a>
+                    <a href="https://github.com/hamfarid/gaara-ai-system/issues" class="doc-link">
+                        <h3>🐛 الإبلاغ عن الأخطاء</h3>
+                        <p>ساعدنا في تحسين النظام</p>
+                    </a>
+                    <a href="https://github.com/hamfarid/gaara-ai-system/discussions" class="doc-link">
+                        <h3>💬 المناقشات</h3>
+                        <p>انضم للمجتمع وشارك أفكارك</p>
+                    </a>
+                </div>
+            </section>
+
+            <section class="docs-section">
+                <h2>🎯 الميزات التقنية</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h3 style="color: #2ecc71; margin-bottom: 1rem;">🔧 الواجهة الخلفية</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✅ Flask 3.0 مع Python 3.11</li>
+                            <li>✅ 85+ API endpoint متكامل</li>
+                            <li>✅ نظام JWT للمصادقة</li>
+                            <li>✅ دعم SQLite/PostgreSQL</li>
+                            <li>✅ نظام كاش Redis</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="color: #2ecc71; margin-bottom: 1rem;">⚛️ الواجهة الأمامية</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✅ React 18 مع Vite 5</li>
+                            <li>✅ Tailwind CSS للتصميم</li>
+                            <li>✅ دعم كامل للعربية (RTL)</li>
+                            <li>✅ تطبيق ويب تقدمي (PWA)</li>
+                            <li>✅ تصميم متجاوب</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Gaara AI. جميع الحقوق محفوظة.</p>
+            <p>مطور بـ ❤️ للزراعة الذكية | <a href="https://github.com/hamfarid">Hamid Farid</a> & <a href="https://manus.im">Manus AI</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>
+

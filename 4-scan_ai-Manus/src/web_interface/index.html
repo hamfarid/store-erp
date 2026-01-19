@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الذكاء الاصطناعي الزراعي المحسّن</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts (Cairo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header role="banner">
+        <h1>نظام الذكاء الاصطناعي الزراعي المحسّن</h1>
+        <p>تحليل ذكي لصحة النبات، توصيات دقيقة، وميزات متقدمة</p>
+    </header>
+
+    <main id="main-content" role="main">
+        <!-- Image Analysis Section -->
+        <section id="image-upload-section" class="card" aria-labelledby="image-analysis-heading">
+            <h2 id="image-analysis-heading"><i class="fas fa-camera-retro"></i> تحليل صورة النبات</h2>
+            <p>قم برفع صورة واضحة للنبات أو التربة للحصول على تشخيص وتحليل دقيق.</p>
+            <div class="upload-area" role="group" aria-label="منطقة رفع الصور">
+                <input type="file" id="plant-image-input" accept="image/*" hidden aria-describedby="upload-instructions">
+                <label for="plant-image-input" class="upload-label" tabindex="0" role="button" aria-pressed="false">
+                    <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+                    <span id="upload-instructions">انقر هنا أو اسحب وأفلت الصورة</span>
+                </label>
+                <div id="image-preview-container" style="display: none;" aria-live="polite">
+                    <img id="image-preview" src="#" alt="معاينة الصورة المرفوعة" />
+                    <button id="remove-image-btn" class="btn btn-danger" aria-label="إزالة الصورة المرفوعة"><i class="fas fa-times" aria-hidden="true"></i> <span class="sr-only">إزالة الصورة</span></button>
+                </div>
+            </div>
+            <button id="analyze-image-btn" class="btn btn-primary" disabled><i class="fas fa-flask" aria-hidden="true"></i> بدء التحليل</button>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="card" style="display: none;" aria-labelledby="analysis-results-heading" aria-live="polite">
+            <h2 id="analysis-results-heading"><i class="fas fa-poll-h"></i> نتائج التحليل</h2>
+            <div id="loading-indicator" style="display: none;" role="status">
+                <div class="spinner" aria-hidden="true"></div>
+                <p>جاري التحليل، يرجى الانتظار...</p>
+            </div>
+            <div id="analysis-results">
+                <!-- Results will be dynamically populated here -->
+                <p class="placeholder">ستظهر نتائج التحليل هنا.</p>
+            </div>
+            <!-- Placeholder for Visualization -->
+            <div id="visualization-area" style="display: none; margin-top: 1.5rem;">
+                <h4><i class="fas fa-chart-bar"></i> تصور النتائج</h4>
+                <!-- Visualization content will go here -->
+                <p>سيتم عرض الرسوم البيانية والتصورات هنا.</p>
+            </div>
+        </section>
+
+        <!-- Breeding Section -->
+        <section id="breeding-section" class="card" aria-labelledby="breeding-heading">
+            <h2 id="breeding-heading"><i class="fas fa-dna"></i> مساعد التهجين والتزاوج</h2>
+            <p>أدخل معلومات السلالات الأبوية للتنبؤ بالنتائج أو ابحث عن اقتراحات تهجين لتحقيق صفات مستهدفة.</p>
+            
+            <form id="breeding-prediction-form">
+                <h3><i class="fas fa-calculator"></i> التنبؤ بنتائج التهجين</h3>
+                <div class="breeding-input">
+                    <div class="parent-input">
+                        <label for="parent1-strain">السلالة الأب 1:</label>
+                        <input type="text" id="parent1-strain" placeholder="اسم السلالة أو صفاتها" required>
+                    </div>
+                    <div class="parent-input">
+                        <label for="parent2-strain">السلالة الأم 2:</label>
+                        <input type="text" id="parent2-strain" placeholder="اسم السلالة أو صفاتها" required>
+                    </div>
+                </div>
+                <button type="submit" id="predict-breeding-btn" class="btn btn-secondary"><i class="fas fa-calculator" aria-hidden="true"></i> التنبؤ بالنتائج</button>
+            </form>
+            
+            <hr style="margin: 2rem 0;">
+            
+            <form id="breeding-suggestion-form">
+                <h3><i class="fas fa-lightbulb"></i> اقتراح أزواج التهجين</h3>
+                <div class="breeding-suggestion">
+                     <div>
+                         <label for="target-trait">الصفة المستهدفة:</label>
+                         <input type="text" id="target-trait" placeholder="مثل: الإنتاجية، مقاومة المرض" required>
+                     </div>
+                     <div>
+                         <label for="target-value">القيمة/المستوى المستهدف:</label>
+                         <input type="text" id="target-value" placeholder="مثل: عالية، 150، مقاومة" required>
+                     </div>
+                     <button type="submit" id="suggest-pairs-btn" class="btn btn-secondary"><i class="fas fa-search" aria-hidden="true"></i> اقتراح أزواج</button>
+                </div>
+            </form>
+
+             <div id="breeding-results" class="results-subsection" style="display: none;" aria-live="polite">
+                <!-- Breeding results will be populated here -->
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section id="history-section" class="card" aria-labelledby="history-heading">
+            <h2 id="history-heading"><i class="fas fa-history"></i> سجل التحليلات</h2>
+            <p>عرض التحليلات السابقة والتوصيات المحفوظة.</p>
+            <div id="analysis-history" aria-live="polite">
+                <!-- History items will be populated here -->
+                <p id="no-history-msg">لا توجد تحليلات سابقة محفوظة.</p>
+            </div>
+            <button id="clear-history-btn" class="btn btn-danger" style="display: none;"><i class="fas fa-trash-alt" aria-hidden="true"></i> مسح السجل</button>
+        </section>
+
+        <!-- Placeholder for Real-time Monitoring -->
+        <section id="monitoring-section" class="card" aria-labelledby="monitoring-heading" style="display: none;">
+            <h2 id="monitoring-heading"><i class="fas fa-satellite-dish"></i> المراقبة الحية</h2>
+            <p>عرض حالة المراقبة والتنبيهات الحالية.</p>
+            <div id="monitoring-status">
+                <!-- Monitoring status and alerts will go here -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" aria-live="assertive"></div>
+
+    <footer role="contentinfo">
+        <p>&copy; 2025 نظام الذكاء الاصطناعي الزراعي المحسّن - تم التطوير بواسطة Manus</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+

@@ -177,14 +177,14 @@ class AnalyticsService(models.Model):
     """نموذج لخدمات التحليلات"""
     SERVICE_TYPE_CHOICES = [
         ("google_analytics", _("Google Analytics")),
-
-    class Meta:
-        app_label = 'maps_location'
-      ("adobe_analytics", _("Adobe Analytics")),
+        ("adobe_analytics", _("Adobe Analytics")),
         ("mixpanel", _("Mixpanel")),
         ("hotjar", _("Hotjar")),
         ("segment", _("Segment")),
     ]
+
+    class Meta:
+        app_label = 'maps_location'
 
     service_id = models.UUIDField(default=uuid.uuid4, unique=True)
     name = models.CharField(_("اسم الخدمة"), max_length=255)

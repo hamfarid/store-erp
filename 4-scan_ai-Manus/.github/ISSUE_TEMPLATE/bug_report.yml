@@ -1,0 +1,147 @@
+name: 🐛 Bug Report - تقرير خطأ
+description: Report a bug in the Arabic Inventory Management System
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## شكراً لك على الإبلاغ عن هذا الخطأ!
+        Thank you for reporting this bug!
+        
+        يرجى ملء النموذج التالي بأكبر قدر من التفاصيل لمساعدتنا في حل المشكلة بسرعة.
+        Please fill out the following form with as much detail as possible to help us resolve the issue quickly.
+
+  - type: input
+    id: bug-title
+    attributes:
+      label: عنوان الخطأ - Bug Title
+      description: وصف مختصر وواضح للخطأ - A brief and clear description of the bug
+      placeholder: "مثال - Example: خطأ في حفظ بيانات العميل - Error saving customer data"
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: وصف الخطأ - Bug Description
+      description: وصف مفصل للخطأ وما حدث - Detailed description of the bug and what happened
+      placeholder: |
+        اشرح الخطأ بالتفصيل...
+        Explain the bug in detail...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: خطوات إعادة الإنتاج - Steps to Reproduce
+      description: الخطوات اللازمة لإعادة إنتاج الخطأ - Steps needed to reproduce the bug
+      placeholder: |
+        1. اذهب إلى... - Go to...
+        2. انقر على... - Click on...
+        3. أدخل... - Enter...
+        4. لاحظ الخطأ... - Observe the error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: السلوك المتوقع - Expected Behavior
+      description: ما كان يجب أن يحدث - What should have happened
+      placeholder: اشرح السلوك المتوقع... - Explain the expected behavior...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: السلوك الفعلي - Actual Behavior
+      description: ما حدث فعلياً - What actually happened
+      placeholder: اشرح ما حدث فعلياً... - Explain what actually happened...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: المكون المتأثر - Affected Component
+      description: أي جزء من النظام متأثر؟ - Which part of the system is affected?
+      options:
+        - Frontend - الواجهة الأمامية
+        - Backend - الخادم
+        - Database - قاعدة البيانات
+        - API - واجهة برمجة التطبيقات
+        - Authentication - المصادقة
+        - Reports - التقارير
+        - Inventory - المخزون
+        - Sales - المبيعات
+        - Customers - العملاء
+        - Products - المنتجات
+        - Other - أخرى
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: درجة الخطورة - Severity
+      description: ما مدى خطورة هذا الخطأ؟ - How severe is this bug?
+      options:
+        - Critical - حرج (النظام لا يعمل)
+        - High - عالي (ميزة مهمة لا تعمل)
+        - Medium - متوسط (ميزة ثانوية لا تعمل)
+        - Low - منخفض (مشكلة تجميلية)
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: المتصفح - Browser
+      description: أي متصفح تستخدم؟ - Which browser are you using?
+      placeholder: "مثال - Example: Chrome 118, Firefox 119, Safari 17"
+
+  - type: input
+    id: os
+    attributes:
+      label: نظام التشغيل - Operating System
+      description: أي نظام تشغيل تستخدم؟ - Which operating system are you using?
+      placeholder: "مثال - Example: Windows 11, macOS 14, Ubuntu 22.04"
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: لقطات الشاشة - Screenshots
+      description: أضف لقطات شاشة إن أمكن - Add screenshots if possible
+      placeholder: اسحب وأفلت الصور هنا أو الصق الروابط - Drag and drop images here or paste links
+
+  - type: textarea
+    id: console-logs
+    attributes:
+      label: سجلات وحدة التحكم - Console Logs
+      description: أضف أي رسائل خطأ من وحدة التحكم - Add any error messages from the console
+      render: shell
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: معلومات إضافية - Additional Context
+      description: أي معلومات أخرى مفيدة - Any other useful information
+      placeholder: أضف أي تفاصيل إضافية... - Add any additional details...
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: التأكيدات - Confirmations
+      description: يرجى التأكيد على النقاط التالية - Please confirm the following points
+      options:
+        - label: لقد بحثت في Issues الموجودة ولم أجد تقريراً مشابهاً - I have searched existing issues and found no similar report
+          required: true
+        - label: لقد جربت إعادة إنتاج الخطأ أكثر من مرة - I have tried to reproduce the bug multiple times
+          required: true
+        - label: المعلومات المقدمة دقيقة وكاملة - The information provided is accurate and complete
+          required: true

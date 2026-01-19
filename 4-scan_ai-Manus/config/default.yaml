@@ -1,0 +1,195 @@
+# تكوين نظام الذكاء الاصطناعي الزراعي المتكامل
+
+# إعدادات عامة
+general:
+  debug: false
+  language: "ar"
+  timezone: "Asia/Riyadh"
+  temp_dir: "temp"
+  max_image_size: 10485760  # 10 ميجابايت
+  supported_image_formats: ["jpg", "jpeg", "png", "webp"]
+
+# إعدادات الكشف عن الأمراض
+disease_detection:
+  model_path: "models/disease_detection"
+  confidence_threshold: 0.75
+  enable_gpu: true
+  batch_size: 16
+  image_size: [224, 224]
+  use_augmentation: true
+  models:
+    viral:
+      model_file: "viral_diseases_model.h5"
+      classes_file: "viral_diseases_classes.json"
+    bacterial:
+      model_file: "bacterial_diseases_model.h5"
+      classes_file: "bacterial_diseases_classes.json"
+    fungal:
+      model_file: "fungal_diseases_model.h5"
+      classes_file: "fungal_diseases_classes.json"
+  database:
+    diseases_db: "database/diseases.db"
+
+# إعدادات تحليل نقص العناصر الغذائية
+nutrient_analysis:
+  model_path: "models/nutrient_analysis"
+  confidence_threshold: 0.7
+  enable_gpu: true
+  batch_size: 16
+  image_size: [299, 299]
+  use_augmentation: true
+  models:
+    major_nutrients:
+      model_file: "major_nutrients_model.h5"
+      classes_file: "major_nutrients_classes.json"
+    minor_nutrients:
+      model_file: "minor_nutrients_model.h5"
+      classes_file: "minor_nutrients_classes.json"
+    trace_elements:
+      model_file: "trace_elements_model.h5"
+      classes_file: "trace_elements_classes.json"
+  database:
+    nutrients_db: "database/nutrients.db"
+
+# إعدادات التهجين وتزاوج النباتات
+plant_breeding:
+  model_path: "models/plant_breeding"
+  database:
+    strains_db: "database/plant_strains.db"
+    breeding_history_db: "database/breeding_history.db"
+  web_search:
+    enable: true
+    max_results: 20
+    trusted_domains: ["scholar.google.com", "researchgate.net", "sciencedirect.com", "ncbi.nlm.nih.gov", "academia.edu"]
+    cache_results: true
+    cache_expiry: 604800  # 7 أيام بالثواني
+  simulation:
+    monte_carlo_iterations: 1000
+    confidence_interval: 0.95
+
+# إعدادات توصيات العلاج
+treatment_recommendation:
+  database:
+    treatments_db: "database/treatments.db"
+    pesticides_db: "database/pesticides.db"
+    fertilizers_db: "database/fertilizers.db"
+  dosage_calculation:
+    safety_factor: 0.9
+    consider_plant_size: true
+    consider_environmental_factors: true
+  timing:
+    consider_weather: true
+    consider_growth_stage: true
+    consider_disease_lifecycle: true
+  follow_up:
+    generate_schedule: true
+    reminder_intervals: [3, 7, 14, 30]  # أيام
+
+# إعدادات جمع البيانات
+data_collection:
+  web_scraping:
+    user_agent: "AgriculturalAI Research Bot/1.0"
+    request_delay: 2  # ثواني
+    max_retries: 3
+    timeout: 30  # ثواني
+    respect_robots_txt: true
+    proxy:
+      enable: false
+      list: []
+  api:
+    weather:
+      provider: "openweathermap"
+      api_key: "${WEATHER_API_KEY}"
+    scientific_papers:
+      provider: "scopus"
+      api_key: "${SCIENTIFIC_API_KEY}"
+
+# إعدادات قاعدة البيانات
+database:
+  type: "sqlite"  # sqlite, mysql, postgresql
+  sqlite:
+    path: "database"
+  mysql:
+    host: "localhost"
+    port: 3306
+    user: "${DB_USER}"
+    password: "${DB_PASSWORD}"
+    database: "agricultural_ai"
+  postgresql:
+    host: "localhost"
+    port: 5432
+    user: "${DB_USER}"
+    password: "${DB_PASSWORD}"
+    database: "agricultural_ai"
+  connection_pool: 10
+  timeout: 30  # ثواني
+
+# إعدادات واجهة الويب
+web_interface:
+  host: "0.0.0.0"
+  port: 5000
+  secret_key: "${SECRET_KEY}"
+  session_lifetime: 86400  # 24 ساعة بالثواني
+  upload_folder: "uploads"
+  max_content_length: 16777216  # 16 ميجابايت
+  templates_folder: "templates"
+  static_folder: "static"
+  enable_csrf: true
+  theme: "default"
+  languages: ["ar", "en"]
+
+# إعدادات واجهة برمجة التطبيقات
+api:
+  host: "0.0.0.0"
+  port: 8000
+  enable_docs: true
+  version: "v1"
+  rate_limit:
+    enable: true
+    limit: 100  # طلبات
+    period: 3600  # ثواني (ساعة)
+  authentication:
+    enable: true
+    jwt_expiry: 86400  # 24 ساعة بالثواني
+    refresh_token_expiry: 2592000  # 30 يوم بالثواني
+
+# إعدادات الأمان
+security:
+  encryption:
+    algorithm: "AES-256-GCM"
+    key_derivation: "PBKDF2"
+    iterations: 100000
+  authentication:
+    password_hash: "bcrypt"
+    hash_rounds: 12
+    session_timeout: 3600  # ثواني
+    max_failed_attempts: 5
+    lockout_period: 1800  # ثواني (30 دقيقة)
+  jwt:
+    algorithm: "HS256"
+    secret_key: "${JWT_SECRET}"
+  cors:
+    allow_origins: ["*"]
+    allow_methods: ["GET", "POST", "PUT", "DELETE"]
+    allow_headers: ["Content-Type", "Authorization"]
+  ssl:
+    enable: true
+    cert_file: "certs/cert.pem"
+    key_file: "certs/key.pem"
+
+# إعدادات التسجيل
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file:
+    enable: true
+    path: "logs"
+    max_size: 10485760  # 10 ميجابايت
+    backup_count: 5
+  syslog:
+    enable: false
+    host: "localhost"
+    port: 514
+  console:
+    enable: true
+    color: true

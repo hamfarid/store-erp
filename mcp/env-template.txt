@@ -1,0 +1,65 @@
+# ===========================================
+# MCP Servers Environment Variables
+# ===========================================
+# Copy this file to .env and fill in your API keys
+# Run: copy env-template.txt .env
+# ===========================================
+
+# Exa - Code search and web research
+# Get key at: https://exa.ai
+EXA_API_KEY=your_exa_api_key_here
+
+# Ref - Documentation verification  
+# Get key at: https://ref.dev
+REF_API_KEY=your_ref_api_key_here
+
+# Supabase - Database queries
+# Get keys at: https://supabase.com/dashboard
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your_anon_key_here
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
+
+# Sentry - Error tracking
+# Get token at: https://sentry.io/settings/auth-tokens/
+SENTRY_AUTH_TOKEN=your_sentry_auth_token_here
+SENTRY_ORG=your_sentry_org
+SENTRY_PROJECT=your_sentry_project
+
+# GitHub - Code management
+# Get token at: https://github.com/settings/tokens
+GITHUB_PERSONAL_ACCESS_TOKEN=your_github_pat_here
+
+# Firecrawl - Web scraping
+# Get key at: https://firecrawl.dev
+FIRECRAWL_API_KEY=your_firecrawl_api_key_here
+
+# Pinecone - Vector search
+# Get keys at: https://app.pinecone.io
+PINECONE_API_KEY=your_pinecone_api_key_here
+PINECONE_ENVIRONMENT=your_pinecone_environment
+PINECONE_INDEX_NAME=your_index_name
+
+# Vectara - RAG engine
+# Get keys at: https://console.vectara.com
+VECTARA_CUSTOMER_ID=your_customer_id
+VECTARA_CORPUS_ID=your_corpus_id
+VECTARA_API_KEY=your_vectara_api_key_here
+
+# Datadog - Observability
+# Get keys at: https://app.datadoghq.com/organization-settings/api-keys
+DD_API_KEY=your_datadog_api_key_here
+DD_APP_KEY=your_datadog_app_key_here
+DD_SITE=datadoghq.com
+
+# Snyk - Security scanning
+# Get token at: https://app.snyk.io/account
+SNYK_TOKEN=your_snyk_token_here
+SNYK_ORG_ID=your_snyk_org_id
+
+# Railway - Deployment
+# Get token at: https://railway.app/account/tokens
+RAILWAY_TOKEN=your_railway_token_here
+
+# Vercel - Frontend deployment
+# Get token at: https://vercel.com/account/tokens
+VERCEL_TOKEN=your_vercel_token_here

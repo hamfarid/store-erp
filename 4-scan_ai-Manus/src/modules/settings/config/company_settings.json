@@ -1,0 +1,32 @@
+{
+  "name": "شركة جعاره",
+  "legal_name": "شركة جعاره للتقنية",
+  "tax_id": "123456789",
+  "registration_number": "987654321",
+  "logo": "/assets/images/logo.png",
+  "address": {
+    "street": "شارع الملك فهد",
+    "city": "الرياض",
+    "state": "الرياض",
+    "postal_code": "12345",
+    "country": "جمهورية مصر العربية"
+  },
+  "contact": {
+    "phone": "+20 100345 6789",
+    "email": "info@gaaragroup.com",
+    "website": "https://gaaragroup.com"
+  },
+  "social_media": {
+    "facebook": "https://facebook.com/gaara",
+    "twitter": "https://twitter.com/gaara",
+    "linkedin": "https://linkedin.com/company/gaara",
+    "instagram": "https://instagram.com/gaara"
+  },
+  "fiscal_year": {
+    "start_month": 1,
+    "start_day": 1,
+    "end_month": 12,
+    "end_day": 31
+  },
+  "last_updated": "2025-05-24T21:00:50.935643"
+}

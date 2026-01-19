@@ -1,0 +1,217 @@
+# =============================================================================
+# Gaara ERP - Prometheus Alert Rules
+# قواعد التنبيه لـ Prometheus
+#
+# Author: Global v35.0 Singularity
+# Created: 2026-01-17
+# =============================================================================
+
+groups:
+  # ===========================================================================
+  # Application Alerts
+  # ===========================================================================
+  - name: gaara-erp-app
+    rules:
+      - alert: HighErrorRate
+        expr: |
+          (sum(rate(http_requests_total{status=~"5.."}[5m])) 
+          / sum(rate(http_requests_total[5m]))) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          team: backend
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value | humanizePercentage }} over the last 5 minutes"
+
+      - alert: HighResponseTime
+        expr: |
+          histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le)) > 2
+        for: 10m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "High response time detected"
+          description: "95th percentile response time is {{ $value }}s"
+
+      - alert: ServiceDown
+        expr: up{job="gaara-backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: devops
+        annotations:
+          summary: "Backend service is down"
+          description: "The backend service has been down for more than 1 minute"
+
+      - alert: TooManyRequests
+        expr: sum(rate(http_requests_total[1m])) > 1000
+        for: 5m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "High request rate"
+          description: "Request rate is {{ $value }} req/s"
+
+  # ===========================================================================
+  # Database Alerts
+  # ===========================================================================
+  - name: gaara-erp-database
+    rules:
+      - alert: PostgresDown
+        expr: pg_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: dba
+        annotations:
+          summary: "PostgreSQL is down"
+          description: "PostgreSQL database is not responding"
+
+      - alert: PostgresHighConnections
+        expr: |
+          (sum(pg_stat_activity_count) / pg_settings_max_connections) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          team: dba
+        annotations:
+          summary: "PostgreSQL connection pool nearly exhausted"
+          description: "{{ $value | humanizePercentage }} of connections in use"
+
+      - alert: PostgresSlowQueries
+        expr: |
+          rate(pg_stat_statements_seconds_total[5m]) > 1
+        for: 10m
+        labels:
+          severity: warning
+          team: dba
+        annotations:
+          summary: "Slow queries detected"
+          description: "Average query time is {{ $value }}s"
+
+      - alert: PostgresDiskSpaceLow
+        expr: |
+          (pg_database_size_bytes / pg_database_size_max_bytes) > 0.85
+        for: 10m
+        labels:
+          severity: warning
+          team: dba
+        annotations:
+          summary: "Database disk space running low"
+          description: "Database is {{ $value | humanizePercentage }} full"
+
+  # ===========================================================================
+  # Redis Alerts
+  # ===========================================================================
+  - name: gaara-erp-redis
+    rules:
+      - alert: RedisDown
+        expr: redis_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: devops
+        annotations:
+          summary: "Redis is down"
+          description: "Redis server is not responding"
+
+      - alert: RedisMemoryHigh
+        expr: |
+          (redis_memory_used_bytes / redis_memory_max_bytes) > 0.85
+        for: 5m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "Redis memory usage high"
+          description: "Redis is using {{ $value | humanizePercentage }} of max memory"
+
+      - alert: RedisTooManyConnections
+        expr: redis_connected_clients > 100
+        for: 5m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "Too many Redis connections"
+          description: "{{ $value }} clients connected to Redis"
+
+  # ===========================================================================
+  # Infrastructure Alerts
+  # ===========================================================================
+  - name: gaara-erp-infra
+    rules:
+      - alert: HighCPUUsage
+        expr: |
+          (1 - avg(rate(node_cpu_seconds_total{mode="idle"}[5m]))) > 0.85
+        for: 10m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "High CPU usage"
+          description: "CPU usage is {{ $value | humanizePercentage }}"
+
+      - alert: HighMemoryUsage
+        expr: |
+          (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) > 0.85
+        for: 10m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "High memory usage"
+          description: "Memory usage is {{ $value | humanizePercentage }}"
+
+      - alert: DiskSpaceLow
+        expr: |
+          (1 - (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} 
+          / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"})) > 0.85
+        for: 10m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "Disk space running low"
+          description: "Disk usage is {{ $value | humanizePercentage }} on {{ $labels.mountpoint }}"
+
+      - alert: ContainerRestarting
+        expr: |
+          rate(container_restart_count[15m]) > 0
+        for: 5m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "Container restarting"
+          description: "Container {{ $labels.name }} is restarting frequently"
+
+  # ===========================================================================
+  # SSL/Certificate Alerts
+  # ===========================================================================
+  - name: gaara-erp-ssl
+    rules:
+      - alert: SSLCertExpiringSoon
+        expr: |
+          (probe_ssl_earliest_cert_expiry - time()) / 86400 < 30
+        for: 1h
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "SSL certificate expiring soon"
+          description: "Certificate for {{ $labels.instance }} expires in {{ $value }} days"
+
+      - alert: SSLCertExpired
+        expr: |
+          (probe_ssl_earliest_cert_expiry - time()) < 0
+        for: 0m
+        labels:
+          severity: critical
+          team: devops
+        annotations:
+          summary: "SSL certificate expired"
+          description: "Certificate for {{ $labels.instance }} has expired!"

@@ -1,0 +1,152 @@
+version: '3.8'
+
+services:
+  # ===========================================
+  # MCP Servers - All-in-One Docker Setup
+  # ===========================================
+
+  # Sequential Thinking (No API Key)
+  sequential-thinking:
+    image: node:20-alpine
+    container_name: mcp-sequential-thinking
+    command: npx -y @modelcontextprotocol/server-sequential-thinking
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    labels:
+      - "mcp.server=sequential-thinking"
+
+  # Speckit - API Specifications (No API Key)
+  speckit:
+    image: node:20-alpine
+    container_name: mcp-speckit
+    command: npx -y @anthropic/mcp-speckit
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    labels:
+      - "mcp.server=speckit"
+
+  # Playwright - Browser Automation (No API Key)
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.40.0-jammy
+    container_name: mcp-playwright
+    command: npx -y @playwright/mcp-server
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    labels:
+      - "mcp.server=playwright"
+
+  # Exa - Code Search (Requires API Key)
+  exa:
+    image: node:20-alpine
+    container_name: mcp-exa
+    command: npx -y @anthropic/mcp-exa
+    environment:
+      - EXA_API_KEY=${EXA_API_KEY}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    labels:
+      - "mcp.server=exa"
+    profiles:
+      - with-api-keys
+
+  # GitHub (Requires API Key)
+  github:
+    image: node:20-alpine
+    container_name: mcp-github
+    command: npx -y @modelcontextprotocol/server-github
+    environment:
+      - GITHUB_PERSONAL_ACCESS_TOKEN=${GITHUB_PERSONAL_ACCESS_TOKEN}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    labels:
+      - "mcp.server=github"
+    profiles:
+      - with-api-keys
+
+  # Firecrawl - Web Scraping (Requires API Key)
+  firecrawl:
+    image: node:20-alpine
+    container_name: mcp-firecrawl
+    command: npx -y firecrawl-mcp
+    environment:
+      - FIRECRAWL_API_KEY=${FIRECRAWL_API_KEY}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    labels:
+      - "mcp.server=firecrawl"
+    profiles:
+      - with-api-keys
+
+  # Supabase (Requires API Keys)
+  supabase:
+    image: node:20-alpine
+    container_name: mcp-supabase
+    command: npx -y @supabase/mcp-server
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    labels:
+      - "mcp.server=supabase"
+    profiles:
+      - with-api-keys
+
+  # Sentry - Error Tracking (Requires API Keys)
+  sentry:
+    image: node:20-alpine
+    container_name: mcp-sentry
+    command: npx -y @sentry/mcp-server
+    environment:
+      - SENTRY_AUTH_TOKEN=${SENTRY_AUTH_TOKEN}
+      - SENTRY_ORG=${SENTRY_ORG}
+      - SENTRY_PROJECT=${SENTRY_PROJECT}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    labels:
+      - "mcp.server=sentry"
+    profiles:
+      - with-api-keys
+
+  # Vercel (Requires API Key)
+  vercel:
+    image: node:20-alpine
+    container_name: mcp-vercel
+    command: npx -y @vercel/mcp-server
+    environment:
+      - VERCEL_TOKEN=${VERCEL_TOKEN}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    labels:
+      - "mcp.server=vercel"
+    profiles:
+      - with-api-keys
+
+  # Railway (Requires API Key)
+  railway:
+    image: node:20-alpine
+    container_name: mcp-railway
+    command: npx -y @railway/mcp-server
+    environment:
+      - RAILWAY_TOKEN=${RAILWAY_TOKEN}
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    labels:
+      - "mcp.server=railway"
+    profiles:
+      - with-api-keys
+
+networks:
+  mcp-network:
+    driver: bridge

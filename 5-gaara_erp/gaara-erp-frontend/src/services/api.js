@@ -1,189 +1,208 @@
 /**
- * API Service - Centralized HTTP client for backend communication
- * Provides consistent error handling, authentication, and request/response processing
+ * API Service - خدمة API المركزية
+ * Gaara ERP v12
+ *
+ * Central API client with interceptors, error handling, and tenant support.
+ *
+ * @author Global v35.0 Singularity
+ * @version 1.0.0
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5001/api"
+import axios from 'axios'
+import { toast } from 'sonner'
 
-// Token management
-const getToken = () => localStorage.getItem("access_token")
-const getRefreshToken = () => localStorage.getItem("refresh_token")
-const setTokens = (access, refresh) => {
-  localStorage.setItem("access_token", access)
-  if (refresh) localStorage.setItem("refresh_token", refresh)
-}
-const clearTokens = () => {
-  localStorage.removeItem("access_token")
-  localStorage.removeItem("refresh_token")
-  localStorage.removeItem("user")
-}
+// Base URL from environment
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
-// Custom error class
-class ApiError extends Error {
-  constructor(message, status, data = null) {
-    super(message)
-    this.name = "ApiError"
-    this.status = status
-    this.data = data
+/**
+ * Create axios instance with default config
+ */
+const api = axios.create({
+  baseURL: `${API_BASE_URL}/api`,
+  timeout: 30000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
+/**
+ * Request interceptor - Add auth token and tenant header
+ */
+api.interceptors.request.use(
+  (config) => {
+    // Add auth token
+    const token = localStorage.getItem('access_token')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+
+    // Add tenant ID
+    const tenantId = localStorage.getItem('current_tenant_id')
+    if (tenantId) {
+      config.headers['X-Tenant-ID'] = tenantId
+    }
+
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
   }
-}
+)
 
-// Request interceptor
-const buildHeaders = (customHeaders = {}) => {
-  const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Accept-Language": "ar",
-    ...customHeaders,
-  }
+/**
+ * Response interceptor - Handle errors and token refresh
+ */
+api.interceptors.response.use(
+  (response) => {
+    return response.data
+  },
+  async (error) => {
+    const originalRequest = error.config
 
-  const token = getToken()
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`
-  }
+    // Handle 401 - Try token refresh
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true
 
-  return headers
-}
+      try {
+        const refreshToken = localStorage.getItem('refresh_token')
+        if (refreshToken) {
+          const response = await axios.post(`${API_BASE_URL}/api/auth/refresh`, {
+            refresh_token: refreshToken,
+          })
 
-// Response handler
-const handleResponse = async (response) => {
-  const contentType = response.headers.get("content-type")
-  let data = null
-
-  if (contentType && contentType.includes("application/json")) {
-    data = await response.json()
-  } else {
-    data = await response.text()
-  }
-
-  if (!response.ok) {
-    // Handle specific error codes
-    if (response.status === 401) {
-      // Token expired, try to refresh
-      const refreshed = await refreshAccessToken()
-      if (!refreshed) {
-        clearTokens()
-        window.location.href = "/login"
+          if (response.data.access_token) {
+            localStorage.setItem('access_token', response.data.access_token)
+            originalRequest.headers.Authorization = `Bearer ${response.data.access_token}`
+            return api(originalRequest)
+          }
+        }
+      } catch (refreshError) {
+        // Refresh failed - logout
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
+        window.location.href = '/login'
+        return Promise.reject(refreshError)
       }
-      throw new ApiError("جلستك انتهت. يرجى تسجيل الدخول مرة أخرى.", response.status, data)
     }
 
-    if (response.status === 403) {
-      throw new ApiError("ليس لديك صلاحية للوصول إلى هذا المورد.", response.status, data)
+    // Handle other errors
+    const errorMessage = error.response?.data?.message_ar ||
+                         error.response?.data?.message ||
+                         error.message ||
+                         'حدث خطأ غير متوقع'
+
+    // Don't show toast for certain endpoints
+    const silentEndpoints = ['/auth/check', '/health']
+    const isSilent = silentEndpoints.some(ep => originalRequest.url?.includes(ep))
+
+    if (!isSilent && error.response?.status !== 401) {
+      toast.error(errorMessage)
     }
 
-    if (response.status === 404) {
-      throw new ApiError("المورد المطلوب غير موجود.", response.status, data)
-    }
-
-    if (response.status === 422) {
-      throw new ApiError(data.detail || "بيانات غير صالحة.", response.status, data)
-    }
-
-    if (response.status >= 500) {
-      throw new ApiError("حدث خطأ في الخادم. يرجى المحاولة لاحقاً.", response.status, data)
-    }
-
-    throw new ApiError(
-      data.message || data.detail || "حدث خطأ غير متوقع.",
-      response.status,
-      data
-    )
-  }
-
-  return data
-}
-
-// Refresh token handler
-const refreshAccessToken = async () => {
-  const refreshToken = getRefreshToken()
-  if (!refreshToken) return false
-
-  try {
-    const response = await fetch(`${API_BASE_URL}/auth/refresh/`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ refresh: refreshToken }),
+    return Promise.reject({
+      success: false,
+      status: error.response?.status,
+      message: errorMessage,
+      message_ar: error.response?.data?.message_ar,
+      data: error.response?.data,
     })
+  }
+)
 
-    if (response.ok) {
-      const data = await response.json()
-      setTokens(data.access, data.refresh)
-      return true
+/**
+ * API Helper Functions
+ */
+export const apiHelpers = {
+  /**
+   * Standard success response
+   */
+  success: (data, message = '', messageAr = '') => ({
+    success: true,
+    data,
+    message,
+    message_ar: messageAr,
+  }),
+
+  /**
+   * Standard error response
+   */
+  error: (message, messageAr = '', status = 400) => ({
+    success: false,
+    message,
+    message_ar: messageAr || message,
+    status,
+  }),
+}
+
+/**
+ * Generic CRUD service factory
+ */
+export const createCrudService = (endpoint) => ({
+  /**
+   * Get all items
+   */
+  getAll: async (params = {}) => {
+    try {
+      return await api.get(endpoint, { params })
+    } catch (error) {
+      throw error
     }
-    return false
-  } catch {
-    return false
-  }
-}
+  },
 
-// Main request function
-const request = async (endpoint, options = {}) => {
-  const { method = "GET", body, headers = {}, params = {} } = options
-
-  // Build URL with query params
-  const url = new URL(`${API_BASE_URL}${endpoint}`)
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
-      url.searchParams.append(key, value)
+  /**
+   * Get single item by ID
+   */
+  getById: async (id) => {
+    try {
+      return await api.get(`${endpoint}/${id}`)
+    } catch (error) {
+      throw error
     }
-  })
+  },
 
-  const config = {
-    method,
-    headers: buildHeaders(headers),
-  }
+  /**
+   * Create new item
+   */
+  create: async (data) => {
+    try {
+      return await api.post(endpoint, data)
+    } catch (error) {
+      throw error
+    }
+  },
 
-  if (body && method !== "GET") {
-    config.body = JSON.stringify(body)
-  }
+  /**
+   * Update item
+   */
+  update: async (id, data) => {
+    try {
+      return await api.put(`${endpoint}/${id}`, data)
+    } catch (error) {
+      throw error
+    }
+  },
 
-  const response = await fetch(url.toString(), config)
-  return handleResponse(response)
-}
+  /**
+   * Delete item
+   */
+  delete: async (id) => {
+    try {
+      return await api.delete(`${endpoint}/${id}`)
+    } catch (error) {
+      throw error
+    }
+  },
 
-// HTTP methods
-export const api = {
-  get: (endpoint, params = {}, headers = {}) =>
-    request(endpoint, { method: "GET", params, headers }),
+  /**
+   * Patch item (partial update)
+   */
+  patch: async (id, data) => {
+    try {
+      return await api.patch(`${endpoint}/${id}`, data)
+    } catch (error) {
+      throw error
+    }
+  },
+})
 
-  post: (endpoint, body = {}, headers = {}) =>
-    request(endpoint, { method: "POST", body, headers }),
-
-  put: (endpoint, body = {}, headers = {}) =>
-    request(endpoint, { method: "PUT", body, headers }),
-
-  patch: (endpoint, body = {}, headers = {}) =>
-    request(endpoint, { method: "PATCH", body, headers }),
-
-  delete: (endpoint, headers = {}) =>
-    request(endpoint, { method: "DELETE", headers }),
-}
-
-// File upload helper
-export const uploadFile = async (endpoint, file, fieldName = "file", additionalData = {}) => {
-  const formData = new FormData()
-  formData.append(fieldName, file)
-
-  Object.entries(additionalData).forEach(([key, value]) => {
-    formData.append(key, value)
-  })
-
-  const token = getToken()
-  const headers = {}
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`
-  }
-
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    method: "POST",
-    headers,
-    body: formData,
-  })
-
-  return handleResponse(response)
-}
-
-// Export utilities
-export { ApiError, getToken, setTokens, clearTokens, API_BASE_URL }
 export default api

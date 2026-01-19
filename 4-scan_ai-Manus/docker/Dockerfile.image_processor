@@ -1,0 +1,62 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# تثبيت حزم النظام الضرورية
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    curl \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    netcat-openbsd \
+    && rm -rf /var/lib/apt/lists/*
+
+# نسخ ملفات متطلبات البايثون
+COPY requirements.txt .
+
+# تثبيت PyTorch وحزم معالجة الصور
+RUN pip install --no-cache-dir -r requirements.txt \
+    torch torchvision torchaudio \
+    opencv-python-headless \
+    pillow \
+    scikit-image \
+    scikit-learn \
+    matplotlib \
+    prometheus-client \
+    albumentations \
+    mahotas \
+    colour-science \
+    colorthief
+
+# نسخ كود المشروع
+COPY src/ /app/src/
+COPY config/ /app/config/
+
+# نسخ نصوص الإعداد والتشغيل
+COPY docker/scripts/wait-for-it.sh /app/wait-for-it.sh
+COPY docker/scripts/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/wait-for-it.sh /app/entrypoint.sh
+
+# إنشاء مجلدات البيانات والنماذج
+RUN mkdir -p /app/models /app/data /app/logs /app/temp
+
+# تعيين متغيرات البيئة الافتراضية
+ENV MODEL_DIR=/app/models
+ENV DATA_DIR=/app/data
+ENV CONFIG_PATH=/app/config/default.yaml
+ENV LOG_LEVEL=INFO
+ENV PYTHONUNBUFFERED=1
+ENV PRIMITIVE_FEATURES_DIR=/app/data/primitive_features
+ENV STANDARD_FEATURES_DIR=/app/data/standard_features
+ENV COMPARISON_RESULTS_DIR=/app/data/comparison_results
+ENV VISUALIZATIONS_DIR=/app/data/visualizations
+
+# تعريض المنفذ للاتصال
+EXPOSE 5000
+
+# تعيين نقطة الدخول
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+# أمر التشغيل الافتراضي
+CMD ["python", "-m", "src.disease_detection.detector", "--host", "0.0.0.0", "--port", "5000"]

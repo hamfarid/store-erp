@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+
+{% block title %}الموارد - نظام جعاره الزراعي الذكي{% endblock %}
+
+{% block page_title %}الموارد{% endblock %}
+
+{% block content %}
+<div class="resources">
+    <!-- Resources Grid -->
+    <div class="resources-grid">
+        <!-- CPU Card -->
+        <div class="resource-card">
+            <div class="resource-header">
+                <div class="resource-icon">
+                    <i class="material-icons">memory</i>
+                </div>
+                <div class="resource-title">
+                    <h3>المعالج</h3>
+                    <p>استخدام المعالج</p>
+                </div>
+            </div>
+            <div class="resource-stats">
+                <div class="stat">
+                    <span class="value">75%</span>
+                    <span class="label">الاستخدام الحالي</span>
+                </div>
+                <div class="stat">
+                    <span class="value">92%</span>
+                    <span class="label">أقصى استخدام</span>
+                </div>
+            </div>
+            <div class="resource-chart">
+                <canvas id="cpuChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Memory Card -->
+        <div class="resource-card">
+            <div class="resource-header">
+                <div class="resource-icon">
+                    <i class="material-icons">storage</i>
+                </div>
+                <div class="resource-title">
+                    <h3>الذاكرة</h3>
+                    <p>استخدام الذاكرة</p>
+                </div>
+            </div>
+            <div class="resource-stats">
+                <div class="stat">
+                    <span class="value">4.2GB</span>
+                    <span class="label">الاستخدام الحالي</span>
+                </div>
+                <div class="stat">
+                    <span class="value">8GB</span>
+                    <span class="label">السعة الكلية</span>
+                </div>
+            </div>
+            <div class="resource-chart">
+                <canvas id="memoryChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Storage Card -->
+        <div class="resource-card">
+            <div class="resource-header">
+                <div class="resource-icon">
+                    <i class="material-icons">folder</i>
+                </div>
+                <div class="resource-title">
+                    <h3>التخزين</h3>
+                    <p>استخدام التخزين</p>
+                </div>
+            </div>
+            <div class="resource-stats">
+                <div class="stat">
+                    <span class="value">256GB</span>
+                    <span class="label">المساحة المستخدمة</span>
+                </div>
+                <div class="stat">
+                    <span class="value">512GB</span>
+                    <span class="label">السعة الكلية</span>
+                </div>
+            </div>
+            <div class="resource-chart">
+                <canvas id="storageChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Network Card -->
+        <div class="resource-card">
+            <div class="resource-header">
+                <div class="resource-icon">
+                    <i class="material-icons">wifi</i>
+                </div>
+                <div class="resource-title">
+                    <h3>الشبكة</h3>
+                    <p>استخدام الشبكة</p>
+                </div>
+            </div>
+            <div class="resource-stats">
+                <div class="stat">
+                    <span class="value">2.5MB/s</span>
+                    <span class="label">سرعة التنزيل</span>
+                </div>
+                <div class="stat">
+                    <span class="value">1.8MB/s</span>
+                    <span class="label">سرعة الرفع</span>
+                </div>
+            </div>
+            <div class="resource-chart">
+                <canvas id="networkChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .resources {
+        padding: 1rem;
+    }
+
+    .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .resource-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .resource-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .resource-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--primary-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .resource-icon i {
+        color: var(--primary-color);
+        font-size: 24px;
+    }
+
+    .resource-title h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--text-color);
+    }
+
+    .resource-title p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: var(--text-light);
+    }
+
+    .resource-stats {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stat {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stat .value {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    .stat .label {
+        font-size: 0.875rem;
+        color: var(--text-light);
+    }
+
+    .resource-chart {
+        height: 200px;
+    }
+
+    @media (max-width: 768px) {
+        .resources-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .resource-card {
+            padding: 1rem;
+        }
+
+        .resource-stats {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // CPU Chart
+    const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+    new Chart(cpuCtx, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+            datasets: [{
+                label: 'استخدام المعالج',
+                data: [65, 59, 80, 81, 56, 55],
+                borderColor: '#2E7D32',
+                tension: 0.4,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+
+    // Memory Chart
+    const memoryCtx = document.getElementById('memoryChart').getContext('2d');
+    new Chart(memoryCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['مستخدم', 'متاح'],
+            datasets: [{
+                data: [4.2, 3.8],
+                backgroundColor: ['#2E7D32', '#E8F5E9']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    // Storage Chart
+    const storageCtx = document.getElementById('storageChart').getContext('2d');
+    new Chart(storageCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['مستخدم', 'متاح'],
+            datasets: [{
+                data: [256, 256],
+                backgroundColor: ['#2E7D32', '#E8F5E9']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    // Network Chart
+    const networkCtx = document.getElementById('networkChart').getContext('2d');
+    new Chart(networkCtx, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+            datasets: [{
+                label: 'سرعة التنزيل',
+                data: [2.5, 2.1, 2.8, 2.3, 2.6, 2.4],
+                borderColor: '#2E7D32',
+                tension: 0.4,
+                fill: false
+            }, {
+                label: 'سرعة الرفع',
+                data: [1.8, 1.5, 1.9, 1.7, 1.8, 1.6],
+                borderColor: '#1976D2',
+                tension: 0.4,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %} 

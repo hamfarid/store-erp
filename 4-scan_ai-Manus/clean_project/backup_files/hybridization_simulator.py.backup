@@ -1,0 +1,1117 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/plant_hybridization/hybridization_simulator.py
+"""
+
+محاكي التهجين النباتي
+يوفر هذا الملف محاكاة لعمليات التهجين النباتي باستخدام مكتبة PyBrOpS
+"""
+
+import os
+import json
+import logging
+import numpy as np
+import pandas as pd
+from datetime import datetime
+import uuid
+
+
+# إعداد التسجيل
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+
+class HybridizationSimulator:
+    """محاكي التهجين النباتي"""
+
+    def __init__(self, data_dir=None):
+        """
+        تهيئة محاكي التهجين
+
+        المعلمات:
+            data_dir (str, optional): مسار دليل البيانات
+        """
+        # مسار حفظ البيانات
+        if data_dir:
+            self.data_dir = data_dir
+        else:
+            self.data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+
+        os.makedirs(self.data_dir, exist_ok=True)
+
+        # مسار حفظ نتائج المحاكاة
+        self.results_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'results')
+        os.makedirs(self.results_dir, exist_ok=True)
+
+        # قاموس الأصناف
+        self.varieties = {}
+
+        # قاموس الصفات
+        self.traits = {}
+
+        # قاموس الأهداف
+        self.objectives = {}
+
+        # سجل المحاكاة
+        self.simulation_history = []
+
+        # تحميل البيانات
+        self._load_data()
+
+        logger.info("تم تهيئة محاكي التهجين النباتي")
+
+    def _load_data(self):
+        """تحميل البيانات من الملفات"""
+        try:
+            # تحميل بيانات الأصناف
+            varieties_file = os.path.join(self.data_dir, 'varieties.json')
+            if os.path.exists(varieties_file):
+                with open(varieties_file, 'rENCODINGutf-8') as f:
+                    self.varieties = json.load(f)
+                logger.info(f"تم تحميل {len(self.varieties)} صنف من {varieties_file}ELSE_LOGGERWARNINGFملف الأصناف غير موجود: {varieties_file}")
+                # إنشاء بيانات أصناف افتراضية
+                self._create_default_varieties()
+
+            # تحميل بيانات الصفات
+            traits_file = os.path.join(self.data_dir, 'traits.json')
+            if os.path.exists(traits_file):
+                with open(traits_file, 'rENCODINGutf-8') as f:
+                    self.traits = json.load(f)
+                logger.info(f"تم تحميل {len(self.traits)} صفة من {traits_file}ELSE_LOGGERWARNINGFملف الصفات غير موجود: {traits_file}")
+                # إنشاء بيانات صفات افتراضية
+                self._create_default_traits()
+
+            # تحميل بيانات الأهداف
+            objectives_file = os.path.join(self.data_dir, 'objectives.json')
+            if os.path.exists(objectives_file):
+                with open(objectives_file, 'rENCODINGutf-8') as f:
+                    self.objectives = json.load(f)
+                logger.info(f"تم تحميل {len(self.objectives)} هدف من {objectives_file}ELSE_LOGGERWARNINGFملف الأهداف غير موجود: {objectives_file}")
+                # إنشاء بيانات أهداف افتراضية
+                self._create_default_objectives()
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء تحميل البيانات: {str(e)}")
+            # إنشاء بيانات افتراضية
+            self._create_default_varieties()
+            self._create_default_traits()
+            self._create_default_objectives()
+
+    def _create_default_varieties(self):
+        """إنشاء بيانات أصناف افتراضية"""
+        self.varieties = {
+            "tomato""varieties""roma""name": "روما""scientific_name": "Solanum lycopersicum 'Roma'""traits""yield""": 75
+                        },
+                        "genetic_markers""yield": ["Y1", "Y2""disease_resistance": ["DR1", "DR3""drought_tolerance": ["DT2""fruit_size": ["FS1""maturity_days": ["MD2", "MD3""beefsteak""name": "بيفستيك""scientific_name": "Solanum lycopersicum 'Beefsteak'""traits""yield""": 0.4,
+                            "fruit_size": 0.9,
+                            "maturity_days": 85
+                        },
+                        "genetic_markers""yield": ["Y2", "Y3""disease_resistance": ["DR2""drought_tolerance": ["DT1""fruit_size": ["FS2", "FS3""maturity_days": ["MD1""cherry""name": "كرزية""scientific_name": "Solanum lycopersicum var. cerasiforme""traits""yield": 0.9,
+                            "disease_resistance""": 0.2,
+                            "maturity_days": 65
+                        },
+                        "genetic_markers""yield": ["Y1", "Y4""disease_resistance": ["DR1", "DR4""drought_tolerance": ["DT3", "DT4""fruit_size": ["FS4""maturity_days": ["MD4"]
+                        }
+                    }
+                },
+                "trait_inheritance""yield": {"type": "polygenic", HERITABILITY: 0.6},
+                    "disease_resistance": {"type": "polygenic", HERITABILITY: 0.7},
+                    DROUGHT_TOLERANCE: {"type": "polygenic", HERITABILITY: 0.5},
+                    "fruit_size": {"type": "polygenic", HERITABILITY: 0.8},
+                    "maturity_days": {"type": "polygenic", HERITABILITY: 0.7}
+                }
+            },
+            "wheat""varieties""hard_red""name": "قمح أحمر صلب""scientific_name": "Triticum aestivum""traits""yield": 0.75,
+                            "disease_resistance": 0.65,
+                            "drought_tolerance""": 120
+                        },
+                        "genetic_markers""yield": ["WY1", "WY2""disease_resistance": ["WDR1""drought_tolerance": ["WDT1", "WDT2""protein_content": ["WP1", "WP2""maturity_days": ["WMD1""soft_white""name": "قمح أبيض طري""scientific_name": "Triticum aestivum""traits""yield": 0.85,
+                            "disease_resistance""": 110
+                        },
+                        "genetic_markers""yield": ["WY2", "WY3""disease_resistance": ["WDR2""drought_tolerance": ["WDT3""protein_content": ["WP3""maturity_days": ["WMD2", "WMD3"]
+                        }
+                    }
+                },
+                "trait_inheritance""yield": {"type": "polygenic", HERITABILITY: 0.5},
+                    "disease_resistance": {"type": "polygenic", HERITABILITY: 0.6},
+                    DROUGHT_TOLERANCE: {"type": "polygenic", HERITABILITY: 0.7},
+                    "protein_content": {"type": "polygenic", HERITABILITY: 0.8},
+                    "maturity_days": {"type": "polygenic", HERITABILITY: 0.7}
+                }
+            }
+        }
+
+        # حفظ البيانات
+        varieties_file = os.path.join(self.data_dir, 'varieties.json')
+        with open(varieties_file, 'wENCODINGutf-8') as f:
+            json.dump(self.varieties, f, ensure_ascii=False, indent=2)
+
+        logger.info(f"تم إنشاء بيانات أصناف افتراضية وحفظها في {varieties_file}")
+
+    def _create_default_traits(self):
+        """إنشاء بيانات صفات افتراضية"""
+        self.traits = {
+            "yield""name": "الإنتاجية""description": "كمية المحصول المنتجة لكل وحدة مساحة""unit": "طن/هكتار""optimization": "maximize""disease_resistance""name": "مقاومة الأمراض""description": "قدرة النبات على مقاومة الأمراض الشائعة""unit": "نسبة مئوية""optimization": "maximize""drought_tolerance""name": "تحمل الجفاف""description": "قدرة النبات على تحمل ظروف الجفاف""unit": "نسبة مئوية""optimization": "maximize""fruit_size""name": "حجم الثمرة""description": "متوسط حجم الثمرة""unit": "سم""optimization": "target""maturity_days""name": "أيام النضج""description": "عدد الأيام من الزراعة حتى النضج""unit": "يوم""optimization": "minimize""protein_content""name": "محتوى البروتين""description": "نسبة البروتين في المحصول""unit": "نسبة مئوية""optimization": "maximize"
+            }
+        }
+
+        # حفظ البيانات
+        traits_file = os.path.join(self.data_dir, 'traits.json')
+        with open(traits_file, 'wENCODINGutf-8') as f:
+            json.dump(self.traits, f, ensure_ascii=False, indent=2)
+
+        logger.info(f"تم إنشاء بيانات صفات افتراضية وحفظها في {traits_file}")
+
+    def _create_default_objectives(self):
+        """إنشاء بيانات أهداف افتراضية"""
+        self.objectives = {
+            "high_yield_tomato""name": "طماطم عالية الإنتاجية""crop": "tomato""description": "تطوير صنف طماطم عالي الإنتاجية مع مقاومة جيدة للأمراض""target_traits""yield": {"min": 0.8, "weight": 0.5},
+                    "disease_resistance": {"min": 0.7, "weight": 0.3},
+                    "maturity_days": {"max": 80, "weight": 0.2}
+                }
+            },
+            "drought_resistant_wheat""name": "قمح مقاوم للجفاف""crop": "wheat""description": "تطوير صنف قمح مقاوم للجفاف مع محتوى بروتين عالي""target_traits""drought_tolerance": {"min": 0.7, "weight": 0.4},
+                    "protein_content": {"min": 0.7, "weight": 0.4},
+                    "yield": {"min": 0.6, "weight": 0.2}
+                }
+            }
+        }
+
+        # حفظ البيانات
+        objectives_file = os.path.join(self.data_dir, 'objectives.json')
+        with open(objectives_file, 'wENCODINGutf-8') as f:
+            json.dump(self.objectives, f, ensure_ascii=False, indent=2)
+
+        logger.info(f"تم إنشاء بيانات أهداف افتراضية وحفظها في {objectives_file}")
+
+    def save_data(self):
+        """حفظ البيانات في ملفات"""
+        try:
+            # حفظ بيانات الأصناف
+            varieties_file = os.path.join(self.data_dir, 'varieties.json')
+            with open(varieties_file, 'wENCODINGutf-8') as f:
+                json.dump(self.varieties, f, ensure_ascii=False, indent=2)
+
+            # حفظ بيانات الصفات
+            traits_file = os.path.join(self.data_dir, 'traits.json')
+            with open(traits_file, 'wENCODINGutf-8') as f:
+                json.dump(self.traits, f, ensure_ascii=False, indent=2)
+
+            # حفظ بيانات الأهداف
+            objectives_file = os.path.join(self.data_dir, 'objectives.json')
+            with open(objectives_file, 'wENCODINGutf-8') as f:
+                json.dump(self.objectives, f, ensure_ascii=False, indent=2)
+
+            logger.info("تم حفظ البيانات بنجاحRETURN_TRUE_EXCEPTخطأ أثناء حفظ البيانات: {str(e)}")
+            return False
+
+    def get_varieties(self, crop_type=None):
+        """
+        الحصول على قائمة الأصناف
+
+        المعلمات:
+            crop_type (str, optional): نوع المحصول
+
+        العائد:
+            dict: قائمة الأصناف
+        """
+        if crop_type:
+            if crop_type in self.varieties:
+                return {crop_type: self.varieties[crop_type]}
+            else:
+                logger.warning(f"نوع المحصول غير موجود: {crop_type}")
+                return {}
+        else:
+            return self.varieties
+
+    def get_traits(self, trait_ids=None):
+        """
+        الحصول على قائمة الصفات
+
+        المعلمات:
+            trait_ids (list, optional): قائمة معرفات الصفات
+
+        العائد:
+            dict: قائمة الصفات
+        """
+        if trait_ids:
+            return {trait_id: self.traits[trait_id] for trait_id in trait_ids if trait_id in self.traits}
+        else:
+            return self.traits
+
+    def get_objectives(self, objective_ids=None):
+        """
+        الحصول على قائمة الأهداف
+
+        المعلمات:
+            objective_ids (list, optional): قائمة معرفات الأهداف
+
+        العائد:
+            dict: قائمة الأهداف
+        """
+        if objective_ids:
+            return {objective_id: self.objectives[objective_id] for objective_id in objective_ids if objective_id in self.objectives}
+        else:
+            return self.objectives
+
+    def add_variety(self, crop_type, variety_id, variety_data):
+        """
+        إضافة صنف جديد
+
+        المعلمات:
+            crop_type (str): نوع المحصول
+            variety_id (str): معرف الصنف
+            variety_data (dict): بيانات الصنف
+
+        العائد:
+            bool: نجاح العملية
+        """
+        try:
+            # التحقق من وجود المحصول
+            if crop_type not in self.varieties:
+                self.varieties[crop_type] = {
+                    "varieties": {},
+                    "trait_inheritance": {}
+                }
+
+            # إضافة الصنف
+            self.varieties[crop_type]["varieties"][variety_id] = variety_data
+
+            # حفظ البيانات
+            self.save_data()
+
+            logger.info(f"تم إضافة الصنف {variety_id} للمحصول {crop_type}RETURN_TRUE_EXCEPTخطأ أثناء إضافة الصنف: {str(e)}")
+            return False
+
+    def add_trait(self, trait_id, trait_data):
+        """
+        إضافة صفة جديدة
+
+        المعلمات:
+            trait_id (str): معرف الصفة
+            trait_data (dict): بيانات الصفة
+
+        العائد:
+            bool: نجاح العملية
+        """
+        try:
+            # إضافة الصفة
+            self.traits[trait_id] = trait_data
+
+            # حفظ البيانات
+            self.save_data()
+
+            logger.info(f"تم إضافة الصفة {trait_id}RETURN_TRUE_EXCEPTخطأ أثناء إضافة الصفة: {str(e)}")
+            return False
+
+    def add_objective(self, objective_id, objective_data):
+        """
+        إضافة هدف جديد
+
+        المعلمات:
+            objective_id (str): معرف الهدف
+            objective_data (dict): بيانات الهدف
+
+        العائد:
+            bool: نجاح العملية
+        """
+        try:
+            # إضافة الهدف
+            self.objectives[objective_id] = objective_data
+
+            # حفظ البيانات
+            self.save_data()
+
+            logger.info(f"تم إضافة الهدف {objective_id}RETURN_TRUE_EXCEPTخطأ أثناء إضافة الهدف: {str(e)}")
+            return False
+
+    def run_simulation(self, simulation_params):
+        """
+        تشغيل محاكاة التهجين
+
+        المعلمات:
+            simulation_params (dict): معلمات المحاكاة
+
+        العائد:
+            dict: نتيجة المحاكاة
+        """
+        try:
+            logger.info("بدء محاكاة التهجين")
+
+            # التحقق من صحة المعلمات
+            validation_result = self._validate_simulation_params(simulation_params)
+            if not validation_result["valid"]:
+                logger.error(f"خطأ في معلمات المحاكاة: {validation_result['error']}")
+                return {
+                    "success": False,
+                    "error": validation_result["error""timestamp": datetime.now().isoformat()
+                }
+
+            # استخراج المعلمات
+            crop_type = simulation_params["crop_type"]
+            parent1_id = simulation_params[PARENT1_ID]
+            parent2_id = simulation_params[PARENT2_ID]
+            num_generations = simulation_params.get("num_generations", 3)
+            population_size = simulation_params.get("population_size", 100)
+            selection_rate = simulation_params.get("selection_rate", 0.2)
+            mutation_rate = simulation_params.get("mutation_rate", 0.05)
+            objective_id = simulation_params.get(OBJECTIVE_ID)
+            custom_objective = simulation_params.get(CUSTOM_OBJECTIVE)
+
+            # الحصول على بيانات الأبوين
+            parent1 = self.varieties[crop_type]["varieties"][parent1_id]
+            parent2 = self.varieties[crop_type]["varieties"][parent2_id]
+
+            # الحصول على معلومات وراثة الصفات
+            trait_inheritance = self.varieties[crop_type]["trait_inheritance"]
+
+            # تحديد الهدف
+            if objective_id:
+                objective = self.objectives[objective_id]
+            elif custom_objective:
+                objective = custom_objective
+            else:
+                # إنشاء هدف افتراضي
+                objective = {
+                    "name": "هدف افتراضي",
+                    "crop": crop_type,
+                    DESCRIPTION: "تحسين جميع الصفات",
+                    TARGET_TRAITS: {}
+                }
+
+                # إضافة جميع الصفات المشتركة بين الأبوين
+                common_traits = set(parent1["traits"].keys()) & set(parent2["traits"].keys())
+                for trait in common_traits:
+                    if trait in self.traits and OPTIMIZATION in self.traits[trait]:
+                        optimization = self.traits[trait][OPTIMIZATION]
+                        if optimization == "maximize":
+                            objective[TARGET_TRAITS][trait] = {"min": 0.7, "weight": 1.0 / len(common_traits)}
+                        elif optimization == "minimize":
+                            objective[TARGET_TRAITS][trait] = {"max": 0.3, "weight": 1.0 / len(common_traits)}
+                        else:  # target
+                            avg_value = (parent1["traits"][trait] + parent2["traits"][trait]) / 2
+                            objective[TARGET_TRAITS][trait] = {"target": avg_value, "weight": 1.0 / len(common_traits)}
+
+            # إنشاء الجيل الأول (تهجين الأبوين)
+            f1_generation = self._create_f1_generation(parent1, parent2, trait_inheritance, population_size)
+
+            # تقييم الجيل الأول
+            f1_evaluation = self._evaluate_generation(f1_generation, objective)
+
+            # إنشاء الأجيال التالية
+            generations = [f1_generation]
+            evaluations = [f1_evaluation]
+
+            for i in range(1, num_generations):
+                # اختيار أفضل الأفراد من الجيل السابق
+                selected_individuals = self._select_best_individuals(generations[-1], evaluations[-1], selection_rate)
+
+                # إنشاء الجيل التالي
+                next_generation = self._create_next_generation(selected_individuals, trait_inheritance, population_size, mutation_rate)
+
+                # تقييم الجيل التالي
+                next_evaluation = self._evaluate_generation(next_generation, objective)
+
+                # إضافة الجيل وتقييمه إلى القوائم
+                generations.append(next_generation)
+                evaluations.append(next_evaluation)
+
+            # اختيار أفضل الهجن
+            best_hybrids = self._select_best_hybrids(generations[-1], evaluations[-1], 10)
+
+            # إعداد نتيجة المحاكاة
+            simulation_id = str(uuid.uuid4())
+            simulation_result = {
+                "success": True,
+                "simulation_idSIMULATION_IDtimestamp": datetime.now().isoformat(),
+                "params": simulation_params,
+                "objective": objective,
+                "parents""parent1": parent1,
+                    "parent2": parent2
+                },
+                "generations": {
+                    f"generation_{i+1}""size": len(generations[i]),
+                        "avg_fitness": np.mean([ind["fitness"] for ind in evaluations[i]]),
+                        "max_fitness": np.max([ind["fitness"] for ind in evaluations[i]]),
+                        "best_individual_index": np.argmax([ind["fitness"] for ind in evaluations[i]])
+                    } for i in range(len(generations))
+                },
+                "best_hybrids": best_hybrids
+            }
+
+            # حفظ نتيجة المحاكاة
+            self._save_simulation_result(simulation_result)
+
+            # إضافة المحاكاة إلى السجل
+            self.simulation_history.append({
+                "simulation_idSIMULATION_IDtimestamp": simulation_result["timestamp""crop_type": crop_type,
+                "parents": [parent1_id, parent2_id],
+                "objective": objective["name"] if "name" in objective else "custom"
+            })
+
+            logger.info(f"تم الانتهاء من محاكاة التهجين (ID: {simulation_id})")
+
+            return simulation_result
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء محاكاة التهجين: {str(e)}")
+            return {
+                "success": False,
+                "error": f"خطأ أثناء محاكاة التهجين: {str(e)}""timestamp": datetime.now().isoformat()
+            }
+
+    def _validate_simulation_params(self, params):
+        """
+        التحقق من صحة معلمات المحاكاة
+
+        المعلمات:
+            params (dict): معلمات المحاكاة
+
+        العائد:
+            dict: نتيجة التحقق
+        """
+        # التحقق من وجود المعلمات الأساسية
+        if "crop_type" not in params:
+            return {"valid": False, "error": "نوع المحصول غير محدد"}
+
+        if PARENT1_ID not in params:
+            return {"valid": False, "error": "معرف الأب الأول غير محدد"}
+
+        if PARENT2_ID not in params:
+            return {"valid": False, "error": "معرف الأب الثاني غير محدد"}
+
+        # التحقق من وجود المحصول
+        crop_type = params["crop_type"]
+        if crop_type not in self.varieties:
+            return {"valid": False, "error": f"نوع المحصول غير موجود: {crop_type}"}
+
+        # التحقق من وجود الأبوين
+        parent1_id = params[PARENT1_ID]
+        parent2_id = params[PARENT2_ID]
+
+        if parent1_id not in self.varieties[crop_type]["varieties"]:
+            return {"valid": False, "error": f"الصنف الأول غير موجود: {parent1_id}"}
+
+        if parent2_id not in self.varieties[crop_type]["varieties"]:
+            return {"valid": False, "error": f"الصنف الثاني غير موجود: {parent2_id}"}
+
+        # التحقق من وجود الهدف إذا تم تحديده
+        if OBJECTIVE_ID in params and params[OBJECTIVE_ID]:
+            objective_id = params[OBJECTIVE_ID]
+            if objective_id not in self.objectives:
+                return {"valid": False, "error": f"الهدف غير موجود: {objective_id}"}
+
+            # التحقق من توافق الهدف مع المحصول
+            if self.objectives[objective_id]["crop"] != crop_type:
+                return {"valid": False, "error": f"الهدف {objective_id} غير متوافق مع المحصول {crop_type}"}
+
+        # التحقق من صحة المعلمات الإضافية
+        if "num_generations" in params:
+            num_generations = params["num_generations"]
+            if not isinstance(num_generations, int) or num_generations < 1 or num_generations > 20:
+                return {"valid": False, "error": "عدد الأجيال يجب أن يكون بين 1 و 20"}
+
+        if "population_size" in params:
+            population_size = params["population_size"]
+            if not isinstance(population_size, int) or population_size < 10 or population_size > 1000:
+                return {"valid": False, "error": "حجم المجتمع يجب أن يكون بين 10 و 1000"}
+
+        if "selection_rate" in params:
+            selection_rate = params["selection_rate"]
+            if not isinstance(selection_rate, (int, float)) or selection_rate <= 0 or selection_rate >= 1:
+                return {"valid": False, "error": "معدل الاختيار يجب أن يكون بين 0 و 1"}
+
+        if "mutation_rate" in params:
+            mutation_rate = params["mutation_rate"]
+            if not isinstance(mutation_rate, (int, float)) or mutation_rate < 0 or mutation_rate > 1:
+                return {"valid": False, "error": "معدل الطفرة يجب أن يكون بين 0 و 1"}
+
+        # التحقق من صحة الهدف المخصص إذا تم تحديده
+        if CUSTOM_OBJECTIVE in params and params[CUSTOM_OBJECTIVE]:
+            custom_objective = params[CUSTOM_OBJECTIVE]
+
+            if TARGET_TRAITS not in custom_objective:
+                return {"valid": False, "error": "الهدف المخصص يجب أن يحتوي على صفات مستهدفة"}
+
+            if not custom_objective[TARGET_TRAITS]:
+                return {"valid": False, "error": "الهدف المخصص يجب أن يحتوي على صفة مستهدفة واحدة على الأقل"}
+
+            # التحقق من وجود الصفات المستهدفة
+            for trait_id in custom_objective[TARGET_TRAITS]:
+                if trait_id not in self.traits:
+                    return {"valid": False, "error": f"الصفة غير موجودة: {trait_id}"}
+
+        return {"valid": True}
+
+    def _create_f1_generation(self, parent1, parent2, trait_inheritance, population_size):
+        """
+        إنشاء الجيل الأول (F1) من التهجين
+
+        المعلمات:
+            parent1 (dict): بيانات الأب الأول
+            parent2 (dict): بيانات الأب الثاني
+            trait_inheritance (dict): معلومات وراثة الصفات
+            population_size (int): حجم المجتمع
+
+        العائد:
+            list: قائمة أفراد الجيل الأول
+        """
+        f1_generation = []
+
+        for i in range(population_size):
+            # إنشاء فرد جديد
+            individual = {
+                "id": f"F1_{i+1}""traits": {},
+                "genetic_markers": {}
+            }
+
+            # حساب قيم الصفات
+            for trait_id, inheritance_info in trait_inheritance.items():
+                # التحقق من وجود الصفة في كلا الأبوين
+                if trait_id in parent1["traitsAND_TRAIT_ID_INtraits"]:
+                    # الحصول على قيم الصفة من الأبوين
+                    parent1_value = parent1["traits"][trait_id]
+                    parent2_value = parent2["traits"][trait_id]
+
+                    # الحصول على معلومات وراثة الصفة
+                    inheritance_type = inheritance_info["type"]
+                    heritability = inheritance_info[HERITABILITY]
+
+                    # حساب قيمة الصفة للفرد الجديد
+                    if inheritance_type == "mendelian":
+                        # وراثة مندلية (صفة واحدة)
+                        individual["traits"][trait_id] = parent1_value if np.random.random() < 0.5 else parent2_value
+                    elif inheritance_type == "polygenic":
+                        # وراثة متعددة الجينات
+                        # حساب المتوسط المرجح بين الأبوين
+                        mean_value = (parent1_value + parent2_value) / 2
+                        # إضافة تباين عشوائي
+                        variance = (1 - heritability) * abs(parent1_value - parent2_value)
+                        individual["traits"][trait_id] = np.random.normal(mean_value, variance)
+                        # تقييد القيمة بين 0 و 1 (للصفات النسبية)
+                        individual["traitsTRAIT_ID_MAX0_MIN1traits"][trait_id]))
+                    else:
+                        # وراثة افتراضية (متوسط الأبوين)
+                        individual["traits"][trait_id] = (parent1_value + parent2_value) / 2
+
+                    # توريث العلامات الوراثية
+                    if trait_id in parent1.get("genetic_markers", {}) and trait_id in parent2.get("genetic_markers", {}):
+                        parent1_markers = parent1["genetic_markers"][trait_id]
+                        parent2_markers = parent2["genetic_markers"][trait_id]
+
+                        # دمج العلامات الوراثية من الأبوين
+                        all_markers = list(set(parent1_markers + parent2_markers))
+
+                        # اختيار عدد عشوائي من العلامات
+                        num_markers = min(len(all_markers), max(len(parent1_markers), len(parent2_markers)))
+                        selected_markers = np.random.choice(all_markers, size=num_markers, replace=False).tolist()
+
+                        individual["genetic_markers"][trait_id] = selected_markers
+
+            # إضافة الفرد إلى الجيل
+            f1_generation.append(individual)
+
+        return f1_generation
+
+    def _evaluate_generation(self, generation, objective):
+        """
+        تقييم جيل من الهجن
+
+        المعلمات:
+            generation (list): قائمة أفراد الجيل
+            objective (dict): هدف التهجين
+
+        العائد:
+            list: قائمة تقييمات الأفراد
+        """
+        evaluations = []
+
+        for individual in generation:
+            # حساب درجة اللياقة للفرد
+            fitness, trait_scores = self._calculate_fitness(individual, objective)
+
+            # إنشاء تقييم الفرد
+            evaluation = {
+                "idINDIVIDUALid""fitness": fitness,
+                "trait_scores": trait_scores
+            }
+
+            # إضافة التقييم إلى القائمة
+            evaluations.append(evaluation)
+
+        return evaluations
+
+    def _calculate_fitness(self, individual, objective):
+        """
+        حساب درجة لياقة الفرد
+
+        المعلمات:
+            individual (dict): بيانات الفرد
+            objective (dict): هدف التهجين
+
+        العائد:
+            tuple: درجة اللياقة الإجمالية ودرجات الصفات
+        """
+        trait_scores = {}
+        weighted_scores = []
+
+        # الحصول على الصفات المستهدفة
+        target_traits = objective.get(TARGET_TRAITS, {})
+
+        # حساب درجة كل صفة
+        for trait_id, target_info in target_traits.items():
+            # التحقق من وجود الصفة في الفرد
+            if trait_id in individual["traits"]:
+                trait_value = individual["traits"][trait_id]
+                trait_weight = target_info.get("weight", 1.0)
+
+                # حساب درجة الصفة بناءً على نوع الهدف
+                if "min" in target_info:
+                    # الحد الأدنى (أكبر أفضل)
+                    min_value = target_info["min"]
+                    if trait_value >= min_value:
+                        trait_score = 1.0
+                    else:
+                        trait_score = trait_value / min_value
+                elif "max" in target_info:
+                    # الحد الأقصى (أصغر أفضل)
+                    max_value = target_info["max"]
+                    if trait_value <= max_value:
+                        trait_score = 1.0
+                    else:
+                        trait_score = max_value / trait_value
+                elif "target" in target_info:
+                    # القيمة المستهدفة
+                    target_value = target_info["target"]
+                    tolerance = target_info.get("tolerance", 0.1)
+
+                    # حساب الفرق النسبي
+                    relative_diff = abs(trait_value - target_value) / target_value
+
+                    if relative_diff <= tolerance:
+                        trait_score = 1.0
+                    else:
+                        trait_score = max(0, 1.0 - (relative_diff - tolerance) / (1.0 - tolerance))
+                else:
+                    # هدف غير محدد (افتراضي)
+                    trait_score = trait_value
+
+                # تخزين درجة الصفة
+                trait_scores[trait_id] = trait_score
+
+                # إضافة الدرجة المرجحة
+                weighted_scores.append(trait_score * trait_weight)
+
+        # حساب درجة اللياقة الإجمالية
+        if weighted_scores:
+            fitness = sum(weighted_scores) / sum(target_info.get("weight", 1.0) for target_info in target_traits.values())
+        else:
+            fitness = 0.0
+
+        return fitness, trait_scores
+
+    def _select_best_individuals(self, generation, evaluations, selection_rate):
+        """
+        اختيار أفضل الأفراد من الجيل
+
+        المعلمات:
+            generation (list): قائمة أفراد الجيل
+            evaluations (list): قائمة تقييمات الأفراد
+            selection_rate (float): معدل الاختيار
+
+        العائد:
+            list: قائمة الأفراد المختارين
+        """
+        # ترتيب الأفراد حسب درجة اللياقة
+        sorted_indices = np.argsort([evaluation["fitness"] for evaluation in evaluations])[::-1]
+
+        # تحديد عدد الأفراد المختارين
+        num_selected = max(2, int(len(generation) * selection_rate))
+
+        # اختيار أفضل الأفراد
+        selected_individuals = [generation[i] for i in sorted_indices[:num_selected]]
+
+        return selected_individuals
+
+    def _create_next_generation(self, selected_individuals, trait_inheritance, population_size, mutation_rate):
+        """
+        إنشاء الجيل التالي
+
+        المعلمات:
+            selected_individuals (list): قائمة الأفراد المختارين
+            trait_inheritance (dict): معلومات وراثة الصفات
+            population_size (int): حجم المجتمع
+            mutation_rate (float): معدل الطفرة
+
+        العائد:
+            list: قائمة أفراد الجيل التالي
+        """
+        next_generation = []
+
+        for i in range(population_size):
+            # اختيار أبوين عشوائيين من الأفراد المختارين
+            parent1 = selected_individuals[np.random.randint(0, len(selected_individuals))]
+            parent2 = selected_individuals[np.random.randint(0, len(selected_individuals))]
+
+            # إنشاء فرد جديد
+            individual = {
+                "id": f"G{len(next_generation) + 1}_{i+1}""traits": {},
+                "genetic_markers": {}
+            }
+
+            # حساب قيم الصفات
+            for trait_id, inheritance_info in trait_inheritance.items():
+                # التحقق من وجود الصفة في كلا الأبوين
+                if trait_id in parent1["traitsAND_TRAIT_ID_INtraits"]:
+                    # الحصول على قيم الصفة من الأبوين
+                    parent1_value = parent1["traits"][trait_id]
+                    parent2_value = parent2["traits"][trait_id]
+
+                    # الحصول على معلومات وراثة الصفة
+                    inheritance_type = inheritance_info["type"]
+                    heritability = inheritance_info[HERITABILITY]
+
+                    # حساب قيمة الصفة للفرد الجديد
+                    if inheritance_type == "mendelian":
+                        # وراثة مندلية (صفة واحدة)
+                        individual["traits"][trait_id] = parent1_value if np.random.random() < 0.5 else parent2_value
+                    elif inheritance_type == "polygenic":
+                        # وراثة متعددة الجينات
+                        # حساب المتوسط المرجح بين الأبوين
+                        mean_value = (parent1_value + parent2_value) / 2
+                        # إضافة تباين عشوائي
+                        variance = (1 - heritability) * abs(parent1_value - parent2_value)
+                        individual["traits"][trait_id] = np.random.normal(mean_value, variance)
+                        # تقييد القيمة بين 0 و 1 (للصفات النسبية)
+                        individual["traitsTRAIT_ID_MAX0_MIN1traits"][trait_id]))
+                    else:
+                        # وراثة افتراضية (متوسط الأبوين)
+                        individual["traits"][trait_id] = (parent1_value + parent2_value) / 2
+
+                    # تطبيق الطفرة
+                    if np.random.random() < mutation_rate:
+                        # إضافة قيمة عشوائية صغيرة
+                        mutation = np.random.normal(0, 0.1)
+                        individual["traits"][trait_id] += mutation
+                        # تقييد القيمة بين 0 و 1 (للصفات النسبية)
+                        individual["traitsTRAIT_ID_MAX0_MIN1traits"][trait_id]))
+
+                    # توريث العلامات الوراثية
+                    if trait_id in parent1.get("genetic_markers", {}) and trait_id in parent2.get("genetic_markers", {}):
+                        parent1_markers = parent1["genetic_markers"][trait_id]
+                        parent2_markers = parent2["genetic_markers"][trait_id]
+
+                        # دمج العلامات الوراثية من الأبوين
+                        all_markers = list(set(parent1_markers + parent2_markers))
+
+                        # اختيار عدد عشوائي من العلامات
+                        num_markers = min(len(all_markers), max(len(parent1_markers), len(parent2_markers)))
+                        selected_markers = np.random.choice(all_markers, size=num_markers, replace=False).tolist()
+
+                        individual["genetic_markers"][trait_id] = selected_markers
+
+            # إضافة الفرد إلى الجيل
+            next_generation.append(individual)
+
+        return next_generation
+
+    def _select_best_hybrids(self, generation, evaluations, num_hybrids):
+        """
+        اختيار أفضل الهجن
+
+        المعلمات:
+            generation (list): قائمة أفراد الجيل
+            evaluations (list): قائمة تقييمات الأفراد
+            num_hybrids (int): عدد الهجن المطلوبة
+
+        العائد:
+            list: قائمة أفضل الهجن
+        """
+        # ترتيب الأفراد حسب درجة اللياقة
+        sorted_indices = np.argsort([evaluation["fitness"] for evaluation in evaluations])[::-1]
+
+        # اختيار أفضل الهجن
+        best_hybrids = []
+
+        for i in range(min(num_hybrids, len(generation))):
+            index = sorted_indices[i]
+            individual = generation[index]
+            evaluation = evaluations[index]
+
+            # إنشاء معلومات الهجين
+            hybrid = {
+                "idINDIVIDUALid""fitness": evaluation["fitness""traitsINDIVIDUALtraits""trait_scores": evaluation["trait_scores"]
+            }
+
+            # إضافة العلامات الوراثية إذا كانت متوفرة
+            if "genetic_markers" in individual:
+                hybrid["genetic_markers"] = individual["genetic_markers"]
+
+            # إضافة الهجين إلى القائمة
+            best_hybrids.append(hybrid)
+
+        return best_hybrids
+
+    def _save_simulation_result(self, simulation_result):
+        """
+        حفظ نتيجة المحاكاة
+
+        المعلمات:
+            simulation_result (dict): نتيجة المحاكاة
+        """
+        try:
+            # إنشاء اسم ملف فريد
+            simulation_id = simulation_result["simulation_id"]
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"simulation_{simulation_id}_{timestamp}.json"
+            file_path = os.path.join(self.results_dir, filename)
+
+            # حفظ النتيجة في ملف JSON
+            with open(file_path, "wENCODINGutf-8") as f:
+                json.dump(simulation_result, f, ensure_ascii=False, indent=2)
+
+            logger.info(f"تم حفظ نتيجة المحاكاة في: {file_path}")
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء حفظ نتيجة المحاكاة: {str(e)}")
+
+    def get_simulation_history(self, limit=10):
+        """
+        الحصول على سجل المحاكاة
+
+        المعلمات:
+            limit (int, optional): عدد النتائج المراد استرجاعها
+
+        العائد:
+            list: سجل المحاكاة
+        """
+        # ترتيب المحاكاة حسب التاريخ (من الأحدث إلى الأقدم)
+        sorted_history = sorted(
+            self.simulation_history,
+            key=lambda x: x["timestamp"],
+            reverse=True
+        )
+
+        # تحديد عدد النتائج المراد استرجاعها
+        return sorted_history[:limit]
+
+    def get_simulation_result(self, simulation_id):
+        """
+        الحصول على نتيجة محاكاة محددة
+
+        المعلمات:
+            simulation_id (str): معرف المحاكاة
+
+        العائد:
+            dict: نتيجة المحاكاة
+        """
+        try:
+            # البحث عن ملف المحاكاة
+            for filename in os.listdir(self.results_dir):
+                if filename.startswith(f"simulation_{simulation_id}"):
+                    file_path = os.path.join(self.results_dir, filename)
+
+                    # قراءة ملف المحاكاة
+                    with open(file_path, "rENCODINGutf-8") as f:
+                        simulation_result = json.load(f)
+
+                    return simulation_result
+
+            logger.warning(f"لم يتم العثور على نتيجة المحاكاة: {simulation_id}")
+            return None
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء استرجاع نتيجة المحاكاة: {str(e)}")
+            return None
+
+    def export_simulation_to_csv(self, simulation_id, output_dir=None):
+        """
+        تصدير نتيجة المحاكاة إلى ملف CSV
+
+        المعلمات:
+            simulation_id (str): معرف المحاكاة
+            output_dir (str, optional): مسار دليل الإخراج
+
+        العائد:
+            str: مسار ملف CSV
+        """
+        try:
+            # الحصول على نتيجة المحاكاة
+            simulation_result = self.get_simulation_result(simulation_id)
+
+            if not simulation_result:
+                logger.error(f"لم يتم العثور على نتيجة المحاكاة: {simulation_id}")
+                return None
+
+            # تحديد مسار دليل الإخراج
+            if not output_dir:
+                output_dir = self.results_dir
+
+            # إنشاء اسم ملف CSV
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            csv_filename = f"simulation_{simulation_id}_{timestamp}.csv"
+            csv_path = os.path.join(output_dir, csv_filename)
+
+            # إنشاء DataFrame للهجن
+            hybrids_data = []
+
+            for hybrid in simulation_result["best_hybrids"]:
+                hybrid_data = {
+                    "id": hybrid["id""fitness": hybrid["fitness"]
+                }
+
+                # إضافة قيم الصفات
+                for trait_id, trait_value in hybrid["traits"].items():
+                    hybrid_data[f"trait_{trait_id}"] = trait_value
+
+                # إضافة درجات الصفات
+                for trait_id, trait_score in hybrid["trait_scores"].items():
+                    hybrid_data[f"score_{trait_id}"] = trait_score
+
+                hybrids_data.append(hybrid_data)
+
+            # إنشاء DataFrame
+            hybrids_df = pd.DataFrame(hybrids_data)
+
+            # حفظ DataFrame إلى ملف CSV
+            hybrids_df.to_csv(csv_path, index=False, encoding="utf-8")
+
+            logger.info(f"تم تصدير نتيجة المحاكاة إلى: {csv_path}")
+
+            return csv_path
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء تصدير نتيجة المحاكاة: {str(e)}")
+            return None
+
+    def generate_recommendations(self, simulation_id):
+        """
+        توليد توصيات بناءً على نتيجة المحاكاة
+
+        المعلمات:
+            simulation_id (str): معرف المحاكاة
+
+        العائد:
+            dict: توصيات للمزارع
+        """
+        try:
+            # الحصول على نتيجة المحاكاة
+            simulation_result = self.get_simulation_result(simulation_id)
+
+            if not simulation_result:
+                logger.error(f"لم يتم العثور على نتيجة المحاكاة: {simulation_id}")
+                return {
+                    "success": False,
+                    "error": f"لم يتم العثور على نتيجة المحاكاة: {simulation_id}"
+                }
+
+            # الحصول على معلومات المحاكاة
+            crop_type = simulation_result["params"]["crop_type"]
+            parent1_id = simulation_result["params"][PARENT1_ID]
+            parent2_id = simulation_result["params"][PARENT2_ID]
+            objective = simulation_result["objective"]
+            best_hybrids = simulation_result["best_hybrids"]
+
+            # إنشاء توصيات عامة
+            general_recommendations = [
+                f"تم تنفيذ محاكاة التهجين بين الصنفين {parent1_id} و {parent2_id} من محصول {crop_type}.",
+                f"الهدف: {objective.get('name', 'هدف مخصص')} - {objective.get(DESCRIPTION, '')}",
+                f"تم إنتاج {len(best_hybrids)} هجين مرشح للاختبار الميداني."
+            ]
+
+            # إنشاء توصيات للهجن
+            hybrid_recommendations = []
+
+            for i, hybrid in enumerate(best_hybrids[:3]):  # أفضل 3 هجن
+                hybrid_recommendation = {
+                    "id": hybrid["id""fitness": hybrid["fitness"],
+                    DESCRIPTION: f"الهجين {hybrid['id']} (درجة اللياقة: {hybrid['fitness']:.2f})",
+                    "traits": {},
+                    "improvements": []
+                }
+
+                # إضافة معلومات الصفات
+                for trait_id, trait_value in hybrid["traits"].items():
+                    if trait_id in self.traits:
+                        trait_name = self.traits[trait_id]["name"]
+                        trait_unit = self.traits[trait_id].get("unit", "")
+
+                        # تحويل القيمة النسبية إلى قيمة فعلية إذا كانت الوحدة محددة
+                        if trait_unit and trait_id != "disease_resistance" and trait_id != DROUGHT_TOLERANCE:
+                            # افتراض نطاق قيم للصفات المختلفة
+                            if trait_id == "yield":
+                                actual_value = trait_value * 20  # 0-20 طن/هكتار
+                            elif trait_id == "fruit_size":
+                                actual_value = trait_value * 15  # 0-15 سم
+                            elif trait_id == "maturity_days":
+                                actual_value = 50 + trait_value * 100  # 50-150 يوم
+                            elif trait_id == "protein_content":
+                                actual_value = trait_value * 25  # 0-25%
+                            else:
+                                actual_value = trait_value
+
+                            hybrid_recommendation["traits"][trait_id] = {
+                                "name": trait_name,
+                                "value": actual_value,
+                                "unit": trait_unit
+                            }
+                        else:
+                            # قيمة نسبية
+                            hybrid_recommendation["traits"][trait_id] = {
+                                "name": trait_name,
+                                "value": trait_value * 100,
+                                "unit": "%"
+                            }
+
+                # إضافة التحسينات مقارنة بالأبوين
+                parent1 = simulation_result["parents"]["parent1"]
+                parent2 = simulation_result["parents"]["parent2"]
+
+                for trait_id, trait_value in hybrid["traits"].items():
+                    if trait_id in parent1["traitsAND_TRAIT_ID_INtraits"]:
+                        parent1_value = parent1["traits"][trait_id]
+                        parent2_value = parent2["traits"][trait_id]
+
+                        # التحقق من وجود تحسين
+                        if trait_id in self.traits and OPTIMIZATION in self.traits[trait_id]:
+                            optimization = self.traits[trait_id][OPTIMIZATION]
+
+                            if optimization == "maximize" and trait_value > max(parent1_value, parent2_value):
+                                improvement = (trait_value - max(parent1_value, parent2_value)) / max(parent1_value, parent2_value) * 100
+                                hybrid_recommendation["improvements"].append({
+                                    "trait_id": trait_id,
+                                    "trait_name": self.traits[trait_id]["name"],
+                                    "improvement": f"+{improvement:.1f}%",
+                                    DESCRIPTION: f"تحسين في {self.traits[trait_id]['name']} بنسبة {improvement:.1f}% مقارنة بأفضل الأبوين"
+                                })
+                            elif optimization == "minimize" and trait_value < min(parent1_value, parent2_value):
+                                improvement = (min(parent1_value, parent2_value) - trait_value) / min(parent1_value, parent2_value) * 100
+                                hybrid_recommendation["improvements"].append({
+                                    "trait_id": trait_id,
+                                    "trait_name": self.traits[trait_id]["name"],
+                                    "improvement": f"-{improvement:.1f}%",
+                                    DESCRIPTION: f"تحسين في {self.traits[trait_id]['name']} بنسبة {improvement:.1f}% مقارنة بأفضل الأبوين"
+                                })
+
+                hybrid_recommendations.append(hybrid_recommendation)
+
+            # إنشاء توصيات للخطوات التالية
+            next_steps = [
+                "إجراء اختبارات ميدانية للهجن المرشحة في بيئات مختلفة""تقييم أداء الهجن في ظروف الإنتاج الفعلية""اختيار الهجين الأفضل للإنتاج التجاري بناءً على نتائج الاختبارات الميدانية""تسجيل الهجين المختار كصنف جديد"
+            ]
+
+            # إنشاء التوصيات النهائية
+            recommendations = {
+                "success": True,
+                "simulation_idSIMULATION_IDtimestamp": datetime.now().isoformat(),
+                "general": general_recommendations,
+                "hybrids": hybrid_recommendations,
+                "next_steps": next_steps
+            }
+
+            return recommendations
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء توليد التوصيات: {str(e)}")
+            return {
+                "success": False,
+                "error": f"خطأ أثناء توليد التوصيات: {str(e)}"
+            }

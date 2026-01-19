@@ -1,0 +1,12 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/disease_diagnosis/__init__.py
+"""
+from flask import g
+مديول تشخيص الأمراض النباتية
+يوفر هذا المديول وظائف لتشخيص الأمراض النباتية وتقديم توصيات العلاج
+"""
+
+from .api import router
+from .disease_knowledge_base import DiseaseKnowledgeBase
+from .diagnosis_engine import DiagnosisEngine
+
+__all__ = ['router', 'DiseaseKnowledgeBase', 'DiagnosisEngine']

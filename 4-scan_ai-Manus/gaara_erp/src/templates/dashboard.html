@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام Gaara ERP - الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="/static/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-top: 60px;
+            padding-right: 260px;
+            transition: padding-right 0.3s ease;
+        }
+        
+        body.sidebar-collapsed {
+            padding-right: 70px;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+        }
+        
+        .dashboard-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .dashboard-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-subtitle {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        
+        .stats-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        
+        .stats-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .stats-card-title {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats-card-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats-card-change {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stats-card-change.positive {
+            color: #28a745;
+        }
+        
+        .stats-card-change.negative {
+            color: #dc3545;
+        }
+        
+        .chart-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .chart-card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .chart-card-actions .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+        }
+        
+        .chart-container {
+            height: 300px;
+        }
+        
+        .table-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .table-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .table-card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .table-card-actions .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+        }
+        
+        .table-responsive {
+            margin-bottom: 0;
+        }
+        
+        .table th {
+            font-weight: 600;
+            color: #495057;
+            border-top: none;
+        }
+        
+        .table td {
+            vertical-align: middle;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-badge.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-badge.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-badge.danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-badge.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        @media (max-width: 992px) {
+            body {
+                padding-right: 0;
+            }
+            
+            body.sidebar-collapsed {
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- تضمين مكون Header -->
+    <div id="header-container"></div>
+    
+    <!-- تضمين مكون Sidebar -->
+    <div id="sidebar-container"></div>
+    
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">مرحباً بك، أحمد محمد</h1>
+                <p class="dashboard-subtitle">هذه هي لوحة التحكم الرئيسية لنظام Gaara ERP. يمكنك متابعة أداء النظام والوصول إلى جميع الوظائف من هنا.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-card-icon" style="background-color: rgba(52, 152, 219, 0.1); color: #3498db;">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="stats-card-title">إجمالي المشاتل</div>
+                        <div class="stats-card-value">12</div>
+                        <div class="stats-card-change positive">
+                            <i class="fas fa-arrow-up me-1"></i>
+                            <span>8.5% منذ الشهر الماضي</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-card-icon" style="background-color: rgba(46, 204, 113, 0.1); color: #2ecc71;">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <div class="stats-card-title">إجمالي المزارع</div>
+                        <div class="stats-card-value">8</div>
+                        <div class="stats-card-change positive">
+                            <i class="fas fa-arrow-up me-1"></i>
+                            <span>12.3% منذ الشهر الماضي</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-card-icon" style="background-color: rgba(155, 89, 182, 0.1); color: #9b59b6;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stats-card-title">إجمالي الموظفين</div>
+                        <div class="stats-card-value">45</div>
+                        <div class="stats-card-change positive">
+                            <i class="fas fa-arrow-up me-1"></i>
+                            <span>5.2% منذ الشهر الماضي</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-card-icon" style="background-color: rgba(231, 76, 60, 0.1); color: #e74c3c;">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stats-card-title">الإيرادات الشهرية</div>
+                        <div class="stats-card-value">125,000 ج.م</div>
+                        <div class="stats-card-change negative">
+                            <i class="fas fa-arrow-down me-1"></i>
+                            <span>3.1% منذ الشهر الماضي</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <div class="chart-card-title">الإيرادات والمصروفات</div>
+                            <div class="chart-card-actions">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-outline-secondary active">شهري</button>
+                                    <button type="button" class="btn btn-outline-secondary">ربع سنوي</button>
+                                    <button type="button" class="btn btn-outline-secondary">سنوي</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <!-- هنا سيتم رسم المخطط البياني باستخدام Chart.js -->
+                            <canvas id="revenueExpenseChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <div class="chart-card-title">إحصائيات المشاتل والمزارع</div>
+                            <div class="chart-card-actions">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-outline-secondary active">المشاتل</button>
+                                    <button type="button" class="btn btn-outline-secondary">المزارع</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <!-- هنا سيتم رسم المخطط البياني باستخدام Chart.js -->
+                            <canvas id="nurseryFarmChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <div class="chart-card-title">توزيع الأصناف</div>
+                            <div class="chart-card-actions">
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <!-- هنا سيتم رسم المخطط الدائري باستخدام Chart.js -->
+                            <canvas id="varietiesChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="table-card">
+                        <div class="table-card-header">
+                            <div class="table-card-title">آخر طلبات التشخيص</div>
+                            <div class="table-card-actions">
+                                <a href="/ai/diagnosis" class="btn btn-primary">
+                                    <i class="fas fa-plus me-1"></i>
+                                    <span>طلب جديد</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم الطلب</th>
+                                        <th>النوع</th>
+                                        <th>التاريخ</th>
+                                        <th>الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#1234</td>
+                                        <td>طماطم</td>
+                                        <td>28/04/2025</td>
+                                        <td><span class="status-badge success">مكتمل</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1233</td>
+                                        <td>خيار</td>
+                                        <td>27/04/2025</td>
+                                        <td><span class="status-badge success">مكتمل</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1232</td>
+                                        <td>فلفل</td>
+                                        <td>26/04/2025</td>
+                                        <td><span class="status-badge warning">قيد المعالجة</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1231</td>
+                                        <td>باذنجان</td>
+                                        <td>25/04/2025</td>
+                                        <td><span class="status-badge danger">فشل</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-card">
+                        <div class="table-card-header">
+                            <div class="table-card-title">آخر العمليات</div>
+                            <div class="table-card-actions">
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fas fa-filter me-1"></i>
+                                    <span>تصفية</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>رقم العملية</th>
+                                        <th>النوع</th>
+                                        <th>المستخدم</th>
+                                        <th>التاريخ</th>
+                                        <th>القيمة</th>
+                                        <th>الحالة</th>
+                                        <th>الإجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#5678</td>
+                                        <td>استلام مخزون</td>
+                                        <td>محمد أحمد</td>
+                                        <td>28/04/2025</td>
+                                        <td>15,000 ج.م</td>
+                                        <td><span class="status-badge success">مكتمل</span></td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#5677</td>
+                                        <td>صرف مخزون</td>
+                                        <td>أحمد محمد</td>
+                                        <td>27/04/2025</td>
+                                        <td>8,500 ج.م</td>
+                                        <td><span class="status-badge success">مكتمل</span></td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#5676</td>
+                                        <td>تحويل مخزون</td>
+                                        <td>علي حسن</td>
+                                        <td>26/04/2025</td>
+                                        <td>12,300 ج.م</td>
+                                        <td><span class="status-badge warning">قيد المعالجة</span></td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#5675</td>
+                                        <td>فاتورة مبيعات</td>
+                                        <td>حسن علي</td>
+                                        <td>25/04/2025</td>
+                                        <td>25,000 ج.م</td>
+                                        <td><span class="status-badge info">بانتظار الدفع</span></td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- تضمين مكون Footer -->
+    <div id="footer-container"></div>
+    
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/chart.js"></script>
+    <script>
+        // تحميل مكونات Header و Sidebar و Footer
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحميل Header
+            fetch('/templates/components/header.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-container').innerHTML = html;
+                });
+            
+            // تحميل Sidebar
+            fetch('/templates/components/sidebar.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('sidebar-container').innerHTML = html;
+                });
+            
+            // تحميل Footer
+            fetch('/templates/components/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-container').innerHTML = html;
+                });
+            
+            // إعداد المخططات البيانية
+            setupCharts();
+        });
+        
+        // إعداد المخططات البيانية باستخدام Chart.js
+        function setupCharts() {
+            // مخطط الإيرادات والمصروفات
+            const revenueExpenseCtx = document.getElementById('revenueExpenseChart').getContext('2d');
+            const revenueExpenseChart = new Chart(revenueExpenseCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+                    datasets: [
+                        {
+                            label: 'الإيرادات',
+                            data: [120000, 135000, 125000, 140000, 130000, 125000],
+                            backgroundColor: '#3498db',
+                            borderColor: '#3498db',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'المصروفات',
+                            data: [90000, 95000, 100000, 110000, 105000, 95000],
+                            backgroundColor: '#e74c3c',
+                            borderColor: '#e74c3c',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // مخطط إحصائيات المشاتل والمزارع
+            const nurseryFarmCtx = document.getElementById('nurseryFarmChart').getContext('2d');
+            const nurseryFarmChart = new Chart(nurseryFarmCtx, {
+                type: 'line',
+                data: {
+                    labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+                    datasets: [
+                        {
+                            label: 'إنتاج المشاتل',
+                            data: [5000, 5500, 6000, 6200, 6500, 7000],
+                            backgroundColor: 'rgba(46, 204, 113, 0.2)',
+                            borderColor: '#2ecc71',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // مخطط توزيع الأصناف
+            const varietiesCtx = document.getElementById('varietiesChart').getContext('2d');
+            const varietiesChart = new Chart(varietiesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['طماطم', 'خيار', 'فلفل', 'باذنجان', 'أخرى'],
+                    datasets: [
+                        {
+                            data: [35, 25, 20, 15, 5],
+                            backgroundColor: [
+                                '#e74c3c',
+                                '#2ecc71',
+                                '#f1c40f',
+                                '#9b59b6',
+                                '#95a5a6'
+                            ],
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

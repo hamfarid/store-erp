@@ -1,0 +1,17 @@
+# =============================================================================
+# Grafana Dashboard Provisioning - Gaara Scan AI
+# =============================================================================
+
+apiVersion: 1
+
+providers:
+  - name: 'Gaara Scan AI Dashboards'
+    orgId: 1
+    folder: 'Gaara Scan AI'
+    folderUid: 'gaara-scan-ai'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards

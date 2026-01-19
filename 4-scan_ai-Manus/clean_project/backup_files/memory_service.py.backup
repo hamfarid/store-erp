@@ -1,0 +1,231 @@
+# /home/ubuntu/ai_web_final_package/src/services/memory_service.py
+# خدمة الذاكرة الموحدة للتفاعل مع mcp_server و Weaviate
+
+import httpx
+import json
+import weaviate
+import weaviate.classes as wvc # لاستخدام فئات Weaviate الحديثة
+import asyncio
+import os
+import random # للاستخدام في المحاكاة والمعرفات المؤقتة
+from typing import List, Dict, Any, Optional, Union
+from uuid import UUID # لاستقبال UUID من Weaviate
+
+# إعدادات الاتصال الافتراضية (يمكن تجاوزها من متغيرات البيئة)
+MCP_SSE_URL = os.getenv("MCP_SSE_URL", "http://mcp_server:8000/sse")
+WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://weaviate:8080")
+WEAVIATE_GRPC_PORT = int(os.getenv("WEAVIATE_GRPC_PORT", "50051"))
+# يمكن إضافة متغيرات بيئة لمفتاح API الخاص بـ Weaviate إذا لزم الأمر
+# WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY")
+
+# إعدادات نموذج التضمين (مثال، يجب تعديله حسب النموذج المستخدم)
+# EMBEDDING_MODEL_DIMENSIONS = 1536 # مثال لـ OpenAI ada-002
+
+class MemoryService:
+    """
+    واجهة برمجة تطبيقات موحدة للتفاعل مع الذاكرة قصيرة المدى (mcp_server)
+    والذاكرة طويلة المدى (Weaviate).
+    """
+    def __init__(self, mcp_sse_url: str = MCP_SSE_URL, weaviate_url: str = WEAVIATE_URL):
+        """
+        تهيئة خدمة الذاكرة.
+        """
+        self.mcp_sse_url = mcp_sse_url
+        self.weaviate_url = weaviate_url
+        self._weaviate_client: Optional[weaviate.WeaviateClient] = None
+        self._sse_client: Optional[httpx.AsyncClient] = None
+        self._sse_connection_lock = asyncio.Lock()
+        self._sse_stream = None
+
+        print(f"[MemoryService] Initialized. MCP URL: {self.mcp_sse_url}, Weaviate URL: {self.weaviate_url}")
+
+    @property
+    def weaviate_client(self) -> weaviate.WeaviateClient:
+        """Lazy initialization for Weaviate client."""
+        if self._weaviate_client is None or not self._weaviate_client.is_connected():
+            try:
+                print(f"[MemoryService] Attempting to connect to Weaviate at {self.weaviate_url} (gRPC: {WEAVIATE_GRPC_PORT})...")
+                # ملاحظة: يجب تعديل المصادقة حسب إعدادات Weaviate
+                # auth_config = weaviate.AuthApiKey(api_key=WEAVIATE_API_KEY) if WEAVIATE_API_KEY else None
+                # استخدام connect_to_local للاتصال بـ Weaviate الذي يعمل محلياً أو في Docker
+                self._weaviate_client = weaviate.connect_to_local(
+                    host=self.weaviate_url.replace("http://", "").split(":")[0],
+                    port=int(self.weaviate_url.replace("http://", "").split(":")[1]),
+                    grpc_port=WEAVIATE_GRPC_PORT
+                    # headers=... # إضافة headers للمصادقة إذا لزم الأمر
+                )
+                self._weaviate_client.connect() # التأكد من الاتصال
+                print("[MemoryService] Weaviate client connected successfully.")
+            except Exception as e:
+                print(f"[MemoryService] Failed to connect to Weaviate: {e}")
+                self._weaviate_client = None # Reset on failure
+                raise ConnectionError(f"Could not connect to Weaviate at {self.weaviate_url}") from e
+        return self._weaviate_client
+
+    async def _get_sse_client(self) -> httpx.AsyncClient:
+        """Lazy initialization for SSE client."""
+        if self._sse_client is None:
+            timeout = httpx.Timeout(10.0, read=None)
+            self._sse_client = httpx.AsyncClient(timeout=timeout)
+            print("[MemoryService] SSE client created.")
+        return self._sse_client
+
+    async def _ensure_sse_connection(self):
+        """Ensures an active SSE connection is established."""
+        # ... (الكود الخاص بـ SSE كما هو في الخطوة السابقة)
+        pass # Placeholder - implementation from previous step remains
+
+    async def _send_mcp_request(self, request_data: Dict[str, Any]) -> Dict[str, Any] | None:
+        """
+        Sends a request to the MCP server (Simulated - SSE is one-way).
+        """
+        # ... (الكود المحاكي لـ MCP كما هو في الخطوة السابقة)
+        print(f"[MemoryService] Simulating MCP Request: {request_data}")
+        await asyncio.sleep(0.1)
+        response_payload = {"status": "success", "message": "Request processed (simulated)", "data": {}}
+        if request_data.get("command") == "add_episode":
+            response_payload["data"] = {"episode_id": f"sim_ep_{random.randint(1000, 9999)}"}
+        elif request_data.get("command") == "get_recent_episodes":
+            limit = request_data.get("params", {}).get("limit", 10)
+            group_id = request_data.get("params", {}).get("group_id", "default")
+            response_payload["data"] = {"episodes": [f"Simulated recent memory {i} for group {group_id}" for i in range(limit)]}
+        elif request_data.get("command") == "search_facts":
+             query = request_data.get("params", {}).get("query", "")
+             group_id = request_data.get("params", {}).get("group_id", "default")
+             response_payload["data"] = {"facts": [f"Simulated fact about \'{query}\' in group {group_id}"]}
+        print(f"[MemoryService] Simulated MCP Response: {response_payload}")
+        return response_payload
+
+    # --- وظائف الذاكرة قصيرة المدى (MCP Server) ---
+    # ... (الكود الخاص بـ MCP كما هو في الخطوة السابقة)
+    async def add_short_term_memory(self, group_id: str, content: str, content_type: str = "message") -> Optional[str]:
+        print(f"[MemoryService] Adding to short-term memory (group: {group_id}): {content[:50]}...")
+        request = {"command": "add_episode", "params": {"group_id": group_id, "content": content, "content_type": content_type}}
+        response = await self._send_mcp_request(request)
+        return response.get("data", {}).get("episode_id") if response and response.get("status") == "success" else None
+
+    async def get_recent_short_term_memory(self, group_id: str, limit: int = 10) -> List[str]:
+        print(f"[MemoryService] Getting recent short-term memory (group: {group_id}, limit: {limit})")
+        request = {"command": "get_recent_episodes", "params": {"group_id": group_id, "limit": limit}}
+        response = await self._send_mcp_request(request)
+        return response.get("data", {}).get("episodes", []) if response and response.get("status") == "success" else []
+
+    async def search_short_term_facts(self, group_id: str, query: str, limit: int = 5) -> List[str]:
+        print(f"[MemoryService] Searching short-term facts (group: {group_id}, query: {query})")
+        request = {"command": "search_facts", "params": {"group_id": group_id, "query": query, "limit": limit}}
+        response = await self._send_mcp_request(request)
+        return response.get("data", {}).get("facts", []) if response and response.get("status") == "success" else []
+
+    # --- وظائف الذاكرة طويلة المدى (Weaviate) ---
+
+    async def add_long_term_memory(self, class_name: str, data_object: Dict[str, Any], vector: Optional[List[float]] = None) -> Optional[str]:
+        """
+        إضافة كائن بيانات إلى الذاكرة طويلة المدى (Weaviate).
+        Args:
+            class_name: اسم الفئة (Collection) في Weaviate.
+            data_object: كائن البيانات (خصائص) المراد تخزينه.
+            vector: (اختياري) المتجه المحسوب مسبقاً.
+        Returns:
+            معرف الكائن (UUID) كنص أو None في حالة الفشل.
+        """
+        print(f"[MemoryService] Adding to long-term memory (class: {class_name}): {str(data_object)[:50]}...")
+        try:
+            client = self.weaviate_client # Ensure client is connected
+            collection = client.collections.get(class_name)
+            
+            # استخدام insert بدلاً من create (الطريقة الأحدث)
+            uuid_obj: UUID = collection.data.insert(
+                properties=data_object,
+                vector=vector # Weaviate يحسب المتجه إذا لم يتم توفيره وكان هناك module مفعّل
+            )
+            print(f"[MemoryService] Successfully added object to Weaviate class ",
+                  f"\"{class_name}\" with UUID: {uuid_obj}")
+            return str(uuid_obj)
+        except Exception as e:
+            print(f"[MemoryService] Error adding object to Weaviate class ",
+                  f"\"{class_name}\": {e}")
+            # قد نحتاج إلى معالجة أكثر تفصيلاً لأنواع الأخطاء المختلفة
+            # (مثل عدم وجود الفئة، خطأ في البيانات، مشكلة في الاتصال)
+            return None
+
+    async def search_long_term_memory(self, class_name: str, query_vector: List[float], limit: int = 5, properties: Optional[List[str]] = None) -> List[Dict[str, Any]]:
+        """
+        البحث في الذاكرة طويلة المدى (Weaviate) باستخدام متجه استعلام.
+        Args:
+            class_name: اسم الفئة للبحث فيها.
+            query_vector: متجه الاستعلام للبحث الدلالي.
+            limit: الحد الأقصى للنتائج.
+            properties: (اختياري) قائمة بالخصائص المراد استرجاعها.
+        Returns:
+            قائمة بالكائنات المطابقة (كمعجم يتضمن الخصائص والمعرف والمسافة).
+        """
+        print(f"[MemoryService] Searching long-term memory (class: {class_name}, limit: {limit})")
+        if not properties:
+            # إذا لم يتم تحديد خصائص، اطلب جميع الخصائص غير المتجهة
+            # ملاحظة: هذا قد يتطلب معرفة مسبقة بالمخطط أو استعلامه ديناميكياً
+            # للتبسيط، سنطلب خاصية معروفة مثل "text" كمثال
+            return_properties = [wvc.query.Property(name="text")] # مثال، يجب تعديله
+        else:
+            return_properties = [wvc.query.Property(name=prop) for prop in properties]
+
+        try:
+            client = self.weaviate_client # Ensure client is connected
+            collection = client.collections.get(class_name)
+
+            response = collection.query.near_vector(
+                near_vector=query_vector,
+                limit=limit,
+                return_metadata=wvc.query.MetadataQuery(distance=True, uuid=True), # طلب المعرف والمسافة
+                return_properties=return_properties
+            )
+
+            # تنسيق النتائج لتكون مشابهة للهيكل المتوقع
+            results = []
+            for o in response.objects:
+                result_item = {
+                    "properties": o.properties,
+                    "_additional": {
+                        "id": str(o.metadata.uuid),
+                        "distance": o.metadata.distance
+                    }
+                }
+                results.append(result_item)
+            
+            print(f"[MemoryService] Found {len(results)} results in Weaviate class ",
+                  f"\"{class_name}\".")
+            return results
+
+        except Exception as e:
+            print(f"[MemoryService] Error searching Weaviate class ",
+                  f"\"{class_name}\": {e}")
+            return []
+
+    # --- وظائف مساعدة (اختياري) ---
+    async def get_text_embedding(self, text: str) -> Optional[List[float]]:
+        """
+        (اختياري) حساب متجه لنص معين.
+        ملاحظة: هذا مجرد placeholder. يجب استخدام نموذج تضمين حقيقي.
+        """
+        print(f"[MemoryService] Placeholder: Calculate embedding for text: {text[:50]}... - Using dummy vector.")
+        # يجب تحديد طريقة حساب المتجهات (نموذج محلي، خدمة خارجية، Weaviate)
+        # await asyncio.sleep(0.05) # محاكاة بسيطة
+        # مثال لمتجه وهمي
+        # يجب استخدام البعد الصحيح للنموذج الفعلي
+        # return [random.random() for _ in range(EMBEDDING_MODEL_DIMENSIONS)] 
+        return [random.random() for _ in range(768)] # مثال لمتجه بحجم 768
+
+    async def close(self):
+        """Closes connections gracefully."""
+        print("[MemoryService] Closing connections...")
+        if self._sse_client:
+            await self._sse_client.aclose()
+            self._sse_client = None
+            self._sse_stream = None
+            print("[MemoryService] SSE client closed.")
+        if self._weaviate_client:
+             self._weaviate_client.close() # استخدام الطريقة الصحيحة للإغلاق
+             self._weaviate_client = None
+             print("[MemoryService] Weaviate client closed.")
+
+# --- نهاية الملف ---
+

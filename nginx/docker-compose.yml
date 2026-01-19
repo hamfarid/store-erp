@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  nginx-gateway:
+    image: nginx:alpine
+    container_name: ai-projects-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"       # Main dashboard
+      - "8080:8080"   # Gold Predictor
+      - "8081:8081"   # Zakat Charity System
+      - "8082:8082"   # Gaara Scan AI
+      - "8083:8083"   # Gaara ERP v12
+      - "8084:8084"   # Security Dashboard
+      - "8085:8085"   # ML Platform
+      - "8086:8086"   # Portainer
+      - "8087:8087"   # OpenVSCode
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./logs:/var/log/nginx
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - ai-projects-network
+
+networks:
+  ai-projects-network:
+    driver: bridge

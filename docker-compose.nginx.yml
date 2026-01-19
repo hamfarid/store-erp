@@ -1,0 +1,41 @@
+services:
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    ports:
+      # Main nginx ports
+      - "80:80"
+      - "443:443"
+      - "8181:8181"  # Nginx configuration/status port
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/logs:/var/log/nginx
+    networks:
+      - Ai_project
+    restart: unless-stopped
+    depends_on:
+      - portainer
+
+  # Portainer - Docker Container Management
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - Ai_project
+
+volumes:
+  portainer_data:
+    driver: local
+
+networks:
+  Ai_project:
+    external: true

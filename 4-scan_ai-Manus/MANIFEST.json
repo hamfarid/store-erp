@@ -1,0 +1,98 @@
+{
+  "name": "Gaara AI Ultimate Integrated System",
+  "version": "3.0.0",
+  "description": "نظام Gaara AI المتكامل والشامل للزراعة الذكية مع جميع التطويرات والتحسينات",
+  "created_at": "2025-07-08T04:37:40.420070",
+  "created_by": "Gaara Group & Manus AI",
+  "backup_info": {
+    "timestamp": "20250708_043740",
+    "source_directory": "gaara_ai_FINAL_INTEGRATED_SYSTEM_20250708_040611",
+    "files_included": 414,
+    "files_excluded": 2,
+    "total_size_mb": 6.19
+  },
+  "system_components": {
+    "backend": {
+      "path": "gaara_ai_integrated/backend",
+      "files": 302,
+      "python_files": 292,
+      "api_files": 56
+    },
+    "frontend": {
+      "path": "gaara_ai_integrated/frontend",
+      "files": 95,
+      "react_files": 78,
+      "component_files": 51
+    },
+    "docker": {
+      "path": ".",
+      "files": 414,
+      "dockerfiles": 2,
+      "compose_files": 2
+    },
+    "docs": {
+      "path": "docs",
+      "files": 2,
+      "markdown_files": 2
+    },
+    "scripts": {
+      "path": "scripts",
+      "files": 4,
+      "shell_scripts": 3
+    }
+  },
+  "features": [
+    "Flask API Server",
+    "Database Models",
+    "Advanced Permissions System",
+    "AI Diagnosis Engine",
+    "Complete API Routes",
+    "React 18 Application",
+    "Advanced Routing System",
+    "Complete API Integration",
+    "Docker Compose Deployment",
+    "Comprehensive Testing Suite"
+  ],
+  "requirements": {
+    "python": ">=3.8",
+    "node": ">=16.0",
+    "docker": ">=20.0",
+    "docker_compose": ">=2.0"
+  },
+  "installation": {
+    "quick_start": [
+      "tar -xzf gaara_ai_ULTIMATE_INTEGRATED_SYSTEM_*.tar.gz",
+      "cd gaara_ai_ULTIMATE_INTEGRATED_SYSTEM_*",
+      "cp .env.example .env",
+      "chmod +x scripts/*.sh",
+      "./scripts/start.sh"
+    ],
+    "docker_deployment": [
+      "docker-compose up -d"
+    ],
+    "manual_setup": [
+      "cd gaara_ai_integrated/backend",
+      "pip install -r requirements.txt",
+      "python main_api.py",
+      "cd ../frontend",
+      "npm install",
+      "npm run dev"
+    ]
+  },
+  "urls": {
+    "frontend": "http://localhost:3000",
+    "backend": "http://localhost:5000",
+    "api_docs": "http://localhost:5000/docs"
+  },
+  "default_credentials": {
+    "username": "admin",
+    "password": "admin123",
+    "note": "يرجى تغيير كلمة المرور بعد أول تسجيل دخول"
+  },
+  "support": {
+    "documentation": "docs/README.md",
+    "developer_guide": "docs/developer-guide.md",
+    "api_reference": "docs/api-reference.md",
+    "troubleshooting": "docs/troubleshooting.md"
+  }
+}

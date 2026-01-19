@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "email_notifications": false,
+  "sms_notifications": false,
+  "default_severity": "medium",
+  "auto_acknowledge": false
+}

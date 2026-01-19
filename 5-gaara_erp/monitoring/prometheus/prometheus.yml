@@ -1,0 +1,85 @@
+# =============================================================================
+# Gaara ERP - Prometheus Configuration
+# تكوين Prometheus للمراقبة
+#
+# Author: Global v35.0 Singularity
+# Created: 2026-01-17
+# =============================================================================
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'gaara-erp-production'
+    env: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+# Load rules
+rule_files:
+  - /etc/prometheus/rules/*.yml
+
+# Scrape configurations
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+    metrics_path: /metrics
+
+  # Backend API monitoring
+  - job_name: 'gaara-backend'
+    static_configs:
+      - targets: ['backend:5000']
+    metrics_path: /api/metrics
+    scrape_interval: 10s
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'backend'
+
+  # Frontend (if using nginx-prometheus-exporter)
+  - job_name: 'gaara-frontend'
+    static_configs:
+      - targets: ['frontend:9113']
+    metrics_path: /metrics
+
+  # PostgreSQL monitoring
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+    metrics_path: /metrics
+
+  # Redis monitoring
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+    metrics_path: /metrics
+
+  # Node exporter (system metrics)
+  - job_name: 'node'
+    static_configs:
+      - targets:
+        - 'node-exporter:9100'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '([^:]+):\d+'
+        target_label: instance
+        replacement: '${1}'
+
+  # Docker containers
+  - job_name: 'docker'
+    static_configs:
+      - targets: ['cadvisor:8080']
+    metrics_path: /metrics
+
+  # Celery workers
+  - job_name: 'celery'
+    static_configs:
+      - targets: ['celery-exporter:9808']
+    metrics_path: /metrics

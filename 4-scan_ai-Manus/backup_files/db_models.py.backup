@@ -1,0 +1,167 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/resource_monitoring/db_models.py
+"""
+
+نماذج قاعدة البيانات لمراقبة الموارد
+توفر هذه الوحدة نماذج قاعدة البيانات لتخزين بيانات الموارد التاريخية
+"""
+
+from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, ForeignKey, JSON, Text
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
+import enum
+from datetime import datetime
+
+Base = declarative_base()
+
+
+class ResourceType(enum.Enum):
+    """أنواع الموارد المراقبة"""
+    CPU = "cpu"
+    MEMORY = "memory"
+    DISK = "disk"
+    NETWORK = "network"
+    DATABASE = "database"
+    CUSTOM = "custom"
+
+
+class ResourceMetric(Base):
+    """نموذج قياسات الموارد"""
+    __tablename__ = 'resource_metrics'
+
+    id = Column(Integer, primary_key=True)
+    resource_type = Column(String(50), nullable=False)
+    metric_name = Column(String(100), nullable=False)
+    display_name = Column(String(100))
+    unit = Column(String(20))
+    description = Column(Text)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.now)
+    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+    # العلاقات
+    data_points = relationship("ResourceDataPointBACK_POPULATESmetric", cascade="all, delete-orphan")
+    thresholds = relationship("ResourceThresholdBACK_POPULATESmetric", cascade="all, delete-orphan")
+
+    def to_dict(self):
+        ""تحويل_الكائن_إلى"RETURNidSELFIDresourceType": self.resource_type,
+            "metricName": self.metric_name,
+            "displayName": self.display_name,
+            "unit": self.unit,
+            "description": self.description,
+            "isActiveSELFIS_ACTIVEcreatedAtSELFCREATED_ATISOFORMAT_IF_SELFCREATED_ATupdatedAt": self.updated_at.isoformat() if self.updated_at else None
+        }
+
+
+class ResourceDataPoint(Base):
+    """نموذج نقطة بيانات الموارد"""
+    __tablename__ = 'resource_data_pointsID_COLUMNINTEGER_PRIMARY_KEYTRUEresource_metrics.id'), nullable=False)
+    value = Column(Float, nullable=False)
+    timestamp = Column(DateTime, default=datetime.now, nullable=False)
+    module_name = Column(String(100))
+    server_id = Column(String(100))
+    resource_metadata = Column(JSON)  # Renamed from metadata as it's a reserved name
+
+    # العلاقات
+    metric = relationship("ResourceMetricBACK_POPULATESdata_points")
+
+    def to_dict(self):
+        ""تحويل_الكائن_إلى"RETURNidSELFIDmetricIdSELFMETRIC_IDmetricName": self.metric.metric_name if self.metric else None,
+            "value": self.value,
+            "timestamp": self.timestamp.isoformat() if self.timestamp else None,
+            "moduleName": self.module_name,
+            "serverIdSELFSERVER_IDmetadata": self.resource_metadata  # Use new field name but keep same API response
+        }
+
+
+class ResourceThreshold(Base):
+    """نموذج عتبات الموارد للتنبيهات"""
+    __tablename__ = 'resource_thresholdsID_COLUMNINTEGER_PRIMARY_KEYTRUEresource_metrics.id'), nullable=False)
+    warning_threshold = Column(Float)
+    critical_threshold = Column(Float)
+    is_active = Column(Boolean, default=True)
+    notification_enabled = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.now)
+    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+    # العلاقات
+    metric = relationship("ResourceMetricBACK_POPULATESthresholds")
+
+    def to_dict(self):
+        ""تحويل_الكائن_إلى"RETURNidSELFIDmetricIdSELFMETRIC_IDmetricName": self.metric.metric_name if self.metric else None,
+            "warningThreshold": self.warning_threshold,
+            "criticalThreshold": self.critical_threshold,
+            "isActiveSELFIS_ACTIVEnotificationEnabled": self.notification_enabled,
+            "createdAtSELFCREATED_ATISOFORMAT_IF_SELFCREATED_ATupdatedAt": self.updated_at.isoformat() if self.updated_at else None
+        }
+
+
+class ResourceAggregation(Base):
+    """نموذج تجميع بيانات الموارد"""
+    __tablename__ = 'resource_aggregationsID_COLUMNINTEGER_PRIMARY_KEYTRUEresource_metrics.id'), nullable=False)
+    aggregation_type = Column(String(20), nullable=False)  # hourly, daily, weekly, monthly
+    start_time = Column(DateTime, nullable=False)
+    end_time = Column(DateTime, nullable=False)
+    min_value = Column(Float)
+    max_value = Column(Float)
+    avg_value = Column(Float)
+    count = Column(Integer)
+    module_name = Column(String(100))
+    server_id = Column(String(100))
+    created_at = Column(DateTime, default=datetime.now)
+
+    def to_dict(self):
+        ""تحويل_الكائن_إلى"RETURNidSELFIDmetricIdSELFMETRIC_IDaggregationType": self.aggregation_type,
+            "startTime": self.start_time.isoformat() if self.start_time else None,
+            "endTime": self.end_time.isoformat() if self.end_time else None,
+            "minValue": self.min_value,
+            "maxValue": self.max_value,
+            "avgValue": self.avg_value,
+            "count": self.count,
+            "moduleName": self.module_name,
+            "serverIdSELFSERVER_IDcreatedAt": self.created_at.isoformat() if self.created_at else None
+        }
+
+
+class Server(Base):
+    """نموذج الخادم"""
+    __tablename__ = 'servers'
+
+    id = Column(Integer, primary_key=True)
+    server_id = Column(String(100), nullable=False, unique=True)
+    name = Column(String(100), nullable=False)
+    ip_address = Column(String(50))
+    server_type = Column(String(50))
+    location = Column(String(100))
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.now)
+    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+    def to_dict(self):
+        ""تحويل_الكائن_إلى"RETURNidSELFIDserverIdSELFSERVER_IDname": self.name,
+            "ipAddress": self.ip_address,
+            "serverType": self.server_type,
+            "location": self.location,
+            "isActiveSELFIS_ACTIVEcreatedAtSELFCREATED_ATISOFORMAT_IF_SELFCREATED_ATupdatedAt": self.updated_at.isoformat() if self.updated_at else None
+        }
+
+
+class Module(Base):
+    """نموذج المديول"""
+    __tablename__ = 'modules'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False, unique=True)
+    display_name = Column(String(100))
+    description = Column(Text)
+    version = Column(String(20))
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.now)
+    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+    def to_dict(self):
+        ""تحويل_الكائن_إلى"RETURNidSELFIDname": self.name,
+            "displayName": self.display_name,
+            "description": self.description,
+            "version": self.version,
+            "isActiveSELFIS_ACTIVEcreatedAtSELFCREATED_ATISOFORMAT_IF_SELFCREATED_ATupdatedAt": self.updated_at.isoformat() if self.updated_at else None
+        }

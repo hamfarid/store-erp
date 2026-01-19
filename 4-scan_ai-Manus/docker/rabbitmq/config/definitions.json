@@ -1,0 +1,187 @@
+{
+  "rabbit_version": "3.12.0",
+  "rabbitmq_version": "3.12.0",
+  "product_name": "RabbitMQ",
+  "product_version": "3.12.0",
+  "users": [
+    {
+      "name": "gaara_admin",
+      "password_hash": "gAAAAABhZ1234567890abcdefghijklmnopqrstuvwxyz",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    },
+    {
+      "name": "gaara_ai_agent",
+      "password_hash": "gAAAAABhZ9876543210zyxwvutsrqponmlkjihgfedcba",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "management"
+    },
+    {
+      "name": "gaara_diagnosis",
+      "password_hash": "gAAAAABhZ5555555555aaaabbbbccccddddeeeeffffgggg",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "monitoring"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "gaara_vhost"
+    },
+    {
+      "name": "gaara_ai_vhost"
+    },
+    {
+      "name": "gaara_diagnosis_vhost"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "gaara_admin",
+      "vhost": "gaara_vhost",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "gaara_ai_agent",
+      "vhost": "gaara_ai_vhost",
+      "configure": "ai\\..*",
+      "write": "ai\\..*",
+      "read": "ai\\..*"
+    },
+    {
+      "user": "gaara_diagnosis",
+      "vhost": "gaara_diagnosis_vhost",
+      "configure": "diagnosis\\..*",
+      "write": "diagnosis\\..*",
+      "read": "diagnosis\\..*"
+    }
+  ],
+  "topic_permissions": [],
+  "parameters": [],
+  "global_parameters": [
+    {
+      "name": "cluster_name",
+      "value": "gaara_cluster"
+    }
+  ],
+  "policies": [
+    {
+      "vhost": "gaara_vhost",
+      "name": "ha-all",
+      "pattern": ".*",
+      "apply-to": "all",
+      "definition": {
+        "ha-mode": "all",
+        "ha-sync-mode": "automatic"
+      },
+      "priority": 0
+    }
+  ],
+  "queues": [
+    {
+      "name": "ai_agent_tasks",
+      "vhost": "gaara_ai_vhost",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-message-ttl": 3600000,
+        "x-max-length": 10000
+      }
+    },
+    {
+      "name": "diagnosis_requests",
+      "vhost": "gaara_diagnosis_vhost",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-message-ttl": 1800000,
+        "x-max-length": 5000
+      }
+    },
+    {
+      "name": "notification_queue",
+      "vhost": "gaara_vhost",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-message-ttl": 600000,
+        "x-max-length": 1000
+      }
+    },
+    {
+      "name": "analytics_queue",
+      "vhost": "gaara_vhost",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-message-ttl": 7200000,
+        "x-max-length": 20000
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "gaara_main_exchange",
+      "vhost": "gaara_vhost",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "ai_agent_exchange",
+      "vhost": "gaara_ai_vhost",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "diagnosis_exchange",
+      "vhost": "gaara_diagnosis_vhost",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "gaara_main_exchange",
+      "vhost": "gaara_vhost",
+      "destination": "notification_queue",
+      "destination_type": "queue",
+      "routing_key": "notification.*",
+      "arguments": {}
+    },
+    {
+      "source": "gaara_main_exchange",
+      "vhost": "gaara_vhost",
+      "destination": "analytics_queue",
+      "destination_type": "queue",
+      "routing_key": "analytics.*",
+      "arguments": {}
+    },
+    {
+      "source": "ai_agent_exchange",
+      "vhost": "gaara_ai_vhost",
+      "destination": "ai_agent_tasks",
+      "destination_type": "queue",
+      "routing_key": "task",
+      "arguments": {}
+    },
+    {
+      "source": "diagnosis_exchange",
+      "vhost": "gaara_diagnosis_vhost",
+      "destination": "diagnosis_requests",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    }
+  ]
+}
+

@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": "user1",
+      "username": "admin",
+      "password_hash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+      "name_ar": "مدير النظام",
+      "name_en": "System Admin",
+      "email": "admin@example.com",
+      "is_active": true,
+      "is_admin": true,
+      "created_at": "2025-04-18T13:39:53.622290",
+      "last_login": "2025-05-18T13:39:53.622317"
+    },
+    {
+      "id": "user2",
+      "username": "manager",
+      "password_hash": "866485796cfa8d7c0cf7111640205b83076433547577511d81f8030ae99ecea5",
+      "name_ar": "مدير",
+      "name_en": "Manager",
+      "email": "manager@example.com",
+      "is_active": true,
+      "is_admin": false,
+      "created_at": "2025-04-28T13:39:53.622324",
+      "last_login": "2025-05-18T13:39:53.622327"
+    },
+    {
+      "id": "user3",
+      "username": "user",
+      "password_hash": "e606e38b0d8c19b24cf0ee3808183162ea7cd63ff7912dbb22b5e803286b4446",
+      "name_ar": "مستخدم",
+      "name_en": "User",
+      "email": "user@example.com",
+      "is_active": true,
+      "is_admin": false,
+      "created_at": "2025-05-08T13:39:53.622331",
+      "last_login": "2025-05-18T13:39:53.622334"
+    }
+  ]
+}

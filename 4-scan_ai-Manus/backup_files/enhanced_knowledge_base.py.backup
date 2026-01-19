@@ -1,0 +1,1262 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/disease_diagnosis/enhanced_knowledge_base.py
+"""
+
+قاعدة المعرفة الزراعية المحسنة
+يوفر هذا الملف قاعدة معرفة شاملة للأمراض النباتية والمحاصيل الزراعية
+مع دعم المصادر الموثوقة والمراجع العلمية
+"""
+
+import os
+import json
+import yaml
+import logging
+
+from datetime import datetime
+
+# إعداد التسجيل
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+
+class EnhancedAgriculturalKnowledgeBase:
+    """قاعدة المعرفة الزراعية المحسنة مع دعم المصادر والمراجع"""
+
+    def __init__(self, knowledge_dir=None, sources_file=None):
+        """
+        تهيئة قاعدة المعرفة الزراعية
+
+        المعلمات:
+            knowledge_dir (str, optional): مسار مجلد قاعدة المعرفة
+            sources_file (str, optional): مسار ملف المصادر
+        """
+        # مسار مجلد قاعدة المعرفة
+        if knowledge_dir:
+            self.knowledge_dir = knowledge_dir
+        else:
+            self.knowledge_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'knowledge')
+
+        # مسار ملف المصادر
+        if sources_file:
+            self.sources_file = sources_file
+        else:
+            self.sources_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'agricultural_sources.md')
+
+        # التأكد من وجود مجلد قاعدة المعرفة
+        os.makedirs(self.knowledge_dir, exist_ok=True)
+
+        # قاعدة المعرفة
+        self.diseases = {}
+        self.crops = {}
+        self.treatments = {}
+        self.varieties = {}
+        self.hybridization = {}
+
+        # المصادر
+        self.sources = {
+            "scientific_journals""seed_companies""fertilizer_companies""research_labs""disease_info""crop_varieties""hybridization_methods""parent_specifications": []
+        }
+
+        # تاريخ آخر تحديث
+        self.last_updated = None
+
+        # تحميل قاعدة المعرفة
+        self._load_knowledge_base()
+
+        # تحميل المصادر
+        self._load_sources()
+
+        logger.info("تم تهيئة قاعدة المعرفة الزراعية المحسنة")
+
+    def _load_knowledge_base(self):
+        """تحميل قاعدة المعرفة من الملفات"""
+        try:
+            # تحميل الأمراض
+            diseases_file = os.path.join(self.knowledge_dir, 'diseases.yaml')
+            if os.path.exists(diseases_file):
+                with open(diseases_file, 'rENCODINGutf-8') as f:
+                    self.diseases = yaml.safe_load(f)
+                logger.info(f"تم تحميل {len(self.diseases)} مرض من {diseases_file}")
+
+            # تحميل المحاصيل
+            crops_file = os.path.join(self.knowledge_dir, 'crops.yaml')
+            if os.path.exists(crops_file):
+                with open(crops_file, 'rENCODINGutf-8') as f:
+                    self.crops = yaml.safe_load(f)
+                logger.info(f"تم تحميل {len(self.crops)} محصول من {crops_file}")
+
+            # تحميل العلاجات
+            treatments_file = os.path.join(self.knowledge_dir, 'treatments.yaml')
+            if os.path.exists(treatments_file):
+                with open(treatments_file, 'rENCODINGutf-8') as f:
+                    self.treatments = yaml.safe_load(f)
+                logger.info(f"تم تحميل {len(self.treatments)} علاج من {treatments_file}")
+
+            # تحميل الأصناف
+            varieties_file = os.path.join(self.knowledge_dir, 'varieties.yaml')
+            if os.path.exists(varieties_file):
+                with open(varieties_file, 'rENCODINGutf-8') as f:
+                    self.varieties = yaml.safe_load(f)
+                logger.info(f"تم تحميل {len(self.varieties)} صنف من {varieties_file}")
+
+            # تحميل معلومات التهجين
+            hybridization_file = os.path.join(self.knowledge_dir, 'hybridization.yaml')
+            if os.path.exists(hybridization_file):
+                with open(hybridization_file, 'rENCODINGutf-8') as f:
+                    self.hybridization = yaml.safe_load(f)
+                logger.info(f"تم تحميل معلومات التهجين من {hybridization_file}")
+
+            # تحميل تاريخ آخر تحديث
+            last_updated_file = os.path.join(self.knowledge_dir, 'last_updated.txt')
+            if os.path.exists(last_updated_file):
+                with open(last_updated_file, 'rENCODINGutf-8') as f:
+                    self.last_updated = f.read().strip()
+                logger.info(f"تاريخ آخر تحديث: {self.last_updated}")
+
+            # إذا لم تكن قاعدة المعرفة موجودة، إنشاء قاعدة معرفة افتراضية
+            if not self.diseases and not self.crops and not self.treatments and not self.varieties and not self.hybridization:
+                logger.warning("قاعدة المعرفة غير موجودة، سيتم إنشاء قاعدة معرفة افتراضية")
+                self._create_default_knowledge_base()
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء تحميل قاعدة المعرفة: {str(e)}")
+            # إنشاء قاعدة معرفة افتراضية
+            self._create_default_knowledge_base()
+
+    def _create_default_knowledge_base(self):
+        """إنشاء قاعدة معرفة افتراضية"""
+        # الأمراض الافتراضية
+        self.diseases = {
+            "late_blight""name": "اللفحة المتأخرة",
+                SCIENTIFIC_NAME: "Phytophthora infestans""crops": ["potato", "tomato""symptoms""بقع بنية على الأوراق""تعفن الثمار والدرنات""نمو أبيض على السطح السفلي للأوراق""conditions""رطوبة عالية""درجات حرارة معتدلة (15-25 درجة مئوية)""treatments": ["fungicide_copper", "fungicide_mancozeb""prevention""استخدام أصناف مقاومة""تناوب المحاصيل""تجنب الري العلوي""source": "مجلة أمراض النبات، المجلد 105، العدد 4، 2021""reference": "https://apsjournals.apsnet.org/doi/10.1094/PDIS-09-20-1932-RE"
+            },
+            "powdery_mildew_cucurbits""name": "البياض الدقيقي في القرعيات",
+                SCIENTIFIC_NAME: "Podosphaera xanthii""crops": ["cucumber", "squash", "melon""symptoms""بقع بيضاء دقيقية على الأوراق""تشوه النمو""ضعف النبات""conditions""رطوبة منخفضة""درجات حرارة معتدلة (20-30 درجة مئوية)""treatments": ["fungicide_sulfur", "fungicide_potassium_bicarbonate""prevention""استخدام أصناف مقاومة""تهوية جيدة""تجنب الزراعة الكثيفة""source": "المجلة الأوروبية لأمراض النبات، المجلد 157، 2020""reference": "https://link.springer.com/article/10.1007/s10658-020-02075-w"
+            },
+            "fusarium_wilt_tomato""name": "الذبول الفيوزاريومي في الطماطم",
+                SCIENTIFIC_NAME: "Fusarium oxysporum f. sp. lycopersici""crops": ["tomato""symptoms""اصفرار الأوراق السفلية""ذبول النبات""تلون الأوعية الناقلة""conditions""درجات حرارة دافئة (25-30 درجة مئوية)""تربة حمضية""treatments": ["fungicide_thiophanate_methyl", "soil_solarization""prevention""استخدام أصناف مقاومة""تناوب المحاصيل""تعقيم التربة""source": "مجلة علم الفطريات التطبيقي، المجلد 67، 2021""reference": "https://www.sciencedirect.com/science/article/abs/pii/S0953756221000575"
+            }
+        }
+
+        # المحاصيل الافتراضية
+        self.crops = {
+            "tomato""name": "طماطم",
+                SCIENTIFIC_NAME: "Solanum lycopersicum""family": "Solanaceae""growing_season": ["spring", "summer""optimal_temperature""min": 15,
+                    "max": 30
+                },
+                "water_requirements": "medium""soil_requirements": "well-drained, pH 6.0-6.8""common_diseases": [LATE_BLIGHT, FUSARIUM_WILT_TOMATO, "early_blight""varieties": ["moneymaker", "beefsteak", "roma""source": "شركة سينجينتا للبذور""reference": "https://www.syngenta.com/seeds/vegetables/tomatoes"
+            },
+            "cucumber""name": "خيار",
+                SCIENTIFIC_NAME: "Cucumis sativus""family": "Cucurbitaceae""growing_season": ["spring", "summer""optimal_temperature""min": 18,
+                    "max": 32
+                },
+                "water_requirements": "high""soil_requirements": "well-drained, pH 6.0-7.0""common_diseases": [POWDERY_MILDEW_CUCURBITS, "downy_mildew", "angular_leaf_spot""varieties": ["beit_alpha", "english", "pickling""source": "شركة سيمينيس للبذور""reference": "https://seminis.com/global/en/products/cucumber/"
+            },
+            "wheat""name": "قمح",
+                SCIENTIFIC_NAME: "Triticum aestivum""family": "Poaceae""growing_season": ["winter", "spring""optimal_temperature""min": 10,
+                    "max": 25
+                },
+                "water_requirements": "medium""soil_requirements": "loamy, pH 6.0-7.0""common_diseases": [WHEAT_RUST, POWDERY_MILDEW_WHEAT, "fusarium_head_blight""varieties": ["kharif", "durum", "amir""source": "المركز الدولي لتحسين الذرة والقمح (CIMMYT)""reference": "https://www.cimmyt.org/projects/wheat-varieties/"
+            }
+        }
+
+        # العلاجات الافتراضية
+        self.treatments = {
+            "fungicide_copper""name": "مبيد فطري نحاسي""type": "chemical""active_ingredient": "copper hydroxide""target_diseases": [LATE_BLIGHT, EARLY_BLIGHT, "bacterial_spot""application_rate": "2-4 g/L""safety_period": 7,
+                "precautions""ارتداء قفازات وقناع""تجنب الرش في الطقس الحار""تجنب الرش قبل المطر""source": "شركة باسف (BASF)""reference": "https://agriculture.basf.com/global/en/business-areas/crop-protection/products.html"
+            },
+            "fungicide_mancozeb""name": "مبيد فطري مانكوزيب""type": "chemical""active_ingredient": "mancozeb""target_diseases": [LATE_BLIGHT, EARLY_BLIGHT, "downy_mildew""application_rate": "2-3 g/L""safety_period": 14,
+                "precautions""ارتداء قفازات وقناع""تجنب الرش في الطقس الحار""تجنب الرش قبل المطر""source": "شركة إف إم سي (FMC)""reference": "https://www.fmcagus.com/en-us/products"
+            },
+            "fungicide_sulfur""name": "مبيد فطري كبريتي""type": "chemical""active_ingredient": "sulfur""target_diseases": [POWDERY_MILDEW_CUCURBITS, "powdery_mildew_wheat""application_rate": "3-5 g/L""safety_period": 3,
+                "precautions""ارتداء قفازات وقناع""تجنب الرش في درجات الحرارة العالية (فوق 30 درجة مئوية)""تجنب الرش قبل المطر""source": "شركة سومي أجرو (Sumitomo Chemical)""reference": "https://www.sumitomo-chem.co.jp/english/products/"
+            }
+        }
+
+        # الأصناف الافتراضية
+        self.varieties = {
+            "tomato""moneymaker""name": "مونيميكر""type": "indeterminate""fruit_size": "medium""fruit_color": "red""days_to_maturity": 75,
+                    "disease_resistance": [FUSARIUM_WILT_TOMATO, "verticillium_wilt"],
+                    YIELD_POTENTIAL: "high""best_uses": ["fresh", "canning""source": "شركة سينجينتا للبذور""reference": "https://www.syngenta.com/seeds/vegetables/tomatoes"
+                },
+                "beefsteak""name": "بيف ستيك""type": "indeterminate""fruit_size": "large""fruit_color": "red""days_to_maturity": 85,
+                    "disease_resistance": [FUSARIUM_WILT_TOMATO],
+                    YIELD_POTENTIAL: "medium""best_uses": ["fresh", "slicing""source": "شركة سيمينيس للبذور""reference": "https://seminis.com/global/en/products/tomatoes/"
+                },
+                "roma""name": "روما""type": "determinate""fruit_size": "medium""fruit_color": "red""days_to_maturity": 70,
+                    "disease_resistance": [FUSARIUM_WILT_TOMATO, "verticillium_wilt", "bacterial_speck"],
+                    YIELD_POTENTIAL: "high""best_uses": ["sauce", "canning", "drying""source": "شركة هاينز للبذور""reference": "https://www.heinzseed.com/tomato-varieties/"
+                }
+            },
+            "wheat""kharif""name": "خريف""type": "winter""grain_color": "amber""days_to_maturity": 120,
+                    "disease_resistance": [WHEAT_RUST, POWDERY_MILDEW_WHEAT],
+                    DROUGHT_TOLERANCE: "high""yield_potential": "medium""best_uses": ["bread", "general purpose""source": "المركز الدولي لتحسين الذرة والقمح (CIMMYT)""reference": "https://www.cimmyt.org/projects/wheat-varieties/"
+                },
+                "durum""name": "دورم""type": "spring""grain_color": "amber""days_to_maturity": 110,
+                    "disease_resistance": [WHEAT_RUST],
+                    DROUGHT_TOLERANCE: "medium""yield_potential": "medium""best_uses": ["pasta", "semolina""source": "المركز الدولي للبحوث الزراعية في المناطق الجافة (ICARDA)""reference": "https://www.icarda.org/research/innovations/wheat-varieties"
+                },
+                "amir""name": "أمير""type": "winter""grain_color": "red""days_to_maturity": 130,
+                    "disease_resistance": [WHEAT_RUST, POWDERY_MILDEW_WHEAT, "fusarium_head_blight""drought_tolerance": "high""yield_potential": "high""best_uses": ["bread", "general purpose""source": "شركة ليماجرين للبذور""reference": "https://www.limagrain.com/products/wheat-varieties/"
+                }
+            }
+        }
+
+        # معلومات التهجين الافتراضية
+        self.hybridization = {
+            "methods""hand_pollination""name": "التلقيح اليدوي""description": "نقل حبوب اللقاح من نبات إلى آخر يدوياً""suitable_crops": ["tomato", "pepper", "eggplant", "cucumber""steps""اختيار الأزهار المناسبة""إزالة الأسدية من الزهرة المستقبلة (الأم)""جمع حبوب اللقاح من الزهرة المانحة (الأب)""نقل حبوب اللقاح إلى ميسم الزهرة المستقبلة""تعليم الزهرة الملقحة""success_rate": "70-90%""source": "كتاب \"التقنيات الحديثة في تربية النبات\" (2021)""reference": "https://www.springer.com/gp/book/9783030459550"
+                },
+                "backcrossing""name": "التهجين الرجعي""description": "تهجين النسل مع أحد الآباء لتثبيت صفة معينة""suitable_crops": ["wheat", "rice", "corn", "tomato""steps""إجراء التهجين الأولي بين الأبوين""اختيار النباتات التي تحمل الصفة المرغوبة من الجيل الأول""تهجين النباتات المختارة مع الأب المتكرر""تكرار العملية لعدة أجيال""اختيار النباتات النهائية""success_rate": "60-80%""source": "مجلة علوم المحاصيل، المجلد 60، العدد 5، 2020""reference": "https://acsess.onlinelibrary.wiley.com/doi/abs/10.2135/cropsci2020.02.0082"
+                },
+                "interspecific_hybridization""name": "التهجين بين الأنواع""description": "تهجين نباتات من أنواع مختلفة لنقل صفات مرغوبة""suitable_crops": ["wheat", "rice", "cotton", "tomato""steps""اختيار الأنواع المناسبة""إجراء التلقيح اليدوي""استخدام تقنيات مساعدة (إنقاذ الأجنة، مضاعفة الكروموسومات)""تقييم الهجن الناتجة""اختيار الهجن المرغوبة""success_rate": "10-30%""source": "مجلة التكنولوجيا الحيوية النباتية، المجلد 38، 2020""reference": "https://www.sciencedirect.com/science/article/abs/pii/S1674205220301878"
+                }
+            },
+            "parent_selection""tomato""disease_resistance": {
+                        DESCRIPTION: "اختيار آباء مقاومين للأمراض الشائعة""recommended_parents": ["moneymaker", "roma""source": "مجلة تربية النبات، المجلد 39، العدد 4، 2020""reference": "https://link.springer.com/article/10.1007/s10681-020-2553-7"
+                    },
+                    "fruit_quality": {
+                        DESCRIPTION: "اختيار آباء ذوي جودة ثمار عالية""recommended_parents": ["beefsteak", "brandywine""source": "مجلة علوم البستنة، المجلد 55، العدد 3، 2020""reference": "https://www.sciencedirect.com/science/article/abs/pii/S0304423820301679"
+                    }
+                },
+                "wheat""drought_tolerance": {
+                        DESCRIPTION: "اختيار آباء متحملين للجفاف""recommended_parents": ["kharif", "amir""source": "المجلة الأوروبية لتربية النبات، المجلد 139، 2020""reference": "https://link.springer.com/article/10.1007/s10681-020-2553-7"
+                    },
+                    "disease_resistance": {
+                        DESCRIPTION: "اختيار آباء مقاومين للأمراض الشائعة""recommended_parents": ["amir", "durum""source": "مجلة أمراض النبات، المجلد 104، العدد 7، 2020""reference": "https://apsjournals.apsnet.org/doi/10.1094/PDIS-11-19-2402-RE"
+                    }
+                }
+            }
+        }
+
+        # حفظ قاعدة المعرفة
+        self._save_knowledge_base()
+
+        logger.info("تم إنشاء قاعدة معرفة افتراضية")
+
+    def _save_knowledge_base(self):
+        """حفظ قاعدة المعرفة في الملفات"""
+        try:
+            # التأكد من وجود مجلد قاعدة المعرفة
+            os.makedirs(self.knowledge_dir, exist_ok=True)
+
+            # حفظ الأمراض
+            diseases_file = os.path.join(self.knowledge_dir, 'diseases.yaml')
+            with open(diseases_file, 'wENCODINGutf-8') as f:
+                yaml.dump(self.diseases, f, allow_unicode=True, sort_keys=False)
+
+            # حفظ المحاصيل
+            crops_file = os.path.join(self.knowledge_dir, 'crops.yaml')
+            with open(crops_file, 'wENCODINGutf-8') as f:
+                yaml.dump(self.crops, f, allow_unicode=True, sort_keys=False)
+
+            # حفظ العلاجات
+            treatments_file = os.path.join(self.knowledge_dir, 'treatments.yaml')
+            with open(treatments_file, 'wENCODINGutf-8') as f:
+                yaml.dump(self.treatments, f, allow_unicode=True, sort_keys=False)
+
+            # حفظ الأصناف
+            varieties_file = os.path.join(self.knowledge_dir, 'varieties.yaml')
+            with open(varieties_file, 'wENCODINGutf-8') as f:
+                yaml.dump(self.varieties, f, allow_unicode=True, sort_keys=False)
+
+            # حفظ معلومات التهجين
+            hybridization_file = os.path.join(self.knowledge_dir, 'hybridization.yaml')
+            with open(hybridization_file, 'wENCODINGutf-8') as f:
+                yaml.dump(self.hybridization, f, allow_unicode=True, sort_keys=False)
+
+            # تحديث تاريخ آخر تحديث
+            self.last_updated = datetime.now().isoformat()
+            last_updated_file = os.path.join(self.knowledge_dir, 'last_updated.txt')
+            with open(last_updated_file, 'wENCODINGutf-8') as f:
+                f.write(self.last_updated)
+
+            logger.info("تم حفظ قاعدة المعرفةRETURN_TRUE_EXCEPTخطأ أثناء حفظ قاعدة المعرفة: {str(e)}")
+            return False
+
+    def _load_sources(self):
+        """تحميل المصادر من ملف المصادر"""
+        try:
+            if os.path.exists(self.sources_file):
+                with open(self.sources_file, 'rENCODINGutf-8') as f:
+                    content = f.read()
+
+                # استخراج المصادر من محتوى الملف
+                self._parse_sources(content)
+
+                logger.info(f"تم تحميل المصادر من {self.sources_file}")
+            else:
+                logger.warning(f"ملف المصادر غير موجود: {self.sources_file}EXCEPT_EXCEPTION_ASخطأ أثناء تحميل المصادر: {str(e)}")
+
+    def _parse_sources(self, content):
+        """
+        استخراج المصادر من محتوى الملف
+
+        المعلمات:
+            content (str): محتوى ملف المصادر
+        """
+        try:
+            # استخراج المجلات العلمية
+            if "## الرسائل العلمية والأبحاث الأكاديميةIN_CONTENT_SECTION## الرسائل العلمية والأبحاث الأكاديمية""##")[0]
+
+                # استخراج المجلات العلمية
+                if "### مجلات علمية متخصصة" in section:
+                    journals_section = section.split("### مجلات علمية متخصصة""###")[0]
+                    journals = []
+
+                    for journal in journals_section.split("\n\n"):
+                        if journal.strip() and "**" in journal:
+                            journal_info = {}
+                            lines = journal.strip().split("\nFOR_LINE_IN1. **"):
+                                    journal_info["nameLINESPLIT**"":IN_LINE_JOURNAL_INFOpublisherLINESPLITالناشر:"" الإلكتروني:IN_LINE_JOURNAL_INFOwebsiteLINESPLITالموقع الإلكتروني:"":IN_LINE_JOURNAL_INFOfields"] = [field.strip() for field in line.split("المجالات:"",")]
+
+                            if journal_info:
+                                journals.append(journal_info)
+
+                    self.sources["scientific_journals"] = journals
+
+            # استخراج شركات البذور
+            if "## شركات البذور المعتمدةIN_CONTENT_SECTION## شركات البذور المعتمدة""##")[0]
+                companies = []
+
+                for company in section.split("\n\n"):
+                    if company.strip() and "**" in company:
+                        company_info = {}
+                        lines = company.strip().split("\nFOR_LINE_IN1. **"):
+                                company_info["nameLINESPLIT**"" الإلكتروني:IN_LINE_COMPANY_INFOwebsiteLINESPLITالموقع الإلكتروني:"":IN_LINE_COMPANY_INFOproducts"] = [product.strip() for product in line.split("المنتجات:"",ELIFقواعد البيانات:IN_LINE_COMPANY_INFOdatabaseLINESPLITقواعد البيانات:")[1].strip()
+
+                        if company_info:
+                            companies.append(company_info)
+
+                self.sources["seed_companies"] = companies
+
+            # استخراج شركات الأسمدة والمبيدات
+            if "## شركات الأسمدة والمبيداتIN_CONTENT_SECTION## شركات الأسمدة والمبيدات""##")[0]
+                companies = []
+
+                for company in section.split("\n\n"):
+                    if company.strip() and "**" in company:
+                        company_info = {}
+                        lines = company.strip().split("\nFOR_LINE_IN1. **"):
+                                company_info["nameLINESPLIT**"" الإلكتروني:IN_LINE_COMPANY_INFOwebsiteLINESPLITالموقع الإلكتروني:"":IN_LINE_COMPANY_INFOproducts"] = [product.strip() for product in line.split("المنتجات:"",ELIFقواعد البيانات:IN_LINE_COMPANY_INFOdatabaseLINESPLITقواعد البيانات:")[1].strip()
+
+                        if company_info:
+                            companies.append(company_info)
+
+                self.sources["fertilizer_companies"] = companies
+
+            # استخراج المعامل البحثية
+            if "## المعامل البحثية المتخصصةIN_CONTENT_SECTION## المعامل البحثية المتخصصة""##")[0]
+                labs = []
+
+                for lab in section.split("\n\n"):
+                    if lab.strip() and "**" in lab:
+                        lab_info = {}
+                        lines = lab.strip().split("\nFOR_LINE_IN1. **"):
+                                lab_info["nameLINESPLIT**"" الإلكتروني:IN_LINE_LAB_INFOwebsiteLINESPLITالموقع الإلكتروني:"" البحث:IN_LINE_LAB_INFOresearch_fields"] = [field.strip() for field in line.split("مجالات البحث:"",ELIFقواعد البيانات:IN_LINE_LAB_INFOdatabaseLINESPLITقواعد البيانات:")[1].strip()
+
+                        if lab_info:
+                            labs.append(lab_info)
+
+                self.sources["research_labs"] = labs
+
+            # استخراج معلومات الأمراض
+            if "## معلومات الأمراض وأعراضهاIN_CONTENT_SECTION## معلومات الأمراض وأعراضها""##")[0]
+                diseases = []
+
+                # استخراج أمراض الخضروات
+                if "### أمراض الخضروات" in section:
+                    vegetables_section = section.split("### أمراض الخضروات""###")[0]
+
+                    for disease in vegetables_section.split("\n\nIF_DISEASESTRIP_AND**IN_DISEASE_DISEASE_INFO\nFOR_LINE_IN1. **DISEASE_INFOnameLINESPLIT**"":IN_LINE_DISEASE_INFOpathogenLINESPLITالمسبب:"":IN_LINE_DISEASE_INFOsymptomsLINESPLITالأعراض:"":IN_LINE_DISEASE_INFOsourceLINESPLITالمصدر:"":IN_LINE_DISEASE_INFOreferenceLINESPLITالرابط:"""] = "vegetables"
+                                diseases.append(disease_info)
+
+                # استخراج أمراض المحاصيل الحقلية
+                if "### أمراض المحاصيل الحقلية" in section:
+                    field_crops_section = section.split("### أمراض المحاصيل الحقلية""###")[0]
+
+                    for disease in field_crops_section.split("\n\nIF_DISEASESTRIP_AND**IN_DISEASE_DISEASE_INFO\nFOR_LINE_IN1. **DISEASE_INFOnameLINESPLIT**"":IN_LINE_DISEASE_INFOpathogenLINESPLITالمسبب:"":IN_LINE_DISEASE_INFOsymptomsLINESPLITالأعراض:"":IN_LINE_DISEASE_INFOsourceLINESPLITالمصدر:"":IN_LINE_DISEASE_INFOreferenceLINESPLITالرابط:"""] = "field_crops"
+                                diseases.append(disease_info)
+
+                # استخراج أمراض أشجار الفاكهة
+                if "### أمراض أشجار الفاكهة" in section:
+                    fruit_trees_section = section.split("### أمراض أشجار الفاكهة""##")[0]
+
+                    for disease in fruit_trees_section.split("\n\nIF_DISEASESTRIP_AND**IN_DISEASE_DISEASE_INFO\nFOR_LINE_IN1. **DISEASE_INFOnameLINESPLIT**"":IN_LINE_DISEASE_INFOpathogenLINESPLITالمسبب:"":IN_LINE_DISEASE_INFOsymptomsLINESPLITالأعراض:"":IN_LINE_DISEASE_INFOsourceLINESPLITالمصدر:"":IN_LINE_DISEASE_INFOreferenceLINESPLITالرابط:"""] = "fruit_trees"
+                                diseases.append(disease_info)
+
+                self.sources["disease_info"] = diseases
+
+            # استخراج مواصفات الأصناف النباتية
+            if "## مواصفات الأصناف النباتيةIN_CONTENT_SECTION## مواصفات الأصناف النباتية""##")[0]
+                varieties = []
+
+                # استخراج أصناف الطماطم
+                if "### أصناف الطماطم" in section:
+                    tomato_section = section.split("### أصناف الطماطم""###")[0]
+
+                    for variety in tomato_section.split("\n\nIF_VARIETYSTRIP_AND**IN_VARIETY_VARIETY_INFO\nFOR_LINE_IN1. **VARIETY_INFOnameLINESPLIT**"":IN_LINE_VARIETY_INFOcharacteristicsLINESPLITالخصائص:"":IN_LINE_VARIETY_INFOsourceLINESPLITالمصدر:"":IN_LINE_VARIETY_INFOreferenceLINESPLITالرابط:"""] = "tomato"
+                                varieties.append(variety_info)
+
+                # استخراج أصناف القمح
+                if "### أصناف القمح" in section:
+                    wheat_section = section.split("### أصناف القمح""###")[0]
+
+                    for variety in wheat_section.split("\n\nIF_VARIETYSTRIP_AND**IN_VARIETY_VARIETY_INFO\nFOR_LINE_IN1. **VARIETY_INFOnameLINESPLIT**"":IN_LINE_VARIETY_INFOcharacteristicsLINESPLITالخصائص:"":IN_LINE_VARIETY_INFOsourceLINESPLITالمصدر:"":IN_LINE_VARIETY_INFOreferenceLINESPLITالرابط:"""] = "wheat"
+                                varieties.append(variety_info)
+
+                # استخراج أصناف الأرز
+                if "### أصناف الأرز" in section:
+                    rice_section = section.split("### أصناف الأرز""##")[0]
+
+                    for variety in rice_section.split("\n\nIF_VARIETYSTRIP_AND**IN_VARIETY_VARIETY_INFO\nFOR_LINE_IN1. **VARIETY_INFOnameLINESPLIT**"":IN_LINE_VARIETY_INFOcharacteristicsLINESPLITالخصائص:"":IN_LINE_VARIETY_INFOsourceLINESPLITالمصدر:"":IN_LINE_VARIETY_INFOreferenceLINESPLITالرابط:"""] = "rice"
+                                varieties.append(variety_info)
+
+                self.sources["crop_varieties"] = varieties
+
+            # استخراج طرق التهجين والتزاوج
+            if "## طرق التهجين والتزاوجIN_CONTENT_SECTION## طرق التهجين والتزاوج""##")[0]
+                methods = []
+
+                for method in section.split("\n\n"):
+                    if method.strip() and "**" in method:
+                        method_info = {}
+                        lines = method.strip().split("\nFOR_LINE_IN1. **"):
+                                method_info["nameLINESPLIT**"":" in line:
+                                method_info[DESCRIPTION] = line.split("الوصف:"":IN_LINE_METHOD_INFOsourceLINESPLITالمصدر:"":IN_LINE_METHOD_INFOreferenceLINESPLITالرابط:")[1].strip()
+
+                        if method_info:
+                            methods.append(method_info)
+
+                self.sources["hybridization_methods"] = methods
+
+            # استخراج مواصفات الآباء والأمهات
+            if "## مواصفات الآباء والأمهات في عمليات التهجينIN_CONTENT_SECTION## مواصفات الآباء والأمهات في عمليات التهجين""##")[0]
+                specifications = []
+
+                for spec in section.split("\n\n"):
+                    if spec.strip() and "**" in spec:
+                        spec_info = {}
+                        lines = spec.strip().split("\nFOR_LINE_IN1. **"):
+                                spec_info["nameLINESPLIT**"" المرغوبة:IN_LINE_SPEC_INFOdesired_traitsLINESPLITالصفات المرغوبة:"":IN_LINE_SPEC_INFOsourceLINESPLITالمصدر:"":IN_LINE_SPEC_INFOreferenceLINESPLITالرابط:")[1].strip()
+
+                        if spec_info:
+                            specifications.append(spec_info)
+
+                self.sources["parent_specifications"] = specifications
+
+            logger.info("تم استخراج المصادر من محتوى الملفEXCEPT_EXCEPTION_ASخطأ أثناء استخراج المصادر: {str(e)}")
+
+    def update_knowledge_base_from_sources(self):
+        """تحديث قاعدة المعرفة من المصادر"""
+        try:
+            # تحديث الأمراض
+            self._update_diseases_from_sources()
+
+            # تحديث المحاصيل
+            self._update_crops_from_sources()
+
+            # تحديث الأصناف
+            self._update_varieties_from_sources()
+
+            # تحديث معلومات التهجين
+            self._update_hybridization_from_sources()
+
+            # حفظ قاعدة المعرفة
+            self._save_knowledge_base()
+
+            logger.info("تم تحديث قاعدة المعرفة من المصادرRETURN_TRUE_EXCEPTخطأ أثناء تحديث قاعدة المعرفة من المصادر: {str(e)}")
+            return False
+
+    def _update_diseases_from_sources(self):
+        """تحديث الأمراض من المصادر"""
+        try:
+            # تحديث الأمراض من معلومات الأمراض
+            for disease_info in self.sources.get("disease_info", []):
+                # استخراج معلومات المرض
+                name = disease_info.get("name")
+                pathogen = disease_info.get("pathogen")
+                symptoms = disease_info.get("symptoms")
+                category = disease_info.get("category")
+                source = disease_info.get("source")
+                reference = disease_info.get("reference")
+
+                if not name or not pathogen:
+                    continue
+
+                # إنشاء معرف المرض
+                disease_id = name.lower().replace(" ", "_REPLACE-", "_")
+
+                # تحديث المرض إذا كان موجوداً
+                if disease_id in self.diseases:
+                    # تحديث المعلومات
+                    if source:
+                        self.diseases[disease_id]["source"] = source
+                    if reference:
+                        self.diseases[disease_id]["reference"] = reference
+
+                    # تحديث الأعراض
+                    if symptoms:
+                        symptoms_list = [s.strip() for s in symptoms.split(",")]
+                        for symptom in symptoms_list:
+                            if symptom not in self.diseases[disease_id].get("symptoms", []):
+                                if "symptoms" not in self.diseases[disease_id]:
+                                    self.diseases[disease_id]["symptoms"] = []
+                                self.diseases[disease_id]["symptoms"].append(symptom)
+                else:
+                    # إنشاء مرض جديد
+                    new_disease = {
+                        "name": name,
+                        SCIENTIFIC_NAME: pathogen,
+                        "symptoms": [s.strip() for s in symptoms.split(",")] if symptoms else [],
+                        "sourceSOURCEreference": reference
+                    }
+
+                    # تحديد المحاصيل المتأثرة بناءً على الفئة
+                    if category == "vegetablesNEW_DISEASEcrops"] = ["tomato", "cucumber", "pepper", "eggplant"]
+                    elif category == "field_cropsNEW_DISEASEcrops"] = ["wheat", "corn", "rice", "barley"]
+                    elif category == "fruit_treesNEW_DISEASEcrops"] = ["apple", "peach", "citrus", "grape"]
+
+                    # إضافة المرض إلى قاعدة المعرفة
+                    self.diseases[disease_id] = new_disease
+
+            logger.info(f"تم تحديث {len(self.diseases)} مرض من المصادرEXCEPT_EXCEPTION_ASخطأ أثناء تحديث الأمراض من المصادر: {str(e)}")
+
+    def _update_crops_from_sources(self):
+        """تحديث المحاصيل من المصادر"""
+        try:
+            # تحديث المحاصيل من أصناف المحاصيل
+            for variety_info in self.sources.get("crop_varieties", []):
+                # استخراج معلومات المحصول
+                crop_type = variety_info.get("crop")
+
+                if not crop_type:
+                    continue
+
+                # تحديث المحصول إذا كان موجوداً
+                if crop_type in self.crops:
+                    # تحديث المصدر والمرجع
+                    source = variety_info.get("source")
+                    reference = variety_info.get("reference")
+
+                    if source:
+                        self.crops[crop_type]["source"] = source
+                    if reference:
+                        self.crops[crop_type]["reference"] = reference
+                else:
+                    # إنشاء محصول جديد
+                    new_crop = {
+                        "name": crop_type.capitalize(),
+                        "source": variety_info.get("source"),
+                        "reference": variety_info.get("reference")
+                    }
+
+                    # إضافة المحصول إلى قاعدة المعرفة
+                    self.crops[crop_type] = new_crop
+
+            logger.info(f"تم تحديث {len(self.crops)} محصول من المصادرEXCEPT_EXCEPTION_ASخطأ أثناء تحديث المحاصيل من المصادر: {str(e)}")
+
+    def _update_varieties_from_sources(self):
+        """تحديث الأصناف من المصادر"""
+        try:
+            # تحديث الأصناف من أصناف المحاصيل
+            for variety_info in self.sources.get("crop_varieties", []):
+                # استخراج معلومات الصنف
+                name = variety_info.get("name")
+                crop_type = variety_info.get("crop")
+                characteristics = variety_info.get("characteristics")
+                source = variety_info.get("source")
+                reference = variety_info.get("reference")
+
+                if not name or not crop_type:
+                    continue
+
+                # إنشاء معرف الصنف
+                variety_id = name.lower().replace(" ", "_REPLACE-", "_")
+
+                # التأكد من وجود المحصول في قاعدة المعرفة
+                if crop_type not in self.varieties:
+                    self.varieties[crop_type] = {}
+
+                # تحديث الصنف إذا كان موجوداً
+                if variety_id in self.varieties[crop_type]:
+                    # تحديث المعلومات
+                    if source:
+                        self.varieties[crop_type][variety_id]["source"] = source
+                    if reference:
+                        self.varieties[crop_type][variety_id]["reference"] = reference
+                    if characteristics:
+                        self.varieties[crop_type][variety_id]["characteristics"] = characteristics
+                else:
+                    # إنشاء صنف جديد
+                    new_variety = {
+                        "nameNAMEcharacteristics": characteristics,
+                        "sourceSOURCEreference": reference
+                    }
+
+                    # إضافة الصنف إلى قاعدة المعرفة
+                    self.varieties[crop_type][variety_id] = new_variety
+
+            logger.info(f"تم تحديث أصناف {len(self.varieties)} محصول من المصادرEXCEPT_EXCEPTION_ASخطأ أثناء تحديث الأصناف من المصادر: {str(e)}")
+
+    def _update_hybridization_from_sources(self):
+        """تحديث معلومات التهجين من المصادر"""
+        try:
+            # تحديث طرق التهجين
+            if "methods" not in self.hybridization:
+                self.hybridization["methods"] = {}
+
+            for method_info in self.sources.get("hybridization_methods", []):
+                # استخراج معلومات طريقة التهجين
+                name = method_info.get("name")
+                description = method_info.get(DESCRIPTION)
+                source = method_info.get("source")
+                reference = method_info.get("reference")
+
+                if not name:
+                    continue
+
+                # إنشاء معرف طريقة التهجين
+                method_id = name.lower().replace(" ", "_REPLACE-", "_")
+
+                # تحديث طريقة التهجين إذا كانت موجودة
+                if method_id in self.hybridization["methods"]:
+                    # تحديث المعلومات
+                    if source:
+                        self.hybridization["methodsMETHOD_IDsource"] = source
+                    if reference:
+                        self.hybridization["methodsMETHOD_IDreference"] = reference
+                    if description:
+                        self.hybridization["methods"][method_id][DESCRIPTION] = description
+                else:
+                    # إنشاء طريقة تهجين جديدة
+                    new_method = {
+                        "name": name,
+                        DESCRIPTION: description,
+                        "sourceSOURCEreference": reference
+                    }
+
+                    # إضافة طريقة التهجين إلى قاعدة المعرفة
+                    self.hybridization["methods"][method_id] = new_method
+
+            # تحديث مواصفات الآباء والأمهات
+            if PARENT_SELECTION not in self.hybridization:
+                self.hybridization[PARENT_SELECTION] = {}
+
+            for spec_info in self.sources.get("parent_specifications", []):
+                # استخراج معلومات مواصفات الآباء والأمهات
+                name = spec_info.get("name")
+                desired_traits = spec_info.get("desired_traits")
+                source = spec_info.get("source")
+                reference = spec_info.get("reference")
+
+                if not name:
+                    continue
+
+                # استخراج نوع المحصول من الاسم
+                crop_type = None
+                if "آباء الطماطمIN_NAME_CROP_TYPEtomatoELIFآباء القمحIN_NAME_CROP_TYPEwheatELIFآباء الأرزIN_NAME_CROP_TYPEriceELIFآباء الذرةIN_NAME_CROP_TYPEcorn"
+
+                if not crop_type:
+                    continue
+
+                # التأكد من وجود المحصول في قاعدة المعرفة
+                if crop_type not in self.hybridization[PARENT_SELECTION]:
+                    self.hybridization[PARENT_SELECTION][crop_type] = {}
+
+                # استخراج نوع الصفة من الاسم
+                trait_type = None
+                if "مقاومة الأمراضIN_DESIRED_TRAITS_TRAIT_TYPEdisease_resistanceELIFمقاومة الجفاف" in desired_traits:
+                    trait_type = DROUGHT_TOLERANCE
+                elif "جودة الثمارIN_DESIRED_TRAITS_TRAIT_TYPEfruit_qualityELIFمحتوى البروتينIN_DESIRED_TRAITS_TRAIT_TYPEprotein_content"
+
+                if not trait_type:
+                    trait_type = "general"
+
+                # تحديث مواصفات الآباء والأمهات
+                if trait_type in self.hybridization[PARENT_SELECTION][crop_type]:
+                    # تحديث المعلومات
+                    if source:
+                        self.hybridization[PARENT_SELECTION][crop_type][trait_type]["source"] = source
+                    if reference:
+                        self.hybridization[PARENT_SELECTION][crop_type][trait_type]["reference"] = reference
+                    if desired_traits:
+                        self.hybridization[PARENT_SELECTION][crop_type][trait_type][DESCRIPTION] = desired_traits
+                else:
+                    # إنشاء مواصفات جديدة
+                    new_spec = {
+                        DESCRIPTION: desired_traits,
+                        "sourceSOURCEreference": reference
+                    }
+
+                    # إضافة المواصفات إلى قاعدة المعرفة
+                    self.hybridization[PARENT_SELECTION][crop_type][trait_type] = new_spec
+
+            logger.info("تم تحديث معلومات التهجين من المصادرEXCEPT_EXCEPTION_ASخطأ أثناء تحديث معلومات التهجين من المصادر: {str(e)}")
+
+    def get_disease_info(self, disease_id=None, crop_type=None, symptoms=None):
+        """
+        الحصول على معلومات الأمراض
+
+        المعلمات:
+            disease_id (str, optional): معرف المرض
+            crop_type (str, optional): نوع المحصول
+            symptoms (list, optional): قائمة الأعراض
+
+        العائد:
+            dict: معلومات الأمراض
+        """
+        try:
+            # إذا تم تحديد معرف المرض
+            if disease_id:
+                if disease_id in self.diseases:
+                    return {
+                        "successTRUEdisease": self.diseases[disease_id]
+                    }
+                else:
+                    return {
+                        "successFALSEerror": fالمرض_DISEASE_ID_غير
+                    }
+
+            # إذا تم تحديد نوع المحصول
+            if crop_type:
+                diseases = {}
+
+                for disease_id, disease_info in self.diseases.items():
+                    if crop_type in disease_info.get("crops", []):
+                        diseases[disease_id] = disease_info
+
+                return {
+                    "success": True,
+                    "diseases": diseases
+                }
+
+            # إذا تم تحديد الأعراض
+            if symptoms:
+                diseases = {}
+
+                for disease_id, disease_info in self.diseases.items():
+                    # التحقق من تطابق الأعراض
+                    disease_symptoms = disease_info.get("symptoms", [])
+                    matching_symptoms = [s for s in symptoms if any(s.lower() in ds.lower() for ds in disease_symptoms)]
+
+                    if matching_symptoms:
+                        diseases[disease_id] = disease_info
+                        diseases[disease_id]["matching_symptoms"] = matching_symptoms
+                        diseases[disease_id]["match_score"] = len(matching_symptoms) / len(symptoms)
+
+                # ترتيب الأمراض حسب درجة التطابق
+                sorted_diseases = dict(sorted(diseases.items(), key=lambda x: x[1].get("match_score", 0), reverse=True))
+
+                return {
+                    "success": True,
+                    "diseases": sorted_diseases
+                }
+
+            # إذا لم يتم تحديد أي معلمة
+            return {
+                "successTRUEdiseases": self.diseases
+            }
+        except Exception as e:
+            logger.error(f"خطأ أثناء استرجاع معلومات الأمراض: {str(e)}RETURNsuccessFALSEerror": f"خطأ أثناء استرجاع معلومات الأمراض: {str(e)}"
+            }
+
+    def get_crop_info(self, crop_id=None, disease_id=None):
+        """
+        الحصول على معلومات المحاصيل
+
+        المعلمات:
+            crop_id (str, optional): معرف المحصول
+            disease_id (str, optional): معرف المرض
+
+        العائد:
+            dict: معلومات المحاصيل
+        """
+        try:
+            # إذا تم تحديد معرف المحصول
+            if crop_id:
+                if crop_id in self.crops:
+                    return {
+                        "successTRUEcrop": self.crops[crop_id]
+                    }
+                else:
+                    return {
+                        "successFALSEerror": f"المحصول {crop_id} غير موجود"
+                    }
+
+            # إذا تم تحديد معرف المرض
+            if disease_id:
+                if disease_id in self.diseases:
+                    crops = {}
+
+                    for crop_id in self.diseases[disease_id].get("crops", []):
+                        if crop_id in self.crops:
+                            crops[crop_id] = self.crops[crop_id]
+
+                    return {
+                        "successTRUEcrops": crops
+                    }
+                else:
+                    return {
+                        "successFALSEerror": fالمرض_DISEASE_ID_غير
+                    }
+
+            # إذا لم يتم تحديد أي معلمة
+            return {
+                "successTRUEcrops": self.crops
+            }
+        except Exception as e:
+            logger.error(f"خطأ أثناء استرجاع معلومات المحاصيل: {str(e)}RETURNsuccessFALSEerror": f"خطأ أثناء استرجاع معلومات المحاصيل: {str(e)}"
+            }
+
+    def get_treatment_info(self, treatment_id=None, disease_id=None):
+        """
+        الحصول على معلومات العلاجات
+
+        المعلمات:
+            treatment_id (str, optional): معرف العلاج
+            disease_id (str, optional): معرف المرض
+
+        العائد:
+            dict: معلومات العلاجات
+        """
+        try:
+            # إذا تم تحديد معرف العلاج
+            if treatment_id:
+                if treatment_id in self.treatments:
+                    return {
+                        "successTRUEtreatment": self.treatments[treatment_id]
+                    }
+                else:
+                    return {
+                        "successFALSEerror": f"العلاج {treatment_id} غير موجود"
+                    }
+
+            # إذا تم تحديد معرف المرض
+            if disease_id:
+                if disease_id in self.diseases:
+                    treatments = {}
+
+                    for treatment_id in self.diseases[disease_id].get("treatments", []):
+                        if treatment_id in self.treatments:
+                            treatments[treatment_id] = self.treatments[treatment_id]
+
+                    return {
+                        "successTRUEtreatments": treatments
+                    }
+                else:
+                    return {
+                        "successFALSEerror": fالمرض_DISEASE_ID_غير
+                    }
+
+            # إذا لم يتم تحديد أي معلمة
+            return {
+                "successTRUEtreatments": self.treatments
+            }
+        except Exception as e:
+            logger.error(f"خطأ أثناء استرجاع معلومات العلاجات: {str(e)}RETURNsuccessFALSEerror": f"خطأ أثناء استرجاع معلومات العلاجات: {str(e)}"
+            }
+
+    def get_variety_info(self, crop_id=None, variety_id=None):
+        """
+        الحصول على معلومات الأصناف
+
+        المعلمات:
+            crop_id (str, optional): معرف المحصول
+            variety_id (str, optional): معرف الصنف
+
+        العائد:
+            dict: معلومات الأصناف
+        """
+        try:
+            # إذا تم تحديد معرف المحصول والصنف
+            if crop_id and variety_id:
+                if crop_id in self.varieties and variety_id in self.varieties[crop_id]:
+                    return {
+                        "successTRUEvariety": self.varieties[crop_id][variety_id]
+                    }
+                else:
+                    return {
+                        "successFALSEerror": f"الصنف {variety_id} للمحصول {crop_id} غير موجود"
+                    }
+
+            # إذا تم تحديد معرف المحصول فقط
+            if crop_id:
+                if crop_id in self.varieties:
+                    return {
+                        "successTRUEvarieties": self.varieties[crop_id]
+                    }
+                else:
+                    return {
+                        "successFALSEerror": f"المحصول {crop_id} غير موجود في قاعدة بيانات الأصناف"
+                    }
+
+            # إذا لم يتم تحديد أي معلمة
+            return {
+                "successTRUEvarieties": self.varieties
+            }
+        except Exception as e:
+            logger.error(f"خطأ أثناء استرجاع معلومات الأصناف: {str(e)}RETURNsuccessFALSEerror": f"خطأ أثناء استرجاع معلومات الأصناف: {str(e)}"
+            }
+
+    def get_hybridization_info(self, method_id=None, crop_id=None):
+        """
+        الحصول على معلومات التهجين
+
+        المعلمات:
+            method_id (str, optional): معرف طريقة التهجين
+            crop_id (str, optional): معرف المحصول
+
+        العائد:
+            dict: معلومات التهجين
+        """
+        try:
+            # إذا تم تحديد معرف طريقة التهجين
+            if method_id:
+                if "methods" in self.hybridization and method_id in self.hybridization["methods"]:
+                    return {
+                        "successTRUEmethod": self.hybridization["methods"][method_id]
+                    }
+                else:
+                    return {
+                        "successFALSEerror": f"طريقة التهجين {method_id} غير موجودة"
+                    }
+
+            # إذا تم تحديد معرف المحصول
+            if crop_id:
+                if PARENT_SELECTION in self.hybridization and crop_id in self.hybridization[PARENT_SELECTION]:
+                    return {
+                        "success": True,
+                        PARENT_SELECTION: self.hybridization[PARENT_SELECTION][crop_id]
+                    }
+                else:
+                    return {
+                        "successFALSEerror": f"معلومات اختيار الآباء للمحصول {crop_id} غير موجودة"
+                    }
+
+            # إذا لم يتم تحديد أي معلمة
+            return {
+                "successTRUEhybridization": self.hybridization
+            }
+        except Exception as e:
+            logger.error(f"خطأ أثناء استرجاع معلومات التهجين: {str(e)}RETURNsuccessFALSEerror": f"خطأ أثناء استرجاع معلومات التهجين: {str(e)}"
+            }
+
+    def get_sources(self, category=None):
+        """
+        الحصول على المصادر
+
+        المعلمات:
+            category (str, optional): فئة المصادر
+
+        العائد:
+            dict: المصادر
+        """
+        try:
+            # إذا تم تحديد فئة المصادر
+            if category:
+                if category in self.sources:
+                    return {
+                        "successTRUEsources": self.sources[category]
+                    }
+                else:
+                    return {
+                        "successFALSEerror": f"فئة المصادر {category} غير موجودة"
+                    }
+
+            # إذا لم يتم تحديد أي معلمة
+            return {
+                "successTRUEsources": self.sources
+            }
+        except Exception as e:
+            logger.error(f"خطأ أثناء استرجاع المصادر: {str(e)}RETURNsuccessFALSEerror": f"خطأ أثناء استرجاع المصادر: {str(e)}"
+            }
+
+    def add_disease(self, disease_id, disease_info):
+        """
+        إضافة مرض جديد
+
+        المعلمات:
+            disease_id (str): معرف المرض
+            disease_info (dict): معلومات المرض
+
+        العائد:
+            bool: نجاح العملية
+        """
+        try:
+            # التحقق من وجود المرض
+            if disease_id in self.diseases:
+                logger.warning(f"المرض {disease_id} موجود بالفعل")
+                return False
+
+            # إضافة المرض
+            self.diseases[disease_id] = disease_info
+
+            # حفظ قاعدة المعرفة
+            self._save_knowledge_base()
+
+            logger.info(f"تم إضافة المرض {disease_id}RETURN_TRUE_EXCEPTخطأ أثناء إضافة المرض: {str(e)}")
+            return False
+
+    def update_disease(self, disease_id, disease_info):
+        """
+        تحديث مرض
+
+        المعلمات:
+            disease_id (str): معرف المرض
+            disease_info (dict): معلومات المرض
+
+        العائد:
+            bool: نجاح العملية
+        """
+        try:
+            # التحقق من وجود المرض
+            if disease_id not in self.diseases:
+                logger.warning(fالمرض_DISEASE_ID_غير)
+                return False
+
+            # تحديث المرض
+            self.diseases[disease_id] = disease_info
+
+            # حفظ قاعدة المعرفة
+            self._save_knowledge_base()
+
+            logger.info(f"تم تحديث المرض {disease_id}RETURN_TRUE_EXCEPTخطأ أثناء تحديث المرض: {str(e)}")
+            return False
+
+    def add_crop(self, crop_id, crop_info):
+        """
+        إضافة محصول جديد
+
+        المعلمات:
+            crop_id (str): معرف المحصول
+            crop_info (dict): معلومات المحصول
+
+        العائد:
+            bool: نجاح العملية
+        """
+        try:
+            # التحقق من وجود المحصول
+            if crop_id in self.crops:
+                logger.warning(f"المحصول {crop_id} موجود بالفعل")
+                return False
+
+            # إضافة المحصول
+            self.crops[crop_id] = crop_info
+
+            # حفظ قاعدة المعرفة
+            self._save_knowledge_base()
+
+            logger.info(f"تم إضافة المحصول {crop_id}RETURN_TRUE_EXCEPTخطأ أثناء إضافة المحصول: {str(e)}")
+            return False
+
+    def update_crop(self, crop_id, crop_info):
+        """
+        تحديث محصول
+
+        المعلمات:
+            crop_id (str): معرف المحصول
+            crop_info (dict): معلومات المحصول
+
+        العائد:
+            bool: نجاح العملية
+        """
+        try:
+            # التحقق من وجود المحصول
+            if crop_id not in self.crops:
+                logger.warning(f"المحصول {crop_id} غير موجود")
+                return False
+
+            # تحديث المحصول
+            self.crops[crop_id] = crop_info
+
+            # حفظ قاعدة المعرفة
+            self._save_knowledge_base()
+
+            logger.info(f"تم تحديث المحصول {crop_id}RETURN_TRUE_EXCEPTخطأ أثناء تحديث المحصول: {str(e)}")
+            return False
+
+    def add_variety(self, crop_id, variety_id, variety_info):
+        """
+        إضافة صنف جديد
+
+        المعلمات:
+            crop_id (str): معرف المحصول
+            variety_id (str): معرف الصنف
+            variety_info (dict): معلومات الصنف
+
+        العائد:
+            bool: نجاح العملية
+        """
+        try:
+            # التأكد من وجود المحصول في قاعدة المعرفة
+            if crop_id not in self.varieties:
+                self.varieties[crop_id] = {}
+
+            # التحقق من وجود الصنف
+            if variety_id in self.varieties[crop_id]:
+                logger.warning(f"الصنف {variety_id} للمحصول {crop_id} موجود بالفعل")
+                return False
+
+            # إضافة الصنف
+            self.varieties[crop_id][variety_id] = variety_info
+
+            # حفظ قاعدة المعرفة
+            self._save_knowledge_base()
+
+            logger.info(f"تم إضافة الصنف {variety_id} للمحصول {crop_id}RETURN_TRUE_EXCEPTخطأ أثناء إضافة الصنف: {str(e)}")
+            return False
+
+    def update_variety(self, crop_id, variety_id, variety_info):
+        """
+        تحديث صنف
+
+        المعلمات:
+            crop_id (str): معرف المحصول
+            variety_id (str): معرف الصنف
+            variety_info (dict): معلومات الصنف
+
+        العائد:
+            bool: نجاح العملية
+        """
+        try:
+            # التحقق من وجود المحصول والصنف
+            if crop_id not in self.varieties or variety_id not in self.varieties[crop_id]:
+                logger.warning(f"الصنف {variety_id} للمحصول {crop_id} غير موجود")
+                return False
+
+            # تحديث الصنف
+            self.varieties[crop_id][variety_id] = variety_info
+
+            # حفظ قاعدة المعرفة
+            self._save_knowledge_base()
+
+            logger.info(f"تم تحديث الصنف {variety_id} للمحصول {crop_id}RETURN_TRUE_EXCEPTخطأ أثناء تحديث الصنف: {str(e)}")
+            return False
+
+    def get_knowledge_base_stats(self):
+        """
+        الحصول على إحصائيات قاعدة المعرفة
+
+        العائد:
+            dict: إحصائيات قاعدة المعرفة
+        """
+        try:
+            # عدد الأمراض
+            num_diseases = len(self.diseases)
+
+            # عدد المحاصيل
+            num_crops = len(self.crops)
+
+            # عدد العلاجات
+            num_treatments = len(self.treatments)
+
+            # عدد الأصناف
+            num_varieties = sum(len(varieties) for varieties in self.varieties.values())
+
+            # عدد طرق التهجين
+            num_hybridization_methods = len(self.hybridization.get("methods", {}))
+
+            # تاريخ آخر تحديث
+            last_updated = self.last_updated
+
+            return {
+                "successTRUEstats""num_diseases": num_diseases,
+                    "num_crops": num_crops,
+                    "num_treatments": num_treatments,
+                    "num_varieties": num_varieties,
+                    "num_hybridization_methods": num_hybridization_methods,
+                    "last_updated": last_updated
+                }
+            }
+        except Exception as e:
+            logger.error(f"خطأ أثناء استرجاع إحصائيات قاعدة المعرفة: {str(e)}RETURNsuccessFALSEerror": f"خطأ أثناء استرجاع إحصائيات قاعدة المعرفة: {str(e)}"
+            }
+
+    def export_knowledge_base(self, export_dir=None):
+        """
+        تصدير قاعدة المعرفة
+
+        المعلمات:
+            export_dir (str, optional): مسار مجلد التصدير
+
+        العائد:
+            dict: نتيجة التصدير
+        """
+        try:
+            # تحديد مسار مجلد التصدير
+            if not export_dir:
+                export_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'export')
+
+            # التأكد من وجود مجلد التصدير
+            os.makedirs(export_dir, exist_ok=True)
+
+            # تصدير قاعدة المعرفة كملف JSON
+            export_file = os.path.join(export_dir, 'knowledge_base.json')
+
+            # إنشاء قاموس قاعدة المعرفة
+            knowledge_base = {
+                "diseases": self.diseases,
+                "crops": self.crops,
+                "treatments": self.treatments,
+                "varieties": self.varieties,
+                "hybridization": self.hybridization,
+                "sources": self.sources,
+                "last_updated": self.last_updated
+            }
+
+            # حفظ قاعدة المعرفة
+            with open(export_file, 'wENCODINGutf-8') as f:
+                json.dump(knowledge_base, f, ensure_ascii=False, indent=2)
+
+            logger.info(f"تم تصدير قاعدة المعرفة إلى {export_file}")
+
+            return {
+                "successTRUEexport_file": export_file
+            }
+        except Exception as e:
+            logger.error(f"خطأ أثناء تصدير قاعدة المعرفة: {str(e)}RETURNsuccessFALSEerror": f"خطأ أثناء تصدير قاعدة المعرفة: {str(e)}"
+            }
+
+    def import_knowledge_base(self, import_file):
+        """
+        استيراد قاعدة المعرفة
+
+        المعلمات:
+            import_file (str): مسار ملف الاستيراد
+
+        العائد:
+            dict: نتيجة الاستيراد
+        """
+        try:
+            # التحقق من وجود ملف الاستيراد
+            if not os.path.exists(import_file):
+                logger.error(f"ملف الاستيراد غير موجود: {import_file}")
+                return {
+                    "success": False,
+                    "error": f"ملف الاستيراد غير موجود: {import_file}"
+                }
+
+            # استيراد قاعدة المعرفة
+            with open(import_file, 'rENCODINGutf-8') as f:
+                knowledge_base = json.load(f)
+
+            # تحديث قاعدة المعرفة
+            if "diseases" in knowledge_base:
+                self.diseases = knowledge_base["diseasesIFcrops" in knowledge_base:
+                self.crops = knowledge_base["cropsIFtreatments" in knowledge_base:
+                self.treatments = knowledge_base["treatmentsIFvarieties" in knowledge_base:
+                self.varieties = knowledge_base["varietiesIFhybridization" in knowledge_base:
+                self.hybridization = knowledge_base["hybridizationIFsources" in knowledge_base:
+                self.sources = knowledge_base["sourcesIFlast_updated" in knowledge_base:
+                self.last_updated = knowledge_base["last_updated"]
+
+            # حفظ قاعدة المعرفة
+            self._save_knowledge_base()
+
+            logger.info(f"تم استيراد قاعدة المعرفة من {import_file}")
+
+            return {
+                "successTRUEmessage": f"تم استيراد قاعدة المعرفة من {import_file}"
+            }
+        except Exception as e:
+            logger.error(f"خطأ أثناء استيراد قاعدة المعرفة: {str(e)}RETURNsuccessFALSEerror": f"خطأ أثناء استيراد قاعدة المعرفة: {str(e)}"
+            }

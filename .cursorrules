@@ -1,0 +1,169 @@
+---
+alwaysApply: true
+description: Exa/Ref/Speckit research guidelines with full MCP stack
+---
+
+# Research Guidelines v1.0 (Full MCP Stack)
+
+This rule outlines how to use all MCP servers for research and development.
+
+## CRITICAL: Date Verification
+
+ALWAYS verify the current date before ANY MCP query:
+```bash
+date +"%Y-%m-%d"
+```
+Assume your internal date is WRONG. Always verify and attach to queries.
+
+---
+
+## MCP Server Priority Order
+
+### Tier 0: Reasoning
+- **sequential-thinking** → Complex problem-solving, multi-step reasoning
+
+### Tier 1: Research (PRIMARY)
+1. **exa** → `get_code_context_exa` FIRST for code-aware context
+2. **exa** → `web_search_exa` FALLBACK for broader searches
+
+### Tier 2: API & Database
+3. **speckit** → API specifications, OpenAPI docs
+4. **supabase** → Database queries, schema exploration
+
+### Tier 3: Documentation (USE SPARINGLY)
+5. **ref** → `ref_search_documentation` and `ref_read_url` ONLY
+   - NEVER use `search_docs` or `my_docs`
+
+---
+
+## Ref Usage Triggers
+
+Use Ref ONLY when:
+- User explicitly requests documentation
+- Exa results contradict each other
+- After 2+ failed attempts to fix external API/library
+- Documentation drift suspected due to model cutoff
+
+---
+
+## Operational Flow
+
+### Step 1: Initial Research
+```
+1. Verify date: date +"%Y-%m-%d"
+2. Call get_code_context_exa with precise query
+3. Include version numbers and language
+```
+
+### Step 2: Fallback Research
+```
+If Step 1 insufficient:
+1. Refine query terms
+2. Call web_search_exa
+3. Cross-reference sources
+```
+
+### Step 3: API Work
+```
+If working with external APIs:
+1. speckit_search for API discovery
+2. speckit_get_spec for full docs
+3. speckit_validate for debugging
+```
+
+### Step 4: Database Context
+```
+If need database info:
+1. supabase for schema queries
+2. Direct table exploration
+```
+
+### Step 5: Documentation Verification
+```
+Only if triggers met:
+1. ref_search_documentation
+2. ref_read_url for specific pages
+```
+
+---
+
+## Security & Quality Checks
+
+### Before Committing Code:
+- **snyk** → Vulnerability scanning
+- **sentry** → Check for existing errors
+
+### During Development:
+- **datadog** → Monitor performance
+- **playwright** → Browser testing
+
+### UI Development:
+- **shadcn** → Professional, accessible components
+- **magic-ui** → Animations, marketing sections
+
+### Vector/AI Features:
+- **pinecone** → Vector search
+- **vectara** → RAG retrieval
+
+### Deployment:
+- **railway** → Django/Python backend
+- **vercel** → Frontend, preview URLs
+
+---
+
+## Query Best Practices
+
+### DO:
+- ✅ Keep queries specific and focused
+- ✅ Use multiple small targeted queries
+- ✅ Include version numbers
+- ✅ Specify programming language
+- ✅ Add date context to queries
+
+### DON'T:
+- ❌ Use broad unfocused queries
+- ❌ Omit version numbers
+- ❌ Use Ref before trying Exa
+- ❌ Use search_docs or my_docs from Ref
+
+---
+
+## Code Annotation Standard
+
+```python
+"""
+Research Sources:
+- Exa: [query] → [summary]
+- Speckit: [API spec ID] → [endpoints]
+- Ref: [URL] → [details]
+
+Version Requirements:
+- Library: [name] >= [version]
+
+Date Verified: [YYYY-MM-DD]
+"""
+```
+
+---
+
+## MCP Servers Summary (17 Total)
+
+| Server | Use Case | API Key |
+|--------|----------|---------|
+| sequential-thinking | Complex reasoning | None |
+| exa | Code search, research | Required |
+| speckit | API specs | None |
+| ref | Doc verification | Required |
+| supabase | Database queries | Required |
+| sentry | Error tracking | Required |
+| github | Code management | Required |
+| firecrawl | Web scraping | Required |
+| pinecone | Vector search | Required |
+| vectara | RAG engine | Required |
+| playwright | Browser testing | None |
+| magic-ui | Animations, marketing | None |
+| shadcn | Professional UI components | None |
+| datadog | Observability | Required |
+| snyk | Security scans | Required |
+| railway | Django deployment | Required |
+| vercel | Frontend deployment | Required |

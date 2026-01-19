@@ -1,0 +1,670 @@
+=================================================================================
+FRONTEND DEVELOPMENT - React, Vue, Angular
+=================================================================================
+
+Version: Latest
+Type: Architecture - Frontend
+
+Comprehensive guidance for modern frontend development.
+
+=================================================================================
+FRAMEWORK SELECTION
+=================================================================================
+
+**React:**
+- Component-based architecture
+- Large ecosystem
+- Flexible and unopinionated
+- JSX syntax
+- Virtual DOM
+
+**Vue:**
+- Progressive framework
+- Easy learning curve
+- Template-based
+- Reactive data binding
+- Official router and state management
+
+**Angular:**
+- Full-featured framework
+- TypeScript by default
+- Dependency injection
+- RxJS for reactive programming
+- CLI tooling
+
+=================================================================================
+REACT BEST PRACTICES
+=================================================================================
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── common/
+│   │   ├── Button.jsx
+│   │   ├── Input.jsx
+│   │   └── Modal.jsx
+│   └── features/
+│       ├── products/
+│       │   ├── ProductList.jsx
+│       │   ├── ProductCard.jsx
+│       │   └── ProductDetail.jsx
+│       └── users/
+├── pages/
+│   ├── Home.jsx
+│   ├── Products.jsx
+│   └── Profile.jsx
+├── services/
+│   ├── api.js
+│   ├── auth.js
+│   └── products.js
+├── store/
+│   ├── index.js
+│   ├── slices/
+│   │   ├── authSlice.js
+│   │   └── productsSlice.js
+├── hooks/
+│   ├── useAuth.js
+│   └── useProducts.js
+├── utils/
+│   ├── helpers.js
+│   └── constants.js
+├── App.jsx
+└── main.jsx
+```
+
+## Components
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+const ProductCard = ({ product, onAddToCart }) => {
+  const [quantity, setQuantity] = useState(1);
+  
+  const handleAddToCart = () => {
+    onAddToCart(product.id, quantity);
+  };
+  
+  return (
+    <div className="product-card">
+      <img src={product.image} alt={product.name} />
+      <h3>{product.name}</h3>
+      <p>{product.description}</p>
+      <p className="price">${product.price}</p>
+      <div className="quantity">
+        <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+          -
+        </button>
+        <span>{quantity}</span>
+        <button onClick={() => setQuantity(quantity + 1)}>+</button>
+      </div>
+      <button onClick={handleAddToCart}>Add to Cart</button>
+    </div>
+  );
+};
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string,
+  }).isRequired,
+  onAddToCart: PropTypes.func.isRequired,
+};
+
+export default ProductCard;
+```
+
+## Custom Hooks
+
+```jsx
+import { useState, useEffect } from 'react';
+import { getProducts } from '../services/products';
+
+export const useProducts = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const data = await getProducts();
+        setProducts(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchProducts();
+  }, []);
+  
+  return { products, loading, error };
+};
+```
+
+## State Management (Redux Toolkit)
+
+```javascript
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getProducts, createProduct } from '../../services/products';
+
+export const fetchProducts = createAsyncThunk(
+  'products/fetchProducts',
+  async () => {
+    const response = await getProducts();
+    return response;
+  }
+);
+
+const productsSlice = createSlice({
+  name: 'products',
+  initialState: {
+    items: [],
+    status: 'idle',
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.items = action.payload;
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+  },
+});
+
+export default productsSlice.reducer;
+```
+
+## Routing (React Router)
+
+```jsx
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Home from './pages/Home';
+import Products from './pages/Products';
+import ProductDetail from './pages/ProductDetail';
+import Profile from './pages/Profile';
+import Login from './pages/Login';
+import { useAuth } from './hooks/useAuth';
+
+const PrivateRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <Navigate to="/login" />;
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
+
+## API Service
+
+```javascript
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Request interceptor
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Response interceptor
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+
+export const getProducts = async () => {
+  const response = await api.get('/products/');
+  return response.data;
+};
+
+export const getProduct = async (id) => {
+  const response = await api.get(`/products/${id}/`);
+  return response.data;
+};
+
+export const createProduct = async (data) => {
+  const response = await api.post('/products/', data);
+  return response.data;
+};
+
+export default api;
+```
+
+=================================================================================
+VUE BEST PRACTICES
+=================================================================================
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── common/
+│   └── features/
+├── views/
+├── store/
+│   ├── index.js
+│   └── modules/
+├── router/
+│   └── index.js
+├── services/
+├── composables/
+├── App.vue
+└── main.js
+```
+
+## Components
+
+```vue
+<template>
+  <div class="product-card">
+    <img :src="product.image" :alt="product.name" />
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
+    <p class="price">${{ product.price }}</p>
+    <div class="quantity">
+      <button @click="decreaseQuantity">-</button>
+      <span>{{ quantity }}</span>
+      <button @click="increaseQuantity">+</button>
+    </div>
+    <button @click="addToCart">Add to Cart</button>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const props = defineProps({
+  product: {
+    type: Object,
+    required: true,
+  },
+});
+
+const emit = defineEmits(['add-to-cart']);
+
+const quantity = ref(1);
+
+const increaseQuantity = () => {
+  quantity.value++;
+};
+
+const decreaseQuantity = () => {
+  if (quantity.value > 1) {
+    quantity.value--;
+  }
+};
+
+const addToCart = () => {
+  emit('add-to-cart', props.product.id, quantity.value);
+};
+</script>
+
+<style scoped>
+.product-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+</style>
+```
+
+## Composables
+
+```javascript
+import { ref, onMounted } from 'vue';
+import { getProducts } from '@/services/products';
+
+export function useProducts() {
+  const products = ref([]);
+  const loading = ref(true);
+  const error = ref(null);
+  
+  const fetchProducts = async () => {
+    try {
+      loading.value = true;
+      products.value = await getProducts();
+    } catch (err) {
+      error.value = err.message;
+    } finally {
+      loading.value = false;
+    }
+  };
+  
+  onMounted(() => {
+    fetchProducts();
+  });
+  
+  return {
+    products,
+    loading,
+    error,
+    fetchProducts,
+  };
+}
+```
+
+## State Management (Pinia)
+
+```javascript
+import { defineStore } from 'pinia';
+import { getProducts } from '@/services/products';
+
+export const useProductsStore = defineStore('products', {
+  state: () => ({
+    items: [],
+    loading: false,
+    error: null,
+  }),
+  
+  getters: {
+    activeProducts: (state) => state.items.filter(p => p.is_active),
+  },
+  
+  actions: {
+    async fetchProducts() {
+      this.loading = true;
+      try {
+        this.items = await getProducts();
+      } catch (error) {
+        this.error = error.message;
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
+});
+```
+
+=================================================================================
+PERFORMANCE OPTIMIZATION
+=================================================================================
+
+## Code Splitting
+
+**React:**
+```jsx
+import { lazy, Suspense } from 'react';
+
+const Products = lazy(() => import('./pages/Products'));
+
+function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Products />
+    </Suspense>
+  );
+}
+```
+
+**Vue:**
+```javascript
+const Products = () => import('./views/Products.vue');
+
+const routes = [
+  {
+    path: '/products',
+    component: Products,
+  },
+];
+```
+
+## Memoization
+
+**React:**
+```jsx
+import { useMemo, useCallback } from 'react';
+
+const ProductList = ({ products, onSelect }) => {
+  const sortedProducts = useMemo(() => {
+    return [...products].sort((a, b) => a.price - b.price);
+  }, [products]);
+  
+  const handleSelect = useCallback((id) => {
+    onSelect(id);
+  }, [onSelect]);
+  
+  return (
+    <div>
+      {sortedProducts.map(product => (
+        <ProductCard
+          key={product.id}
+          product={product}
+          onSelect={handleSelect}
+        />
+      ))}
+    </div>
+  );
+};
+```
+
+=================================================================================
+TESTING
+=================================================================================
+
+## React Testing Library
+
+```jsx
+import { render, screen, fireEvent } from '@testing-library/react';
+import ProductCard from './ProductCard';
+
+describe('ProductCard', () => {
+  const mockProduct = {
+    id: 1,
+    name: 'Test Product',
+    price: 99.99,
+    description: 'Test description',
+  };
+  
+  const mockOnAddToCart = jest.fn();
+  
+  it('renders product information', () => {
+    render(<ProductCard product={mockProduct} onAddToCart={mockOnAddToCart} />);
+    
+    expect(screen.getByText('Test Product')).toBeInTheDocument();
+    expect(screen.getByText('$99.99')).toBeInTheDocument();
+  });
+  
+  it('calls onAddToCart when button clicked', () => {
+    render(<ProductCard product={mockProduct} onAddToCart={mockOnAddToCart} />);
+    
+    const button = screen.getByText('Add to Cart');
+    fireEvent.click(button);
+    
+    expect(mockOnAddToCart).toHaveBeenCalledWith(1, 1);
+  });
+});
+```
+
+=================================================================================
+END OF FRONTEND PROMPT
+=================================================================================
+
+
+================================================================================
+RECOVERED CONTENT FROM  (Phase 2)
+================================================================================
+
+Mock external dependencies
+  
+- **Integration Tests:** 20% of total tests
+  - Test component interactions
+  - Real database (test instance)
+  - API integration
+  
+- **E2E Tests:** 10% of total tests
+  - Full user workflows
+  - Selenium/Playwright
+  - Critical paths only
+
+**Coverage Targets:**
+- Overall: ≥80%
+- Critical modules: ≥90%
+- Utilities: ≥95%
+
+### 46.5 Quality Tools
+
+**Required Tools:**
+```bash
+# Install all verification tools
+pip install \
+  pre-commit \
+  pytest pytest-cov pytest-xdist pytest-mock \
+  flake8 pylint black isort \
+  mypy types-requests types-PyYAML \
+  bandit safety \
+  radon vulture mccabe \
+  coverage
+```
+
+**Tool Configuration:**
+
+**`pyproject.toml`:**
+```toml
+[tool.black]
+line-length = 120
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --cov=. --cov-report=term --cov-report=html"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["."]
+omit = ["*/t
+
+================================================================================
+CRITICAL MISSING CONTENT - Deep Search Recovery
+================================================================================
+
+```python
+#!/usr/bin/env python3
+"""Check that all files have proper headers."""
+
+import re
+import sys
+from pathlib import Path
+
+REQUIRED_FIELDS = ['File:', 'Module:', 'Created:', 'Author:', 'Description:']
+
+def check_python_header(file_path):
+    """Check Python file header."""
+    with open(file_path) as f:
+        content = f.read(500)  # First 500 chars
+    
+    if not content.startswith('"""'):
+        return False, "Missing docstring header"
+    
+    for field in REQUIRED_FIELDS:
+        if field not in content:
+            return False, f"Missing field: {field}"
+    
+    return True, "OK"
+
+def check_ts_header(file_path):
+    """Check TypeScript/JavaScript file header."""
+    with open(file_path) as f:
+        content = f.read(500)
+    
+    if not content.startswith('/**'):
+        return False, "Missing JSDoc header"
+    
+    for field in REQUIRED_FIELDS:
+        if field not in content:
+            return False, f"Missing field: {field}"
+    
+    return True, "OK"
+
+def main():
+    """Check all files."""
+    issues = []
+    
+    for file_path in Path('.').rglob('*'):
+        if file_path.suffix == '.py' and '__pycache__' not in str(file_path):
+            ok, msg = check_python_header(file_path)
+            if not ok:
+                issues.append(f"{file_path}: {msg}")
+        
+        elif file_path.suffix in ('.ts', '.tsx', '.js', '.jsx'):
+            ok, msg = check_ts_header(file_path)
+            if not ok:
+                issues.append(f"{file_path}: {msg}")
+    
+    if issues:
+        print("❌ File header issues found:\n")
+        for issue in issues:
+            print(f"  {issue}")
+        sys.exit(1)
+    
+    print("✅ All file headers are correct")
+
+if __name__ == '__main__':
+    main()
+```
+

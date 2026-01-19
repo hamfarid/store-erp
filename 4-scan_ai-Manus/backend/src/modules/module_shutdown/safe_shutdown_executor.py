@@ -1,0 +1,1117 @@
+# /home/ubuntu/ai_web_organized/src/modules/module_shutdown/safe_shutdown_executor.py
+
+"""
+from flask import g
+منفذ الإغلاق الآمن (Safe Shutdown Executor)
+
+هذه الوحدة مسؤولة عن إغلاق المديولات بشكل آمن دون فقدان البيانات،
+مع مراعاة الاعتمادية وحفظ الحالة واستخدام أساليب آمنة لإغلاق كل مديول.
+"""
+
+import json
+import logging
+import os
+import threading
+from datetime import datetime
+from typing import Any, Callable, Dict, List, Optional
+
+import psutil
+
+# استيراد مدير المديولات ومحدد الأولويات
+from modules.module_shutdown.module_manager import (
+    ModuleInfo,
+    ModuleManager,
+    ModuleState,
+)
+from modules.module_shutdown.priority_determiner import (
+    PriorityDeterminer,
+    ShutdownReason,
+)
+
+# إعداد التسجيل
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger('safe_shutdown_executor')
+
+
+class ShutdownStrategy:
+    """
+    فئة تمثل استراتيجيات الإغلاق.
+    """
+    GRACEFUL = "graceful"  # إغلاق تدريجي مع انتظار اكتمال العمليات الجارية
+    FORCED = "forced"      # إغلاق إجباري بعد مهلة محددة
+    IMMEDIATE = "immediate"  # إغلاق فوري دون انتظار
+
+
+class ShutdownStatus:
+    """
+    فئة تمثل حالة الإغلاق.
+    """
+    PENDING = "pending"    # في انتظار الإغلاق
+    IN_PROGRESS = "in_progress"  # جاري الإغلاق
+    COMPLETED = "completed"  # تم الإغلاق بنجاح
+    FAILED = "failed"      # فشل الإغلاق
+    TIMEOUT = "timeout"    # انتهت مهلة الإغلاق
+
+
+class ShutdownTask:
+    """
+    فئة تمثل مهمة إغلاق المديول.
+    """
+
+    def __init__(
+            self,
+            module_id: str,
+            strategy: str = ShutdownStrategy.GRACEFUL,
+            timeout: int = 30,
+            reason: str = None):
+        """
+        تهيئة مهمة إغلاق المديول.
+
+        Args:
+            module_id: معرف المديول
+            strategy: استراتيجية الإغلاق
+            timeout: مهلة الإغلاق بالثواني
+            reason: سبب الإغلاق
+        """
+        self.module_id = module_id
+        self.strategy = strategy
+        self.timeout = timeout
+        self.reason = reason
+        self.status = ShutdownStatus.PENDING
+        self.start_time = None
+        self.end_time = None
+        self.error_message = None
+        self.data_saved = False
+        self.dependencies_shutdown = False
+
+
+class SafeShutdownExecutor:
+    """
+    فئة منفذ الإغلاق الآمن المسؤولة عن إغلاق المديولات بشكل آمن دون فقدان البيانات.
+    """
+
+    def __init__(
+            self,
+            module_manager: ModuleManager,
+            priority_determiner: PriorityDeterminer = None,
+            config_path: str = None):
+        """
+        تهيئة منفذ الإغلاق الآمن.
+
+        Args:
+            module_manager: مدير المديولات
+            priority_determiner: محدد الأولويات
+            config_path: مسار ملف التكوين
+        """
+        self.module_manager = module_manager
+        self.priority_determiner = priority_determiner
+        self.config_path = config_path or "/home/ubuntu/ai_web_organized/config/safe_shutdown_executor.json"
+        self.config = {
+            "default_strategy": ShutdownStrategy.GRACEFUL,
+            "default_timeout": 30,  # ثواني
+            "max_shutdown_attempts": 3,
+            "shutdown_hooks": {},
+            "pre_shutdown_scripts": {},
+            "post_shutdown_scripts": {},
+            "module_specific_settings": {}
+        }
+
+        # تحميل التكوين
+        self._load_config()
+
+        # قائمة مهام الإغلاق
+        self.shutdown_tasks: Dict[str, ShutdownTask] = {}
+
+        # قفل للتزامن
+        self.lock = threading.Lock()
+
+        # خرائط الاستدعاء
+        self.pre_shutdown_hooks: Dict[str, List[Callable]] = {}
+        self.post_shutdown_hooks: Dict[str, List[Callable]] = {}
+
+        logger.info("تم تهيئة منفذ الإغلاق الآمن بنجاح")
+
+    def _load_config(self) -> bool:
+        """
+        تحميل تكوين منفذ الإغلاق الآمن من ملف.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            if not os.path.exists(self.config_path):
+                # إنشاء ملف تكوين افتراضي إذا لم يكن موجودًا
+                os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
+                with open(self.config_path, 'w', encoding='utf-8') as f:
+                    json.dump(self.config, f, ensure_ascii=False, indent=4)
+                logger.info(
+                    f"تم إنشاء ملف تكوين افتراضي في {self.config_path}")
+                return True
+
+            with open(self.config_path, 'r', encoding='utf-8') as f:
+                loaded_config = json.load(f)
+
+            # دمج التكوين المحمل مع التكوين الافتراضي
+            for key, value in loaded_config.items():
+                self.config[key] = value
+
+            logger.info(
+                f"تم تحميل تكوين منفذ الإغلاق الآمن من {self.config_path}")
+            return True
+        except Exception as e:
+            logger.error(f"فشل تحميل تكوين منفذ الإغلاق الآمن: {str(e)}")
+            return False
+
+    def _save_config(self) -> bool:
+        """
+        حفظ تكوين منفذ الإغلاق الآمن إلى ملف.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
+            with open(self.config_path, 'w', encoding='utf-8') as f:
+                json.dump(self.config, f, ensure_ascii=False, indent=4)
+
+            logger.info(
+                f"تم حفظ تكوين منفذ الإغلاق الآمن إلى {self.config_path}")
+            return True
+        except Exception as e:
+            logger.error(f"فشل حفظ تكوين منفذ الإغلاق الآمن: {str(e)}")
+            return False
+
+    def update_config(self, **kwargs) -> bool:
+        """
+        تحديث تكوين منفذ الإغلاق الآمن.
+
+        Args:
+            **kwargs: المعلومات المراد تحديثها
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # تحديث التكوين
+            for key, value in kwargs.items():
+                if key in self.config:
+                    self.config[key] = value
+
+            # حفظ التكوين
+            return self._save_config()
+
+    def register_pre_shutdown_hook(
+            self,
+            module_id: str,
+            hook: Callable) -> bool:
+        """
+        تسجيل دالة استدعاء قبل الإغلاق.
+
+        Args:
+            module_id: معرف المديول
+            hook: دالة الاستدعاء
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            if module_id not in self.pre_shutdown_hooks:
+                self.pre_shutdown_hooks[module_id] = []
+
+            self.pre_shutdown_hooks[module_id].append(hook)
+            logger.info(
+                f"تم تسجيل دالة استدعاء قبل الإغلاق للمديول {module_id}")
+            return True
+
+    def register_post_shutdown_hook(
+            self,
+            module_id: str,
+            hook: Callable) -> bool:
+        """
+        تسجيل دالة استدعاء بعد الإغلاق.
+
+        Args:
+            module_id: معرف المديول
+            hook: دالة الاستدعاء
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            if module_id not in self.post_shutdown_hooks:
+                self.post_shutdown_hooks[module_id] = []
+
+            self.post_shutdown_hooks[module_id].append(hook)
+            logger.info(
+                f"تم تسجيل دالة استدعاء بعد الإغلاق للمديول {module_id}")
+            return True
+
+    def _execute_pre_shutdown_hooks(self, module_id: str) -> bool:
+        """
+        تنفيذ دوال الاستدعاء قبل الإغلاق.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            # تنفيذ دوال الاستدعاء المسجلة
+            if module_id in self.pre_shutdown_hooks:
+                for hook in self.pre_shutdown_hooks[module_id]:
+                    hook(module_id)
+
+            # تنفيذ النصوص البرمجية قبل الإغلاق
+            pre_shutdown_scripts = self.config.get("pre_shutdown_scripts", {})
+            if module_id in pre_shutdown_scripts:
+                script = pre_shutdown_scripts[module_id]
+                if script:
+                    # تنفيذ النص البرمجي (يمكن استبدال هذا بالتنفيذ الفعلي)
+                    logger.info(
+                        f"تنفيذ النص البرمجي قبل الإغلاق للمديول {module_id}: {script}")
+
+            return True
+        except Exception as e:
+            logger.error(
+                f"فشل تنفيذ دوال الاستدعاء قبل الإغلاق للمديول {module_id}: {str(e)}")
+            return False
+
+    def _execute_post_shutdown_hooks(self, module_id: str) -> bool:
+        """
+        تنفيذ دوال الاستدعاء بعد الإغلاق.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            # تنفيذ دوال الاستدعاء المسجلة
+            if module_id in self.post_shutdown_hooks:
+                for hook in self.post_shutdown_hooks[module_id]:
+                    hook(module_id)
+
+            # تنفيذ النصوص البرمجية بعد الإغلاق
+            post_shutdown_scripts = self.config.get(
+                "post_shutdown_scripts", {})
+            if module_id in post_shutdown_scripts:
+                script = post_shutdown_scripts[module_id]
+                if script:
+                    # تنفيذ النص البرمجي (يمكن استبدال هذا بالتنفيذ الفعلي)
+                    logger.info(
+                        f"تنفيذ النص البرمجي بعد الإغلاق للمديول {module_id}: {script}")
+
+            return True
+        except Exception as e:
+            logger.error(
+                f"فشل تنفيذ دوال الاستدعاء بعد الإغلاق للمديول {module_id}: {str(e)}")
+            return False
+
+    def _save_module_state(self, module_id: str) -> bool:
+        """
+        حفظ حالة المديول قبل الإغلاق.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            # الحصول على معلومات المديول
+            module_info = self.module_manager.get_module_info(module_id)
+            if not module_info:
+                logger.warning(f"المديول {module_id} غير مسجل")
+                return False
+
+            # حفظ حالة المديول (يمكن استبدال هذا بالتنفيذ الفعلي)
+            state_dir = os.path.join(
+                "/home/ubuntu/ai_web_organized/data/module_states", module_id)
+            os.makedirs(state_dir, exist_ok=True)
+
+            state_file = os.path.join(
+                state_dir, f"state_{datetime.now().strftime('%Y%m%d%H%M%S')}.json")
+            with open(state_file, 'w', encoding='utf-8') as f:
+                state_data = {
+                    "module_id": module_id,
+                    "name": module_info.name,
+                    "state": module_info.state,
+                    "resource_usage": module_info.resource_usage,
+                    "timestamp": datetime.now().isoformat()
+                }
+                json.dump(state_data, f, ensure_ascii=False, indent=4)
+
+            logger.info(f"تم حفظ حالة المديول {module_id} في {state_file}")
+            return True
+        except Exception as e:
+            logger.error(f"فشل حفظ حالة المديول {module_id}: {str(e)}")
+            return False
+
+    def _get_module_specific_settings(self, module_id: str) -> Dict[str, Any]:
+        """
+        الحصول على الإعدادات الخاصة بالمديول.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            Dict[str, Any]: الإعدادات الخاصة بالمديول
+        """
+        module_specific_settings = self.config.get(
+            "module_specific_settings", {})
+        return module_specific_settings.get(module_id, {})
+
+    def _get_shutdown_strategy(self, module_id: str) -> str:
+        """
+        الحصول على استراتيجية الإغلاق للمديول.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            str: استراتيجية الإغلاق
+        """
+        # الحصول على الإعدادات الخاصة بالمديول
+        settings = self._get_module_specific_settings(module_id)
+
+        # الحصول على استراتيجية الإغلاق
+        strategy = settings.get(
+            "strategy",
+            self.config.get(
+                "default_strategy",
+                ShutdownStrategy.GRACEFUL))
+
+        return strategy
+
+    def _get_shutdown_timeout(self, module_id: str) -> int:
+        """
+        الحصول على مهلة الإغلاق للمديول.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            int: مهلة الإغلاق بالثواني
+        """
+        # الحصول على الإعدادات الخاصة بالمديول
+        settings = self._get_module_specific_settings(module_id)
+
+        # الحصول على مهلة الإغلاق
+        timeout = settings.get(
+            "timeout", self.config.get(
+                "default_timeout", 30))
+
+        return timeout
+
+    def _get_max_shutdown_attempts(self, module_id: str) -> int:
+        """
+        الحصول على الحد الأقصى لمحاولات الإغلاق للمديول.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            int: الحد الأقصى لمحاولات الإغلاق
+        """
+        # الحصول على الإعدادات الخاصة بالمديول
+        settings = self._get_module_specific_settings(module_id)
+
+        # الحصول على الحد الأقصى لمحاولات الإغلاق
+        max_attempts = settings.get(
+            "max_attempts", self.config.get(
+                "max_shutdown_attempts", 3))
+
+        return max_attempts
+
+    def _shutdown_process(
+            self,
+            process_id: int,
+            strategy: str,
+            timeout: int) -> bool:
+        """
+        إغلاق العملية.
+
+        Args:
+            process_id: معرف العملية
+            strategy: استراتيجية الإغلاق
+            timeout: مهلة الإغلاق بالثواني
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            # التحقق من وجود العملية
+            if not psutil.pid_exists(process_id):
+                logger.warning(f"العملية {process_id} غير موجودة")
+                return True
+
+            process = psutil.Process(process_id)
+
+            # إغلاق العملية حسب الاستراتيجية
+            if strategy == ShutdownStrategy.GRACEFUL:
+                # إغلاق تدريجي
+                process.terminate()
+
+                # انتظار انتهاء العملية
+                try:
+                    process.wait(timeout=timeout)
+                    return True
+                except psutil.TimeoutExpired:
+                    # إذا انتهت المهلة، إغلاق إجباري
+                    logger.warning(
+                        f"انتهت مهلة الإغلاق التدريجي للعملية {process_id}، جاري الإغلاق الإجباري")
+                    process.kill()
+                    return True
+
+            elif strategy == ShutdownStrategy.FORCED:
+                # إغلاق إجباري بعد مهلة قصيرة
+                process.terminate()
+
+                # انتظار انتهاء العملية لفترة قصيرة
+                try:
+                    process.wait(timeout=min(5, timeout))
+                    return True
+                except psutil.TimeoutExpired:
+                    # إذا انتهت المهلة، إغلاق فوري
+                    logger.warning(
+                        f"انتهت مهلة الإغلاق الإجباري للعملية {process_id}، جاري الإغلاق الفوري")
+                    process.kill()
+                    return True
+
+            elif strategy == ShutdownStrategy.IMMEDIATE:
+                # إغلاق فوري
+                process.kill()
+                return True
+
+            else:
+                logger.error(f"استراتيجية الإغلاق غير معروفة: {strategy}")
+                return False
+
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess) as e:
+            logger.warning(f"خطأ في إغلاق العملية {process_id}: {str(e)}")
+            return True  # العملية غير موجودة أو تم إغلاقها بالفعل
+
+        except Exception as e:
+            logger.error(f"فشل إغلاق العملية {process_id}: {str(e)}")
+            return False
+
+    def shutdown_module(
+            self,
+            module_id: str,
+            strategy: str = None,
+            timeout: int = None,
+            reason: str = None,
+            force: bool = False) -> bool:
+        """
+        إغلاق المديول بشكل آمن.
+
+        Args:
+            module_id: معرف المديول
+            strategy: استراتيجية الإغلاق
+            timeout: مهلة الإغلاق بالثواني
+            reason: سبب الإغلاق
+            force: إجبار الإغلاق حتى لو كانت هناك مديولات تعتمد عليه
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # التحقق من وجود المديول
+            module_info = self.module_manager.get_module_info(module_id)
+            if not module_info:
+                logger.warning(f"المديول {module_id} غير مسجل")
+                return False
+
+            # التحقق من حالة المديول
+            if module_info.state not in [
+                    ModuleState.RUNNING, ModuleState.PAUSED]:
+                logger.warning(
+                    f"المديول {module_id} ليس قيد التشغيل أو الإيقاف المؤقت")
+                return True
+
+            # التحقق من عدم وجود مديولات قيد التشغيل تعتمد على هذا المديول
+            if not force:
+                dependent_modules = self.module_manager.get_dependent_modules(
+                    module_id)
+                running_dependent_modules = []
+
+                for dep_id in dependent_modules:
+                    dep_info = self.module_manager.get_module_info(dep_id)
+                    if dep_info and dep_info.state == ModuleState.RUNNING:
+                        running_dependent_modules.append(dep_id)
+
+                if running_dependent_modules:
+                    logger.error(
+                        f"لا يمكن إغلاق المديول {module_id} لأن المديولات التالية تعتمد عليه: {', '.join(running_dependent_modules)}")
+                    return False
+
+            # الحصول على استراتيجية الإغلاق ومهلة الإغلاق
+            if strategy is None:
+                strategy = self._get_shutdown_strategy(module_id)
+
+            if timeout is None:
+                timeout = self._get_shutdown_timeout(module_id)
+
+            # إنشاء مهمة الإغلاق
+            task = ShutdownTask(
+                module_id=module_id,
+                strategy=strategy,
+                timeout=timeout,
+                reason=reason
+            )
+
+            # حفظ مهمة الإغلاق
+            self.shutdown_tasks[module_id] = task
+
+            # تحديث حالة المهمة
+            task.status = ShutdownStatus.IN_PROGRESS
+            task.start_time = datetime.now()
+
+            try:
+                # تنفيذ دوال الاستدعاء قبل الإغلاق
+                self._execute_pre_shutdown_hooks(module_id)
+
+                # حفظ حالة المديول
+                self._save_module_state(module_id)
+                task.data_saved = True
+
+                # إغلاق المديول
+                if module_info.process_id is not None:
+                    success = self._shutdown_process(
+                        module_info.process_id, strategy, timeout)
+                    if not success:
+                        task.status = ShutdownStatus.FAILED
+                        task.error_message = "فشل إغلاق العملية"
+                        logger.error(f"فشل إغلاق المديول {module_id}")
+                        return False
+
+                # تحديث حالة المديول في مدير المديولات
+                self.module_manager.stop_module(module_id, force=force)
+
+                # تنفيذ دوال الاستدعاء بعد الإغلاق
+                self._execute_post_shutdown_hooks(module_id)
+
+                # تحديث حالة المهمة
+                task.status = ShutdownStatus.COMPLETED
+                task.end_time = datetime.now()
+
+                logger.info(f"تم إغلاق المديول {module_id} بنجاح")
+                return True
+
+            except Exception as e:
+                # تحديث حالة المهمة في حالة الخطأ
+                task.status = ShutdownStatus.FAILED
+                task.error_message = str(e)
+                task.end_time = datetime.now()
+
+                logger.error(f"فشل إغلاق المديول {module_id}: {str(e)}")
+                return False
+
+    def shutdown_modules(self,
+                         module_ids: List[str],
+                         strategy: str = None,
+                         timeout: int = None,
+                         reason: str = None,
+                         force: bool = False) -> Dict[str,
+                                                      bool]:
+        """
+        إغلاق مجموعة من المديولات بشكل آمن.
+
+        Args:
+            module_ids: قائمة معرفات المديولات
+            strategy: استراتيجية الإغلاق
+            timeout: مهلة الإغلاق بالثواني
+            reason: سبب الإغلاق
+            force: إجبار الإغلاق حتى لو كانت هناك مديولات تعتمد عليها
+
+        Returns:
+            Dict[str, bool]: نتائج الإغلاق لكل مديول
+        """
+        results = {}
+
+        # بناء شجرة الاعتماد
+        dependency_tree = {}
+        for module_id in module_ids:
+            module_info = self.module_manager.get_module_info(module_id)
+            if module_info:
+                dependency_tree[module_id] = module_info.dependencies
+
+        # ترتيب المديولات حسب الاعتماد
+        shutdown_order = self._get_shutdown_order(dependency_tree)
+
+        # إغلاق المديولات حسب الترتيب
+        for module_id in shutdown_order:
+            if module_id in module_ids:
+                results[module_id] = self.shutdown_module(
+                    module_id=module_id,
+                    strategy=strategy,
+                    timeout=timeout,
+                    reason=reason,
+                    force=force
+                )
+
+        return results
+
+    def _get_shutdown_order(self,
+                            dependency_tree: Dict[str,
+                                                  List[str]]) -> List[str]:
+        """
+        الحصول على ترتيب إغلاق المديولات حسب الاعتماد.
+
+        Args:
+            dependency_tree: شجرة الاعتماد
+
+        Returns:
+            List[str]: ترتيب إغلاق المديولات
+        """
+        # ترتيب المديولات بحيث يتم إغلاق المديولات التي تعتمد على غيرها أولاً
+        visited = set()
+        result = []
+
+        def dfs(module_id):
+            if module_id in visited:
+                return
+
+            visited.add(module_id)
+
+            # زيارة المديولات التي تعتمد على هذا المديول
+            for other_id, dependencies in dependency_tree.items():
+                if module_id in dependencies and other_id not in visited:
+                    dfs(other_id)
+
+            result.append(module_id)
+
+        # زيارة جميع المديولات
+        for module_id in dependency_tree:
+            if module_id not in visited:
+                dfs(module_id)
+
+        return result
+
+    def shutdown_by_priority(self,
+                             count: int = 1,
+                             strategy: str = None,
+                             timeout: int = None,
+                             reason: str = ShutdownReason.LOW_PRIORITY) -> Dict[str,
+                                                                                bool]:
+        """
+        إغلاق المديولات حسب الأولوية.
+
+        Args:
+            count: عدد المديولات المراد إغلاقها
+            strategy: استراتيجية الإغلاق
+            timeout: مهلة الإغلاق بالثواني
+            reason: سبب الإغلاق
+
+        Returns:
+            Dict[str, bool]: نتائج الإغلاق لكل مديول
+        """
+        if not self.priority_determiner:
+            logger.error("محدد الأولويات غير متوفر")
+            return {}
+
+        # الحصول على المديولات المرشحة للإغلاق
+        candidates = self.priority_determiner.get_shutdown_candidates(count)
+
+        # إغلاق المديولات
+        results = {}
+        for module_id, shutdown_reason in candidates.items():
+            results[module_id] = self.shutdown_module(
+                module_id=module_id,
+                strategy=strategy,
+                timeout=timeout,
+                reason=shutdown_reason or reason
+            )
+
+        return results
+
+    def shutdown_by_resource_critical(self,
+                                      resource_type: str = None,
+                                      strategy: str = None,
+                                      timeout: int = None) -> Dict[str,
+                                                                   bool]:
+        """
+        إغلاق المديولات بسبب استهلاك الموارد الحرج.
+
+        Args:
+            resource_type: نوع المورد (CPU، الذاكرة، القرص)
+            strategy: استراتيجية الإغلاق
+            timeout: مهلة الإغلاق بالثواني
+
+        Returns:
+            Dict[str, bool]: نتائج الإغلاق لكل مديول
+        """
+        if not self.priority_determiner:
+            logger.error("محدد الأولويات غير متوفر")
+            return {}
+
+        # الحصول على خطة إغلاق المديولات
+        shutdown_plan = self.priority_determiner.get_shutdown_plan(
+            resource_type)
+
+        # إغلاق المديولات
+        results = {}
+        for plan_item in shutdown_plan:
+            module_id = plan_item["module_id"]
+            reason = plan_item["reason"]
+
+            results[module_id] = self.shutdown_module(
+                module_id=module_id,
+                strategy=strategy,
+                timeout=timeout,
+                reason=reason
+            )
+
+        return results
+
+    def get_shutdown_task(self, module_id: str) -> Optional[ShutdownTask]:
+        """
+        الحصول على مهمة إغلاق المديول.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            Optional[ShutdownTask]: مهمة إغلاق المديول أو None إذا لم تكن موجودة
+        """
+        return self.shutdown_tasks.get(module_id)
+
+    def get_all_shutdown_tasks(self) -> Dict[str, ShutdownTask]:
+        """
+        الحصول على جميع مهام إغلاق المديولات.
+
+        Returns:
+            Dict[str, ShutdownTask]: قاموس مهام إغلاق المديولات
+        """
+        return self.shutdown_tasks.copy()
+
+    def get_shutdown_tasks_by_status(
+            self, status: str) -> Dict[str, ShutdownTask]:
+        """
+        الحصول على مهام إغلاق المديولات حسب الحالة.
+
+        Args:
+            status: حالة الإغلاق
+
+        Returns:
+            Dict[str, ShutdownTask]: قاموس مهام إغلاق المديولات
+        """
+        return {
+            module_id: task for module_id, task in self.shutdown_tasks.items()
+            if task.status == status
+        }
+
+    def retry_failed_shutdown(
+            self,
+            module_id: str,
+            strategy: str = None,
+            timeout: int = None) -> bool:
+        """
+        إعادة محاولة إغلاق المديول الفاشل.
+
+        Args:
+            module_id: معرف المديول
+            strategy: استراتيجية الإغلاق
+            timeout: مهلة الإغلاق بالثواني
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # التحقق من وجود مهمة الإغلاق
+            task = self.get_shutdown_task(module_id)
+            if not task:
+                logger.warning(f"لا توجد مهمة إغلاق للمديول {module_id}")
+                return False
+
+            # التحقق من حالة المهمة
+            if task.status != ShutdownStatus.FAILED:
+                logger.warning(
+                    f"مهمة إغلاق المديول {module_id} ليست في حالة فشل")
+                return False
+
+            # الحصول على استراتيجية الإغلاق ومهلة الإغلاق
+            if strategy is None:
+                strategy = task.strategy
+
+            if timeout is None:
+                timeout = task.timeout
+
+            # إعادة محاولة إغلاق المديول
+            return self.shutdown_module(
+                module_id=module_id,
+                strategy=strategy,
+                timeout=timeout,
+                reason=task.reason
+            )
+
+    def retry_all_failed_shutdowns(
+            self, strategy: str = None, timeout: int = None) -> Dict[str, bool]:
+        """
+        إعادة محاولة إغلاق جميع المديولات الفاشلة.
+
+        Args:
+            strategy: استراتيجية الإغلاق
+            timeout: مهلة الإغلاق بالثواني
+
+        Returns:
+            Dict[str, bool]: نتائج الإغلاق لكل مديول
+        """
+        # الحصول على مهام الإغلاق الفاشلة
+        failed_tasks = self.get_shutdown_tasks_by_status(ShutdownStatus.FAILED)
+
+        # إعادة محاولة إغلاق المديولات
+        results = {}
+        for module_id in failed_tasks:
+            results[module_id] = self.retry_failed_shutdown(
+                module_id=module_id,
+                strategy=strategy,
+                timeout=timeout
+            )
+
+        return results
+
+    def clear_shutdown_tasks(self) -> bool:
+        """
+        مسح جميع مهام إغلاق المديولات.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            self.shutdown_tasks.clear()
+            logger.info("تم مسح جميع مهام إغلاق المديولات")
+            return True
+
+    def emergency_shutdown_all(self,
+                               strategy: str = ShutdownStrategy.FORCED,
+                               timeout: int = 10,
+                               reason: str = ShutdownReason.SYSTEM_SHUTDOWN) -> Dict[str,
+                                                                                     bool]:
+        """
+        إغلاق جميع المديولات في حالة الطوارئ.
+
+        Args:
+            strategy: استراتيجية الإغلاق
+            timeout: مهلة الإغلاق بالثواني
+            reason: سبب الإغلاق
+
+        Returns:
+            Dict[str, bool]: نتائج الإغلاق لكل مديول
+        """
+        # الحصول على جميع المديولات قيد التشغيل
+        running_modules = self.module_manager.get_modules_by_state(
+            ModuleState.RUNNING)
+
+        # إغلاق المديولات
+        results = {}
+        for module_id in running_modules:
+            results[module_id] = self.shutdown_module(
+                module_id=module_id,
+                strategy=strategy,
+                timeout=timeout,
+                reason=reason,
+                force=True
+            )
+
+        return results
+
+    def set_module_specific_settings(self, module_id: str, **kwargs) -> bool:
+        """
+        تعيين الإعدادات الخاصة بالمديول.
+
+        Args:
+            module_id: معرف المديول
+            **kwargs: الإعدادات المراد تعيينها
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # الحصول على الإعدادات الخاصة بالمديول
+            module_specific_settings = self.config.get(
+                "module_specific_settings", {})
+
+            if module_id not in module_specific_settings:
+                module_specific_settings[module_id] = {}
+
+            # تحديث الإعدادات
+            for key, value in kwargs.items():
+                module_specific_settings[module_id][key] = value
+
+            self.config["module_specific_settings"] = module_specific_settings
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم تعيين الإعدادات الخاصة بالمديول {module_id}: {kwargs}")
+
+            return result
+
+    def get_module_specific_settings(self, module_id: str) -> Dict[str, Any]:
+        """
+        الحصول على الإعدادات الخاصة بالمديول.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            Dict[str, Any]: الإعدادات الخاصة بالمديول
+        """
+        return self._get_module_specific_settings(module_id)
+
+    def set_pre_shutdown_script(self, module_id: str, script: str) -> bool:
+        """
+        تعيين النص البرمجي قبل الإغلاق للمديول.
+
+        Args:
+            module_id: معرف المديول
+            script: النص البرمجي
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # الحصول على النصوص البرمجية قبل الإغلاق
+            pre_shutdown_scripts = self.config.get("pre_shutdown_scripts", {})
+
+            # تحديث النص البرمجي
+            pre_shutdown_scripts[module_id] = script
+
+            self.config["pre_shutdown_scripts"] = pre_shutdown_scripts
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم تعيين النص البرمجي قبل الإغلاق للمديول {module_id}")
+
+            return result
+
+    def set_post_shutdown_script(self, module_id: str, script: str) -> bool:
+        """
+        تعيين النص البرمجي بعد الإغلاق للمديول.
+
+        Args:
+            module_id: معرف المديول
+            script: النص البرمجي
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # الحصول على النصوص البرمجية بعد الإغلاق
+            post_shutdown_scripts = self.config.get(
+                "post_shutdown_scripts", {})
+
+            # تحديث النص البرمجي
+            post_shutdown_scripts[module_id] = script
+
+            self.config["post_shutdown_scripts"] = post_shutdown_scripts
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم تعيين النص البرمجي بعد الإغلاق للمديول {module_id}")
+
+            return result
+
+    def get_pre_shutdown_script(self, module_id: str) -> Optional[str]:
+        """
+        الحصول على النص البرمجي قبل الإغلاق للمديول.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            Optional[str]: النص البرمجي أو None إذا لم يكن موجودًا
+        """
+        pre_shutdown_scripts = self.config.get("pre_shutdown_scripts", {})
+        return pre_shutdown_scripts.get(module_id)
+
+    def get_post_shutdown_script(self, module_id: str) -> Optional[str]:
+        """
+        الحصول على النص البرمجي بعد الإغلاق للمديول.
+
+        Args:
+            module_id: معرف المديول
+
+        Returns:
+            Optional[str]: النص البرمجي أو None إذا لم يكن موجودًا
+        """
+        post_shutdown_scripts = self.config.get("post_shutdown_scripts", {})
+        return post_shutdown_scripts.get(module_id)
+
+
+# مثال على الاستخدام
+if __name__ == "__main__":
+    # إنشاء مدير المديولات
+    from modules.module_shutdown.priority_determiner import PriorityDeterminer
+
+    manager = ModuleManager()
+
+    # تسجيل بعض المديولات
+    manager.register_module(ModuleInfo(
+        module_id="module1",
+        name="المديول الأول",
+        description="وصف المديول الأول",
+        priority=1
+    ))
+
+    manager.register_module(ModuleInfo(
+        module_id="module2",
+        name="المديول الثاني",
+        description="وصف المديول الثاني",
+        priority=2,
+        dependencies=["module1"]
+    ))
+
+    manager.register_module(ModuleInfo(
+        module_id="module3",
+        name="المديول الثالث",
+        description="وصف المديول الثالث",
+        priority=3
+    ))
+
+    # بدء تشغيل المديولات
+    manager.start_module("module1")
+    manager.start_module("module2")
+    manager.start_module("module3")
+
+    # إنشاء محدد الأولويات
+    determiner = PriorityDeterminer(manager)
+
+    # إنشاء منفذ الإغلاق الآمن
+    executor = SafeShutdownExecutor(manager, determiner)
+
+    # تسجيل دالة استدعاء قبل الإغلاق
+    def pre_shutdown_hook(module_id):
+        print(f"تنفيذ دالة الاستدعاء قبل الإغلاق للمديول {module_id}")
+
+    executor.register_pre_shutdown_hook("module1", pre_shutdown_hook)
+
+    # تسجيل دالة استدعاء بعد الإغلاق
+    def post_shutdown_hook(module_id):
+        print(f"تنفيذ دالة الاستدعاء بعد الإغلاق للمديول {module_id}")
+
+    executor.register_post_shutdown_hook("module1", post_shutdown_hook)
+
+    # إغلاق المديولات
+    executor.shutdown_module("module3")
+    executor.shutdown_module("module2")
+    executor.shutdown_module("module1")
+
+    # الحصول على مهام الإغلاق
+    tasks = executor.get_all_shutdown_tasks()
+    for module_id, task in tasks.items():
+        print(f"مهمة إغلاق المديول {module_id}: {task.status}")

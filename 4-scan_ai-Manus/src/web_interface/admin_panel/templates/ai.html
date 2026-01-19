@@ -1,0 +1,443 @@
+{% extends "base.html" %}
+
+{% block title %}إدارة الذكاء الاصطناعي - نظام جعاره الزراعي الذكي{% endblock %}
+
+{% block page_title %}إدارة الذكاء الاصطناعي{% endblock %}
+
+{% block content %}
+<div class="ai-management">
+    <!-- Model Status -->
+    <div class="model-status">
+        <div class="status-card">
+            <div class="status-icon">
+                <i class="material-icons">psychology</i>
+            </div>
+            <div class="status-content">
+                <h3>حالة النموذج</h3>
+                <div class="status-value active">نشط</div>
+                <div class="status-details">
+                    <span>آخر تحديث: 2024-03-20 14:30</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-card">
+            <div class="status-icon">
+                <i class="material-icons">speed</i>
+            </div>
+            <div class="status-content">
+                <h3>دقة النموذج</h3>
+                <div class="status-value">95.8%</div>
+                <div class="status-details">
+                    <span>متوسط الدقة الشهري</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-card">
+            <div class="status-icon">
+                <i class="material-icons">update</i>
+            </div>
+            <div class="status-content">
+                <h3>وقت الاستجابة</h3>
+                <div class="status-value">0.8 ثانية</div>
+                <div class="status-details">
+                    <span>متوسط وقت الاستجابة</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model Performance -->
+    <div class="model-performance">
+        <div class="chart-card">
+            <div class="chart-header">
+                <h3>أداء النموذج</h3>
+                <div class="chart-actions">
+                    <button class="btn btn-secondary">
+                        <i class="material-icons">download</i>
+                        تصدير البيانات
+                    </button>
+                </div>
+            </div>
+            <canvas id="modelPerformanceChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Model Configuration -->
+    <div class="model-config">
+        <div class="config-card">
+            <div class="config-header">
+                <h3>إعدادات النموذج</h3>
+                <button class="btn btn-primary">
+                    <i class="material-icons">save</i>
+                    حفظ التغييرات
+                </button>
+            </div>
+            <div class="config-content">
+                <div class="form-group">
+                    <label for="modelType">نوع النموذج</label>
+                    <select id="modelType" class="form-control">
+                        <option value="resnet50">ResNet50</option>
+                        <option value="efficientnet">EfficientNet</option>
+                        <option value="mobilenet">MobileNet</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="confidenceThreshold">عتبة الثقة</label>
+                    <input type="range" id="confidenceThreshold" class="form-control" min="0" max="100" value="80">
+                    <div class="range-value">80%</div>
+                </div>
+                <div class="form-group">
+                    <label for="batchSize">حجم الدفعة</label>
+                    <input type="number" id="batchSize" class="form-control" value="32" min="1" max="128">
+                </div>
+                <div class="form-group">
+                    <label for="learningRate">معدل التعلم</label>
+                    <input type="number" id="learningRate" class="form-control" value="0.001" step="0.0001">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Training History -->
+    <div class="training-history">
+        <div class="history-card">
+            <div class="history-header">
+                <h3>سجل التدريب</h3>
+                <div class="history-actions">
+                    <button class="btn btn-primary">
+                        <i class="material-icons">add</i>
+                        تدريب جديد
+                    </button>
+                </div>
+            </div>
+            <div class="history-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>التاريخ</th>
+                            <th>النموذج</th>
+                            <th>الدقة</th>
+                            <th>الخسارة</th>
+                            <th>المدة</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-03-20</td>
+                            <td>ResNet50</td>
+                            <td>95.8%</td>
+                            <td>0.12</td>
+                            <td>2h 30m</td>
+                            <td><span class="status completed">مكتمل</span></td>
+                            <td>
+                                <button class="btn-icon" title="عرض التفاصيل">
+                                    <i class="material-icons">visibility</i>
+                                </button>
+                                <button class="btn-icon" title="استعادة">
+                                    <i class="material-icons">restore</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2024-03-15</td>
+                            <td>EfficientNet</td>
+                            <td>94.2%</td>
+                            <td>0.15</td>
+                            <td>3h 15m</td>
+                            <td><span class="status completed">مكتمل</span></td>
+                            <td>
+                                <button class="btn-icon" title="عرض التفاصيل">
+                                    <i class="material-icons">visibility</i>
+                                </button>
+                                <button class="btn-icon" title="استعادة">
+                                    <i class="material-icons">restore</i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .ai-management {
+        padding: 1rem;
+    }
+
+    .model-status {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .status-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .status-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--primary-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .status-icon i {
+        color: var(--primary-color);
+        font-size: 24px;
+    }
+
+    .status-content {
+        flex: 1;
+    }
+
+    .status-content h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+        color: var(--text-light);
+    }
+
+    .status-value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .status-value.active {
+        color: #2E7D32;
+    }
+
+    .status-details {
+        font-size: 0.875rem;
+        color: var(--text-light);
+    }
+
+    .model-performance {
+        margin-bottom: 2rem;
+    }
+
+    .chart-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .chart-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--text-color);
+    }
+
+    .model-config {
+        margin-bottom: 2rem;
+    }
+
+    .config-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .config-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .config-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--text-color);
+    }
+
+    .config-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-light);
+    }
+
+    .range-value {
+        text-align: center;
+        margin-top: 0.5rem;
+        color: var(--text-light);
+    }
+
+    .training-history {
+        margin-bottom: 2rem;
+    }
+
+    .history-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .history-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .history-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--text-color);
+    }
+
+    .history-table {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 1rem;
+        text-align: right;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+        font-weight: 600;
+        color: var(--text-light);
+        background: #f8f9fa;
+    }
+
+    .status {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .status.completed {
+        background: #E8F5E9;
+        color: #2E7D32;
+    }
+
+    .btn-icon {
+        background: none;
+        border: none;
+        color: var(--text-light);
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 4px;
+        transition: all 0.3s;
+    }
+
+    .btn-icon:hover {
+        background: var(--primary-light);
+        color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+        .model-status {
+            grid-template-columns: 1fr;
+        }
+
+        .config-content {
+            grid-template-columns: 1fr;
+        }
+
+        .chart-header, .config-header, .history-header {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .history-table {
+            margin: 0 -1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Model Performance Chart
+    const modelPerformanceCtx = document.getElementById('modelPerformanceChart').getContext('2d');
+    new Chart(modelPerformanceCtx, {
+        type: 'line',
+        data: {
+            labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+            datasets: [{
+                label: 'الدقة',
+                data: [92, 93, 94, 95, 95.5, 95.8],
+                borderColor: '#2E7D32',
+                tension: 0.4,
+                fill: false
+            }, {
+                label: 'الخسارة',
+                data: [0.2, 0.18, 0.15, 0.13, 0.12, 0.12],
+                borderColor: '#D32F2F',
+                tension: 0.4,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+
+    // Confidence Threshold Range
+    const confidenceThreshold = document.getElementById('confidenceThreshold');
+    const rangeValue = confidenceThreshold.nextElementSibling;
+    
+    confidenceThreshold.addEventListener('input', function() {
+        rangeValue.textContent = this.value + '%';
+    });
+</script>
+{% endblock %} 

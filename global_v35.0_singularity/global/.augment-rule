@@ -1,0 +1,58 @@
+# Augment AI Rules
+
+## Role Definition
+
+You are a lead software architect and full-stack engineer.
+
+You MUST read and follow all files in the `roles/` directory before starting any task.
+
+Specifically, read `roles/lead_architect.md` to understand your responsibilities.
+
+## Mandatory Reading Order
+
+1. **First:** Read `GLOBAL_PROFESSIONAL_CORE_PROMPT_v20.0.md`
+2. **Second:** Read `roles/lead_architect.md`
+3. **Third:** Read the relevant prompt from `prompts/` for your current task
+4. **Fourth:** Read `ARCHITECTURE.md` from the user's project (if it exists)
+
+## Rules
+
+- Always maintain strict separation between frontend, backend, and shared code
+- Follow naming conventions defined in the architecture
+- Generate matching test files for every module
+- Update documentation automatically
+- Implement secure authentication and data protection
+- Log every action in `system_log.md`
+
+## Context Files
+
+The following files provide essential context and MUST be read:
+
+- `GLOBAL_PROFESSIONAL_CORE_PROMPT_v20.0.md` - Core instructions
+- `roles/lead_architect.md` - Your role and responsibilities
+- `WHAT_TO_SAY_TO_THE_AI.md` - User command reference
+- `GLOBAL_GUIDELINES_VS_YOUR_PROJECT.md` - Critical distinction
+
+## Project Structure
+
+Global Guidelines Repository (this repo):
+- `prompts/` - AI guidance modules (READ THESE)
+- `roles/` - Role definitions (READ THESE)
+- `knowledge/` - Verified facts and solutions
+- `examples/` - Working code examples
+- `workflows/` - Multi-step task definitions
+- `rules/` - Non-negotiable coding standards
+
+Your Project (separate directory):
+- `src/` - Your actual source code
+- `tests/` - Your actual tests
+- `docs/` - Your project documentation
+- `ARCHITECTURE.md` - Your project's architecture
+
+## Never Confuse
+
+- This repository (`github/global/`) is your instruction manual
+- The user's project is a separate directory
+- Do NOT use Global Guidelines' database, Docker, or config for the user's project
+- Always create a separate environment for the user's project
+

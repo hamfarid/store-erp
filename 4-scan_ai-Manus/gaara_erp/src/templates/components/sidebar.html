@@ -1,0 +1,509 @@
+<!-- 
+مكون Sidebar لنظام Gaara ERP
+يحتوي على قائمة التنقل الرئيسية للنظام مع الوحدات المختلفة
+-->
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Component - Gaara ERP</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="/static/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <style>
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 900;
+            padding-top: 60px;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+        
+        .sidebar.collapsed {
+            width: 70px;
+        }
+        
+        .sidebar-toggle {
+            position: absolute;
+            top: 70px;
+            left: 10px;
+            background-color: #34495e;
+            color: #ecf0f1;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .sidebar-toggle:hover {
+            background-color: #3d566e;
+        }
+        
+        .sidebar-header {
+            padding: 1rem;
+            border-bottom: 1px solid #34495e;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+        
+        .sidebar-header .company-info {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .sidebar-header .company-name {
+            font-weight: 600;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .sidebar-header .company-branch {
+            font-size: 0.8rem;
+            color: #bdc3c7;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-menu li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .sidebar-menu .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .sidebar-menu .menu-item:hover {
+            background-color: #34495e;
+        }
+        
+        .sidebar-menu .menu-item.active {
+            background-color: #3498db;
+        }
+        
+        .sidebar-menu .menu-item i {
+            width: 24px;
+            text-align: center;
+            margin-left: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .sidebar-menu .menu-item .menu-text {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .sidebar-menu .menu-item .badge {
+            background-color: #e74c3c;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+        }
+        
+        .sidebar-menu .menu-item .menu-arrow {
+            margin-right: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-menu .menu-item[aria-expanded="true"] .menu-arrow {
+            transform: rotate(90deg);
+        }
+        
+        .sidebar-menu .submenu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: #243342;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+        
+        .sidebar-menu .submenu.show {
+            max-height: 500px;
+        }
+        
+        .sidebar-menu .submenu .menu-item {
+            padding-right: 3rem;
+            font-size: 0.9rem;
+        }
+        
+        .sidebar-menu .menu-category {
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+        
+        .sidebar.collapsed .sidebar-header .company-info,
+        .sidebar.collapsed .menu-text,
+        .sidebar.collapsed .menu-arrow,
+        .sidebar.collapsed .badge,
+        .sidebar.collapsed .menu-category {
+            display: none;
+        }
+        
+        .sidebar.collapsed .sidebar-menu .menu-item {
+            padding: 0.75rem;
+            justify-content: center;
+        }
+        
+        .sidebar.collapsed .sidebar-menu .menu-item i {
+            margin: 0;
+        }
+        
+        .sidebar.collapsed .sidebar-menu .submenu .menu-item {
+            padding-right: 0.75rem;
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(100%);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .sidebar-backdrop {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 890;
+                display: none;
+            }
+            
+            .sidebar-backdrop.show {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <div class="sidebar-header">
+            <img src="/static/images/company-logo.png" alt="شعار الشركة">
+            <div class="company-info">
+                <span class="company-name">شركة الأمل الزراعية</span>
+                <span class="company-branch">الفرع الرئيسي - القاهرة</span>
+            </div>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li>
+                <a href="/dashboard" class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="menu-text">لوحة التحكم</span>
+                </a>
+            </li>
+            
+            <li class="menu-category">المشاتل والمزارع</li>
+            
+            <li>
+                <a href="#nurserySubmenu" class="menu-item" data-bs-toggle="collapse" aria-expanded="false">
+                    <i class="fas fa-seedling"></i>
+                    <span class="menu-text">المشاتل</span>
+                    <i class="fas fa-chevron-left menu-arrow"></i>
+                </a>
+                <ul class="submenu collapse" id="nurserySubmenu">
+                    <li>
+                        <a href="/nursery/dashboard" class="menu-item">
+                            <span class="menu-text">لوحة تحكم المشاتل</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/nursery/list" class="menu-item">
+                            <span class="menu-text">قائمة المشاتل</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/nursery/stock" class="menu-item">
+                            <span class="menu-text">مخزون المشاتل</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/nursery/operations" class="menu-item">
+                            <span class="menu-text">عمليات المشاتل</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#farmSubmenu" class="menu-item" data-bs-toggle="collapse" aria-expanded="false">
+                    <i class="fas fa-tractor"></i>
+                    <span class="menu-text">المزارع</span>
+                    <i class="fas fa-chevron-left menu-arrow"></i>
+                </a>
+                <ul class="submenu collapse" id="farmSubmenu">
+                    <li>
+                        <a href="/farm/dashboard" class="menu-item">
+                            <span class="menu-text">لوحة تحكم المزارع</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/farm/list" class="menu-item">
+                            <span class="menu-text">قائمة المزارع</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/farm/plots" class="menu-item">
+                            <span class="menu-text">قطع الأراضي</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/farm/operations" class="menu-item">
+                            <span class="menu-text">عمليات المزارع</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="menu-category">الذكاء الاصطناعي</li>
+            
+            <li>
+                <a href="/ai/diagnosis" class="menu-item">
+                    <i class="fas fa-microscope"></i>
+                    <span class="menu-text">تشخيص الأمراض</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/ai/breeding" class="menu-item">
+                    <i class="fas fa-dna"></i>
+                    <span class="menu-text">تهجين النباتات</span>
+                </a>
+            </li>
+            
+            <li class="menu-category">الإدارة</li>
+            
+            <li>
+                <a href="#inventorySubmenu" class="menu-item" data-bs-toggle="collapse" aria-expanded="false">
+                    <i class="fas fa-warehouse"></i>
+                    <span class="menu-text">المخزون</span>
+                    <span class="badge">3</span>
+                    <i class="fas fa-chevron-left menu-arrow"></i>
+                </a>
+                <ul class="submenu collapse" id="inventorySubmenu">
+                    <li>
+                        <a href="/inventory/dashboard" class="menu-item">
+                            <span class="menu-text">لوحة تحكم المخزون</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/inventory/items" class="menu-item">
+                            <span class="menu-text">الأصناف</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/inventory/warehouses" class="menu-item">
+                            <span class="menu-text">المستودعات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/inventory/transactions" class="menu-item">
+                            <span class="menu-text">حركات المخزون</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#accountingSubmenu" class="menu-item" data-bs-toggle="collapse" aria-expanded="false">
+                    <i class="fas fa-calculator"></i>
+                    <span class="menu-text">الحسابات</span>
+                    <i class="fas fa-chevron-left menu-arrow"></i>
+                </a>
+                <ul class="submenu collapse" id="accountingSubmenu">
+                    <li>
+                        <a href="/accounting/dashboard" class="menu-item">
+                            <span class="menu-text">لوحة تحكم الحسابات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/accounting/journal" class="menu-item">
+                            <span class="menu-text">القيود اليومية</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/accounting/accounts" class="menu-item">
+                            <span class="menu-text">دليل الحسابات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/accounting/reports" class="menu-item">
+                            <span class="menu-text">التقارير المالية</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#hrSubmenu" class="menu-item" data-bs-toggle="collapse" aria-expanded="false">
+                    <i class="fas fa-users"></i>
+                    <span class="menu-text">الموارد البشرية</span>
+                    <i class="fas fa-chevron-left menu-arrow"></i>
+                </a>
+                <ul class="submenu collapse" id="hrSubmenu">
+                    <li>
+                        <a href="/hr/dashboard" class="menu-item">
+                            <span class="menu-text">لوحة تحكم الموارد البشرية</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/hr/employees" class="menu-item">
+                            <span class="menu-text">الموظفين</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/hr/departments" class="menu-item">
+                            <span class="menu-text">الأقسام</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/hr/attendance" class="menu-item">
+                            <span class="menu-text">الحضور والانصراف</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/hr/payroll" class="menu-item">
+                            <span class="menu-text">الرواتب</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="menu-category">النظام</li>
+            
+            <li>
+                <a href="/reports" class="menu-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span class="menu-text">التقارير</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="#adminSubmenu" class="menu-item" data-bs-toggle="collapse" aria-expanded="false">
+                    <i class="fas fa-cogs"></i>
+                    <span class="menu-text">الإدارة</span>
+                    <i class="fas fa-chevron-left menu-arrow"></i>
+                </a>
+                <ul class="submenu collapse" id="adminSubmenu">
+                    <li>
+                        <a href="/admin/users" class="menu-item">
+                            <span class="menu-text">المستخدمين</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/roles" class="menu-item">
+                            <span class="menu-text">الصلاحيات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/settings" class="menu-item">
+                            <span class="menu-text">إعدادات النظام</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/logs" class="menu-item">
+                            <span class="menu-text">سجلات النظام</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // تبديل حالة الشريط الجانبي
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        });
+        
+        // إظهار/إخفاء الشريط الجانبي في الشاشات الصغيرة
+        function toggleMobileSidebar(show) {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            
+            if (show) {
+                sidebar.classList.add('show');
+                backdrop.classList.add('show');
+            } else {
+                sidebar.classList.remove('show');
+                backdrop.classList.remove('show');
+            }
+        }
+        
+        // إخفاء الشريط الجانبي عند النقر على الخلفية
+        document.getElementById('sidebarBackdrop').addEventListener('click', function() {
+            toggleMobileSidebar(false);
+        });
+        
+        // التحقق من حجم الشاشة عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            if (window.innerWidth < 992) {
+                document.getElementById('sidebar').classList.add('collapsed');
+            }
+        });
+        
+        // التحقق من حجم الشاشة عند تغيير حجم النافذة
+        window.addEventListener('resize', function() {
+            if (window.innerWidth < 992) {
+                document.getElementById('sidebar').classList.add('collapsed');
+            }
+        });
+    </script>
+</body>
+</html>

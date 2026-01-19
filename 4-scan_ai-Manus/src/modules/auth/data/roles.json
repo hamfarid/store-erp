@@ -1,0 +1,39 @@
+{
+  "roles": [
+    {
+      "id": "admin",
+      "name_ar": "مدير",
+      "name_en": "Admin",
+      "description_ar": "صلاحيات كاملة للنظام",
+      "description_en": "Full system permissions"
+    },
+    {
+      "id": "manager",
+      "name_ar": "مشرف",
+      "name_en": "Manager",
+      "description_ar": "صلاحيات إدارة المديولات والمستخدمين",
+      "description_en": "Module and user management permissions"
+    },
+    {
+      "id": "user",
+      "name_ar": "مستخدم",
+      "name_en": "User",
+      "description_ar": "صلاحيات استخدام النظام الأساسية",
+      "description_en": "Basic system usage permissions"
+    }
+  ],
+  "user_roles": [
+    {
+      "user_id": "user1",
+      "role_id": "admin"
+    },
+    {
+      "user_id": "user2",
+      "role_id": "manager"
+    },
+    {
+      "user_id": "user3",
+      "role_id": "user"
+    }
+  ]
+}

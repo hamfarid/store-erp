@@ -1,0 +1,397 @@
+{% extends "base.html" %}
+
+{% block title %}التنبيهات - نظام جعاره الزراعي الذكي{% endblock %}
+
+{% block page_title %}التنبيهات{% endblock %}
+
+{% block content %}
+<div class="alerts-filters">
+    <div class="filter-group">
+        <label>نوع التنبيه:</label>
+        <select>
+            <option>جميع التنبيهات</option>
+            <option>تنبيهات النظام</option>
+            <option>تنبيهات النباتات</option>
+            <option>تنبيهات الأمان</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>الحالة:</label>
+        <select>
+            <option>جميع الحالات</option>
+            <option>جديد</option>
+            <option>قيد المعالجة</option>
+            <option>تم الحل</option>
+        </select>
+    </div>
+    <button class="btn-primary">
+        <i class="material-icons">notifications_off</i>
+        تعطيل جميع التنبيهات
+    </button>
+</div>
+
+<div class="alerts-grid">
+    <div class="alerts-card">
+        <div class="alerts-header">
+            <h3>إحصائيات التنبيهات</h3>
+            <div class="alerts-icon">
+                <i class="material-icons">analytics</i>
+            </div>
+        </div>
+        <div class="alerts-chart">
+            <canvas id="alertsChart"></canvas>
+        </div>
+        <div class="alerts-stats">
+            <div class="stat">
+                <span class="stat-label">تنبيهات اليوم</span>
+                <span class="stat-value">12</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">تنبيهات جديدة</span>
+                <span class="stat-value">3</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="alerts-card">
+        <div class="alerts-header">
+            <h3>توزيع التنبيهات</h3>
+            <div class="alerts-icon">
+                <i class="material-icons">pie_chart</i>
+            </div>
+        </div>
+        <div class="alerts-chart">
+            <canvas id="alertsDistributionChart"></canvas>
+        </div>
+        <div class="alerts-stats">
+            <div class="stat">
+                <span class="stat-label">أكثر نوع تكراراً</span>
+                <span class="stat-value">تنبيهات النباتات</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">نسبة التكرار</span>
+                <span class="stat-value">45%</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alerts-list">
+    <div class="alert-item new">
+        <div class="alert-icon">
+            <i class="material-icons">warning</i>
+        </div>
+        <div class="alert-content">
+            <div class="alert-header">
+                <h4>تنبيه: اكتشاف مرض في محصول الطماطم</h4>
+                <span class="alert-time">منذ 5 دقائق</span>
+            </div>
+            <p class="alert-message">تم اكتشاف علامات مرض الندوة المتأخرة في محصول الطماطم. يرجى مراجعة المنطقة المحددة.</p>
+            <div class="alert-actions">
+                <button class="btn-secondary">
+                    <i class="material-icons">visibility</i>
+                    عرض التفاصيل
+                </button>
+                <button class="btn-secondary">
+                    <i class="material-icons">check</i>
+                    تم الحل
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert-item">
+        <div class="alert-icon">
+            <i class="material-icons">memory</i>
+        </div>
+        <div class="alert-content">
+            <div class="alert-header">
+                <h4>تنبيه: ارتفاع استهلاك وحدة المعالجة المركزية</h4>
+                <span class="alert-time">منذ 15 دقيقة</span>
+            </div>
+            <p class="alert-message">استهلاك وحدة المعالجة المركزية تجاوز 90%. يرجى مراجعة العمليات الجارية.</p>
+            <div class="alert-actions">
+                <button class="btn-secondary">
+                    <i class="material-icons">visibility</i>
+                    عرض التفاصيل
+                </button>
+                <button class="btn-secondary">
+                    <i class="material-icons">check</i>
+                    تم الحل
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert-item">
+        <div class="alert-icon">
+            <i class="material-icons">security</i>
+        </div>
+        <div class="alert-content">
+            <div class="alert-header">
+                <h4>تنبيه: محاولة تسجيل دخول غير مصرح بها</h4>
+                <span class="alert-time">منذ 30 دقيقة</span>
+            </div>
+            <p class="alert-message">تم اكتشاف محاولة تسجيل دخول غير مصرح بها. يرجى مراجعة سجلات الأمان.</p>
+            <div class="alert-actions">
+                <button class="btn-secondary">
+                    <i class="material-icons">visibility</i>
+                    عرض التفاصيل
+                </button>
+                <button class="btn-secondary">
+                    <i class="material-icons">check</i>
+                    تم الحل
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .alerts-filters {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        align-items: center;
+    }
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .filter-group label {
+        color: #666;
+    }
+    .filter-group select {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: white;
+    }
+    .btn-primary {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        background: #2E7D32;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .btn-primary:hover {
+        background: #1B5E20;
+    }
+    .alerts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    .alerts-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .alerts-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    .alerts-header h3 {
+        color: #333;
+        font-size: 1.2rem;
+    }
+    .alerts-icon {
+        width: 40px;
+        height: 40px;
+        background: #E8F5E9;
+        color: #2E7D32;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .alerts-icon i {
+        font-size: 24px;
+    }
+    .alerts-chart {
+        height: 200px;
+        margin-bottom: 1.5rem;
+    }
+    .alerts-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .stat-label {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 0.3rem;
+    }
+    .stat-value {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+    }
+    .alerts-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .alert-item {
+        display: flex;
+        gap: 1rem;
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .alert-item.new {
+        border-right: 4px solid #2E7D32;
+    }
+    .alert-icon {
+        width: 48px;
+        height: 48px;
+        background: #E8F5E9;
+        color: #2E7D32;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .alert-icon i {
+        font-size: 24px;
+    }
+    .alert-content {
+        flex: 1;
+    }
+    .alert-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+    .alert-header h4 {
+        color: #333;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+    .alert-time {
+        color: #666;
+        font-size: 0.9rem;
+    }
+    .alert-message {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+    .alert-actions {
+        display: flex;
+        gap: 1rem;
+    }
+    .btn-secondary {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border: 1px solid #2E7D32;
+        border-radius: 5px;
+        background: white;
+        color: #2E7D32;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .btn-secondary:hover {
+        background: #E8F5E9;
+    }
+    @media (max-width: 768px) {
+        .alerts-filters {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .filter-group {
+            width: 100%;
+        }
+        .filter-group select {
+            flex: 1;
+        }
+        .btn-primary {
+            width: 100%;
+            justify-content: center;
+        }
+        .alerts-grid {
+            grid-template-columns: 1fr;
+        }
+        .alert-item {
+            flex-direction: column;
+        }
+        .alert-actions {
+            flex-direction: column;
+        }
+        .btn-secondary {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Alerts Chart
+    const alertsCtx = document.getElementById('alertsChart').getContext('2d');
+    new Chart(alertsCtx, {
+        type: 'line',
+        data: {
+            labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+            datasets: [{
+                label: 'عدد التنبيهات',
+                data: [50, 75, 60, 85, 70, 90],
+                borderColor: '#2E7D32',
+                tension: 0.4,
+                fill: true,
+                backgroundColor: 'rgba(46, 125, 50, 0.1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    // Alerts Distribution Chart
+    const alertsDistributionCtx = document.getElementById('alertsDistributionChart').getContext('2d');
+    new Chart(alertsDistributionCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['تنبيهات النباتات', 'تنبيهات النظام', 'تنبيهات الأمان'],
+            datasets: [{
+                data: [45, 30, 25],
+                backgroundColor: ['#2E7D32', '#4CAF50', '#81C784']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+{% endblock %} 

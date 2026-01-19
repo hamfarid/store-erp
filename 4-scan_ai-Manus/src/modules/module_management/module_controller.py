@@ -1,0 +1,403 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/module_management/module_controller.py
+"""
+from flask import g
+وحدة التحكم في المديولات
+توفر هذه الوحدة وظائف للتحكم في المديولات (تشغيل، إيقاف، إعادة تشغيل، مراقبة الحالة)
+"""
+
+import json
+import logging
+import os
+import subprocess
+import sys
+import time
+from datetime import datetime
+
+import psutil
+
+# إعداد التسجيل
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# مسار المديولات
+MODULES_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# مسار ملف البيانات المؤقت
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+MODULES_PROCESSES_FILE = os.path.join(DATA_DIR, 'modules_processes.json')
+
+# التأكد من وجود مجلد البيانات
+os.makedirs(DATA_DIR, exist_ok=True)
+
+# دالة مساعدة لتحميل البيانات من ملف JSON
+
+
+def load_data(file_path, default_data=None):
+    if default_data is None:
+        default_data = {}
+
+    if not os.path.exists(file_path):
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(default_data, f, ensure_ascii=False, indent=2)
+        return default_data
+
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (json.JSONDecodeError, FileNotFoundError):
+        return default_data
+
+# دالة مساعدة لحفظ البيانات في ملف JSON
+
+
+def save_data(file_path, data):
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+# دالة للتحقق من وجود المديول
+
+
+def module_exists(module_name):
+    """التحقق من وجود المديول"""
+    module_path = os.path.join(MODULES_DIR, module_name)
+    return os.path.isdir(module_path) and not module_name.startswith('__')
+
+# دالة للتحقق من وجود ملف التشغيل للمديول
+
+
+def module_runner_exists(module_name):
+    """التحقق من وجود ملف التشغيل للمديول"""
+    module_path = os.path.join(MODULES_DIR, module_name)
+    runner_path = os.path.join(module_path, 'runner.py')
+    return os.path.isfile(runner_path)
+
+# دالة للحصول على حالة المديول
+
+
+def get_module_status(module_name):
+    """التحقق من حالة المديول"""
+    try:
+        # التحقق من وجود المديول
+        if not module_exists(module_name):
+            return 'not_found'
+
+        # الحصول على معلومات العمليات
+        processes = load_data(MODULES_PROCESSES_FILE, {"processes": {}})
+
+        # التحقق من وجود معلومات العملية للمديول
+        if module_name in processes["processes"]:
+            pid = processes["processes"][module_name].get("pid")
+            if pid:
+                try:
+                    # التحقق من وجود العملية
+                    process = psutil.Process(pid)
+                    if process.is_running():
+                        return 'running'
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    pass
+
+        # البحث عن العمليات المرتبطة بالمديول
+        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+            try:
+                cmdline = ' '.join(proc.info['cmdline'] or [])
+                if f"modules/{module_name}/runner.py" in cmdline or f"modules\\{module_name}\\runner.py" in cmdline:
+                    # تحديث معلومات العملية
+                    if module_name not in processes["processes"]:
+                        processes["processes"][module_name] = {}
+                    processes["processes"][module_name]["pid"] = proc.pid
+                    save_data(MODULES_PROCESSES_FILE, processes)
+                    return 'running'
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                pass
+
+        return 'stopped'
+    except Exception as e:
+        logger.error(f"Error checking module status: {str(e)}")
+        return 'unknown'
+
+# دالة لتشغيل المديول
+
+
+def start_module(module_name):
+    """تشغيل المديول"""
+    try:
+        # التحقق من وجود المديول
+        if not module_exists(module_name):
+            logger.error(f"Module {module_name} not found")
+            return False
+
+        # التحقق من حالة المديول
+        status = get_module_status(module_name)
+        if status == 'running':
+            logger.info(f"Module {module_name} is already running")
+            return True
+
+        # التحقق من وجود ملف التشغيل
+        if not module_runner_exists(module_name):
+            logger.error(f"Runner file for module {module_name} not found")
+            return False
+
+        # تشغيل المديول
+        module_path = os.path.join(MODULES_DIR, module_name)
+        runner_path = os.path.join(module_path, 'runner.py')
+
+        # تشغيل المديول كعملية منفصلة
+        process = subprocess.Popen(
+            [sys.executable, runner_path],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            cwd=module_path,
+            start_new_session=True  # تشغيل في جلسة جديدة لتجنب إنهاء العملية عند إنهاء العملية الأم
+        )
+
+        # انتظار لحظة للتأكد من بدء التشغيل
+        time.sleep(1)
+
+        # التحقق من نجاح التشغيل
+        if process.poll() is None:  # العملية لا تزال قيد التشغيل
+            # تحديث معلومات العملية
+            processes = load_data(MODULES_PROCESSES_FILE, {"processes": {}})
+            if module_name not in processes["processes"]:
+                processes["processes"][module_name] = {}
+            processes["processes"][module_name]["pid"] = process.pid
+            processes["processes"][module_name]["started_at"] = datetime.now().isoformat()
+            save_data(MODULES_PROCESSES_FILE, processes)
+
+            logger.info(f"Module {module_name} started successfully with PID {process.pid}")
+            return True
+        else:
+            # قراءة رسائل الخطأ
+            stdout, stderr = process.communicate()
+            logger.error(f"Failed to start module {module_name}: {stderr.decode('utf-8')}")
+            return False
+    except Exception as e:
+        logger.error(f"Error starting module {module_name}: {str(e)}")
+        return False
+
+# دالة لإيقاف المديول
+
+
+def stop_module(module_name):
+    """إيقاف المديول"""
+    try:
+        # التحقق من وجود المديول
+        if not module_exists(module_name):
+            logger.error(f"Module {module_name} not found")
+            return False
+
+        # التحقق من حالة المديول
+        status = get_module_status(module_name)
+        if status != 'running':
+            logger.info(f"Module {module_name} is not running")
+            return True
+
+        # الحصول على معلومات العملية
+        processes = load_data(MODULES_PROCESSES_FILE, {"processes": {}})
+
+        # التحقق من وجود معلومات العملية للمديول
+        if module_name in processes["processes"]:
+            pid = processes["processes"][module_name].get("pid")
+            if pid:
+                try:
+                    # إيقاف العملية
+                    process = psutil.Process(pid)
+                    process.terminate()
+
+                    # انتظار إنهاء العملية
+                    try:
+                        process.wait(timeout=5)
+                    except psutil.TimeoutExpired:
+                        # إجبار إنهاء العملية إذا لم تستجب
+                        process.kill()
+
+                    # تحديث معلومات العملية
+                    processes["processes"][module_name]["pid"] = None
+                    processes["processes"][module_name]["stopped_at"] = datetime.now().isoformat()
+                    save_data(MODULES_PROCESSES_FILE, processes)
+
+                    logger.info(f"Module {module_name} stopped successfully")
+                    return True
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    pass
+
+        # البحث عن العمليات المرتبطة بالمديول
+        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+            try:
+                cmdline = ' '.join(proc.info['cmdline'] or [])
+                if f"modules/{module_name}/runner.py" in cmdline or f"modules\\{module_name}\\runner.py" in cmdline:
+                    # إيقاف العملية
+                    proc.terminate()
+
+                    # انتظار إنهاء العملية
+                    try:
+                        proc.wait(timeout=5)
+                    except psutil.TimeoutExpired:
+                        # إجبار إنهاء العملية إذا لم تستجب
+                        proc.kill()
+
+                    # تحديث معلومات العملية
+                    if module_name not in processes["processes"]:
+                        processes["processes"][module_name] = {}
+                    processes["processes"][module_name]["pid"] = None
+                    processes["processes"][module_name]["stopped_at"] = datetime.now().isoformat()
+                    save_data(MODULES_PROCESSES_FILE, processes)
+
+                    logger.info(f"Module {module_name} stopped successfully")
+                    return True
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                pass
+
+        logger.warning(f"No running process found for module {module_name}")
+        return False
+    except Exception as e:
+        logger.error(f"Error stopping module {module_name}: {str(e)}")
+        return False
+
+# دالة لإعادة تشغيل المديول
+
+
+def restart_module(module_name):
+    """إعادة تشغيل المديول"""
+    try:
+        # إيقاف المديول
+        stop_module(module_name)
+
+        # انتظار لحظة للتأكد من إيقاف المديول
+        time.sleep(2)
+
+        # تشغيل المديول
+        start_result = start_module(module_name)
+
+        return start_result
+    except Exception as e:
+        logger.error(f"Error restarting module {module_name}: {str(e)}")
+        return False
+
+# دالة للحصول على استخدام المعالج للمديول
+
+
+def get_module_cpu_usage(module_name):
+    """الحصول على استخدام المعالج للمديول"""
+    try:
+        # التحقق من حالة المديول
+        status = get_module_status(module_name)
+        if status != 'running':
+            return 0
+
+        # الحصول على معلومات العملية
+        processes = load_data(MODULES_PROCESSES_FILE, {"processes": {}})
+
+        # التحقق من وجود معلومات العملية للمديول
+        if module_name in processes["processes"]:
+            pid = processes["processes"][module_name].get("pid")
+            if pid:
+                try:
+                    # الحصول على استخدام المعالج
+                    process = psutil.Process(pid)
+                    return process.cpu_percent(interval=0.5)
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    pass
+
+        # البحث عن العمليات المرتبطة بالمديول
+        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+            try:
+                cmdline = ' '.join(proc.info['cmdline'] or [])
+                if f"modules/{module_name}/runner.py" in cmdline or f"modules\\{module_name}\\runner.py" in cmdline:
+                    # الحصول على استخدام المعالج
+                    return proc.cpu_percent(interval=0.5)
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                pass
+
+        return 0
+    except Exception as e:
+        logger.error(f"Error getting CPU usage for module {module_name}: {str(e)}")
+        return 0
+
+# دالة للحصول على استخدام الذاكرة للمديول
+
+
+def get_module_ram_usage(module_name):
+    """الحصول على استخدام الذاكرة للمديول"""
+    try:
+        # التحقق من حالة المديول
+        status = get_module_status(module_name)
+        if status != 'running':
+            return 0
+
+        # الحصول على معلومات العملية
+        processes = load_data(MODULES_PROCESSES_FILE, {"processes": {}})
+
+        # التحقق من وجود معلومات العملية للمديول
+        if module_name in processes["processes"]:
+            pid = processes["processes"][module_name].get("pid")
+            if pid:
+                try:
+                    # الحصول على استخدام الذاكرة
+                    process = psutil.Process(pid)
+                    return process.memory_info().rss / (1024 * 1024)  # تحويل إلى ميجابايت
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    pass
+
+        # البحث عن العمليات المرتبطة بالمديول
+        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+            try:
+                cmdline = ' '.join(proc.info['cmdline'] or [])
+                if f"modules/{module_name}/runner.py" in cmdline or f"modules\\{module_name}\\runner.py" in cmdline:
+                    # الحصول على استخدام الذاكرة
+                    return proc.memory_info().rss / (1024 * 1024)  # تحويل إلى ميجابايت
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                pass
+
+        return 0
+    except Exception as e:
+        logger.error(f"Error getting RAM usage for module {module_name}: {str(e)}")
+        return 0
+
+# دالة للحصول على آخر وقت تشغيل للمديول
+
+
+def get_module_last_started(module_name):
+    """الحصول على آخر وقت تشغيل للمديول"""
+    try:
+        # الحصول على معلومات العملية
+        processes = load_data(MODULES_PROCESSES_FILE, {"processes": {}})
+
+        # التحقق من وجود معلومات العملية للمديول
+        if module_name in processes["processes"]:
+            return processes["processes"][module_name].get("started_at")
+
+        return None
+    except Exception as e:
+        logger.error(f"Error getting last started time for module {module_name}: {str(e)}")
+        return None
+
+# دالة للحصول على آخر وقت إيقاف للمديول
+
+
+def get_module_last_stopped(module_name):
+    """الحصول على آخر وقت إيقاف للمديول"""
+    try:
+        # الحصول على معلومات العملية
+        processes = load_data(MODULES_PROCESSES_FILE, {"processes": {}})
+
+        # التحقق من وجود معلومات العملية للمديول
+        if module_name in processes["processes"]:
+            return processes["processes"][module_name].get("stopped_at")
+
+        return None
+    except Exception as e:
+        logger.error(f"Error getting last stopped time for module {module_name}: {str(e)}")
+        return None
+
+# دالة لتهيئة البيانات الافتراضية
+
+
+def init_default_data():
+    """تهيئة البيانات الافتراضية"""
+    # التأكد من وجود ملف معلومات العمليات
+    if not os.path.exists(MODULES_PROCESSES_FILE):
+        save_data(MODULES_PROCESSES_FILE, {"processes": {}})
+
+
+# تهيئة البيانات الافتراضية
+init_default_data()

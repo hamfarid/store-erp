@@ -1,0 +1,1600 @@
+# /home/ubuntu/ai_web_organized/src/modules/performance_monitoring/monitoring_interface.py
+
+"""
+from flask import g
+واجهة مراقبة الأداء (Performance Monitoring Interface)
+
+هذه الوحدة مسؤولة عن توفير واجهة للمسؤول لمراقبة أداء النظام والمديولات والذكاء الصناعي،
+وعرض التقارير والإحصائيات والتنبيهات، وتوفير إمكانية التحكم في إعدادات المراقبة.
+"""
+
+import datetime
+import json
+import logging
+import os
+import queue
+import threading
+import time
+
+from flask import Flask, jsonify, redirect, render_template, request, send_file, url_for
+
+# تكوين نظام التسجيل
+logger = logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+
+class PerformanceMonitoringInterface:
+    """واجهة مراقبة الأداء - مسؤولة عن توفير واجهة للمسؤول لمراقبة أداء النظام"""
+
+    def __init__(self, performance_monitor, config_path=None):
+        """
+        تهيئة واجهة مراقبة الأداء
+
+        Args:
+            performance_monitor: نظام مراقبة الأداء
+            config_path (str, optional): مسار ملف التكوين. Defaults to None.
+        """
+        self.performance_monitor = performance_monitor
+        self.config = self._load_config(config_path)
+        self.app = Flask(__name__)
+        self.setup_routes()
+        self.notification_queue = queue.Queue()
+        self.active_alerts = []
+
+        # بدء خيط لمعالجة التنبيهات
+        self.alert_thread = threading.Thread(
+            target=self._process_alerts, daemon=True)
+        self.alert_thread.start()
+
+    def _load_config(self, config_path):
+        """تحميل إعدادات التكوين من ملف"""
+        default_config = {
+            "host": "0.0.0.0",
+            "port": 5000,
+            "debug": False,
+            "secret_key": "performance_monitoring_secret",
+            "session_lifetime": 3600,  # 1 hour
+            "admin_username": "admin",
+            "admin_password": "admin",
+            "refresh_interval": 60,  # 60 seconds
+            "max_data_points": 100,
+            "default_time_range": "1d",
+            "alert_check_interval": 60,  # 60 seconds
+            "alert_thresholds": {
+                "cpu_percent": {"warning": 70, "critical": 90},
+                "memory_percent": {"warning": 70, "critical": 90},
+                "disk_percent": {"warning": 70, "critical": 90},
+                "error_rate": {"warning": 0.05, "critical": 0.1}
+            },
+            "notification_methods": ["web", "email"],
+            "email_config": {
+                "smtp_server": "smtp.example.com",
+                "smtp_port": 587,
+                "smtp_username": "alerts@example.com",
+                "smtp_password": "password",
+                "from_email": "alerts@example.com",
+                "admin_email": "admin@example.com"
+            }
+        }
+
+        if config_path and os.path.exists(config_path):
+            try:
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                    # دمج الإعدادات المخصصة مع الإعدادات الافتراضية
+                    for key, value in default_config.items():
+                        if key not in config:
+                            config[key] = value
+                        elif isinstance(value, dict):
+                            for subkey, subvalue in value.items():
+                                if subkey not in config[key]:
+                                    config[key][subkey] = subvalue
+                    return config
+            except Exception as e:
+                logger.error(f"Error loading config from {config_path}: {e}")
+                return default_config
+        else:
+            return default_config
+
+    def setup_routes(self):
+        """إعداد مسارات واجهة الويب"""
+        app = self.app
+
+        @app.route('/')
+        def index():
+            """الصفحة الرئيسية"""
+            return render_template(
+                'admin_panel/performance_monitoring/dashboard.html')
+
+        @app.route('/login', methods=['GET', 'POST'])
+        def login():
+            """صفحة تسجيل الدخول"""
+            if request.method == 'POST':
+                username = request.form.get('username')
+                password = request.form.get('password')
+
+                if username == self.config["admin_username"] and password == self.config["admin_password"]:
+                    # تسجيل الدخول بنجاح
+                    return redirect(url_for('index'))
+                else:
+                    # فشل تسجيل الدخول
+                    return render_template(
+                        'admin_panel/performance_monitoring/login.html',
+                        error="Invalid credentials")
+
+            return render_template(
+                'admin_panel/performance_monitoring/login.html')
+
+        @app.route('/api/system/metrics')
+        def system_metrics():
+            """الحصول على مقاييس أداء النظام"""
+            time_range = request.args.get(
+                'time_range', self.config["default_time_range"])
+            metrics = self.performance_monitor.data_collector.get_system_metrics(
+                time_range)
+            return jsonify(metrics)
+
+        @app.route('/api/modules/metrics')
+        def modules_metrics():
+            """الحصول على مقاييس أداء المديولات"""
+            time_range = request.args.get(
+                'time_range', self.config["default_time_range"])
+            module_id = request.args.get('module_id')
+
+            if module_id:
+                metrics = self.performance_monitor.data_collector.get_module_metrics(
+                    module_id, time_range)
+                return jsonify(metrics)
+            else:
+                all_modules = self.performance_monitor.data_collector.get_active_modules()
+                all_metrics = {}
+
+                for module in all_modules:
+                    all_metrics[module] = self.performance_monitor.data_collector.get_module_metrics(
+                        module, time_range)
+
+                return jsonify(all_metrics)
+
+        @app.route('/api/ai/metrics')
+        def ai_metrics():
+            """الحصول على مقاييس أداء الذكاء الصناعي"""
+            time_range = request.args.get(
+                'time_range', self.config["default_time_range"])
+            ai_model_id = request.args.get('ai_model_id')
+
+            if ai_model_id:
+                metrics = self.performance_monitor.data_collector.get_ai_metrics(
+                    ai_model_id, time_range)
+                return jsonify(metrics)
+            else:
+                all_models = self.performance_monitor.data_collector.get_active_ai_models()
+                all_metrics = {}
+
+                for model in all_models:
+                    all_metrics[model] = self.performance_monitor.data_collector.get_ai_metrics(
+                        model, time_range)
+
+                return jsonify(all_metrics)
+
+        @app.route('/api/database/metrics')
+        def database_metrics():
+            """الحصول على مقاييس أداء قواعد البيانات"""
+            time_range = request.args.get(
+                'time_range', self.config["default_time_range"])
+            db_name = request.args.get('db_name')
+
+            if db_name:
+                metrics = self.performance_monitor.data_collector.get_database_metrics(
+                    db_name, time_range)
+                return jsonify(metrics)
+            else:
+                all_databases = self.performance_monitor.data_collector.get_active_databases()
+                all_metrics = {}
+
+                for db in all_databases:
+                    all_metrics[db] = self.performance_monitor.data_collector.get_database_metrics(
+                        db, time_range)
+
+                return jsonify(all_metrics)
+
+        @app.route('/api/system/analysis')
+        def system_analysis():
+            """الحصول على تحليل أداء النظام"""
+            time_range = request.args.get(
+                'time_range', self.config["default_time_range"])
+            trend_analysis = self.performance_monitor.performance_analyzer.analyze_performance_trend(
+                "system", None, time_range)
+            anomalies = self.performance_monitor.performance_analyzer.detect_performance_anomalies(
+                "system", None, time_range)
+
+            # تحويل كائنات dataclass إلى قواميس
+            trend_dict = None
+            if trend_analysis:
+                trend_dict = {
+                    "entity_id": trend_analysis.entity_id,
+                    "metric_type": trend_analysis.metric_type,
+                    "time_range": trend_analysis.time_range,
+                    "trend_direction": trend_analysis.trend_direction,
+                    "trend_slope": trend_analysis.trend_slope,
+                    "trend_confidence": trend_analysis.trend_confidence,
+                    "last_value": trend_analysis.last_value,
+                    "average_value": trend_analysis.average_value,
+                    "min_value": trend_analysis.min_value,
+                    "max_value": trend_analysis.max_value,
+                    "prediction_next_hour": trend_analysis.prediction_next_hour,
+                    "prediction_next_day": trend_analysis.prediction_next_day}
+
+            anomalies_list = []
+            for anomaly in anomalies:
+                anomalies_list.append({
+                    "entity_id": anomaly.entity_id,
+                    "metric_type": anomaly.metric_type,
+                    "metric_name": anomaly.metric_name,
+                    "timestamp": anomaly.timestamp,
+                    "value": anomaly.value,
+                    "expected_value": anomaly.expected_value,
+                    "deviation_percent": anomaly.deviation_percent,
+                    "severity": anomaly.severity,
+                    "description": anomaly.description
+                })
+
+            return jsonify({
+                "trend_analysis": trend_dict,
+                "anomalies": anomalies_list
+            })
+
+        @app.route('/api/modules/analysis')
+        def modules_analysis():
+            """الحصول على تحليل أداء المديولات"""
+            time_range = request.args.get(
+                'time_range', self.config["default_time_range"])
+            module_id = request.args.get('module_id')
+
+            if module_id:
+                trend_analysis = self.performance_monitor.performance_analyzer.analyze_performance_trend(
+                    "module", module_id, time_range)
+                anomalies = self.performance_monitor.performance_analyzer.detect_performance_anomalies(
+                    "module", module_id, time_range)
+
+                # تحويل كائنات dataclass إلى قواميس
+                trend_dict = None
+                if trend_analysis:
+                    trend_dict = {
+                        "entity_id": trend_analysis.entity_id,
+                        "metric_type": trend_analysis.metric_type,
+                        "time_range": trend_analysis.time_range,
+                        "trend_direction": trend_analysis.trend_direction,
+                        "trend_slope": trend_analysis.trend_slope,
+                        "trend_confidence": trend_analysis.trend_confidence,
+                        "last_value": trend_analysis.last_value,
+                        "average_value": trend_analysis.average_value,
+                        "min_value": trend_analysis.min_value,
+                        "max_value": trend_analysis.max_value,
+                        "prediction_next_hour": trend_analysis.prediction_next_hour,
+                        "prediction_next_day": trend_analysis.prediction_next_day}
+
+                anomalies_list = []
+                for anomaly in anomalies:
+                    anomalies_list.append({
+                        "entity_id": anomaly.entity_id,
+                        "metric_type": anomaly.metric_type,
+                        "metric_name": anomaly.metric_name,
+                        "timestamp": anomaly.timestamp,
+                        "value": anomaly.value,
+                        "expected_value": anomaly.expected_value,
+                        "deviation_percent": anomaly.deviation_percent,
+                        "severity": anomaly.severity,
+                        "description": anomaly.description
+                    })
+
+                return jsonify({
+                    "trend_analysis": trend_dict,
+                    "anomalies": anomalies_list
+                })
+            else:
+                all_modules = self.performance_monitor.data_collector.get_active_modules()
+                all_analysis = {}
+
+                for module in all_modules:
+                    trend_analysis = self.performance_monitor.performance_analyzer.analyze_performance_trend(
+                        "module", module, time_range)
+                    anomalies = self.performance_monitor.performance_analyzer.detect_performance_anomalies(
+                        "module", module, time_range)
+
+                    # تحويل كائنات dataclass إلى قواميس
+                    trend_dict = None
+                    if trend_analysis:
+                        trend_dict = {
+                            "entity_id": trend_analysis.entity_id,
+                            "metric_type": trend_analysis.metric_type,
+                            "time_range": trend_analysis.time_range,
+                            "trend_direction": trend_analysis.trend_direction,
+                            "trend_slope": trend_analysis.trend_slope,
+                            "trend_confidence": trend_analysis.trend_confidence,
+                            "last_value": trend_analysis.last_value,
+                            "average_value": trend_analysis.average_value,
+                            "min_value": trend_analysis.min_value,
+                            "max_value": trend_analysis.max_value,
+                            "prediction_next_hour": trend_analysis.prediction_next_hour,
+                            "prediction_next_day": trend_analysis.prediction_next_day}
+
+                    anomalies_list = []
+                    for anomaly in anomalies:
+                        anomalies_list.append({
+                            "entity_id": anomaly.entity_id,
+                            "metric_type": anomaly.metric_type,
+                            "metric_name": anomaly.metric_name,
+                            "timestamp": anomaly.timestamp,
+                            "value": anomaly.value,
+                            "expected_value": anomaly.expected_value,
+                            "deviation_percent": anomaly.deviation_percent,
+                            "severity": anomaly.severity,
+                            "description": anomaly.description
+                        })
+
+                    all_analysis[module] = {
+                        "trend_analysis": trend_dict,
+                        "anomalies": anomalies_list
+                    }
+
+                return jsonify(all_analysis)
+
+        @app.route('/api/recommendations')
+        def recommendations():
+            """الحصول على توصيات تحسين الأداء"""
+            entity_id = request.args.get('entity_id')
+            recommendations = self.performance_monitor.performance_analyzer.generate_performance_recommendations(
+                entity_id)
+
+            recommendations_list = []
+            for recommendation in recommendations:
+                recommendations_list.append({
+                    "entity_id": recommendation.entity_id,
+                    "metric_type": recommendation.metric_type,
+                    "priority": recommendation.priority,
+                    "description": recommendation.description,
+                    "expected_improvement": recommendation.expected_improvement,
+                    "implementation_difficulty": recommendation.implementation_difficulty,
+                    "implementation_steps": recommendation.implementation_steps
+                })
+
+            return jsonify(recommendations_list)
+
+        @app.route('/api/reports/generate', methods=['POST'])
+        def generate_report():
+            """إنشاء تقرير أداء"""
+            data = request.json
+
+            report_config = self.performance_monitor.report_generator.ReportConfig(
+                title=data.get(
+                    'title', 'تقرير أداء النظام'), description=data.get(
+                    'description', 'تقرير أداء النظام والمديولات والذكاء الصناعي'), time_range=data.get(
+                    'time_range', self.config["default_time_range"]), include_charts=data.get(
+                    'include_charts', True), include_recommendations=data.get(
+                        'include_recommendations', True), include_anomalies=data.get(
+                            'include_anomalies', True), include_trends=data.get(
+                                'include_trends', True), max_recommendations=data.get(
+                                    'max_recommendations', 5), max_anomalies=data.get(
+                                        'max_anomalies', 10), chart_width=data.get(
+                                            'chart_width', 10), chart_height=data.get(
+                                                'chart_height', 6), output_format=data.get(
+                                                    'output_format', 'html'), output_dir=data.get(
+                                                        'output_dir', self.config.get(
+                                                            "report_output_dir", "/tmp/reports")))
+
+            report_type = data.get('report_type', 'system')
+            entity_id = data.get('entity_id')
+
+            if report_type == 'system':
+                report_path = self.performance_monitor.report_generator.generate_system_performance_report(
+                    report_config)
+            elif report_type == 'module':
+                report_path = self.performance_monitor.report_generator.generate_module_performance_report(
+                    entity_id, report_config)
+            elif report_type == 'ai':
+                report_path = self.performance_monitor.report_generator.generate_ai_performance_report(
+                    entity_id, report_config)
+            elif report_type == 'database':
+                report_path = self.performance_monitor.report_generator.generate_database_performance_report(
+                    entity_id, report_config)
+            elif report_type == 'comprehensive':
+                report_path = self.performance_monitor.report_generator.generate_comprehensive_report(
+                    report_config)
+            else:
+                return jsonify(
+                    {"error": f"Unknown report type: {report_type}"}), 400
+
+            if report_path:
+                return jsonify({"report_path": report_path})
+            else:
+                return jsonify({"error": "Failed to generate report"}), 500
+
+        @app.route('/api/reports/download')
+        def download_report():
+            """تنزيل تقرير أداء"""
+            report_path = request.args.get('report_path')
+
+            if not report_path or not os.path.exists(report_path):
+                return jsonify({"error": "Report not found"}), 404
+
+            return send_file(report_path, as_attachment=True)
+
+        @app.route('/api/alerts')
+        def get_alerts():
+            """الحصول على التنبيهات النشطة"""
+            return jsonify(self.active_alerts)
+
+        @app.route('/api/alerts/acknowledge', methods=['POST'])
+        def acknowledge_alert():
+            """الإقرار بتنبيه"""
+            data = request.json
+            alert_id = data.get('alert_id')
+
+            for i, alert in enumerate(self.active_alerts):
+                if alert.get('id') == alert_id:
+                    self.active_alerts[i]['acknowledged'] = True
+                    self.active_alerts[i]['acknowledged_at'] = datetime.datetime.now(
+                    ).isoformat()
+                    self.active_alerts[i]['acknowledged_by'] = data.get(
+                        'user', 'admin')
+                    return jsonify({"success": True})
+
+            return jsonify({"error": "Alert not found"}), 404
+
+        @app.route('/api/settings', methods=['GET', 'POST'])
+        def settings():
+            """إدارة إعدادات المراقبة"""
+            if request.method == 'POST':
+                data = request.json
+
+                # تحديث الإعدادات
+                for key, value in data.items():
+                    if key in self.config:
+                        self.config[key] = value
+
+                # حفظ الإعدادات إلى ملف
+                config_path = os.path.join(
+                    os.path.dirname(
+                        os.path.abspath(__file__)),
+                    'config.json')
+                with open(config_path, 'w') as f:
+                    json.dump(self.config, f, indent=4)
+
+                return jsonify({"success": True})
+            else:
+                # إرجاع الإعدادات الحالية
+                return jsonify(self.config)
+
+        @app.route('/api/modules/list')
+        def list_modules():
+            """الحصول على قائمة المديولات النشطة"""
+            modules = self.performance_monitor.data_collector.get_active_modules()
+            return jsonify(modules)
+
+        @app.route('/api/ai/list')
+        def list_ai_models():
+            """الحصول على قائمة نماذج الذكاء الصناعي النشطة"""
+            ai_models = self.performance_monitor.data_collector.get_active_ai_models()
+            return jsonify(ai_models)
+
+        @app.route('/api/database/list')
+        def list_databases():
+            """الحصول على قائمة قواعد البيانات النشطة"""
+            databases = self.performance_monitor.data_collector.get_active_databases()
+            return jsonify(databases)
+
+        @app.route('/api/modules/resource-intensive')
+        def resource_intensive_modules():
+            """الحصول على قائمة المديولات التي تستهلك موارد كثيرة"""
+            resource_type = request.args.get('resource_type', 'cpu')
+            threshold = request.args.get('threshold')
+            time_range = request.args.get(
+                'time_range', self.config["default_time_range"])
+
+            if threshold:
+                threshold = float(threshold)
+
+            modules = self.performance_monitor.performance_analyzer.identify_resource_intensive_modules(
+                resource_type, threshold, time_range)
+
+            return jsonify(modules)
+
+        @app.route('/api/modules/low-performing')
+        def low_performing_modules():
+            """الحصول على قائمة المديولات ذات الأداء المنخفض"""
+            threshold = request.args.get('threshold')
+            time_range = request.args.get(
+                'time_range', self.config["default_time_range"])
+
+            if threshold:
+                threshold = float(threshold)
+
+            modules = self.performance_monitor.performance_analyzer.identify_low_performing_modules(
+                threshold, time_range)
+
+            return jsonify(modules)
+
+        @app.route('/dashboard')
+        def dashboard():
+            """لوحة المعلومات الرئيسية"""
+            return render_template(
+                'admin_panel/performance_monitoring/dashboard.html')
+
+        @app.route('/system')
+        def system_dashboard():
+            """لوحة معلومات أداء النظام"""
+            return render_template(
+                'admin_panel/performance_monitoring/system.html')
+
+        @app.route('/modules')
+        def modules_dashboard():
+            """لوحة معلومات أداء المديولات"""
+            return render_template(
+                'admin_panel/performance_monitoring/modules.html')
+
+        @app.route('/ai')
+        def ai_dashboard():
+            """لوحة معلومات أداء الذكاء الصناعي"""
+            return render_template(
+                'admin_panel/performance_monitoring/ai.html')
+
+        @app.route('/database')
+        def database_dashboard():
+            """لوحة معلومات أداء قواعد البيانات"""
+            return render_template(
+                'admin_panel/performance_monitoring/database.html')
+
+        @app.route('/reports')
+        def reports_dashboard():
+            """لوحة معلومات التقارير"""
+            return render_template(
+                'admin_panel/performance_monitoring/reports.html')
+
+        @app.route('/alerts')
+        def alerts_dashboard():
+            """لوحة معلومات التنبيهات"""
+            return render_template(
+                'admin_panel/performance_monitoring/alerts.html')
+
+        @app.route('/settings')
+        def settings_dashboard():
+            """لوحة معلومات الإعدادات"""
+            return render_template(
+                'admin_panel/performance_monitoring/settings.html')
+
+    def start(self, host=None, port=None, debug=None):
+        """
+        بدء تشغيل واجهة الويب
+
+        Args:
+            host (str, optional): المضيف. Defaults to None.
+            port (int, optional): المنفذ. Defaults to None.
+            debug (bool, optional): وضع التصحيح. Defaults to None.
+        """
+        host = host or self.config.get("host", "0.0.0.0")
+        port = port or self.config.get("port", 5000)
+        debug = debug if debug is not None else self.config.get("debug", False)
+
+        # تعيين مفتاح السر
+        self.app.secret_key = self.config.get(
+            "secret_key", "performance_monitoring_secret")
+
+        # بدء تشغيل خيط فحص التنبيهات
+        self._start_alert_checker()
+
+        # بدء تشغيل واجهة الويب
+        self.app.run(host=host, port=port, debug=debug)
+
+    def _start_alert_checker(self):
+        """بدء تشغيل خيط فحص التنبيهات"""
+        alert_thread = threading.Thread(target=self._check_alerts, daemon=True)
+        alert_thread.start()
+
+    def _check_alerts(self):
+        """فحص التنبيهات بشكل دوري"""
+        while True:
+            try:
+                # فحص مقاييس النظام
+                system_metrics = self.performance_monitor.data_collector.get_system_metrics(
+                    "5m")
+                if system_metrics:
+                    latest_metrics = system_metrics[-1]
+
+                    # فحص استهلاك CPU
+                    if "cpu.total_percent" in latest_metrics:
+                        cpu_percent = latest_metrics["cpu.total_percent"]
+                        cpu_thresholds = self.config["alert_thresholds"]["cpu_percent"]
+
+                        if cpu_percent >= cpu_thresholds["critical"]:
+                            self._add_alert(
+                                "system", "cpu", "critical", f"CPU usage is critical: {cpu_percent:.2f}%")
+                        elif cpu_percent >= cpu_thresholds["warning"]:
+                            self._add_alert(
+                                "system", "cpu", "warning", f"CPU usage is high: {cpu_percent:.2f}%")
+
+                    # فحص استهلاك الذاكرة
+                    if "memory.percent" in latest_metrics:
+                        memory_percent = latest_metrics["memory.percent"]
+                        memory_thresholds = self.config["alert_thresholds"]["memory_percent"]
+
+                        if memory_percent >= memory_thresholds["critical"]:
+                            self._add_alert(
+                                "system",
+                                "memory",
+                                "critical",
+                                f"Memory usage is critical: {memory_percent:.2f}%")
+                        elif memory_percent >= memory_thresholds["warning"]:
+                            self._add_alert(
+                                "system",
+                                "memory",
+                                "warning",
+                                f"Memory usage is high: {memory_percent:.2f}%")
+
+                    # فحص استهلاك القرص
+                    if "disk.percent" in latest_metrics:
+                        disk_percent = latest_metrics["disk.percent"]
+                        disk_thresholds = self.config["alert_thresholds"]["disk_percent"]
+
+                        if disk_percent >= disk_thresholds["critical"]:
+                            self._add_alert(
+                                "system",
+                                "disk",
+                                "critical",
+                                f"Disk usage is critical: {disk_percent:.2f}%")
+                        elif disk_percent >= disk_thresholds["warning"]:
+                            self._add_alert(
+                                "system", "disk", "warning", f"Disk usage is high: {disk_percent:.2f}%")
+
+                # فحص مقاييس المديولات
+                modules = self.performance_monitor.data_collector.get_active_modules()
+                for module_id in modules:
+                    module_metrics = self.performance_monitor.data_collector.get_module_metrics(
+                        module_id, "5m")
+                    if module_metrics:
+                        latest_metrics = module_metrics[-1]
+
+                        # فحص معدل الأخطاء
+                        if "performance.error_rate" in latest_metrics:
+                            error_rate = latest_metrics["performance.error_rate"]
+                            error_thresholds = self.config["alert_thresholds"]["error_rate"]
+
+                            if error_rate >= error_thresholds["critical"]:
+                                self._add_alert(
+                                    "module",
+                                    module_id,
+                                    "critical",
+                                    f"Error rate for module {module_id} is critical: {error_rate:.2f}")
+                            elif error_rate >= error_thresholds["warning"]:
+                                self._add_alert(
+                                    "module",
+                                    module_id,
+                                    "warning",
+                                    f"Error rate for module {module_id} is high: {error_rate:.2f}")
+
+                        # فحص استهلاك CPU
+                        if "resources.cpu_percent" in latest_metrics:
+                            cpu_percent = latest_metrics["resources.cpu_percent"]
+                            cpu_thresholds = self.config["alert_thresholds"]["cpu_percent"]
+
+                            if cpu_percent >= cpu_thresholds["critical"]:
+                                self._add_alert(
+                                    "module",
+                                    module_id,
+                                    "critical",
+                                    f"CPU usage for module {module_id} is critical: {cpu_percent:.2f}%")
+                            elif cpu_percent >= cpu_thresholds["warning"]:
+                                self._add_alert(
+                                    "module",
+                                    module_id,
+                                    "warning",
+                                    f"CPU usage for module {module_id} is high: {cpu_percent:.2f}%")
+
+                # فحص مقاييس الذكاء الصناعي
+                ai_models = self.performance_monitor.data_collector.get_active_ai_models()
+                for ai_model_id in ai_models:
+                    ai_metrics = self.performance_monitor.data_collector.get_ai_metrics(
+                        ai_model_id, "5m")
+                    if ai_metrics:
+                        latest_metrics = ai_metrics[-1]
+
+                        # فحص استهلاك GPU
+                        if "resources.gpu_percent" in latest_metrics:
+                            gpu_percent = latest_metrics["resources.gpu_percent"]
+                            # استخدام نفس عتبات CPU
+                            gpu_thresholds = self.config["alert_thresholds"]["cpu_percent"]
+
+                            if gpu_percent >= gpu_thresholds["critical"]:
+                                self._add_alert(
+                                    "ai",
+                                    ai_model_id,
+                                    "critical",
+                                    f"GPU usage for AI model {ai_model_id} is critical: {gpu_percent:.2f}%")
+                            elif gpu_percent >= gpu_thresholds["warning"]:
+                                self._add_alert(
+                                    "ai",
+                                    ai_model_id,
+                                    "warning",
+                                    f"GPU usage for AI model {ai_model_id} is high: {gpu_percent:.2f}%")
+
+                # فحص مقاييس قواعد البيانات
+                databases = self.performance_monitor.data_collector.get_active_databases()
+                for db_name in databases:
+                    db_metrics = self.performance_monitor.data_collector.get_database_metrics(
+                        db_name, "5m")
+                    if db_metrics:
+                        latest_metrics = db_metrics[-1]
+
+                        # فحص معدل الأخطاء
+                        if "performance.error_rate" in latest_metrics:
+                            error_rate = latest_metrics["performance.error_rate"]
+                            error_thresholds = self.config["alert_thresholds"]["error_rate"]
+
+                            if error_rate >= error_thresholds["critical"]:
+                                self._add_alert(
+                                    "database",
+                                    db_name,
+                                    "critical",
+                                    f"Error rate for database {db_name} is critical: {error_rate:.2f}")
+                            elif error_rate >= error_thresholds["warning"]:
+                                self._add_alert(
+                                    "database",
+                                    db_name,
+                                    "warning",
+                                    f"Error rate for database {db_name} is high: {error_rate:.2f}")
+
+            except Exception as e:
+                logger.error(f"Error checking alerts: {e}")
+
+            # انتظار الفحص التالي
+            time.sleep(self.config["alert_check_interval"])
+
+    def _add_alert(self, entity_type, entity_id, severity, message):
+        """
+        إضافة تنبيه جديد
+
+        Args:
+            entity_type (str): نوع الكيان (system, module, ai, database)
+            entity_id (str): معرف الكيان
+            severity (str): شدة التنبيه (warning, critical)
+            message (str): رسالة التنبيه
+        """
+        # التحقق مما إذا كان التنبيه موجوداً بالفعل
+        for alert in self.active_alerts:
+            if (alert["entity_type"] == entity_type
+                and alert["entity_id"] == entity_id
+                and alert["severity"] == severity
+                    and not alert["resolved"]):
+                # التنبيه موجود بالفعل
+                return
+
+        # إنشاء تنبيه جديد
+        alert_id = f"{entity_type}_{entity_id}_{severity}_{int(time.time())}"
+        alert = {
+            "id": alert_id,
+            "entity_type": entity_type,
+            "entity_id": entity_id,
+            "severity": severity,
+            "message": message,
+            "created_at": datetime.datetime.now().isoformat(),
+            "acknowledged": False,
+            "acknowledged_at": None,
+            "acknowledged_by": None,
+            "resolved": False,
+            "resolved_at": None
+        }
+
+        # إضافة التنبيه إلى قائمة التنبيهات النشطة
+        self.active_alerts.append(alert)
+
+        # إضافة التنبيه إلى قائمة الإشعارات
+        self.notification_queue.put(alert)
+
+        logger.info(f"New alert: {message}")
+
+    def _process_alerts(self):
+        """معالجة التنبيهات وإرسال الإشعارات"""
+        while True:
+            try:
+                # الحصول على التنبيه التالي من قائمة الانتظار
+                alert = self.notification_queue.get()
+
+                # إرسال الإشعارات
+                notification_methods = self.config["notification_methods"]
+
+                if "email" in notification_methods:
+                    self._send_email_notification(alert)
+
+                # تحديث حالة التنبيه
+                self.notification_queue.task_done()
+
+            except Exception as e:
+                logger.error(f"Error processing alerts: {e}")
+
+            # انتظار التنبيه التالي
+            time.sleep(1)
+
+    def _send_email_notification(self, alert):
+        """
+        إرسال إشعار بالبريد الإلكتروني
+
+        Args:
+            alert (dict): التنبيه
+        """
+        try:
+            import smtplib
+            from email.mime.multipart import MIMEMultipart
+            from email.mime.text import MIMEText
+
+            # الحصول على إعدادات البريد الإلكتروني
+            email_config = self.config["email_config"]
+
+            # إنشاء رسالة البريد الإلكتروني
+            msg = MIMEMultipart()
+            msg["From"] = email_config["from_email"]
+            msg["To"] = email_config["admin_email"]
+            msg["Subject"] = f"[{alert['severity'].upper()}] {alert['entity_type']} Alert: {alert['entity_id']}"
+
+            # إنشاء محتوى الرسالة
+            body = f"""
+            <html>
+            <body>
+                <h2>Performance Monitoring Alert</h2>
+                <p><strong>Severity:</strong> {alert['severity']}</p>
+                <p><strong>Entity Type:</strong> {alert['entity_type']}</p>
+                <p><strong>Entity ID:</strong> {alert['entity_id']}</p>
+                <p><strong>Message:</strong> {alert['message']}</p>
+                <p><strong>Created At:</strong> {alert['created_at']}</p>
+            </body>
+            </html>
+            """
+
+            msg.attach(MIMEText(body, "html"))
+
+            # إرسال البريد الإلكتروني
+            server = smtplib.SMTP(
+                email_config["smtp_server"],
+                email_config["smtp_port"])
+            server.starttls()
+            server.login(
+                email_config["smtp_username"],
+                email_config["smtp_password"])
+            server.send_message(msg)
+            server.quit()
+
+            logger.info(f"Email notification sent for alert: {alert['id']}")
+
+        except Exception as e:
+            logger.error(f"Error sending email notification: {e}")
+
+    def create_templates(self):
+        """إنشاء قوالب واجهة المستخدم"""
+        # إنشاء دليل القوالب إذا لم يكن موجوداً
+        templates_dir = os.path.join(
+            os.path.dirname(
+                os.path.abspath(__file__)),
+            'templates')
+        os.makedirs(templates_dir, exist_ok=True)
+
+        # إنشاء دليل القوالب الخاصة بلوحة المعلومات
+        dashboard_dir = os.path.join(
+            templates_dir,
+            'admin_panel',
+            'performance_monitoring')
+        os.makedirs(dashboard_dir, exist_ok=True)
+
+        # إنشاء قالب الصفحة الرئيسية
+        dashboard_html = """
+        <!DOCTYPE html>
+        <html dir="rtl" lang="ar">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>لوحة معلومات مراقبة الأداء</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+            <style>
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    background-color: #f8f9fa;
+                }
+                .sidebar {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 250px;
+                    padding: 20px;
+                    background-color: #343a40;
+                    color: white;
+                }
+                .sidebar .nav-link {
+                    color: #adb5bd;
+                    margin-bottom: 10px;
+                }
+                .sidebar .nav-link:hover {
+                    color: white;
+                }
+                .sidebar .nav-link.active {
+                    color: white;
+                    background-color: #495057;
+                }
+                .main-content {
+                    margin-right: 250px;
+                    padding: 20px;
+                }
+                .card {
+                    margin-bottom: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                }
+                .card-header {
+                    background-color: #f8f9fa;
+                    border-bottom: 1px solid #e9ecef;
+                    font-weight: bold;
+                }
+                .alert-badge {
+                    display: inline-block;
+                    padding: 5px 10px;
+                    border-radius: 50px;
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+                .alert-badge.critical {
+                    background-color: #dc3545;
+                    color: white;
+                }
+                .alert-badge.warning {
+                    background-color: #ffc107;
+                    color: black;
+                }
+                .chart-container {
+                    height: 300px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="sidebar">
+                <h3 class="mb-4 text-center">مراقبة الأداء</h3>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/dashboard">
+                            <i class="bi bi-speedometer2 me-2"></i> لوحة المعلومات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/system">
+                            <i class="bi bi-cpu me-2"></i> أداء النظام
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/modules">
+                            <i class="bi bi-boxes me-2"></i> أداء المديولات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ai">
+                            <i class="bi bi-robot me-2"></i> أداء الذكاء الصناعي
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/database">
+                            <i class="bi bi-database me-2"></i> أداء قواعد البيانات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reports">
+                            <i class="bi bi-file-earmark-text me-2"></i> التقارير
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/alerts">
+                            <i class="bi bi-exclamation-triangle me-2"></i> التنبيهات
+                            <span class="badge bg-danger" id="alerts-count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings">
+                            <i class="bi bi-gear me-2"></i> الإعدادات
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>لوحة المعلومات</h2>
+                    <div>
+                        <button class="btn btn-outline-secondary" id="refresh-btn">
+                            <i class="bi bi-arrow-clockwise"></i> تحديث
+                        </button>
+                        <select class="form-select d-inline-block ms-2" style="width: auto;" id="time-range">
+                            <option value="1h">آخر ساعة</option>
+                            <option value="6h">آخر 6 ساعات</option>
+                            <option value="1d" selected>آخر يوم</option>
+                            <option value="7d">آخر أسبوع</option>
+                            <option value="30d">آخر شهر</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                استهلاك موارد النظام
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="text-center mb-3">
+                                            <h5>CPU</h5>
+                                            <div class="progress">
+                                                <div class="progress-bar" id="cpu-progress" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-center mb-3">
+                                            <h5>الذاكرة</h5>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-success" id="memory-progress" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-center mb-3">
+                                            <h5>القرص</h5>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-info" id="disk-progress" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="system-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                التنبيهات النشطة
+                            </div>
+                            <div class="card-body">
+                                <div id="alerts-container">
+                                    <div class="text-center py-5">
+                                        <i class="bi bi-check-circle text-success" style="font-size: 3rem;"></i>
+                                        <p class="mt-3">لا توجد تنبيهات نشطة</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                المديولات ذات الأداء المنخفض
+                            </div>
+                            <div class="card-body">
+                                <div id="low-performing-modules-container">
+                                    <div class="text-center py-5">
+                                        <i class="bi bi-check-circle text-success" style="font-size: 3rem;"></i>
+                                        <p class="mt-3">لا توجد مديولات ذات أداء منخفض</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                التوصيات
+                            </div>
+                            <div class="card-body">
+                                <div id="recommendations-container">
+                                    <div class="text-center py-5">
+                                        <i class="bi bi-lightbulb text-warning" style="font-size: 3rem;"></i>
+                                        <p class="mt-3">جاري تحليل البيانات لتوليد التوصيات...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                // تحديث البيانات كل 60 ثانية
+                const refreshInterval = 60000;
+                let refreshTimer;
+
+                // الرسوم البيانية
+                let systemChart;
+
+                // تهيئة الصفحة
+                document.addEventListener('DOMContentLoaded', function() {
+                    // تحديث البيانات عند تحميل الصفحة
+                    updateDashboard();
+
+                    // تحديث البيانات بشكل دوري
+                    refreshTimer = setInterval(updateDashboard, refreshInterval);
+
+                    // تحديث البيانات عند النقر على زر التحديث
+                    document.getElementById('refresh-btn').addEventListener('click', function() {
+                        updateDashboard();
+                        clearInterval(refreshTimer);
+                        refreshTimer = setInterval(updateDashboard, refreshInterval);
+                    });
+
+                    // تحديث البيانات عند تغيير النطاق الزمني
+                    document.getElementById('time-range').addEventListener('change', function() {
+                        updateDashboard();
+                        clearInterval(refreshTimer);
+                        refreshTimer = setInterval(updateDashboard, refreshInterval);
+                    });
+                });
+
+                // تحديث لوحة المعلومات
+                function updateDashboard() {
+                    const timeRange = document.getElementById('time-range').value;
+
+                    // تحديث مقاييس النظام
+                    fetch(`/api/system/metrics?time_range=${timeRange}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            updateSystemMetrics(data);
+                        })
+                        .catch(error => console.error('Error fetching system metrics:', error));
+
+                    // تحديث التنبيهات
+                    fetch('/api/alerts')
+                        .then(response => response.json())
+                        .then(data => {
+                            updateAlerts(data);
+                        })
+                        .catch(error => console.error('Error fetching alerts:', error));
+
+                    // تحديث المديولات ذات الأداء المنخفض
+                    fetch(`/api/modules/low-performing?time_range=${timeRange}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            updateLowPerformingModules(data);
+                        })
+                        .catch(error => console.error('Error fetching low performing modules:', error));
+
+                    // تحديث التوصيات
+                    fetch('/api/recommendations')
+                        .then(response => response.json())
+                        .then(data => {
+                            updateRecommendations(data);
+                        })
+                        .catch(error => console.error('Error fetching recommendations:', error));
+                }
+
+                // تحديث مقاييس النظام
+                function updateSystemMetrics(data) {
+                    if (!data || data.length === 0) {
+                        return;
+                    }
+
+                    // الحصول على آخر قياس
+                    const latestMetrics = data[data.length - 1];
+
+                    // تحديث شريط تقدم CPU
+                    if ('cpu.total_percent' in latestMetrics) {
+                        const cpuPercent = latestMetrics['cpu.total_percent'];
+                        const cpuProgress = document.getElementById('cpu-progress');
+                        cpuProgress.style.width = `${cpuPercent}%`;
+                        cpuProgress.setAttribute('aria-valuenow', cpuPercent);
+                        cpuProgress.textContent = `${cpuPercent.toFixed(1)}%`;
+
+                        // تغيير لون الشريط حسب القيمة
+                        if (cpuPercent >= 90) {
+                            cpuProgress.className = 'progress-bar bg-danger';
+                        } else if (cpuPercent >= 70) {
+                            cpuProgress.className = 'progress-bar bg-warning';
+                        } else {
+                            cpuProgress.className = 'progress-bar';
+                        }
+                    }
+
+                    // تحديث شريط تقدم الذاكرة
+                    if ('memory.percent' in latestMetrics) {
+                        const memoryPercent = latestMetrics['memory.percent'];
+                        const memoryProgress = document.getElementById('memory-progress');
+                        memoryProgress.style.width = `${memoryPercent}%`;
+                        memoryProgress.setAttribute('aria-valuenow', memoryPercent);
+                        memoryProgress.textContent = `${memoryPercent.toFixed(1)}%`;
+
+                        // تغيير لون الشريط حسب القيمة
+                        if (memoryPercent >= 90) {
+                            memoryProgress.className = 'progress-bar bg-danger';
+                        } else if (memoryPercent >= 70) {
+                            memoryProgress.className = 'progress-bar bg-warning';
+                        } else {
+                            memoryProgress.className = 'progress-bar bg-success';
+                        }
+                    }
+
+                    // تحديث شريط تقدم القرص
+                    if ('disk.percent' in latestMetrics) {
+                        const diskPercent = latestMetrics['disk.percent'];
+                        const diskProgress = document.getElementById('disk-progress');
+                        diskProgress.style.width = `${diskPercent}%`;
+                        diskProgress.setAttribute('aria-valuenow', diskPercent);
+                        diskProgress.textContent = `${diskPercent.toFixed(1)}%`;
+
+                        // تغيير لون الشريط حسب القيمة
+                        if (diskPercent >= 90) {
+                            diskProgress.className = 'progress-bar bg-danger';
+                        } else if (diskPercent >= 70) {
+                            diskProgress.className = 'progress-bar bg-warning';
+                        } else {
+                            diskProgress.className = 'progress-bar bg-info';
+                        }
+                    }
+
+                    // تحديث الرسم البياني
+                    updateSystemChart(data);
+                }
+
+                // تحديث الرسم البياني للنظام
+                function updateSystemChart(data) {
+                    const ctx = document.getElementById('system-chart').getContext('2d');
+
+                    // استخراج البيانات
+                    const timestamps = data.map(item => new Date(item.timestamp));
+                    const cpuData = data.map(item => item['cpu.total_percent'] || 0);
+                    const memoryData = data.map(item => item['memory.percent'] || 0);
+                    const diskData = data.map(item => item['disk.percent'] || 0);
+
+                    // إنشاء الرسم البياني أو تحديثه
+                    if (systemChart) {
+                        systemChart.data.labels = timestamps;
+                        systemChart.data.datasets[0].data = cpuData;
+                        systemChart.data.datasets[1].data = memoryData;
+                        systemChart.data.datasets[2].data = diskData;
+                        systemChart.update();
+                    } else {
+                        systemChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: timestamps,
+                                datasets: [
+                                    {
+                                        label: 'CPU',
+                                        data: cpuData,
+                                        borderColor: '#0d6efd',
+                                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                                        borderWidth: 2,
+                                        tension: 0.1,
+                                        fill: true
+                                    },
+                                    {
+                                        label: 'الذاكرة',
+                                        data: memoryData,
+                                        borderColor: '#198754',
+                                        backgroundColor: 'rgba(25, 135, 84, 0.1)',
+                                        borderWidth: 2,
+                                        tension: 0.1,
+                                        fill: true
+                                    },
+                                    {
+                                        label: 'القرص',
+                                        data: diskData,
+                                        borderColor: '#0dcaf0',
+                                        backgroundColor: 'rgba(13, 202, 240, 0.1)',
+                                        borderWidth: 2,
+                                        tension: 0.1,
+                                        fill: true
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    x: {
+                                        type: 'time',
+                                        time: {
+                                            unit: 'hour',
+                                            displayFormats: {
+                                                hour: 'HH:mm'
+                                            }
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: 'الوقت'
+                                        }
+                                    },
+                                    y: {
+                                        beginAtZero: true,
+                                        max: 100,
+                                        title: {
+                                            display: true,
+                                            text: 'النسبة المئوية (%)'
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        position: 'top'
+                                    },
+                                    tooltip: {
+                                        mode: 'index',
+                                        intersect: false
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+
+                // تحديث التنبيهات
+                function updateAlerts(data) {
+                    const alertsContainer = document.getElementById('alerts-container');
+                    const alertsCount = document.getElementById('alerts-count');
+
+                    // تحديث عدد التنبيهات
+                    const activeAlerts = data.filter(alert => !alert.resolved);
+                    alertsCount.textContent = activeAlerts.length;
+
+                    // تحديث قائمة التنبيهات
+                    if (activeAlerts.length === 0) {
+                        alertsContainer.innerHTML = `
+                            <div class="text-center py-5">
+                                <i class="bi bi-check-circle text-success" style="font-size: 3rem;"></i>
+                                <p class="mt-3">لا توجد تنبيهات نشطة</p>
+                            </div>
+                        `;
+                    } else {
+                        let alertsHtml = '';
+
+                        // ترتيب التنبيهات حسب الشدة والوقت
+                        activeAlerts.sort((a, b) => {
+                            if (a.severity === b.severity) {
+                                return new Date(b.created_at) - new Date(a.created_at);
+                            }
+                            return a.severity === 'critical' ? -1 : 1;
+                        });
+
+                        // عرض أحدث 5 تنبيهات
+                        const recentAlerts = activeAlerts.slice(0, 5);
+
+                        for (const alert of recentAlerts) {
+                            const createdAt = new Date(alert.created_at).toLocaleString();
+                            const severityClass = alert.severity === 'critical' ? 'critical' : 'warning';
+                            const severityText = alert.severity === 'critical' ? 'حرج' : 'تحذير';
+
+                            alertsHtml += `
+                                <div class="alert ${alert.severity === 'critical' ? 'alert-danger' : 'alert-warning'} mb-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="alert-badge ${severityClass}">${severityText}</span>
+                                        <small>${createdAt}</small>
+                                    </div>
+                                    <p class="mt-2 mb-0">${alert.message}</p>
+                                </div>
+                            `;
+                        }
+
+                        if (activeAlerts.length > 5) {
+                            alertsHtml += `
+                                <div class="text-center">
+                                    <a href="/alerts" class="btn btn-sm btn-outline-secondary">عرض جميع التنبيهات (${activeAlerts.length})</a>
+                                </div>
+                            `;
+                        }
+
+                        alertsContainer.innerHTML = alertsHtml;
+                    }
+                }
+
+                // تحديث المديولات ذات الأداء المنخفض
+                function updateLowPerformingModules(data) {
+                    const container = document.getElementById('low-performing-modules-container');
+
+                    if (!data || data.length === 0) {
+                        container.innerHTML = `
+                            <div class="text-center py-5">
+                                <i class="bi bi-check-circle text-success" style="font-size: 3rem;"></i>
+                                <p class="mt-3">لا توجد مديولات ذات أداء منخفض</p>
+                            </div>
+                        `;
+                    } else {
+                        let html = '<div class="list-group">';
+
+                        for (const moduleId of data) {
+                            html += `
+                                <a href="/modules?module_id=${moduleId}" class="list-group-item list-group-item-action">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0">${moduleId}</h6>
+                                        <span class="badge bg-warning">أداء منخفض</span>
+                                    </div>
+                                </a>
+                            `;
+                        }
+
+                        html += '</div>';
+                        container.innerHTML = html;
+                    }
+                }
+
+                // تحديث التوصيات
+                function updateRecommendations(data) {
+                    const container = document.getElementById('recommendations-container');
+
+                    if (!data || data.length === 0) {
+                        container.innerHTML = `
+                            <div class="text-center py-5">
+                                <i class="bi bi-check-circle text-success" style="font-size: 3rem;"></i>
+                                <p class="mt-3">لا توجد توصيات حالياً</p>
+                            </div>
+                        `;
+                    } else {
+                        let html = '';
+
+                        // ترتيب التوصيات حسب الأولوية
+                        const priorityOrder = {
+                            'critical': 0,
+                            'high': 1,
+                            'medium': 2,
+                            'low': 3
+                        };
+
+                        data.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+
+                        // عرض أهم 3 توصيات
+                        const topRecommendations = data.slice(0, 3);
+
+                        for (const recommendation of topRecommendations) {
+                            let priorityClass = '';
+                            let priorityText = '';
+
+                            switch (recommendation.priority) {
+                                case 'critical':
+                                    priorityClass = 'bg-danger';
+                                    priorityText = 'حرجة';
+                                    break;
+                                case 'high':
+                                    priorityClass = 'bg-warning text-dark';
+                                    priorityText = 'مرتفعة';
+                                    break;
+                                case 'medium':
+                                    priorityClass = 'bg-info text-dark';
+                                    priorityText = 'متوسطة';
+                                    break;
+                                case 'low':
+                                    priorityClass = 'bg-success';
+                                    priorityText = 'منخفضة';
+                                    break;
+                            }
+
+                            html += `
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="card-title mb-0">${recommendation.entity_id}</h5>
+                                            <span class="badge ${priorityClass}">أولوية ${priorityText}</span>
+                                        </div>
+                                        <p class="card-text">${recommendation.description}</p>
+                                        <p class="card-text"><strong>التحسين المتوقع:</strong> ${recommendation.expected_improvement}</p>
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        if (data.length > 3) {
+                            html += `
+                                <div class="text-center">
+                                    <a href="/reports" class="btn btn-sm btn-outline-secondary">عرض جميع التوصيات (${data.length})</a>
+                                </div>
+                            `;
+                        }
+
+                        container.innerHTML = html;
+                    }
+                }
+            </script>
+        </body>
+        </html>
+        """
+
+        with open(os.path.join(dashboard_dir, 'dashboard.html'), 'w', encoding='utf-8') as f:
+            f.write(dashboard_html)
+
+        # إنشاء قالب صفحة تسجيل الدخول
+        login_html = """
+        <!DOCTYPE html>
+        <html dir="rtl" lang="ar">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>تسجيل الدخول - نظام مراقبة الأداء</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+            <style>
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    background-color: #f8f9fa;
+                    height: 100vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .login-container {
+                    max-width: 400px;
+                    width: 100%;
+                    padding: 20px;
+                    background-color: white;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                }
+                .login-header {
+                    text-align: center;
+                    margin-bottom: 30px;
+                }
+                .login-header h2 {
+                    color: #343a40;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="login-container">
+                <div class="login-header">
+                    <h2>نظام مراقبة الأداء</h2>
+                    <p class="text-muted">الرجاء تسجيل الدخول للمتابعة</p>
+                </div>
+
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form method="post" action="/login">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">اسم المستخدم</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">كلمة المرور</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
+                    </div>
+                </form>
+            </div>
+        </body>
+        </html>
+        """
+
+        with open(os.path.join(dashboard_dir, 'login.html'), 'w', encoding='utf-8') as f:
+            f.write(login_html)
+
+        # إنشاء قوالب إضافية
+        # (يمكن إضافة المزيد من القوالب حسب الحاجة)
+
+
+def create_monitoring_interface(performance_monitor, config_path=None):
+    """
+    إنشاء واجهة مراقبة الأداء
+
+    Args:
+        performance_monitor: نظام مراقبة الأداء
+        config_path (str, optional): مسار ملف التكوين. Defaults to None.
+
+    Returns:
+        PerformanceMonitoringInterface: واجهة مراقبة الأداء
+    """
+    interface = PerformanceMonitoringInterface(
+        performance_monitor, config_path)
+    interface.create_templates()
+    return interface

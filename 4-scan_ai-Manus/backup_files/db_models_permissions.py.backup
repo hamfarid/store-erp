@@ -1,0 +1,198 @@
+# File:
+# /home/ubuntu/ai_web_organized/src/modules/ai_management/db_models_permissions.py
+"""
+
+نماذج قاعدة البيانات لنظام صلاحيات وكلاء الذكاء الاصطناعي
+يوفر هذا الملف تعريفات جداول قاعدة البيانات لنظام الصلاحيات
+"""
+
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Table, Text, DateTime, Float
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
+import datetime
+
+Base = declarative_base()
+
+# ثوابت للمراجع الخارجية
+USERS_ID_FK = 'users.id'
+ROLES_ID_FK = 'roles.id'
+AI_AGENTS_ID_FK = 'ai_agents.id'
+
+# جدول العلاقة بين المستخدمين والأدوار
+user_roles = Table(
+    'user_rolesBASEMETADATA_COLUMNuser_id', Integer, ForeignKey(USERS_ID_FK), primary_key=True),
+    Column('role_id', Integer, ForeignKey(ROLES_ID_FK), primary_key=True),
+    Column('created_atDATETIME_DEFAULTDATETIMEDATETIMEUTCNOW_COLUMNcreated_by', Integer, ForeignKey(USERS_ID_FK))
+)
+
+# جدول العلاقة بين الوكلاء والأدوار
+agent_roles = Table(
+    'agent_rolesBASEMETADATA_COLUMNagent_id', String(50), ForeignKey(AI_AGENTS_ID_FK), primary_key=True),
+    Column('role_id', Integer, ForeignKey(ROLES_ID_FK), primary_key=True),
+    Column('created_atDATETIME_DEFAULTDATETIMEDATETIMEUTCNOW_COLUMNcreated_byINTEGER_FOREIGNKEYusers.id'))
+)
+
+# جدول العلاقة بين الأدوار والصلاحيات
+role_permissions = Table(
+    'role_permissionsBASEMETADATA_COLUMNrole_idINTEGER_FOREIGNKEYroles.id'), primary_key=True),
+    Column('permission_idINTEGER_FOREIGNKEYpermissions.id'), primary_key=True),
+    Column('created_atDATETIME_DEFAULTDATETIMEDATETIMEUTCNOW_COLUMNcreated_byINTEGER_FOREIGNKEYusers.id'))
+)
+
+
+class Role(Base):
+    """نموذج الدور في النظام"""
+    __tablename__ = 'roles'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False, unique=True)
+    description = Column(Text)
+    is_system = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow)
+    created_by = Column(Integer, ForeignKey('users.id'))
+
+    # العلاقات
+    permissions = relationship(
+        'Permission',
+        secondary=role_permissions,
+        back_populates='roles')
+    users = relationship('User', secondary=user_roles, back_populates='roles')
+    agents = relationship(
+        'AIAgent',
+        secondary=agent_roles,
+        back_populates='roles')
+
+
+class Permission(Base):
+    """نموذج الصلاحية في النظام"""
+    __tablename__ = 'permissions'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100), nullable=False, unique=True)
+    code = Column(String(100), nullable=False, unique=True)
+    description = Column(Text)
+    # تصنيف الصلاحية (مثل: إدارة الوكلاء، إدارة المستخدمين، إلخ)
+    category = Column(String(50))
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow)
+
+    # العلاقات
+    roles = relationship(
+        'Role',
+        secondary=role_permissions,
+        back_populates='permissions')
+
+
+class AIAgent(Base):
+    """نموذج وكيل الذكاء الاصطناعي"""
+    __tablename__ = 'ai_agents'
+
+    id = Column(String(50), primary_key=True)
+    name = Column(String(100), nullable=False)
+    type = Column(String(50), nullable=False)
+    description = Column(Text)
+    capabilities = Column(Text)  # قائمة القدرات مفصولة بفواصل
+    max_tokens = Column(Integer, default=0)
+    priority = Column(Integer, default=0)
+    cost_per_token = Column(Float, default=0.0)
+    protocol = Column(String(50), default='rest')
+    api_endpoint = Column(String(255))
+    api_key_required = Column(Boolean, default=False)
+    api_key = Column(String(255))
+    system_agent = Column(Boolean, default=False)
+    enabled = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow)
+    created_by = Column(Integer, ForeignKey('users.id'))
+
+    # العلاقات
+    roles = relationship(
+        'Role',
+        secondary=agent_roles,
+        back_populates='agents')
+    usage_logs = relationship('AIAgentUsageLogBACK_POPULATESagent')
+
+
+class AIAgentUsageLog(Base):
+    """نموذج سجل استخدام وكيل الذكاء الاصطناعي"""
+    __tablename__ = 'ai_agent_usage_logs'
+
+    id = Column(Integer, primary_key=True)
+    agent_id = Column(String(50), ForeignKey('ai_agents.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    request_id = Column(String(100), nullable=False)
+    input_type = Column(String(50), default='text')
+    input_text = Column(Text)
+    output_type = Column(String(50), default='text')
+    output_text = Column(Text)
+    input_tokens = Column(Integer, default=0)
+    output_tokens = Column(Integer, default=0)
+    total_tokens = Column(Integer, default=0)
+    cost = Column(Float, default=0.0)
+    processing_time = Column(Float, default=0.0)
+    success = Column(Boolean, default=True)
+    error_message = Column(Text)
+    is_failover = Column(Boolean, default=False)
+    original_agent_id = Column(String(50))
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    # العلاقات
+    agent = relationship('AIAgentBACK_POPULATESusage_logs')
+    user = relationship('UserBACK_POPULATESai_usage_logs')
+
+
+class User(Base):
+    """نموذج المستخدم في النظام"""
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String(50), nullable=False, unique=True)
+    email = Column(String(100), nullable=False, unique=True)
+    password_hash = Column(String(255), nullable=False)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    is_active = Column(Boolean, default=True)
+    is_admin = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow)
+
+    # العلاقات
+    roles = relationship('Role', secondary=user_roles, back_populates='users')
+    ai_usage_logs = relationship('AIAgentUsageLogBACK_POPULATESuser')
+    ai_preferences = relationship('UserAIPreferenceBACK_POPULATESuser')
+
+
+class UserAIPreference(Base):
+    """نموذج تفضيلات المستخدم للذكاء الاصطناعي"""
+    __tablename__ = 'user_ai_preferences'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    preferred_agent_id = Column(String(50), ForeignKey('ai_agents.id'))
+    # قائمة معرفات الوكلاء المسموح بها مفصولة بفواصل
+    allowed_agents = Column(Text)
+    # قائمة معرفات الوكلاء المستبعدة مفصولة بفواصل
+    excluded_agents = Column(Text)
+    max_tokens_per_request = Column(Integer, default=0)
+    max_cost_per_day = Column(Float, default=0.0)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow)
+
+    # العلاقات
+    user = relationship('UserBACK_POPULATESai_preferences')

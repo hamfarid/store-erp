@@ -1,0 +1,103 @@
+{
+  "test_summary": {
+    "total_tests": 13,
+    "passed": 13,
+    "failed": 0,
+    "errors": 0,
+    "average_response_time": 0.0024576370532696065
+  },
+  "test_results": [
+    {
+      "test_name": "Health Check",
+      "status": "PASS",
+      "message": "النظام يعمل بشكل طبيعي",
+      "response_time": 0.008383035659790039,
+      "timestamp": "2025-06-15T17:15:15.541118"
+    },
+    {
+      "test_name": "Authentication - Login",
+      "status": "PASS",
+      "message": "تم تسجيل الدخول بنجاح",
+      "response_time": 0.003564596176147461,
+      "timestamp": "2025-06-15T17:15:15.544802"
+    },
+    {
+      "test_name": "Dashboard Stats",
+      "status": "PASS",
+      "message": "البيانات متوفرة",
+      "response_time": 0.0019025802612304688,
+      "timestamp": "2025-06-15T17:15:15.546922"
+    },
+    {
+      "test_name": "Dashboard Charts",
+      "status": "PASS",
+      "message": "البيانات متوفرة",
+      "response_time": 0.0017590522766113281,
+      "timestamp": "2025-06-15T17:15:15.548763"
+    },
+    {
+      "test_name": "Image Enhancement - Stats",
+      "status": "PASS",
+      "message": "إحصائيات متوفرة",
+      "response_time": 0.0017609596252441406,
+      "timestamp": "2025-06-15T17:15:15.550626"
+    },
+    {
+      "test_name": "Image Enhancement - Gallery",
+      "status": "PASS",
+      "message": "المعرض يحتوي على 2 عنصر",
+      "response_time": 0.0017290115356445312,
+      "timestamp": "2025-06-15T17:15:15.552430"
+    },
+    {
+      "test_name": "Plant Hybridization - Plants",
+      "status": "PASS",
+      "message": "متوفر 4 نوع نبات",
+      "response_time": 0.0018870830535888672,
+      "timestamp": "2025-06-15T17:15:15.554444"
+    },
+    {
+      "test_name": "Plant Hybridization - Simulation",
+      "status": "PASS",
+      "message": "تم إنتاج 3 نتيجة",
+      "response_time": 0.002256155014038086,
+      "timestamp": "2025-06-15T17:15:15.556841"
+    },
+    {
+      "test_name": "YOLO Detection - Stats",
+      "status": "PASS",
+      "message": "إحصائيات الكشف متوفرة",
+      "response_time": 0.0016431808471679688,
+      "timestamp": "2025-06-15T17:15:15.558647"
+    },
+    {
+      "test_name": "YOLO Detection - History",
+      "status": "PASS",
+      "message": "السجل يحتوي على 2 عملية",
+      "response_time": 0.001722574234008789,
+      "timestamp": "2025-06-15T17:15:15.560446"
+    },
+    {
+      "test_name": "Docker Management - Stats",
+      "status": "PASS",
+      "message": "إحصائيات Docker متوفرة",
+      "response_time": 0.0017375946044921875,
+      "timestamp": "2025-06-15T17:15:15.562294"
+    },
+    {
+      "test_name": "Docker Management - Services",
+      "status": "PASS",
+      "message": "متوفر 10 خدمة",
+      "response_time": 0.0019288063049316406,
+      "timestamp": "2025-06-15T17:15:15.564347"
+    },
+    {
+      "test_name": "System Settings - Get",
+      "status": "PASS",
+      "message": "إعدادات النظام متوفرة",
+      "response_time": 0.001674652099609375,
+      "timestamp": "2025-06-15T17:15:15.566108"
+    }
+  ],
+  "generated_at": "2025-06-15T17:15:15.566237"
+}

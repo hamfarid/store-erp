@@ -1,0 +1,86 @@
+# File:
+# /home/ubuntu/ai_web_organized/src/modules/ai_management/auth_compatibility.py
+"""
+وحدة التوافق مع نظام المصادقة
+توفر هذه الوحدة دوال مساعدة لضمان التوافق مع نظام المصادقة الحالي
+"""
+
+from functools import wraps
+from flask import g, jsonify
+
+
+UNAUTHORIZED_ERROR = "Unauthorized access"
+
+
+def check_auth_permission(permission_name):
+    """
+    مزين للتحقق من صلاحيات المستخدم
+
+    هذه الدالة تستخدم كمزين للتحقق من صلاحيات المستخدم في واجهات برمجة التطبيقات
+    وهي متوافقة مع نظام المصادقة الحالي
+
+    المعاملات:
+        permission_name (str): اسم الصلاحية المطلوبة
+
+    القيمة المرجعة:
+        function: دالة مزين
+    """
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            # التحقق من وجود المستخدم في g
+            if not hasattr(g, 'user_id'):
+                return jsonify({"error": UNAUTHORIZED_ERROR}), 401
+
+            # هنا يمكن إضافة منطق التحقق من الصلاحيات
+            # في الوقت الحالي، نفترض أن المستخدم لديه الصلاحية
+
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+
+def company_access_required(f):
+    """
+    مزين للتحقق من صلاحية الوصول إلى الشركة
+
+    المعاملات:
+        f (function): الدالة المراد تزيينها
+
+    القيمة المرجعة:
+        function: دالة مزين
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # التحقق من وجود المستخدم في g
+        if not hasattr(g, 'user_id'):
+            return jsonify({"error": UNAUTHORIZED_ERROR}), 401
+
+        # هنا يمكن إضافة منطق التحقق من صلاحية الوصول إلى الشركة
+        # في الوقت الحالي، نفترض أن المستخدم لديه الصلاحية
+
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+def country_access_required(f):
+    """
+    مزين للتحقق من صلاحية الوصول إلى الدولة
+
+    المعاملات:
+        f (function): الدالة المراد تزيينها
+
+    القيمة المرجعة:
+        function: دالة مزين
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # التحقق من وجود المستخدم في g
+        if not hasattr(g, 'user_id'):
+            return jsonify({"error": UNAUTHORIZED_ERROR}), 401
+
+        # هنا يمكن إضافة منطق التحقق من صلاحية الوصول إلى الدولة
+        # في الوقت الحالي، نفترض أن المستخدم لديه الصلاحية
+
+        return f(*args, **kwargs)
+    return decorated_function

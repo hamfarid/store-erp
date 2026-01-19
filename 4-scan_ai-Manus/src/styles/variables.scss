@@ -1,0 +1,71 @@
+// متغيرات الألوان والخطوط لنظام Gaara Scan AI
+// تم إنشاؤه بناءً على دليل الهوية البصرية
+
+// الألوان الرئيسية
+$color-primary-dark: #1B4D2E;    // أخضر داكن - اللون الأساسي
+$color-primary: #4CAF50;         // أخضر فاتح - اللون الثانوي
+$color-background-light: #F5F5DC; // بيج فاتح - خلفيات
+$color-white: #FFFFFF;           // أبيض - خلفيات ونصوص
+
+// الألوان الثانوية
+$color-gray-light: #F5F5F5;      // رمادي فاتح - خلفيات بديلة
+$color-gray-medium: #E0E0E0;     // رمادي متوسط - حدود
+$color-gray-dark: #757575;       // رمادي داكن - نصوص ثانوية
+$color-black: #212121;           // أسود - نصوص أساسية
+
+// ألوان الحالة
+$color-success: #388E3C;         // أخضر نجاح
+$color-error: #D32F2F;           // أحمر خطأ
+$color-warning: #FFA000;         // برتقالي تحذير
+$color-info: #1976D2;            // أزرق معلومات
+
+// الخطوط
+$font-primary-ar: 'Cairo', sans-serif;    // الخط الرئيسي للعربية
+$font-secondary-ar: 'Tajawal', sans-serif; // الخط الثانوي للعربية
+$font-primary-en: 'Roboto', sans-serif;    // الخط الرئيسي للإنجليزية
+$font-secondary-en: 'Open Sans', sans-serif; // الخط الثانوي للإنجليزية
+
+// أحجام الخطوط
+$font-size-base: 16px;           // حجم النص الأساسي
+$font-size-sm: 14px;             // حجم النص الصغير
+$font-size-xs: 12px;             // حجم النص الأصغر
+$font-size-lg: 18px;             // حجم النص الكبير
+$font-size-xl: 20px;             // حجم النص الأكبر
+$font-size-h1: 32px;             // حجم العنوان الأول
+$font-size-h2: 24px;             // حجم العنوان الثاني
+$font-size-h3: 20px;             // حجم العنوان الثالث
+$font-size-h4: 18px;             // حجم العنوان الرابع
+
+// المسافات
+$spacing-xs: 4px;                // مسافة صغيرة جداً
+$spacing-sm: 8px;                // مسافة صغيرة
+$spacing-md: 16px;               // مسافة متوسطة
+$spacing-lg: 24px;               // مسافة كبيرة
+$spacing-xl: 32px;               // مسافة كبيرة جداً
+
+// الزوايا المدورة
+$border-radius-sm: 4px;          // زوايا مدورة صغيرة
+$border-radius-md: 8px;          // زوايا مدورة متوسطة
+$border-radius-lg: 12px;         // زوايا مدورة كبيرة
+
+// الظلال
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);  // ظلال خفيفة
+$shadow-md: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);  // ظلال متوسطة
+$shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); // ظلال كبيرة
+
+// نقاط الكسر (Breakpoints)
+$breakpoint-xs: 576px;           // الهواتف الصغيرة
+$breakpoint-sm: 768px;           // الهواتف الكبيرة والأجهزة اللوحية الصغيرة
+$breakpoint-md: 992px;           // الأجهزة اللوحية والشاشات الصغيرة
+$breakpoint-lg: 1200px;          // الشاشات المتوسطة
+$breakpoint-xl: 1400px;          // الشاشات الكبيرة
+
+// أبعاد العناصر
+$header-height: 64px;            // ارتفاع الهيدر
+$sidebar-width: 250px;           // عرض القائمة الجانبية
+$sidebar-collapsed-width: 64px;  // عرض القائمة الجانبية المطوية
+$footer-height: 48px;            // ارتفاع الفوتر
+
+// الانتقالات
+$transition-speed: 0.3s;         // سرعة الانتقال الافتراضية
+$transition-function: ease;      // دالة الانتقال الافتراضية

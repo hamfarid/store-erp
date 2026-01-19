@@ -1,0 +1,42 @@
+# إعدادات JVM لـ Elasticsearch
+
+# إعدادات الذاكرة
+-Xms2g
+-Xmx2g
+
+# إعدادات GC
+-XX:+UseG1GC
+-XX:G1HeapRegionSize=32m
+-XX:+UseG1MixedGCCountTarget=8
+-XX:+UseStringDeduplication
+
+# إعدادات الأداء
+-XX:+UnlockExperimentalVMOptions
+-XX:+UseCGroupMemoryLimitForHeap
+-XX:+UseContainerSupport
+
+# إعدادات الأمان
+-Djava.security.policy=all.policy
+-Dlog4j2.disable.jmx=true
+
+# إعدادات الشبكة
+-Djava.net.preferIPv4Stack=true
+
+# إعدادات السجلات
+-Dlog4j.shutdownHookEnabled=false
+-Dlog4j2.disable.jmx=true
+
+# إعدادات التشفير
+-Djava.security.egd=file:/dev/./urandom
+
+# إعدادات الملفات المؤقتة
+-Djava.io.tmpdir=${ES_TMPDIR}
+
+# إعدادات الذاكرة المتقدمة
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/usr/share/elasticsearch/logs/
+
+# إعدادات التحسين
+-XX:+UseCompressedOops
+-XX:+UseCompressedClassPointers
+

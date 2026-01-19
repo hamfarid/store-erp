@@ -1,0 +1,457 @@
+{% extends "base.html" %}
+
+{% block title %}إعداد النظام{% endblock %}
+
+{% block content %}
+<div class="setup-wizard">
+    <div class="setup-header">
+        <h1>إعداد النظام</h1>
+        <p>مرحباً بك في معالج إعداد النظام. يرجى اتباع الخطوات التالية لإكمال الإعداد.</p>
+    </div>
+
+    <div class="setup-steps">
+        <div class="step-indicator">
+            <div class="step active" data-step="1">
+                <span class="step-number">1</span>
+                <span class="step-title">المعلومات الأساسية</span>
+            </div>
+            <div class="step" data-step="2">
+                <span class="step-number">2</span>
+                <span class="step-title">إعدادات النظام</span>
+            </div>
+            <div class="step" data-step="3">
+                <span class="step-number">3</span>
+                <span class="step-title">إعدادات الأمان</span>
+            </div>
+            <div class="step" data-step="4">
+                <span class="step-number">4</span>
+                <span class="step-title">المراجعة النهائية</span>
+            </div>
+        </div>
+
+        <form id="setupForm" method="POST" action="{{ url_for('admin.setup') }}">
+            <!-- Step 1: Basic Information -->
+            <div class="step-content active" id="step1">
+                <h2>المعلومات الأساسية</h2>
+                <div class="form-group">
+                    <label for="system_name">اسم النظام</label>
+                    <input type="text" id="system_name" name="system_name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin_email">البريد الإلكتروني للمسؤول</label>
+                    <input type="email" id="admin_email" name="admin_email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin_password">كلمة المرور</label>
+                    <div class="password-input">
+                        <input type="password" id="admin_password" name="admin_password" class="form-control" required>
+                        <button type="button" class="btn-icon toggle-password">
+                            <i class="material-icons">visibility</i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                </div>
+            </div>
+
+            <!-- Step 2: System Settings -->
+            <div class="step-content" id="step2">
+                <h2>إعدادات النظام</h2>
+                <div class="form-group">
+                    <label for="language">اللغة الافتراضية</label>
+                    <select id="language" name="language" class="form-control" required>
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="timezone">المنطقة الزمنية</label>
+                    <select id="timezone" name="timezone" class="form-control" required>
+                        <option value="Asia/Riyadh">الرياض (GMT+3)</option>
+                        <option value="UTC">UTC</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date_format">تنسيق التاريخ</label>
+                    <select id="date_format" name="date_format" class="form-control" required>
+                        <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                        <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                        <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Step 3: Security Settings -->
+            <div class="step-content" id="step3">
+                <h2>إعدادات الأمان</h2>
+                <div class="form-group">
+                    <label for="session_timeout">مهلة الجلسة (بالدقائق)</label>
+                    <input type="number" id="session_timeout" name="session_timeout" class="form-control" value="30" min="5" max="120" required>
+                </div>
+                <div class="form-group">
+                    <label for="max_login_attempts">الحد الأقصى لمحاولات تسجيل الدخول</label>
+                    <input type="number" id="max_login_attempts" name="max_login_attempts" class="form-control" value="5" min="3" max="10" required>
+                </div>
+                <div class="form-group">
+                    <label for="password_expiry">صلاحية كلمة المرور (بالأيام)</label>
+                    <input type="number" id="password_expiry" name="password_expiry" class="form-control" value="90" min="30" max="365" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="enable_2fa" name="enable_2fa">
+                        تفعيل المصادقة الثنائية
+                    </label>
+                </div>
+            </div>
+
+            <!-- Step 4: Review -->
+            <div class="step-content" id="step4">
+                <h2>المراجعة النهائية</h2>
+                <div class="review-section">
+                    <h3>المعلومات الأساسية</h3>
+                    <div class="review-item">
+                        <span class="label">اسم النظام:</span>
+                        <span class="value" id="review_system_name"></span>
+                    </div>
+                    <div class="review-item">
+                        <span class="label">البريد الإلكتروني للمسؤول:</span>
+                        <span class="value" id="review_admin_email"></span>
+                    </div>
+                </div>
+                <div class="review-section">
+                    <h3>إعدادات النظام</h3>
+                    <div class="review-item">
+                        <span class="label">اللغة الافتراضية:</span>
+                        <span class="value" id="review_language"></span>
+                    </div>
+                    <div class="review-item">
+                        <span class="label">المنطقة الزمنية:</span>
+                        <span class="value" id="review_timezone"></span>
+                    </div>
+                    <div class="review-item">
+                        <span class="label">تنسيق التاريخ:</span>
+                        <span class="value" id="review_date_format"></span>
+                    </div>
+                </div>
+                <div class="review-section">
+                    <h3>إعدادات الأمان</h3>
+                    <div class="review-item">
+                        <span class="label">مهلة الجلسة:</span>
+                        <span class="value" id="review_session_timeout"></span>
+                    </div>
+                    <div class="review-item">
+                        <span class="label">الحد الأقصى لمحاولات تسجيل الدخول:</span>
+                        <span class="value" id="review_max_login_attempts"></span>
+                    </div>
+                    <div class="review-item">
+                        <span class="label">صلاحية كلمة المرور:</span>
+                        <span class="value" id="review_password_expiry"></span>
+                    </div>
+                    <div class="review-item">
+                        <span class="label">المصادقة الثنائية:</span>
+                        <span class="value" id="review_2fa"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-buttons">
+                <button type="button" class="btn btn-secondary" id="prevStep" style="display: none;">السابق</button>
+                <button type="button" class="btn btn-primary" id="nextStep">التالي</button>
+                <button type="submit" class="btn btn-success" id="submitSetup" style="display: none;">إنهاء الإعداد</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.setup-wizard {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--card-background);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.setup-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.setup-header h1 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.setup-steps {
+    position: relative;
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.step-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--border-color);
+    z-index: 1;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--card-background);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s;
+}
+
+.step.active .step-number {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.step-title {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    transition: all 0.3s;
+}
+
+.step.active .step-title {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.step-content {
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.step-content.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.password-input {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.review-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-radius: 5px;
+}
+
+.review-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.review-item {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.review-item .label {
+    font-weight: bold;
+    margin-left: 1rem;
+    color: var(--text-light);
+}
+
+.step-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .setup-wizard {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .step-indicator {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .step-indicator::before {
+        display: none;
+    }
+
+    .step {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .step-number {
+        margin-bottom: 0;
+        margin-left: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('setupForm');
+    const steps = document.querySelectorAll('.step');
+    const stepContents = document.querySelectorAll('.step-content');
+    const prevButton = document.getElementById('prevStep');
+    const nextButton = document.getElementById('nextStep');
+    const submitButton = document.getElementById('submitSetup');
+    let currentStep = 1;
+
+    // Password visibility toggle
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('admin_password');
+    
+    togglePassword.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.querySelector('i').textContent = type === 'password' ? 'visibility' : 'visibility_off';
+    });
+
+    // Form validation
+    function validateStep(step) {
+        const inputs = stepContents[step - 1].querySelectorAll('input[required], select[required]');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            if (!input.value) {
+                isValid = false;
+                input.classList.add('is-invalid');
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        });
+
+        // Special validation for step 1
+        if (step === 1) {
+            const password = document.getElementById('admin_password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            
+            if (password !== confirmPassword) {
+                document.getElementById('confirm_password').classList.add('is-invalid');
+                isValid = false;
+            }
+        }
+
+        return isValid;
+    }
+
+    // Update review section
+    function updateReview() {
+        document.getElementById('review_system_name').textContent = document.getElementById('system_name').value;
+        document.getElementById('review_admin_email').textContent = document.getElementById('admin_email').value;
+        document.getElementById('review_language').textContent = document.getElementById('language').options[document.getElementById('language').selectedIndex].text;
+        document.getElementById('review_timezone').textContent = document.getElementById('timezone').options[document.getElementById('timezone').selectedIndex].text;
+        document.getElementById('review_date_format').textContent = document.getElementById('date_format').options[document.getElementById('date_format').selectedIndex].text;
+        document.getElementById('review_session_timeout').textContent = document.getElementById('session_timeout').value + ' دقيقة';
+        document.getElementById('review_max_login_attempts').textContent = document.getElementById('max_login_attempts').value + ' محاولات';
+        document.getElementById('review_password_expiry').textContent = document.getElementById('password_expiry').value + ' يوم';
+        document.getElementById('review_2fa').textContent = document.getElementById('enable_2fa').checked ? 'مفعل' : 'غير مفعل';
+    }
+
+    // Navigation
+    function showStep(step) {
+        steps.forEach(s => s.classList.remove('active'));
+        stepContents.forEach(c => c.classList.remove('active'));
+        
+        steps[step - 1].classList.add('active');
+        stepContents[step - 1].classList.add('active');
+        
+        prevButton.style.display = step > 1 ? 'block' : 'none';
+        nextButton.style.display = step < 4 ? 'block' : 'none';
+        submitButton.style.display = step === 4 ? 'block' : 'none';
+        
+        if (step === 4) {
+            updateReview();
+        }
+    }
+
+    nextButton.addEventListener('click', function() {
+        if (validateStep(currentStep)) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    });
+
+    prevButton.addEventListener('click', function() {
+        currentStep--;
+        showStep(currentStep);
+    });
+
+    // Form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (validateStep(currentStep)) {
+            // Show loading overlay
+            document.querySelector('.loading-overlay').classList.add('show');
+            
+            // Submit form
+            this.submit();
+        }
+    });
+
+    // Initialize
+    showStep(1);
+});
+</script>
+{% endblock %} 

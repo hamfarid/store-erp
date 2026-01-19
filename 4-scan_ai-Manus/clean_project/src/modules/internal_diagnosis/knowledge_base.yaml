@@ -1,0 +1,66 @@
+# /home/ubuntu/agricultural_ai_project/src/modules/internal_diagnosis/knowledge_base.yaml
+# Initial Knowledge Base for Plant Diseases (YAML Format)
+# Sources should be added for each entry in a real implementation.
+
+- disease: Tomato_Bacterial_spot
+  plant_type: Tomato
+  symptoms:
+    - small dark water-soaked spots on leaves
+    - spots enlarge and become angular
+    - centers of spots may dry and fall out (shot-hole effect)
+    - yellow halo around spots
+    - spots on stems and fruit (raised, scab-like)
+  treatments:
+    - Use disease-free seeds/transplants.
+    - Rotate crops (avoid planting tomatoes/peppers in the same spot for 2-3 years).
+    - Apply copper-based bactericides preventatively.
+    - Improve air circulation.
+  sources:
+    - "Placeholder: University Extension Fact Sheet XYZ"
+
+- disease: Tomato_Late_blight
+  plant_type: Tomato
+  symptoms:
+    - large, dark, water-soaked lesions on leaves, often with pale green border
+    - white fuzzy mold on underside of leaves in humid conditions
+    - dark, greasy-looking lesions on stems
+    - firm, dark, greasy lesions on fruit
+    - rapid plant collapse in favorable conditions
+  treatments:
+    - Use resistant varieties.
+    - Destroy infected plants immediately.
+    - Apply fungicides preventatively and curatively (e.g., chlorothalonil, mancozeb, specific oomycete fungicides).
+    - Ensure good drainage and air circulation.
+  sources:
+    - "Placeholder: Plant Pathology Journal Vol. ABC"
+
+- disease: Fusarium_Wilt_Tomato
+  plant_type: Tomato
+  symptoms:
+    - yellowing of lower leaves, often starting on one side of the plant or leaf
+    - wilting, especially during the hottest part of the day
+    - stunting of plant growth
+    - brown discoloration inside the stem when cut lengthwise near the base
+  treatments:
+    - Use resistant varieties (marked VFN, etc.).
+    - Crop rotation (long rotations needed, 5-7 years).
+    - Soil solarization in some climates.
+    - Maintain optimal soil pH (around 6.5-7.0).
+    - No effective chemical cure once infected.
+  sources:
+    - "Placeholder: Agricultural Research Service Publication 123"
+
+- disease: Powdery_Mildew_General
+  plant_type: Various (e.g., Cucumber, Squash, Roses)
+  symptoms:
+    - white powdery patches on leaves, stems, and sometimes flowers/fruit
+    - leaves may yellow and dry out
+    - distorted growth in severe cases
+  treatments:
+    - Use resistant varieties.
+    - Improve air circulation, prune crowded growth.
+    - Apply fungicides (e.g., sulfur, potassium bicarbonate, neem oil, specific synthetic fungicides).
+    - Remove and destroy infected plant parts.
+  sources:
+    - "Placeholder: General Plant Pathology Textbook Chapter 5"
+

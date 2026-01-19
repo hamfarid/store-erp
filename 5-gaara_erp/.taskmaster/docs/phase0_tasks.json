@@ -1,0 +1,372 @@
+{
+  "phase": 0,
+  "name": "Critical Stabilization",
+  "duration": "12 weeks",
+  "generated": "2026-01-17T14:00:00Z",
+  "tasks": [
+    {
+      "id": 100,
+      "title": "Fix 154 Python Critical Errors",
+      "description": "إصلاح 154 خطأ Python حرج (F821, E9, F811)",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "1-2",
+      "dependencies": [],
+      "details": "Run flake8, autopep8, manual fixes for undefined names, syntax errors, and redefinitions",
+      "testStrategy": "flake8 --select=E9,F821,F811 returns 0",
+      "subtasks": [
+        {"id": "100.1", "title": "Run flake8 assessment and create error report", "status": "pending"},
+        {"id": "100.2", "title": "Run autopep8 auto-fix", "status": "pending"},
+        {"id": "100.3", "title": "Fix F821 errors (68 undefined names)", "status": "pending"},
+        {"id": "100.4", "title": "Fix E9 errors (24 syntax errors)", "status": "pending"},
+        {"id": "100.5", "title": "Fix F811 errors (62 redefinitions)", "status": "pending"},
+        {"id": "100.6", "title": "Setup pre-commit hooks", "status": "pending"},
+        {"id": "100.7", "title": "Verify all errors fixed", "status": "pending"}
+      ]
+    },
+    {
+      "id": 101,
+      "title": "Create Tenant Model",
+      "description": "إنشاء نموذج المستأجر مع جميع العلاقات",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "3",
+      "dependencies": [100],
+      "details": "Create Tenant, TenantUser, TenantSettings, TenantPlan models in backend/src/models/tenant.py",
+      "testStrategy": "Unit tests for all models, migration applies successfully",
+      "subtasks": [
+        {"id": "101.1", "title": "Check file_registry.json (Librarian)", "status": "pending"},
+        {"id": "101.2", "title": "Create tenant.py file", "status": "pending"},
+        {"id": "101.3", "title": "Implement Tenant model", "status": "pending"},
+        {"id": "101.4", "title": "Implement TenantUser model", "status": "pending"},
+        {"id": "101.5", "title": "Implement TenantSettings model", "status": "pending"},
+        {"id": "101.6", "title": "Implement TenantPlan model", "status": "pending"},
+        {"id": "101.7", "title": "Run migrations", "status": "pending"},
+        {"id": "101.8", "title": "Write unit tests", "status": "pending"},
+        {"id": "101.9", "title": "Update file_registry.json", "status": "pending"}
+      ]
+    },
+    {
+      "id": 102,
+      "title": "Create Tenant Middleware",
+      "description": "إنشاء وسيط تحديد المستأجر وتوجيه Schema",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "3-4",
+      "dependencies": [101],
+      "details": "Implement TenantMiddleware with subdomain, custom domain, and header detection",
+      "testStrategy": "Integration tests for all 3 identification methods",
+      "subtasks": [
+        {"id": "102.1", "title": "Check file_registry.json (Librarian)", "status": "pending"},
+        {"id": "102.2", "title": "Create tenant_middleware.py", "status": "pending"},
+        {"id": "102.3", "title": "Implement subdomain detection", "status": "pending"},
+        {"id": "102.4", "title": "Implement custom domain lookup", "status": "pending"},
+        {"id": "102.5", "title": "Implement X-Tenant-ID header support", "status": "pending"},
+        {"id": "102.6", "title": "Implement schema switching", "status": "pending"},
+        {"id": "102.7", "title": "Add exempt paths", "status": "pending"},
+        {"id": "102.8", "title": "Register in settings", "status": "pending"},
+        {"id": "102.9", "title": "Write integration tests", "status": "pending"}
+      ]
+    },
+    {
+      "id": 103,
+      "title": "Create Tenant Service & API",
+      "description": "إنشاء خدمة المستأجر وواجهة API",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "4",
+      "dependencies": [102],
+      "details": "Create tenant_service.py and tenant_routes.py with full CRUD",
+      "testStrategy": "API tests for all endpoints, verify schema creation on tenant create",
+      "subtasks": [
+        {"id": "103.1", "title": "Create tenant_service.py", "status": "pending"},
+        {"id": "103.2", "title": "Implement create_tenant with schema creation", "status": "pending"},
+        {"id": "103.3", "title": "Implement update_tenant", "status": "pending"},
+        {"id": "103.4", "title": "Implement deactivate_tenant", "status": "pending"},
+        {"id": "103.5", "title": "Create tenant_routes.py", "status": "pending"},
+        {"id": "103.6", "title": "Implement all API endpoints", "status": "pending"},
+        {"id": "103.7", "title": "Add permission checks", "status": "pending"},
+        {"id": "103.8", "title": "Write API tests", "status": "pending"},
+        {"id": "103.9", "title": "Connect MultiTenancyPage.jsx to real API", "status": "pending"}
+      ]
+    },
+    {
+      "id": 104,
+      "title": "Complete MFA - TOTP",
+      "description": "إكمال المصادقة عبر TOTP (Google Authenticator)",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "5",
+      "dependencies": [100],
+      "details": "Create totp_service.py with pyotp, QR generation, verification",
+      "testStrategy": "Unit tests with mock authenticator, verify code validation",
+      "subtasks": [
+        {"id": "104.1", "title": "Install pyotp and qrcode", "status": "pending"},
+        {"id": "104.2", "title": "Update MFA models", "status": "pending"},
+        {"id": "104.3", "title": "Create totp_service.py", "status": "pending"},
+        {"id": "104.4", "title": "Implement generate_secret", "status": "pending"},
+        {"id": "104.5", "title": "Implement encrypt/decrypt_secret", "status": "pending"},
+        {"id": "104.6", "title": "Implement generate_qr_code", "status": "pending"},
+        {"id": "104.7", "title": "Implement verify_code", "status": "pending"},
+        {"id": "104.8", "title": "Create TOTPSetupPage.jsx", "status": "pending"},
+        {"id": "104.9", "title": "Write unit tests", "status": "pending"}
+      ]
+    },
+    {
+      "id": 105,
+      "title": "Complete MFA - SMS OTP",
+      "description": "إكمال المصادقة عبر SMS (Twilio)",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "5-6",
+      "dependencies": [104],
+      "details": "Create sms_service.py with Twilio integration, rate limiting",
+      "testStrategy": "Unit tests with mock Twilio, verify OTP flow",
+      "subtasks": [
+        {"id": "105.1", "title": "Install twilio package", "status": "pending"},
+        {"id": "105.2", "title": "Create sms_service.py", "status": "pending"},
+        {"id": "105.3", "title": "Implement generate_otp", "status": "pending"},
+        {"id": "105.4", "title": "Implement send_otp via Twilio", "status": "pending"},
+        {"id": "105.5", "title": "Implement verify_otp", "status": "pending"},
+        {"id": "105.6", "title": "Add rate limiting (3/10min)", "status": "pending"},
+        {"id": "105.7", "title": "Create VerifyOTPPage.jsx", "status": "pending"},
+        {"id": "105.8", "title": "Write unit tests with mock", "status": "pending"}
+      ]
+    },
+    {
+      "id": 106,
+      "title": "Complete MFA - Email OTP",
+      "description": "إكمال المصادقة عبر البريد الإلكتروني",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "6",
+      "dependencies": [105],
+      "details": "Create email_service.py with Arabic templates, rate limiting",
+      "testStrategy": "Unit tests with mock email, verify OTP flow",
+      "subtasks": [
+        {"id": "106.1", "title": "Create email_service.py", "status": "pending"},
+        {"id": "106.2", "title": "Create Arabic email template", "status": "pending"},
+        {"id": "106.3", "title": "Implement send_otp_email", "status": "pending"},
+        {"id": "106.4", "title": "Implement verify_otp", "status": "pending"},
+        {"id": "106.5", "title": "Add rate limiting (5/15min)", "status": "pending"},
+        {"id": "106.6", "title": "Add resend with 60s cooldown", "status": "pending"},
+        {"id": "106.7", "title": "Write unit tests", "status": "pending"}
+      ]
+    },
+    {
+      "id": 107,
+      "title": "Create MFA Backup Codes",
+      "description": "إنشاء أكواد النسخ الاحتياطي",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "6",
+      "dependencies": [106],
+      "details": "Create backup_service.py with code generation, hashing, one-time verification",
+      "testStrategy": "Unit tests for generation and verification",
+      "subtasks": [
+        {"id": "107.1", "title": "Create backup_service.py", "status": "pending"},
+        {"id": "107.2", "title": "Implement generate_codes (10 codes)", "status": "pending"},
+        {"id": "107.3", "title": "Implement store_codes with hash", "status": "pending"},
+        {"id": "107.4", "title": "Implement verify_code (one-time)", "status": "pending"},
+        {"id": "107.5", "title": "Create BackupCodesPage.jsx", "status": "pending"},
+        {"id": "107.6", "title": "Write unit tests", "status": "pending"}
+      ]
+    },
+    {
+      "id": 108,
+      "title": "MFA API Routes Update",
+      "description": "تحديث مسارات API للمصادقة",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "6",
+      "dependencies": [107],
+      "details": "Update mfa/routes.py with all endpoints",
+      "testStrategy": "API tests for all 10+ endpoints",
+      "subtasks": [
+        {"id": "108.1", "title": "Implement /api/mfa/status/", "status": "pending"},
+        {"id": "108.2", "title": "Implement /api/mfa/totp/setup/", "status": "pending"},
+        {"id": "108.3", "title": "Implement /api/mfa/totp/verify/", "status": "pending"},
+        {"id": "108.4", "title": "Implement /api/mfa/sms/send/", "status": "pending"},
+        {"id": "108.5", "title": "Implement /api/mfa/sms/verify/", "status": "pending"},
+        {"id": "108.6", "title": "Implement /api/mfa/email/send/", "status": "pending"},
+        {"id": "108.7", "title": "Implement /api/mfa/email/verify/", "status": "pending"},
+        {"id": "108.8", "title": "Implement /api/mfa/backup-codes/", "status": "pending"},
+        {"id": "108.9", "title": "Write API tests", "status": "pending"}
+      ]
+    },
+    {
+      "id": 109,
+      "title": "Integration Tests - Multi-Tenant",
+      "description": "اختبارات التكامل لتعدد المستأجرين",
+      "status": "pending",
+      "priority": "high",
+      "phase": 0,
+      "week": "7",
+      "dependencies": [103],
+      "details": "Full integration tests for tenant isolation, routing, data separation",
+      "testStrategy": "pytest with tenant fixtures",
+      "subtasks": [
+        {"id": "109.1", "title": "Test tenant creation creates schema", "status": "pending"},
+        {"id": "109.2", "title": "Test data isolation between tenants", "status": "pending"},
+        {"id": "109.3", "title": "Test subdomain routing", "status": "pending"},
+        {"id": "109.4", "title": "Test custom domain routing", "status": "pending"},
+        {"id": "109.5", "title": "Test header routing", "status": "pending"},
+        {"id": "109.6", "title": "Test invalid tenant 404", "status": "pending"},
+        {"id": "109.7", "title": "Test inactive tenant 403", "status": "pending"}
+      ]
+    },
+    {
+      "id": 110,
+      "title": "Integration Tests - MFA",
+      "description": "اختبارات التكامل للمصادقة",
+      "status": "pending",
+      "priority": "high",
+      "phase": 0,
+      "week": "7",
+      "dependencies": [108],
+      "details": "Full integration tests for all MFA methods",
+      "testStrategy": "pytest with mocks for external services",
+      "subtasks": [
+        {"id": "110.1", "title": "Test TOTP setup flow", "status": "pending"},
+        {"id": "110.2", "title": "Test SMS OTP flow with mock", "status": "pending"},
+        {"id": "110.3", "title": "Test Email OTP flow with mock", "status": "pending"},
+        {"id": "110.4", "title": "Test backup code usage", "status": "pending"},
+        {"id": "110.5", "title": "Test rate limiting", "status": "pending"},
+        {"id": "110.6", "title": "Test account lockout", "status": "pending"}
+      ]
+    },
+    {
+      "id": 111,
+      "title": "Security Audit",
+      "description": "تدقيق أمني شامل",
+      "status": "pending",
+      "priority": "high",
+      "phase": 0,
+      "week": "8",
+      "dependencies": [109, 110],
+      "details": "Run bandit, fix issues, document results",
+      "testStrategy": "bandit returns 0 HIGH/MEDIUM issues",
+      "subtasks": [
+        {"id": "111.1", "title": "Install bandit", "status": "pending"},
+        {"id": "111.2", "title": "Run security scan", "status": "pending"},
+        {"id": "111.3", "title": "Fix HIGH severity issues", "status": "pending"},
+        {"id": "111.4", "title": "Fix MEDIUM severity issues", "status": "pending"},
+        {"id": "111.5", "title": "Re-run and verify", "status": "pending"},
+        {"id": "111.6", "title": "Create SECURITY_AUDIT.md", "status": "pending"}
+      ]
+    },
+    {
+      "id": 112,
+      "title": "Create HR Module - Models",
+      "description": "إنشاء نماذج مديول الموارد البشرية",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "9",
+      "dependencies": [100],
+      "details": "Create Department, Employee, Attendance, Leave, Payroll models",
+      "testStrategy": "Unit tests for all models",
+      "subtasks": [
+        {"id": "112.1", "title": "Create hr/models/__init__.py", "status": "pending"},
+        {"id": "112.2", "title": "Create Department model", "status": "pending"},
+        {"id": "112.3", "title": "Create Employee model", "status": "pending"},
+        {"id": "112.4", "title": "Create Attendance model", "status": "pending"},
+        {"id": "112.5", "title": "Create LeaveType and LeaveRequest models", "status": "pending"},
+        {"id": "112.6", "title": "Create Payslip model", "status": "pending"},
+        {"id": "112.7", "title": "Run migrations", "status": "pending"},
+        {"id": "112.8", "title": "Write unit tests", "status": "pending"}
+      ]
+    },
+    {
+      "id": 113,
+      "title": "Create HR Module - Services",
+      "description": "إنشاء خدمات مديول الموارد البشرية",
+      "status": "pending",
+      "priority": "high",
+      "phase": 0,
+      "week": "10",
+      "dependencies": [112],
+      "details": "Create employee, attendance, leave, payroll services",
+      "testStrategy": "Unit tests for all services",
+      "subtasks": [
+        {"id": "113.1", "title": "Create employee_service.py", "status": "pending"},
+        {"id": "113.2", "title": "Create attendance_service.py", "status": "pending"},
+        {"id": "113.3", "title": "Create leave_service.py", "status": "pending"},
+        {"id": "113.4", "title": "Create payroll_service.py", "status": "pending"},
+        {"id": "113.5", "title": "Implement business logic", "status": "pending"},
+        {"id": "113.6", "title": "Write service tests", "status": "pending"}
+      ]
+    },
+    {
+      "id": 114,
+      "title": "Create HR Module - API",
+      "description": "إنشاء API لمديول الموارد البشرية",
+      "status": "pending",
+      "priority": "high",
+      "phase": 0,
+      "week": "11",
+      "dependencies": [113],
+      "details": "Create views and serializers for all HR endpoints",
+      "testStrategy": "API tests for all endpoints",
+      "subtasks": [
+        {"id": "114.1", "title": "Create serializers", "status": "pending"},
+        {"id": "114.2", "title": "Create employee_views.py", "status": "pending"},
+        {"id": "114.3", "title": "Create attendance_views.py", "status": "pending"},
+        {"id": "114.4", "title": "Create leave_views.py", "status": "pending"},
+        {"id": "114.5", "title": "Create payroll_views.py", "status": "pending"},
+        {"id": "114.6", "title": "Register routes", "status": "pending"},
+        {"id": "114.7", "title": "Write API tests", "status": "pending"}
+      ]
+    },
+    {
+      "id": 115,
+      "title": "Create HR Module - Frontend",
+      "description": "إنشاء واجهة مديول الموارد البشرية",
+      "status": "pending",
+      "priority": "high",
+      "phase": 0,
+      "week": "12",
+      "dependencies": [114],
+      "details": "Create all HR pages with DataTable, forms, and workflows",
+      "testStrategy": "E2E tests with Playwright",
+      "subtasks": [
+        {"id": "115.1", "title": "Create hrService.js", "status": "pending"},
+        {"id": "115.2", "title": "Create EmployeesPage.jsx", "status": "pending"},
+        {"id": "115.3", "title": "Create AttendancePage.jsx", "status": "pending"},
+        {"id": "115.4", "title": "Create LeavesPage.jsx", "status": "pending"},
+        {"id": "115.5", "title": "Create PayrollPage.jsx", "status": "pending"},
+        {"id": "115.6", "title": "Create HRDashboardPage.jsx", "status": "pending"},
+        {"id": "115.7", "title": "Write E2E tests", "status": "pending"}
+      ]
+    },
+    {
+      "id": 116,
+      "title": "Phase 0 Final Verification",
+      "description": "التحقق النهائي من المرحلة 0",
+      "status": "pending",
+      "priority": "critical",
+      "phase": 0,
+      "week": "12",
+      "dependencies": [111, 115],
+      "details": "Run all tests, verify coverage, create checkpoint",
+      "testStrategy": "All tests pass, coverage >70%",
+      "subtasks": [
+        {"id": "116.1", "title": "Run flake8 - 0 errors", "status": "pending"},
+        {"id": "116.2", "title": "Run all pytest tests", "status": "pending"},
+        {"id": "116.3", "title": "Verify coverage >70%", "status": "pending"},
+        {"id": "116.4", "title": "Run security scan - 0 HIGH/MEDIUM", "status": "pending"},
+        {"id": "116.5", "title": "Create Phase 0 checkpoint", "status": "pending"},
+        {"id": "116.6", "title": "Update documentation", "status": "pending"}
+      ]
+    }
+  ]
+}

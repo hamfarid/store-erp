@@ -1,0 +1,1766 @@
+# /home/ubuntu/ai_web_organized/src/modules/performance_monitoring/performance_monitor.py
+
+"""
+from flask import g
+وحدة مراقبة الأداء للنظام (Performance Monitoring Module)
+
+هذه الوحدة مسؤولة عن جمع بيانات الأداء من مختلف مكونات النظام وتحليلها وتخزينها،
+مع توفير واجهة برمجية للتكامل مع نظام التنبيه الذكي وواجهة المستخدم.
+
+تستخدم هذه الوحدة Langfuse لتتبع أداء الذكاء الصناعي وEvidently لمراقبة انحراف البيانات.
+"""
+
+import datetime
+import json
+import logging
+import os
+import threading
+import time
+import uuid
+from typing import Any, Dict, List, Tuple
+
+import psutil
+
+# تكوين نظام التسجيل
+logger = logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# محاولة استيراد مكتبات تتبع الأداء
+try:
+    import langfuse
+    LANGFUSE_AVAILABLE = True
+except ImportError:
+    logger.warning(
+        "Langfuse library not available. AI performance tracking will be limited.")
+    LANGFUSE_AVAILABLE = False
+
+try:
+    from evidently.dashboard import Dashboard
+    from evidently.tabs import DataDriftTab
+    EVIDENTLY_AVAILABLE = True
+except ImportError:
+    logger.warning(
+        "Evidently library not available. Data drift monitoring will be limited.")
+    EVIDENTLY_AVAILABLE = False
+
+
+class PerformanceDataCollector:
+    """جامع بيانات الأداء - مسؤول عن جمع بيانات الأداء من مختلف مكونات النظام"""
+
+    def __init__(self, config_path=None):
+        """
+        تهيئة جامع بيانات الأداء
+
+        Args:
+            config_path (str, optional): مسار ملف التكوين. Defaults to None.
+        """
+        self.running = False
+        self.collection_thread = None
+        self.config = self._load_config(config_path)
+        self.data_store = None  # سيتم تعيينه لاحقاً
+
+    def _load_config(self, config_path):
+        """تحميل إعدادات التكوين من ملف"""
+        default_config = {
+            # الفاصل الزمني بين عمليات الجمع (بالثواني)
+            "collection_interval": 60,
+            "system_metrics": ["cpu", "memory", "disk", "network"],
+            "module_metrics": ["response_time", "error_rate", "request_rate"],
+            "ai_metrics": ["inference_time", "accuracy", "confidence"],
+            "db_metrics": ["query_time", "active_connections", "error_rate"]
+        }
+
+        if config_path and os.path.exists(config_path):
+            try:
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                    # دمج الإعدادات المخصصة مع الإعدادات الافتراضية
+                    for key, value in default_config.items():
+                        if key not in config:
+                            config[key] = value
+                    return config
+            except Exception as e:
+                logger.error(f"Error loading config from {config_path}: {e}")
+                return default_config
+        else:
+            return default_config
+
+    def set_data_store(self, data_store):
+        """تعيين مخزن البيانات"""
+        self.data_store = data_store
+
+    def start_collection(self, interval=None):
+        """
+        بدء عملية جمع البيانات بشكل دوري
+
+        Args:
+            interval (int, optional): الفاصل الزمني بين عمليات الجمع (بالثواني).
+                                     Defaults to config value.
+        """
+        if self.running is not None:
+            logger.warning("Data collection is already running.")
+            return
+
+        if not self.data_store:
+            logger.error("Data store not set. Cannot start collection.")
+            return
+
+        if interval is None:
+            interval = self.config.get("collection_interval", 60)
+
+        self.running = True
+        self.collection_thread = threading.Thread(
+            target=self._collection_loop, args=(interval,))
+        self.collection_thread.daemon = True
+        self.collection_thread.start()
+        logger.info(
+            f"Started performance data collection with interval {interval} seconds.")
+
+    def stop_collection(self):
+        """إيقاف عملية جمع البيانات"""
+        if not self.running:
+            logger.warning("Data collection is not running.")
+            return
+
+        self.running = False
+        if self.collection_thread is not None:
+            self.collection_thread.join(timeout=5.0)
+            if self.collection_thread.is_alive():
+                logger.warning(
+                    "Collection thread did not terminate gracefully.")
+            else:
+                logger.info("Stopped performance data collection.")
+
+    def _collection_loop(self, interval):
+        """حلقة جمع البيانات الدورية"""
+        while self.running:
+            try:
+                # جمع مقاييس النظام
+                system_metrics = self.collect_system_metrics()
+                if system_metrics and self.data_store:
+                    self.data_store.store_metrics(system_metrics, "system")
+
+                # جمع مقاييس المديولات
+                for module_id in self.get_active_modules():
+                    module_metrics = self.collect_module_metrics(module_id)
+                    if module_metrics and self.data_store:
+                        self.data_store.store_metrics(
+                            module_metrics, "module", module_id)
+
+                # جمع مقاييس الذكاء الصناعي
+                for ai_model_id in self.get_active_ai_models():
+                    ai_metrics = self.collect_ai_metrics(ai_model_id)
+                    if ai_metrics and self.data_store:
+                        self.data_store.store_metrics(
+                            ai_metrics, "ai", ai_model_id)
+
+                # جمع مقاييس قاعدة البيانات
+                for db_name in self.get_active_databases():
+                    db_metrics = self.collect_database_metrics(db_name)
+                    if db_metrics and self.data_store:
+                        self.data_store.store_metrics(
+                            db_metrics, "database", db_name)
+
+            except Exception as e:
+                logger.error(f"Error collecting performance data: {e}")
+
+            # انتظار الفاصل الزمني المحدد
+            time.sleep(interval)
+
+    def get_active_modules(self) -> List[str]:
+        """
+        الحصول على قائمة المديولات النشطة
+
+        Returns:
+            List[str]: قائمة معرفات المديولات النشطة
+        """
+        # هذه الدالة يجب أن تستعلم عن المديولات النشطة في النظام
+        # في هذا المثال، نعيد قائمة ثابتة للتوضيح
+        return [
+            "backup_module",
+            "data_validation",
+            "admin_module",
+            "ai_agent_module"]
+
+    def get_active_ai_models(self) -> List[str]:
+        """
+        الحصول على قائمة نماذج الذكاء الصناعي النشطة
+
+        Returns:
+            List[str]: قائمة معرفات نماذج الذكاء الصناعي النشطة
+        """
+        # هذه الدالة يجب أن تستعلم عن نماذج الذكاء الصناعي النشطة في النظام
+        return ["ai_agent", "ai_agent_image_analyzer", "ai_agent_diagnosis"]
+
+    def get_active_databases(self) -> List[str]:
+        """
+        الحصول على قائمة قواعد البيانات النشطة
+
+        Returns:
+            List[str]: قائمة أسماء قواعد البيانات النشطة
+        """
+        # هذه الدالة يجب أن تستعلم عن قواعد البيانات النشطة في النظام
+        return ["main_db", "analytics_db"]
+
+    def collect_system_metrics(self) -> Dict[str, Any]:
+        """
+        جمع مقاييس النظام (CPU, RAM, Disk, Network)
+
+        Returns:
+            Dict[str, Any]: قاموس يحتوي على مقاييس النظام
+        """
+        metrics = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "cpu": {},
+            "memory": {},
+            "disk": {},
+            "network": {}
+        }
+
+        try:
+            # CPU metrics
+            cpu_percent = psutil.cpu_percent(interval=1)
+            cpu_times = psutil.cpu_times_percent(interval=1)
+            metrics["cpu"] = {
+                "total_percent": cpu_percent,
+                "user_percent": cpu_times.user,
+                "system_percent": cpu_times.system,
+                "idle_percent": cpu_times.idle,
+                "core_count": psutil.cpu_count(),
+                "per_core_percent": psutil.cpu_percent(interval=1, percpu=True)
+            }
+
+            # Memory metrics
+            memory = psutil.virtual_memory()
+            metrics["memory"] = {
+                "total_bytes": memory.total,
+                "available_bytes": memory.available,
+                "used_bytes": memory.used,
+                "percent": memory.percent,
+                "swap_total": psutil.swap_memory().total,
+                "swap_used": psutil.swap_memory().used,
+                "swap_percent": psutil.swap_memory().percent
+            }
+
+            # Disk metrics
+            disk = psutil.disk_usage('/')
+            disk_io = psutil.disk_io_counters()
+            metrics["disk"] = {
+                "total_bytes": disk.total,
+                "used_bytes": disk.used,
+                "free_bytes": disk.free,
+                "percent": disk.percent,
+                "read_count": disk_io.read_count if disk_io else 0,
+                "write_count": disk_io.write_count if disk_io else 0,
+                "read_bytes": disk_io.read_bytes if disk_io else 0,
+                "write_bytes": disk_io.write_bytes if disk_io else 0
+            }
+
+            # Network metrics
+            net_io = psutil.net_io_counters()
+            metrics["network"] = {
+                "bytes_sent": net_io.bytes_sent,
+                "bytes_recv": net_io.bytes_recv,
+                "packets_sent": net_io.packets_sent,
+                "packets_recv": net_io.packets_recv,
+                "errin": net_io.errin,
+                "errout": net_io.errout,
+                "dropin": net_io.dropin,
+                "dropout": net_io.dropout
+            }
+
+            return metrics
+        except Exception as e:
+            logger.error(f"Error collecting system metrics: {e}")
+            return None
+
+    def collect_module_metrics(self, module_id: str) -> Dict[str, Any]:
+        """
+        جمع مقاييس المديول
+
+        Args:
+            module_id (str): معرف المديول
+
+        Returns:
+            Dict[str, Any]: قاموس يحتوي على مقاييس المديول
+        """
+        # هذه الدالة يجب أن تجمع مقاييس المديول المحدد
+        # في هذا المثال، نعيد بيانات عشوائية للتوضيح
+
+        metrics = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "module_id": module_id,
+            "status": "active",  # يمكن أن تكون "active", "warning", "error", "inactive"
+            "performance": {
+                "response_time_ms": 150,  # متوسط وقت الاستجابة بالمللي ثانية
+                "request_rate": 10,  # عدد الطلبات في الثانية
+                "error_rate": 0.02,  # نسبة الأخطاء (0.02 = 2%)
+                "active_threads": 5,  # عدد الخيوط النشطة
+                "queue_length": 2  # طول قائمة الانتظار
+            },
+            "resources": {
+                "cpu_percent": 15,  # النسبة المئوية لاستخدام CPU
+                # استخدام الذاكرة بالبايت (50 ميجابايت)
+                "memory_bytes": 1024 * 1024 * 50,
+                # استخدام القرص بالبايت (10 ميجابايت)
+                "disk_bytes": 1024 * 1024 * 10,
+                # استخدام الشبكة (الوارد) بالبايت (100 كيلوبايت)
+                "network_bytes_in": 1024 * 100,
+                # استخدام الشبكة (الصادر) بالبايت (50 كيلوبايت)
+                "network_bytes_out": 1024 * 50
+            }
+        }
+
+        # تخصيص المقاييس حسب نوع المديول
+        if module_id == "backup_module":
+            metrics["custom"] = {
+                "backup_count": 10,
+                "last_backup_time": (
+                    datetime.datetime.now()
+                    - datetime.timedelta(
+                        hours=6)).isoformat(),
+                "backup_success_rate": 0.95}
+        elif module_id == "data_validation":
+            metrics["custom"] = {
+                "validation_count": 500,
+                "validation_success_rate": 0.98,
+                "validation_error_types": {
+                    "missing_data": 10,
+                    "invalid_format": 5,
+                    "constraint_violation": 2
+                }
+            }
+
+        return metrics
+
+    def collect_ai_metrics(self, ai_model_id: str) -> Dict[str, Any]:
+        """
+        جمع مقاييس الذكاء الصناعي
+
+        Args:
+            ai_model_id (str): معرف نموذج الذكاء الصناعي
+
+        Returns:
+            Dict[str, Any]: قاموس يحتوي على مقاييس الذكاء الصناعي
+        """
+        metrics = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "ai_model_id": ai_model_id,
+            "status": "active",  # يمكن أن تكون "active", "suspended", "error"
+            "performance": {
+                "inference_time_ms": 200,  # متوسط وقت الاستدلال بالمللي ثانية
+                "inference_rate": 5,  # عدد عمليات الاستدلال في الثانية
+                "accuracy": 0.92,  # دقة النموذج (0.92 = 92%)
+                "confidence": 0.85,  # متوسط ثقة النموذج (0.85 = 85%)
+                "concurrent_requests": 3  # عدد الطلبات المتزامنة
+            },
+            "resources": {
+                "cpu_percent": 25,  # النسبة المئوية لاستخدام CPU
+                # استخدام الذاكرة بالبايت (500 ميجابايت)
+                "memory_bytes": 1024 * 1024 * 500,
+                "gpu_percent": 40,  # النسبة المئوية لاستخدام GPU
+                # استخدام ذاكرة GPU بالبايت (1 جيجابايت)
+                "gpu_memory_bytes": 1024 * 1024 * 1024,
+            }
+        }
+
+        # تخصيص المقاييس حسب نوع النموذج
+        if ai_model_id == "ai_agent_image_analyzer":
+            metrics["custom"] = {
+                "image_count": 100,
+                # متوسط حجم الصورة بالبايت (500 كيلوبايت)
+                "average_image_size": 1024 * 500,
+                "detection_accuracy": 0.88
+            }
+        elif ai_model_id == "ai_agent_diagnosis":
+            metrics["custom"] = {
+                "diagnosis_count": 50,
+                "average_confidence": 0.82,
+                "false_positive_rate": 0.05,
+                "false_negative_rate": 0.03
+            }
+
+        # إضافة بيانات Langfuse إذا كانت متاحة
+        if LANGFUSE_AVAILABLE:
+            metrics["langfuse"] = {
+                "trace_id": str(uuid.uuid4()),
+                "observation_count": 25,
+                "average_latency": 180,
+                "token_usage": {
+                    "prompt": 500,
+                    "completion": 200,
+                    "total": 700
+                }
+            }
+
+        return metrics
+
+    def collect_database_metrics(self, db_name: str) -> Dict[str, Any]:
+        """
+        جمع مقاييس قاعدة البيانات
+
+        Args:
+            db_name (str): اسم قاعدة البيانات
+
+        Returns:
+            Dict[str, Any]: قاموس يحتوي على مقاييس قاعدة البيانات
+        """
+        metrics = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "db_name": db_name,
+            "status": "active",  # يمكن أن تكون "active", "warning", "error"
+            "performance": {
+                "query_time_ms": 50,  # متوسط وقت الاستعلام بالمللي ثانية
+                "query_rate": 20,  # عدد الاستعلامات في الثانية
+                "error_rate": 0.01,  # نسبة الأخطاء (0.01 = 1%)
+                "active_connections": 10,  # عدد الاتصالات النشطة
+                "active_transactions": 5,  # عدد المعاملات النشطة
+                "read_rate": 15,  # عدد عمليات القراءة في الثانية
+                "write_rate": 5  # عدد عمليات الكتابة في الثانية
+            },
+            "resources": {
+                # حجم قاعدة البيانات بالبايت (2 جيجابايت)
+                "size_bytes": 1024 * 1024 * 1024 * 2,
+                # حجم الفهارس بالبايت (500 ميجابايت)
+                "index_size_bytes": 1024 * 1024 * 500,
+                "connection_limit": 100,  # الحد الأقصى لعدد الاتصالات
+                "connection_usage_percent": 10  # النسبة المئوية لاستخدام الاتصالات
+            }
+        }
+
+        return metrics
+
+    def get_latest_metrics(self, metric_type: str,
+                           entity_id: str = None) -> Dict[str, Any]:
+        """
+        الحصول على أحدث المقاييس
+
+        Args:
+            metric_type (str): نوع المقياس (system, module, ai, database)
+            entity_id (str, optional): معرف الكيان (module_id, ai_model_id, db_name)
+
+        Returns:
+            Dict[str, Any]: قاموس يحتوي على أحدث المقاييس
+        """
+        if not self.data_store:
+            logger.error("Data store not set. Cannot get latest metrics.")
+            return None
+
+        return self.data_store.get_latest_metrics(metric_type, entity_id)
+
+
+class PerformanceDataStore:
+    """مخزن بيانات الأداء - مسؤول عن تخزين بيانات الأداء واسترجاعها"""
+
+    def __init__(self, db_config=None):
+        """
+        تهيئة مخزن بيانات الأداء
+
+        Args:
+            db_config (Dict, optional): إعدادات قاعدة البيانات. Defaults to None.
+        """
+        self.db_config = db_config or {}
+        self.metrics_dir = self.db_config.get(
+            "metrics_dir", "/home/ubuntu/ai_web_organized/data/metrics")
+        os.makedirs(self.metrics_dir, exist_ok=True)
+
+        # يمكن إضافة اتصال قاعدة البيانات هنا إذا كان مطلوباً
+        self.db_connection = None
+
+        # تخزين مؤقت للمقاييس الأخيرة
+        self.latest_metrics = {
+            "system": {},
+            "module": {},
+            "ai": {},
+            "database": {}
+        }
+
+    def store_metrics(self,
+                      metrics: Dict[str,
+                                    Any],
+                      metric_type: str,
+                      entity_id: str = None) -> bool:
+        """
+        تخزين المقاييس
+
+        Args:
+            metrics (Dict[str, Any]): المقاييس المراد تخزينها
+            metric_type (str): نوع المقياس (system, module, ai, database)
+            entity_id (str, optional): معرف الكيان (module_id, ai_model_id, db_name)
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            # تحديث التخزين المؤقت للمقاييس الأخيرة
+            if metric_type == "system":
+                self.latest_metrics[metric_type] = metrics
+            elif entity_id:
+                if metric_type not in self.latest_metrics:
+                    self.latest_metrics[metric_type] = {}
+                self.latest_metrics[metric_type][entity_id] = metrics
+
+            # تخزين المقاييس في ملف
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"{metric_type}"
+            if entity_id:
+                filename += f"_{entity_id}"
+            filename += f"_{timestamp}.json"
+
+            filepath = os.path.join(self.metrics_dir, filename)
+            with open(filepath, 'w') as f:
+                json.dump(metrics, f, indent=2)
+
+            logger.debug(f"Stored {metric_type} metrics to {filepath}")
+            return True
+        except Exception as e:
+            logger.error(f"Error storing {metric_type} metrics: {e}")
+            return False
+
+    def get_metrics(self,
+                    metric_type: str,
+                    entity_id: str = None,
+                    time_range: str = None,
+                    aggregation: str = None) -> List[Dict[str,
+                                                          Any]]:
+        """
+        استرجاع المقاييس
+
+        Args:
+            metric_type (str): نوع المقياس (system, module, ai, database)
+            entity_id (str, optional): معرف الكيان (module_id, ai_model_id, db_name)
+            time_range (str, optional): نطاق زمني للبيانات (مثل "last_hour", "last_day", "last_week")
+            aggregation (str, optional): نوع التجميع (مثل "avg", "max", "min")
+
+        Returns:
+            List[Dict[str, Any]]: قائمة المقاييس
+        """
+        try:
+            # تحديد نطاق الوقت
+            now = datetime.datetime.now()
+            start_time = None
+
+            if time_range == "last_hour":
+                start_time = now - datetime.timedelta(hours=1)
+            elif time_range == "last_day":
+                start_time = now - datetime.timedelta(days=1)
+            elif time_range == "last_week":
+                start_time = now - datetime.timedelta(weeks=1)
+            elif time_range == "last_month":
+                start_time = now - datetime.timedelta(days=30)
+
+            # البحث عن ملفات المقاييس المطابقة
+            metrics_list = []
+            prefix = f"{metric_type}"
+            if entity_id:
+                prefix += f"_{entity_id}"
+
+            for filename in os.listdir(self.metrics_dir):
+                if filename.startswith(prefix) and filename.endswith(".json"):
+                    # استخراج الطابع الزمني من اسم الملف
+                    try:
+                        file_timestamp_str = filename.split(
+                            '_')[-1].split('.')[0]
+                        file_date_str = filename.split('_')[-2]
+                        file_datetime_str = f"{file_date_str}_{file_timestamp_str}"
+                        file_datetime = datetime.datetime.strptime(
+                            file_datetime_str, "%Y%m%d_%H%M%S")
+
+                        # التحقق من النطاق الزمني
+                        if start_time and file_datetime < start_time:
+                            continue
+
+                        # قراءة ملف المقاييس
+                        filepath = os.path.join(self.metrics_dir, filename)
+                        with open(filepath, 'r') as f:
+                            metrics = json.load(f)
+                            metrics_list.append(metrics)
+                    except Exception as e:
+                        logger.warning(
+                            f"Error processing metrics file {filename}: {e}")
+
+            # تطبيق التجميع إذا كان مطلوباً
+            if aggregation and metrics_list:
+                return self._aggregate_metrics(metrics_list, aggregation)
+
+            return metrics_list
+        except Exception as e:
+            logger.error(f"Error retrieving {metric_type} metrics: {e}")
+            return []
+
+    def _aggregate_metrics(
+            self, metrics_list: List[Dict[str, Any]], aggregation: str) -> List[Dict[str, Any]]:
+        """
+        تجميع المقاييس
+
+        Args:
+            metrics_list (List[Dict[str, Any]]): قائمة المقاييس
+            aggregation (str): نوع التجميع (مثل "avg", "max", "min")
+
+        Returns:
+            List[Dict[str, Any]]: قائمة المقاييس المجمعة
+        """
+        # هذه الدالة يجب أن تجمع المقاييس حسب نوع التجميع المطلوب
+        # في هذا المثال، نعيد القائمة كما هي
+        return metrics_list
+
+    def get_latest_metrics(self, metric_type: str,
+                           entity_id: str = None) -> Dict[str, Any]:
+        """
+        الحصول على أحدث المقاييس
+
+        Args:
+            metric_type (str): نوع المقياس (system, module, ai, database)
+            entity_id (str, optional): معرف الكيان (module_id, ai_model_id, db_name)
+
+        Returns:
+            Dict[str, Any]: قاموس يحتوي على أحدث المقاييس
+        """
+        if metric_type == "system":
+            return self.latest_metrics.get(metric_type, {})
+        elif entity_id and metric_type in self.latest_metrics:
+            return self.latest_metrics[metric_type].get(entity_id, {})
+        return {}
+
+    def clean_old_data(self, retention_period: int = 30) -> int:
+        """
+        تنظيف البيانات القديمة
+
+        Args:
+            retention_period (int, optional): فترة الاحتفاظ بالبيانات (بالأيام). Defaults to 30.
+
+        Returns:
+            int: عدد الملفات التي تم حذفها
+        """
+        try:
+            deleted_count = 0
+            now = datetime.datetime.now()
+            cutoff_date = now - datetime.timedelta(days=retention_period)
+
+            for filename in os.listdir(self.metrics_dir):
+                if filename.endswith(".json"):
+                    try:
+                        # استخراج الطابع الزمني من اسم الملف
+                        file_timestamp_str = filename.split(
+                            '_')[-1].split('.')[0]
+                        file_date_str = filename.split('_')[-2]
+                        file_datetime_str = f"{file_date_str}_{file_timestamp_str}"
+                        file_datetime = datetime.datetime.strptime(
+                            file_datetime_str, "%Y%m%d_%H%M%S")
+
+                        # التحقق من تاريخ الملف
+                        if file_datetime < cutoff_date:
+                            filepath = os.path.join(self.metrics_dir, filename)
+                            os.remove(filepath)
+                            deleted_count += 1
+                    except Exception as e:
+                        logger.warning(
+                            f"Error processing file {filename} for cleanup: {e}")
+
+            logger.info(f"Cleaned up {deleted_count} old metrics files.")
+            return deleted_count
+        except Exception as e:
+            logger.error(f"Error cleaning old data: {e}")
+            return 0
+
+
+class PerformanceAnalyzer:
+    """محلل الأداء - مسؤول عن تحليل بيانات الأداء واكتشاف الاتجاهات والمشكلات"""
+
+    def __init__(self, data_store, config_path=None):
+        """
+        تهيئة محلل الأداء
+
+        Args:
+            data_store (PerformanceDataStore): مخزن بيانات الأداء
+            config_path (str, optional): مسار ملف التكوين. Defaults to None.
+        """
+        self.data_store = data_store
+        self.config = self._load_config(config_path)
+
+    def _load_config(self, config_path):
+        """تحميل إعدادات التكوين من ملف"""
+        default_config = {
+            "thresholds": {
+                "cpu_percent": 80,
+                "memory_percent": 80,
+                "disk_percent": 90,
+                "response_time_ms": 500,
+                "error_rate": 0.05
+            },
+            "anomaly_detection": {
+                "window_size": 10,
+                "std_deviation_threshold": 3.0
+            }
+        }
+
+        if config_path and os.path.exists(config_path):
+            try:
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                    # دمج الإعدادات المخصصة مع الإعدادات الافتراضية
+                    for key, value in default_config.items():
+                        if key not in config:
+                            config[key] = value
+                        elif isinstance(value, dict):
+                            for subkey, subvalue in value.items():
+                                if subkey not in config[key]:
+                                    config[key][subkey] = subvalue
+                    return config
+            except Exception as e:
+                logger.error(f"Error loading config from {config_path}: {e}")
+                return default_config
+        else:
+            return default_config
+
+    def analyze_performance_trend(self,
+                                  metric_type: str,
+                                  entity_id: str = None,
+                                  time_range: str = "last_day") -> Dict[str,
+                                                                        Any]:
+        """
+        تحليل اتجاه الأداء
+
+        Args:
+            metric_type (str): نوع المقياس (system, module, ai, database)
+            entity_id (str, optional): معرف الكيان (module_id, ai_model_id, db_name)
+            time_range (str, optional): نطاق زمني للبيانات. Defaults to "last_day".
+
+        Returns:
+            Dict[str, Any]: نتائج تحليل الاتجاه
+        """
+        metrics = self.data_store.get_metrics(
+            metric_type, entity_id, time_range)
+        if not metrics:
+            return {
+                "status": "error",
+                "message": "No metrics data available for analysis"}
+
+        # تحليل الاتجاه (هذا مثال بسيط)
+        trend_analysis = {
+            "status": "success",
+            "metric_type": metric_type,
+            "entity_id": entity_id,
+            "time_range": time_range,
+            "data_points": len(metrics),
+            "trends": {}
+        }
+
+        # تحليل اتجاهات مختلفة حسب نوع المقياس
+        if metric_type == "system":
+            # تحليل اتجاه استخدام CPU
+            cpu_values = [m.get("cpu", {}).get("total_percent", 0)
+                          for m in metrics if "cpu" in m]
+            if cpu_values:
+                trend_analysis["trends"]["cpu"] = self._analyze_numeric_trend(
+                    cpu_values)
+
+            # تحليل اتجاه استخدام الذاكرة
+            memory_values = [
+                m.get(
+                    "memory",
+                    {}).get(
+                    "percent",
+                    0) for m in metrics if "memory" in m]
+            if memory_values:
+                trend_analysis["trends"]["memory"] = self._analyze_numeric_trend(
+                    memory_values)
+
+            # تحليل اتجاه استخدام القرص
+            disk_values = [m.get("disk", {}).get("percent", 0)
+                           for m in metrics if "disk" in m]
+            if disk_values:
+                trend_analysis["trends"]["disk"] = self._analyze_numeric_trend(
+                    disk_values)
+
+        elif metric_type == "module":
+            # تحليل اتجاه وقت الاستجابة
+            response_time_values = [
+                m.get(
+                    "performance",
+                    {}).get(
+                    "response_time_ms",
+                    0) for m in metrics if "performance" in m]
+            if response_time_values:
+                trend_analysis["trends"]["response_time"] = self._analyze_numeric_trend(
+                    response_time_values)
+
+            # تحليل اتجاه معدل الأخطاء
+            error_rate_values = [
+                m.get(
+                    "performance",
+                    {}).get(
+                    "error_rate",
+                    0) for m in metrics if "performance" in m]
+            if error_rate_values:
+                trend_analysis["trends"]["error_rate"] = self._analyze_numeric_trend(
+                    error_rate_values)
+
+        elif metric_type == "ai":
+            # تحليل اتجاه وقت الاستدلال
+            inference_time_values = [
+                m.get(
+                    "performance",
+                    {}).get(
+                    "inference_time_ms",
+                    0) for m in metrics if "performance" in m]
+            if inference_time_values:
+                trend_analysis["trends"]["inference_time"] = self._analyze_numeric_trend(
+                    inference_time_values)
+
+            # تحليل اتجاه الدقة
+            accuracy_values = [
+                m.get(
+                    "performance",
+                    {}).get(
+                    "accuracy",
+                    0) for m in metrics if "performance" in m]
+            if accuracy_values:
+                trend_analysis["trends"]["accuracy"] = self._analyze_numeric_trend(
+                    accuracy_values)
+
+        elif metric_type == "database":
+            # تحليل اتجاه وقت الاستعلام
+            query_time_values = [
+                m.get(
+                    "performance",
+                    {}).get(
+                    "query_time_ms",
+                    0) for m in metrics if "performance" in m]
+            if query_time_values:
+                trend_analysis["trends"]["query_time"] = self._analyze_numeric_trend(
+                    query_time_values)
+
+            # تحليل اتجاه معدل الأخطاء
+            error_rate_values = [
+                m.get(
+                    "performance",
+                    {}).get(
+                    "error_rate",
+                    0) for m in metrics if "performance" in m]
+            if error_rate_values:
+                trend_analysis["trends"]["error_rate"] = self._analyze_numeric_trend(
+                    error_rate_values)
+
+        return trend_analysis
+
+    def _analyze_numeric_trend(self, values: List[float]) -> Dict[str, Any]:
+        """
+        تحليل اتجاه القيم العددية
+
+        Args:
+            values (List[float]): قائمة القيم العددية
+
+        Returns:
+            Dict[str, Any]: نتائج تحليل الاتجاه
+        """
+        if not values:
+            return {
+                "status": "error",
+                "message": "No values provided for analysis"}
+
+        # حساب الإحصاءات الأساسية
+        avg = sum(values) / len(values)
+        min_val = min(values)
+        max_val = max(values)
+
+        # تحديد الاتجاه
+        if len(values) >= 2:
+            first_half = values[:len(values) // 2]
+            second_half = values[len(values) // 2:]
+            first_half_avg = sum(first_half) / len(first_half)
+            second_half_avg = sum(second_half) / len(second_half)
+
+            if second_half_avg > first_half_avg * 1.1:
+                trend = "increasing"
+                trend_percent = ((second_half_avg / first_half_avg) - 1) * 100
+            elif second_half_avg < first_half_avg * 0.9:
+                trend = "decreasing"
+                trend_percent = (1 - (second_half_avg / first_half_avg)) * 100
+            else:
+                trend = "stable"
+                trend_percent = ((second_half_avg / first_half_avg) - 1) * 100
+        else:
+            trend = "unknown"
+            trend_percent = 0
+
+        return {
+            "avg": avg,
+            "min": min_val,
+            "max": max_val,
+            "trend": trend,
+            "trend_percent": trend_percent,
+            "data_points": len(values)
+        }
+
+    def detect_performance_anomalies(self,
+                                     metric_type: str,
+                                     entity_id: str = None,
+                                     time_range: str = "last_day") -> List[Dict[str,
+                                                                                Any]]:
+        """
+        اكتشاف الانحرافات في الأداء
+
+        Args:
+            metric_type (str): نوع المقياس (system, module, ai, database)
+            entity_id (str, optional): معرف الكيان (module_id, ai_model_id, db_name)
+            time_range (str, optional): نطاق زمني للبيانات. Defaults to "last_day".
+
+        Returns:
+            List[Dict[str, Any]]: قائمة الانحرافات المكتشفة
+        """
+        metrics = self.data_store.get_metrics(
+            metric_type, entity_id, time_range)
+        if not metrics:
+            return []
+
+        anomalies = []
+
+        # اكتشاف الانحرافات حسب نوع المقياس
+        if metric_type == "system":
+            # اكتشاف انحرافات استخدام CPU
+            cpu_values = [
+                (m.get(
+                    "timestamp", ""), m.get(
+                    "cpu", {}).get(
+                    "total_percent", 0)) for m in metrics if "cpu" in m]
+            cpu_anomalies = self._detect_numeric_anomalies(
+                cpu_values, "cpu_percent")
+            anomalies.extend(cpu_anomalies)
+
+            # اكتشاف انحرافات استخدام الذاكرة
+            memory_values = [
+                (m.get(
+                    "timestamp", ""), m.get(
+                    "memory", {}).get(
+                    "percent", 0)) for m in metrics if "memory" in m]
+            memory_anomalies = self._detect_numeric_anomalies(
+                memory_values, "memory_percent")
+            anomalies.extend(memory_anomalies)
+
+            # اكتشاف انحرافات استخدام القرص
+            disk_values = [
+                (m.get(
+                    "timestamp", ""), m.get(
+                    "disk", {}).get(
+                    "percent", 0)) for m in metrics if "disk" in m]
+            disk_anomalies = self._detect_numeric_anomalies(
+                disk_values, "disk_percent")
+            anomalies.extend(disk_anomalies)
+
+        elif metric_type == "module":
+            # اكتشاف انحرافات وقت الاستجابة
+            response_time_values = [
+                (m.get(
+                    "timestamp", ""), m.get(
+                    "performance", {}).get(
+                    "response_time_ms", 0)) for m in metrics if "performance" in m]
+            response_time_anomalies = self._detect_numeric_anomalies(
+                response_time_values, "response_time_ms")
+            anomalies.extend(response_time_anomalies)
+
+            # اكتشاف انحرافات معدل الأخطاء
+            error_rate_values = [
+                (m.get(
+                    "timestamp", ""), m.get(
+                    "performance", {}).get(
+                    "error_rate", 0)) for m in metrics if "performance" in m]
+            error_rate_anomalies = self._detect_numeric_anomalies(
+                error_rate_values, "error_rate")
+            anomalies.extend(error_rate_anomalies)
+
+        # يمكن إضافة المزيد من الانحرافات حسب الحاجة
+
+        return anomalies
+
+    def _detect_numeric_anomalies(
+            self, values: List[Tuple[str, float]], metric_name: str) -> List[Dict[str, Any]]:
+        """
+        اكتشاف الانحرافات في القيم العددية
+
+        Args:
+            values (List[Tuple[str, float]]): قائمة الأزواج (الطابع الزمني، القيمة)
+            metric_name (str): اسم المقياس
+
+        Returns:
+            List[Dict[str, Any]]: قائمة الانحرافات المكتشفة
+        """
+        if not values:
+            return []
+
+        # استخراج القيم فقط (بدون الطوابع الزمنية)
+        numeric_values = [v[1] for v in values]
+
+        # حساب المتوسط والانحراف المعياري
+        avg = sum(numeric_values) / len(numeric_values)
+        variance = sum((x - avg) ** 2 for x in numeric_values) / \
+            len(numeric_values)
+        std_dev = variance ** 0.5
+
+        # الحصول على عتبة الانحراف المعياري من التكوين
+        std_dev_threshold = self.config.get(
+            "anomaly_detection", {}).get(
+            "std_deviation_threshold", 3.0)
+
+        # الحصول على عتبة القيمة المطلقة من التكوين
+        absolute_threshold = self.config.get(
+            "thresholds", {}).get(
+            metric_name, float('inf'))
+
+        anomalies = []
+
+        for timestamp, value in values:
+            # التحقق من الانحراف المعياري
+            if std_dev > 0 and abs(value - avg) > std_dev * std_dev_threshold:
+                anomalies.append({
+                    "timestamp": timestamp,
+                    "metric_name": metric_name,
+                    "value": value,
+                    "avg": avg,
+                    "std_dev": std_dev,
+                    "deviation": (value - avg) / std_dev if std_dev > 0 else 0,
+                    "type": "statistical_anomaly"
+                })
+
+            # التحقق من العتبة المطلقة
+            elif value > absolute_threshold:
+                anomalies.append({
+                    "timestamp": timestamp,
+                    "metric_name": metric_name,
+                    "value": value,
+                    "threshold": absolute_threshold,
+                    "excess": value - absolute_threshold,
+                    "type": "threshold_violation"
+                })
+
+        return anomalies
+
+    def identify_low_performing_modules(
+            self,
+            threshold: float = None,
+            time_range: str = "last_hour") -> List[str]:
+        """
+        تحديد المديولات ذات الأداء المنخفض
+
+        Args:
+            threshold (float, optional): عتبة الأداء المنخفض. Defaults to None.
+            time_range (str, optional): نطاق زمني للبيانات. Defaults to "last_hour".
+
+        Returns:
+            List[str]: قائمة معرفات المديولات ذات الأداء المنخفض
+        """
+        # الحصول على قائمة المديولات النشطة
+        active_modules = []
+        for module_id in self.data_store.latest_metrics.get("module", {}):
+            active_modules.append(module_id)
+
+        low_performing_modules = []
+
+        for module_id in active_modules:
+            # تحليل أداء المديول
+            metrics = self.data_store.get_metrics(
+                "module", module_id, time_range)
+            if not metrics:
+                continue
+
+            # حساب متوسط وقت الاستجابة
+            response_times = [
+                m.get(
+                    "performance",
+                    {}).get(
+                    "response_time_ms",
+                    0) for m in metrics if "performance" in m]
+            if not response_times:
+                continue
+
+            avg_response_time = sum(response_times) / len(response_times)
+
+            # الحصول على عتبة وقت الاستجابة من التكوين
+            response_time_threshold = threshold or self.config.get(
+                "thresholds", {}).get("response_time_ms", 500)
+
+            # التحقق من تجاوز العتبة
+            if avg_response_time > response_time_threshold:
+                low_performing_modules.append(module_id)
+
+        return low_performing_modules
+
+    def identify_resource_intensive_modules(
+            self,
+            resource_type: str,
+            threshold: float = None,
+            time_range: str = "last_hour") -> List[str]:
+        """
+        تحديد المديولات التي تستهلك موارد كثيرة
+
+        Args:
+            resource_type (str): نوع المورد (cpu, memory, disk, network)
+            threshold (float, optional): عتبة استهلاك الموارد. Defaults to None.
+            time_range (str, optional): نطاق زمني للبيانات. Defaults to "last_hour".
+
+        Returns:
+            List[str]: قائمة معرفات المديولات التي تستهلك موارد كثيرة
+        """
+        # الحصول على قائمة المديولات النشطة
+        active_modules = []
+        for module_id in self.data_store.latest_metrics.get("module", {}):
+            active_modules.append(module_id)
+
+        resource_intensive_modules = []
+
+        for module_id in active_modules:
+            # تحليل استهلاك الموارد للمديول
+            metrics = self.data_store.get_metrics(
+                "module", module_id, time_range)
+            if not metrics:
+                continue
+
+            # استخراج قيم استهلاك الموارد
+            resource_values = []
+
+            if resource_type == "cpu":
+                resource_values = [m.get("resources", {}).get("cpu_percent", 0)
+                                   for m in metrics if "resources" in m]
+            elif resource_type == "memory":
+                resource_values = [
+                    m.get(
+                        "resources",
+                        {}).get(
+                        "memory_bytes",
+                        0) for m in metrics if "resources" in m]
+            elif resource_type == "disk":
+                resource_values = [m.get("resources", {}).get("disk_bytes", 0)
+                                   for m in metrics if "resources" in m]
+            elif resource_type == "network":
+                resource_values = [
+                    m.get(
+                        "resources",
+                        {}).get(
+                        "network_bytes_in",
+                        0)
+                    + m.get(
+                        "resources",
+                        {}).get(
+                        "network_bytes_out",
+                        0) for m in metrics if "resources" in m]
+
+            if not resource_values:
+                continue
+
+            avg_resource_usage = sum(resource_values) / len(resource_values)
+
+            # الحصول على العتبة المناسبة من التكوين
+            if resource_type == "cpu":
+                resource_threshold = threshold or self.config.get(
+                    "thresholds", {}).get("cpu_percent", 80)
+            elif resource_type == "memory":
+                # تحويل العتبة من نسبة مئوية إلى بايت
+                system_memory = psutil.virtual_memory().total
+                percent_threshold = threshold or self.config.get(
+                    "thresholds", {}).get("memory_percent", 80)
+                resource_threshold = system_memory * (percent_threshold / 100)
+            else:
+                # استخدام العتبة المقدمة أو قيمة افتراضية عالية
+                resource_threshold = threshold or float('inf')
+
+            # التحقق من تجاوز العتبة
+            if avg_resource_usage > resource_threshold:
+                resource_intensive_modules.append(module_id)
+
+        return resource_intensive_modules
+
+    def generate_performance_recommendations(
+            self, entity_id: str = None) -> List[Dict[str, Any]]:
+        """
+        توفير توصيات لتحسين الأداء
+
+        Args:
+            entity_id (str, optional): معرف الكيان (module_id, ai_model_id, db_name)
+
+        Returns:
+            List[Dict[str, Any]]: قائمة التوصيات
+        """
+        recommendations = []
+
+        # تحديد المديولات ذات الأداء المنخفض
+        low_performing_modules = self.identify_low_performing_modules()
+        for module_id in low_performing_modules:
+            if entity_id and module_id != entity_id:
+                continue
+
+            recommendations.append({
+                "entity_id": module_id,
+                "entity_type": "module",
+                "issue": "low_performance",
+                "metric": "response_time",
+                "recommendation": "تحسين أداء المديول عن طريق تحسين الخوارزميات أو زيادة الموارد المخصصة له."
+            })
+
+        # تحديد المديولات التي تستهلك موارد CPU كثيرة
+        cpu_intensive_modules = self.identify_resource_intensive_modules("cpu")
+        for module_id in cpu_intensive_modules:
+            if entity_id and module_id != entity_id:
+                continue
+
+            recommendations.append({
+                "entity_id": module_id,
+                "entity_type": "module",
+                "issue": "high_resource_usage",
+                "metric": "cpu",
+                "recommendation": "تقليل استهلاك CPU عن طريق تحسين الخوارزميات أو جدولة المهام بشكل أفضل."
+            })
+
+        # تحديد المديولات التي تستهلك ذاكرة كثيرة
+        memory_intensive_modules = self.identify_resource_intensive_modules(
+            "memory")
+        for module_id in memory_intensive_modules:
+            if entity_id and module_id != entity_id:
+                continue
+
+            recommendations.append({
+                "entity_id": module_id,
+                "entity_type": "module",
+                "issue": "high_resource_usage",
+                "metric": "memory",
+                "recommendation": "تقليل استهلاك الذاكرة عن طريق تحسين إدارة الموارد أو تنظيف الذاكرة المؤقتة."
+            })
+
+        # يمكن إضافة المزيد من التوصيات حسب الحاجة
+
+        return recommendations
+
+
+class PerformanceMonitor:
+    """مراقب الأداء - الواجهة الرئيسية لنظام مراقبة الأداء"""
+
+    def __init__(self, config_path=None):
+        """
+        تهيئة مراقب الأداء
+
+        Args:
+            config_path (str, optional): مسار ملف التكوين. Defaults to None.
+        """
+        self.config = self._load_config(config_path)
+        self.data_store = PerformanceDataStore(
+            self.config.get("data_store", {}))
+        self.data_collector = PerformanceDataCollector(config_path)
+        self.data_collector.set_data_store(self.data_store)
+        self.analyzer = PerformanceAnalyzer(self.data_store, config_path)
+
+        # تكوين Langfuse إذا كان متاحاً
+        self.langfuse_client = None
+        if LANGFUSE_AVAILABLE:
+            try:
+                langfuse_config = self.config.get("langfuse", {})
+                self.langfuse_client = langfuse.Langfuse(
+                    public_key=langfuse_config.get(
+                        "public_key", ""), secret_key=langfuse_config.get(
+                        "secret_key", ""), host=langfuse_config.get(
+                        "host", "https://cloud.langfuse.com"))
+                logger.info("Langfuse client initialized successfully.")
+            except Exception as e:
+                logger.error(f"Error initializing Langfuse client: {e}")
+
+        # تكوين Evidently إذا كان متاحاً
+        self.evidently_enabled = EVIDENTLY_AVAILABLE
+        if self.evidently_enabled is not None:
+            logger.info("Evidently library initialized successfully.")
+
+    def _load_config(self, config_path):
+        """تحميل إعدادات التكوين من ملف"""
+        default_config = {
+            "data_store": {
+                "metrics_dir": "/home/ubuntu/ai_web_organized/data/metrics"
+            },
+            "collection_interval": 60,
+            "langfuse": {
+                "public_key": "",
+                "secret_key": "",
+                "host": "https://cloud.langfuse.com"
+            },
+            "alert_thresholds": {
+                "cpu_percent": 80,
+                "memory_percent": 80,
+                "disk_percent": 90,
+                "response_time_ms": 500,
+                "error_rate": 0.05
+            }
+        }
+
+        if config_path and os.path.exists(config_path):
+            try:
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                    # دمج الإعدادات المخصصة مع الإعدادات الافتراضية
+                    for key, value in default_config.items():
+                        if key not in config:
+                            config[key] = value
+                        elif isinstance(value, dict):
+                            for subkey, subvalue in value.items():
+                                if subkey not in config[key]:
+                                    config[key][subkey] = subvalue
+                    return config
+            except Exception as e:
+                logger.error(f"Error loading config from {config_path}: {e}")
+                return default_config
+        else:
+            return default_config
+
+    def start(self, interval=None):
+        """
+        بدء مراقبة الأداء
+
+        Args:
+            interval (int, optional): الفاصل الزمني بين عمليات الجمع (بالثواني).
+                                     Defaults to config value.
+        """
+        if interval is None:
+            interval = self.config.get("collection_interval", 60)
+
+        logger.info(
+            f"Starting performance monitoring with interval {interval} seconds.")
+        self.data_collector.start_collection(interval)
+
+    def stop(self):
+        """إيقاف مراقبة الأداء"""
+        logger.info("Stopping performance monitoring.")
+        self.data_collector.stop_collection()
+
+    def get_system_status(self) -> Dict[str, Any]:
+        """
+        الحصول على حالة النظام الحالية
+
+        Returns:
+            Dict[str, Any]: حالة النظام
+        """
+        system_metrics = self.data_store.get_latest_metrics("system")
+        if not system_metrics:
+            return {
+                "status": "unknown",
+                "message": "No system metrics available"}
+
+        # تحديد حالة النظام بناءً على المقاييس
+        status = "healthy"
+        issues = []
+
+        # التحقق من استخدام CPU
+        cpu_percent = system_metrics.get("cpu", {}).get("total_percent", 0)
+        cpu_threshold = self.config.get(
+            "alert_thresholds", {}).get(
+            "cpu_percent", 80)
+        if cpu_percent > cpu_threshold:
+            status = "warning"
+            issues.append(
+                f"CPU usage is high: {cpu_percent:.1f}% (threshold: {cpu_threshold}%)")
+
+        # التحقق من استخدام الذاكرة
+        memory_percent = system_metrics.get("memory", {}).get("percent", 0)
+        memory_threshold = self.config.get(
+            "alert_thresholds", {}).get(
+            "memory_percent", 80)
+        if memory_percent > memory_threshold:
+            status = "warning"
+            issues.append(
+                f"Memory usage is high: {memory_percent:.1f}% (threshold: {memory_threshold}%)")
+
+        # التحقق من استخدام القرص
+        disk_percent = system_metrics.get("disk", {}).get("percent", 0)
+        disk_threshold = self.config.get(
+            "alert_thresholds", {}).get(
+            "disk_percent", 90)
+        if disk_percent > disk_threshold:
+            status = "warning"
+            issues.append(
+                f"Disk usage is high: {disk_percent:.1f}% (threshold: {disk_threshold}%)")
+
+        # إذا كانت هناك مشكلات متعددة، قد تكون الحالة حرجة
+        if len(issues) >= 2:
+            status = "critical"
+
+        return {
+            "status": status,
+            "timestamp": datetime.datetime.now().isoformat(),
+            "metrics": system_metrics,
+            "issues": issues
+        }
+
+    def get_module_status(self, module_id: str) -> Dict[str, Any]:
+        """
+        الحصول على حالة مديول محدد
+
+        Args:
+            module_id (str): معرف المديول
+
+        Returns:
+            Dict[str, Any]: حالة المديول
+        """
+        module_metrics = self.data_store.get_latest_metrics(
+            "module", module_id)
+        if not module_metrics:
+            return {
+                "status": "unknown",
+                "message": f"No metrics available for module {module_id}"}
+
+        # استخراج حالة المديول من المقاييس
+        status = module_metrics.get("status", "unknown")
+
+        # التحقق من مشكلات الأداء
+        issues = []
+
+        # التحقق من وقت الاستجابة
+        response_time = module_metrics.get(
+            "performance", {}).get(
+            "response_time_ms", 0)
+        response_time_threshold = self.config.get(
+            "alert_thresholds", {}).get(
+            "response_time_ms", 500)
+        if response_time > response_time_threshold:
+            issues.append(
+                f"Response time is high: {response_time} ms (threshold: {response_time_threshold} ms)")
+
+        # التحقق من معدل الأخطاء
+        error_rate = module_metrics.get("performance", {}).get("error_rate", 0)
+        error_rate_threshold = self.config.get(
+            "alert_thresholds", {}).get(
+            "error_rate", 0.05)
+        if error_rate > error_rate_threshold:
+            issues.append(
+                f"Error rate is high: {error_rate:.1%} (threshold: {error_rate_threshold:.1%})")
+
+        return {
+            "module_id": module_id,
+            "status": status,
+            "timestamp": datetime.datetime.now().isoformat(),
+            "metrics": module_metrics,
+            "issues": issues
+        }
+
+    def get_ai_model_status(self, ai_model_id: str) -> Dict[str, Any]:
+        """
+        الحصول على حالة نموذج ذكاء صناعي محدد
+
+        Args:
+            ai_model_id (str): معرف نموذج الذكاء الصناعي
+
+        Returns:
+            Dict[str, Any]: حالة نموذج الذكاء الصناعي
+        """
+        ai_metrics = self.data_store.get_latest_metrics("ai", ai_model_id)
+        if not ai_metrics:
+            return {
+                "status": "unknown",
+                "message": f"No metrics available for AI model {ai_model_id}"}
+
+        # استخراج حالة النموذج من المقاييس
+        status = ai_metrics.get("status", "unknown")
+
+        # التحقق من مشكلات الأداء
+        issues = []
+
+        # التحقق من وقت الاستدلال
+        inference_time = ai_metrics.get(
+            "performance", {}).get(
+            "inference_time_ms", 0)
+        inference_time_threshold = self.config.get(
+            "alert_thresholds", {}).get(
+            "inference_time_ms", 1000)
+        if inference_time > inference_time_threshold:
+            issues.append(
+                f"Inference time is high: {inference_time} ms (threshold: {inference_time_threshold} ms)")
+
+        # التحقق من الدقة
+        accuracy = ai_metrics.get("performance", {}).get("accuracy", 0)
+        accuracy_threshold = self.config.get(
+            "alert_thresholds", {}).get(
+            "accuracy", 0.8)
+        if accuracy < accuracy_threshold:
+            issues.append(
+                f"Accuracy is low: {accuracy:.1%} (threshold: {accuracy_threshold:.1%})")
+
+        return {
+            "ai_model_id": ai_model_id,
+            "status": status,
+            "timestamp": datetime.datetime.now().isoformat(),
+            "metrics": ai_metrics,
+            "issues": issues
+        }
+
+    def check_for_alerts(self) -> List[Dict[str, Any]]:
+        """
+        التحقق من وجود تنبيهات
+
+        Returns:
+            List[Dict[str, Any]]: قائمة التنبيهات
+        """
+        alerts = []
+
+        # التحقق من حالة النظام
+        system_status = self.get_system_status()
+        if system_status.get("status") in ["warning", "critical"]:
+            for issue in system_status.get("issues", []):
+                alerts.append({
+                    "timestamp": datetime.datetime.now().isoformat(),
+                    "severity": "critical" if system_status.get("status") == "critical" else "warning",
+                    "category": "system",
+                    "message": issue
+                })
+
+        # التحقق من حالة المديولات
+        for module_id in self.data_collector.get_active_modules():
+            module_status = self.get_module_status(module_id)
+            if module_status.get("issues"):
+                for issue in module_status.get("issues", []):
+                    alerts.append({
+                        "timestamp": datetime.datetime.now().isoformat(),
+                        "severity": "warning",
+                        "category": "module",
+                        "entity_id": module_id,
+                        "message": issue
+                    })
+
+        # التحقق من حالة نماذج الذكاء الصناعي
+        for ai_model_id in self.data_collector.get_active_ai_models():
+            ai_status = self.get_ai_model_status(ai_model_id)
+            if ai_status.get("issues"):
+                for issue in ai_status.get("issues", []):
+                    alerts.append({
+                        "timestamp": datetime.datetime.now().isoformat(),
+                        "severity": "warning",
+                        "category": "ai",
+                        "entity_id": ai_model_id,
+                        "message": issue
+                    })
+
+        # التحقق من الانحرافات في الأداء
+        system_anomalies = self.analyzer.detect_performance_anomalies(
+            "system", time_range="last_hour")
+        for anomaly in system_anomalies:
+            alerts.append({
+                "timestamp": anomaly.get("timestamp", datetime.datetime.now().isoformat()),
+                "severity": "warning",
+                "category": "system",
+                "metric": anomaly.get("metric_name"),
+                "message": f"Anomaly detected in {anomaly.get('metric_name')}: value={anomaly.get('value')}, threshold={anomaly.get('threshold', 'N/A')}"
+            })
+
+        return alerts
+
+    def track_ai_performance(self,
+                             trace_id: str,
+                             model_name: str,
+                             prompt: str,
+                             completion: str,
+                             metadata: Dict[str,
+                                            Any] = None) -> str:
+        """
+        تتبع أداء الذكاء الصناعي باستخدام Langfuse
+
+        Args:
+            trace_id (str): معرف التتبع
+            model_name (str): اسم النموذج
+            prompt (str): النص المدخل
+            completion (str): النص المخرج
+            metadata (Dict[str, Any], optional): بيانات إضافية. Defaults to None.
+
+        Returns:
+            str: معرف الملاحظة
+        """
+        if not LANGFUSE_AVAILABLE or not self.langfuse_client:
+            logger.warning(
+                "Langfuse is not available. AI performance tracking skipped.")
+            return None
+
+        try:
+            # إنشاء تتبع جديد أو استخدام تتبع موجود
+            trace = self.langfuse_client.trace(
+                id=trace_id,
+                name=f"{model_name}_trace",
+                metadata=metadata or {}
+            )
+
+            # إضافة ملاحظة للتتبع
+            observation = trace.observation(
+                name=f"{model_name}_generation",
+                input=prompt,
+                output=completion,
+                model=model_name,
+                metadata=metadata or {}
+            )
+
+            logger.info(
+                f"Tracked AI performance for model {model_name} with trace_id={trace_id}, observation_id={observation.id}")
+            return observation.id
+        except Exception as e:
+            logger.error(f"Error tracking AI performance: {e}")
+            return None
+
+    def monitor_data_drift(self, reference_data, current_data,
+                           model_name: str) -> Dict[str, Any]:
+        """
+        مراقبة انحراف البيانات باستخدام Evidently
+
+        Args:
+            reference_data: البيانات المرجعية
+            current_data: البيانات الحالية
+            model_name (str): اسم النموذج
+
+        Returns:
+            Dict[str, Any]: نتائج مراقبة انحراف البيانات
+        """
+        if not self.evidently_enabled:
+            logger.warning(
+                "Evidently is not available. Data drift monitoring skipped.")
+            return {"status": "error", "message": "Evidently is not available"}
+
+        try:
+            # إنشاء لوحة معلومات انحراف البيانات
+            dashboard = Dashboard(tabs=[DataDriftTab()])
+            dashboard.calculate(reference_data, current_data)
+
+            # حفظ التقرير
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            report_dir = os.path.join(
+                self.config.get(
+                    "data_store",
+                    {}).get(
+                    "metrics_dir",
+                    ""),
+                "evidently_reports")
+            os.makedirs(report_dir, exist_ok=True)
+            report_path = os.path.join(
+                report_dir, f"data_drift_{model_name}_{timestamp}.html")
+            dashboard.save(report_path)
+
+            # استخراج ملخص التقرير
+            data_drift_result = dashboard.get_tab(tab_class=DataDriftTab)
+            drift_detected = data_drift_result.get_result(
+            )["data_drift"]["data_drift_detected"]
+
+            result = {
+                "status": "success",
+                "model_name": model_name,
+                "timestamp": datetime.datetime.now().isoformat(),
+                "drift_detected": drift_detected,
+                "report_path": report_path,
+                "summary": {
+                    "number_of_columns": len(
+                        data_drift_result.get_result()["data_drift"]["data"]["metrics"]),
+                    "drifted_columns": sum(
+                        1 for col in data_drift_result.get_result()["data_drift"]["data"]["metrics"] if col["drift_detected"])}}
+
+            logger.info(
+                f"Monitored data drift for model {model_name}: drift_detected={drift_detected}")
+            return result
+        except Exception as e:
+            logger.error(f"Error monitoring data drift: {e}")
+            return {"status": "error", "message": str(e)}
+
+    def generate_performance_report(self,
+                                    report_type: str = "system",
+                                    entity_id: str = None,
+                                    time_range: str = "last_day") -> Dict[str,
+                                                                          Any]:
+        """
+        إنشاء تقرير أداء
+
+        Args:
+            report_type (str, optional): نوع التقرير (system, module, ai, database). Defaults to "system".
+            entity_id (str, optional): معرف الكيان (module_id, ai_model_id, db_name). Defaults to None.
+            time_range (str, optional): نطاق زمني للبيانات. Defaults to "last_day".
+
+        Returns:
+            Dict[str, Any]: تقرير الأداء
+        """
+        report = {
+            "type": report_type,
+            "entity_id": entity_id,
+            "time_range": time_range,
+            "timestamp": datetime.datetime.now().isoformat(),
+            "metrics": [],
+            "trends": {},
+            "anomalies": [],
+            "recommendations": []
+        }
+
+        # جمع المقاييس
+        metrics = self.data_store.get_metrics(
+            report_type, entity_id, time_range)
+        report["metrics"] = metrics
+
+        # تحليل الاتجاهات
+        trends = self.analyzer.analyze_performance_trend(
+            report_type, entity_id, time_range)
+        report["trends"] = trends
+
+        # اكتشاف الانحرافات
+        anomalies = self.analyzer.detect_performance_anomalies(
+            report_type, entity_id, time_range)
+        report["anomalies"] = anomalies
+
+        # توفير التوصيات
+        if report_type == "module" or report_type == "ai":
+            recommendations = self.analyzer.generate_performance_recommendations(
+                entity_id)
+            report["recommendations"] = recommendations
+
+        return report
+
+    def clean_old_data(self, retention_period: int = 30) -> int:
+        """
+        تنظيف البيانات القديمة
+
+        Args:
+            retention_period (int, optional): فترة الاحتفاظ بالبيانات (بالأيام). Defaults to 30.
+
+        Returns:
+            int: عدد الملفات التي تم حذفها
+        """
+        return self.data_store.clean_old_data(retention_period)
+
+
+# مثال للاستخدام
+if __name__ == "__main__":
+    # إنشاء مراقب الأداء
+    monitor = PerformanceMonitor()
+
+    # بدء مراقبة الأداء
+    monitor.start(interval=10)  # جمع البيانات كل 10 ثوانٍ
+
+    try:
+        # انتظار لجمع بعض البيانات
+        print("Collecting performance data for 30 seconds...")
+        time.sleep(30)
+
+        # الحصول على حالة النظام
+        system_status = monitor.get_system_status()
+        print("\nSystem Status:")
+        print(f"Status: {system_status['status']}")
+        print(
+            f"CPU Usage: {system_status['metrics'].get('cpu', {}).get('total_percent', 0):.1f}%")
+        print(
+            f"Memory Usage: {system_status['metrics'].get('memory', {}).get('percent', 0):.1f}%")
+        print(
+            f"Disk Usage: {system_status['metrics'].get('disk', {}).get('percent', 0):.1f}%")
+
+        # التحقق من وجود تنبيهات
+        alerts = monitor.check_for_alerts()
+        if alerts:
+            print("\nAlerts:")
+            for alert in alerts:
+                print(f"[{alert['severity']}] {alert['message']}")
+        else:
+            print("\nNo alerts detected.")
+
+        # إنشاء تقرير أداء
+        report = monitor.generate_performance_report()
+        print("\nPerformance Report:")
+        print(f"Timestamp: {report['timestamp']}")
+        print(f"Metrics Count: {len(report['metrics'])}")
+        print(f"Anomalies Count: {len(report['anomalies'])}")
+
+    finally:
+        # إيقاف مراقبة الأداء
+        monitor.stop()
+        print("\nPerformance monitoring stopped.")

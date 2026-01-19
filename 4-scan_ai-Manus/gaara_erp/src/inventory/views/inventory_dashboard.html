@@ -1,0 +1,580 @@
+<!-- 
+واجهة المستخدم لوحدة المخزون في نظام Gaara ERP
+هذا الملف يحتوي على مكونات واجهة المستخدم الرئيسية لإدارة المخزون
+-->
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المخزون - نظام Gaara ERP</title>
+    <link rel="stylesheet" href="/static/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="/static/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <style>
+        .inventory-dashboard {
+            padding: 20px;
+        }
+        .card-stats {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        .card-stats:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            padding: 15px;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .bg-items {
+            background-color: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+        .bg-warehouses {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        .bg-movements {
+            background-color: rgba(155, 89, 182, 0.2);
+            color: #9b59b6;
+        }
+        .bg-alerts {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+        .table-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .action-buttons .btn {
+            margin-right: 5px;
+        }
+        .filter-section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- القائمة الجانبية -->
+    <div class="sidebar">
+        <!-- محتوى القائمة الجانبية -->
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+        <!-- شريط التنقل العلوي -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">نظام Gaara ERP</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">الرئيسية</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="inventoryDropdown" role="button" data-bs-toggle="dropdown">
+                                المخزون
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/inventory/items">الأصناف</a></li>
+                                <li><a class="dropdown-item" href="/inventory/warehouses">المستودعات</a></li>
+                                <li><a class="dropdown-item" href="/inventory/movements">حركات المخزون</a></li>
+                                <li><a class="dropdown-item" href="/inventory/counts">الجرد</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/inventory/reports">التقارير</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="accountsDropdown" role="button" data-bs-toggle="dropdown">
+                                الحسابات
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/accounts/chart">دليل الحسابات</a></li>
+                                <li><a class="dropdown-item" href="/accounts/journals">القيود اليومية</a></li>
+                                <li><a class="dropdown-item" href="/accounts/ledger">دفتر الأستاذ</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/accounts/reports">التقارير المالية</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                                <i class="fas fa-user"></i> المستخدم
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/profile">الملف الشخصي</a></li>
+                                <li><a class="dropdown-item" href="/settings">الإعدادات</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/logout">تسجيل الخروج</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- محتوى الصفحة -->
+        <div class="container-fluid inventory-dashboard">
+            <h1 class="mb-4">لوحة تحكم المخزون</h1>
+            
+            <!-- بطاقات الإحصائيات -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card card-stats">
+                        <div class="card-body text-center">
+                            <div class="card-icon bg-items mx-auto">
+                                <i class="fas fa-boxes"></i>
+                            </div>
+                            <h5 class="card-title">إجمالي الأصناف</h5>
+                            <h2 class="card-text" id="total-items">1,245</h2>
+                            <p class="text-muted">صنف في المخزون</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-stats">
+                        <div class="card-body text-center">
+                            <div class="card-icon bg-warehouses mx-auto">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <h5 class="card-title">المستودعات</h5>
+                            <h2 class="card-text" id="total-warehouses">8</h2>
+                            <p class="text-muted">مستودع نشط</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-stats">
+                        <div class="card-body text-center">
+                            <div class="card-icon bg-movements mx-auto">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h5 class="card-title">حركات اليوم</h5>
+                            <h2 class="card-text" id="today-movements">37</h2>
+                            <p class="text-muted">حركة مخزون</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-stats">
+                        <div class="card-body text-center">
+                            <div class="card-icon bg-alerts mx-auto">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <h5 class="card-title">تنبيهات المخزون</h5>
+                            <h2 class="card-text" id="stock-alerts">12</h2>
+                            <p class="text-muted">صنف تحت الحد الأدنى</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قسم التصفية -->
+            <div class="filter-section">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="warehouse-filter">المستودع</label>
+                            <select class="form-select" id="warehouse-filter">
+                                <option value="">جميع المستودعات</option>
+                                <option value="1">المستودع الرئيسي</option>
+                                <option value="2">مستودع المواد الخام</option>
+                                <option value="3">مستودع المنتجات النهائية</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="category-filter">الفئة</label>
+                            <select class="form-select" id="category-filter">
+                                <option value="">جميع الفئات</option>
+                                <option value="1">مواد خام</option>
+                                <option value="2">منتجات زراعية</option>
+                                <option value="3">أدوات ومعدات</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="search-items">بحث</label>
+                            <input type="text" class="form-control" id="search-items" placeholder="ابحث عن صنف...">
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button class="btn btn-primary w-100" id="apply-filters">تطبيق</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- جدول الأصناف -->
+            <div class="table-container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4>الأصناف في المخزون</h4>
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                        <i class="fas fa-plus"></i> إضافة صنف
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>الكود</th>
+                                <th>اسم الصنف</th>
+                                <th>الفئة</th>
+                                <th>المستودع</th>
+                                <th>الكمية المتاحة</th>
+                                <th>الحد الأدنى</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="items-table-body">
+                            <tr>
+                                <td>ITM001</td>
+                                <td>بذور طماطم</td>
+                                <td>بذور</td>
+                                <td>المستودع الرئيسي</td>
+                                <td>250 كجم</td>
+                                <td>50 كجم</td>
+                                <td><span class="badge bg-success">متوفر</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ITM002</td>
+                                <td>سماد عضوي</td>
+                                <td>أسمدة</td>
+                                <td>مستودع المواد الخام</td>
+                                <td>120 كجم</td>
+                                <td>200 كجم</td>
+                                <td><span class="badge bg-danger">تحت الحد الأدنى</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ITM003</td>
+                                <td>مبيد حشري</td>
+                                <td>مبيدات</td>
+                                <td>مستودع المواد الخام</td>
+                                <td>45 لتر</td>
+                                <td>20 لتر</td>
+                                <td><span class="badge bg-success">متوفر</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ITM004</td>
+                                <td>شتلات خيار</td>
+                                <td>شتلات</td>
+                                <td>المستودع الرئيسي</td>
+                                <td>1500 شتلة</td>
+                                <td>500 شتلة</td>
+                                <td><span class="badge bg-success">متوفر</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ITM005</td>
+                                <td>أدوات زراعية</td>
+                                <td>معدات</td>
+                                <td>مستودع المعدات</td>
+                                <td>35 قطعة</td>
+                                <td>15 قطعة</td>
+                                <td><span class="badge bg-success">متوفر</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">السابق</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">التالي</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <!-- آخر حركات المخزون -->
+            <div class="table-container">
+                <h4>آخر حركات المخزون</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>رقم الحركة</th>
+                                <th>التاريخ</th>
+                                <th>نوع الحركة</th>
+                                <th>الصنف</th>
+                                <th>المستودع</th>
+                                <th>الكمية</th>
+                                <th>المستخدم</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="movements-table-body">
+                            <tr>
+                                <td>MOV001</td>
+                                <td>2025-04-27 10:15</td>
+                                <td><span class="badge bg-success">استلام</span></td>
+                                <td>بذور طماطم</td>
+                                <td>المستودع الرئيسي</td>
+                                <td>+100 كجم</td>
+                                <td>أحمد محمد</td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>MOV002</td>
+                                <td>2025-04-27 11:30</td>
+                                <td><span class="badge bg-danger">صرف</span></td>
+                                <td>سماد عضوي</td>
+                                <td>مستودع المواد الخام</td>
+                                <td>-50 كجم</td>
+                                <td>محمد علي</td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>MOV003</td>
+                                <td>2025-04-27 13:45</td>
+                                <td><span class="badge bg-info">تحويل</span></td>
+                                <td>شتلات خيار</td>
+                                <td>المستودع الرئيسي → مستودع المنتجات النهائية</td>
+                                <td>500 شتلة</td>
+                                <td>سارة أحمد</td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <a href="/inventory/movements" class="btn btn-outline-primary">عرض جميع الحركات</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة صنف جديد -->
+    <div class="modal fade" id="addItemModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إضافة صنف جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-item-form">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="item-code" class="form-label">كود الصنف</label>
+                                <input type="text" class="form-control" id="item-code" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="item-name" class="form-label">اسم الصنف</label>
+                                <input type="text" class="form-control" id="item-name" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="item-category" class="form-label">الفئة</label>
+                                <select class="form-select" id="item-category" required>
+                                    <option value="">اختر الفئة</option>
+                                    <option value="1">بذور</option>
+                                    <option value="2">أسمدة</option>
+                                    <option value="3">مبيدات</option>
+                                    <option value="4">شتلات</option>
+                                    <option value="5">معدات</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="item-unit" class="form-label">وحدة القياس</label>
+                                <select class="form-select" id="item-unit" required>
+                                    <option value="">اختر الوحدة</option>
+                                    <option value="kg">كيلوجرام</option>
+                                    <option value="liter">لتر</option>
+                                    <option value="piece">قطعة</option>
+                                    <option value="seedling">شتلة</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="item-min-qty" class="form-label">الحد الأدنى للمخزون</label>
+                                <input type="number" class="form-control" id="item-min-qty" min="0" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="item-max-qty" class="form-label">الحد الأقصى للمخزون</label>
+                                <input type="number" class="form-control" id="item-max-qty" min="0">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="item-purchase-price" class="form-label">سعر الشراء</label>
+                                <input type="number" class="form-control" id="item-purchase-price" min="0" step="0.01" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="item-sale-price" class="form-label">سعر البيع</label>
+                                <input type="number" class="form-control" id="item-sale-price" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="item-description" class="form-label">الوصف</label>
+                            <textarea class="form-control" id="item-description" rows="3"></textarea>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="item-agricultural">
+                            <label class="form-check-label" for="item-agricultural">
+                                صنف زراعي (متكامل مع النظام الزراعي)
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" id="save-item">حفظ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- سكريبت جافاسكريبت -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/chart.min.js"></script>
+    <script>
+        // سكريبت لتحميل بيانات الصفحة
+        $(document).ready(function() {
+            // تهيئة الصفحة
+            loadDashboardData();
+            
+            // حدث النقر على زر تطبيق التصفية
+            $('#apply-filters').click(function() {
+                loadItemsData();
+            });
+            
+            // حدث النقر على زر حفظ الصنف
+            $('#save-item').click(function() {
+                saveNewItem();
+            });
+        });
+        
+        // دالة لتحميل بيانات لوحة التحكم
+        function loadDashboardData() {
+            // في الإصدار النهائي، سيتم استبدال هذا بطلب AJAX لجلب البيانات من الخادم
+            console.log('تحميل بيانات لوحة التحكم...');
+            
+            // محاكاة تحميل البيانات
+            setTimeout(function() {
+                $('#total-items').text('1,245');
+                $('#total-warehouses').text('8');
+                $('#today-movements').text('37');
+                $('#stock-alerts').text('12');
+            }, 500);
+        }
+        
+        // دالة لتحميل بيانات الأصناف
+        function loadItemsData() {
+            // في الإصدار النهائي، سيتم استبدال هذا بطلب AJAX لجلب البيانات من الخادم
+            console.log('تحميل بيانات الأصناف...');
+            
+            // الحصول على قيم التصفية
+            const warehouseId = $('#warehouse-filter').val();
+            const categoryId = $('#category-filter').val();
+            const searchTerm = $('#search-items').val();
+            
+            console.log(`تصفية: المستودع=${warehouseId}, الفئة=${categoryId}, البحث=${searchTerm}`);
+            
+            // محاكاة تحميل البيانات
+            // في التطبيق الفعلي، سيتم استبدال هذا بطلب AJAX
+        }
+        
+        // دالة لحفظ صنف جديد
+        function saveNewItem() {
+            // في الإصدار النهائي، سيتم استبدال هذا بطلب AJAX لإرسال البيانات إلى الخادم
+            console.log('حفظ صنف جديد...');
+            
+            // الحصول على قيم النموذج
+            const itemData = {
+                code: $('#item-code').val(),
+                name: $('#item-name').val(),
+                categoryId: $('#item-category').val(),
+                unit: $('#item-unit').val(),
+                minQty: $('#item-min-qty').val(),
+                maxQty: $('#item-max-qty').val(),
+                purchasePrice: $('#item-purchase-price').val(),
+                salePrice: $('#item-sale-price').val(),
+                description: $('#item-description').val(),
+                isAgricultural: $('#item-agricultural').is(':checked')
+            };
+            
+            console.log('بيانات الصنف:', itemData);
+            
+            // محاكاة الحفظ الناجح
+            setTimeout(function() {
+                // إغلاق النافذة المنبثقة
+                $('#addItemModal').modal('hide');
+                
+                // إعادة تحميل بيانات الأصناف
+                loadItemsData();
+                
+                // عرض رسالة نجاح (في التطبيق الفعلي)
+                alert('تم حفظ الصنف بنجاح');
+                
+                // إعادة تعيين النموذج
+                $('#add-item-form')[0].reset();
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

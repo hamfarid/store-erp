@@ -1,0 +1,1312 @@
+# /home/ubuntu/ai_web_organized/src/modules/module_shutdown/ai_resource_monitor.py
+
+"""
+
+مراقب موارد الذكاء الصناعي (AI Resource Monitor)
+
+هذه الوحدة مسؤولة عن مراقبة استهلاك موارد الذكاء الصناعي بشكل دوري،
+وتوفير واجهة برمجية للتكامل مع منظومة الإغلاق والتعليق.
+"""
+
+import os
+
+import time
+import json
+import logging
+import threading
+import psutil
+import requests
+from typing import Dict, List, Any, Optional, Callable
+from datetime import datetime
+
+# استيراد مدير المديولات ومحدد الأولويات ومنفذ الإغلاق الآمن
+from modules.module_shutdown.module_manager import ModuleManager, ModuleInfo
+from modules.module_shutdown.priority_determiner import PriorityDeterminer, ShutdownReason
+from modules.module_shutdown.safe_shutdown_executor import SafeShutdownExecutor, ShutdownStrategy
+
+# إعداد التسجيل
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger('ai_resource_monitor')
+
+
+class ResourceAlert:
+    """
+    فئة تمثل تنبيهات الموارد.
+    """
+    NORMAL = "normal"        # حالة طبيعية
+    WARNING = "warning"      # تحذير
+    CRITICAL = "critical"    # حالة حرجة
+    EMERGENCY = "emergency"  # حالة طوارئ
+
+
+class AIResourceType:
+    """
+    فئة تمثل أنواع موارد الذكاء الصناعي.
+    """
+    CPU = "cpu"              # وحدة المعالجة المركزية
+    MEMORY = "memory"        # الذاكرة
+    GPU = "gpu"              # وحدة معالجة الرسومات
+    TOKENS = "tokens"        # الرموز المستهلكة
+    API_CALLS = "api_calls"  # استدعاءات واجهة برمجة التطبيقات
+    STORAGE = "storage"      # التخزين
+    NETWORK = "network"      # الشبكة
+
+
+class AIResourceData:
+    """
+    فئة تمثل بيانات موارد الذكاء الصناعي.
+    """
+
+    def __init__(self, ai_module_id: str, name: str = None):
+        """
+        تهيئة بيانات موارد الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            name: اسم مديول الذكاء الصناعي
+        """
+        self.ai_module_id = ai_module_id
+        self.name = name or ai_module_id
+        self.timestamp = datetime.now()
+        self.resources = {
+            AIResourceType.CPU: 0.0,
+            AIResourceType.MEMORY: 0.0,
+            AIResourceType.GPU: 0.0,
+            AIResourceType.TOKENS: 0,
+            AIResourceType.API_CALLS: 0,
+            AIResourceType.STORAGE: 0.0,
+            AIResourceType.NETWORK: 0.0
+        }
+        self.limits = {
+            AIResourceType.CPU: 80.0,
+            AIResourceType.MEMORY: 80.0,
+            AIResourceType.GPU: 80.0,
+            AIResourceType.TOKENS: 1000000,
+            AIResourceType.API_CALLS: 10000,
+            AIResourceType.STORAGE: 80.0,
+            AIResourceType.NETWORK: 80.0
+        }
+        self.status = ResourceAlert.NORMAL
+        self.process_id = None
+        self.is_active = True
+        self.last_activity = datetime.now()
+        self.error_message = None
+
+
+class AIResourceMonitor:
+    """
+    فئة مراقب موارد الذكاء الصناعي المسؤولة عن مراقبة استهلاك موارد الذكاء الصناعي.
+    """
+
+    def __init__(self, module_manager: ModuleManager = None, priority_determiner: PriorityDeterminer = None,
+                 shutdown_executor: SafeShutdownExecutor = None, config_path: str = None):
+        """
+        تهيئة مراقب موارد الذكاء الصناعي.
+
+        Args:
+            module_manager: مدير المديولات
+            priority_determiner: محدد الأولويات
+            shutdown_executor: منفذ الإغلاق الآمن
+            config_path: مسار ملف التكوين
+        """
+        self.module_manager = module_manager
+        self.priority_determiner = priority_determiner
+        self.shutdown_executor = shutdown_executor
+        self.config_path = config_path or "/home/ubuntu/ai_web_organized/config/ai_resource_monitor.json"
+        self.config = {
+            "monitoring_interval": 30,  # ثواني
+            "alert_thresholds""warning": {
+                    AIResourceType.CPU: 70.0,
+                    AIResourceType.MEMORY: 70.0,
+                    AIResourceType.GPU: 70.0,
+                    AIResourceType.TOKENS: 800000,
+                    AIResourceType.API_CALLS: 8000,
+                    AIResourceType.STORAGE: 70.0,
+                    AIResourceType.NETWORK: 70.0
+                },
+                "critical": {
+                    AIResourceType.CPU: 85.0,
+                    AIResourceType.MEMORY: 85.0,
+                    AIResourceType.GPU: 85.0,
+                    AIResourceType.TOKENS: 950000,
+                    AIResourceType.API_CALLS: 9500,
+                    AIResourceType.STORAGE: 85.0,
+                    AIResourceType.NETWORK: 85.0
+                },
+                "emergency": {
+                    AIResourceType.CPU: 95.0,
+                    AIResourceType.MEMORY: 95.0,
+                    AIResourceType.GPU: 95.0,
+                    AIResourceType.TOKENS: 990000,
+                    AIResourceType.API_CALLS: 9900,
+                    AIResourceType.STORAGE: 95.0,
+                    AIResourceType.NETWORK: 95.0
+                }
+            },
+            "auto_actions""warning": "notify""critical": "suspend""emergency": "shutdown"
+            },
+            "ai_modules": {},
+            "notification_endpoints""email": """webhook": """telegram": ""
+            },
+            "history_retention_days": 30,
+            "enable_gpu_monitoring": True,
+            "enable_token_monitoring": True,
+            "enable_api_calls_monitoring": True
+        }
+
+        # تحميل التكوين
+        self._load_config()
+
+        # بيانات موارد الذكاء الصناعي
+        self.ai_resources: Dict[str, AIResourceData] = {}
+
+        # سجل التنبيهات
+        self.alert_history: List[Dict[str, Any]] = []
+
+        # حالة المراقبة
+        self.is_monitoring = False
+        self.monitoring_thread = None
+        self.lock = threading.Lock()
+
+        # دوال الاستدعاء للتنبيهات
+        self.alert_callbacks: Dict[str, List[Callable]] = {
+            ResourceAlert.WARNING: [],
+            ResourceAlert.CRITICAL: [],
+            ResourceAlert.EMERGENCY: []
+        }
+
+        logger.info("تم تهيئة مراقب موارد الذكاء الصناعي بنجاح")
+
+    def _load_config(self) -> bool:
+        """
+        تحميل تكوين مراقب موارد الذكاء الصناعي من ملف.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            if not os.path.exists(self.config_path):
+                # إنشاء ملف تكوين افتراضي إذا لم يكن موجودًا
+                os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
+                with open(self.config_path, 'wENCODINGutf-8') as f:
+                    json.dump(self.config, f, ensure_ascii=False, indent=4)
+                logger.info(f"تم إنشاء ملف تكوين افتراضي في {self.config_path}")
+                return True
+
+            with open(self.config_path, 'rENCODINGutf-8') as f:
+                loaded_config = json.load(f)
+
+            # دمج التكوين المحمل مع التكوين الافتراضي
+            for key, value in loaded_config.items():
+                self.config[key] = value
+
+            logger.info(f"تم تحميل تكوين مراقب موارد الذكاء الصناعي من {self.config_path}")
+            return True
+        except Exception as e:
+            logger.error(f"فشل تحميل تكوين مراقب موارد الذكاء الصناعي: {str(e)}")
+            return False
+
+    def _save_config(self) -> bool:
+        """
+        حفظ تكوين مراقب موارد الذكاء الصناعي إلى ملف.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
+            with open(self.config_path, 'wENCODINGutf-8') as f:
+                json.dump(self.config, f, ensure_ascii=False, indent=4)
+
+            logger.info(f"تم حفظ تكوين مراقب موارد الذكاء الصناعي إلى {self.config_path}")
+            return True
+        except Exception as e:
+            logger.error(f"فشل حفظ تكوين مراقب موارد الذكاء الصناعي: {str(e)}")
+            return False
+
+    def update_config(self, **kwargs) -> bool:
+        """
+        تحديث تكوين مراقب موارد الذكاء الصناعي.
+
+        Args:
+            **kwargs: المعلومات المراد تحديثها
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # تحديث التكوين
+            for key, value in kwargs.items():
+                if key in self.config:
+                    self.config[key] = value
+
+            # حفظ التكوين
+            return self._save_config()
+
+    def register_ai_module(self, ai_module_id: str, name: str = None, process_id: int = None,
+                           resource_limits: Dict[str, Any] = None) -> bool:
+        """
+        تسجيل مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            name: اسم مديول الذكاء الصناعي
+            process_id: معرف العملية
+            resource_limits: حدود الموارد
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # إنشاء بيانات موارد الذكاء الصناعي
+            resource_data = AIResourceData(ai_module_id, name)
+
+            # تعيين معرف العملية
+            if process_id:
+                resource_data.process_id = process_id
+
+            # تعيين حدود الموارد
+            if resource_limits:
+                for resource_type, limit in resource_limits.items():
+                    if resource_type in resource_data.limits:
+                        resource_data.limits[resource_type] = limit
+
+            # حفظ بيانات موارد الذكاء الصناعي
+            self.ai_resources[ai_module_id] = resource_data
+
+            # حفظ التكوين
+            ai_modules = self.config.get("ai_modules", {})
+            ai_modules[ai_module_id] = {
+                "name": name or ai_module_id,
+                "resource_limits": resource_data.limits
+            }
+            self.config["ai_modulesAI_MODULES_SELF_SAVE_CONFIG_LOGGERINFOFتم تسجيل مديول الذكاء الصناعي {ai_module_id}")
+            return True
+
+    def unregister_ai_module(self, ai_module_id: str) -> bool:
+        """
+        إلغاء تسجيل مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_IFمديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            # حذف بيانات موارد الذكاء الصناعي
+            del self.ai_resources[ai_module_id]
+
+            # حفظ التكوين
+            ai_modules = self.config.get("ai_modules", {})
+            if ai_module_id in ai_modules:
+                del ai_modules[ai_module_id]
+            self.config["ai_modulesAI_MODULES_SELF_SAVE_CONFIG_LOGGERINFOFتم إلغاء تسجيل مديول الذكاء الصناعي {ai_module_id}")
+            return True
+
+    def update_ai_module_resources(self, ai_module_id: str, resources: Dict[str, Any]) -> bool:
+        """
+        تحديث موارد مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            resources: الموارد
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_IFمديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            # تحديث الموارد
+            resource_data = self.ai_resources[ai_module_id]
+            for resource_type, value in resources.items():
+                if resource_type in resource_data.resources:
+                    resource_data.resources[resource_type] = value
+
+            # تحديث وقت آخر نشاط
+            resource_data.last_activity = datetime.now()
+
+            # تحديث الحالة
+            resource_data.status = self._calculate_resource_status(resource_data)
+
+            logger.debug(f"تم تحديث موارد مديول الذكاء الصناعي {ai_module_id}")
+            return True
+
+    def update_ai_module_limits(self, ai_module_id: str, limits: Dict[str, Any]) -> bool:
+        """
+        تحديث حدود موارد مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            limits: حدود الموارد
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_IFمديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            # تحديث حدود الموارد
+            resource_data = self.ai_resources[ai_module_id]
+            for resource_type, limit in limits.items():
+                if resource_type in resource_data.limits:
+                    resource_data.limits[resource_type] = limit
+
+            # حفظ التكوين
+            ai_modules = self.config.get("ai_modules", {})
+            if ai_module_id in ai_modules:
+                ai_modules[ai_module_id]["resource_limits"] = resource_data.limits
+            self.config["ai_modulesAI_MODULES_SELF_SAVE_CONFIG_LOGGERINFOFتم تحديث حدود موارد مديول الذكاء الصناعي {ai_module_id}")
+            return True
+
+    def get_ai_module_resources(self, ai_module_id: str) -> Optional[Dict[str, Any]]:
+        """
+        الحصول على موارد مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+
+        Returns:
+            Optional[Dict[str, Any]]: موارد مديول الذكاء الصناعي أو None إذا لم يكن مسجلاً
+        """
+        if ai_module_id not in self.ai_resources:
+            logger.warning(f"مديول الذكاء الصناعي {ai_module_id} غير مسجل")
+            return None
+
+        resource_data = self.ai_resources[ai_module_id]
+        return {
+            "ai_module_id": resource_data.ai_module_id,
+            "name": resource_data.name,
+            "timestamp": resource_data.timestamp.isoformat(),
+            "resources": resource_data.resources,
+            "limits": resource_data.limits,
+            "status": resource_data.status,
+            "process_id": resource_data.process_id,
+            "is_active": resource_data.is_active,
+            "last_activity": resource_data.last_activity.isoformat(),
+            "error_message": resource_data.error_message
+        }
+
+    def get_all_ai_module_resources(self) -> Dict[str, Dict[str, Any]]:
+        """
+        الحصول على موارد جميع مديولات الذكاء الصناعي.
+
+        Returns:
+            Dict[str, Dict[str, Any]]: موارد جميع مديولات الذكاء الصناعي
+        """
+        result = {}
+        for ai_module_id, resource_data in self.ai_resources.items():
+            result[ai_module_id] = {
+                "ai_module_id": resource_data.ai_module_id,
+                "name": resource_data.name,
+                "timestamp": resource_data.timestamp.isoformat(),
+                "resources": resource_data.resources,
+                "limits": resource_data.limits,
+                "status": resource_data.status,
+                "process_id": resource_data.process_id,
+                "is_active": resource_data.is_active,
+                "last_activity": resource_data.last_activity.isoformat(),
+                "error_message": resource_data.error_message
+            }
+        return result
+
+    def _calculate_resource_status(self, resource_data: AIResourceData) -> str:
+        """
+        حساب حالة موارد مديول الذكاء الصناعي.
+
+        Args:
+            resource_data: بيانات موارد مديول الذكاء الصناعي
+
+        Returns:
+            str: حالة موارد مديول الذكاء الصناعي
+        """
+        # الحصول على عتبات التنبيه
+        thresholds = self.config.get("alert_thresholds", {})
+
+        # التحقق من حالة الطوارئ
+        emergency_thresholds = thresholds.get("emergency", {})
+        for resource_type, value in resource_data.resources.items():
+            if resource_type in emergency_thresholds:
+                threshold = emergency_thresholds[resource_type]
+                if value >= threshold:
+                    return ResourceAlert.EMERGENCY
+
+        # التحقق من الحالة الحرجة
+        critical_thresholds = thresholds.get("critical", {})
+        for resource_type, value in resource_data.resources.items():
+            if resource_type in critical_thresholds:
+                threshold = critical_thresholds[resource_type]
+                if value >= threshold:
+                    return ResourceAlert.CRITICAL
+
+        # التحقق من حالة التحذير
+        warning_thresholds = thresholds.get("warning", {})
+        for resource_type, value in resource_data.resources.items():
+            if resource_type in warning_thresholds:
+                threshold = warning_thresholds[resource_type]
+                if value >= threshold:
+                    return ResourceAlert.WARNING
+
+        # الحالة الطبيعية
+        return ResourceAlert.NORMAL
+
+    def _collect_process_resources(self, process_id: int) -> Dict[str, Any]:
+        """
+        جمع موارد العملية.
+
+        Args:
+            process_id: معرف العملية
+
+        Returns:
+            Dict[str, Any]: موارد العملية
+        """
+        try:
+            # التحقق من وجود العملية
+            if not psutil.pid_exists(process_id):
+                logger.warning(f"العملية {process_id} غير موجودة")
+                return {}
+
+            process = psutil.Process(process_id)
+
+            # جمع موارد العملية
+            cpu_percent = process.cpu_percent(interval=0.1)
+            memory_percent = process.memory_percent()
+
+            # جمع موارد وحدة معالجة الرسومات إذا كان مفعلاً
+            gpu_percent = 0.0
+            if self.config.get("enable_gpu_monitoring", True):
+                # هنا يمكن استخدام مكتبة مثل pynvml لجمع موارد وحدة معالجة الرسومات
+                # لكن لتبسيط المثال، سنستخدم قيمة افتراضية
+                gpu_percent = 0.0
+
+            return {
+                AIResourceType.CPU: cpu_percent,
+                AIResourceType.MEMORY: memory_percent,
+                AIResourceType.GPU: gpu_percent,
+                AIResourceType.STORAGE: 0.0,
+                AIResourceType.NETWORK: 0.0
+            }
+        except Exception as e:
+            logger.error(f"فشل جمع موارد العملية {process_id}: {str(e)}")
+            return {}
+
+    def _collect_ai_module_resources(self, ai_module_id: str) -> bool:
+        """
+        جمع موارد مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            if ai_module_id not in self.ai_resources:
+                logger.warning(f"مديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            resource_data = self.ai_resources[ai_module_id]
+
+            # جمع موارد العملية إذا كان معرف العملية متوفراً
+            if resource_data.process_id:
+                process_resources = self._collect_process_resources(resource_data.process_id)
+                for resource_type, value in process_resources.items():
+                    resource_data.resources[resource_type] = value
+
+            # تحديث وقت آخر تحديث
+            resource_data.timestamp = datetime.now()
+
+            # تحديث الحالة
+            old_status = resource_data.status
+            resource_data.status = self._calculate_resource_status(resource_data)
+
+            # إذا تغيرت الحالة، إضافة تنبيه إلى السجل
+            if old_status != resource_data.status and resource_data.status != ResourceAlert.NORMAL:
+                self._add_alert(ai_module_id, resource_data.status)
+
+            return True
+        except Exception as e:
+            logger.error(f"فشل جمع موارد مديول الذكاء الصناعي {ai_module_id}: {str(e)}")
+            return False
+
+    def _add_alert(self, ai_module_id: str, status: str) -> None:
+        """
+        إضافة تنبيه إلى السجل.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            status: حالة التنبيه
+        """
+        # إنشاء التنبيه
+        alert = {
+            "ai_module_id": ai_module_id,
+            "name": self.ai_resources[ai_module_id].name,
+            "status": status,
+            "timestamp": datetime.now().isoformat(),
+            "resources": self.ai_resources[ai_module_id].resources.copy(),
+            "limits": self.ai_resources[ai_module_id].limits.copy()
+        }
+
+        # إضافة التنبيه إلى السجل
+        self.alert_history.append(alert)
+
+        # تنفيذ الإجراء التلقائي
+        self._execute_auto_action(ai_module_id, status)
+
+        # تنفيذ دوال الاستدعاء للتنبيهات
+        if status in self.alert_callbacks:
+            for callback in self.alert_callbacks[status]:
+                try:
+                    callback(ai_module_id, status, alert)
+                except Exception as e:
+                    logger.error(f"فشل تنفيذ دالة الاستدعاء للتنبيه: {str(e)}")
+
+        # إرسال التنبيه
+        self._send_alert_notification(alert)
+
+        logger.info(f"تم إضافة تنبيه لمديول الذكاء الصناعي {ai_module_id} بحالة {status}")
+
+    def _execute_auto_action(self, ai_module_id: str, status: str) -> None:
+        """
+        تنفيذ الإجراء التلقائي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            status: حالة التنبيه
+        """
+        # الحصول على الإجراء التلقائي
+        auto_actions = self.config.get("auto_actions", {})
+        action = auto_actions.get(status, "notify")
+
+        # تنفيذ الإجراء
+        if action == "notify":
+            # تم تنفيذ الإشعار بالفعل في _add_alert
+            pass
+
+        elif action == "suspend":
+            # تعليق مديول الذكاء الصناعي
+            if self.module_manager:
+                module_id = f"ai_{ai_module_id}"
+                if module_id in self.module_manager.modules:
+                    logger.info(f"تعليق مديول الذكاء الصناعي {ai_module_id}")
+                    self.module_manager.pause_module(module_id)
+
+        elif action == "shutdown":
+            # إغلاق مديول الذكاء الصناعي
+            if self.shutdown_executor:
+                module_id = f"ai_{ai_module_id}"
+                logger.info(f"إغلاق مديول الذكاء الصناعي {ai_module_id}")
+                self.shutdown_executor.shutdown_module(
+                    module_id=module_id,
+                    strategy=ShutdownStrategy.GRACEFUL,
+                    reason=ShutdownReason.RESOURCE_CRITICAL
+                )
+
+    def _send_alert_notification(self, alert: Dict[str, Any]) -> None:
+        """
+        إرسال إشعار التنبيه.
+
+        Args:
+            alert: التنبيه
+        """
+        # الحصول على نقاط نهاية الإشعارات
+        notification_endpoints = self.config.get("notification_endpoints", {})
+
+        # إرسال الإشعار عبر البريد الإلكتروني
+        email = notification_endpoints.get("email")
+        if email:
+            try:
+                # هنا يمكن استخدام مكتبة مثل smtplib لإرسال البريد الإلكتروني
+                logger.info(f"إرسال إشعار التنبيه عبر البريد الإلكتروني إلى {email}EXCEPT_EXCEPTION_ASفشل إرسال إشعار التنبيه عبر البريد الإلكتروني: {str(e)}")
+
+        # إرسال الإشعار عبر webhook
+        webhook = notification_endpoints.get("webhook")
+        if webhook:
+            try:
+                # إرسال الإشعار عبر webhook
+                requests.post(webhook, json=alert)
+                logger.info(f"إرسال إشعار التنبيه عبر webhook إلى {webhook}EXCEPT_EXCEPTION_ASفشل إرسال إشعار التنبيه عبر webhook: {str(e)}")
+
+        # إرسال الإشعار عبر تيليجرام
+        telegram = notification_endpoints.get("telegram")
+        if telegram:
+            try:
+                # هنا يمكن استخدام مكتبة مثل python-telegram-bot لإرسال الإشعار عبر تيليجرام
+                logger.info(f"إرسال إشعار التنبيه عبر تيليجرام إلى {telegram}EXCEPT_EXCEPTION_ASفشل إرسال إشعار التنبيه عبر تيليجرام: {str(e)}")
+
+    def register_alert_callback(self, status: str, callback: Callable) -> bool:
+        """
+        تسجيل دالة استدعاء للتنبيهات.
+
+        Args:
+            status: حالة التنبيه
+            callback: دالة الاستدعاء
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            if status not in self.alert_callbacks:
+                logger.warning(f"حالة التنبيه {status} غير معروفة")
+                return False
+
+            self.alert_callbacks[status].append(callback)
+            logger.info(f"تم تسجيل دالة استدعاء للتنبيهات بحالة {status}")
+            return True
+
+    def unregister_alert_callback(self, status: str, callback: Callable) -> bool:
+        """
+        إلغاء تسجيل دالة استدعاء للتنبيهات.
+
+        Args:
+            status: حالة التنبيه
+            callback: دالة الاستدعاء
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            if status not in self.alert_callbacks:
+                logger.warning(f"حالة التنبيه {status} غير معروفة")
+                return False
+
+            if callback in self.alert_callbacks[status]:
+                self.alert_callbacks[status].remove(callback)
+                logger.info(f"تم إلغاء تسجيل دالة استدعاء للتنبيهات بحالة {status}")
+                return True
+
+            logger.warning(f"دالة الاستدعاء غير مسجلة للتنبيهات بحالة {status}")
+            return False
+
+    def get_alert_history(self, ai_module_id: str = None, status: str = None,
+                          start_time: datetime = None, end_time: datetime = None) -> List[Dict[str, Any]]:
+        """
+        الحصول على سجل التنبيهات.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            status: حالة التنبيه
+            start_time: وقت البداية
+            end_time: وقت النهاية
+
+        Returns:
+            List[Dict[str, Any]]: سجل التنبيهات
+        """
+        # تصفية سجل التنبيهات
+        filtered_alerts = self.alert_history
+
+        if ai_module_id:
+            filtered_alerts = [alert for alert in filtered_alerts if alert["ai_module_id"] == ai_module_id]
+
+        if status:
+            filtered_alerts = [alert for alert in filtered_alerts if alert["status"] == status]
+
+        if start_time:
+            filtered_alerts = [
+                alert for alert in filtered_alerts
+                if datetime.fromisoformat(alert["timestamp"]) >= start_time
+            ]
+
+        if end_time:
+            filtered_alerts = [
+                alert for alert in filtered_alerts
+                if datetime.fromisoformat(alert["timestamp"]) <= end_time
+            ]
+
+        return filtered_alerts
+
+    def clear_alert_history(self) -> bool:
+        """
+        مسح سجل التنبيهات.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            self.alert_history.clear()
+            logger.info("تم مسح سجل التنبيهات")
+            return True
+
+    def start_monitoring(self) -> bool:
+        """
+        بدء مراقبة موارد الذكاء الصناعي.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        if self.is_monitoring:
+            logger.warning("المراقبة قيد التشغيل بالفعل")
+            return True
+
+        self.is_monitoring = True
+        self.monitoring_thread = threading.Thread(target=self._monitoring_loop)
+        self.monitoring_thread.daemon = True
+        self.monitoring_thread.start()
+
+        logger.info("تم بدء مراقبة موارد الذكاء الصناعي")
+        return True
+
+    def stop_monitoring(self) -> bool:
+        """
+        إيقاف مراقبة موارد الذكاء الصناعي.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        if not self.is_monitoring:
+            logger.warning("المراقبة متوقفة بالفعل")
+            return True
+
+        self.is_monitoring = False
+        if self.monitoring_thread:
+            self.monitoring_thread.join(timeout=5)
+            self.monitoring_thread = None
+
+        logger.info("تم إيقاف مراقبة موارد الذكاء الصناعي")
+        return True
+
+    def _monitoring_loop(self) -> None:
+        """
+        حلقة مراقبة موارد الذكاء الصناعي.
+        """
+        logger.info("بدء حلقة مراقبة موارد الذكاء الصناعي")
+
+        while self.is_monitoring:
+            try:
+                # جمع موارد جميع مديولات الذكاء الصناعي
+                for ai_module_id in list(self.ai_resources.keys()):
+                    self._collect_ai_module_resources(ai_module_id)
+
+                # انتظار الفاصل الزمني
+                time.sleep(self.config.get("monitoring_interval", 30))
+            except Exception as e:
+                logger.error(f"خطأ في حلقة المراقبة: {str(e)}")
+                time.sleep(self.config.get("monitoring_interval", 30))
+
+        logger.info("انتهاء حلقة مراقبة موارد الذكاء الصناعي")
+
+    def update_alert_thresholds(self, level: str, thresholds: Dict[str, Any]) -> bool:
+        """
+        تحديث عتبات التنبيه.
+
+        Args:
+            level: مستوى التنبيه
+            thresholds: العتبات
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # الحصول على عتبات التنبيه
+            alert_thresholds = self.config.get("alert_thresholds", {})
+
+            if level not in alert_thresholds:
+                logger.warning(f"مستوى التنبيه {level} غير معروف")
+                return False
+
+            # تحديث العتبات
+            for resource_type, threshold in thresholds.items():
+                alert_thresholds[level][resource_type] = threshold
+
+            self.config["alert_thresholds"] = alert_thresholds
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(f"تم تحديث عتبات التنبيه لمستوى {level}")
+
+            return result
+
+    def get_alert_thresholds(self, level: str = None) -> Dict[str, Any]:
+        """
+        الحصول على عتبات التنبيه.
+
+        Args:
+            level: مستوى التنبيه
+
+        Returns:
+            Dict[str, Any]: عتبات التنبيه
+        """
+        alert_thresholds = self.config.get("alert_thresholds", {})
+
+        if level:
+            return alert_thresholds.get(level, {}).copy()
+
+        return alert_thresholds.copy()
+
+    def update_auto_actions(self, actions: Dict[str, str]) -> bool:
+        """
+        تحديث الإجراءات التلقائية.
+
+        Args:
+            actions: الإجراءات التلقائية
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # تحديث الإجراءات التلقائية
+            auto_actions = self.config.get("auto_actions", {})
+
+            for level, action in actions.items():
+                auto_actions[level] = action
+
+            self.config["auto_actions"] = auto_actions
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info("تم تحديث الإجراءات التلقائية")
+
+            return result
+
+    def get_auto_actions(self) -> Dict[str, str]:
+        """
+        الحصول على الإجراءات التلقائية.
+
+        Returns:
+            Dict[str, str]: الإجراءات التلقائية
+        ""RETURN_SELFCONFIGGETauto_actions", {}).copy()
+
+    def update_notification_endpoints(self, endpoints: Dict[str, str]) -> bool:
+        """
+        تحديث نقاط نهاية الإشعارات.
+
+        Args:
+            endpoints: نقاط نهاية الإشعارات
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # تحديث نقاط نهاية الإشعارات
+            notification_endpoints = self.config.get("notification_endpoints", {})
+
+            for endpoint_type, endpoint in endpoints.items():
+                notification_endpoints[endpoint_type] = endpoint
+
+            self.config["notification_endpoints"] = notification_endpoints
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info("تم تحديث نقاط نهاية الإشعارات")
+
+            return result
+
+    def get_notification_endpoints(self) -> Dict[str, str]:
+        """
+        الحصول على نقاط نهاية الإشعارات.
+
+        Returns:
+            Dict[str, str]: نقاط نهاية الإشعارات
+        ""RETURN_SELFCONFIGGETnotification_endpoints", {}).copy()
+
+    def set_monitoring_interval(self, interval: int) -> bool:
+        """
+        تعيين الفاصل الزمني للمراقبة.
+
+        Args:
+            interval: الفاصل الزمني بالثواني
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_SELFCONFIGmonitoring_interval"] = interval
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(f"تم تعيين الفاصل الزمني للمراقبة: {interval} ثانية")
+
+            return result
+
+    def get_monitoring_interval(self) -> int:
+        """
+        الحصول على الفاصل الزمني للمراقبة.
+
+        Returns:
+            int: الفاصل الزمني بالثواني
+        ""RETURN_SELFCONFIGGETmonitoring_interval", 30)
+
+    def set_history_retention_days(self, days: int) -> bool:
+        """
+        تعيين عدد أيام الاحتفاظ بالسجل.
+
+        Args:
+            days: عدد الأيام
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_SELFCONFIGhistory_retention_days"] = days
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(f"تم تعيين عدد أيام الاحتفاظ بالسجل: {days} يوم")
+
+            return result
+
+    def get_history_retention_days(self) -> int:
+        """
+        الحصول على عدد أيام الاحتفاظ بالسجل.
+
+        Returns:
+            int: عدد الأيام
+        ""RETURN_SELFCONFIGGEThistory_retention_days", 30)
+
+    def enable_gpu_monitoring(self, enable: bool) -> bool:
+        """
+        تفعيل أو تعطيل مراقبة وحدة معالجة الرسومات.
+
+        Args:
+            enable: تفعيل أو تعطيل
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_SELFCONFIGenable_gpu_monitoringENABLE_حفظ_التكوينتم {'تفعيلIF_ENABLE_ELSEتعطيل'} مراقبة وحدة معالجة الرسومات")
+
+            return result
+
+    def is_gpu_monitoring_enabled(self) -> bool:
+        """
+        التحقق مما إذا كانت مراقبة وحدة معالجة الرسومات مفعلة.
+
+        Returns:
+            bool: مراقبة وحدة معالجة الرسومات مفعلة
+        ""RETURN_SELFCONFIGGETenable_gpu_monitoring", True)
+
+    def enable_token_monitoring(self, enable: bool) -> bool:
+        """
+        تفعيل أو تعطيل مراقبة الرموز.
+
+        Args:
+            enable: تفعيل أو تعطيل
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_SELFCONFIGenable_token_monitoringENABLE_حفظ_التكوينتم {'تفعيلIF_ENABLE_ELSEتعطيل'} مراقبة الرموز")
+
+            return result
+
+    def is_token_monitoring_enabled(self) -> bool:
+        """
+        التحقق مما إذا كانت مراقبة الرموز مفعلة.
+
+        Returns:
+            bool: مراقبة الرموز مفعلة
+        ""RETURN_SELFCONFIGGETenable_token_monitoring", True)
+
+    def enable_api_calls_monitoring(self, enable: bool) -> bool:
+        """
+        تفعيل أو تعطيل مراقبة استدعاءات واجهة برمجة التطبيقات.
+
+        Args:
+            enable: تفعيل أو تعطيل
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_SELFCONFIGenable_api_calls_monitoringENABLE_حفظ_التكوينتم {'تفعيلIF_ENABLE_ELSEتعطيل'} مراقبة استدعاءات واجهة برمجة التطبيقات")
+
+            return result
+
+    def is_api_calls_monitoring_enabled(self) -> bool:
+        """
+        التحقق مما إذا كانت مراقبة استدعاءات واجهة برمجة التطبيقات مفعلة.
+
+        Returns:
+            bool: مراقبة استدعاءات واجهة برمجة التطبيقات مفعلة
+        ""RETURN_SELFCONFIGGETenable_api_calls_monitoring", True)
+
+    def update_token_usage(self, ai_module_id: str, tokens: int) -> bool:
+        """
+        تحديث استهلاك الرموز.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            tokens: عدد الرموز
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_IFمديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            # تحديث استهلاك الرموز
+            resource_data = self.ai_resources[ai_module_id]
+            resource_data.resources[AIResourceType.TOKENS] += tokens
+
+            # تحديث وقت آخر نشاط
+            resource_data.last_activity = datetime.now()
+
+            # تحديث الحالة
+            old_status = resource_data.status
+            resource_data.status = self._calculate_resource_status(resource_data)
+
+            # إذا تغيرت الحالة، إضافة تنبيه إلى السجل
+            if old_status != resource_data.status and resource_data.status != ResourceAlert.NORMAL:
+                self._add_alert(ai_module_id, resource_data.status)
+
+            logger.debug(f"تم تحديث استهلاك الرموز لمديول الذكاء الصناعي {ai_module_id}: {tokens}")
+            return True
+
+    def update_api_calls(self, ai_module_id: str, calls: int) -> bool:
+        """
+        تحديث استدعاءات واجهة برمجة التطبيقات.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            calls: عدد الاستدعاءات
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_IFمديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            # تحديث استدعاءات واجهة برمجة التطبيقات
+            resource_data = self.ai_resources[ai_module_id]
+            resource_data.resources[AIResourceType.API_CALLS] += calls
+
+            # تحديث وقت آخر نشاط
+            resource_data.last_activity = datetime.now()
+
+            # تحديث الحالة
+            old_status = resource_data.status
+            resource_data.status = self._calculate_resource_status(resource_data)
+
+            # إذا تغيرت الحالة، إضافة تنبيه إلى السجل
+            if old_status != resource_data.status and resource_data.status != ResourceAlert.NORMAL:
+                self._add_alert(ai_module_id, resource_data.status)
+
+            logger.debug(f"تم تحديث استدعاءات واجهة برمجة التطبيقات لمديول الذكاء الصناعي {ai_module_id}: {calls}")
+            return True
+
+    def reset_token_usage(self, ai_module_id: str) -> bool:
+        """
+        إعادة تعيين استهلاك الرموز.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_IFمديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            # إعادة تعيين استهلاك الرموز
+            resource_data = self.ai_resources[ai_module_id]
+            resource_data.resources[AIResourceType.TOKENS] = 0
+
+            # تحديث الحالة
+            resource_data.status = self._calculate_resource_status(resource_data)
+
+            logger.info(f"تم إعادة تعيين استهلاك الرموز لمديول الذكاء الصناعي {ai_module_id}")
+            return True
+
+    def reset_api_calls(self, ai_module_id: str) -> bool:
+        """
+        إعادة تعيين استدعاءات واجهة برمجة التطبيقات.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_IFمديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            # إعادة تعيين استدعاءات واجهة برمجة التطبيقات
+            resource_data = self.ai_resources[ai_module_id]
+            resource_data.resources[AIResourceType.API_CALLS] = 0
+
+            # تحديث الحالة
+            resource_data.status = self._calculate_resource_status(resource_data)
+
+            logger.info(f"تم إعادة تعيين استدعاءات واجهة برمجة التطبيقات لمديول الذكاء الصناعي {ai_module_id}")
+            return True
+
+    def get_ai_modules_by_status(self, status: str) -> List[str]:
+        """
+        الحصول على مديولات الذكاء الصناعي حسب الحالة.
+
+        Args:
+            status: الحالة
+
+        Returns:
+            List[str]: قائمة معرفات مديولات الذكاء الصناعي
+        """
+        return [
+            ai_module_id for ai_module_id, resource_data in self.ai_resources.items()
+            if resource_data.status == status
+        ]
+
+    def get_ai_modules_by_activity(self, active: bool) -> List[str]:
+        """
+        الحصول على مديولات الذكاء الصناعي حسب النشاط.
+
+        Args:
+            active: نشط
+
+        Returns:
+            List[str]: قائمة معرفات مديولات الذكاء الصناعي
+        """
+        return [
+            ai_module_id for ai_module_id, resource_data in self.ai_resources.items()
+            if resource_data.is_active == active
+        ]
+
+    def set_ai_module_active(self, ai_module_id: str, active: bool) -> bool:
+        """
+        تعيين نشاط مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            active: نشط
+
+        Returns:
+            bool: نجاح العملية
+        ""WITH_SELFLOCK_IFمديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            # تعيين نشاط مديول الذكاء الصناعي
+            resource_data = self.ai_resources[ai_module_id]
+            resource_data.is_active = active
+
+            logger.info(f"تم تعيين نشاط مديول الذكاء الصناعي {ai_module_id}: {active}")
+            return True
+
+    def get_system_resources(self) -> Dict[str, float]:
+        """
+        الحصول على موارد النظام.
+
+        Returns:
+            Dict[str, float]: موارد النظام
+        """
+        try:
+            # جمع موارد النظام
+            cpu_percent = psutil.cpu_percent(interval=0.1)
+            memory_percent = psutil.virtual_memory().percent
+            disk_percent = psutil.disk_usage('/').percent
+
+            # جمع موارد وحدة معالجة الرسومات إذا كان مفعلاً
+            gpu_percent = 0.0
+            if self.config.get("enable_gpu_monitoring", True):
+                # هنا يمكن استخدام مكتبة مثل pynvml لجمع موارد وحدة معالجة الرسومات
+                # لكن لتبسيط المثال، سنستخدم قيمة افتراضية
+                gpu_percent = 0.0
+
+            return {
+                AIResourceType.CPU: cpu_percent,
+                AIResourceType.MEMORY: memory_percent,
+                AIResourceType.GPU: gpu_percent,
+                AIResourceType.STORAGE: disk_percent,
+                AIResourceType.NETWORK: 0.0
+            }
+        except Exception as e:
+            logger.error(f"فشل جمع موارد النظام: {str(e)}")
+            return {
+                AIResourceType.CPU: 0.0,
+                AIResourceType.MEMORY: 0.0,
+                AIResourceType.GPU: 0.0,
+                AIResourceType.STORAGE: 0.0,
+                AIResourceType.NETWORK: 0.0
+            }
+
+    def get_total_ai_resources(self) -> Dict[str, float]:
+        """
+        الحصول على إجمالي موارد الذكاء الصناعي.
+
+        Returns:
+            Dict[str, float]: إجمالي موارد الذكاء الصناعي
+        """
+        total_resources = {
+            AIResourceType.CPU: 0.0,
+            AIResourceType.MEMORY: 0.0,
+            AIResourceType.GPU: 0.0,
+            AIResourceType.TOKENS: 0,
+            AIResourceType.API_CALLS: 0,
+            AIResourceType.STORAGE: 0.0,
+            AIResourceType.NETWORK: 0.0
+        }
+
+        # حساب إجمالي موارد الذكاء الصناعي
+        for resource_data in self.ai_resources.values():
+            for resource_type, value in resource_data.resources.items():
+                if resource_type in total_resources:
+                    total_resources[resource_type] += value
+
+        return total_resources
+
+
+# مثال على الاستخدام
+if __name__ == "__main__":
+    # إنشاء مدير المديولات
+    from modules.module_shutdown.module_manager import ModuleManager
+    from modules.module_shutdown.priority_determiner import PriorityDeterminer
+    from modules.module_shutdown.safe_shutdown_executor import SafeShutdownExecutor
+
+    manager = ModuleManager()
+
+    # تسجيل بعض المديولات
+    manager.register_module(ModuleInfo(
+        module_id="ai_module1",
+        name="مديول الذكاء الصناعي الأول",
+        description="وصف مديول الذكاء الصناعي الأول",
+        priority=1
+    ))
+
+    manager.register_module(ModuleInfo(
+        module_id="ai_module2",
+        name="مديول الذكاء الصناعي الثاني",
+        description="وصف مديول الذكاء الصناعي الثاني",
+        priority=2
+    ))
+
+    # بدء تشغيل المديولات
+    manager.start_module("ai_module1")
+    manager.start_module("ai_module2")
+
+    # إنشاء محدد الأولويات
+    determiner = PriorityDeterminer(manager)
+
+    # إنشاء منفذ الإغلاق الآمن
+    executor = SafeShutdownExecutor(manager, determiner)
+
+    # إنشاء مراقب موارد الذكاء الصناعي
+    monitor = AIResourceMonitor(manager, determiner, executor)
+
+    # تسجيل مديولات الذكاء الصناعي
+    monitor.register_ai_module("module1", "مديول الذكاء الصناعي الأول")
+    monitor.register_ai_module("module2", "مديول الذكاء الصناعي الثاني")
+
+    # تسجيل دالة استدعاء للتنبيهات
+    def alert_callback(ai_module_id, status, alert):
+        print(f"تنبيه لمديول الذكاء الصناعي {ai_module_id} بحالة {status}")
+
+    monitor.register_alert_callback(ResourceAlert.WARNING, alert_callback)
+
+    # بدء المراقبة
+    monitor.start_monitoring()
+
+    # تحديث استهلاك الرموز
+    monitor.update_token_usage("module1", 500000)
+
+    # انتظار بعض الوقت
+    time.sleep(10)
+
+    # إيقاف المراقبة
+    monitor.stop_monitoring()
+
+    # الحصول على موارد مديول الذكاء الصناعي
+    resources = monitor.get_ai_module_resources("module1")
+    print(f"موارد مديول الذكاء الصناعي: {resources}")
+
+    # الحصول على سجل التنبيهات
+    alerts = monitor.get_alert_history()
+    print(f"سجل التنبيهات: {alerts}")

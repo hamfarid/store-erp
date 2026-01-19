@@ -1,0 +1,418 @@
+{% extends "base.html" %}
+
+{% block title %}الاستخدام - نظام جعاره الزراعي الذكي{% endblock %}
+
+{% block page_title %}الاستخدام{% endblock %}
+
+{% block content %}
+<div class="usage">
+    <!-- Filters -->
+    <div class="filters">
+        <div class="filter-group">
+            <label for="dateRange">الفترة الزمنية</label>
+            <select id="dateRange" class="form-control">
+                <option value="today">اليوم</option>
+                <option value="week">الأسبوع</option>
+                <option value="month">الشهر</option>
+                <option value="year">السنة</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="modelType">نوع النموذج</label>
+            <select id="modelType" class="form-control">
+                <option value="all">الكل</option>
+                <option value="disease">تشخيص الأمراض</option>
+                <option value="pest">تشخيص الآفات</option>
+                <option value="growth">تحليل النمو</option>
+            </select>
+        </div>
+        <button class="btn btn-primary">
+            <i class="material-icons">filter_list</i>
+            تطبيق الفلتر
+        </button>
+    </div>
+
+    <!-- Usage Stats -->
+    <div class="usage-stats">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="material-icons">analytics</i>
+            </div>
+            <div class="stat-content">
+                <h3>إجمالي الطلبات</h3>
+                <div class="stat-value">1,234</div>
+                <div class="stat-trend up">
+                    <i class="material-icons">trending_up</i>
+                    <span>12%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="material-icons">speed</i>
+            </div>
+            <div class="stat-content">
+                <h3>متوسط وقت الاستجابة</h3>
+                <div class="stat-value">98ms</div>
+                <div class="stat-trend down">
+                    <i class="material-icons">trending_down</i>
+                    <span>5%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="material-icons">check_circle</i>
+            </div>
+            <div class="stat-content">
+                <h3>نسبة النجاح</h3>
+                <div class="stat-value">99.9%</div>
+                <div class="stat-trend up">
+                    <i class="material-icons">trending_up</i>
+                    <span>0.1%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Usage Chart -->
+    <div class="chart-card">
+        <div class="chart-header">
+            <h3>إحصائيات الاستخدام</h3>
+            <div class="chart-actions">
+                <button class="btn btn-secondary">
+                    <i class="material-icons">download</i>
+                    تصدير البيانات
+                </button>
+            </div>
+        </div>
+        <canvas id="usageChart"></canvas>
+    </div>
+
+    <!-- Usage Log -->
+    <div class="log-card">
+        <div class="log-header">
+            <h3>سجل الاستخدام</h3>
+            <div class="log-actions">
+                <div class="search-box">
+                    <i class="material-icons">search</i>
+                    <input type="text" placeholder="بحث..." class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="log-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>التاريخ</th>
+                        <th>النموذج</th>
+                        <th>الطلب</th>
+                        <th>الاستجابة</th>
+                        <th>الحالة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-03-20 14:30</td>
+                        <td>تشخيص الأمراض</td>
+                        <td>تحليل صورة نبات</td>
+                        <td>98ms</td>
+                        <td><span class="status success">نجاح</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-03-20 14:28</td>
+                        <td>تشخيص الآفات</td>
+                        <td>تحليل صورة حشرة</td>
+                        <td>102ms</td>
+                        <td><span class="status success">نجاح</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-03-20 14:25</td>
+                        <td>تحليل النمو</td>
+                        <td>تقييم نمو النبات</td>
+                        <td>95ms</td>
+                        <td><span class="status success">نجاح</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="log-pagination">
+            <button class="btn btn-secondary">
+                <i class="material-icons">chevron_right</i>
+                السابق
+            </button>
+            <span>الصفحة 1 من 10</span>
+            <button class="btn btn-secondary">
+                التالي
+                <i class="material-icons">chevron_left</i>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .usage {
+        padding: 1rem;
+    }
+
+    .filters {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-group {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .filter-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-light);
+    }
+
+    .usage-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--primary-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .stat-icon i {
+        color: var(--primary-color);
+        font-size: 24px;
+    }
+
+    .stat-content {
+        flex: 1;
+    }
+
+    .stat-content h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+        color: var(--text-light);
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-trend {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.875rem;
+    }
+
+    .stat-trend.up {
+        color: #2E7D32;
+    }
+
+    .stat-trend.down {
+        color: #D32F2F;
+    }
+
+    .chart-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .chart-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--text-color);
+    }
+
+    .log-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .log-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .log-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--text-color);
+    }
+
+    .search-box {
+        position: relative;
+        width: 300px;
+    }
+
+    .search-box i {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-light);
+    }
+
+    .search-box input {
+        padding-right: 2.5rem;
+    }
+
+    .log-table {
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 1rem;
+        text-align: right;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+        font-weight: 600;
+        color: var(--text-light);
+        background: #f8f9fa;
+    }
+
+    .status {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .status.success {
+        background: #E8F5E9;
+        color: #2E7D32;
+    }
+
+    .log-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .log-pagination span {
+        color: var(--text-light);
+    }
+
+    @media (max-width: 768px) {
+        .filters {
+            flex-direction: column;
+        }
+
+        .filter-group {
+            width: 100%;
+        }
+
+        .usage-stats {
+            grid-template-columns: 1fr;
+        }
+
+        .chart-header, .log-header {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .search-box {
+            width: 100%;
+        }
+
+        .log-pagination {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Usage Chart
+    const usageCtx = document.getElementById('usageChart').getContext('2d');
+    new Chart(usageCtx, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+            datasets: [{
+                label: 'طلبات تشخيص الأمراض',
+                data: [65, 59, 80, 81, 56, 55],
+                borderColor: '#2E7D32',
+                tension: 0.4
+            }, {
+                label: 'طلبات تشخيص الآفات',
+                data: [28, 48, 40, 19, 86, 27],
+                borderColor: '#1976D2',
+                tension: 0.4
+            }, {
+                label: 'طلبات تحليل النمو',
+                data: [45, 25, 16, 36, 67, 18],
+                borderColor: '#FF9800',
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %} 

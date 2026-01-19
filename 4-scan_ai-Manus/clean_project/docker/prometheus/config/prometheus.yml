@@ -1,0 +1,143 @@
+# تكوين Prometheus لمراقبة نظام Gaara Scan AI
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'gaara-cluster'
+    environment: 'production'
+
+# إعدادات التنبيهات
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+# قواعد التنبيه
+rule_files:
+  - "gaara_alerts.yml"
+
+# إعدادات جمع المقاييس
+scrape_configs:
+  # Prometheus نفسه
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+    scrape_interval: 5s
+
+  # Node Exporter
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['gaara-node-exporter:9100']
+    scrape_interval: 10s
+
+  # cAdvisor
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['gaara-cadvisor:8080']
+    scrape_interval: 10s
+
+  # التطبيق الرئيسي
+  - job_name: 'gaara-main-app'
+    static_configs:
+      - targets: ['gaara-main-app:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+
+  # خدمة التشخيص
+  - job_name: 'gaara-diagnosis-service'
+    static_configs:
+      - targets: ['gaara-diagnosis-service:8001']
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+
+  # خدمة التحليلات
+  - job_name: 'gaara-analytics-service'
+    static_configs:
+      - targets: ['gaara-analytics-service:8002']
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+
+  # خدمة ResNet-50
+  - job_name: 'gaara-resnet50-service'
+    static_configs:
+      - targets: ['gaara-resnet50-service:8003']
+    metrics_path: '/metrics'
+    scrape_interval: 20s
+
+  # خدمة وكلاء الذكاء الاصطناعي
+  - job_name: 'gaara-ai-agents-service'
+    static_configs:
+      - targets: ['gaara-ai-agents-service:8004']
+    metrics_path: '/metrics'
+    scrape_interval: 20s
+
+  # خدمة الذاكرة
+  - job_name: 'gaara-memory-service'
+    static_configs:
+      - targets: ['gaara-memory-service:8005']
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+
+  # خدمة قاعدة البيانات الشعاعية
+  - job_name: 'gaara-vector-db-service'
+    static_configs:
+      - targets: ['gaara-vector-db-service:8006']
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+
+  # PostgreSQL
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['gaara-postgres:5432']
+    scrape_interval: 30s
+
+  # Redis
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['gaara-redis:6379']
+    scrape_interval: 30s
+
+  # RabbitMQ
+  - job_name: 'rabbitmq'
+    static_configs:
+      - targets: ['gaara-rabbitmq:15692']
+    scrape_interval: 30s
+
+  # Elasticsearch
+  - job_name: 'elasticsearch'
+    static_configs:
+      - targets: ['gaara-elasticsearch:9200']
+    metrics_path: '/_prometheus/metrics'
+    scrape_interval: 30s
+
+  # Nginx
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['gaara-nginx:80']
+    metrics_path: '/nginx_status'
+    scrape_interval: 15s
+
+  # Grafana
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['gaara-grafana:3000']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+# إعدادات التخزين
+storage:
+  tsdb:
+    path: /prometheus/data
+    retention.time: 30d
+    retention.size: 10GB
+    wal-compression: true
+
+# إعدادات الويب
+web:
+  console.templates: /etc/prometheus/consoles
+  console.libraries: /etc/prometheus/console_libraries
+  enable-lifecycle: true
+  enable-admin-api: true
+

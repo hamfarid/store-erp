@@ -1,0 +1,3 @@
+"""
+AI Agricultural System Package
+""" 

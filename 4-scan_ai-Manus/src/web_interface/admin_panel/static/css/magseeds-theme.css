@@ -1,0 +1,501 @@
+/* File: /home/ubuntu/clean_project/src/web_interface/admin_panel/static/css/magseeds-theme.css */
+/* تصميم مستوحى من موقع MAGseeds.com لنظام Gaara Scan AI */
+
+/* ==========================================
+   متغيرات الألوان المستوحاة من MAGseeds
+   ========================================== */
+:root {
+  /* الألوان الأساسية */
+  --magseeds-primary: #2E7D32;        /* أخضر داكن */
+  --magseeds-primary-light: #4CAF50;   /* أخضر فاتح */
+  --magseeds-primary-dark: #1B5E20;    /* أخضر أغمق */
+  
+  /* الألوان الثانوية */
+  --magseeds-secondary: #FF9800;       /* برتقالي */
+  --magseeds-secondary-light: #FFB74D; /* برتقالي فاتح */
+  --magseeds-secondary-dark: #F57C00;  /* برتقالي داكن */
+  
+  /* الألوان المحايدة */
+  --magseeds-gray-50: #FAFAFA;
+  --magseeds-gray-100: #F5F5F5;
+  --magseeds-gray-200: #EEEEEE;
+  --magseeds-gray-300: #E0E0E0;
+  --magseeds-gray-400: #BDBDBD;
+  --magseeds-gray-500: #9E9E9E;
+  --magseeds-gray-600: #757575;
+  --magseeds-gray-700: #616161;
+  --magseeds-gray-800: #424242;
+  --magseeds-gray-900: #212121;
+  
+  /* ألوان الحالة */
+  --magseeds-success: #4CAF50;
+  --magseeds-warning: #FF9800;
+  --magseeds-error: #F44336;
+  --magseeds-info: #2196F3;
+  
+  /* الخطوط */
+  --magseeds-font-primary: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --magseeds-font-secondary: 'Roboto', 'Arial', sans-serif;
+  --magseeds-font-mono: 'Fira Code', 'Consolas', monospace;
+  
+  /* الظلال */
+  --magseeds-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --magseeds-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --magseeds-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --magseeds-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --magseeds-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* الانتقالات */
+  --magseeds-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --magseeds-transition-fast: all 0.15s ease-in-out;
+  
+  /* الحدود */
+  --magseeds-border-radius: 8px;
+  --magseeds-border-radius-sm: 4px;
+  --magseeds-border-radius-lg: 12px;
+  --magseeds-border-radius-xl: 16px;
+}
+
+/* ==========================================
+   إعدادات عامة
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--magseeds-font-primary);
+  background-color: var(--magseeds-gray-50);
+  color: var(--magseeds-gray-800);
+  line-height: 1.6;
+  direction: rtl;
+  text-align: right;
+}
+
+/* ==========================================
+   الشريط العلوي (Header)
+   ========================================== */
+.magseeds-header {
+  background: linear-gradient(135deg, var(--magseeds-primary) 0%, var(--magseeds-primary-dark) 100%);
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: var(--magseeds-shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.magseeds-header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.magseeds-header .logo::before {
+  content: "🌱";
+  font-size: 1.8rem;
+}
+
+/* ==========================================
+   الشريط الجانبي (Sidebar)
+   ========================================== */
+.magseeds-sidebar {
+  background: white;
+  width: 280px;
+  height: calc(100vh - 80px);
+  position: fixed;
+  right: 0;
+  top: 80px;
+  box-shadow: var(--magseeds-shadow-lg);
+  overflow-y: auto;
+  transition: var(--magseeds-transition);
+}
+
+.magseeds-sidebar-menu {
+  list-style: none;
+  padding: 1rem 0;
+}
+
+.magseeds-sidebar-menu li {
+  margin: 0.25rem 0;
+}
+
+.magseeds-sidebar-menu a {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  color: var(--magseeds-gray-700);
+  text-decoration: none;
+  transition: var(--magseeds-transition-fast);
+  border-right: 3px solid transparent;
+}
+
+.magseeds-sidebar-menu a:hover,
+.magseeds-sidebar-menu a.active {
+  background-color: var(--magseeds-gray-100);
+  color: var(--magseeds-primary);
+  border-right-color: var(--magseeds-primary);
+}
+
+.magseeds-sidebar-menu a .icon {
+  margin-left: 0.75rem;
+  font-size: 1.1rem;
+}
+
+/* ==========================================
+   المحتوى الرئيسي
+   ========================================== */
+.magseeds-main-content {
+  margin-right: 280px;
+  padding: 2rem;
+  min-height: calc(100vh - 80px);
+}
+
+.magseeds-page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--magseeds-gray-800);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.magseeds-page-title::before {
+  content: "";
+  width: 4px;
+  height: 2rem;
+  background: linear-gradient(to bottom, var(--magseeds-primary), var(--magseeds-secondary));
+  border-radius: 2px;
+}
+
+/* ==========================================
+   البطاقات (Cards)
+   ========================================== */
+.magseeds-card {
+  background: white;
+  border-radius: var(--magseeds-border-radius);
+  box-shadow: var(--magseeds-shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: var(--magseeds-transition);
+  border: 1px solid var(--magseeds-gray-200);
+}
+
+.magseeds-card:hover {
+  box-shadow: var(--magseeds-shadow-md);
+  transform: translateY(-2px);
+}
+
+.magseeds-card-header {
+  border-bottom: 1px solid var(--magseeds-gray-200);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.magseeds-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--magseeds-gray-800);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ==========================================
+   الأزرار (Buttons)
+   ========================================== */
+.magseeds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--magseeds-border-radius);
+  font-family: var(--magseeds-font-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--magseeds-transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.magseeds-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.magseeds-btn:hover::before {
+  left: 100%;
+}
+
+.magseeds-btn-primary {
+  background: linear-gradient(135deg, var(--magseeds-primary) 0%, var(--magseeds-primary-dark) 100%);
+  color: white;
+}
+
+.magseeds-btn-primary:hover {
+  background: linear-gradient(135deg, var(--magseeds-primary-dark) 0%, var(--magseeds-primary) 100%);
+  transform: translateY(-1px);
+  box-shadow: var(--magseeds-shadow-md);
+}
+
+.magseeds-btn-secondary {
+  background: linear-gradient(135deg, var(--magseeds-secondary) 0%, var(--magseeds-secondary-dark) 100%);
+  color: white;
+}
+
+.magseeds-btn-outline {
+  background: transparent;
+  color: var(--magseeds-primary);
+  border: 2px solid var(--magseeds-primary);
+}
+
+.magseeds-btn-outline:hover {
+  background: var(--magseeds-primary);
+  color: white;
+}
+
+/* ==========================================
+   النماذج (Forms)
+   ========================================== */
+.magseeds-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.magseeds-label {
+  display: block;
+  font-weight: 500;
+  color: var(--magseeds-gray-700);
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.magseeds-input,
+.magseeds-textarea,
+.magseeds-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--magseeds-gray-300);
+  border-radius: var(--magseeds-border-radius);
+  font-family: var(--magseeds-font-primary);
+  font-size: 0.875rem;
+  transition: var(--magseeds-transition-fast);
+  background: white;
+}
+
+.magseeds-input:focus,
+.magseeds-textarea:focus,
+.magseeds-select:focus {
+  outline: none;
+  border-color: var(--magseeds-primary);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.magseeds-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ==========================================
+   الجداول (Tables)
+   ========================================== */
+.magseeds-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--magseeds-border-radius);
+  overflow: hidden;
+  box-shadow: var(--magseeds-shadow);
+}
+
+.magseeds-table th,
+.magseeds-table td {
+  padding: 1rem;
+  text-align: right;
+  border-bottom: 1px solid var(--magseeds-gray-200);
+}
+
+.magseeds-table th {
+  background: linear-gradient(135deg, var(--magseeds-gray-100) 0%, var(--magseeds-gray-200) 100%);
+  font-weight: 600;
+  color: var(--magseeds-gray-800);
+}
+
+.magseeds-table tbody tr:hover {
+  background-color: var(--magseeds-gray-50);
+}
+
+/* ==========================================
+   الشارات (Badges)
+   ========================================== */
+.magseeds-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.magseeds-badge-success {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--magseeds-success);
+}
+
+.magseeds-badge-warning {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: var(--magseeds-warning);
+}
+
+.magseeds-badge-error {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: var(--magseeds-error);
+}
+
+/* ==========================================
+   التنبيهات (Alerts)
+   ========================================== */
+.magseeds-alert {
+  padding: 1rem 1.5rem;
+  border-radius: var(--magseeds-border-radius);
+  margin-bottom: 1rem;
+  border-right: 4px solid;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.magseeds-alert-success {
+  background-color: rgba(76, 175, 80, 0.1);
+  border-right-color: var(--magseeds-success);
+  color: var(--magseeds-success);
+}
+
+.magseeds-alert-warning {
+  background-color: rgba(255, 152, 0, 0.1);
+  border-right-color: var(--magseeds-warning);
+  color: var(--magseeds-warning);
+}
+
+.magseeds-alert-error {
+  background-color: rgba(244, 67, 54, 0.1);
+  border-right-color: var(--magseeds-error);
+  color: var(--magseeds-error);
+}
+
+/* ==========================================
+   الشبكة (Grid)
+   ========================================== */
+.magseeds-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.magseeds-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.magseeds-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.magseeds-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* ==========================================
+   الإحصائيات (Stats)
+   ========================================== */
+.magseeds-stat-card {
+  background: linear-gradient(135deg, white 0%, var(--magseeds-gray-50) 100%);
+  border-radius: var(--magseeds-border-radius-lg);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--magseeds-shadow);
+  border: 1px solid var(--magseeds-gray-200);
+  transition: var(--magseeds-transition);
+}
+
+.magseeds-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--magseeds-shadow-lg);
+}
+
+.magseeds-stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--magseeds-primary);
+  margin-bottom: 0.5rem;
+}
+
+.magseeds-stat-label {
+  color: var(--magseeds-gray-600);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================
+   التحميل (Loading)
+   ========================================== */
+.magseeds-loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--magseeds-gray-300);
+  border-radius: 50%;
+  border-top-color: var(--magseeds-primary);
+  animation: magseeds-spin 1s ease-in-out infinite;
+}
+
+@keyframes magseeds-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================
+   الاستجابة (Responsive)
+   ========================================== */
+@media (max-width: 768px) {
+  .magseeds-sidebar {
+    transform: translateX(100%);
+    width: 100%;
+  }
+  
+  .magseeds-sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .magseeds-main-content {
+    margin-right: 0;
+    padding: 1rem;
+  }
+  
+  .magseeds-grid-2,
+  .magseeds-grid-3,
+  .magseeds-grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .magseeds-page-title {
+    font-size: 1.5rem;
+  }
+}
+

@@ -1,0 +1,147 @@
+---
+alwaysApply: true
+description: Ref MCP usage rules - Documentation verification (use sparingly)
+globs:
+  - "**/*"
+---
+
+# Ref MCP Rules
+
+## Overview
+Ref is for DOCUMENTATION VERIFICATION ONLY. Use sparingly as a last resort.
+
+## ⚠️ CRITICAL: Usage Restrictions
+
+### ALLOWED Functions:
+- ✅ `ref_search_documentation` - Search official docs
+- ✅ `ref_read_url` - Read specific doc pages
+
+### PROHIBITED Functions:
+- ❌ `search_docs` - NEVER USE
+- ❌ `my_docs` - NEVER USE
+
+## When to Use Ref
+
+### Trigger Conditions (ALL must apply):
+1. Exa search completed with insufficient results
+2. One of these conditions met:
+   - User explicitly requests documentation
+   - Exa results contradict each other
+   - 2+ failed attempts to fix API/library integration
+   - Documentation drift suspected due to model cutoff
+
+### Decision Tree:
+```
+Has Exa been tried? 
+  NO → Use Exa first
+  YES → Did Exa return useful results?
+    YES → Use Exa results
+    NO → Is this an API issue?
+      YES → Try Speckit first
+      NO → Is user requesting docs explicitly?
+        YES → Use Ref
+        NO → Have you failed 2+ times?
+          YES → Use Ref
+          NO → Retry with refined Exa query
+```
+
+## ref_search_documentation
+
+### Query Format:
+```
+[library/framework name] [version] [specific topic]
+```
+
+### Best Practices:
+- Be specific about library/framework
+- Include version when known
+- Focus on one topic per query
+- Use official library names
+
+### Example Queries:
+```
+"Django 5.0 async views official documentation"
+"React 18 Suspense API reference"
+"FastAPI 0.100 dependency injection guide"
+"Pydantic v2 migration from v1"
+```
+
+## ref_read_url
+
+### When to Use:
+- User explicitly requests a docs/quickstart page
+- Need to validate details found via Exa
+- Reading official API reference
+- Checking changelogs for breaking changes
+
+### URL Types to Read:
+- ✅ Official documentation sites
+- ✅ Quickstart/Getting Started pages
+- ✅ API reference pages
+- ✅ Migration/upgrade guides
+- ✅ Changelog pages
+
+### URL Types to Avoid:
+- ❌ Blog posts (use Exa instead)
+- ❌ Stack Overflow (use Exa instead)
+- ❌ GitHub issues (use Exa instead)
+- ❌ Tutorial sites (use Exa instead)
+
+## Integration Workflow
+
+### Step 1: Exhausted Exa Options
+```
+1. Tried get_code_context_exa ✓
+2. Tried web_search_exa ✓
+3. Results still insufficient or contradictory
+```
+
+### Step 2: Ref Search
+```
+1. Call ref_search_documentation
+2. Use specific library + version
+3. Note search timestamp
+```
+
+### Step 3: Read Authoritative Source
+```
+1. Identify most relevant doc URL
+2. Call ref_read_url
+3. Extract needed information
+```
+
+### Step 4: Document Findings
+```
+1. Add source URL to code comments
+2. Note version and date
+3. Flag potential drift areas
+```
+
+## Code Annotation Format
+
+When using Ref results in code:
+```python
+# Documentation Reference:
+# Source: https://docs.djangoproject.com/en/5.0/topics/async/
+# Version: Django 5.0
+# Accessed: 2026-01-12
+# Note: Async views require ASGI server
+```
+
+## Warning Signs for Documentation Drift
+
+Use Ref when you suspect:
+- Library had major version release
+- API behavior doesn't match examples
+- Error messages reference deprecated features
+- Model knowledge seems outdated
+- Breaking changes between versions
+
+## Escalation Path
+
+If Ref doesn't resolve the issue:
+1. Document the specific problem
+2. Note all sources consulted
+3. Suggest user check GitHub issues
+4. Recommend community forums
+5. Consider version downgrade as temporary solution

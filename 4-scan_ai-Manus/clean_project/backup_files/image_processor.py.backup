@@ -1,0 +1,797 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/image_processing/image_processor.py
+"""
+
+معالج الصور الزراعية
+يوفر هذا الملف وظائف لمعالجة وتحليل الصور الزراعية
+"""
+
+import os
+import cv2
+import numpy as np
+import logging
+from datetime import datetime
+import json
+
+import tensorflow as tf
+from tensorflow.keras.applications import ResNet50
+from tensorflow.keras.applications.resnet50 import preprocess_input
+from tensorflow.keras.preprocessing import image as keras_image
+
+# إعداد التسجيل
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+
+class ImageProcessor:
+    """معالج الصور الزراعية"""
+
+    def __init__(self, model_path=None):
+        """تهيئة معالج الصور"""
+        # مسار حفظ الصور المعالجة
+        self.processed_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'processed')
+        os.makedirs(self.processed_dir, exist_ok=True)
+
+        # مسار حفظ نتائج التحليل
+        self.results_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'results')
+        os.makedirs(self.results_dir, exist_ok=True)
+
+        # تحميل نموذج التعلم العميق
+        self.model = self._load_model(model_path)
+
+        # سجل معالجة الصور
+        self.processing_history = []
+
+        logger.info("تم تهيئة معالج الصور الزراعية")
+
+    def _load_model(self, model_path=None):
+        """
+        تحميل نموذج التعلم العميق
+
+        المعلمات:
+            model_path (str, optional): مسار ملف النموذج
+
+        العائد:
+            object: نموذج التعلم العميق
+        """
+        try:
+            if model_path and os.path.exists(model_path):
+                # تحميل نموذج مخصص
+                logger.info(f"جاري تحميل النموذج من: {model_path}")
+                model = tf.keras.models.load_model(model_path)
+            else:
+                # استخدام نموذج ResNet-50 المدرب مسبقًا
+                logger.info("جاري تحميل نموذج ResNet-50 المدرب مسبقًا")
+                model = ResNet50(weights='imagenet', include_top=False, pooling='avg')
+
+            return model
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء تحميل النموذج: {str(e)}")
+            # إرجاع نموذج ResNet-50 كبديل
+            return ResNet50(weights='imagenet', include_top=False, pooling='avg')
+
+    def process_image(self, image_path, crop_type=None, processing_options=None):
+        """
+        معالجة الصورة وتحليلها
+
+        المعلمات:
+            image_path (str): مسار ملف الصورة
+            crop_type (str, optional): نوع المحصول
+            processing_options (dict, optional): خيارات المعالجة
+
+        العائد:
+            dict: نتيجة المعالجة
+        """
+        try:
+            logger.info(f"بدء معالجة الصورة: {image_path}")
+
+            # التحقق من وجود الصورة
+            if not os.path.exists(image_path):
+                logger.error(f"الصورة غير موجودة: {image_path}")
+                return {
+                    "success": False,
+                    "error": "الصورة غير موجودة",
+                    "timestamp": datetime.now().isoformat()
+                }
+
+            # تحميل الصورة
+            img = cv2.imread(image_path)
+            if img is None:
+                logger.error(f"فشل في قراءة الصورة: {image_path}")
+                return {
+                    "success": False,
+                    "error": "فشل في قراءة الصورة",
+                    "timestamp": datetime.now().isoformat()
+                }
+
+            # تحويل الصورة من BGR إلى RGB
+            img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+            # تحسين جودة الصورة
+            enhanced_img = self._enhance_image(img_rgb, processing_options)
+
+            # استخراج ميزات الصورة
+            features = self._extract_features(enhanced_img)
+
+            # تحليل الصورة
+            analysis_result = self._analyze_image(enhanced_img, features, crop_type)
+
+            # حفظ الصورة المعالجة
+            processed_image_path = self._save_processed_image(enhanced_img, image_path)
+
+            # إعداد نتيجة المعالجة
+            processing_result = {
+                "success": True,
+                "original_image": image_path,
+                "processed_image": processed_image_path,
+                "timestamp": datetime.now().isoformat(),
+                "features": features,
+                "analysis": analysis_result
+            }
+
+            # إضافة نوع المحصول إذا كان متوفرًا
+            if crop_type:
+                processing_result["crop_type"] = crop_type
+
+            # حفظ نتيجة المعالجة
+            self._save_processing_result(processing_result)
+
+            # إضافة المعالجة إلى السجل
+            self.processing_history.append({
+                "timestamp": processing_result["timestamp"],
+                "image_path": image_path,
+                "crop_typeCROP_TYPEresult": "success"
+            })
+
+            logger.info(f"تم الانتهاء من معالجة الصورة: {image_path}")
+
+            return processing_result
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء معالجة الصورة: {str(e)}RETURNsuccess": False,
+                "error": f"خطأ أثناء معالجة الصورة: {str(e)}""timestamp": datetime.now().isoformat()
+            }
+
+    def _enhance_image(self, img, options=None):
+        """
+        تحسين جودة الصورة
+
+        المعلمات:
+            img (numpy.ndarray): الصورة
+            options (dict, optional): خيارات التحسين
+
+        العائد:
+            numpy.ndarray: الصورة المحسنة
+        """
+        try:
+            # نسخة من الصورة الأصلية
+            enhanced = img.copy()
+
+            # تهيئة خيارات التحسين
+            if options is None:
+                options = {}
+
+            # تطبيق تحسين التباين
+            if options.get("enhance_contrast", True):
+                # تحويل الصورة إلى LAB
+                lab = cv2.cvtColor(enhanced, cv2.COLOR_RGB2LAB)
+                # تقسيم القنوات
+                l, a, b = cv2.split(lab)
+                # تطبيق تحسين التباين على قناة الإضاءة
+                clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+                cl = clahe.apply(l)
+                # دمج القنوات
+                limg = cv2.merge((cl, a, b))
+                # تحويل الصورة مرة أخرى إلى RGB
+                enhanced = cv2.cvtColor(limg, cv2.COLOR_LAB2RGB)
+
+            # تطبيق تقليل الضوضاء
+            if options.get("reduce_noise", True):
+                enhanced = cv2.fastNlMeansDenoisingColored(enhanced, None, 10, 10, 7, 21)
+
+            # تطبيق تحسين الحدة
+            if options.get("sharpen", True):
+                kernel = np.array([[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]])
+                enhanced = cv2.filter2D(enhanced, -1, kernel)
+
+            return enhanced
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء تحسين الصورة: {str(e)}")
+            return img
+
+    def _extract_features(self, img):
+        """
+        استخراج ميزات الصورة
+
+        المعلمات:
+            img (numpy.ndarray): الصورة
+
+        العائد:
+            dict: ميزات الصورة
+        """
+        try:
+            features = {}
+
+            # حساب هيستوجرام الألوان
+            color_hist = self._calculate_color_histogram(img)
+            features["color_histogram"] = color_hist
+
+            # استخراج ميزات النسيج
+            texture_features = self._calculate_texture_features(img)
+            features["texture_features"] = texture_features
+
+            # استخراج ميزات الشكل
+            shape_features = self._calculate_shape_features(img)
+            features["shape_features"] = shape_features
+
+            # استخراج ميزات التعلم العميق
+            deep_features = self._extract_deep_features(img)
+            features["deep_features"] = deep_features
+
+            # حساب درجة جودة الصورة
+            quality_score = self._calculate_quality_score(img)
+            features["quality_score"] = quality_score
+
+            return features
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء استخراج ميزات الصورة: {str(e)}")
+            return {}
+
+    def _calculate_color_histogram(self, img):
+        """
+        حساب هيستوجرام الألوان
+
+        المعلمات:
+            img (numpy.ndarray): الصورة
+
+        العائد:
+            dict: هيستوجرام الألوان
+        """
+        try:
+            # تقسيم الصورة إلى قنوات RGB
+            r, g, b = cv2.split(img)
+
+            # حساب هيستوجرام كل قناة
+            hist_r = cv2.calcHist([r], [0], None, [256], [0, 256])
+            hist_g = cv2.calcHist([g], [0], None, [256], [0, 256])
+            hist_b = cv2.calcHist([b], [0], None, [256], [0, 256])
+
+            # تطبيع الهيستوجرام
+            hist_r = cv2.normalize(hist_r, hist_r).flatten().tolist()
+            hist_g = cv2.normalize(hist_g, hist_g).flatten().tolist()
+            hist_b = cv2.normalize(hist_b, hist_b).flatten().tolist()
+
+            # حساب متوسط كل قناة
+            avg_r = np.mean(r)
+            avg_g = np.mean(g)
+            avg_b = np.mean(b)
+
+            # حساب انحراف معياري لكل قناة
+            std_r = np.std(r)
+            std_g = np.std(g)
+            std_b = np.std(b)
+
+            # تحويل الصورة إلى HSV
+            hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+            h, s, v = cv2.split(hsv)
+
+            # حساب متوسط كل قناة HSV
+            avg_h = np.mean(h)
+            avg_s = np.mean(s)
+            avg_v = np.mean(v)
+
+            return {
+                "r_hist": hist_r[:10],  # نأخذ أول 10 قيم فقط لتقليل حجم البيانات
+                "g_hist": hist_g[:10],
+                "b_hist": hist_b[:10],
+                "avg_r": float(avg_r),
+                "avg_g": float(avg_g),
+                "avg_b": float(avg_b),
+                "std_r": float(std_r),
+                "std_g": float(std_g),
+                "std_b": float(std_b),
+                "avg_h": float(avg_h),
+                "avg_s": float(avg_s),
+                "avg_v": float(avg_v)
+            }
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء حساب هيستوجرام الألوان: {str(e)}")
+            return {}
+
+    def _calculate_texture_features(self, img):
+        """
+        حساب ميزات النسيج
+
+        المعلمات:
+            img (numpy.ndarray): الصورة
+
+        العائد:
+            dict: ميزات النسيج
+        """
+        try:
+            # تحويل الصورة إلى تدرج رمادي
+            gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+
+            # حساب مصفوفة التواجد المشترك للمستويات الرمادية (GLCM)
+            # في التطبيق الحقيقي، سيتم استخدام مكتبة مثل scikit-image لحساب GLCM
+            # هذه مجرد محاكاة بسيطة
+
+            # حساب تباين الصورة
+            contrast = np.var(gray)
+
+            # حساب الطاقة (مربع القيم)
+            energy = np.sum(gray ** 2) / (gray.shape[0] * gray.shape[1])
+
+            # حساب التجانس
+            homogeneity = 1.0  # قيمة افتراضية
+
+            # حساب الارتباط
+            correlation = 0.5  # قيمة افتراضية
+
+            return {
+                "contrast": float(contrast),
+                "energy": float(energy),
+                "homogeneity": float(homogeneity),
+                "correlation": float(correlation)
+            }
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء حساب ميزات النسيج: {str(e)}")
+            return {}
+
+    def _calculate_shape_features(self, img):
+        """
+        حساب ميزات الشكل
+
+        المعلمات:
+            img (numpy.ndarray): الصورة
+
+        العائد:
+            dict: ميزات الشكل
+        """
+        try:
+            # تحويل الصورة إلى تدرج رمادي
+            gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+
+            # تطبيق عتبة ثنائية
+            _, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+            # البحث عن الحدود
+            contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+            # حساب عدد الحدود
+            num_contours = len(contours)
+
+            # حساب مساحة الحدود
+            total_area = 0
+            for contour in contours:
+                area = cv2.contourArea(contour)
+                total_area += area
+
+            # حساب محيط الحدود
+            total_perimeter = 0
+            for contour in contours:
+                perimeter = cv2.arcLength(contour, True)
+                total_perimeter += perimeter
+
+            # حساب نسبة الشكل (الدائرية)
+            circularity = 0
+            if num_contours > 0 and total_perimeter > 0:
+                circularity = 4 * np.pi * total_area / (total_perimeter ** 2)
+
+            return {
+                "num_contours": num_contours,
+                "total_area": float(total_area),
+                "total_perimeter": float(total_perimeter),
+                "circularity": float(circularity)
+            }
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء حساب ميزات الشكل: {str(e)}")
+            return {}
+
+    def _extract_deep_features(self, img):
+        """
+        استخراج ميزات التعلم العميق
+
+        المعلمات:
+            img (numpy.ndarray): الصورة
+
+        العائد:
+            dict: ميزات التعلم العميق
+        """
+        try:
+            # تغيير حجم الصورة إلى 224x224 (الحجم المطلوب لـ ResNet-50)
+            img_resized = cv2.resize(img, (224, 224))
+
+            # تحويل الصورة إلى تنسيق مناسب للنموذج
+            img_array = keras_image.img_to_array(img_resized)
+            img_array = np.expand_dims(img_array, axis=0)
+            img_array = preprocess_input(img_array)
+
+            # استخراج الميزات
+            features = self.model.predict(img_array)
+
+            # تحويل المصفوفة إلى قائمة
+            features_list = features[0].tolist()
+
+            # تقليل حجم الميزات (نأخذ أول 10 قيم فقط)
+            return {
+                "resnet50_features": features_list[:10]
+            }
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء استخراج ميزات التعلم العميق: {str(e)}")
+            return {}
+
+    def _calculate_quality_score(self, img):
+        """
+        حساب درجة جودة الصورة
+
+        المعلمات:
+            img (numpy.ndarray): الصورة
+
+        العائد:
+            float: درجة جودة الصورة (0-1)
+        """
+        try:
+            # تحويل الصورة إلى تدرج رمادي
+            gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+
+            # حساب تباين الصورة
+            contrast = np.var(gray)
+
+            # حساب وضوح الصورة (باستخدام مشتق لابلاس)
+            laplacian = cv2.Laplacian(gray, cv2.CV_64F)
+            sharpness = np.var(laplacian)
+
+            # حساب نسبة الإشارة إلى الضوضاء
+            mean = np.mean(gray)
+            std = np.std(gray)
+            snr = mean / std if std > 0 else 0
+
+            # حساب درجة الجودة الإجمالية
+            # نقوم بتطبيع القيم وجمعها بأوزان مختلفة
+            normalized_contrast = min(1.0, contrast / 10000)
+            normalized_sharpness = min(1.0, sharpness / 1000)
+            normalized_snr = min(1.0, snr / 10)
+
+            quality_score = 0.3 * normalized_contrast + 0.4 * normalized_sharpness + 0.3 * normalized_snr
+
+            return float(quality_score)
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء حساب درجة جودة الصورة: {str(e)}")
+            return 0.5  # قيمة افتراضية
+
+    def _analyze_image(self, img, features, crop_type=None):
+        """
+        تحليل الصورة
+
+        المعلمات:
+            img (numpy.ndarray): الصورة
+            features (dict): ميزات الصورة
+            crop_type (str, optional): نوع المحصول
+
+        العائد:
+            dict: نتيجة التحليل
+        """
+        try:
+            analysis_result = {
+                "vegetation_index": self._calculate_vegetation_index(img),
+                "color_analysis": self._analyze_colors(features["color_histogram"]),
+                "texture_analysis": self._analyze_texture(features["texture_features"]),
+                "quality_assessment": {
+                    "score": features["quality_score"],
+                    "assessment": self._assess_quality(features["quality_score"])
+                }
+            }
+
+            # إضافة تحليل خاص بنوع المحصول إذا كان متوفرًا
+            if crop_type:
+                analysis_result["crop_specific_analysis"] = self._analyze_crop_specific(img, features, crop_type)
+
+            return analysis_result
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء تحليل الصورة: {str(e)}")
+            return {}
+
+    def _calculate_vegetation_index(self, img):
+        """
+        حساب مؤشر الغطاء النباتي
+
+        المعلمات:
+            img (numpy.ndarray): الصورة
+
+        العائد:
+            dict: مؤشر الغطاء النباتي
+        """
+        try:
+            # تقسيم الصورة إلى قنوات RGB
+            r, g, b = cv2.split(img)
+
+            # تحويل القنوات إلى نوع float
+            r = r.astype(float)
+            g = g.astype(float)
+            b = b.astype(float)
+
+            # حساب مؤشر الغطاء النباتي المعدل (NDVI)
+            # في الصور RGB، نستخدم القناة الحمراء والخضراء كتقريب
+            # NDVI = (NIR - Red) / (NIR + Red)
+            # نستخدم Green كتقريب لـ NIR
+            epsilon = 1e-10  # لتجنب القسمة على صفر
+            ndvi = (g - r) / (g + r + epsilon)
+
+            # حساب متوسط NDVI
+            avg_ndvi = float(np.mean(ndvi))
+
+            # حساب مؤشر الخضرة الزائد (ExG)
+            # ExG = 2*g - r - b
+            exg = 2 * g - r - b
+
+            # حساب متوسط ExG
+            avg_exg = float(np.mean(exg))
+
+            # تقييم حالة النبات
+            plant_health = "جيدة"
+            if avg_ndvi < 0:
+                plant_health = "ضعيفة"
+            elif avg_ndvi < 0.3:
+                plant_health = "متوسطةRETURNndvi": avg_ndvi,
+                "exg": avg_exg,
+                "plant_health": plant_health
+            }
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء حساب مؤشر الغطاء النباتي: {str(e)}RETURNndvi""": "غير معروفة"
+            }
+
+    def _analyze_colors(self, color_histogram):
+        """
+        تحليل الألوان
+
+        المعلمات:
+            color_histogram (dict): هيستوجرام الألوان
+
+        العائد:
+            dict: تحليل الألوان
+        """
+        try:
+            # تحليل نسبة اللون الأخضر
+            green_ratio = color_histogram["avg_g"] / (color_histogram["avg_r"] + color_histogram["avg_g"] + color_histogram["avg_b"] + 1e-10)
+
+            # تحليل تشبع الألوان
+            saturation = color_histogram["avg_s"]
+
+            # تحديد اللون السائد
+            dominant_color = "أخضر"
+            if color_histogram["avg_rCOLOR_HISTOGRAMavg_g"] and color_histogram["avg_rCOLOR_HISTOGRAMavg_b"]:
+                dominant_color = "أحمر"
+            elif color_histogram["avg_bCOLOR_HISTOGRAMavg_g"] and color_histogram["avg_bCOLOR_HISTOGRAMavg_r"]:
+                dominant_color = "أزرق"
+
+            # تقييم حالة النبات بناءً على الألوان
+            plant_condition = "صحية"
+            if green_ratio < 0.3:
+                plant_condition = "غير صحية"
+            elif green_ratio < 0.4:
+                plant_condition = "متوسطةRETURNgreen_ratio": float(green_ratio),
+                "saturation": float(saturation),
+                "dominant_color": dominant_color,
+                "plant_condition": plant_condition
+            }
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء تحليل الألوان: {str(e)}RETURNgreen_ratio""": "غير معروف""plant_condition": "غير معروفة"
+            }
+
+    def _analyze_texture(self, texture_features):
+        """
+        تحليل النسيج
+
+        المعلمات:
+            texture_features (dict): ميزات النسيج
+
+        العائد:
+            dict: تحليل النسيج
+        """
+        try:
+            # تقييم النسيج
+            texture_assessment = "ناعم"
+            if texture_features["contrast"] > 5000:
+                texture_assessment = "خشن"
+            elif texture_features["contrast"] > 2000:
+                texture_assessment = "متوسطRETURNtexture_assessment": texture_assessment,
+                "contrast_level": "مرتفع" if texture_features["contrast"] > 3000 else "منخفض"
+            }
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء تحليل النسيج: {str(e)}RETURNtexture_assessment": "غير معروف""contrast_level": "غير معروف"
+            }
+
+    def _assess_quality(self, quality_score):
+        """
+        تقييم جودة الصورة
+
+        المعلمات:
+            quality_score (float): درجة جودة الصورة
+
+        العائد:
+            str: تقييم الجودة
+        """
+        if quality_score > 0.8:
+            return "ممتازة"
+        elif quality_score > 0.6:
+            return "جيدة"
+        elif quality_score > 0.4:
+            return "متوسطة"
+        else:
+            return "ضعيفة"
+
+    def _analyze_crop_specific(self, img, features, crop_type):
+        """
+        تحليل خاص بنوع المحصول
+
+        المعلمات:
+            img (numpy.ndarray): الصورة
+            features (dict): ميزات الصورة
+            crop_type (str): نوع المحصول
+
+        العائد:
+            dict: تحليل خاص بنوع المحصول
+        """
+        try:
+            # تحليل خاص بنوع المحصول
+            # في التطبيق الحقيقي، سيتم استخدام نماذج مخصصة لكل محصول
+            # هذه مجرد محاكاة بسيطة
+
+            crop_specific = {
+                "crop_typeCROP_TYPEanalysis_confidence": 0.7
+            }
+
+            # تحليل خاص بالقمح
+            if crop_type.lower() in ["قمح", "wheatCROP_SPECIFICgrowth_stage"] = "نضجCROP_SPECIFICestimated_yield"] = "متوسط"
+
+            # تحليل خاص بالذرة
+            elif crop_type.lower() in ["ذرة", "corn", "maizeCROP_SPECIFICgrowth_stage"] = "نموCROP_SPECIFICestimated_yield"] = "مرتفع"
+
+            # تحليل خاص بالطماطم
+            elif crop_type.lower() in ["طماطم", "tomatoCROP_SPECIFICgrowth_stage"] = "إثمارCROP_SPECIFICestimated_yield"] = "مرتفع"
+
+            # تحليل خاص بالخيار
+            elif crop_type.lower() in ["خيار", "cucumberCROP_SPECIFICgrowth_stage"] = "نموCROP_SPECIFICestimated_yield"] = "متوسط"
+
+            # تحليل افتراضي
+            else:
+                crop_specific["growth_stage"] = "غير معروفCROP_SPECIFICestimated_yield"] = "غير معروف"
+
+            return crop_specific
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء التحليل الخاص بنوع المحصول: {str(e)}RETURNcrop_typeCROP_TYPEanalysis_confidence": 0.3,
+                "growth_stage": "غير معروف""estimated_yield": "غير معروف"
+            }
+
+    def _save_processed_image(self, img, original_image_path):
+        """
+        حفظ الصورة المعالجة
+
+        المعلمات:
+            img (numpy.ndarray): الصورة المعالجة
+            original_image_path (str): مسار الصورة الأصلية
+
+        العائد:
+            str: مسار الصورة المعالجة
+        """
+        try:
+            # إنشاء اسم ملف فريد
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = os.path.basename(original_image_path)
+            name, ext = os.path.splitext(filename)
+            processed_filename = f"{name}_processed_{timestamp}{ext}"
+
+            # حفظ الصورة المعالجة
+            processed_path = os.path.join(self.processed_dir, processed_filename)
+            cv2.imwrite(processed_path, cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
+
+            logger.info(f"تم حفظ الصورة المعالجة في: {processed_path}")
+
+            return processed_path
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء حفظ الصورة المعالجة: {str(e)}")
+            return ""
+
+    def _save_processing_result(self, processing_result):
+        """
+        حفظ نتيجة المعالجة
+
+        المعلمات:
+            processing_result (dict): نتيجة المعالجة
+        """
+        try:
+            # إنشاء اسم ملف فريد
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"processing_result_{timestamp}.json"
+
+            # حفظ النتيجة في ملف JSON
+            filepath = os.path.join(self.results_dir, filename)
+
+            # تحويل المسارات إلى مسارات نسبية
+            result_copy = processing_result.copy()
+            if "original_image" in result_copy:
+                result_copy["original_image"] = os.path.basename(result_copy["original_image"])
+            if "processed_image" in result_copy:
+                result_copy["processed_image"] = os.path.basename(result_copy["processed_image"])
+
+            with open(filepath, 'w', encoding='utf-8') as f:
+                json.dump(result_copy, f, ensure_ascii=False, indent=2)
+
+            logger.info(f"تم حفظ نتيجة المعالجة في: {filepath}")
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء حفظ نتيجة المعالجة: {str(e)}")
+
+    def get_processing_history(self, limit=10):
+        """
+        الحصول على سجل معالجة الصور
+
+        المعلمات:
+            limit (int): عدد النتائج المطلوبة
+
+        العائد:
+            list: سجل معالجة الصور
+        """
+        # ترتيب السجل حسب التاريخ (الأحدث أولاً)
+        sorted_history = sorted(self.processing_history, key=lambda x: x["timestamp"], reverse=True)
+
+        # تحديد عدد النتائج المطلوبة
+        return sorted_history[:limit]
+
+    def get_processing_statistics(self):
+        """
+        الحصول على إحصائيات معالجة الصور
+
+        العائد:
+            dict: إحصائيات معالجة الصور
+        """
+        try:
+            total_processings = len(self.processing_history)
+
+            if total_processings == 0:
+                return {
+                    "total_processings": 0,
+                    "success_rate": 0,
+                    "crop_distribution": {}
+                }
+
+            # حساب معدل النجاح
+            successful_processings = sum(1 for p in self.processing_history if p["result"] == "success")
+            success_rate = successful_processings / total_processings
+
+            # حساب توزيع المحاصيل
+            crop_distribution = {}
+            for processing in self.processing_history:
+                crop_type = processing.get("crop_type", "غير محدد")
+                if crop_type in crop_distribution:
+                    crop_distribution[crop_type] += 1
+                else:
+                    crop_distribution[crop_type] = 1
+
+            # تحويل التوزيع إلى نسب مئوية
+            for crop in crop_distribution:
+                crop_distribution[crop] = crop_distribution[crop] / total_processings
+
+            return {
+                "total_processings": total_processings,
+                "success_rate": success_rate,
+                "crop_distribution": crop_distribution
+            }
+
+        except Exception as e:
+            logger.error(f"خطأ أثناء حساب إحصائيات معالجة الصور: {str(e)}RETURNtotal_processings""": {}
+            }

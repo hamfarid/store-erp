@@ -1,0 +1,180 @@
+{
+  "permissions": [
+    {
+      "id": "view_dashboard",
+      "name_ar": "عرض لوحة التحكم",
+      "name_en": "View Dashboard",
+      "module": "core"
+    },
+    {
+      "id": "manage_users",
+      "name_ar": "إدارة المستخدمين",
+      "name_en": "Manage Users",
+      "module": "core"
+    },
+    {
+      "id": "manage_roles",
+      "name_ar": "إدارة الأدوار",
+      "name_en": "Manage Roles",
+      "module": "core"
+    },
+    {
+      "id": "manage_modules",
+      "name_ar": "إدارة المديولات",
+      "name_en": "Manage Modules",
+      "module": "module_management"
+    },
+    {
+      "id": "view_resources",
+      "name_ar": "عرض الموارد",
+      "name_en": "View Resources",
+      "module": "resource_monitoring"
+    },
+    {
+      "id": "manage_alerts",
+      "name_ar": "إدارة التنبيهات",
+      "name_en": "Manage Alerts",
+      "module": "alert_management"
+    },
+    {
+      "id": "manage_ai_agents",
+      "name_ar": "إدارة وكلاء الذكاء الصناعي",
+      "name_en": "Manage AI Agents",
+      "module": "ai_management"
+    },
+    {
+      "id": "view_ai_stats",
+      "name_ar": "عرض إحصائيات الذكاء الصناعي",
+      "name_en": "View AI Stats",
+      "module": "ai_management"
+    },
+    {
+      "id": "manage_backups",
+      "name_ar": "إدارة النسخ الاحتياطي",
+      "name_en": "Manage Backups",
+      "module": "backup_module"
+    },
+    {
+      "id": "manage_data_validation",
+      "name_ar": "إدارة التحقق من صحة البيانات",
+      "name_en": "Manage Data Validation",
+      "module": "data_validation"
+    },
+    {
+      "id": "manage_settings",
+      "name_ar": "إدارة الإعدادات",
+      "name_en": "Manage Settings",
+      "module": "core"
+    }
+  ],
+  "role_permissions": [
+    {
+      "role_id": "admin",
+      "permission_id": "view_dashboard"
+    },
+    {
+      "role_id": "admin",
+      "permission_id": "manage_users"
+    },
+    {
+      "role_id": "admin",
+      "permission_id": "manage_roles"
+    },
+    {
+      "role_id": "admin",
+      "permission_id": "manage_modules"
+    },
+    {
+      "role_id": "admin",
+      "permission_id": "view_resources"
+    },
+    {
+      "role_id": "admin",
+      "permission_id": "manage_alerts"
+    },
+    {
+      "role_id": "admin",
+      "permission_id": "manage_ai_agents"
+    },
+    {
+      "role_id": "admin",
+      "permission_id": "view_ai_stats"
+    },
+    {
+      "role_id": "admin",
+      "permission_id": "manage_backups"
+    },
+    {
+      "role_id": "admin",
+      "permission_id": "manage_data_validation"
+    },
+    {
+      "role_id": "admin",
+      "permission_id": "manage_settings"
+    },
+    {
+      "role_id": "manager",
+      "permission_id": "view_dashboard"
+    },
+    {
+      "role_id": "manager",
+      "permission_id": "manage_modules"
+    },
+    {
+      "role_id": "manager",
+      "permission_id": "view_resources"
+    },
+    {
+      "role_id": "manager",
+      "permission_id": "manage_alerts"
+    },
+    {
+      "role_id": "manager",
+      "permission_id": "manage_ai_agents"
+    },
+    {
+      "role_id": "manager",
+      "permission_id": "view_ai_stats"
+    },
+    {
+      "role_id": "user",
+      "permission_id": "view_dashboard"
+    },
+    {
+      "role_id": "user",
+      "permission_id": "view_resources"
+    },
+    {
+      "role_id": "user",
+      "permission_id": "view_ai_stats"
+    }
+  ],
+  "company_permissions": [
+    {
+      "user_id": "user1",
+      "company_id": "all"
+    },
+    {
+      "user_id": "user2",
+      "company_id": "company1"
+    },
+    {
+      "user_id": "user3",
+      "company_id": "company1"
+    }
+  ],
+  "country_permissions": [
+    {
+      "user_id": "user1",
+      "country_id": "all"
+    },
+    {
+      "user_id": "user2",
+      "country_id": "country1"
+    },
+    {
+      "user_id": "user3",
+      "country_id": "country1"
+    }
+  ]
+}

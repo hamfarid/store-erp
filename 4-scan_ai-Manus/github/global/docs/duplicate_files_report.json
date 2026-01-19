@@ -1,0 +1,44 @@
+{
+  "project_path": ".",
+  "similar_names": {
+    "gitkeep": [
+      "errors/critical/.gitkeep",
+      "errors/high/.gitkeep",
+      "errors/low/.gitkeep",
+      "errors/medium/.gitkeep",
+      "errors/resolved/.gitkeep",
+      ".memory/checkpoints/.gitkeep",
+      ".memory/conversations/.gitkeep",
+      ".memory/knowledge/.gitkeep",
+      ".memory/preferences/.gitkeep",
+      ".memory/state/.gitkeep",
+      ".memory/vectors/.gitkeep"
+    ],
+    "index": [
+      ".memory/checkpoints/index.json",
+      ".memory/conversations/index.json",
+      ".memory/knowledge/index.json"
+    ]
+  },
+  "exact_duplicates": {
+    ".gitkeep": [
+      "errors/critical/.gitkeep",
+      "errors/high/.gitkeep",
+      "errors/low/.gitkeep",
+      "errors/medium/.gitkeep",
+      "errors/resolved/.gitkeep",
+      ".memory/checkpoints/.gitkeep",
+      ".memory/conversations/.gitkeep",
+      ".memory/knowledge/.gitkeep",
+      ".memory/preferences/.gitkeep",
+      ".memory/state/.gitkeep",
+      ".memory/vectors/.gitkeep"
+    ]
+  },
+  "summary": {
+    "similar_name_groups": 2,
+    "similar_name_files": 14,
+    "exact_duplicate_groups": 1,
+    "exact_duplicate_files": 11
+  }
+}

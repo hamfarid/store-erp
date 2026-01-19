@@ -1,0 +1,207 @@
+<!-- 
+مكون Header لنظام Gaara ERP
+يحتوي على شعار النظام، اسم المستخدم، الإشعارات، وقائمة المستخدم
+-->
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Component - Gaara ERP</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="/static/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <style>
+        .header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+            height: 60px;
+        }
+        
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-logo img {
+            height: 40px;
+            margin-left: 10px;
+        }
+        
+        .header-logo h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-actions .btn {
+            margin-right: 10px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            color: #6c757d;
+            border: none;
+            position: relative;
+        }
+        
+        .header-actions .btn:hover {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+        
+        .header-actions .btn .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        .user-menu:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .user-menu img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+        
+        .user-menu .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .user-menu .user-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+        
+        .user-menu .user-role {
+            font-size: 0.75rem;
+            color: #6c757d;
+        }
+        
+        .dropdown-menu {
+            min-width: 200px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            border-radius: 0.25rem;
+        }
+        
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dropdown-item i {
+            margin-left: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .dropdown-divider {
+            margin: 0.5rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-logo h1 {
+                display: none;
+            }
+            
+            .user-menu .user-info {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <img src="/static/images/logo.png" alt="Gaara ERP Logo">
+            <h1>نظام Gaara ERP</h1>
+        </div>
+        
+        <div class="header-actions">
+            <button class="btn" title="البحث">
+                <i class="fas fa-search"></i>
+            </button>
+            
+            <button class="btn" title="الإشعارات">
+                <i class="fas fa-bell"></i>
+                <span class="badge">3</span>
+            </button>
+            
+            <button class="btn" title="الرسائل">
+                <i class="fas fa-envelope"></i>
+                <span class="badge">5</span>
+            </button>
+            
+            <div class="dropdown">
+                <div class="user-menu" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/static/images/user-avatar.png" alt="صورة المستخدم">
+                    <div class="user-info">
+                        <span class="user-name">أحمد محمد</span>
+                        <span class="user-role">مدير النظام</span>
+                    </div>
+                    <i class="fas fa-chevron-down ms-2"></i>
+                </div>
+                
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> الملف الشخصي</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-palette"></i> تغيير المظهر</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-question-circle"></i> المساعدة</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // يمكن إضافة أي سلوك JavaScript إضافي هنا
+    </script>
+</body>
+</html>

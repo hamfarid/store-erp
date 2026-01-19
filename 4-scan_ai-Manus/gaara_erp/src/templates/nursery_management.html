@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام Gaara ERP - إدارة المشاتل</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="/static/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <style>
+        /* أنماط خاصة بصفحة إدارة المشاتل */
+        .nursery-stats-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .nursery-stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        
+        .nursery-form {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .nursery-table {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .nursery-table .table th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .nursery-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .nursery-filter .form-control,
+        .nursery-filter .btn {
+            min-width: 150px;
+        }
+        
+        .nursery-pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .nursery-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .nursery-actions .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .nursery-modal .modal-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .nursery-modal .modal-footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .nursery-tabs .nav-link {
+            color: #6c757d;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+        }
+        
+        .nursery-tabs .nav-link.active {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .nursery-tabs .tab-content {
+            padding: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- تضمين مكون Header -->
+    <div id="header-container"></div>
+    
+    <!-- تضمين مكون Sidebar -->
+    <div id="sidebar-container"></div>
+    
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3 mb-0">إدارة المشاتل</h1>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNurseryModal">
+                    <i class="fas fa-plus me-1"></i>
+                    إضافة مشتل جديد
+                </button>
+            </div>
+            
+            <!-- بطاقات الإحصائيات -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="nursery-stats-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">إجمالي المشاتل</h5>
+                            <div class="stats-icon" style="background-color: rgba(52, 152, 219, 0.1); color: #3498db; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                        </div>
+                        <h2 class="mb-0">12</h2>
+                        <div class="text-success mt-2">
+                            <i class="fas fa-arrow-up me-1"></i>
+                            <small>8.5% منذ الشهر الماضي</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="nursery-stats-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">السعة الإجمالية</h5>
+                            <div class="stats-icon" style="background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                        </div>
+                        <h2 class="mb-0">25,000</h2>
+                        <div class="text-success mt-2">
+                            <i class="fas fa-arrow-up me-1"></i>
+                            <small>12.3% منذ الشهر الماضي</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="nursery-stats-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">الإشغال الحالي</h5>
+                            <div class="stats-icon" style="background-color: rgba(155, 89, 182, 0.1); color: #9b59b6; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                        </div>
+                        <h2 class="mb-0">18,500</h2>
+                        <div class="text-success mt-2">
+                            <i class="fas fa-arrow-up me-1"></i>
+                            <small>5.2% منذ الشهر الماضي</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="nursery-stats-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">نسبة الإشغال</h5>
+                            <div class="stats-icon" style="background-color: rgba(231, 76, 60, 0.1); color: #e74c3c; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                        </div>
+                        <h2 class="mb-0">74%</h2>
+                        <div class="text-danger mt-2">
+                            <i class="fas fa-arrow-down me-1"></i>
+                            <small>3.1% منذ الشهر الماضي</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- عناصر التصفية -->
+            <div class="nursery-filter">
+                <input type="text" class="form-control" placeholder="بحث...">
+                <select class="form-select">
+                    <option value="">جميع المواقع</option>
+                    <option value="cairo">القاهرة</option>
+                    <option value="alexandria">الإسكندرية</option>
+                    <option value="giza">الجيزة</option>
+                </select>
+                <select class="form-select">
+                    <option value="">جميع الحالات</option>
+                    <option value="active">نشط</option>
+                    <option value="inactive">غير نشط</option>
+                    <option value="maintenance">صيانة</option>
+                </select>
+                <button type="button" class="btn btn-primary">
+                    <i class="fas fa-search me-1"></i>
+                    بحث
+                </button>
+                <button type="button" class="btn btn-outline-secondary">
+                    <i class="fas fa-redo me-1"></i>
+                    إعادة تعيين
+                </button>
+            </div>
+            
+            <!-- جدول المشاتل -->
+            <div class="nursery-table">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>الرقم</th>
+                                <th>اسم المشتل</th>
+                                <th>الموقع</th>
+                                <th>السعة</th>
+                                <th>الإشغال</th>
+                                <th>نسبة الإشغال</th>
+                                <th>المدير</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>مشتل الأمل</td>
+                                <td>القاهرة</td>
+                                <td>5,000</td>
+                                <td>3,750</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>75%</small>
+                                </td>
+                                <td>أحمد محمد</td>
+                                <td><span class="badge bg-success">نشط</span></td>
+                                <td>
+                                    <div class="nursery-actions">
+                                        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#viewNurseryModal">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editNurseryModal">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>مشتل النور</td>
+                                <td>الإسكندرية</td>
+                                <td>3,000</td>
+                                <td>2,400</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>80%</small>
+                                </td>
+                                <td>محمد علي</td>
+                                <td><span class="badge bg-success">نشط</span></td>
+                                <td>
+                                    <div class="nursery-actions">
+                                        <button type="button" class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>مشتل الربيع</td>
+                                <td>الجيزة</td>
+                                <td>4,000</td>
+                                <td>2,800</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>70%</small>
+                                </td>
+                                <td>علي حسن</td>
+                                <td><span class="badge bg-warning">صيانة</span></td>
+                                <td>
+                                    <div class="nursery-actions">
+                                        <button type="button" class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>مشتل الزهور</td>
+                                <td>القاهرة</td>
+                                <td>2,500</td>
+                                <td>1,500</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>60%</small>
+                                </td>
+                                <td>حسن علي</td>
+                                <td><span class="badge bg-success">نشط</span></td>
+                                <td>
+                                    <div class="nursery-actions">
+                                        <button type="button" class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>مشتل الواحة</td>
+                                <td>الإسكندرية</td>
+                                <td>3,500</td>
+                                <td>2,100</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>60%</small>
+                                </td>
+                                <td>محمود أحمد</td>
+                                <td><span class="badge bg-danger">غير نشط</span></td>
+                                <td>
+                                    <div class="nursery-actions">
+                                        <button type="button" class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- ترقيم الصفحات -->
+                <div class="nursery-pagination">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- تضمين مكون Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- نافذة إضافة مشتل جديد -->
+    <div class="modal fade nursery-modal" id="addNurseryModal" tabindex="-1" aria-labelledby="addNurseryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addNurseryModalLabel">إضافة مشتل جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nurseryName" class="form-label">اسم المشتل</label>
+                                <input type="text" class="form-control" id="nurseryName" placeholder="أدخل اسم المشتل">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nurseryLocation" class="form-label">الموقع</label>
+                                <select class="form-select" id="nurseryLocation">
+                                    <option value="">اختر الموقع</option>
+                                    <option value="cairo">القاهرة</option>
+                                    <option value="alexandria">الإسكندرية</option>
+                                    <option value="giza">الجيزة</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nurseryCapacity" class="form-label">السعة</label>
+                                <input type="number" class="form-control" id="nurseryCapacity" placeholder="أدخل سعة المشتل">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nurseryManager" class="form-label">المدير</label>
+                                <select class="form-select" id="nurseryManager">
+                                    <option value="">اختر المدير</option>
+                                    <option value="1">أحمد محمد</option>
+                                    <option value="2">محمد علي</option>
+                                    <option value="3">علي حسن</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nurseryStatus" class="form-label">الحالة</label>
+                                <select class="form-select" id="nurseryStatus">
+                                    <option value="active">نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                    <option value="maintenance">صيانة</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nurseryType" class="form-label">نوع المشتل</label>
+                                <select class="form-select" id="nurseryType">
+                                    <option value="">اختر النوع</option>
+                                    <option value="vegetables">خضروات</option>
+                                    <option value="fruits">فواكه</option>
+                                    <option value="flowers">زهور</option>
+                                    <option value="mixed">متنوع</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="nurseryDescription" class="form-label">الوصف</label>
+                            <textarea class="form-control" id="nurseryDescription" rows="3" placeholder="أدخل وصف المشتل"></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="nurseryAddress" class="form-label">العنوان التفصيلي</label>
+                            <input type="text" class="form-control" id="nurseryAddress" placeholder="أدخل العنوان التفصيلي">
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nurseryPhone" class="form-label">رقم الهاتف</label>
+                                <input type="tel" class="form-control" id="nurseryPhone" placeholder="أدخل رقم الهاتف">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nurseryEmail" class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="nurseryEmail" placeholder="أدخل البريد الإلكتروني">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary">حفظ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- نافذة عرض تفاصيل المشتل -->
+    <div class="modal fade nursery-modal" id="viewNurseryModal" tabindex="-1" aria-labelledby="viewNurseryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewNurseryModalLabel">تفاصيل المشتل</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- علامات التبويب -->
+                    <ul class="nav nav-tabs nursery-tabs mb-3" id="nurseryTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info-tab-pane" type="button" role="tab" aria-controls="info-tab-pane" aria-selected="true">معلومات أساسية</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="stock-tab" data-bs-toggle="tab" data-bs-target="#stock-tab-pane" type="button" role="tab" aria-controls="stock-tab-pane" aria-selected="false">المخزون</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="operations-tab" data-bs-toggle="tab" data-bs-target="#operations-tab-pane" type="button" role="tab" aria-controls="operations-tab-pane" aria-selected="false">العمليات</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-tab-pane" type="button" role="tab" aria-controls="reports-tab-pane" aria-selected="false">التقارير</button>
+                        </li>
+                    </ul>
+                    
+                    <!-- محتوى علامات التبويب -->
+                    <div class="tab-content" id="nurseryTabsContent">
+                        <!-- معلومات أساسية -->
+                        <div class="tab-pane fade show active" id="info-tab-pane" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>اسم المشتل:</strong> مشتل الأمل</p>
+                                    <p><strong>الموقع:</strong> القاهرة</p>
+                                    <p><strong>السعة:</strong> 5,000</p>
+                                    <p><strong>الإشغال:</strong> 3,750</p>
+                                    <p><strong>نسبة الإشغال:</strong> 75%</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>المدير:</strong> أحمد محمد</p>
+                                    <p><strong>الحالة:</strong> <span class="badge bg-success">نشط</span></p>
+                                    <p><strong>نوع المشتل:</strong> متنوع</p>
+                                    <p><strong>تاريخ الإنشاء:</strong> 15/01/2024</p>
+                                    <p><strong>آخر تحديث:</strong> 28/04/2025</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <p><strong>الوصف:</strong></p>
+                                    <p>مشتل الأمل هو أحد أكبر المشاتل في القاهرة، يتخصص في إنتاج شتلات الخضروات والفواكه عالية الجودة. يتميز بموقعه الاستراتيجي وسهولة الوصول إليه.</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <p><strong>العنوان التفصيلي:</strong></p>
+                                    <p>طريق مصر الإسكندرية الزراعي، كيلو 28، القاهرة</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <p><strong>رقم الهاتف:</strong> 01234567890</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>البريد الإلكتروني:</strong> info@alamal-nursery.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- المخزون -->
+                        <div class="tab-pane fade" id="stock-tab-pane" role="tabpanel" aria-labelledby="stock-tab" tabindex="0">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>الصنف</th>
+                                            <th>النوع</th>
+                                            <th>الكمية</th>
+                                            <th>تاريخ الزراعة</th>
+                                            <th>تاريخ الحصاد المتوقع</th>
+                                            <th>الحالة</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>طماطم</td>
+                                            <td>خضروات</td>
+                                            <td>1,200</td>
+                                            <td>01/03/2025</td>
+                                            <td>15/05/2025</td>
+                                            <td><span class="badge bg-success">نامي</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>خيار</td>
+                                            <td>خضروات</td>
+                                            <td>800</td>
+                                            <td>15/03/2025</td>
+                                            <td>20/05/2025</td>
+                                            <td><span class="badge bg-success">نامي</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>فلفل</td>
+                                            <td>خضروات</td>
+                                            <td>600</td>
+                                            <td>10/03/2025</td>
+                                            <td>25/05/2025</td>
+                                            <td><span class="badge bg-warning">بطيء النمو</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>باذنجان</td>
+                                            <td>خضروات</td>
+                                            <td>500</td>
+                                            <td>05/03/2025</td>
+                                            <td>20/05/2025</td>
+                                            <td><span class="badge bg-success">نامي</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>فراولة</td>
+                                            <td>فواكه</td>
+                                            <td>650</td>
+                                            <td>01/02/2025</td>
+                                            <td>10/05/2025</td>
+                                            <td><span class="badge bg-info">جاهز للحصاد</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- العمليات -->
+                        <div class="tab-pane fade" id="operations-tab-pane" role="tabpanel" aria-labelledby="operations-tab" tabindex="0">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>رقم العملية</th>
+                                            <th>نوع العملية</th>
+                                            <th>التاريخ</th>
+                                            <th>المسؤول</th>
+                                            <th>الصنف</th>
+                                            <th>الكمية</th>
+                                            <th>الحالة</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>OP-1001</td>
+                                            <td>زراعة</td>
+                                            <td>01/03/2025</td>
+                                            <td>محمد أحمد</td>
+                                            <td>طماطم</td>
+                                            <td>1,200</td>
+                                            <td><span class="badge bg-success">مكتمل</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>OP-1002</td>
+                                            <td>ري</td>
+                                            <td>05/03/2025</td>
+                                            <td>أحمد علي</td>
+                                            <td>متنوع</td>
+                                            <td>3,000</td>
+                                            <td><span class="badge bg-success">مكتمل</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>OP-1003</td>
+                                            <td>تسميد</td>
+                                            <td>10/03/2025</td>
+                                            <td>علي حسن</td>
+                                            <td>متنوع</td>
+                                            <td>2,500</td>
+                                            <td><span class="badge bg-success">مكتمل</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>OP-1004</td>
+                                            <td>مكافحة آفات</td>
+                                            <td>15/03/2025</td>
+                                            <td>حسن محمود</td>
+                                            <td>متنوع</td>
+                                            <td>3,000</td>
+                                            <td><span class="badge bg-success">مكتمل</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>OP-1005</td>
+                                            <td>حصاد</td>
+                                            <td>20/04/2025</td>
+                                            <td>محمود أحمد</td>
+                                            <td>فراولة</td>
+                                            <td>200</td>
+                                            <td><span class="badge bg-warning">قيد التنفيذ</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- التقارير -->
+                        <div class="tab-pane fade" id="reports-tab-pane" role="tabpanel" aria-labelledby="reports-tab" tabindex="0">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">تقرير إنتاجية المشتل</h6>
+                                        <p class="mb-1 text-muted">تقرير شامل عن إنتاجية المشتل خلال الفترة من 01/01/2025 إلى 31/03/2025</p>
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill">PDF</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">تقرير مخزون المشتل</h6>
+                                        <p class="mb-1 text-muted">تقرير تفصيلي عن مخزون المشتل الحالي</p>
+                                    </div>
+                                    <span class="badge bg-success rounded-pill">Excel</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">تقرير عمليات المشتل</h6>
+                                        <p class="mb-1 text-muted">تقرير عن العمليات التي تمت في المشتل خلال شهر مارس 2025</p>
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill">PDF</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">تقرير تكاليف المشتل</h6>
+                                        <p class="mb-1 text-muted">تقرير عن تكاليف تشغيل المشتل خلال الربع الأول من عام 2025</p>
+                                    </div>
+                                    <span class="badge bg-success rounded-pill">Excel</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">تقرير الأمراض والآفات</h6>
+                                        <p class="mb-1 text-muted">تقرير عن الأمراض والآفات التي تم رصدها في المشتل وطرق مكافحتها</p>
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill">PDF</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#editNurseryModal">تعديل</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- نافذة تعديل المشتل -->
+    <div class="modal fade nursery-modal" id="editNurseryModal" tabindex="-1" aria-labelledby="editNurseryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editNurseryModalLabel">تعديل المشتل</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editNurseryName" class="form-label">اسم المشتل</label>
+                                <input type="text" class="form-control" id="editNurseryName" value="مشتل الأمل">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editNurseryLocation" class="form-label">الموقع</label>
+                                <select class="form-select" id="editNurseryLocation">
+                                    <option value="">اختر الموقع</option>
+                                    <option value="cairo" selected>القاهرة</option>
+                                    <option value="alexandria">الإسكندرية</option>
+                                    <option value="giza">الجيزة</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editNurseryCapacity" class="form-label">السعة</label>
+                                <input type="number" class="form-control" id="editNurseryCapacity" value="5000">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editNurseryManager" class="form-label">المدير</label>
+                                <select class="form-select" id="editNurseryManager">
+                                    <option value="">اختر المدير</option>
+                                    <option value="1" selected>أحمد محمد</option>
+                                    <option value="2">محمد علي</option>
+                                    <option value="3">علي حسن</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editNurseryStatus" class="form-label">الحالة</label>
+                                <select class="form-select" id="editNurseryStatus">
+                                    <option value="active" selected>نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                    <option value="maintenance">صيانة</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editNurseryType" class="form-label">نوع المشتل</label>
+                                <select class="form-select" id="editNurseryType">
+                                    <option value="">اختر النوع</option>
+                                    <option value="vegetables">خضروات</option>
+                                    <option value="fruits">فواكه</option>
+                                    <option value="flowers">زهور</option>
+                                    <option value="mixed" selected>متنوع</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="editNurseryDescription" class="form-label">الوصف</label>
+                            <textarea class="form-control" id="editNurseryDescription" rows="3">مشتل الأمل هو أحد أكبر المشاتل في القاهرة، يتخصص في إنتاج شتلات الخضروات والفواكه عالية الجودة. يتميز بموقعه الاستراتيجي وسهولة الوصول إليه.</textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="editNurseryAddress" class="form-label">العنوان التفصيلي</label>
+                            <input type="text" class="form-control" id="editNurseryAddress" value="طريق مصر الإسكندرية الزراعي، كيلو 28، القاهرة">
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editNurseryPhone" class="form-label">رقم الهاتف</label>
+                                <input type="tel" class="form-control" id="editNurseryPhone" value="01234567890">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editNurseryEmail" class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="editNurseryEmail" value="info@alamal-nursery.com">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary">حفظ التغييرات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/chart.js"></script>
+    <script>
+        // تحميل مكونات Header و Sidebar و Footer
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحميل Header
+            fetch('/templates/components/header.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-container').innerHTML = html;
+                });
+            
+            // تحميل Sidebar
+            fetch('/templates/components/sidebar.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('sidebar-container').innerHTML = html;
+                });
+            
+            // تحميل Footer
+            fetch('/templates/components/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-container').innerHTML = html;
+                });
+        });
+    </script>
+</body>
+</html>

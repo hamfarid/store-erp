@@ -1,0 +1,39 @@
+{
+  "backup": {
+    "auto_backup": true,
+    "backup_frequency": "daily",
+    "backup_time": "02:00",
+    "backup_retention_days": 30,
+    "backup_location": "/backups"
+  },
+  "security": {
+    "password_expiry_days": 90,
+    "min_password_length": 8,
+    "require_special_chars": true,
+    "require_numbers": true,
+    "require_uppercase": true,
+    "require_lowercase": true,
+    "max_login_attempts": 5,
+    "lockout_duration_minutes": 30,
+    "session_timeout_minutes": 60,
+    "two_factor_auth": false
+  },
+  "logging": {
+    "log_level": "INFO",
+    "log_retention_days": 90,
+    "audit_trail": true
+  },
+  "performance": {
+    "cache_enabled": true,
+    "cache_ttl_seconds": 3600,
+    "max_upload_size_mb": 10,
+    "max_report_rows": 10000,
+    "pagination_size": 50
+  },
+  "maintenance": {
+    "maintenance_mode": false,
+    "maintenance_message": "النظام قيد الصيانة حالياً. يرجى المحاولة لاحقاً.",
+    "allowed_ips_during_maintenance": []
+  },
+  "last_updated": "2025-05-24T21:00:50.935643"
+}

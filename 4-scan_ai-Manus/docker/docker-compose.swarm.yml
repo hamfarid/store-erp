@@ -1,0 +1,187 @@
+version: '3.8'
+
+# docker-compose.yml for Docker Swarm Deployment
+# Defines the core services running on the Linux Swarm cluster.
+# Assumes shared storage is mounted consistently on all Swarm nodes (e.g., /mnt/shared_storage).
+
+networks:
+  gaara_net:
+    driver: overlay
+    attachable: true
+
+volumes:
+  # Define named volumes. These should ideally map to paths on the shared storage.
+  # The actual mapping needs configuration on the Docker hosts or via volume drivers.
+  # Example: Define 'db_data' volume pointing to /mnt/shared_storage/db_data on hosts.
+  db_data:
+    driver_opts:
+      type: nfs # Or appropriate driver for your shared storage
+      o: addr=100.77.215.80,rw # Replace with actual NFS server IP and options
+      device: :/path/to/shared/db_data # Replace with actual NFS export path
+  rabbitmq_data:
+    driver_opts:
+      type: nfs
+      o: addr=100.77.215.80,rw
+      device: :/path/to/shared/rabbitmq_data
+  prometheus_data:
+    driver_opts:
+      type: nfs
+      o: addr=100.77.215.80,rw
+      device: :/path/to/shared/prometheus_data
+  grafana_data:
+    driver_opts:
+      type: nfs
+      o: addr=100.77.215.80,rw
+      device: :/path/to/shared/grafana_data
+  shared_logs:
+    driver_opts:
+      type: nfs
+      o: addr=100.77.215.80,rw
+      device: :/path/to/shared/logs # Shared logs directory
+  shared_models:
+    driver_opts:
+      type: nfs
+      o: addr=100.77.215.80,rw
+      device: :/path/to/shared/models # Shared models directory
+  shared_datasets:
+    driver_opts:
+      type: nfs
+      o: addr=100.77.215.80,rw
+      device: :/path/to/shared/datasets # Shared datasets directory
+
+services:
+  database:
+    image: postgres:14-alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: gaara_erp_db
+      POSTGRES_USER: gaara_user # Replace with secure user
+      POSTGRES_PASSWORD: gaara_password # Replace with secure password
+    networks:
+      - gaara_net
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager # Prefer running DB on manager or specific node
+      restart_policy:
+        condition: on-failure
+
+  message-queue:
+    image: rabbitmq:3.9-management-alpine
+    ports:
+      - "5672:5672" # AMQP port
+      - "15672:15672" # Management UI port
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq/
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbit_user # Replace with secure user
+      RABBITMQ_DEFAULT_PASS: rabbit_password # Replace with secure password
+    networks:
+      - gaara_net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  api-server:
+    # Assuming you build a custom image for the API server
+    # Replace 'your_api_image:latest' with the actual image name
+    image: your_api_image:latest
+    # build:
+    #   context: ../../ # Adjust context path relative to this compose file
+    #   dockerfile: docker/Dockerfile.api_server # Adjust Dockerfile path
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+      - message-queue
+    environment:
+      DATABASE_URL: postgresql://gaara_user:gaara_password@database:5432/gaara_erp_db # Use service name
+      RABBITMQ_HOST: message-queue
+      RABBITMQ_USER: rabbit_user
+      RABBITMQ_PASS: rabbit_password
+      SHARED_DATASETS_PATH: /mnt/shared_storage/datasets # Path inside container
+      SHARED_MODELS_PATH: /mnt/shared_storage/models # Path inside container
+      SHARED_LOGS_PATH: /mnt/shared_storage/logs # Path inside container
+      # Add other necessary environment variables (API keys, etc.)
+    volumes:
+      # Mount shared storage for access to datasets, models, logs
+      - shared_datasets:/mnt/shared_storage/datasets
+      - shared_models:/mnt/shared_storage/models
+      - shared_logs:/mnt/shared_storage/logs
+    networks:
+      - gaara_net
+    deploy:
+      replicas: 2 # Example: run 2 replicas for availability
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+  web-ui:
+    # Assuming you build a custom image for the Flask Web UI
+    # Replace 'your_webui_image:latest' with the actual image name
+    image: your_webui_image:latest
+    # build:
+    #   context: ../../gaara_erp # Adjust context path
+    #   dockerfile: ../docker/Dockerfile.web_ui # Create a Dockerfile for Flask app
+    ports:
+      - "2050:2050"
+    depends_on:
+      - api-server
+    environment:
+      API_SERVER_URL: http://api-server:8000
+      FLASK_ENV: production # Set to 'development' for debugging
+      FLASK_RUN_HOST: 0.0.0.0
+      FLASK_RUN_PORT: 2050
+    networks:
+      - gaara_net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  prometheus:
+    image: prom/prometheus:v2.37.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml # Mount config file
+      - prometheus_data:/prometheus
+    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --web.console.libraries=/usr/share/prometheus/console_libraries --web.console.templates=/usr/share/prometheus/consoles
+    networks:
+      - gaara_net
+    depends_on:
+      - api-server # Add other services to scrape
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+
+  grafana:
+    image: grafana/grafana:8.5.2
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin # Replace with secure user
+      GF_SECURITY_ADMIN_PASSWORD: grafana_password # Replace with secure password
+    networks:
+      - gaara_net
+    depends_on:
+      - prometheus
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: on-failure
+

@@ -1,0 +1,531 @@
+/**
+ * RTL (Right-to-Left) Stylesheet for Arabic Support
+ * ==================================================
+ * 
+ * Purpose: Provide full RTL support for Arabic interface
+ * Works with the LanguageToggle component and Tailwind CSS
+ * 
+ * Features:
+ * - Direction-aware layouts
+ * - Arabic typography optimization
+ * - Mirrored UI elements
+ * - Form field alignment
+ * - Animation direction fixes
+ * 
+ * @author Global System v35.0
+ * @date 2026-01-17
+ */
+
+/* ===========================================
+   Arabic Font Family
+   =========================================== */
+
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/cairo/v28/SLXgc1nY6HkvangtZmpQdkhzfH5lkSs2SgRjCAGMQ1z0hGA-W1M.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/cairo/v28/SLXgc1nY6HkvangtZmpQdkhzfH5lkSs2SgRjCAGMQ1z0hOY5W1M.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/cairo/v28/SLXgc1nY6HkvangtZmpQdkhzfH5lkSs2SgRjCAGMQ1z0hN85W1M.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+
+/* ===========================================
+   Base RTL Styles
+   =========================================== */
+
+/* Apply RTL when document direction is set */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Arabic text uses Cairo font */
+[dir="rtl"],
+.lang-ar,
+.font-arabic {
+  font-family: 'Cairo', 'Segoe UI', 'Tahoma', sans-serif;
+}
+
+/* Better Arabic text rendering */
+[dir="rtl"] * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ===========================================
+   Layout Mirroring
+   =========================================== */
+
+/* Flex direction reversal */
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .flex-row-reverse {
+  flex-direction: row;
+}
+
+/* Grid auto flow */
+[dir="rtl"] .grid-flow-col {
+  direction: ltr; /* Keep grid LTR, reverse items */
+}
+
+/* Spacing utilities reversal */
+[dir="rtl"] .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+[dir="rtl"] .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+[dir="rtl"] .pl-4,
+[dir="rtl"] .pl-5,
+[dir="rtl"] .pl-6,
+[dir="rtl"] .pl-8 {
+  padding-left: 0;
+  padding-right: inherit;
+}
+
+[dir="rtl"] .pr-4,
+[dir="rtl"] .pr-5,
+[dir="rtl"] .pr-6,
+[dir="rtl"] .pr-8 {
+  padding-right: 0;
+  padding-left: inherit;
+}
+
+/* Text alignment in RTL */
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+
+/* ===========================================
+   Icons and Visual Elements
+   =========================================== */
+
+/* Mirror icons that are directional */
+[dir="rtl"] .icon-arrow-right,
+[dir="rtl"] .icon-arrow-left,
+[dir="rtl"] .icon-chevron-right,
+[dir="rtl"] .icon-chevron-left {
+  transform: scaleX(-1);
+}
+
+/* Don't mirror non-directional icons */
+[dir="rtl"] .icon-no-flip {
+  transform: none;
+}
+
+/* Back button arrow */
+[dir="rtl"] button[aria-label*="back"] svg,
+[dir="rtl"] a[aria-label*="back"] svg,
+[dir="rtl"] .btn-back svg {
+  transform: scaleX(-1);
+}
+
+
+/* ===========================================
+   Form Elements
+   =========================================== */
+
+/* Input fields */
+[dir="rtl"] input:not([type="checkbox"]):not([type="radio"]),
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Input with icons */
+[dir="rtl"] .input-with-icon-left {
+  padding-left: 0.75rem;
+  padding-right: 2.5rem;
+}
+
+[dir="rtl"] .input-with-icon-left .input-icon {
+  right: 0.75rem;
+  left: auto;
+}
+
+[dir="rtl"] .input-with-icon-right {
+  padding-right: 0.75rem;
+  padding-left: 2.5rem;
+}
+
+[dir="rtl"] .input-with-icon-right .input-icon {
+  left: 0.75rem;
+  right: auto;
+}
+
+/* Placeholder styling for Arabic */
+[dir="rtl"] input::placeholder,
+[dir="rtl"] textarea::placeholder {
+  font-family: 'Cairo', sans-serif;
+  text-align: right;
+}
+
+/* Checkbox and radio alignment */
+[dir="rtl"] .checkbox-label,
+[dir="rtl"] .radio-label {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] input[type="checkbox"],
+[dir="rtl"] input[type="radio"] {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+/* Form labels */
+[dir="rtl"] label {
+  text-align: right;
+  display: block;
+}
+
+/* Error messages */
+[dir="rtl"] .form-error,
+[dir="rtl"] .input-error-message {
+  text-align: right;
+}
+
+
+/* ===========================================
+   Navigation & Sidebar
+   =========================================== */
+
+/* Sidebar position */
+[dir="rtl"] .sidebar {
+  right: 0;
+  left: auto;
+  border-left: 1px solid var(--border-color);
+  border-right: none;
+}
+
+/* Sidebar collapsed state */
+[dir="rtl"] .sidebar-collapsed {
+  transform: translateX(100%);
+}
+
+/* Main content offset */
+[dir="rtl"] .main-with-sidebar {
+  margin-left: 0;
+  margin-right: var(--sidebar-width);
+}
+
+/* Dropdown menus */
+[dir="rtl"] .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+/* Nav items */
+[dir="rtl"] .nav-item {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .nav-icon {
+  margin-left: 0.75rem;
+  margin-right: 0;
+}
+
+
+/* ===========================================
+   Tables
+   =========================================== */
+
+[dir="rtl"] table {
+  direction: rtl;
+}
+
+[dir="rtl"] th,
+[dir="rtl"] td {
+  text-align: right;
+}
+
+[dir="rtl"] th:first-child,
+[dir="rtl"] td:first-child {
+  padding-right: 1rem;
+  padding-left: 0;
+}
+
+[dir="rtl"] th:last-child,
+[dir="rtl"] td:last-child {
+  padding-left: 1rem;
+  padding-right: 0;
+}
+
+
+/* ===========================================
+   Cards & Containers
+   =========================================== */
+
+[dir="rtl"] .card-header {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .card-actions {
+  flex-direction: row-reverse;
+}
+
+/* List items */
+[dir="rtl"] .list-item {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .list-bullet {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+
+/* ===========================================
+   Modals & Dialogs
+   =========================================== */
+
+[dir="rtl"] .modal-close {
+  right: auto;
+  left: 1rem;
+}
+
+[dir="rtl"] .modal-header {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .modal-footer {
+  flex-direction: row-reverse;
+}
+
+
+/* ===========================================
+   Alerts & Notifications
+   =========================================== */
+
+[dir="rtl"] .alert {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .alert-icon {
+  margin-left: 0.75rem;
+  margin-right: 0;
+}
+
+[dir="rtl"] .alert-close {
+  right: auto;
+  left: 0.5rem;
+}
+
+[dir="rtl"] .toast {
+  right: auto;
+  left: 1rem;
+}
+
+
+/* ===========================================
+   Progress & Stats
+   =========================================== */
+
+/* Progress bar direction */
+[dir="rtl"] .progress-bar {
+  direction: ltr; /* Keep progress LTR */
+}
+
+[dir="rtl"] .progress-fill {
+  transform-origin: right;
+}
+
+/* Stats layout */
+[dir="rtl"] .stat-card {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .stat-icon {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+
+/* ===========================================
+   Scrollbars
+   =========================================== */
+
+/* Scrollbar position in RTL */
+[dir="rtl"]::-webkit-scrollbar {
+  left: 0;
+  right: auto;
+}
+
+
+/* ===========================================
+   Animations
+   =========================================== */
+
+/* Slide animations */
+[dir="rtl"] .slide-in-left {
+  animation-name: slideInRight;
+}
+
+[dir="rtl"] .slide-in-right {
+  animation-name: slideInLeft;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+
+/* ===========================================
+   Utility Classes
+   =========================================== */
+
+/* Force LTR for specific content (numbers, code, etc.) */
+.ltr {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* Force RTL */
+.rtl {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* Bidirectional text */
+.bidi-override {
+  unicode-bidi: bidi-override;
+}
+
+/* Number display (always LTR) */
+.number,
+.phone,
+.price,
+.percentage {
+  direction: ltr;
+  display: inline-block;
+}
+
+/* Code blocks (always LTR) */
+[dir="rtl"] code,
+[dir="rtl"] pre,
+[dir="rtl"] .code-block {
+  direction: ltr;
+  text-align: left;
+}
+
+
+/* ===========================================
+   Tailwind RTL Plugin Overrides
+   =========================================== */
+
+/* Override Tailwind spacing for RTL */
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+/* Border radius adjustments */
+[dir="rtl"] .rounded-l-lg {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+[dir="rtl"] .rounded-r-lg {
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+
+/* ===========================================
+   Dark Mode RTL Adjustments
+   =========================================== */
+
+@media (prefers-color-scheme: dark) {
+  [dir="rtl"] .sidebar {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.dark [dir="rtl"] .sidebar {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+
+/* ===========================================
+   Print Styles
+   =========================================== */
+
+@media print {
+  [dir="rtl"] {
+    direction: rtl;
+  }
+  
+  [dir="rtl"] .no-print-rtl {
+    direction: ltr;
+  }
+}

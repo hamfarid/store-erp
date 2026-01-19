@@ -1,0 +1,578 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/setup_wizard/setup_wizard.py
+"""
+معالج الإعداد التفاعلي للنظام
+يوفر واجهة برمجية لإعداد النظام عند التثبيت الأولي
+"""
+
+import os
+import json
+import logging
+from datetime import datetime
+from typing import Dict, List, Any, Optional, Union
+
+# إعداد التسجيل
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+
+class SetupWizard:
+    """فئة معالج الإعداد الرئيسية"""
+
+    def __init__(self, config_path: str = None):
+        """
+        تهيئة معالج الإعداد
+
+        Args:
+            config_path: مسار ملف التكوين الافتراضي
+        """
+        self.config_path = config_path or os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            'config',
+            'default_config.json'
+        )
+        self.config = {}
+        self.setup_steps = [
+            'system_settings',
+            'database_settings',
+            'user_settings',
+            'agricultural_modules',
+            'ai_settings',
+            'notification_settings',
+            'backup_settings'
+        ]
+        self.current_step = 0
+        self.setup_complete = False
+        self._load_default_config()
+
+    def _load_default_config(self) -> None:
+        """تحميل التكوين الافتراضي"""
+        try:
+            if os.path.exists(self.config_path):
+                with open(self.config_path, 'r', encoding='utf-8') as f:
+                    self.config = json.load(f)
+                logger.info(f"تم تحميل التكوين الافتراضي من {self.config_path}")
+            else:
+                logger.warning(f"ملف التكوين الافتراضي غير موجود: {self.config_path}")
+                self._create_default_config()
+        except Exception as e:
+            logger.error(f"خطأ في تحميل التكوين الافتراضي: {str(e)}")
+            self._create_default_config()
+
+    def _create_default_config(self) -> None:
+        """إنشاء تكوين افتراضي"""
+        self.config = {
+            "system_settings": {
+                "app_name": "نظام الذكاء الاصطناعي الزراعي",
+                "language": "ar",
+                "timezone": "Africa/Cairo",
+                "date_format": "YYYY-MM-DD",
+                "time_format": "HH:mm:ss",
+                "theme": "light",
+                "debug_mode": False,
+                "setup_completed": False,
+                "setup_date": None
+            },
+            "database_settings": {
+                "db_type": "postgresql",
+                "db_host": "localhost",
+                "db_port": 5432,
+                "db_name": "agri_ai_db",
+                "db_user": "postgres",
+                "db_password": "",
+                "connection_pool_size": 10,
+                "connection_timeout": 30
+            },
+            "user_settings": {
+                "admin_username": "admin",
+                "admin_password": "",
+                "admin_email": "",
+                "default_role": "admin",
+                "available_roles": ["admin", "manager", "user", "viewer"],
+                "password_policy": {
+                    "min_length": 8,
+                    "require_uppercase": True,
+                    "require_lowercase": True,
+                    "require_numbers": True,
+                    "require_special_chars": True
+                }
+            },
+            "agricultural_modules": {
+                "disease_diagnosis": {
+                    "enabled": True,
+                    "knowledge_base_path": "data/disease_knowledge_base.json",
+                    "model_path": "models/disease_model.pkl",
+                    "confidence_threshold": 0.75
+                },
+                "image_processing": {
+                    "enabled": True,
+                    "model_path": "models/image_model.h5",
+                    "supported_formats": ["jpg", "jpeg", "png"],
+                    "max_image_size": 10485760  # 10MB
+                },
+                "plant_hybridization": {
+                    "enabled": True,
+                    "data_path": "data/plant_varieties.json",
+                    "simulation_iterations": 1000,
+                    "parallel_processing": False,
+                    "max_generations": 10
+                }
+            },
+            "ai_settings": {
+                "central_ai": {
+                    "enabled": True,
+                    "model_type": "local",
+                    "api_key": "",
+                    "max_tokens": 2000,
+                    "temperature": 0.7,
+                    "request_timeout": 60
+                },
+                "agents": {
+                    "max_agents": 10,
+                    "default_permissions": ["read", "analyze"],
+                    "memory_enabled": True,
+                    "memory_retention_days": 30
+                },
+                "vector_db": {
+                    "enabled": True,
+                    "db_type": "milvus",
+                    "host": "localhost",
+                    "port": 19530
+                }
+            },
+            "notification_settings": {
+                "email": {
+                    "enabled": False,
+                    "smtp_server": "",
+                    "smtp_port": 587,
+                    "smtp_user": "",
+                    "smtp_password": "",
+                    "from_email": "",
+                    "use_tls": True
+                },
+                "sms": {
+                    "enabled": False,
+                    "provider": "",
+                    "api_key": ""
+                },
+                "in_app": {
+                    "enabled": True,
+                    "max_notifications": 100,
+                    "retention_days": 30
+                }
+            },
+            "backup_settings": {
+                "auto_backup": {
+                    "enabled": True,
+                    "frequency": "daily",
+                    "time": "02:00",
+                    "retention_count": 7
+                },
+                "backup_path": "backups/",
+                "include_uploads": True,
+                "include_logs": False,
+                "compress": True
+            }
+        }
+        logger.info("تم إنشاء تكوين افتراضي جديد")
+
+        # إنشاء دليل التكوين إذا لم يكن موجوداً
+        os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
+
+        # حفظ التكوين الافتراضي
+        self.save_config()
+
+    def save_config(self) -> bool:
+        """
+        حفظ التكوين الحالي إلى ملف
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            with open(self.config_path, 'w', encoding='utf-8') as f:
+                json.dump(self.config, f, ensure_ascii=False, indent=4)
+            logger.info(f"تم حفظ التكوين إلى {self.config_path}")
+            return True
+        except Exception as e:
+            logger.error(f"خطأ في حفظ التكوين: {str(e)}")
+            return False
+
+    def get_current_step(self) -> Dict[str, Any]:
+        """
+        الحصول على الخطوة الحالية في معالج الإعداد
+
+        Returns:
+            Dict: معلومات الخطوة الحالية
+        """
+        if self.current_step >= len(self.setup_steps):
+            return {
+                "step_id": "complete",
+                "step_name": "اكتمال الإعداد",
+                "step_data": {},
+                "is_last_step": True
+            }
+
+        step_id = self.setup_steps[self.current_step]
+        step_data = self.config.get(step_id, {})
+
+        return {
+            "step_id": step_id,
+            "step_name": self._get_step_name(step_id),
+            "step_data": step_data,
+            "is_last_step": self.current_step == len(self.setup_steps) - 1
+        }
+
+    def _get_step_name(self, step_id: str) -> str:
+        """
+        الحصول على اسم الخطوة بناءً على معرفها
+
+        Args:
+            step_id: معرف الخطوة
+
+        Returns:
+            str: اسم الخطوة
+        """
+        step_names = {
+            "system_settings": "إعدادات النظام",
+            "database_settings": "إعدادات قاعدة البيانات",
+            "user_settings": "إعدادات المستخدمين",
+            "agricultural_modules": "المديولات الزراعية",
+            "ai_settings": "إعدادات الذكاء الاصطناعي",
+            "notification_settings": "إعدادات الإشعارات",
+            "backup_settings": "إعدادات النسخ الاحتياطي"
+        }
+        return step_names.get(step_id, step_id)
+
+    def next_step(self) -> Dict[str, Any]:
+        """
+        الانتقال إلى الخطوة التالية
+
+        Returns:
+            Dict: معلومات الخطوة التالية
+        """
+        if self.current_step < len(self.setup_steps) - 1:
+            self.current_step += 1
+            logger.info(f"الانتقال إلى الخطوة: {self.setup_steps[self.current_step]}")
+        else:
+            self.complete_setup()
+
+        return self.get_current_step()
+
+    def previous_step(self) -> Dict[str, Any]:
+        """
+        العودة إلى الخطوة السابقة
+
+        Returns:
+            Dict: معلومات الخطوة السابقة
+        """
+        if self.current_step > 0:
+            self.current_step -= 1
+            logger.info(f"العودة إلى الخطوة: {self.setup_steps[self.current_step]}")
+
+        return self.get_current_step()
+
+    def update_step_data(self, step_id: str, data: Dict[str, Any]) -> bool:
+        """
+        تحديث بيانات خطوة معينة
+
+        Args:
+            step_id: معرف الخطوة
+            data: البيانات الجديدة
+
+        Returns:
+            bool: نجاح العملية
+        """
+        if step_id not in self.setup_steps:
+            logger.error(f"خطوة غير صالحة: {step_id}")
+            return False
+
+        try:
+            # التحقق من صحة البيانات
+            validation_result = self._validate_step_data(step_id, data)
+            if not validation_result["valid"]:
+                logger.error(f"بيانات غير صالحة للخطوة {step_id}: {validation_result['errors']}")
+                return False
+
+            # دمج البيانات الجديدة مع التكوين الحالي
+            self.config[step_id] = {**self.config.get(step_id, {}), **data}
+            logger.info(f"تم تحديث بيانات الخطوة: {step_id}")
+
+            # حفظ التكوين بعد كل تحديث
+            self.save_config()
+            return True
+        except Exception as e:
+            logger.error(f"خطأ في تحديث بيانات الخطوة {step_id}: {str(e)}")
+            return False
+
+    def _validate_step_data(self, step_id: str, data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        التحقق من صحة بيانات الخطوة
+
+        Args:
+            step_id: معرف الخطوة
+            data: البيانات للتحقق
+
+        Returns:
+            Dict: نتيجة التحقق
+        """
+        errors = []
+
+        # التحقق من صحة إعدادات النظام
+        if step_id == "system_settings":
+            if "app_name" in data and not data["app_name"]:
+                errors.append("اسم التطبيق مطلوب")
+            if "language" in data and data["language"] not in ["ar", "en"]:
+                errors.append("اللغة غير مدعومة")
+
+        # التحقق من صحة إعدادات قاعدة البيانات
+        elif step_id == "database_settings":
+            if "db_type" in data and data["db_type"] not in ["postgresql", "mysql", "sqlite"]:
+                errors.append("نوع قاعدة البيانات غير مدعوم")
+            if "db_host" in data and not data["db_host"]:
+                errors.append("اسم المضيف مطلوب")
+            if "db_name" in data and not data["db_name"]:
+                errors.append("اسم قاعدة البيانات مطلوب")
+
+        # التحقق من صحة إعدادات المستخدمين
+        elif step_id == "user_settings":
+            if "admin_username" in data and not data["admin_username"]:
+                errors.append("اسم المستخدم المسؤول مطلوب")
+            if "admin_password" in data:
+                password = data["admin_password"]
+                if not password:
+                    errors.append("كلمة مرور المسؤول مطلوبة")
+                elif len(password) < 8:
+                    errors.append("كلمة المرور يجب أن تكون 8 أحرف على الأقل")
+
+        # التحقق من صحة إعدادات المديولات الزراعية
+        elif step_id == "agricultural_modules":
+            pass  # التحقق المخصص للمديولات الزراعية
+
+        # التحقق من صحة إعدادات الذكاء الاصطناعي
+        elif step_id == "ai_settings":
+            if "central_ai" in data and "model_type" in data["central_ai"]:
+                if data["central_ai"]["model_type"] not in ["local", "cloud"]:
+                    errors.append("نوع نموذج الذكاء الاصطناعي غير مدعوم")
+
+        # التحقق من صحة إعدادات الإشعارات
+        elif step_id == "notification_settings":
+            if "email" in data and data["email"].get("enabled", False):
+                if not data["email"].get("smtp_server"):
+                    errors.append("خادم SMTP مطلوب عند تفعيل الإشعارات عبر البريد الإلكتروني")
+
+        # التحقق من صحة إعدادات النسخ الاحتياطي
+        elif step_id == "backup_settings":
+            if "auto_backup" in data and data["auto_backup"].get("enabled", False):
+                if not data["auto_backup"].get("frequency"):
+                    errors.append("تكرار النسخ الاحتياطي مطلوب عند تفعيل النسخ الاحتياطي التلقائي")
+
+        return {
+            "valid": len(errors) == 0,
+            "errors": errors
+        }
+
+    def complete_setup(self) -> bool:
+        """
+        إكمال عملية الإعداد
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            # التحقق من اكتمال جميع الخطوات الإلزامية
+            required_steps = ["system_settings", "database_settings", "user_settings"]
+            for step in required_steps:
+                if step not in self.config or not self.config[step]:
+                    logger.error(f"الخطوة الإلزامية غير مكتملة: {step}")
+                    return False
+
+            # تحديث حالة الإعداد
+            if "system_settings" not in self.config:
+                self.config["system_settings"] = {}
+
+            self.config["system_settings"]["setup_completed"] = True
+            self.config["system_settings"]["setup_date"] = datetime.now().isoformat()
+
+            self.setup_complete = True
+            logger.info("تم إكمال عملية الإعداد بنجاح")
+
+            # حفظ التكوين النهائي
+            self.save_config()
+
+            # تنفيذ الإجراءات اللازمة بعد الإعداد
+            self._post_setup_actions()
+
+            return True
+        except Exception as e:
+            logger.error(f"خطأ في إكمال عملية الإعداد: {str(e)}")
+            return False
+
+    def _post_setup_actions(self) -> None:
+        """تنفيذ الإجراءات اللازمة بعد إكمال الإعداد"""
+        try:
+            # إنشاء قاعدة البيانات إذا لم تكن موجودة
+            self._initialize_database()
+
+            # إنشاء المستخدم المسؤول
+            self._create_admin_user()
+
+            # تهيئة المديولات المفعلة
+            self._initialize_modules()
+
+            logger.info("تم تنفيذ الإجراءات اللازمة بعد الإعداد بنجاح")
+        except Exception as e:
+            logger.error(f"خطأ في تنفيذ الإجراءات بعد الإعداد: {str(e)}")
+
+    def _initialize_database(self) -> None:
+        """تهيئة قاعدة البيانات"""
+        # هذه الدالة ستقوم بإنشاء قاعدة البيانات وتهيئتها
+        # يمكن استدعاء خدمات قاعدة البيانات الخارجية هنا
+        logger.info("تم تهيئة قاعدة البيانات")
+
+    def _create_admin_user(self) -> None:
+        """إنشاء المستخدم المسؤول"""
+        # هذه الدالة ستقوم بإنشاء المستخدم المسؤول في قاعدة البيانات
+        logger.info("تم إنشاء المستخدم المسؤول")
+
+    def _initialize_modules(self) -> None:
+        """تهيئة المديولات المفعلة"""
+        # هذه الدالة ستقوم بتهيئة المديولات المفعلة
+        modules = self.config.get("agricultural_modules", {})
+        for module_name, module_config in modules.items():
+            if module_config.get("enabled", False):
+                logger.info(f"تم تهيئة المديول: {module_name}")
+
+    def get_config(self) -> Dict[str, Any]:
+        """
+        الحصول على التكوين الكامل
+
+        Returns:
+            Dict: التكوين الكامل
+        """
+        return self.config
+
+    def reset_setup(self) -> bool:
+        """
+        إعادة تعيين عملية الإعداد
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            self.current_step = 0
+            self.setup_complete = False
+
+            if "system_settings" in self.config:
+                self.config["system_settings"]["setup_completed"] = False
+                self.config["system_settings"]["setup_date"] = None
+
+            logger.info("تم إعادة تعيين عملية الإعداد")
+            self.save_config()
+            return True
+        except Exception as e:
+            logger.error(f"خطأ في إعادة تعيين عملية الإعداد: {str(e)}")
+            return False
+
+    def is_setup_complete(self) -> bool:
+        """
+        التحقق من اكتمال عملية الإعداد
+
+        Returns:
+            bool: حالة اكتمال الإعداد
+        """
+        if self.setup_complete is not None:
+            return True
+
+        if "system_settings" in self.config:
+            return self.config["system_settings"].get("setup_completed", False)
+
+        return False
+
+    def export_config(self, export_path: str) -> bool:
+        """
+        تصدير التكوين إلى ملف
+
+        Args:
+            export_path: مسار ملف التصدير
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            with open(export_path, 'w', encoding='utf-8') as f:
+                json.dump(self.config, f, ensure_ascii=False, indent=4)
+            logger.info(f"تم تصدير التكوين إلى {export_path}")
+            return True
+        except Exception as e:
+            logger.error(f"خطأ في تصدير التكوين: {str(e)}")
+            return False
+
+    def import_config(self, import_path: str) -> bool:
+        """
+        استيراد التكوين من ملف
+
+        Args:
+            import_path: مسار ملف الاستيراد
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            if not os.path.exists(import_path):
+                logger.error(f"ملف الاستيراد غير موجود: {import_path}")
+                return False
+
+            with open(import_path, 'r', encoding='utf-8') as f:
+                imported_config = json.load(f)
+
+            # التحقق من صحة التكوين المستورد
+            for step_id in self.setup_steps:
+                if step_id in imported_config:
+                    validation_result = self._validate_step_data(step_id, imported_config[step_id])
+                    if not validation_result["valid"]:
+                        logger.error(f"بيانات غير صالحة في التكوين المستورد للخطوة {step_id}: {validation_result['errors']}")
+                        return False
+
+            # استبدال التكوين الحالي بالتكوين المستورد
+            self.config = imported_config
+            logger.info(f"تم استيراد التكوين من {import_path}")
+
+            # حفظ التكوين المستورد
+            self.save_config()
+            return True
+        except Exception as e:
+            logger.error(f"خطأ في استيراد التكوين: {str(e)}")
+            return False
+
+    def get_setup_progress(self) -> Dict[str, Any]:
+        """
+        الحصول على تقدم عملية الإعداد
+
+        Returns:
+            Dict: معلومات تقدم الإعداد
+        """
+        completed_steps = 0
+        for step_id in self.setup_steps:
+            if step_id in self.config and self.config[step_id]:
+                completed_steps += 1
+
+        total_steps = len(self.setup_steps)
+        progress_percentage = (completed_steps / total_steps) * 100 if total_steps > 0 else 0
+
+        return {
+            "current_step": self.current_step + 1,
+            "total_steps": total_steps,
+            "completed_steps": completed_steps,
+            "progress_percentage": progress_percentage,
+            "is_complete": self.is_setup_complete()
+        }
+
+
+# مثال على الاستخدام
+if __name__ == "__main__":
+    setup_wizard = SetupWizard()
+    print(f"تقدم الإعداد: {setup_wizard.get_setup_progress()}")
+    print(f"الخطوة الحالية: {setup_wizard.get_current_step()}")

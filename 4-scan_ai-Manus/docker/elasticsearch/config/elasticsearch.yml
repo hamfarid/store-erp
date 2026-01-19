@@ -1,0 +1,63 @@
+# تكوين Elasticsearch لنظام Gaara Scan AI
+
+# إعدادات الكتلة
+cluster.name: gaara-elasticsearch-cluster
+node.name: gaara-elasticsearch-node-1
+node.roles: [ master, data, ingest ]
+
+# إعدادات الشبكة
+network.host: 0.0.0.0
+http.port: 9200
+transport.port: 9300
+
+# إعدادات البيانات
+path.data: /usr/share/elasticsearch/data
+path.logs: /usr/share/elasticsearch/logs
+
+# إعدادات الذاكرة
+bootstrap.memory_lock: false
+indices.memory.index_buffer_size: 20%
+
+# إعدادات الأمان
+xpack.security.enabled: true
+xpack.security.authc.api_key.enabled: true
+xpack.security.transport.ssl.enabled: false
+xpack.security.http.ssl.enabled: false
+
+# إعدادات المراقبة
+xpack.monitoring.collection.enabled: true
+xpack.monitoring.elasticsearch.collection.enabled: true
+
+# إعدادات الفهرسة
+action.auto_create_index: true
+action.destructive_requires_name: true
+
+# إعدادات البحث
+search.max_buckets: 65536
+indices.query.bool.max_clause_count: 10000
+
+# إعدادات التحليل العربي
+index.analysis.analyzer.arabic_analyzer.type: custom
+index.analysis.analyzer.arabic_analyzer.tokenizer: standard
+index.analysis.analyzer.arabic_analyzer.filter: [lowercase, arabic_normalization, arabic_stemmer]
+
+# إعدادات الأداء
+thread_pool.search.size: 8
+thread_pool.search.queue_size: 1000
+thread_pool.index.size: 4
+thread_pool.index.queue_size: 200
+
+# إعدادات التخزين المؤقت
+indices.requests.cache.size: 5%
+indices.fielddata.cache.size: 20%
+
+# إعدادات الاستعادة
+cluster.routing.allocation.disk.threshold_enabled: true
+cluster.routing.allocation.disk.watermark.low: 85%
+cluster.routing.allocation.disk.watermark.high: 90%
+cluster.routing.allocation.disk.watermark.flood_stage: 95%
+
+# إعدادات السجلات
+logger.org.elasticsearch.discovery: DEBUG
+logger.org.elasticsearch.cluster.service: DEBUG
+

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مرحباً بك في نظام Gaara Scan AI</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .setup-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 800px;
+            width: 90%;
+            margin: 20px;
+        }
+        
+        .setup-header {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .setup-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .setup-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .setup-content {
+            padding: 40px;
+        }
+        
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .welcome-icon {
+            font-size: 4rem;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .welcome-description {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .feature-description {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .setup-progress {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .progress-title {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            min-width: 100px;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #6c757d;
+        }
+        
+        .step-circle.active {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.85rem;
+            color: #6c757d;
+            text-align: center;
+        }
+        
+        .step-label.active {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .system-info {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .system-info h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e3f2fd;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #424242;
+        }
+        
+        .info-value {
+            color: #1976d2;
+        }
+        
+        @media (max-width: 768px) {
+            .setup-header h1 {
+                font-size: 2rem;
+            }
+            
+            .setup-header p {
+                font-size: 1rem;
+            }
+            
+            .setup-content {
+                padding: 20px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-steps {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .progress-step {
+                flex-direction: row;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            
+            .step-circle {
+                margin-bottom: 0;
+                margin-left: 15px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-container">
+        <div class="setup-header">
+            <h1><i class="fas fa-seedling"></i> Gaara Scan AI</h1>
+            <p>نظام الذكاء الاصطناعي المتقدم لتشخيص أمراض النباتات</p>
+        </div>
+        
+        <div class="setup-content">
+            <div class="welcome-section">
+                <div class="welcome-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h2 class="welcome-title">مرحباً بك في رحلة الإعداد!</h2>
+                <p class="welcome-description">
+                    نحن سعداء لانضمامك إلى نظام Gaara Scan AI. سنقوم معاً بإعداد النظام خطوة بخطوة 
+                    لضمان حصولك على أفضل تجربة ممكنة. العملية بسيطة وستستغرق بضع دقائق فقط.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 class="feature-title">تشخيص دقيق</h3>
+                    <p class="feature-description">
+                        تشخيص أمراض النباتات باستخدام أحدث تقنيات الذكاء الاصطناعي
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <h3 class="feature-title">تهجين النباتات</h3>
+                    <p class="feature-description">
+                        محاكاة وتحليل عمليات تهجين النباتات لتطوير أصناف محسنة
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="feature-title">كشف الكائنات</h3>
+                    <p class="feature-description">
+                        كشف وتحليل الكائنات في الصور باستخدام تقنية YOLO المتقدمة
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="feature-title">تحسين الصور</h3>
+                    <p class="feature-description">
+                        تحسين جودة الصور تلقائياً لتحليل أفضل ونتائج أدق
+                    </p>
+                </div>
+            </div>
+            
+            <div class="setup-progress">
+                <h3 class="progress-title">خطوات الإعداد</h3>
+                <div class="progress-steps">
+                    <div class="progress-step">
+                        <div class="step-circle active">1</div>
+                        <span class="step-label active">الترحيب</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle">2</div>
+                        <span class="step-label">حساب المدير</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle">3</div>
+                        <span class="step-label">قاعدة البيانات</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle">4</div>
+                        <span class="step-label">الخدمات</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle">5</div>
+                        <span class="step-label">الأمان</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle">6</div>
+                        <span class="step-label">الإكمال</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="system-info">
+                <h3><i class="fas fa-info-circle"></i> معلومات النظام</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">الإصدار:</span>
+                        <span class="info-value">v2.0.0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">عدد الخدمات:</span>
+                        <span class="info-value">26 خدمة</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">نوع النشر:</span>
+                        <span class="info-value">Docker Containers</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">اللغة:</span>
+                        <span class="info-value">العربية</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="/setup/admin" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i>
+                    بدء الإعداد
+                </a>
+                <a href="#" class="btn btn-secondary" onclick="showSystemRequirements()">
+                    <i class="fas fa-list"></i>
+                    متطلبات النظام
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSystemRequirements() {
+            alert(`متطلبات النظام:
+            
+• Docker 20.10+ مع Docker Compose
+• ذاكرة وصول عشوائي: 8 جيجابايت على الأقل (16 جيجابايت مُوصى)
+• مساحة تخزين: 50 جيجابايت على الأقل
+• معالج: 4 أنوية على الأقل
+• نظام التشغيل: Linux/Windows/macOS
+• GPU (اختياري): NVIDIA مع دعم CUDA للأداء المحسن
+• اتصال إنترنت لتحميل النماذج والتحديثات`);
+        }
+        
+        // تحديث معلومات النظام تلقائياً
+        document.addEventListener('DOMContentLoaded', function() {
+            // يمكن إضافة استدعاءات AJAX هنا لجلب معلومات النظام الفعلية
+            console.log('صفحة الترحيب جاهزة');
+        });
+    </script>
+</body>
+</html>
+

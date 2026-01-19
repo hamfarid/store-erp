@@ -1,0 +1,139 @@
+# =============================================================================
+# Alertmanager Configuration - Gaara Scan AI
+# =============================================================================
+# 
+# Alert routing and notification configuration
+#
+# Last Updated: 2026-01-19
+# =============================================================================
+
+global:
+  # Default SMTP settings
+  smtp_smarthost: 'smtp.example.com:587'
+  smtp_from: 'alerts@gaara-scan-ai.com'
+  smtp_auth_username: 'alerts@gaara-scan-ai.com'
+  smtp_auth_password: '${SMTP_PASSWORD}'
+  smtp_require_tls: true
+
+  # Slack settings (optional)
+  slack_api_url: '${SLACK_WEBHOOK_URL}'
+
+  # Default resolve timeout
+  resolve_timeout: 5m
+
+# Route tree
+route:
+  # Default receiver
+  receiver: 'default-receiver'
+  
+  # Group alerts by these labels
+  group_by: ['alertname', 'severity', 'service']
+  
+  # Wait before sending first notification
+  group_wait: 30s
+  
+  # Wait before sending update notifications
+  group_interval: 5m
+  
+  # Wait before re-sending notifications
+  repeat_interval: 4h
+
+  # Child routes
+  routes:
+    # Critical alerts - immediate notification
+    - match:
+        severity: critical
+      receiver: 'critical-receiver'
+      group_wait: 10s
+      repeat_interval: 1h
+
+    # Warning alerts
+    - match:
+        severity: warning
+      receiver: 'warning-receiver'
+      group_wait: 1m
+      repeat_interval: 4h
+
+    # Database alerts
+    - match:
+        service: database
+      receiver: 'database-receiver'
+      group_wait: 30s
+
+    # ML Service alerts
+    - match:
+        service: ml-service
+      receiver: 'ml-receiver'
+
+# Inhibition rules - suppress less severe alerts
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'service']
+
+# Notification receivers
+receivers:
+  # Default receiver
+  - name: 'default-receiver'
+    email_configs:
+      - to: 'devops@gaara-scan-ai.com'
+        send_resolved: true
+    slack_configs:
+      - channel: '#alerts'
+        send_resolved: true
+        title: '{{ template "slack.default.title" . }}'
+        text: '{{ template "slack.default.text" . }}'
+
+  # Critical alerts - multiple channels
+  - name: 'critical-receiver'
+    email_configs:
+      - to: 'oncall@gaara-scan-ai.com,devops@gaara-scan-ai.com'
+        send_resolved: true
+    slack_configs:
+      - channel: '#critical-alerts'
+        send_resolved: true
+        color: '{{ if eq .Status "firing" }}danger{{ else }}good{{ end }}'
+        title: '🚨 CRITICAL: {{ .CommonAnnotations.summary }}'
+        text: '{{ .CommonAnnotations.description }}'
+    # PagerDuty for critical alerts (optional)
+    # pagerduty_configs:
+    #   - service_key: '${PAGERDUTY_SERVICE_KEY}'
+    #     send_resolved: true
+
+  # Warning alerts
+  - name: 'warning-receiver'
+    email_configs:
+      - to: 'devops@gaara-scan-ai.com'
+        send_resolved: true
+    slack_configs:
+      - channel: '#alerts'
+        send_resolved: true
+        color: 'warning'
+        title: '⚠️ Warning: {{ .CommonAnnotations.summary }}'
+        text: '{{ .CommonAnnotations.description }}'
+
+  # Database alerts
+  - name: 'database-receiver'
+    email_configs:
+      - to: 'dba@gaara-scan-ai.com,devops@gaara-scan-ai.com'
+        send_resolved: true
+    slack_configs:
+      - channel: '#database-alerts'
+        send_resolved: true
+        title: '🗄️ Database Alert: {{ .CommonAnnotations.summary }}'
+
+  # ML Service alerts
+  - name: 'ml-receiver'
+    email_configs:
+      - to: 'ml-team@gaara-scan-ai.com'
+        send_resolved: true
+    slack_configs:
+      - channel: '#ml-alerts'
+        send_resolved: true
+        title: '🤖 ML Service Alert: {{ .CommonAnnotations.summary }}'
+
+# Templates (optional - for custom notification formatting)
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'

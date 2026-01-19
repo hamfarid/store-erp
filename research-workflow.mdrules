@@ -1,0 +1,244 @@
+---
+alwaysApply: true
+description: Combined MCP research workflow - Exa, Speckit, Ref integration
+globs:
+  - "**/*"
+---
+
+# Research Workflow Rules v0.3
+
+## 🚨 CRITICAL: Date Verification
+
+ALWAYS verify the current date before ANY MCP query:
+
+```bash
+# Run this FIRST
+date +"%Y-%m-%d %H:%M:%S %Z"
+```
+
+Assume your internal date knowledge is WRONG. Always verify.
+Attach verified date to queries for temporal relevance.
+
+---
+
+## Priority Hierarchy
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  PRIORITY 1: Exa MCP                                    │
+│  ├── get_code_context_exa (FIRST)                      │
+│  └── web_search_exa (FALLBACK)                         │
+├─────────────────────────────────────────────────────────┤
+│  PRIORITY 2: Speckit MCP (for API work)                │
+│  ├── speckit_search                                     │
+│  ├── speckit_get_spec                                   │
+│  └── speckit_validate                                   │
+├─────────────────────────────────────────────────────────┤
+│  PRIORITY 3: Ref MCP (documentation verification)      │
+│  ├── ref_search_documentation ✅                        │
+│  ├── ref_read_url ✅                                    │
+│  ├── search_docs ❌ PROHIBITED                          │
+│  └── my_docs ❌ PROHIBITED                              │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Decision Flowchart
+
+```
+START
+  │
+  ▼
+┌─────────────────────┐
+│ Verify System Date  │
+└─────────────────────┘
+  │
+  ▼
+┌─────────────────────┐
+│ Is this code/impl   │
+│ related?            │
+└─────────────────────┘
+  │
+  ├── YES ──▶ get_code_context_exa
+  │             │
+  │             ├── Results Good? ──▶ USE RESULTS
+  │             │
+  │             └── Results Bad? ──▶ web_search_exa
+  │                                    │
+  │                                    ├── Results Good? ──▶ USE RESULTS
+  │                                    │
+  │                                    └── Results Bad? ──▶ Continue below
+  │
+  └── NO
+        │
+        ▼
+┌─────────────────────┐
+│ Is this REST API    │
+│ related?            │
+└─────────────────────┘
+  │
+  ├── YES ──▶ speckit_search → speckit_get_spec
+  │             │
+  │             └── Need validation? ──▶ speckit_validate
+  │
+  └── NO
+        │
+        ▼
+┌─────────────────────┐
+│ Ref Trigger Check:  │
+│ • User requests?    │
+│ • Results conflict? │
+│ • 2+ failed fixes?  │
+│ • Doc drift likely? │
+└─────────────────────┘
+  │
+  ├── ANY YES ──▶ ref_search_documentation
+  │                  │
+  │                  └── Need specific page? ──▶ ref_read_url
+  │
+  └── ALL NO ──▶ Retry Exa with refined query
+```
+
+---
+
+## Query Templates
+
+### Exa: Code Context
+```
+[library] [version] [feature] [language] implementation example [year]
+```
+
+### Exa: Web Search
+```
+[topic] [specific aspect] [version] [year] best practices
+```
+
+### Speckit: API Search
+```
+[service] [API type] [version]
+```
+
+### Ref: Documentation
+```
+[library/framework] [version] [topic] official documentation
+```
+
+---
+
+## Operational Steps
+
+### Step 1: Pre-Research
+```
+1. Verify system date
+2. Identify query type (code/API/docs)
+3. Determine library/framework versions
+4. Prepare specific query terms
+```
+
+### Step 2: Primary Research (Exa)
+```
+1. Start with get_code_context_exa
+2. Use precise, code-oriented query
+3. Include version and language
+4. Evaluate result relevance
+```
+
+### Step 3: Fallback Research (Exa)
+```
+If Step 2 insufficient:
+1. Refine query terms
+2. Use web_search_exa
+3. Target authoritative sources
+4. Cross-reference results
+```
+
+### Step 4: API Specification (Speckit)
+```
+If working with external APIs:
+1. speckit_search for API discovery
+2. speckit_get_spec for full docs
+3. speckit_validate for debugging
+```
+
+### Step 5: Documentation Verification (Ref)
+```
+Only if triggers met:
+1. ref_search_documentation
+2. Include specific version
+3. ref_read_url for primary sources
+4. Extract authoritative details
+```
+
+### Step 6: Implementation
+```
+1. Apply research findings
+2. Test implementation
+3. Document sources in code
+4. Note version dependencies
+```
+
+---
+
+## Code Annotation Standard
+
+When implementing based on MCP research:
+
+```python
+"""
+Research Sources:
+- Exa: [query used] → [result summary]
+- Speckit: [API spec ID] → [endpoints used]  
+- Ref: [doc URL] → [key details]
+
+Version Requirements:
+- Library: [name] >= [version]
+- API: [service] [version]
+
+Date Verified: [YYYY-MM-DD]
+Potential Drift: [areas that may change]
+"""
+```
+
+---
+
+## Error Recovery
+
+### Contradictory Results
+```
+1. Note the contradiction
+2. Check result timestamps
+3. Use Ref for authoritative source
+4. Prefer newer, official sources
+5. Document uncertainty
+```
+
+### No Results Found
+```
+1. Broaden search terms
+2. Try alternative terminology
+3. Check spelling/naming
+4. Verify feature exists in version
+5. Consider version mismatch
+```
+
+### Integration Failures
+```
+1. Document exact error
+2. Verify API/library version
+3. speckit_validate if API issue
+4. ref_search_documentation for updates
+5. Check for breaking changes
+```
+
+---
+
+## Quality Checklist
+
+Before completing research:
+- [ ] Date verified
+- [ ] Exa tried first
+- [ ] Version numbers included
+- [ ] Results cross-referenced
+- [ ] Sources documented
+- [ ] Potential drift noted

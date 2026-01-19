@@ -1,0 +1,38 @@
+{
+  "yield": {
+    "name": "الإنتاجية",
+    "description": "كمية المحصول المنتجة لكل وحدة مساحة",
+    "unit": "طن/هكتار",
+    "optimization": "maximize"
+  },
+  "disease_resistance": {
+    "name": "مقاومة الأمراض",
+    "description": "قدرة النبات على مقاومة الأمراض الشائعة",
+    "unit": "نسبة مئوية",
+    "optimization": "maximize"
+  },
+  "drought_tolerance": {
+    "name": "تحمل الجفاف",
+    "description": "قدرة النبات على تحمل ظروف الجفاف",
+    "unit": "نسبة مئوية",
+    "optimization": "maximize"
+  },
+  "fruit_size": {
+    "name": "حجم الثمرة",
+    "description": "متوسط حجم الثمرة",
+    "unit": "سم",
+    "optimization": "target"
+  },
+  "maturity_days": {
+    "name": "أيام النضج",
+    "description": "عدد الأيام من الزراعة حتى النضج",
+    "unit": "يوم",
+    "optimization": "minimize"
+  },
+  "protein_content": {
+    "name": "محتوى البروتين",
+    "description": "نسبة البروتين في المحصول",
+    "unit": "نسبة مئوية",
+    "optimization": "maximize"
+  }
+}

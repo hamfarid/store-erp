@@ -1,0 +1,724 @@
+# /home/ubuntu/ai_web_organized/src/modules/data_validation/invalid_data_handler.py
+
+"""
+
+وحدة معالج البيانات غير الصحيحة (Invalid Data Handler)
+
+هذه الوحدة مسؤولة عن معالجة البيانات غير الصحيحة التي تم اكتشافها بواسطة
+محقق النموذج (Model Validator) ومحقق قاعدة البيانات (Database Validator).
+توفر آليات للتصحيح التلقائي، والإبلاغ عن الأخطاء، وتسجيل الأحداث.
+"""
+
+import json
+import logging
+import os
+from datetime import datetime
+from typing import Dict, List, Any, Optional, Tuple, Callable
+
+# استيراد وحدات التحقق
+from .model_validator import ModelValidator
+from .database_validator import DatabaseValidator
+
+# إعداد التسجيل
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger('invalid_data_handler')
+
+
+class InvalidDataHandler:
+    """
+    فئة معالج البيانات غير الصحيحة المسؤولة عن معالجة البيانات غير الصحيحة.
+    """
+
+    def __init__(self, config_path: Optional[str] = None):
+        """
+        تهيئة معالج البيانات غير الصحيحة.
+
+        Args:
+            config_path (str, optional): مسار ملف التكوين. إذا لم يتم تحديده، يتم استخدام الإعدادات الافتراضية.
+        """
+        self.config = self._load_config(config_path)
+        self.model_validator = ModelValidator(config_path)
+        self.database_validator = DatabaseValidator(config_path)
+        self.error_handlers = self._load_error_handlers()
+        self.notification_handlers = self._load_notification_handlers()
+        logger.info("تم تهيئة معالج البيانات غير الصحيحة بنجاح")
+
+    def _load_config(self, config_path: Optional[str]) -> Dict[str, Any]:
+        """
+        تحميل ملف التكوين.
+
+        Args:
+            config_path (str, optional): مسار ملف التكوين.
+
+        Returns:
+            Dict[str, Any]: بيانات التكوين.
+        """
+        default_config = {
+            "auto_fix": False,
+            "log_errors": True,
+            "notify_admin": True,
+            "error_log_path": "/home/ubuntu/ai_web_organized/logs/data_validation_errors.log",
+            "error_handlers_path": "/home/ubuntu/ai_web_organized/src/modules/data_validation/error_handlers",
+            "notification_handlers_path": "/home/ubuntu/ai_web_organized/src/modules/data_validation/notification_handlers",
+            "log_level": "INFO"
+        }
+
+        if config_path:
+            try:
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                    return {**default_config, **config}
+            except Exception as e:
+                logger.error(f"خطأ في تحميل ملف التكوين: {str(e)}")
+                return default_config
+        return default_config
+
+    def _load_error_handlers(self) -> Dict[str, Dict[str, Callable]]:
+        """
+        تحميل معالجات الأخطاء.
+
+        Returns:
+            Dict[str, Dict[str, Callable]]: معالجات الأخطاء المحملة.
+        """
+        error_handlers = {
+            "model": {
+                "missing_field": self._handle_missing_field,
+                "invalid_type": self._handle_invalid_type,
+                "invalid_value": self._handle_invalid_value,
+                "unknown_field": self._handle_unknown_field
+            },
+            "database": {
+                "schema_mismatch": self._handle_schema_mismatch,
+                "null_value": self._handle_null_value,
+                "invalid_value": self._handle_invalid_value,
+                "foreign_key_violation": self._handle_foreign_key_violation
+            }
+        }
+        logger.info("تم تحميل معالجات الأخطاء بنجاح")
+        return error_handlers
+
+    def _load_notification_handlers(self) -> Dict[str, Callable]:
+        """
+        تحميل معالجات الإشعارات.
+
+        Returns:
+            Dict[str, Callable]: معالجات الإشعارات المحملة.
+        """
+        notification_handlers = {
+            "log": self._notify_log,
+            "admin": self._notify_admin,
+            "email": self._notify_email,
+            "telegram": self._notify_telegram
+        }
+        logger.info("تم تحميل معالجات الإشعارات بنجاح")
+        return notification_handlers
+
+    def handle_invalid_model_data(self, data: Dict[str, Any], model_name: str, auto_fix: Optional[bool] = None) -> Tuple[bool, Dict[str, Any], List[Dict[str, Any]]]:
+        """
+        معالجة البيانات غير الصحيحة وفقًا لنموذج محدد.
+
+        Args:
+            data (Dict[str, Any]): البيانات المراد معالجتها.
+            model_name (str): اسم النموذج.
+            auto_fix (bool, optional): ما إذا كان يجب إصلاح البيانات تلقائيًا. إذا لم يتم تحديده، يتم استخدام الإعداد في ملف التكوين.
+
+        Returns:
+            Tuple[bool, Dict[str, Any], List[Dict[str, Any]]]: زوج من القيمة المنطقية (صحيح/خطأ)، البيانات المعالجة، وقائمة بالإجراءات المتخذة.
+        """
+        if auto_fix is None:
+            auto_fix = self.config.get("auto_fix", False)
+
+        # التحقق من صحة البيانات
+        is_valid, errors = self.model_validator.validate_data(data, model_name)
+
+        if is_valid:
+            logger.info(f"البيانات صحيحة وفقًا للنموذج '{model_name}'")
+            return True, data, []
+
+        # معالجة الأخطاء
+        fixed_data = data.copy()
+        actions = []
+
+        for error in errors:
+            field = error.get("field")
+            error_type = self._determine_error_type(error)
+
+            if error_type in self.error_handlers["model"]:
+                handler = self.error_handlers["model"][error_type]
+                result = handler(fixed_data, field, model_name, auto_fix)
+
+                if result:
+                    fixed, action = result
+                    if fixed:
+                        actions.append(action)
+
+        # التحقق مرة أخرى بعد المعالجة
+        is_valid, remaining_errors = self.model_validator.validate_data(fixed_data, model_name)
+
+        # تسجيل الأخطاء والإشعارات
+        if not is_valid and self.config.get("log_errors", True):
+            self._log_errors("model", model_name, remaining_errors)
+
+        if not is_valid and self.config.get("notify_admin", True):
+            self._notify_errors("model", model_name, remaining_errors)
+
+        return is_valid, fixed_data, actions
+
+    def handle_invalid_database_data(self, table_name: str, auto_fix: Optional[bool] = None) -> Tuple[bool, List[Dict[str, Any]]]:
+        """
+        معالجة البيانات غير الصحيحة في قاعدة البيانات.
+
+        Args:
+            table_name (str): اسم الجدول.
+            auto_fix (bool, optional): ما إذا كان يجب إصلاح البيانات تلقائيًا. إذا لم يتم تحديده، يتم استخدام الإعداد في ملف التكوين.
+
+        Returns:
+            Tuple[bool, List[Dict[str, Any]]]: زوج من القيمة المنطقية (صحيح/خطأ) وقائمة بالإجراءات المتخذة.
+        """
+        if auto_fix is None:
+            auto_fix = self.config.get("auto_fix", False)
+
+        # التأكد من الاتصال بقاعدة البيانات
+        if not self.database_validator.connection:
+            connected = self.database_validator.connect()
+            if not connected:
+                logger.error("فشل الاتصال بقاعدة البيانات")
+                return False, [{"tableTABLE_NAMEerror": "فشل الاتصال بقاعدة البيانات"}]
+
+        # التحقق من صحة مخطط الجدول
+        schema_valid, schema_errors = self.database_validator.validate_table_schema(table_name)
+
+        if not schema_valid:
+            logger.warning(f"مخطط الجدول '{table_name}' غير صحيح")
+
+            # تسجيل الأخطاء والإشعارات
+            if self.config.get("log_errors", True):
+                self._log_errors("database_schema", table_name, schema_errors)
+
+            if self.config.get("notify_admin", True):
+                self._notify_errors("database_schema", table_name, schema_errors)
+
+            # لا يمكن إصلاح مخطط الجدول تلقائيًا
+            return False, [{"tableTABLE_NAMEerror": "مخطط الجدول غير صحيح", "details": schema_errors}]
+
+        # التحقق من تكامل البيانات وإصلاحها إذا لزم الأمر
+        if auto_fix:
+            is_valid, actions = self.database_validator.repair_data_integrity(table_name, auto_fix=True)
+        else:
+            is_valid, errors = self.database_validator.validate_data_integrity(table_name)
+            actions = [{"tableTABLE_NAMEerror": "تم اكتشاف أخطاء في تكامل البيانات", "details": errors}]
+
+        # تسجيل الأخطاء والإشعارات
+        if not is_valid and self.config.get("log_errors", True):
+            self._log_errors("database_integrity", table_name, errors if 'errors' in locals() else [])
+
+        if not is_valid and self.config.get("notify_admin", True):
+            self._notify_errors("database_integrity", table_name, errors if 'errors' in locals() else [])
+
+        return is_valid, actions
+
+    def handle_batch_model_data(self, data_list: List[Dict[str, Any]], model_name: str, auto_fix: Optional[bool] = None) -> Tuple[bool, List[Dict[str, Any]], List[Dict[str, Any]]]:
+        """
+        معالجة مجموعة من البيانات غير الصحيحة وفقًا لنموذج محدد.
+
+        Args:
+            data_list (List[Dict[str, Any]]): قائمة البيانات المراد معالجتها.
+            model_name (str): اسم النموذج.
+            auto_fix (bool, optional): ما إذا كان يجب إصلاح البيانات تلقائيًا. إذا لم يتم تحديده، يتم استخدام الإعداد في ملف التكوين.
+
+        Returns:
+            Tuple[bool, List[Dict[str, Any]], List[Dict[str, Any]]]: زوج من القيمة المنطقية (صحيح/خطأ)، قائمة البيانات المعالجة، وقائمة بالإجراءات المتخذة.
+        """
+        fixed_data_list = []
+        all_actions = []
+        all_valid = True
+
+        for index, data in enumerate(data_list):
+            is_valid, fixed_data, actions = self.handle_invalid_model_data(data, model_name, auto_fix)
+
+            fixed_data_list.append(fixed_data)
+
+            if actions:
+                for action in actions:
+                    action["index"] = index
+                all_actions.extend(actions)
+
+            if not is_valid:
+                all_valid = False
+
+        return all_valid, fixed_data_list, all_actions
+
+    def handle_all_database_tables(self, auto_fix: Optional[bool] = None) -> Dict[str, Tuple[bool, List[Dict[str, Any]]]]:
+        """
+        معالجة البيانات غير الصحيحة في جميع جداول قاعدة البيانات.
+
+        Args:
+            auto_fix (bool, optional): ما إذا كان يجب إصلاح البيانات تلقائيًا. إذا لم يتم تحديده، يتم استخدام الإعداد في ملف التكوين.
+
+        Returns:
+            Dict[str, Tuple[bool, List[Dict[str, Any]]]]: نتائج المعالجة لكل جدول.
+        """
+        results = {}
+
+        # التأكد من الاتصال بقاعدة البيانات
+        if not self.database_validator.connection:
+            connected = self.database_validator.connect()
+            if not connected:
+                logger.error("فشل الاتصال بقاعدة البيانات")
+                return {"error": (False, [{"error": "فشل الاتصال بقاعدة البيانات"}])}
+
+        # معالجة كل جدول
+        for table_name in self.database_validator.constraints.keys():
+            is_valid, actions = self.handle_invalid_database_data(table_name, auto_fix)
+            results[table_name] = (is_valid, actions)
+
+        return results
+
+    def _determine_error_type(self, error: Dict[str, Any]) -> str:
+        """
+        تحديد نوع الخطأ.
+
+        Args:
+            error (Dict[str, Any]): معلومات الخطأ.
+
+        Returns:
+            str: نوع الخطأ.
+        """
+        error_message = error.get("error", "").lower()
+
+        if "مطلوبIN_ERROR_MESSAGE_ORrequiredIN_ERROR_MESSAGE_RETURNmissing_fieldELIFنوعIN_ERROR_MESSAGE_ORtypeIN_ERROR_MESSAGE_RETURNinvalid_typeELIFقيمةIN_ERROR_MESSAGE_ORvalueIN_ERROR_MESSAGE_RETURNinvalid_valueELIFغير موجودIN_ERROR_MESSAGE_ORnot foundIN_ERROR_MESSAGE_RETURNunknown_field"
+        else:
+            return "invalid_value"  # نوع افتراضي
+
+    def _handle_missing_field(self, data: Dict[str, Any], field: str, model_name: str, auto_fix: bool) -> Optional[Tuple[bool, Dict[str, Any]]]:
+        """
+        معالجة حقل مفقود.
+
+        Args:
+            data (Dict[str, Any]): البيانات.
+            field (str): اسم الحقل.
+            model_name (str): اسم النموذج.
+            auto_fix (bool): ما إذا كان يجب إصلاح البيانات تلقائيًا.
+
+        Returns:
+            Optional[Tuple[bool, Dict[str, Any]]]: زوج من القيمة المنطقية (صحيح/خطأ) ومعلومات الإجراء المتخذ.
+        """
+        if not auto_fix:
+            return None
+
+        # الحصول على معلومات النموذج
+        model = self.model_validator.get_model(model_name)
+        if not model:
+            return None
+
+        # الحصول على معلومات الحقل
+        field_info = model["fields"].get(field)
+        if not field_info:
+            return None
+
+        # تحديد القيمة الافتراضية بناءً على نوع الحقل
+        field_type = field_info.get("type")
+        default_value = None
+
+        if field_type == "string":
+            default_value = ""
+        elif field_type == "integer":
+            default_value = 0
+        elif field_type == "float":
+            default_value = 0.0
+        elif field_type == "boolean":
+            default_value = False
+        elif field_type == "email":
+            default_value = "user@example.com"
+        elif field_type == "datetime":
+            default_value = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        elif field_type == "array":
+            default_value = []
+
+        # إضافة القيمة الافتراضية
+        if default_value is not None:
+            data[field] = default_value
+            return True, {
+                "fieldFIELDaction": "إضافة""value": default_value,
+                "message": f"تمت إضافة قيمة افتراضية للحقل '{field}'"
+            }
+
+        return None
+
+    def _handle_invalid_type(self, data: Dict[str, Any], field: str, model_name: str, auto_fix: bool) -> Optional[Tuple[bool, Dict[str, Any]]]:
+        """
+        معالجة نوع غير صحيح.
+
+        Args:
+            data (Dict[str, Any]): البيانات.
+            field (str): اسم الحقل.
+            model_name (str): اسم النموذج.
+            auto_fix (bool): ما إذا كان يجب إصلاح البيانات تلقائيًا.
+
+        Returns:
+            Optional[Tuple[bool, Dict[str, Any]]]: زوج من القيمة المنطقية (صحيح/خطأ) ومعلومات الإجراء المتخذ.
+        """
+        if not auto_fix or field not in data:
+            return None
+
+        # الحصول على معلومات النموذج
+        model = self.model_validator.get_model(model_name)
+        if not model:
+            return None
+
+        # الحصول على معلومات الحقل
+        field_info = model["fields"].get(field)
+        if not field_info:
+            return None
+
+        # تحويل القيمة إلى النوع الصحيح
+        field_type = field_info.get("type")
+        current_value = data[field]
+        converted_value = None
+
+        try:
+            if field_type == "string":
+                converted_value = str(current_value)
+            elif field_type == "integer":
+                converted_value = int(float(current_value))
+            elif field_type == "float":
+                converted_value = float(current_value)
+            elif field_type == "boolean":
+                if isinstance(current_value, str):
+                    converted_value = current_value.lower() in ["true", "yes", "1", "y"]
+                else:
+                    converted_value = bool(current_value)
+            elif field_type == "email":
+                converted_value = str(current_value)
+                if "@" not in converted_value:
+                    converted_value = "user@example.com"
+            elif field_type == "datetime":
+                if isinstance(current_value, str):
+                    converted_value = current_value
+                else:
+                    converted_value = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            elif field_type == "array":
+                if isinstance(current_value, str):
+                    try:
+                        converted_value = json.loads(current_value)
+                    except BaseException:
+                        converted_value = []
+                else:
+                    converted_value = list(current_value) if hasattr(current_value, "__iter__") else [current_value]
+        except Exception as e:
+            logger.error(f"خطأ في تحويل قيمة الحقل '{field}': {str(e)}")
+            return None
+
+        # تحديث القيمة
+        if converted_value is not None:
+            old_value = data[field]
+            data[field] = converted_value
+            return True, {
+                "fieldFIELDaction": "تحويل""old_value": old_value,
+                "new_value": converted_value,
+                "message": f"تم تحويل قيمة الحقل '{field}' من '{old_value}' إلى '{converted_value}'"
+            }
+
+        return None
+
+    def _handle_invalid_value(self, data: Dict[str, Any], field: str, model_name: str, auto_fix: bool) -> Optional[Tuple[bool, Dict[str, Any]]]:
+        """
+        معالجة قيمة غير صحيحة.
+
+        Args:
+            data (Dict[str, Any]): البيانات.
+            field (str): اسم الحقل.
+            model_name (str): اسم النموذج.
+            auto_fix (bool): ما إذا كان يجب إصلاح البيانات تلقائيًا.
+
+        Returns:
+            Optional[Tuple[bool, Dict[str, Any]]]: زوج من القيمة المنطقية (صحيح/خطأ) ومعلومات الإجراء المتخذ.
+        """
+        if not auto_fix or field not in data:
+            return None
+
+        # الحصول على معلومات النموذج
+        model = self.model_validator.get_model(model_name)
+        if not model:
+            return None
+
+        # الحصول على معلومات الحقل
+        field_info = model["fields"].get(field)
+        if not field_info:
+            return None
+
+        # تصحيح القيمة
+        field_type = field_info.get("type")
+        current_value = data[field]
+        fixed_value = None
+
+        if field_type == "string":
+            min_length = field_info.get("min_length", 0)
+            max_length = field_info.get("max_length", float('inf'))
+
+            if isinstance(current_value, str):
+                if len(current_value) < min_length:
+                    fixed_value = current_value.ljust(min_length, 'x')
+                elif len(current_value) > max_length:
+                    fixed_value = current_value[:max_length]
+
+        elif field_type == "integer" or field_type == "float":
+            min_value = field_info.get("min", float('-inf'))
+            max_value = field_info.get("max", float('inf'))
+
+            if isinstance(current_value, (int, float)):
+                if current_value < min_value:
+                    fixed_value = min_value
+                elif current_value > max_value:
+                    fixed_value = max_value
+
+        elif field_type == "email":
+            if isinstance(current_value, str) and "@" not in current_value:
+                fixed_value = "user@example.com"
+
+        elif "enum" in field_info:
+            enum_values = field_info.get("enum", [])
+            if enum_values and current_value not in enum_values:
+                fixed_value = enum_values[0]
+
+        # تحديث القيمة
+        if fixed_value is not None:
+            old_value = data[field]
+            data[field] = fixed_value
+            return True, {
+                "fieldFIELDaction": "تصحيح""old_value": old_value,
+                "new_value": fixed_value,
+                "message": f"تم تصحيح قيمة الحقل '{field}' من '{old_value}' إلى '{fixed_value}'"
+            }
+
+        return None
+
+    def _handle_unknown_field(self, data: Dict[str, Any], field: str, model_name: str, auto_fix: bool) -> Optional[Tuple[bool, Dict[str, Any]]]:
+        """
+        معالجة حقل غير معروف.
+
+        Args:
+            data (Dict[str, Any]): البيانات.
+            field (str): اسم الحقل.
+            model_name (str): اسم النموذج.
+            auto_fix (bool): ما إذا كان يجب إصلاح البيانات تلقائيًا.
+
+        Returns:
+            Optional[Tuple[bool, Dict[str, Any]]]: زوج من القيمة المنطقية (صحيح/خطأ) ومعلومات الإجراء المتخذ.
+        """
+        if not auto_fix or field not in data:
+            return None
+
+        # حذف الحقل غير المعروف
+        old_value = data[field]
+        del data[field]
+        return True, {
+            "field": field,
+            "action": "حذف",
+            "old_value": old_value,
+            "message": f"تم حذف الحقل غير المعروف '{field}'"
+        }
+
+    def _handle_schema_mismatch(self, data: Dict[str, Any], field: str, table_name: str, auto_fix: bool) -> Optional[Tuple[bool, Dict[str, Any]]]:
+        """
+        معالجة عدم تطابق المخطط.
+
+        Args:
+            data (Dict[str, Any]): البيانات.
+            field (str): اسم الحقل.
+            table_name (str): اسم الجدول.
+            auto_fix (bool): ما إذا كان يجب إصلاح البيانات تلقائيًا.
+
+        Returns:
+            Optional[Tuple[bool, Dict[str, Any]]]: زوج من القيمة المنطقية (صحيح/خطأ) ومعلومات الإجراء المتخذ.
+        """
+        # لا يمكن إصلاح مخطط الجدول تلقائيًا
+        return None
+
+    def _handle_null_value(self, data: Dict[str, Any], field: str, table_name: str, auto_fix: bool) -> Optional[Tuple[bool, Dict[str, Any]]]:
+        """
+        معالجة قيمة فارغة.
+
+        Args:
+            data (Dict[str, Any]): البيانات.
+            field (str): اسم الحقل.
+            table_name (str): اسم الجدول.
+            auto_fix (bool): ما إذا كان يجب إصلاح البيانات تلقائيًا.
+
+        Returns:
+            Optional[Tuple[bool, Dict[str, Any]]]: زوج من القيمة المنطقية (صحيح/خطأ) ومعلومات الإجراء المتخذ.
+        """
+        # تتم معالجة القيم الفارغة في قاعدة البيانات بواسطة repair_data_integrity
+        return None
+
+    def _handle_foreign_key_violation(self, data: Dict[str, Any], field: str, table_name: str, auto_fix: bool) -> Optional[Tuple[bool, Dict[str, Any]]]:
+        """
+        معالجة انتهاك المفتاح الأجنبي.
+
+        Args:
+            data (Dict[str, Any]): البيانات.
+            field (str): اسم الحقل.
+            table_name (str): اسم الجدول.
+            auto_fix (bool): ما إذا كان يجب إصلاح البيانات تلقائيًا.
+
+        Returns:
+            Optional[Tuple[bool, Dict[str, Any]]]: زوج من القيمة المنطقية (صحيح/خطأ) ومعلومات الإجراء المتخذ.
+        """
+        # تتم معالجة انتهاكات المفتاح الأجنبي في قاعدة البيانات بواسطة repair_data_integrity
+        return None
+
+    def _log_errors(self, error_type: str, context: str, errors: List[Dict[str, Any]]) -> None:
+        """
+        تسجيل الأخطاء.
+
+        Args:
+            error_type (str): نوع الخطأ.
+            context (str): سياق الخطأ.
+            errors (List[Dict[str, Any]]): قائمة الأخطاء.
+        """
+        if not errors:
+            return
+
+        log_path = self.config.get("error_log_path")
+
+        # التأكد من وجود مجلد السجلات
+        log_dir = os.path.dirname(log_path)
+        if not os.path.exists(log_dir):
+            os.makedirs(log_dir)
+
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        try:
+            with open(log_path, 'a', encoding='utf-8') as f:
+                f.write(f"[{timestamp}] {error_type} - {context}:\n")
+                for error in errors:
+                    f.write(f"  - {json.dumps(error, ensure_ascii=False)}\n")
+                f.write("\n")
+
+            logger.info(f"تم تسجيل {len(errors)} خطأ في '{log_path}'")
+        except Exception as e:
+            logger.error(f"خطأ في تسجيل الأخطاء: {str(e)}")
+
+    def _notify_errors(self, error_type: str, context: str, errors: List[Dict[str, Any]]) -> None:
+        """
+        إشعار بالأخطاء.
+
+        Args:
+            error_type (str): نوع الخطأ.
+            context (str): سياق الخطأ.
+            errors (List[Dict[str, Any]]): قائمة الأخطاء.
+        """
+        if not errors:
+            return
+
+        # استدعاء معالجات الإشعارات
+        for handler_name, handler in self.notification_handlers.items():
+            try:
+                handler(error_type, context, errors)
+            except Exception as e:
+                logger.error(f"خطأ في معالج الإشعارات '{handler_name}': {str(e)}")
+
+    def _notify_log(self, error_type: str, context: str, errors: List[Dict[str, Any]]) -> None:
+        """
+        إشعار بالأخطاء في السجل.
+
+        Args:
+            error_type (str): نوع الخطأ.
+            context (str): سياق الخطأ.
+            errors (List[Dict[str, Any]]): قائمة الأخطاء.
+        """
+        logger.warning(f"{error_type} - {context}: {len(errors)} خطأ")
+        for error in errors[:5]:  # تسجيل أول 5 أخطاء فقط لتجنب التضخم
+            logger.warning(f"  - {json.dumps(error, ensure_ascii=False)}")
+
+        if len(errors) > 5:
+            logger.warning(f"  ... و{len(errors) - 5} خطأ آخر")
+
+    def _notify_admin(self, error_type: str, context: str, errors: List[Dict[str, Any]]) -> None:
+        """
+        إشعار المسؤول بالأخطاء.
+
+        Args:
+            error_type (str): نوع الخطأ.
+            context (str): سياق الخطأ.
+            errors (List[Dict[str, Any]]): قائمة الأخطاء.
+        """
+        # في الإنتاج، يمكن إرسال إشعار إلى لوحة تحكم المسؤول
+        # هنا نقوم بتسجيل الإشعار فقط
+        logger.info(f"تم إرسال إشعار إلى المسؤول: {error_type} - {context}: {len(errors)} خطأ")
+
+    def _notify_email(self, error_type: str, context: str, errors: List[Dict[str, Any]]) -> None:
+        """
+        إشعار بالأخطاء عبر البريد الإلكتروني.
+
+        Args:
+            error_type (str): نوع الخطأ.
+            context (str): سياق الخطأ.
+            errors (List[Dict[str, Any]]): قائمة الأخطاء.
+        """
+        # في الإنتاج، يمكن إرسال بريد إلكتروني إلى المسؤول
+        # هنا نقوم بتسجيل الإشعار فقط
+        logger.info(f"تم إرسال إشعار عبر البريد الإلكتروني: {error_type} - {context}: {len(errors)} خطأ")
+
+    def _notify_telegram(self, error_type: str, context: str, errors: List[Dict[str, Any]]) -> None:
+        """
+        إشعار بالأخطاء عبر تيليجرام.
+
+        Args:
+            error_type (str): نوع الخطأ.
+            context (str): سياق الخطأ.
+            errors (List[Dict[str, Any]]): قائمة الأخطاء.
+        """
+        # في الإنتاج، يمكن إرسال رسالة إلى بوت تيليجرام
+        # هنا نقوم بتسجيل الإشعار فقط
+        logger.info(f"تم إرسال إشعار عبر تيليجرام: {error_type} - {context}: {len(errors)} خطأ")
+
+
+# مثال على الاستخدام
+if __name__ == "__main__":
+    # إنشاء كائن معالج البيانات غير الصحيحة
+    handler = InvalidDataHandler()
+
+    # بيانات للتحقق
+    user_data = {
+        "username": "a",  # أقل من الحد الأدنى
+        "email": "invalid-email",  # بريد إلكتروني غير صالح
+        "password": "pass",  # أقل من الحد الأدنى
+        "role": "invalid-role",  # قيمة غير صالحة
+        "unknown_field": "value"  # حقل غير معروف
+    }
+
+    # معالجة البيانات غير الصحيحة
+    is_valid, fixed_data, actions = handler.handle_invalid_model_data(user_data, "user", auto_fix=True)
+
+    if is_valid:
+        print("تم إصلاح البيانات بنجاح:")
+        print(fixed_data)
+    else:
+        print("لم يتم إصلاح جميع المشكلات:")
+        print(fixed_data)
+
+    print("\nالإجراءات المتخذة:")
+    for action in actions:
+        print(f"- {action['message']}")
+
+    # معالجة البيانات غير الصحيحة في قاعدة البيانات
+    if handler.database_validator.connect():
+        is_valid, actions = handler.handle_invalid_database_data("users", auto_fix=True)
+
+        if is_valid:
+            print("\nتم إصلاح بيانات الجدول بنجاح")
+        else:
+            print("\nلم يتم إصلاح جميع مشكلات الجدول")
+
+        print("\nالإجراءات المتخذة:")
+        for action in actions:
+            if "action" in action:
+                print(f"- {action['action']}")
+            elif "error" in action:
+                print(f"- خطأ: {action['error']}")
+
+        handler.database_validator.disconnect()

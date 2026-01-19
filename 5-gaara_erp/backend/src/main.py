@@ -94,6 +94,12 @@ blueprints_to_import = [
     ("routes.dashboard", "dashboard_bp"),
     ("routes.inventory", "inventory_bp"),
     ("routes.admin", "admin_bp"),
+    # Multi-tenancy blueprint (Global v35.0)
+    ("routes.tenant_api", "tenant_bp"),
+    # P0.100: New API Blueprints (Global v35.0 Singularity)
+    ("src.routes.tenant_api", "tenant_api"),
+    ("src.routes.sales_api", "sales_api"),
+    ("src.routes.inventory_api", "inventory_api"),
     # Additional blueprints
     ("routes.partners", "partners_bp"),
     ("routes.reports", "reports_bp"),
@@ -333,8 +339,17 @@ CORS(
     app,
     supports_credentials=True,
     origins=origins,
-    allow_headers=["Content-Type", "Authorization"],
+    allow_headers=["Content-Type", "Authorization", "X-Tenant-ID"],
 )
+
+# P0.100: Multi-Tenancy Middleware Initialization
+# Initialize tenant context middleware for request processing
+try:
+    from src.middleware.flask_tenant_middleware import init_tenant_middleware
+    init_tenant_middleware(app)
+    print("✅ Multi-tenancy middleware ENABLED")
+except ImportError as e:
+    print(f"⚠️ Multi-tenancy middleware not available: {e}")
 
 
 # P0.12: HTTPS enforcement in production
@@ -759,6 +774,10 @@ blueprints_to_register = [
     (payment_management_bp, "/api", "payment_management"),
     (products_advanced_bp, "/api", "products_advanced"),
     (rag_bp, "/api", "rag"),
+    # P0.100: New Gaara ERP API Blueprints (Global v35.0 Singularity)
+    (imported_blueprints.get("tenant_api"), "", "tenant_api"),
+    (imported_blueprints.get("sales_api"), "", "sales_api"),
+    (imported_blueprints.get("inventory_api"), "", "inventory_api"),
 ]
 
 for blueprint, prefix, name in blueprints_to_register:

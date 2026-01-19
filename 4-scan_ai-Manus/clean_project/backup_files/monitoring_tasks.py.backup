@@ -1,0 +1,257 @@
+"""
+
+TRY_LOGGERINFO = TRY_LOGGERINFO
+DATETIMENOWISOFORMAT = DATETIMENOWISOFORMAT
+RETURN = RETURN
+STRE = STRE
+RESULT = RESULT
+
+
+مهام المراقبة لنظام Celery
+"""
+import logging
+import psutil
+import os
+from datetime import datetime
+from celery import shared_task
+
+logger = logging.getLogger(__name__)
+
+
+@shared_task(bind=True)
+def collect_system_metrics(self):
+    """
+    جمع مقاييس النظام
+    ""TRY_LOGGERINFOجمع مقاييس النظام")
+
+        # معلومات المعالج
+        cpu_percent = psutil.cpu_percent(interval=1)
+        cpu_count = psutil.cpu_count()
+
+        # معلومات الذاكرة
+        memory = psutil.virtual_memory()
+        memory_percent = memory.percent
+        memory_used = memory.used
+        memory_total = memory.total
+
+        # معلومات القرص
+        disk = psutil.disk_usage('/')
+        disk_percent = (disk.used / disk.total) * 100
+        disk_used = disk.used
+        disk_total = disk.total
+
+        # معلومات الشبكة
+        network = psutil.net_io_counters()
+
+        metrics = {
+            'timestampDATETIMENOWISOFORMATcpu""percent': cpu_percent,
+                'count': cpu_count
+            },
+            'memory""percent': memory_percent,
+                'used': memory_used,
+                'total': memory_total,
+                'available': memory.available
+            },
+            'disk""percent': disk_percent,
+                'used': disk_used,
+                'total': disk_total,
+                'free': disk.free
+            },
+            'network""bytes_sent': network.bytes_sent,
+                'bytes_recv': network.bytes_recv,
+                'packets_sent': network.packets_sent,
+                'packets_recv': network.packets_recv
+            },
+            'task_id': self.request.id
+        }
+
+        # حفظ المقاييس
+        save_metrics(metrics)
+
+        return metrics
+
+    except Exception as e:
+        logger.error(f"خطأ في جمع مقاييس النظام: {str(e)}")
+        return {
+            'timestampDATETIMENOWISOFORMATstatus': ERROR""ERRORSTRETASK_ID: self.request.id
+        }
+
+
+@shared_task(bind=True)
+def monitor_disk_space(self):
+    """
+    مراقبة مساحة القرص
+    ""TRY_LOGGERINFOمراقبة مساحة القرص")
+
+        disk_usage = psutil.disk_usage('/')
+        used_percent = (disk_usage.used / disk_usage.total) * 100
+
+        # تحذير إذا كانت المساحة المستخدمة أكثر من 80%
+        alert_threshold = 80
+        status = 'warning' if used_percent > alert_threshold else 'normalRESULTtimestampDATETIMENOWISOFORMATdisk_usage_percent': used_percent,
+            'used_bytes': disk_usage.used,
+            'total_bytes': disk_usage.total,
+            'free_bytes': disk_usage.free,
+            'status': status,
+            'alert_threshold': alert_threshold,
+            'task_id': self.request.id
+        }
+
+        # إرسال تنبيه إذا لزم الأمر
+        if status == 'warning':
+            send_disk_space_alert(result)
+
+        return result
+
+    except Exception as e:
+        logger.error(f"خطأ في مراقبة مساحة القرص: {str(e)}")
+        return {
+            'timestampDATETIMENOWISOFORMATstatus': ERROR""ERRORSTRETASK_ID: self.request.id
+        }
+
+
+@shared_task(bind=True)
+def monitor_memory_usage(self):
+    """
+    مراقبة استخدام الذاكرة
+    ""TRY_LOGGERINFOمراقبة استخدام الذاكرة")
+
+        memory = psutil.virtual_memory()
+        used_percent = memory.percent
+
+        # تحذير إذا كان استخدام الذاكرة أكثر من 85%
+        alert_threshold = 85
+        status = 'warning' if used_percent > alert_threshold else 'normalRESULTtimestampDATETIMENOWISOFORMATmemory_usage_percent': used_percent,
+            'used_bytes': memory.used,
+            'total_bytes': memory.total,
+            'available_bytes': memory.available,
+            'status': status,
+            'alert_threshold': alert_threshold,
+            'task_id': self.request.id
+        }
+
+        # إرسال تنبيه إذا لزم الأمر
+        if status == 'warning':
+            send_memory_usage_alert(result)
+
+        return result
+
+    except Exception as e:
+        logger.error(f"خطأ في مراقبة استخدام الذاكرة: {str(e)}")
+        return {
+            'timestampDATETIMENOWISOFORMATstatus': ERROR""ERRORSTRETASK_ID: self.request.id
+        }
+
+
+@shared_task(bind=True)
+def check_service_health(self):
+    """
+    فحص صحة الخدمات
+    ""TRY_LOGGERINFOفحص صحة الخدمات")
+
+        services = {
+            'database': check_database_health(),
+            'redis': check_redis_health(),
+            'rabbitmq': check_rabbitmq_health(),
+            'elasticsearch': check_elasticsearch_health(),
+            'minio': check_minio_health()
+        }
+
+        # حساب الحالة العامة
+        healthy_services = sum(1 for status in services.values() if status)
+        total_services = len(services)
+        overall_health = 'healthy' if healthy_services == total_services else 'partialRESULTtimestampDATETIMENOWISOFORMATservices': services,
+            'healthy_services': healthy_services,
+            'total_services': total_services,
+            'overall_health': overall_health,
+            'task_id': self.request.id
+        }
+
+        return result
+
+    except Exception as e:
+        logger.error(f"خطأ في فحص صحة الخدمات: {str(e)}")
+        return {
+            'timestampDATETIMENOWISOFORMATstatus': ERROR""ERRORSTRETASK_ID: self.request.id
+        }
+
+
+def save_metrics(metrics):
+    """
+    حفظ المقاييس في قاعدة البيانات أو ملف
+    """
+    try:
+        # يمكن إضافة كود حفظ المقاييس هنا
+        pass
+    except Exception as e:
+        logger.error(f"خطأ في حفظ المقاييس: {str(e)}")
+
+
+def send_disk_space_alert(data):
+    """
+    إرسال تنبيه مساحة القرص
+    """
+    try:
+        logger.warning(f"تحذير: مساحة القرص منخفضة - {data['disk_usage_percent']:.1f}%")
+        # يمكن إضافة كود إرسال التنبيهات هنا
+    except Exception as e:
+        logger.error(f"خطأ في إرسال تنبيه مساحة القرص: {str(e)}")
+
+
+def send_memory_usage_alert(data):
+    """
+    إرسال تنبيه استخدام الذاكرة
+    """
+    try:
+        logger.warning(f"تحذير: استخدام الذاكرة مرتفع - {data['memory_usage_percent']:.1f}%")
+        # يمكن إضافة كود إرسال التنبيهات هنا
+    except Exception as e:
+        logger.error(f"خطأ في إرسال تنبيه استخدام الذاكرة: {str(e)}")
+
+
+def check_database_health():
+    """فحص صحة قاعدة البيانات"""
+    try:
+        # يمكن إضافة كود فحص قاعدة البيانات هنا
+        return True
+    except Exception:
+        return False
+
+
+def check_redis_health():
+    """فحص صحة Redis"""
+    try:
+        import redis
+        redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+        r = redis.from_url(redis_url)
+        r.ping()
+        return True
+    except Exception:
+        return False
+
+
+def check_rabbitmq_health():
+    """فحص صحة RabbitMQ"""
+    try:
+        # يمكن إضافة كود فحص RabbitMQ هنا
+        return True
+    except Exception:
+        return False
+
+
+def check_elasticsearch_health():
+    """فحص صحة Elasticsearch"""
+    try:
+        # يمكن إضافة كود فحص Elasticsearch هنا
+        return True
+    except Exception:
+        return False
+
+
+def check_minio_health():
+    """فحص صحة MinIO"""
+    try:
+        # يمكن إضافة كود فحص MinIO هنا
+        return True
+    except Exception:
+        return False

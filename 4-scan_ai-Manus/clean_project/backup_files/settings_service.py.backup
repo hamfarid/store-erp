@@ -1,0 +1,531 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/settings/settings_service.py
+"""
+
+RETURN = RETURN
+TRUE = TRUE
+ENCODING = ENCODING
+OR_SETTINGS_TYPE = OR_SETTINGS_TYPE
+IF = IF
+التحقق_من_وجود = التحقق_من_وجود
+IN_SETTINGS_AND = IN_SETTINGS_AND
+IF = IF
+DICT_RETURN_FALSE = DICT_RETURN_FALSE
+ELIF_SETTINGS_TYPE = ELIF_SETTINGS_TYPE
+
+
+خدمة الإعدادات العامة
+توفر هذه الوحدة خدمات لإدارة الإعدادات العامة للنظام
+"""
+
+import os
+import json
+
+import logging
+import datetime
+
+
+# إعداد التسجيل
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("settings.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
+
+
+class SettingsService:
+    """خدمة الإعدادات العامة"""
+
+    def __init__(self, config_dir=None):
+        """
+        تهيئة خدمة الإعدادات العامة
+
+        Args:
+            config_dir (str, optional): مجلد الإعدادات. Defaults to None.
+        """
+        # تحديد مجلد الإعدادات
+        self.config_dir = config_dir or os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config')
+
+        # التأكد من وجود مجلد الإعدادات
+        os.makedirs(self.config_dir, exist_ok=True)
+
+        # مسار ملف الإعدادات العامة
+        self.general_settings_file = os.path.join(self.config_dir, 'general_settings.json')
+
+        # مسار ملف إعدادات الشركة
+        self.company_settings_file = os.path.join(self.config_dir, 'company_settings.json')
+
+        # مسار ملف إعدادات النظام
+        self.system_settings_file = os.path.join(self.config_dir, 'system_settings.json')
+
+        # مسار ملف إعدادات الاتصال
+        self.connection_settings_file = os.path.join(self.config_dir, 'connection_settings.json')
+
+        # تحميل الإعدادات
+        self.general_settings = self._load_settings(self.general_settings_file, self._get_default_general_settings())
+        self.company_settings = self._load_settings(self.company_settings_file, self._get_default_company_settings())
+        self.system_settings = self._load_settings(self.system_settings_file, self._get_default_system_settings())
+        self.connection_settings = self._load_settings(self.connection_settings_file, self._get_default_connection_settings())
+
+    def _get_default_general_settings(self):
+        """
+        الحصول على الإعدادات العامة الافتراضية
+
+        Returns:
+            dict: الإعدادات العامة الافتراضية
+        ""RETURNlanguage": "ar""timezone": "Africa/Cairo""date_format": "YYYY-MM-DD""time_format": "HH:mm:ss""currency": "SAR""decimal_separator": ".""thousands_separator": ",""default_page_size": 20,
+            "theme""primary_color": "#1976d2""secondary_color": "#dc004e""dark_mode": False
+            },
+            "notifications""emailTRUEsms": False,
+                "pushTRUEin_app": True
+            },
+            LAST_UPDATED: datetime.datetime.now().isoformat()
+        }
+
+    def _get_default_company_settings(self):
+        """
+        الحصول على إعدادات الشركة الافتراضية
+
+        Returns:
+            dict: إعدادات الشركة الافتراضية
+        ""RETURNname": "شركة جعاره""legal_name": "شركة جعاره للتقنية""tax_id": "123456789""registration_number": "987654321""logo": "/assets/images/logo.png""address""street": "شارع الملك فهد""city": "الرياض""state": "الرياض""postal_code": "12345""country": "جمهورية مصر العربية"
+            },
+            "contact""phone": "+20 100345 6789""email": "info@gaaragroup.com""website": "https://gaaragroup.com"
+            },
+            "social_media""facebook": "https://facebook.com/gaara""twitter": "https://twitter.com/gaara""linkedin": "https://linkedin.com/company/gaara""instagram": "https://instagram.com/gaara"
+            },
+            "fiscal_year""start_month": 1,
+                "start_day": 1,
+                "end_month": 12,
+                "end_day": 31
+            },
+            LAST_UPDATED: datetime.datetime.now().isoformat()
+        }
+
+    def _get_default_system_settings(self):
+        """
+        الحصول على إعدادات النظام الافتراضية
+
+        Returns:
+            dict: إعدادات النظام الافتراضية
+        ""RETURNbackup""auto_backupTRUEbackup_frequency": "daily""backup_time": "02:00""backup_retention_days""": "/backups"
+            },
+            "security""password_expiry_days": 90,
+                "min_password_length": 8,
+                "require_special_charsTRUErequire_numbersTRUErequire_uppercaseTRUErequire_lowercaseTRUEmax_login_attempts": 5,
+                "lockout_duration_minutes""": 60,
+                "two_factor_auth": False
+            },
+            "logging""log_level": "INFO""log_retention_days": 90,
+                "audit_trail": True
+            },
+            "performance""cache_enabledTRUEcache_ttl_seconds": 3600,
+                "max_upload_size_mb": 10,
+                "max_report_rows": 10000,
+                "pagination_size": 50
+            },
+            "maintenance""maintenance_mode": False,
+                "maintenance_message": "النظام قيد الصيانة حالياً. يرجى المحاولة لاحقاً.""allowed_ips_during_maintenance": []
+            },
+            LAST_UPDATED: datetime.datetime.now().isoformat()
+        }
+
+    def _get_default_connection_settings(self):
+        """
+        الحصول على إعدادات الاتصال الافتراضية
+
+        Returns:
+            dict: إعدادات الاتصال الافتراضية
+        ""RETURNdatabase""type": "postgresql""host": "localhost""port": 5432,
+                "name": "gaara_erp""user": "postgres""password": "postgres""max_connections": 100,
+                "timeout_seconds": 30
+            },
+            "redis""host": "localhost""port": 6379,
+                "password": """db": 0
+            },
+            "email""smtp_server": "smtp.example.com""smtp_port": 587,
+                "smtp_user": "no-reply@gaaragroup.com""smtp_password": "password""use_tlsTRUEfrom_email": "no-reply@gaaragroup.com""from_name": "نظام جعاره"
+            },
+            "sms""provider": "twilio""account_sid": "your_account_sid""auth_token": "your_auth_token""from_number": "+1234567890"
+            },
+            "api""base_url": "https://api.gaaragroup.com""version": "v1""timeout_seconds""": 100
+            },
+            "ai""provider": "openai""api_key": "your_api_key""model": "gpt-4""temperature": 0.7,
+                "max_tokens": 2000
+            },
+            LAST_UPDATED: datetime.datetime.now().isoformat()
+        }
+
+    def _load_settings(self, file_path, default_settings):
+        """
+        تحميل الإعدادات من ملف
+
+        Args:
+            file_path (str): مسار الملف
+            default_settings (dict): الإعدادات الافتراضية
+
+        Returns:
+            dict: الإعدادات المحملة
+        """
+        try:
+            if os.path.exists(file_path):
+                with open(file_path, 'rENCODINGutf-8') as f:
+                    settings = json.load(f)
+
+                # دمج الإعدادات المحملة مع الإعدادات الافتراضية
+                merged_settings = default_settings.copy()
+                self._deep_update(merged_settings, settings)
+
+                return merged_settings
+            else:
+                # حفظ الإعدادات الافتراضية
+                self._save_settings(file_path, default_settings)
+
+                return default_settings
+        except Exception as e:
+            logger.exception(f"Error loading settings from {file_path}: {str(e)}")
+
+            # حفظ الإعدادات الافتراضية
+            self._save_settings(file_path, default_settings)
+
+            return default_settings
+
+    def _save_settings(self, file_path, settings):
+        """
+        حفظ الإعدادات في ملف
+
+        Args:
+            file_path (str): مسار الملف
+            settings (dict): الإعدادات
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            # تحديث تاريخ آخر تحديث
+            if isinstance(settings, dict) and LAST_UPDATED in settings:
+                settings[LAST_UPDATED] = datetime.datetime.now().isoformat()
+
+            with open(file_path, 'wENCODINGutf-8') as f:
+                json.dump(settings, f, ensure_ascii=False, indent=2)
+
+            return True
+        except Exception as e:
+            logger.exception(f"Error saving settings to {file_path}: {str(e)}")
+            return False
+
+    def _deep_update(self, target, source):
+        """
+        تحديث عميق للقاموس
+
+        Args:
+            target (dict): القاموس الهدف
+            source (dict): القاموس المصدر
+        """
+        for key, value in source.items():
+            if key in target and isinstance(target[key], dict) and isinstance(value, dict):
+                self._deep_update(target[key], value)
+            else:
+                target[key] = value
+
+    def get_general_settings(self):
+        """
+        الحصول على الإعدادات العامة
+
+        Returns:
+            dict: الإعدادات العامة
+        """
+        return self.general_settings
+
+    def update_general_settings(self, settings):
+        """
+        تحديث الإعدادات العامة
+
+        Args:
+            settings (dict): الإعدادات الجديدة
+
+        Returns:
+            dict: الإعدادات المحدثة
+        """
+        # دمج الإعدادات الجديدة مع الإعدادات الحالية
+        self._deep_update(self.general_settings, settings)
+
+        # حفظ الإعدادات
+        self._save_settings(self.general_settings_file, self.general_settings)
+
+        return self.general_settings
+
+    def get_company_settings(self):
+        """
+        الحصول على إعدادات الشركة
+
+        Returns:
+            dict: إعدادات الشركة
+        """
+        return self.company_settings
+
+    def update_company_settings(self, settings):
+        """
+        تحديث إعدادات الشركة
+
+        Args:
+            settings (dict): الإعدادات الجديدة
+
+        Returns:
+            dict: الإعدادات المحدثة
+        """
+        # دمج الإعدادات الجديدة مع الإعدادات الحالية
+        self._deep_update(self.company_settings, settings)
+
+        # حفظ الإعدادات
+        self._save_settings(self.company_settings_file, self.company_settings)
+
+        return self.company_settings
+
+    def get_system_settings(self):
+        """
+        الحصول على إعدادات النظام
+
+        Returns:
+            dict: إعدادات النظام
+        """
+        return self.system_settings
+
+    def update_system_settings(self, settings):
+        """
+        تحديث إعدادات النظام
+
+        Args:
+            settings (dict): الإعدادات الجديدة
+
+        Returns:
+            dict: الإعدادات المحدثة
+        """
+        # دمج الإعدادات الجديدة مع الإعدادات الحالية
+        self._deep_update(self.system_settings, settings)
+
+        # حفظ الإعدادات
+        self._save_settings(self.system_settings_file, self.system_settings)
+
+        return self.system_settings
+
+    def get_connection_settings(self):
+        """
+        الحصول على إعدادات الاتصال
+
+        Returns:
+            dict: إعدادات الاتصال
+        """
+        return self.connection_settings
+
+    def update_connection_settings(self, settings):
+        """
+        تحديث إعدادات الاتصال
+
+        Args:
+            settings (dict): الإعدادات الجديدة
+
+        Returns:
+            dict: الإعدادات المحدثة
+        """
+        # دمج الإعدادات الجديدة مع الإعدادات الحالية
+        self._deep_update(self.connection_settings, settings)
+
+        # حفظ الإعدادات
+        self._save_settings(self.connection_settings_file, self.connection_settings)
+
+        return self.connection_settings
+
+    def get_all_settings(self):
+        """
+        الحصول على جميع الإعدادات
+
+        Returns:
+            dict: جميع الإعدادات
+        ""RETURNgeneral": self.general_settings,
+            "company": self.company_settings,
+            "system": self.system_settings,
+            "connection": self.connection_settings
+        }
+
+    def reset_settings(self, settings_type):
+        """
+        إعادة تعيين الإعدادات إلى القيم الافتراضية
+
+        Args:
+            settings_type (str): نوع الإعدادات (general, company, system, connection, all)
+
+        Returns:
+            dict: الإعدادات المعاد تعيينها
+        """
+        if settings_type == "generalOR_SETTINGS_TYPEall":
+            self.general_settings = self._get_default_general_settings()
+            self._save_settings(self.general_settings_file, self.general_settings)
+
+        if settings_type == "companyOR_SETTINGS_TYPEall":
+            self.company_settings = self._get_default_company_settings()
+            self._save_settings(self.company_settings_file, self.company_settings)
+
+        if settings_type == "systemOR_SETTINGS_TYPEall":
+            self.system_settings = self._get_default_system_settings()
+            self._save_settings(self.system_settings_file, self.system_settings)
+
+        if settings_type == "connectionOR_SETTINGS_TYPEall":
+            self.connection_settings = self._get_default_connection_settings()
+            self._save_settings(self.connection_settings_file, self.connection_settings)
+
+        if settings_type == "all":
+            return self.get_all_settings()
+        elif settings_type == "general":
+            return self.general_settings
+        elif settings_type == "company":
+            return self.company_settings
+        elif settings_type == "system":
+            return self.system_settings
+        elif settings_type == "connection":
+            return self.connection_settings
+        else:
+            raise ValueError(f"Invalid settings type: {settings_type}")
+
+    def export_settings(self, settings_type, file_path=None):
+        """
+        تصدير الإعدادات إلى ملف
+
+        Args:
+            settings_type (str): نوع الإعدادات (general, company, system, connection, all)
+            file_path (str, optional): مسار الملف. Defaults to None.
+
+        Returns:
+            str: مسار الملف
+        """
+        # تحديد الإعدادات المراد تصديرها
+        if settings_type == "general":
+            settings = self.general_settings
+        elif settings_type == "company":
+            settings = self.company_settings
+        elif settings_type == "system":
+            settings = self.system_settings
+        elif settings_type == "connection":
+            settings = self.connection_settings
+        elif settings_type == "all":
+            settings = self.get_all_settings()
+        else:
+            raise ValueError(f"Invalid settings type: {settings_type}")
+
+        # تحديد مسار الملف
+        if file_path is None:
+            file_path = os.path.join(
+                self.config_dir,
+                f"export_{settings_type}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+            )
+
+        # تصدير الإعدادات
+        try:
+            with open(file_path, 'wENCODINGutf-8') as f:
+                json.dump(settings, f, ensure_ascii=False, indent=2)
+
+            return file_path
+        except Exception as e:
+            logger.exception(f"Error exporting settings to {file_path}: {str(e)}")
+            raise
+
+    def import_settings(self, settings_type, file_path):
+        """
+        استيراد الإعدادات من ملف
+
+        Args:
+            settings_type (str): نوع الإعدادات (general, company, system, connection, all)
+            file_path (str): مسار الملف
+
+        Returns:
+            dict: الإعدادات المستوردة
+        """
+        # التحقق من وجود الملف
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Settings file not found: {file_path}")
+
+        # استيراد الإعدادات
+        try:
+            with open(file_path, 'rENCODINGutf-8') as f:
+                settings = json.load(f)
+
+            # تحديث الإعدادات
+            if settings_type == "general":
+                self.update_general_settings(settings)
+                return self.general_settings
+            elif settings_type == "company":
+                self.update_company_settings(settings)
+                return self.company_settings
+            elif settings_type == "system":
+                self.update_system_settings(settings)
+                return self.system_settings
+            elif settings_type == "connection":
+                self.update_connection_settings(settings)
+                return self.connection_settings
+            elif settings_type == "all":
+                if isinstance(settings, dict):
+                    if "general" in settings:
+                        self.update_general_settings(settings["generalIFcompany" in settings:
+                        self.update_company_settings(settings["companyIFsystem" in settings:
+                        self.update_system_settings(settings["systemIFconnection" in settings:
+                        self.update_connection_settings(settings["connection"])
+
+                return self.get_all_settings()
+            else:
+                raise ValueError(f"Invalid settings type: {settings_type}")
+        except Exception as e:
+            logger.exception(f"Error importing settings from {file_path}: {str(e)}")
+            raise
+
+    def validate_settings(self, settings_type, settings):
+        """
+        التحقق من صحة الإعدادات
+
+        Args:
+            settings_type (str): نوع الإعدادات (general, company, system, connection)
+            settings (dict): الإعدادات
+
+        Returns:
+            tuple: (صحيح/خاطئ, رسالة الخطأ)
+        """
+        # التحقق من نوع الإعدادات
+        if settings_type not in ["general", "company", "system", "connection"]:
+            return False, f"Invalid settings type: {settings_type}"
+
+        # التحقق من نوع الإعدادات
+        if not isinstance(settings, dict):
+            return False, "Settings must be a dictionary"
+
+        # التحقق من الإعدادات حسب النوع
+        if settings_type == "generalالتحقق_من_وجودlanguage", "timezone", "date_format", "time_format", "currency"]
+            for field in required_fields:
+                if field not in settings:
+                    return False, f"Missing required field: {field}"
+
+            # التحقق من صحة القيم
+            if "languageIN_SETTINGS_ANDlanguage"" must be a stringIFtimezoneIN_SETTINGS_ANDtimezone"" must be a stringIFdate_formatIN_SETTINGS_ANDdate_format"" format must be a stringIFtime_formatIN_SETTINGS_ANDtime_format"" format must be a stringIFcurrencyIN_SETTINGS_ANDcurrency"" must be a stringIFdecimal_separatorIN_SETTINGS_ANDdecimal_separator"" separator must be a stringIFthousands_separatorIN_SETTINGS_ANDthousands_separator"" separator must be a stringIFdefault_page_sizeIN_SETTINGS_ANDdefault_page_size"], int):
+                return False, "Default page size must be an integerIFthemeIN_SETTINGS_ANDthemeDICT_RETURN_FALSETheme must be a dictionaryIFnotificationsIN_SETTINGS_ANDnotificationsDICT_RETURN_FALSENotifications must be a dictionaryELIF_SETTINGS_TYPEcompanyالتحقق_من_وجودname", "legal_name", "tax_id", "registration_number"]
+            for field in required_fields:
+                if field not in settings:
+                    return False, f"Missing required field: {field}"
+
+            # التحقق من صحة القيم
+            if "nameIN_SETTINGS_ANDname"" name must be a stringIFlegal_nameIN_SETTINGS_ANDlegal_name"" name must be a stringIFtax_idIN_SETTINGS_ANDtax_id"" ID must be a stringIFregistration_numberIN_SETTINGS_ANDregistration_number"" number must be a stringIFaddressIN_SETTINGS_ANDaddressDICT_RETURN_FALSEAddress must be a dictionaryIFcontactIN_SETTINGS_ANDcontactDICT_RETURN_FALSEContact must be a dictionaryIFsocial_mediaIN_SETTINGS_ANDsocial_mediaDICT_RETURN_FALSESocial media must be a dictionaryIFfiscal_yearIN_SETTINGS_ANDfiscal_yearDICT_RETURN_FALSEFiscal year must be a dictionaryELIF_SETTINGS_TYPEsystemالتحقق_من_وجودbackup", "security", "logging", "performance", "maintenance"]
+            for field in required_fields:
+                if field not in settings:
+                    return False, f"Missing required field: {field}"
+
+            # التحقق من صحة القيم
+            if "backupIN_SETTINGS_ANDbackupDICT_RETURN_FALSEBackup must be a dictionaryIFsecurityIN_SETTINGS_ANDsecurityDICT_RETURN_FALSESecurity must be a dictionaryIFloggingIN_SETTINGS_ANDloggingDICT_RETURN_FALSELogging must be a dictionaryIFperformanceIN_SETTINGS_ANDperformanceDICT_RETURN_FALSEPerformance must be a dictionaryIFmaintenanceIN_SETTINGS_ANDmaintenanceDICT_RETURN_FALSEMaintenance must be a dictionaryELIF_SETTINGS_TYPEconnectionالتحقق_من_وجودdatabase", "redis", "email", "sms", "api", "ai"]
+            for field in required_fields:
+                if field not in settings:
+                    return False, f"Missing required field: {field}"
+
+            # التحقق من صحة القيم
+            if "databaseIN_SETTINGS_ANDdatabaseDICT_RETURN_FALSEDatabase must be a dictionaryIFredisIN_SETTINGS_ANDredisDICT_RETURN_FALSERedis must be a dictionaryIFemailIN_SETTINGS_ANDemailDICT_RETURN_FALSEEmail must be a dictionaryIFsmsIN_SETTINGS_ANDsmsDICT_RETURN_FALSESMS must be a dictionaryIFapiIN_SETTINGS_ANDapiDICT_RETURN_FALSEAPI must be a dictionaryIFaiIN_SETTINGS_ANDaiDICT_RETURN_FALSEAI must be a dictionary"
+
+        # الإعدادات صحيحة
+        return True, "Settings are valid"

@@ -1,0 +1,404 @@
+# ==========================================
+# Docker Compose - Gaara Scan AI v4.3.1
+# Complete production-ready stack
+# Configured for Nginx Proxy with Ai_project network
+# ==========================================
+
+services:
+  # ==========================================
+  # PostgreSQL Database
+  # ==========================================
+  database:
+    image: postgres:16-alpine
+    container_name: scan_ai-Manus-database
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-gaara_scan_ai}
+      POSTGRES_USER: ${POSTGRES_USER:-gaara_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+      PGDATA: /var/lib/postgresql/data/pgdata
+      TZ: ${TZ:-UTC}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./data/postgres/backups:/backups
+    expose:
+      - "8502"
+    command: -p 8502
+    networks:
+      - Ai_project
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-gaara_user} -d ${POSTGRES_DB:-gaara_scan_ai} -p 8502"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+        reservations:
+          memory: 512M
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ==========================================
+  # Redis Cache & Sessions
+  # ==========================================
+  redis:
+    image: redis:7-alpine
+    container_name: scan_ai-Manus-redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --appendonly yes
+      --requirepass ${REDIS_PASSWORD:?REDIS_PASSWORD is required}
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+      --save 900 1
+      --save 300 10
+      --save 60 10000
+    volumes:
+      - redis_data:/data
+    expose:
+      - "6379"
+    networks:
+      - Ai_project
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          memory: 256M
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ==========================================
+  # Backend API (FastAPI)
+  # ==========================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        BUILD_DATE: ${BUILD_DATE:-2025-12-13}
+        VCS_REF: ${VCS_REF:-latest}
+        VERSION: ${APP_VERSION:-4.3.1}
+    image: gaara-backend:${APP_VERSION:-4.3.1}
+    container_name: scan_ai-Manus-backend
+    restart: unless-stopped
+    environment:
+      # Application
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      DEBUG: ${DEBUG:-false}
+      APP_PORT: 4001
+      PORT: 4001
+      WORKERS: ${WORKERS:-4}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      TZ: ${TZ:-UTC}
+
+      # Database
+      DATABASE_URL: postgresql://${POSTGRES_USER:-gaara_user}:${POSTGRES_PASSWORD:-gaara_secure_2024}@scan_ai-Manus-database:8502/${POSTGRES_DB:-gaara_scan_ai}
+      DATABASE_HOST: scan_ai-Manus-database
+      DATABASE_PORT: 8502
+      DATABASE_NAME: ${POSTGRES_DB:-gaara_scan_ai}
+      DATABASE_USER: ${POSTGRES_USER:-gaara_user}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-gaara_secure_2024}
+
+      # Redis
+      REDIS_HOST: scan_ai-Manus-redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD is required}
+      REDIS_DB: 0
+
+      # Security
+      SECRET_KEY: ${SECRET_KEY:?SECRET_KEY is required}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: ${JWT_ACCESS_TOKEN_EXPIRE_MINUTES:-15}
+      JWT_REFRESH_TOKEN_EXPIRE_DAYS: ${JWT_REFRESH_TOKEN_EXPIRE_DAYS:-7}
+
+      # CORS
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:4501,http://localhost:4001,http://localhost:3000,http://localhost:5173}
+      ALLOWED_METHODS: ${ALLOWED_METHODS:-GET,POST,PUT,DELETE,PATCH,OPTIONS}
+      ALLOWED_HEADERS: ${ALLOWED_HEADERS:-*}
+      ALLOW_CREDENTIALS: ${ALLOW_CREDENTIALS:-true}
+
+      # File Upload
+      UPLOAD_DIR: /app/data/uploads
+      RESULTS_DIR: /app/data/results
+      MAX_FILE_SIZE: ${MAX_FILE_SIZE:-52428800}
+      ALLOWED_FILE_TYPES: ${ALLOWED_FILE_TYPES:-image/jpeg,image/png,image/jpg,image/webp}
+
+      # Migrations
+      RUN_MIGRATIONS: ${RUN_MIGRATIONS:-true}
+    volumes:
+      - backend_uploads:/app/data/uploads
+      - backend_results:/app/data/results
+      - backend_logs:/app/logs
+      - backend_backups:/app/data/backups
+      - ai_models:/app/data/models
+    ports:
+      - "4001:4001"
+    expose:
+      - "4001"
+    networks:
+      - Ai_project
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4001/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 2G
+        reservations:
+          memory: 1G
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # ==========================================
+  # ML Service (AI/ML for Disease Diagnosis)
+  # ==========================================
+  ml_service:
+    build:
+      context: ./ml_service
+      dockerfile: Dockerfile
+      args:
+        BUILD_DATE: ${BUILD_DATE:-2025-12-13}
+        VCS_REF: ${VCS_REF:-latest}
+        VERSION: ${APP_VERSION:-4.3.1}
+    image: gaara-ml-service:${APP_VERSION:-4.3.1}
+    container_name: scan_ai-Manus-ml
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-UTC}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      PORT: 4101
+      DATABASE_URL: postgresql://${POSTGRES_USER:-gaara_user}:${POSTGRES_PASSWORD:-gaara_secure_2024}@scan_ai-Manus-database:8502/${POSTGRES_DB:-gaara_scan_ai}
+      REDIS_HOST: scan_ai-Manus-redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD is required}
+    volumes:
+      - ai_models:/app/models
+      - ml_data:/app/data
+      - ml_logs:/app/logs
+    ports:
+      - "4101:4101"
+    expose:
+      - "4101"
+    networks:
+      - Ai_project
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4101/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 4G
+        reservations:
+          memory: 2G
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # ==========================================
+  # AI Service (Additional AI capabilities)
+  # ==========================================
+  ai_service:
+    build:
+      context: ./image_crawler
+      dockerfile: Dockerfile
+      args:
+        BUILD_DATE: ${BUILD_DATE:-2025-12-14}
+        VCS_REF: ${VCS_REF:-latest}
+        VERSION: ${APP_VERSION:-4.3.1}
+    image: gaara-ai-service:${APP_VERSION:-4.3.1}
+    container_name: scan_ai-Manus-ai
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-UTC}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      PORT: 4601
+      DATABASE_URL: postgresql://${POSTGRES_USER:-gaara_user}:${POSTGRES_PASSWORD:-gaara_secure_2024}@scan_ai-Manus-database:8502/${POSTGRES_DB:-gaara_scan_ai}
+      REDIS_HOST: scan_ai-Manus-redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD is required}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    volumes:
+      - crawler_data:/app/data
+      - crawler_logs:/app/logs
+    ports:
+      - "4601:4601"
+    expose:
+      - "4601"
+    networks:
+      - Ai_project
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4601/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          memory: 1G
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # ==========================================
+  # Frontend (React + Vite + Nginx)
+  # ==========================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        BUILD_DATE: ${BUILD_DATE:-2025-12-13}
+        VCS_REF: ${VCS_REF:-latest}
+        VERSION: ${APP_VERSION:-4.3.1}
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:4001/api/v1}
+        VITE_UPLOAD_URL: ${VITE_UPLOAD_URL:-http://localhost:4001/uploads}
+    image: gaara-frontend:${APP_VERSION:-4.3.1}
+    container_name: scan_ai-Manus-frontend
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-UTC}
+      PORT: 4501
+    volumes:
+      - frontend_logs:/var/log/nginx
+    ports:
+      - "4501:4501"
+    expose:
+      - "4501"
+    networks:
+      - Ai_project
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4501/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          memory: 256M
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# ==========================================
+# Networks
+# ==========================================
+networks:
+  Ai_project:
+    external: true
+
+# ==========================================
+# Volumes
+# ==========================================
+volumes:
+  postgres_data:
+    name: scan_ai_manus_postgres_data
+    driver: local
+  redis_data:
+    name: scan_ai_manus_redis_data
+    driver: local
+  backend_uploads:
+    name: scan_ai_manus_backend_uploads
+    driver: local
+  backend_results:
+    name: scan_ai_manus_backend_results
+    driver: local
+  backend_logs:
+    name: scan_ai_manus_backend_logs
+    driver: local
+  backend_backups:
+    name: scan_ai_manus_backend_backups
+    driver: local
+  frontend_logs:
+    name: scan_ai_manus_frontend_logs
+    driver: local
+  ai_models:
+    name: scan_ai_manus_ai_models
+    driver: local
+  ml_data:
+    name: scan_ai_manus_ml_data
+    driver: local
+  ml_logs:
+    name: scan_ai_manus_ml_logs
+    driver: local
+  crawler_data:
+    name: scan_ai_manus_crawler_data
+    driver: local
+  crawler_logs:
+    name: scan_ai_manus_crawler_logs
+    driver: local

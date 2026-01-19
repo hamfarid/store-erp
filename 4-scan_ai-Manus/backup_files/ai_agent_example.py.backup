@@ -1,0 +1,111 @@
+# /home/ubuntu/ai_web_final_package/src/modules/ai_agent_example.py
+# مثال توضيحي لتعديل وحدة وكيل ذكاء اصطناعي لاستخدام MemoryService
+
+import asyncio
+from typing import List, Dict, Any
+
+# افتراض وجود خدمة الذاكرة الجديدة
+# في التطبيق الفعلي، سيتم استيرادها وتهيئتها بشكل مناسب
+# (قد تكون singleton أو يتم تمريرها عبر dependency injection)
+from src.services.memory_service import MemoryService
+
+# --- افتراض وجود كائن خدمة الذاكرة --- 
+# في سيناريو حقيقي، قد يتم الحصول عليه من إطار العمل (مثل FastAPI)
+# أو إنشاؤه مرة واحدة وتمريره
+memory_service = MemoryService()
+
+class ExampleAIAgent:
+    """
+    فئة وكيل ذكاء اصطناعي توضيحية.
+    """
+    def __init__(self, agent_id: str, session_id: str):
+        self.agent_id = agent_id
+        self.session_id = session_id # معرف فريد للجلسة أو المجموعة
+        print(f"[ExampleAgent {agent_id}] Initialized for session {session_id}")
+
+    async def process_message(self, user_message: str) -> str:
+        """
+        معالجة رسالة المستخدم وتوليد رد.
+        """
+        print(f"[ExampleAgent {self.agent_id}] Processing message: {user_message[:50]}...")
+
+        # 1. استرجاع الذاكرة قصيرة المدى ذات الصلة
+        recent_context = await memory_service.get_recent_short_term_memory(
+            group_id=self.session_id,
+            limit=5
+        )
+        print(f"[ExampleAgent {self.agent_id}] Retrieved short-term context: {recent_context}")
+
+        # 2. البحث في الذاكرة طويلة المدى عن معلومات ذات صلة
+        # أ. حساب متجه الاستعلام (باستخدام دالة مساعدة أو نموذج تضمين)
+        query_vector = await memory_service.get_text_embedding(user_message)
+        
+        # ب. البحث في قاعدة البيانات المتجهة (نفترض وجود فئة 'documents')
+        long_term_results = []
+        if query_vector:
+            long_term_results = await memory_service.search_long_term_memory(
+                class_name="Documents", # اسم الفئة في Weaviate (يجب إنشاؤها مسبقاً)
+                query_vector=query_vector,
+                limit=3,
+                properties=["text", "source"] # الخصائص المراد استرجاعها
+            )
+            print(f"[ExampleAgent {self.agent_id}] Retrieved long-term results: {long_term_results}")
+        else:
+            print(f"[ExampleAgent {self.agent_id}] Could not generate query vector.")
+
+        # 3. توليد الرد بناءً على الرسالة والسياق والذاكرة طويلة المدى
+        # (هنا يتم استدعاء نموذج اللغة الكبير أو منطق الوكيل)
+        response_text = self._generate_response(user_message, recent_context, long_term_results)
+        print(f"[ExampleAgent {self.agent_id}] Generated response: {response_text[:50]}...")
+
+        # 4. حفظ الرسالة والرد في الذاكرة قصيرة المدى
+        await memory_service.add_short_term_memory(
+            group_id=self.session_id,
+            content=f"User: {user_message}",
+            content_type="message"
+        )
+        await memory_service.add_short_term_memory(
+            group_id=self.session_id,
+            content=f"Agent: {response_text}",
+            content_type="message"
+        )
+
+        # 5. (اختياري) تحديث الذاكرة طويلة المدى بمعلومات جديدة مستخلصة
+        # extracted_knowledge = self._extract_knowledge(user_message, response_text)
+        # if extracted_knowledge:
+        #    knowledge_vector = await memory_service.get_text_embedding(extracted_knowledge["text"])
+        #    if knowledge_vector:
+        #        await memory_service.add_long_term_memory(
+        #            class_name="Knowledge", # فئة أخرى في Weaviate
+        #            data_object=extracted_knowledge, 
+        #            vector=knowledge_vector
+        #        )
+
+        return response_text
+
+    def _generate_response(self, message: str, context: List[str], knowledge: List[Dict[str, Any]]) -> str:
+        """
+        (محاكاة) توليد رد بناءً على المدخلات.
+        """
+        # في التطبيق الفعلي، سيتم استدعاء LLM هنا
+        response = f"Received: '{message}'. Context length: {len(context)}. Knowledge items: {len(knowledge)}. This is a simulated response."
+        return response
+
+# --- مثال للاستخدام (للتوضيح فقط) ---
+async def main():
+    print("--- Running AI Agent Example ---")
+    agent = ExampleAIAgent(agent_id="agent-001", session_id="session-123")
+    response1 = await agent.process_message("Hello, tell me about photosynthesis.")
+    print(f"Response 1: {response1}")
+    response2 = await agent.process_message("What are the key factors?")
+    print(f"Response 2: {response2}")
+    
+    # إغلاق الاتصالات عند الانتهاء
+    await memory_service.close()
+    print("--- Example Finished ---")
+
+# if __name__ == "__main__":
+#     asyncio.run(main())
+
+# --- نهاية الملف ---
+

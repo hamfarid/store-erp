@@ -1,0 +1,254 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/config.json",
+  "version": "1.0",
+  "name": "GAARA Development MCP Config",
+  "description": "Full MCP configuration for Google Antigravity",
+  
+  "servers": {
+    "sequential-thinking": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "metadata": {
+        "name": "Sequential Thinking",
+        "description": "Dynamic and reflective problem-solving through thought sequences",
+        "category": "reasoning"
+      }
+    },
+
+    "exa": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-exa"],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      },
+      "metadata": {
+        "name": "Exa Search",
+        "description": "Primary research - Code context search and web research",
+        "category": "research",
+        "priority": 1
+      }
+    },
+
+    "speckit": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-speckit"],
+      "metadata": {
+        "name": "Speckit",
+        "description": "API specification lookup and validation",
+        "category": "api",
+        "requiresAuth": false
+      }
+    },
+
+    "ref": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-ref"],
+      "env": {
+        "REF_API_KEY": "${REF_API_KEY}"
+      },
+      "metadata": {
+        "name": "Ref Documentation",
+        "description": "Documentation verification (use sparingly)",
+        "category": "documentation"
+      }
+    },
+
+    "supabase": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server"],
+      "env": {
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_ANON_KEY": "${SUPABASE_ANON_KEY}",
+        "SUPABASE_SERVICE_ROLE_KEY": "${SUPABASE_SERVICE_ROLE_KEY}"
+      },
+      "metadata": {
+        "name": "Supabase",
+        "description": "Database queries - Direct Postgres access, schema exploration",
+        "category": "database"
+      }
+    },
+
+    "sentry": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "${SENTRY_AUTH_TOKEN}",
+        "SENTRY_ORG": "${SENTRY_ORG}",
+        "SENTRY_PROJECT": "${SENTRY_PROJECT}"
+      },
+      "metadata": {
+        "name": "Sentry",
+        "description": "Error tracking - Real-time errors, stack traces",
+        "category": "monitoring"
+      }
+    },
+
+    "github": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "metadata": {
+        "name": "GitHub",
+        "description": "Code management - PRs, issues, repo management",
+        "category": "vcs"
+      }
+    },
+
+    "firecrawl": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      },
+      "metadata": {
+        "name": "Firecrawl",
+        "description": "Data scraping - Web scraping, structured data extraction",
+        "category": "scraping"
+      }
+    },
+
+    "pinecone": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@pinecone-database/mcp-server"],
+      "env": {
+        "PINECONE_API_KEY": "${PINECONE_API_KEY}",
+        "PINECONE_ENVIRONMENT": "${PINECONE_ENVIRONMENT}",
+        "PINECONE_INDEX_NAME": "${PINECONE_INDEX_NAME}"
+      },
+      "metadata": {
+        "name": "Pinecone",
+        "description": "Vector search - Semantic search, vector indexing",
+        "category": "vector-db"
+      }
+    },
+
+    "vectara": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@vectara/mcp-server"],
+      "env": {
+        "VECTARA_CUSTOMER_ID": "${VECTARA_CUSTOMER_ID}",
+        "VECTARA_CORPUS_ID": "${VECTARA_CORPUS_ID}",
+        "VECTARA_API_KEY": "${VECTARA_API_KEY}"
+      },
+      "metadata": {
+        "name": "Vectara",
+        "description": "RAG engine - Document search, semantic retrieval",
+        "category": "rag"
+      }
+    },
+
+    "playwright": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp-server"],
+      "metadata": {
+        "name": "Playwright",
+        "description": "Browser automation - Testing, web interactions",
+        "category": "testing",
+        "requiresAuth": false
+      }
+    },
+
+    "magic-ui": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@magicui/mcp-server"],
+      "metadata": {
+        "name": "Magic UI",
+        "description": "UI components - React + Tailwind components, animations",
+        "category": "ui",
+        "requiresAuth": false
+      }
+    },
+
+    "datadog": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@datadog/mcp-server"],
+      "env": {
+        "DD_API_KEY": "${DD_API_KEY}",
+        "DD_APP_KEY": "${DD_APP_KEY}",
+        "DD_SITE": "${DD_SITE}"
+      },
+      "metadata": {
+        "name": "Datadog",
+        "description": "Observability - Metrics, logs, traces, APM",
+        "category": "monitoring"
+      }
+    },
+
+    "snyk": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@snyk/mcp-server"],
+      "env": {
+        "SNYK_TOKEN": "${SNYK_TOKEN}",
+        "SNYK_ORG_ID": "${SNYK_ORG_ID}"
+      },
+      "metadata": {
+        "name": "Snyk",
+        "description": "Security - Vulnerability scanning, dependency auditing",
+        "category": "security"
+      }
+    },
+
+    "shadcn": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@shadcn/mcp-server"],
+      "metadata": {
+        "name": "Shadcn UI",
+        "description": "Professional UI components - Accessible React components with Tailwind",
+        "category": "ui",
+        "requiresAuth": false
+      }
+    },
+
+    "railway": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@railway/mcp-server"],
+      "env": {
+        "RAILWAY_TOKEN": "${RAILWAY_TOKEN}"
+      },
+      "metadata": {
+        "name": "Railway",
+        "description": "Deployment - Django/Python hosting, databases, logs",
+        "category": "deployment"
+      }
+    },
+
+    "vercel": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@vercel/mcp-server"],
+      "env": {
+        "VERCEL_TOKEN": "${VERCEL_TOKEN}"
+      },
+      "metadata": {
+        "name": "Vercel",
+        "description": "Deployment - Frontend hosting, preview URLs, serverless",
+        "category": "deployment"
+      }
+    }
+  },
+
+  "settings": {
+    "autoConnect": true,
+    "logLevel": "info",
+    "timeout": 30000,
+    "retries": 2
+  }
+}

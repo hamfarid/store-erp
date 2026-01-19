@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}نظام جعاره الزراعي الذكي{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Additional Styles -->
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="شعار النظام" class="logo">
+            <h1>نظام جعاره</h1>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('dashboard') }}" class="nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
+                <i class="material-icons">dashboard</i>
+                <span>لوحة التحكم</span>
+            </a>
+            <a href="{{ url_for('ai') }}" class="nav-item {% if request.endpoint == 'ai' %}active{% endif %}">
+                <i class="material-icons">psychology</i>
+                <span>إدارة الذكاء الاصطناعي</span>
+            </a>
+            <a href="{{ url_for('resources') }}" class="nav-item {% if request.endpoint == 'resources' %}active{% endif %}">
+                <i class="material-icons">memory</i>
+                <span>الموارد</span>
+            </a>
+            <a href="{{ url_for('usage') }}" class="nav-item {% if request.endpoint == 'usage' %}active{% endif %}">
+                <i class="material-icons">analytics</i>
+                <span>الاستخدام</span>
+            </a>
+            <a href="{{ url_for('diagnosis') }}" class="nav-item {% if request.endpoint == 'diagnosis' %}active{% endif %}">
+                <i class="material-icons">biotech</i>
+                <span>التشخيص</span>
+            </a>
+            <a href="{{ url_for('alerts') }}" class="nav-item {% if request.endpoint == 'alerts' %}active{% endif %}">
+                <i class="material-icons">notifications</i>
+                <span>التنبيهات</span>
+                <span class="badge">3</span>
+            </a>
+            <a href="{{ url_for('settings') }}" class="nav-item {% if request.endpoint == 'settings' %}active{% endif %}">
+                <i class="material-icons">settings</i>
+                <span>الإعدادات</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <img src="{{ url_for('static', filename='images/avatar.png') }}" alt="الصورة الشخصية" class="avatar">
+                <div class="user-details">
+                    <span class="user-name">مدير النظام</span>
+                    <span class="user-role">مسؤول</span>
+                </div>
+            </div>
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                <i class="material-icons">logout</i>
+                <span>تسجيل الخروج</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="top-bar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="material-icons">menu</i>
+                </button>
+                <div class="breadcrumb">
+                    {% block breadcrumb %}{% endblock %}
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <div class="search-box">
+                    <i class="material-icons">search</i>
+                    <input type="text" placeholder="بحث..." id="globalSearch">
+                </div>
+                <div class="notifications">
+                    <button class="btn-icon" id="notificationsBtn">
+                        <i class="material-icons">notifications</i>
+                        <span class="badge">3</span>
+                    </button>
+                    <div class="notifications-dropdown">
+                        <div class="notifications-header">
+                            <h3>التنبيهات</h3>
+                            <button class="btn-text">تعيين الكل كمقروء</button>
+                        </div>
+                        <div class="notifications-list">
+                            <div class="notification-item unread">
+                                <i class="material-icons">warning</i>
+                                <div class="notification-content">
+                                    <p>تنبيه: ارتفاع في استهلاك الموارد</p>
+                                    <span class="notification-time">منذ 5 دقائق</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <i class="material-icons">psychology</i>
+                                <div class="notification-content">
+                                    <p>اكتمل تدريب النموذج الجديد</p>
+                                    <span class="notification-time">منذ ساعة</span>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <i class="material-icons">biotech</i>
+                                <div class="notification-content">
+                                    <p>تم اكتشاف مرض جديد في المحصول</p>
+                                    <span class="notification-time">منذ 3 ساعات</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notifications-footer">
+                            <a href="{{ url_for('alerts') }}" class="btn-text">عرض كل التنبيهات</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-toggle">
+                    <button class="btn-icon" id="themeToggle">
+                        <i class="material-icons">dark_mode</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            <i class="material-icons">
+                                {% if category == 'success' %}
+                                    check_circle
+                                {% elif category == 'error' %}
+                                    error
+                                {% elif category == 'warning' %}
+                                    warning
+                                {% else %}
+                                    info
+                                {% endif %}
+                            </i>
+                            <span>{{ message }}</span>
+                            <button class="close-btn">
+                                <i class="material-icons">close</i>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Page Content -->
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <!-- Additional Scripts -->
+    {% block scripts %}{% endblock %}
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-theme');
+            themeToggle.querySelector('i').textContent = 'light_mode';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            const isDark = body.classList.contains('dark-theme');
+            themeToggle.querySelector('i').textContent = isDark ? 'light_mode' : 'dark_mode';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            document.querySelector('.main-content').classList.toggle('expanded');
+        });
+
+        // Notifications Dropdown
+        const notificationsBtn = document.getElementById('notificationsBtn');
+        const notificationsDropdown = document.querySelector('.notifications-dropdown');
+        
+        notificationsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notificationsDropdown.classList.toggle('show');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!notificationsDropdown.contains(e.target) && !notificationsBtn.contains(e.target)) {
+                notificationsDropdown.classList.remove('show');
+            }
+        });
+
+        // Global Search
+        const globalSearch = document.getElementById('globalSearch');
+        globalSearch.addEventListener('input', (e) => {
+            // Implement search functionality
+            console.log('Searching for:', e.target.value);
+        });
+
+        // Loading Overlay
+        window.addEventListener('beforeunload', () => {
+            document.getElementById('loadingOverlay').classList.add('show');
+        });
+    </script>
+    
+    <!-- API Client -->
+    <script src="{{ url_for('static', filename='js/api_client.js') }}"></script>
+    
+    <!-- Additional Scripts -->
+    {% block scripts %}{% endblock %}
+</body>
+</html> 

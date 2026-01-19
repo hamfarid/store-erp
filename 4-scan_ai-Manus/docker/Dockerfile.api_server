@@ -1,0 +1,57 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# تثبيت حزم النظام الضرورية
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    curl \
+    netcat-openbsd \
+    && rm -rf /var/lib/apt/lists/*
+
+# نسخ ملفات متطلبات البايثون
+COPY requirements.txt .
+
+# تثبيت FastAPI و Django وحزم الخادم
+RUN pip install --no-cache-dir -r requirements.txt \
+    fastapi \
+    uvicorn \
+    django \
+    djangorestframework \
+    django-cors-headers \
+    pydantic \
+    python-multipart \
+    python-dotenv \
+    prometheus-client \
+    psycopg2-binary \
+    redis
+
+# نسخ كود المشروع
+COPY src/ /app/src/
+COPY config/ /app/config/
+
+# نسخ نصوص الإعداد والتشغيل
+COPY docker/scripts/wait-for-it.sh /app/wait-for-it.sh
+COPY docker/scripts/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/wait-for-it.sh /app/entrypoint.sh
+
+# إنشاء مجلدات البيانات
+RUN mkdir -p /app/data /app/logs /app/uploads
+
+# تعيين متغيرات البيئة الافتراضية
+ENV CONFIG_PATH=/app/config/default.yaml
+ENV LOG_LEVEL=INFO
+ENV DATABASE_URL=sqlite:///app/data/db.sqlite3
+ENV SECRET_KEY=changeme_in_production
+ENV ALLOWED_HOSTS=localhost,127.0.0.1
+ENV PYTHONUNBUFFERED=1
+
+# تعريض المنفذ للاتصال
+EXPOSE 8000
+
+# تعيين نقطة الدخول
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+# أمر التشغيل الافتراضي
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]

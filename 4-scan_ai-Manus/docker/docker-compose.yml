@@ -1,0 +1,197 @@
+version: '3.8'
+
+services:
+  # خادم API مع FastAPI و Django
+  api_server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api_server
+    image: ${DOCKER_REGISTRY:+$DOCKER_REGISTRY/}${DOCKER_IMAGE_PREFIX:-agricultural_ai_system}/api_server:${DOCKER_TAG:-latest}
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    volumes:
+      - ../data:/app/data
+      - ../models:/app/models
+      - ../config:/app/config
+      - ../logs:/app/logs
+      - ../uploads:/app/uploads
+    env_file:
+      - ./env/${ENVIRONMENT:-development}.env
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - ALLOWED_HOSTS=${SECURITY_ALLOWED_HOSTS:-localhost,127.0.0.1,api_server}
+      - DB_HOST=database
+      - DB_PORT=5432
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - RUN_MIGRATIONS=${RUN_MIGRATIONS:-true}
+      - APP_ENV=${APP_ENV:-development}
+    deploy:
+      replicas: ${DOCKER_API_SERVER_REPLICAS:-2}
+      resources:
+        limits:
+          cpus: '${API_CPU_LIMIT:-1}'
+          memory: ${API_MEMORY_LIMIT:-1G}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    depends_on:
+      - database
+      - redis
+    networks:
+      - agri_net
+
+  # خدمة معالجة الصور مع PyTorch
+  image_processor:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.image_processor
+    image: ${DOCKER_REGISTRY:+$DOCKER_REGISTRY/}${DOCKER_IMAGE_PREFIX:-agricultural_ai_system}/image_processor:${DOCKER_TAG:-latest}
+    restart: unless-stopped
+    ports:
+      - "${IMAGE_PROCESSOR_PORT:-5000}:5000"
+    volumes:
+      - ../data:/app/data
+      - ../models:/app/models
+      - ../config:/app/config
+      - ../logs:/app/logs
+      - ../temp:/app/temp
+    env_file:
+      - ./env/${ENVIRONMENT:-development}.env
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - MODEL_DIR=/app/models
+      - DATA_DIR=/app/data
+      - PRIMITIVE_FEATURES_DIR=/app/data/primitive_features
+      - STANDARD_FEATURES_DIR=/app/data/standard_features
+      - COMPARISON_RESULTS_DIR=/app/data/comparison_results
+      - VISUALIZATIONS_DIR=/app/data/visualizations
+      - APP_ENV=${APP_ENV:-development}
+    deploy:
+      replicas: ${DOCKER_IMAGE_PROCESSOR_REPLICAS:-2}
+      resources:
+        limits:
+          cpus: '${PROCESSOR_CPU_LIMIT:-2}'
+          memory: ${PROCESSOR_MEMORY_LIMIT:-4G}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    depends_on:
+      - api_server
+    networks:
+      - agri_net
+
+  # خدمة موازنة الحمل للخوادم المتعددة
+  load_balancer:
+    image: nginx:latest
+    ports:
+      - "${NGINX_PORT:-80}:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../logs/nginx:/var/log/nginx
+    depends_on:
+      - api_server
+      - image_processor
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '${NGINX_CPU_LIMIT:-0.5}'
+          memory: ${NGINX_MEMORY_LIMIT:-256M}
+    networks:
+      - agri_net
+
+  # خدمة قاعدة البيانات
+  database:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_DB=${DB_NAME:-agricultural_ai}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ../logs/postgres:/var/log/postgresql
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - agri_net
+
+  # خدمة Redis للتخزين المؤقت وإدارة المهام
+  redis:
+    image: redis:6-alpine
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - agri_net
+
+  # خدمة المراقبة (Prometheus)
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    ports:
+      - "${MONITORING_PROMETHEUS_PORT:-9090}:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    networks:
+      - agri_net
+    profiles:
+      - monitoring
+
+  # خدمة عرض المراقبة (Grafana)
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    ports:
+      - "${MONITORING_GRAFANA_PORT:-3000}:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - agri_net
+    profiles:
+      - monitoring
+
+volumes:
+  db_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+networks:
+  agri_net:
+    driver: bridge
+    name: ${DOCKER_NETWORK_NAME:-agricultural-ai-network}

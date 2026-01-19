@@ -1,0 +1,60 @@
+{
+  "thresholds": {
+    "cpu": 80,
+    "memory": 80,
+    "disk": 80,
+    "network": 80
+  },
+  "notifications": {
+    "email": true,
+    "sms": false,
+    "push": true,
+    "webhook": false
+  },
+  "recipients": {
+    "email": [
+      "admin@example.com"
+    ],
+    "sms": [
+      "+1234567890"
+    ],
+    "push": [
+      "admin"
+    ]
+  },
+  "webhook_url": "",
+  "email_settings": {
+    "smtp_server": "smtp.example.com",
+    "smtp_port": 587,
+    "smtp_username": "alerts@example.com",
+    "smtp_password": "password",
+    "from_email": "alerts@example.com",
+    "use_tls": true
+  },
+  "alert_levels": {
+    "critical": {
+      "email": true,
+      "sms": true,
+      "push": true,
+      "webhook": true
+    },
+    "high": {
+      "email": true,
+      "sms": false,
+      "push": true,
+      "webhook": true
+    },
+    "medium": {
+      "email": false,
+      "sms": false,
+      "push": true,
+      "webhook": false
+    },
+    "low": {
+      "email": false,
+      "sms": false,
+      "push": false,
+      "webhook": false
+    }
+  }
+}

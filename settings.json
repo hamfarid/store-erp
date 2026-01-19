@@ -1,0 +1,47 @@
+{
+  // Cursor MCP Research Settings
+  // Copy relevant sections to your .vscode/settings.json or Cursor settings
+  
+  // MCP Server Priority
+  "cursor.mcp.priority": ["exa", "speckit", "ref"],
+  
+  // Auto-verify date before research
+  "cursor.mcp.autoVerifyDate": true,
+  
+  // Exa Configuration
+  "cursor.mcp.exa.primaryTool": "get_code_context_exa",
+  "cursor.mcp.exa.fallbackTool": "web_search_exa",
+  "cursor.mcp.exa.includeVersions": true,
+  "cursor.mcp.exa.includeLanguage": true,
+  
+  // Ref Configuration  
+  "cursor.mcp.ref.allowedTools": [
+    "ref_search_documentation",
+    "ref_read_url"
+  ],
+  "cursor.mcp.ref.prohibitedTools": [
+    "search_docs",
+    "my_docs"
+  ],
+  "cursor.mcp.ref.requireTrigger": true,
+  
+  // Speckit Configuration
+  "cursor.mcp.speckit.autoValidate": true,
+  "cursor.mcp.speckit.cacheSpecs": true,
+  
+  // Code Annotation
+  "cursor.mcp.annotate.sources": true,
+  "cursor.mcp.annotate.versions": true,
+  "cursor.mcp.annotate.dates": true,
+  
+  // Research Workflow
+  "cursor.mcp.workflow.maxRetries": 2,
+  "cursor.mcp.workflow.exhaustExaFirst": true,
+  "cursor.mcp.workflow.annotateInCode": true,
+  
+  // Terminal Date Command (for verification)
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.env.linux": {
+    "DATE_FORMAT": "%Y-%m-%d %H:%M:%S %Z"
+  }
+}

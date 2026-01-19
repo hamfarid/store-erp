@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaara Scan AI - نظام التشخيص الذكي</title>
+    
+    <!-- خط Cairo من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    
+    <!-- ملفات CSS المخصصة -->
+    <link rel="stylesheet" href="/styles/themes/magseeds-complete.css">
+    <link rel="stylesheet" href="/styles/components/layout.css">
+    <link rel="stylesheet" href="/styles/components/navigation.css">
+    <link rel="stylesheet" href="/styles/components/dashboard.css">
+    
+    <style>
+        /* تطبيق خط Cairo على جميع العناصر */
+        * {
+            font-family: 'Cairo', sans-serif !important;
+        }
+        
+        /* متغيرات CSS للخط */
+        :root {
+            --font-family-primary: 'Cairo', sans-serif;
+            --font-weight-light: 300;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --font-weight-extrabold: 800;
+        }
+        
+        /* تحسين عرض النص العربي */
+        body {
+            font-family: var(--font-family-primary);
+            font-weight: var(--font-weight-normal);
+            line-height: 1.6;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* تحسين العناوين */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-primary);
+            font-weight: var(--font-weight-semibold);
+        }
+        
+        /* تحسين الأزرار */
+        .btn {
+            font-family: var(--font-family-primary);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        /* تحسين القوائم */
+        .nav-link {
+            font-family: var(--font-family-primary);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--magseeds-gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 1.2rem;
+            font-weight: var(--font-weight-medium);
+            margin-bottom: 10px;
+        }
+        
+        .loading-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">جاري تحميل نظام Gaara Scan AI</div>
+            <div class="loading-subtitle">نظام التشخيص الذكي للنباتات</div>
+        </div>
+    </div>
+
+    <!-- التطبيق الرئيسي -->
+    <div id="app">
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <div class="container-fluid">
+                <!-- Logo والعلامة التجارية -->
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="/assets/logo.png" alt="Gaara Scan AI" height="40" class="me-3">
+                    <span class="fw-bold">Gaara Scan AI</span>
+                </a>
+                
+                <!-- زر القائمة للجوال -->
+                <button class="navbar-toggler" type="button" @click="toggleSidebar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <!-- قائمة المستخدم -->
+                <div class="navbar-nav ms-auto">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                            <img src="/assets/user-avatar.png" alt="المستخدم" class="rounded-circle me-2" width="32" height="32">
+                            <span>{{ userName }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/profile"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                            <li><a class="dropdown-item" href="/settings"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" @click="logout"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Layout الرئيسي -->
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar" :class="{ 'sidebar-open': sidebarOpen }">
+                <div class="sidebar-content">
+                    <!-- قائمة التنقل الرئيسية -->
+                    <nav class="sidebar-nav">
+                        <ul class="nav flex-column">
+                            <!-- لوحة التحكم -->
+                            <li class="nav-item">
+                                <router-link to="/" class="nav-link" active-class="active">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>لوحة التحكم</span>
+                                </router-link>
+                            </li>
+                            
+                            <!-- الذكاء الاصطناعي -->
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="collapse" href="#aiMenu" role="button">
+                                    <i class="fas fa-brain"></i>
+                                    <span>الذكاء الاصطناعي</span>
+                                </a>
+                                <div class="collapse" id="aiMenu">
+                                    <ul class="nav flex-column ms-3">
+                                        <li class="nav-item">
+                                            <router-link to="/ai/management" class="nav-link" active-class="active">
+                                                <i class="fas fa-cogs"></i>
+                                                <span>إدارة الذكاء الاصطناعي</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/ai/agent" class="nav-link" active-class="active">
+                                                <i class="fas fa-robot"></i>
+                                                <span>المساعد الذكي</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/ai/reports" class="nav-link" active-class="active">
+                                                <i class="fas fa-chart-line"></i>
+                                                <span>تقارير الاستخدام</span>
+                                            </router-link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <!-- التشخيص والتحليل -->
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="collapse" href="#diagnosisMenu" role="button">
+                                    <i class="fas fa-microscope"></i>
+                                    <span>التشخيص والتحليل</span>
+                                </a>
+                                <div class="collapse" id="diagnosisMenu">
+                                    <ul class="nav flex-column ms-3">
+                                        <li class="nav-item">
+                                            <router-link to="/diagnosis/dashboard" class="nav-link" active-class="active">
+                                                <i class="fas fa-stethoscope"></i>
+                                                <span>لوحة التشخيص</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/diagnosis/image-enhancement" class="nav-link" active-class="active">
+                                                <i class="fas fa-image"></i>
+                                                <span>تحسين الصور</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/diagnosis/plant-hybridization" class="nav-link" active-class="active">
+                                                <i class="fas fa-seedling"></i>
+                                                <span>تهجين النباتات</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/diagnosis/yolo-detection" class="nav-link" active-class="active">
+                                                <i class="fas fa-search"></i>
+                                                <span>كشف الكائنات</span>
+                                            </router-link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <!-- إدارة البيانات -->
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="collapse" href="#dataMenu" role="button">
+                                    <i class="fas fa-database"></i>
+                                    <span>إدارة البيانات</span>
+                                </a>
+                                <div class="collapse" id="dataMenu">
+                                    <ul class="nav flex-column ms-3">
+                                        <li class="nav-item">
+                                            <router-link to="/data/activity-log" class="nav-link" active-class="active">
+                                                <i class="fas fa-history"></i>
+                                                <span>سجل الأنشطة</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/data/import-export" class="nav-link" active-class="active">
+                                                <i class="fas fa-exchange-alt"></i>
+                                                <span>الاستيراد والتصدير</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/data/validation" class="nav-link" active-class="active">
+                                                <i class="fas fa-check-circle"></i>
+                                                <span>التحقق من البيانات</span>
+                                            </router-link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <!-- إدارة الحاويات -->
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="collapse" href="#dockerMenu" role="button">
+                                    <i class="fab fa-docker"></i>
+                                    <span>إدارة الحاويات</span>
+                                </a>
+                                <div class="collapse" id="dockerMenu">
+                                    <ul class="nav flex-column ms-3">
+                                        <li class="nav-item">
+                                            <router-link to="/docker/management" class="nav-link" active-class="active">
+                                                <i class="fas fa-cubes"></i>
+                                                <span>إدارة الحاويات</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/docker/monitoring" class="nav-link" active-class="active">
+                                                <i class="fas fa-eye"></i>
+                                                <span>مراقبة الحاويات</span>
+                                            </router-link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <!-- الإدارة (للمديرين فقط) -->
+                            <li class="nav-item" v-if="isAdmin">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="collapse" href="#adminMenu" role="button">
+                                    <i class="fas fa-user-shield"></i>
+                                    <span>الإدارة</span>
+                                </a>
+                                <div class="collapse" id="adminMenu">
+                                    <ul class="nav flex-column ms-3">
+                                        <li class="nav-item">
+                                            <router-link to="/admin/settings" class="nav-link" active-class="active">
+                                                <i class="fas fa-cog"></i>
+                                                <span>إعدادات النظام</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/admin/users" class="nav-link" active-class="active">
+                                                <i class="fas fa-users"></i>
+                                                <span>إدارة المستخدمين</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/admin/monitoring" class="nav-link" active-class="active">
+                                                <i class="fas fa-chart-area"></i>
+                                                <span>مراقبة النظام</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/admin/backup" class="nav-link" active-class="active">
+                                                <i class="fas fa-database"></i>
+                                                <span>النسخ الاحتياطي</span>
+                                            </router-link>
+                                        </li>
+                                        <li class="nav-item">
+                                            <router-link to="/admin/security" class="nav-link" active-class="active">
+                                                <i class="fas fa-shield-alt"></i>
+                                                <span>إدارة الأمان</span>
+                                            </router-link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- المحتوى الرئيسي -->
+            <main class="main-content" :class="{ 'sidebar-open': sidebarOpen }">
+                <!-- شريط العنوان -->
+                <div class="content-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-outline-primary me-3" @click="toggleSidebar">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <h1 class="page-title mb-0">{{ currentPageTitle }}</h1>
+                        </div>
+                        
+                        <!-- أزرار الإجراءات السريعة -->
+                        <div class="quick-actions">
+                            <button class="btn btn-outline-success me-2" @click="refreshData">
+                                <i class="fas fa-sync-alt"></i>
+                                تحديث
+                            </button>
+                            <button class="btn btn-primary" @click="openQuickActions">
+                                <i class="fas fa-plus"></i>
+                                إجراء جديد
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- محتوى الصفحة -->
+                <div class="page-content">
+                    <router-view></router-view>
+                </div>
+            </main>
+        </div>
+
+        <!-- الإشعارات -->
+        <div class="notifications-container">
+            <div v-for="notification in notifications" :key="notification.id" 
+                 class="notification" :class="notification.type">
+                <div class="notification-content">
+                    <i class="notification-icon" :class="getNotificationIcon(notification.type)"></i>
+                    <div class="notification-text">
+                        <div class="notification-title">{{ notification.title }}</div>
+                        <div class="notification-message">{{ notification.message }}</div>
+                    </div>
+                    <button class="notification-close" @click="removeNotification(notification.id)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4/dist/vue-router.global.js"></script>
+    <script src="https://unpkg.com/pinia@2/dist/pinia.iife.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <!-- التطبيق الرئيسي -->
+    <script type="module">
+        import router from './router/index.js'
+        import { useAuthStore, useSystemStore } from './store/index.js'
+        
+        const { createApp } = Vue
+        const { createPinia } = Pinia
+        
+        // إنشاء التطبيق
+        const app = createApp({
+            data() {
+                return {
+                    loading: true
+                }
+            },
+            
+            computed: {
+                sidebarOpen() {
+                    const systemStore = useSystemStore()
+                    return systemStore.sidebarOpen
+                },
+                
+                userName() {
+                    const authStore = useAuthStore()
+                    return authStore.userName
+                },
+                
+                isAdmin() {
+                    const authStore = useAuthStore()
+                    return authStore.isAdmin
+                },
+                
+                notifications() {
+                    const systemStore = useSystemStore()
+                    return systemStore.notifications
+                },
+                
+                currentPageTitle() {
+                    return this.$route.meta.title || 'Gaara Scan AI'
+                }
+            },
+            
+            methods: {
+                toggleSidebar() {
+                    const systemStore = useSystemStore()
+                    systemStore.toggleSidebar()
+                },
+                
+                async logout() {
+                    const authStore = useAuthStore()
+                    await authStore.logout()
+                    this.$router.push('/login')
+                },
+                
+                refreshData() {
+                    // تحديث البيانات حسب الصفحة الحالية
+                    this.$emit('refresh-data')
+                },
+                
+                openQuickActions() {
+                    // فتح قائمة الإجراءات السريعة
+                    console.log('فتح الإجراءات السريعة')
+                },
+                
+                removeNotification(id) {
+                    const systemStore = useSystemStore()
+                    systemStore.removeNotification(id)
+                },
+                
+                getNotificationIcon(type) {
+                    const icons = {
+                        success: 'fas fa-check-circle',
+                        error: 'fas fa-exclamation-circle',
+                        warning: 'fas fa-exclamation-triangle',
+                        info: 'fas fa-info-circle'
+                    }
+                    return icons[type] || icons.info
+                }
+            },
+            
+            async mounted() {
+                // تهيئة المصادقة
+                const authStore = useAuthStore()
+                authStore.initializeAuth()
+                
+                // تهيئة النظام
+                const systemStore = useSystemStore()
+                systemStore.setLanguage('ar')
+                systemStore.setTheme('light')
+                
+                // إخفاء شاشة التحميل
+                setTimeout(() => {
+                    const loadingScreen = document.getElementById('loading-screen')
+                    if (loadingScreen) {
+                        loadingScreen.style.opacity = '0'
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none'
+                        }, 500)
+                    }
+                    this.loading = false
+                }, 2000)
+            }
+        })
+        
+        // تثبيت المكونات الإضافية
+        app.use(createPinia())
+        app.use(router)
+        
+        // تشغيل التطبيق
+        app.mount('#app')
+    </script>
+</body>
+</html>
+

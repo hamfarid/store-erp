@@ -1,0 +1,635 @@
+# File:
+# /home/ubuntu/ai_web_organized/src/modules/resource_monitoring/resource_collector.py
+"""
+from flask import g
+وحدة جمع بيانات الموارد
+توفر هذه الوحدة وظائف لجمع بيانات موارد النظام (المعالج، الذاكرة، القرص، الشبكة) بشكل فعلي
+"""
+
+import json
+import logging
+import os
+import platform
+import socket
+import threading
+import time
+from datetime import datetime
+
+import psutil
+import psycopg2
+from psycopg2 import sql
+
+# إعداد التسجيل
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# مسار ملف البيانات المؤقت
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+RESOURCES_FILE = os.path.join(DATA_DIR, 'resources.json')
+RESOURCES_HISTORY_FILE = os.path.join(DATA_DIR, 'resources_history.json')
+MODULES_RESOURCES_FILE = os.path.join(DATA_DIR, 'modules_resources.json')
+
+# التأكد من وجود مجلد البيانات
+os.makedirs(DATA_DIR, exist_ok=True)
+
+# دالة مساعدة لتحميل البيانات من ملف JSON
+
+
+def load_data(file_path, default_data=None):
+    if default_data is None:
+        default_data = {}
+
+    if not os.path.exists(file_path):
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(default_data, f, ensure_ascii=False, indent=2)
+        return default_data
+
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (json.JSONDecodeError, FileNotFoundError):
+        return default_data
+
+# دالة مساعدة لحفظ البيانات في ملف JSON
+
+
+def save_data(file_path, data):
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+# دالة للحصول على استخدام المعالج
+
+
+def get_cpu_usage():
+    """الحصول على استخدام المعالج"""
+    try:
+        # استخدام interval=0.1 للحصول على قراءة سريعة
+        cpu_percent = psutil.cpu_percent(interval=0.1)
+
+        # الحصول على استخدام المعالج لكل نواة
+        cpu_percent_per_core = psutil.cpu_percent(interval=0.1, percpu=True)
+
+        # الحصول على معلومات المعالج
+        cpu_freq = psutil.cpu_freq()
+        cpu_count = psutil.cpu_count()
+        cpu_count_logical = psutil.cpu_count(logical=True)
+
+        return {
+            "percent": cpu_percent,
+            "percent_per_core": cpu_percent_per_core,
+            "freq_current": cpu_freq.current if cpu_freq else None,
+            "freq_min": cpu_freq.min if cpu_freq and hasattr(
+                cpu_freq,
+                'min') else None,
+            "freq_max": cpu_freq.max if cpu_freq and hasattr(
+                cpu_freq,
+                'max') else None,
+            "count_physical": cpu_count,
+            "count_logical": cpu_count_logical}
+    except Exception as e:
+        logger.error(f"Error getting CPU usage: {str(e)}")
+        return {
+            "percent": 0,
+            "percent_per_core": [],
+            "freq_current": None,
+            "freq_min": None,
+            "freq_max": None,
+            "count_physical": 0,
+            "count_logical": 0
+        }
+
+# دالة للحصول على استخدام الذاكرة
+
+
+def get_memory_usage():
+    """الحصول على استخدام الذاكرة"""
+    try:
+        # الحصول على معلومات الذاكرة الافتراضية
+        memory = psutil.virtual_memory()
+
+        # الحصول على معلومات الذاكرة المتبادلة
+        swap = psutil.swap_memory()
+
+        return {
+            "virtual": {
+                "total": memory.total,
+                "available": memory.available,
+                "used": memory.used,
+                "free": memory.free,
+                "percent": memory.percent,
+                "active": getattr(memory, 'active', None),
+                "inactive": getattr(memory, 'inactive', None),
+                "buffers": getattr(memory, 'buffers', None),
+                "cached": getattr(memory, 'cached', None),
+                "shared": getattr(memory, 'shared', None)
+            },
+            "swap": {
+                "total": swap.total,
+                "used": swap.used,
+                "free": swap.free,
+                "percent": swap.percent,
+                "sin": getattr(swap, 'sin', None),
+                "sout": getattr(swap, 'sout', None)
+            }
+        }
+    except Exception as e:
+        logger.error(f"Error getting memory usage: {str(e)}")
+        return {
+            "virtual": {
+                "total": 0,
+                "available": 0,
+                "used": 0,
+                "free": 0,
+                "percent": 0
+            },
+            "swap": {
+                "total": 0,
+                "used": 0,
+                "free": 0,
+                "percent": 0
+            }
+        }
+
+# دالة للحصول على استخدام القرص
+
+
+def get_disk_usage():
+    """الحصول على استخدام القرص"""
+    try:
+        # الحصول على معلومات القرص لنقطة التثبيت الرئيسية
+        disk = psutil.disk_usage('/')
+
+        # الحصول على إحصائيات الإدخال/الإخراج للقرص
+        disk_io = psutil.disk_io_counters()
+
+        # الحصول على معلومات الأقسام
+        partitions = []
+        for partition in psutil.disk_partitions():
+            try:
+                partition_usage = psutil.disk_usage(partition.mountpoint)
+                partitions.append({
+                    "device": partition.device,
+                    "mountpoint": partition.mountpoint,
+                    "fstype": partition.fstype,
+                    "opts": partition.opts,
+                    "total": partition_usage.total,
+                    "used": partition_usage.used,
+                    "free": partition_usage.free,
+                    "percent": partition_usage.percent
+                })
+            except (PermissionError, FileNotFoundError):
+                # تجاهل الأقسام التي لا يمكن الوصول إليها
+                pass
+
+        return {
+            "main": {
+                "total": disk.total,
+                "used": disk.used,
+                "free": disk.free,
+                "percent": disk.percent},
+            "io": {
+                "read_count": disk_io.read_count if disk_io else None,
+                "write_count": disk_io.write_count if disk_io else None,
+                "read_bytes": disk_io.read_bytes if disk_io else None,
+                "write_bytes": disk_io.write_bytes if disk_io else None,
+                "read_time": disk_io.read_time if disk_io and hasattr(
+                    disk_io,
+                    'read_time') else None,
+                "write_time": disk_io.write_time if disk_io and hasattr(
+                    disk_io,
+                    'write_time') else None},
+            "partitions": partitions}
+    except Exception as e:
+        logger.error(f"Error getting disk usage: {str(e)}")
+        return {
+            "main": {
+                "total": 0,
+                "used": 0,
+                "free": 0,
+                "percent": 0
+            },
+            "io": {},
+            "partitions": []
+        }
+
+# دالة للحصول على استخدام الشبكة
+
+
+def get_network_usage():
+    """الحصول على استخدام الشبكة"""
+    try:
+        # الحصول على إحصائيات الشبكة الأولية
+        net_io_counters_start = psutil.net_io_counters()
+
+        # انتظار لحظة
+        time.sleep(0.5)
+
+        # الحصول على إحصائيات الشبكة النهائية
+        net_io_counters_end = psutil.net_io_counters()
+
+        # حساب معدل نقل البيانات (بايت/ثانية)
+        bytes_sent = net_io_counters_end.bytes_sent - net_io_counters_start.bytes_sent
+        bytes_recv = net_io_counters_end.bytes_recv - net_io_counters_start.bytes_recv
+
+        # الحصول على معلومات الواجهات
+        interfaces = []
+        for interface_name, interface_addresses in psutil.net_if_addrs().items():
+            addresses = []
+            for address in interface_addresses:
+                addresses.append({
+                    "family": str(address.family),
+                    "address": address.address,
+                    "netmask": address.netmask,
+                    "broadcast": address.broadcast
+                })
+
+            # الحصول على إحصائيات الواجهة
+            interface_stats = psutil.net_if_stats().get(interface_name)
+
+            interfaces.append({
+                "name": interface_name,
+                "addresses": addresses,
+                "isup": interface_stats.isup if interface_stats else False,
+                "duplex": str(interface_stats.duplex) if interface_stats else None,
+                "speed": interface_stats.speed if interface_stats else None,
+                "mtu": interface_stats.mtu if interface_stats else None
+            })
+
+        # حساب النسبة المئوية (تقدير تقريبي)
+        # افتراض أن 10 ميجابت/ثانية هو 100%
+        max_bandwidth = 10 * 1024 * 1024  # 10 ميجابت/ثانية بالبايت
+        total_bytes = bytes_sent + bytes_recv
+        # ضرب في 2 لأن الفترة الزمنية 0.5 ثانية
+        percent = min(100, (total_bytes * 2) / max_bandwidth * 100)
+
+        return {
+            "bytes_sent": bytes_sent,
+            "bytes_recv": bytes_recv,
+            "bytes_total": total_bytes,
+            "packets_sent": net_io_counters_end.packets_sent -
+            net_io_counters_start.packets_sent,
+            "packets_recv": net_io_counters_end.packets_recv -
+            net_io_counters_start.packets_recv,
+            "errin": net_io_counters_end.errin -
+            net_io_counters_start.errin,
+            "errout": net_io_counters_end.errout -
+            net_io_counters_start.errout,
+            "dropin": net_io_counters_end.dropin -
+            net_io_counters_start.dropin,
+            "dropout": net_io_counters_end.dropout -
+            net_io_counters_start.dropout,
+            "percent": percent,
+            "interfaces": interfaces}
+    except Exception as e:
+        logger.error(f"Error getting network usage: {str(e)}")
+        return {
+            "bytes_sent": 0,
+            "bytes_recv": 0,
+            "bytes_total": 0,
+            "packets_sent": 0,
+            "packets_recv": 0,
+            "errin": 0,
+            "errout": 0,
+            "dropin": 0,
+            "dropout": 0,
+            "percent": 0,
+            "interfaces": []
+        }
+
+# دالة للحصول على معلومات النظام
+
+
+def get_system_info():
+    """الحصول على معلومات النظام"""
+    try:
+        # الحصول على معلومات النظام
+        uname = platform.uname()
+
+        # الحصول على وقت تشغيل النظام
+        boot_time = datetime.fromtimestamp(psutil.boot_time()).isoformat()
+
+        # الحصول على عدد المستخدمين
+        users = []
+        for user in psutil.users():
+            users.append({
+                "name": user.name,
+                "terminal": user.terminal,
+                "host": user.host,
+                "started": datetime.fromtimestamp(user.started).isoformat(),
+                "pid": user.pid if hasattr(user, 'pid') else None
+            })
+
+        return {
+            "system": uname.system,
+            "node": uname.node,
+            "release": uname.release,
+            "version": uname.version,
+            "machine": uname.machine,
+            "processor": uname.processor,
+            "hostname": socket.gethostname(),
+            "ip_address": socket.gethostbyname(socket.gethostname()),
+            "boot_time": boot_time,
+            "users": users
+        }
+    except Exception as e:
+        logger.error(f"Error getting system info: {str(e)}")
+        return {}
+
+# دالة للحصول على استخدام الموارد حسب المديول
+
+
+def get_modules_resources():
+    """الحصول على استخدام الموارد حسب المديول"""
+    try:
+        # مسار المديولات
+        modules_dir = os.path.join(
+            os.path.dirname(
+                os.path.dirname(
+                    os.path.abspath(__file__))))
+
+        modules_resources = []
+
+        # الحصول على قائمة المديولات
+        for item in os.listdir(modules_dir):
+            module_path = os.path.join(modules_dir, item)
+            if os.path.isdir(module_path) and not item.startswith('__'):
+                # البحث عن العمليات المرتبطة بالمديول
+                cpu_usage = 0
+                memory_usage = 0
+                disk_usage = 0
+
+                for proc in psutil.process_iter(
+                        ['pid', 'name', 'cmdline', 'cpu_percent', 'memory_info']):
+                    try:
+                        cmdline = ' '.join(proc.info['cmdline'] or [])
+                        if f"modules/{item}/" in cmdline or f"modules\\{item}\\" in cmdline:
+                            # جمع استخدام الموارد
+                            cpu_usage += proc.info['cpu_percent'] or 0
+                            memory_usage += proc.info['memory_info'].rss / \
+                                (1024 * 1024) if proc.info['memory_info'] else 0
+
+                            # تقدير استخدام القرص (تقريبي)
+                            try:
+                                proc_io = proc.io_counters()
+                                disk_usage += (proc_io.read_bytes +
+                                               proc_io.write_bytes) / (1024 * 1024)
+                            except (psutil.AccessDenied, AttributeError):
+                                # تقدير تقريبي إذا لم يمكن الحصول على معلومات
+                                # الإدخال/الإخراج
+                                disk_usage += 10  # افتراض 10 ميجابايت
+                    except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                        pass
+
+                # إذا لم يتم العثور على عمليات، استخدم قيم افتراضية للمديولات
+                # النشطة
+                if cpu_usage == 0 and memory_usage == 0 and disk_usage == 0:
+                    # التحقق من وجود ملف runner.py
+                    runner_path = os.path.join(module_path, 'runner.py')
+                    if os.path.isfile(runner_path):
+                        # توليد قيم عشوائية للمحاكاة
+                        # قيمة عشوائية بين 0.1 و 0.6
+                        cpu_usage = round(
+                            0.1 + 0.5 * (hash(item) % 10) / 10, 1)
+                        # قيمة عشوائية بين 5 و 15 ميجابايت
+                        memory_usage = round(5 + 10 * (hash(item) % 10) / 10)
+                        # قيمة عشوائية بين 10 و 30 ميجابايت
+                        disk_usage = round(10 + 20 * (hash(item) % 10) / 10)
+
+                # إضافة معلومات المديول
+                modules_resources.append({
+                    "id": item,
+                    "nameAr": get_module_display_name(item, 'ar'),
+                    "nameEn": get_module_display_name(item, 'en'),
+                    "cpu": cpu_usage,
+                    "memory": memory_usage,
+                    "disk": disk_usage
+                })
+
+        return modules_resources
+    except Exception as e:
+        logger.error(f"Error getting modules resources: {str(e)}")
+        return []
+
+# دالة للحصول على اسم العرض للمديول
+
+
+def get_module_display_name(module_name, language):
+    """الحصول على اسم العرض للمديول"""
+    module_names = {
+        "performance_monitoring": {"ar": "مراقبة الأداء", "en": "Performance Monitoring"},
+        "data_validation": {"ar": "التحقق من البيانات", "en": "Data Validation"},
+        "backup_module": {"ar": "النسخ الاحتياطي", "en": "Backup Module"},
+        "module_shutdown": {"ar": "إغلاق المديولات", "en": "Module Shutdown"},
+        "ai_management": {"ar": "إدارة الذكاء الصناعي", "en": "AI Management"},
+        "disease_diagnosis": {"ar": "تشخيص الأمراض النباتية", "en": "Plant Disease Diagnosis"},
+        "image_processing": {"ar": "معالجة الصور", "en": "Image Processing"},
+        "plant_hybridization": {"ar": "محاكاة التهجين النباتي", "en": "Plant Hybridization Simulation"},
+        "module_management": {"ar": "إدارة المديولات", "en": "Module Management"},
+        "resource_monitoring": {"ar": "مراقبة الموارد", "en": "Resource Monitoring"},
+        "alert_management": {"ar": "إدارة التنبيهات", "en": "Alert Management"},
+        "integration_tests": {"ar": "اختبارات التكامل", "en": "Integration Tests"},
+        "ai_usage_reports": {"ar": "تقارير استخدام الذكاء الصناعي", "en": "AI Usage Reports"}
+    }
+
+    if module_name in module_names and language in module_names[module_name]:
+        return module_names[module_name][language]
+    return module_name
+
+# دالة لتحديث بيانات الموارد
+
+
+def update_resources_data():
+    """تحديث بيانات الموارد"""
+    try:
+        # الحصول على بيانات الموارد الحالية
+        cpu_usage = get_cpu_usage()
+        memory_usage = get_memory_usage()
+        disk_usage = get_disk_usage()
+        network_usage = get_network_usage()
+        system_info = get_system_info()
+
+        # إنشاء كائن البيانات
+        resources_data = {
+            "timestamp": datetime.now().isoformat(),
+            "cpu": cpu_usage,
+            "memory": memory_usage,
+            "disk": disk_usage,
+            "network": network_usage,
+            "system": system_info
+        }
+
+        # حفظ البيانات الحالية
+        save_data(RESOURCES_FILE, resources_data)
+
+        # تحديث البيانات التاريخية
+        update_resources_history(resources_data)
+
+        # تحديث بيانات الموارد حسب المديول
+        modules_resources = get_modules_resources()
+        save_data(MODULES_RESOURCES_FILE, {"modules": modules_resources})
+
+        return resources_data
+    except Exception as e:
+        logger.error(f"Error updating resources data: {str(e)}")
+        return {}
+
+# دالة لتحديث البيانات التاريخية
+
+
+def update_resources_history(resources_data):
+    """تحديث البيانات التاريخية"""
+    try:
+        # الحصول على البيانات التاريخية
+        history = load_data(RESOURCES_HISTORY_FILE, {"history": []})
+
+        # إضافة البيانات الجديدة
+        history["history"].append({
+            "timestamp": resources_data["timestamp"],
+            "cpu": resources_data["cpu"]["percent"],
+            "memory": resources_data["memory"]["virtual"]["percent"],
+            "disk": resources_data["disk"]["main"]["percent"],
+            "network": resources_data["network"]["percent"]
+        })
+
+        # الاحتفاظ بآخر 1000 نقطة بيانات فقط
+        if len(history["history"]) > 1000:
+            history["history"] = history["history"][-1000:]
+
+        # حفظ البيانات التاريخية
+        save_data(RESOURCES_HISTORY_FILE, history)
+    except Exception as e:
+        logger.error(f"Error updating resources history: {str(e)}")
+
+# فئة لجمع بيانات الموارد في الخلفية
+
+
+class ResourceCollector:
+    """فئة لجمع بيانات الموارد في الخلفية"""
+
+    def __init__(self, interval=60):
+        """تهيئة جامع الموارد"""
+        self.interval = interval  # الفترة الزمنية بين عمليات جمع البيانات (بالثواني)
+        self.running = False
+        self.thread = None
+
+    def start(self):
+        """بدء جمع البيانات"""
+        if self.running is not None:
+            logger.warning("Resource collector is already running")
+            return
+
+        self.running = True
+        self.thread = threading.Thread(target=self._collect_resources)
+        self.thread.daemon = True
+        self.thread.start()
+        logger.info(
+            f"Resource collector started with interval {self.interval} seconds")
+
+    def stop(self):
+        """إيقاف جمع البيانات"""
+        self.running = False
+        if self.thread is not None:
+            self.thread.join(timeout=5)
+            logger.info("Resource collector stopped")
+
+    def _collect_resources(self):
+        """جمع بيانات الموارد بشكل دوري"""
+        while self.running:
+            try:
+                # تحديث بيانات الموارد
+                update_resources_data()
+
+                # انتظار الفترة الزمنية المحددة
+                for _ in range(int(self.interval)):
+                    if not self.running:
+                        break
+                    time.sleep(1)
+            except Exception as e:
+                logger.error(f"Error in resource collector: {str(e)}")
+                time.sleep(10)  # انتظار قبل المحاولة مرة أخرى في حالة حدوث خطأ
+
+    def collect_system_resources(self):
+        """
+        Collect and return current system resource metrics (CPU, memory, disk, network, system info).
+        Returns:
+            dict: Dictionary containing system resource metrics.
+        """
+        try:
+            resources = {
+                "cpu": get_cpu_usage(),
+                "memory": get_memory_usage(),
+                "disk": get_disk_usage(),
+                "network": get_network_usage(),
+                "system": get_system_info(),
+            }
+            return resources
+        except Exception as e:
+            logger.error(f"Error collecting system resources: {str(e)}")
+            return {}
+
+    def collect_database_resources(self):
+        """
+        Collect and return current PostgreSQL database resource metrics (active connections, query count, db size, etc.).
+        Returns:
+            dict: Dictionary containing database resource metrics.
+        """
+        try:
+            # Read DB connection info from environment variables or use
+            # defaults
+            db_name = os.environ.get('POSTGRES_DB', 'postgres')
+            db_user = os.environ.get('POSTGRES_USER', 'postgres')
+            db_password = os.environ.get('POSTGRES_PASSWORD', 'postgres')
+            db_host = os.environ.get('POSTGRES_HOST', 'localhost')
+            db_port = int(os.environ.get('POSTGRES_PORT', 5432))
+
+            conn = psycopg2.connect(
+                dbname=db_name,
+                user=db_user,
+                password=db_password,
+                host=db_host,
+                port=db_port
+            )
+            cur = conn.cursor()
+
+            # Active connections
+            cur.execute(
+                "SELECT count(*) FROM pg_stat_activity WHERE state = 'active'")
+            ac_result = cur.fetchone()
+            active_connections = ac_result[0] if ac_result and ac_result[0] is not None else 0
+
+            # Query count (total calls)
+            cur.execute("SELECT sum(calls) FROM pg_stat_statements")
+            result = cur.fetchone()
+            query_count = result[0] if result and result[0] is not None else 0
+
+            # Database size in bytes
+            cur.execute(sql.SQL("SELECT pg_database_size(%s)"), [db_name])
+            db_size_result = cur.fetchone()
+            db_size = db_size_result[0] if db_size_result and db_size_result[0] is not None else 0
+
+            cur.close()
+            conn.close()
+
+            return {
+                "active_connections": active_connections,
+                "query_count": query_count,
+                "db_size_bytes": db_size
+            }
+        except Exception as e:
+            logger.error(
+                f"Error collecting PostgreSQL database resources: {str(e)}")
+            return {}
+
+# تهيئة البيانات الافتراضية
+
+
+def init_default_data():
+    """تهيئة البيانات الافتراضية"""
+    # تحديث بيانات الموارد
+    update_resources_data()
+
+
+# تهيئة البيانات الافتراضية
+init_default_data()

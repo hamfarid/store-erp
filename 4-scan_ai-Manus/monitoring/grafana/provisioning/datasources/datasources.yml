@@ -1,0 +1,43 @@
+# =============================================================================
+# Grafana Datasources Configuration - Gaara Scan AI
+# =============================================================================
+
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    orgId: 1
+    url: http://prometheus:9090
+    basicAuth: false
+    isDefault: true
+    editable: true
+    jsonData:
+      timeInterval: "15s"
+      httpMethod: POST
+      
+  - name: PostgreSQL
+    type: postgres
+    access: proxy
+    orgId: 1
+    url: scan_ai-Manus-database:8502
+    database: gaara_scan_ai
+    user: gaara_user
+    secureJsonData:
+      password: ${POSTGRES_PASSWORD}
+    jsonData:
+      sslmode: disable
+      maxOpenConns: 5
+      maxIdleConns: 2
+      connMaxLifetime: 14400
+    editable: true
+    
+  - name: Redis
+    type: redis-datasource
+    access: proxy
+    orgId: 1
+    url: scan_ai-Manus-redis:6379
+    secureJsonData:
+      password: ${REDIS_PASSWORD}
+    editable: true

@@ -1,0 +1,43 @@
+{
+  "rules": {
+    "cognitive-complexity": "off",
+    "no-duplicate-string": "off",
+    "no-nested-template-literals": "off",
+    "prefer-immediate-return": "off",
+    "no-small-switch": "off",
+    "no-identical-functions": "off",
+    "no-collapsible-if": "off",
+    "prefer-while": "off",
+    "no-redundant-boolean": "off",
+    "no-unused-collection": "off",
+    "no-gratuitous-expressions": "off"
+  },
+  "ignorePatterns": [
+    "node_modules/**",
+    "build/**",
+    "dist/**",
+    "coverage/**",
+    "public/**",
+    "*.config.js",
+    "*.config.ts",
+    "**/*.d.ts",
+    "**/*.test.js",
+    "**/*.test.jsx",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.js",
+    "**/*.spec.jsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "globals": {
+    "React": "readonly",
+    "JSX": "readonly"
+  }
+}

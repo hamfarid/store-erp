@@ -1,0 +1,1067 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/resource_monitoring/db_service.py
+"""
+خدمة قاعدة البيانات لمراقبة الموارد
+توفر هذه الوحدة خدمات للتعامل مع قاعدة بيانات مراقبة الموارد وتخزين البيانات التاريخية
+"""
+
+import logging
+import os
+from datetime import datetime, timedelta
+
+from sqlalchemy import create_engine, func, desc, extract
+from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.exc import SQLAlchemyError
+
+from .db_models import (
+    Base, ResourceType, ResourceMetric, ResourceDataPoint,
+    ResourceThreshold, ResourceAggregation, Server, Module
+)
+
+# إعداد التسجيل
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# إعداد اتصال قاعدة البيانات
+DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///resource_monitoring.db')
+
+engine = create_engine(DATABASE_URL)
+SessionFactory = sessionmaker(bind=engine)
+Session = scoped_session(SessionFactory)
+
+# إنشاء الجداول إذا لم تكن موجودة
+
+
+def init_db():
+    """تهيئة قاعدة البيانات وإنشاء الجداول"""
+    try:
+        Base.metadata.create_all(engine)
+        logger.info("تم إنشاء جداول قاعدة البيانات بنجاح")
+
+        # التحقق من وجود بيانات أولية وإضافتها إذا لم تكن موجودة
+        session = Session()
+        try:
+            if session.query(ResourceMetric).count() == 0:
+                init_default_metrics(session)
+                logger.info("تم إضافة المقاييس الافتراضية بنجاح")
+        except Exception as e:
+            logger.error(f"خطأ أثناء إضافة المقاييس الافتراضية: {str(e)}")
+            session.rollback()
+        finally:
+            session.close()
+
+    except Exception as e:
+        logger.error(f"خطأ أثناء إنشاء قاعدة البيانات: {str(e)}")
+
+# إضافة مقاييس افتراضية
+
+
+def init_default_metrics(session):
+    """إضافة مقاييس افتراضية إلى قاعدة البيانات"""
+
+    # مقاييس المعالج
+    cpu_usage = ResourceMetric(
+        resource_type=ResourceType.CPU.value,
+        metric_name="cpu_usage",
+        display_name="استخدام المعالج",
+        unit="%",
+        description="نسبة استخدام المعالج"
+    )
+
+    cpu_load = ResourceMetric(
+        resource_type=ResourceType.CPU.value,
+        metric_name="cpu_load",
+        display_name="حمل المعالج",
+        unit="",
+        description="متوسط حمل المعالج خلال 1 و 5 و 15 دقيقة"
+    )
+
+    # مقاييس الذاكرة
+    memory_usage = ResourceMetric(
+        resource_type=ResourceType.MEMORY.value,
+        metric_name="memory_usage",
+        display_name="استخدام الذاكرة",
+        unit="%",
+        description="نسبة استخدام الذاكرة"
+    )
+
+    memory_available = ResourceMetric(
+        resource_type=ResourceType.MEMORY.value,
+        metric_name="memory_available",
+        display_name="الذاكرة المتاحة",
+        unit="MB",
+        description="كمية الذاكرة المتاحة بالميجابايت"
+    )
+
+    # مقاييس القرص
+    disk_usage = ResourceMetric(
+        resource_type=ResourceType.DISK.value,
+        metric_name="disk_usage",
+        display_name="استخدام القرص",
+        unit="%",
+        description="نسبة استخدام مساحة القرص"
+    )
+
+    disk_io = ResourceMetric(
+        resource_type=ResourceType.DISK.value,
+        metric_name="disk_io",
+        display_name="عمليات القراءة/الكتابة",
+        unit="IOPS",
+        description="عدد عمليات القراءة والكتابة في الثانية"
+    )
+
+    # مقاييس الشبكة
+    network_in = ResourceMetric(
+        resource_type=ResourceType.NETWORK.value,
+        metric_name="network_in",
+        display_name="حركة الشبكة الواردة",
+        unit="KB/s",
+        description="كمية البيانات الواردة عبر الشبكة في الثانية"
+    )
+
+    network_out = ResourceMetric(
+        resource_type=ResourceType.NETWORK.value,
+        metric_name="network_out",
+        display_name="حركة الشبكة الصادرة",
+        unit="KB/s",
+        description="كمية البيانات الصادرة عبر الشبكة في الثانية"
+    )
+
+    # مقاييس قاعدة البيانات
+    db_connections = ResourceMetric(
+        resource_type=ResourceType.DATABASE.value,
+        metric_name="db_connections",
+        display_name="اتصالات قاعدة البيانات",
+        unit="",
+        description="عدد اتصالات قاعدة البيانات النشطة"
+    )
+
+    db_queries = ResourceMetric(
+        resource_type=ResourceType.DATABASE.value,
+        metric_name="db_queries",
+        display_name="استعلامات قاعدة البيانات",
+        unit="QPS",
+        description="عدد استعلامات قاعدة البيانات في الثانية"
+    )
+
+    session.add_all([
+        cpu_usage, cpu_load, memory_usage, memory_available,
+        disk_usage, disk_io, network_in, network_out,
+        db_connections, db_queries
+    ])
+
+    session.flush()
+
+    # إضافة عتبات افتراضية
+    thresholds = [
+        ResourceThreshold(metric_id=cpu_usage.id, warning_threshold=70, critical_threshold=90),
+        ResourceThreshold(metric_id=memory_usage.id, warning_threshold=80, critical_threshold=95),
+        ResourceThreshold(metric_id=disk_usage.id, warning_threshold=85, critical_threshold=95),
+        ResourceThreshold(metric_id=db_connections.id, warning_threshold=80, critical_threshold=95)
+    ]
+
+    session.add_all(thresholds)
+    session.commit()
+
+# خدمات المقاييس
+
+
+def get_all_metrics():
+    """الحصول على جميع المقاييس"""
+    session = Session()
+    try:
+        metrics = session.query(ResourceMetric).all()
+        return [metric.to_dict() for metric in metrics]
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع المقاييس: {str(e)}")
+        return []
+    finally:
+        session.close()
+
+
+def get_metrics_by_type(resource_type):
+    """الحصول على المقاييس حسب النوع"""
+    session = Session()
+    try:
+        metrics = session.query(ResourceMetric).filter(ResourceMetric.resource_type == resource_type).all()
+        return [metric.to_dict() for metric in metrics]
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع المقاييس من النوع {resource_type}: {str(e)}")
+        return []
+    finally:
+        session.close()
+
+
+def get_metric_by_id(metric_id):
+    """الحصول على مقياس بواسطة المعرف"""
+    session = Session()
+    try:
+        metric = session.query(ResourceMetric).filter(ResourceMetric.id == metric_id).first()
+        return metric.to_dict() if metric else None
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع المقياس {metric_id}: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def get_metric_by_name(metric_name):
+    """الحصول على مقياس بواسطة الاسم"""
+    session = Session()
+    try:
+        metric = session.query(ResourceMetric).filter(ResourceMetric.metric_name == metric_name).first()
+        return metric.to_dict() if metric else None
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع المقياس {metric_name}: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def create_metric(metric_data):
+    """إنشاء مقياس جديد"""
+    session = Session()
+    try:
+        # التحقق من عدم وجود المقياس مسبقاً
+        existing_metric = session.query(ResourceMetric).filter(
+            ResourceMetric.metric_name == metric_data['metricName']
+        ).first()
+
+        if existing_metric:
+            logger.warning(f"المقياس {metric_data['metricName']} موجود بالفعل")
+            return None
+
+        metric = ResourceMetric(
+            resource_type=metric_data['resourceType'],
+            metric_name=metric_data['metricName'],
+            display_name=metric_data.get('displayName', ''),
+            unit=metric_data.get('unit', ''),
+            description=metric_data.get('description', ''),
+            is_active=metric_data.get('isActive', True)
+        )
+
+        session.add(metric)
+        session.flush()
+
+        # إضافة عتبة افتراضية إذا تم توفيرها
+        if 'warningThreshold' in metric_data or 'criticalThreshold' in metric_data:
+            threshold = ResourceThreshold(
+                metric_id=metric.id,
+                warning_threshold=metric_data.get('warningThreshold'),
+                critical_threshold=metric_data.get('criticalThreshold'),
+                is_active=True,
+                notification_enabled=True
+            )
+            session.add(threshold)
+
+        session.commit()
+
+        return metric.to_dict()
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء إنشاء مقياس جديد: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def update_metric(metric_id, metric_data):
+    """تحديث مقياس موجود"""
+    session = Session()
+    try:
+        metric = session.query(ResourceMetric).filter(ResourceMetric.id == metric_id).first()
+        if not metric:
+            return None
+
+        # تحديث البيانات
+        if 'resourceType' in metric_data:
+            metric.resource_type = metric_data['resourceType']
+        if 'metricName' in metric_data:
+            metric.metric_name = metric_data['metricName']
+        if 'displayName' in metric_data:
+            metric.display_name = metric_data['displayName']
+        if 'unit' in metric_data:
+            metric.unit = metric_data['unit']
+        if 'description' in metric_data:
+            metric.description = metric_data['description']
+        if 'isActive' in metric_data:
+            metric.is_active = metric_data['isActive']
+
+        metric.updated_at = datetime.now()
+
+        session.commit()
+
+        return metric.to_dict()
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء تحديث المقياس {metric_id}: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def delete_metric(metric_id):
+    """حذف مقياس"""
+    session = Session()
+    try:
+        metric = session.query(ResourceMetric).filter(ResourceMetric.id == metric_id).first()
+        if not metric:
+            return None
+
+        # التحقق من عدم وجود نقاط بيانات مرتبطة بالمقياس
+        data_points_count = session.query(ResourceDataPoint).filter(ResourceDataPoint.metric_id == metric_id).count()
+        if data_points_count > 0:
+            logger.warning(f"لا يمكن حذف المقياس {metric_id} لأنه مرتبط بـ {data_points_count} نقطة بيانات")
+            return False
+
+        metric_dict = metric.to_dict()
+
+        # حذف العتبات المرتبطة بالمقياس
+        session.query(ResourceThreshold).filter(ResourceThreshold.metric_id == metric_id).delete()
+
+        # حذف المقياس
+        session.delete(metric)
+        session.commit()
+
+        return metric_dict
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء حذف المقياس {metric_id}: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+# خدمات نقاط البيانات
+
+
+def add_data_point(data_point):
+    """إضافة نقطة بيانات جديدة"""
+    session = Session()
+    try:
+        # التحقق من وجود المقياس
+        metric_id = data_point.get('metricId')
+        if not metric_id:
+            # البحث عن المقياس بواسطة الاسم
+            metric_name = data_point.get('metricName')
+            if not metric_name:
+                logger.error("يجب توفير معرف المقياس أو اسمه")
+                return None
+
+            metric = session.query(ResourceMetric).filter(ResourceMetric.metric_name == metric_name).first()
+            if not metric:
+                logger.error(f"المقياس {metric_name} غير موجود")
+                return None
+
+            metric_id = metric.id
+        else:
+            # التحقق من وجود المقياس بواسطة المعرف
+            metric = session.query(ResourceMetric).filter(ResourceMetric.id == metric_id).first()
+            if not metric:
+                logger.error(f"المقياس {metric_id} غير موجود")
+                return None
+
+        # إنشاء نقطة البيانات
+        data_point_obj = ResourceDataPoint(
+            metric_id=metric_id,
+            value=data_point['value'],
+            timestamp=data_point.get('timestamp', datetime.now()),
+            module_name=data_point.get('moduleName'),
+            server_id=data_point.get('serverId'),
+            metadata=data_point.get('metadata')
+        )
+
+        session.add(data_point_obj)
+        session.commit()
+
+        # التحقق من تجاوز العتبات
+        check_thresholds(session, metric_id, data_point['value'], data_point_obj.id)
+
+        return data_point_obj.to_dict()
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء إضافة نقطة بيانات جديدة: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def add_multiple_data_points(data_points):
+    """إضافة عدة نقاط بيانات دفعة واحدة"""
+    session = Session()
+    try:
+        added_points = []
+        metrics_cache = {}  # تخزين مؤقت للمقاييس
+
+        for data_point in data_points:
+            # التحقق من وجود المقياس
+            metric_id = data_point.get('metricId')
+            if not metric_id:
+                # البحث عن المقياس بواسطة الاسم
+                metric_name = data_point.get('metricName')
+                if not metric_name:
+                    logger.warning("تم تخطي نقطة بيانات: يجب توفير معرف المقياس أو اسمه")
+                    continue
+
+                # استخدام التخزين المؤقت للمقاييس
+                if metric_name in metrics_cache:
+                    metric_id = metrics_cache[metric_name]
+                else:
+                    metric = session.query(ResourceMetric).filter(ResourceMetric.metric_name == metric_name).first()
+                    if not metric:
+                        logger.warning(f"تم تخطي نقطة بيانات: المقياس {metric_name} غير موجود")
+                        continue
+
+                    metric_id = metric.id
+                    metrics_cache[metric_name] = metric_id
+            else:
+                # التحقق من وجود المقياس بواسطة المعرف إذا لم يكن في التخزين المؤقت
+                if f"id_{metric_id}" not in metrics_cache:
+                    metric = session.query(ResourceMetric).filter(ResourceMetric.id == metric_id).first()
+                    if not metric:
+                        logger.warning(f"تم تخطي نقطة بيانات: المقياس {metric_id} غير موجود")
+                        continue
+
+                    metrics_cache[f"id_{metric_id}"] = metric_id
+
+            # إنشاء نقطة البيانات
+            data_point_obj = ResourceDataPoint(
+                metric_id=metric_id,
+                value=data_point['value'],
+                timestamp=data_point.get('timestamp', datetime.now()),
+                module_name=data_point.get('moduleName'),
+                server_id=data_point.get('serverId'),
+                metadata=data_point.get('metadata')
+            )
+
+            session.add(data_point_obj)
+            added_points.append(data_point_obj)
+
+        session.commit()
+
+        # التحقق من تجاوز العتبات لكل نقطة بيانات
+        for data_point_obj in added_points:
+            check_thresholds(session, data_point_obj.metric_id, data_point_obj.value, data_point_obj.id)
+
+        return [point.to_dict() for point in added_points]
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء إضافة نقاط بيانات متعددة: {str(e)}")
+        return []
+    finally:
+        session.close()
+
+
+def get_data_points(metric_id=None, start_time=None, end_time=None, module_name=None, server_id=None, limit=1000):
+    """الحصول على نقاط البيانات"""
+    session = Session()
+    try:
+        query = session.query(ResourceDataPoint)
+
+        # تطبيق الفلاتر
+        if metric_id:
+            query = query.filter(ResourceDataPoint.metric_id == metric_id)
+        if start_time:
+            query = query.filter(ResourceDataPoint.timestamp >= start_time)
+        if end_time:
+            query = query.filter(ResourceDataPoint.timestamp <= end_time)
+        if module_name:
+            query = query.filter(ResourceDataPoint.module_name == module_name)
+        if server_id:
+            query = query.filter(ResourceDataPoint.server_id == server_id)
+
+        # ترتيب النتائج حسب الوقت تنازلياً
+        query = query.order_by(desc(ResourceDataPoint.timestamp))
+
+        # تحديد عدد النتائج
+        if limit:
+            query = query.limit(limit)
+
+        data_points = query.all()
+        return [point.to_dict() for point in data_points]
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع نقاط البيانات: {str(e)}")
+        return []
+    finally:
+        session.close()
+
+
+def get_latest_data_point(metric_id=None, module_name=None, server_id=None):
+    """الحصول على أحدث نقطة بيانات"""
+    session = Session()
+    try:
+        query = session.query(ResourceDataPoint)
+
+        # تطبيق الفلاتر
+        if metric_id:
+            query = query.filter(ResourceDataPoint.metric_id == metric_id)
+        if module_name:
+            query = query.filter(ResourceDataPoint.module_name == module_name)
+        if server_id:
+            query = query.filter(ResourceDataPoint.server_id == server_id)
+
+        # ترتيب النتائج حسب الوقت تنازلياً والحصول على أحدث نقطة
+        latest_point = query.order_by(desc(ResourceDataPoint.timestamp)).first()
+
+        return latest_point.to_dict() if latest_point else None
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع أحدث نقطة بيانات: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def delete_old_data_points(days_to_keep=30):
+    """حذف نقاط البيانات القديمة"""
+    session = Session()
+    try:
+        cutoff_date = datetime.now() - timedelta(days=days_to_keep)
+
+        # حذف نقاط البيانات القديمة
+        result = session.query(ResourceDataPoint).filter(ResourceDataPoint.timestamp < cutoff_date).delete()
+
+        session.commit()
+
+        logger.info(f"تم حذف {result} نقطة بيانات قديمة")
+        return result
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء حذف نقاط البيانات القديمة: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+# خدمات العتبات
+
+
+def get_all_thresholds():
+    """الحصول على جميع العتبات"""
+    session = Session()
+    try:
+        thresholds = session.query(ResourceThreshold).all()
+        return [threshold.to_dict() for threshold in thresholds]
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع العتبات: {str(e)}")
+        return []
+    finally:
+        session.close()
+
+
+def get_threshold_by_metric(metric_id):
+    """الحصول على عتبة بواسطة معرف المقياس"""
+    session = Session()
+    try:
+        threshold = session.query(ResourceThreshold).filter(ResourceThreshold.metric_id == metric_id).first()
+        return threshold.to_dict() if threshold else None
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع عتبة المقياس {metric_id}: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def create_or_update_threshold(threshold_data):
+    """إنشاء أو تحديث عتبة"""
+    session = Session()
+    try:
+        metric_id = threshold_data.get('metricId')
+        if not metric_id:
+            logger.error("معرف المقياس مطلوب")
+            return None
+
+        # التحقق من وجود المقياس
+        metric = session.query(ResourceMetric).filter(ResourceMetric.id == metric_id).first()
+        if not metric:
+            logger.error(f"المقياس {metric_id} غير موجود")
+            return None
+
+        # البحث عن العتبة الحالية
+        threshold = session.query(ResourceThreshold).filter(ResourceThreshold.metric_id == metric_id).first()
+
+        if threshold:
+            # تحديث العتبة الموجودة
+            if 'warningThreshold' in threshold_data:
+                threshold.warning_threshold = threshold_data['warningThreshold']
+            if 'criticalThreshold' in threshold_data:
+                threshold.critical_threshold = threshold_data['criticalThreshold']
+            if 'isActive' in threshold_data:
+                threshold.is_active = threshold_data['isActive']
+            if 'notificationEnabled' in threshold_data:
+                threshold.notification_enabled = threshold_data['notificationEnabled']
+
+            threshold.updated_at = datetime.now()
+        else:
+            # إنشاء عتبة جديدة
+            threshold = ResourceThreshold(
+                metric_id=metric_id,
+                warning_threshold=threshold_data.get('warningThreshold'),
+                critical_threshold=threshold_data.get('criticalThreshold'),
+                is_active=threshold_data.get('isActive', True),
+                notification_enabled=threshold_data.get('notificationEnabled', True)
+            )
+            session.add(threshold)
+
+        session.commit()
+
+        return threshold.to_dict()
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء إنشاء أو تحديث العتبة: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def delete_threshold(threshold_id):
+    """حذف عتبة"""
+    session = Session()
+    try:
+        threshold = session.query(ResourceThreshold).filter(ResourceThreshold.id == threshold_id).first()
+        if not threshold:
+            return None
+
+        threshold_dict = threshold.to_dict()
+        session.delete(threshold)
+        session.commit()
+
+        return threshold_dict
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء حذف العتبة {threshold_id}: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def check_thresholds(session, metric_id, value, data_point_id=None):
+    """التحقق من تجاوز العتبات"""
+    try:
+        threshold = session.query(ResourceThreshold).filter(
+            ResourceThreshold.metric_id == metric_id,
+            ResourceThreshold.is_active
+        ).first()
+
+        if not threshold:
+            return None
+
+        alert_level = None
+
+        # التحقق من تجاوز العتبة الحرجة
+        if threshold.critical_threshold is not None and value >= threshold.critical_threshold:
+            alert_level = "critical"
+        # التحقق من تجاوز عتبة التحذير
+        elif threshold.warning_threshold is not None and value >= threshold.warning_threshold:
+            alert_level = "warning"
+
+        if alert_level and threshold.notification_enabled:
+            # هنا يمكن إضافة منطق إرسال التنبيهات
+            metric = session.query(ResourceMetric).filter(ResourceMetric.id == metric_id).first()
+            logger.warning(f"تنبيه {alert_level}: تجاوز المقياس {metric.metric_name} العتبة بقيمة {value} {metric.unit}")
+
+            # يمكن إضافة التنبيه إلى جدول التنبيهات أو إرساله عبر نظام الإشعارات
+            # TODO: ربط هذه الوظيفة بنظام التنبيهات
+
+        return alert_level
+    except Exception as e:
+        logger.error(f"خطأ أثناء التحقق من العتبات: {str(e)}")
+        return None
+
+# خدمات تجميع البيانات
+
+
+def aggregate_data(metric_id=None, aggregation_type="hourly", start_time=None, end_time=None, module_name=None, server_id=None):
+    """تجميع البيانات"""
+    session = Session()
+    try:
+        # تحديد فترات التجميع
+        if not start_time:
+            if aggregation_type == "hourly":
+                start_time = datetime.now() - timedelta(days=1)
+            elif aggregation_type == "daily":
+                start_time = datetime.now() - timedelta(days=30)
+            elif aggregation_type == "weekly":
+                start_time = datetime.now() - timedelta(days=90)
+            elif aggregation_type == "monthly":
+                start_time = datetime.now() - timedelta(days=365)
+            else:
+                start_time = datetime.now() - timedelta(days=1)
+
+        if not end_time:
+            end_time = datetime.now()
+
+        # بناء الاستعلام الأساسي
+        query = session.query(
+            ResourceDataPoint.metric_id,
+            func.min(ResourceDataPoint.value).label('min_value'),
+            func.max(ResourceDataPoint.value).label('max_value'),
+            func.avg(ResourceDataPoint.value).label('avg_value'),
+            func.count(ResourceDataPoint.id).label('count')
+        )
+
+        # تطبيق الفلاتر
+        if metric_id:
+            query = query.filter(ResourceDataPoint.metric_id == metric_id)
+        if start_time:
+            query = query.filter(ResourceDataPoint.timestamp >= start_time)
+        if end_time:
+            query = query.filter(ResourceDataPoint.timestamp <= end_time)
+        if module_name:
+            query = query.filter(ResourceDataPoint.module_name == module_name)
+        if server_id:
+            query = query.filter(ResourceDataPoint.server_id == server_id)
+
+        # تحديد التجميع حسب النوع
+        if aggregation_type == "hourly":
+            query = query.group_by(
+                ResourceDataPoint.metric_id,
+                extract('year', ResourceDataPoint.timestamp),
+                extract('month', ResourceDataPoint.timestamp),
+                extract('day', ResourceDataPoint.timestamp),
+                extract('hour', ResourceDataPoint.timestamp)
+            )
+        elif aggregation_type == "daily":
+            query = query.group_by(
+                ResourceDataPoint.metric_id,
+                extract('year', ResourceDataPoint.timestamp),
+                extract('month', ResourceDataPoint.timestamp),
+                extract('day', ResourceDataPoint.timestamp)
+            )
+        elif aggregation_type == "weekly":
+            # التجميع الأسبوعي يتطلب منطق إضافي
+            # هذا مثال بسيط، قد تحتاج إلى تعديله حسب قاعدة البيانات المستخدمة
+            query = query.group_by(
+                ResourceDataPoint.metric_id,
+                extract('year', ResourceDataPoint.timestamp),
+                extract('week', ResourceDataPoint.timestamp)
+            )
+        elif aggregation_type == "monthly":
+            query = query.group_by(
+                ResourceDataPoint.metric_id,
+                extract('year', ResourceDataPoint.timestamp),
+                extract('month', ResourceDataPoint.timestamp)
+            )
+
+        # تنفيذ الاستعلام
+        results = query.all()
+
+        # تحويل النتائج إلى قائمة قواميس
+        aggregated_data = []
+        for result in results:
+            metric = session.query(ResourceMetric).filter(ResourceMetric.id == result.metric_id).first()
+
+            aggregated_data.append({
+                "metricId": result.metric_id,
+                "metricName": metric.metric_name if metric else None,
+                "minValue": result.min_value,
+                "maxValue": result.max_value,
+                "avgValue": result.avg_value,
+                "count": result.count,
+                "aggregationType": aggregation_type
+            })
+
+        return aggregated_data
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء تجميع البيانات: {str(e)}")
+        return []
+    finally:
+        session.close()
+
+
+def store_aggregated_data(aggregation_type="hourly"):
+    """تخزين البيانات المجمعة"""
+    session = Session()
+    try:
+        # تحديد فترة التجميع
+        if aggregation_type == "hourly":
+            start_time = datetime.now() - timedelta(hours=1)
+            end_time = datetime.now()
+        elif aggregation_type == "daily":
+            start_time = datetime.now() - timedelta(days=1)
+            end_time = datetime.now()
+        elif aggregation_type == "weekly":
+            start_time = datetime.now() - timedelta(days=7)
+            end_time = datetime.now()
+        elif aggregation_type == "monthly":
+            start_time = datetime.now() - timedelta(days=30)
+            end_time = datetime.now()
+        else:
+            logger.error(f"نوع التجميع غير صالح: {aggregation_type}")
+            return False
+
+        # الحصول على جميع المقاييس
+        metrics = session.query(ResourceMetric).all()
+
+        for metric in metrics:
+            # تجميع البيانات لكل مقياس
+            query = session.query(
+                func.min(ResourceDataPoint.value).label('min_value'),
+                func.max(ResourceDataPoint.value).label('max_value'),
+                func.avg(ResourceDataPoint.value).label('avg_value'),
+                func.count(ResourceDataPoint.id).label('count'),
+                ResourceDataPoint.module_name,
+                ResourceDataPoint.server_id
+            ).filter(
+                ResourceDataPoint.metric_id == metric.id,
+                ResourceDataPoint.timestamp >= start_time,
+                ResourceDataPoint.timestamp <= end_time
+            ).group_by(
+                ResourceDataPoint.module_name,
+                ResourceDataPoint.server_id
+            )
+
+            results = query.all()
+
+            for result in results:
+                # إنشاء تجميع جديد
+                aggregation = ResourceAggregation(
+                    metric_id=metric.id,
+                    aggregation_type=aggregation_type,
+                    start_time=start_time,
+                    end_time=end_time,
+                    min_value=result.min_value,
+                    max_value=result.max_value,
+                    avg_value=result.avg_value,
+                    count=result.count,
+                    module_name=result.module_name,
+                    server_id=result.server_id
+                )
+
+                session.add(aggregation)
+
+        session.commit()
+
+        logger.info(f"تم تخزين البيانات المجمعة بنجاح لنوع التجميع: {aggregation_type}")
+        return True
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء تخزين البيانات المجمعة: {str(e)}")
+        return False
+    finally:
+        session.close()
+
+
+def get_aggregated_data(aggregation_type="hourly", metric_id=None, start_time=None, end_time=None, module_name=None, server_id=None):
+    """الحصول على البيانات المجمعة المخزنة"""
+    session = Session()
+    try:
+        query = session.query(ResourceAggregation).filter(
+            ResourceAggregation.aggregation_type == aggregation_type
+        )
+
+        # تطبيق الفلاتر
+        if metric_id:
+            query = query.filter(ResourceAggregation.metric_id == metric_id)
+        if start_time:
+            query = query.filter(ResourceAggregation.end_time >= start_time)
+        if end_time:
+            query = query.filter(ResourceAggregation.start_time <= end_time)
+        if module_name:
+            query = query.filter(ResourceAggregation.module_name == module_name)
+        if server_id:
+            query = query.filter(ResourceAggregation.server_id == server_id)
+
+        # ترتيب النتائج حسب الوقت
+        query = query.order_by(ResourceAggregation.start_time)
+
+        aggregations = query.all()
+        return [agg.to_dict() for agg in aggregations]
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع البيانات المجمعة: {str(e)}")
+        return []
+    finally:
+        session.close()
+
+# خدمات الخوادم
+
+
+def get_all_servers():
+    """الحصول على جميع الخوادم"""
+    session = Session()
+    try:
+        servers = session.query(Server).all()
+        return [server.to_dict() for server in servers]
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع الخوادم: {str(e)}")
+        return []
+    finally:
+        session.close()
+
+
+def get_server_by_id(server_id):
+    """الحصول على خادم بواسطة المعرف"""
+    session = Session()
+    try:
+        server = session.query(Server).filter(Server.server_id == server_id).first()
+        return server.to_dict() if server else None
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع الخادم {server_id}: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def create_or_update_server(server_data):
+    """إنشاء أو تحديث خادم"""
+    session = Session()
+    try:
+        server_id = server_data.get('serverId')
+        if not server_id:
+            logger.error("معرف الخادم مطلوب")
+            return None
+
+        # البحث عن الخادم الحالي
+        server = session.query(Server).filter(Server.server_id == server_id).first()
+
+        if server:
+            # تحديث الخادم الموجود
+            if 'name' in server_data:
+                server.name = server_data['name']
+            if 'ipAddress' in server_data:
+                server.ip_address = server_data['ipAddress']
+            if 'serverType' in server_data:
+                server.server_type = server_data['serverType']
+            if 'location' in server_data:
+                server.location = server_data['location']
+            if 'isActive' in server_data:
+                server.is_active = server_data['isActive']
+
+            server.updated_at = datetime.now()
+        else:
+            # إنشاء خادم جديد
+            server = Server(
+                server_id=server_id,
+                name=server_data.get('name', server_id),
+                ip_address=server_data.get('ipAddress'),
+                server_type=server_data.get('serverType'),
+                location=server_data.get('location'),
+                is_active=server_data.get('isActive', True)
+            )
+            session.add(server)
+
+        session.commit()
+
+        return server.to_dict()
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء إنشاء أو تحديث الخادم: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def delete_server(server_id):
+    """حذف خادم"""
+    session = Session()
+    try:
+        server = session.query(Server).filter(Server.server_id == server_id).first()
+        if not server:
+            return None
+
+        server_dict = server.to_dict()
+        session.delete(server)
+        session.commit()
+
+        return server_dict
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء حذف الخادم {server_id}: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+# خدمات المديولات
+
+
+def get_all_modules():
+    """الحصول على جميع المديولات"""
+    session = Session()
+    try:
+        modules = session.query(Module).all()
+        return [module.to_dict() for module in modules]
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع المديولات: {str(e)}")
+        return []
+    finally:
+        session.close()
+
+
+def get_module_by_name(module_name):
+    """الحصول على مديول بواسطة الاسم"""
+    session = Session()
+    try:
+        module = session.query(Module).filter(Module.name == module_name).first()
+        return module.to_dict() if module else None
+    except SQLAlchemyError as e:
+        logger.error(f"خطأ أثناء استرجاع المديول {module_name}: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def create_or_update_module(module_data):
+    """إنشاء أو تحديث مديول"""
+    session = Session()
+    try:
+        module_name = module_data.get('name')
+        if not module_name:
+            logger.error("اسم المديول مطلوب")
+            return None
+
+        # البحث عن المديول الحالي
+        module = session.query(Module).filter(Module.name == module_name).first()
+
+        if module:
+            # تحديث المديول الموجود
+            if 'displayName' in module_data:
+                module.display_name = module_data['displayName']
+            if 'description' in module_data:
+                module.description = module_data['description']
+            if 'version' in module_data:
+                module.version = module_data['version']
+            if 'isActive' in module_data:
+                module.is_active = module_data['isActive']
+
+            module.updated_at = datetime.now()
+        else:
+            # إنشاء مديول جديد
+            module = Module(
+                name=module_name,
+                display_name=module_data.get('displayName', module_name),
+                description=module_data.get('description'),
+                version=module_data.get('version'),
+                is_active=module_data.get('isActive', True)
+            )
+            session.add(module)
+
+        session.commit()
+
+        return module.to_dict()
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء إنشاء أو تحديث المديول: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+def delete_module(module_name):
+    """حذف مديول"""
+    session = Session()
+    try:
+        module = session.query(Module).filter(Module.name == module_name).first()
+        if not module:
+            return None
+
+        module_dict = module.to_dict()
+        session.delete(module)
+        session.commit()
+
+        return module_dict
+    except SQLAlchemyError as e:
+        session.rollback()
+        logger.error(f"خطأ أثناء حذف المديول {module_name}: {str(e)}")
+        return None
+    finally:
+        session.close()
+
+
+# تهيئة قاعدة البيانات
+init_db()

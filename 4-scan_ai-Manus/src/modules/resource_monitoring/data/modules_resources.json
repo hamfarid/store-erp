@@ -1,0 +1,140 @@
+{
+  "modules": [
+    {
+      "id": "ai_management",
+      "nameAr": "إدارة الذكاء الصناعي",
+      "nameEn": "AI Management",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "ai_usage_reports",
+      "nameAr": "تقارير استخدام الذكاء الصناعي",
+      "nameEn": "AI Usage Reports",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "alert_management",
+      "nameAr": "إدارة التنبيهات",
+      "nameEn": "Alert Management",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "auth",
+      "nameAr": "auth",
+      "nameEn": "auth",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "backup_module",
+      "nameAr": "النسخ الاحتياطي",
+      "nameEn": "Backup Module",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "backup_restore",
+      "nameAr": "backup_restore",
+      "nameEn": "backup_restore",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "data_validation",
+      "nameAr": "التحقق من البيانات",
+      "nameEn": "Data Validation",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "disease_diagnosis",
+      "nameAr": "تشخيص الأمراض النباتية",
+      "nameEn": "Plant Disease Diagnosis",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "image_processing",
+      "nameAr": "معالجة الصور",
+      "nameEn": "Image Processing",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "integration_tests",
+      "nameAr": "اختبارات التكامل",
+      "nameEn": "Integration Tests",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "module_management",
+      "nameAr": "إدارة المديولات",
+      "nameEn": "Module Management",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "module_shutdown",
+      "nameAr": "إغلاق المديولات",
+      "nameEn": "Module Shutdown",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "performance_monitoring",
+      "nameAr": "مراقبة الأداء",
+      "nameEn": "Performance Monitoring",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "plant_hybridization",
+      "nameAr": "محاكاة التهجين النباتي",
+      "nameEn": "Plant Hybridization Simulation",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "resource_monitoring",
+      "nameAr": "مراقبة الموارد",
+      "nameEn": "Resource Monitoring",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "settings",
+      "nameAr": "settings",
+      "nameEn": "settings",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    },
+    {
+      "id": "setup_wizard",
+      "nameAr": "setup_wizard",
+      "nameEn": "setup_wizard",
+      "cpu": 0,
+      "memory": 0,
+      "disk": 0
+    }
+  ]
+}

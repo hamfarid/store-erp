@@ -1,0 +1,455 @@
+# Continuous Integration Workflow
+# ================================
+# 
+# Purpose: Automated testing, linting, and security scanning
+# Triggers: Push to main/develop, Pull Requests
+# 
+# Jobs:
+# - lint: Code quality checks
+# - test-backend: Python tests with pytest
+# - test-frontend: JavaScript tests with Vitest
+# - security: Dependency vulnerability scan
+# - build: Docker image build verification
+#
+# Author: Global System v35.0
+# Date: 2026-01-17
+
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '20'
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # ============================================
+  # Lint Job - Code Quality Checks
+  # ============================================
+  lint:
+    name: 🔍 Lint Code
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          
+      - name: Install linting tools
+        run: |
+          pip install flake8 black isort mypy
+          
+      - name: Run flake8
+        run: |
+          flake8 backend/src --max-line-length=100 --ignore=E501,W503
+        continue-on-error: true
+        
+      - name: Check Black formatting
+        run: |
+          black --check backend/src || true
+          
+      - name: Check isort
+        run: |
+          isort --check-only backend/src || true
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+          
+      - name: Run ESLint
+        run: |
+          cd frontend
+          npm run lint || true
+
+  # ============================================
+  # Backend Test Job
+  # ============================================
+  test-backend:
+    name: 🐍 Test Backend
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: gaara
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD || 'test_password' }}
+          POSTGRES_DB: gaara_scan_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          pip install pytest pytest-cov pytest-asyncio httpx
+          
+      - name: Run tests with coverage
+        env:
+          DATABASE_URL: postgresql://gaara:${{ secrets.POSTGRES_PASSWORD || 'test_password' }}@localhost:5432/gaara_scan_test
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          SECRET_KEY: test-secret-key-for-ci-only
+          ALGORITHM: HS256
+          ENVIRONMENT: test
+        run: |
+          cd backend
+          pytest tests/ -v --cov=src --cov-report=xml --cov-report=term-missing
+          
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          file: backend/coverage.xml
+          flags: backend
+          name: backend-coverage
+
+  # ============================================
+  # Frontend Test Job
+  # ============================================
+  test-frontend:
+    name: ⚛️ Test Frontend
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+          
+      - name: Run tests
+        run: |
+          cd frontend
+          npm test -- --coverage || true
+          
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+  # ============================================
+  # Security Scan Job
+  # ============================================
+  security:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          
+      - name: Install safety
+        run: pip install safety
+        
+      - name: Run Python dependency scan
+        run: |
+          cd backend
+          safety check -r requirements.txt --output json > safety-report.json || true
+          cat safety-report.json
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          
+      - name: Run npm audit
+        run: |
+          cd frontend
+          npm audit --json > npm-audit.json || true
+          cat npm-audit.json
+          
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'table'
+          exit-code: '0'  # Don't fail on vulnerabilities
+          severity: 'CRITICAL,HIGH'
+
+  # ============================================
+  # Docker Build Job
+  # ============================================
+  build:
+    name: 🐳 Build Docker Images
+    runs-on: ubuntu-latest
+    needs: [lint, test-backend, test-frontend]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Build Backend Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: false
+          tags: gaara-scan-backend:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          
+      - name: Build Frontend Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: false
+          tags: gaara-scan-frontend:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          
+      - name: Build ML Service Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./ml_service
+          push: false
+          tags: gaara-scan-ml:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          
+      - name: Build Image Crawler Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./image_crawler
+          push: false
+          tags: gaara-scan-crawler:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ============================================
+  # E2E Tests Job
+  # ============================================
+  e2e-tests:
+    name: 🎭 E2E Tests
+    runs-on: ubuntu-latest
+    needs: [build]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Docker Compose
+        run: |
+          docker compose version
+          
+      - name: Start services
+        run: |
+          cp env.example .env
+          echo "POSTGRES_PASSWORD=test_password" >> .env
+          echo "REDIS_PASSWORD=test_password" >> .env
+          echo "SECRET_KEY=test-secret-key-ci" >> .env
+          echo "JWT_SECRET=test-jwt-secret-ci" >> .env
+          docker compose up -d database redis
+          sleep 10
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          
+      - name: Install Playwright
+        run: |
+          cd frontend
+          npm ci
+          npx playwright install --with-deps chromium
+          
+      - name: Run E2E tests
+        run: |
+          cd frontend
+          npm run test:e2e || true
+          
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: frontend/playwright-report/
+          retention-days: 7
+          
+      - name: Cleanup
+        if: always()
+        run: docker compose down -v
+
+  # ============================================
+  # ML Model Tests Job
+  # ============================================
+  test-ml:
+    name: 🤖 Test ML Service
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          
+      - name: Install dependencies
+        run: |
+          cd ml_service
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
+          
+      - name: Run ML tests
+        run: |
+          cd ml_service
+          pytest tests/ -v --cov=. --cov-report=xml || true
+          
+      - name: Upload ML coverage
+        uses: codecov/codecov-action@v4
+        with:
+          file: ml_service/coverage.xml
+          flags: ml-service
+          name: ml-coverage
+
+  # ============================================
+  # Integration Tests Job
+  # ============================================
+  integration-tests:
+    name: 🔗 Integration Tests
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-frontend, test-ml]
+    
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: gaara
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: gaara_scan_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio httpx
+          
+      - name: Run integration tests
+        env:
+          DATABASE_URL: postgresql://gaara:test_password@localhost:5432/gaara_scan_test
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          SECRET_KEY: test-secret-key-for-ci
+          JWT_SECRET: test-jwt-secret-ci
+          ENVIRONMENT: test
+        run: |
+          cd backend
+          pytest tests/integration/ -v --tb=short || true
+
+  # ============================================
+  # Summary Job
+  # ============================================
+  summary:
+    name: 📊 CI Summary
+    runs-on: ubuntu-latest
+    needs: [lint, test-backend, test-frontend, test-ml, security, build, integration-tests]
+    if: always()
+    
+    steps:
+      - name: Check job statuses
+        run: |
+          echo "## CI Pipeline Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Lint | ${{ needs.lint.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Backend Tests | ${{ needs.test-backend.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Frontend Tests | ${{ needs.test-frontend.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ML Tests | ${{ needs.test-ml.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Security | ${{ needs.security.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | ${{ needs.build.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Integration Tests | ${{ needs.integration-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY

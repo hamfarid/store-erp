@@ -1,0 +1,250 @@
+# =============================================================================
+# Gaara ERP - Production Deployment Workflow
+# نشر الإنتاج مع Railway و Docker Registry
+#
+# Author: Global v35.0 Singularity
+# Created: 2026-01-17
+# =============================================================================
+
+name: 🚀 Deploy to Production
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      version:
+        description: 'Version tag (leave empty for latest)'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+  deployments: write
+  id-token: write
+
+concurrency:
+  group: deploy-${{ github.event.inputs.environment || 'production' }}
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME_BACKEND: ${{ github.repository }}/backend
+  IMAGE_NAME_FRONTEND: ${{ github.repository }}/frontend
+
+jobs:
+  # ===========================================================================
+  # Prepare Release
+  # ===========================================================================
+  prepare:
+    name: 📋 Prepare Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      environment: ${{ steps.env.outputs.environment }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🏷️ Get version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "release" ]; then
+            echo "version=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+          elif [ -n "${{ github.event.inputs.version }}" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=sha-${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🌍 Set environment
+        id: env
+        run: |
+          if [ "${{ github.event_name }}" == "release" ]; then
+            echo "environment=production" >> $GITHUB_OUTPUT
+          else
+            echo "environment=${{ github.event.inputs.environment || 'staging' }}" >> $GITHUB_OUTPUT
+          fi
+
+  # ===========================================================================
+  # Build & Push Docker Images
+  # ===========================================================================
+  build-push:
+    name: 🐳 Build & Push Images
+    runs-on: ubuntu-latest
+    needs: prepare
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔑 Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📝 Extract metadata (Backend)
+        id: meta-backend
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}
+          tags: |
+            type=raw,value=${{ needs.prepare.outputs.version }}
+            type=raw,value=latest,enable=${{ needs.prepare.outputs.environment == 'production' }}
+
+      - name: 🏗️ Build & Push Backend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: ${{ steps.meta-backend.outputs.tags }}
+          labels: ${{ steps.meta-backend.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            VERSION=${{ needs.prepare.outputs.version }}
+            BUILD_DATE=${{ github.event.repository.updated_at }}
+
+      - name: 📝 Extract metadata (Frontend)
+        id: meta-frontend
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}
+          tags: |
+            type=raw,value=${{ needs.prepare.outputs.version }}
+            type=raw,value=latest,enable=${{ needs.prepare.outputs.environment == 'production' }}
+
+      - name: 🏗️ Build & Push Frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./gaara-erp-frontend
+          file: ./gaara-erp-frontend/Dockerfile
+          push: true
+          tags: ${{ steps.meta-frontend.outputs.tags }}
+          labels: ${{ steps.meta-frontend.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            VITE_API_URL=${{ needs.prepare.outputs.environment == 'production' && 'https://api.gaara-erp.com' || 'https://staging-api.gaara-erp.com' }}
+
+  # ===========================================================================
+  # Deploy to Railway
+  # ===========================================================================
+  deploy-railway:
+    name: 🚂 Deploy to Railway
+    runs-on: ubuntu-latest
+    needs: [prepare, build-push]
+    environment:
+      name: ${{ needs.prepare.outputs.environment }}
+      url: ${{ steps.deploy.outputs.url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🚂 Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: 🚀 Deploy Backend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          railway link ${{ secrets.RAILWAY_PROJECT_ID }}
+          railway up --service backend --detach
+
+      - name: 🚀 Deploy Frontend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          railway up --service frontend --detach
+
+      - name: 📍 Get deployment URL
+        id: deploy
+        run: |
+          if [ "${{ needs.prepare.outputs.environment }}" == "production" ]; then
+            echo "url=https://gaara-erp.com" >> $GITHUB_OUTPUT
+          else
+            echo "url=https://staging.gaara-erp.com" >> $GITHUB_OUTPUT
+          fi
+
+  # ===========================================================================
+  # Post-Deployment
+  # ===========================================================================
+  post-deploy:
+    name: ✅ Post-Deployment Checks
+    runs-on: ubuntu-latest
+    needs: [prepare, deploy-railway]
+
+    steps:
+      - name: ⏳ Wait for deployment
+        run: sleep 60
+
+      - name: 🏥 Health check
+        run: |
+          ENV="${{ needs.prepare.outputs.environment }}"
+          if [ "$ENV" == "production" ]; then
+            URL="https://api.gaara-erp.com/api/health"
+          else
+            URL="https://staging-api.gaara-erp.com/api/health"
+          fi
+
+          echo "Checking: $URL"
+          for i in {1..5}; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL" || echo "000")
+            if [ "$STATUS" == "200" ]; then
+              echo "✅ Health check passed!"
+              exit 0
+            fi
+            echo "Attempt $i: Status $STATUS, retrying..."
+            sleep 10
+          done
+          echo "❌ Health check failed!"
+          exit 1
+
+      - name: 📊 Create deployment summary
+        run: |
+          echo "## 🚀 Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Environment | ${{ needs.prepare.outputs.environment }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Version | ${{ needs.prepare.outputs.version }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Time | $(date -u +"%Y-%m-%d %H:%M:%S UTC") |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit | ${GITHUB_SHA::8} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: 🔔 Notify Slack
+        if: always() && env.SLACK_WEBHOOK_URL != ''
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # ===========================================================================
+  # Rollback (Manual)
+  # ===========================================================================
+  rollback:
+    name: ⏪ Rollback
+    runs-on: ubuntu-latest
+    if: failure() && needs.prepare.outputs.environment == 'production'
+    needs: [prepare, post-deploy]
+
+    steps:
+      - name: 🔙 Trigger rollback
+        run: |
+          echo "::warning::Deployment failed! Manual rollback may be required."
+          echo "Previous version should be restored from Railway dashboard."

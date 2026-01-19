@@ -1,0 +1,61 @@
+# FILE: backend/requirements-test.txt | PURPOSE: Testing dependencies | OWNER: QA Team | LAST-AUDITED: 2025-11-18
+
+# Testing Framework
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
+pytest-mock==3.12.0
+pytest-xdist==3.5.0  # Parallel test execution
+pytest-timeout==2.2.0
+pytest-benchmark==4.0.0
+
+# Coverage
+coverage==7.3.2
+coverage-badge==1.1.0
+
+# Security Testing
+safety==2.3.5  # Dependency vulnerability scanning
+bandit==1.7.5  # Security linting
+semgrep==1.45.0  # Static analysis
+
+# Code Quality
+pylint==3.0.2
+flake8==6.1.0
+black==23.11.0
+isort==5.12.0
+mypy==1.7.1
+
+# API Testing
+httpx==0.25.1  # Async HTTP client for testing
+requests-mock==1.11.0
+faker==20.1.0  # Generate fake data for tests
+
+# Database Testing
+pytest-postgresql==5.0.0
+sqlalchemy-utils==0.41.1
+
+# Mocking & Fixtures
+factory-boy==3.3.0
+freezegun==1.4.0  # Mock datetime
+responses==0.24.1  # Mock HTTP responses
+
+# Performance Testing
+locust==2.18.0  # Load testing
+pytest-benchmark==4.0.0
+
+# E2E Testing
+playwright==1.40.0
+selenium==4.15.2
+
+# Security Dependencies (for testing security modules)
+bleach==6.1.0  # HTML sanitization
+pyotp==2.9.0  # TOTP for MFA
+qrcode==7.4.2  # QR code generation
+passlib==1.7.4  # Password hashing
+bcrypt==4.1.1  # Bcrypt hashing
+cryptography==41.0.7  # Cryptographic functions
+
+# Utilities
+python-dotenv==1.0.0
+pyyaml==6.0.1
+

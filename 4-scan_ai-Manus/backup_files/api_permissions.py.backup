@@ -1,0 +1,628 @@
+# File:
+# /home/ubuntu/ai_web_organized/src/modules/ai_management/api_permissions.py
+"""
+
+واجهة برمجة التطبيقات لإدارة صلاحيات وكلاء الذكاء الاصطناعي
+يوفر هذا الملف نقاط نهاية RESTful لإدارة الأدوار والصلاحيات والوكلاء
+"""
+
+from fastapi import APIRouter, Depends, HTTPException, status, Query, Path
+from fastapi.security import OAuth2PasswordBearer
+from typing import List, Optional
+from sqlalchemy.orm import Session
+from datetime import datetime
+
+from ..auth.auth_service import get_current_user, verify_admin
+from ..database import get_db
+from . import db_service_permissions as db_service
+from . import schemas_permissions as schemas
+
+# إنشاء موجه API
+router = APIRouter(
+    prefix="/api/ai/permissions",
+    tags=["AI Permissions"],
+    responses={404: {"description": "Not found"}},
+)
+
+# نقطة نهاية OAuth2
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+# ==================== إدارة الأدوار ====================
+
+
+@router.get("/roles", response_model=List[schemas.RoleResponse])
+async def get_roles(
+    skip: int = Query(0, description=SKIP_DESCRIPTION),
+    limit: int = Query(100, description=LIMIT_DESCRIPTION),
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    الحصول على قائمة الأدوار
+
+    يتطلب مصادقة المستخدم
+    ""التحقق_من_صلاحياتview_rolesRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لعرض الأدوار"
+        )
+
+    roles = db_service.get_roles(db, skip=skip, limit=limit)
+    return roles
+
+
+@router.get("/roles/{role_id}", response_model=schemas.RoleDetailResponse)
+async def get_role(
+    role_id: int = Path(..., description=ROLE_ID_DESCRIPTION),
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    الحصول على تفاصيل دور محدد
+
+    يتطلب مصادقة المستخدم
+    ""التحقق_من_صلاحياتview_rolesRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لعرض الأدوار"
+        )
+
+    role = db_service.get_role(db, role_id)
+    if role is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"الدور برقم {role_id} غير موجود"
+        )
+
+    return role
+
+
+@router.post("/roles", response_model=schemas.RoleResponse,
+             status_code=status.HTTP_201_CREATED)
+async def create_role(
+    role: schemas.RoleCreate,
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    إنشاء دور جديد
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة الأدوار
+    ""التحقق_من_صلاحياتmanage_roles"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=NO_ROLE_PERMISSION
+        )
+
+    # التحقق من وجود دور بنفس الاسم
+    db_role = db_service.get_role_by_name(db, role.name)
+    if db_role:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"الدور باسم '{role.name}' موجود بالفعل"
+        )
+
+    return db_service.create_role(db, role, current_user.id)
+
+
+@router.put("/roles/{role_id}", response_model=schemas.RoleResponse)
+async def update_role(
+    role_id: int = Path(..., description=ROLE_ID_DESCRIPTION),
+    role: schemas.RoleUpdate = None,
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    تحديث دور موجود
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة الأدوار
+    ""التحقق_من_صلاحياتmanage_roles"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=NO_ROLE_PERMISSION
+        )
+
+    # التحقق من وجود الدور
+    db_role = db_service.get_role(db, role_id)
+    if db_role is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"الدور برقم {role_id} غير موجود"
+        )
+
+    # التحقق من أن الدور ليس دور نظام
+    if db_role.is_system:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="لا يمكن تعديل أدوار النظام"
+        )
+
+    return db_service.update_role(db, role_id, role)
+
+
+@router.delete("/roles/{role_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_role(
+    role_id: int = Path(..., description=ROLE_ID_DESCRIPTION),
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(verify_admin)
+):
+    """
+    حذف دور
+
+    يتطلب مصادقة المستخدم وصلاحيات المدير
+    """
+    # التحقق من وجود الدور
+    db_role = db_service.get_role(db, role_id)
+    if db_role is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"الدور برقم {role_id} غير موجود"
+        )
+
+    # التحقق من أن الدور ليس دور نظام
+    if db_role.is_system:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="لا يمكن حذف أدوار النظام"
+        )
+
+    db_service.delete_role(db, role_id)
+    return None
+
+
+@router.post("/roles/{role_id}/permissions",
+             response_model=schemas.RoleDetailResponse)
+async def assign_permissions_to_role(
+    role_id: int = Path(..., description=ROLE_ID_DESCRIPTION),
+    permissions: schemas.PermissionAssignment = None,
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    تعيين صلاحيات لدور
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة الأدوار
+    ""التحقق_من_صلاحياتmanage_roles"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=NO_ROLE_PERMISSION
+        )
+
+    # التحقق من وجود الدور
+    db_role = db_service.get_role(db, role_id)
+    if db_role is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"الدور برقم {role_id} غير موجود"
+        )
+
+    return db_service.assign_permissions_to_role(
+        db, role_id, permissions.permission_ids, current_user.id)
+
+# ==================== إدارة الصلاحيات ====================
+
+
+@router.get("/permissions", response_model=List[schemas.PermissionResponse])
+async def get_permissions(
+    skip: int = Query(0, description=SKIP_DESCRIPTION),
+    limit: int = Query(100, description=LIMIT_DESCRIPTION),
+    category: Optional[str] = Query(None, description="تصنيف الصلاحياتDB_SESSION_DEPENDSGET_DB""
+    الحصول على قائمة الصلاحيات
+
+    يتطلب مصادقة المستخدم
+    ""التحقق_من_صلاحياتview_permissionsRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لعرض الصلاحيات"
+        )
+
+    permissions = db_service.get_permissions(
+        db, skip=skip, limit=limit, category=category)
+    return permissions
+
+
+@router.get("/permissions/categories", response_model=List[str])
+async def get_permission_categories(
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    الحصول على قائمة تصنيفات الصلاحيات
+
+    يتطلب مصادقة المستخدم
+    ""التحقق_من_صلاحياتview_permissionsRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لعرض الصلاحيات"
+        )
+
+    categories = db_service.get_permission_categories(db)
+    return categories
+
+
+@router.post("/permissions",
+             response_model=schemas.PermissionResponse,
+             status_code=status.HTTP_201_CREATED)
+async def create_permission(
+    permission: schemas.PermissionCreate,
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(verify_admin)
+):
+    """
+    إنشاء صلاحية جديدة
+
+    يتطلب مصادقة المستخدم وصلاحيات المدير
+    """
+    # التحقق من وجود صلاحية بنفس الاسم أو الرمز
+    db_permission = db_service.get_permission_by_name_or_code(
+        db, permission.name, permission.code)
+    if db_permission:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"الصلاحية باسم '{permission.name}' أو رمز '{permission.code}' موجودة بالفعل")
+
+    return db_service.create_permission(db, permission)
+
+# ==================== إدارة وكلاء الذكاء الاصطناعي ====================
+
+
+@router.get("/agents", response_model=List[schemas.AIAgentResponse])
+async def get_agents(
+    skip: int = Query(0, description=SKIP_DESCRIPTION),
+    limit: int = Query(100, description=LIMIT_DESCRIPTION),
+    type: Optional[str] = Query(None, description="نوع الوكيل"),
+    enabled: Optional[bool] = Query(None, description="حالة التفعيلDB_SESSION_DEPENDSGET_DB""
+    الحصول على قائمة وكلاء الذكاء الاصطناعي
+
+    يتطلب مصادقة المستخدم
+    ""التحقق_من_صلاحياتview_ai_agentsRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لعرض وكلاء الذكاء الاصطناعي"
+        )
+
+    agents = db_service.get_agents(
+        db,
+        skip=skip,
+        limit=limit,
+        type=type,
+        enabled=enabled)
+    return agents
+
+
+@router.get("/agents/{agent_id}", response_model=schemas.AIAgentDetailResponse)
+async def get_agent(
+    agent_id: str = Path(..., description=AGENT_ID_DESCRIPTION),
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    الحصول على تفاصيل وكيل ذكاء اصطناعي محدد
+
+    يتطلب مصادقة المستخدم
+    ""التحقق_من_صلاحياتview_ai_agentsRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لعرض وكلاء الذكاء الاصطناعي"
+        )
+
+    agent = db_service.get_agent(db, agent_id)
+    if agent is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"الوكيل بمعرف {agent_id} غير موجود"
+        )
+
+    return agent
+
+
+@router.post("/agents", response_model=schemas.AIAgentResponse,
+             status_code=status.HTTP_201_CREATED)
+async def create_agent(
+    agent: schemas.AIAgentCreate,
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    إنشاء وكيل ذكاء اصطناعي جديد
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة وكلاء الذكاء الاصطناعي
+    ""التحقق_من_صلاحياتmanage_ai_agents"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=NO_AGENT_PERMISSION
+        )
+
+    # التحقق من وجود وكيل بنفس المعرف
+    db_agent = db_service.get_agent(db, agent.id)
+    if db_agent:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"الوكيل بمعرف '{agent.id}' موجود بالفعل"
+        )
+
+    return db_service.create_agent(db, agent, current_user.id)
+
+
+@router.put("/agents/{agent_id}", response_model=schemas.AIAgentResponse)
+async def update_agent(
+    agent_id: str = Path(..., description=AGENT_ID_DESCRIPTION),
+    agent: schemas.AIAgentUpdate = None,
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    تحديث وكيل ذكاء اصطناعي موجود
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة وكلاء الذكاء الاصطناعي
+    ""التحقق_من_صلاحياتmanage_ai_agentsRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لإدارة وكلاء الذكاء الاصطناعيالتحقق_من_وجودالوكيل بمعرف {agent_id} غير موجود"
+        )
+
+    # التحقق من أن الوكيل ليس وكيل نظام إذا كان هناك محاولة لتغيير معلومات
+    # حساسة
+    if db_agent.system_agent and (
+        agent.type is not None
+        or agent.protocol is not None
+        or agent.api_endpoint is not None
+        or agent.api_key is not None
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="لا يمكن تعديل معلومات حساسة لوكلاء النظام"
+        )
+
+    return db_service.update_agent(db, agent_id, agent)
+
+
+@router.delete("/agents/{agent_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_agent(
+    agent_id: str = Path(..., description="معرف الوكيلDB_SESSION_DEPENDSGET_DB""
+    حذف وكيل ذكاء اصطناعي
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة وكلاء الذكاء الاصطناعي
+    ""التحقق_من_صلاحياتmanage_ai_agentsRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لإدارة وكلاء الذكاء الاصطناعيالتحقق_من_وجودالوكيل بمعرف {agent_id} غير موجود"
+        )
+
+    # التحقق من أن الوكيل ليس وكيل نظام
+    if db_agent.system_agent:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="لا يمكن حذف وكلاء النظام"
+        )
+
+    db_service.delete_agent(db, agent_id)
+    return None
+
+
+@router.post("/agents/{agent_id}/enable",
+             response_model=schemas.AIAgentResponse)
+async def enable_agent(
+    agent_id: str = Path(..., description="معرف الوكيلDB_SESSION_DEPENDSGET_DB""
+    تفعيل وكيل ذكاء اصطناعي
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة وكلاء الذكاء الاصطناعي
+    ""التحقق_من_صلاحياتmanage_ai_agentsRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لإدارة وكلاء الذكاء الاصطناعيالتحقق_من_وجودالوكيل بمعرف {agent_id} غير موجود"
+        )
+
+    return db_service.enable_agent(db, agent_id)
+
+
+@router.post("/agents/{agent_id}/disable",
+             response_model=schemas.AIAgentResponse)
+async def disable_agent(
+    agent_id: str = Path(..., description="معرف الوكيلDB_SESSION_DEPENDSGET_DB""
+    تعطيل وكيل ذكاء اصطناعي
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة وكلاء الذكاء الاصطناعي
+    ""التحقق_من_صلاحياتmanage_ai_agentsRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لإدارة وكلاء الذكاء الاصطناعيالتحقق_من_وجودالوكيل بمعرف {agent_id} غير موجود"
+        )
+
+    return db_service.disable_agent(db, agent_id)
+
+
+@router.post("/agents/{agent_id}/roles",
+             response_model=schemas.AIAgentDetailResponse)
+async def assign_roles_to_agent(
+    agent_id: str = Path(..., description="معرف الوكيل"),
+    roles: schemas.RoleAssignment = None,
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    تعيين أدوار لوكيل ذكاء اصطناعي
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة وكلاء الذكاء الاصطناعي
+    ""التحقق_من_صلاحياتmanage_ai_agentsRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لإدارة وكلاء الذكاء الاصطناعيالتحقق_من_وجودالوكيل بمعرف {agent_id} غير موجود"
+        )
+
+    return db_service.assign_roles_to_agent(
+        db, agent_id, roles.role_ids, current_user.id)
+
+# ==================== إدارة تفضيلات المستخدم للذكاء الاصطناعي ===========
+
+
+@router.get("/user-preferences",
+            response_model=schemas.UserAIPreferenceResponse)
+async def get_user_preferences(
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    الحصول على تفضيلات المستخدم الحالي للذكاء الاصطناعي
+
+    يتطلب مصادقة المستخدم
+    """
+    preferences = db_service.get_user_preferences(db, current_user.id)
+    if preferences is None:
+        # إنشاء تفضيلات افتراضية
+        preferences = db_service.create_user_preferences(
+            db, current_user.id, schemas.UserAIPreferenceCreate())
+
+    return preferences
+
+
+@router.put("/user-preferences",
+            response_model=schemas.UserAIPreferenceResponse)
+async def update_user_preferences(
+    preferences: schemas.UserAIPreferenceUpdate,
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    تحديث تفضيلات المستخدم الحالي للذكاء الاصطناعي
+
+    يتطلب مصادقة المستخدم
+    """
+    # التحقق من وجود تفضيلات للمستخدم
+    db_preferences = db_service.get_user_preferences(db, current_user.id)
+    if db_preferences is None:
+        # إنشاء تفضيلات جديدة
+        return db_service.create_user_preferences(
+            db, current_user.id, preferences)
+    else:
+        # تحديث التفضيلات الموجودة
+        return db_service.update_user_preferences(
+            db, current_user.id, preferences)
+
+# ==================== إدارة سجلات استخدام الذكاء الاصطناعي ==============
+
+
+@router.get("/usage-logs",
+            response_model=List[schemas.AIAgentUsageLogResponse])
+async def get_usage_logs(
+    skip: int = Query(0, description="عدد العناصر للتخطي"),
+    limit: int = Query(100, description="الحد الأقصى لعدد العناصر المسترجعة"),
+    agent_id: Optional[str] = Query(None, description="معرف الوكيل"),
+    user_id: Optional[int] = Query(None, description="معرف المستخدم"),
+    start_date: Optional[datetime] = Query(None, description="تاريخ البداية"),
+    end_date: Optional[datetime] = Query(None, description="تاريخ النهاية"),
+    success: Optional[bool] = Query(None, description="حالة النجاحDB_SESSION_DEPENDSGET_DB""
+    الحصول على سجلات استخدام وكلاء الذكاء الاصطناعي
+
+    يتطلب مصادقة المستخدم وصلاحية عرض سجلات الاستخدام
+    """
+    # التحقق من صلاحيات المستخدم
+    can_view_all = db_service.check_permission(
+        db, current_user.id, "view_all_ai_logs")
+    can_view_own = db_service.check_permission(
+        db, current_user.id, "view_own_ai_logs")
+
+    if not (can_view_all or can_view_own):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="ليس لديك صلاحية لعرض سجلات استخدام الذكاء الاصطناعي"
+        )
+
+    # إذا كان المستخدم يمكنه عرض سجلاته فقط، فيجب تقييد الاستعلام بمعرف
+    # المستخدم
+    if not can_view_all and can_view_own:
+        user_id = current_user.id
+
+    logs = db_service.get_usage_logs(
+        db,
+        skip=skip,
+        limit=limit,
+        agent_id=agent_id,
+        user_id=user_id,
+        start_date=start_date,
+        end_date=end_date,
+        success=success
+    )
+
+    return logs
+
+
+@router.get("/usage-report", response_model=schemas.AIUsageReportResponse)
+async def get_usage_report(
+    start_date: Optional[datetime] = Query(None, description="تاريخ البداية"),
+    end_date: Optional[datetime] = Query(None, description="تاريخ النهاية"),
+    agent_id: Optional[str] = Query(None, description="معرف الوكيل"),
+    user_id: Optional[int] = Query(None, description="معرف المستخدمDB_SESSION_DEPENDSGET_DB""
+    الحصول على تقرير استخدام وكلاء الذكاء الاصطناعي
+
+    يتطلب مصادقة المستخدم وصلاحية عرض تقارير الاستخدام
+    """
+    # التحقق من صلاحيات المستخدم
+    can_view_all = db_service.check_permission(
+        db, current_user.id, "view_ai_reports")
+    can_view_own = db_service.check_permission(
+        db, current_user.id, "view_own_ai_reports")
+
+    if not (can_view_all or can_view_own):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="ليس لديك صلاحية لعرض تقارير استخدام الذكاء الاصطناعي"
+        )
+
+    # إذا كان المستخدم يمكنه عرض تقاريره فقط، فيجب تقييد الاستعلام بمعرف
+    # المستخدم
+    if not can_view_all and can_view_own:
+        user_id = current_user.id
+
+    report = db_service.get_usage_report(
+        db,
+        start_date=start_date,
+        end_date=end_date,
+        agent_id=agent_id,
+        user_id=user_id
+    )
+
+    return report
+
+# ==================== إدارة صلاحيات المستخدمين ====================
+
+
+@router.get("/user-roles/{user_id}", response_model=List[schemas.RoleResponse])
+async def get_user_roles(
+    user_id: int = Path(..., description="معرف المستخدمDB_SESSION_DEPENDSGET_DB""
+    الحصول على أدوار مستخدم محدد
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة المستخدمين
+    """
+    # التحقق من صلاحيات المستخدم
+    if not db_service.check_permission(
+            db,
+            current_user.id,
+            "manage_users") and current_user.id != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="ليس لديك صلاحية لعرض أدوار المستخدمين الآخرين"
+        )
+
+    roles = db_service.get_user_roles(db, user_id)
+    return roles
+
+
+@router.post("/user-roles/{user_id}",
+             response_model=List[schemas.RoleResponse])
+async def assign_roles_to_user(
+    user_id: int = Path(..., description="معرف المستخدم"),
+    roles: schemas.RoleAssignment = None,
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
+    """
+    تعيين أدوار لمستخدم
+
+    يتطلب مصادقة المستخدم وصلاحية إدارة المستخدمين
+    ""التحقق_من_صلاحياتmanage_usersRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية لإدارة المستخدمين"
+        )
+
+    return db_service.assign_roles_to_user(
+        db, user_id, roles.role_ids, current_user.id)
+
+
+@router.get("/check-permission",
+            response_model=schemas.PermissionCheckResponse)
+async def check_user_permission(
+        permission_code: str = Query(
+            ...,
+            description="رمز الصلاحية"),
+        user_id: Optional[int] = Query(
+            None,
+            description="معرف المستخدم (اختياري، يستخدم المستخدم الحالي إذا لم يتم تحديده)"),
+        db: Session = Depends(get_db),
+        current_user: schemas.User = Depends(get_current_user)):
+    """
+    التحقق من صلاحية مستخدم
+
+    يتطلب مصادقة المستخدم
+    """
+    # إذا لم يتم تحديد معرف المستخدم، استخدم المستخدم الحالي
+    if user_id is None:
+        user_id = current_user.id
+
+    # التحقق من صلاحيات المستخدم الحالي للتحقق من صلاحيات مستخدم آخر
+    if user_id != current_user.id and not db_service.check_permission(
+            db, current_user.id, "manage_usersRAISE_HTTPEXCEPTION_STATUS_CODESTATUSHTTP_403_FORBIDDENليس لديك صلاحية للتحقق من صلاحيات المستخدمين الآخرين"
+        )
+
+    has_permission = db_service.check_permission(db, user_id, permission_code)
+
+    return {
+        "user_id": user_id,
+        "permission_code": permission_code,
+        "has_permission": has_permission
+    }

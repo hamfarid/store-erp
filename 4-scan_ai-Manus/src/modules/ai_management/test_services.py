@@ -1,0 +1,750 @@
+# File: /home/ubuntu/ai_web_organized/src/modules/ai_management/test_services.py
+"""
+اختبارات منفصلة لخدمات الذكاء الاصطناعي
+يقوم هذا الملف باختبار كل خدمة بشكل منفصل للتأكد من صحة منطق العمل
+"""
+
+import unittest
+import logging
+
+from memory_and_learning import (
+    MemoryType, AccessLevel, PermissionType, ResourceType, AgentType,
+    ModelCategory, CostLevel, EventType, ProviderType, PricingType,
+    RoutingStrategy, MemoryService, KnowledgeService, ModelService,
+    PerformanceService, ExternalAgentService, RouterService, PermissionService
+)
+
+# إعداد التسجيل
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+class MockDBSession:
+    """جلسة قاعدة بيانات وهمية للاختبار"""
+
+    def __init__(self):
+        """تهيئة الجلسة"""
+        self.data = {}
+        self.id_counter = 1
+
+    def add(self, obj):
+        """إضافة كائن إلى قاعدة البيانات"""
+        obj.id = self.id_counter
+        self.id_counter += 1
+
+        table_name = obj.__class__.__name__
+        if table_name not in self.data:
+            self.data[table_name] = {}
+
+        self.data[table_name][obj.id] = obj
+
+    def commit(self):
+        """تأكيد التغييرات"""
+        pass
+
+    def query(self, cls):
+        """استعلام عن كائنات من قاعدة البيانات"""
+        return MockQuery(self, cls)
+
+
+class MockQuery:
+    """استعلام وهمي للاختبار"""
+
+    def __init__(self, db_session, cls):
+        """تهيئة الاستعلام"""
+        self.db_session = db_session
+        self.cls = cls
+        self.filters = []
+
+    def filter(self, *args):
+        """إضافة مرشح للاستعلام"""
+        self.filters.extend(args)
+        return self
+
+    def first(self):
+        """الحصول على أول نتيجة"""
+        results = self.all()
+        if results:
+            return results[0]
+        return None
+
+    def all(self):
+        """الحصول على جميع النتائج"""
+        table_name = self.cls.__name__
+        if table_name not in self.db_session.data:
+            return []
+
+        results = list(self.db_session.data[table_name].values())
+
+        # تطبيق المرشحات بشكل مبسط
+        filtered_results = []
+        for obj in results:
+            include = True
+            for filter_expr in self.filters:
+                # تنفيذ منطق تصفية بسيط للاختبار
+                if hasattr(filter_expr, 'left') and hasattr(filter_expr, 'right'):
+                    # هذا مجرد محاكاة بسيطة للمرشحات
+                    include = True
+                elif isinstance(filter_expr, tuple) and len(filter_expr) == 2:
+                    # محاكاة بسيطة للمرشحات المباشرة
+                    attr_name, value = filter_expr
+                    if hasattr(obj, attr_name) and getattr(obj, attr_name) != value:
+                        include = False
+                        break
+
+            if include:
+                filtered_results.append(obj)
+
+        return filtered_results
+
+    def delete(self):
+        """حذف الكائنات المطابقة للاستعلام"""
+        table_name = self.cls.__name__
+        if table_name not in self.db_session.data:
+            return 0
+
+        to_delete = []
+        for obj_id, obj in self.db_session.data[table_name].items():
+            include = True
+            for filter_expr in self.filters:
+                # تنفيذ منطق تصفية بسيط للاختبار
+                if hasattr(filter_expr, 'left') and hasattr(filter_expr, 'right'):
+                    # هذا مجرد محاكاة بسيطة للمرشحات
+                    include = True
+                elif isinstance(filter_expr, tuple) and len(filter_expr) == 2:
+                    # محاكاة بسيطة للمرشحات المباشرة
+                    attr_name, value = filter_expr
+                    if hasattr(obj, attr_name) and getattr(obj, attr_name) != value:
+                        include = False
+                        break
+
+            if include:
+                to_delete.append(obj_id)
+
+        for obj_id in to_delete:
+            del self.db_session.data[table_name][obj_id]
+
+        return len(to_delete)
+
+    def limit(self, limit_count):
+        """تحديد عدد النتائج"""
+        # تجاهل حد النتائج في الاختبار
+        return self
+
+
+class TestMemoryService(unittest.TestCase):
+    """اختبار خدمة الذاكرة"""
+
+    def setUp(self):
+        """إعداد بيئة الاختبار"""
+        self.db_session = MockDBSession()
+        self.memory_service = MemoryService(self.db_session)
+
+    def test_store_and_get_memory(self):
+        """اختبار تخزين واسترجاع الذاكرة"""
+        # تخزين ذاكرة جديدة
+        self.memory_service.store_memory(
+            agent_id="test_agent",
+            memory_type=MemoryType.SHORT_TERM,
+            key="test_key",
+            value="test_value",
+            access_level=AccessLevel.PRIVATE
+        )
+
+        # استرجاع الذاكرة
+        memories = self.memory_service.get_memory(
+            agent_id="test_agent",
+            memory_type=MemoryType.SHORT_TERM,
+            key="test_key"
+        )
+
+        # التحقق من استرجاع الذاكرة
+        self.assertEqual(len(memories), 1)
+        self.assertEqual(memories[0].value, "test_value")
+
+    def test_update_memory(self):
+        """اختبار تحديث الذاكرة"""
+        # تخزين ذاكرة جديدة
+        self.memory_service.store_memory(
+            agent_id="test_agent",
+            memory_type=MemoryType.SHORT_TERM,
+            key="test_key",
+            value="test_value",
+            access_level=AccessLevel.PRIVATE
+        )
+
+        # تحديث الذاكرة
+        updated_memory = self.memory_service.store_memory(
+            agent_id="test_agent",
+            memory_type=MemoryType.SHORT_TERM,
+            key="test_key",
+            value="updated_value",
+            access_level=AccessLevel.SHARED
+        )
+
+        # التحقق من تحديث الذاكرة
+        self.assertEqual(updated_memory.value, "updated_value")
+
+    def test_delete_memory(self):
+        """اختبار حذف الذاكرة"""
+        # تخزين ذاكرة جديدة
+        self.memory_service.store_memory(
+            agent_id="test_agent",
+            memory_type=MemoryType.SHORT_TERM,
+            key="test_key",
+            value="test_value",
+            access_level=AccessLevel.PRIVATE
+        )
+
+        # حذف الذاكرة
+        result = self.memory_service.delete_memory(
+            agent_id="test_agent",
+            memory_type=MemoryType.SHORT_TERM,
+            key="test_key"
+        )
+
+        # التحقق من حذف الذاكرة
+        self.assertTrue(result)
+
+        # التحقق من عدم وجود الذاكرة بعد الحذف
+        memories = self.memory_service.get_memory(
+            agent_id="test_agent",
+            memory_type=MemoryType.SHORT_TERM,
+            key="test_key"
+        )
+
+        # التحقق من عدم وجود الذاكرة
+        self.assertEqual(len(memories), 0)
+
+
+class TestKnowledgeService(unittest.TestCase):
+    """اختبار خدمة المعرفة"""
+
+    def setUp(self):
+        """إعداد بيئة الاختبار"""
+        self.db_session = MockDBSession()
+        self.knowledge_service = KnowledgeService(self.db_session)
+
+    def test_add_and_get_knowledge(self):
+        """اختبار إضافة واسترجاع المعرفة"""
+        # إضافة معرفة جديدة
+        knowledge = self.knowledge_service.add_knowledge(
+            content="هذه معرفة اختبارية",
+            keywords="اختبار,معرفة",
+            source="وحدة الاختبار",
+            confidence=0.9
+        )
+
+        # التحقق من إضافة المعرفة
+        self.assertIsNotNone(knowledge)
+        self.assertEqual(knowledge.content, "هذه معرفة اختبارية")
+        self.assertEqual(knowledge.keywords, "اختبار,معرفة")
+        self.assertEqual(knowledge.source, "وحدة الاختبار")
+        self.assertEqual(knowledge.confidence, 0.9)
+
+        # استرجاع المعرفة
+        retrieved_knowledge = self.knowledge_service.get_knowledge(knowledge.id)
+
+        # التحقق من استرجاع المعرفة
+        self.assertIsNotNone(retrieved_knowledge)
+        self.assertEqual(retrieved_knowledge.content, "هذه معرفة اختبارية")
+
+    def test_update_knowledge(self):
+        """اختبار تحديث المعرفة"""
+        # إضافة معرفة جديدة
+        knowledge = self.knowledge_service.add_knowledge(
+            content="هذه معرفة اختبارية",
+            keywords="اختبار,معرفة",
+            source="وحدة الاختبار",
+            confidence=0.9
+        )
+
+        # تحديث المعرفة
+        updated_knowledge = self.knowledge_service.update_knowledge(
+            knowledge_id=knowledge.id,
+            content="هذه معرفة محدثة",
+            keywords="اختبار,معرفة,تحديث"
+        )
+
+        # التحقق من تحديث المعرفة
+        self.assertIsNotNone(updated_knowledge)
+        self.assertEqual(updated_knowledge.content, "هذه معرفة محدثة")
+        self.assertEqual(updated_knowledge.keywords, "اختبار,معرفة,تحديث")
+
+        # استرجاع المعرفة المحدثة
+        retrieved_knowledge = self.knowledge_service.get_knowledge(knowledge.id)
+
+        # التحقق من استرجاع المعرفة المحدثة
+        self.assertIsNotNone(retrieved_knowledge)
+        self.assertEqual(retrieved_knowledge.content, "هذه معرفة محدثة")
+
+    def test_delete_knowledge(self):
+        """اختبار حذف المعرفة"""
+        # إضافة معرفة جديدة
+        knowledge = self.knowledge_service.add_knowledge(
+            content="هذه معرفة اختبارية",
+            keywords="اختبار,معرفة",
+            source="وحدة الاختبار",
+            confidence=0.9
+        )
+
+        # حذف المعرفة
+        result = self.knowledge_service.delete_knowledge(knowledge.id)
+
+        # التحقق من حذف المعرفة
+        self.assertTrue(result)
+
+        # استرجاع المعرفة بعد الحذف
+        retrieved_knowledge = self.knowledge_service.get_knowledge(knowledge.id)
+
+        # التحقق من عدم وجود المعرفة بعد الحذف (تم تعديل المنطق ليعيد None)
+        self.assertIsNone(retrieved_knowledge)
+
+
+class TestModelService(unittest.TestCase):
+    """اختبار خدمة النماذج"""
+
+    def setUp(self):
+        """إعداد بيئة الاختبار"""
+        self.db_session = MockDBSession()
+        self.model_service = ModelService(self.db_session)
+
+    def test_start_and_complete_training(self):
+        """اختبار بدء وإكمال تدريب النموذج"""
+        # بدء تدريب نموذج
+        training_run = self.model_service.start_training(
+            model_name="test_model",
+            dataset_description="بيانات اختبارية",
+            hyperparameters={"learning_rate": 0.01, "epochs": 10},
+            created_by="test_user"
+        )
+
+        # التحقق من بدء تدريب النموذج
+        self.assertIsNotNone(training_run)
+        self.assertEqual(training_run.model_name, "test_model")
+        self.assertEqual(training_run.dataset_description, "بيانات اختبارية")
+        self.assertEqual(training_run.hyperparameters, {"learning_rate": 0.01, "epochs": 10})
+        self.assertEqual(training_run.status, "running")
+
+        # إكمال تدريب النموذج
+        completed_training = self.model_service.complete_training(
+            training_id=training_run.id,
+            model_path="/path/to/model",
+            metrics={"accuracy": 0.95, "loss": 0.05}
+        )
+
+        # التحقق من إكمال تدريب النموذج
+        self.assertIsNotNone(completed_training)
+        self.assertEqual(completed_training.model_path, "/path/to/model")
+        self.assertEqual(completed_training.metrics, {"accuracy": 0.95, "loss": 0.05})
+        self.assertEqual(completed_training.status, "completed")
+
+    def test_deploy_model(self):
+        """اختبار نشر النموذج"""
+        # نشر نموذج
+        deployment = self.model_service.deploy_model(
+            model_name="test_model",
+            agent_type=AgentType.GENERAL_ASSISTANT,
+            model_category=ModelCategory.LOCAL_FREE,
+            cost_level=CostLevel.FREE,
+            capabilities={"text_generation": True, "image_generation": False},
+            model_path="/path/to/model"
+        )
+
+        # التحقق من نشر النموذج
+        self.assertIsNotNone(deployment)
+        self.assertEqual(deployment.model_name, "test_model")
+        self.assertEqual(deployment.agent_type, AgentType.GENERAL_ASSISTANT)
+        self.assertEqual(deployment.model_category, ModelCategory.LOCAL_FREE)
+        self.assertEqual(deployment.cost_level, CostLevel.FREE)
+        self.assertEqual(deployment.model_path, "/path/to/model")
+        self.assertTrue(deployment.is_active)
+
+        # الحصول على النشرات النشطة
+        active_deployments = self.model_service.get_active_deployments()
+
+        # التحقق من الحصول على النشرات النشطة
+        self.assertEqual(len(active_deployments), 1)
+        self.assertEqual(active_deployments[0].model_name, "test_model")
+
+
+class TestPerformanceService(unittest.TestCase):
+    """اختبار خدمة الأداء"""
+
+    def setUp(self):
+        """إعداد بيئة الاختبار"""
+        self.db_session = MockDBSession()
+        self.performance_service = PerformanceService(self.db_session)
+
+    def test_log_event(self):
+        """اختبار تسجيل الأحداث"""
+        # تسجيل حدث
+        log_entry = self.performance_service.log_event(
+            event_type=EventType.USER_MESSAGE,
+            actor_agent_id="test_agent_1",
+            target_agent_id="test_agent_2",
+            user_id="test_user",
+            input_data={"query": "ما هو الذكاء الاصطناعي؟"},
+            output_data={"response": "الذكاء الاصطناعي هو فرع من علوم الحاسوب يهتم بإنشاء آلات ذكية."},
+            response_time=0.5,
+            status="success"
+        )
+
+        # التحقق من تسجيل الحدث
+        self.assertIsNotNone(log_entry)
+        self.assertEqual(log_entry.event_type, EventType.USER_MESSAGE)
+        self.assertEqual(log_entry.actor_agent_id, "test_agent_1")
+        self.assertEqual(log_entry.target_agent_id, "test_agent_2")
+        self.assertEqual(log_entry.user_id, "test_user")
+        self.assertEqual(log_entry.input_data, {"query": "ما هو الذكاء الاصطناعي؟"})
+        self.assertEqual(log_entry.output_data, {"response": "الذكاء الاصطناعي هو فرع من علوم الحاسوب يهتم بإنشاء آلات ذكية."})
+        self.assertEqual(log_entry.response_time, 0.5)
+        self.assertEqual(log_entry.status, "success")
+
+    def test_get_agent_performance(self):
+        """اختبار الحصول على أداء الوكيل"""
+        # تسجيل عدة أحداث
+        self.performance_service.log_event(
+            event_type=EventType.USER_MESSAGE,
+            actor_agent_id="test_agent",
+            response_time=0.5,
+            status="success"
+        )
+
+        self.performance_service.log_event(
+            event_type=EventType.USER_MESSAGE,
+            actor_agent_id="test_agent",
+            response_time=0.7,
+            status="success"
+        )
+
+        self.performance_service.log_event(
+            event_type=EventType.ERROR,
+            actor_agent_id="test_agent",
+            response_time=1.0,
+            status="error"
+        )
+
+        # الحصول على أداء الوكيل
+        performance = self.performance_service.get_agent_performance("test_agent")
+
+        # التحقق من الحصول على أداء الوكيل
+        self.assertIsNotNone(performance)
+        self.assertEqual(performance['total_logs'], 3)
+        self.assertEqual(performance['successful_logs'], 2)
+        self.assertEqual(performance['error_logs'], 1)
+        self.assertEqual(performance['success_rate'], 2 / 3 * 100)
+        self.assertAlmostEqual(performance['avg_response_time'], (0.5 + 0.7 + 1.0) / 3)
+
+
+class TestExternalAgentService(unittest.TestCase):
+    """اختبار خدمة الوكلاء الخارجيين"""
+
+    def setUp(self):
+        """إعداد بيئة الاختبار"""
+        self.db_session = MockDBSession()
+        self.external_agent_service = ExternalAgentService(self.db_session)
+
+    def test_register_and_get_agent(self):
+        """اختبار تسجيل واسترجاع الوكلاء الخارجيين"""
+        # تسجيل وكيل خارجي
+        agent = self.external_agent_service.register_agent(
+            name="test_external_agent",
+            provider_type=ProviderType.OPENAI,
+            pricing_type=PricingType.PAID,
+            api_key="test_api_key",
+            api_endpoint="https://api.example.com",
+            model_name="gpt-4",
+            capabilities={"text_generation": True, "image_generation": False},
+            rate_limits={"daily_limit": 1000, "minute_limit": 60}
+        )
+
+        # التحقق من تسجيل الوكيل الخارجي
+        self.assertIsNotNone(agent)
+        self.assertEqual(agent.name, "test_external_agent")
+        self.assertEqual(agent.provider_type, ProviderType.OPENAI)
+        self.assertEqual(agent.pricing_type, PricingType.PAID)
+        self.assertEqual(agent.api_key, "test_api_key")
+        self.assertEqual(agent.api_endpoint, "https://api.example.com")
+        self.assertEqual(agent.model_name, "gpt-4")
+        self.assertEqual(agent.capabilities, {"text_generation": True, "image_generation": False})
+        self.assertEqual(agent.rate_limits, {"daily_limit": 1000, "minute_limit": 60})
+        self.assertTrue(agent.is_active)
+
+        # الحصول على الوكيل
+        retrieved_agent = self.external_agent_service.get_agent(agent.id)
+
+        # التحقق من الحصول على الوكيل
+        self.assertIsNotNone(retrieved_agent)
+        self.assertEqual(retrieved_agent.name, "test_external_agent")
+
+    def test_update_agent(self):
+        """اختبار تحديث الوكيل"""
+        # تسجيل وكيل خارجي
+        agent = self.external_agent_service.register_agent(
+            name="test_external_agent",
+            provider_type=ProviderType.OPENAI,
+            pricing_type=PricingType.PAID,
+            api_key="test_api_key"
+        )
+
+        # تحديث الوكيل
+        updated_agent = self.external_agent_service.update_agent(
+            agent_id=agent.id,
+            name="updated_agent",
+            api_key="new_test_api_key"
+        )
+
+        # التحقق من تحديث الوكيل
+        self.assertIsNotNone(updated_agent)
+        self.assertEqual(updated_agent.name, "updated_agent")
+        self.assertEqual(updated_agent.api_key, "new_test_api_key")
+
+        # الحصول على الوكيل المحدث
+        retrieved_agent = self.external_agent_service.get_agent(agent.id)
+
+        # التحقق من الحصول على الوكيل المحدث
+        self.assertIsNotNone(retrieved_agent)
+        self.assertEqual(retrieved_agent.name, "updated_agent")
+
+    def test_get_active_agents(self):
+        """اختبار الحصول على الوكلاء النشطين"""
+        # تسجيل وكلاء متعددين
+        self.external_agent_service.register_agent(
+            name="test_agent_1",
+            provider_type=ProviderType.OPENAI,
+            pricing_type=PricingType.PAID,
+            capabilities={"text_generation": True}
+        )
+
+        self.external_agent_service.register_agent(
+            name="test_agent_2",
+            provider_type=ProviderType.ANTHROPIC,
+            pricing_type=PricingType.FREE,
+            capabilities={"text_generation": True}
+        )
+
+        # الحصول على الوكلاء النشطين
+        active_agents = self.external_agent_service.get_active_agents()
+
+        # التحقق من الحصول على الوكلاء النشطين
+        self.assertEqual(len(active_agents), 2)
+
+    def test_update_usage_stats(self):
+        """اختبار تحديث إحصائيات الاستخدام"""
+        # تسجيل وكيل خارجي
+        agent = self.external_agent_service.register_agent(
+            name="test_external_agent",
+            provider_type=ProviderType.OPENAI,
+            pricing_type=PricingType.PAID
+        )
+
+        # تحديث إحصائيات الاستخدام
+        result = self.external_agent_service.update_usage_stats(agent.id, tokens=10)
+
+        # التحقق من تحديث إحصائيات الاستخدام
+        self.assertTrue(result)
+
+        # الحصول على الوكيل بعد تحديث الإحصائيات
+        updated_agent = self.external_agent_service.get_agent(agent.id)
+
+        # التحقق من تحديث الإحصائيات
+        self.assertIsNotNone(updated_agent.usage_stats)
+        self.assertEqual(updated_agent.usage_stats["total_tokens"], 10)
+        self.assertEqual(updated_agent.usage_stats["total_requests"], 1)
+
+
+class TestRouterService(unittest.TestCase):
+    """اختبار خدمة التوجيه"""
+
+    def setUp(self):
+        """إعداد بيئة الاختبار"""
+        self.db_session = MockDBSession()
+        self.external_agent_service = ExternalAgentService(self.db_session)
+        self.router_service = RouterService(self.db_session, self.external_agent_service)
+
+    def test_create_and_get_router(self):
+        """اختبار إنشاء واسترجاع الموجهات"""
+        # إنشاء موجه
+        router = self.router_service.create_router(
+            name="test_router",
+            routing_strategy=RoutingStrategy.ROUND_ROBIN,
+            routing_rules={"default_agent": "test_agent_1"},
+            failover_settings={"enabled": True, "max_retries": 3}
+        )
+
+        # التحقق من إنشاء الموجه
+        self.assertIsNotNone(router)
+        self.assertEqual(router.name, "test_router")
+        self.assertEqual(router.routing_strategy, RoutingStrategy.ROUND_ROBIN)
+        self.assertEqual(router.routing_rules, {"default_agent": "test_agent_1"})
+        self.assertEqual(router.failover_settings, {"enabled": True, "max_retries": 3})
+        self.assertTrue(router.is_active)
+
+        # الحصول على الموجه
+        retrieved_router = self.router_service.get_router(router.id)
+
+        # التحقق من الحصول على الموجه
+        self.assertIsNotNone(retrieved_router)
+        self.assertEqual(retrieved_router.name, "test_router")
+
+    def test_update_router(self):
+        """اختبار تحديث الموجه"""
+        # إنشاء موجه
+        router = self.router_service.create_router(
+            name="test_router",
+            routing_strategy=RoutingStrategy.ROUND_ROBIN
+        )
+
+        # تحديث الموجه
+        updated_router = self.router_service.update_router(
+            router_id=router.id,
+            name="updated_router",
+            routing_strategy=RoutingStrategy.LEAST_LOAD
+        )
+
+        # التحقق من تحديث الموجه
+        self.assertIsNotNone(updated_router)
+        self.assertEqual(updated_router.name, "updated_router")
+        self.assertEqual(updated_router.routing_strategy, RoutingStrategy.LEAST_LOAD)
+
+        # الحصول على الموجه المحدث
+        retrieved_router = self.router_service.get_router(router.id)
+
+        # التحقق من الحصول على الموجه المحدث
+        self.assertIsNotNone(retrieved_router)
+        self.assertEqual(retrieved_router.name, "updated_router")
+
+    def test_route_request(self):
+        """اختبار توجيه الطلب"""
+        # تسجيل وكيل خارجي
+        agent = self.external_agent_service.register_agent(
+            name="test_agent",
+            provider_type=ProviderType.OPENAI,
+            pricing_type=PricingType.PAID,
+            capabilities={"text_generation": True}
+        )
+
+        # إنشاء موجه
+        router = self.router_service.create_router(
+            name="test_router",
+            routing_strategy=RoutingStrategy.ROUND_ROBIN
+        )
+
+        # توجيه طلب
+        agent_id = self.router_service.route_request(
+            router_id=router.id,
+            request={"query": "ما هو الذكاء الاصطناعي؟"}
+        )
+
+        # التحقق من توجيه الطلب
+        self.assertIsNotNone(agent_id)
+        self.assertEqual(agent_id, agent.id)
+
+
+class TestPermissionService(unittest.TestCase):
+    """اختبار خدمة الصلاحيات"""
+
+    def setUp(self):
+        """إعداد بيئة الاختبار"""
+        self.db_session = MockDBSession()
+        self.permission_service = PermissionService(self.db_session)
+
+    def test_grant_and_check_permission(self):
+        """اختبار منح والتحقق من الصلاحيات"""
+        # منح صلاحية
+        permission = self.permission_service.grant_permission(
+            agent_id="test_agent",
+            permission_type=PermissionType.READ,
+            resource_type=ResourceType.DATA,
+            resource_id="test_data"
+        )
+
+        # التحقق من منح الصلاحية
+        self.assertIsNotNone(permission)
+        self.assertEqual(permission.agent_id, "test_agent")
+        self.assertEqual(permission.permission_type, PermissionType.READ)
+        self.assertEqual(permission.resource_type, ResourceType.DATA)
+        self.assertEqual(permission.resource_id, "test_data")
+        self.assertTrue(permission.is_active)
+
+        # التحقق من الصلاحية
+        permission_exists = self.permission_service.check_permission(
+            agent_id="test_agent",
+            permission_type=PermissionType.READ,
+            resource_type=ResourceType.DATA,
+            resource_id="test_data"
+        )
+
+        # التحقق من وجود الصلاحية
+        self.assertTrue(permission_exists)
+
+        # التحقق من عدم وجود صلاحية غير ممنوحة
+        permission_exists = self.permission_service.check_permission(
+            agent_id="test_agent",
+            permission_type=PermissionType.WRITE,
+            resource_type=ResourceType.DATA,
+            resource_id="test_data"
+        )
+
+        # التحقق من عدم وجود الصلاحية
+        self.assertFalse(permission_exists)
+
+    def test_revoke_permission(self):
+        """اختبار إلغاء الصلاحية"""
+        # منح صلاحية
+        permission = self.permission_service.grant_permission(
+            agent_id="test_agent",
+            permission_type=PermissionType.READ,
+            resource_type=ResourceType.DATA,
+            resource_id="test_data"
+        )
+
+        # إلغاء الصلاحية
+        result = self.permission_service.revoke_permission(permission.id)
+
+        # التحقق من إلغاء الصلاحية
+        self.assertTrue(result)
+
+        # التحقق من عدم وجود الصلاحية بعد الإلغاء
+        permission_exists = self.permission_service.check_permission(
+            agent_id="test_agent",
+            permission_type=PermissionType.READ,
+            resource_type=ResourceType.DATA,
+            resource_id="test_data"
+        )
+
+        # التحقق من عدم وجود الصلاحية
+        self.assertFalse(permission_exists)
+
+    def test_get_agent_permissions(self):
+        """اختبار الحصول على صلاحيات الوكيل"""
+        # منح صلاحيات متعددة
+        self.permission_service.grant_permission(
+            agent_id="test_agent",
+            permission_type=PermissionType.READ,
+            resource_type=ResourceType.DATA,
+            resource_id="test_data_1"
+        )
+
+        self.permission_service.grant_permission(
+            agent_id="test_agent",
+            permission_type=PermissionType.WRITE,
+            resource_type=ResourceType.DATA,
+            resource_id="test_data_2"
+        )
+
+        # الحصول على صلاحيات الوكيل
+        permissions = self.permission_service.get_agent_permissions("test_agent")
+
+        # التحقق من الحصول على صلاحيات الوكيل
+        self.assertEqual(len(permissions), 2)
+
+        # التحقق من أنواع الصلاحيات
+        permission_types = [p.permission_type for p in permissions]
+        self.assertIn(PermissionType.READ, permission_types)
+        self.assertIn(PermissionType.WRITE, permission_types)
+
+
+if __name__ == '__main__':
+    unittest.main()

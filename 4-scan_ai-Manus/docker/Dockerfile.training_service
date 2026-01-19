@@ -1,0 +1,56 @@
+# Dockerfile for the Training Service (GPU Enabled)
+# This service runs on the Windows GPU node (victus).
+
+# Use an official PyTorch image with CUDA support.
+# IMPORTANT: Choose a CUDA version compatible with the NVIDIA driver installed on the Windows host (victus).
+# Check compatibility here: https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#cuda-major-component-versions
+# Example: Use CUDA 11.7 if the host driver supports it.
+ARG CUDA_VERSION=11.7
+ARG PYTHON_VERSION=3.10
+ARG PYTORCH_VERSION=1.13.1
+ARG TORCHVISION_VERSION=0.14.1
+ARG TORCHAUDIO_VERSION=0.13.1
+
+FROM pytorch/pytorch:${PYTORCH_VERSION}-cuda${CUDA_VERSION}-cudnn8-runtime AS base
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies (if any)
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#     some-package \
+#     && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+# Ensure pip is up-to-date and install requirements
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install specific libraries needed for the training service
+RUN pip install --no-cache-dir pika # For RabbitMQ communication
+# Add other necessary libraries, e.g., for data processing, logging, etc.
+RUN pip install --no-cache-dir pandas scikit-learn Pillow matplotlib seaborn
+# Install library for SMB access if needed (alternative to host mounting)
+# RUN pip install --no-cache-dir pysmbclient
+
+# Copy the training service code into the container
+COPY src/training_service /app/training_service
+# Copy any other necessary scripts or configuration files
+# COPY config/training_config.yaml /app/config/
+
+# Define environment variables (can be overridden at runtime)
+ENV RABBITMQ_HOST=message-queue # Default, should be overridden with actual Swarm service IP/DNS
+ENV RABBITMQ_PORT=5672
+ENV RABBITMQ_USER=rabbit_user
+ENV RABBITMQ_PASS=rabbit_password
+ENV SHARED_DATASETS_PATH=/mnt/shared_storage/datasets # Path inside container, must match mount
+ENV SHARED_MODELS_PATH=/mnt/shared_storage/models # Path inside container, must match mount
+ENV SHARED_LOGS_PATH=/mnt/shared_storage/logs # Path inside container, must match mount
+ENV NVIDIA_VISIBLE_DEVICES=all # Ensure GPU is visible
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+# Command to run the training service script
+# Replace 'run_training_service.py' with the actual entrypoint script name
+CMD ["python", "training_service/run_training_service.py"]
+

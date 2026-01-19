@@ -1,0 +1,22 @@
+{
+  "language": "ar",
+  "timezone": "Africa/Cairo",
+  "date_format": "YYYY-MM-DD",
+  "time_format": "HH:mm:ss",
+  "currency": "SAR",
+  "decimal_separator": ".",
+  "thousands_separator": ",",
+  "default_page_size": 20,
+  "theme": {
+    "primary_color": "#1976d2",
+    "secondary_color": "#dc004e",
+    "dark_mode": false
+  },
+  "notifications": {
+    "email": true,
+    "sms": false,
+    "push": true,
+    "in_app": true
+  },
+  "last_updated": "2025-05-24T21:00:50.935643"
+}

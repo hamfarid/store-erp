@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المزارع | نظام Gaara ERP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            background-color: #343a40;
+            color: white;
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            z-index: 100;
+            padding-top: 20px;
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .sidebar .nav-link:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .sidebar .nav-link.active {
+            color: white;
+            background-color: #28a745;
+        }
+        .sidebar .nav-link i {
+            margin-left: 10px;
+        }
+        .main-content {
+            margin-right: 250px;
+            padding: 20px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            font-weight: bold;
+        }
+        .stats-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .stats-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #28a745;
+        }
+        .stats-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stats-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        .chart-container {
+            height: 300px;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        .btn-action {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            margin-right: 5px;
+        }
+        .farm-filter {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .status-active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-inactive {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .status-maintenance {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+        .crop-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            margin: 2px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <!-- القائمة الجانبية -->
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <img src="/static/img/logo.png" alt="Gaara ERP" width="120">
+            <h5 class="mt-2">نظام Gaara ERP</h5>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard">
+                    <i class="bi bi-speedometer2"></i>
+                    لوحة التحكم
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/nursery/dashboard">
+                    <i class="bi bi-flower1"></i>
+                    المشاتل
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/farm/dashboard">
+                    <i class="bi bi-tree"></i>
+                    المزارع
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/inventory/dashboard">
+                    <i class="bi bi-box"></i>
+                    المخزون
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/accounts/dashboard">
+                    <i class="bi bi-cash-coin"></i>
+                    الحسابات
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/hr/dashboard">
+                    <i class="bi bi-people"></i>
+                    الموارد البشرية
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/reports">
+                    <i class="bi bi-file-earmark-text"></i>
+                    التقارير
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/settings">
+                    <i class="bi bi-gear"></i>
+                    الإعدادات
+                </a>
+            </li>
+            <li class="nav-item mt-5">
+                <a class="nav-link" href="/logout">
+                    <i class="bi bi-box-arrow-right"></i>
+                    تسجيل الخروج
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+        <!-- شريط العنوان -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="bi bi-tree me-2"></i> لوحة تحكم المزارع</h2>
+            <div>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addFarmModal">
+                    <i class="bi bi-plus-circle"></i> إضافة مزرعة جديدة
+                </button>
+                <button class="btn btn-outline-secondary ms-2">
+                    <i class="bi bi-file-earmark-pdf"></i> تصدير التقرير
+                </button>
+            </div>
+        </div>
+
+        <!-- مرشحات البحث -->
+        <div class="farm-filter">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="companyFilter">الشركة</label>
+                        <select class="form-select" id="companyFilter">
+                            <option value="">جميع الشركات</option>
+                            <option value="1">شركة محمد فريد عبد الهادي جعاره وشركاه</option>
+                            <option value="2">جعاره جروب للاستثمار الزراعي</option>
+                            <option value="3">مشاتل جعاره</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="branchFilter">الفرع</label>
+                        <select class="form-select" id="branchFilter">
+                            <option value="">جميع الفروع</option>
+                            <option value="1">الفرع الرئيسي</option>
+                            <option value="2">فرع القاهرة</option>
+                            <option value="3">فرع الإسكندرية</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="statusFilter">الحالة</label>
+                        <select class="form-select" id="statusFilter">
+                            <option value="">جميع الحالات</option>
+                            <option value="نشط">نشط</option>
+                            <option value="متوقف">متوقف</option>
+                            <option value="تحت الصيانة">تحت الصيانة</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="searchInput">بحث</label>
+                        <input type="text" class="form-control" id="searchInput" placeholder="اسم المزرعة...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بطاقات الإحصائيات -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <div class="stats-icon">
+                        <i class="bi bi-tree"></i>
+                    </div>
+                    <div class="stats-title">إجمالي المزارع</div>
+                    <div class="stats-value">8</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <div class="stats-icon">
+                        <i class="bi bi-grid"></i>
+                    </div>
+                    <div class="stats-title">إجمالي المساحة</div>
+                    <div class="stats-value">1,250 فدان</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <div class="stats-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div class="stats-title">نسبة الاستغلال</div>
+                    <div class="stats-value">82%</div>
+                    <div class="progress mt-2">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <div class="stats-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <div class="stats-title">محاصيل جاهزة للحصاد</div>
+                    <div class="stats-value">3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الرسوم البيانية -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-bar-chart"></i> توزيع المحاصيل حسب المزارع
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="farmDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-pie-chart"></i> توزيع المحاصيل حسب النوع
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="cropTypeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- جدول المزارع -->
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-table"></i> قائمة المزارع
+            </div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>اسم المزرعة</th>
+                                <th>الموقع</th>
+                                <th>المساحة (فدان)</th>
+                                <th>المحاصيل الحالية</th>
+                                <th>نسبة الاستغلال</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>مزرعة الوادي</td>
+                                <td>البحيرة - وادي النطرون</td>
+                                <td>350</td>
+                                <td>
+                                    <span class="crop-badge">قمح</span>
+                                    <span class="crop-badge">طماطم</span>
+                                    <span class="crop-badge">بطاطس</span>
+                                </td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>90% (315 فدان)</small>
+                                </td>
+                                <td><span class="status-badge status-active">نشط</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info btn-action" title="عرض التفاصيل">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-success btn-action" title="تعديل">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger btn-action" title="حذف">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>مزرعة النيل</td>
+                                <td>الشرقية - الصالحية الجديدة</td>
+                                <td>200</td>
+                                <td>
+                                    <span class="crop-badge">برسيم</span>
+                                    <span class="crop-badge">ذرة</span>
+                                </td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>75% (150 فدان)</small>
+                                </td>
+                                <td><span class="status-badge status-active">نشط</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info btn-action" title="عرض التفاصيل">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-success btn-action" title="تعديل">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger btn-action" title="حذف">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>مزرعة الفواكه</td>
+                                <td>النوبارية</td>
+                                <td>150</td>
+                                <td>
+                                    <span class="crop-badge">برتقال</span>
+                                    <span class="crop-badge">مانجو</span>
+                                    <span class="crop-badge">عنب</span>
+                                </td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>95% (142 فدان)</small>
+                                </td>
+                                <td><span class="status-badge status-active">نشط</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info btn-action" title="عرض التفاصيل">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-success btn-action" title="تعديل">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger btn-action" title="حذف">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>مزرعة الخضروات</td>
+                                <td>الإسماعيلية</td>
+                                <td>100</td>
+                                <td>
+                                    <span class="crop-badge">خيار</span>
+                                    <span class="crop-badge">فلفل</span>
+                                    <span class="crop-badge">باذنجان</span>
+                                </td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>80% (80 فدان)</small>
+                                </td>
+                                <td><span class="status-badge status-maintenance">تحت الصيانة</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info btn-action" title="عرض التفاصيل">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-success btn-action" title="تعديل">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger btn-action" title="حذف">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>مزرعة الزيتون</td>
+                                <td>مطروح</td>
+                                <td>300</td>
+                                <td>
+                                    <span class="crop-badge">زيتون</span>
+                                </td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>30% (90 فدان)</small>
+                                </td>
+                                <td><span class="status-badge status-inactive">متوقف</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info btn-action" title="عرض التفاصيل">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-success btn-action" title="تعديل">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger btn-action" title="حذف">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">السابق</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">التالي</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- قسم المحاصيل الجاهزة للحصاد -->
+        <div class="card">
+            <div class="card-header">
+                <i class="bi bi-calendar-check"></i> المحاصيل الجاهزة للحصاد
+            </div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>المحصول</th>
+                                <th>المزرعة</th>
+                                <th>القطعة</th>
+                                <th>المساحة (فدان)</th>
+                                <th>تاريخ الزراعة</th>
+                                <th>تاريخ الحصاد المتوقع</th>
+                                <th>الإنتاج المتوقع (طن)</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>قمح</td>
+                                <td>مزرعة الوادي</td>
+                                <td>قطعة 3</td>
+                                <td>50</td>
+                                <td>15/11/2024</td>
+                                <td>10/05/2025</td>
+                                <td>250</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success btn-action" title="جدولة الحصاد">
+                                        <i class="bi bi-calendar-plus"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-info btn-action" title="تفاصيل">
+                                        <i class="bi bi-info-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>طماطم</td>
+                                <td>مزرعة الخضروات</td>
+                                <td>قطعة 2</td>
+                                <td>20</td>
+                                <td>01/02/2025</td>
+                                <td>15/05/2025</td>
+                                <td>400</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success btn-action" title="جدولة الحصاد">
+                                        <i class="bi bi-calendar-plus"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-info btn-action" title="تفاصيل">
+                                        <i class="bi bi-info-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>برتقال</td>
+                                <td>مزرعة الفواكه</td>
+                                <td>قطعة 1</td>
+                                <td>30</td>
+                                <td>--</td>
+                                <td>20/05/2025</td>
+                                <td>600</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success btn-action" title="جدولة الحصاد">
+                                        <i class="bi bi-calendar-plus"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-info btn-action" title="تفاصيل">
+                                        <i class="bi bi-info-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة مزرعة جديدة -->
+    <div class="modal fade" id="addFarmModal" tabindex="-1" aria-labelledby="addFarmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addFarmModalLabel">إضافة مزرعة جديدة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addFarmForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="farmName" class="form-label">اسم المزرعة</label>
+                                <input type="text" class="form-control" id="farmName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="farmLocation" class="form-label">الموقع</label>
+                                <input type="text" class="form-control" id="farmLocation" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="farmArea" class="form-label">المساحة (فدان)</label>
+                                <input type="number" class="form-control" id="farmArea" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="farmSoilType" class="form-label">نوع التربة</label>
+                                <select class="form-select" id="farmSoilType" required>
+                                    <option value="">اختر نوع التربة</option>
+                                    <option value="طينية">طينية</option>
+                                    <option value="رملية">رملية</option>
+                                    <option value="طميية">طميية</option>
+                                    <option value="صحراوية">صحراوية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="farmStatus" class="form-label">الحالة</label>
+                                <select class="form-select" id="farmStatus" required>
+                                    <option value="نشط">نشط</option>
+                                    <option value="متوقف">متوقف</option>
+                                    <option value="تحت الصيانة">تحت الصيانة</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="farmWaterSource" class="form-label">مصدر المياه</label>
+                                <select class="form-select" id="farmWaterSource" required>
+                                    <option value="">اختر مصدر المياه</option>
+                                    <option value="نهر">نهر</option>
+                                    <option value="آبار">آبار</option>
+                                    <option value="مياه جوفية">مياه جوفية</option>
+                                    <option value="قناة ري">قناة ري</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="farmIrrigationType" class="form-label">نظام الري</label>
+                                <select class="form-select" id="farmIrrigationType" required>
+                                    <option value="">اختر نظام الري</option>
+                                    <option value="بالتنقيط">بالتنقيط</option>
+                                    <option value="بالرش">بالرش</option>
+                                    <option value="بالغمر">بالغمر</option>
+                                    <option value="محوري">محوري</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="farmCompany" class="form-label">الشركة</label>
+                                <select class="form-select" id="farmCompany" required>
+                                    <option value="">اختر الشركة</option>
+                                    <option value="1">شركة محمد فريد عبد الهادي جعاره وشركاه</option>
+                                    <option value="2">جعاره جروب للاستثمار الزراعي</option>
+                                    <option value="3">مشاتل جعاره</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="farmBranch" class="form-label">الفرع</label>
+                                <select class="form-select" id="farmBranch" required>
+                                    <option value="">اختر الفرع</option>
+                                    <option value="1">الفرع الرئيسي</option>
+                                    <option value="2">فرع القاهرة</option>
+                                    <option value="3">فرع الإسكندرية</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="farmDescription" class="form-label">الوصف</label>
+                            <textarea class="form-control" id="farmDescription" rows="3"></textarea>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="farmManager" class="form-label">مدير المزرعة</label>
+                                <select class="form-select" id="farmManager" required>
+                                    <option value="">اختر المدير</option>
+                                    <option value="1">أحمد محمد</option>
+                                    <option value="2">محمد علي</option>
+                                    <option value="3">خالد إبراهيم</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="farmCoordinates" class="form-label">الإحداثيات (خط الطول، خط العرض)</label>
+                                <input type="text" class="form-control" id="farmCoordinates" placeholder="مثال: 30.0444, 31.2357">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-success" id="saveFarmBtn">حفظ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- سكريبت جافاسكريبت -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // تهيئة الرسوم البيانية
+        document.addEventListener('DOMContentLoaded', function() {
+            // رسم بياني لتوزيع المحاصيل حسب المزارع
+            const farmDistributionCtx = document.getElementById('farmDistributionChart').getContext('2d');
+            const farmDistributionChart = new Chart(farmDistributionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['مزرعة الوادي', 'مزرعة النيل', 'مزرعة الفواكه', 'مزرعة الخضروات', 'مزرعة الزيتون'],
+                    datasets: [{
+                        label: 'المساحة المزروعة (فدان)',
+                        data: [315, 150, 142, 80, 90],
+                        backgroundColor: [
+                            'rgba(40, 167, 69, 0.6)',
+                            'rgba(23, 162, 184, 0.6)',
+                            'rgba(255, 193, 7, 0.6)',
+                            'rgba(0, 123, 255, 0.6)',
+                            'rgba(220, 53, 69, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(40, 167, 69, 1)',
+                            'rgba(23, 162, 184, 1)',
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(0, 123, 255, 1)',
+                            'rgba(220, 53, 69, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // رسم بياني لتوزيع المحاصيل حسب النوع
+            const cropTypeCtx = document.getElementById('cropTypeChart').getContext('2d');
+            const cropTypeChart = new Chart(cropTypeCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['حبوب', 'خضروات', 'فواكه', 'أعلاف', 'زيتون'],
+                    datasets: [{
+                        label: 'المساحة (فدان)',
+                        data: [200, 150, 180, 100, 90],
+                        backgroundColor: [
+                            'rgba(255, 193, 7, 0.6)',
+                            'rgba(40, 167, 69, 0.6)',
+                            'rgba(23, 162, 184, 0.6)',
+                            'rgba(0, 123, 255, 0.6)',
+                            'rgba(108, 117, 125, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(40, 167, 69, 1)',
+                            'rgba(23, 162, 184, 1)',
+                            'rgba(0, 123, 255, 1)',
+                            'rgba(108, 117, 125, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+
+            // معالجة نموذج إضافة مزرعة جديدة
+            document.getElementById('saveFarmBtn').addEventListener('click', function() {
+                const form = document.getElementById('addFarmForm');
+                if (form.checkValidity()) {
+                    // هنا يمكن إضافة كود لإرسال البيانات إلى الخادم
+                    alert('تم حفظ المزرعة بنجاح!');
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addFarmModal'));
+                    modal.hide();
+                } else {
+                    form.reportValidity();
+                }
+            });
+
+            // معالجة مرشحات البحث
+            document.getElementById('companyFilter').addEventListener('change', filterFarms);
+            document.getElementById('branchFilter').addEventListener('change', filterFarms);
+            document.getElementById('statusFilter').addEventListener('change', filterFarms);
+            document.getElementById('searchInput').addEventListener('input', filterFarms);
+
+            function filterFarms() {
+                // هنا يمكن إضافة كود لتصفية المزارع حسب المرشحات
+                console.log('تصفية المزارع...');
+            }
+        });
+    </script>
+</body>
+</html>

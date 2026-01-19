@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+
+{% block title %}التشخيص - نظام جعاره الزراعي الذكي{% endblock %}
+
+{% block page_title %}التشخيص{% endblock %}
+
+{% block content %}
+<div class="diagnosis-filters">
+    <div class="filter-group">
+        <label>نوع النبات:</label>
+        <select>
+            <option>جميع النباتات</option>
+            <option>الطماطم</option>
+            <option>البطاطس</option>
+            <option>الفلفل</option>
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>الحالة:</label>
+        <select>
+            <option>جميع الحالات</option>
+            <option>سليم</option>
+            <option>مصاب</option>
+            <option>تحت المراقبة</option>
+        </select>
+    </div>
+    <button class="btn-primary">
+        <i class="material-icons">download</i>
+        تصدير التقرير
+    </button>
+</div>
+
+<div class="diagnosis-grid">
+    <div class="diagnosis-card">
+        <div class="diagnosis-header">
+            <h3>إحصائيات التشخيص</h3>
+            <div class="diagnosis-icon">
+                <i class="material-icons">analytics</i>
+            </div>
+        </div>
+        <div class="diagnosis-chart">
+            <canvas id="diagnosisChart"></canvas>
+        </div>
+        <div class="diagnosis-stats">
+            <div class="stat">
+                <span class="stat-label">إجمالي التشخيصات</span>
+                <span class="stat-value">1,234</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">دقة التشخيص</span>
+                <span class="stat-value">95%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="diagnosis-card">
+        <div class="diagnosis-header">
+            <h3>توزيع الأمراض</h3>
+            <div class="diagnosis-icon">
+                <i class="material-icons">pie_chart</i>
+            </div>
+        </div>
+        <div class="diagnosis-chart">
+            <canvas id="diseaseChart"></canvas>
+        </div>
+        <div class="diagnosis-stats">
+            <div class="stat">
+                <span class="stat-label">أكثر مرض انتشاراً</span>
+                <span class="stat-value">الندوة المتأخرة</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">نسبة الانتشار</span>
+                <span class="stat-value">35%</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="diagnosis-table-container">
+    <h3>سجل التشخيصات</h3>
+    <table class="diagnosis-table">
+        <thead>
+            <tr>
+                <th>التاريخ</th>
+                <th>النبات</th>
+                <th>الحالة</th>
+                <th>دقة التشخيص</th>
+                <th>الإجراءات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2024-03-20</td>
+                <td>طماطم</td>
+                <td>مصاب</td>
+                <td>98%</td>
+                <td>
+                    <button class="btn-icon">
+                        <i class="material-icons">visibility</i>
+                    </button>
+                    <button class="btn-icon">
+                        <i class="material-icons">edit</i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2024-03-20</td>
+                <td>بطاطس</td>
+                <td>سليم</td>
+                <td>95%</td>
+                <td>
+                    <button class="btn-icon">
+                        <i class="material-icons">visibility</i>
+                    </button>
+                    <button class="btn-icon">
+                        <i class="material-icons">edit</i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2024-03-20</td>
+                <td>فلفل</td>
+                <td>تحت المراقبة</td>
+                <td>92%</td>
+                <td>
+                    <button class="btn-icon">
+                        <i class="material-icons">visibility</i>
+                    </button>
+                    <button class="btn-icon">
+                        <i class="material-icons">edit</i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .diagnosis-filters {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        align-items: center;
+    }
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .filter-group label {
+        color: #666;
+    }
+    .filter-group select {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: white;
+    }
+    .btn-primary {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        background: #2E7D32;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .btn-primary:hover {
+        background: #1B5E20;
+    }
+    .diagnosis-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    .diagnosis-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .diagnosis-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    .diagnosis-header h3 {
+        color: #333;
+        font-size: 1.2rem;
+    }
+    .diagnosis-icon {
+        width: 40px;
+        height: 40px;
+        background: #E8F5E9;
+        color: #2E7D32;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .diagnosis-icon i {
+        font-size: 24px;
+    }
+    .diagnosis-chart {
+        height: 200px;
+        margin-bottom: 1.5rem;
+    }
+    .diagnosis-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .stat-label {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 0.3rem;
+    }
+    .stat-value {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+    }
+    .diagnosis-table-container {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .diagnosis-table-container h3 {
+        color: #333;
+        margin-bottom: 1rem;
+    }
+    .diagnosis-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .diagnosis-table th,
+    .diagnosis-table td {
+        padding: 1rem;
+        text-align: right;
+        border-bottom: 1px solid #eee;
+    }
+    .diagnosis-table th {
+        color: #666;
+        font-weight: 600;
+    }
+    .diagnosis-table tbody tr:hover {
+        background: #f5f5f5;
+    }
+    .btn-icon {
+        background: none;
+        border: none;
+        color: #666;
+        cursor: pointer;
+        padding: 0.3rem;
+        border-radius: 5px;
+        transition: all 0.3s;
+    }
+    .btn-icon:hover {
+        background: #f5f5f5;
+        color: #2E7D32;
+    }
+    @media (max-width: 768px) {
+        .diagnosis-filters {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .filter-group {
+            width: 100%;
+        }
+        .filter-group select {
+            flex: 1;
+        }
+        .btn-primary {
+            width: 100%;
+            justify-content: center;
+        }
+        .diagnosis-grid {
+            grid-template-columns: 1fr;
+        }
+        .diagnosis-table {
+            display: block;
+            overflow-x: auto;
+        }
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Diagnosis Chart
+    const diagnosisCtx = document.getElementById('diagnosisChart').getContext('2d');
+    new Chart(diagnosisCtx, {
+        type: 'line',
+        data: {
+            labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+            datasets: [{
+                label: 'عدد التشخيصات',
+                data: [150, 200, 250, 300, 280, 220],
+                borderColor: '#2E7D32',
+                tension: 0.4,
+                fill: true,
+                backgroundColor: 'rgba(46, 125, 50, 0.1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    // Disease Distribution Chart
+    const diseaseCtx = document.getElementById('diseaseChart').getContext('2d');
+    new Chart(diseaseCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['الندوة المتأخرة', 'البياض الدقيقي', 'الذبول الفيوزاريومي'],
+            datasets: [{
+                data: [35, 25, 20],
+                backgroundColor: ['#2E7D32', '#4CAF50', '#81C784']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+{% endblock %} 

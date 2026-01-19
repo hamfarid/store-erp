@@ -1,0 +1,195 @@
+# Cloudflare Configuration - Gaara Scan AI v4.3.1
+# E2E Encryption and Security Settings
+
+# Cloudflare Tunnel Configuration
+tunnel:
+  name: gaara-scan-ai
+  credentials-file: /root/.cloudflared/credentials.json
+
+# Ingress rules
+ingress:
+  # Frontend
+  - hostname: gaara-scan-ai.yourdomain.com
+    service: http://frontend:80
+    originRequest:
+      noTLSVerify: false
+      connectTimeout: 30s
+      tlsTimeout: 10s
+      keepAliveTimeout: 90s
+      keepAliveConnections: 100
+  
+  # API Backend
+  - hostname: api.gaara-scan-ai.yourdomain.com
+    service: http://backend:1005
+    originRequest:
+      noTLSVerify: false
+      connectTimeout: 60s
+      tlsTimeout: 10s
+  
+  # ML Service
+  - hostname: ml.gaara-scan-ai.yourdomain.com
+    service: http://ml_service:8000
+    originRequest:
+      noTLSVerify: false
+      connectTimeout: 120s
+  
+  # Image Crawler
+  - hostname: crawler.gaara-scan-ai.yourdomain.com
+    service: http://image_crawler:8001
+    originRequest:
+      noTLSVerify: false
+      connectTimeout: 60s
+  
+  # Catch-all rule
+  - service: http_status:404
+
+# Cloudflare Access (Zero Trust)
+access:
+  enabled: true
+  policies:
+    - name: "Admin Access"
+      include:
+        - email:
+            - admin@yourdomain.com
+      require:
+        - email_domain:
+            domain: yourdomain.com
+    
+    - name: "2FA Required"
+      include:
+        - everyone: true
+      require:
+        - auth_method:
+            auth_method: otp
+
+# WAF Rules
+waf:
+  enabled: true
+  rules:
+    - description: "Block SQL Injection"
+      expression: '(http.request.uri.path contains "union" and http.request.uri.path contains "select") or (http.request.uri.path contains "exec")'
+      action: block
+    
+    - description: "Block XSS Attempts"
+      expression: 'http.request.uri.path contains "<script"'
+      action: block
+    
+    - description: "Rate Limit API"
+      expression: 'http.request.uri.path contains "/api/"'
+      action: challenge
+      ratelimit:
+        requests_per_minute: 100
+
+# SSL/TLS Settings
+ssl:
+  mode: full_strict  # Full E2E encryption
+  min_tls_version: "1.2"
+  tls_1_3: enabled
+  automatic_https_rewrites: true
+  always_use_https: true
+  opportunistic_encryption: true
+
+# Security Headers
+security_headers:
+  - header: "Strict-Transport-Security"
+    value: "max-age=31536000; includeSubDomains; preload"
+  
+  - header: "X-Content-Type-Options"
+    value: "nosniff"
+  
+  - header: "X-Frame-Options"
+    value: "SAMEORIGIN"
+  
+  - header: "X-XSS-Protection"
+    value: "1; mode=block"
+  
+  - header: "Referrer-Policy"
+    value: "strict-origin-when-cross-origin"
+
+# DDoS Protection
+ddos_protection:
+  enabled: true
+  sensitivity: high
+  
+# Bot Management
+bot_management:
+  enabled: true
+  fight_mode: true
+  
+# Cache Settings
+cache:
+  level: aggressive
+  browser_cache_ttl: 14400  # 4 hours
+  edge_cache_ttl: 7200      # 2 hours
+  bypass_cache_on_cookie: true
+  
+# Performance
+performance:
+  minify:
+    html: true
+    css: true
+    js: true
+  
+  brotli: true
+  early_hints: true
+  http2: true
+  http3: true
+  
+  rocket_loader: false  # Disable for React apps
+  auto_minify: true
+
+# Firewall Rules
+firewall:
+  - description: "Block bad bots"
+    expression: '(cf.client.bot) and not (cf.verified_bot_category in {"Search Engine Crawler" "Monitoring & Analytics"})'
+    action: block
+  
+  - description: "Challenge suspicious countries"
+    expression: 'ip.geoip.country in {"CN" "RU" "KP"}'
+    action: challenge
+  
+  - description: "Block known malicious IPs"
+    expression: 'ip.src in $malicious_ips'
+    action: block
+
+# Page Rules
+page_rules:
+  - url: "*/api/*"
+    settings:
+      cache_level: bypass
+      security_level: high
+  
+  - url: "*/uploads/*"
+    settings:
+      cache_level: cache_everything
+      edge_cache_ttl: 2592000  # 30 days
+  
+  - url: "*.js"
+    settings:
+      cache_level: cache_everything
+      edge_cache_ttl: 31536000  # 1 year
+  
+  - url: "*.css"
+    settings:
+      cache_level: cache_everything
+      edge_cache_ttl: 31536000  # 1 year
+
+# Load Balancing
+load_balancing:
+  enabled: false  # Enable when you have multiple origins
+  
+# Analytics
+analytics:
+  enabled: true
+  web_analytics: true
+  
+# Notifications
+notifications:
+  - type: health_check_failure
+    enabled: true
+  
+  - type: ddos_attack
+    enabled: true
+  
+  - type: ssl_expiration
+    enabled: true

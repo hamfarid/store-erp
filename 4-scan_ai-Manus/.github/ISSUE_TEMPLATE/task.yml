@@ -1,0 +1,203 @@
+name: 📋 Task/Improvement - مهمة/تحسين
+description: Create a task or improvement for the Arabic Inventory Management System
+title: "[TASK] "
+labels: ["task", "improvement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## إنشاء مهمة أو تحسين جديد
+        Creating a new task or improvement
+        
+        استخدم هذا النموذج لإنشاء مهام التطوير، التحسينات، أو المهام الإدارية.
+        Use this template to create development tasks, improvements, or administrative tasks.
+
+  - type: input
+    id: task-title
+    attributes:
+      label: عنوان المهمة - Task Title
+      description: عنوان مختصر وواضح للمهمة - A brief and clear title for the task
+      placeholder: "مثال - Example: تحسين أداء استعلامات قاعدة البيانات - Improve database query performance"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: task-type
+    attributes:
+      label: نوع المهمة - Task Type
+      description: ما نوع هذه المهمة؟ - What type of task is this?
+      options:
+        - Development - تطوير
+        - Bug Fix - إصلاح خطأ
+        - Performance Improvement - تحسين الأداء
+        - Code Refactoring - إعادة هيكلة الكود
+        - Documentation - توثيق
+        - Testing - اختبار
+        - Security Enhancement - تعزيز الأمان
+        - UI/UX Improvement - تحسين الواجهة/التجربة
+        - Database Optimization - تحسين قاعدة البيانات
+        - API Enhancement - تحسين واجهة برمجة التطبيقات
+        - Configuration - إعدادات
+        - Maintenance - صيانة
+        - Research - بحث
+        - Other - أخرى
+    validations:
+      required: true
+
+  - type: textarea
+    id: task-description
+    attributes:
+      label: وصف المهمة - Task Description
+      description: وصف مفصل للمهمة والعمل المطلوب - Detailed description of the task and required work
+      placeholder: |
+        اشرح المهمة بالتفصيل...
+        Explain the task in detail...
+    validations:
+      required: true
+
+  - type: textarea
+    id: objectives
+    attributes:
+      label: الأهداف - Objectives
+      description: ما هي الأهداف المحددة لهذه المهمة؟ - What are the specific objectives of this task?
+      placeholder: |
+        - الهدف الأول - First objective
+        - الهدف الثاني - Second objective
+        - الهدف الثالث - Third objective
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: الأولوية - Priority
+      description: ما مدى أولوية هذه المهمة؟ - What is the priority of this task?
+      options:
+        - Urgent - عاجل
+        - High - عالي
+        - Medium - متوسط
+        - Low - منخفض
+    validations:
+      required: true
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: التعقيد - Complexity
+      description: ما مدى تعقيد هذه المهمة؟ - How complex is this task?
+      options:
+        - Simple - بسيط (بضع ساعات)
+        - Medium - متوسط (1-3 أيام)
+        - Complex - معقد (1-2 أسبوع)
+        - Very Complex - معقد جداً (أكثر من أسبوعين)
+    validations:
+      required: true
+
+  - type: input
+    id: estimated-time
+    attributes:
+      label: الوقت المقدر - Estimated Time
+      description: كم من الوقت تتوقع أن تستغرق هذه المهمة؟ - How much time do you estimate this task will take?
+      placeholder: "مثال - Example: 2 days, 1 week, 16 hours"
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: معايير القبول - Acceptance Criteria
+      description: ما هي المعايير التي يجب تحقيقها لاعتبار هذه المهمة مكتملة؟ - What criteria must be met to consider this task complete?
+      placeholder: |
+        - [ ] المعيار الأول - First criterion
+        - [ ] المعيار الثاني - Second criterion
+        - [ ] المعيار الثالث - Third criterion
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical-requirements
+    attributes:
+      label: المتطلبات التقنية - Technical Requirements
+      description: ما هي المتطلبات التقنية لهذه المهمة؟ - What are the technical requirements for this task?
+      placeholder: |
+        - المتطلب الأول - First requirement
+        - المتطلب الثاني - Second requirement
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: التبعيات - Dependencies
+      description: هل تعتمد هذه المهمة على مهام أخرى؟ - Does this task depend on other tasks?
+      placeholder: |
+        - المهمة #123 يجب أن تكتمل أولاً - Task #123 must be completed first
+        - يحتاج إلى موافقة من... - Needs approval from...
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: المكون المتأثر - Affected Component
+      description: أي جزء من النظام سيتأثر؟ - Which part of the system will be affected?
+      options:
+        - Frontend - الواجهة الأمامية
+        - Backend - الخادم
+        - Database - قاعدة البيانات
+        - API - واجهة برمجة التطبيقات
+        - Authentication - المصادقة
+        - Reports - التقارير
+        - Inventory - المخزون
+        - Sales - المبيعات
+        - Customers - العملاء
+        - Products - المنتجات
+        - Infrastructure - البنية التحتية
+        - Documentation - التوثيق
+        - Testing - الاختبار
+        - Multiple Components - مكونات متعددة
+        - Other - أخرى
+
+  - type: textarea
+    id: testing-requirements
+    attributes:
+      label: متطلبات الاختبار - Testing Requirements
+      description: ما نوع الاختبارات المطلوبة؟ - What type of testing is required?
+      placeholder: |
+        - اختبارات الوحدة - Unit tests
+        - اختبارات التكامل - Integration tests
+        - اختبارات الواجهة - UI tests
+
+  - type: textarea
+    id: documentation-updates
+    attributes:
+      label: تحديثات التوثيق - Documentation Updates
+      description: هل تحتاج هذه المهمة إلى تحديث التوثيق؟ - Does this task require documentation updates?
+      placeholder: |
+        - تحديث دليل المستخدم - Update user guide
+        - تحديث التوثيق التقني - Update technical documentation
+
+  - type: input
+    id: assignee-suggestion
+    attributes:
+      label: اقتراح المكلف - Assignee Suggestion
+      description: هل تقترح شخصاً معيناً لهذه المهمة؟ - Do you suggest a specific person for this task?
+      placeholder: "اسم المستخدم أو اتركه فارغاً - username or leave empty"
+
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: ملاحظات إضافية - Additional Notes
+      description: أي ملاحظات أو معلومات إضافية - Any additional notes or information
+      placeholder: أضف أي تفاصيل إضافية... - Add any additional details...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: قائمة التحقق - Checklist
+      description: تأكد من النقاط التالية - Check the following points
+      options:
+        - label: المهمة محددة بوضوح ومفهومة - The task is clearly defined and understandable
+          required: true
+        - label: معايير القبول واضحة وقابلة للقياس - Acceptance criteria are clear and measurable
+          required: true
+        - label: تم تحديد الأولوية والتعقيد - Priority and complexity have been determined
+          required: true
+        - label: تم النظر في التبعيات والمتطلبات - Dependencies and requirements have been considered
+          required: true

@@ -1,0 +1,2114 @@
+# /home/ubuntu/ai_web_organized/src/modules/performance_monitoring/report_generator.py
+
+"""
+from flask import g
+وحدة مولد التقارير (Report Generator)
+
+هذه الوحدة مسؤولة عن إنشاء تقارير الأداء المختلفة بناءً على بيانات الأداء المجمعة،
+وتوفير واجهة برمجية لتوليد التقارير بتنسيقات مختلفة (HTML، PDF، JSON).
+"""
+
+import base64
+import datetime
+import json
+import logging
+import os
+from dataclasses import dataclass
+from io import BytesIO
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+
+# تكوين نظام التسجيل
+logger = logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# محاولة استيراد مكتبات إنشاء PDF
+try:
+    from fpdf import FPDF
+    PDF_SUPPORT = True
+except ImportError:
+    logger.warning(
+        "FPDF library not available. PDF report generation will be disabled.")
+    PDF_SUPPORT = False
+
+
+@dataclass
+class ReportConfig:
+    """فئة تمثل إعدادات التقرير"""
+    title: str
+    description: str
+    time_range: str
+    include_charts: bool = True
+    include_recommendations: bool = True
+    include_anomalies: bool = True
+    include_trends: bool = True
+    max_recommendations: int = 5
+    max_anomalies: int = 10
+    chart_width: int = 10
+    chart_height: int = 6
+    output_format: str = "html"  # "html", "pdf", "json"
+    output_dir: str = "/tmp/reports"
+
+
+class ReportGenerator:
+    """مولد التقارير - مسؤول عن إنشاء تقارير الأداء المختلفة"""
+
+    def __init__(self, data_store, performance_analyzer, config_path=None):
+        """
+        تهيئة مولد التقارير
+
+        Args:
+            data_store: مخزن بيانات الأداء
+            performance_analyzer: محلل الأداء
+            config_path (str, optional): مسار ملف التكوين. Defaults to None.
+        """
+        self.data_store = data_store
+        self.performance_analyzer = performance_analyzer
+        self.config = self._load_config(config_path)
+
+        # إنشاء دليل التقارير إذا لم يكن موجوداً
+        os.makedirs(
+            self.config.get(
+                "report_output_dir",
+                "/tmp/reports"),
+            exist_ok=True)
+
+    def _load_config(self, config_path):
+        """تحميل إعدادات التكوين من ملف"""
+        default_config = {
+            "report_output_dir": "/tmp/reports",
+            "report_formats": ["html", "pdf", "json"],
+            "default_time_ranges": ["1h", "6h", "1d", "7d", "30d"],
+            "max_items_per_report": 50,
+            "chart_theme": "darkgrid",
+            "include_system_info": True,
+            "include_recommendations": True,
+            "include_anomalies": True,
+            "include_trends": True,
+            "logo_path": None
+        }
+
+        if config_path and os.path.exists(config_path):
+            try:
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                    # دمج الإعدادات المخصصة مع الإعدادات الافتراضية
+                    for key, value in default_config.items():
+                        if key not in config:
+                            config[key] = value
+                    return config
+            except Exception as e:
+                logger.error(f"Error loading config from {config_path}: {e}")
+                return default_config
+        else:
+            return default_config
+
+    def generate_system_performance_report(
+            self, report_config: ReportConfig) -> str:
+        """
+        إنشاء تقرير أداء النظام
+
+        Args:
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        try:
+            # الحصول على بيانات أداء النظام
+            system_metrics = self.data_store.get_metrics(
+                "system", None, report_config.time_range)
+            if not system_metrics:
+                logger.warning(
+                    f"No system metrics found for time range: {report_config.time_range}")
+                return None
+
+            # تحويل البيانات إلى DataFrame للتحليل
+            df = pd.DataFrame(system_metrics)
+
+            # تحليل اتجاه الأداء
+            trend_analysis = None
+            if report_config.include_trends is not None:
+                trend_analysis = self.performance_analyzer.analyze_performance_trend(
+                    "system", None, report_config.time_range)
+
+            # اكتشاف الانحرافات
+            anomalies = []
+            if report_config.include_anomalies is not None:
+                anomalies = self.performance_analyzer.detect_performance_anomalies(
+                    "system", None, report_config.time_range)
+                if report_config.max_anomalies > 0 and len(
+                        anomalies) > report_config.max_anomalies:
+                    anomalies = anomalies[:report_config.max_anomalies]
+
+            # توليد التوصيات
+            recommendations = []
+            if report_config.include_recommendations is not None:
+                recommendations = self.performance_analyzer.generate_performance_recommendations()
+                if report_config.max_recommendations > 0 and len(
+                        recommendations) > report_config.max_recommendations:
+                    recommendations = recommendations[:
+                                                      report_config.max_recommendations]
+
+            # إنشاء الرسوم البيانية
+            charts = {}
+            if report_config.include_charts is not None:
+                charts = self._create_system_performance_charts(
+                    df, report_config)
+
+            # إنشاء التقرير بالتنسيق المطلوب
+            if report_config.output_format.lower() == "html":
+                report_path = self._generate_html_system_report(
+                    df, trend_analysis, anomalies, recommendations, charts, report_config)
+            elif report_config.output_format.lower() == "pdf" and PDF_SUPPORT:
+                report_path = self._generate_pdf_system_report(
+                    df, trend_analysis, anomalies, recommendations, charts, report_config)
+            elif report_config.output_format.lower() == "json":
+                report_path = self._generate_json_system_report(
+                    df, trend_analysis, anomalies, recommendations, report_config)
+            else:
+                logger.warning(
+                    f"Unsupported output format: {report_config.output_format}")
+                report_path = None
+
+            return report_path
+
+        except Exception as e:
+            logger.error(f"Error generating system performance report: {e}")
+            return None
+
+    def generate_module_performance_report(
+            self, module_id: str, report_config: ReportConfig) -> str:
+        """
+        إنشاء تقرير أداء المديول
+
+        Args:
+            module_id (str): معرف المديول
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        try:
+            # الحصول على بيانات أداء المديول
+            module_metrics = self.data_store.get_metrics(
+                "module", module_id, report_config.time_range)
+            if not module_metrics:
+                logger.warning(
+                    f"No metrics found for module {module_id} in time range: {report_config.time_range}")
+                return None
+
+            # تحويل البيانات إلى DataFrame للتحليل
+            df = pd.DataFrame(module_metrics)
+
+            # تحليل اتجاه الأداء
+            trend_analysis = None
+            if report_config.include_trends is not None:
+                trend_analysis = self.performance_analyzer.analyze_performance_trend(
+                    "module", module_id, report_config.time_range)
+
+            # اكتشاف الانحرافات
+            anomalies = []
+            if report_config.include_anomalies is not None:
+                anomalies = self.performance_analyzer.detect_performance_anomalies(
+                    "module", module_id, report_config.time_range)
+                if report_config.max_anomalies > 0 and len(
+                        anomalies) > report_config.max_anomalies:
+                    anomalies = anomalies[:report_config.max_anomalies]
+
+            # توليد التوصيات
+            recommendations = []
+            if report_config.include_recommendations is not None:
+                recommendations = self.performance_analyzer.generate_performance_recommendations(
+                    module_id)
+                if report_config.max_recommendations > 0 and len(
+                        recommendations) > report_config.max_recommendations:
+                    recommendations = recommendations[:
+                                                      report_config.max_recommendations]
+
+            # إنشاء الرسوم البيانية
+            charts = {}
+            if report_config.include_charts is not None:
+                charts = self._create_module_performance_charts(
+                    df, module_id, report_config)
+
+            # إنشاء التقرير بالتنسيق المطلوب
+            if report_config.output_format.lower() == "html":
+                report_path = self._generate_html_module_report(
+                    df, module_id, trend_analysis, anomalies, recommendations, charts, report_config)
+            elif report_config.output_format.lower() == "pdf" and PDF_SUPPORT:
+                report_path = self._generate_pdf_module_report(
+                    df, module_id, trend_analysis, anomalies, recommendations, charts, report_config)
+            elif report_config.output_format.lower() == "json":
+                report_path = self._generate_json_module_report(
+                    df, module_id, trend_analysis, anomalies, recommendations, report_config)
+            else:
+                logger.warning(
+                    f"Unsupported output format: {report_config.output_format}")
+                report_path = None
+
+            return report_path
+
+        except Exception as e:
+            logger.error(f"Error generating module performance report: {e}")
+            return None
+
+    def generate_ai_performance_report(
+            self,
+            ai_model_id: str,
+            report_config: ReportConfig) -> str:
+        """
+        إنشاء تقرير أداء نموذج الذكاء الصناعي
+
+        Args:
+            ai_model_id (str): معرف نموذج الذكاء الصناعي
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        try:
+            # الحصول على بيانات أداء نموذج الذكاء الصناعي
+            ai_metrics = self.data_store.get_metrics(
+                "ai", ai_model_id, report_config.time_range)
+            if not ai_metrics:
+                logger.warning(
+                    f"No metrics found for AI model {ai_model_id} in time range: {report_config.time_range}")
+                return None
+
+            # تحويل البيانات إلى DataFrame للتحليل
+            df = pd.DataFrame(ai_metrics)
+
+            # تحليل اتجاه الأداء
+            trend_analysis = None
+            if report_config.include_trends is not None:
+                trend_analysis = self.performance_analyzer.analyze_performance_trend(
+                    "ai", ai_model_id, report_config.time_range)
+
+            # اكتشاف الانحرافات
+            anomalies = []
+            if report_config.include_anomalies is not None:
+                anomalies = self.performance_analyzer.detect_performance_anomalies(
+                    "ai", ai_model_id, report_config.time_range)
+                if report_config.max_anomalies > 0 and len(
+                        anomalies) > report_config.max_anomalies:
+                    anomalies = anomalies[:report_config.max_anomalies]
+
+            # توليد التوصيات
+            recommendations = []
+            if report_config.include_recommendations is not None:
+                recommendations = self.performance_analyzer.generate_performance_recommendations(
+                    ai_model_id)
+                if report_config.max_recommendations > 0 and len(
+                        recommendations) > report_config.max_recommendations:
+                    recommendations = recommendations[:
+                                                      report_config.max_recommendations]
+
+            # إنشاء الرسوم البيانية
+            charts = {}
+            if report_config.include_charts is not None:
+                charts = self._create_ai_performance_charts(
+                    df, ai_model_id, report_config)
+
+            # إنشاء التقرير بالتنسيق المطلوب
+            if report_config.output_format.lower() == "html":
+                report_path = self._generate_html_ai_report(
+                    df,
+                    ai_model_id,
+                    trend_analysis,
+                    anomalies,
+                    recommendations,
+                    charts,
+                    report_config)
+            elif report_config.output_format.lower() == "pdf" and PDF_SUPPORT:
+                report_path = self._generate_pdf_ai_report(
+                    df,
+                    ai_model_id,
+                    trend_analysis,
+                    anomalies,
+                    recommendations,
+                    charts,
+                    report_config)
+            elif report_config.output_format.lower() == "json":
+                report_path = self._generate_json_ai_report(
+                    df, ai_model_id, trend_analysis, anomalies, recommendations, report_config)
+            else:
+                logger.warning(
+                    f"Unsupported output format: {report_config.output_format}")
+                report_path = None
+
+            return report_path
+
+        except Exception as e:
+            logger.error(f"Error generating AI performance report: {e}")
+            return None
+
+    def generate_database_performance_report(
+            self, db_name: str, report_config: ReportConfig) -> str:
+        """
+        إنشاء تقرير أداء قاعدة البيانات
+
+        Args:
+            db_name (str): اسم قاعدة البيانات
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        try:
+            # الحصول على بيانات أداء قاعدة البيانات
+            db_metrics = self.data_store.get_metrics(
+                "database", db_name, report_config.time_range)
+            if not db_metrics:
+                logger.warning(
+                    f"No metrics found for database {db_name} in time range: {report_config.time_range}")
+                return None
+
+            # تحويل البيانات إلى DataFrame للتحليل
+            df = pd.DataFrame(db_metrics)
+
+            # تحليل اتجاه الأداء
+            trend_analysis = None
+            if report_config.include_trends is not None:
+                trend_analysis = self.performance_analyzer.analyze_performance_trend(
+                    "database", db_name, report_config.time_range)
+
+            # اكتشاف الانحرافات
+            anomalies = []
+            if report_config.include_anomalies is not None:
+                anomalies = self.performance_analyzer.detect_performance_anomalies(
+                    "database", db_name, report_config.time_range)
+                if report_config.max_anomalies > 0 and len(
+                        anomalies) > report_config.max_anomalies:
+                    anomalies = anomalies[:report_config.max_anomalies]
+
+            # توليد التوصيات
+            recommendations = []
+            if report_config.include_recommendations is not None:
+                recommendations = self.performance_analyzer.generate_performance_recommendations(
+                    db_name)
+                if report_config.max_recommendations > 0 and len(
+                        recommendations) > report_config.max_recommendations:
+                    recommendations = recommendations[:
+                                                      report_config.max_recommendations]
+
+            # إنشاء الرسوم البيانية
+            charts = {}
+            if report_config.include_charts is not None:
+                charts = self._create_database_performance_charts(
+                    df, db_name, report_config)
+
+            # إنشاء التقرير بالتنسيق المطلوب
+            if report_config.output_format.lower() == "html":
+                report_path = self._generate_html_database_report(
+                    df, db_name, trend_analysis, anomalies, recommendations, charts, report_config)
+            elif report_config.output_format.lower() == "pdf" and PDF_SUPPORT:
+                report_path = self._generate_pdf_database_report(
+                    df, db_name, trend_analysis, anomalies, recommendations, charts, report_config)
+            elif report_config.output_format.lower() == "json":
+                report_path = self._generate_json_database_report(
+                    df, db_name, trend_analysis, anomalies, recommendations, report_config)
+            else:
+                logger.warning(
+                    f"Unsupported output format: {report_config.output_format}")
+                report_path = None
+
+            return report_path
+
+        except Exception as e:
+            logger.error(f"Error generating database performance report: {e}")
+            return None
+
+    def generate_comprehensive_report(
+            self, report_config: ReportConfig) -> str:
+        """
+        إنشاء تقرير شامل لأداء النظام والمديولات والذكاء الصناعي وقواعد البيانات
+
+        Args:
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        try:
+            # الحصول على بيانات أداء النظام
+            system_metrics = self.data_store.get_metrics(
+                "system", None, report_config.time_range)
+            if not system_metrics:
+                logger.warning(
+                    f"No system metrics found for time range: {report_config.time_range}")
+                system_df = None
+            else:
+                system_df = pd.DataFrame(system_metrics)
+
+            # الحصول على قائمة المديولات النشطة
+            active_modules = self.data_store.get_active_entities("module")
+
+            # الحصول على قائمة نماذج الذكاء الصناعي النشطة
+            active_ai_models = self.data_store.get_active_entities("ai")
+
+            # الحصول على قائمة قواعد البيانات النشطة
+            active_databases = self.data_store.get_active_entities("database")
+
+            # تحليل اتجاه الأداء للنظام
+            system_trend = None
+            if report_config.include_trends and system_df is not None:
+                system_trend = self.performance_analyzer.analyze_performance_trend(
+                    "system", None, report_config.time_range)
+
+            # اكتشاف الانحرافات في النظام
+            system_anomalies = []
+            if report_config.include_anomalies and system_df is not None:
+                system_anomalies = self.performance_analyzer.detect_performance_anomalies(
+                    "system", None, report_config.time_range)
+
+            # توليد التوصيات للنظام
+            system_recommendations = []
+            if report_config.include_recommendations is not None:
+                system_recommendations = self.performance_analyzer._generate_system_recommendations()
+
+            # إنشاء الرسوم البيانية للنظام
+            system_charts = {}
+            if report_config.include_charts and system_df is not None:
+                system_charts = self._create_system_performance_charts(
+                    system_df, report_config)
+
+            # جمع بيانات المديولات
+            module_data = {}
+            for module_id in active_modules:
+                module_metrics = self.data_store.get_metrics(
+                    "module", module_id, report_config.time_range)
+                if not module_metrics:
+                    continue
+
+                module_df = pd.DataFrame(module_metrics)
+                module_trend = None
+                if report_config.include_trends is not None:
+                    module_trend = self.performance_analyzer.analyze_performance_trend(
+                        "module", module_id, report_config.time_range)
+
+                module_anomalies = []
+                if report_config.include_anomalies is not None:
+                    module_anomalies = self.performance_analyzer.detect_performance_anomalies(
+                        "module", module_id, report_config.time_range)
+
+                module_recommendations = []
+                if report_config.include_recommendations is not None:
+                    module_recommendations = self.performance_analyzer._generate_module_recommendations(
+                        module_id)
+
+                module_charts = {}
+                if report_config.include_charts is not None:
+                    module_charts = self._create_module_performance_charts(
+                        module_df, module_id, report_config)
+
+                module_data[module_id] = {
+                    "metrics": module_df,
+                    "trend": module_trend,
+                    "anomalies": module_anomalies,
+                    "recommendations": module_recommendations,
+                    "charts": module_charts
+                }
+
+            # جمع بيانات نماذج الذكاء الصناعي
+            ai_data = {}
+            for ai_model_id in active_ai_models:
+                ai_metrics = self.data_store.get_metrics(
+                    "ai", ai_model_id, report_config.time_range)
+                if not ai_metrics:
+                    continue
+
+                ai_df = pd.DataFrame(ai_metrics)
+                ai_trend = None
+                if report_config.include_trends is not None:
+                    ai_trend = self.performance_analyzer.analyze_performance_trend(
+                        "ai", ai_model_id, report_config.time_range)
+
+                ai_anomalies = []
+                if report_config.include_anomalies is not None:
+                    ai_anomalies = self.performance_analyzer.detect_performance_anomalies(
+                        "ai", ai_model_id, report_config.time_range)
+
+                ai_recommendations = []
+                if report_config.include_recommendations is not None:
+                    ai_recommendations = self.performance_analyzer._generate_ai_recommendations(
+                        ai_model_id)
+
+                ai_charts = {}
+                if report_config.include_charts is not None:
+                    ai_charts = self._create_ai_performance_charts(
+                        ai_df, ai_model_id, report_config)
+
+                ai_data[ai_model_id] = {
+                    "metrics": ai_df,
+                    "trend": ai_trend,
+                    "anomalies": ai_anomalies,
+                    "recommendations": ai_recommendations,
+                    "charts": ai_charts
+                }
+
+            # جمع بيانات قواعد البيانات
+            db_data = {}
+            for db_name in active_databases:
+                db_metrics = self.data_store.get_metrics(
+                    "database", db_name, report_config.time_range)
+                if not db_metrics:
+                    continue
+
+                db_df = pd.DataFrame(db_metrics)
+                db_trend = None
+                if report_config.include_trends is not None:
+                    db_trend = self.performance_analyzer.analyze_performance_trend(
+                        "database", db_name, report_config.time_range)
+
+                db_anomalies = []
+                if report_config.include_anomalies is not None:
+                    db_anomalies = self.performance_analyzer.detect_performance_anomalies(
+                        "database", db_name, report_config.time_range)
+
+                db_recommendations = []
+                if report_config.include_recommendations is not None:
+                    db_recommendations = self.performance_analyzer._generate_database_recommendations(
+                        db_name)
+
+                db_charts = {}
+                if report_config.include_charts is not None:
+                    db_charts = self._create_database_performance_charts(
+                        db_df, db_name, report_config)
+
+                db_data[db_name] = {
+                    "metrics": db_df,
+                    "trend": db_trend,
+                    "anomalies": db_anomalies,
+                    "recommendations": db_recommendations,
+                    "charts": db_charts
+                }
+
+            # إنشاء التقرير بالتنسيق المطلوب
+            if report_config.output_format.lower() == "html":
+                report_path = self._generate_html_comprehensive_report(
+                    system_df, system_trend, system_anomalies, system_recommendations, system_charts,
+                    module_data, ai_data, db_data, report_config)
+            elif report_config.output_format.lower() == "pdf" and PDF_SUPPORT:
+                report_path = self._generate_pdf_comprehensive_report(
+                    system_df,
+                    system_trend,
+                    system_anomalies,
+                    system_recommendations,
+                    system_charts,
+                    module_data,
+                    ai_data,
+                    db_data,
+                    report_config)
+            elif report_config.output_format.lower() == "json":
+                report_path = self._generate_json_comprehensive_report(
+                    system_df, system_trend, system_anomalies, system_recommendations,
+                    module_data, ai_data, db_data, report_config)
+            else:
+                logger.warning(
+                    f"Unsupported output format: {report_config.output_format}")
+                report_path = None
+
+            return report_path
+
+        except Exception as e:
+            logger.error(f"Error generating comprehensive report: {e}")
+            return None
+
+    def _create_system_performance_charts(self, df, report_config):
+        """
+        إنشاء الرسوم البيانية لأداء النظام
+
+        Args:
+            df (DataFrame): بيانات أداء النظام
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            dict: قاموس الرسوم البيانية
+        """
+        charts = {}
+
+        try:
+            # تعيين نمط الرسوم البيانية
+            sns.set_theme(style=self.config.get("chart_theme", "darkgrid"))
+
+            # تحويل عمود التاريخ إلى تاريخ
+            if "timestamp" in df.columns:
+                df["timestamp"] = pd.to_datetime(df["timestamp"])
+
+            # رسم استهلاك CPU
+            if "cpu.total_percent" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["cpu.total_percent"],
+                    marker='o',
+                    linestyle='-',
+                    color='#1f77b4')
+                plt.title("CPU Usage Over Time")
+                plt.xlabel("Time")
+                plt.ylabel("CPU Usage (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["cpu_usage"] = image_base64
+                plt.close()
+
+            # رسم استهلاك الذاكرة
+            if "memory.percent" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["memory.percent"],
+                    marker='o',
+                    linestyle='-',
+                    color='#ff7f0e')
+                plt.title("Memory Usage Over Time")
+                plt.xlabel("Time")
+                plt.ylabel("Memory Usage (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["memory_usage"] = image_base64
+                plt.close()
+
+            # رسم استهلاك القرص
+            if "disk.percent" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["disk.percent"],
+                    marker='o',
+                    linestyle='-',
+                    color='#2ca02c')
+                plt.title("Disk Usage Over Time")
+                plt.xlabel("Time")
+                plt.ylabel("Disk Usage (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["disk_usage"] = image_base64
+                plt.close()
+
+            # رسم استهلاك الشبكة
+            if "network.bytes_sent" in df.columns and "network.bytes_recv" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["network.bytes_sent"] /
+                    1024 /
+                    1024,
+                    marker='o',
+                    linestyle='-',
+                    color='#d62728',
+                    label="Sent")
+                plt.plot(
+                    df["timestamp"],
+                    df["network.bytes_recv"] /
+                    1024 /
+                    1024,
+                    marker='o',
+                    linestyle='-',
+                    color='#9467bd',
+                    label="Received")
+                plt.title("Network Traffic Over Time")
+                plt.xlabel("Time")
+                plt.ylabel("Traffic (MB)")
+                plt.legend()
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["network_traffic"] = image_base64
+                plt.close()
+
+            return charts
+
+        except Exception as e:
+            logger.error(f"Error creating system performance charts: {e}")
+            return {}
+
+    def _create_module_performance_charts(self, df, module_id, report_config):
+        """
+        إنشاء الرسوم البيانية لأداء المديول
+
+        Args:
+            df (DataFrame): بيانات أداء المديول
+            module_id (str): معرف المديول
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            dict: قاموس الرسوم البيانية
+        """
+        charts = {}
+
+        try:
+            # تعيين نمط الرسوم البيانية
+            sns.set_theme(style=self.config.get("chart_theme", "darkgrid"))
+
+            # تحويل عمود التاريخ إلى تاريخ
+            if "timestamp" in df.columns:
+                df["timestamp"] = pd.to_datetime(df["timestamp"])
+
+            # رسم وقت الاستجابة
+            if "performance.response_time_ms" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["performance.response_time_ms"],
+                    marker='o',
+                    linestyle='-',
+                    color='#1f77b4')
+                plt.title(f"Response Time for Module: {module_id}")
+                plt.xlabel("Time")
+                plt.ylabel("Response Time (ms)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["response_time"] = image_base64
+                plt.close()
+
+            # رسم معدل الأخطاء
+            if "performance.error_rate" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["performance.error_rate"] * 100,
+                    marker='o',
+                    linestyle='-',
+                    color='#d62728')
+                plt.title(f"Error Rate for Module: {module_id}")
+                plt.xlabel("Time")
+                plt.ylabel("Error Rate (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["error_rate"] = image_base64
+                plt.close()
+
+            # رسم استهلاك CPU
+            if "resources.cpu_percent" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["resources.cpu_percent"],
+                    marker='o',
+                    linestyle='-',
+                    color='#ff7f0e')
+                plt.title(f"CPU Usage for Module: {module_id}")
+                plt.xlabel("Time")
+                plt.ylabel("CPU Usage (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["cpu_usage"] = image_base64
+                plt.close()
+
+            # رسم استهلاك الذاكرة
+            if "resources.memory_percent" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["resources.memory_percent"],
+                    marker='o',
+                    linestyle='-',
+                    color='#2ca02c')
+                plt.title(f"Memory Usage for Module: {module_id}")
+                plt.xlabel("Time")
+                plt.ylabel("Memory Usage (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["memory_usage"] = image_base64
+                plt.close()
+
+            return charts
+
+        except Exception as e:
+            logger.error(f"Error creating module performance charts: {e}")
+            return {}
+
+    def _create_ai_performance_charts(self, df, ai_model_id, report_config):
+        """
+        إنشاء الرسوم البيانية لأداء نموذج الذكاء الصناعي
+
+        Args:
+            df (DataFrame): بيانات أداء نموذج الذكاء الصناعي
+            ai_model_id (str): معرف نموذج الذكاء الصناعي
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            dict: قاموس الرسوم البيانية
+        """
+        charts = {}
+
+        try:
+            # تعيين نمط الرسوم البيانية
+            sns.set_theme(style=self.config.get("chart_theme", "darkgrid"))
+
+            # تحويل عمود التاريخ إلى تاريخ
+            if "timestamp" in df.columns:
+                df["timestamp"] = pd.to_datetime(df["timestamp"])
+
+            # رسم وقت الاستدلال
+            if "performance.inference_time_ms" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["performance.inference_time_ms"],
+                    marker='o',
+                    linestyle='-',
+                    color='#1f77b4')
+                plt.title(f"Inference Time for AI Model: {ai_model_id}")
+                plt.xlabel("Time")
+                plt.ylabel("Inference Time (ms)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["inference_time"] = image_base64
+                plt.close()
+
+            # رسم دقة النموذج
+            if "performance.accuracy" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["performance.accuracy"] * 100,
+                    marker='o',
+                    linestyle='-',
+                    color='#2ca02c')
+                plt.title(f"Accuracy for AI Model: {ai_model_id}")
+                plt.xlabel("Time")
+                plt.ylabel("Accuracy (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["accuracy"] = image_base64
+                plt.close()
+
+            # رسم استهلاك GPU
+            if "resources.gpu_percent" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["resources.gpu_percent"],
+                    marker='o',
+                    linestyle='-',
+                    color='#ff7f0e')
+                plt.title(f"GPU Usage for AI Model: {ai_model_id}")
+                plt.xlabel("Time")
+                plt.ylabel("GPU Usage (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["gpu_usage"] = image_base64
+                plt.close()
+
+            # رسم استهلاك الذاكرة
+            if "resources.memory_percent" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["resources.memory_percent"],
+                    marker='o',
+                    linestyle='-',
+                    color='#d62728')
+                plt.title(f"Memory Usage for AI Model: {ai_model_id}")
+                plt.xlabel("Time")
+                plt.ylabel("Memory Usage (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["memory_usage"] = image_base64
+                plt.close()
+
+            return charts
+
+        except Exception as e:
+            logger.error(f"Error creating AI performance charts: {e}")
+            return {}
+
+    def _create_database_performance_charts(self, df, db_name, report_config):
+        """
+        إنشاء الرسوم البيانية لأداء قاعدة البيانات
+
+        Args:
+            df (DataFrame): بيانات أداء قاعدة البيانات
+            db_name (str): اسم قاعدة البيانات
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            dict: قاموس الرسوم البيانية
+        """
+        charts = {}
+
+        try:
+            # تعيين نمط الرسوم البيانية
+            sns.set_theme(style=self.config.get("chart_theme", "darkgrid"))
+
+            # تحويل عمود التاريخ إلى تاريخ
+            if "timestamp" in df.columns:
+                df["timestamp"] = pd.to_datetime(df["timestamp"])
+
+            # رسم وقت الاستعلام
+            if "performance.query_time_ms" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["performance.query_time_ms"],
+                    marker='o',
+                    linestyle='-',
+                    color='#1f77b4')
+                plt.title(f"Query Time for Database: {db_name}")
+                plt.xlabel("Time")
+                plt.ylabel("Query Time (ms)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["query_time"] = image_base64
+                plt.close()
+
+            # رسم معدل الأخطاء
+            if "performance.error_rate" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["performance.error_rate"] * 100,
+                    marker='o',
+                    linestyle='-',
+                    color='#d62728')
+                plt.title(f"Error Rate for Database: {db_name}")
+                plt.xlabel("Time")
+                plt.ylabel("Error Rate (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["error_rate"] = image_base64
+                plt.close()
+
+            # رسم عدد الاتصالات النشطة
+            if "performance.active_connections" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["performance.active_connections"],
+                    marker='o',
+                    linestyle='-',
+                    color='#ff7f0e')
+                plt.title(f"Active Connections for Database: {db_name}")
+                plt.xlabel("Time")
+                plt.ylabel("Active Connections")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["active_connections"] = image_base64
+                plt.close()
+
+            # رسم استخدام الاتصالات
+            if "resources.connection_usage_percent" in df.columns:
+                plt.figure(
+                    figsize=(
+                        report_config.chart_width,
+                        report_config.chart_height))
+                plt.plot(
+                    df["timestamp"],
+                    df["resources.connection_usage_percent"],
+                    marker='o',
+                    linestyle='-',
+                    color='#2ca02c')
+                plt.title(f"Connection Usage for Database: {db_name}")
+                plt.xlabel("Time")
+                plt.ylabel("Connection Usage (%)")
+                plt.grid(True)
+                plt.tight_layout()
+
+                # حفظ الرسم البياني كصورة في الذاكرة
+                buffer = BytesIO()
+                plt.savefig(buffer, format='png')
+                buffer.seek(0)
+                image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+                charts["connection_usage"] = image_base64
+                plt.close()
+
+            return charts
+
+        except Exception as e:
+            logger.error(f"Error creating database performance charts: {e}")
+            return {}
+
+    def _generate_html_system_report(
+            self,
+            df,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            charts,
+            report_config):
+        """
+        إنشاء تقرير HTML لأداء النظام
+
+        Args:
+            df (DataFrame): بيانات أداء النظام
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            charts: قاموس الرسوم البيانية
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        try:
+            # إنشاء دليل التقارير إذا لم يكن موجوداً
+            os.makedirs(report_config.output_dir, exist_ok=True)
+
+            # إنشاء اسم ملف التقرير
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            report_filename = f"system_performance_report_{timestamp}.html"
+            report_path = os.path.join(
+                report_config.output_dir, report_filename)
+
+            # إنشاء محتوى التقرير
+            html_content = f"""
+            <!DOCTYPE html>
+            <html dir="rtl" lang="ar">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>{report_config.title}</title>
+                <style>
+                    body {{
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        margin: 0;
+                        padding: 20px;
+                        color: #333;
+                        background-color: #f8f8f8;
+                    }}
+                    .container {{
+                        max-width: 1200px;
+                        margin: 0 auto;
+                        background-color: #fff;
+                        padding: 20px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    }}
+                    h1, h2, h3 {{
+                        color: #2c3e50;
+                    }}
+                    h1 {{
+                        text-align: center;
+                        padding-bottom: 10px;
+                        border-bottom: 2px solid #eee;
+                    }}
+                    .section {{
+                        margin-bottom: 30px;
+                    }}
+                    .chart-container {{
+                        margin: 20px 0;
+                        text-align: center;
+                    }}
+                    .chart {{
+                        max-width: 100%;
+                        height: auto;
+                    }}
+                    table {{
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin: 20px 0;
+                    }}
+                    th, td {{
+                        padding: 12px 15px;
+                        text-align: right;
+                        border-bottom: 1px solid #ddd;
+                    }}
+                    th {{
+                        background-color: #f2f2f2;
+                        font-weight: bold;
+                    }}
+                    tr:hover {{
+                        background-color: #f5f5f5;
+                    }}
+                    .summary {{
+                        background-color: #e8f4f8;
+                        padding: 15px;
+                        border-radius: 5px;
+                        margin-bottom: 20px;
+                    }}
+                    .critical {{
+                        color: #721c24;
+                        background-color: #f8d7da;
+                        padding: 5px;
+                        border-radius: 3px;
+                    }}
+                    .high {{
+                        color: #856404;
+                        background-color: #fff3cd;
+                        padding: 5px;
+                        border-radius: 3px;
+                    }}
+                    .medium {{
+                        color: #0c5460;
+                        background-color: #d1ecf1;
+                        padding: 5px;
+                        border-radius: 3px;
+                    }}
+                    .low {{
+                        color: #155724;
+                        background-color: #d4edda;
+                        padding: 5px;
+                        border-radius: 3px;
+                    }}
+                    .footer {{
+                        text-align: center;
+                        margin-top: 30px;
+                        padding-top: 10px;
+                        border-top: 1px solid #eee;
+                        font-size: 0.9em;
+                        color: #777;
+                    }}
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>{report_config.title}</h1>
+
+                    <div class="section summary">
+                        <h2>ملخص التقرير</h2>
+                        <p>{report_config.description}</p>
+                        <p>النطاق الزمني: {report_config.time_range}</p>
+                        <p>تاريخ التقرير: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
+                    </div>
+            """
+
+            # إضافة قسم الرسوم البيانية
+            if charts and report_config.include_charts:
+                html_content += """
+                    <div class="section">
+                        <h2>الرسوم البيانية</h2>
+                """
+
+                for chart_name, chart_data in charts.items():
+                    chart_title = ""
+                    if chart_name == "cpu_usage":
+                        chart_title = "استهلاك وحدة المعالجة المركزية (CPU)"
+                    elif chart_name == "memory_usage":
+                        chart_title = "استهلاك الذاكرة (Memory)"
+                    elif chart_name == "disk_usage":
+                        chart_title = "استهلاك القرص (Disk)"
+                    elif chart_name == "network_traffic":
+                        chart_title = "حركة الشبكة (Network)"
+
+                    html_content += f"""
+                        <div class="chart-container">
+                            <h3>{chart_title}</h3>
+                            <img class="chart" src="data:image/png;base64,{chart_data}" alt="{chart_title}">
+                        </div>
+                    """
+
+                html_content += """
+                    </div>
+                """
+
+            # إضافة قسم تحليل الاتجاه
+            if trend_analysis and report_config.include_trends:
+                html_content += """
+                    <div class="section">
+                        <h2>تحليل اتجاه الأداء</h2>
+                        <table>
+                            <tr>
+                                <th>المقياس</th>
+                                <th>الاتجاه</th>
+                                <th>القيمة الأخيرة</th>
+                                <th>المتوسط</th>
+                                <th>الحد الأدنى</th>
+                                <th>الحد الأقصى</th>
+                                <th>التنبؤ (ساعة)</th>
+                                <th>التنبؤ (يوم)</th>
+                            </tr>
+                """
+
+                trend_direction_ar = {
+                    "increasing": "تصاعدي",
+                    "decreasing": "تنازلي",
+                    "stable": "مستقر"
+                }
+
+                html_content += f"""
+                            <tr>
+                                <td>{trend_analysis.metric_type}</td>
+                                <td>{trend_direction_ar.get(trend_analysis.trend_direction, trend_analysis.trend_direction)}</td>
+                                <td>{trend_analysis.last_value:.2f}</td>
+                                <td>{trend_analysis.average_value:.2f}</td>
+                                <td>{trend_analysis.min_value:.2f}</td>
+                                <td>{trend_analysis.max_value:.2f}</td>
+                                <td>{trend_analysis.prediction_next_hour:.2f if trend_analysis.prediction_next_hour is not None else 'غير متاح'}</td>
+                                <td>{trend_analysis.prediction_next_day:.2f if trend_analysis.prediction_next_day is not None else 'غير متاح'}</td>
+                            </tr>
+                        </table>
+                    </div>
+                """
+
+            # إضافة قسم الانحرافات
+            if anomalies and report_config.include_anomalies:
+                html_content += """
+                    <div class="section">
+                        <h2>الانحرافات المكتشفة</h2>
+                        <table>
+                            <tr>
+                                <th>المقياس</th>
+                                <th>الوقت</th>
+                                <th>القيمة</th>
+                                <th>القيمة المتوقعة</th>
+                                <th>نسبة الانحراف</th>
+                                <th>الشدة</th>
+                                <th>الوصف</th>
+                            </tr>
+                """
+
+                severity_ar = {
+                    "critical": "حرج",
+                    "high": "مرتفع",
+                    "medium": "متوسط",
+                    "low": "منخفض"
+                }
+
+                for anomaly in anomalies:
+                    html_content += f"""
+                            <tr>
+                                <td>{anomaly.metric_name}</td>
+                                <td>{anomaly.timestamp}</td>
+                                <td>{anomaly.value:.2f}</td>
+                                <td>{anomaly.expected_value:.2f}</td>
+                                <td>{anomaly.deviation_percent:.2f}%</td>
+                                <td class="{anomaly.severity}">{severity_ar.get(anomaly.severity, anomaly.severity)}</td>
+                                <td>{anomaly.description}</td>
+                            </tr>
+                    """
+
+                html_content += """
+                        </table>
+                    </div>
+                """
+
+            # إضافة قسم التوصيات
+            if recommendations and report_config.include_recommendations:
+                html_content += """
+                    <div class="section">
+                        <h2>التوصيات</h2>
+                        <table>
+                            <tr>
+                                <th>الأولوية</th>
+                                <th>الوصف</th>
+                                <th>التحسين المتوقع</th>
+                                <th>صعوبة التنفيذ</th>
+                            </tr>
+                """
+
+                priority_ar = {
+                    "critical": "حرج",
+                    "high": "مرتفع",
+                    "medium": "متوسط",
+                    "low": "منخفض"
+                }
+
+                difficulty_ar = {
+                    "easy": "سهل",
+                    "medium": "متوسط",
+                    "hard": "صعب"
+                }
+
+                for recommendation in recommendations:
+                    html_content += f"""
+                            <tr>
+                                <td class="{recommendation.priority}">{priority_ar.get(recommendation.priority, recommendation.priority)}</td>
+                                <td>{recommendation.description}</td>
+                                <td>{recommendation.expected_improvement}</td>
+                                <td>{difficulty_ar.get(recommendation.implementation_difficulty, recommendation.implementation_difficulty)}</td>
+                            </tr>
+                    """
+
+                html_content += """
+                        </table>
+                    </div>
+                """
+
+            # إضافة تذييل التقرير
+            html_content += """
+                    <div class="footer">
+                        <p>تم إنشاء هذا التقرير بواسطة نظام مراقبة الأداء</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+            """
+
+            # كتابة محتوى التقرير إلى ملف
+            with open(report_path, 'w', encoding='utf-8') as f:
+                f.write(html_content)
+
+            return report_path
+
+        except Exception as e:
+            logger.error(f"Error generating HTML system report: {e}")
+            return None
+
+    def _generate_pdf_system_report(
+            self,
+            df,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            charts,
+            report_config):
+        """
+        إنشاء تقرير PDF لأداء النظام
+
+        Args:
+            df (DataFrame): بيانات أداء النظام
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            charts: قاموس الرسوم البيانية
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        if not PDF_SUPPORT:
+            logger.warning(
+                "PDF support is not available. Cannot generate PDF report.")
+            return None
+
+        try:
+            # إنشاء دليل التقارير إذا لم يكن موجوداً
+            os.makedirs(report_config.output_dir, exist_ok=True)
+
+            # إنشاء اسم ملف التقرير
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            report_filename = f"system_performance_report_{timestamp}.pdf"
+            report_path = os.path.join(
+                report_config.output_dir, report_filename)
+
+            # إنشاء ملف PDF
+            pdf = FPDF()
+            pdf.add_page()
+
+            # إضافة العنوان
+            pdf.set_font("Arial", "B", 16)
+            pdf.cell(0, 10, report_config.title, 0, 1, "C")
+
+            # إضافة الوصف
+            pdf.set_font("Arial", "", 12)
+            pdf.multi_cell(0, 10, report_config.description)
+            pdf.ln(5)
+
+            # إضافة معلومات التقرير
+            pdf.set_font("Arial", "B", 12)
+            pdf.cell(0, 10, f"النطاق الزمني: {report_config.time_range}", 0, 1)
+            pdf.cell(
+                0,
+                10,
+                f"تاريخ التقرير: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+                0,
+                1)
+            pdf.ln(5)
+
+            # إضافة الرسوم البيانية
+            if charts and report_config.include_charts:
+                pdf.set_font("Arial", "B", 14)
+                pdf.cell(0, 10, "الرسوم البيانية", 0, 1)
+
+                for chart_name, chart_data in charts.items():
+                    chart_title = ""
+                    if chart_name == "cpu_usage":
+                        chart_title = "استهلاك وحدة المعالجة المركزية (CPU)"
+                    elif chart_name == "memory_usage":
+                        chart_title = "استهلاك الذاكرة (Memory)"
+                    elif chart_name == "disk_usage":
+                        chart_title = "استهلاك القرص (Disk)"
+                    elif chart_name == "network_traffic":
+                        chart_title = "حركة الشبكة (Network)"
+
+                    pdf.set_font("Arial", "B", 12)
+                    pdf.cell(0, 10, chart_title, 0, 1)
+
+                    # تحويل الصورة من base64 إلى ملف مؤقت
+                    image_data = base64.b64decode(chart_data)
+                    temp_image_path = os.path.join(
+                        report_config.output_dir, f"temp_{chart_name}.png")
+                    with open(temp_image_path, "wb") as f:
+                        f.write(image_data)
+
+                    # إضافة الصورة إلى PDF
+                    pdf.image(temp_image_path, x=10, w=190)
+                    pdf.ln(5)
+
+                    # حذف الملف المؤقت
+                    os.remove(temp_image_path)
+
+            # إضافة تحليل الاتجاه
+            if trend_analysis and report_config.include_trends:
+                pdf.add_page()
+                pdf.set_font("Arial", "B", 14)
+                pdf.cell(0, 10, "تحليل اتجاه الأداء", 0, 1)
+
+                trend_direction_ar = {
+                    "increasing": "تصاعدي",
+                    "decreasing": "تنازلي",
+                    "stable": "مستقر"
+                }
+
+                pdf.set_font("Arial", "B", 10)
+                pdf.cell(30, 10, "المقياس", 1)
+                pdf.cell(30, 10, "الاتجاه", 1)
+                pdf.cell(30, 10, "القيمة الأخيرة", 1)
+                pdf.cell(30, 10, "المتوسط", 1)
+                pdf.cell(30, 10, "الحد الأدنى", 1)
+                pdf.cell(30, 10, "الحد الأقصى", 1)
+                pdf.ln()
+
+                pdf.set_font("Arial", "", 10)
+                pdf.cell(30, 10, trend_analysis.metric_type, 1)
+                pdf.cell(
+                    30,
+                    10,
+                    trend_direction_ar.get(
+                        trend_analysis.trend_direction,
+                        trend_analysis.trend_direction),
+                    1)
+                pdf.cell(30, 10, f"{trend_analysis.last_value:.2f}", 1)
+                pdf.cell(30, 10, f"{trend_analysis.average_value:.2f}", 1)
+                pdf.cell(30, 10, f"{trend_analysis.min_value:.2f}", 1)
+                pdf.cell(30, 10, f"{trend_analysis.max_value:.2f}", 1)
+                pdf.ln(15)
+
+            # إضافة الانحرافات
+            if anomalies and report_config.include_anomalies:
+                pdf.add_page()
+                pdf.set_font("Arial", "B", 14)
+                pdf.cell(0, 10, "الانحرافات المكتشفة", 0, 1)
+
+                severity_ar = {
+                    "critical": "حرج",
+                    "high": "مرتفع",
+                    "medium": "متوسط",
+                    "low": "منخفض"
+                }
+
+                pdf.set_font("Arial", "B", 10)
+                pdf.cell(30, 10, "المقياس", 1)
+                pdf.cell(30, 10, "القيمة", 1)
+                pdf.cell(30, 10, "القيمة المتوقعة", 1)
+                pdf.cell(30, 10, "نسبة الانحراف", 1)
+                pdf.cell(30, 10, "الشدة", 1)
+                pdf.ln()
+
+                pdf.set_font("Arial", "", 10)
+                for anomaly in anomalies:
+                    pdf.cell(30, 10, anomaly.metric_name, 1)
+                    pdf.cell(30, 10, f"{anomaly.value:.2f}", 1)
+                    pdf.cell(30, 10, f"{anomaly.expected_value:.2f}", 1)
+                    pdf.cell(30, 10, f"{anomaly.deviation_percent:.2f}%", 1)
+                    pdf.cell(
+                        30, 10, severity_ar.get(
+                            anomaly.severity, anomaly.severity), 1)
+                    pdf.ln()
+
+            # إضافة التوصيات
+            if recommendations and report_config.include_recommendations:
+                pdf.add_page()
+                pdf.set_font("Arial", "B", 14)
+                pdf.cell(0, 10, "التوصيات", 0, 1)
+
+                priority_ar = {
+                    "critical": "حرج",
+                    "high": "مرتفع",
+                    "medium": "متوسط",
+                    "low": "منخفض"
+                }
+
+                difficulty_ar = {
+                    "easy": "سهل",
+                    "medium": "متوسط",
+                    "hard": "صعب"
+                }
+
+                for i, recommendation in enumerate(recommendations):
+                    pdf.set_font("Arial", "B", 12)
+                    pdf.cell(
+                        0,
+                        10,
+                        f"{i+1}. {priority_ar.get(recommendation.priority, recommendation.priority)}: {recommendation.description}",
+                        0,
+                        1)
+
+                    pdf.set_font("Arial", "", 10)
+                    pdf.multi_cell(
+                        0, 10, f"التحسين المتوقع: {recommendation.expected_improvement}")
+                    pdf.multi_cell(
+                        0,
+                        10,
+                        f"صعوبة التنفيذ: {difficulty_ar.get(recommendation.implementation_difficulty, recommendation.implementation_difficulty)}")
+
+                    pdf.set_font("Arial", "B", 10)
+                    pdf.cell(0, 10, "خطوات التنفيذ:", 0, 1)
+
+                    pdf.set_font("Arial", "", 10)
+                    for j, step in enumerate(
+                            recommendation.implementation_steps):
+                        pdf.multi_cell(0, 10, f"{j+1}. {step}")
+
+                    pdf.ln(5)
+
+            # حفظ ملف PDF
+            pdf.output(report_path)
+
+            return report_path
+
+        except Exception as e:
+            logger.error(f"Error generating PDF system report: {e}")
+            return None
+
+    def _generate_json_system_report(
+            self,
+            df,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            report_config):
+        """
+        إنشاء تقرير JSON لأداء النظام
+
+        Args:
+            df (DataFrame): بيانات أداء النظام
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        try:
+            # إنشاء دليل التقارير إذا لم يكن موجوداً
+            os.makedirs(report_config.output_dir, exist_ok=True)
+
+            # إنشاء اسم ملف التقرير
+            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            report_filename = f"system_performance_report_{timestamp}.json"
+            report_path = os.path.join(
+                report_config.output_dir, report_filename)
+
+            # إنشاء قاموس البيانات
+            report_data = {
+                "title": report_config.title,
+                "description": report_config.description,
+                "time_range": report_config.time_range,
+                "generated_at": datetime.datetime.now().isoformat(),
+                "metrics": json.loads(
+                    df.to_json(
+                        orient="records")) if df is not None else []}
+
+            # إضافة تحليل الاتجاه
+            if trend_analysis and report_config.include_trends:
+                report_data["trend_analysis"] = {
+                    "entity_id": trend_analysis.entity_id,
+                    "metric_type": trend_analysis.metric_type,
+                    "time_range": trend_analysis.time_range,
+                    "trend_direction": trend_analysis.trend_direction,
+                    "trend_slope": trend_analysis.trend_slope,
+                    "trend_confidence": trend_analysis.trend_confidence,
+                    "last_value": trend_analysis.last_value,
+                    "average_value": trend_analysis.average_value,
+                    "min_value": trend_analysis.min_value,
+                    "max_value": trend_analysis.max_value,
+                    "prediction_next_hour": trend_analysis.prediction_next_hour,
+                    "prediction_next_day": trend_analysis.prediction_next_day}
+
+            # إضافة الانحرافات
+            if anomalies and report_config.include_anomalies:
+                report_data["anomalies"] = []
+                for anomaly in anomalies:
+                    report_data["anomalies"].append({
+                        "entity_id": anomaly.entity_id,
+                        "metric_type": anomaly.metric_type,
+                        "metric_name": anomaly.metric_name,
+                        "timestamp": anomaly.timestamp,
+                        "value": anomaly.value,
+                        "expected_value": anomaly.expected_value,
+                        "deviation_percent": anomaly.deviation_percent,
+                        "severity": anomaly.severity,
+                        "description": anomaly.description
+                    })
+
+            # إضافة التوصيات
+            if recommendations and report_config.include_recommendations:
+                report_data["recommendations"] = []
+                for recommendation in recommendations:
+                    report_data["recommendations"].append({
+                        "entity_id": recommendation.entity_id,
+                        "metric_type": recommendation.metric_type,
+                        "priority": recommendation.priority,
+                        "description": recommendation.description,
+                        "expected_improvement": recommendation.expected_improvement,
+                        "implementation_difficulty": recommendation.implementation_difficulty,
+                        "implementation_steps": recommendation.implementation_steps
+                    })
+
+            # كتابة البيانات إلى ملف JSON
+            with open(report_path, 'w', encoding='utf-8') as f:
+                json.dump(report_data, f, ensure_ascii=False, indent=4)
+
+            return report_path
+
+        except Exception as e:
+            logger.error(f"Error generating JSON system report: {e}")
+            return None
+
+    def _generate_html_module_report(
+            self,
+            df,
+            module_id,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            charts,
+            report_config):
+        """
+        إنشاء تقرير HTML لأداء المديول
+
+        Args:
+            df (DataFrame): بيانات أداء المديول
+            module_id (str): معرف المديول
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            charts: قاموس الرسوم البيانية
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_html_system_report مع تعديلات خاصة بالمديول
+
+    def _generate_pdf_module_report(
+            self,
+            df,
+            module_id,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            charts,
+            report_config):
+        """
+        إنشاء تقرير PDF لأداء المديول
+
+        Args:
+            df (DataFrame): بيانات أداء المديول
+            module_id (str): معرف المديول
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            charts: قاموس الرسوم البيانية
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_pdf_system_report مع تعديلات خاصة بالمديول
+
+    def _generate_json_module_report(
+            self,
+            df,
+            module_id,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            report_config):
+        """
+        إنشاء تقرير JSON لأداء المديول
+
+        Args:
+            df (DataFrame): بيانات أداء المديول
+            module_id (str): معرف المديول
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_json_system_report مع تعديلات خاصة بالمديول
+
+    def _generate_html_ai_report(
+            self,
+            df,
+            ai_model_id,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            charts,
+            report_config):
+        """
+        إنشاء تقرير HTML لأداء نموذج الذكاء الصناعي
+
+        Args:
+            df (DataFrame): بيانات أداء نموذج الذكاء الصناعي
+            ai_model_id (str): معرف نموذج الذكاء الصناعي
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            charts: قاموس الرسوم البيانية
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_html_system_report مع تعديلات خاصة بنموذج
+        # الذكاء الصناعي
+
+    def _generate_pdf_ai_report(
+            self,
+            df,
+            ai_model_id,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            charts,
+            report_config):
+        """
+        إنشاء تقرير PDF لأداء نموذج الذكاء الصناعي
+
+        Args:
+            df (DataFrame): بيانات أداء نموذج الذكاء الصناعي
+            ai_model_id (str): معرف نموذج الذكاء الصناعي
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            charts: قاموس الرسوم البيانية
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_pdf_system_report مع تعديلات خاصة بنموذج الذكاء
+        # الصناعي
+
+    def _generate_json_ai_report(
+            self,
+            df,
+            ai_model_id,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            report_config):
+        """
+        إنشاء تقرير JSON لأداء نموذج الذكاء الصناعي
+
+        Args:
+            df (DataFrame): بيانات أداء نموذج الذكاء الصناعي
+            ai_model_id (str): معرف نموذج الذكاء الصناعي
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_json_system_report مع تعديلات خاصة بنموذج
+        # الذكاء الصناعي
+
+    def _generate_html_database_report(
+            self,
+            df,
+            db_name,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            charts,
+            report_config):
+        """
+        إنشاء تقرير HTML لأداء قاعدة البيانات
+
+        Args:
+            df (DataFrame): بيانات أداء قاعدة البيانات
+            db_name (str): اسم قاعدة البيانات
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            charts: قاموس الرسوم البيانية
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_html_system_report مع تعديلات خاصة بقاعدة
+        # البيانات
+
+    def _generate_pdf_database_report(
+            self,
+            df,
+            db_name,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            charts,
+            report_config):
+        """
+        إنشاء تقرير PDF لأداء قاعدة البيانات
+
+        Args:
+            df (DataFrame): بيانات أداء قاعدة البيانات
+            db_name (str): اسم قاعدة البيانات
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            charts: قاموس الرسوم البيانية
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_pdf_system_report مع تعديلات خاصة بقاعدة
+        # البيانات
+
+    def _generate_json_database_report(
+            self,
+            df,
+            db_name,
+            trend_analysis,
+            anomalies,
+            recommendations,
+            report_config):
+        """
+        إنشاء تقرير JSON لأداء قاعدة البيانات
+
+        Args:
+            df (DataFrame): بيانات أداء قاعدة البيانات
+            db_name (str): اسم قاعدة البيانات
+            trend_analysis: تحليل اتجاه الأداء
+            anomalies: قائمة الانحرافات
+            recommendations: قائمة التوصيات
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_json_system_report مع تعديلات خاصة بقاعدة
+        # البيانات
+
+    def _generate_html_comprehensive_report(
+            self,
+            system_df,
+            system_trend,
+            system_anomalies,
+            system_recommendations,
+            system_charts,
+            module_data,
+            ai_data,
+            db_data,
+            report_config):
+        """
+        إنشاء تقرير HTML شامل
+
+        Args:
+            system_df (DataFrame): بيانات أداء النظام
+            system_trend: تحليل اتجاه أداء النظام
+            system_anomalies: قائمة انحرافات النظام
+            system_recommendations: قائمة توصيات النظام
+            system_charts: قاموس الرسوم البيانية للنظام
+            module_data: بيانات المديولات
+            ai_data: بيانات نماذج الذكاء الصناعي
+            db_data: بيانات قواعد البيانات
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_html_system_report مع تعديلات لتضمين جميع
+        # البيانات
+
+    def _generate_pdf_comprehensive_report(
+            self,
+            system_df,
+            system_trend,
+            system_anomalies,
+            system_recommendations,
+            system_charts,
+            module_data,
+            ai_data,
+            db_data,
+            report_config):
+        """
+        إنشاء تقرير PDF شامل
+
+        Args:
+            system_df (DataFrame): بيانات أداء النظام
+            system_trend: تحليل اتجاه أداء النظام
+            system_anomalies: قائمة انحرافات النظام
+            system_recommendations: قائمة توصيات النظام
+            system_charts: قاموس الرسوم البيانية للنظام
+            module_data: بيانات المديولات
+            ai_data: بيانات نماذج الذكاء الصناعي
+            db_data: بيانات قواعد البيانات
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_pdf_system_report مع تعديلات لتضمين جميع
+        # البيانات
+
+    def _generate_json_comprehensive_report(
+            self,
+            system_df,
+            system_trend,
+            system_anomalies,
+            system_recommendations,
+            module_data,
+            ai_data,
+            db_data,
+            report_config):
+        """
+        إنشاء تقرير JSON شامل
+
+        Args:
+            system_df (DataFrame): بيانات أداء النظام
+            system_trend: تحليل اتجاه أداء النظام
+            system_anomalies: قائمة انحرافات النظام
+            system_recommendations: قائمة توصيات النظام
+            module_data: بيانات المديولات
+            ai_data: بيانات نماذج الذكاء الصناعي
+            db_data: بيانات قواعد البيانات
+            report_config (ReportConfig): إعدادات التقرير
+
+        Returns:
+            str: مسار ملف التقرير المنشأ
+        """
+        # مشابه لدالة _generate_json_system_report مع تعديلات لتضمين جميع
+        # البيانات

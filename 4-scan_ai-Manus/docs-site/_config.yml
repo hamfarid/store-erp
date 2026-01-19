@@ -1,0 +1,17 @@
+title: Gaara AI Documentation
+description: نظام الزراعة الذكية المتطور
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+markdown: kramdown
+highlighter: rouge
+
+lang: ar
+direction: rtl
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

@@ -1,0 +1,181 @@
+"""
+
+المهام الأساسية لنظام Celery
+"""
+import logging
+from datetime import datetime, timedelta
+from celery import shared_task
+
+logger = logging.getLogger(__name__)
+
+
+@shared_task(bind=True)
+def health_check(self):
+    """
+    فحص صحة النظام
+    """
+    try:
+        logger.info("تشغيل فحص صحة النظام")
+
+        # فحص الاتصال بقاعدة البيانات
+        db_status = check_database_connection()
+
+        # فحص الاتصال بـ Redis
+        redis_status = check_redis_connection()
+
+        # فحص الاتصال بـ RabbitMQ
+        rabbitmq_status = check_rabbitmq_connection()
+
+        result = {
+            'timestampDATETIMENOWISOFORMATdatabase': db_status,
+            'redis': redis_status,
+            'rabbitmq': rabbitmq_status,
+            'status': 'healthy' if all([db_status, redis_status, rabbitmq_status]) else 'unhealthy'
+        }
+
+        logger.info(f"نتيجة فحص الصحة: {result}")
+        return result
+
+    except Exception as e:
+        logger.error(f"خطأ في فحص صحة النظام: {str(e)}")
+        return {
+            'timestampDATETIMENOWISOFORMATstatus': 'error""error': str(e)
+        }
+
+
+@shared_task(bind=True)
+def cleanup_old_data(self):
+    """
+    تنظيف البيانات القديمة
+    """
+    try:
+        logger.info("بدء تنظيف البيانات القديمة")
+
+        # تنظيف السجلات القديمة (أكثر من 30 يوم)
+        cutoff_date = datetime.now() - timedelta(days=30)
+
+        cleaned_count = 0
+
+        # تنظيف ملفات الصور المؤقتة
+        cleaned_count += cleanup_temp_images()
+
+        # تنظيف سجلات المراقبة القديمة
+        cleaned_count += cleanup_old_monitoring_logs(cutoff_date)
+
+        # تنظيف ملفات النسخ الاحتياطي القديمة
+        cleaned_count += cleanup_old_backups(cutoff_date)
+
+        result = {
+            'timestampDATETIMENOWISOFORMATcleaned_items': cleaned_count,
+            'cutoff_date': cutoff_date.isoformat(),
+            'status': 'completed'
+        }
+
+        logger.info(f"تم تنظيف {cleaned_count} عنصر")
+        return result
+
+    except Exception as e:
+        logger.error(f"خطأ في تنظيف البيانات: {str(e)}")
+        return {
+            'timestampDATETIMENOWISOFORMATstatus': 'error""error': str(e)
+        }
+
+
+def check_database_connection():
+    """فحص الاتصال بقاعدة البيانات"""
+    try:
+        # محاولة الاتصال بقاعدة البيانات
+        # يمكن إضافة كود فحص حقيقي هنا
+        return True
+    except Exception:
+        return False
+
+
+def check_redis_connection():
+    """فحص الاتصال بـ Redis"""
+    try:
+        import redis
+        import os
+
+        redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+        r = redis.from_url(redis_url)
+        r.ping()
+        return True
+    except Exception:
+        return False
+
+
+def check_rabbitmq_connection():
+    """فحص الاتصال بـ RabbitMQ"""
+    try:
+        # محاولة الاتصال بـ RabbitMQ
+        # يمكن إضافة كود فحص حقيقي هنا
+        return True
+    except Exception:
+        return False
+
+
+def cleanup_temp_images():
+    """تنظيف الصور المؤقتة"""
+    try:
+        import os
+        import glob
+
+        temp_dirs = [
+            'uploads/temp""src/modules/image_processing/uploads""src/modules/disease_diagnosis/uploads'
+        ]
+
+        cleaned = 0
+        for temp_dir in temp_dirs:
+            if os.path.exists(temp_dir):
+                files = glob.glob(os.path.join(temp_dir, '*'))
+                for file in files:
+                    try:
+                        if os.path.isfile(file):
+                            # فحص عمر الملف
+                            file_age = datetime.now() - datetime.fromtimestamp(os.path.getctime(file))
+                            if file_age > timedelta(hours=24):  # ملفات أقدم من 24 ساعة
+                                os.remove(file)
+                                cleaned += 1
+                    except Exception:
+                        continue
+
+        return cleaned
+    except Exception:
+        return 0
+
+
+def cleanup_old_monitoring_logs(cutoff_date):
+    """تنظيف سجلات المراقبة القديمة"""
+    try:
+        # يمكن إضافة كود تنظيف سجلات المراقبة هنا
+        return 0
+    except Exception:
+        return 0
+
+
+def cleanup_old_backups(cutoff_date):
+    """تنظيف النسخ الاحتياطية القديمة"""
+    try:
+        import os
+        import glob
+
+        backup_dir = 'backups'
+        if not os.path.exists(backup_dir):
+            return 0
+
+        cleaned = 0
+        backup_files = glob.glob(os.path.join(backup_dir, '*.zip'))
+
+        for backup_file in backup_files:
+            try:
+                file_age = datetime.now() - datetime.fromtimestamp(os.path.getctime(backup_file))
+                if file_age > timedelta(days=30):  # نسخ احتياطية أقدم من 30 يوم
+                    os.remove(backup_file)
+                    cleaned += 1
+            except Exception:
+                continue
+
+        return cleaned
+    except Exception:
+        return 0

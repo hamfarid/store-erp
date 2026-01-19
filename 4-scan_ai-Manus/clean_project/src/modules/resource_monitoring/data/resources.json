@@ -1,0 +1,434 @@
+{
+  "timestamp": "2025-05-27T09:57:22.510647",
+  "cpu": {
+    "percent": 44.0,
+    "percent_per_core": [
+      0.0,
+      0.0,
+      33.3,
+      0.0,
+      83.3,
+      16.7,
+      0.0,
+      16.7,
+      16.7,
+      0.0,
+      0.0,
+      33.3,
+      16.7,
+      83.3,
+      16.7,
+      16.7,
+      16.7,
+      0.0,
+      0.0,
+      100.0
+    ],
+    "freq_current": 2300.0,
+    "freq_min": 0.0,
+    "freq_max": 2300.0,
+    "count_physical": 20,
+    "count_logical": 20
+  },
+  "memory": {
+    "virtual": {
+      "total": 34008834048,
+      "available": 13687746560,
+      "used": 20321087488,
+      "free": 13687746560,
+      "percent": 59.8,
+      "active": null,
+      "inactive": null,
+      "buffers": null,
+      "cached": null,
+      "shared": null
+    },
+    "swap": {
+      "total": 103079215104,
+      "used": 897191936,
+      "free": 102182023168,
+      "percent": 0.9,
+      "sin": 0,
+      "sout": 0
+    }
+  },
+  "disk": {
+    "main": {
+      "total": 268402946048,
+      "used": 133845536768,
+      "free": 134557409280,
+      "percent": 49.9
+    },
+    "io": {
+      "read_count": 3749220,
+      "write_count": 6787501,
+      "read_bytes": 79942637056,
+      "write_bytes": 155273176576,
+      "read_time": 1536,
+      "write_time": 1785
+    },
+    "partitions": [
+      {
+        "device": "C:\\",
+        "mountpoint": "C:\\",
+        "fstype": "NTFS",
+        "opts": "rw,fixed",
+        "total": 307050311680,
+        "used": 188323901440,
+        "free": 118726410240,
+        "percent": 61.3
+      },
+      {
+        "device": "D:\\",
+        "mountpoint": "D:\\",
+        "fstype": "NTFS",
+        "opts": "rw,fixed",
+        "total": 268402946048,
+        "used": 133845536768,
+        "free": 134557409280,
+        "percent": 49.9
+      },
+      {
+        "device": "E:\\",
+        "mountpoint": "E:\\",
+        "fstype": "NTFS",
+        "opts": "rw,fixed",
+        "total": 1371409477632,
+        "used": 1197142929408,
+        "free": 174266548224,
+        "percent": 87.3
+      },
+      {
+        "device": "F:\\",
+        "mountpoint": "F:\\",
+        "fstype": "NTFS",
+        "opts": "rw,fixed",
+        "total": 120034684928,
+        "used": 96914759680,
+        "free": 23119925248,
+        "percent": 80.7
+      },
+      {
+        "device": "G:\\",
+        "mountpoint": "G:\\",
+        "fstype": "NTFS",
+        "opts": "rw,fixed",
+        "total": 52428537856,
+        "used": 34460925952,
+        "free": 17967611904,
+        "percent": 65.7
+      },
+      {
+        "device": "H:\\",
+        "mountpoint": "H:\\",
+        "fstype": "FAT32",
+        "opts": "rw,fixed",
+        "total": 307050311680,
+        "used": 194260221952,
+        "free": 112790089728,
+        "percent": 63.3
+      },
+      {
+        "device": "I:\\",
+        "mountpoint": "I:\\",
+        "fstype": "NTFS",
+        "opts": "rw,fixed",
+        "total": 372288516096,
+        "used": 364126556160,
+        "free": 8161959936,
+        "percent": 97.8
+      },
+      {
+        "device": "J:\\",
+        "mountpoint": "J:\\",
+        "fstype": "NTFS",
+        "opts": "rw,fixed",
+        "total": 473518043136,
+        "used": 393074225152,
+        "free": 80443817984,
+        "percent": 83.0
+      },
+      {
+        "device": "K:\\",
+        "mountpoint": "K:\\",
+        "fstype": "NTFS",
+        "opts": "rw,fixed",
+        "total": 34358689280,
+        "used": 17265147392,
+        "free": 17093541888,
+        "percent": 50.2
+      }
+    ]
+  },
+  "network": {
+    "bytes_sent": 1295,
+    "bytes_recv": 212,
+    "bytes_total": 1507,
+    "packets_sent": 18,
+    "packets_recv": 2,
+    "errin": 0,
+    "errout": 0,
+    "dropin": 0,
+    "dropout": 0,
+    "percent": 0.02874374389648437,
+    "interfaces": [
+      {
+        "name": "Local Area Connection* 9",
+        "addresses": [
+          {
+            "family": "-1",
+            "address": "38-7A-0E-D6-C8-ED",
+            "netmask": null,
+            "broadcast": null
+          },
+          {
+            "family": "2",
+            "address": "169.254.235.186",
+            "netmask": "255.255.0.0",
+            "broadcast": null
+          },
+          {
+            "family": "23",
+            "address": "fe80::bf74:6c93:9cea:b520",
+            "netmask": null,
+            "broadcast": null
+          }
+        ],
+        "isup": false,
+        "duplex": "2",
+        "speed": 0,
+        "mtu": 1500
+      },
+      {
+        "name": "Local Area Connection* 10",
+        "addresses": [
+          {
+            "family": "-1",
+            "address": "3A-7A-0E-D6-C8-EC",
+            "netmask": null,
+            "broadcast": null
+          },
+          {
+            "family": "2",
+            "address": "169.254.118.178",
+            "netmask": "255.255.0.0",
+            "broadcast": null
+          },
+          {
+            "family": "23",
+            "address": "fe80::fee:6559:8911:4c47",
+            "netmask": null,
+            "broadcast": null
+          }
+        ],
+        "isup": false,
+        "duplex": "2",
+        "speed": 0,
+        "mtu": 1500
+      },
+      {
+        "name": "Wi-Fi",
+        "addresses": [
+          {
+            "family": "-1",
+            "address": "38-7A-0E-D6-C8-EC",
+            "netmask": null,
+            "broadcast": null
+          },
+          {
+            "family": "2",
+            "address": "172.16.16.27",
+            "netmask": "255.255.255.0",
+            "broadcast": null
+          },
+          {
+            "family": "23",
+            "address": "fe80::f944:a5cf:25a1:b7f2",
+            "netmask": null,
+            "broadcast": null
+          }
+        ],
+        "isup": true,
+        "duplex": "2",
+        "speed": 144,
+        "mtu": 1500
+      },
+      {
+        "name": "Bluetooth Network Connection",
+        "addresses": [
+          {
+            "family": "-1",
+            "address": "38-7A-0E-D6-C8-F0",
+            "netmask": null,
+            "broadcast": null
+          },
+          {
+            "family": "2",
+            "address": "169.254.222.195",
+            "netmask": "255.255.0.0",
+            "broadcast": null
+          },
+          {
+            "family": "23",
+            "address": "fe80::e399:1dcf:d9b1:27ab",
+            "netmask": null,
+            "broadcast": null
+          }
+        ],
+        "isup": false,
+        "duplex": "2",
+        "speed": 3,
+        "mtu": 1500
+      },
+      {
+        "name": "Ethernet",
+        "addresses": [
+          {
+            "family": "-1",
+            "address": "5C-60-BA-B9-7D-9A",
+            "netmask": null,
+            "broadcast": null
+          },
+          {
+            "family": "2",
+            "address": "169.254.246.109",
+            "netmask": "255.255.0.0",
+            "broadcast": null
+          },
+          {
+            "family": "23",
+            "address": "fe80::98:515d:e86e:9303",
+            "netmask": null,
+            "broadcast": null
+          }
+        ],
+        "isup": false,
+        "duplex": "2",
+        "speed": 0,
+        "mtu": 1500
+      },
+      {
+        "name": "vEthernet (Default Switch)",
+        "addresses": [
+          {
+            "family": "-1",
+            "address": "00-15-5D-BA-87-60",
+            "netmask": null,
+            "broadcast": null
+          },
+          {
+            "family": "2",
+            "address": "172.28.192.1",
+            "netmask": "255.255.240.0",
+            "broadcast": null
+          },
+          {
+            "family": "23",
+            "address": "fe80::da34:f5c1:194e:4526",
+            "netmask": null,
+            "broadcast": null
+          }
+        ],
+        "isup": true,
+        "duplex": "2",
+        "speed": 4294,
+        "mtu": 1500
+      },
+      {
+        "name": "vEthernet (WSL (Hyper-V firewall))",
+        "addresses": [
+          {
+            "family": "-1",
+            "address": "00-15-5D-9D-20-7C",
+            "netmask": null,
+            "broadcast": null
+          },
+          {
+            "family": "2",
+            "address": "172.31.0.1",
+            "netmask": "255.255.240.0",
+            "broadcast": null
+          },
+          {
+            "family": "23",
+            "address": "fe80::6e09:5cab:9e9d:e348",
+            "netmask": null,
+            "broadcast": null
+          }
+        ],
+        "isup": true,
+        "duplex": "2",
+        "speed": 4294,
+        "mtu": 1500
+      },
+      {
+        "name": "Tailscale",
+        "addresses": [
+          {
+            "family": "2",
+            "address": "100.95.120.21",
+            "netmask": "255.255.255.255",
+            "broadcast": null
+          },
+          {
+            "family": "23",
+            "address": "fd7a:115c:a1e0::6701:7817",
+            "netmask": null,
+            "broadcast": null
+          },
+          {
+            "family": "23",
+            "address": "fe80::832e:a878:7df9:2df8",
+            "netmask": null,
+            "broadcast": null
+          }
+        ],
+        "isup": true,
+        "duplex": "2",
+        "speed": 4294,
+        "mtu": 65535
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "addresses": [
+          {
+            "family": "2",
+            "address": "127.0.0.1",
+            "netmask": "255.0.0.0",
+            "broadcast": null
+          },
+          {
+            "family": "23",
+            "address": "::1",
+            "netmask": null,
+            "broadcast": null
+          }
+        ],
+        "isup": true,
+        "duplex": "2",
+        "speed": 1073,
+        "mtu": 1500
+      }
+    ]
+  },
+  "system": {
+    "system": "Windows",
+    "node": "Victus",
+    "release": "10",
+    "version": "10.0.26100",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "hostname": "Victus",
+    "ip_address": "172.16.16.27",
+    "boot_time": "2025-05-24T19:05:43.503776",
+    "users": [
+      {
+        "name": "hadym",
+        "terminal": null,
+        "host": null,
+        "started": "2025-05-24T19:06:05.841456",
+        "pid": null
+      }
+    ]
+  }
+}

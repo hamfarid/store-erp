@@ -1,0 +1,68 @@
+# /home/ubuntu/image_search_integration/docker-compose.yml
+version: '3.8'
+
+services:
+  # خدمة البحث الذاتي الذكي
+  auto_learning:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gaara_auto_learning
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/gaara_erp
+      - MEMORY_API_URL=http://memory:8001/api/v1
+      - A2A_API_URL=http://a2a:8002/api/v1
+      - A2A_API_KEY=${A2A_API_KEY}
+      - LOG_LEVEL=INFO
+    depends_on:
+      - db
+      - memory
+      - a2a
+
+  # قاعدة البيانات
+  db:
+    image: postgres:14
+    container_name: gaara_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=gaara_erp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # خدمة الذاكرة المركزية
+  memory:
+    image: gaara/memory:latest
+    container_name: gaara_memory
+    restart: always
+    ports:
+      - "8001:8001"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/gaara_memory
+      - LOG_LEVEL=INFO
+    depends_on:
+      - db
+
+  # خدمة A2A
+  a2a:
+    image: gaara/a2a:latest
+    container_name: gaara_a2a
+    restart: always
+    ports:
+      - "8002:8002"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/gaara_a2a
+      - LOG_LEVEL=INFO
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

@@ -1,0 +1,63 @@
+# تكوين Kibana لنظام Gaara Scan AI
+
+# إعدادات الخادم
+server.host: 0.0.0.0
+server.port: 5601
+server.name: gaara-kibana
+server.basePath: /kibana
+
+# إعدادات Elasticsearch
+elasticsearch.hosts: ["http://gaara-elasticsearch:9200"]
+elasticsearch.username: "elastic"
+elasticsearch.password: "gaara_elastic_2024"
+elasticsearch.requestTimeout: 30000
+elasticsearch.shardTimeout: 30000
+
+# إعدادات الأمان
+xpack.security.enabled: true
+xpack.security.encryptionKey: "gaara_kibana_encryption_key_2024_very_long_string"
+xpack.security.sessionTimeout: 1800000
+
+# إعدادات المراقبة
+monitoring.enabled: true
+monitoring.kibana.collection.enabled: true
+monitoring.kibana.collection.interval: 10000
+
+# إعدادات السجلات
+logging.appenders.file.type: file
+logging.appenders.file.fileName: /usr/share/kibana/logs/kibana.log
+logging.appenders.file.layout.type: json
+logging.root.level: info
+
+# إعدادات البيانات
+path.data: /usr/share/kibana/data
+
+# إعدادات اللغة العربية
+i18n.locale: "ar"
+
+# إعدادات التصور
+visualization.colorMapping.enabled: true
+visualization.regionmap.enabled: true
+
+# إعدادات التقارير
+xpack.reporting.enabled: true
+xpack.reporting.encryptionKey: "gaara_reporting_key_2024"
+
+# إعدادات التنبيهات
+xpack.alerting.enabled: true
+
+# إعدادات الفهارس الافتراضية
+kibana.index: ".kibana-gaara"
+kibana.defaultAppId: "dashboard"
+
+# إعدادات الشبكة
+server.maxPayloadBytes: 1048576
+server.compression.enabled: true
+
+# إعدادات التخزين المؤقت
+server.cache.enabled: true
+
+# إعدادات المطورين
+console.enabled: true
+dev.basePathProxyTarget: "http://localhost:5601"
+

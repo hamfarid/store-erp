@@ -1,0 +1,66 @@
+{
+  "alerts": [
+    {
+      "id": "d67a0d06-41cb-43e2-bb8b-58a0e8dcd689",
+      "type": "resource",
+      "severity": "high",
+      "module": "resource_monitoring",
+      "messageAr": "استخدام المعالج مرتفع (85%)",
+      "messageEn": "High CPU usage (85%)",
+      "details": {
+        "resource": "cpu",
+        "value": 85,
+        "threshold": 80
+      },
+      "timestamp": "2025-05-22T07:41:04.982415",
+      "status": "active",
+      "acknowledged": false,
+      "acknowledgedBy": null,
+      "acknowledgedAt": null,
+      "resolved": false,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "id": "39082376-9070-44d7-bc67-95cacb504702",
+      "type": "resource",
+      "severity": "medium",
+      "module": "resource_monitoring",
+      "messageAr": "استخدام الذاكرة مرتفع (75%)",
+      "messageEn": "High memory usage (75%)",
+      "details": {
+        "resource": "memory",
+        "value": 75,
+        "threshold": 80
+      },
+      "timestamp": "2025-05-22T06:41:04.982494",
+      "status": "acknowledged",
+      "acknowledged": true,
+      "acknowledgedBy": "admin",
+      "acknowledgedAt": "2025-05-22T07:11:04.982509",
+      "resolved": false,
+      "resolvedBy": null,
+      "resolvedAt": null
+    },
+    {
+      "id": "1a6e96c1-8155-4003-aea3-e3b0c463e0d5",
+      "type": "error",
+      "severity": "critical",
+      "module": "disease_diagnosis",
+      "messageAr": "فشل في تحميل نموذج تشخيص الأمراض",
+      "messageEn": "Failed to load disease diagnosis model",
+      "details": {
+        "error": "FileNotFoundError",
+        "message": "Model file not found"
+      },
+      "timestamp": "2025-05-22T05:41:04.982553",
+      "status": "resolved",
+      "acknowledged": true,
+      "acknowledgedBy": "admin",
+      "acknowledgedAt": "2025-05-22T05:56:04.982566",
+      "resolved": true,
+      "resolvedBy": "admin",
+      "resolvedAt": "2025-05-22T06:41:04.982577"
+    }
+  ]
+}

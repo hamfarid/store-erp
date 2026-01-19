@@ -1,0 +1,134 @@
+# ==========================================
+# Docker Compose - Gaara Scan AI v4.3.1
+# Unified Container Setup (2 containers)
+# Container 1: Backend + Frontend + SQLite
+# Container 2: ML + AI + Scraper
+# Updated: 2026-01-03
+# ==========================================
+
+services:
+  # ==========================================
+  # Unified Main Container
+  # Backend + Frontend + SQLite Database
+  # ==========================================
+  gaara-main:
+    build:
+      context: .
+      dockerfile: docker/unified/Dockerfile
+      args:
+        BUILD_DATE: ${BUILD_DATE:-2026-01-01}
+        VERSION: ${APP_VERSION:-4.3.1}
+    image: gaara-unified:${APP_VERSION:-4.3.1}
+    container_name: gaara_main
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      DEBUG: ${DEBUG:-false}
+      SECRET_KEY: ${SECRET_KEY:-gaara_secret_key_2024}
+      JWT_SECRET: ${JWT_SECRET:-gaara_jwt_secret_2024}
+      JWT_ALGORITHM: HS256
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:1505,http://localhost:3000}
+      ML_SERVICE_URL: http://gaara-ml-ai:8000
+      CRAWLER_SERVICE_URL: http://gaara-ml-ai:8001
+    volumes:
+      - gaara_data:/app/data
+      - gaara_logs:/app/logs
+      - gaara_uploads:/app/uploads
+    ports:
+      - "${BACKEND_PORT:-1005}:1005"
+      - "${FRONTEND_PORT:-1505}:1505"
+    networks:
+      - Ai_project
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:1005/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          memory: 1G
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # ==========================================
+  # ML/AI/Scraper Container
+  # ML Service + Image Crawler + AI Features
+  # ==========================================
+  gaara-ml-ai:
+    build:
+      context: .
+      dockerfile: docker/ml-ai/Dockerfile
+      args:
+        BUILD_DATE: ${BUILD_DATE:-2026-01-01}
+        VERSION: ${APP_VERSION:-4.3.1}
+    image: gaara-ml-ai:${APP_VERSION:-4.3.1}
+    container_name: gaara_ml_ai
+    restart: unless-stopped
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      MAIN_API_URL: http://gaara-main:1005/api/v1
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    volumes:
+      - gaara_models:/app/models
+      - gaara_ml_data:/app/data
+      - gaara_ml_logs:/app/logs
+    ports:
+      - "${ML_SERVICE_PORT:-8000}:8000"
+      - "${CRAWLER_PORT:-8001}:8001"
+    networks:
+      - Ai_project
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 4G
+        reservations:
+          memory: 2G
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+# ==========================================
+# Networks
+# ==========================================
+networks:
+  Ai_project:
+    external: true
+
+# ==========================================
+# Volumes
+# ==========================================
+volumes:
+  gaara_data:
+    name: gaara_unified_data
+  gaara_logs:
+    name: gaara_unified_logs
+  gaara_uploads:
+    name: gaara_unified_uploads
+  gaara_models:
+    name: gaara_ai_models
+  gaara_ml_data:
+    name: gaara_ml_data
+  gaara_ml_logs:
+    name: gaara_ml_logs
+

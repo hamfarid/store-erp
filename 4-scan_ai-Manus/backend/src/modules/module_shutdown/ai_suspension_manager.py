@@ -1,0 +1,1589 @@
+# /home/ubuntu/ai_web_organized/src/modules/module_shutdown/ai_suspension_manager.py
+
+"""
+from flask import g
+مدير التعليق والاستئناف (Suspension Manager)
+
+هذه الوحدة مسؤولة عن تعليق واستئناف الذكاء الصناعي عند الحاجة،
+وتوفير واجهة برمجية للتكامل مع منظومة الإغلاق ومراقب الموارد.
+"""
+
+import json
+import logging
+import os
+import threading
+import time
+from datetime import datetime, timedelta
+from typing import Any, Callable, Dict, List, Optional
+
+from modules.module_shutdown.ai_resource_monitor import (
+    AIResourceMonitor,
+    AIResourceType,
+    ResourceAlert,
+)
+
+# استيراد مدير المديولات ومحدد الأولويات ومنفذ الإغلاق الآمن ومراقب موارد
+# الذكاء الصناعي
+from modules.module_shutdown.module_manager import ModuleInfo, ModuleManager
+from modules.module_shutdown.priority_determiner import (
+    PriorityDeterminer,
+    ShutdownReason,
+)
+from modules.module_shutdown.safe_shutdown_executor import (
+    SafeShutdownExecutor,
+    ShutdownStrategy,
+)
+
+# إعداد التسجيل
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger('ai_suspension_manager')
+
+
+class SuspensionReason:
+    """
+    فئة تمثل أسباب تعليق الذكاء الصناعي.
+    """
+    RESOURCE_CRITICAL = "resource_critical"  # الموارد في حالة حرجة
+    SCHEDULED = "scheduled"                  # مجدول
+    MANUAL = "manual"                        # يدوي
+    SYSTEM_MAINTENANCE = "system_maintenance"  # صيانة النظام
+    ERROR = "error"                          # خطأ
+    SECURITY = "security"                    # أمان
+
+
+class SuspensionState:
+    """
+    فئة تمثل حالات تعليق الذكاء الصناعي.
+    """
+    ACTIVE = "active"                # نشط
+    SUSPENDING = "suspending"        # قيد التعليق
+    SUSPENDED = "suspended"          # معلق
+    RESUMING = "resuming"            # قيد الاستئناف
+    FAILED = "failed"                # فشل
+
+
+class SuspensionStrategy:
+    """
+    فئة تمثل استراتيجيات تعليق الذكاء الصناعي.
+    """
+    IMMEDIATE = "immediate"          # فوري
+    GRACEFUL = "graceful"            # تدريجي
+    SCHEDULED = "scheduled"          # مجدول
+
+
+class SuspensionData:
+    """
+    فئة تمثل بيانات تعليق الذكاء الصناعي.
+    """
+
+    def __init__(self, ai_module_id: str, name: str = None):
+        """
+        تهيئة بيانات تعليق الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            name: اسم مديول الذكاء الصناعي
+        """
+        self.ai_module_id = ai_module_id
+        self.name = name or ai_module_id
+        self.state = SuspensionState.ACTIVE
+        self.reason = None
+        self.strategy = None
+        self.suspended_at = None
+        self.resumed_at = None
+        self.scheduled_resume_at = None
+        self.suspension_count = 0
+        self.total_suspension_time = timedelta(0)
+        self.last_suspension_time = None
+        self.error_message = None
+        self.metadata = {}
+
+
+class AISuspensionManager:
+    """
+    فئة مدير التعليق والاستئناف المسؤولة عن تعليق واستئناف الذكاء الصناعي.
+    """
+
+    def __init__(
+            self,
+            module_manager: ModuleManager = None,
+            priority_determiner: PriorityDeterminer = None,
+            shutdown_executor: SafeShutdownExecutor = None,
+            resource_monitor: AIResourceMonitor = None,
+            config_path: str = None):
+        """
+        تهيئة مدير التعليق والاستئناف.
+
+        Args:
+            module_manager: مدير المديولات
+            priority_determiner: محدد الأولويات
+            shutdown_executor: منفذ الإغلاق الآمن
+            resource_monitor: مراقب موارد الذكاء الصناعي
+            config_path: مسار ملف التكوين
+        """
+        self.module_manager = module_manager
+        self.priority_determiner = priority_determiner
+        self.shutdown_executor = shutdown_executor
+        self.resource_monitor = resource_monitor
+        self.config_path = config_path or "/home/ubuntu/ai_web_organized/config/ai_suspension_manager.json"
+        self.config = {
+            "auto_resume": True,
+            "default_suspension_time": 300,  # ثواني
+            "max_suspension_time": 3600,     # ثواني
+            "min_suspension_time": 60,       # ثواني
+            "resource_check_interval": 30,   # ثواني
+            "resume_resource_threshold": {
+                AIResourceType.CPU: 60.0,
+                AIResourceType.MEMORY: 60.0,
+                AIResourceType.GPU: 60.0,
+                AIResourceType.STORAGE: 60.0,
+                AIResourceType.NETWORK: 60.0
+            },
+            "notification_endpoints": {
+                "email": "",
+                "webhook": "",
+                "telegram": ""
+            },
+            "history_retention_days": 30,
+            "ai_modules": {}
+        }
+
+        # تحميل التكوين
+        self._load_config()
+
+        # بيانات تعليق الذكاء الصناعي
+        self.ai_suspensions: Dict[str, SuspensionData] = {}
+
+        # سجل التعليق
+        self.suspension_history: List[Dict[str, Any]] = []
+
+        # حالة المراقبة
+        self.is_monitoring = False
+        self.monitoring_thread = None
+        self.lock = threading.Lock()
+
+        # دوال الاستدعاء للتعليق
+        self.suspension_callbacks: Dict[str, List[Callable]] = {
+            SuspensionState.SUSPENDING: [],
+            SuspensionState.SUSPENDED: [],
+            SuspensionState.RESUMING: [],
+            SuspensionState.ACTIVE: [],
+            SuspensionState.FAILED: []
+        }
+
+        # تسجيل دوال الاستدعاء لمراقب موارد الذكاء الصناعي
+        if self.resource_monitor is not None:
+            self.resource_monitor.register_alert_callback(
+                ResourceAlert.CRITICAL, self._handle_resource_critical)
+            self.resource_monitor.register_alert_callback(
+                ResourceAlert.EMERGENCY, self._handle_resource_emergency)
+
+        logger.info("تم تهيئة مدير التعليق والاستئناف بنجاح")
+
+    def _load_config(self) -> bool:
+        """
+        تحميل تكوين مدير التعليق والاستئناف من ملف.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            if not os.path.exists(self.config_path):
+                # إنشاء ملف تكوين افتراضي إذا لم يكن موجودًا
+                os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
+                with open(self.config_path, 'w', encoding='utf-8') as f:
+                    json.dump(self.config, f, ensure_ascii=False, indent=4)
+                logger.info(
+                    f"تم إنشاء ملف تكوين افتراضي في {self.config_path}")
+                return True
+
+            with open(self.config_path, 'r', encoding='utf-8') as f:
+                loaded_config = json.load(f)
+
+            # دمج التكوين المحمل مع التكوين الافتراضي
+            for key, value in loaded_config.items():
+                self.config[key] = value
+
+            logger.info(
+                f"تم تحميل تكوين مدير التعليق والاستئناف من {self.config_path}")
+            return True
+        except Exception as e:
+            logger.error(f"فشل تحميل تكوين مدير التعليق والاستئناف: {str(e)}")
+            return False
+
+    def _save_config(self) -> bool:
+        """
+        حفظ تكوين مدير التعليق والاستئناف إلى ملف.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            os.makedirs(os.path.dirname(self.config_path), exist_ok=True)
+            with open(self.config_path, 'w', encoding='utf-8') as f:
+                json.dump(self.config, f, ensure_ascii=False, indent=4)
+
+            logger.info(
+                f"تم حفظ تكوين مدير التعليق والاستئناف إلى {self.config_path}")
+            return True
+        except Exception as e:
+            logger.error(f"فشل حفظ تكوين مدير التعليق والاستئناف: {str(e)}")
+            return False
+
+    def update_config(self, **kwargs) -> bool:
+        """
+        تحديث تكوين مدير التعليق والاستئناف.
+
+        Args:
+            **kwargs: المعلومات المراد تحديثها
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # تحديث التكوين
+            for key, value in kwargs.items():
+                if key in self.config:
+                    self.config[key] = value
+
+            # حفظ التكوين
+            return self._save_config()
+
+    def register_ai_module(self, ai_module_id: str, name: str = None) -> bool:
+        """
+        تسجيل مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            name: اسم مديول الذكاء الصناعي
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # إنشاء بيانات تعليق الذكاء الصناعي
+            suspension_data = SuspensionData(ai_module_id, name)
+
+            # حفظ بيانات تعليق الذكاء الصناعي
+            self.ai_suspensions[ai_module_id] = suspension_data
+
+            # حفظ التكوين
+            ai_modules = self.config.get("ai_modules", {})
+            ai_modules[ai_module_id] = {
+                "name": name or ai_module_id,
+                "auto_resume": True,
+                "default_suspension_time": self.config.get(
+                    "default_suspension_time",
+                    300)}
+            self.config["ai_modules"] = ai_modules
+            self._save_config()
+
+            logger.info(f"تم تسجيل مديول الذكاء الصناعي {ai_module_id}")
+            return True
+
+    def unregister_ai_module(self, ai_module_id: str) -> bool:
+        """
+        إلغاء تسجيل مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            if ai_module_id not in self.ai_suspensions:
+                logger.warning(f"مديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            # حذف بيانات تعليق الذكاء الصناعي
+            del self.ai_suspensions[ai_module_id]
+
+            # حفظ التكوين
+            ai_modules = self.config.get("ai_modules", {})
+            if ai_module_id in ai_modules:
+                del ai_modules[ai_module_id]
+            self.config["ai_modules"] = ai_modules
+            self._save_config()
+
+            logger.info(f"تم إلغاء تسجيل مديول الذكاء الصناعي {ai_module_id}")
+            return True
+
+    def suspend_ai_module(self,
+                          ai_module_id: str,
+                          reason: str = SuspensionReason.MANUAL,
+                          strategy: str = SuspensionStrategy.GRACEFUL,
+                          resume_after: int = None,
+                          metadata: Dict[str,
+                                         Any] = None) -> bool:
+        """
+        تعليق مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            reason: سبب التعليق
+            strategy: استراتيجية التعليق
+            resume_after: استئناف بعد (ثواني)
+            metadata: بيانات وصفية
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            if ai_module_id not in self.ai_suspensions:
+                logger.warning(f"مديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            suspension_data = self.ai_suspensions[ai_module_id]
+
+            # التحقق من الحالة
+            if suspension_data.state == SuspensionState.SUSPENDED:
+                logger.warning(
+                    f"مديول الذكاء الصناعي {ai_module_id} معلق بالفعل")
+                return True
+
+            if suspension_data.state == SuspensionState.SUSPENDING:
+                logger.warning(
+                    f"مديول الذكاء الصناعي {ai_module_id} قيد التعليق بالفعل")
+                return True
+
+            # تحديث حالة التعليق
+            old_state = suspension_data.state
+            suspension_data.state = SuspensionState.SUSPENDING
+            suspension_data.reason = reason
+            suspension_data.strategy = strategy
+            suspension_data.error_message = None
+
+            if metadata:
+                suspension_data.metadata = metadata
+
+            # تنفيذ دوال الاستدعاء للتعليق
+            self._execute_suspension_callbacks(
+                ai_module_id, SuspensionState.SUSPENDING)
+
+            # تعليق مديول الذكاء الصناعي
+            success = self._execute_suspension(ai_module_id, strategy)
+
+            if success:
+                # تحديث بيانات التعليق
+                suspension_data.state = SuspensionState.SUSPENDED
+                suspension_data.suspended_at = datetime.now()
+                suspension_data.resumed_at = None
+                suspension_data.suspension_count += 1
+
+                # تحديد وقت الاستئناف المجدول
+                if resume_after is not None:
+                    suspension_data.scheduled_resume_at = datetime.now() + \
+                        timedelta(seconds=resume_after)
+                else:
+                    ai_module_config = self.config.get(
+                        "ai_modules", {}).get(ai_module_id, {})
+                    default_suspension_time = ai_module_config.get(
+                        "default_suspension_time",
+                        self.config.get("default_suspension_time", 300)
+                    )
+                    suspension_data.scheduled_resume_at = datetime.now(
+                    ) + timedelta(seconds=default_suspension_time)
+
+                # إضافة سجل التعليق
+                self._add_suspension_record(
+                    ai_module_id,
+                    old_state,
+                    SuspensionState.SUSPENDED,
+                    reason,
+                    strategy)
+
+                # تنفيذ دوال الاستدعاء للتعليق
+                self._execute_suspension_callbacks(
+                    ai_module_id, SuspensionState.SUSPENDED)
+
+                logger.info(
+                    f"تم تعليق مديول الذكاء الصناعي {ai_module_id} بسبب {reason}")
+            else:
+                # تحديث حالة التعليق
+                suspension_data.state = SuspensionState.FAILED
+                suspension_data.error_message = "فشل تنفيذ التعليق"
+
+                # إضافة سجل التعليق
+                self._add_suspension_record(
+                    ai_module_id,
+                    old_state,
+                    SuspensionState.FAILED,
+                    reason,
+                    strategy)
+
+                # تنفيذ دوال الاستدعاء للتعليق
+                self._execute_suspension_callbacks(
+                    ai_module_id, SuspensionState.FAILED)
+
+                logger.error(f"فشل تعليق مديول الذكاء الصناعي {ai_module_id}")
+
+            return success
+
+    def resume_ai_module(self, ai_module_id: str, force: bool = False) -> bool:
+        """
+        استئناف مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            force: إجبار الاستئناف
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            if ai_module_id not in self.ai_suspensions:
+                logger.warning(f"مديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            suspension_data = self.ai_suspensions[ai_module_id]
+
+            # التحقق من الحالة
+            if suspension_data.state == SuspensionState.ACTIVE:
+                logger.warning(
+                    f"مديول الذكاء الصناعي {ai_module_id} نشط بالفعل")
+                return True
+
+            if suspension_data.state == SuspensionState.RESUMING:
+                logger.warning(
+                    f"مديول الذكاء الصناعي {ai_module_id} قيد الاستئناف بالفعل")
+                return True
+
+            # التحقق من الموارد إذا لم يكن إجباريًا
+            if not force and self.resource_monitor:
+                system_resources = self.resource_monitor.get_system_resources()
+                resume_threshold = self.config.get(
+                    "resume_resource_threshold", {})
+
+                for resource_type, threshold in resume_threshold.items():
+                    if resource_type in system_resources and system_resources[
+                            resource_type] >= threshold:
+                        logger.warning(
+                            f"لا يمكن استئناف مديول الذكاء الصناعي {ai_module_id} "
+                            f"بسبب استهلاك الموارد: {resource_type} = {system_resources[resource_type]}")
+                        return False
+
+            # تحديث حالة التعليق
+            old_state = suspension_data.state
+            suspension_data.state = SuspensionState.RESUMING
+            suspension_data.error_message = None
+
+            # تنفيذ دوال الاستدعاء للتعليق
+            self._execute_suspension_callbacks(
+                ai_module_id, SuspensionState.RESUMING)
+
+            # استئناف مديول الذكاء الصناعي
+            success = self._execute_resume(ai_module_id)
+
+            if success:
+                # تحديث بيانات التعليق
+                suspension_data.state = SuspensionState.ACTIVE
+                suspension_data.resumed_at = datetime.now()
+                suspension_data.scheduled_resume_at = None
+
+                # حساب وقت التعليق
+                if suspension_data.suspended_at is not None:
+                    suspension_time = datetime.now() - suspension_data.suspended_at
+                    suspension_data.last_suspension_time = suspension_time
+                    suspension_data.total_suspension_time += suspension_time
+
+                # إضافة سجل التعليق
+                self._add_suspension_record(
+                    ai_module_id, old_state, SuspensionState.ACTIVE, None, None)
+
+                # تنفيذ دوال الاستدعاء للتعليق
+                self._execute_suspension_callbacks(
+                    ai_module_id, SuspensionState.ACTIVE)
+
+                logger.info(f"تم استئناف مديول الذكاء الصناعي {ai_module_id}")
+            else:
+                # تحديث حالة التعليق
+                suspension_data.state = SuspensionState.FAILED
+                suspension_data.error_message = "فشل تنفيذ الاستئناف"
+
+                # إضافة سجل التعليق
+                self._add_suspension_record(
+                    ai_module_id, old_state, SuspensionState.FAILED, None, None)
+
+                # تنفيذ دوال الاستدعاء للتعليق
+                self._execute_suspension_callbacks(
+                    ai_module_id, SuspensionState.FAILED)
+
+                logger.error(
+                    f"فشل استئناف مديول الذكاء الصناعي {ai_module_id}")
+
+            return success
+
+    def get_ai_module_suspension(
+            self, ai_module_id: str) -> Optional[Dict[str, Any]]:
+        """
+        الحصول على بيانات تعليق مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+
+        Returns:
+            Optional[Dict[str, Any]]: بيانات تعليق مديول الذكاء الصناعي أو None إذا لم يكن مسجلاً
+        """
+        if ai_module_id not in self.ai_suspensions:
+            logger.warning(f"مديول الذكاء الصناعي {ai_module_id} غير مسجل")
+            return None
+
+        suspension_data = self.ai_suspensions[ai_module_id]
+        return {
+            "ai_module_id": suspension_data.ai_module_id,
+            "name": suspension_data.name,
+            "state": suspension_data.state,
+            "reason": suspension_data.reason,
+            "strategy": suspension_data.strategy,
+            "suspended_at": suspension_data.suspended_at.isoformat() if suspension_data.suspended_at else None,
+            "resumed_at": suspension_data.resumed_at.isoformat() if suspension_data.resumed_at else None,
+            "scheduled_resume_at": suspension_data.scheduled_resume_at.isoformat() if suspension_data.scheduled_resume_at else None,
+            "suspension_count": suspension_data.suspension_count,
+            "total_suspension_time": str(
+                suspension_data.total_suspension_time),
+            "last_suspension_time": str(
+                suspension_data.last_suspension_time) if suspension_data.last_suspension_time else None,
+            "error_message": suspension_data.error_message,
+            "metadata": suspension_data.metadata}
+
+    def get_all_ai_module_suspensions(self) -> Dict[str, Dict[str, Any]]:
+        """
+        الحصول على بيانات تعليق جميع مديولات الذكاء الصناعي.
+
+        Returns:
+            Dict[str, Dict[str, Any]]: بيانات تعليق جميع مديولات الذكاء الصناعي
+        """
+        result = {}
+        for ai_module_id, suspension_data in self.ai_suspensions.items():
+            result[ai_module_id] = {
+                "ai_module_id": suspension_data.ai_module_id,
+                "name": suspension_data.name,
+                "state": suspension_data.state,
+                "reason": suspension_data.reason,
+                "strategy": suspension_data.strategy,
+                "suspended_at": suspension_data.suspended_at.isoformat() if suspension_data.suspended_at else None,
+                "resumed_at": suspension_data.resumed_at.isoformat() if suspension_data.resumed_at else None,
+                "scheduled_resume_at": suspension_data.scheduled_resume_at.isoformat() if suspension_data.scheduled_resume_at else None,
+                "suspension_count": suspension_data.suspension_count,
+                "total_suspension_time": str(
+                    suspension_data.total_suspension_time),
+                "last_suspension_time": str(
+                    suspension_data.last_suspension_time) if suspension_data.last_suspension_time else None,
+                "error_message": suspension_data.error_message,
+                "metadata": suspension_data.metadata}
+        return result
+
+    def _execute_suspension(self, ai_module_id: str, strategy: str) -> bool:
+        """
+        تنفيذ تعليق مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            strategy: استراتيجية التعليق
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            # تعليق مديول الذكاء الصناعي باستخدام مدير المديولات
+            if self.module_manager is not None:
+                module_id = f"ai_{ai_module_id}"
+                if module_id in self.module_manager.modules:
+                    logger.info(f"تعليق مديول الذكاء الصناعي {ai_module_id}")
+                    return self.module_manager.pause_module(module_id)
+
+            # تعليق مديول الذكاء الصناعي باستخدام منفذ الإغلاق الآمن
+            if self.shutdown_executor is not None:
+                module_id = f"ai_{ai_module_id}"
+                logger.info(f"تعليق مديول الذكاء الصناعي {ai_module_id}")
+
+                shutdown_strategy = ShutdownStrategy.GRACEFUL
+                if strategy == SuspensionStrategy.IMMEDIATE:
+                    shutdown_strategy = ShutdownStrategy.IMMEDIATE
+
+                return self.shutdown_executor.suspend_module(
+                    module_id=module_id,
+                    strategy=shutdown_strategy,
+                    reason=ShutdownReason.RESOURCE_CRITICAL
+                )
+
+            # تعليق مديول الذكاء الصناعي باستخدام مراقب موارد الذكاء الصناعي
+            if self.resource_monitor is not None:
+                if ai_module_id in self.resource_monitor.ai_resources:
+                    logger.info(f"تعليق مديول الذكاء الصناعي {ai_module_id}")
+                    self.resource_monitor.set_ai_module_active(
+                        ai_module_id, False)
+                    return True
+
+            logger.warning(
+                f"لا يمكن تعليق مديول الذكاء الصناعي {ai_module_id} بسبب عدم وجود مدير المديولات أو منفذ الإغلاق الآمن")
+            return False
+        except Exception as e:
+            logger.error(
+                f"فشل تنفيذ تعليق مديول الذكاء الصناعي {ai_module_id}: {str(e)}")
+            return False
+
+    def _execute_resume(self, ai_module_id: str) -> bool:
+        """
+        تنفيذ استئناف مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+
+        Returns:
+            bool: نجاح العملية
+        """
+        try:
+            # استئناف مديول الذكاء الصناعي باستخدام مدير المديولات
+            if self.module_manager is not None:
+                module_id = f"ai_{ai_module_id}"
+                if module_id in self.module_manager.modules:
+                    logger.info(f"استئناف مديول الذكاء الصناعي {ai_module_id}")
+                    return self.module_manager.resume_module(module_id)
+
+            # استئناف مديول الذكاء الصناعي باستخدام منفذ الإغلاق الآمن
+            if self.shutdown_executor is not None:
+                module_id = f"ai_{ai_module_id}"
+                logger.info(f"استئناف مديول الذكاء الصناعي {ai_module_id}")
+                return self.shutdown_executor.resume_module(module_id)
+
+            # استئناف مديول الذكاء الصناعي باستخدام مراقب موارد الذكاء الصناعي
+            if self.resource_monitor is not None:
+                if ai_module_id in self.resource_monitor.ai_resources:
+                    logger.info(f"استئناف مديول الذكاء الصناعي {ai_module_id}")
+                    self.resource_monitor.set_ai_module_active(
+                        ai_module_id, True)
+                    return True
+
+            logger.warning(
+                f"لا يمكن استئناف مديول الذكاء الصناعي {ai_module_id} بسبب عدم وجود مدير المديولات أو منفذ الإغلاق الآمن")
+            return False
+        except Exception as e:
+            logger.error(
+                f"فشل تنفيذ استئناف مديول الذكاء الصناعي {ai_module_id}: {str(e)}")
+            return False
+
+    def _add_suspension_record(
+            self,
+            ai_module_id: str,
+            old_state: str,
+            new_state: str,
+            reason: str = None,
+            strategy: str = None) -> None:
+        """
+        إضافة سجل التعليق.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            old_state: الحالة القديمة
+            new_state: الحالة الجديدة
+            reason: سبب التعليق
+            strategy: استراتيجية التعليق
+        """
+        # إنشاء سجل التعليق
+        record = {
+            "ai_module_id": ai_module_id,
+            "name": self.ai_suspensions[ai_module_id].name,
+            "old_state": old_state,
+            "new_state": new_state,
+            "reason": reason,
+            "strategy": strategy,
+            "timestamp": datetime.now().isoformat()
+        }
+
+        # إضافة سجل التعليق
+        self.suspension_history.append(record)
+
+        # إرسال إشعار التعليق
+        self._send_suspension_notification(record)
+
+        logger.info(
+            f"تم إضافة سجل التعليق لمديول الذكاء الصناعي {ai_module_id} من {old_state} إلى {new_state}")
+
+    def _send_suspension_notification(self, record: Dict[str, Any]) -> None:
+        """
+        إرسال إشعار التعليق.
+
+        Args:
+            record: سجل التعليق
+        """
+        # الحصول على نقاط نهاية الإشعارات
+        notification_endpoints = self.config.get("notification_endpoints", {})
+
+        # إرسال الإشعار عبر البريد الإلكتروني
+        email = notification_endpoints.get("email")
+        if email:
+            try:
+                # هنا يمكن استخدام مكتبة مثل smtplib لإرسال البريد الإلكتروني
+                logger.info(
+                    f"إرسال إشعار التعليق عبر البريد الإلكتروني إلى {email}")
+            except Exception as e:
+                logger.error(
+                    f"فشل إرسال إشعار التعليق عبر البريد الإلكتروني: {str(e)}")
+
+        # إرسال الإشعار عبر webhook
+        webhook = notification_endpoints.get("webhook")
+        if webhook:
+            try:
+                # إرسال الإشعار عبر webhook
+                import requests
+                requests.post(webhook, json=record)
+                logger.info(f"إرسال إشعار التعليق عبر webhook إلى {webhook}")
+            except Exception as e:
+                logger.error(f"فشل إرسال إشعار التعليق عبر webhook: {str(e)}")
+
+        # إرسال الإشعار عبر تيليجرام
+        telegram = notification_endpoints.get("telegram")
+        if telegram:
+            try:
+                # هنا يمكن استخدام مكتبة مثل python-telegram-bot لإرسال الإشعار
+                # عبر تيليجرام
+                logger.info(f"إرسال إشعار التعليق عبر تيليجرام إلى {telegram}")
+            except Exception as e:
+                logger.error(f"فشل إرسال إشعار التعليق عبر تيليجرام: {str(e)}")
+
+    def _execute_suspension_callbacks(
+            self, ai_module_id: str, state: str) -> None:
+        """
+        تنفيذ دوال الاستدعاء للتعليق.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            state: الحالة
+        """
+        if state in self.suspension_callbacks:
+            for callback in self.suspension_callbacks[state]:
+                try:
+                    callback(
+                        ai_module_id,
+                        state,
+                        self.ai_suspensions[ai_module_id])
+                except Exception as e:
+                    logger.error(f"فشل تنفيذ دالة الاستدعاء للتعليق: {str(e)}")
+
+    def register_suspension_callback(
+            self, state: str, callback: Callable) -> bool:
+        """
+        تسجيل دالة استدعاء للتعليق.
+
+        Args:
+            state: الحالة
+            callback: دالة الاستدعاء
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            if state not in self.suspension_callbacks:
+                logger.warning(f"حالة التعليق {state} غير معروفة")
+                return False
+
+            self.suspension_callbacks[state].append(callback)
+            logger.info(f"تم تسجيل دالة استدعاء للتعليق بحالة {state}")
+            return True
+
+    def unregister_suspension_callback(
+            self, state: str, callback: Callable) -> bool:
+        """
+        إلغاء تسجيل دالة استدعاء للتعليق.
+
+        Args:
+            state: الحالة
+            callback: دالة الاستدعاء
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            if state not in self.suspension_callbacks:
+                logger.warning(f"حالة التعليق {state} غير معروفة")
+                return False
+
+            if callback in self.suspension_callbacks[state]:
+                self.suspension_callbacks[state].remove(callback)
+                logger.info(
+                    f"تم إلغاء تسجيل دالة استدعاء للتعليق بحالة {state}")
+                return True
+
+            logger.warning(f"دالة الاستدعاء غير مسجلة للتعليق بحالة {state}")
+            return False
+
+    def get_suspension_history(self,
+                               ai_module_id: str = None,
+                               state: str = None,
+                               start_time: datetime = None,
+                               end_time: datetime = None) -> List[Dict[str,
+                                                                       Any]]:
+        """
+        الحصول على سجل التعليق.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            state: الحالة
+            start_time: وقت البداية
+            end_time: وقت النهاية
+
+        Returns:
+            List[Dict[str, Any]]: سجل التعليق
+        """
+        # تصفية سجل التعليق
+        filtered_records = self.suspension_history
+
+        if ai_module_id:
+            filtered_records = [
+                record for record in filtered_records if record["ai_module_id"] == ai_module_id]
+
+        if state:
+            filtered_records = [
+                record for record in filtered_records if record["new_state"] == state]
+
+        if start_time:
+            filtered_records = [
+                record for record in filtered_records
+                if datetime.fromisoformat(record["timestamp"]) >= start_time
+            ]
+
+        if end_time:
+            filtered_records = [
+                record for record in filtered_records
+                if datetime.fromisoformat(record["timestamp"]) <= end_time
+            ]
+
+        return filtered_records
+
+    def clear_suspension_history(self) -> bool:
+        """
+        مسح سجل التعليق.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            self.suspension_history.clear()
+            logger.info("تم مسح سجل التعليق")
+            return True
+
+    def start_monitoring(self) -> bool:
+        """
+        بدء مراقبة تعليق الذكاء الصناعي.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        if self.is_monitoring is not None:
+            logger.warning("المراقبة قيد التشغيل بالفعل")
+            return True
+
+        self.is_monitoring = True
+        self.monitoring_thread = threading.Thread(target=self._monitoring_loop)
+        self.monitoring_thread.daemon = True
+        self.monitoring_thread.start()
+
+        logger.info("تم بدء مراقبة تعليق الذكاء الصناعي")
+        return True
+
+    def stop_monitoring(self) -> bool:
+        """
+        إيقاف مراقبة تعليق الذكاء الصناعي.
+
+        Returns:
+            bool: نجاح العملية
+        """
+        if not self.is_monitoring:
+            logger.warning("المراقبة متوقفة بالفعل")
+            return True
+
+        self.is_monitoring = False
+        if self.monitoring_thread is not None:
+            self.monitoring_thread.join(timeout=5)
+            self.monitoring_thread = None
+
+        logger.info("تم إيقاف مراقبة تعليق الذكاء الصناعي")
+        return True
+
+    def _monitoring_loop(self) -> None:
+        """
+        حلقة مراقبة تعليق الذكاء الصناعي.
+        """
+        logger.info("بدء حلقة مراقبة تعليق الذكاء الصناعي")
+
+        while self.is_monitoring:
+            try:
+                # التحقق من مديولات الذكاء الصناعي المعلقة
+                for ai_module_id, suspension_data in self.ai_suspensions.items():
+                    # التحقق من الاستئناف المجدول
+                    if (suspension_data.state == SuspensionState.SUSPENDED
+                        and suspension_data.scheduled_resume_at
+                            and datetime.now() >= suspension_data.scheduled_resume_at):
+
+                        # التحقق من الاستئناف التلقائي
+                        ai_module_config = self.config.get(
+                            "ai_modules", {}).get(ai_module_id, {})
+                        auto_resume = ai_module_config.get(
+                            "auto_resume",
+                            self.config.get("auto_resume", True)
+                        )
+
+                        if auto_resume:
+                            logger.info(
+                                f"استئناف مديول الذكاء الصناعي {ai_module_id} تلقائيًا")
+                            self.resume_ai_module(ai_module_id)
+
+                # انتظار الفاصل الزمني
+                time.sleep(self.config.get("resource_check_interval", 30))
+            except Exception as e:
+                logger.error(f"خطأ في حلقة المراقبة: {str(e)}")
+                time.sleep(self.config.get("resource_check_interval", 30))
+
+        logger.info("انتهاء حلقة مراقبة تعليق الذكاء الصناعي")
+
+    def _handle_resource_critical(
+            self, ai_module_id: str, status: str, alert: Dict[str, Any]) -> None:
+        """
+        معالجة حالة الموارد الحرجة.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            status: الحالة
+            alert: التنبيه
+        """
+        logger.info(
+            f"معالجة حالة الموارد الحرجة لمديول الذكاء الصناعي {ai_module_id}")
+
+        # التحقق من الإجراء التلقائي
+        auto_actions = self.config.get("auto_actions", {})
+        action = auto_actions.get(status, "notify")
+
+        if action == "suspend":
+            # تعليق مديول الذكاء الصناعي
+            self.suspend_ai_module(
+                ai_module_id=ai_module_id,
+                reason=SuspensionReason.RESOURCE_CRITICAL,
+                strategy=SuspensionStrategy.GRACEFUL
+            )
+
+    def _handle_resource_emergency(
+            self, ai_module_id: str, status: str, alert: Dict[str, Any]) -> None:
+        """
+        معالجة حالة الموارد الطارئة.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            status: الحالة
+            alert: التنبيه
+        """
+        logger.info(
+            f"معالجة حالة الموارد الطارئة لمديول الذكاء الصناعي {ai_module_id}")
+
+        # تعليق مديول الذكاء الصناعي
+        self.suspend_ai_module(
+            ai_module_id=ai_module_id,
+            reason=SuspensionReason.RESOURCE_CRITICAL,
+            strategy=SuspensionStrategy.IMMEDIATE
+        )
+
+    def update_auto_resume(self, ai_module_id: str, auto_resume: bool) -> bool:
+        """
+        تحديث الاستئناف التلقائي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            auto_resume: الاستئناف التلقائي
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # تحديث الاستئناف التلقائي
+            ai_modules = self.config.get("ai_modules", {})
+
+            if ai_module_id not in ai_modules:
+                ai_modules[ai_module_id] = {
+                    "name": self.ai_suspensions[ai_module_id].name if ai_module_id in self.ai_suspensions else ai_module_id,
+                    "auto_resume": auto_resume,
+                    "default_suspension_time": self.config.get(
+                        "default_suspension_time",
+                        300)}
+            else:
+                ai_modules[ai_module_id]["auto_resume"] = auto_resume
+
+            self.config["ai_modules"] = ai_modules
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم تحديث الاستئناف التلقائي لمديول الذكاء الصناعي {ai_module_id}: {auto_resume}")
+
+            return result
+
+    def update_default_suspension_time(
+            self,
+            ai_module_id: str,
+            default_suspension_time: int) -> bool:
+        """
+        تحديث وقت التعليق الافتراضي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            default_suspension_time: وقت التعليق الافتراضي
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # التحقق من وقت التعليق الافتراضي
+            min_suspension_time = self.config.get("min_suspension_time", 60)
+            max_suspension_time = self.config.get("max_suspension_time", 3600)
+
+            if default_suspension_time < min_suspension_time:
+                default_suspension_time = min_suspension_time
+
+            if default_suspension_time > max_suspension_time:
+                default_suspension_time = max_suspension_time
+
+            # تحديث وقت التعليق الافتراضي
+            ai_modules = self.config.get("ai_modules", {})
+
+            if ai_module_id not in ai_modules:
+                ai_modules[ai_module_id] = {
+                    "name": self.ai_suspensions[ai_module_id].name if ai_module_id in self.ai_suspensions else ai_module_id,
+                    "auto_resume": self.config.get(
+                        "auto_resume",
+                        True),
+                    "default_suspension_time": default_suspension_time}
+            else:
+                ai_modules[ai_module_id]["default_suspension_time"] = default_suspension_time
+
+            self.config["ai_modules"] = ai_modules
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم تحديث وقت التعليق الافتراضي لمديول الذكاء الصناعي {ai_module_id}: {default_suspension_time}")
+
+            return result
+
+    def update_global_auto_resume(self, auto_resume: bool) -> bool:
+        """
+        تحديث الاستئناف التلقائي العام.
+
+        Args:
+            auto_resume: الاستئناف التلقائي
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            self.config["auto_resume"] = auto_resume
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم تحديث الاستئناف التلقائي العام: {auto_resume}")
+
+            return result
+
+    def update_global_default_suspension_time(
+            self, default_suspension_time: int) -> bool:
+        """
+        تحديث وقت التعليق الافتراضي العام.
+
+        Args:
+            default_suspension_time: وقت التعليق الافتراضي
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # التحقق من وقت التعليق الافتراضي
+            min_suspension_time = self.config.get("min_suspension_time", 60)
+            max_suspension_time = self.config.get("max_suspension_time", 3600)
+
+            if default_suspension_time < min_suspension_time:
+                default_suspension_time = min_suspension_time
+
+            if default_suspension_time > max_suspension_time:
+                default_suspension_time = max_suspension_time
+
+            self.config["default_suspension_time"] = default_suspension_time
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم تحديث وقت التعليق الافتراضي العام: {default_suspension_time}")
+
+            return result
+
+    def update_min_max_suspension_time(
+            self,
+            min_suspension_time: int,
+            max_suspension_time: int) -> bool:
+        """
+        تحديث الحد الأدنى والأقصى لوقت التعليق.
+
+        Args:
+            min_suspension_time: الحد الأدنى لوقت التعليق
+            max_suspension_time: الحد الأقصى لوقت التعليق
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # التحقق من الحد الأدنى والأقصى لوقت التعليق
+            if min_suspension_time < 0:
+                min_suspension_time = 0
+
+            if max_suspension_time < min_suspension_time:
+                max_suspension_time = min_suspension_time
+
+            self.config["min_suspension_time"] = min_suspension_time
+            self.config["max_suspension_time"] = max_suspension_time
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم تحديث الحد الأدنى والأقصى لوقت التعليق: {min_suspension_time}, {max_suspension_time}")
+
+            return result
+
+    def update_resource_check_interval(self, interval: int) -> bool:
+        """
+        تحديث الفاصل الزمني للتحقق من الموارد.
+
+        Args:
+            interval: الفاصل الزمني بالثواني
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            self.config["resource_check_interval"] = interval
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم تحديث الفاصل الزمني للتحقق من الموارد: {interval} ثانية")
+
+            return result
+
+    def update_resume_resource_threshold(
+            self, thresholds: Dict[str, float]) -> bool:
+        """
+        تحديث عتبة الموارد للاستئناف.
+
+        Args:
+            thresholds: عتبة الموارد
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # تحديث عتبة الموارد للاستئناف
+            resume_resource_threshold = self.config.get(
+                "resume_resource_threshold", {})
+
+            for resource_type, threshold in thresholds.items():
+                resume_resource_threshold[resource_type] = threshold
+
+            self.config["resume_resource_threshold"] = resume_resource_threshold
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(f"تم تحديث عتبة الموارد للاستئناف: {thresholds}")
+
+            return result
+
+    def update_notification_endpoints(self, endpoints: Dict[str, str]) -> bool:
+        """
+        تحديث نقاط نهاية الإشعارات.
+
+        Args:
+            endpoints: نقاط نهاية الإشعارات
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # تحديث نقاط نهاية الإشعارات
+            notification_endpoints = self.config.get(
+                "notification_endpoints", {})
+
+            for endpoint_type, endpoint in endpoints.items():
+                notification_endpoints[endpoint_type] = endpoint
+
+            self.config["notification_endpoints"] = notification_endpoints
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(f"تم تحديث نقاط نهاية الإشعارات: {endpoints}")
+
+            return result
+
+    def update_history_retention_days(self, days: int) -> bool:
+        """
+        تحديث عدد أيام الاحتفاظ بالسجل.
+
+        Args:
+            days: عدد الأيام
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            self.config["history_retention_days"] = days
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(f"تم تحديث عدد أيام الاحتفاظ بالسجل: {days} يوم")
+
+            return result
+
+    def get_ai_modules_by_state(self, state: str) -> List[str]:
+        """
+        الحصول على مديولات الذكاء الصناعي حسب الحالة.
+
+        Args:
+            state: الحالة
+
+        Returns:
+            List[str]: قائمة معرفات مديولات الذكاء الصناعي
+        """
+        return [
+            ai_module_id for ai_module_id, suspension_data in self.ai_suspensions.items()
+            if suspension_data.state == state
+        ]
+
+    def get_suspension_stats(self, ai_module_id: str = None) -> Dict[str, Any]:
+        """
+        الحصول على إحصائيات التعليق.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+
+        Returns:
+            Dict[str, Any]: إحصائيات التعليق
+        """
+        stats = {
+            "total_suspensions": 0,
+            "active_modules": 0,
+            "suspended_modules": 0,
+            "suspending_modules": 0,
+            "resuming_modules": 0,
+            "failed_modules": 0,
+            "total_suspension_time": timedelta(0),
+            "average_suspension_time": timedelta(0),
+            "max_suspension_time": timedelta(0),
+            "min_suspension_time": timedelta(0) if len(
+                self.ai_suspensions) > 0 else None,
+            "suspension_reasons": {},
+            "suspension_strategies": {}}
+
+        # حساب إحصائيات التعليق
+        for module_id, suspension_data in self.ai_suspensions.items():
+            if ai_module_id and module_id != ai_module_id:
+                continue
+
+            # حساب عدد التعليقات
+            stats["total_suspensions"] += suspension_data.suspension_count
+
+            # حساب عدد المديولات حسب الحالة
+            if suspension_data.state == SuspensionState.ACTIVE:
+                stats["active_modules"] += 1
+            elif suspension_data.state == SuspensionState.SUSPENDED:
+                stats["suspended_modules"] += 1
+            elif suspension_data.state == SuspensionState.SUSPENDING:
+                stats["suspending_modules"] += 1
+            elif suspension_data.state == SuspensionState.RESUMING:
+                stats["resuming_modules"] += 1
+            elif suspension_data.state == SuspensionState.FAILED:
+                stats["failed_modules"] += 1
+
+            # حساب وقت التعليق
+            stats["total_suspension_time"] += suspension_data.total_suspension_time
+
+            # حساب أقصى وقت تعليق
+            if suspension_data.last_suspension_time and suspension_data.last_suspension_time > stats[
+                    "max_suspension_time"]:
+                stats["max_suspension_time"] = suspension_data.last_suspension_time
+
+            # حساب أدنى وقت تعليق
+            if suspension_data.last_suspension_time and (
+                    stats["min_suspension_time"] is None or suspension_data.last_suspension_time < stats["min_suspension_time"]):
+                stats["min_suspension_time"] = suspension_data.last_suspension_time
+
+            # حساب أسباب التعليق
+            if suspension_data.reason is not None:
+                if suspension_data.reason not in stats["suspension_reasons"]:
+                    stats["suspension_reasons"][suspension_data.reason] = 0
+                stats["suspension_reasons"][suspension_data.reason] += 1
+
+            # حساب استراتيجيات التعليق
+            if suspension_data.strategy is not None:
+                if suspension_data.strategy not in stats["suspension_strategies"]:
+                    stats["suspension_strategies"][suspension_data.strategy] = 0
+                stats["suspension_strategies"][suspension_data.strategy] += 1
+
+        # حساب متوسط وقت التعليق
+        if stats["total_suspensions"] > 0:
+            stats["average_suspension_time"] = stats["total_suspension_time"] / \
+                stats["total_suspensions"]
+
+        return stats
+
+    def schedule_suspension(self,
+                            ai_module_id: str,
+                            suspend_at: datetime,
+                            resume_at: datetime = None,
+                            reason: str = SuspensionReason.SCHEDULED,
+                            strategy: str = SuspensionStrategy.GRACEFUL,
+                            metadata: Dict[str,
+                                           Any] = None) -> bool:
+        """
+        جدولة تعليق مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            suspend_at: وقت التعليق
+            resume_at: وقت الاستئناف
+            reason: سبب التعليق
+            strategy: استراتيجية التعليق
+            metadata: بيانات وصفية
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            if ai_module_id not in self.ai_suspensions:
+                logger.warning(f"مديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            # إنشاء مهمة التعليق
+            suspension_task = {
+                "ai_module_id": ai_module_id,
+                "suspend_at": suspend_at.isoformat(),
+                "resume_at": resume_at.isoformat() if resume_at else None,
+                "reason": reason,
+                "strategy": strategy,
+                "metadata": metadata or {}
+            }
+
+            # حفظ مهمة التعليق
+            ai_modules = self.config.get("ai_modules", {})
+
+            if ai_module_id not in ai_modules:
+                ai_modules[ai_module_id] = {
+                    "name": self.ai_suspensions[ai_module_id].name, "auto_resume": self.config.get(
+                        "auto_resume", True), "default_suspension_time": self.config.get(
+                        "default_suspension_time", 300), "scheduled_suspensions": [suspension_task]}
+            else:
+                if "scheduled_suspensions" not in ai_modules[ai_module_id]:
+                    ai_modules[ai_module_id]["scheduled_suspensions"] = []
+
+                ai_modules[ai_module_id]["scheduled_suspensions"].append(
+                    suspension_task)
+
+            self.config["ai_modules"] = ai_modules
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم جدولة تعليق مديول الذكاء الصناعي {ai_module_id} في {suspend_at}")
+
+            return result
+
+    def cancel_scheduled_suspension(
+            self,
+            ai_module_id: str,
+            task_index: int = None) -> bool:
+        """
+        إلغاء جدولة تعليق مديول الذكاء الصناعي.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+            task_index: فهرس المهمة
+
+        Returns:
+            bool: نجاح العملية
+        """
+        with self.lock:
+            # الحصول على مهام التعليق المجدولة
+            ai_modules = self.config.get("ai_modules", {})
+
+            if ai_module_id not in ai_modules:
+                logger.warning(f"مديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return False
+
+            if "scheduled_suspensions" not in ai_modules[ai_module_id]:
+                logger.warning(
+                    f"لا توجد مهام تعليق مجدولة لمديول الذكاء الصناعي {ai_module_id}")
+                return False
+
+            # إلغاء مهمة التعليق المجدولة
+            if task_index is not None:
+                if task_index < 0 or task_index >= len(
+                        ai_modules[ai_module_id]["scheduled_suspensions"]):
+                    logger.warning(f"فهرس المهمة {task_index} غير صالح")
+                    return False
+
+                del ai_modules[ai_module_id]["scheduled_suspensions"][task_index]
+            else:
+                ai_modules[ai_module_id]["scheduled_suspensions"] = []
+
+            self.config["ai_modules"] = ai_modules
+
+            # حفظ التكوين
+            result = self._save_config()
+
+            if result:
+                logger.info(
+                    f"تم إلغاء جدولة تعليق مديول الذكاء الصناعي {ai_module_id}")
+
+            return result
+
+    def get_scheduled_suspensions(
+            self, ai_module_id: str = None) -> List[Dict[str, Any]]:
+        """
+        الحصول على مهام التعليق المجدولة.
+
+        Args:
+            ai_module_id: معرف مديول الذكاء الصناعي
+
+        Returns:
+            List[Dict[str, Any]]: مهام التعليق المجدولة
+        """
+        # الحصول على مهام التعليق المجدولة
+        ai_modules = self.config.get("ai_modules", {})
+
+        if ai_module_id:
+            if ai_module_id not in ai_modules:
+                logger.warning(f"مديول الذكاء الصناعي {ai_module_id} غير مسجل")
+                return []
+
+            return ai_modules[ai_module_id].get("scheduled_suspensions", [])
+
+        # الحصول على جميع مهام التعليق المجدولة
+        scheduled_suspensions = []
+
+        for module_id, module_config in ai_modules.items():
+            for task in module_config.get("scheduled_suspensions", []):
+                task["ai_module_id"] = module_id
+                scheduled_suspensions.append(task)
+
+        return scheduled_suspensions
+
+
+# مثال على الاستخدام
+if __name__ == "__main__":
+    # إنشاء مدير المديولات
+    from modules.module_shutdown.priority_determiner import PriorityDeterminer
+    from modules.module_shutdown.safe_shutdown_executor import SafeShutdownExecutor
+
+    manager = ModuleManager()
+
+    # تسجيل بعض المديولات
+    manager.register_module(ModuleInfo(
+        module_id="ai_module1",
+        name="مديول الذكاء الصناعي الأول",
+        description="وصف مديول الذكاء الصناعي الأول",
+        priority=1
+    ))
+
+    manager.register_module(ModuleInfo(
+        module_id="ai_module2",
+        name="مديول الذكاء الصناعي الثاني",
+        description="وصف مديول الذكاء الصناعي الثاني",
+        priority=2
+    ))
+
+    # بدء تشغيل المديولات
+    manager.start_module("ai_module1")
+    manager.start_module("ai_module2")
+
+    # إنشاء محدد الأولويات
+    determiner = PriorityDeterminer(manager)
+
+    # إنشاء منفذ الإغلاق الآمن
+    executor = SafeShutdownExecutor(manager, determiner)
+
+    # إنشاء مراقب موارد الذكاء الصناعي
+    monitor = AIResourceMonitor(manager, determiner, executor)
+
+    # تسجيل مديولات الذكاء الصناعي
+    monitor.register_ai_module("module1", "مديول الذكاء الصناعي الأول")
+    monitor.register_ai_module("module2", "مديول الذكاء الصناعي الثاني")
+
+    # إنشاء مدير التعليق والاستئناف
+    suspension_manager = AISuspensionManager(
+        manager, determiner, executor, monitor)
+
+    # تسجيل مديولات الذكاء الصناعي
+    suspension_manager.register_ai_module(
+        "module1", "مديول الذكاء الصناعي الأول")
+    suspension_manager.register_ai_module(
+        "module2", "مديول الذكاء الصناعي الثاني")
+
+    # تسجيل دالة استدعاء للتعليق
+    def suspension_callback(ai_module_id, state, suspension_data):
+        print(f"تعليق مديول الذكاء الصناعي {ai_module_id} بحالة {state}")
+
+    suspension_manager.register_suspension_callback(
+        SuspensionState.SUSPENDED, suspension_callback)
+
+    # بدء المراقبة
+    suspension_manager.start_monitoring()
+
+    # تعليق مديول الذكاء الصناعي
+    suspension_manager.suspend_ai_module(
+        ai_module_id="module1",
+        reason=SuspensionReason.MANUAL,
+        strategy=SuspensionStrategy.GRACEFUL,
+        resume_after=60
+    )
+
+    # انتظار بعض الوقت
+    time.sleep(10)
+
+    # استئناف مديول الذكاء الصناعي
+    suspension_manager.resume_ai_module("module1")
+
+    # انتظار بعض الوقت
+    time.sleep(10)
+
+    # إيقاف المراقبة
+    suspension_manager.stop_monitoring()
+
+    # الحصول على بيانات تعليق مديول الذكاء الصناعي
+    suspension_data = suspension_manager.get_ai_module_suspension("module1")
+    print(f"بيانات تعليق مديول الذكاء الصناعي: {suspension_data}")
+
+    # الحصول على سجل التعليق
+    suspension_history = suspension_manager.get_suspension_history()
+    print(f"سجل التعليق: {suspension_history}")
+
+    # الحصول على إحصائيات التعليق
+    suspension_stats = suspension_manager.get_suspension_stats()
+    print(f"إحصائيات التعليق: {suspension_stats}")

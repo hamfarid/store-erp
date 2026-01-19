@@ -1,0 +1,157 @@
+{
+  "mcpServers": {
+    "MCP_DOCKER": {
+      "command": "docker",
+      "args": ["run", "-l", "mcp.client=cursor", "--rm", "-i", "alpine/socat", "STDIO", "TCP:host.docker.internal:8811"]
+    },
+
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "Dynamic and reflective problem-solving through thought sequences"
+    },
+
+    "exa": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-exa"],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      },
+      "description": "Primary research - Code context search and web research"
+    },
+
+    "speckit": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-speckit"],
+      "description": "API specification lookup and validation (no API key required)"
+    },
+
+    "ref": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-ref"],
+      "env": {
+        "REF_API_KEY": "${REF_API_KEY}"
+      },
+      "description": "Documentation verification (use sparingly)"
+    },
+
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server"],
+      "env": {
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_ANON_KEY": "${SUPABASE_ANON_KEY}",
+        "SUPABASE_SERVICE_ROLE_KEY": "${SUPABASE_SERVICE_ROLE_KEY}"
+      },
+      "description": "Database queries - Direct Postgres access, schema exploration"
+    },
+
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "${SENTRY_AUTH_TOKEN}",
+        "SENTRY_ORG": "${SENTRY_ORG}",
+        "SENTRY_PROJECT": "${SENTRY_PROJECT}"
+      },
+      "description": "Error tracking - Real-time errors, stack traces, performance issues"
+    },
+
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "description": "Code management - PRs, issues, repo management"
+    },
+
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      },
+      "description": "Data scraping - Web scraping, structured data extraction"
+    },
+
+    "pinecone": {
+      "command": "npx",
+      "args": ["-y", "@pinecone-database/mcp-server"],
+      "env": {
+        "PINECONE_API_KEY": "${PINECONE_API_KEY}",
+        "PINECONE_ENVIRONMENT": "${PINECONE_ENVIRONMENT}",
+        "PINECONE_INDEX_NAME": "${PINECONE_INDEX_NAME}"
+      },
+      "description": "Vector search - Semantic search, vector indexing, RAG support"
+    },
+
+    "vectara": {
+      "command": "npx",
+      "args": ["-y", "@vectara/mcp-server"],
+      "env": {
+        "VECTARA_CUSTOMER_ID": "${VECTARA_CUSTOMER_ID}",
+        "VECTARA_CORPUS_ID": "${VECTARA_CORPUS_ID}",
+        "VECTARA_API_KEY": "${VECTARA_API_KEY}"
+      },
+      "description": "RAG engine - Document search, semantic retrieval, ranking"
+    },
+
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp-server"],
+      "description": "Browser automation - Testing, web interactions, accessibility checks (no API key)"
+    },
+
+    "magic-ui": {
+      "command": "npx",
+      "args": ["-y", "@magicui/mcp-server"],
+      "description": "UI components - React + Tailwind components, animations, marketing sections"
+    },
+
+    "shadcn": {
+      "command": "npx",
+      "args": ["-y", "@shadcn/mcp-server"],
+      "description": "UI Components - Professional, accessible React components with Tailwind"
+    },
+
+    "datadog": {
+      "command": "npx",
+      "args": ["-y", "@datadog/mcp-server"],
+      "env": {
+        "DD_API_KEY": "${DD_API_KEY}",
+        "DD_APP_KEY": "${DD_APP_KEY}",
+        "DD_SITE": "${DD_SITE}"
+      },
+      "description": "Observability - Metrics, logs, traces, APM debugging"
+    },
+
+    "snyk": {
+      "command": "npx",
+      "args": ["-y", "@snyk/mcp-server"],
+      "env": {
+        "SNYK_TOKEN": "${SNYK_TOKEN}",
+        "SNYK_ORG_ID": "${SNYK_ORG_ID}"
+      },
+      "description": "Security - Vulnerability scanning, dependency auditing"
+    },
+
+    "railway": {
+      "command": "npx",
+      "args": ["-y", "@railway/mcp-server"],
+      "env": {
+        "RAILWAY_TOKEN": "${RAILWAY_TOKEN}"
+      },
+      "description": "Deployment - Django/Python hosting, database provisioning, logs"
+    },
+
+    "vercel": {
+      "command": "npx",
+      "args": ["-y", "@vercel/mcp-server"],
+      "env": {
+        "VERCEL_TOKEN": "${VERCEL_TOKEN}"
+      },
+      "description": "Deployment - Frontend hosting, preview URLs, serverless functions"
+    }
+  }
+}

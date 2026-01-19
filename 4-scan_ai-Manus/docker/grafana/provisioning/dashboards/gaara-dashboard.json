@@ -1,0 +1,177 @@
+# File: /home/ubuntu/clean_project/docker/grafana/provisioning/dashboards/gaara-dashboard.json
+# لوحة تحكم Grafana مخصصة لنظام Gaara Scan AI
+# مع تطبيق ألوان وتصميم MAGseeds
+
+{
+  "dashboard": {
+    "id": null,
+    "title": "Gaara Scan AI - نظام المراقبة الذكي",
+    "tags": ["gaara", "agriculture", "ai", "monitoring"],
+    "style": "dark",
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "حالة النظام العامة",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "up{job=\"gaara-app\"}",
+            "legendFormat": "التطبيق الرئيسي"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "steps": [
+                {"color": "#2E7D32", "value": 1},
+                {"color": "#D32F2F", "value": 0}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "استخدام المعالج",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "100 - (avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+            "legendFormat": "استخدام المعالج %"
+          }
+        ],
+        "yAxes": [
+          {
+            "min": 0,
+            "max": 100,
+            "unit": "percent"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+      },
+      {
+        "id": 3,
+        "title": "استخدام الذاكرة",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100",
+            "legendFormat": "استخدام الذاكرة %"
+          }
+        ],
+        "yAxes": [
+          {
+            "min": 0,
+            "max": 100,
+            "unit": "percent"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8}
+      },
+      {
+        "id": 4,
+        "title": "طلبات API",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "طلبات في الثانية"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}
+      },
+      {
+        "id": 5,
+        "title": "عمليات التشخيص",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "increase(diagnosis_requests_total[1h])",
+            "legendFormat": "عمليات التشخيص في الساعة"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 8, "x": 0, "y": 16}
+      },
+      {
+        "id": 6,
+        "title": "دقة التشخيص",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "diagnosis_accuracy_percentage",
+            "legendFormat": "دقة التشخيص %"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "steps": [
+                {"color": "#D32F2F", "value": 0},
+                {"color": "#FF9800", "value": 70},
+                {"color": "#2E7D32", "value": 90}
+              ]
+            }
+          }
+        },
+        "gridPos": {"h": 8, "w": 8, "x": 8, "y": 16}
+      },
+      {
+        "id": 7,
+        "title": "المستخدمين النشطين",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "active_users_count",
+            "legendFormat": "مستخدمين نشطين"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 8, "x": 16, "y": 16}
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s",
+    "schemaVersion": 30,
+    "version": 1,
+    "links": []
+  },
+  "meta": {
+    "type": "db",
+    "canSave": true,
+    "canEdit": true,
+    "canAdmin": true,
+    "canStar": true,
+    "slug": "gaara-scan-ai",
+    "url": "/d/gaara-scan-ai/gaara-scan-ai",
+    "expires": "0001-01-01T00:00:00Z",
+    "created": "2024-01-01T00:00:00Z",
+    "updated": "2024-01-01T00:00:00Z",
+    "updatedBy": "admin",
+    "createdBy": "admin",
+    "version": 1,
+    "hasAcl": false,
+    "isFolder": false,
+    "folderId": 0,
+    "folderTitle": "General",
+    "folderUrl": "",
+    "provisioned": true,
+    "provisionedExternalId": "gaara-dashboard.json"
+  }
+}
+

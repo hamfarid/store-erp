@@ -1,0 +1,280 @@
+# File: /home/ubuntu/clean_project/src/web_interface/admin_panel/templates/diagnosis_interface.html
+<!--
+مسار الملف: /home/ubuntu/clean_project/src/web_interface/admin_panel/templates/diagnosis_interface.html
+
+واجهة تشخيص الأمراض المتقدمة
+تتضمن رفع الصور، معاينة فورية، ونتائج تفاعلية
+-->
+
+{% extends "base.html" %}
+
+{% block title %}تشخيص أمراض النباتات{% endblock %}
+
+{% block extra_css %}
+<style>
+    .diagnosis-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .upload-area {
+        border: 3px dashed #007bff;
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        background: #f8f9fa;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .upload-area:hover {
+        border-color: #0056b3;
+        background: #e3f2fd;
+    }
+    
+    .upload-area.dragover {
+        border-color: #28a745;
+        background: #d4edda;
+    }
+    
+    .preview-container {
+        display: none;
+        margin-top: 20px;
+    }
+    
+    .image-preview {
+        max-width: 100%;
+        max-height: 400px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .crop-selector {
+        margin: 20px 0;
+    }
+    
+    .diagnosis-results {
+        display: none;
+        margin-top: 30px;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .confidence-bar {
+        height: 20px;
+        background: #e9ecef;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 10px 0;
+    }
+    
+    .confidence-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #dc3545, #ffc107, #28a745);
+        transition: width 1s ease;
+    }
+    
+    .treatment-card {
+        background: #f8f9fa;
+        border-left: 4px solid #007bff;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+    }
+    
+    .loading-spinner {
+        display: none;
+        text-align: center;
+        margin: 20px 0;
+    }
+    
+    .history-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .history-item:hover {
+        background: #f8f9fa;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .history-image {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-right: 15px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="diagnosis-container">
+    <div class="row">
+        <!-- منطقة التشخيص الرئيسية -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-microscope"></i> تشخيص أمراض النباتات</h4>
+                </div>
+                <div class="card-body">
+                    <!-- منطقة رفع الصور -->
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+                        <h5>اسحب الصورة هنا أو انقر للاختيار</h5>
+                        <p class="text-muted">يدعم النظام صيغ JPG, PNG, WEBP</p>
+                        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <!-- معاينة الصورة -->
+                    <div class="preview-container" id="previewContainer">
+                        <div class="text-center">
+                            <img id="imagePreview" class="image-preview" alt="معاينة الصورة">
+                        </div>
+                        
+                        <!-- اختيار نوع المحصول -->
+                        <div class="crop-selector">
+                            <label for="cropSelect" class="form-label">نوع المحصول:</label>
+                            <select class="form-select" id="cropSelect">
+                                <option value="">اختر نوع المحصول...</option>
+                                <option value="tomato">الطماطم</option>
+                                <option value="potato">البطاطس</option>
+                                <option value="corn">الذرة</option>
+                                <option value="wheat">القمح</option>
+                                <option value="rice">الأرز</option>
+                                <option value="cotton">القطن</option>
+                                <option value="cucumber">الخيار</option>
+                                <option value="pepper">الفلفل</option>
+                            </select>
+                        </div>
+                        
+                        <!-- أزرار التحكم -->
+                        <div class="text-center">
+                            <button class="btn btn-primary btn-lg" id="diagnoseBtn">
+                                <i class="fas fa-search"></i> بدء التشخيص
+                            </button>
+                            <button class="btn btn-secondary" id="resetBtn">
+                                <i class="fas fa-redo"></i> إعادة تعيين
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- مؤشر التحميل -->
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">جاري التحليل...</span>
+                        </div>
+                        <p class="mt-2">جاري تحليل الصورة بواسطة الذكاء الاصطناعي...</p>
+                    </div>
+                    
+                    <!-- نتائج التشخيص -->
+                    <div class="diagnosis-results" id="diagnosisResults">
+                        <h5><i class="fas fa-chart-line"></i> نتائج التشخيص</h5>
+                        
+                        <div id="diseaseInfo">
+                            <!-- سيتم ملؤها بواسطة JavaScript -->
+                        </div>
+                        
+                        <div class="treatment-card" id="treatmentInfo">
+                            <!-- معلومات العلاج -->
+                        </div>
+                        
+                        <div class="mt-3">
+                            <button class="btn btn-success" id="saveResultBtn">
+                                <i class="fas fa-save"></i> حفظ النتيجة
+                            </button>
+                            <button class="btn btn-info" id="shareResultBtn">
+                                <i class="fas fa-share"></i> مشاركة
+                            </button>
+                            <button class="btn btn-warning" id="reportErrorBtn">
+                                <i class="fas fa-exclamation-triangle"></i> الإبلاغ عن خطأ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- الشريط الجانبي -->
+        <div class="col-lg-4">
+            <!-- إحصائيات سريعة -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6><i class="fas fa-chart-bar"></i> إحصائيات اليوم</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h4 class="text-primary" id="todayDiagnoses">0</h4>
+                            <small>تشخيص اليوم</small>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-success" id="accuracyRate">0%</h4>
+                            <small>معدل الدقة</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- التشخيصات الحديثة -->
+            <div class="card">
+                <div class="card-header">
+                    <h6><i class="fas fa-history"></i> التشخيصات الحديثة</h6>
+                </div>
+                <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                    <div id="recentDiagnoses">
+                        <!-- سيتم ملؤها بواسطة JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- نافذة تفاصيل التشخيص -->
+<div class="modal fade" id="diagnosisModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">تفاصيل التشخيص</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- تفاصيل التشخيص -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/diagnosis_interface.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // تهيئة واجهة التشخيص
+    const diagnosisInterface = new DiagnosisInterface();
+    
+    // تحميل البيانات الأولية
+    diagnosisInterface.loadInitialData();
+    
+    // تحديث الإحصائيات كل دقيقة
+    setInterval(() => {
+        diagnosisInterface.updateStats();
+    }, 60000);
+});
+</script>
+{% endblock %}
+
