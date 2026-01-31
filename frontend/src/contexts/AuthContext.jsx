@@ -201,34 +201,47 @@ export const AuthProvider = ({ children }) => {
         method: 'POST',
         body: JSON.stringify({ username, password })
       });
-      
+
       console.log('✅ Login API response:', data);
-      
+
       if (data.success) {
-        // إضافة الصلاحيات بناءً على الدور
+        // Check if 2FA is required
+        if (data.require_2fa) {
+          console.log('🔐 2FA required, returning temp token');
+          // Store temp token for 2FA verification
+          localStorage.setItem('temp_2fa_token', data.temp_token);
+          return {
+            success: true,
+            require_2fa: true,
+            temp_token: data.temp_token,
+            pendingUser: data.data
+          };
+        }
+
+        // Normal login flow - إضافة الصلاحيات بناءً على الدور
         const userWithPermissions = {
           ...data.data.user,
           permissions: ROLES[data.data.user.role]?.permissions || []
         };
-        
+
         setUser(userWithPermissions);
         setIsAuthenticated(true);
-        
+
         // Initialize secure session with hijacking protection
         sessionSecurity.initializeSession(userWithPermissions, {
           access_token: data.data.access_token,
           refresh_token: data.data.refresh_token,
           session_id: data.data.session_id
         });
-        
+
         console.log('🔑 Secure session initialized');
         console.log('🔑 Token saved:', data.data.access_token.substring(0, 20) + '...');
-        
+
         return { success: true, user: userWithPermissions };
       }
-      
+
       return { success: false, error: data.message || 'فشل تسجيل الدخول' };
-      
+
     } catch (error) {
       console.error('❌ Login error:', error);
       return { success: false, error: error.message || 'حدث خطأ أثناء تسجيل الدخول' };

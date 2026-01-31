@@ -1,0 +1,19 @@
+# =============================================================================
+# Ruff Configuration for Store ERP
+# =============================================================================
+# Extends the root ruff.toml configuration
+# =============================================================================
+
+extend = "../ruff.toml"
+
+# Project-specific overrides
+[lint]
+# Flask-specific ignores
+extend-ignore = ["E402"]
+
+[lint.isort]
+known-first-party = ["app", "backend", "models", "routes", "services"]
+
+[lint.per-file-ignores]
+"*/migrations/*.py" = ["E501", "ERA001"]
+

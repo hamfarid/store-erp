@@ -26,53 +26,51 @@ const roles = {
 };
 
 const UserCard = ({ user, onEdit, onDelete, onView }) => (
-  <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl transition-all duration-300">
-    <div className="flex items-start justify-between mb-4">
+  <div className="entity-card">
+    <div className="entity-card__header">
       <div className="flex items-center gap-4">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center text-white text-xl font-bold shadow-lg">
+        <div className="entity-card__avatar entity-card__avatar--success">
           {user.name.charAt(0)}
         </div>
         <div>
-          <h3 className="font-bold text-gray-900">{user.name}</h3>
-          <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-${roles[user.role].color}-100 text-${roles[user.role].color}-700`}>
+          <h3 className="entity-card__name">{user.name}</h3>
+          <span className={`status-badge status-badge--${roles[user.role].color === 'rose' ? 'danger' : roles[user.role].color === 'purple' ? 'info' : roles[user.role].color === 'emerald' ? 'success' : roles[user.role].color === 'amber' ? 'warning' : 'primary'}`}>
             {roles[user.role].label}
           </span>
         </div>
       </div>
-      <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${
-        user.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-600'
-      }`}>
+      <span className={`status-badge ${user.status === 'active' ? 'status-badge--success' : 'status-badge--neutral'}`}>
         {user.status === 'active' ? <CheckCircle size={12} /> : <XCircle size={12} />}
         {user.status === 'active' ? 'نشط' : 'غير نشط'}
       </span>
     </div>
 
-    <div className="space-y-2 mb-4">
-      <div className="flex items-center gap-2 text-gray-600 text-sm">
-        <Mail size={14} className="text-gray-400" />
+    <div className="entity-card__info">
+      <div className="entity-card__info-row">
+        <Mail size={14} className="entity-card__info-icon" />
         <span>{user.email}</span>
       </div>
-      <div className="flex items-center gap-2 text-gray-600 text-sm">
-        <Phone size={14} className="text-gray-400" />
+      <div className="entity-card__info-row">
+        <Phone size={14} className="entity-card__info-icon" />
         <span dir="ltr">{user.phone}</span>
       </div>
-      <div className="flex items-center gap-2 text-gray-500 text-xs">
-        <Clock size={12} className="text-gray-400" />
+      <div className="entity-card__info-row text-xs">
+        <Clock size={12} className="entity-card__info-icon" />
         <span>آخر دخول: {user.lastLogin}</span>
       </div>
     </div>
 
-    <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
-      <button onClick={() => onView(user)} className="flex-1 py-2 text-center text-sm font-medium text-teal-600 hover:bg-teal-50 rounded-lg">
+    <div className="entity-card__actions">
+      <button onClick={() => onView(user)} className="entity-card__action entity-card__action--primary">
         عرض
       </button>
-      <button onClick={() => onEdit(user)} className="flex-1 py-2 text-center text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">
+      <button onClick={() => onEdit(user)} className="entity-card__action entity-card__action--secondary">
         تعديل
       </button>
-      <button className="p-2 text-gray-500 hover:bg-gray-50 rounded-lg">
+      <button className="entity-card__action entity-card__action--secondary p-2">
         <Key size={16} />
       </button>
-      <button onClick={() => onDelete(user)} className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg">
+      <button onClick={() => onDelete(user)} className="entity-card__action entity-card__action--danger p-2">
         <Trash2 size={16} />
       </button>
     </div>
@@ -97,7 +95,7 @@ const UsersPage = () => {
       <div className="page-header">
         <div>
           <h1 className="page-title">المستخدمين</h1>
-          <p className="text-gray-500 mt-1">إدارة المستخدمين والصلاحيات</p>
+          <p className="page-subtitle">إدارة المستخدمين والصلاحيات</p>
         </div>
         <div className="page-actions">
           <Button variant="primary" icon={Plus}>مستخدم جديد</Button>
@@ -173,7 +171,7 @@ const UsersPage = () => {
           </div>
         </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="entity-grid">
         {filteredUsers.map(user => (
           <UserCard
             key={user.id}

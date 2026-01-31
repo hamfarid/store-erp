@@ -120,6 +120,11 @@ class User(db.Model):
     locked_until = db.Column(db.DateTime, nullable=True)
     last_failed_login = db.Column(db.DateTime, nullable=True)
 
+    # Two-Factor Authentication
+    two_factor_enabled = db.Column(db.Boolean, default=False)
+    two_factor_secret = db.Column(db.String(32), nullable=True)
+    two_factor_backup_codes = db.Column(db.Text, nullable=True)
+
     # معلومات إضافية
     phone = db.Column(db.String(20))
     department = db.Column(db.String(50))

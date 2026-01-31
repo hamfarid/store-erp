@@ -52,7 +52,7 @@ const ReturnsPage = () => {
       <div className="page-header">
         <div>
           <h1 className="page-title">المرتجعات</h1>
-          <p className="text-gray-500 mt-1">إدارة طلبات الإرجاع والاستبدال</p>
+          <p className="text-secondary mt-1">إدارة طلبات الإرجاع والاستبدال</p>
         </div>
         <div className="page-actions">
           <Button variant="primary" icon={Plus}>طلب إرجاع جديد</Button>

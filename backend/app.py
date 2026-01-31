@@ -441,6 +441,7 @@ def register_blueprints(app):
     ]
 
     registered_count = 0
+    registered_names = set()  # Track registered blueprint names to avoid duplicates
     for module_name, blueprint_name in blueprints_to_register:
         try:
             # Log import attempt
@@ -454,7 +455,14 @@ def register_blueprints(app):
                 logger.info(f"ℹ️ Skipping blueprint {blueprint_name} (not available)")
                 continue
 
+            # Check if blueprint with this name is already registered
+            blueprint_name_value = blueprint.name if hasattr(blueprint, 'name') else blueprint_name
+            if blueprint_name_value in registered_names:
+                logger.warning(f"⚠️ Blueprint '{blueprint_name_value}' already registered, skipping duplicate")
+                continue
+
             app.register_blueprint(blueprint)
+            registered_names.add(blueprint_name_value)
             registered_count += 1
 
             # Log successful blueprint registration
@@ -463,6 +471,12 @@ def register_blueprints(app):
             )
             logger.info(f"✅ Registered blueprint: {blueprint_name}")
 
+        except ValueError as e:
+            # Handle case where blueprint name is already registered
+            if "already registered" in str(e):
+                logger.warning(f"⚠️ Blueprint {blueprint_name} already registered: {e}")
+            else:
+                raise
         except (ImportError, AttributeError) as e:
             # Log failed blueprint registration
             comprehensive_logger.log_startup(
@@ -832,6 +846,25 @@ def _register_health(app):
                 "message": "Complete Inventory Management System v1.5 is running",
             }
         )
+
+    @app.route("/api/metrics")
+    def prometheus_metrics():
+        """Prometheus metrics endpoint for monitoring"""
+        try:
+            from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
+            from flask import Response as FlaskResponse
+
+            return FlaskResponse(
+                generate_latest(),
+                mimetype=CONTENT_TYPE_LATEST
+            )
+        except ImportError:
+            return jsonify({
+                "error": "prometheus_client not installed",
+                "service": "store-backend",
+                "status": "running",
+                "timestamp": datetime.now().isoformat()
+            }), 503
 
     @app.route("/api/info")
     @decorator_info

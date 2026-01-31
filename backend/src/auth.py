@@ -11,7 +11,7 @@ P0.1: Migrated to Argon2id password hashing (OWASP recommended)
 """
 from flask import jsonify, redirect, request, session
 import secrets
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from functools import wraps
 import logging
 
@@ -259,6 +259,113 @@ class AuthManager:
         except Exception as e:
             print(f"JWT generation error: {e}")
             return None
+
+    @staticmethod
+    def authenticate_user(username, password, use_jwt=True):
+        """
+        Authenticate user by username/email and password.
+        
+        Args:
+            username: Username or email
+            password: Plain text password
+            use_jwt: Whether to generate JWT tokens (default True)
+            
+        Returns:
+            dict with success status and user info/tokens or error message
+        """
+        from src.models.user import User
+        
+        try:
+            # Find user by username or email
+            user = User.query.filter(
+                (User.username == username) | (User.email == username)
+            ).first()
+            
+            if not user:
+                return {
+                    "success": False,
+                    "message": "بيانات تسجيل الدخول غير صحيحة",
+                    "error": "Invalid credentials"
+                }
+            
+            # Check if account is active
+            if not user.is_active:
+                return {
+                    "success": False,
+                    "message": "الحساب معطل",
+                    "error": "Account is disabled"
+                }
+            
+            # Check if account is locked
+            if user.locked_until and user.locked_until > datetime.now(timezone.utc):
+                return {
+                    "success": False,
+                    "message": "الحساب مقفل مؤقتاً",
+                    "error": "Account is temporarily locked",
+                    "locked_until": user.locked_until.isoformat()
+                }
+            
+            # Verify password
+            if not AuthManager.verify_password(password, user.password_hash):
+                # Track failed login attempts
+                user.failed_login_count = (user.failed_login_count or 0) + 1
+                user.last_failed_login = datetime.now(timezone.utc)
+                
+                # Lock account after 5 failed attempts
+                if user.failed_login_count >= 5:
+                    user.locked_until = datetime.now(timezone.utc) + timedelta(minutes=15)
+                
+                from src.database import db
+                db.session.commit()
+                
+                return {
+                    "success": False,
+                    "message": "بيانات تسجيل الدخول غير صحيحة",
+                    "error": "Invalid credentials"
+                }
+            
+            # Successful login - reset failed attempts
+            user.failed_login_count = 0
+            user.locked_until = None
+            user.last_login = datetime.now(timezone.utc)
+            user.login_count = (user.login_count or 0) + 1
+            
+            from src.database import db
+            db.session.commit()
+            
+            # Get role name
+            role_name = user.role.name if user.role else "مستخدم"
+            
+            result = {
+                "success": True,
+                "message": "تم تسجيل الدخول بنجاح",
+                "user": {
+                    "id": user.id,
+                    "username": user.username,
+                    "email": user.email,
+                    "full_name": user.full_name,
+                    "role": role_name,
+                    "role_id": user.role_id
+                }
+            }
+            
+            # Generate JWT tokens if requested
+            if use_jwt:
+                tokens = AuthManager.generate_jwt_tokens(user.id, user.username, role_name)
+                if tokens:
+                    result["access_token"] = tokens["access_token"]
+                    result["refresh_token"] = tokens["refresh_token"]
+                    result["expires_in"] = tokens["expires_in"]
+            
+            return result
+            
+        except Exception as e:
+            print(f"Authentication error: {e}")
+            return {
+                "success": False,
+                "message": "حدث خطأ أثناء تسجيل الدخول",
+                "error": str(e)
+            }
 
     @staticmethod
     def verify_jwt_token(token, token_type="access"):
@@ -688,3 +795,20 @@ def require_auth(func):
     Alias for login_required for compatibility
     """
     return login_required(func)
+
+
+# Re-export token_required from decorators for backwards compatibility
+try:
+    from src.decorators.auth_decorators import token_required, admin_required
+except ImportError:
+    # Fallback if decorators module not available
+    def token_required(f):
+        """Fallback token_required decorator"""
+        @wraps(f)
+        def decorated(*args, **kwargs):
+            return jsonify({"error": "Authentication not configured"}), 401
+        return decorated
+    
+    def admin_required(f):
+        """Fallback admin_required decorator"""
+        return token_required(f)

@@ -1,139 +1,162 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Badge } from '../components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow
+} from '../components/ui/table';
+import { CreditCard, Banknote, FileText, Wallet } from 'lucide-react';
 
 function InvoicesPage() {
-  const [activeTab, setActiveTab] = useState('currencies');
-
   return (
-    <div className="page-container" dir="rtl">
-      <div className="page-header">
-        <div>
-          <h1 className="page-title">نظام الفواتير المالية</h1>
-          <p className="text-muted-foreground mt-1">إدارة العملات والبنوك والفواتير المالية</p>
-        </div>
+    <div className="p-6 space-y-6" dir="rtl">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-foreground">نظام الفواتير المالية</h1>
+        <p className="text-muted-foreground mt-1">إدارة العملات والبنوك والفواتير المالية</p>
       </div>
 
-      {/* Navigation Tabs */}
-      <div className="border-b border-border mb-6">
-        <nav className="-mb-px flex space-x-8">
-          {[
-            { id: 'currencies', label: 'العملات', icon: '💰' },
-            { id: 'banks', label: 'البنوك', icon: '🏦' },
-            { id: 'invoices', label: 'الفواتير', icon: '📄' }
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                activeTab === tab.id
-                  ? 'border-primary/100 text-primary'
-                  : 'border-transparent text-gray-500 hover:text-foreground hover:border-border'
-              }`}
-            >
-              <span className="mr-2">{tab.icon}</span>
-              {tab.label}
-            </button>
-          ))}
-        </nav>
-      </div>
+      <Tabs defaultValue="currencies" className="space-y-4">
+        <TabsList>
+          <TabsTrigger value="currencies" className="gap-2">
+            <Banknote className="w-4 h-4" />
+            العملات
+          </TabsTrigger>
+          <TabsTrigger value="banks" className="gap-2">
+            <Wallet className="w-4 h-4" />
+            البنوك
+          </TabsTrigger>
+          <TabsTrigger value="invoices" className="gap-2">
+            <FileText className="w-4 h-4" />
+            الفواتير
+          </TabsTrigger>
+        </TabsList>
 
-      {/* Tab Content */}
-      {activeTab === 'currencies' && (
-        <div className="card-standard">
-          <div className="card-header">
-            <h2 className="card-title">إدارة العملات</h2>
-          </div>
-          <div className="card-content">
-            <div className="grid-container grid-3">
-              <div className="card-standard">
-                <h3 className="font-medium text-foreground">الجنيه المصري</h3>
-                <p className="text-sm text-muted-foreground">EGP - ج.م</p>
-                <p className="text-xs text-gray-500">العملة الأساسية</p>
+        {/* Currencies Tab */}
+        <TabsContent value="currencies">
+          <Card>
+            <CardHeader>
+              <CardTitle>إدارة العملات</CardTitle>
+              <CardDescription>أسعار الصرف والعملات المتاحة</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg">الجنيه المصري</CardTitle>
+                    <CardDescription>EGP - ج.م</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Badge variant="secondary">العملة الأساسية</Badge>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg">اليورو</CardTitle>
+                    <CardDescription>EUR - €</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm font-medium">سعر الصرف: 52.50 ج.م</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg">الدولار الأمريكي</CardTitle>
+                    <CardDescription>USD - $</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm font-medium">سعر الصرف: 48.75 ج.م</p>
+                  </CardContent>
+                </Card>
               </div>
-              <div className="card-standard">
-                <h3 className="font-medium text-foreground">اليورو</h3>
-                <p className="text-sm text-muted-foreground">EUR - €</p>
-                <p className="text-xs text-gray-500">سعر الصرف: 52.50 ج.م</p>
-              </div>
-              <div className="card-standard">
-                <h3 className="font-medium text-foreground">الدولار الأمريكي</h3>
-                <p className="text-sm text-muted-foreground">USD - $</p>
-                <p className="text-xs text-gray-500">سعر الصرف: 48.75 ج.م</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-      {activeTab === 'banks' && (
-        <div className="card-standard">
-          <div className="card-header">
-            <h2 className="card-title">إدارة البنوك</h2>
-          </div>
-          <div className="card-content">
-            <div className="grid-container grid-2">
-              <div className="card-standard">
-                <h3 className="font-medium text-foreground">البنك الأهلي المصري</h3>
-                <p className="text-sm text-muted-foreground">رقم الحساب: 123456789</p>
-                <p className="text-xs text-gray-500">حساب جاري - EGP</p>
+        {/* Banks Tab */}
+        <TabsContent value="banks">
+          <Card>
+            <CardHeader>
+              <CardTitle>إدارة البنوك</CardTitle>
+              <CardDescription>الحسابات البنكية والمصرفية</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card>
+                  <CardHeader className="pb-2">
+                    <div className="flex items-center gap-2">
+                      <CreditCard className="w-5 h-5 text-primary" />
+                      <CardTitle className="text-lg">البنك الأهلي المصري</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p className="text-sm text-foreground">رقم الحساب: <span className="font-mono">123456789</span></p>
+                    <Badge variant="outline">حساب جاري - EGP</Badge>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="pb-2">
+                    <div className="flex items-center gap-2">
+                      <CreditCard className="w-5 h-5 text-primary" />
+                      <CardTitle className="text-lg">بنك مصر</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p className="text-sm text-foreground">رقم الحساب: <span className="font-mono">987654321</span></p>
+                    <Badge variant="outline">حساب توفير - EGP</Badge>
+                  </CardContent>
+                </Card>
               </div>
-              <div className="card-standard">
-                <h3 className="font-medium text-foreground">بنك مصر</h3>
-                <p className="text-sm text-muted-foreground">رقم الحساب: 987654321</p>
-                <p className="text-xs text-gray-500">حساب توفير - EGP</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-      {activeTab === 'invoices' && (
-        <div className="card-standard" data-testid="invoices-table">
-          <div className="card-header">
-            <h2 className="card-title">فواتير الاستيراد</h2>
-          </div>
-          <div className="card-content">
-            <div className="table-wrapper">
-              <table className="table-standard">
-                <thead>
-                  <tr>
-                    <th>رقم الفاتورة</th>
-                    <th>المورد</th>
-                    <th>المبلغ</th>
-                    <th>العملة</th>
-                    <th>التاريخ</th>
-                    <th>الحالة</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">INV-2024-001</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">شركة البذور المتقدمة</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">15,000.00</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">EUR</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">2024-01-15</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-primary/20 text-green-800">
-                      مدفوعة
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">INV-2024-002</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">مؤسسة الأسمدة الحديثة</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">8,500.00</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">EUR</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">2024-01-20</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-accent/20 text-yellow-800">
-                      معلقة
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
+        {/* Invoices Tab */}
+        <TabsContent value="invoices">
+          <Card data-testid="invoices-table">
+            <CardHeader>
+              <CardTitle>فواتير الاستيراد</CardTitle>
+              <CardDescription>سجل الفواتير والمعاملات</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>رقم الفاتورة</TableHead>
+                    <TableHead>المورد</TableHead>
+                    <TableHead>المبلغ</TableHead>
+                    <TableHead>العملة</TableHead>
+                    <TableHead>التاريخ</TableHead>
+                    <TableHead>الحالة</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-medium">INV-2024-001</TableCell>
+                    <TableCell>شركة البذور المتقدمة</TableCell>
+                    <TableCell>15,000.00</TableCell>
+                    <TableCell>EUR</TableCell>
+                    <TableCell>2024-01-15</TableCell>
+                    <TableCell>
+                      <Badge variant="default" className="bg-green-100 text-green-800 hover:bg-green-100">مدفوعة</Badge>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">INV-2024-002</TableCell>
+                    <TableCell>مؤسسة الأسمدة الحديثة</TableCell>
+                    <TableCell>8,500.00</TableCell>
+                    <TableCell>EUR</TableCell>
+                    <TableCell>2024-01-20</TableCell>
+                    <TableCell>
+                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 hover:bg-yellow-100">معلقة</Badge>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

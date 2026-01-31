@@ -61,6 +61,7 @@ try:
         RegisterSchema,
         validate_json,
     )
+    from src.utils.two_factor_auth import TwoFactorAuthManager
 except ImportError:
     # Create fallback validation
     LoginSchema = None  # type: ignore[misc,assignment]
@@ -499,7 +500,38 @@ def login():
 
         db.session.commit()
 
-        # إنشاء الرموز
+        # التحقق من المصادقة الثنائية (2FA)
+        if getattr(user, 'two_factor_enabled', False):
+            # إنشاء رمز مؤقت للمصادقة الثنائية
+            temp_payload = {
+                "user_id": user.id,
+                "type": "pre_2fa",
+                "exp": datetime.now(timezone.utc) + timedelta(minutes=5),
+                "iat": datetime.now(timezone.utc),
+            }
+            temp_token = jwt.encode(
+                temp_payload,
+                current_app.config.get("JWT_SECRET_KEY", current_app.config["SECRET_KEY"]),
+                algorithm="HS256",
+            )
+            
+            return (
+                jsonify(
+                    {
+                        "success": True,
+                        "require_2fa": True,
+                        "temp_token": temp_token,
+                        "data": {
+                            "user_id": user.id,
+                            "username": user.username,
+                        },
+                        "message": "المصادقة الثنائية مطلوبة",
+                    }
+                ),
+                200,
+            )
+
+        # إنشاء الرموز (Normal Flow)
         access_token = create_access_token(user)
         refresh_token = create_refresh_token(user)
 
@@ -517,6 +549,7 @@ def login():
             jsonify(
                 {
                     "success": True,
+                    "require_2fa": False,
                     "data": {
                         "access_token": access_token,
                         "refresh_token": refresh_token,
@@ -553,6 +586,77 @@ def login():
             status_code=500,
             details={"ar": "حدث خطأ أثناء تسجيل الدخول", "debug": str(e)},
         )
+
+
+@auth_unified_bp.route("/api/auth/2fa/verify-login", methods=["POST"])
+def verify_2fa_login():
+    """
+    التحقق من المصادقة الثنائية لإتمام تسجيل الدخول
+    
+    Headers:
+        Authorization: Bearer <temp_token>
+        
+    Body:
+        code: رمز التحقق (OTP)
+    """
+    try:
+        # Get temp token
+        token = get_token_from_header()
+        if not token:
+            return error_response("missing_token", "Auth token required", status=401)
+            
+        # Verify temp token
+        payload = verify_token(token)
+        if not payload or payload.get("type") != "pre_2fa":
+            return error_response("invalid_token", "Invalid or expired 2FA session", status=401)
+            
+        user_id = payload.get("user_id")
+        user = User.query.get(user_id)
+        if not user:
+            return error_response("user_not_found", "User not found", status=404)
+            
+        # Get code
+        data = request.get_json(silent=True) or {}
+        code = data.get("code")
+        if not code:
+            return error_response("missing_code", "Verification code required", status=400)
+            
+        # Verify code
+        manager = TwoFactorAuthManager(db.session)
+        is_valid = manager.verify_user_code(user.id, code)
+        
+        if not is_valid:
+            return error_response("invalid_code", "Invalid verification code", status=401)
+            
+        # Generate real tokens
+        access_token = create_access_token(user)
+        refresh_token = create_refresh_token(user)
+        
+        # Log activity
+        log_activity(
+            user.id,
+            ActionType.LOGIN if UNIFIED_MODELS else "login_2fa",
+            {
+                "ip": request.remote_addr,
+                "user_agent": request.headers.get("User-Agent"),
+                "method": "2fa"
+            }
+        )
+        
+        return jsonify({
+            "success": True,
+            "data": {
+                "access_token": access_token,
+                "refresh_token": refresh_token,
+                "user": user.to_dict(),
+                "expires_in": 3600
+            },
+            "message": "تم تسجيل الدخول بنجاح"
+        }), 200
+        
+    except Exception as e:
+        logger.error(f"2FA Login error: {e}")
+        return error_response("internal_error", "An error occurred", status=500)
 
 
 @auth_unified_bp.route("/api/auth/logout", methods=["POST"])

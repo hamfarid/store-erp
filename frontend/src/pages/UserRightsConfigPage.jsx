@@ -255,14 +255,14 @@ const UserRightsConfigPage = () => {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto" dir="rtl">
+    <div className="page-container" dir="rtl">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+        <h1 className="page-title flex items-center gap-3">
           <Shield className="w-8 h-8 text-primary-500" />
           إعدادات صلاحيات المستخدمين
         </h1>
-        <p className="text-gray-500 mt-2">
+        <p className="text-secondary mt-2">
           إدارة أدوار وصلاحيات المستخدمين في النظام
         </p>
       </div>
@@ -274,7 +274,7 @@ const UserRightsConfigPage = () => {
           className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
             activeTab === 'users'
               ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/30'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              : 'bg-secondary text-secondary hover:bg-hover'
           }`}
         >
           <Users className="w-5 h-5" />
@@ -285,7 +285,7 @@ const UserRightsConfigPage = () => {
           className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
             activeTab === 'roles'
               ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/30'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              : 'bg-secondary text-secondary hover:bg-hover'
           }`}
         >
           <Key className="w-5 h-5" />
@@ -296,17 +296,17 @@ const UserRightsConfigPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Users/Roles List */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+          <div className="entity-card overflow-hidden p-0">
             {/* Search */}
-            <div className="p-4 border-b border-gray-100">
+            <div className="p-4 border-b border-light">
               <div className="relative">
-                <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-tertiary" />
                 <input
                   type="text"
                   placeholder="بحث..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pr-10 pl-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="w-full pr-10 pl-4 py-2 border border-light rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-secondary"
                 />
               </div>
             </div>
@@ -318,7 +318,7 @@ const UserRightsConfigPage = () => {
                   <button
                     key={userItem.id}
                     onClick={() => handleSelectUser(userItem)}
-                    className={`w-full p-4 flex items-center gap-3 border-b border-gray-50 hover:bg-gray-50 transition-colors ${
+                    className={`w-full p-4 flex items-center gap-3 border-b border-light hover:bg-hover transition-colors ${
                       selectedUser?.id === userItem.id ? 'bg-primary-50 border-r-4 border-r-primary-500' : ''
                     }`}
                   >
@@ -326,13 +326,13 @@ const UserRightsConfigPage = () => {
                       {userItem.name?.charAt(0) || userItem.username?.charAt(0)}
                     </div>
                     <div className="flex-1 text-right">
-                      <p className="font-medium text-gray-900">{userItem.name || userItem.username}</p>
-                      <p className="text-sm text-gray-500">{userItem.email}</p>
+                      <p className="font-medium text-primary">{userItem.name || userItem.username}</p>
+                      <p className="text-sm text-secondary">{userItem.email}</p>
                     </div>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                       userItem.role === 'admin' ? 'bg-red-100 text-red-700' :
                       userItem.role === 'manager' ? 'bg-blue-100 text-blue-700' :
-                      'bg-gray-100 text-gray-700'
+                      'status-badge--neutral'
                     }`}>
                       {ROLES[userItem.role]?.name || userItem.role}
                     </span>
@@ -343,7 +343,7 @@ const UserRightsConfigPage = () => {
                   <button
                     key={role.id}
                     onClick={() => handleSelectRole(role)}
-                    className={`w-full p-4 flex items-center gap-3 border-b border-gray-50 hover:bg-gray-50 transition-colors ${
+                    className={`w-full p-4 flex items-center gap-3 border-b border-light hover:bg-hover transition-colors ${
                       selectedRole?.id === role.id ? 'bg-primary-50 border-r-4 border-r-primary-500' : ''
                     }`}
                   >
@@ -351,8 +351,8 @@ const UserRightsConfigPage = () => {
                       <Key className="w-5 h-5" />
                     </div>
                     <div className="flex-1 text-right">
-                      <p className="font-medium text-gray-900">{role.name}</p>
-                      <p className="text-sm text-gray-500">{role.permissions?.length || 0} صلاحية</p>
+                      <p className="font-medium text-primary">{role.name}</p>
+                      <p className="text-sm text-secondary">{role.permissions?.length || 0} صلاحية</p>
                     </div>
                   </button>
                 ))
@@ -364,7 +364,7 @@ const UserRightsConfigPage = () => {
         {/* Permissions Panel */}
         <div className="lg:col-span-2">
           {selectedUser ? (
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div className="entity-card overflow-hidden p-0">
               {/* User Header */}
               <div className="p-6 bg-gradient-to-l from-primary-500 to-primary-600 text-white">
                 <div className="flex items-center gap-4">
@@ -379,14 +379,14 @@ const UserRightsConfigPage = () => {
               </div>
 
               {/* Role Selection */}
-              <div className="p-6 border-b border-gray-100">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="p-6 border-b border-light">
+                <label className="block text-sm font-medium text-secondary mb-2">
                   الدور الوظيفي
                 </label>
                 <select
                   value={userRole}
                   onChange={(e) => handleRoleChange(e.target.value)}
-                  className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="w-full p-3 border border-light rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-secondary"
                 >
                   {Object.entries(ROLES).map(([key, value]) => (
                     <option key={key} value={key}>{value.name}</option>
@@ -396,7 +396,7 @@ const UserRightsConfigPage = () => {
 
               {/* Permissions Grid */}
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
                   <Lock className="w-5 h-5 text-primary-500" />
                   الصلاحيات التفصيلية
                 </h3>
@@ -409,16 +409,16 @@ const UserRightsConfigPage = () => {
                     const allSelected = selectedCount === categoryPerms.length;
 
                     return (
-                      <div key={key} className="border border-gray-200 rounded-xl overflow-hidden">
+                      <div key={key} className="border border-light rounded-xl overflow-hidden">
                         {/* Category Header */}
                         <button
                           onClick={() => toggleCategory(key)}
-                          className="w-full p-4 flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors"
+                          className="w-full p-4 flex items-center justify-between bg-secondary hover:bg-hover transition-colors"
                         >
                           <div className="flex items-center gap-3">
                             <span className="text-2xl">{category.icon}</span>
-                            <span className="font-medium text-gray-900">{category.name}</span>
-                            <span className="text-sm text-gray-500">
+                            <span className="font-medium text-primary">{category.name}</span>
+                            <span className="text-sm text-secondary">
                               ({selectedCount}/{categoryPerms.length})
                             </span>
                           </div>
@@ -429,17 +429,17 @@ const UserRightsConfigPage = () => {
                                 toggleAllInCategory(key);
                               }}
                               className={`p-2 rounded-lg transition-colors ${
-                                allSelected 
-                                  ? 'bg-primary-100 text-primary-700' 
-                                  : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                                allSelected
+                                  ? 'bg-primary-100 text-primary-700'
+                                  : 'bg-secondary text-secondary hover:bg-hover'
                               }`}
                             >
                               {allSelected ? <CheckCircle2 className="w-4 h-4" /> : <Check className="w-4 h-4" />}
                             </button>
                             {isExpanded ? (
-                              <ChevronDown className="w-5 h-5 text-gray-400" />
+                              <ChevronDown className="w-5 h-5 text-tertiary" />
                             ) : (
-                              <ChevronRight className="w-5 h-5 text-gray-400" />
+                              <ChevronRight className="w-5 h-5 text-tertiary" />
                             )}
                           </div>
                         </button>
@@ -458,7 +458,7 @@ const UserRightsConfigPage = () => {
                                   className={`p-3 rounded-xl flex items-center gap-2 transition-all ${
                                     isSelected
                                       ? 'bg-primary-100 text-primary-700 border-2 border-primary-300'
-                                      : 'bg-gray-50 text-gray-600 border-2 border-transparent hover:border-gray-200'
+                                      : 'bg-secondary text-secondary border-2 border-transparent hover:border-light'
                                   }`}
                                 >
                                   {isSelected ? (
@@ -479,7 +479,7 @@ const UserRightsConfigPage = () => {
               </div>
 
               {/* Save Button */}
-              <div className="p-6 bg-gray-50 border-t border-gray-100">
+              <div className="p-6 bg-secondary border-t border-light">
                 <button
                   onClick={handleSaveUserRights}
                   disabled={saving}
@@ -500,7 +500,7 @@ const UserRightsConfigPage = () => {
               </div>
             </div>
           ) : selectedRole ? (
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div className="entity-card overflow-hidden p-0">
               {/* Role Header */}
               <div className="p-6 bg-gradient-to-l from-secondary-500 to-secondary-600 text-white">
                 <h2 className="text-2xl font-bold flex items-center gap-3">
@@ -514,7 +514,7 @@ const UserRightsConfigPage = () => {
 
               {/* Role Permissions */}
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h3 className="text-lg font-semibold text-primary mb-4">
                   صلاحيات هذا الدور:
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -531,12 +531,12 @@ const UserRightsConfigPage = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-12 flex flex-col items-center justify-center text-center">
-              <UserCog className="w-16 h-16 text-gray-300 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            <div className="entity-card p-12 flex flex-col items-center justify-center text-center">
+              <UserCog className="w-16 h-16 text-tertiary mb-4" />
+              <h3 className="text-xl font-semibold text-primary mb-2">
                 اختر مستخدم أو دور
               </h3>
-              <p className="text-gray-500">
+              <p className="text-secondary">
                 اختر مستخدم من القائمة لتعديل صلاحياته، أو دور لعرض تفاصيله
               </p>
             </div>

@@ -1,10 +1,10 @@
 /**
  * Modern Products Page
  * 
- * A beautiful, professional products management page with modern UI/UX.
+ * A beautiful, professional products management page with modern UI/UX using ShadCN components.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Search,
   Plus,
@@ -26,170 +26,120 @@ import {
   ChevronLeft,
   SlidersHorizontal,
   Tag,
-  Barcode
+  Barcode,
+  RefreshCw
 } from 'lucide-react';
 
-// ============================================================================
-// Sample Data
-// ============================================================================
-
-const sampleProducts = [
-  {
-    id: 1,
-    name: 'آيفون 15 برو ماكس',
-    sku: 'IP15PM-256',
-    category: 'هواتف',
-    price: 5499,
-    cost: 4800,
-    stock: 45,
-    minStock: 10,
-    status: 'in_stock',
-    image: null
-  },
-  {
-    id: 2,
-    name: 'سماعات إيربودز برو 2',
-    sku: 'AP2-WHT',
-    category: 'إكسسوارات',
-    price: 999,
-    cost: 750,
-    stock: 120,
-    minStock: 20,
-    status: 'in_stock',
-    image: null
-  },
-  {
-    id: 3,
-    name: 'شاحن MagSafe',
-    sku: 'MS-CHG',
-    category: 'إكسسوارات',
-    price: 199,
-    cost: 120,
-    stock: 8,
-    minStock: 15,
-    status: 'low_stock',
-    image: null
-  },
-  {
-    id: 4,
-    name: 'ماك بوك برو 16',
-    sku: 'MBP16-M3',
-    category: 'لابتوب',
-    price: 12999,
-    cost: 11000,
-    stock: 0,
-    minStock: 5,
-    status: 'out_of_stock',
-    image: null
-  },
-  {
-    id: 5,
-    name: 'آيباد برو 12.9',
-    sku: 'IPAD-PRO12',
-    category: 'أجهزة لوحية',
-    price: 4999,
-    cost: 4200,
-    stock: 32,
-    minStock: 8,
-    status: 'in_stock',
-    image: null
-  },
-  {
-    id: 6,
-    name: 'أبل واتش سيريس 9',
-    sku: 'AW-S9-45',
-    category: 'ساعات',
-    price: 1899,
-    cost: 1500,
-    stock: 67,
-    minStock: 15,
-    status: 'in_stock',
-    image: null
-  },
-];
+import { productService } from '../services/productService';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Badge } from '../components/ui/badge';
+import { 
+  Card, 
+  CardContent, 
+  CardHeader, 
+  CardTitle, 
+  CardDescription,
+  CardFooter 
+} from '../components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../components/ui/table';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 // ============================================================================
 // Status Badge Component
 // ============================================================================
 
-const StatusBadge = ({ status }) => {
-  const config = {
-    in_stock: { label: 'متوفر', color: 'bg-emerald-100 text-emerald-700', icon: CheckCircle },
-    low_stock: { label: 'مخزون منخفض', color: 'bg-amber-100 text-amber-700', icon: AlertTriangle },
-    out_of_stock: { label: 'نفد المخزون', color: 'bg-rose-100 text-rose-700', icon: XCircle },
-  };
+// ============================================================================
+// Status Badge Component
+// ============================================================================
 
-  const { label, color, icon: Icon } = config[status] || config.in_stock;
+const StatusBadge = ({ status, stock, minStock }) => {
+  let variant = 'default';
+  let label = 'متوفر';
+  let Icon = CheckCircle;
+
+  // Use explicit status if available and valid
+  if (status === 'out_of_stock' || stock <= 0) {
+    variant = 'destructive'; // Red
+    label = 'نفد المخزون';
+    Icon = XCircle;
+  } else if (status === 'low_stock' || stock <= minStock) {
+    variant = 'warning'; // Yellow
+    label = 'مخزون منخفض';
+    Icon = AlertTriangle;
+  } else {
+    variant = 'success'; // Green
+    label = 'متوفر';
+    Icon = CheckCircle;
+  }
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${color}`}>
+    <Badge variant={variant} className="gap-1.5">
       <Icon size={12} />
       {label}
-    </span>
+    </Badge>
   );
 };
-
 // ============================================================================
 // Product Card Component (Grid View)
 // ============================================================================
 
 const ProductCard = ({ product, onView, onEdit, onDelete }) => (
-  <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group">
-    {/* Image */}
-    <div className="relative aspect-square bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center">
+  <Card hover className="overflow-hidden group border-border/50 bg-card">
+    <div className="relative aspect-square bg-gradient-to-br from-muted/50 to-muted flex items-center justify-center">
       {product.image ? (
         <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
       ) : (
-        <Package className="w-16 h-16 text-gray-300" />
+        <Package className="w-16 h-16 text-muted-foreground/30" />
       )}
       
       {/* Quick Actions Overlay */}
-      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-        <button
-          onClick={() => onView(product)}
-          className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:scale-110 transition-transform"
-        >
-          <Eye size={18} className="text-gray-700" />
-        </button>
-        <button
-          onClick={() => onEdit(product)}
-          className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:scale-110 transition-transform"
-        >
-          <Edit size={18} className="text-gray-700" />
-        </button>
-        <button
-          onClick={() => onDelete(product)}
-          className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:scale-110 transition-transform"
-        >
-          <Trash2 size={18} className="text-rose-600" />
-        </button>
+      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 backdrop-blur-[2px]">
+        <Button size="icon" variant="ghost" className="bg-background/90 hover:bg-background rounded-full" onClick={() => onView(product)}>
+          <Eye size={18} />
+        </Button>
+        <Button size="icon" variant="ghost" className="bg-background/90 hover:bg-background rounded-full" onClick={() => onEdit(product)}>
+          <Edit size={18} />
+        </Button>
+        <Button size="icon" variant="ghost" className="bg-background/90 hover:bg-background rounded-full text-destructive hover:text-destructive" onClick={() => onDelete(product)}>
+          <Trash2 size={18} />
+        </Button>
       </div>
 
-      {/* Status Badge */}
       <div className="absolute top-3 right-3">
-        <StatusBadge status={product.status} />
+        <StatusBadge status={product.status} stock={product.stock} minStock={product.min_stock || 10} />
       </div>
     </div>
 
-    {/* Info */}
-    <div className="p-4">
-      <p className="text-xs text-gray-400 mb-1">{product.sku}</p>
-      <h3 className="font-semibold text-gray-900 mb-2 truncate">{product.name}</h3>
-      
-      <div className="flex items-center justify-between">
+    <CardContent className="p-4">
+      <div className="flex justify-between items-start mb-2">
         <div>
-          <p className="text-lg font-bold text-teal-600">{product.price.toLocaleString()} ج.م</p>
-          <p className="text-xs text-gray-400">التكلفة: {product.cost.toLocaleString()} ج.م</p>
+          <p className="text-xs text-muted-foreground font-mono mb-1">{product.sku}</p>
+          <h3 className="font-semibold text-foreground truncate max-w-[180px]" title={product.name}>{product.name}</h3>
+        </div>
+      </div>
+      
+      <div className="flex items-center justify-between mt-4">
+        <div>
+          <p className="text-lg font-bold text-primary">{(product.price || 0).toLocaleString()} ج.م</p>
+          <p className="text-xs text-muted-foreground">التكلفة: {(product.cost || 0).toLocaleString()} ج.م</p>
         </div>
         <div className="text-left">
-          <p className={`text-lg font-bold ${product.stock <= product.minStock ? 'text-rose-600' : 'text-gray-900'}`}>
+          <p className={`text-lg font-bold ${product.stock <= (product.min_stock || 10) ? 'text-destructive' : 'text-foreground'}`}>
             {product.stock}
           </p>
-          <p className="text-xs text-gray-400">في المخزون</p>
+          <p className="text-xs text-muted-foreground">في المخزون</p>
         </div>
       </div>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 );
 
 // ============================================================================
@@ -197,64 +147,58 @@ const ProductCard = ({ product, onView, onEdit, onDelete }) => (
 // ============================================================================
 
 const ProductRow = ({ product, onView, onEdit, onDelete }) => (
-  <tr className="hover:bg-gray-50 transition-colors">
-    <td className="px-6 py-4">
+  <TableRow>
+    <TableCell>
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center flex-shrink-0">
+        <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center flex-shrink-0 border border-border">
           {product.image ? (
-            <img src={product.image} alt="" className="w-full h-full object-cover rounded-xl" />
+            <img src={product.image} alt="" className="w-full h-full object-cover rounded-lg" />
           ) : (
-            <Package className="text-gray-300" size={20} />
+            <Package className="text-muted-foreground/50" size={20} />
           )}
         </div>
         <div>
-          <p className="font-semibold text-gray-900">{product.name}</p>
-          <p className="text-sm text-gray-400">{product.sku}</p>
+          <p className="font-medium text-foreground">{product.name}</p>
+          <p className="text-xs text-muted-foreground font-mono">{product.sku}</p>
         </div>
       </div>
-    </td>
-    <td className="px-6 py-4">
-      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm">
-        <Tag size={14} />
-        {product.category}
-      </span>
-    </td>
-    <td className="px-6 py-4">
-      <p className="font-semibold text-gray-900">{product.price.toLocaleString()} ج.م</p>
-      <p className="text-xs text-gray-400">تكلفة: {product.cost.toLocaleString()}</p>
-    </td>
-    <td className="px-6 py-4">
-      <p className={`font-semibold ${product.stock <= product.minStock ? 'text-rose-600' : 'text-gray-900'}`}>
-        {product.stock}
-      </p>
-      <p className="text-xs text-gray-400">حد أدنى: {product.minStock}</p>
-    </td>
-    <td className="px-6 py-4">
-      <StatusBadge status={product.status} />
-    </td>
-    <td className="px-6 py-4">
-      <div className="flex items-center gap-2">
-        <button
-          onClick={() => onView(product)}
-          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-        >
-          <Eye size={18} className="text-gray-500" />
-        </button>
-        <button
-          onClick={() => onEdit(product)}
-          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-        >
-          <Edit size={18} className="text-gray-500" />
-        </button>
-        <button
-          onClick={() => onDelete(product)}
-          className="p-2 hover:bg-rose-50 rounded-lg transition-colors"
-        >
-          <Trash2 size={18} className="text-rose-500" />
-        </button>
+    </TableCell>
+    <TableCell>
+      <Badge variant="secondary" className="font-normal">
+        {product.category?.name || product.category || 'غير مصنف'}
+      </Badge>
+    </TableCell>
+    <TableCell>
+      <div className="flex flex-col">
+        <span className="font-semibold">{(product.price || 0).toLocaleString()} ج.م</span>
+        <span className="text-xs text-muted-foreground">{(product.cost || 0).toLocaleString()} ج.م</span>
       </div>
-    </td>
-  </tr>
+    </TableCell>
+    <TableCell>
+      <div className="flex flex-col">
+        <span className={`font-semibold ${product.stock <= (product.min_stock || 10) ? 'text-destructive' : ''}`}>
+          {product.stock}
+        </span>
+        <span className="text-xs text-muted-foreground">الحد الأدنى: {product.min_stock || 10}</span>
+      </div>
+    </TableCell>
+    <TableCell>
+      <StatusBadge status={product.status} stock={product.stock} minStock={product.min_stock || 10} />
+    </TableCell>
+    <TableCell>
+      <div className="flex items-center gap-1">
+        <Button variant="ghost" size="icon" onClick={() => onView(product)}>
+          <Eye size={16} />
+        </Button>
+        <Button variant="ghost" size="icon" onClick={() => onEdit(product)}>
+          <Edit size={16} />
+        </Button>
+        <Button variant="ghost" size="icon" className="text-destructive hover:bg-destructive/10" onClick={() => onDelete(product)}>
+          <Trash2 size={16} />
+        </Button>
+      </div>
+    </TableCell>
+  </TableRow>
 );
 
 // ============================================================================
@@ -262,158 +206,221 @@ const ProductRow = ({ product, onView, onEdit, onDelete }) => (
 // ============================================================================
 
 const ProductsPage = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'table'
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedStatus, setSelectedStatus] = useState('all');
-  // const [currentPage, setCurrentPage] = useState(1); // Currently unused
+  const [pagination, setPagination] = useState({ page: 1, limit: 12, total: 0, totalPages: 1 });
+  
+  // Fetch Stats
+  const [stats, setStats] = useState({
+    total: 0,
+    inStock: 0,
+    lowStock: 0,
+    outOfStock: 0
+  });
 
-  const categories = ['all', 'هواتف', 'لابتوب', 'أجهزة لوحية', 'إكسسوارات', 'ساعات'];
+  const fetchProducts = React.useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      // Fetch products with filters
+      const response = await productService.getAll({
+        page: pagination.page,
+        limit: pagination.limit,
+        search: searchQuery,
+        category_id: selectedCategory === 'all' ? '' : selectedCategory
+      });
+      
+      setProducts(response.products);
+      setPagination(prev => ({
+        ...prev,
+        total: response.total,
+        totalPages: response.totalPages
+      }));
+
+      const total = response.total;
+      setStats({
+        total: total,
+        inStock: response.products.filter(p => p.stock > (p.min_stock || 10)).length,
+        lowStock: response.products.filter(p => p.stock <= (p.min_stock || 10) && p.stock > 0).length,
+        outOfStock: response.products.filter(p => p.stock <= 0).length
+      });
+
+    } catch (err) {
+      console.error("Error fetching products:", err);
+      setError("حدث خطأ أثناء تحميل المنتجات. يرجى المحاولة مرة أخرى.");
+    } finally {
+      setLoading(false);
+    }
+  }, [pagination.page, pagination.limit, searchQuery, selectedCategory]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   // Handlers
   const handleView = (product) => console.log('View:', product);
   const handleEdit = (product) => console.log('Edit:', product);
-  const handleDelete = (product) => console.log('Delete:', product);
+  const handleDelete = async (product) => {
+    if (window.confirm(`هل أنت متأكد من حذف ${product.name}؟`)) {
+      try {
+        await productService.delete(product.id);
+        fetchProducts(); // Refresh
+      } catch (err) {
+        alert("فشل الحذف: " + err.message);
+      }
+    }
+  };
 
-  // Filter products
-  const filteredProducts = sampleProducts.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         product.sku.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-    const matchesStatus = selectedStatus === 'all' || product.status === selectedStatus;
-    return matchesSearch && matchesCategory && matchesStatus;
-  });
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= pagination.totalPages) {
+      setPagination(prev => ({ ...prev, page: newPage }));
+    }
+  };
+
+  if (loading && products.length === 0) {
+    return <div className="h-screen flex items-center justify-center"><LoadingSpinner /></div>;
+  }
+  
+  if (error) {
+    return (
+      <div className="h-screen flex flex-col items-center justify-center gap-4 text-center p-4">
+        <AlertTriangle size={48} className="text-destructive mb-2" />
+        <h2 className="text-xl font-bold">خطأ في التحميل</h2>
+        <p className="text-muted-foreground">{error}</p>
+        <Button onClick={fetchProducts} variant="outline">
+          <RefreshCw size={16} className="ml-2" />
+          إعادة المحاولة
+        </Button>
+      </div>
+    );
+  }
 
   return (
-    <div className="page-container" dir="rtl">
+    <div className="p-8 space-y-8 min-h-screen bg-background text-foreground" dir="rtl">
       {/* Header */}
-      <div className="page-header">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="page-title">المنتجات</h1>
-          <p className="text-gray-500 mt-1">إدارة جميع المنتجات في متجرك</p>
+          <h1 className="text-3xl font-bold tracking-tight">المنتجات</h1>
+          <p className="text-muted-foreground mt-1">إدارة دليل المنتجات والمخزون</p>
         </div>
-        <div className="page-actions">
-          <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-l from-teal-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg shadow-teal-500/30 hover:shadow-xl hover:shadow-teal-500/40 transition-all duration-300">
-            <Plus size={20} />
-            <span>إضافة منتج</span>
-          </button>
+        <div className="flex gap-2">
+           <Button variant="outline" onClick={fetchProducts}>
+            <RefreshCw size={18} className="ml-2" />
+            تحديث
+          </Button>
+          <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Plus size={20} className="ml-2" />
+            إضافة منتج
+          </Button>
         </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="stats-grid">
-          <div className="stats-card">
-            <div className="stats-card-header">
-              <span className="stats-card-title">إجمالي المنتجات</span>
-              <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center">
-                <Package className="text-teal-600" size={24} />
-              </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="p-6 flex items-center justify-between shadow-sm">
+          <div>
+            <p className="text-sm font-medium text-muted-foreground">إجمالي المنتجات</p>
+            <h3 className="text-2xl font-bold mt-1">{stats.total}</h3>
+          </div>
+          <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+            <Package size={24} />
+          </div>
+        </Card>
+        
+        <Card className="p-6 flex items-center justify-between shadow-sm">
+          <div>
+            <p className="text-sm font-medium text-muted-foreground">متوفر</p>
+            <h3 className="text-2xl font-bold mt-1 text-emerald-600">--</h3>
+          </div>
+          <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+            <CheckCircle size={24} />
+          </div>
+        </Card>
+        
+        <Card className="p-6 flex items-center justify-between shadow-sm">
+          <div>
+            <p className="text-sm font-medium text-muted-foreground">مخزون منخفض</p>
+            <h3 className="text-2xl font-bold mt-1 text-amber-600">--</h3>
+          </div>
+          <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
+            <AlertTriangle size={24} />
+          </div>
+        </Card>
+        
+        <Card className="p-6 flex items-center justify-between shadow-sm">
+          <div>
+            <p className="text-sm font-medium text-muted-foreground">نفد المخزون</p>
+            <h3 className="text-2xl font-bold mt-1 text-rose-600">--</h3>
+          </div>
+          <div className="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center text-rose-600">
+            <XCircle size={24} />
+          </div>
+        </Card>
+      </div>
+
+      {/* Filters & Actions */}
+      <Card className="p-4">
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div className="flex flex-1 w-full gap-4 items-center">
+             <div className="relative flex-1 max-w-md">
+              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Input 
+                placeholder="بحث..." 
+                className="pr-9" 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
-            <div className="stats-card-value">1,234</div>
-          </div>
-          <div className="stats-card">
-            <div className="stats-card-header">
-              <span className="stats-card-title">متوفر</span>
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
-                <CheckCircle className="text-emerald-600" size={24} />
-              </div>
-            </div>
-            <div className="stats-card-value text-emerald-600">1,180</div>
-          </div>
-          <div className="stats-card">
-            <div className="stats-card-header">
-              <span className="stats-card-title">مخزون منخفض</span>
-              <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center">
-                <AlertTriangle className="text-amber-600" size={24} />
-              </div>
-            </div>
-            <div className="stats-card-value text-amber-600">42</div>
-          </div>
-          <div className="stats-card">
-            <div className="stats-card-header">
-              <span className="stats-card-title">نفد المخزون</span>
-              <div className="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center">
-                <XCircle className="text-rose-600" size={24} />
-              </div>
-            </div>
-            <div className="stats-card-value text-rose-600">12</div>
-          </div>
-        </div>
-
-        {/* Filters & Search */}
-        <div className="search-filter-bar">
-          {/* Search */}
-          <div className="relative search-input">
-            <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="بحث بالاسم أو الكود..."
-              className="form-input-standard pr-12"
-            />
+            {/* Simple Category Select - Could be replaced with UI Select */}
+            <select 
+              className="h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="all">جميع الفئات</option>
+              {/* Should be dynamic from API */}
+              <option value="1">إلكترونيات</option>
+              <option value="2">ملابس</option>
+            </select>
           </div>
 
-          {/* Category Filter */}
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="form-input-standard filter-select"
-          >
-            <option value="all">جميع الفئات</option>
-            {categories.slice(1).map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-
-          {/* Status Filter */}
-          <select
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-            className="form-input-standard filter-select"
-          >
-            <option value="all">جميع الحالات</option>
-            <option value="in_stock">متوفر</option>
-            <option value="low_stock">مخزون منخفض</option>
-            <option value="out_of_stock">نفد المخزون</option>
-          </select>
-
-          <div className="action-buttons">
-            {/* Export */}
-            <button className="flex items-center gap-2 px-4 py-3 border-2 border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
-              <Download size={18} className="text-gray-500" />
-              <span className="text-sm font-medium text-gray-700">تصدير</span>
-            </button>
-
-            {/* Import */}
-            <button className="flex items-center gap-2 px-4 py-3 border-2 border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
-              <Upload size={18} className="text-gray-500" />
-              <span className="text-sm font-medium text-gray-700">استيراد</span>
-            </button>
-
-            {/* View Toggle */}
-            <div className="flex items-center bg-gray-100 rounded-xl p-1">
-              <button
+          <div className="flex items-center gap-2 w-full md:w-auto">
+            <Button variant="outline" size="icon">
+              <Filter size={18} />
+            </Button>
+            <Button variant="outline" size="icon">
+              <Download size={18} />
+            </Button>
+             <div className="bg-muted p-1 rounded-lg flex gap-1">
+              <Button 
+                variant={viewMode === 'grid' ? 'secondary' : 'ghost'} 
+                size="sm" 
+                className="h-8 px-2"
                 onClick={() => setViewMode('grid')}
-                className={`p-2.5 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-white shadow' : 'hover:bg-gray-200'}`}
               >
-                <Grid size={18} className={viewMode === 'grid' ? 'text-teal-600' : 'text-gray-500'} />
-              </button>
-              <button
+                <Grid size={16} />
+              </Button>
+              <Button 
+                variant={viewMode === 'table' ? 'secondary' : 'ghost'} 
+                size="sm"
+                className="h-8 px-2"
                 onClick={() => setViewMode('table')}
-                className={`p-2.5 rounded-lg transition-colors ${viewMode === 'table' ? 'bg-white shadow' : 'hover:bg-gray-200'}`}
               >
-                <List size={18} className={viewMode === 'table' ? 'text-teal-600' : 'text-gray-500'} />
-              </button>
+                <List size={16} />
+              </Button>
             </div>
           </div>
         </div>
+      </Card>
 
       {/* Content */}
       {viewMode === 'grid' ? (
-        /* Grid View */
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" data-testid="products-table">
-          {filteredProducts.map(product => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {products.map(product => (
             <ProductCard
               key={product.id}
               product={product}
@@ -422,23 +429,27 @@ const ProductsPage = () => {
               onDelete={handleDelete}
             />
           ))}
+          {products.length === 0 && !loading && (
+             <div className="col-span-full text-center py-12 text-muted-foreground">
+               لا توجد منتجات لعرضها
+             </div>
+          )}
         </div>
       ) : (
-        /* Table View */
-        <div className="table-wrapper" data-testid="products-table">
-          <table className="table-standard">
-            <thead>
-              <tr>
-                <th>المنتج</th>
-                <th>الفئة</th>
-                <th>السعر</th>
-                <th>المخزون</th>
-                <th>الحالة</th>
-                <th>إجراءات</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredProducts.map(product => (
+        <Card className="overflow-hidden">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>المنتج</TableHead>
+                <TableHead>الفئة</TableHead>
+                <TableHead>السعر</TableHead>
+                <TableHead>المخزون</TableHead>
+                <TableHead>الحالة</TableHead>
+                <TableHead>إجراءات</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {products.map(product => (
                 <ProductRow
                   key={product.id}
                   product={product}
@@ -447,26 +458,43 @@ const ProductsPage = () => {
                   onDelete={handleDelete}
                 />
               ))}
-            </tbody>
-          </table>
-        </div>
+               {products.length === 0 && !loading && (
+                 <TableRow>
+                   <TableCell colSpan={6} className="text-center py-12 text-muted-foreground">
+                     لا توجد منتجات لعرضها
+                   </TableCell>
+                 </TableRow>
+               )}
+            </TableBody>
+          </Table>
+        </Card>
       )}
 
       {/* Pagination */}
-      <div className="mt-8 button-group button-group-space-between">
-        <p className="text-gray-500 text-sm">
-          عرض 1-{filteredProducts.length} من {filteredProducts.length} منتج
+      <div className="flex items-center justify-between border-t pt-4">
+        <p className="text-sm text-muted-foreground">
+          عرض {Math.min((pagination.page - 1) * pagination.limit + 1, pagination.total)} - {Math.min(pagination.page * pagination.limit, pagination.total)} من {pagination.total} منتج
         </p>
-        <div className="button-group">
-          <button className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50" disabled>
-            <ChevronRight size={18} className="text-gray-500" />
-          </button>
-          <button className="w-10 h-10 bg-teal-600 text-white rounded-lg font-medium">1</button>
-          <button className="w-10 h-10 hover:bg-gray-100 rounded-lg font-medium text-gray-700">2</button>
-          <button className="w-10 h-10 hover:bg-gray-100 rounded-lg font-medium text-gray-700">3</button>
-          <button className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-            <ChevronLeft size={18} className="text-gray-500" />
-          </button>
+        <div className="flex gap-2">
+          <Button 
+            variant="outline" 
+            size="icon" 
+            onClick={() => handlePageChange(pagination.page - 1)}
+            disabled={pagination.page <= 1}
+          >
+            <ChevronRight size={16} />
+          </Button>
+          <Button variant="outline" className="w-10">
+            {pagination.page}
+          </Button>
+          <Button 
+            variant="outline" 
+            size="icon" 
+            onClick={() => handlePageChange(pagination.page + 1)}
+            disabled={pagination.page >= pagination.totalPages}
+          >
+            <ChevronLeft size={16} />
+          </Button>
         </div>
       </div>
     </div>

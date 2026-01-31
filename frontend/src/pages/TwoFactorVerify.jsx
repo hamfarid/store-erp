@@ -89,11 +89,13 @@ const TwoFactorVerify = () => {
     setError('');
 
     try {
-      const result = await authService.verify2FA(codeToVerify);
-      
-      if (result.success) {
+      // Get temp token from location state
+      const tempToken = location.state?.temp_token;
+      const result = await authService.verify2FA(codeToVerify, tempToken);
+
+      if (result.success && result.data) {
         // Login with the verified tokens
-        login(result.user, result.access_token);
+        login(result.data.user, result.data.access_token);
         navigate('/');
       } else {
         setError('رمز التحقق غير صحيح');
@@ -111,7 +113,7 @@ const TwoFactorVerify = () => {
 
   const handleBackupCodeSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!backupCode.trim()) {
       setError('يرجى إدخال رمز الاسترداد');
       return;
@@ -121,10 +123,12 @@ const TwoFactorVerify = () => {
     setError('');
 
     try {
-      const result = await authService.verify2FA(backupCode.trim());
-      
-      if (result.success) {
-        login(result.user, result.access_token);
+      // Get temp token from location state
+      const tempToken = location.state?.temp_token;
+      const result = await authService.verify2FA(backupCode.trim(), tempToken);
+
+      if (result.success && result.data) {
+        login(result.data.user, result.data.access_token);
         navigate('/');
       } else {
         setError('رمز الاسترداد غير صحيح');

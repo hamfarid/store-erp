@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
 import Layout from './Layout';
 import Login from './Login';
-import InteractiveDashboard from '../pages/InteractiveDashboard';
+import DashboardNew from './DashboardNew';
 import { 
   Error400, Error401, Error402, Error403, Error404, Error405,
   Error500, Error501, Error502, Error503, Error504, Error505, Error506,
@@ -15,6 +15,7 @@ import { PermissionsProvider } from './ui/PermissionsGuard'
 const ForgotPassword = lazy(() => import('../pages/ForgotPassword'));
 const ResetPassword = lazy(() => import('../pages/ResetPassword'));
 const TwoFactorVerify = lazy(() => import('../pages/TwoFactorVerify'));
+const TwoFactorSetup = lazy(() => import('../pages/TwoFactorSetup'));
 const LogoutPage = lazy(() => import('../pages/Logout'));
 const RegisterPage = lazy(() => import('../pages/Register'));
 const ProfilePage = lazy(() => import('../pages/Profile'));
@@ -89,8 +90,9 @@ const ModernStockMovementsPage = lazy(() => import('../pages/StockMovementsPage'
 const ModernPurchasesPage = lazy(() => import('../pages/PurchasesPage'));
 const POSSystem = lazy(() => import('../pages/POSSystem'));
 const ReportsSystem = lazy(() => import('../pages/ReportsSystem'));
-const PurchaseOrdersManagement = lazy(() => import('../pages/PurchaseOrdersManagement'));
-const RolesPermissionsManagement = lazy(() => import('../pages/RolesPermissionsManagement'));
+// Temporarily disabled - requires @mui/material package
+// const PurchaseOrdersManagement = lazy(() => import('../pages/PurchaseOrdersManagement'));
+// const RolesPermissionsManagement = lazy(() => import('../pages/RolesPermissionsManagement'));
 
 // Admin Pages
 const AdminDashboard = lazy(() => import('../pages/AdminDashboard'));
@@ -157,6 +159,11 @@ const AppRouter = () => {
               <ResetPassword />
             </Suspense>
           } />
+          <Route path="/two-factor-verify" element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <TwoFactorVerify />
+            </Suspense>
+          } />
           <Route path="/2fa-verify" element={
             <Suspense fallback={<LoadingSpinner />}>
               <TwoFactorVerify />
@@ -205,8 +212,8 @@ const AppRouter = () => {
             </ProtectedRoute>
           }>
             {/* الصفحة الرئيسية */}
-            <Route index element={<InteractiveDashboard />} />
-            <Route path="dashboard" element={<InteractiveDashboard />} />
+            <Route index element={<DashboardNew />} />
+            <Route path="dashboard" element={<DashboardNew />} />
 
             {/* إدارة المنتجات والمخزون */}
             <Route path="products" element={
@@ -636,6 +643,13 @@ const AppRouter = () => {
                 </Suspense>
               </ProtectedRoute>
             } />
+            <Route path="two-factor-setup" element={
+              <ProtectedRoute>
+                <Suspense fallback={<LoadingSpinner />}>
+                  <TwoFactorSetup />
+                </Suspense>
+              </ProtectedRoute>
+            } />
 
             {/* تنبيهات المخزون */}
             <Route path="inventory-alerts" element={
@@ -851,23 +865,23 @@ const AppRouter = () => {
               </ProtectedRoute>
             } />
 
-            {/* إدارة أوامر الشراء */}
-            <Route path="purchases-management" element={
+            {/* إدارة أوامر الشراء - temporarily disabled (requires @mui/material) */}
+            {/* <Route path="purchases-management" element={
               <ProtectedRoute requiredPermission="purchases.view">
                 <Suspense fallback={<LoadingSpinner />}>
                   <PurchaseOrdersManagement />
                 </Suspense>
               </ProtectedRoute>
-            } />
+            } /> */}
 
-            {/* إدارة الأدوار والأذونات */}
-            <Route path="roles-permissions" element={
+            {/* إدارة الأدوار والأذونات - temporarily disabled (requires @mui/material) */}
+            {/* <Route path="roles-permissions" element={
               <ProtectedRoute requiredPermission="admin.view">
                 <Suspense fallback={<LoadingSpinner />}>
                   <RolesPermissionsManagement />
                 </Suspense>
               </ProtectedRoute>
-            } />
+            } /> */}
 
             {/* أدوات الإدارة */}
             <Route path="admin/security" element={

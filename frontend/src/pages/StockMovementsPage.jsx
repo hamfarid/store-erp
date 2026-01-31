@@ -92,63 +92,55 @@ const StockMovementsPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 p-8" dir="rtl">
-      <div className="flex items-center justify-between mb-8">
+    <div className="page-container" dir="rtl">
+      <div className="page-header">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">حركة المخزون</h1>
-          <p className="text-gray-500">تتبع جميع حركات المخزون</p>
+          <h1 className="page-title">حركة المخزون</h1>
+          <p className="page-subtitle">تتبع جميع حركات المخزون</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="page-actions">
           <Button variant="secondary" icon={Download}>تصدير</Button>
           <Button variant="primary" icon={RefreshCw}>تسوية جديدة</Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">إجمالي الحركات</p>
-              <p className="text-2xl font-bold text-gray-900">{sampleMovements.length}</p>
-            </div>
+      <div className="stats-grid">
+        <div className="stats-card">
+          <div className="stats-card-header">
+            <span className="stats-card-title">إجمالي الحركات</span>
             <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
               <ArrowLeftRight className="text-purple-600" size={24} />
             </div>
           </div>
+          <div className="stats-card-value">{sampleMovements.length}</div>
         </div>
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">إجمالي الوارد</p>
-              <p className="text-2xl font-bold text-emerald-600">+{totalIn}</p>
-            </div>
+        <div className="stats-card">
+          <div className="stats-card-header">
+            <span className="stats-card-title">إجمالي الوارد</span>
             <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
               <ArrowDownRight className="text-emerald-600" size={24} />
             </div>
           </div>
+          <div className="stats-card-value text-emerald-600">+{totalIn}</div>
         </div>
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">إجمالي الصادر</p>
-              <p className="text-2xl font-bold text-rose-600">-{totalOut}</p>
-            </div>
+        <div className="stats-card">
+          <div className="stats-card-header">
+            <span className="stats-card-title">إجمالي الصادر</span>
             <div className="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center">
               <ArrowUpRight className="text-rose-600" size={24} />
             </div>
           </div>
+          <div className="stats-card-value text-rose-600">-{totalOut}</div>
         </div>
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">صافي الحركة</p>
-              <p className={`text-2xl font-bold ${totalIn - totalOut > 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                {totalIn - totalOut > 0 ? '+' : ''}{totalIn - totalOut}
-              </p>
-            </div>
+        <div className="stats-card">
+          <div className="stats-card-header">
+            <span className="stats-card-title">صافي الحركة</span>
             <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
               <Package className="text-blue-600" size={24} />
             </div>
+          </div>
+          <div className={`stats-card-value ${totalIn - totalOut > 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+            {totalIn - totalOut > 0 ? '+' : ''}{totalIn - totalOut}
           </div>
         </div>
       </div>

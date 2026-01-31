@@ -37,19 +37,19 @@ const sampleActiveUsers = [
 ];
 
 const StatCard = ({ title, value, subtitle, icon: IconComponent, color, trend }) => (
-  <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-all">
-    <div className="flex items-start justify-between">
+  <div className="stats-card">
+    <div className="stats-card-header">
       <div>
-        <p className="text-gray-500 text-sm mb-1">{title}</p>
-        <p className="text-3xl font-bold text-gray-900">{value}</p>
-        {subtitle && <p className="text-sm text-gray-400 mt-1">{subtitle}</p>}
+        <p className="stats-card-title">{title}</p>
+        <p className="stats-card-value">{value}</p>
+        {subtitle && <p className="text-secondary text-sm mt-1">{subtitle}</p>}
       </div>
       <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center shadow-lg`}>
         <IconComponent className="text-white" size={24} />
       </div>
     </div>
     {trend && (
-      <div className="flex items-center gap-1 mt-4 pt-4 border-t border-gray-100">
+      <div className="flex items-center gap-1 mt-4 pt-4 border-t border-light">
         <TrendingUp size={14} className="text-emerald-500" />
         <span className="text-sm text-emerald-600 font-medium">{trend}</span>
       </div>
@@ -60,15 +60,15 @@ const StatCard = ({ title, value, subtitle, icon: IconComponent, color, trend })
 const QuickAction = ({ title, description, icon: IconComponent, color, onClick }) => (
   <button
     onClick={onClick}
-    className="bg-white rounded-xl p-4 border border-gray-100 hover:shadow-md transition-all text-right w-full group"
+    className="entity-card text-right w-full group"
   >
     <div className="flex items-center gap-4">
       <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
         <IconComponent className="text-white" size={20} />
       </div>
       <div>
-        <h4 className="font-semibold text-gray-900">{title}</h4>
-        <p className="text-sm text-gray-500">{description}</p>
+        <h4 className="entity-card__name">{title}</h4>
+        <p className="text-secondary text-sm">{description}</p>
       </div>
     </div>
   </button>
@@ -80,21 +80,21 @@ const AdminDashboard = () => {
   const [activeUsers] = useState(sampleActiveUsers);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 p-8" dir="rtl">
+    <div className="page-container" dir="rtl">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="page-header">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">لوحة تحكم المدير</h1>
-          <p className="text-gray-500">إدارة النظام والمستخدمين والصلاحيات</p>
+          <h1 className="page-title">لوحة تحكم المدير</h1>
+          <p className="page-subtitle">إدارة النظام والمستخدمين والصلاحيات</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="page-actions">
           <Button variant="secondary" icon={RefreshCw}>تحديث</Button>
           <Button variant="primary" icon={Settings}>الإعدادات</Button>
         </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="stats-grid mb-8">
         <StatCard
           title="المستخدمين"
           value={stats.users.total}
@@ -128,8 +128,8 @@ const AdminDashboard = () => {
 
       {/* Quick Actions */}
       <div className="mb-8">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">إجراءات سريعة</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <h2 className="text-xl font-bold text-primary mb-4">إجراءات سريعة</h2>
+        <div className="stats-grid">
           <Link to="/admin/users/new">
             <QuickAction
               title="إضافة مستخدم"
@@ -165,11 +165,11 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid-container grid-2">
         {/* Recent Audit Logs */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-6">
+        <div className="entity-card">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-bold text-gray-900 text-lg">آخر النشاطات</h2>
+            <h2 className="entity-card__name text-lg">آخر النشاطات</h2>
             <Link to="/admin/audit" className="text-teal-600 text-sm font-medium hover:underline">
               عرض الكل
             </Link>
@@ -187,11 +187,11 @@ const AdminDashboard = () => {
                   )}
                 </div>
                 <div className="flex-1">
-                  <p className="font-medium text-gray-900">{log.user}</p>
-                  <p className="text-sm text-gray-500">{log.action} - {log.resource}</p>
+                  <p className="text-primary font-medium">{log.user}</p>
+                  <p className="text-secondary text-sm">{log.action} - {log.resource}</p>
                 </div>
                 <div className="text-left">
-                  <p className="text-sm text-gray-400">{log.time}</p>
+                  <p className="text-tertiary text-sm">{log.time}</p>
                 </div>
               </div>
             ))}
@@ -199,10 +199,10 @@ const AdminDashboard = () => {
         </div>
 
         {/* Active Users */}
-        <div className="bg-white rounded-2xl border border-gray-100 p-6">
+        <div className="entity-card">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-bold text-gray-900 text-lg">المستخدمين النشطين</h2>
-            <span className="px-3 py-1 bg-emerald-100 text-emerald-700 text-sm font-medium rounded-full">
+            <h2 className="entity-card__name text-lg">المستخدمين النشطين</h2>
+            <span className="status-badge--success">
               {activeUsers.filter(u => u.status === 'online').length} متصل
             </span>
           </div>
@@ -210,7 +210,7 @@ const AdminDashboard = () => {
             {activeUsers.map(user => (
               <div key={user.id} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
                 <div className="relative">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center text-white font-bold">
+                  <div className="entity-card__avatar entity-card__avatar--primary">
                     {user.name.charAt(0)}
                   </div>
                   <span className={`absolute -bottom-1 -left-1 w-4 h-4 rounded-full border-2 border-white ${
@@ -218,11 +218,11 @@ const AdminDashboard = () => {
                   }`} />
                 </div>
                 <div className="flex-1">
-                  <p className="font-medium text-gray-900">{user.name}</p>
-                  <p className="text-sm text-gray-500">{user.role}</p>
+                  <p className="text-primary font-medium">{user.name}</p>
+                  <p className="text-secondary text-sm">{user.role}</p>
                 </div>
                 <div className="text-left">
-                  <p className="text-xs text-gray-400">{user.lastActivity}</p>
+                  <p className="text-tertiary text-xs">{user.lastActivity}</p>
                 </div>
               </div>
             ))}
@@ -231,15 +231,15 @@ const AdminDashboard = () => {
       </div>
 
       {/* System Health */}
-      <div className="mt-8 bg-white rounded-2xl border border-gray-100 p-6">
-        <h2 className="font-bold text-gray-900 text-lg mb-6">حالة النظام</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="mt-8 entity-card">
+        <h2 className="entity-card__name text-lg mb-6">حالة النظام</h2>
+        <div className="stats-grid">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
               <CheckCircle size={24} className="text-emerald-600" />
             </div>
             <div>
-              <p className="font-medium text-gray-900">قاعدة البيانات</p>
+              <p className="text-primary font-medium">قاعدة البيانات</p>
               <p className="text-sm text-emerald-600">متصل</p>
             </div>
           </div>
@@ -248,7 +248,7 @@ const AdminDashboard = () => {
               <CheckCircle size={24} className="text-emerald-600" />
             </div>
             <div>
-              <p className="font-medium text-gray-900">Redis Cache</p>
+              <p className="text-primary font-medium">Redis Cache</p>
               <p className="text-sm text-emerald-600">متصل</p>
             </div>
           </div>
@@ -257,7 +257,7 @@ const AdminDashboard = () => {
               <CheckCircle size={24} className="text-emerald-600" />
             </div>
             <div>
-              <p className="font-medium text-gray-900">خادم البريد</p>
+              <p className="text-primary font-medium">خادم البريد</p>
               <p className="text-sm text-emerald-600">متصل</p>
             </div>
           </div>
@@ -266,7 +266,7 @@ const AdminDashboard = () => {
               <AlertTriangle size={24} className="text-amber-600" />
             </div>
             <div>
-              <p className="font-medium text-gray-900">التخزين</p>
+              <p className="text-primary font-medium">التخزين</p>
               <p className="text-sm text-amber-600">78% مستخدم</p>
             </div>
           </div>

@@ -12,27 +12,28 @@
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "ignoreDeprecations": "5.0",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "*"
+        "src/*"
       ],
       "@/components/*": [
-        "components/*"
+        "src/components/*"
       ],
       "@/services/*": [
-        "services/*"
+        "src/services/*"
       ],
       "@/utils/*": [
-        "utils/*"
+        "src/utils/*"
       ],
       "@/contexts/*": [
-        "contexts/*"
+        "src/contexts/*"
       ]
     },
     "noImplicitAny": false

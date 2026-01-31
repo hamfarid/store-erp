@@ -207,9 +207,19 @@ def create_tables(app):
 
             # إنشاء جميع الجداول
             logger.info("🔄 Creating all database tables...")
-            db.create_all()
-            logger.info("✅ تم إنشاء جداول قاعدة البيانات بنجاح")
-            print("✅ تم إنشاء جداول قاعدة البيانات بنجاح")
+            try:
+                db.create_all()
+                logger.info("✅ تم إنشاء جداول قاعدة البيانات بنجاح")
+                print("✅ تم إنشاء جداول قاعدة البيانات بنجاح")
+            except Exception as create_error:
+                # Handle PostgreSQL duplicate type errors (pg_type_typname_nsp_index)
+                error_str = str(create_error)
+                if "pg_type_typname_nsp_index" in error_str or "duplicate key value" in error_str:
+                    logger.warning("⚠️ PostgreSQL type already exists, skipping type creation")
+                    logger.info("✅ الجداول موجودة بالفعل أو تم إنشاؤها مسبقاً")
+                    print("⚠️ PostgreSQL type already exists, continuing...")
+                else:
+                    raise
 
             # Return models to pass to create_default_data (avoid duplicate imports)
             return True, User, Role, Category, Warehouse
@@ -226,7 +236,7 @@ def create_default_data(User=None, Role=None, Category=None, Warehouse=None):
         User, Role, Category, Warehouse: Model classes passed from init_database()
             to avoid duplicate imports/registrations
     """
-    from flask import has_app_context
+    from flask import has_app_context, current_app
     from sqlalchemy import select, func, inspect
     import logging
 
@@ -272,8 +282,8 @@ def create_default_data(User=None, Role=None, Category=None, Warehouse=None):
                     "name_ar": "مدير النظام",
                     "description": "مدير النظام",
                     "description_ar": "مدير النظام",
-                    "is_active": 1,
-                    "is_system": 1,
+                    "is_active": True,  # Boolean instead of integer for PostgreSQL
+                    "is_system": True,  # Boolean instead of integer for PostgreSQL
                 },
                 {
                     "code": "user",
@@ -281,8 +291,8 @@ def create_default_data(User=None, Role=None, Category=None, Warehouse=None):
                     "name_ar": "مستخدم عادي",
                     "description": "مستخدم عادي",
                     "description_ar": "مستخدم عادي",
-                    "is_active": 1,
-                    "is_system": 1,
+                    "is_active": True,  # Boolean instead of integer for PostgreSQL
+                    "is_system": True,  # Boolean instead of integer for PostgreSQL
                 },
             ]
 
@@ -337,14 +347,16 @@ def create_default_data(User=None, Role=None, Category=None, Warehouse=None):
                 "admin123".encode(), bcrypt.gensalt()
             ).decode()
 
+            # Use boolean for PostgreSQL, integer for SQLite
+            is_active_value = True if current_app.config.get("SQLALCHEMY_DATABASE_URI", "").startswith("postgresql") else 1
             db.session.execute(
                 db.text(
                     """
                 INSERT INTO users (username, email, full_name, password_hash, role_id, is_active)
-                VALUES ('admin', 'admin@store.com', 'مدير النظام', :pwd, 1, 1)
+                VALUES ('admin', 'admin@store.com', 'مدير النظام', :pwd, 1, :is_active)
             """
                 ),
-                {"pwd": password_hash},
+                {"pwd": password_hash, "is_active": is_active_value},
             )
             db.session.commit()
             print("✅ تم إنشاء المستخدم الإداري")
@@ -376,14 +388,17 @@ def create_default_data(User=None, Role=None, Category=None, Warehouse=None):
         ).scalar()
 
         if warehouse_count == 0:
+            # Use boolean for PostgreSQL, integer for SQLite
+            is_active_value = True if current_app.config.get("SQLALCHEMY_DATABASE_URI", "").startswith("postgresql") else 1
             db.session.execute(
                 db.text(
                     """
                 INSERT INTO warehouses (name, code, address, is_active) VALUES
-                ('المخزن الرئيسي', 'WH001', 'الرياض - المخزن الرئيسي للشركة', 1),
-                ('مخزن فرعي', 'WH002', 'جدة - مخزن فرعي', 1)
+                ('المخزن الرئيسي', 'WH001', 'الرياض - المخزن الرئيسي للشركة', :is_active),
+                ('مخزن فرعي', 'WH002', 'جدة - مخزن فرعي', :is_active)
             """
-                )
+                ),
+                {"is_active": is_active_value}
             )
             db.session.commit()
             print("✅ تم إنشاء المخازن الأساسية")

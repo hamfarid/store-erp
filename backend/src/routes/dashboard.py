@@ -72,6 +72,83 @@ def calculate_change(current: float, previous: float) -> dict:
 # =============================================================================
 
 
+@dashboard_bp.route("/stats", methods=["GET"])
+def get_dashboard_stats():
+    """
+    Get dashboard statistics for the main dashboard view.
+    
+    This endpoint provides aggregated stats without requiring authentication
+    for initial page load, then updates with authenticated data.
+    """
+    from src.models.invoice import Invoice
+    from src.models.product import Product
+    from src.models.partners import Customer, Supplier
+    from src.models.stock_movement import StockMovement
+
+    try:
+        today = datetime.now().date()
+        month_start = today.replace(day=1)
+        
+        # Total counts
+        total_products = Product.query.count()
+        total_customers = Customer.query.count()
+        total_suppliers = Supplier.query.count()
+        
+        # Low stock products
+        low_stock_count = Product.query.filter(
+            Product.quantity <= Product.min_stock_level
+        ).count()
+        
+        # Monthly sales
+        monthly_sales = (
+            db.session.query(func.coalesce(func.sum(Invoice.total), 0))
+            .filter(
+                Invoice.type == "sale",
+                func.date(Invoice.created_at) >= month_start,
+                func.date(Invoice.created_at) <= today,
+            )
+            .scalar()
+            or 0
+        )
+        
+        # Total sales count
+        total_sales = Invoice.query.filter(Invoice.type == "sale").count()
+        
+        # Inventory value
+        inventory_value = (
+            db.session.query(
+                func.coalesce(func.sum(Product.quantity * Product.price), 0)
+            ).scalar()
+            or 0
+        )
+        
+        # Recent movements (last 30 days)
+        thirty_days_ago = today - timedelta(days=30)
+        recent_movements = StockMovement.query.filter(
+            func.date(StockMovement.created_at) >= thirty_days_ago
+        ).count()
+        
+        return jsonify({
+            "success": True,
+            "data": {
+                "total_products": total_products,
+                "total_customers": total_customers,
+                "total_suppliers": total_suppliers,
+                "total_sales": total_sales,
+                "total_inventory_value": float(inventory_value),
+                "low_stock_count": low_stock_count,
+                "recent_movements": recent_movements,
+                "monthly_revenue": float(monthly_sales)
+            }
+        })
+    except Exception as e:
+        logger.error(f"Error fetching dashboard stats: {e}")
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+
 @dashboard_bp.route("/summary", methods=["GET"])
 @token_required
 @require_permission(Permissions.DASHBOARD_VIEW)

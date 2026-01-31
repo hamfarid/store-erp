@@ -20,63 +20,63 @@ const sampleSuppliers = [
 ];
 
 const SupplierCard = ({ supplier, onView, onEdit, onDelete }) => (
-  <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl transition-all duration-300">
-    <div className="flex items-start justify-between mb-4">
+  <div className="entity-card">
+    <div className="entity-card__header">
       <div className="flex items-center gap-4">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg">
+        <div className="entity-card__avatar entity-card__avatar--primary">
           <Building2 size={24} />
         </div>
         <div>
-          <h3 className="font-bold text-gray-900">{supplier.name}</h3>
-          <p className="text-sm text-gray-500 flex items-center gap-1">
+          <h3 className="entity-card__name">{supplier.name}</h3>
+          <p className="entity-card__meta">
             <Globe size={12} />
             {supplier.city}، {supplier.country}
           </p>
         </div>
       </div>
-      <div className="flex items-center">
+      <div className="rating-stars">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} size={14} className={i < supplier.rating ? 'text-amber-400 fill-amber-400' : 'text-gray-200'} />
+          <Star key={i} size={14} className={i < supplier.rating ? 'rating-star--filled' : 'rating-star--empty'} />
         ))}
       </div>
     </div>
 
-    <div className="space-y-2 mb-4">
-      <div className="flex items-center gap-2 text-gray-600 text-sm">
-        <Mail size={14} className="text-gray-400" />
+    <div className="entity-card__info">
+      <div className="entity-card__info-row">
+        <Mail size={14} className="entity-card__info-icon" />
         <span>{supplier.email}</span>
       </div>
-      <div className="flex items-center gap-2 text-gray-600 text-sm">
-        <Phone size={14} className="text-gray-400" />
+      <div className="entity-card__info-row">
+        <Phone size={14} className="entity-card__info-icon" />
         <span dir="ltr">{supplier.phone}</span>
       </div>
     </div>
 
-    <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-100">
-      <div className="text-center">
-        <p className="text-lg font-bold text-gray-900">{supplier.productsCount}</p>
-        <p className="text-xs text-gray-500">المنتجات</p>
+    <div className="entity-card__stats">
+      <div className="entity-card__stat">
+        <p className="entity-card__stat-value">{supplier.productsCount}</p>
+        <p className="entity-card__stat-label">المنتجات</p>
       </div>
-      <div className="text-center">
-        <p className="text-lg font-bold text-blue-600">{(supplier.totalPurchases / 1000).toFixed(0)}K</p>
-        <p className="text-xs text-gray-500">المشتريات</p>
+      <div className="entity-card__stat">
+        <p className="entity-card__stat-value entity-card__stat-value--primary">{(supplier.totalPurchases / 1000).toFixed(0)}K</p>
+        <p className="entity-card__stat-label">المشتريات</p>
       </div>
-      <div className="text-center">
-        <p className={`text-lg font-bold ${supplier.balance < 0 ? 'text-rose-600' : 'text-gray-900'}`}>
+      <div className="entity-card__stat">
+        <p className={`entity-card__stat-value ${supplier.balance < 0 ? 'entity-card__stat-value--danger' : ''}`}>
           {Math.abs(supplier.balance).toLocaleString()}
         </p>
-        <p className="text-xs text-gray-500">{supplier.balance < 0 ? 'مستحق' : 'الرصيد'}</p>
+        <p className="entity-card__stat-label">{supplier.balance < 0 ? 'مستحق' : 'الرصيد'}</p>
       </div>
     </div>
 
-    <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
-      <button onClick={() => onView(supplier)} className="flex-1 py-2 text-center text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-lg">
+    <div className="entity-card__actions">
+      <button onClick={() => onView(supplier)} className="entity-card__action entity-card__action--primary">
         عرض
       </button>
-      <button onClick={() => onEdit(supplier)} className="flex-1 py-2 text-center text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">
+      <button onClick={() => onEdit(supplier)} className="entity-card__action entity-card__action--secondary">
         تعديل
       </button>
-      <button onClick={() => onDelete(supplier)} className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg">
+      <button onClick={() => onDelete(supplier)} className="entity-card__action entity-card__action--danger">
         <Trash2 size={16} />
       </button>
     </div>

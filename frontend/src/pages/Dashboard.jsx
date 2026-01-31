@@ -40,7 +40,7 @@ import '../styles/theme.css';
 
 const StatCard = ({ title, value, change, changeType, icon: Icon, color, delay }) => {
   const isPositive = changeType === 'up';
-  
+
   const colorClasses = {
     teal: 'from-teal-500 to-teal-600',
     amber: 'from-amber-500 to-amber-600',
@@ -51,25 +51,25 @@ const StatCard = ({ title, value, change, changeType, icon: Icon, color, delay }
   };
 
   return (
-    <div 
+    <div
       className={`animate-fade-in-up stagger-${delay}`}
       style={{ opacity: 0, animationFillMode: 'forwards' }}
       data-testid="metric-card"
     >
-      <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 relative overflow-hidden group">
+      <div className="stats-card hover:shadow-xl hover:-translate-y-1 relative overflow-hidden group">
         {/* Background decoration */}
         <div className={`absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br ${colorClasses[color]} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity`} />
-        
+
         <div className="flex items-start justify-between relative z-10">
           <div>
-            <p className="text-gray-500 text-sm font-medium mb-1">{title}</p>
-            <h3 className="text-3xl font-bold text-gray-900 mb-2">{value}</h3>
+            <p className="stats-card-title">{title}</p>
+            <h3 className="stats-card-value mb-2">{value}</h3>
             <div className={`inline-flex items-center gap-1 text-sm font-semibold px-2 py-1 rounded-full ${
               isPositive ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'
             }`}>
               {isPositive ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
               <span>{change}%</span>
-              <span className="text-gray-400 font-normal mr-1">من الشهر الماضي</span>
+              <span className="text-tertiary font-normal mr-1">من الشهر الماضي</span>
             </div>
           </div>
           <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${colorClasses[color]} flex items-center justify-center shadow-lg`}>
@@ -86,14 +86,14 @@ const StatCard = ({ title, value, change, changeType, icon: Icon, color, delay }
 // ============================================================================
 
 const QuickAction = ({ icon: Icon, label, onClick, color }) => (
-  <button 
+  <button
     onClick={onClick}
-    className="flex flex-col items-center gap-2 p-4 rounded-xl bg-white border border-gray-100 hover:border-teal-200 hover:shadow-md transition-all duration-300 group"
+    className="entity-card flex flex-col items-center gap-2 hover:border-teal-200 hover:shadow-md group"
   >
     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform`}>
       <Icon className="text-white" size={20} />
     </div>
-    <span className="text-sm font-medium text-gray-700">{label}</span>
+    <span className="text-sm font-medium text-secondary">{label}</span>
   </button>
 );
 
@@ -113,19 +113,19 @@ const ActivityItem = ({ type, title, description, time, amount }) => {
   const Icon = config.icon;
 
   return (
-    <div className="flex items-center gap-4 p-4 hover:bg-gray-50 rounded-xl transition-colors">
+    <div className="flex items-center gap-4 p-4 hover:bg-hover rounded-xl transition-colors">
       <div className={`w-10 h-10 rounded-xl ${config.color} flex items-center justify-center`}>
         <Icon className="text-white" size={18} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="font-medium text-gray-900 truncate">{title}</p>
-        <p className="text-sm text-gray-500 truncate">{description}</p>
+        <p className="font-medium text-primary truncate">{title}</p>
+        <p className="text-sm text-secondary truncate">{description}</p>
       </div>
       <div className="text-left">
-        <p className={`font-semibold ${type === 'sale' || type === 'payment' ? 'text-emerald-600' : 'text-gray-900'}`}>
+        <p className={`font-semibold ${type === 'sale' || type === 'payment' ? 'text-emerald-600' : 'text-primary'}`}>
           {amount}
         </p>
-        <p className="text-xs text-gray-400">{time}</p>
+        <p className="text-xs text-tertiary">{time}</p>
       </div>
     </div>
   );
@@ -149,7 +149,7 @@ const AlertItem = ({ severity, title, description }) => {
       <div className={`w-2 h-10 rounded-full ${config.icon}`} />
       <div className="flex-1">
         <p className={`font-medium ${config.text}`}>{title}</p>
-        <p className="text-sm text-gray-600">{description}</p>
+        <p className="text-sm text-secondary">{description}</p>
       </div>
     </div>
   );
@@ -160,21 +160,21 @@ const AlertItem = ({ severity, title, description }) => {
 // ============================================================================
 
 const TopProductItem = ({ rank, name, sales, revenue, trend }) => (
-  <div className="flex items-center gap-4 p-4 hover:bg-gray-50 rounded-xl transition-colors">
+  <div className="flex items-center gap-4 p-4 hover:bg-hover rounded-xl transition-colors">
     <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm ${
       rank === 1 ? 'bg-amber-100 text-amber-700' :
-      rank === 2 ? 'bg-gray-100 text-gray-600' :
+      rank === 2 ? 'bg-secondary text-secondary' :
       rank === 3 ? 'bg-orange-100 text-orange-700' :
-      'bg-gray-50 text-gray-500'
+      'bg-tertiary text-secondary'
     }`}>
       {rank}
     </div>
     <div className="flex-1 min-w-0">
-      <p className="font-medium text-gray-900 truncate">{name}</p>
-      <p className="text-sm text-gray-500">{sales} مبيعات</p>
+      <p className="font-medium text-primary truncate">{name}</p>
+      <p className="text-sm text-secondary">{sales} مبيعات</p>
     </div>
     <div className="text-left">
-      <p className="font-semibold text-gray-900">{revenue}</p>
+      <p className="font-semibold text-primary">{revenue}</p>
       <div className={`text-xs flex items-center gap-1 ${trend > 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
         {trend > 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
         {Math.abs(trend)}%
@@ -247,40 +247,40 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100" dir="rtl">
+    <div className="page-container" dir="rtl">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-30">
+      <header className="bg-primary/80 backdrop-blur-lg border-b border-default sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">لوحة التحكم</h1>
-              <p className="text-gray-500 text-sm">
+              <h1 className="text-2xl font-bold text-primary">لوحة التحكم</h1>
+              <p className="text-secondary text-sm">
                 {currentDate.toLocaleDateString('ar-SA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
               </p>
             </div>
-            
+
             <div className="flex items-center gap-4">
               {/* Search */}
               <div className="relative">
-                <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-tertiary" size={18} />
                 <input
                   type="text"
                   placeholder="بحث..."
-                  className="w-64 pr-10 pl-4 py-2.5 bg-gray-100 border-0 rounded-xl focus:ring-2 focus:ring-teal-500 focus:bg-white transition-all"
+                  className="w-64 pr-10 pl-4 py-2.5 bg-secondary border-0 rounded-xl focus:ring-2 focus:ring-teal-500 focus:bg-primary transition-all"
                 />
               </div>
-              
+
               {/* Notifications */}
-              <button className="relative p-2.5 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors">
-                <Bell size={20} className="text-gray-600" />
+              <button className="relative p-2.5 bg-secondary rounded-xl hover:bg-hover transition-colors">
+                <Bell size={20} className="text-secondary" />
                 <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full" />
               </button>
-              
+
               {/* Profile */}
-              <div className="flex items-center gap-3 pr-3 border-r border-gray-200">
+              <div className="flex items-center gap-3 pr-3 border-r border-default">
                 <div className="text-left">
-                  <p className="font-medium text-gray-900">أحمد محمد</p>
-                  <p className="text-xs text-gray-500">مدير النظام</p>
+                  <p className="font-medium text-primary">أحمد محمد</p>
+                  <p className="text-xs text-secondary">مدير النظام</p>
                 </div>
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center text-white font-bold">
                   أ
@@ -294,16 +294,16 @@ const Dashboard = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="stats-grid mb-8">
           {stats.map((stat, index) => (
             <StatCard key={index} {...stat} delay={index + 1} />
           ))}
         </div>
 
         {/* Quick Actions */}
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 mb-8 animate-fade-in-up" style={{ animationDelay: '0.5s', opacity: 0, animationFillMode: 'forwards' }}>
+        <div className="entity-card mb-8 animate-fade-in-up" style={{ animationDelay: '0.5s', opacity: 0, animationFillMode: 'forwards' }}>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-gray-900">إجراءات سريعة</h2>
+            <h2 className="text-lg font-bold text-primary">إجراءات سريعة</h2>
             <button className="text-teal-600 text-sm font-medium hover:text-teal-700">
               عرض الكل
             </button>
@@ -318,26 +318,26 @@ const Dashboard = () => {
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Recent Activity */}
-          <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden animate-fade-in-up" style={{ animationDelay: '0.6s', opacity: 0, animationFillMode: 'forwards' }}>
-            <div className="p-6 border-b border-gray-100">
+          <div className="lg:col-span-2 entity-card overflow-hidden animate-fade-in-up" style={{ animationDelay: '0.6s', opacity: 0, animationFillMode: 'forwards' }}>
+            <div className="p-6 border-b border-light">
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-bold text-gray-900">النشاط الأخير</h2>
+                <h2 className="text-lg font-bold text-primary">النشاط الأخير</h2>
                 <div className="flex items-center gap-2">
-                  <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                    <Filter size={18} className="text-gray-500" />
+                  <button className="p-2 hover:bg-hover rounded-lg transition-colors">
+                    <Filter size={18} className="text-secondary" />
                   </button>
-                  <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                    <MoreVertical size={18} className="text-gray-500" />
+                  <button className="p-2 hover:bg-hover rounded-lg transition-colors">
+                    <MoreVertical size={18} className="text-secondary" />
                   </button>
                 </div>
               </div>
             </div>
-            <div className="divide-y divide-gray-50">
+            <div className="divide-y divide-light">
               {recentActivities.map((activity, index) => (
                 <ActivityItem key={index} {...activity} />
               ))}
             </div>
-            <div className="p-4 bg-gray-50 text-center">
+            <div className="p-4 bg-secondary text-center">
               <button className="text-teal-600 font-medium hover:text-teal-700 transition-colors">
                 عرض جميع الأنشطة
               </button>
@@ -345,10 +345,10 @@ const Dashboard = () => {
           </div>
 
           {/* Alerts */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden animate-fade-in-up" style={{ animationDelay: '0.7s', opacity: 0, animationFillMode: 'forwards' }}>
-            <div className="p-6 border-b border-gray-100">
+          <div className="entity-card overflow-hidden animate-fade-in-up" style={{ animationDelay: '0.7s', opacity: 0, animationFillMode: 'forwards' }}>
+            <div className="p-6 border-b border-light">
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-bold text-gray-900">التنبيهات</h2>
+                <h2 className="text-lg font-bold text-primary">التنبيهات</h2>
                 <span className="bg-rose-100 text-rose-600 text-xs font-semibold px-2.5 py-1 rounded-full">
                   {alerts.length} جديد
                 </span>
@@ -359,7 +359,7 @@ const Dashboard = () => {
                 <AlertItem key={index} {...alert} />
               ))}
             </div>
-            <div className="p-4 bg-gray-50 text-center">
+            <div className="p-4 bg-secondary text-center">
               <button className="text-teal-600 font-medium hover:text-teal-700 transition-colors">
                 عرض جميع التنبيهات
               </button>
@@ -368,12 +368,12 @@ const Dashboard = () => {
         </div>
 
         {/* Top Products */}
-        <div className="mt-8 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden animate-fade-in-up" style={{ animationDelay: '0.8s', opacity: 0, animationFillMode: 'forwards' }}>
-          <div className="p-6 border-b border-gray-100">
+        <div className="mt-8 entity-card overflow-hidden animate-fade-in-up" style={{ animationDelay: '0.8s', opacity: 0, animationFillMode: 'forwards' }}>
+          <div className="p-6 border-b border-light">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-gray-900">المنتجات الأكثر مبيعاً</h2>
+              <h2 className="text-lg font-bold text-primary">المنتجات الأكثر مبيعاً</h2>
               <div className="flex items-center gap-2">
-                <select className="bg-gray-100 border-0 rounded-lg px-3 py-2 text-sm font-medium text-gray-700">
+                <select className="bg-secondary border-0 rounded-lg px-3 py-2 text-sm font-medium text-secondary">
                   <option>هذا الأسبوع</option>
                   <option>هذا الشهر</option>
                   <option>هذا العام</option>
@@ -381,7 +381,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="divide-y divide-gray-50">
+          <div className="divide-y divide-light">
             {topProducts.map((product, index) => (
               <TopProductItem key={index} {...product} />
             ))}
@@ -391,17 +391,17 @@ const Dashboard = () => {
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
           {/* Sales Chart */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 animate-fade-in-up" style={{ animationDelay: '0.9s', opacity: 0, animationFillMode: 'forwards' }}>
+          <div className="entity-card animate-fade-in-up" style={{ animationDelay: '0.9s', opacity: 0, animationFillMode: 'forwards' }}>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold text-gray-900">المبيعات</h2>
+              <h2 className="text-lg font-bold text-primary">المبيعات</h2>
               <div className="flex items-center gap-2">
                 <button className="px-3 py-1.5 bg-teal-100 text-teal-700 rounded-lg text-sm font-medium">
                   يومي
                 </button>
-                <button className="px-3 py-1.5 text-gray-500 hover:bg-gray-100 rounded-lg text-sm font-medium">
+                <button className="px-3 py-1.5 text-secondary hover:bg-hover rounded-lg text-sm font-medium">
                   أسبوعي
                 </button>
-                <button className="px-3 py-1.5 text-gray-500 hover:bg-gray-100 rounded-lg text-sm font-medium">
+                <button className="px-3 py-1.5 text-secondary hover:bg-hover rounded-lg text-sm font-medium">
                   شهري
                 </button>
               </div>
@@ -416,11 +416,11 @@ const Dashboard = () => {
           </div>
 
           {/* Categories Chart */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 animate-fade-in-up" style={{ animationDelay: '1s', opacity: 0, animationFillMode: 'forwards' }}>
+          <div className="entity-card animate-fade-in-up" style={{ animationDelay: '1s', opacity: 0, animationFillMode: 'forwards' }}>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold text-gray-900">المبيعات حسب الفئة</h2>
-              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                <MoreVertical size={18} className="text-gray-500" />
+              <h2 className="text-lg font-bold text-primary">المبيعات حسب الفئة</h2>
+              <button className="p-2 hover:bg-hover rounded-lg transition-colors">
+                <MoreVertical size={18} className="text-secondary" />
               </button>
             </div>
             {/* Chart placeholder */}
@@ -435,16 +435,16 @@ const Dashboard = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-12">
+      <footer className="bg-primary border-t border-default mt-12">
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
-            <p className="text-gray-500 text-sm">
+            <p className="text-secondary text-sm">
               © 2025 نظام إدارة المخزون. جميع الحقوق محفوظة.
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="text-gray-500 hover:text-teal-600 text-sm">الدعم الفني</a>
-              <a href="#" className="text-gray-500 hover:text-teal-600 text-sm">الوثائق</a>
-              <a href="#" className="text-gray-500 hover:text-teal-600 text-sm">سياسة الخصوصية</a>
+              <a href="#" className="text-secondary hover:text-teal-600 text-sm">الدعم الفني</a>
+              <a href="#" className="text-secondary hover:text-teal-600 text-sm">الوثائق</a>
+              <a href="#" className="text-secondary hover:text-teal-600 text-sm">سياسة الخصوصية</a>
             </div>
           </div>
         </div>
