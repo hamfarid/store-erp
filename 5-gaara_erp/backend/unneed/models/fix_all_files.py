@@ -78,7 +78,7 @@ except ImportError:
     '''
 
 
-    def clean_file_completely(file_path):
+def clean_file_completely(file_path):
     """تنظيف ملف بالكامل وإعادة بنائه"""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -150,7 +150,8 @@ except ImportError:
         print(f"❌ خطأ في تنظيف {file_path}: {e}")
         return False
 
-    def main():
+
+def main():
     """الدالة الرئيسية"""
     # البحث عن جميع ملفات Python
     python_files = glob.glob('*.py')

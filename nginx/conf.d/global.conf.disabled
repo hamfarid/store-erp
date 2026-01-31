@@ -1,0 +1,17 @@
+server {
+    listen 80;
+    server_name localhost;
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html;
+    }
+
+    # Project Proxies (Note: Depending on app configuration, assets might need sub-path config)
+    # We expose these as convenience, but Direct Port Access via the Dashboard is the primary method.
+    
+    # Project 1
+    # location /project1/ {
+    #     proxy_pass http://host.docker.internal:1501/;
+    # }
+}

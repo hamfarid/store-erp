@@ -14,11 +14,12 @@ from celery import Celery
 from celery.schedules import crontab
 
 # Broker/result configuration
+# Broker/result configuration
 BROKER_URL = os.getenv("CELERY_BROKER_URL") or os.getenv(
-    "REDIS_URL", "redis://localhost:5606/0"
+    "REDIS_URL", "redis://gaara_redis:6379/0"
 )
 BACKEND_URL = os.getenv("CELERY_RESULT_BACKEND") or os.getenv(
-    "REDIS_URL", "redis://localhost:5606/0"
+    "REDIS_URL", "redis://gaara_redis:6379/0"
 )
 
 celery_app = Celery(

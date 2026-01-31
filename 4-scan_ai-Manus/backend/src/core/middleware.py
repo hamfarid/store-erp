@@ -101,6 +101,8 @@ def setup_middleware(app: FastAPI, settings):
 
         # إنشاء معرف فريد للطلب
         request_id = str(uuid.uuid4())[:8]
+        # Store request_id in request.state for error handlers
+        request.state.request_id = request_id
 
         # تسجيل بداية الطلب
         start_time = time.time()

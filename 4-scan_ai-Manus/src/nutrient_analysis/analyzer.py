@@ -238,17 +238,17 @@ if __name__ == "__main__":
         
         major_model = tf.keras.Sequential([
             tf.keras.layers.Input(shape=input_shape),
-            tf.keras.layers.Conv2D(8, (3, 3), activation=\'relu\'),
+            tf.keras.layers.Conv2D(8, (3, 3), activation='relu'),
             tf.keras.layers.GlobalAveragePooling2D(),
-            tf.keras.layers.Dense(num_classes_major, activation=\'softmax\')
+            tf.keras.layers.Dense(num_classes_major, activation='softmax')
         ])
         major_model.save(os.path.join(dummy_config["model_path"], dummy_config["models"]["major_nutrients"]["model_file"]))
-        
+
         minor_model = tf.keras.Sequential([
             tf.keras.layers.Input(shape=input_shape),
-            tf.keras.layers.Conv2D(8, (3, 3), activation=\'relu\'),
+            tf.keras.layers.Conv2D(8, (3, 3), activation='relu'),
             tf.keras.layers.GlobalAveragePooling2D(),
-            tf.keras.layers.Dense(num_classes_minor, activation=\'softmax\')
+            tf.keras.layers.Dense(num_classes_minor, activation='softmax')
         ])
         minor_model.save(os.path.join(dummy_config["model_path"], dummy_config["models"]["minor_nutrients"]["model_file"]))
         

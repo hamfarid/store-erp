@@ -51,6 +51,7 @@ disable = [
 ]
 
 [tool.ruff]
+extend = "../ruff.toml"
 line-length = 120
 target-version = "py311"
 exclude = [
@@ -71,7 +72,6 @@ ignore = [
     "E302",  # expected 2 blank lines
     "E305",  # expected 2 blank lines after class or function definition
     "E501",  # line too long
-    "W503",  # line break before binary operator
 ]
 
 [tool.mypy]

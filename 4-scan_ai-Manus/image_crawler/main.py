@@ -93,6 +93,51 @@ async def health_check():
         stats=stats
     )
 
+@app.get("/metrics")
+async def metrics():
+    """Prometheus-compatible metrics endpoint"""
+    from fastapi.responses import PlainTextResponse
+    
+    try:
+        import psutil
+        cpu = psutil.cpu_percent(interval=0.1)
+        memory = psutil.virtual_memory()
+        
+        # Get task stats
+        total_tasks = len(tasks)
+        active_tasks = len([t for t in tasks.values() if t["status"] == "running"])
+        completed_tasks = len([t for t in tasks.values() if t["status"] == "completed"])
+        total_images = knowledge_base.get_total_images()
+        
+        metrics_text = f"""# HELP ai_service_up Whether the AI service is up
+# TYPE ai_service_up gauge
+ai_service_up 1
+# HELP ai_service_cpu_usage_percent CPU usage percentage
+# TYPE ai_service_cpu_usage_percent gauge
+ai_service_cpu_usage_percent {cpu}
+# HELP ai_service_memory_usage_percent Memory usage percentage
+# TYPE ai_service_memory_usage_percent gauge
+ai_service_memory_usage_percent {memory.percent}
+# HELP ai_service_tasks_total Total tasks count
+# TYPE ai_service_tasks_total gauge
+ai_service_tasks_total {total_tasks}
+# HELP ai_service_tasks_active Active tasks count
+# TYPE ai_service_tasks_active gauge
+ai_service_tasks_active {active_tasks}
+# HELP ai_service_tasks_completed Completed tasks count
+# TYPE ai_service_tasks_completed gauge
+ai_service_tasks_completed {completed_tasks}
+# HELP ai_service_images_total Total images in knowledge base
+# TYPE ai_service_images_total gauge
+ai_service_images_total {total_images}
+"""
+        return PlainTextResponse(content=metrics_text, media_type="text/plain")
+    except Exception as e:
+        return PlainTextResponse(
+            content=f"# Error collecting metrics: {str(e)}\nai_service_up 0\n",
+            media_type="text/plain"
+        )
+
 @app.post("/api/v1/crawl", response_model=CrawlResponse)
 async def start_crawl(request: CrawlRequest, background_tasks: BackgroundTasks):
     """

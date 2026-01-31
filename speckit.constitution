@@ -1,0 +1,42 @@
+# Speckit Constitution
+
+This document establishes the core principles and standards for all projects within the Speckit ecosystem. These principles are non-negotiable and serve as the foundation for engineering excellence.
+
+## 1. Code Quality
+**"Clean Code is the Default, Not the Exception."**
+
+*   **Readability First**: Code must be written for humans to read, not just for machines to execute. Variable and function names must be descriptive and self-documenting.
+*   **DRY (Don't Repeat Yourself)**: Extract common logic into reusable utilities or components. Duplication is a source of bugs and maintenance overhead.
+*   **Modular Architecture**: Enforce strict separation of concerns. Services should be decoupled, and dependencies should be explicitly managed.
+*   **Static Analysis**: All projects must utilize linters (e.g., eslint, ruff) and formatters (e.g., prettier, black) in their pre-commit hooks. Zero tolerance for linting errors in the main branch.
+*   **Documentation**: Every public API, complex algorithm, and architectural decision must be documented. `README.md` files must be up-to-date and include setup instructions.
+
+## 2. Testing Standards
+**"If it isn't tested, it's broken."**
+
+*   **Coverage Requirements**: Maintain a minimum of 80% code coverage for business logic. Critical paths require 100% coverage.
+*   **Test Pyramid**: Prioritize Unit Tests for speed and feedback. Use Integration Tests for service boundaries and E2E Tests for critical user flows.
+*   **Deterministic Tests**: Flaky tests are unacceptable. Tests must pass consistently in any environment (local, CI/CD).
+*   **Mocking**: External dependencies (APIs, Databases) must be mocked in unit tests to ensure isolation and speed.
+*   **Bug Reproduction**: Every bug fix must be accompanied by a test case that reproduces the issue and verifies the fix.
+
+## 3. User Experience (UX) Consistency
+**"Delight in every interaction."**
+
+*   **Visual Consistency**: Adhere to the defined Design System for colors, typography, spacing, and component behavior. Do not introduce ad-hoc styles.
+*   **Performance as UX**: A slow interface is a broken interface. Ensure interactions provide immediate feedback (loading states, optimistic UI).
+*   **Accessibility (a11y)**: All interfaces must be accessible. Use semantic HTML, proper ARIA labels, and support keyboard navigation.
+*   **Responsive Design**: Applications must function seamlessly across all device sizes (Mobile, Tablet, Desktop).
+*   **Error Handling**: User-facing errors must be helpful, non-technical, and offer a path to resolution.
+
+## 4. Performance Requirements
+**"Speed is a feature."**
+
+*   **Resource Efficiency**: Optimize CPU and Memory usage. Minimize container footprint. Use lightweight base images (e.g., Alpine) where possible.
+*   **Load Time**: First Contentful Paint (FCP) must be under 1.5 seconds. Time to Interactive (TTI) must be under 3.5 seconds.
+*   **Database Optimization**: All queries must be indexed. Avoid N+1 query problems. Use caching (Redis) for expensive operations.
+*   **Network Optimization**: Minify and compress assets (Brotli/Gzip). Implement lazy loading for images and non-critical modules.
+*   **Monitoring**: All distinct services must expose health checks and metrics. Logging must be structured and centralized.
+
+---
+*Signed, Speckit Engineering*

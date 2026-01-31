@@ -6,7 +6,7 @@
 # ==========================================
 # Stage 1: Builder - Install dependencies
 # ==========================================
-FROM python:3.11-slim as builder
+FROM python:3.11-slim AS builder
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -44,7 +44,7 @@ RUN pip install --upgrade pip setuptools wheel && \
 # ==========================================
 # Stage 2: Production - Runtime image
 # ==========================================
-FROM python:3.11-slim as production
+FROM python:3.11-slim AS production
 
 ARG BUILD_DATE
 ARG VCS_REF

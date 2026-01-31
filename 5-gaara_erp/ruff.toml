@@ -1,0 +1,22 @@
+# =============================================================================
+# Ruff Configuration for gaara_erp
+# =============================================================================
+# Extends the root ruff.toml configuration
+# =============================================================================
+
+extend = "../ruff.toml"
+
+# Project-specific overrides
+[lint]
+# Django-specific ignores
+extend-ignore = ["E402", "RUF012"]
+
+[lint.isort]
+known-first-party = ["gaara_erp", "core", "admin_modules", "core_modules"]
+known-third-party = ["django", "rest_framework"]
+
+[lint.per-file-ignores]
+"*/migrations/*.py" = ["E501", "ERA001"]
+"*/settings/*.py" = ["F401", "F403", "F405"]
+"conftest.py" = ["E402"]
+

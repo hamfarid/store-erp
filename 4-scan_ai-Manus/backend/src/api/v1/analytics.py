@@ -1,11 +1,12 @@
 """
-FILE: backend/src/api/v1/analytics.py | PURPOSE: Analytics API routes | OWNER: Backend Team | LAST-AUDITED: 2025-12-19
+FILE: backend/src/api/v1/analytics.py | PURPOSE: Analytics API routes
+OWNER: Backend Team | LAST-AUDITED: 2026-01-31
 
-Analytics API Routes
+Analytics API Routes - Advanced Analytics Dashboard
 
-Handles analytics and insights endpoints.
+Handles analytics, insights, heatmaps, predictions, and comparative analysis.
 
-Version: 1.1.0
+Version: 2.0.0 - Added advanced analytics (heatmap, comparative, predictions)
 """
 
 from datetime import datetime, timedelta
@@ -393,4 +394,376 @@ async def get_trends(
         "success": True,
         "data": trends,
         "period": period
+    }
+
+
+# ============================================
+# Advanced Analytics Endpoints
+# ============================================
+
+@router.get("/heatmap", response_model=Dict[str, Any])
+async def get_disease_heatmap(
+    period: str = Query("30d", pattern="^(7d|30d|90d|1y)$"),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Get disease heatmap data by location/farm.
+    Returns geographic distribution of diseases for visualization.
+    """
+    start_date = get_period_start(period)
+
+    # Get disease counts by farm location
+    heatmap_data = db.query(
+        Farm.name.label('farm_name'),
+        Farm.latitude,
+        Farm.longitude,
+        func.count(Diagnosis.id).label('diagnosis_count'),
+        func.sum(
+            func.case(
+                (Diagnosis.disease != "Healthy", 1),
+                else_=0
+            )
+        ).label('disease_count')
+    ).join(
+        Diagnosis, Diagnosis.farm_id == Farm.id, isouter=True
+    ).filter(
+        Farm.deleted_at.is_(None),
+        Diagnosis.created_at >= start_date
+    ).group_by(
+        Farm.id, Farm.name, Farm.latitude, Farm.longitude
+    ).all()
+
+    points = []
+    for farm_name, lat, lng, diag_count, disease_count in heatmap_data:
+        if lat and lng:
+            intensity = min(1.0, (disease_count or 0) / 10)
+            points.append({
+                "farm": farm_name,
+                "lat": float(lat),
+                "lng": float(lng),
+                "diagnoses": diag_count or 0,
+                "diseases": disease_count or 0,
+                "intensity": round(intensity, 2)
+            })
+
+    return {
+        "success": True,
+        "data": points,
+        "period": period,
+        "total_points": len(points)
+    }
+
+
+@router.get("/comparative", response_model=Dict[str, Any])
+async def get_comparative_analysis(
+    period: str = Query("30d", pattern="^(7d|30d|90d)$"),
+    compare_by: str = Query("farm", pattern="^(farm|crop|month)$"),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Get comparative analysis across farms, crops, or time periods.
+    Useful for identifying best/worst performing areas.
+    """
+    start_date = get_period_start(period)
+
+    if compare_by == "farm":
+        # Compare farms by health metrics
+        stats = db.query(
+            Farm.name.label('category'),
+            func.count(Diagnosis.id).label('total_diagnoses'),
+            func.avg(Diagnosis.confidence).label('avg_confidence'),
+            func.sum(
+                func.case((Diagnosis.disease == "Healthy", 1), else_=0)
+            ).label('healthy_count')
+        ).join(
+            Diagnosis, Diagnosis.farm_id == Farm.id, isouter=True
+        ).filter(
+            Farm.deleted_at.is_(None),
+            Diagnosis.created_at >= start_date
+        ).group_by(Farm.id, Farm.name).all()
+
+    elif compare_by == "crop":
+        # Compare by crop type
+        stats = db.query(
+            Farm.crop_type.label('category'),
+            func.count(Diagnosis.id).label('total_diagnoses'),
+            func.avg(Diagnosis.confidence).label('avg_confidence'),
+            func.sum(
+                func.case((Diagnosis.disease == "Healthy", 1), else_=0)
+            ).label('healthy_count')
+        ).join(
+            Diagnosis, Diagnosis.farm_id == Farm.id, isouter=True
+        ).filter(
+            Farm.deleted_at.is_(None),
+            Farm.crop_type.isnot(None),
+            Diagnosis.created_at >= start_date
+        ).group_by(Farm.crop_type).all()
+
+    else:  # month
+        # Compare by month
+        stats = db.query(
+            func.strftime('%Y-%m', Diagnosis.created_at).label('category'),
+            func.count(Diagnosis.id).label('total_diagnoses'),
+            func.avg(Diagnosis.confidence).label('avg_confidence'),
+            func.sum(
+                func.case((Diagnosis.disease == "Healthy", 1), else_=0)
+            ).label('healthy_count')
+        ).filter(
+            Diagnosis.deleted_at.is_(None),
+            Diagnosis.created_at >= start_date
+        ).group_by(
+            func.strftime('%Y-%m', Diagnosis.created_at)
+        ).order_by(
+            func.strftime('%Y-%m', Diagnosis.created_at)
+        ).all()
+
+    comparison = []
+    for category, total, avg_conf, healthy in stats:
+        if category:
+            health_rate = (healthy / total * 100) if total > 0 else 0
+            comparison.append({
+                "category": category,
+                "total_diagnoses": total or 0,
+                "avg_confidence": round(float(avg_conf or 0), 2),
+                "healthy_count": healthy or 0,
+                "health_rate": round(health_rate, 1)
+            })
+
+    # Sort by health rate descending
+    comparison.sort(key=lambda x: x["health_rate"], reverse=True)
+
+    return {
+        "success": True,
+        "compare_by": compare_by,
+        "data": comparison,
+        "period": period,
+        "best_performer": comparison[0] if comparison else None,
+        "worst_performer": comparison[-1] if comparison else None
+    }
+
+
+@router.get("/predictions", response_model=Dict[str, Any])
+async def get_yield_predictions(
+    farm_id: Optional[int] = None,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Get yield predictions based on historical data and current health.
+    Uses simple trend analysis for predictions.
+    """
+    # Get historical diagnosis data
+    base_query = db.query(Diagnosis).filter(Diagnosis.deleted_at.is_(None))
+
+    if farm_id:
+        base_query = base_query.filter(Diagnosis.farm_id == farm_id)
+    elif current_user.role != "ADMIN":
+        base_query = base_query.filter(Diagnosis.user_id == current_user.id)
+
+    # Last 90 days data
+    ninety_days_ago = datetime.utcnow() - timedelta(days=90)
+    recent_data = base_query.filter(
+        Diagnosis.created_at >= ninety_days_ago
+    ).all()
+
+    # Calculate health trend
+    total_diagnoses = len(recent_data)
+    healthy_count = sum(1 for d in recent_data if d.disease == "Healthy")
+    current_health_rate = (healthy_count / total_diagnoses * 100) if total_diagnoses > 0 else 0
+
+    # Simple prediction based on health rate
+    # Higher health rate = better yield prediction
+    base_yield = 100  # Baseline yield percentage
+    health_factor = current_health_rate / 100
+    predicted_yield = base_yield * (0.5 + 0.5 * health_factor)
+
+    # Risk assessment
+    if current_health_rate >= 80:
+        risk_level = "low"
+        risk_label = "منخفض"
+    elif current_health_rate >= 60:
+        risk_level = "medium"
+        risk_label = "متوسط"
+    else:
+        risk_level = "high"
+        risk_label = "مرتفع"
+
+    # Monthly trend
+    monthly_health = []
+    for i in range(3):
+        month_start = datetime.utcnow() - timedelta(days=30 * (i + 1))
+        month_end = datetime.utcnow() - timedelta(days=30 * i)
+        month_data = [
+            d for d in recent_data
+            if month_start <= d.created_at < month_end
+        ]
+        month_healthy = sum(1 for d in month_data if d.disease == "Healthy")
+        month_rate = (month_healthy / len(month_data) * 100) if month_data else 0
+        monthly_health.append({
+            "month": month_start.strftime("%Y-%m"),
+            "health_rate": round(month_rate, 1),
+            "diagnoses": len(month_data)
+        })
+
+    return {
+        "success": True,
+        "predictions": {
+            "current_health_rate": round(current_health_rate, 1),
+            "predicted_yield_percentage": round(predicted_yield, 1),
+            "risk_level": risk_level,
+            "risk_label": risk_label,
+            "confidence": 0.75 if total_diagnoses >= 50 else 0.5
+        },
+        "trend": monthly_health,
+        "recommendations": get_recommendations(current_health_rate, risk_level),
+        "data_points": total_diagnoses
+    }
+
+
+def get_recommendations(health_rate: float, risk_level: str) -> List[Dict]:
+    """Generate recommendations based on health metrics."""
+    recommendations = []
+
+    if risk_level == "high":
+        recommendations.extend([
+            {
+                "priority": "high",
+                "message": "Immediate disease inspection recommended",
+                "message_ar": "يُنصح بفحص الأمراض فوراً"
+            },
+            {
+                "priority": "high",
+                "message": "Consider preventive treatment application",
+                "message_ar": "فكر في تطبيق العلاج الوقائي"
+            }
+        ])
+    elif risk_level == "medium":
+        recommendations.extend([
+            {
+                "priority": "medium",
+                "message": "Schedule regular health monitoring",
+                "message_ar": "جدولة مراقبة صحية منتظمة"
+            },
+            {
+                "priority": "medium",
+                "message": "Review irrigation and nutrition plans",
+                "message_ar": "مراجعة خطط الري والتغذية"
+            }
+        ])
+    else:
+        recommendations.extend([
+            {
+                "priority": "low",
+                "message": "Maintain current practices",
+                "message_ar": "حافظ على الممارسات الحالية"
+            },
+            {
+                "priority": "low",
+                "message": "Continue regular monitoring",
+                "message_ar": "استمر في المراقبة المنتظمة"
+            }
+        ])
+
+    return recommendations
+
+
+@router.get("/summary-report", response_model=Dict[str, Any])
+async def get_summary_report(
+    period: str = Query("30d", pattern="^(7d|30d|90d|1y)$"),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Get comprehensive summary report for the specified period.
+    Combines all analytics into a single report.
+    """
+    start_date = get_period_start(period)
+
+    # Build base queries based on user role
+    is_admin = current_user.role == "ADMIN"
+
+    # Farm stats
+    farms_query = db.query(Farm).filter(Farm.deleted_at.is_(None))
+    if not is_admin:
+        farms_query = farms_query.filter(Farm.owner_id == current_user.id)
+    total_farms = farms_query.count()
+
+    # Diagnosis stats
+    diag_query = db.query(Diagnosis).filter(
+        Diagnosis.deleted_at.is_(None),
+        Diagnosis.created_at >= start_date
+    )
+    if not is_admin:
+        diag_query = diag_query.filter(Diagnosis.user_id == current_user.id)
+
+    total_diagnoses = diag_query.count()
+    healthy_count = diag_query.filter(Diagnosis.disease == "Healthy").count()
+    disease_count = diag_query.filter(
+        Diagnosis.disease.isnot(None),
+        Diagnosis.disease != "Healthy"
+    ).count()
+
+    # Sensor stats
+    sensor_query = db.query(Sensor).filter(Sensor.deleted_at.is_(None))
+    if not is_admin:
+        sensor_query = sensor_query.filter(Sensor.user_id == current_user.id)
+
+    total_sensors = sensor_query.count()
+    active_sensors = sensor_query.filter(Sensor.status == "active").count()
+    alert_sensors = sensor_query.filter(
+        Sensor.status.in_(["warning", "error"])
+    ).count()
+
+    # Top diseases
+    top_diseases = db.query(
+        Diagnosis.disease,
+        func.count(Diagnosis.id).label('count')
+    ).filter(
+        Diagnosis.deleted_at.is_(None),
+        Diagnosis.created_at >= start_date,
+        Diagnosis.disease.isnot(None),
+        Diagnosis.disease != "Healthy"
+    ).group_by(Diagnosis.disease).order_by(
+        func.count(Diagnosis.id).desc()
+    ).limit(5).all()
+
+    # Calculate metrics
+    health_rate = (healthy_count / total_diagnoses * 100) if total_diagnoses > 0 else 0
+    disease_rate = (disease_count / total_diagnoses * 100) if total_diagnoses > 0 else 0
+
+    return {
+        "success": True,
+        "report": {
+            "period": period,
+            "generated_at": datetime.utcnow().isoformat(),
+            "summary": {
+                "total_farms": total_farms,
+                "total_diagnoses": total_diagnoses,
+                "health_rate": round(health_rate, 1),
+                "disease_rate": round(disease_rate, 1)
+            },
+            "sensors": {
+                "total": total_sensors,
+                "active": active_sensors,
+                "alerts": alert_sensors
+            },
+            "top_diseases": [
+                {"name": name, "count": count}
+                for name, count in top_diseases
+            ],
+            "health_status": (
+                "excellent" if health_rate >= 90 else
+                "good" if health_rate >= 70 else
+                "fair" if health_rate >= 50 else
+                "poor"
+            ),
+            "health_status_ar": (
+                "ممتاز" if health_rate >= 90 else
+                "جيد" if health_rate >= 70 else
+                "مقبول" if health_rate >= 50 else
+                "ضعيف"
+            )
+        }
     }

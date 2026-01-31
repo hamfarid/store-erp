@@ -23,6 +23,7 @@ def _import_router(module_path: str):
 analytics_router = _import_router("src.api.v1.analytics")
 auth_v1_router = _import_router("src.api.v1.auth")
 breeding_router = _import_router("src.api.v1.breeding")
+chatbot_router = _import_router("src.api.v1.chatbot")
 companies_router = _import_router("src.api.v1.companies")
 crops_router = _import_router("src.api.v1.crops")
 diagnosis_v1_router = _import_router("src.api.v1.diagnosis")
@@ -31,12 +32,16 @@ equipment_router = _import_router("src.api.v1.equipment")
 farms_router = _import_router("src.api.v1.farms")
 health_v1_router = _import_router("src.api.v1.health")
 inventory_router = _import_router("src.api.v1.inventory")
+notifications_router = _import_router("src.api.v1.notifications")
 reports_v1_router = _import_router("src.api.v1.reports")
 sensors_router = _import_router("src.api.v1.sensors")
 settings_router = _import_router("src.api.v1.settings")
 setup_router = _import_router("src.api.v1.setup")
+tenants_router = _import_router("src.api.v1.tenants")
 upload_v1_router = _import_router("src.api.v1.upload")
 users_router = _import_router("src.api.v1.users")
+websocket_router = _import_router("src.api.v1.websocket")
+workers_router = _import_router("src.api.v1.workers")
 
 # Optional/auxiliary v1 routers (may require heavier deps)
 try:
@@ -167,6 +172,11 @@ def setup_routes(app: FastAPI):
         app.include_router(users_router)
         print("[OK] Registered: Users API (v1)")
 
+    # Workers API (v1)
+    if workers_router:
+        app.include_router(workers_router)
+        print("[OK] Registered: Workers API (v1)")
+
     # Companies API (v1)
     if companies_router:
         app.include_router(companies_router)
@@ -182,6 +192,16 @@ def setup_routes(app: FastAPI):
         app.include_router(analytics_router)
         print("[OK] Registered: Analytics API (v1)")
 
+    # Chatbot API (v1)
+    if chatbot_router:
+        app.include_router(chatbot_router)
+        print("[OK] Registered: AI Chatbot API (v1)")
+
+    # Tenants API (v1) - Multi-tenant Management
+    if tenants_router:
+        app.include_router(tenants_router)
+        print("[OK] Registered: Tenants API (v1)")
+
     # Settings API (v1)
     if settings_router:
         app.include_router(settings_router)
@@ -191,6 +211,16 @@ def setup_routes(app: FastAPI):
     if setup_router:
         app.include_router(setup_router)
         print("[OK] Registered: Setup Wizard API (v1)")
+
+    # Notifications API (v1)
+    if notifications_router:
+        app.include_router(notifications_router)
+        print("[OK] Registered: Notifications API (v1)")
+
+    # WebSocket API (v1)
+    if websocket_router:
+        app.include_router(websocket_router)
+        print("[OK] Registered: WebSocket API (v1)")
 
     # =========================================================================
     # AUXILIARY V1 ROUTES (mounted under /api/v1)
@@ -276,14 +306,15 @@ def setup_routes(app: FastAPI):
 
 
 # Flask routes are deprecated - keeping stub for backwards compatibility
-def setup_flask_routes(app):
+def setup_flask_routes(app):  # pylint: disable=unused-argument
     """
     إعداد مسارات Flask للتقنيات المتقدمة (deprecated)
     Setup Flask routes for advanced technologies (deprecated)
 
-    Note: This function is deprecated. The project now uses FastAPI exclusively.
+    Note: This function is deprecated.
+    The project now uses FastAPI exclusively.
     """
-    print("Warning: Flask routes are deprecated. Use FastAPI routes instead.")
+    print("Warning: Flask routes are deprecated.")
 
 
 def setup_hybrid_routes(fastapi_app: FastAPI, flask_app=None):
@@ -291,13 +322,14 @@ def setup_hybrid_routes(fastapi_app: FastAPI, flask_app=None):
     إعداد مسارات هجينة لكل من FastAPI و Flask (deprecated)
     Setup hybrid routes for both FastAPI and Flask (deprecated)
 
-    Note: Flask support is deprecated. This function now only sets up FastAPI routes.
+    Note: Flask support is deprecated.
+    This function now only sets up FastAPI routes.
     """
 
     # إعداد مسارات FastAPI
     setup_routes(fastapi_app)
 
     if flask_app:
-        print("Warning: Flask routes are deprecated. Ignoring flask_app parameter.")
+        print("Warning: Flask routes deprecated. Ignoring flask_app.")
 
     print("Routing setup completed (FastAPI only)")

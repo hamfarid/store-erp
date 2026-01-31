@@ -80,7 +80,6 @@ def configure_database(app):
                 "pool_size": 10,
                 "max_overflow": 20,
             }
-    else:
         # Fallback to SQLite for development
         basedir = os.path.abspath(os.path.dirname(__file__))
         instance_dir = os.path.join(os.path.dirname(basedir), "instance")
@@ -89,7 +88,8 @@ def configure_database(app):
         if not os.path.exists(instance_dir):
             os.makedirs(instance_dir)
 
-        # مسار قاعدة البيانات
+        # مسار قاعدة البيانات - استخدام SQLite افتراضيًا بدلًا من Localhost Postgres
+        # لمنع الأخطاء عند عدم وجود DATABASE_URL
         database_path = os.path.join(instance_dir, "inventory.db")
         app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{database_path}"
         logger.info(f"✅ Using SQLite for development: {database_path}")

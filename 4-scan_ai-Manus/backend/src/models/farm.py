@@ -1,11 +1,12 @@
 """
-FILE: backend/src/models/farm.py | PURPOSE: Farm database model | OWNER: Backend Team | LAST-AUDITED: 2025-11-18
+FILE: backend/src/models/farm.py | PURPOSE: Farm database model
+OWNER: Backend Team | LAST-AUDITED: 2026-01-31
 
-Farm Model
+Farm Model - Multi-tenant Support
 
-Represents agricultural farms managed by users.
+Represents agricultural farms managed by users with tenant isolation.
 
-Version: 1.0.0
+Version: 2.0.0 - Added tenant_id for multi-tenancy
 """
 
 from datetime import datetime
@@ -22,6 +23,14 @@ class Farm(Base):
 
     # Primary Key
     id = Column(Integer, primary_key=True, index=True)
+
+    # Multi-tenancy
+    tenant_id = Column(
+        Integer,
+        ForeignKey('tenants.id'),
+        nullable=True,
+        index=True
+    )
 
     # Foreign Keys
     owner_id = Column(
@@ -72,6 +81,7 @@ class Farm(Base):
         """Convert to dictionary"""
         return {
             'id': self.id,
+            'tenant_id': self.tenant_id,
             'owner_id': self.owner_id,
             'name': self.name,
             'location': self.location,
@@ -84,6 +94,10 @@ class Farm(Base):
             'soil_type': self.soil_type,
             'is_active': self.is_active,
             'description': self.description,
-            'created_at': self.created_at.isoformat() if self.created_at else None,
-            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+            'created_at': (
+                self.created_at.isoformat() if self.created_at else None
+            ),
+            'updated_at': (
+                self.updated_at.isoformat() if self.updated_at else None
+            ),
         }

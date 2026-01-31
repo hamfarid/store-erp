@@ -26,12 +26,19 @@
 
 ---
 
-## �️ Management Tools
+## 🛠️ Management & Monitoring Tools
 
 | Tool | Port | URL | Description |
 |------|------|-----|-------------|
 | Portainer | 9000, 9443 | <http://localhost:9000> | Docker Container Management |
 | Nginx Gateway | 80, 443 | <http://localhost> | Unified Entry Point |
+| Nginx Config | 8181 | <http://localhost:8181> | Nginx Configuration Dashboard |
+| **Grafana** | 3000 | <http://localhost:3000> | Visualization & Dashboards |
+| **Prometheus** | 9090 | <http://localhost:9090> | Metrics Collection |
+| **Alertmanager** | 9093 | <http://localhost:9093> | Alert Handling |
+| **cAdvisor** | 8088 | <http://localhost:8088> | Container Metrics |
+| **Node Exporter** | 9100 | <http://localhost:9100> | Host Metrics |
+| **Loki** | 3100 | <http://localhost:3100> | Log Aggregation |
 
 ---
 
@@ -58,6 +65,22 @@ All projects accessible via <http://localhost> with path-based routing:
 | `/store/` | Store Frontend | Store/Inventory Frontend |
 | `/store/api/` | Store Backend | Store/Inventory API |
 | `/portainer/` | Portainer | Docker Management |
+| `/grafana/` | Grafana | Monitoring Dashboard |
+| `/prometheus/` | Prometheus | Metrics Collection |
+| `/alertmanager/` | Alertmanager | Alert Management |
+
+---
+
+## 🔗 Direct Access Ports
+
+| Port | Project | Description |
+|------|---------|-------------|
+| 8080 | Gold Price Predictor | Direct access to Gold project |
+| 8081 | Zakat | Direct access to Zakat project |
+| 8082 | Scan AI | Direct access to Scan AI project |
+| 8083 | Gaara ERP | Direct access to ERP project |
+| 8084 | Store | Direct access to Store project |
+| 8085 | Test Projects | Direct access to Test project |
 
 ---
 
@@ -67,10 +90,46 @@ All projects accessible via <http://localhost> with path-based routing:
 |---|---------|---------|----------|----------|----|----|-------|
 | 1 | test_projects | test-backend | test-frontend | - | - | - | - |
 | 2 | gold-price-predictor | gold-price-predictor-backend | gold-price-predictor-frontend | gold-price-predictor-database | gold-price-predictor-ml | gold-price-predictor-ai | gold-price-predictor-redis |
-| 3 | Zakat | zakat_backend | zakat_frontend | zakat_db | - | - | zakat_redis |
+| 3 | Zakat | zakat-backend | zakat-frontend | zakat-postgres | - | - | zakat-redis |
 | 4 | scan_ai-Manus | scan_ai-Manus-backend | scan_ai-Manus-frontend | scan_ai-Manus-database | scan_ai-Manus-ml | scan_ai-Manus-ai | scan_ai-Manus-redis |
 | 5 | gaara_erp | gaara_backend | gaara_frontend | gaara_db | - | - | gaara_redis |
 | 6 | store | store_backend | store_frontend | store_database | - | - | store_redis |
+
+---
+
+## 📈 Monitoring Stack Components
+
+### Grafana (Port 3000)
+- **Default Login**: admin / admin123
+- **Pre-configured Dashboards**:
+  - AI Projects Overview
+  - Container Metrics
+  - Host Metrics
+- **Data Sources**:
+  - Prometheus (metrics)
+  - Loki (logs)
+  - Alertmanager (alerts)
+
+### Prometheus (Port 9090)
+- **Scrape Interval**: 15s
+- **Retention**: 30 days
+- **Targets**: All project backends, frontends, ML, and AI services
+- **Alert Rules**: Defined in `/monitoring/prometheus/alerts/`
+
+### Alertmanager (Port 9093)
+- **Routes**: Project-specific and severity-based
+- **Receivers**: Webhook-based (configurable for email/Slack)
+- **Inhibition Rules**: Prevent alert floods
+
+### Loki (Port 3100)
+- **Log Retention**: 30 days
+- **Sources**: All Docker containers
+
+### cAdvisor (Port 8088)
+- **Metrics**: Container CPU, Memory, Network, Disk
+
+### Node Exporter (Port 9100)
+- **Metrics**: Host CPU, Memory, Disk, Network
 
 ---
 
@@ -80,222 +139,25 @@ All projects accessible via <http://localhost> with path-based routing:
 |---|---------|-----------|--------|
 | 1 | test_projects | N/A | ⬜ No env needed |
 | 2 | gold-price-predictor | `.env` | ✅ Configured |
-| 3 | Zakat | `Zakat_Clean/.env` | ✅ Created |
+| 3 | Zakat | `Zakat_Clean/.env` | ✅ Configured |
 | 4 | scan_ai-Manus | `.env` | ✅ Configured |
 | 5 | gaara_erp | `.env` | ✅ Configured |
 | 6 | store | `.env`, `backend/.env` | ✅ Configured |
 
 ---
 
-## 📋 Project Analysis Summary
-
-### Project 1: test_projects
-
-**Path:** `E:\Ai_Project\1-test_projects\global - V1.3 -13-12-2025\test`
-**Status:** ✅ Configured for Ai_project network
-**Services:**
-
-- ✅ Backend (port 1001)
-- ✅ Frontend (port 1501)
-- ⬜ Database (not needed)
-- ⬜ ML (not needed)
-- ⬜ AI
-- ⬜ Redis
-
----
-
-### Project 2: gold-price-predictor ✅ CONFIGURED
-
-**Path:** `E:\Ai_Project\2-gold-price-predictor`
-**Tech Stack:** FastAPI Backend, React+Vite Frontend, PostgreSQL, Redis, ML (TensorFlow), AI/RAG
-**Status:** Docker Compose configured, needs network update
-**Services:**
-
-- ✅ Backend (FastAPI) - Port 2001
-- ✅ Frontend (React+Vite+Nginx) - Port 2501
-- ✅ Database (PostgreSQL) - Port 4502
-- ✅ ML Service (TensorFlow) - Port 2101
-- ✅ AI/RAG Service - Port 2601
-- ✅ Redis - Port 6379 → Should be 6372
-
----
-
-### Project 3: Zakat
-
-**Path:** `E:\Ai_Project\3-Zakat\Zakat_Clean`
-**Tech Stack:** Flask Backend, React Frontend, PostgreSQL, Redis
-**Current Ports:** Backend 3005, Frontend 3505, DB 5432, Redis 6379
-**Services Needed:**
-
-- ✅ Backend (Flask) - Change to 3001
-- ✅ Frontend - Change to 3501
-- ✅ Database - Change to 6502
-- ⬜ ML Service - Add 3101
-- ⬜ AI Service - Add 3601
-- ✅ Redis - Change to 6373
-
----
-
-### Project 4: scan_ai-Manus ✅ CONFIGURED
-
-**Path:** `E:\Ai_Project\4-scan_ai-Manus`
-**Tech Stack:** FastAPI Backend, React+Vite Frontend, PostgreSQL, Redis, ML (Disease Diagnosis), AI (Image Crawler)
-**Status:** Already configured with Ai_project network
-**Services:**
-
-- ✅ Backend (FastAPI) - Port 4001
-- ✅ Frontend (React+Vite) - Port 4501
-- ✅ Database (PostgreSQL) - Port 8502 (internal)
-- ✅ ML Service - Port 4101
-- ✅ AI Service - Port 4601
-- ✅ Redis - Exposed internally
-
----
-
-### Project 5: gaara_erp
-
-**Path:** `E:\Ai_Project\5-gaara_erp`
-**Tech Stack:** Django Backend, React Frontend, PostgreSQL, Redis, Celery, Nginx
-**Current Ports:** Backend 8000, Frontend 3000, Nginx 80/443
-**Services Needed:**
-
-- ✅ Backend (Django) - Change to 5001
-- ✅ Frontend (React) - Change to 5501
-- ✅ Database - Change to 10502
-- ⬜ ML Service - Add 5101
-- ⬜ AI Service - Add 5601
-- ✅ Redis - Change to 6375
-- ✅ Celery Worker
-- ⬜ Celery Beat
-
----
-
-### Project 6: store
-
-**Path:** `E:\Ai_Project\6-store`
-**Tech Stack:** Flask Backend, React Frontend, PostgreSQL, Redis, Nginx
-**Current Ports:** Backend 5002, Frontend 5502, DB 5432, Nginx 80/443
-**Services Needed:**
-
-- ✅ Backend (Flask) - Change to 6001
-- ✅ Frontend - Change to 6501
-- ✅ Database - Change to 12502
-- ⬜ ML Service - Add 6101
-- ⬜ AI Service - Add 6601
-- ✅ Redis - Change to 6376
-
----
-
-## 🎯 Master Task List
-
-### Phase 1: Network Setup (COMPLETED)
-
-- [x] Create shared network `Ai_project`
-- [x] Create Nginx proxy container
-- [x] Configure main nginx.conf
-
-### Phase 2: Project Configuration
-
-#### Task 2.1: gold-price-predictor (Project 2) ✅ COMPLETE
-
-- [x] Update docker-compose.yml with correct ports
-- [x] Update container names
-- [x] Configure Ai_project network
-- [x] Update .env file
-- [x] Fix Redis port to 6372
-- [x] Validate docker-compose config
-- [x] Enable Nginx config
-
-#### Task 2.2: Zakat (Project 3) ✅ COMPLETE
-
-- [x] Create/Update docker-compose.yml
-  - [x] Change backend port 3005 → 3001
-  - [x] Change frontend port 3505 → 3501
-  - [x] Change database port → 6502
-  - [x] Change Redis port → 6373
-- [x] Update container names to zakat_* convention
-- [x] Add Ai_project network
-- [x] Update .env file
-- [x] Validate docker-compose config
-- [x] Enable Nginx config
-
-#### Task 2.3: scan_ai-Manus (Project 4) ✅ COMPLETE
-
-- [x] Docker-compose already configured
-- [x] Container names correct
-- [x] Ai_project network configured
-- [x] docker-compose.unified.yml validated
-- [x] Validate docker-compose config
-- [x] Enable Nginx config
-
-#### Task 2.4: gaara_erp (Project 5) ✅ COMPLETE
-
-- [x] Update docker-compose.yml
-  - [x] Change backend port 8000 → 5001
-  - [x] Change frontend port 3000 → 5501
-  - [x] Add database port 10502
-  - [x] Change Redis port → 6375
-- [x] Update container names to gaara_* convention
-- [x] Replace gaara_network with Ai_project
-- [x] Update .env file (added ENCRYPTION_KEY)
-- [x] Celery configured
-- [x] Validate docker-compose config
-- [x] Enable Nginx config
-
-#### Task 2.5: store (Project 6) ✅ COMPLETE
-
-- [x] Update docker-compose.yml
-  - [x] Change backend port 5002 → 6001
-  - [x] Change frontend port 5502 → 6501
-  - [x] Change database port → 12502
-  - [x] Change Redis port → 6376
-- [x] Update container names to store_* convention
-- [x] Replace inventory_network with Ai_project
-- [x] Validate docker-compose config
-- [x] Enable Nginx config
-
-#### Task 2.6: test_projects (Project 1) - Optional
-
-- [ ] Create docker-compose.yml template
-- [ ] Configure for development/testing
-
-### Phase 3: Nginx Configuration ✅ COMPLETE
-
-- [x] Create conf.d backup folder
-- [x] Update all nginx configs with correct internal ports
-- [x] Add port 8181 for configuration dashboard
-- [x] Test nginx configuration
-- [x] All project configs enabled
-
-### Phase 4: Environment Files ✅ COMPLETE
-
-- [x] All projects have .env configured
-- [x] DATABASE_URL with correct host:port
-- [x] REDIS_URL with correct port
-- [x] Added ENCRYPTION_KEY to gaara_erp
-
-### Phase 5: Testing & Validation
-
-- [ ] Run e2e tests for each project
-- [ ] Run Playwright tests
-- [ ] Take screenshots
-- [ ] Fix any errors found
-- [ ] Document any remaining issues
-
----
-
 ## 🔧 Quick Reference: Docker Commands
 
 ```bash
-# Create network
+# Create network (if not exists)
 docker network create Ai_project
 
-# Start Nginx proxy
-cd E:\Ai_Project
+# Start Nginx proxy and monitoring stack
+cd D:\Ai_Project
 docker-compose -f docker-compose.nginx.yml up -d
 
 # Start a project
-cd E:\Ai_Project\2-gold-price-predictor
+cd D:\Ai_Project\2-gold-price-predictor
 docker-compose up -d
 
 # View logs
@@ -306,23 +168,12 @@ docker exec nginx-proxy nginx -s reload
 
 # Check container status
 docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-```
 
----
+# View Prometheus targets
+curl http://localhost:9090/api/v1/targets
 
-## 📁 Files to Create/Update Per Project
-
-```
-project-folder/
-├── docker-compose.yml          # Update ports, network, container names
-├── .env                         # Update connection strings
-├── .env.example                 # Template for environment
-├── backend/
-│   └── Dockerfile              # Expose correct port
-├── frontend/
-│   └── Dockerfile              # Expose correct port
-├── NGINX_SETUP_PROMPT.md       # AI agent instructions
-└── docker-compose.override.yml # Optional: development overrides
+# Check Alertmanager alerts
+curl http://localhost:9093/api/v2/alerts
 ```
 
 ---
@@ -330,30 +181,40 @@ project-folder/
 ## 🌐 Network Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        Ai_project Network                           │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  ┌──────────────────────────────────────────────────────────────┐  │
-│  │                    nginx-proxy (80, 443)                      │  │
-│  │  Forwards to all project ports based on configuration         │  │
-│  └──────────────────────────────────────────────────────────────┘  │
-│                              │                                      │
-│     ┌────────────────────────┼────────────────────────┐            │
-│     │                        │                        │            │
-│     ▼                        ▼                        ▼            │
-│  ┌─────────┐           ┌─────────┐              ┌─────────┐       │
-│  │Project 2│           │Project 4│              │Project 5│       │
-│  │Gold Pred│           │Scan AI  │              │Gaara ERP│       │
-│  ├─────────┤           ├─────────┤              ├─────────┤       │
-│  │BE: 2001 │           │BE: 4001 │              │BE: 5001 │       │
-│  │FE: 2501 │           │FE: 4501 │              │FE: 5501 │       │
-│  │DB: 4502 │           │DB: 8502 │              │DB:10502 │       │
-│  │ML: 2101 │           │ML: 4101 │              │ML: 5101 │       │
-│  │AI: 2601 │           │AI: 4601 │              │AI: 5601 │       │
-│  └─────────┘           └─────────┘              └─────────┘       │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           Ai_project Network                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  ┌────────────────────────────────────────────────────────────────────────┐ │
+│  │                    nginx-proxy (80, 443, 8181)                         │ │
+│  │         + Direct Ports: 8080, 8081, 8082, 8083, 8084, 8085             │ │
+│  └────────────────────────────────────────────────────────────────────────┘ │
+│                                    │                                         │
+│     ┌──────────────────────────────┼──────────────────────────┐             │
+│     │                              │                          │             │
+│     ▼                              ▼                          ▼             │
+│  ┌─────────────┐            ┌─────────────┐            ┌─────────────┐     │
+│  │ Project 2   │            │ Project 4   │            │ Project 5   │     │
+│  │ Gold Pred   │            │ Scan AI     │            │ Gaara ERP   │     │
+│  ├─────────────┤            ├─────────────┤            ├─────────────┤     │
+│  │ BE: 2001    │            │ BE: 4001    │            │ BE: 5001    │     │
+│  │ FE: 2501    │            │ FE: 4501    │            │ FE: 5501    │     │
+│  │ DB: 4502    │            │ DB: 8502    │            │ DB: 10502   │     │
+│  │ ML: 2101    │            │ ML: 4101    │            │             │     │
+│  │ AI: 2601    │            │ AI: 4601    │            │             │     │
+│  └─────────────┘            └─────────────┘            └─────────────┘     │
+│                                                                              │
+│  ┌──────────────────────────────────────────────────────────────────────┐   │
+│  │                     MONITORING STACK                                  │   │
+│  ├──────────────────────────────────────────────────────────────────────┤   │
+│  │  Prometheus (9090) ─► Grafana (3000)                                 │   │
+│  │  Alertmanager (9093)                                                 │   │
+│  │  Loki (3100) ─► Promtail                                            │   │
+│  │  cAdvisor (8088) | Node Exporter (9100)                             │   │
+│  │  Portainer (9000, 9443)                                             │   │
+│  └──────────────────────────────────────────────────────────────────────┘   │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -367,4 +228,4 @@ project-folder/
 
 ---
 
-*Last Updated: January 2, 2026*
+*Last Updated: January 19, 2026*

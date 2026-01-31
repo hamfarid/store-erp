@@ -26,6 +26,7 @@ from src.models.equipment import Equipment
 from src.models.inventory import Inventory
 from src.models.company import Company
 from src.models.breeding import BreedingProgram
+from src.models.notification import Notification
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

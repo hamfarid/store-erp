@@ -93,7 +93,7 @@ except ImportError:
     '''
 
 
-    def fix_syntax_errors(file_path):
+def fix_syntax_errors(file_path):
     """إصلاح مشاكل syntax في ملف واحد"""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -128,7 +128,7 @@ except ImportError:
         return False
 
 
-    def fix_file_imports(file_path):
+def fix_file_imports(file_path):
     """إصلاح الاستيرادات في ملف واحد"""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:

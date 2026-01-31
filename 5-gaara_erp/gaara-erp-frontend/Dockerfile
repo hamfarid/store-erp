@@ -17,11 +17,11 @@ COPY package.json pnpm-lock.yaml* package-lock.json* ./
 # Install pnpm if not using npm
 RUN npm install -g pnpm@latest || true
 
-# Install dependencies
+# Install dependencies (use --no-frozen-lockfile for flexibility)
 RUN if [ -f "pnpm-lock.yaml" ]; then \
-      pnpm install --frozen-lockfile; \
+      pnpm install; \
     else \
-      npm ci; \
+      npm install; \
     fi
 
 # Copy source code
@@ -64,7 +64,7 @@ EXPOSE 80
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
+    CMD curl -f http://127.0.0.1/health || exit 1
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]

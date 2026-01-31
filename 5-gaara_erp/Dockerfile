@@ -58,7 +58,8 @@ WORKDIR /app
 
 # Copy virtual environment from builder
 COPY --from=builder /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
+ENV PATH="/opt/venv/bin:$PATH" \
+    PYTHONPATH="/app"
 
 # Install runtime dependencies only
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -81,10 +82,9 @@ RUN mkdir -p /app/staticfiles /app/media /app/logs && \
     chmod -R 755 /app/staticfiles /app/media && \
     chmod -R 750 /app/logs
 
-# Security: Set proper permissions
-RUN chmod -R 550 /app && \
-    find /app -type f -name "*.py" -exec chmod 440 {} \; && \
-    find /app -type d -exec chmod 550 {} \;
+# Security: Set proper permissions (allow write to necessary dirs)
+RUN chmod -R 755 /app && \
+    chown -R appuser:appgroup /app
 
 # Security: Switch to non-root user
 USER appuser
@@ -97,7 +97,8 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD /app/docker/docker-healthcheck.sh || exit 1
 
 # Default command
-CMD ["gunicorn", "gaara_erp.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "4", "--threads", "2", "--timeout", "120", "--access-logfile", "-", "--error-logfile", "-"]
+# Increased timeout to 180s and reduced workers to 3 to prevent memory issues
+CMD ["gunicorn", "gaara_erp.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--threads", "2", "--timeout", "180", "--graceful-timeout", "30", "--keep-alive", "5", "--max-requests", "1000", "--max-requests-jitter", "50", "--access-logfile", "-", "--error-logfile", "-"]
 
 # =============================================================================
 # Stage 3: Development

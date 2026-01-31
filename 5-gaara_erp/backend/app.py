@@ -460,6 +460,7 @@ def register_blueprints(app):
     ]
 
     registered_count = 0
+    registered_names = set()  # Track registered blueprint names to avoid duplicates
     for module_name, blueprint_name in blueprints_to_register:
         try:
             # Log import attempt
@@ -473,7 +474,14 @@ def register_blueprints(app):
                 logger.info(f"ℹ️ Skipping blueprint {blueprint_name} (not available)")
                 continue
 
+            # Check if blueprint with this name is already registered
+            blueprint_name_value = blueprint.name if hasattr(blueprint, 'name') else blueprint_name
+            if blueprint_name_value in registered_names:
+                logger.warning(f"⚠️ Blueprint '{blueprint_name_value}' already registered, skipping duplicate")
+                continue
+
             app.register_blueprint(blueprint)
+            registered_names.add(blueprint_name_value)
             registered_count += 1
 
             # Log successful blueprint registration
@@ -482,6 +490,12 @@ def register_blueprints(app):
             )
             logger.info(f"✅ Registered blueprint: {blueprint_name}")
 
+        except ValueError as e:
+            # Handle case where blueprint name is already registered
+            if "already registered" in str(e):
+                logger.warning(f"⚠️ Blueprint {blueprint_name} already registered: {e}")
+            else:
+                raise
         except (ImportError, AttributeError) as e:
             # Log failed blueprint registration
             comprehensive_logger.log_startup(

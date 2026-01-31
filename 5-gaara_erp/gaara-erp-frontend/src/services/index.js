@@ -27,3 +27,6 @@ export { default as permissionsService } from './permissionsService'
 
 // Utility Services
 export { default as reportsService } from './reportsService'
+
+// Auth Service
+export { default as authService } from './authService'

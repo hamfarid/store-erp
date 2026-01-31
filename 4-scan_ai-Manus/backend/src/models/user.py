@@ -1,19 +1,18 @@
 """
-FILE: backend/src/models/user.py
-PURPOSE: User database model
-OWNER: Backend Team
-LAST-AUDITED: 2025-11-18
+FILE: backend/src/models/user.py | PURPOSE: User database model
+OWNER: Backend Team | LAST-AUDITED: 2026-01-31
 
-User Model
+User Model - Multi-tenant Support
 
-Represents system users with authentication and authorization.
+Represents system users with authentication, authorization, and tenant isolation.
 
-Version: 1.0.0
+Version: 2.0.0 - Added tenant_id for multi-tenancy
 """
 
 from datetime import datetime
 
-from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy.orm import relationship
 
 from ..core.database import Base
 
@@ -25,6 +24,14 @@ class User(Base):
 
     # Primary Key
     id = Column(Integer, primary_key=True, index=True)
+
+    # Multi-tenancy
+    tenant_id = Column(
+        Integer,
+        ForeignKey('tenants.id'),
+        nullable=True,  # Nullable for system admins
+        index=True
+    )
 
     # Authentication
     email = Column(String(255), unique=True, nullable=False, index=True)
@@ -76,6 +83,7 @@ class User(Base):
     # farms = relationship("Farm", back_populates="owner")
     # diagnoses = relationship("Diagnosis", back_populates="user")
     # reports = relationship("Report", back_populates="user")
+    notifications = relationship("Notification", back_populates="user", lazy="dynamic")
 
     def __repr__(self):
         return (
@@ -87,6 +95,7 @@ class User(Base):
         """Convert to dictionary"""
         return {
             'id': self.id,
+            'tenant_id': self.tenant_id,
             'email': self.email,
             'name': self.name,
             'phone': self.phone,

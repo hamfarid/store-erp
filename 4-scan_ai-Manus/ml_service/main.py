@@ -13,6 +13,10 @@ from datetime import datetime, timezone
 import tempfile
 from pathlib import Path
 
+# MLflow Integration
+import mlflow
+from mlflow.pytorch import autolog as pytorch_autolog
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -94,6 +98,21 @@ DISEASE_KNOWLEDGE_BASE = {
     }
 }
 
+# Initialize MLflow
+MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://ml-platform-mlflow:5000")
+MLFLOW_EXPERIMENT_NAME = os.getenv("MLFLOW_EXPERIMENT_NAME", "scan-ai-manus-diagnosis")
+
+try:
+    mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
+    mlflow.set_experiment(MLFLOW_EXPERIMENT_NAME)
+    # Enable autologging for PyTorch models (YOLO uses PyTorch)
+    pytorch_autolog()
+    logger.info(f"✅ MLflow initialized: {MLFLOW_TRACKING_URI}")
+    logger.info(f"✅ MLflow experiment: {MLFLOW_EXPERIMENT_NAME}")
+except Exception as e:
+    logger.warning(f"⚠️ MLflow initialization warning: {e}")
+    logger.warning("   Continuing without MLflow tracking...")
+
 # Initialize FastAPI app
 app = FastAPI(
     title="Gaara Scan AI - ML Service",
@@ -146,130 +165,262 @@ async def health_check():
         timestamp=datetime.now(timezone.utc).isoformat()
     )
 
+@app.get("/metrics")
+async def metrics():
+    """Prometheus-compatible metrics endpoint"""
+    import psutil
+    from fastapi.responses import PlainTextResponse
+    
+    try:
+        cpu = psutil.cpu_percent(interval=0.1)
+        memory = psutil.virtual_memory()
+        
+        metrics_text = f"""# HELP ml_service_up Whether the ML service is up
+# TYPE ml_service_up gauge
+ml_service_up 1
+# HELP ml_service_cpu_usage_percent CPU usage percentage
+# TYPE ml_service_cpu_usage_percent gauge
+ml_service_cpu_usage_percent {cpu}
+# HELP ml_service_memory_usage_percent Memory usage percentage
+# TYPE ml_service_memory_usage_percent gauge
+ml_service_memory_usage_percent {memory.percent}
+# HELP ml_service_memory_available_bytes Available memory in bytes
+# TYPE ml_service_memory_available_bytes gauge
+ml_service_memory_available_bytes {memory.available}
+"""
+        return PlainTextResponse(content=metrics_text, media_type="text/plain")
+    except Exception as e:
+        return PlainTextResponse(
+            content=f"# Error collecting metrics: {str(e)}\nml_service_up 0\n",
+            media_type="text/plain"
+        )
+
 @app.post("/api/v1/diagnose", response_model=DiagnosisResponse)
 async def diagnose_disease(request: DiagnosisRequest):
     """
-    Diagnose plant disease based on symptoms and crop type
+    Diagnose plant disease based on symptoms and crop type with MLflow logging
     """
+    start_time = datetime.now(timezone.utc)
+    
     try:
         logger.info(f"Diagnosis request for crop: {request.crop_type}")
 
-        # Symptom-based diagnosis using knowledge base
-        crop_type = request.crop_type.lower()
-        symptoms = [s.lower() for s in request.symptoms]
+        # Start MLflow run for diagnosis
+        with mlflow.start_run(run_name=f"diagnosis-{request.crop_type}-{start_time.strftime('%Y%m%d-%H%M%S')}"):
+            # Log parameters
+            mlflow.log_params({
+                "crop_type": request.crop_type,
+                "symptoms_count": len(request.symptoms),
+                "has_environmental_conditions": request.environmental_conditions is not None
+            })
+            
+            # Symptom-based diagnosis using knowledge base
+            crop_type = request.crop_type.lower()
+            symptoms = [s.lower() for s in request.symptoms]
 
-        best_match = None
-        best_score = 0.0
-        best_recommendations = []
+            best_match = None
+            best_score = 0.0
+            best_recommendations = []
 
-        if crop_type in DISEASE_KNOWLEDGE_BASE:
-            crop_diseases = DISEASE_KNOWLEDGE_BASE[crop_type]
-            for disease_name, disease_info in crop_diseases.items():
-                disease_symptoms = [s.lower() for s in disease_info["symptoms"]]
-                # Calculate symptom match score
-                matches = sum(
-                    1 for s in symptoms
-                    if any(ds in s or s in ds for ds in disease_symptoms)
+            if crop_type in DISEASE_KNOWLEDGE_BASE:
+                crop_diseases = DISEASE_KNOWLEDGE_BASE[crop_type]
+                for disease_name, disease_info in crop_diseases.items():
+                    disease_symptoms = [s.lower() for s in disease_info["symptoms"]]
+                    # Calculate symptom match score
+                    matches = sum(
+                        1 for s in symptoms
+                        if any(ds in s or s in ds for ds in disease_symptoms)
+                    )
+                    score = matches / max(len(disease_symptoms), 1)
+
+                    if score > best_score:
+                        best_score = score
+                        best_match = disease_name.replace("_", " ").title()
+                        best_recommendations = disease_info["recommendations"]
+
+            # Calculate confidence
+            confidence = min(best_score + 0.3, 0.95) if best_match and best_score > 0.3 else 0.0
+            
+            # Log metrics
+            mlflow.log_metrics({
+                "diagnosis_confidence": confidence,
+                "symptom_match_score": best_score,
+                "diagnosis_success": 1.0 if best_match else 0.0
+            })
+            
+            # Set tags
+            mlflow.set_tags({
+                "crop_type": request.crop_type,
+                "disease_detected": best_match or "none",
+                "diagnosis_method": "symptom_based"
+            })
+            
+            # Calculate processing time
+            processing_time = (datetime.now(timezone.utc) - start_time).total_seconds()
+            mlflow.log_metric("processing_time_seconds", processing_time)
+            
+            # Log environmental conditions if provided
+            if request.environmental_conditions:
+                mlflow.log_params(request.environmental_conditions)
+
+            if best_match and best_score > 0.3:
+                return DiagnosisResponse(
+                    success=True,
+                    disease_name=best_match,
+                    confidence=confidence,
+                    recommendations=best_recommendations,
+                    message="Diagnosis completed based on symptom analysis"
                 )
-                score = matches / max(len(disease_symptoms), 1)
-
-                if score > best_score:
-                    best_score = score
-                    best_match = disease_name.replace("_", " ").title()
-                    best_recommendations = disease_info["recommendations"]
-
-        if best_match and best_score > 0.3:
-            return DiagnosisResponse(
-                success=True,
-                disease_name=best_match,
-                confidence=min(best_score + 0.3, 0.95),
-                recommendations=best_recommendations,
-                message="Diagnosis completed based on symptom analysis"
-            )
-        else:
-            return DiagnosisResponse(
-                success=True,
-                disease_name=None,
-                confidence=0.0,
-                recommendations=[
-                    "Consult with a local agricultural expert",
-                    "Take clear photos of affected areas",
-                    "Monitor plant health over the next few days"
-                ],
-                message="Unable to determine specific disease. Please provide more symptoms or use image analysis."
-            )
+            else:
+                return DiagnosisResponse(
+                    success=True,
+                    disease_name=None,
+                    confidence=0.0,
+                    recommendations=[
+                        "Consult with a local agricultural expert",
+                        "Take clear photos of affected areas",
+                        "Monitor plant health over the next few days"
+                    ],
+                    message="Unable to determine specific disease. Please provide more symptoms or use image analysis."
+                )
 
     except Exception as e:
         logger.error(f"Diagnosis error: {str(e)}")
+        # Log error to MLflow
+        try:
+            with mlflow.start_run(run_name=f"diagnosis-error-{start_time.strftime('%Y%m%d-%H%M%S')}"):
+                mlflow.log_param("error", str(e))
+                mlflow.log_metric("diagnosis_success", 0.0)
+        except:
+            pass
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/v1/analyze-image")
 async def analyze_image(file: UploadFile = File(...)):
     """
-    Analyze uploaded image for disease detection using YOLO model
+    Analyze uploaded image for disease detection using YOLO model with MLflow logging
     """
+    start_time = datetime.now(timezone.utc)
+    
     try:
         logger.info(f"Image analysis request: {file.filename}")
 
-        # Validate file type
-        if not file.content_type.startswith("image/"):
-            raise HTTPException(
-                status_code=400,
-                detail="Invalid file type. Only images are allowed."
-            )
+        # Start MLflow run for image analysis
+        with mlflow.start_run(run_name=f"image-analysis-{start_time.strftime('%Y%m%d-%H%M%S')}"):
+            # Log parameters
+            mlflow.log_params({
+                "filename": file.filename,
+                "content_type": file.content_type,
+                "analysis_method": "yolo"
+            })
 
-        # Read image bytes
-        image_bytes = await file.read()
+            # Validate file type
+            if not file.content_type.startswith("image/"):
+                mlflow.log_metric("analysis_success", 0.0)
+                raise HTTPException(
+                    status_code=400,
+                    detail="Invalid file type. Only images are allowed."
+                )
 
-        # Try YOLO detection
-        detector = get_yolo_detector()
-        if detector is not None:
-            detections = detector.detect_from_bytes(image_bytes)
+            # Read image bytes
+            image_bytes = await file.read()
+            image_size = len(image_bytes)
+            mlflow.log_metric("image_size_bytes", image_size)
 
-            if detections:
-                # Get the detection with highest confidence
-                best_detection = max(detections, key=lambda x: x["confidence"])
-                disease_name = best_detection["class_name"].replace("_", " ").title()
-                confidence = best_detection["confidence"]
+            # Try YOLO detection
+            detector = get_yolo_detector()
+            if detector is not None:
+                detections = detector.detect_from_bytes(image_bytes)
+                
+                # Log detection metrics
+                mlflow.log_metric("detections_count", len(detections) if detections else 0)
+                mlflow.log_metric("yolo_available", 1.0)
 
-                # Get recommendations based on detected disease
-                recommendations = _get_recommendations_for_disease(disease_name)
+                if detections:
+                    # Get the detection with highest confidence
+                    best_detection = max(detections, key=lambda x: x["confidence"])
+                    disease_name = best_detection["class_name"].replace("_", " ").title()
+                    confidence = best_detection["confidence"]
+                    
+                    # Log metrics
+                    mlflow.log_metrics({
+                        "detection_confidence": confidence,
+                        "analysis_success": 1.0
+                    })
+                    mlflow.set_tags({
+                        "disease_detected": disease_name,
+                        "analysis_method": "yolo"
+                    })
+                    
+                    # Get recommendations based on detected disease
+                    recommendations = _get_recommendations_for_disease(disease_name)
 
-                return {
-                    "success": True,
-                    "filename": file.filename,
-                    "disease_detected": True,
-                    "disease_name": disease_name,
-                    "confidence": round(confidence, 3),
-                    "detections": detections,
-                    "recommendations": recommendations,
-                    "message": "Image analyzed successfully with YOLO model"
-                }
+                    return {
+                        "success": True,
+                        "filename": file.filename,
+                        "disease_detected": True,
+                        "disease_name": disease_name,
+                        "confidence": round(confidence, 3),
+                        "detections": detections,
+                        "recommendations": recommendations,
+                        "message": "Image analyzed successfully with YOLO model"
+                    }
+                else:
+                    # No detections found
+                    mlflow.log_metrics({
+                        "analysis_success": 0.0,
+                        "detections_count": 0,
+                        "detection_confidence": 0.0
+                    })
+                    processing_time = (datetime.now(timezone.utc) - start_time).total_seconds()
+                    mlflow.log_metric("processing_time_seconds", processing_time)
+                    mlflow.set_tags({
+                        "disease_detected": "none",
+                        "analysis_method": "yolo"
+                    })
+                    return {
+                        "success": True,
+                        "filename": file.filename,
+                        "disease_detected": False,
+                        "disease_name": None,
+                        "confidence": 0.0,
+                        "message": "No disease detected in the image"
+                    }
             else:
+                # Fallback response when YOLO is not available
+                logger.warning("YOLO detector not available, returning fallback")
+                mlflow.log_metrics({
+                    "yolo_available": 0.0,
+                    "analysis_success": 0.0,
+                    "detections_count": 0
+                })
+                processing_time = (datetime.now(timezone.utc) - start_time).total_seconds()
+                mlflow.log_metric("processing_time_seconds", processing_time)
+                mlflow.set_tags({
+                    "disease_detected": "none",
+                    "analysis_method": "fallback",
+                    "yolo_available": "false"
+                })
                 return {
                     "success": True,
                     "filename": file.filename,
                     "disease_detected": False,
                     "disease_name": None,
                     "confidence": 0.0,
-                    "message": "No disease detected in the image"
+                    "message": "ML model not available. Please try again later."
                 }
-        else:
-            # Fallback response when YOLO is not available
-            logger.warning("YOLO detector not available, returning fallback")
-            return {
-                "success": True,
-                "filename": file.filename,
-                "disease_detected": False,
-                "disease_name": None,
-                "confidence": 0.0,
-                "message": "ML model not available. Please try again later."
-            }
 
     except HTTPException:
         raise
     except Exception as e:
         logger.error(f"Image analysis error: {str(e)}")
+        # Log error to MLflow
+        try:
+            with mlflow.start_run(run_name=f"image-analysis-error-{start_time.strftime('%Y%m%d-%H%M%S')}"):
+                mlflow.log_param("error", str(e))
+                mlflow.log_metric("analysis_success", 0.0)
+        except:
+            pass
         raise HTTPException(status_code=500, detail=str(e))
 
 

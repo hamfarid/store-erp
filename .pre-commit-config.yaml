@@ -1,0 +1,101 @@
+# =============================================================================
+# Pre-commit Configuration for Ai_Project Multi-Project Environment
+# =============================================================================
+# Based on CONSTITUTION.md - Code Quality Principles
+# Run: pre-commit install && pre-commit run --all-files
+# =============================================================================
+
+repos:
+  # -------------------------------------------------------------------------
+  # General Hooks
+  # -------------------------------------------------------------------------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: ['--unsafe']  # Allow custom tags in docker-compose
+      - id: check-json
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: check-case-conflict
+
+  # -------------------------------------------------------------------------
+  # Python Code Quality (Backends: Zakat, Gaara ERP, Gold Predictor, etc.)
+  # -------------------------------------------------------------------------
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.9
+    hooks:
+      - id: ruff
+        args: ['--fix', '--exit-non-zero-on-fix']
+        types_or: [python, pyi]
+      - id: ruff-format
+        types_or: [python, pyi]
+
+  # -------------------------------------------------------------------------
+  # JavaScript/TypeScript (Frontends)
+  # -------------------------------------------------------------------------
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.56.0
+    hooks:
+      - id: eslint
+        files: \.(js|jsx|ts|tsx)$
+        types: [file]
+        additional_dependencies:
+          - eslint@8.56.0
+          - eslint-config-prettier@9.1.0
+          - eslint-plugin-react@7.33.2
+          - eslint-plugin-react-hooks@4.6.0
+          - '@typescript-eslint/eslint-plugin@6.18.1'
+          - '@typescript-eslint/parser@6.18.1'
+
+  # -------------------------------------------------------------------------
+  # Docker & YAML Validation
+  # -------------------------------------------------------------------------
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint-docker
+        args: ['--ignore', 'DL3008', '--ignore', 'DL3013']
+
+  # -------------------------------------------------------------------------
+  # Security Scanning
+  # -------------------------------------------------------------------------
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        exclude: package-lock\.json|yarn\.lock|\.env\.example
+
+  # -------------------------------------------------------------------------
+  # Commit Message Linting (Conventional Commits)
+  # -------------------------------------------------------------------------
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.13.0
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+
+# =============================================================================
+# Configuration
+# =============================================================================
+default_language_version:
+  python: python3.11
+
+exclude: |
+  (?x)^(
+    .*migrations/.*|
+    .*node_modules/.*|
+    .*venv/.*|
+    .*\.git/.*|
+    .*dist/.*|
+    .*build/.*|
+    .*__pycache__/.*|
+    .*\.egg-info/.*|
+    .*global_v[^/]+/.*|
+    (^|.*/)github/.*
+  )$
+

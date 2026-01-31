@@ -1,0 +1,159 @@
+# =============================================================================
+# Promtail Configuration - Log Collection for All AI Projects
+# =============================================================================
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # ==========================================================================
+  # Docker Container Logs
+  # ==========================================================================
+  - job_name: containers
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: containerlogs
+          __path__: /var/lib/docker/containers/*/*log
+
+    pipeline_stages:
+      - json:
+          expressions:
+            output: log
+            stream: stream
+            attrs:
+      - json:
+          expressions:
+            tag:
+          source: attrs
+      - regex:
+          expression: (?P<container_name>(?:[a-zA-Z0-9][a-zA-Z0-9_.-]+))
+          source: tag
+      - labels:
+          container_name:
+          stream:
+      - output:
+          source: output
+
+  # ==========================================================================
+  # System Logs
+  # ==========================================================================
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          __path__: /var/log/*log
+
+  # ==========================================================================
+  # Nginx Access Logs
+  # ==========================================================================
+  - job_name: nginx-access
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx
+          type: access
+          __path__: /var/log/nginx/access.log
+
+    pipeline_stages:
+      - regex:
+          expression: '^(?P<remote_addr>[\d\.]+) - (?P<remote_user>\S+) \[(?P<time_local>.+)\] "(?P<method>\w+) (?P<request_uri>\S+) (?P<protocol>\S+)" (?P<status>\d+) (?P<body_bytes_sent>\d+) "(?P<http_referer>[^"]*)" "(?P<http_user_agent>[^"]*)"'
+      - labels:
+          method:
+          status:
+          request_uri:
+
+  # ==========================================================================
+  # Nginx Error Logs
+  # ==========================================================================
+  - job_name: nginx-error
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx
+          type: error
+          __path__: /var/log/nginx/error.log
+
+  # ==========================================================================
+  # Project 1: Test Projects
+  # ==========================================================================
+  - job_name: test-projects
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: test_projects
+          project_id: "1"
+          __path__: /var/lib/docker/containers/*test*/*log
+
+  # ==========================================================================
+  # Project 2: Gold Price Predictor
+  # ==========================================================================
+  - job_name: gold-predictor
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: gold_price_predictor
+          project_id: "2"
+          __path__: /var/lib/docker/containers/*gold*/*log
+
+  # ==========================================================================
+  # Project 3: Zakat
+  # ==========================================================================
+  - job_name: zakat
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: zakat
+          project_id: "3"
+          __path__: /var/lib/docker/containers/*zakat*/*log
+
+  # ==========================================================================
+  # Project 4: Scan AI
+  # ==========================================================================
+  - job_name: scan-ai
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: scan_ai_manus
+          project_id: "4"
+          __path__: /var/lib/docker/containers/*scan*/*log
+
+  # ==========================================================================
+  # Project 5: Gaara ERP
+  # ==========================================================================
+  - job_name: gaara-erp
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: gaara_erp
+          project_id: "5"
+          __path__: /var/lib/docker/containers/*gaara*/*log
+
+  # ==========================================================================
+  # Project 6: Store
+  # ==========================================================================
+  - job_name: store
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: store
+          project_id: "6"
+          __path__: /var/lib/docker/containers/*store*/*log

@@ -534,6 +534,56 @@ class ApiService {
     return this.request(`/analytics/yield-predictions${query ? `?${query}` : ''}`);
   }
 
+  // Advanced Analytics (v2.0)
+  async getAnalyticsHeatmap(period = '30d') {
+    return this.request(`/analytics/heatmap?period=${period}`);
+  }
+
+  async getComparativeAnalysis(period = '30d', compareBy = 'farm') {
+    return this.request(`/analytics/comparative?period=${period}&compare_by=${compareBy}`);
+  }
+
+  async getPredictions(farmId = null) {
+    const query = farmId ? `?farm_id=${farmId}` : '';
+    return this.request(`/analytics/predictions${query}`);
+  }
+
+  async getSummaryReport(period = '30d') {
+    return this.request(`/analytics/summary-report?period=${period}`);
+  }
+
+  // ==================
+  // AI Chatbot Endpoints
+  // ==================
+
+  async sendChatMessage(message, options = {}) {
+    return this.request('/chatbot/chat', {
+      method: 'POST',
+      body: JSON.stringify({
+        message,
+        language: options.language || 'ar',
+        context: options.context || null,
+        conversation_id: options.conversationId || null
+      })
+    });
+  }
+
+  async getChatQuickActions() {
+    return this.request('/chatbot/quick-actions');
+  }
+
+  async getDiseaseInfo(diseaseName) {
+    return this.request(`/chatbot/disease-info/${encodeURIComponent(diseaseName)}`);
+  }
+
+  async getPlantCareInfo(plantType) {
+    return this.request(`/chatbot/plant-care/${encodeURIComponent(plantType)}`);
+  }
+
+  async getChatConversation(conversationId) {
+    return this.request(`/chatbot/conversation/${conversationId}`);
+  }
+
   // ==================
   // Reports Endpoints
   // ==================

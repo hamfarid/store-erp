@@ -1,115 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Projects Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>🚀 بوابة مشاريع الذكاء الاصطناعي</title>
     <style>
-        :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: #1a1a24;
-            --accent-blue: #3b82f6;
-            --accent-green: #10b981;
-            --accent-purple: #8b5cf6;
-            --accent-orange: #f59e0b;
-            --accent-red: #ef4444;
-            --accent-cyan: #06b6d4;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --border: #2d2d3a;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             min-height: 100vh;
-            background-image: 
-                radial-gradient(ellipse at 20% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 100%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            color: #fff;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 40px 20px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease;
         }
 
         h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            font-size: 3em;
+            background: linear-gradient(90deg, #00ff88, #00d4ff, #ff00ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
         }
 
         .subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .status-bar {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        .status-dot.online { background: var(--accent-green); }
-        .status-dot.warning { background: var(--accent-orange); }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            color: #888;
+            font-size: 1.2em;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
         }
 
         .project-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            animation: fadeInUp 0.6s ease;
         }
 
         .project-card::before {
@@ -118,301 +67,327 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--card-accent), transparent);
+            height: 4px;
+            background: linear-gradient(90deg, var(--card-color), transparent);
         }
 
         .project-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--card-accent);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--card-color);
         }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+        .project-card:nth-child(1) { --card-color: #ff6b6b; animation-delay: 0.1s; }
+        .project-card:nth-child(2) { --card-color: #ffd93d; animation-delay: 0.2s; }
+        .project-card:nth-child(3) { --card-color: #6bcb77; animation-delay: 0.3s; }
+        .project-card:nth-child(4) { --card-color: #4d96ff; animation-delay: 0.4s; }
+        .project-card:nth-child(5) { --card-color: #9b59b6; animation-delay: 0.5s; }
+        .project-card:nth-child(6) { --card-color: #e74c3c; animation-delay: 0.6s; }
+
+        .project-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4em;
+            font-weight: bold;
+            opacity: 0.1;
+            color: var(--card-color);
         }
 
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--card-accent), transparent);
+        .project-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--card-color);
         }
 
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .card-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
+        .project-desc {
+            color: #aaa;
+            margin-bottom: 20px;
             line-height: 1.6;
         }
 
-        .ports-list {
+        .ports-info {
             display: flex;
+            gap: 15px;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
 
         .port-badge {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
             border-radius: 20px;
-            color: var(--text-secondary);
+            font-size: 0.85em;
+            font-family: monospace;
         }
 
-        .card-actions {
+        .port-badge span {
+            color: var(--card-color);
+            font-weight: bold;
+        }
+
+        .project-links {
             display: flex;
-            gap: 0.75rem;
+            gap: 10px;
         }
 
         .btn {
             flex: 1;
-            padding: 0.75rem 1rem;
+            padding: 12px 20px;
             border: none;
-            border-radius: 8px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 500;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            font-size: 0.95em;
             text-decoration: none;
             text-align: center;
-            font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
 
         .btn-primary {
-            background: var(--card-accent);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            filter: brightness(1.1);
-            transform: scale(1.02);
+            background: var(--card-color);
+            color: #fff;
         }
 
         .btn-secondary {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .btn-secondary:hover {
-            background: var(--border);
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Card accent colors */
-        .card-gold { --card-accent: var(--accent-orange); }
-        .card-zakat { --card-accent: var(--accent-green); }
-        .card-gaara { --card-accent: var(--accent-cyan); }
-        .card-erp { --card-accent: var(--accent-purple); }
-        .card-security { --card-accent: var(--accent-red); }
-        .card-ml { --card-accent: var(--accent-blue); }
-        .card-portainer { --card-accent: #13bee0; }
-        .card-vscode { --card-accent: #007acc; }
+        .tools-section {
+            margin-top: 30px;
+        }
+
+        .tools-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00ff88;
+            font-size: 2em;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .tool-card {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .tool-card:hover {
+            background: rgba(0, 255, 136, 0.2);
+            transform: scale(1.05);
+        }
+
+        .tool-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .tool-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .tool-port {
+            color: #00ff88;
+            font-family: monospace;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         footer {
             text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         @media (max-width: 768px) {
-            .container { padding: 1rem; }
-            h1 { font-size: 2rem; }
+            h1 { font-size: 2em; }
             .projects-grid { grid-template-columns: 1fr; }
+            .project-number { font-size: 3em; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🚀 AI Projects Dashboard</h1>
-            <p class="subtitle">Unified Gateway to All Development Projects</p>
-            <div class="status-bar">
-                <div class="status-item">
-                    <span class="status-dot online"></span>
-                    <span>Nginx Gateway: Active</span>
-                </div>
-                <div class="status-item">
-                    <span class="status-dot online"></span>
-                    <span>Docker: Running</span>
-                </div>
-                <div class="status-item">
-                    <span class="status-dot online"></span>
-                    <span id="time"></span>
-                </div>
-            </div>
+            <h1>🚀 بوابة مشاريع الذكاء الاصطناعي</h1>
+            <p class="subtitle">6 مشاريع متكاملة | نظام مراقبة موحد | بنية تحتية احترافية</p>
         </header>
 
         <div class="projects-grid">
-            <!-- Gold Predictor -->
-            <div class="project-card card-gold">
-                <div class="card-header">
-                    <div class="card-icon">💰</div>
-                    <h2 class="card-title">Gold Price Predictor</h2>
+            <!-- Project 1: Test Projects -->
+            <div class="project-card">
+                <span class="project-number">1</span>
+                <h3 class="project-title">🧪 مشاريع الاختبار</h3>
+                <p class="project-desc">بيئة اختبار للمشاريع التجريبية والتطوير السريع</p>
+                <div class="ports-info">
+                    <div class="port-badge">Backend: <span>1001</span></div>
+                    <div class="port-badge">Frontend: <span>1501</span></div>
                 </div>
-                <p class="card-description">ML-powered gold price prediction with technical analysis, fear-greed index, and AI insights.</p>
-                <div class="ports-list">
-                    <span class="port-badge">Frontend: 2506</span>
-                    <span class="port-badge">API: 2505</span>
-                    <span class="port-badge">ML: 2105</span>
-                </div>
-                <div class="card-actions">
-                    <a href="http://localhost:8080" class="btn btn-primary" target="_blank">Open App</a>
-                    <a href="http://localhost:2506" class="btn btn-secondary" target="_blank">Direct</a>
+                <div class="project-links">
+                    <a href="/test/" class="btn btn-primary">فتح المشروع</a>
+                    <a href="http://localhost:8085" class="btn btn-secondary">وصول مباشر</a>
                 </div>
             </div>
 
-            <!-- Zakat Charity System -->
-            <div class="project-card card-zakat">
-                <div class="card-header">
-                    <div class="card-icon">🕌</div>
-                    <h2 class="card-title">Zakat Charity System</h2>
+            <!-- Project 2: Gold Price Predictor -->
+            <div class="project-card">
+                <span class="project-number">2</span>
+                <h3 class="project-title">💰 متنبئ أسعار الذهب</h3>
+                <p class="project-desc">نظام تنبؤ بأسعار الذهب باستخدام التعلم الآلي والذكاء الاصطناعي</p>
+                <div class="ports-info">
+                    <div class="port-badge">Backend: <span>2001</span></div>
+                    <div class="port-badge">Frontend: <span>2501</span></div>
+                    <div class="port-badge">ML: <span>2101</span></div>
+                    <div class="port-badge">AI: <span>2601</span></div>
                 </div>
-                <p class="card-description">Complete charity management with beneficiaries, aids, treasury, and Arabic RTL support.</p>
-                <div class="ports-list">
-                    <span class="port-badge">Frontend: 3505</span>
-                    <span class="port-badge">Backend: 3005</span>
-                </div>
-                <div class="card-actions">
-                    <a href="http://localhost:8081" class="btn btn-primary" target="_blank">Open App</a>
-                    <a href="http://localhost:3505" class="btn btn-secondary" target="_blank">Direct</a>
-                </div>
-            </div>
-
-            <!-- Gaara Scan AI -->
-            <div class="project-card card-gaara">
-                <div class="card-header">
-                    <div class="card-icon">🌱</div>
-                    <h2 class="card-title">Gaara Scan AI</h2>
-                </div>
-                <p class="card-description">Agricultural AI platform with disease diagnosis, crop management, and sensor monitoring.</p>
-                <div class="ports-list">
-                    <span class="port-badge">Frontend: 1505</span>
-                    <span class="port-badge">Backend: 1005</span>
-                    <span class="port-badge">PostgreSQL: 1605</span>
-                </div>
-                <div class="card-actions">
-                    <a href="http://localhost:8082" class="btn btn-primary" target="_blank">Open App</a>
-                    <a href="http://localhost:1505" class="btn btn-secondary" target="_blank">Direct</a>
+                <div class="project-links">
+                    <a href="/gold/" class="btn btn-primary">فتح المشروع</a>
+                    <a href="http://localhost:8080" class="btn btn-secondary">وصول مباشر</a>
                 </div>
             </div>
 
-            <!-- Gaara ERP -->
-            <div class="project-card card-erp">
-                <div class="card-header">
-                    <div class="card-icon">📊</div>
-                    <h2 class="card-title">Gaara ERP v12</h2>
+            <!-- Project 3: Zakat -->
+            <div class="project-card">
+                <span class="project-number">3</span>
+                <h3 class="project-title">🕌 نظام الزكاة</h3>
+                <p class="project-desc">نظام متكامل لحساب وإدارة الزكاة والصدقات</p>
+                <div class="ports-info">
+                    <div class="port-badge">Backend: <span>3001</span></div>
+                    <div class="port-badge">Frontend: <span>3501</span></div>
                 </div>
-                <p class="card-description">Enterprise resource planning with 180 Django models, AI integration, and full business modules.</p>
-                <div class="ports-list">
-                    <span class="port-badge">Frontend: 3505</span>
-                    <span class="port-badge">Backend: 9551</span>
-                    <span class="port-badge">Redis: 9651</span>
-                </div>
-                <div class="card-actions">
-                    <a href="http://localhost:8083" class="btn btn-primary" target="_blank">Open App</a>
-                    <a href="http://localhost:9551" class="btn btn-secondary" target="_blank">Direct</a>
+                <div class="project-links">
+                    <a href="/zakat/" class="btn btn-primary">فتح المشروع</a>
+                    <a href="http://localhost:8081" class="btn btn-secondary">وصول مباشر</a>
                 </div>
             </div>
 
-            <!-- Security Dashboard -->
-            <div class="project-card card-security">
-                <div class="card-header">
-                    <div class="card-icon">🛡️</div>
-                    <h2 class="card-title">Security Testing Dashboard</h2>
+            <!-- Project 4: Scan AI -->
+            <div class="project-card">
+                <span class="project-number">4</span>
+                <h3 class="project-title">🔬 Scan AI - تشخيص الأمراض</h3>
+                <p class="project-desc">نظام ذكاء اصطناعي لتشخيص أمراض المحاصيل من الصور</p>
+                <div class="ports-info">
+                    <div class="port-badge">Backend: <span>4001</span></div>
+                    <div class="port-badge">Frontend: <span>4501</span></div>
+                    <div class="port-badge">ML: <span>4101</span></div>
+                    <div class="port-badge">AI: <span>4601</span></div>
                 </div>
-                <p class="card-description">Comprehensive security testing with 67 tests, Playwright E2E, and Arabic interface.</p>
-                <div class="ports-list">
-                    <span class="port-badge">Frontend: 1051</span>
-                    <span class="port-badge">Backend: 4005</span>
-                </div>
-                <div class="card-actions">
-                    <a href="http://localhost:8084" class="btn btn-primary" target="_blank">Open App</a>
-                    <a href="http://localhost:1051" class="btn btn-secondary" target="_blank">Direct</a>
-                </div>
-            </div>
-
-            <!-- ML Platform -->
-            <div class="project-card card-ml">
-                <div class="card-header">
-                    <div class="card-icon">🤖</div>
-                    <h2 class="card-title">ML Platform</h2>
-                </div>
-                <p class="card-description">Machine learning platform with MLFlow, Flower task queue, and RAG service.</p>
-                <div class="ports-list">
-                    <span class="port-badge">API: 8000</span>
-                    <span class="port-badge">MLFlow: 5000</span>
-                    <span class="port-badge">Flower: 5555</span>
-                    <span class="port-badge">RAG: 8003</span>
-                </div>
-                <div class="card-actions">
-                    <a href="http://localhost:8085" class="btn btn-primary" target="_blank">Open App</a>
-                    <a href="http://localhost:8000" class="btn btn-secondary" target="_blank">Direct</a>
+                <div class="project-links">
+                    <a href="/scan/" class="btn btn-primary">فتح المشروع</a>
+                    <a href="http://localhost:8082" class="btn btn-secondary">وصول مباشر</a>
                 </div>
             </div>
 
-            <!-- Portainer -->
-            <div class="project-card card-portainer">
-                <div class="card-header">
-                    <div class="card-icon">🐳</div>
-                    <h2 class="card-title">Portainer</h2>
+            <!-- Project 5: Gaara ERP -->
+            <div class="project-card">
+                <span class="project-number">5</span>
+                <h3 class="project-title">🏢 Gaara ERP</h3>
+                <p class="project-desc">نظام تخطيط موارد المؤسسات الشامل</p>
+                <div class="ports-info">
+                    <div class="port-badge">Backend: <span>5001</span></div>
+                    <div class="port-badge">Frontend: <span>5501</span></div>
+                    <div class="port-badge">DB: <span>10502</span></div>
                 </div>
-                <p class="card-description">Docker container management and monitoring interface.</p>
-                <div class="ports-list">
-                    <span class="port-badge">UI: 9000</span>
-                </div>
-                <div class="card-actions">
-                    <a href="http://localhost:8086" class="btn btn-primary" target="_blank">Open App</a>
-                    <a href="http://localhost:9000" class="btn btn-secondary" target="_blank">Direct</a>
+                <div class="project-links">
+                    <a href="/erp/" class="btn btn-primary">فتح المشروع</a>
+                    <a href="http://localhost:8083" class="btn btn-secondary">وصول مباشر</a>
                 </div>
             </div>
 
-            <!-- OpenVSCode -->
-            <div class="project-card card-vscode">
-                <div class="card-header">
-                    <div class="card-icon">💻</div>
-                    <h2 class="card-title">OpenVSCode Server</h2>
+            <!-- Project 6: Store -->
+            <div class="project-card">
+                <span class="project-number">6</span>
+                <h3 class="project-title">🏪 نظام المخزون</h3>
+                <p class="project-desc">نظام إدارة المخزون والمبيعات</p>
+                <div class="ports-info">
+                    <div class="port-badge">Backend: <span>6001</span></div>
+                    <div class="port-badge">Frontend: <span>6501</span></div>
+                    <div class="port-badge">DB: <span>12502</span></div>
                 </div>
-                <p class="card-description">Browser-based VS Code instance for remote development.</p>
-                <div class="ports-list">
-                    <span class="port-badge">UI: 57081</span>
-                </div>
-                <div class="card-actions">
-                    <a href="http://localhost:8087" class="btn btn-primary" target="_blank">Open App</a>
-                    <a href="http://localhost:57081" class="btn btn-secondary" target="_blank">Direct</a>
+                <div class="project-links">
+                    <a href="/store/" class="btn btn-primary">فتح المشروع</a>
+                    <a href="http://localhost:8084" class="btn btn-secondary">وصول مباشر</a>
                 </div>
             </div>
         </div>
 
+        <div class="tools-section">
+            <h2>🛠️ أدوات الإدارة والمراقبة</h2>
+            <div class="tools-grid">
+                <a href="http://localhost:3000" class="tool-card">
+                    <div class="tool-icon">📊</div>
+                    <div class="tool-name">Grafana</div>
+                    <div class="tool-port">:3000</div>
+                </a>
+                <a href="http://localhost:9090" class="tool-card">
+                    <div class="tool-icon">📈</div>
+                    <div class="tool-name">Prometheus</div>
+                    <div class="tool-port">:9090</div>
+                </a>
+                <a href="http://localhost:9093" class="tool-card">
+                    <div class="tool-icon">🔔</div>
+                    <div class="tool-name">Alertmanager</div>
+                    <div class="tool-port">:9093</div>
+                </a>
+                <a href="http://localhost:9000" class="tool-card">
+                    <div class="tool-icon">🐳</div>
+                    <div class="tool-name">Portainer</div>
+                    <div class="tool-port">:9000</div>
+                </a>
+                <a href="http://localhost:8088" class="tool-card">
+                    <div class="tool-icon">📦</div>
+                    <div class="tool-name">cAdvisor</div>
+                    <div class="tool-port">:8088</div>
+                </a>
+                <a href="http://localhost:8181" class="tool-card">
+                    <div class="tool-icon">⚙️</div>
+                    <div class="tool-name">Nginx Config</div>
+                    <div class="tool-port">:8181</div>
+                </a>
+            </div>
+        </div>
+
         <footer>
-            <p>AI Projects Gateway • Nginx Reverse Proxy • Built with ❤️</p>
+            <p>🚀 AI Projects Gateway | آخر تحديث: 2026-01-19 | الشبكة: Ai_project</p>
         </footer>
     </div>
-
-    <script>
-        function updateTime() {
-            const now = new Date();
-            document.getElementById('time').textContent = now.toLocaleString();
-        }
-        updateTime();
-        setInterval(updateTime, 1000);
-    </script>
 </body>
 </html>

@@ -285,6 +285,7 @@ def get_current_user(
 # Routes
 @router.post("/register", response_model=TokenResponse,
              status_code=status.HTTP_201_CREATED)
+@limiter.limit("3/hour")
 async def register(
     request: Request,
     response: Response,
@@ -343,6 +344,7 @@ async def register(
 
 
 @router.post("/login", response_model=LoginResponse)
+@limiter.limit("5/minute")
 async def login(
     request: Request,
     response: Response,
@@ -351,7 +353,7 @@ async def login(
 ):
     """
     Login user - Rate limited: 5 per minute
-    
+
     Security Features:
     - Account lockout after failed attempts
     - Tracks failed login attempts
@@ -360,7 +362,6 @@ async def login(
     from ...services.lockout_service import LockoutService
     
     settings = get_settings()
-    lockout_service = LockoutService(db)
     
     if settings.DEBUG:
         logger.info("[DEBUG] login() handler reached; response param type=%s", type(response))
@@ -370,16 +371,17 @@ async def login(
 
     # Check if account is locked (if user exists)
     if user:
-        is_locked, lockout_info = lockout_service.check_lockout(user)
-        if is_locked:
+        if LockoutService.is_locked(user):
+            remaining_seconds = LockoutService.get_lockout_remaining(user)
+            locked_until = user.locked_until.isoformat() if user.locked_until else None
             logger.warning(f"[SECURITY] Blocked login attempt for locked account: {login_data.username}")
             raise HTTPException(
                 status_code=status.HTTP_423_LOCKED,
                 detail={
                     "message": "Account is temporarily locked due to too many failed login attempts",
                     "message_ar": "الحساب مقفل مؤقتاً بسبب محاولات تسجيل دخول فاشلة متعددة",
-                    "locked_until": lockout_info.get("locked_until"),
-                    "remaining_seconds": lockout_info.get("remaining_seconds")
+                    "locked_until": locked_until,
+                    "remaining_seconds": remaining_seconds
                 }
             )
 
@@ -387,11 +389,11 @@ async def login(
     if not user or not verify_password(login_data.password, user.password_hash):
         # Record failed attempt if user exists
         if user:
-            lockout_service.record_failed_attempt(user)
-            remaining = settings.MAX_LOGIN_ATTEMPTS - user.failed_login_attempts if hasattr(settings, 'MAX_LOGIN_ATTEMPTS') else 5 - user.failed_login_attempts
+            is_now_locked = LockoutService.record_failed_attempt(db, user)
+            remaining = LockoutService.get_attempts_remaining(user)
             logger.warning(f"[SECURITY] Failed login attempt for {login_data.username}. Attempts: {user.failed_login_attempts}")
             
-            if remaining <= 0:
+            if is_now_locked:
                 raise HTTPException(
                     status_code=status.HTTP_423_LOCKED,
                     detail={
@@ -415,7 +417,7 @@ async def login(
 
     # Clear lockout on successful login
     client_ip = request.headers.get('X-Forwarded-For', request.client.host if request.client else 'unknown')
-    lockout_service.record_successful_login(user, client_ip)
+    LockoutService.reset_attempts(db, user)
     
     # Check MFA if enabled
     if user.mfa_enabled:
@@ -447,6 +449,7 @@ async def login(
 
 
 @router.post("/forgot-password", response_model=MessageResponse)
+@limiter.limit("3/hour")
 async def forgot_password(
     request: Request,
     response: Response,
@@ -482,6 +485,7 @@ async def forgot_password(
 
 
 @router.post("/reset-password", response_model=MessageResponse)
+@limiter.limit("5/hour")
 async def reset_password(
         request: Request,
         response: Response,
@@ -634,11 +638,13 @@ async def setup_mfa_endpoint(
 
 
 @router.post("/mfa/enable")
+@limiter.limit("10/minute")
 async def enable_mfa(
+        request: Request,
         mfa_token: str,
         current_user: User = Depends(get_current_user),
         db: Session = Depends(get_db)):
-    """Enable MFA for current user"""
+    """Enable MFA for current user - Rate limited: 10 per minute"""
 
     if not current_user.mfa_secret:
         raise HTTPException(

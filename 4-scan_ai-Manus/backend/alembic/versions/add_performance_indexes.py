@@ -14,7 +14,7 @@ import sqlalchemy as sa
 
 # revision identifiers
 revision = 'add_performance_indexes'
-down_revision = None  # Update this to your last migration
+down_revision = 'ec23a0c0d692'  # Link to initial migration
 branch_labels = None
 depends_on = None
 
@@ -234,6 +234,39 @@ def upgrade():
         unique=False
     )
 
+    # ===== Notifications Table =====
+    op.create_index(
+        'ix_notifications_user_id',
+        'notifications',
+        ['user_id'],
+        unique=False
+    )
+    op.create_index(
+        'ix_notifications_is_read',
+        'notifications',
+        ['is_read'],
+        unique=False
+    )
+    op.create_index(
+        'ix_notifications_created_at',
+        'notifications',
+        ['created_at'],
+        unique=False
+    )
+    op.create_index(
+        'ix_notifications_deleted_at',
+        'notifications',
+        ['deleted_at'],
+        unique=False
+    )
+    # Composite index for common query: unread notifications by user
+    op.create_index(
+        'ix_notifications_user_unread',
+        'notifications',
+        ['user_id', 'is_read', 'deleted_at'],
+        unique=False
+    )
+
 
 def downgrade():
     """Remove performance indexes"""
@@ -290,3 +323,10 @@ def downgrade():
     # Companies
     op.drop_index('ix_companies_type', table_name='companies')
     op.drop_index('ix_companies_deleted_at', table_name='companies')
+
+    # Notifications
+    op.drop_index('ix_notifications_user_id', table_name='notifications')
+    op.drop_index('ix_notifications_is_read', table_name='notifications')
+    op.drop_index('ix_notifications_created_at', table_name='notifications')
+    op.drop_index('ix_notifications_deleted_at', table_name='notifications')
+    op.drop_index('ix_notifications_user_unread', table_name='notifications')

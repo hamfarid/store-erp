@@ -6,7 +6,7 @@
 # ==========================================
 # Stage 1: Builder - Build React app
 # ==========================================
-FROM node:20-alpine as builder
+FROM node:20-alpine AS builder
 
 # Set build arguments
 ARG BUILD_DATE
@@ -15,9 +15,8 @@ ARG VERSION=4.3.1
 ARG VITE_API_URL=http://localhost:4001/api
 ARG VITE_UPLOAD_URL=http://localhost:4001/uploads
 
-# Set environment variables
-ENV NODE_ENV=production \
-    VITE_API_URL=${VITE_API_URL} \
+# Set environment variables (keep NODE_ENV as development during build for devDependencies)
+ENV VITE_API_URL=${VITE_API_URL} \
     VITE_UPLOAD_URL=${VITE_UPLOAD_URL}
 
 # Install build dependencies
@@ -46,7 +45,7 @@ RUN npm run build && \
 # ==========================================
 # Stage 2: Production - Nginx server
 # ==========================================
-FROM nginx:1.25-alpine as production
+FROM nginx:1.25-alpine AS production
 
 # Set build arguments
 ARG BUILD_DATE

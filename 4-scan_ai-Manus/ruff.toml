@@ -1,0 +1,20 @@
+# =============================================================================
+# Ruff Configuration for Scan AI (Gaara Scan)
+# =============================================================================
+# Extends the root ruff.toml configuration
+# =============================================================================
+
+extend = "../ruff.toml"
+
+# Project-specific overrides
+[lint]
+# FastAPI-specific ignores
+extend-ignore = ["E402", "B008"]  # B008 for FastAPI Depends()
+
+[lint.isort]
+known-first-party = ["src", "backend", "api", "core", "models", "services"]
+
+[lint.per-file-ignores]
+"*/migrations/*.py" = ["E501", "ERA001"]
+"backend/src/api/*.py" = ["B008"]  # FastAPI Depends
+

@@ -1,0 +1,118 @@
+# =============================================================================
+# Alertmanager Configuration - Unified Alert Handling
+# =============================================================================
+
+global:
+  # The smarthost for SMTP relay
+  # smtp_smarthost: 'smtp.gmail.com:587'
+  # smtp_from: 'alertmanager@aiprojects.local'
+  # smtp_auth_username: 'your-email@gmail.com'
+  # smtp_auth_password: 'your-app-password'
+  resolve_timeout: 5m
+
+# Route configuration
+route:
+  # Default receiver
+  receiver: 'default-receiver'
+  
+  # Group alerts by these labels
+  group_by: ['alertname', 'project', 'severity']
+  
+  # Wait time before sending first notification
+  group_wait: 30s
+  
+  # Wait time before sending updates
+  group_interval: 5m
+  
+  # Wait time before resending
+  repeat_interval: 4h
+  
+  # Child routes
+  routes:
+    # Critical alerts - immediate notification
+    - match:
+        severity: critical
+      receiver: 'critical-alerts'
+      group_wait: 10s
+      group_interval: 1m
+      repeat_interval: 1h
+    
+    # High priority alerts
+    - match:
+        severity: high
+      receiver: 'high-priority'
+      group_wait: 30s
+      repeat_interval: 2h
+    
+    # Project-specific routes
+    - match:
+        project: gold_price_predictor
+      receiver: 'gold-predictor-team'
+    
+    - match:
+        project: scan_ai_manus
+      receiver: 'scan-ai-team'
+    
+    - match:
+        project: gaara_erp
+      receiver: 'erp-team'
+
+# Inhibition rules - prevent redundant alerts
+inhibit_rules:
+  # If a critical alert is firing, inhibit warnings for the same alertname
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'project']
+
+# Receivers configuration
+receivers:
+  # Default receiver - null (no action until webhook endpoints are configured)
+  - name: 'default-receiver'
+    # Webhook disabled until proper endpoint is set up
+    # webhook_configs:
+    #   - url: 'http://your-webhook-endpoint/api/alerts'
+    #     send_resolved: true
+
+  # Critical alerts receiver
+  - name: 'critical-alerts'
+    # Webhook disabled until proper endpoint is set up
+    # webhook_configs:
+    #   - url: 'http://your-webhook-endpoint/api/alerts/critical'
+    #     send_resolved: true
+    # Uncomment for email notifications
+    # email_configs:
+    #   - to: 'admin@aiprojects.local'
+    #     send_resolved: true
+
+  # High priority alerts
+  - name: 'high-priority'
+    # Webhook disabled until proper endpoint is set up
+    # webhook_configs:
+    #   - url: 'http://your-webhook-endpoint/api/alerts/high'
+    #     send_resolved: true
+
+  # Project-specific receivers
+  - name: 'gold-predictor-team'
+    # Webhook disabled until proper endpoint is set up
+    # webhook_configs:
+    #   - url: 'http://your-webhook-endpoint/api/alerts/gold'
+    #     send_resolved: true
+
+  - name: 'scan-ai-team'
+    # Webhook disabled until proper endpoint is set up
+    # webhook_configs:
+    #   - url: 'http://your-webhook-endpoint/api/alerts/scan'
+    #     send_resolved: true
+
+  - name: 'erp-team'
+    # Webhook disabled until proper endpoint is set up
+    # webhook_configs:
+    #   - url: 'http://your-webhook-endpoint/api/alerts/erp'
+    #     send_resolved: true
+
+# Templates for notification messages
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+

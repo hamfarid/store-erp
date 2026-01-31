@@ -111,7 +111,8 @@ class BasicModel(db.Model):
         }}
     '''
 
-    def fix_broken_file(file_path):
+
+def fix_broken_file(file_path):
     """إصلاح ملف معطوب بإنشاء نسخة أساسية تعمل"""
     try:
         filename = file_path.replace('.py', '')
@@ -130,7 +131,8 @@ class BasicModel(db.Model):
         print(f"❌ خطأ في إصلاح {file_path}: {e}")
         return False
 
-    def test_file(file_path):
+
+def test_file(file_path):
     """اختبار ملف للتأكد من عمله"""
     try:
         import importlib.util

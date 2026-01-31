@@ -1,0 +1,187 @@
+# =============================================================================
+# Prometheus Alert Rules - All AI Projects
+# =============================================================================
+
+groups:
+  # ==========================================================================
+  # INFRASTRUCTURE ALERTS
+  # ==========================================================================
+  - name: infrastructure
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage on {{ $labels.instance }}"
+          description: "CPU usage is above 80% for more than 5 minutes"
+
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage on {{ $labels.instance }}"
+          description: "Memory usage is above 85%"
+
+      - alert: DiskSpaceLow
+        expr: (node_filesystem_avail_bytes{fstype!="tmpfs"} / node_filesystem_size_bytes) * 100 < 15
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Low disk space on {{ $labels.instance }}"
+          description: "Disk space is below 15%"
+
+  # ==========================================================================
+  # CONTAINER ALERTS
+  # ==========================================================================
+  - name: containers
+    rules:
+      - alert: ContainerDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Container {{ $labels.job }} is down"
+          description: "Container {{ $labels.instance }} has been down for more than 1 minute"
+
+      - alert: ContainerHighCPU
+        expr: rate(container_cpu_usage_seconds_total{name!=""}[5m]) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU in container {{ $labels.name }}"
+          description: "Container CPU usage is above 80%"
+
+      - alert: ContainerHighMemory
+        expr: container_memory_usage_bytes{name!=""} / container_spec_memory_limit_bytes * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory in container {{ $labels.name }}"
+          description: "Container memory usage is above 80%"
+
+      - alert: ContainerRestarting
+        expr: increase(container_last_seen{name!=""}[1h]) > 3
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container {{ $labels.name }} restarting frequently"
+          description: "Container has restarted more than 3 times in the last hour"
+
+  # ==========================================================================
+  # PROJECT-SPECIFIC ALERTS
+  # ==========================================================================
+  - name: projects
+    rules:
+      # Backend health alerts
+      - alert: BackendServiceDown
+        expr: up{service="backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Backend service down for {{ $labels.project }}"
+          description: "Backend service for project {{ $labels.project }} is not responding"
+
+      # Frontend health alerts
+      - alert: FrontendServiceDown
+        expr: up{service="frontend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Frontend service down for {{ $labels.project }}"
+          description: "Frontend service for project {{ $labels.project }} is not responding"
+
+      # ML service alerts
+      - alert: MLServiceDown
+        expr: up{service="ml"} == 0
+        for: 2m
+        labels:
+          severity: high
+        annotations:
+          summary: "ML service down for {{ $labels.project }}"
+          description: "ML service for project {{ $labels.project }} is not responding"
+
+      # AI service alerts
+      - alert: AIServiceDown
+        expr: up{service="ai"} == 0
+        for: 2m
+        labels:
+          severity: high
+        annotations:
+          summary: "AI service down for {{ $labels.project }}"
+          description: "AI service for project {{ $labels.project }} is not responding"
+
+      # Database alerts
+      - alert: DatabaseConnectionFailed
+        expr: up{service="database"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Database connection failed for {{ $labels.project }}"
+          description: "Cannot connect to database for project {{ $labels.project }}"
+
+      # Redis alerts
+      - alert: RedisDown
+        expr: up{service="redis"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Redis down for {{ $labels.project }}"
+          description: "Redis cache service for project {{ $labels.project }} is not responding"
+
+  # ==========================================================================
+  # GOLD PREDICTOR SPECIFIC ALERTS
+  # ==========================================================================
+  - name: gold-predictor
+    rules:
+      - alert: GoldPredictorMLLatencyHigh
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="gold-ml"}[5m])) > 10
+        for: 5m
+        labels:
+          severity: warning
+          project: gold_price_predictor
+        annotations:
+          summary: "High ML prediction latency"
+          description: "95th percentile latency for ML predictions is above 10 seconds"
+
+  # ==========================================================================
+  # SCAN AI SPECIFIC ALERTS
+  # ==========================================================================
+  - name: scan-ai
+    rules:
+      - alert: ScanAIImageProcessingFailed
+        expr: increase(scan_ai_image_processing_errors_total[5m]) > 10
+        for: 5m
+        labels:
+          severity: warning
+          project: scan_ai_manus
+        annotations:
+          summary: "High image processing error rate"
+          description: "More than 10 image processing errors in the last 5 minutes"
+
+  # ==========================================================================
+  # GAARA ERP SPECIFIC ALERTS
+  # ==========================================================================
+  - name: gaara-erp
+    rules:
+      - alert: GaaraERPCeleryQueueHigh
+        expr: celery_task_queue_length > 100
+        for: 5m
+        labels:
+          severity: warning
+          project: gaara_erp
+        annotations:
+          summary: "High Celery task queue"
+          description: "More than 100 tasks in Celery queue"

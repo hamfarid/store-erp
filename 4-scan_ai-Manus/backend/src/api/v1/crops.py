@@ -61,6 +61,9 @@ class CropUpdate(BaseModel):
     image_url: Optional[str] = None
 
 
+CropPartialUpdate = CropUpdate
+
+
 class CropResponse(BaseModel):
     id: int
     name: str
@@ -166,6 +169,65 @@ async def get_crops(
     return CropListResponse(success=True, data=response_crops, total=total)
 
 
+@router.get("/search", response_model=List[CropResponse])
+async def search_crops(
+    query: str = Query(..., min_length=2),
+    category: Optional[str] = None,
+    water_needs: Optional[str] = None,
+    skip: int = 0,
+    limit: int = 20,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Advanced search for crops"""
+    query_obj = db.query(Crop).filter(Crop.deleted_at.is_(None))
+
+    if query:
+        query_obj = query_obj.filter(
+            or_(
+                Crop.name.ilike(f"%{query}%"),
+                Crop.name_en.ilike(f"%{query}%"),
+                Crop.scientific_name.ilike(f"%{query}%"),
+                Crop.description.ilike(f"%{query}%")
+            )
+        )
+    
+    if category:
+        query_obj = query_obj.filter(Crop.category == category)
+        
+    if water_needs:
+        query_obj = query_obj.filter(Crop.water_needs == water_needs)
+
+    crops = query_obj.offset(skip).limit(limit).all()
+
+    # Convert to response format
+    response_crops = []
+    for crop in crops:
+        # Re-use logic or manually map. Manual map for now to be safe.
+        crop_dict = {
+            "id": crop.id,
+            "name": crop.name,
+            "name_en": crop.name_en,
+            "scientific_name": crop.scientific_name,
+            "category": crop.category,
+            "growing_season": crop.growing_season,
+            "water_needs": crop.water_needs,
+            "sunlight_needs": crop.sunlight_needs,
+            "temperature_min": crop.temperature_min,
+            "temperature_max": crop.temperature_max,
+            "growth_duration": crop.growth_duration,
+            "description": crop.description,
+            "care_tips": crop.care_tips,
+            "common_diseases": parse_diseases(crop.common_diseases),
+            "image_url": crop.image_url,
+            "created_at": crop.created_at,
+            "updated_at": crop.updated_at
+        }
+        response_crops.append(CropResponse(**crop_dict))
+
+    return response_crops
+
+
 @router.get("/{crop_id}", response_model=CropResponse)
 async def get_crop(
     crop_id: int,
@@ -262,6 +324,55 @@ async def create_crop(
     )
 
 
+@router.patch("/{crop_id}", response_model=CropResponse)
+async def update_crop_partial(
+    crop_id: int,
+    crop_update: CropPartialUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Partial update of crop data"""
+    crop = db.query(Crop).filter(
+        Crop.id == crop_id,
+        Crop.deleted_at.is_(None)
+    ).first()
+
+    if not crop:
+        raise HTTPException(status_code=404, detail="Crop not found")
+
+    update_data = crop_update.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        if field == "common_diseases" and value is not None:
+             value = json.dumps(value)
+        setattr(crop, field, value)
+
+    crop.updated_at = datetime.utcnow()
+
+    db.commit()
+    db.refresh(crop)
+
+    # Return with parsed diseases
+    return CropResponse(
+        id=crop.id,
+        name=crop.name,
+        name_en=crop.name_en,
+        scientific_name=crop.scientific_name,
+        category=crop.category,
+        growing_season=crop.growing_season,
+        water_needs=crop.water_needs,
+        sunlight_needs=crop.sunlight_needs,
+        temperature_min=crop.temperature_min,
+        temperature_max=crop.temperature_max,
+        growth_duration=crop.growth_duration,
+        description=crop.description,
+        care_tips=crop.care_tips,
+        common_diseases=parse_diseases(crop.common_diseases),
+        image_url=crop.image_url,
+        created_at=crop.created_at,
+        updated_at=crop.updated_at
+    )
+
+
 @router.put("/{crop_id}", response_model=CropResponse)
 async def update_crop(
     crop_id: int,
@@ -315,20 +426,25 @@ async def update_crop(
 @router.delete("/{crop_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_crop(
     crop_id: int,
+    permanent: bool = False,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    """Delete crop (soft delete)"""
-    crop = db.query(Crop).filter(
-        Crop.id == crop_id,
-        Crop.deleted_at.is_(None)
-    ).first()
+    """Delete crop (soft or permanent)"""
+    query = db.query(Crop).filter(Crop.id == crop_id)
+    if not permanent:
+        query = query.filter(Crop.deleted_at.is_(None))
+        
+    crop = query.first()
 
     if not crop:
         raise HTTPException(status_code=404, detail="Crop not found")
 
-    crop.deleted_at = datetime.utcnow()
-    crop.updated_at = datetime.utcnow()
+    if permanent and current_user.role == "ADMIN":
+        db.delete(crop)
+    else:
+        crop.deleted_at = datetime.utcnow()
+        crop.updated_at = datetime.utcnow()
 
     db.commit()
 

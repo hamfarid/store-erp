@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speckit Global Hub</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #334155;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .card h2 {
+            margin: 0 0 10px 0;
+            color: #60a5fa;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            margin: 0 0 15px 0;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .ports {
+            display: flex;
+            gap: 10px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .port-tag {
+            background: #334155;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #e2e8f0;
+        }
+
+        .status {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #10b981;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Speckit Project Hub</h1>
+    <div class="grid">
+        <a href="http://localhost:1002" class="card" target="_blank" rel="noopener noreferrer">
+            <h2><span class="status"></span>Project 1: Global</h2>
+            <p>Professional Development System (File View)</p>
+            <div class="ports">
+                <span class="port-tag">File Server: 1002</span>
+            </div>
+        </a>
+        <a href="http://localhost:2501" class="card" target="_blank" rel="noopener noreferrer">
+            <h2><span class="status"></span>Project 2: Gold</h2>
+            <p>AI Gold Price Prediction</p>
+            <div class="ports">
+                <span class="port-tag">FE: 2501</span>
+                <span class="port-tag">BE: 2002</span>
+            </div>
+        </a>
+        <a href="http://localhost:3501" class="card" target="_blank" rel="noopener noreferrer">
+            <h2><span class="status"></span>Project 3: Zakat</h2>
+            <p>Charity Management System</p>
+            <div class="ports">
+                <span class="port-tag">FE: 3501</span>
+                <span class="port-tag">BE: 3002</span>
+            </div>
+        </a>
+        <a href="http://localhost:4501" class="card" target="_blank" rel="noopener noreferrer">
+            <h2><span class="status"></span>Project 4: Scan AI</h2>
+            <p>Medical Image Analysis</p>
+            <div class="ports">
+                <span class="port-tag">FE: 4501</span>
+                <span class="port-tag">BE: 4002</span>
+            </div>
+        </a>
+        <a href="http://localhost:5501" class="card" target="_blank" rel="noopener noreferrer">
+            <h2><span class="status"></span>Project 5: Gaara</h2>
+            <p>Enterprise Resource Planning</p>
+            <div class="ports">
+                <span class="port-tag">FE: 5501</span>
+                <span class="port-tag">BE: 5002</span>
+            </div>
+        </a>
+        <a href="http://localhost:6501" class="card" target="_blank" rel="noopener noreferrer">
+            <h2><span class="status"></span>Project 6: Store</h2>
+            <p>Inventory Management</p>
+            <div class="ports">
+                <span class="port-tag">FE: 6501</span>
+                <span class="port-tag">BE: 6002</span>
+            </div>
+        </a>
+    </div>
+</body>
+
+</html>

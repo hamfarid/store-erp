@@ -118,7 +118,7 @@ class ComprehensiveInternetSearcher:
                         all_results.append(analyzed_result)
                         
             except Exception as e:
-                logger.error(f"فشل في البحث عن الكلمة المفتاحية ", {keyword}": {e}")
+                logger.error(f"فشل في البحث عن الكلمة المفتاحية {keyword}: {e}")
                 
         logger.info(f"اكتمل البحث الشامل. تم العثور على {len(all_results)} نتائج في {time.time() - start_time:.2f} ثانية")
         
@@ -281,22 +281,24 @@ if __name__ == "__main__":
     
     print(f"\nتم العثور على {len(search_results)} نتائج:")
     for i, res in enumerate(search_results):
-        print(f"  {i+1}. {res.get("title", "N/A")}")
-        print(f"     الرابط: {res.get("url", "N/A")}")
-        print(f"     الموثوقية: {res.get("source_reliability", 0):.2f}")
-        print(f"     حقوق النشر: {res.get("copyright_info", {}).get("status", "unknown")}")
+        print(f"  {i+1}. {res.get('title', 'N/A')}")
+        print(f"     الرابط: {res.get('url', 'N/A')}")
+        print(f"     الموثوقية: {res.get('source_reliability', 0):.2f}")
+        print(f"     حقوق النشر: {res.get('copyright_info', {}).get('status', 'unknown')}")
         if res.get("copyright_info", {}).get("mentions"):
-             print(f"       إشارات: {res["copyright_info"]["mentions"]}")
-        print(f"     ملخص المحتوى: {res.get("content_summary", "N/A")[:100]}...")
-        
+            print(f"       إشارات: {res['copyright_info']['mentions']}")
+        print(f"     ملخص المحتوى: {res.get('content_summary', 'N/A')[:100]}...")
+
     # اختبار بحث آخر
     print("\n--- اختبار بحث عن نوع تربة --- ")
     keywords_to_search = "التربة الطينية"
     categories_to_search = ["soil"]
-    search_results_soil = searcher.search(keywords_to_search, categories=categories_to_search, max_total_results=5)
+    search_results_soil = searcher.search(
+        keywords_to_search, categories=categories_to_search, max_total_results=5
+    )
     print(f"\nتم العثور على {len(search_results_soil)} نتائج:")
     for i, res in enumerate(search_results_soil):
-        print(f"  {i+1}. {res.get("title", "N/A")}")
-        print(f"     الرابط: {res.get("url", "N/A")}")
-        print(f"     الموثوقية: {res.get("source_reliability", 0):.2f}")
+        print(f"  {i+1}. {res.get('title', 'N/A')}")
+        print(f"     الرابط: {res.get('url', 'N/A')}")
+        print(f"     الموثوقية: {res.get('source_reliability', 0):.2f}")
 

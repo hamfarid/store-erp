@@ -1,0 +1,16 @@
+# =============================================================================
+# Grafana Dashboard Provisioning Configuration
+# =============================================================================
+
+apiVersion: 1
+
+providers:
+  - name: 'AI Projects Dashboards'
+    orgId: 1
+    folder: 'AI Projects'
+    type: file
+    disableDeletion: false
+    editable: true
+    updateIntervalSeconds: 30
+    options:
+      path: /etc/grafana/provisioning/dashboards

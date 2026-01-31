@@ -95,16 +95,16 @@ class SecurityManager:
     def validate_text_input(self, text: str, field_name: str = "input") -> Tuple[bool, str]:
         """التحقق من صحة المدخلات النصية"""
         if not isinstance(text, str):
-             return False, f"الإدخال للحقل ", {field_name}" يجب أن يكون نصيًا."
-             
+            return False, f"الإدخال للحقل '{field_name}' يجب أن يكون نصيًا."
+
         if len(text) > self.input_length_limit:
-            return False, f"طول الإدخال للحقل ", {field_name}" يتجاوز الحد المسموح به ({self.input_length_limit} حرفًا)."
-            
+            return False, f"طول الإدخال للحقل '{field_name}' يتجاوز الحد المسموح به ({self.input_length_limit} حرفًا)."
+
         # يمكن إضافة فحوصات أخرى هنا (مثل التحقق من الأحرف المسموح بها)
         # مثال: التحقق من عدم وجود أحرف تحكم غير مرغوب فيها
         if re.search(r"[\x00-\x1F\x7F]", text):
-            return False, f"الإدخال للحقل ", {field_name}" يحتوي على أحرف تحكم غير صالحة."
-            
+            return False, f"الإدخال للحقل '{field_name}' يحتوي على أحرف تحكم غير صالحة."
+
         logger.debug(f"تم التحقق من صحة الإدخال النصي للحقل: {field_name}")
         return True, "الإدخال صالح"
 
@@ -187,7 +187,9 @@ class SecurityManager:
             "ip_address": ip_address
         }
         # يمكن توجيه هذا السجل إلى ملف منفصل أو نظام مراقبة
-        logger.warning(f"[SECURITY EVENT - {event_type}] {message} (User: {user_id or \'N/A\'}, IP: {ip_address or \'N/A\'})", extra=log_entry)
+        user_display = user_id or 'N/A'
+        ip_display = ip_address or 'N/A'
+        logger.warning(f"[SECURITY EVENT - {event_type}] {message} (User: {user_display}, IP: {ip_display})", extra=log_entry)
 
 # مثال للاستخدام (للتجربة)
 if __name__ == "__main__":
@@ -247,7 +249,7 @@ if __name__ == "__main__":
     
     # --- اختبار تنقية HTML ---
     print("\n--- اختبار تنقية HTML ---")
-    dirty_html = "<p>نص عادي <script>alert(\'XSS\');</script> <b>وخط عريض</b></p><img src=\'invalid\' onerror=\'alert(\'error\')\'>"
+    dirty_html = '<p>نص عادي <script>alert("XSS");</script> <b>وخط عريض</b></p><img src="invalid" onerror="alert(\'error\')">'
     clean_html = security_manager.sanitize_html(dirty_html)
     print(f"Original HTML: {dirty_html}")
     print(f"Sanitized HTML: {clean_html}")
@@ -258,7 +260,7 @@ if __name__ == "__main__":
     hashed_password = security_manager.hash_password(password)
     print(f"Hashed password: {hashed_password}")
     print(f"Verify correct password: {security_manager.verify_password(hashed_password, password)}")
-    print(f"Verify incorrect password: {security_manager.verify_password(hashed_password, \"wrongpassword\")}")
+    print(f"Verify incorrect password: {security_manager.verify_password(hashed_password, 'wrongpassword')}")
     
     # --- اختبار تسجيل الأحداث ---
     print("\n--- اختبار تسجيل الأحداث ---")

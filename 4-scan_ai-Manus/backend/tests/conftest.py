@@ -73,9 +73,9 @@ def test_settings():
         "max_file_size": 50 * 1024 * 1024,  # 50 MB
     }
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="session", autouse=True)
 def setup_test_database():
-    """Setup test database and create test user once for all tests"""
+    """Setup test database and create test user once for all tests (autouse)"""
     try:
         from src.core.database import SessionLocal, engine
         from src.models.user import User

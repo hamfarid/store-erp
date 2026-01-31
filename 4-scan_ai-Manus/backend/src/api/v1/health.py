@@ -101,3 +101,48 @@ async def readiness_check(db: Session = Depends(get_db)):
             detail="Database not ready"
         )
     return {"status": "ready"}
+
+
+@router.get("/system/metrics")
+async def metrics_endpoint():
+    """
+    Prometheus metrics endpoint
+    Returns basic system metrics in Prometheus format
+    """
+    try:
+        cpu = psutil.cpu_percent(interval=0.1)
+        memory = psutil.virtual_memory()
+        disk = psutil.disk_usage("/")
+        
+        # Format metrics in Prometheus text format
+        metrics = f"""# HELP system_cpu_usage_percent CPU usage percentage
+# TYPE system_cpu_usage_percent gauge
+system_cpu_usage_percent {cpu}
+
+# HELP system_memory_usage_percent Memory usage percentage
+# TYPE system_memory_usage_percent gauge
+system_memory_usage_percent {memory.percent}
+
+# HELP system_memory_available_bytes Available memory in bytes
+# TYPE system_memory_available_bytes gauge
+system_memory_available_bytes {memory.available}
+
+# HELP system_disk_usage_percent Disk usage percentage
+# TYPE system_disk_usage_percent gauge
+system_disk_usage_percent {disk.percent}
+
+# HELP system_disk_free_bytes Free disk space in bytes
+# TYPE system_disk_free_bytes gauge
+system_disk_free_bytes {disk.free}
+
+# HELP system_disk_total_bytes Total disk space in bytes
+# TYPE system_disk_total_bytes gauge
+system_disk_total_bytes {disk.total}
+"""
+        from fastapi.responses import Response
+        return Response(content=metrics, media_type="text/plain")
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error collecting metrics: {str(e)}"
+        )

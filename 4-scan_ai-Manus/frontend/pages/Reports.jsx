@@ -10,7 +10,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   FileText, Download, Plus, Search, Calendar, RefreshCw, MoreVertical,
   Eye, Trash2, Filter, Clock, Check, AlertTriangle, Loader, File,
-  FilePdf, FileSpreadsheet, BarChart3, Warehouse, Leaf
+  FileType, Sheet, BarChart3, Warehouse, Leaf
 } from 'lucide-react';
 
 import ApiService from '../services/ApiService';
@@ -41,8 +41,8 @@ const STATUS_OPTIONS = [
 ];
 
 const FORMAT_OPTIONS = [
-  { value: 'pdf', label: 'PDF', icon: FilePdf },
-  { value: 'excel', label: 'Excel', icon: FileSpreadsheet },
+  { value: 'pdf', label: 'PDF', icon: FileType },
+  { value: 'excel', label: 'Excel', icon: Sheet },
   { value: 'csv', label: 'CSV', icon: File }
 ];
 

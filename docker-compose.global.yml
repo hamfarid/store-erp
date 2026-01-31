@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  nginx-global:
+    image: nginx:alpine
+    container_name: global-nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/html:/usr/share/nginx/html:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - Ai_project
+
+networks:
+  Ai_project:
+    external: true

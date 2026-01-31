@@ -664,10 +664,10 @@ def get_dashboard():
         # أحدث المنتجات المضافة
         cursor.execute(
             """
-            SELECT name, sku, quantity, created_at 
-            FROM products 
-            WHERE is_active = 1 
-            ORDER BY created_at DESC 
+            SELECT name, sku, quantity, created_at
+            FROM products
+            WHERE is_active = 1
+            ORDER BY created_at DESC
             LIMIT 5
         """
         )
@@ -685,10 +685,10 @@ def get_dashboard():
         # المنتجات منخفضة المخزون (تفصيلي)
         cursor.execute(
             """
-            SELECT name, sku, quantity, min_quantity 
-            FROM products 
-            WHERE quantity <= min_quantity AND is_active = 1 
-            ORDER BY quantity ASC 
+            SELECT name, sku, quantity, min_quantity
+            FROM products
+            WHERE quantity <= min_quantity AND is_active = 1
+            ORDER BY quantity ASC
             LIMIT 10
         """
         )
@@ -729,11 +729,46 @@ def get_dashboard():
         )
 
 
-app.register_blueprint(categories_bp)
-app.register_blueprint(reports_bp)
-app.register_blueprint(inventory_bp)
-app.register_blueprint(users_bp)
-app.register_blueprint(warehouses_bp)
+# Register blueprints with duplicate check
+try:
+    app.register_blueprint(categories_bp)
+except ValueError as e:
+    if "already registered" in str(e):
+        print(f"⚠️ Blueprint 'categories' already registered, skipping")
+    else:
+        raise
+
+try:
+    app.register_blueprint(reports_bp)
+except ValueError as e:
+    if "already registered" in str(e):
+        print(f"⚠️ Blueprint 'reports' already registered, skipping")
+    else:
+        raise
+
+try:
+    app.register_blueprint(inventory_bp)
+except ValueError as e:
+    if "already registered" in str(e):
+        print(f"⚠️ Blueprint 'inventory' already registered, skipping")
+    else:
+        raise
+
+try:
+    app.register_blueprint(users_bp)
+except ValueError as e:
+    if "already registered" in str(e):
+        print(f"⚠️ Blueprint 'users' already registered, skipping")
+    else:
+        raise
+
+try:
+    app.register_blueprint(warehouses_bp)
+except ValueError as e:
+    if "already registered" in str(e):
+        print(f"⚠️ Blueprint 'warehouses' already registered, skipping")
+    else:
+        raise
 
 if __name__ == "__main__":
     print("✅ تم تهيئة قاعدة البيانات")

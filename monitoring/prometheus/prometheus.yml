@@ -1,0 +1,218 @@
+# =============================================================================
+# Prometheus Configuration - Unified Monitoring for All AI Projects
+# =============================================================================
+# This configuration collects metrics from all 6 projects in the Ai_project network
+# =============================================================================
+
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+  scrape_timeout: 15s
+  external_labels:
+    monitor: 'ai-projects-monitor'
+    environment: 'production'
+
+# Alerting configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+# Rule files
+rule_files:
+  - /etc/prometheus/alerts/*.yml
+
+# Scrape configurations for all services
+scrape_configs:
+  # ==========================================================================
+  # INFRASTRUCTURE METRICS
+  # ==========================================================================
+  
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+    metrics_path: /metrics
+
+  # Node Exporter - Host metrics
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'ai-project-host'
+
+  # cAdvisor - Container metrics
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+
+  # ==========================================================================
+  # PROJECT 1: TEST PROJECTS (Ports: Backend 1001, Frontend 1501)
+  # ==========================================================================
+  - job_name: 'test-backend'
+    static_configs:
+      - targets: ['test-backend:3001']
+        labels:
+          project: 'test_projects'
+          service: 'backend'
+          project_id: '1'
+    metrics_path: /metrics
+
+  # NOTE: Frontend apps (React/Vue) do not expose /metrics endpoints
+  # Frontend monitoring is done via browser-side tools (e.g., Sentry, LogRocket)
+  # - job_name: 'test-frontend'
+  #   static_configs:
+  #     - targets: ['test-frontend:1051']
+
+  # ==========================================================================
+  # PROJECT 2: GOLD PRICE PREDICTOR (Ports: Backend 2001, Frontend 2501, ML 2101, AI 2601)
+  # ==========================================================================
+  - job_name: 'gold-backend'
+    static_configs:
+      - targets: ['gold-price-predictor-backend:2001']
+        labels:
+          project: 'gold_price_predictor'
+          service: 'backend'
+          project_id: '2'
+    metrics_path: /metrics
+
+  # NOTE: Frontend apps (React/Vue) do not expose /metrics endpoints
+  # - job_name: 'gold-frontend'
+  #   static_configs:
+  #     - targets: ['gold-price-predictor-frontend:2501']
+
+  - job_name: 'gold-ml'
+    scrape_interval: 60s
+    scrape_timeout: 30s
+    static_configs:
+      - targets: ['gold-price-predictor-ml:2101']
+        labels:
+          project: 'gold_price_predictor'
+          service: 'ml'
+          project_id: '2'
+    metrics_path: /metrics
+
+  - job_name: 'gold-ai'
+    scrape_interval: 60s
+    scrape_timeout: 30s
+    static_configs:
+      - targets: ['gold-price-predictor-ai:2601']
+        labels:
+          project: 'gold_price_predictor'
+          service: 'ai'
+          project_id: '2'
+    metrics_path: /metrics
+
+  # ==========================================================================
+  # PROJECT 3: ZAKAT (Ports: Backend 3001, Frontend 3501)
+  # ==========================================================================
+  - job_name: 'zakat-backend'
+    static_configs:
+      - targets: ['zakat-backend:3005']
+        labels:
+          project: 'zakat'
+          service: 'backend'
+          project_id: '3'
+    metrics_path: /metrics
+
+  # NOTE: Frontend apps (React/Vue) do not expose /metrics endpoints
+  # - job_name: 'zakat-frontend'
+  #   static_configs:
+  #     - targets: ['zakat-frontend:80']
+
+  # ==========================================================================
+  # PROJECT 4: SCAN AI MANUS (Ports: Backend 4001, Frontend 4501, ML 4101, AI 4601)
+  # ==========================================================================
+  - job_name: 'scan-backend'
+    static_configs:
+      - targets: ['scan_ai-Manus-backend:4001']
+        labels:
+          project: 'scan_ai_manus'
+          service: 'backend'
+          project_id: '4'
+    metrics_path: /api/v1/metrics
+
+  # NOTE: Frontend apps (React/Vue) do not expose /metrics endpoints
+  # - job_name: 'scan-frontend'
+  #   static_configs:
+  #     - targets: ['scan_ai-Manus-frontend:4501']
+
+  - job_name: 'scan-ml'
+    scrape_interval: 60s
+    scrape_timeout: 30s
+    static_configs:
+      - targets: ['scan_ai-Manus-ml:4101']
+        labels:
+          project: 'scan_ai_manus'
+          service: 'ml'
+          project_id: '4'
+    metrics_path: /metrics
+
+  - job_name: 'scan-ai'
+    scrape_interval: 60s
+    scrape_timeout: 30s
+    static_configs:
+      - targets: ['scan_ai-Manus-ai:4601']
+        labels:
+          project: 'scan_ai_manus'
+          service: 'ai'
+          project_id: '4'
+    metrics_path: /metrics
+
+  # ==========================================================================
+  # PROJECT 5: GAARA ERP (Ports: Backend 5001, Frontend 5501)
+  # ==========================================================================
+  - job_name: 'erp-backend'
+    static_configs:
+      # Fix: Use gaara-backend alias (hyphen) instead of gaara_backend (underscore)
+      # Django rejects hostnames with underscores per RFC 1034/1035
+      - targets: ['gaara-backend:8000']
+        labels:
+          project: 'gaara_erp'
+          service: 'backend'
+          project_id: '5'
+    metrics_path: /metrics/
+
+  # NOTE: Frontend apps (React/Vue) do not expose /metrics endpoints
+  # - job_name: 'erp-frontend'
+  #   static_configs:
+  #     - targets: ['gaara_frontend:80']
+
+  # ==========================================================================
+  # PROJECT 6: STORE (Ports: Backend 6001, Frontend 6501)
+  # ==========================================================================
+  - job_name: 'store-backend'
+    static_configs:
+      - targets: ['store_backend:5000']
+        labels:
+          project: 'store'
+          service: 'backend'
+          project_id: '6'
+    metrics_path: /api/metrics
+
+  # NOTE: Frontend apps (React/Vue) do not expose /metrics endpoints
+  # - job_name: 'store-frontend'
+  #   static_configs:
+  #     - targets: ['store_frontend:80']
+
+  # ==========================================================================
+  # MANAGEMENT TOOLS
+  # ==========================================================================
+  - job_name: 'nginx-proxy'
+    static_configs:
+      - targets: ['nginx-proxy:8181']
+        labels:
+          service: 'nginx'
+          type: 'infrastructure'
+    metrics_path: /nginx_status
+
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']
+        labels:
+          service: 'grafana'
+          type: 'infrastructure'
+    metrics_path: /metrics

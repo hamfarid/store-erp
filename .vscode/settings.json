@@ -1,0 +1,45 @@
+{
+    "chat.promptFilesRecommendations": {
+        "speckit.constitution": true,
+        "speckit.specify": true,
+        "speckit.plan": true,
+        "speckit.tasks": true,
+        "speckit.implement": true
+    },
+    "chat.tools.terminal.autoApprove": {
+        ".specify/scripts/bash/": true,
+        ".specify/scripts/powershell/": true,
+        "docker logs": true,
+        "docker-compose": true,
+        "Start-Process": true,
+        "docker info": true,
+        "docker ps": true,
+        "docker images": true,
+        "docker container": true,
+        "Get-Process": true,
+        "dir": true,
+        "docker version": true,
+        "docker network": true,
+        "Set-Location": true,
+        "docker start": true,
+        "/^Test-Path \"D:\\\\Ai_Project\\\\3-Zakat\\\\Zakat_Clean\\\\backend\\\\migrations\\\\init\\.sql\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd \"D:\\\\Ai_Project\\\\1-test_projects\\\\global - V1\\.3 -13-12-2025\"; npm install$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "hostname": true,
+        "C:\\Windows\\System32\\cmd.exe": true,
+        "/^Get-Location ; docker --version$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^chcp 437; docker-compose -f \"D:\\\\Ai_Project\\\\1-test_projects\\\\global - V1\\.3 -13-12-2025\\\\docker-compose\\.yml\" up -d$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
+

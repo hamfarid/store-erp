@@ -349,4 +349,5 @@ if (!document.getElementById('modal-animations')) {
   document.head.appendChild(style);
 }
 
+export { Modal };
 export default Modal;

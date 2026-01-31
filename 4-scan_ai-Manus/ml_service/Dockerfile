@@ -3,7 +3,7 @@
 # AI/ML service for disease diagnosis
 # ==========================================
 
-FROM python:3.11-slim as builder
+FROM python:3.11-slim AS builder
 
 # Set build arguments
 ARG BUILD_DATE
@@ -43,7 +43,7 @@ RUN pip install --upgrade pip setuptools wheel && \
 # ==========================================
 # Production stage
 # ==========================================
-FROM python:3.11-slim as production
+FROM python:3.11-slim AS production
 
 ARG BUILD_DATE
 ARG VCS_REF

@@ -34,6 +34,37 @@ os.environ.setdefault("CELERY_TASK_EAGER_PROPAGATES", "True")
 
 
 # ============================================
+# pytest-django Compatibility Fixtures
+# ============================================
+#
+# This repository intentionally supports running Django tests under pytest *without*
+# requiring pytest-django in every environment. Some fixtures in this file were
+# originally written to depend on pytest-django's `db` and `client` fixtures.
+#
+# We provide lightweight equivalents so test execution does not fail at collection/
+# setup time when pytest-django is not installed.
+
+
+@pytest.fixture
+def db():
+    """Compatibility fixture for database access.
+
+    The Django test database lifecycle is handled by the Django bootstrap in
+    `gaara_erp/conftest.py` (directory-level conftest). This fixture exists to
+    satisfy fixture dependencies (e.g. `test_user(db, ...)`).
+    """
+    yield
+
+
+@pytest.fixture
+def client():
+    """Django test client fixture (pytest-django compatible name)."""
+    from django.test import Client
+
+    return Client()
+
+
+# ============================================
 # User Fixtures
 # ============================================
 
@@ -76,7 +107,7 @@ def test_user(db, user_data):
     """Create a regular test user."""
     from django.contrib.auth import get_user_model
     User = get_user_model()
-    
+
     user = User.objects.create_user(
         email=user_data["email"],
         username=user_data.get("username", user_data["email"]),
@@ -94,7 +125,7 @@ def admin_user(db, admin_data):
     """Create an admin user."""
     from django.contrib.auth import get_user_model
     User = get_user_model()
-    
+
     user = User.objects.create_superuser(
         email=admin_data["email"],
         username=admin_data.get("username", admin_data["email"]),
@@ -150,7 +181,7 @@ def admin_api_client(api_client, admin_user):
 def jwt_tokens(test_user):
     """Generate JWT tokens for test user."""
     from rest_framework_simplejwt.tokens import RefreshToken
-    
+
     refresh = RefreshToken.for_user(test_user)
     return {
         "access": str(refresh.access_token),

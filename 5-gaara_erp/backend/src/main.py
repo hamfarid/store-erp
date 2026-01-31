@@ -780,14 +780,28 @@ blueprints_to_register = [
     (imported_blueprints.get("inventory_api"), "", "inventory_api"),
 ]
 
+registered_names = set()  # Track registered blueprint names to avoid duplicates
 for blueprint, prefix, name in blueprints_to_register:
     try:
         if blueprint is not None:
+            # Check if blueprint with this name is already registered
+            blueprint_name_value = blueprint.name if hasattr(blueprint, 'name') else name
+            if blueprint_name_value in registered_names:
+                print(f"⚠️ Blueprint '{blueprint_name_value}' already registered, skipping duplicate")
+                continue
+
             app.register_blueprint(blueprint, url_prefix=prefix)
+            registered_names.add(blueprint_name_value)
             registered_count += 1
             print(f"✅ Registered optional {name} blueprint")
         else:
             print(f"⚠️ Optional blueprint {name} not available")
+    except ValueError as e:
+        # Handle case where blueprint name is already registered
+        if "already registered" in str(e):
+            print(f"⚠️ Blueprint {name} already registered, skipping: {e}")
+        else:
+            print(f"❌ Error registering {name}: {e}")
     except Exception as e:
         print(f"❌ Error registering {name}: {e}")
 

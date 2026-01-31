@@ -33,6 +33,9 @@ redis==5.0.1
 # YOLO
 ultralytics==8.1.0
 
+# MLflow Tracking
+mlflow==2.11.3
+
 # Utilities
 python-dotenv==1.0.0
 pyyaml==6.0.1

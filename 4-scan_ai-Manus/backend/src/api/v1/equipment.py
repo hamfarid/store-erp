@@ -52,6 +52,9 @@ class EquipmentUpdate(BaseModel):
     notes: Optional[str] = None
 
 
+EquipmentPartialUpdate = EquipmentUpdate
+
+
 class EquipmentResponse(BaseModel):
     id: int
     name: str
@@ -117,6 +120,44 @@ async def get_equipment(
     equipment_list = query.order_by(Equipment.name).offset(skip).limit(limit).all()
 
     return EquipmentListResponse(success=True, data=equipment_list, total=total)
+
+
+@router.get("/search", response_model=List[EquipmentResponse])
+async def search_equipment(
+    query: str = Query(..., min_length=2),
+    type: Optional[str] = None,
+    status: Optional[str] = None,
+    farm_id: Optional[int] = None,
+    skip: int = 0,
+    limit: int = 20,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Advanced search for equipment"""
+    query_obj = db.query(Equipment).filter(Equipment.deleted_at.is_(None))
+
+    if query:
+        query_obj = query_obj.filter(
+            or_(
+                Equipment.name.ilike(f"%{query}%"),
+                Equipment.brand.ilike(f"%{query}%"),
+                Equipment.model.ilike(f"%{query}%"),
+                Equipment.serial_number.ilike(f"%{query}%"),
+                Equipment.notes.ilike(f"%{query}%")
+            )
+        )
+
+    if type:
+        query_obj = query_obj.filter(Equipment.type == type)
+
+    if status:
+        query_obj = query_obj.filter(Equipment.status == status)
+
+    if farm_id:
+        query_obj = query_obj.filter(Equipment.farm_id == farm_id)
+
+    equipment_list = query_obj.offset(skip).limit(limit).all()
+    return equipment_list
 
 
 @router.get("/{equipment_id}", response_model=EquipmentResponse)
@@ -220,13 +261,14 @@ async def update_equipment(
     return equipment
 
 
-@router.delete("/{equipment_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_equipment(
+@router.patch("/{equipment_id}", response_model=EquipmentResponse)
+async def update_equipment_partial(
     equipment_id: int,
-    current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    equipment_update: EquipmentPartialUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
-    """Delete equipment (soft delete)"""
+    """Partial update of equipment data"""
     equipment = db.query(Equipment).filter(
         Equipment.id == equipment_id,
         Equipment.deleted_at.is_(None)
@@ -235,8 +277,53 @@ async def delete_equipment(
     if not equipment:
         raise HTTPException(status_code=404, detail="Equipment not found")
 
-    equipment.deleted_at = datetime.utcnow()
+    # Check for duplicate serial number if changing it
+    if equipment_update.serial_number is not None and equipment_update.serial_number != equipment.serial_number:
+        existing = db.query(Equipment).filter(
+            Equipment.serial_number == equipment_update.serial_number,
+            Equipment.id != equipment_id,
+            Equipment.deleted_at.is_(None)
+        ).first()
+        if existing:
+            raise HTTPException(
+                status_code=400,
+                detail="Equipment with this serial number already exists"
+            )
+
+    update_data = equipment_update.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(equipment, field, value)
+
     equipment.updated_at = datetime.utcnow()
+
+    db.commit()
+    db.refresh(equipment)
+
+    return equipment
+
+
+@router.delete("/{equipment_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_equipment(
+    equipment_id: int,
+    permanent: bool = False,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Delete equipment (soft or permanent)"""
+    query = db.query(Equipment).filter(Equipment.id == equipment_id)
+    if not permanent:
+        query = query.filter(Equipment.deleted_at.is_(None))
+
+    equipment = query.first()
+
+    if not equipment:
+        raise HTTPException(status_code=404, detail="Equipment not found")
+
+    if permanent and current_user.role == "ADMIN":
+        db.delete(equipment)
+    else:
+        equipment.deleted_at = datetime.utcnow()
+        equipment.updated_at = datetime.utcnow()
 
     db.commit()
 
