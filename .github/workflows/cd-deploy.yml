@@ -3,6 +3,16 @@
 # =============================================================================
 # Runs on: Push to main (after CI passes), Manual trigger
 # Purpose: Build, push images, and deploy to production/staging
+#
+# NOTE: Secrets Configuration Required
+# Before using this workflow, configure these secrets in GitHub Settings:
+#   - STAGING_HOST: Staging server hostname
+#   - STAGING_USER: Staging server SSH username
+#   - STAGING_SSH_KEY: Staging server SSH private key
+#   - PRODUCTION_HOST: Production server hostname
+#   - PRODUCTION_USER: Production server SSH username
+#   - PRODUCTION_SSH_KEY: Production server SSH private key
+#   - SLACK_WEBHOOK_URL: Slack webhook for notifications (optional)
 # =============================================================================
 
 name: CD - Deploy
@@ -154,9 +164,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     if: github.ref == 'refs/heads/main' || inputs.environment == 'staging'
-    environment:
-      name: staging
-      url: https://staging.store-erp.example.com
+    # Note: Uncomment environment section after configuring in GitHub Settings
+    # environment:
+    #   name: staging
+    #   url: https://staging.store-erp.example.com
     
     steps:
       - name: Checkout code
@@ -222,9 +233,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, deploy-staging]
     if: inputs.environment == 'production'
-    environment:
-      name: production
-      url: https://store-erp.example.com
+    # Note: Uncomment environment section after configuring in GitHub Settings
+    # environment:
+    #   name: production
+    #   url: https://store-erp.example.com
     
     steps:
       - name: Checkout code

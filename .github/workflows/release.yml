@@ -1,5 +1,10 @@
 name: 📦 Release - Semantic Versioning
 
+# NOTE: Required GitHub Secrets (optional)
+# For auto-deployment after release, add these secrets in Settings → Secrets:
+#   - PRODUCTION_HOST, PRODUCTION_USER, PRODUCTION_SSH_KEY
+# See .github/SETUP_GITHUB_SECRETS.md for complete setup guide
+
 on:
   workflow_dispatch:
     inputs:
@@ -260,12 +265,13 @@ jobs:
   # ============================================================
   deploy:
     name: Deploy Release
-    needs: create-release
+    needs: [calculate-version, create-release]
     runs-on: ubuntu-latest
     if: inputs.target_branch == 'main'
-    environment:
-      name: production
-      url: https://example.com
+    # Note: Uncomment environment section after configuring in GitHub Settings
+    # environment:
+    #   name: production
+    #   url: https://example.com
 
     steps:
       - uses: actions/checkout@v4

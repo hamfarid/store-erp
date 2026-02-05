@@ -1,5 +1,10 @@
 name: 🚨 Hotfix - Emergency Patch
 
+# NOTE: Required GitHub Secrets
+# Before using this workflow, add these secrets in Settings → Secrets:
+#   - SLACK_WEBHOOK_URL (optional): For Slack notifications
+# See .github/SETUP_GITHUB_SECRETS.md for complete setup guide
+
 on:
   workflow_dispatch:
     inputs:
@@ -76,9 +81,10 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     if: ${{ !inputs.skip_staging }}
-    environment:
-      name: staging
-      url: https://staging.example.com
+    # Note: Uncomment environment section after configuring in GitHub Settings
+    # environment:
+    #   name: staging
+    #   url: https://staging.example.com
 
     steps:
       - uses: actions/checkout@v4
@@ -102,9 +108,10 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     if: always() && needs.validate.result == 'success'
-    environment:
-      name: production
-      url: https://example.com
+    # Note: Uncomment environment section after configuring in GitHub Settings
+    # environment:
+    #   name: production
+    #   url: https://example.com
 
     steps:
       - uses: actions/checkout@v4
