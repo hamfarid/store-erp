@@ -1,0 +1,29 @@
+#!/bin/sh
+# FILE: .husky/commit-msg | PURPOSE: Validate commit messages | OWNER: DevOps Team | LAST-AUDITED: 2026-02-05
+
+# Commitlint hook - validates commit message format
+npx --no -- commitlint --edit "$1" 2>/dev/null || {
+    echo ""
+    echo "❌ رسالة الالتزام غير صالحة!"
+    echo ""
+    echo "📋 الصيغة المطلوبة: <type>(<scope>): <subject>"
+    echo ""
+    echo "🏷️ الأنواع المسموحة:"
+    echo "   feat     - ميزة جديدة"
+    echo "   fix      - إصلاح خطأ"
+    echo "   docs     - تحديث التوثيق"
+    echo "   style    - تنسيق الكود"
+    echo "   refactor - إعادة هيكلة"
+    echo "   perf     - تحسين الأداء"
+    echo "   test     - اختبارات"
+    echo "   build    - تغييرات البناء"
+    echo "   ci       - تغييرات CI/CD"
+    echo "   chore    - مهام صيانة"
+    echo ""
+    echo "📝 أمثلة صحيحة:"
+    echo "   feat(auth): add two-factor authentication"
+    echo "   fix(api): resolve timeout issue"
+    echo "   docs(readme): update installation guide"
+    echo ""
+    exit 1
+}

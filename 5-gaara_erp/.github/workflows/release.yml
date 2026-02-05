@@ -1,0 +1,92 @@
+# FILE: .github/workflows/release.yml | PURPOSE: Automated semantic release | OWNER: DevOps Team | RELATED: .releaserc.json | LAST-AUDITED: 2026-02-05
+
+name: 🏷️ الإصدار التلقائي (Semantic Release)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'تشغيل تجريبي (بدون إصدار فعلي)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release:
+    name: 🏷️ إصدار جديد
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 استنساخ المستودع
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🟢 إعداد Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 🐍 إعداد Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 تثبيت المتطلبات
+        run: |
+          npm install -g semantic-release \
+            @semantic-release/changelog \
+            @semantic-release/exec \
+            @semantic-release/git \
+            @semantic-release/github \
+            conventional-changelog-conventionalcommits
+
+      - name: 🔍 التحقق من التكوين
+        run: |
+          echo "📋 التحقق من ملف التكوين..."
+          if [ -f ".releaserc.json" ]; then
+            echo "✅ ملف .releaserc.json موجود"
+            cat .releaserc.json | head -20
+          else
+            echo "❌ ملف .releaserc.json غير موجود!"
+            exit 1
+          fi
+
+      - name: 🏷️ تشغيل Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            echo "🔍 تشغيل تجريبي..."
+            npx semantic-release --dry-run
+          else
+            echo "🚀 إصدار فعلي..."
+            npx semantic-release
+          fi
+
+      - name: 📊 ملخص الإصدار
+        if: success()
+        run: |
+          echo "## 🏷️ ملخص الإصدار" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # الحصول على آخر علامة
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "لا يوجد")
+          
+          echo "- **آخر إصدار:** \`$LATEST_TAG\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **الفرع:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **المُنفذ:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ **هذا تشغيل تجريبي - لم يتم إنشاء إصدار فعلي**" >> $GITHUB_STEP_SUMMARY
+          fi

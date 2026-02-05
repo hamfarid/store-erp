@@ -1,0 +1,26 @@
+#!/bin/sh
+# FILE: .husky/pre-push | PURPOSE: Run tests before push | OWNER: DevOps Team | LAST-AUDITED: 2026-02-05
+
+echo "🧪 جارٍ تشغيل الاختبارات قبل الدفع..."
+
+# الحصول على الفرع الحالي
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# تخطي الاختبارات لفروع WIP
+if echo "$BRANCH" | grep -qE "^(wip|WIP|draft)/"; then
+    echo "⏭️ تم تخطي الاختبارات لفرع WIP"
+    exit 0
+fi
+
+# تشغيل اختبارات سريعة
+if [ -f "pytest.ini" ] || [ -f "pyproject.toml" ]; then
+    echo "🐍 تشغيل اختبارات Python..."
+    python -m pytest -x -q --tb=no 2>/dev/null || {
+        echo ""
+        echo "❌ فشلت بعض الاختبارات!"
+        echo "💡 لتخطي الفحص (غير موصى به): git push --no-verify"
+        exit 1
+    }
+fi
+
+echo "✅ جميع الاختبارات نجحت!"

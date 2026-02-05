@@ -1,0 +1,40 @@
+{
+  "name": "gaara-erp-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "أدوات التطوير لمشروع Gaara ERP",
+  "scripts": {
+    "prepare": "husky install || true",
+    "commit": "cz",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run",
+    "lint:commits": "commitlint --from HEAD~10 --to HEAD --verbose"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.4.0",
+    "@commitlint/config-conventional": "^18.4.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.2.0",
+    "commitizen": "^4.3.0",
+    "conventional-changelog-conventionalcommits": "^7.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.3",
+    "semantic-release": "^22.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hamfarid/gaara_erp.git"
+  },
+  "author": "Gaara ERP Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

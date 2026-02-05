@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json.schemastore.org/commitlintrc",
+  "extends": ["@commitlint/config-conventional"],
+  "rules": {
+    "type-enum": [
+      2,
+      "always",
+      [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "build",
+        "ci",
+        "chore",
+        "revert",
+        "wip"
+      ]
+    ],
+    "type-case": [2, "always", "lower-case"],
+    "type-empty": [2, "never"],
+    "scope-case": [2, "always", "lower-case"],
+    "subject-case": [0],
+    "subject-empty": [2, "never"],
+    "subject-full-stop": [2, "never", "."],
+    "header-max-length": [2, "always", 100],
+    "body-leading-blank": [2, "always"],
+    "body-max-line-length": [2, "always", 200],
+    "footer-leading-blank": [2, "always"],
+    "footer-max-line-length": [2, "always", 200]
+  },
+  "prompt": {
+    "settings": {},
+    "messages": {
+      "skip": "(اختياري - اضغط Enter للتخطي)",
+      "max": "الحد الأقصى %d حرف",
+      "min": "الحد الأدنى %d حرف",
+      "emptyWarning": "لا يمكن أن يكون فارغاً",
+      "upperLimitWarning": "تجاوزت الحد الأقصى",
+      "lowerLimitWarning": "أقل من الحد الأدنى"
+    },
+    "questions": {
+      "type": {
+        "description": "اختر نوع التغيير:",
+        "enum": {
+          "feat": {
+            "description": "✨ ميزة جديدة",
+            "title": "Features",
+            "emoji": "✨"
+          },
+          "fix": {
+            "description": "🐛 إصلاح خطأ",
+            "title": "Bug Fixes",
+            "emoji": "🐛"
+          },
+          "docs": {
+            "description": "📚 تحديث التوثيق",
+            "title": "Documentation",
+            "emoji": "📚"
+          },
+          "style": {
+            "description": "🎨 تنسيق الكود (لا يؤثر على المنطق)",
+            "title": "Styles",
+            "emoji": "🎨"
+          },
+          "refactor": {
+            "description": "♻️ إعادة هيكلة الكود",
+            "title": "Code Refactoring",
+            "emoji": "♻️"
+          },
+          "perf": {
+            "description": "⚡ تحسين الأداء",
+            "title": "Performance",
+            "emoji": "⚡"
+          },
+          "test": {
+            "description": "🧪 إضافة/تعديل الاختبارات",
+            "title": "Tests",
+            "emoji": "🧪"
+          },
+          "build": {
+            "description": "📦 تغييرات البناء والتبعيات",
+            "title": "Builds",
+            "emoji": "📦"
+          },
+          "ci": {
+            "description": "🔧 تغييرات CI/CD",
+            "title": "CI",
+            "emoji": "🔧"
+          },
+          "chore": {
+            "description": "🔨 مهام صيانة",
+            "title": "Chores",
+            "emoji": "🔨"
+          },
+          "revert": {
+            "description": "⏪ التراجع عن تغيير سابق",
+            "title": "Reverts",
+            "emoji": "⏪"
+          },
+          "wip": {
+            "description": "🚧 عمل قيد التنفيذ",
+            "title": "Work in Progress",
+            "emoji": "🚧"
+          }
+        }
+      },
+      "scope": {
+        "description": "نطاق التغيير (مثال: auth, api, models):"
+      },
+      "subject": {
+        "description": "وصف قصير للتغيير:"
+      },
+      "body": {
+        "description": "وصف مفصل (اختياري):"
+      },
+      "isBreaking": {
+        "description": "هل هذا تغيير كاسر للتوافق؟"
+      },
+      "breakingBody": {
+        "description": "وصف التغيير الكاسر:"
+      },
+      "breaking": {
+        "description": "وصف التغييرات الكاسرة:"
+      },
+      "isIssueAffected": {
+        "description": "هل يتعلق بمشكلة مفتوحة؟"
+      },
+      "issuesBody": {
+        "description": "معلومات إضافية عن المشاكل:"
+      },
+      "issues": {
+        "description": "أرقام المشاكل (مثال: #123, #456):"
+      }
+    }
+  }
+}

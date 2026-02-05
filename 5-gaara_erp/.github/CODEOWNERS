@@ -1,0 +1,95 @@
+# FILE: .github/CODEOWNERS | PURPOSE: Define code ownership for review requirements | OWNER: Maintainers | LAST-AUDITED: 2026-02-05
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 📋 CODEOWNERS - Gaara ERP
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# يحدد هذا الملف مالكي الكود المسؤولين عن مراجعة التغييرات.
+# عند إنشاء Pull Request، سيُطلب تلقائياً من المالكين المناسبين المراجعة.
+#
+# الصيغة: <pattern> <owner1> <owner2> ...
+# المالكون يمكن أن يكونوا: @username أو @org/team-name أو email@example.com
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🌐 المالك الافتراضي لجميع الملفات
+# ─────────────────────────────────────────────────────────────────────────────
+*                                   @hamfarid
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🔧 ملفات التكوين والبنية التحتية
+# ─────────────────────────────────────────────────────────────────────────────
+/.github/                           @hamfarid
+/.github/workflows/                 @hamfarid
+/.github/CODEOWNERS                 @hamfarid
+Dockerfile                          @hamfarid
+docker-compose*.yml                 @hamfarid
+*.Dockerfile                        @hamfarid
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🐍 Django Backend
+# ─────────────────────────────────────────────────────────────────────────────
+/gaara_erp/                         @hamfarid
+
+# إعدادات Django الأساسية (تتطلب مراجعة دقيقة)
+/gaara_erp/gaara_erp/settings*.py   @hamfarid
+/gaara_erp/gaara_erp/urls.py        @hamfarid
+/gaara_erp/manage.py                @hamfarid
+
+# النماذج وقاعدة البيانات
+/gaara_erp/*/models.py              @hamfarid
+/gaara_erp/*/migrations/            @hamfarid
+
+# الـ APIs والـ Views
+/gaara_erp/*/views.py               @hamfarid
+/gaara_erp/*/api/                   @hamfarid
+/gaara_erp/*/serializers.py         @hamfarid
+
+# نظام المصادقة والأمان
+/gaara_erp/accounts/                @hamfarid
+/gaara_erp/*/permissions.py         @hamfarid
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🧪 الاختبارات
+# ─────────────────────────────────────────────────────────────────────────────
+/tests/                             @hamfarid
+/gaara_erp/*/tests/                 @hamfarid
+pytest.ini                          @hamfarid
+conftest.py                         @hamfarid
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 📚 التوثيق
+# ─────────────────────────────────────────────────────────────────────────────
+/docs/                              @hamfarid
+*.md                                @hamfarid
+README.md                           @hamfarid
+CHANGELOG.md                        @hamfarid
+LICENSE                             @hamfarid
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 📦 إدارة الحزم والمتطلبات
+# ─────────────────────────────────────────────────────────────────────────────
+requirements*.txt                   @hamfarid
+setup.py                            @hamfarid
+setup.cfg                           @hamfarid
+pyproject.toml                      @hamfarid
+package.json                        @hamfarid
+package-lock.json                   @hamfarid
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🔐 ملفات حساسة (تتطلب مراجعة أمنية)
+# ─────────────────────────────────────────────────────────────────────────────
+*.pem                               @hamfarid
+*.key                               @hamfarid
+*.crt                               @hamfarid
+.env*                               @hamfarid
+secrets/                            @hamfarid
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 📝 ملفات التعليمات والقواعد
+# ─────────────────────────────────────────────────────────────────────────────
+/.github/instructions/              @hamfarid
+.commitlintrc*                      @hamfarid
+.releaserc*                         @hamfarid
+.husky/                             @hamfarid

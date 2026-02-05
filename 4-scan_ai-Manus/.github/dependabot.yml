@@ -1,0 +1,57 @@
+version: 2
+updates:
+  # Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "hamfarid"
+    labels:
+      - "dependencies"
+      - "python"
+  
+  # JavaScript dependencies
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "hamfarid"
+    labels:
+      - "dependencies"
+      - "javascript"
+  
+  # Docker dependencies
+  - package-ecosystem: "docker"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "hamfarid"
+    labels:
+      - "dependencies"
+      - "docker"
+  
+  - package-ecosystem: "docker"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "hamfarid"
+    labels:
+      - "dependencies"
+      - "docker"
+  
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "hamfarid"
+    labels:
+      - "dependencies"
+      - "github-actions"

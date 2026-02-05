@@ -1,0 +1,30 @@
+#!/bin/sh
+# FILE: .husky/pre-commit | PURPOSE: Run checks before commit | OWNER: DevOps Team | LAST-AUDITED: 2026-02-05
+
+echo "🔍 جارٍ فحص الكود قبل الالتزام..."
+
+# تشغيل Black (إذا كان متاحاً)
+if command -v black &> /dev/null; then
+    echo "🎨 فحص التنسيق (Black)..."
+    black --check --quiet gaara_erp/ 2>/dev/null || {
+        echo "⚠️ يوجد كود يحتاج تنسيق. شغّل: black gaara_erp/"
+        exit 1
+    }
+fi
+
+# تشغيل Flake8 (إذا كان متاحاً)
+if command -v flake8 &> /dev/null; then
+    echo "🔎 فحص الأخطاء (Flake8)..."
+    flake8 gaara_erp/ --max-line-length=120 --select=E9,F63,F7,F82 --quiet 2>/dev/null || {
+        echo "❌ يوجد أخطاء في الكود. راجع المخرجات أعلاه."
+        exit 1
+    }
+fi
+
+# فحص عدم وجود أسرار
+echo "🔐 فحص الأسرار..."
+if grep -rn "password\s*=\s*['\"][^'\"]*['\"]" gaara_erp/ --include="*.py" 2>/dev/null | grep -v "# noqa" | grep -v "test" | head -5; then
+    echo "⚠️ تحذير: قد تكون هناك كلمات مرور مكشوفة في الكود!"
+fi
+
+echo "✅ تم اجتياز الفحوصات!"

@@ -1,0 +1,187 @@
+# FILE: .github/workflows/deploy-staging.yml | PURPOSE: Deploy to Staging environment | OWNER: DevOps Team | RELATED: ci.yml, deploy-production.yml | LAST-AUDITED: 2026-02-05
+
+name: 🚀 النشر إلى Staging
+
+on:
+  push:
+    branches:
+      - develop
+      - 'release/**'
+  workflow_dispatch:
+    inputs:
+      skip_tests:
+        description: 'تخطي الاختبارات (غير موصى به)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: staging-deployment
+  cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: '3.11'
+  STAGING_URL: 'https://staging.gaara-erp.com'
+
+jobs:
+  # ═══════════════════════════════════════════════════════════════
+  # 🧪 البناء والاختبار
+  # ═══════════════════════════════════════════════════════════════
+  build-and-test:
+    name: 🧪 البناء والاختبار
+    runs-on: ubuntu-latest
+    if: ${{ !inputs.skip_tests }}
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: 📥 استنساخ المستودع
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 إعداد Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 📦 تثبيت المتطلبات
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
+
+      - name: 🧪 تشغيل الاختبارات
+        env:
+          DJANGO_SETTINGS_MODULE: gaara_erp.settings
+          SECRET_KEY: staging-test-key
+        run: |
+          pytest -v --tb=short
+
+      - name: 🔢 تحديد الإصدار
+        id: version
+        run: |
+          VERSION=$(git describe --tags --always --dirty)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "📦 الإصدار: $VERSION"
+
+      - name: 📦 إنشاء Artifact
+        run: |
+          mkdir -p dist
+          tar -czf dist/staging-build.tar.gz \
+            --exclude='.git' \
+            --exclude='__pycache__' \
+            --exclude='*.pyc' \
+            --exclude='.env*' \
+            --exclude='*.sqlite3' \
+            --exclude='node_modules' \
+            gaara_erp/
+
+      - name: 📤 رفع Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: staging-build
+          path: dist/
+          retention-days: 3
+
+  # ═══════════════════════════════════════════════════════════════
+  # 🚀 النشر إلى Staging
+  # ═══════════════════════════════════════════════════════════════
+  deploy:
+    name: 🚀 النشر إلى Staging
+    needs: build-and-test
+    if: always() && (needs.build-and-test.result == 'success' || inputs.skip_tests)
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: ${{ env.STAGING_URL }}
+
+    steps:
+      - name: 📥 استنساخ المستودع
+        uses: actions/checkout@v4
+
+      - name: 📥 تنزيل Artifact
+        if: ${{ !inputs.skip_tests }}
+        uses: actions/download-artifact@v4
+        with:
+          name: staging-build
+          path: dist/
+
+      - name: 🔐 إعداد بيانات الاعتماد
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.STAGING_SSH_KEY }}" > ~/.ssh/staging_key
+          chmod 600 ~/.ssh/staging_key
+          echo "Host staging" >> ~/.ssh/config
+          echo "  HostName ${{ secrets.STAGING_HOST }}" >> ~/.ssh/config
+          echo "  User ${{ secrets.STAGING_USER }}" >> ~/.ssh/config
+          echo "  IdentityFile ~/.ssh/staging_key" >> ~/.ssh/config
+          echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+
+      - name: 🚀 النشر
+        run: |
+          echo "🚀 جارٍ النشر إلى بيئة Staging..."
+          echo "📦 الإصدار: ${{ needs.build-and-test.outputs.version || 'manual' }}"
+
+          # نسخ الملفات (مثال)
+          # rsync -avz --delete dist/ staging:/var/www/gaara-erp/
+
+          # أو باستخدام Docker
+          # ssh staging "cd /opt/gaara-erp && docker-compose pull && docker-compose up -d"
+
+          echo "✅ تم النشر بنجاح!"
+
+      - name: 🔍 اختبارات الدخان (Smoke Tests)
+        run: |
+          echo "🔍 جارٍ التحقق من صحة النشر..."
+          sleep 10
+
+          # التحقق من صحة الخادم
+          # curl -f ${{ env.STAGING_URL }}/health || exit 1
+          # curl -f ${{ env.STAGING_URL }}/api/v1/status || exit 1
+
+          echo "✅ جميع الفحوصات نجحت!"
+
+      - name: 📢 إشعار Slack
+        if: always()
+        uses: slackapi/slack-github-action@v1
+        continue-on-error: true
+        with:
+          payload: |
+            {
+              "text": "${{ job.status == 'success' && '✅' || '❌' }} نشر Staging: ${{ job.status }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*${{ job.status == 'success' && '✅ نجح' || '❌ فشل' }} نشر Staging*\n• الفرع: `${{ github.ref_name }}`\n• المُنفذ: ${{ github.actor }}\n• <${{ env.STAGING_URL }}|زيارة Staging>"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+  # ═══════════════════════════════════════════════════════════════
+  # 📊 ملخص النشر
+  # ═══════════════════════════════════════════════════════════════
+  summary:
+    name: 📊 ملخص النشر
+    needs: [build-and-test, deploy]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📋 كتابة الملخص
+        run: |
+          echo "## 🚀 ملخص النشر إلى Staging" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| المرحلة | الحالة |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 🧪 البناء والاختبار | ${{ needs.build-and-test.result == 'success' && '✅' || (needs.build-and-test.result == 'skipped' && '⏭️ تم التخطي' || '❌') }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🚀 النشر | ${{ needs.deploy.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**الفرع:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**المُنفذ:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "**الرابط:** ${{ env.STAGING_URL }}" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,100 @@
+{
+  "branches": [
+    "main",
+    {
+      "name": "develop",
+      "prerelease": "dev"
+    },
+    {
+      "name": "release/*",
+      "prerelease": "rc"
+    }
+  ],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [
+          { "type": "feat", "release": "minor" },
+          { "type": "fix", "release": "patch" },
+          { "type": "perf", "release": "patch" },
+          { "type": "refactor", "release": "patch" },
+          { "type": "docs", "release": false },
+          { "type": "style", "release": false },
+          { "type": "test", "release": false },
+          { "type": "build", "release": false },
+          { "type": "ci", "release": false },
+          { "type": "chore", "release": false },
+          { "breaking": true, "release": "major" }
+        ],
+        "parserOpts": {
+          "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"]
+        }
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "feat", "section": "✨ الميزات الجديدة", "hidden": false },
+            { "type": "fix", "section": "🐛 إصلاحات الأخطاء", "hidden": false },
+            { "type": "perf", "section": "⚡ تحسينات الأداء", "hidden": false },
+            { "type": "refactor", "section": "♻️ إعادة الهيكلة", "hidden": false },
+            { "type": "docs", "section": "📚 التوثيق", "hidden": false },
+            { "type": "style", "section": "🎨 التنسيق", "hidden": true },
+            { "type": "test", "section": "🧪 الاختبارات", "hidden": true },
+            { "type": "build", "section": "📦 البناء", "hidden": true },
+            { "type": "ci", "section": "🔧 CI/CD", "hidden": true },
+            { "type": "chore", "section": "🔨 الصيانة", "hidden": true },
+            { "type": "revert", "section": "⏪ التراجعات", "hidden": false }
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md",
+        "changelogTitle": "# 📋 سجل التغييرات\n\nجميع التغييرات الملحوظة في هذا المشروع موثقة في هذا الملف.\n\nيتبع هذا المشروع [Semantic Versioning](https://semver.org/lang/ar/).\n"
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "echo 'VERSION=${nextRelease.version}' && python scripts/update_version.py ${nextRelease.version} || true"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md",
+          "package.json",
+          "package-lock.json",
+          "pyproject.toml",
+          "gaara_erp/__version__.py"
+        ],
+        "message": "chore(release): 🎉 ${nextRelease.version}\n\n${nextRelease.notes}"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "dist/*.tar.gz",
+            "label": "Distribution (${nextRelease.version})"
+          }
+        ],
+        "successComment": "🎉 تم إصدار النسخة ${nextRelease.version} بنجاح!\n\n${nextRelease.notes}",
+        "failComment": "❌ فشل الإصدار التلقائي. يرجى مراجعة السجلات.",
+        "labels": ["released"],
+        "releasedLabels": ["released-<%= nextRelease.channel || 'latest' %>"]
+      }
+    ]
+  ],
+  "tagFormat": "v${version}"
+}
