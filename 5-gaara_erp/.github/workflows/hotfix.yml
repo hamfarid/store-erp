@@ -124,7 +124,7 @@ jobs:
     if: ${{ !inputs.skip_staging }}
     runs-on: ubuntu-latest
     environment:
-      name: staging
+      name: staging-env
       url: ${{ env.STAGING_URL }}
 
     steps:
@@ -167,7 +167,7 @@ jobs:
     if: always() && needs.validate.result == 'success' && (needs.deploy-staging.result == 'success' || inputs.skip_staging)
     runs-on: ubuntu-latest
     environment:
-      name: production
+      name: production-env
       url: ${{ env.PRODUCTION_URL }}
 
     steps:

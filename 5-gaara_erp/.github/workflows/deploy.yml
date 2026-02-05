@@ -4,6 +4,15 @@ name: Deploy (Dev → Staging → Production)
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
   push:
     branches: ["main"]
     paths-ignore:
@@ -82,7 +91,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: development
+      name: development-env
       url: ${{ steps.out.outputs.url }}
     steps:
       - uses: actions/download-artifact@v4
@@ -135,11 +144,28 @@ jobs:
           echo "All CI gates must have passed already."
           echo "Verifying security scans, tests, and SBOM..."
 
+      - name: Create pre-deployment backup
+        run: |
+          python create_backup.py . ./backups
+          echo "✅ Pre-deployment backup created"
+
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pre-deployment-backup
+          path: backups/*.zip
+          retention-days: 90
+
       - name: Deploy to Production (HTTPS + HSTS enforced)
         run: |
           echo "Deploying to PRODUCTION environment..."
           # Add actual deployment commands here
           # Ensure HTTPS is enforced and HSTS headers are set
+
+      - name: Health check
+        run: |
+          echo "Performing health check..."
+          # curl -f https://your-app-url/health || exit 1
 
       - name: Output Prod URL
         id: out

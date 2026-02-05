@@ -9,8 +9,6 @@ updates:
       time: "09:00"
       timezone: "Asia/Riyadh"
     open-pull-requests-limit: 10
-    reviewers:
-      - "hamfarid"
     assignees:
       - "hamfarid"
     labels:
@@ -21,7 +19,7 @@ updates:
       prefix: "chore(deps)"
       prefix-development: "chore(deps-dev)"
       include: "scope"
-    
+
   # JavaScript dependencies (Frontend)
   - package-ecosystem: "npm"
     directory: "/frontend"
@@ -31,8 +29,6 @@ updates:
       time: "09:00"
       timezone: "Asia/Riyadh"
     open-pull-requests-limit: 10
-    reviewers:
-      - "hamfarid"
     assignees:
       - "hamfarid"
     labels:
@@ -44,21 +40,56 @@ updates:
       prefix-development: "chore(deps-dev)"
       include: "scope"
     versioning-strategy: increase
-    
+
   # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
-      day: "monday"
+      day: "wednesday"
       time: "09:00"
       timezone: "Asia/Riyadh"
     open-pull-requests-limit: 5
-    reviewers:
+    assignees:
       - "hamfarid"
     labels:
       - "dependencies"
       - "github-actions"
+      - "ci-cd"
     commit-message:
-      prefix: "chore(deps)"
+      prefix: "chore(ci)"
       include: "scope"
+
+  # Docker images (Backend)
+  - package-ecosystem: "docker"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "Asia/Riyadh"
+    assignees:
+      - "hamfarid"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "backend"
+    commit-message:
+      prefix: "chore(docker)"
+
+  # Docker images (Frontend)
+  - package-ecosystem: "docker"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "Asia/Riyadh"
+    assignees:
+      - "hamfarid"
+    labels:
+      - "dependencies"
+      - "docker"
+      - "frontend"
+    commit-message:
+      prefix: "chore(docker)"
