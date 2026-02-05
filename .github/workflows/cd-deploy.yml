@@ -341,7 +341,7 @@ jobs:
     name: Rollback Deployment
     runs-on: ubuntu-latest
     if: failure() && inputs.environment == 'production'
-    needs: [deploy-production]
+    needs: [build, deploy-production]
     
     steps:
       - name: Rollback to previous version
