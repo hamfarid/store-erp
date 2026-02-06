@@ -33,7 +33,7 @@ jobs:
   validate:
     name: Validate Hotfix
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,12 +48,14 @@ jobs:
           echo "✅ Branch naming convention valid"
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
 
       - name: Install dependencies
+        working-directory: backend
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt -q
@@ -64,13 +66,14 @@ jobs:
           flake8 backend --count || echo "⚠️ Linting warnings"
 
       - name: Run tests
+        working-directory: backend
         run: |
           pip install pytest -q
           pytest tests/ -v --tb=short || echo "⚠️ Some tests failed"
 
       - name: Build backend
         run: |
-          python -m py_compile backend/*.py
+          find backend/src -name "*.py" -exec python -m py_compile {} +
           echo "✅ Backend build successful"
 
   # ============================================================
@@ -167,14 +170,14 @@ jobs:
           name: Hotfix v${{ steps.version.outputs.version }}
           body: |
             ## 🚨 Hotfix Release
-            
+
             **Issue**: #${{ inputs.issue_number }}
             **Branch**: ${{ github.ref_name }}
             **Commit**: ${{ github.sha }}
-            
+
             ### ما تم إصلاحه:
             - تم حل المشكلة الحرجة
-            
+
             ### اختبارات:
             - ✅ جميع الاختبارات تمر
             - ✅ تم التحقق من الإنتاج

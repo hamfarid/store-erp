@@ -6,9 +6,10 @@
 from datetime import datetime
 import sys
 import os
+from pathlib import Path
 
 # إضافة مسار src للاستيراد
-sys.path.insert(0, "src")
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 
 def migrate_invoices():
@@ -16,7 +17,7 @@ def migrate_invoices():
     print("🔄 بدء migration الفواتير...")
 
     try:
-        from models.invoice import Invoice as OldInvoice, InvoiceItem as OldInvoiceItem
+        from models.invoice_unified import Invoice as OldInvoice, InvoiceItem as OldInvoiceItem
         from models.unified_invoice import UnifiedInvoice, UnifiedInvoiceItem
         from database import db
 

@@ -80,8 +80,8 @@ def get_dashboard_stats():
     This endpoint provides aggregated stats without requiring authentication
     for initial page load, then updates with authenticated data.
     """
-    from src.models.invoice import Invoice
-    from src.models.product import Product
+    from src.models.invoice_unified import Invoice
+    from src.models.inventory import Product
     from src.models.partners import Customer, Supplier
     from src.models.stock_movement import StockMovement
 
@@ -158,8 +158,8 @@ def get_summary():
 
     Returns key metrics for the dashboard overview.
     """
-    from src.models.invoice import Invoice
-    from src.models.product import Product
+    from src.models.invoice_unified import Invoice
+    from src.models.inventory import Product
     from src.models.partners import Customer, Supplier
 
     period = request.args.get("period", "month")
@@ -269,7 +269,7 @@ def get_sales_chart():
         period: week, month, year
         type: daily, weekly, monthly
     """
-    from src.models.invoice import Invoice
+    from src.models.invoice_unified import Invoice
 
     period = request.args.get("period", "month")
     chart_type = request.args.get("type", "daily")
@@ -386,8 +386,8 @@ def get_top_products():
         period: week, month, year
         limit: Number of products (default 10)
     """
-    from src.models.invoice import Invoice, InvoiceItem
-    from src.models.product import Product
+    from src.models.invoice_unified import Invoice, InvoiceItem
+    from src.models.inventory import Product
 
     period = request.args.get("period", "month")
     limit = request.args.get("limit", 10, type=int)
@@ -443,7 +443,7 @@ def get_top_customers():
     """
     Get top customers by purchase amount.
     """
-    from src.models.invoice import Invoice
+    from src.models.invoice_unified import Invoice
     from src.models.partners import Customer
 
     period = request.args.get("period", "month")
@@ -496,7 +496,7 @@ def get_low_stock():
     """
     Get products with low stock.
     """
-    from src.models.product import Product
+    from src.models.inventory import Product
 
     limit = request.args.get("limit", 20, type=int)
 
@@ -537,7 +537,7 @@ def get_recent_activity():
     """
     Get recent activity feed.
     """
-    from src.models.invoice import Invoice
+    from src.models.invoice_unified import Invoice
     from src.models.stock_movement import StockMovement
 
     limit = request.args.get("limit", 20, type=int)
@@ -592,7 +592,7 @@ def get_payment_status():
     """
     Get payment status breakdown.
     """
-    from src.models.invoice import Invoice
+    from src.models.invoice_unified import Invoice
 
     period = request.args.get("period", "month")
     start_date, end_date = get_date_range(period)

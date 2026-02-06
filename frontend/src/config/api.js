@@ -1,12 +1,14 @@
 /**
- * إعدادات API المركزية
  * Central API Configuration
- * 
- * Port Configuration:
- * - Frontend: 5505
- * - Backend: 5506
- * - Redis: 5606 (Backend + 100)
- * - Database: 5605 (Frontend + 100)
+ *
+ * Port Configuration (host-side):
+ * - Frontend: 6501 (maps to nginx:80 in Docker)
+ * - Backend: 6001 (maps to gunicorn:5000 in Docker)
+ * - Redis: 6376 (maps to redis:6379 in Docker)
+ * - Database: 12502 (maps to postgres:5432 in Docker)
+ *
+ * In Docker: Nginx proxies /api/* to backend:5000 so API_BASE_URL is empty (relative).
+ * In dev: Vite proxy handles /api/* to localhost:6001.
  */
 
 // Port Configuration (synced with config/ports.json)
@@ -19,15 +21,16 @@ export const PORTS = {
   DATABASE: 5432  // PostgreSQL (Dev uses SQLite)
 };
 
-// عنوان الخادم الأساسي
-// Use relative URL when port matches vite config (6501), otherwise direct to backend
-// This handles cases where Vite falls back to a different port
+// API Base URL resolution:
+// - In Docker (nginx): port is 80 or 6501, use relative URLs (nginx proxies /api/ to backend)
+// - In Vite dev: port is 6501 or 5173, use relative URLs (vite proxy handles /api/)
+// - Otherwise: direct to backend port
 const currentPort = typeof window !== 'undefined' ? window.location.port : '6501';
-const isViteConfiguredPort = currentPort === '6501' || currentPort === '5173';
+const useRelativeUrl = currentPort === '6501' || currentPort === '5173' || currentPort === '80' || currentPort === '';
 export const API_BASE_URL = import.meta.env.VITE_API_URL ||
   import.meta.env.VITE_API_BASE ||
   import.meta.env.VITE_BACKEND_URL ||
-  (isViteConfiguredPort ? '' : `http://localhost:${PORTS.BACKEND}`);
+  (useRelativeUrl ? '' : `http://localhost:${PORTS.BACKEND}`);
 
 // نقاط النهاية للـ API
 export const API_ENDPOINTS = {

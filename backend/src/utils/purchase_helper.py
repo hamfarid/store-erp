@@ -182,7 +182,7 @@ def update_inventory_from_receipt(receipt):
     Returns:
         bool: نجاح العملية
     """
-    from src.models.purchase_order_item import PurchaseOrderItem
+    from src.models.purchase_order import PurchaseOrderItem
     
     items = PurchaseOrderItem.query.filter_by(po_id=receipt.po_id).all()
     

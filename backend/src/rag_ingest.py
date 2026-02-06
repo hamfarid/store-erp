@@ -11,8 +11,12 @@ import os
 from pathlib import Path
 from typing import Iterable, List, Dict, Union, Sequence, Mapping, cast
 
-import chromadb
-from sentence_transformers import SentenceTransformer
+try:
+    import chromadb  # type: ignore[import-untyped]
+    from sentence_transformers import SentenceTransformer  # type: ignore[import-untyped]
+except ImportError:
+    chromadb = None  # type: ignore[assignment]
+    SentenceTransformer = None  # type: ignore[assignment,misc]
 
 # Paths
 SRC_DIR = Path(__file__).resolve().parent

@@ -6,9 +6,9 @@ Created: 2025-12-13
 from flask import Blueprint, request, jsonify
 from datetime import datetime, timedelta, date
 from sqlalchemy import and_, or_, desc
-from models.lot_advanced import LotAdvanced
-from models.product import Product
-from database import db
+from src.models.lot_advanced import LotAdvanced
+from src.models.inventory import Product
+from src.database import db
 
 batches_bp = Blueprint('batches_advanced', __name__)
 

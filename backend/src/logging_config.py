@@ -171,9 +171,9 @@ def setup_logging(
     # Sentry integration (if DSN provided)
     if sentry_dsn:
         try:
-            import sentry_sdk
-            from sentry_sdk.integrations.flask import FlaskIntegration
-            from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
+            import sentry_sdk  # type: ignore[import-untyped]
+            from sentry_sdk.integrations.flask import FlaskIntegration  # type: ignore[import-untyped]
+            from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration  # type: ignore[import-untyped]
 
             sentry_sdk.init(
                 dsn=sentry_dsn,

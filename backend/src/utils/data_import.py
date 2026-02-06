@@ -389,7 +389,7 @@ def to_string(value: Any) -> str:
 
 def get_products_importer():
     """Get importer for products."""
-    from src.models.product import Product
+    from src.models.inventory import Product
 
     return DataImporter(
         model=Product,

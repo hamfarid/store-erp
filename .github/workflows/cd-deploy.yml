@@ -52,7 +52,7 @@ jobs:
     name: Pre-deployment Tests
     runs-on: ubuntu-latest
     if: ${{ !inputs.skip_tests }}
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -168,7 +168,7 @@ jobs:
     # environment:
     #   name: staging
     #   url: https://staging.store-erp.example.com
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -181,20 +181,20 @@ jobs:
           key: ${{ secrets.STAGING_SSH_KEY }}
           script: |
             cd /opt/store-erp
-            
+
             # Pull latest images
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}:${{ needs.build.outputs.version }}
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:${{ needs.build.outputs.version }}
-            
+
             # Update docker-compose with new image tags
             export BACKEND_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}:${{ needs.build.outputs.version }}
             export FRONTEND_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:${{ needs.build.outputs.version }}
-            
+
             # Deploy with zero-downtime
-            docker-compose -f docker-compose.staging.yml up -d --no-deps --scale backend=2 backend
+            docker-compose -f docker-compose.production.yml up -d --no-deps --scale backend=2 backend
             sleep 10
-            docker-compose -f docker-compose.staging.yml up -d --no-deps frontend nginx
-            
+            docker-compose -f docker-compose.production.yml up -d --no-deps frontend nginx
+
             # Cleanup old images
             docker image prune -f
         continue-on-error: true
@@ -237,7 +237,7 @@ jobs:
     # environment:
     #   name: production
     #   url: https://store-erp.example.com
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -250,10 +250,10 @@ jobs:
           key: ${{ secrets.PRODUCTION_SSH_KEY }}
           script: |
             cd /opt/store-erp
-            
+
             # Backup database
             docker exec store_database pg_dump -U inventory_user inventory_db > backup_$(date +%Y%m%d_%H%M%S).sql
-            
+
             # Keep only last 5 backups
             ls -t backup_*.sql | tail -n +6 | xargs -r rm
         continue-on-error: true
@@ -266,25 +266,25 @@ jobs:
           key: ${{ secrets.PRODUCTION_SSH_KEY }}
           script: |
             cd /opt/store-erp
-            
+
             # Pull latest images
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}:${{ needs.build.outputs.version }}
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:${{ needs.build.outputs.version }}
-            
+
             # Blue-green deployment
             export BACKEND_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}:${{ needs.build.outputs.version }}
             export FRONTEND_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:${{ needs.build.outputs.version }}
-            
+
             # Deploy backend first
             docker-compose -f docker-compose.production.yml up -d --no-deps backend
             sleep 20
-            
+
             # Health check backend
             curl -f http://localhost:6001/api/health || exit 1
-            
+
             # Deploy frontend and nginx
             docker-compose -f docker-compose.production.yml up -d --no-deps frontend nginx
-            
+
             # Cleanup
             docker image prune -f
         continue-on-error: true
@@ -302,11 +302,11 @@ jobs:
           name: Release v${{ needs.build.outputs.version }}
           body: |
             ## Store ERP Release v${{ needs.build.outputs.version }}
-            
+
             ### Changes
             - Commit: ${{ github.sha }}
             - Deployed: ${{ github.event.repository.updated_at }}
-            
+
             ### Docker Images
             - Backend: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}:${{ needs.build.outputs.version }}`
             - Frontend: `${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:${{ needs.build.outputs.version }}`
@@ -342,7 +342,7 @@ jobs:
     runs-on: ubuntu-latest
     if: failure() && inputs.environment == 'production'
     needs: [build, deploy-production]
-    
+
     steps:
       - name: Rollback to previous version
         uses: appleboy/ssh-action@v1.0.3
@@ -352,15 +352,15 @@ jobs:
           key: ${{ secrets.PRODUCTION_SSH_KEY }}
           script: |
             cd /opt/store-erp
-            
+
             # Get previous image tags
             PREV_BACKEND=$(docker images --format "{{.Tag}}" ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }} | sed -n '2p')
             PREV_FRONTEND=$(docker images --format "{{.Tag}}" ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }} | sed -n '2p')
-            
+
             # Rollback
             export BACKEND_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}:$PREV_BACKEND
             export FRONTEND_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:$PREV_FRONTEND
-            
+
             docker-compose -f docker-compose.production.yml up -d
         continue-on-error: true
 

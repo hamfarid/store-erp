@@ -7,7 +7,7 @@ from flask import Blueprint, request, jsonify
 from datetime import datetime, date
 from src.database import db
 from src.models.purchase_order import PurchaseOrder, POStatus
-from src.models.purchase_order_item import PurchaseOrderItem
+from src.models.purchase_order import PurchaseOrderItem
 from src.models.purchase_receipt import PurchaseReceipt
 from src.models.lot_advanced import LotAdvanced
 from src.decorators.auth_decorators import token_required

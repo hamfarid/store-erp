@@ -11,6 +11,7 @@
 ### 📋 القواعد المطلوبة
 
 #### 1. **Require pull request reviews before merging**
+
 - ✅ **Enabled**
 - **عدد الموافقات:** 1 (أو أكثر حسب حجم الفريق)
 - **Dismiss stale pull request reviews:** ✅ مفعّل
@@ -18,6 +19,7 @@
 - **Require last push approval:** ✅ مفعّل
 
 #### 2. **Require status checks to pass before merging**
+
 - ✅ **Enabled**
 - **Required checks:**
   - `CI / Lint Backend (Python)`
@@ -28,22 +30,28 @@
 - **Require branches to be up to date:** ✅ مفعّل
 
 #### 3. **Require code owner reviews**
+
 - ✅ **Enabled**
 - **File:** `.github/CODEOWNERS`
 
 #### 4. **Allow force pushes**
+
 - ❌ **Disabled** (لا نسمح بـ force push)
 
 #### 5. **Allow deletions**
+
 - ❌ **Disabled** (لا نسمح بحذف main)
 
 #### 6. **Require conversation resolution before merging**
+
 - ✅ **Enabled** (يجب حل جميع التعليقات)
 
 #### 7. **Require linear history**
+
 - ✅ **Enabled** (سجل نظيف بدون merge commits غير ضرورية)
 
 #### 8. **Require signed commits**
+
 - ❌ **Optional** (موصى به للأمان العالي)
 
 ---
@@ -51,6 +59,7 @@
 ## إعدادات Branch Protection لـ `develop` (اختياري)
 
 ### القواعس الأساسية فقط
+
 - ✅ Require pull request reviews (1 approval)
 - ✅ Require status checks
 - ❌ Require conversation resolution
@@ -60,12 +69,13 @@
 
 ## كيفية تطبيق القواعس على GitHub
 
-### الطريقة اليدوية:
+### الطريقة اليدوية
 
 1. **انتقل إلى:** Settings → Branches
 2. **اضغط:** "Add rule"
 3. **Branch name pattern:** `main`
 4. **فعّل الإعدادات أعلاه:**
+
    ```
    ☑️ Require a pull request before merging
       ☑️ Require approvals (Count: 1)
@@ -83,7 +93,7 @@
    ☑️ Restrict who can push to matching branches
    ```
 
-### الطريقة البرمجية (Terraform):
+### الطريقة البرمجية (Terraform)
 
 ```hcl
 resource "github_branch_protection" "main" {
@@ -116,7 +126,7 @@ resource "github_branch_protection" "main" {
 }
 ```
 
-### الطريقة عبر GitHub CLI:
+### الطريقة عبر GitHub CLI
 
 ```bash
 # عرض الإعدادات الحالية
@@ -185,11 +195,13 @@ gh api repos/hamfarid/store-erp/branches/main/protection --pretty
 بعد تطبيق القواعس:
 
 ### ✅ يمكنك
+
 - فتح PRs من أي فرع
 - دمج PRs **بعد** الموافقة و CI
 - رؤية قائمة كاملة من الفحوصات المطلوبة
 
 ### ❌ لا يمكنك
+
 - دمج PR بدون موافقة
 - دمج PR بدون CI تمرير
 - حذف main

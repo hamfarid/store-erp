@@ -77,8 +77,8 @@ class PurchaseReceipt(db.Model):
         Args:
             items_batches: قائمة من {item_id: batch_id}
         """
-        from src.models.purchase_order_item import PurchaseOrderItem
-        
+        from src.models.purchase_order import PurchaseOrderItem
+
         for item_id, batch_id in items_batches.items():
             item = PurchaseOrderItem.query.get(item_id)
             if item and item.po_id == self.po_id:
@@ -91,7 +91,7 @@ class PurchaseReceipt(db.Model):
         """
         تحديث المخزون بناءً على الاستلام
         """
-        from src.models.purchase_order_item import PurchaseOrderItem
+        from src.models.purchase_order import PurchaseOrderItem
         from src.models.lot_advanced import LotAdvanced
         
         items = PurchaseOrderItem.query.filter_by(po_id=self.po_id).all()
@@ -113,8 +113,8 @@ class PurchaseReceipt(db.Model):
         self.update_inventory()
         
         # تحديث حالة أمر الشراء
-        from src.models.purchase_order_item import PurchaseOrderItem
-        
+        from src.models.purchase_order import PurchaseOrderItem
+
         items = PurchaseOrderItem.query.filter_by(po_id=self.po_id).all()
         all_received = all(item.is_fully_received for item in items)
         any_received = any(item.is_partially_received or item.is_fully_received for item in items)

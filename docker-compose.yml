@@ -3,7 +3,7 @@
 # =============================================================================
 # Configured for Ai_project shared network
 # Port Assignment: Project 6 -> Backend: 6001, Frontend: 6501
-# Updated: 2026-01-19
+# Updated: 2026-02-06
 # =============================================================================
 
 services:
@@ -23,83 +23,15 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     ports:
-      - "12502:5432"
+      - "${DATABASE_PORT:-12502}:5432"
     networks:
       - Ai_project
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U inventory_user -d inventory_db" ]
-      interval: 30s
-      timeout: 10s
+      test: ["CMD-SHELL", "pg_isready -U inventory_user -d inventory_db"]
+      interval: 10s
+      timeout: 5s
       retries: 5
-
-  # ===========================================================================
-  # Backend API (Flask)
-  # ===========================================================================
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: store_backend
-    restart: unless-stopped
-    environment:
-      - FLASK_ENV=production
-      - DATABASE_URL=postgresql://inventory_user:${POSTGRES_PASSWORD:-inventory_password}@store_database:5432/inventory_db
-      - SECRET_KEY=${SECRET_KEY:-your-secret-key-here}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-jwt-secret-key-here}
-      - REDIS_URL=redis://store_redis:6379/0
-      - CORS_ORIGINS=http://localhost:6501,http://nginx-proxy,http://localhost:80
-    volumes:
-      - backend_uploads:/app/uploads
-      - backend_logs:/app/logs
-      - backend_backups:/app/backups
-      - backend_sessions:/app/flask_session
-    ports:
-      - "6002:5000"
-    networks:
-      - Ai_project
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-    depends_on:
-      database:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:5000/api/health" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-  # ===========================================================================
-  # Frontend (React + Nginx)
-  # ===========================================================================
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: store_frontend
-    restart: unless-stopped
-    environment:
-      - VITE_API_URL=${VITE_API_URL:-http://localhost:6002/api}
-    ports:
-      - "6501:80"
-    networks:
-      - Ai_project
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-    depends_on:
-      backend:
-        condition: service_healthy
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost/" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      start_period: 10s
 
   # ===========================================================================
   # Redis Cache
@@ -110,16 +42,100 @@ services:
     restart: unless-stopped
     command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
     ports:
-      - "6376:6379"
+      - "${REDIS_PORT:-6376}:6379"
     volumes:
       - redis_data:/data
     networks:
       - Ai_project
     healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ===========================================================================
+  # Backend API (Flask + Gunicorn)
+  # ===========================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: store_backend
+    restart: unless-stopped
+    environment:
+      - FLASK_ENV=production
+      - FLASK_DEBUG=0
+      - DATABASE_URL=postgresql://inventory_user:${POSTGRES_PASSWORD:-inventory_password}@store_database:5432/inventory_db
+      - DB_HOST=store_database
+      - DB_PORT=5432
+      - DB_NAME=inventory_db
+      - DB_USER=inventory_user
+      - DB_PASSWORD=${POSTGRES_PASSWORD:-inventory_password}
+      - SECRET_KEY=${SECRET_KEY:-store_secret_key_2024_change_in_production}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-store_jwt_secret_2024_change_in_production}
+      - REDIS_URL=redis://store_redis:6379/0
+      - CORS_ORIGINS=http://localhost:6501,http://store_frontend,http://store_frontend:80
+      - HOST=0.0.0.0
+      - PORT=5000
+      - TZ=${TZ:-Africa/Cairo}
+      - LANGUAGE=${LANGUAGE:-ar}
+      - CURRENCY=${CURRENCY:-EGP}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - backend_uploads:/app/uploads
+      - backend_logs:/app/logs
+      - backend_backups:/app/backups
+      - backend_instance:/app/instance
+    ports:
+      - "${BACKEND_PORT:-6001}:5000"
+    networks:
+      - Ai_project
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 256M
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 60s
+
+  # ===========================================================================
+  # Frontend (React + Nginx)
+  # ===========================================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=
+    container_name: store_frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-6501}:80"
+    networks:
+      - Ai_project
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
 # =============================================================================
 # Networks - Using external Ai_project network
@@ -142,5 +158,5 @@ volumes:
     driver: local
   backend_backups:
     driver: local
-  backend_sessions:
+  backend_instance:
     driver: local

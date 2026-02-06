@@ -108,7 +108,7 @@ class BatchResponse:
 
 def get_model_for_resource(resource: str):
     """Get SQLAlchemy model for resource name."""
-    from src.models.product import Product
+    from src.models.inventory import Product
     from src.models.partners import Customer, Supplier
     from src.models.category import Category
 

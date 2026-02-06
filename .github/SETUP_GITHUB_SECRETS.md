@@ -140,7 +140,8 @@ Error: Secrets.STAGING_HOST is not defined
 Permission denied (publickey).
 ```
 
-**الحل:** 
+**الحل:**
+
 - تحقق من المفتاح الخاص في الـ secret
 - تحقق من المفتاح العام على الخادم
 

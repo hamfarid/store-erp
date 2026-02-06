@@ -11,7 +11,6 @@ from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
 from sqlalchemy import func, desc, and_, extract
 from src.database import db
-from src.models.invoice import Invoice
 import logging
 
 logger = logging.getLogger(__name__)
@@ -72,7 +71,7 @@ class ReportsService:
     @staticmethod
     def get_sales_summary(period: ReportPeriod) -> Dict[str, Any]:
         """Get sales summary for a period."""
-        from src.models.invoice import Invoice
+        from src.models.invoice_unified import Invoice
 
         query = Invoice.query.filter(
             Invoice.created_at >= period.start_date,
@@ -116,7 +115,7 @@ class ReportsService:
     @staticmethod
     def get_sales_by_day(period: ReportPeriod) -> List[Dict[str, Any]]:
         """Get daily sales breakdown."""
-        from src.models.invoice import Invoice
+        from src.models.invoice_unified import Invoice
 
         query = (
             db.session.query(
@@ -145,8 +144,8 @@ class ReportsService:
     @staticmethod
     def get_top_products(period: ReportPeriod, limit: int = 10) -> List[Dict[str, Any]]:
         """Get top selling products."""
-        from src.models.invoice import InvoiceItem
-        from src.models.product import Product
+        from src.models.invoice_unified import InvoiceItem
+        from src.models.inventory import Product
 
         query = (
             db.session.query(
@@ -171,7 +170,7 @@ class ReportsService:
             .limit(limit)
         )
 
-        from src.models.invoice import Invoice  # Import here to avoid circular
+        from src.models.invoice_unified import Invoice  # Import here to avoid circular
 
         return [
             {
@@ -188,7 +187,7 @@ class ReportsService:
         period: ReportPeriod, limit: int = 10
     ) -> List[Dict[str, Any]]:
         """Get top customers by purchase amount."""
-        from src.models.invoice import Invoice
+        from src.models.invoice_unified import Invoice
         from src.models.partners import Customer
 
         query = (
@@ -222,7 +221,7 @@ class ReportsService:
     @staticmethod
     def get_inventory_report() -> Dict[str, Any]:
         """Get inventory status report."""
-        from src.models.product import Product
+        from src.models.inventory import Product
 
         total_products = Product.query.count()
 
@@ -275,7 +274,7 @@ class ReportsService:
     @staticmethod
     def get_profit_report(period: ReportPeriod) -> Dict[str, Any]:
         """Get profit and loss report."""
-        from src.models.invoice import Invoice, InvoiceItem
+        from src.models.invoice_unified import Invoice, InvoiceItem
 
         # Revenue (Sales)
         revenue = (
@@ -319,8 +318,8 @@ class ReportsService:
     @staticmethod
     def get_sales_by_category(period: ReportPeriod) -> List[Dict[str, Any]]:
         """Get sales breakdown by category."""
-        from src.models.invoice import Invoice, InvoiceItem
-        from src.models.product import Product
+        from src.models.invoice_unified import Invoice, InvoiceItem
+        from src.models.inventory import Product
         from src.models.category import Category
 
         query = (
@@ -355,7 +354,7 @@ class ReportsService:
     @staticmethod
     def get_payment_summary(period: ReportPeriod) -> Dict[str, Any]:
         """Get payment method breakdown."""
-        from src.models.invoice import Invoice
+        from src.models.invoice_unified import Invoice
 
         query = (
             db.session.query(

@@ -118,7 +118,7 @@ yarn.lock
 requirements_comprehensive.txt
 requirements_fixed.txt
 requirements_integrated.txt
-# requirements.txt - DO NOT IGNORE - needed for Docker build
+# NOTE: requirements.txt is NOT ignored - it is needed for Docker build
 
 # ==================== DEVELOPMENT SCRIPTS ====================
 start_server_simple.py

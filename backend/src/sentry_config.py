@@ -44,11 +44,11 @@ def init_sentry(
         True if Sentry initialized successfully, False otherwise
     """
     try:
-        import sentry_sdk
-        from sentry_sdk.integrations.flask import FlaskIntegration
-        from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
-        from sentry_sdk.integrations.redis import RedisIntegration
-        from sentry_sdk.integrations.logging import LoggingIntegration
+        import sentry_sdk  # type: ignore[import-untyped]
+        from sentry_sdk.integrations.flask import FlaskIntegration  # type: ignore[import-untyped]
+        from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration  # type: ignore[import-untyped]
+        from sentry_sdk.integrations.redis import RedisIntegration  # type: ignore[import-untyped]
+        from sentry_sdk.integrations.logging import LoggingIntegration  # type: ignore[import-untyped]
 
         # Get DSN from environment if not provided
         if not dsn:
@@ -177,7 +177,7 @@ def set_user_context(user_id: int, username: str, email: Optional[str] = None):
         email: User email (optional)
     """
     try:
-        import sentry_sdk
+        import sentry_sdk  # type: ignore[import-untyped]
 
         sentry_sdk.set_user({"id": user_id, "username": username, "email": email})
     except ImportError:
@@ -187,7 +187,7 @@ def set_user_context(user_id: int, username: str, email: Optional[str] = None):
 def clear_user_context():
     """Clear user context (e.g., on logout)."""
     try:
-        import sentry_sdk
+        import sentry_sdk  # type: ignore[import-untyped]
 
         sentry_sdk.set_user(None)
     except ImportError:
@@ -203,7 +203,7 @@ def set_context(context_name: str, context_data: Dict[str, Any]):
         context_data: Context data dictionary
     """
     try:
-        import sentry_sdk
+        import sentry_sdk  # type: ignore[import-untyped]
 
         sentry_sdk.set_context(context_name, context_data)
     except ImportError:
@@ -226,7 +226,7 @@ def add_breadcrumb(
         data: Additional data
     """
     try:
-        import sentry_sdk
+        import sentry_sdk  # type: ignore[import-untyped]
 
         sentry_sdk.add_breadcrumb(
             message=message, category=category, level=level, data=data or {}
@@ -244,7 +244,7 @@ def capture_exception(error: Exception, **kwargs):
         **kwargs: Additional context
     """
     try:
-        import sentry_sdk
+        import sentry_sdk  # type: ignore[import-untyped]
 
         # Add extra context
         if kwargs:
@@ -269,7 +269,7 @@ def capture_message(message: str, level: str = "info", **kwargs):
         **kwargs: Additional context
     """
     try:
-        import sentry_sdk
+        import sentry_sdk  # type: ignore[import-untyped]
 
         # Add extra context
         if kwargs:
@@ -336,7 +336,7 @@ def start_transaction(name: str, op: str = "http.server"):
         Transaction object or None
     """
     try:
-        import sentry_sdk
+        import sentry_sdk  # type: ignore[import-untyped]
 
         return sentry_sdk.start_transaction(name=name, op=op)
     except ImportError:

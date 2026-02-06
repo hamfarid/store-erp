@@ -11,9 +11,12 @@ import os
 # Add the src directory to the path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
-from main import app, db  # noqa: E402
+from main import create_app  # noqa: E402
+from database import db  # noqa: E402
 from models.user import User, Role  # noqa: E402
 from sqlalchemy.exc import SQLAlchemyError  # noqa: E402
+
+app = create_app()
 
 
 def create_admin_user():

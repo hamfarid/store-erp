@@ -255,7 +255,7 @@ class ReturnService:
         user_id: int = None,
     ) -> ReturnRequest:
         """Create a new return request."""
-        from src.models.invoice import Invoice
+        from src.models.invoice_unified import Invoice
 
         invoice = Invoice.query.get(invoice_id)
 
