@@ -1,0 +1,4 @@
+[submodule "gaara_erp"]
+	path = gaara_erp
+	url = https://github.com/hamfarid/gaara_erp.git
+	branch = main
