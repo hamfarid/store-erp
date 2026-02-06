@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, master, gaara-erp, develop ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, master, gaara-erp, develop ]
 
 env:
   PYTHON_VERSION: '3.11'
@@ -181,3 +181,56 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'
+        continue-on-error: true
+
+  # ===========================================================================
+  # Database Migration Check
+  # ===========================================================================
+  database-migrations:
+    name: Database Migration Validation
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: gaara_erp_test
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Check for missing migrations
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/gaara_erp_test
+          SECRET_KEY: test-secret-key-for-ci
+        run: |
+          cd backend
+          python manage.py makemigrations --check --dry-run
+
+      - name: Run migrations
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/gaara_erp_test
+          SECRET_KEY: test-secret-key-for-ci
+        run: |
+          cd backend
+          python manage.py migrate --noinput

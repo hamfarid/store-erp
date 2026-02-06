@@ -248,7 +248,7 @@ jobs:
     
     environment:
       name: staging
-      url: https://staging.gaara-scan-ai.com
+      url: https://staging.example.com
       
     steps:
       - name: Checkout code
@@ -313,7 +313,7 @@ jobs:
     
     environment:
       name: production
-      url: https://gaara-scan-ai.com
+      url: https://example.com
       
     steps:
       - name: Checkout code

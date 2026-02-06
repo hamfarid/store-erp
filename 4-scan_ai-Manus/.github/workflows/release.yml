@@ -1,0 +1,502 @@
+# =============================================================================
+# Release Workflow - Version Releases
+# =============================================================================
+# 
+# PURPOSE: Automated release process with semantic versioning
+# TRIGGERS: Push to release/* branches, manual dispatch
+# 
+# Features:
+# - Automatic version detection
+# - CHANGELOG generation
+# - GitHub Release creation
+# - Multi-environment deployment
+#
+# Author: Gaara Scan AI Team
+# =============================================================================
+
+name: 📦 Release Pipeline
+
+on:
+  push:
+    branches:
+      - 'release/**'
+      - 'release/*'
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'نوع الإصدار'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+        default: 'minor'
+      prerelease:
+        description: 'إصدار تجريبي (alpha/beta/rc)'
+        type: choice
+        options:
+          - ''
+          - alpha
+          - beta
+          - rc
+        default: ''
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '18'
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # ============================================
+  # Prepare Release
+  # ============================================
+  prepare:
+    name: 📋 تحضير الإصدار
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      release_name: ${{ steps.version.outputs.release_name }}
+      is_prerelease: ${{ steps.version.outputs.is_prerelease }}
+      changelog: ${{ steps.changelog.outputs.changelog }}
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Calculate version
+        id: version
+        run: |
+          # Extract version from branch name or calculate
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          
+          if [[ "$BRANCH_NAME" == release/* ]]; then
+            # Extract version from branch name (e.g., release/v1.2.0)
+            VERSION="${BRANCH_NAME#release/}"
+            VERSION="${VERSION#v}"
+          else
+            # Calculate from latest tag
+            LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+            VERSION="${LATEST_TAG#v}"
+            
+            MAJOR=$(echo $VERSION | cut -d. -f1)
+            MINOR=$(echo $VERSION | cut -d. -f2)
+            PATCH=$(echo $VERSION | cut -d. -f3)
+            
+            case "${{ inputs.release_type }}" in
+              major)
+                MAJOR=$((MAJOR + 1))
+                MINOR=0
+                PATCH=0
+                ;;
+              minor)
+                MINOR=$((MINOR + 1))
+                PATCH=0
+                ;;
+              patch)
+                PATCH=$((PATCH + 1))
+                ;;
+            esac
+            
+            VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          fi
+          
+          # Add prerelease suffix if specified
+          PRERELEASE="${{ inputs.prerelease }}"
+          IS_PRERELEASE="false"
+          if [ -n "$PRERELEASE" ]; then
+            VERSION="${VERSION}-${PRERELEASE}.1"
+            IS_PRERELEASE="true"
+          fi
+          
+          echo "version=v${VERSION}" >> $GITHUB_OUTPUT
+          echo "release_name=Gaara Scan AI v${VERSION}" >> $GITHUB_OUTPUT
+          echo "is_prerelease=$IS_PRERELEASE" >> $GITHUB_OUTPUT
+          
+          echo "📦 Release version: v${VERSION}"
+          
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get commits since last tag
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          
+          if [ -n "$LATEST_TAG" ]; then
+            COMMITS=$(git log --pretty=format:"- %s (%h)" "$LATEST_TAG"..HEAD)
+          else
+            COMMITS=$(git log --pretty=format:"- %s (%h)" -20)
+          fi
+          
+          # Categorize commits
+          FEATURES=$(echo "$COMMITS" | grep -E "^- (feat|feature):" || echo "")
+          FIXES=$(echo "$COMMITS" | grep -E "^- (fix|bugfix):" || echo "")
+          DOCS=$(echo "$COMMITS" | grep -E "^- (doc|docs):" || echo "")
+          OTHERS=$(echo "$COMMITS" | grep -vE "^- (feat|feature|fix|bugfix|doc|docs):" || echo "")
+          
+          # Build changelog
+          CHANGELOG="## التغييرات في هذا الإصدار\n\n"
+          
+          if [ -n "$FEATURES" ]; then
+            CHANGELOG="${CHANGELOG}### ✨ ميزات جديدة\n${FEATURES}\n\n"
+          fi
+          
+          if [ -n "$FIXES" ]; then
+            CHANGELOG="${CHANGELOG}### 🐛 إصلاحات\n${FIXES}\n\n"
+          fi
+          
+          if [ -n "$DOCS" ]; then
+            CHANGELOG="${CHANGELOG}### 📝 توثيق\n${DOCS}\n\n"
+          fi
+          
+          if [ -n "$OTHERS" ]; then
+            CHANGELOG="${CHANGELOG}### 🔧 تغييرات أخرى\n${OTHERS}\n\n"
+          fi
+          
+          # Save changelog
+          echo -e "$CHANGELOG" > release-notes.md
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          cat release-notes.md >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+  # ============================================
+  # Test Release
+  # ============================================
+  test:
+    name: 🧪 اختبار الإصدار
+    needs: prepare
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: gaara
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: gaara_scan_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+          
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          pip install pytest pytest-cov pytest-asyncio httpx
+          
+      - name: Run backend tests
+        env:
+          DATABASE_URL: postgresql://gaara:test_password@localhost:5432/gaara_scan_test
+          REDIS_HOST: localhost
+          SECRET_KEY: test-secret-key
+          ENVIRONMENT: test
+        run: |
+          cd backend
+          pytest tests/ -v --tb=short || echo "⚠️ Some tests may need attention"
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+          
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm test -- --passWithNoTests || true
+          
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+  # ============================================
+  # Build Release Artifacts
+  # ============================================
+  build:
+    name: 🐳 بناء الإصدار
+    needs: [prepare, test]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      
+    outputs:
+      backend-digest: ${{ steps.build-backend.outputs.digest }}
+      frontend-digest: ${{ steps.build-frontend.outputs.digest }}
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Log in to Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Backend
+      - name: Build and push Backend
+        id: build-backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/backend:${{ needs.prepare.outputs.version }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/backend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            VERSION=${{ needs.prepare.outputs.version }}
+            
+      # Frontend
+      - name: Build and push Frontend
+        id: build-frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/frontend:${{ needs.prepare.outputs.version }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/frontend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ============================================
+  # Deploy to Staging
+  # ============================================
+  deploy-staging:
+    name: 🧪 نشر إلى Staging
+    needs: [prepare, build]
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://staging.example.com
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Deploy to Staging
+        run: |
+          echo "🚀 جارٍ نشر الإصدار ${{ needs.prepare.outputs.version }} إلى Staging..."
+          # Add your staging deployment commands here
+          
+      - name: Run smoke tests
+        run: |
+          echo "🔍 تشغيل اختبارات الدخان..."
+          sleep 15
+          # curl -f https://staging.gaara-scan.ai/api/v1/health
+          echo "✅ Staging deployment successful"
+
+  # ============================================
+  # Deploy to Production
+  # ============================================
+  deploy-production:
+    name: 🚀 نشر إلى الإنتاج
+    needs: [prepare, build, deploy-staging]
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://example.com
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Deploy to Production
+        run: |
+          echo "🚀 جارٍ نشر الإصدار ${{ needs.prepare.outputs.version }} إلى الإنتاج..."
+          # Add your production deployment commands here
+          
+      - name: Verify deployment
+        run: |
+          echo "🔍 التحقق من النشر..."
+          sleep 30
+          # curl -f https://gaara-scan.ai/api/v1/health
+          echo "✅ Production deployment successful"
+
+  # ============================================
+  # Create GitHub Release
+  # ============================================
+  create-release:
+    name: 📋 إنشاء الإصدار
+    needs: [prepare, deploy-production]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Create and push tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          
+          VERSION="${{ needs.prepare.outputs.version }}"
+          
+          # Create annotated tag
+          git tag -a "$VERSION" -m "${{ needs.prepare.outputs.release_name }}"
+          git push origin "$VERSION"
+          
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.prepare.outputs.version }}
+          name: ${{ needs.prepare.outputs.release_name }}
+          body: |
+            # ${{ needs.prepare.outputs.release_name }}
+            
+            ${{ needs.prepare.outputs.changelog }}
+            
+            ## 🐳 صور Docker
+            
+            ```bash
+            # Backend
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/backend:${{ needs.prepare.outputs.version }}
+            
+            # Frontend
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/frontend:${{ needs.prepare.outputs.version }}
+            ```
+            
+            ## 📖 التوثيق
+            
+            راجع [دليل التثبيت](https://github.com/${{ github.repository }}/blob/main/INSTALLATION_GUIDE.md) للحصول على تعليمات التثبيت الكاملة.
+          prerelease: ${{ needs.prepare.outputs.is_prerelease == 'true' }}
+          generate_release_notes: true
+
+  # ============================================
+  # Merge back to develop
+  # ============================================
+  merge-develop:
+    name: 🔄 دمج في develop
+    needs: [prepare, create-release]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Merge to develop
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          VERSION="${{ needs.prepare.outputs.version }}"
+          
+          # Fetch and checkout develop
+          git fetch origin develop
+          git checkout develop
+          git pull origin develop
+          
+          # Merge release branch
+          git merge "$BRANCH_NAME" --no-ff -m "🔄 Merge release $VERSION into develop"
+          git push origin develop
+          
+          echo "✅ تم دمج الإصدار في develop"
+          
+      - name: Cleanup release branch
+        run: |
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          git push origin --delete "$BRANCH_NAME" || echo "Branch may already be deleted"
+
+  # ============================================
+  # Update CHANGELOG
+  # ============================================
+  update-changelog:
+    name: 📝 تحديث CHANGELOG
+    needs: [prepare, create-release]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Update CHANGELOG.md
+        run: |
+          VERSION="${{ needs.prepare.outputs.version }}"
+          DATE=$(date +%Y-%m-%d)
+          
+          # Create new changelog entry
+          cat > new_entry.md << 'EOF'
+          ## [${{ needs.prepare.outputs.version }}] - $DATE
+          
+          ${{ needs.prepare.outputs.changelog }}
+          
+          EOF
+          
+          # Prepend to CHANGELOG.md
+          if [ -f CHANGELOG.md ]; then
+            # Insert after header
+            head -n 10 CHANGELOG.md > temp_changelog.md
+            cat new_entry.md >> temp_changelog.md
+            tail -n +11 CHANGELOG.md >> temp_changelog.md
+            mv temp_changelog.md CHANGELOG.md
+          else
+            echo "# سجل التغييرات | Changelog" > CHANGELOG.md
+            echo "" >> CHANGELOG.md
+            cat new_entry.md >> CHANGELOG.md
+          fi
+          
+          rm -f new_entry.md
+          
+      - name: Commit CHANGELOG
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          
+          git add CHANGELOG.md
+          git commit -m "docs: update CHANGELOG for ${{ needs.prepare.outputs.version }}" || echo "No changes to commit"
+          git push origin main

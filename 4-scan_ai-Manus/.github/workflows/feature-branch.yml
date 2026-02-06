@@ -1,0 +1,213 @@
+# =============================================================================
+# سير عمل فروع الميزات | Feature Branch Workflow
+# =============================================================================
+# 
+# يُشغّل عند إنشاء طلب سحب من فرع feature/*
+# يوفر ملاحظات سريعة للمطورين
+#
+# =============================================================================
+
+name: 🔧 Feature Branch CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - 'feature/**'
+      - 'feature/*'
+
+concurrency:
+  group: feature-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '18'
+
+jobs:
+  # ============================================
+  # Quick Checks (Fast Feedback)
+  # ============================================
+  quick-checks:
+    name: ⚡ فحوصات سريعة
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Check commit messages
+        uses: wagoid/commitlint-github-action@v5
+        continue-on-error: true
+        
+      - name: Check for large files
+        run: |
+          # التحقق من عدم وجود ملفات كبيرة
+          find . -type f -size +10M -not -path "./.git/*" | head -5 > large_files.txt
+          if [ -s large_files.txt ]; then
+            echo "⚠️ تحذير: وجدت ملفات كبيرة:"
+            cat large_files.txt
+          fi
+          
+      - name: Check for secrets
+        uses: trufflesecurity/trufflehog@main
+        continue-on-error: true
+        with:
+          path: ./
+          base: ${{ github.event.pull_request.base.sha || 'HEAD~1' }}
+          head: ${{ github.event.pull_request.head.sha || 'HEAD' }}
+
+  # ============================================
+  # Backend Checks
+  # ============================================
+  backend:
+    name: 🐍 فحص Backend
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          pip install flake8 black isort mypy
+          
+      - name: Run flake8
+        run: |
+          cd backend
+          flake8 src --max-line-length=100 --ignore=E501,W503 --statistics
+        continue-on-error: true
+        
+      - name: Check Black formatting
+        run: |
+          cd backend
+          black --check --diff src
+        continue-on-error: true
+        
+      - name: Check imports with isort
+        run: |
+          cd backend
+          isort --check-only --diff src
+        continue-on-error: true
+        
+      - name: Type checking with mypy
+        run: |
+          cd backend
+          mypy src --ignore-missing-imports --no-error-summary 2>/dev/null || true
+
+  # ============================================
+  # Frontend Checks
+  # ============================================
+  frontend:
+    name: ⚛️ فحص Frontend
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+          
+      - name: Run ESLint
+        run: |
+          cd frontend
+          npm run lint -- --max-warnings 50
+        continue-on-error: true
+        
+      - name: Check TypeScript (if applicable)
+        run: |
+          cd frontend
+          npm run type-check 2>/dev/null || echo "No type-check script"
+        continue-on-error: true
+        
+      - name: Build check
+        run: |
+          cd frontend
+          npm run build
+
+  # ============================================
+  # Summary Comment
+  # ============================================
+  summary:
+    name: 📊 ملخص الفحوصات
+    needs: [quick-checks, backend, frontend]
+    if: always() && github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      
+    steps:
+      - name: Create summary comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const quickChecks = '${{ needs.quick-checks.result }}';
+            const backend = '${{ needs.backend.result }}';
+            const frontend = '${{ needs.frontend.result }}';
+            
+            const getEmoji = (result) => {
+              if (result === 'success') return '✅';
+              if (result === 'failure') return '❌';
+              return '⚠️';
+            };
+            
+            const body = `## 📊 ملخص فحوصات Feature Branch
+            
+            | الفحص | الحالة |
+            |-------|--------|
+            | فحوصات سريعة | ${getEmoji(quickChecks)} ${quickChecks} |
+            | Backend | ${getEmoji(backend)} ${backend} |
+            | Frontend | ${getEmoji(frontend)} ${frontend} |
+            
+            ---
+            *تم إنشاء هذا التعليق تلقائياً بواسطة GitHub Actions*
+            `;
+            
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('ملخص فحوصات Feature Branch')
+            );
+            
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body
+              });
+            }

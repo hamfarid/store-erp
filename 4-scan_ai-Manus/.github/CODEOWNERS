@@ -1,0 +1,83 @@
+# =============================================================================
+# CODEOWNERS - Gaara Scan AI
+# =============================================================================
+# هذا الملف يحدد المالكين المسؤولين عن مراجعة التغييرات في أجزاء مختلفة من الكود
+# المالكون سيُطلب منهم تلقائياً مراجعة طلبات السحب التي تؤثر على ملفاتهم
+# =============================================================================
+
+# المالكون الافتراضيون لكل الملفات
+*                                   @team-leads @project-maintainers
+
+# =============================================================================
+# Backend - Python/FastAPI
+# =============================================================================
+/backend/                           @backend-team
+/backend/src/api/                   @backend-team @api-reviewers
+/backend/src/models/                @backend-team @database-team
+/backend/src/modules/               @backend-team
+/backend/src/core/                  @backend-team @senior-devs
+/backend/src/utils/                 @backend-team
+/backend/tests/                     @backend-team @qa-team
+
+# الموديولات الحساسة
+/backend/src/modules/authentication/ @security-team @backend-team
+/backend/src/modules/user_management/ @security-team @backend-team
+/backend/src/modules/disease_diagnosis/ @ai-team @backend-team
+/backend/src/modules/ai_management/ @ai-team @backend-team
+
+# =============================================================================
+# Frontend - React/Vite
+# =============================================================================
+/frontend/                          @frontend-team
+/frontend/src/pages/                @frontend-team @ui-reviewers
+/frontend/src/components/           @frontend-team
+/frontend/src/context/              @frontend-team @senior-devs
+/frontend/src/utils/                @frontend-team
+
+# =============================================================================
+# AI/ML Services
+# =============================================================================
+/src/ai_service/                    @ai-team
+/src/ml_service/                    @ai-team
+/src/training_service/              @ai-team
+/models/                            @ai-team
+
+# =============================================================================
+# DevOps & Infrastructure
+# =============================================================================
+/docker-compose*.yml                @devops-team
+/Dockerfile*                        @devops-team
+/.github/workflows/                 @devops-team @senior-devs
+/infrastructure/                    @devops-team
+/k8s/                               @devops-team
+/scripts/                           @devops-team
+
+# =============================================================================
+# Database & Migrations
+# =============================================================================
+/backend/alembic/                   @database-team @backend-team
+/backend/alembic/versions/          @database-team @senior-devs
+
+# =============================================================================
+# Configuration & Security
+# =============================================================================
+/backend/src/core/config.py         @security-team @senior-devs
+/backend/src/core/security.py       @security-team
+*.env*                              @security-team @devops-team
+**/secrets/                         @security-team
+/.github/CODEOWNERS                 @project-maintainers
+/.github/PRODUCTION_SECRETS.md      @security-team @project-maintainers
+
+# =============================================================================
+# Documentation
+# =============================================================================
+/docs/                              @documentation-team
+*.md                                @documentation-team
+README.md                           @project-maintainers
+
+# =============================================================================
+# Dependencies
+# =============================================================================
+/backend/requirements.txt           @backend-team @security-team
+/frontend/package.json              @frontend-team @security-team
+/frontend/package-lock.json         @frontend-team

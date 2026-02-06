@@ -1,0 +1,296 @@
+name: Deployment Rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to rollback'
+        required: true
+        type: choice
+        options:
+          - production
+          - staging
+      version:
+        description: 'Version to rollback to (tag or commit SHA)'
+        required: true
+        type: string
+      reason:
+        description: 'Reason for rollback'
+        required: true
+        type: string
+
+jobs:
+  validate-rollback:
+    name: Validate Rollback Request
+    runs-on: ubuntu-latest
+    outputs:
+      approved: ${{ steps.validation.outputs.approved }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Validate version
+      id: validation
+      run: |
+        VERSION="${{ github.event.inputs.version }}"
+        
+        # Check if version exists
+        if git rev-parse "$VERSION" >/dev/null 2>&1; then
+          echo "✅ Version $VERSION exists"
+          echo "approved=true" >> $GITHUB_OUTPUT
+        else
+          echo "❌ Version $VERSION does not exist"
+          echo "approved=false" >> $GITHUB_OUTPUT
+          exit 1
+        fi
+        
+        # Get version details
+        git log -1 --pretty=format:"Commit: %H%nAuthor: %an%nDate: %ad%nMessage: %s" $VERSION
+    
+    - name: Create rollback issue
+      uses: actions/github-script@v7
+      with:
+        script: |
+          await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `🔄 Rollback to ${{ github.event.inputs.version }} in ${{ github.event.inputs.environment }}`,
+            body: `
+              ## Rollback Request
+              
+              **Environment:** ${{ github.event.inputs.environment }}
+              **Target Version:** ${{ github.event.inputs.version }}
+              **Reason:** ${{ github.event.inputs.reason }}
+              **Requested by:** @${{ github.actor }}
+              **Timestamp:** ${new Date().toISOString()}
+              
+              ### Pre-Rollback Checklist
+              - [ ] Database backup verified
+              - [ ] Traffic redirected to backup servers
+              - [ ] Monitoring alerts acknowledged
+              - [ ] Team notified
+              
+              ### Rollback Steps
+              - [ ] Stop current deployment
+              - [ ] Restore database if needed
+              - [ ] Deploy previous version
+              - [ ] Run health checks
+              - [ ] Verify functionality
+              
+              ---
+              *This issue was automatically created by the rollback workflow*
+            `,
+            labels: ['rollback', 'critical', ${{ github.event.inputs.environment }}]
+          });
+
+  backup-current-state:
+    name: Backup Current State
+    runs-on: ubuntu-latest
+    needs: validate-rollback
+    if: needs.validate-rollback.outputs.approved == 'true'
+    
+    steps:
+    - name: Checkout current version
+      uses: actions/checkout@v4
+    
+    - name: Create emergency backup
+      env:
+        DB_HOST: ${{ secrets.PROD_DB_HOST }}
+        DB_USER: ${{ secrets.PROD_DB_USER }}
+        DB_PASSWORD: ${{ secrets.PROD_DB_PASSWORD }}
+        DB_NAME: ${{ secrets.PROD_DB_NAME }}
+      run: |
+        mkdir -p emergency-backup
+        
+        # Database backup
+        BACKUP_FILE="emergency-backup/pre_rollback_$(date +'%Y%m%d_%H%M%S').sql"
+        PGPASSWORD=$DB_PASSWORD pg_dump \
+          -h $DB_HOST \
+          -U $DB_USER \
+          -d $DB_NAME \
+          -F c \
+          -f $BACKUP_FILE
+        
+        gzip $BACKUP_FILE
+        echo "Emergency backup created: ${BACKUP_FILE}.gz"
+    
+    - name: Upload emergency backup
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        S3_BUCKET: ${{ secrets.BACKUP_S3_BUCKET }}
+      run: |
+        pip install awscli
+        aws s3 cp emergency-backup/ s3://${S3_BUCKET}/emergency-backups/ \
+          --recursive
+
+  execute-rollback:
+    name: Execute Rollback
+    runs-on: ubuntu-latest
+    needs: backup-current-state
+    environment: ${{ github.event.inputs.environment }}
+    
+    steps:
+    - name: Checkout target version
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.inputs.version }}
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Log in to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Build rollback images
+      run: |
+        docker build -t ghcr.io/${{ github.repository }}-backend:rollback-${{ github.event.inputs.version }} ./backend
+        docker build -t ghcr.io/${{ github.repository }}-frontend:rollback-${{ github.event.inputs.version }} ./frontend
+    
+    - name: Push rollback images
+      run: |
+        docker push ghcr.io/${{ github.repository }}-backend:rollback-${{ github.event.inputs.version }}
+        docker push ghcr.io/${{ github.repository }}-frontend:rollback-${{ github.event.inputs.version }}
+    
+    - name: Deploy to Kubernetes
+      if: github.event.inputs.environment == 'production'
+      run: |
+        # Configure kubectl
+        echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > kubeconfig.yaml
+        export KUBECONFIG=kubeconfig.yaml
+        
+        # Update deployments
+        kubectl set image deployment/backend \
+          backend=ghcr.io/${{ github.repository }}-backend:rollback-${{ github.event.inputs.version }}
+        
+        kubectl set image deployment/frontend \
+          frontend=ghcr.io/${{ github.repository }}-frontend:rollback-${{ github.event.inputs.version }}
+        
+        # Wait for rollout
+        kubectl rollout status deployment/backend --timeout=5m
+        kubectl rollout status deployment/frontend --timeout=5m
+    
+    - name: Run database migrations (if needed)
+      env:
+        DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
+      run: |
+        cd backend
+        pip install alembic psycopg2-binary
+        
+        # Check current migration version
+        CURRENT_VERSION=$(alembic current)
+        echo "Current migration: $CURRENT_VERSION"
+        
+        # Downgrade if needed (manual approval required)
+        # alembic downgrade <revision>
+
+  health-check:
+    name: Post-Rollback Health Check
+    runs-on: ubuntu-latest
+    needs: execute-rollback
+    
+    steps:
+    - name: Wait for stabilization
+      run: sleep 30
+    
+    - name: Check backend health
+      run: |
+        BACKEND_URL="${{ secrets.PROD_BACKEND_URL }}/health"
+        
+        for i in {1..10}; do
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" $BACKEND_URL)
+          if [ $STATUS -eq 200 ]; then
+            echo "✅ Backend health check passed"
+            break
+          else
+            echo "⚠️  Attempt $i: Backend returned status $STATUS"
+            sleep 10
+          fi
+        done
+    
+    - name: Check frontend health
+      run: |
+        FRONTEND_URL="${{ secrets.PROD_FRONTEND_URL }}"
+        
+        STATUS=$(curl -s -o /dev/null -w "%{http_code}" $FRONTEND_URL)
+        if [ $STATUS -eq 200 ]; then
+          echo "✅ Frontend health check passed"
+        else
+          echo "❌ Frontend health check failed with status $STATUS"
+          exit 1
+        fi
+    
+    - name: Run smoke tests
+      run: |
+        # Add smoke test commands
+        echo "Running smoke tests..."
+        # curl -X POST $API_URL/api/test/smoke
+    
+    - name: Verify database connectivity
+      env:
+        DB_HOST: ${{ secrets.PROD_DB_HOST }}
+        DB_USER: ${{ secrets.PROD_DB_USER }}
+        DB_PASSWORD: ${{ secrets.PROD_DB_PASSWORD }}
+        DB_NAME: ${{ secrets.PROD_DB_NAME }}
+      run: |
+        PGPASSWORD=$DB_PASSWORD psql \
+          -h $DB_HOST \
+          -U $DB_USER \
+          -d $DB_NAME \
+          -c "SELECT version();"
+    
+    - name: Check error rates
+      run: |
+        # Query monitoring system for error rates
+        echo "Checking error rates in last 5 minutes..."
+        # Add Prometheus/Grafana query here
+
+  notify:
+    name: Send Notifications
+    runs-on: ubuntu-latest
+    needs: [execute-rollback, health-check]
+    if: always()
+    
+    steps:
+    - name: Slack notification
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        text: |
+          🔄 Rollback ${{ job.status }}
+          
+          Environment: ${{ github.event.inputs.environment }}
+          Version: ${{ github.event.inputs.version }}
+          Reason: ${{ github.event.inputs.reason }}
+          Initiated by: @${{ github.actor }}
+          
+          ${{ needs.health-check.result == 'success' && '✅ All health checks passed' || '❌ Health checks failed - manual intervention required' }}
+        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      continue-on-error: true
+    
+    - name: Email notification
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "Rollback ${{ job.status }}: ${{ github.event.inputs.environment }}"
+        to: ${{ secrets.ALERT_EMAIL }}
+        from: GitHub Actions
+        body: |
+          Rollback to version ${{ github.event.inputs.version }} has ${{ job.status }}.
+          
+          Environment: ${{ github.event.inputs.environment }}
+          Reason: ${{ github.event.inputs.reason }}
+          Initiated by: ${{ github.actor }}
+          
+          Please review the deployment logs for details.
+      continue-on-error: true

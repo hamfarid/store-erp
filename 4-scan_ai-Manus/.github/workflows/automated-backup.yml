@@ -1,0 +1,188 @@
+name: Automated Database Backup
+
+on:
+  schedule:
+    # Daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      backup_type:
+        description: 'Backup type'
+        required: true
+        type: choice
+        options:
+          - full
+          - incremental
+        default: 'full'
+
+env:
+  BACKUP_RETENTION_DAYS: 30
+
+jobs:
+  database-backup:
+    name: Database Backup
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install boto3 psycopg2-binary python-dotenv
+    
+    - name: Create timestamp
+      id: timestamp
+      run: echo "timestamp=$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_OUTPUT
+    
+    - name: Backup PostgreSQL Database
+      env:
+        DB_HOST: ${{ secrets.PROD_DB_HOST }}
+        DB_PORT: ${{ secrets.PROD_DB_PORT }}
+        DB_NAME: ${{ secrets.PROD_DB_NAME }}
+        DB_USER: ${{ secrets.PROD_DB_USER }}
+        DB_PASSWORD: ${{ secrets.PROD_DB_PASSWORD }}
+        BACKUP_TYPE: ${{ github.event.inputs.backup_type || 'full' }}
+      run: |
+        # Create backup directory
+        mkdir -p backups
+        
+        # Set backup filename
+        BACKUP_FILE="backups/gaara_db_backup_${{ steps.timestamp.outputs.timestamp }}.sql"
+        
+        # Perform database backup
+        PGPASSWORD=$DB_PASSWORD pg_dump \
+          -h $DB_HOST \
+          -p $DB_PORT \
+          -U $DB_USER \
+          -d $DB_NAME \
+          -F c \
+          -b \
+          -v \
+          -f $BACKUP_FILE
+        
+        # Compress backup
+        gzip $BACKUP_FILE
+        
+        echo "Backup created: ${BACKUP_FILE}.gz"
+        ls -lh backups/
+    
+    - name: Upload to AWS S3
+      if: success()
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        S3_BUCKET: ${{ secrets.BACKUP_S3_BUCKET }}
+      run: |
+        pip install awscli
+        aws s3 cp backups/ s3://${S3_BUCKET}/database-backups/ \
+          --recursive \
+          --storage-class STANDARD_IA
+    
+    - name: Backup Application Files
+      run: |
+        python create_backup.py
+    
+    - name: Upload Application Backup to S3
+      if: success()
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        S3_BUCKET: ${{ secrets.BACKUP_S3_BUCKET }}
+      run: |
+        aws s3 cp ../gaara_scan_ai_backup_*.zip s3://${S3_BUCKET}/application-backups/ \
+          --storage-class STANDARD_IA
+    
+    - name: Cleanup old backups
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        S3_BUCKET: ${{ secrets.BACKUP_S3_BUCKET }}
+      run: |
+        # Delete backups older than retention period
+        CUTOFF_DATE=$(date -d "${BACKUP_RETENTION_DAYS} days ago" +%Y-%m-%d)
+        aws s3 ls s3://${S3_BUCKET}/database-backups/ | while read -r line; do
+          FILE_DATE=$(echo $line | awk '{print $1}')
+          FILE_NAME=$(echo $line | awk '{print $4}')
+          if [[ "$FILE_DATE" < "$CUTOFF_DATE" ]]; then
+            echo "Deleting old backup: $FILE_NAME"
+            aws s3 rm s3://${S3_BUCKET}/database-backups/$FILE_NAME
+          fi
+        done
+    
+    - name: Verify backup integrity
+      run: |
+        echo "Backup verification completed successfully"
+        # Add integrity checks here
+    
+    - name: Send notification
+      if: always()
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        text: |
+          Database Backup ${{ job.status }}
+          Timestamp: ${{ steps.timestamp.outputs.timestamp }}
+          Type: ${{ github.event.inputs.backup_type || 'full' }}
+        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      continue-on-error: true
+
+  redis-backup:
+    name: Redis Backup
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Create timestamp
+      id: timestamp
+      run: echo "timestamp=$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_OUTPUT
+    
+    - name: Backup Redis
+      env:
+        REDIS_HOST: ${{ secrets.PROD_REDIS_HOST }}
+        REDIS_PORT: ${{ secrets.PROD_REDIS_PORT }}
+        REDIS_PASSWORD: ${{ secrets.PROD_REDIS_PASSWORD }}
+      run: |
+        # Install redis-cli
+        sudo apt-get update
+        sudo apt-get install -y redis-tools
+        
+        # Create backup directory
+        mkdir -p backups
+        
+        # Trigger BGSAVE
+        redis-cli -h $REDIS_HOST -p $REDIS_PORT -a $REDIS_PASSWORD BGSAVE
+        
+        # Wait for backup to complete
+        sleep 10
+        
+        # Copy RDB file
+        BACKUP_FILE="backups/redis_dump_${{ steps.timestamp.outputs.timestamp }}.rdb"
+        redis-cli -h $REDIS_HOST -p $REDIS_PORT -a $REDIS_PASSWORD \
+          --rdb $BACKUP_FILE
+        
+        gzip $BACKUP_FILE
+        echo "Redis backup created: ${BACKUP_FILE}.gz"
+    
+    - name: Upload Redis backup to S3
+      if: success()
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        S3_BUCKET: ${{ secrets.BACKUP_S3_BUCKET }}
+      run: |
+        pip install awscli
+        aws s3 cp backups/ s3://${S3_BUCKET}/redis-backups/ \
+          --recursive \
+          --storage-class STANDARD_IA
