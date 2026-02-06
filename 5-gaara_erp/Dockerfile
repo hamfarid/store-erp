@@ -86,6 +86,10 @@ RUN mkdir -p /app/staticfiles /app/media /app/logs && \
 RUN chmod -R 755 /app && \
     chown -R appuser:appgroup /app
 
+# Copy entrypoint script
+COPY --chown=appuser:appgroup docker/docker-entrypoint.sh /app/docker/docker-entrypoint.sh
+RUN chmod +x /app/docker/docker-entrypoint.sh
+
 # Security: Switch to non-root user
 USER appuser
 
@@ -96,8 +100,10 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD /app/docker/docker-healthcheck.sh || exit 1
 
-# Default command
-# Increased timeout to 180s and reduced workers to 3 to prevent memory issues
+# Entrypoint handles migrations, collectstatic, and superuser creation
+ENTRYPOINT ["/app/docker/docker-entrypoint.sh"]
+
+# Default command (passed to entrypoint via exec "$@")
 CMD ["gunicorn", "gaara_erp.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--threads", "2", "--timeout", "180", "--graceful-timeout", "30", "--keep-alive", "5", "--max-requests", "1000", "--max-requests-jitter", "50", "--access-logfile", "-", "--error-logfile", "-"]
 
 # =============================================================================

@@ -7,19 +7,34 @@ set -euo pipefail
 
 echo "Starting Gaara ERP backend..."
 
-# Wait for database to be ready
+# Wait for database to be ready using Python (works as non-root appuser)
 echo "Waiting for database..."
-until PGPASSWORD="${POSTGRES_PASSWORD}" psql -h "${DB_HOST:-db}" -U "${POSTGRES_USER:-gaara_admin}" -d "${POSTGRES_DB:-gaara_erp}" -c '\q' 2>/dev/null; do
-  echo "Database is unavailable - sleeping"
-  sleep 1
-done
+python -c "
+import time, sys
+while True:
+    try:
+        import psycopg2
+        conn = psycopg2.connect(
+            host='${DB_HOST:-gaara_db}',
+            port='${DB_PORT:-5432}',
+            dbname='${DB_NAME:-gaara_erp}',
+            user='${DB_USER:-gaara_admin}',
+            password='${DB_PASSWORD:-${POSTGRES_PASSWORD:-}}',
+            connect_timeout=5
+        )
+        conn.close()
+        break
+    except Exception as e:
+        print(f'Database is unavailable ({e}) - sleeping')
+        time.sleep(2)
+" 2>/dev/null || {
+    # Fallback: try with psql if available
+    until PGPASSWORD="${DB_PASSWORD:-${POSTGRES_PASSWORD:-}}" psql -h "${DB_HOST:-gaara_db}" -U "${DB_USER:-gaara_admin}" -d "${DB_NAME:-gaara_erp}" -c '\q' 2>/dev/null; do
+        echo "Database is unavailable - sleeping"
+        sleep 2
+    done
+}
 echo "Database is ready!"
-
-# Run database initialization if script exists
-if [ -f "/app/docker/database-init.sh" ]; then
-    echo "Running database initialization..."
-    bash /app/docker/database-init.sh
-fi
 
 # Run migrations if requested
 if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
