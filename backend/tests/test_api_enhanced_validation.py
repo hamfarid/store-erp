@@ -15,11 +15,11 @@ import time
 def resolve_ref(openapi_spec, ref):
     """
     Resolve a $ref reference in an OpenAPI spec.
-    
+
     Args:
         openapi_spec: The full OpenAPI specification dictionary
         ref: The reference string (e.g., '#/components/schemas/User')
-    
+
     Returns:
         The resolved schema dictionary
     """
@@ -36,11 +36,11 @@ def resolve_ref(openapi_spec, ref):
 def resolve_schema(openapi_spec, schema):
     """
     Resolve all $ref references in a schema recursively.
-    
+
     Args:
         openapi_spec: The full OpenAPI specification dictionary
         schema: The schema dictionary that may contain $ref
-    
+
     Returns:
         The resolved schema dictionary with all $ref expanded
     """
@@ -65,40 +65,40 @@ def resolve_schema(openapi_spec, schema):
 def convert_openapi_to_json_schema(openapi_spec, schema_name):
     """
     Convert an OpenAPI schema to a valid JSON Schema for validation.
-    
+
     Args:
         openapi_spec: The full OpenAPI specification dictionary
         schema_name: The name of the schema to convert
-    
+
     Returns:
         A valid JSON Schema dictionary
     """
     schemas = openapi_spec.get("components", {}).get("schemas", {})
     schema = schemas.get(schema_name)
-    
+
     if schema is None:
         return None
-    
+
     # Resolve all $ref references
     resolved = resolve_schema(openapi_spec, schema)
-    
+
     # Build JSON Schema - include all properties including arrays
     json_schema = {
         "type": resolved.get("type", "object"),
     }
-    
+
     # Add properties if present
     if "properties" in resolved:
         json_schema["properties"] = resolved["properties"]
-    
+
     # Add required if present
     if "required" in resolved:
         json_schema["required"] = resolved["required"]
-    
+
     # Handle array type
     if "items" in resolved:
         json_schema["items"] = resolve_schema(openapi_spec, resolved["items"])
-    
+
     return json_schema
 
 
@@ -181,7 +181,7 @@ class TestJSONSchemaValidation:
 
         # Convert OpenAPI schema to JSON Schema with $ref resolution
         json_schema = convert_openapi_to_json_schema(openapi_spec, "LoginResponse")
-        
+
         assert json_schema is not None, "Failed to convert LoginResponse schema"
 
         # Should not raise exception
@@ -227,9 +227,8 @@ class TestJSONSchemaValidation:
 
         # Convert OpenAPI schema to JSON Schema with $ref resolution
         json_schema = convert_openapi_to_json_schema(openapi_spec, "ProductsResponse")
-        
+
         assert json_schema is not None, "Failed to convert ProductsResponse schema"
-        
         # Should not raise exception
         validate(instance=valid_response, schema=json_schema)
 
