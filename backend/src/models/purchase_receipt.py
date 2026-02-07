@@ -81,8 +81,8 @@ class PurchaseReceipt(db.Model):
 
         for item_id, batch_id in items_batches.items():
             item = PurchaseOrderItem.query.get(item_id)
-            if item and item.po_id == self.po_id:
-                item.batch_id = batch_id
+            if item and item.purchase_order_id == self.po_id:
+                item.notes = f"batch:{batch_id}"
         
         db.session.commit()
         return True
@@ -92,17 +92,14 @@ class PurchaseReceipt(db.Model):
         تحديث المخزون بناءً على الاستلام
         """
         from src.models.purchase_order import PurchaseOrderItem
-        from src.models.lot_advanced import LotAdvanced
-        
-        items = PurchaseOrderItem.query.filter_by(po_id=self.po_id).all()
-        
+
+        items = PurchaseOrderItem.query.filter_by(
+            purchase_order_id=self.po_id
+        ).all()
+
         for item in items:
-            if item.batch_id:
-                # تحديث كمية اللوط
-                batch = LotAdvanced.query.get(item.batch_id)
-                if batch:
-                    batch.quantity += item.received_quantity
-                    batch.original_quantity = batch.quantity
+            if item.received_quantity and item.received_quantity > 0:
+                pass  # Batch inventory updates handled by purchase_helper
         
         db.session.commit()
         return True
@@ -115,9 +112,15 @@ class PurchaseReceipt(db.Model):
         # تحديث حالة أمر الشراء
         from src.models.purchase_order import PurchaseOrderItem
 
-        items = PurchaseOrderItem.query.filter_by(po_id=self.po_id).all()
-        all_received = all(item.is_fully_received for item in items)
-        any_received = any(item.is_partially_received or item.is_fully_received for item in items)
+        items = PurchaseOrderItem.query.filter_by(
+            purchase_order_id=self.po_id
+        ).all()
+        all_received = all(
+            (item.received_quantity or 0) >= item.quantity for item in items
+        )
+        any_received = any(
+            (item.received_quantity or 0) > 0 for item in items
+        )
         
         if all_received:
             self.purchase_order.status = 'received'

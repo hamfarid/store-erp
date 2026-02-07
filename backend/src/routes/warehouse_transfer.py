@@ -34,7 +34,7 @@ TransferStatus = None
 def _get_models():
     global WarehouseTransfer, WarehouseTransferItem, TransferStatus
     if WarehouseTransfer is None or WarehouseTransferItem is None:
-        from models import warehouse_transfer as wt
+        from src.models import warehouse_transfer as wt
 
         WarehouseTransfer = wt.WarehouseTransfer
         WarehouseTransferItem = wt.WarehouseTransferItem
@@ -44,21 +44,14 @@ def _get_models():
 
 # Import database - handle different import paths
 try:
-    from database import db
+    from src.database import db
 except ImportError:
-    # Create mock db for testing
-    class MockDB:
-        session = None
-
-        @staticmethod
-        def create_all():  # pragma: no cover - mock placeholder for tests
-            pass
-
-        @staticmethod
-        def drop_all():  # pragma: no cover - mock placeholder for tests
-            pass
-
-    db = MockDB()
+    try:
+        from database import db
+    except ImportError:
+        class MockDB:
+            session = None
+        db = MockDB()
 # Import auth functions
 try:
     from auth import login_required, has_permission, Permissions, AuthManager

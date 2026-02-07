@@ -94,7 +94,7 @@ def get_purchase_order(current_user, po_id):
         
         # تضمين العناصر
         po_dict = po.to_dict()
-        po_dict['items'] = [item.to_dict() for item in po.items.all()]
+        po_dict['items'] = [item.to_dict() for item in po.items]
         po_dict['receipts'] = [receipt.to_dict() for receipt in po.receipts.all()]
         
         return jsonify({
@@ -145,25 +145,23 @@ def create_purchase_order(current_user):
         total_amount = 0
         for item_data in data['items']:
             item = PurchaseOrderItem(
-                po_id=po.id,
+                purchase_order_id=po.id,
                 product_id=item_data['product_id'],
                 quantity=item_data['quantity'],
-                unit_price=item_data['unit_price'],
-                discount_percentage=item_data.get('discount_percentage', 0),
-                tax_percentage=item_data.get('tax_percentage', 0),
-                notes=item_data.get('notes'),
-                expiry_date=datetime.fromisoformat(item_data['expiry_date']).date() if item_data.get('expiry_date') else None,
-                manufacture_date=datetime.fromisoformat(item_data['manufacture_date']).date() if item_data.get('manufacture_date') else None
+                unit_cost=item_data['unit_price'],
+                discount=item_data.get('discount_percentage', 0),
+                tax_rate=item_data.get('tax_percentage', 0),
+                notes=item_data.get('notes')
             )
-            
+
             # حساب الإجمالي
             item.calculate_total()
-            total_amount += float(item.final_price or 0)
-            
+            total_amount += float(item.total or 0)
+
             db.session.add(item)
-        
+
         # تحديث الإجمالي
-        po.total_amount = total_amount
+        po.total = total_amount
         
         db.session.commit()
         
@@ -208,29 +206,27 @@ def update_purchase_order(current_user, po_id):
         # تحديث العناصر إذا كانت موجودة
         if 'items' in data:
             # حذف العناصر القديمة
-            PurchaseOrderItem.query.filter_by(po_id=po.id).delete()
-            
+            PurchaseOrderItem.query.filter_by(purchase_order_id=po.id).delete()
+
             # إضافة العناصر الجديدة
             total_amount = 0
             for item_data in data['items']:
                 item = PurchaseOrderItem(
-                    po_id=po.id,
+                    purchase_order_id=po.id,
                     product_id=item_data['product_id'],
                     quantity=item_data['quantity'],
-                    unit_price=item_data['unit_price'],
-                    discount_percentage=item_data.get('discount_percentage', 0),
-                    tax_percentage=item_data.get('tax_percentage', 0),
-                    notes=item_data.get('notes'),
-                    expiry_date=datetime.fromisoformat(item_data['expiry_date']).date() if item_data.get('expiry_date') else None,
-                    manufacture_date=datetime.fromisoformat(item_data['manufacture_date']).date() if item_data.get('manufacture_date') else None
+                    unit_cost=item_data['unit_price'],
+                    discount=item_data.get('discount_percentage', 0),
+                    tax_rate=item_data.get('tax_percentage', 0),
+                    notes=item_data.get('notes')
                 )
-                
+
                 item.calculate_total()
-                total_amount += float(item.final_price or 0)
-                
+                total_amount += float(item.total or 0)
+
                 db.session.add(item)
-            
-            po.total_amount = total_amount
+
+            po.total = total_amount
         
         db.session.commit()
         
@@ -314,16 +310,15 @@ def receive_purchase_order(current_user, po_id):
         items_received = data.get('items', [])
         for item_data in items_received:
             item = PurchaseOrderItem.query.get(item_data['item_id'])
-            if item and item.po_id == po.id:
+            if item and item.purchase_order_id == po.id:
                 received_qty = item_data.get('received_quantity', 0)
                 if received_qty > 0:
-                    item.update_received(received_qty)
-                    
+                    item.received_quantity = (item.received_quantity or 0) + received_qty
+
                     # إنشاء لوط جديد إذا كان مطلوباً
                     if item_data.get('create_batch', True):
                         from src.utils.purchase_helper import create_batch_from_receipt
-                        batch = create_batch_from_receipt(item, received_qty, data)
-                        item.batch_id = batch.id
+                        create_batch_from_receipt(item, received_qty, data)
         
         # إتمام الاستلام
         receipt.complete()
@@ -355,14 +350,14 @@ def get_statistics(current_user):
         status_stats = db.session.query(
             PurchaseOrder.status,
             func.count(PurchaseOrder.id).label('count'),
-            func.sum(PurchaseOrder.total_amount).label('total')
+            func.sum(PurchaseOrder.total).label('total')
         ).group_by(PurchaseOrder.status).all()
         
         # إحصائيات شهرية
         monthly_stats = db.session.query(
             func.strftime('%Y-%m', PurchaseOrder.order_date).label('month'),
             func.count(PurchaseOrder.id).label('count'),
-            func.sum(PurchaseOrder.total_amount).label('total')
+            func.sum(PurchaseOrder.total).label('total')
         ).group_by('month').order_by('month').limit(12).all()
         
         # أوامر الشراء المعلقة

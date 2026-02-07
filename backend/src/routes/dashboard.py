@@ -96,7 +96,7 @@ def get_dashboard_stats():
         
         # Low stock products
         low_stock_count = Product.query.filter(
-            Product.quantity <= Product.min_stock_level
+            Product.current_stock <= Product.min_stock_level
         ).count()
         
         # Monthly sales
@@ -117,7 +117,7 @@ def get_dashboard_stats():
         # Inventory value
         inventory_value = (
             db.session.query(
-                func.coalesce(func.sum(Product.quantity * Product.price), 0)
+                func.coalesce(func.sum(Product.current_stock * Product.selling_price), 0)
             ).scalar()
             or 0
         )
@@ -223,7 +223,7 @@ def get_summary():
 
     # Low stock products
     low_stock = Product.query.filter(
-        Product.quantity <= Product.min_stock_level
+        Product.current_stock <= Product.min_stock_level
     ).count()
 
     # Pending invoices
@@ -501,8 +501,8 @@ def get_low_stock():
     limit = request.args.get("limit", 20, type=int)
 
     low_stock_products = (
-        Product.query.filter(Product.quantity <= Product.min_stock_level)
-        .order_by(Product.quantity.asc())
+        Product.query.filter(Product.current_stock <= Product.min_stock_level)
+        .order_by(Product.current_stock.asc())
         .limit(limit)
         .all()
     )
@@ -512,16 +512,16 @@ def get_low_stock():
             "success": True,
             "data": {
                 "total_count": Product.query.filter(
-                    Product.quantity <= Product.min_stock_level
+                    Product.current_stock <= Product.min_stock_level
                 ).count(),
                 "products": [
                     {
                         "id": p.id,
                         "name": p.name,
                         "sku": p.sku,
-                        "quantity": p.quantity,
+                        "quantity": p.current_stock,
                         "min_stock_level": p.min_stock_level,
-                        "shortage": p.min_stock_level - p.quantity,
+                        "shortage": p.min_stock_level - p.current_stock,
                     }
                     for p in low_stock_products
                 ],

@@ -198,7 +198,7 @@
 | `test_api_drift.py` | 13 | Schema mismatch | Update schemas |
 | `test_api_drift_inventory.py` | 15 | Missing routes | Verify routes |
 | `test_api_drift_invoices.py` | 11 | Validation issues | Fix validators |
-| `test_api_enhanced_validation.py` | 2 | Schema issues | Update schemas |
+| `test_api_enhanced_validation.py` | 2 | Schema issues | ✅ FIXED - Added $ref resolver |
 | `test_mfa_p0.py` | N/A | MFA not enabled | Enable conditionally |
 
 ### 5.2 Test Coverage Improvements (P2)
