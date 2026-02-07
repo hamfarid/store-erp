@@ -91,7 +91,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: development-env
+      name: development
       url: ${{ steps.out.outputs.url }}
     steps:
       - uses: actions/download-artifact@v4
@@ -112,7 +112,7 @@ jobs:
     needs: deploy_dev
     runs-on: ubuntu-latest
     environment:
-      name: staging-env
+      name: staging
       url: ${{ steps.out.outputs.url }}
     steps:
       - uses: actions/download-artifact@v4
@@ -132,7 +132,7 @@ jobs:
     needs: deploy_staging
     runs-on: ubuntu-latest
     environment:
-      name: production-env
+      name: production
       url: ${{ steps.out.outputs.url }}
     steps:
       - uses: actions/download-artifact@v4

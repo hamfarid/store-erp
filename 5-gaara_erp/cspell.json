@@ -1,0 +1,20 @@
+{
+  "version": "0.2",
+  "language": "en,ar",
+  "words": [
+    "gaara",
+    "pytest",
+    "pycache",
+    "collectstatic",
+    "noinput",
+    "venv",
+    "hamfarid"
+  ],
+  "ignorePaths": [
+    "**/*.sqlite3",
+    "**/migrations/**",
+    "**/node_modules/**",
+    "**/.venv/**",
+    "**/backups/**"
+  ]
+}

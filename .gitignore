@@ -1,0 +1,57 @@
+# Compressed / Archive files
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.bz2
+*.gz
+*.xz
+
+# Backup directories
+backups/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+*.egg-info/
+
+# Database files
+*.sqlite3
+*.sqlite3-journal
+*.db
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+
+# Docker
+docker-compose.override.yml
+
+# Temp
+*.tmp
+*.bak
+*.orig
