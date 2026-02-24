@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# pylint: disable=not-callable
 """
 P2.86: Payment Tracking System
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=not-callable
 # FILE: backend/src/models/optimized_queries.py
 # PURPOSE: Optimized Database Queries
 # OWNER: Backend

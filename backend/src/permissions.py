@@ -41,6 +41,15 @@ class Permissions:
     VIEW_SECURITY = "view_security"  # View security logs
     VIEW_AUDIT_LOG = "view_audit_log"  # View audit logs
 
+    # Backward-compatibility aliases
+    SECURITY_VIEW = "view_security"
+    SECURITY_MANAGE = "manage_security"
+
+    # Products aliases (map to Inventory permissions)
+    PRODUCTS_ADD = "inventory_add"
+    PRODUCTS_EDIT = "inventory_edit"
+    PRODUCTS_DELETE = "inventory_delete"
+
     # User Profile
     PROFILE_VIEW = "profile_view"  # View own profile
     PROFILE_EDIT = "profile_edit"  # Edit own profile

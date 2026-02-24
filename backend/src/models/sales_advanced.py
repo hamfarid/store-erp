@@ -1,5 +1,6 @@
 # type: ignore
 # flake8: noqa
+# pylint: disable=not-callable,no-member
 """
 sales_advanced - نموذج أساسي
 All linting disabled due to SQLAlchemy mock objects.

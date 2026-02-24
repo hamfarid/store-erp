@@ -345,7 +345,7 @@ class FileScanner:
             if (
                 pattern in content.lower()
                 if isinstance(pattern, bytes)
-                else pattern.encode() in content.lower()
+                else pattern.encode() in content.lower()  # pylint: disable=no-member
             ):
                 findings.append(f"Dangerous pattern detected: {pattern[:20]}...")
 

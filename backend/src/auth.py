@@ -396,6 +396,19 @@ class AuthManager:
             return None
 
     @staticmethod
+    def refresh_access_token(refresh_token):
+        """Generate a new access token from a valid refresh token."""
+        payload = AuthManager.verify_jwt_token(refresh_token, token_type="refresh")
+        if not payload:
+            return {"success": False, "error": "Invalid or expired refresh token"}
+        tokens = AuthManager.generate_jwt_tokens(
+            payload["user_id"], payload["username"], payload.get("role", "user")
+        )
+        if not tokens:
+            return {"success": False, "error": "Token generation failed"}
+        return {"success": True, **tokens}
+
+    @staticmethod
     def create_session(user):
         """إنشاء جلسة للمستخدم"""
         # إنشاء الجلسة

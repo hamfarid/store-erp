@@ -12,7 +12,7 @@ P0.2: JWT token rotation with 15min access + 7d refresh
 
 from datetime import datetime, timezone
 from sqlalchemy import Index
-from database import db
+from database import db  # pylint: disable=import-error
 
 
 class RefreshToken(db.Model):

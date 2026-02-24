@@ -4,7 +4,7 @@ Permission Model
 """
 
 from datetime import datetime
-from database import db
+from database import db  # pylint: disable=import-error
 
 
 class Permission(db.Model):

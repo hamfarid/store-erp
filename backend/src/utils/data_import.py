@@ -413,7 +413,7 @@ def get_products_importer():
 
 def get_customers_importer():
     """Get importer for customers."""
-    from src.models.partners import Customer
+    from src.models.customer import Customer
 
     return DataImporter(
         model=Customer,
@@ -434,7 +434,7 @@ def get_customers_importer():
 
 def get_suppliers_importer():
     """Get importer for suppliers."""
-    from src.models.partners import Supplier
+    from src.models.supplier import Supplier
 
     return DataImporter(
         model=Supplier,

@@ -29,7 +29,7 @@ batch_bp = Blueprint("batch", __name__, url_prefix="/api/batch")
 class BatchItemSchema(Schema):
     """Schema for a single batch item."""
 
-    id = fields.String(required=True, description="Item identifier within batch")
+    id = fields.String(required=True, metadata={"description": "Item identifier within batch"})  # pylint: disable=unexpected-keyword-arg
     action = fields.String(
         required=True, validate=validate.OneOf(["create", "update", "delete", "upsert"])
     )
@@ -109,7 +109,8 @@ class BatchResponse:
 def get_model_for_resource(resource: str):
     """Get SQLAlchemy model for resource name."""
     from src.models.inventory import Product
-    from src.models.partners import Customer, Supplier
+    from src.models.customer import Customer
+    from src.models.supplier import Supplier
     from src.models.category import Category
 
     models = {

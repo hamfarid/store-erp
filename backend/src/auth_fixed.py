@@ -51,8 +51,10 @@ def register():
         )
         new_user = User(
             email=validated_data["email"],
-            password=hashed_password,
+            password_hash=hashed_password,
             username=validated_data["username"],
+            full_name=validated_data.get("full_name") or validated_data["username"],
+            role_id=1,
         )
         db.session.add(new_user)
         db.session.commit()

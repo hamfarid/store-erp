@@ -854,7 +854,7 @@ def register():
             )
 
         # إنشاء المستخدم
-        user = User(username=username, email=email, role=role)  # type: ignore[call-arg]
+        user = User(username=username, email=email, role=role)  # type: ignore[call-arg]  # pylint: disable=no-value-for-parameter
         user.set_password(password)
         db.session.add(user)
         db.session.commit()

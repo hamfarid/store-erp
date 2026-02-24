@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# pylint: disable=not-callable
 """
 P2.76: Reporting Service
 
@@ -186,7 +187,7 @@ class ReportsService:
     ) -> List[Dict[str, Any]]:
         """Get top customers by purchase amount."""
         from src.models.invoice_unified import Invoice
-        from src.models.partners import Customer
+        from src.models.customer import Customer
 
         query = (
             db.session.query(

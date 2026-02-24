@@ -12,6 +12,7 @@ class RegisterSchema(Schema):
     email = fields.Email(required=True)
     password = fields.Str(required=True, validate=validate.Length(min=8))
     username = fields.Str(required=True, validate=validate.Length(min=3, max=50))
+    full_name = fields.Str(load_default="")
 
 
 class LoginSchema(Schema):
