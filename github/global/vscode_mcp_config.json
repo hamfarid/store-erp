@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "memory": {
+      "command": "python3",
+      "args": ["tools/memory_mcp_server.py"]
+    },
+    "code-reviewer": {
+      "command": "python3",
+      "args": ["tools/code_reviewer_mcp.py"]
+    }
+  }
+}

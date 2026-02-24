@@ -1,5 +1,8 @@
 # Project Initialization Workflow
 
+> **Note**: File references below are target outputs of project initialization.
+> They do not exist until the initialization workflow runs.
+
 > **How to properly initialize a new project**
 
 ---

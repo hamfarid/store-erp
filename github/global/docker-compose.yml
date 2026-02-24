@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    depends_on:
+      - redis
+      - chromadb
+      - ollama
+    deploy:
+      resources:
+        limits:
+          memory: 1024m
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - CHROMA_DB_HOST=chromadb
+      - CHROMA_DB_PORT=8000
+      - OLLAMA_HOST=http://ollama:11434
+    networks:
+      - backend
+      - frontend
+    volumes:
+      - .:/app
+
+  redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  chromadb:
+    image: chromadb/chroma:latest
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    networks:
+      - backend
+    environment:
+      - IS_PERSISTENT=TRUE
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: always
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - backend
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  backend:
+  frontend:
+
+volumes:
+  redis_data:
+  chroma_data:
+  ollama_data:

@@ -1,0 +1,12 @@
+{
+  "name": "global-ai-system",
+  "version": "15.9.1",
+  "engines": {
+    "pnpm": ">=9.0.0",
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server-filesystem": "^0.6.2",
+    "@modelcontextprotocol/server-github": "^0.6.2"
+  }
+}

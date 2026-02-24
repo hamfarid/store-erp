@@ -1,0 +1,1540 @@
+‫& ‪GAARA AI Ecosystem — Complete Tools‬‬
+‫‪Architecture Guide‬‬
+‫ٮ‪.‬ﺤﺚ ﺷﺎﻣﻞ ﻋﻦ أﺣﺪث اﻷدوات وٮ‪.‬ٮ) ٮ‪-‬ﺔ اﻟٮ) )ﻄﺎم اﻟﻤوزع‬
+
+‫‪.‬ﺣﺪول اﻟﻤﺤٮ@ويﺎت‬
+‫)‪ (Web Scraping‬أدوات اﻟٮ‪-‬ﺤﺚ ﻋﲆ اﻹ "ٮٮ‪%‬ﺮٮ"ﺖ ‪1.‬‬
+‫)‪ (Image Search & Processing‬أدوات اﻟٮ‪-‬ﺤﺚ ﻋﻦ اﻟﺼور ‪2.‬‬
+‫اﻵلى ‪3.‬‬
+‫)‪ (ML Learning Tools‬أدوات اﻟٮ‪%‬ﻌﻠﻢ‬
+‫‪7‬‬
+‫‪ AI Avatar‬أدوات ‪4.‬‬
+‫ﻣﺤﲇ؟ — ٮ‪%‬ﺤﻠٮ‪D‬ﻞ "‬
+‫ﻣڡﺼﻞ ‪ LLM‬ﻫﻞ ٮ‪%‬ﺤٮ‪%‬ﺎج ‪5.‬‬
+‫)‪- (Multi-Server Architecture‬ٮ "ٮٮ‪D‬ﺔ اﻟٮ "‬
+‫"ﻄﺎم اﻟﻤوزع ‪6.‬‬
+‫‪ ERP‬اﻟرٮ‪-‬ﻂ ﻣﻊ ‪7.‬‬
+‫اﻟٮ‪%‬ﻮﺻٮ‪D‬ﺎت اﻟٮ"ﻬﺎﺋٮ‪D‬ﺔ ‪8.‬‬
+
+‫‪ (Web Scraping & Search) {#1‬أدوات اﻟٮ‪ .‬ﺤﺚ ﻋﲆ اﻹ )ٮٮ@ﺮٮ)ﺖ ‪1.‬‬‫}‪web-scraping-tools‬‬
+‫‪#‬‬
+‫ى ‪2026-2025‬‬
+‫أڡﻀﻞ اﻷدوات ‪#‬ڡ !‬
+‫‪#‬‬
+‫‪#‬‬
+‫)اﻷڡﻀﻞ ﻟﺤﺎﻟٮ‪5‬ﻚ — <‬
+‫وﻣڡٮ‪5‬وح اﻟﻤﺼﺪر‬
+‫ى‬
+‫ﻣﺤﺎ ‪#‬ٮ !‬
+
+‫( ‪A. Crawl4AI‬‬
+
+‫ﻣﻔﺘﻮﺣﺔ اﻟﻤﺼﺪر ‪ Python‬اﻟﻨﻮع‪ :‬ﻣﻜﺘﺒﺔ‬
+‫‪GitHub Stars: +58,000‬‬
+‫اﻟﺘﺮﺧﯿﺺ‪ :‬ﻣﺠﺎﻧﻲ ﺑﺎﻟﻜﺎﻣﻞ‬
+
+‫‪:‬ﻟﻤﺎذا ﻫﻮ ‪#‬‬
+‫اﻷڡﻀﻞ ﻟﻚ‬
+
+‫ﺳٮ‪D‬ﺎدة ﰷﻣﻠﺔ ﻋﲆ اﻟ ‪-‬ٮٮ‪D‬ﺎٮ"ﺎت — )‪ (Offline‬ٮ ‪D‬ﻌﻤﻞ ٮ‪-‬ﺎﻟﲀﻣﻞ ﻣﺤﻠ ‪D‬ٮا ً‬
+‫"ﺣ ‪-‬‬
+‫‬‫ﺣﺎﺣﺔ ﻟـ — ‪ Ollama‬اﻟﻤﺤﻠٮ‪D‬ﺔ ﻋٮ‪-‬ﺮ ‪ LLMs‬ٮ ‪D‬ﺪﻋﻢ‬
+‫ى ‪ API‬ﻻ‬
+‫ﺎرح ‪7‬‬
+‫"‬
+‫اﻟﺼڡﺤﺎت ٮ‪%‬ﻠ ‪%‬ڡﺎﺋ ‪D‬ٮا ً إﻟﻰ‬
+‫‪- LLM‬ﺣﺎﻫﺰ ﻟﻠـ ‪ Markdown‬ٮ ‪D‬ﺤول‬
+‫‪D‬كى‬
+‫)‪ (JavaScript rendering‬ٮ ‪D‬ﺪﻋﻢ اﻟﻤﺤٮ‪%‬وى اﻟﺪٮ‪D‬ٮ"ﺎﻣٮ ‪7‬‬
+‫ﻟٮ "‬
+‫‪%‬ﺼڡٮ‪D‬ﺔ اﻟﻤﺤٮ‪%‬وى ﺣﺴﺐ اﻟﺼﻠﺔ ‪ BM25 content filter‬ٮ ‪D‬ﺤٮ‪%‬وي ﻋﲆ‬
+‫ﻟٮ "‬
+‫"‬
+‫اﻟﻤﺤﺼﺺ ‪ backend‬ٮ ‪D‬ﻌﻤﻞ ٮ‪-‬ﺸكﻞ ﻣﻤٮ‪%‬ﺎز ﻛـ‬
+‫"ﻄﺎﻣﻚ‬
+‫‪%‬ڡوي ‪ error handling‬و ‪ retry‬ٮ ""ﻄﺎم‬
+‫ﻣﺜﺎل ﺑﺴﯿﻂ ‪#‬‬
+‫‪import asyncio‬‬
+‫‪from crawl4ai import AsyncWebCrawler‬‬
+‫‪async def main():‬‬
+‫‪async with AsyncWebCrawler() as crawler:‬‬
+‫)"‪result = await crawler.arun(url="https://example.com‬‬
+‫‪ LLM‬ﻣﺤﺘﻮى ﺟﺎھﺰ ﻟﻠـ ‪#‬‬
+
+‫)‪print(result.markdown‬‬
+‫))(‪asyncio.run(main‬‬
+
+‫‪#‬‬
+‫‪#‬‬
+‫ﻣﺪڡوع( ‪B. Firecrawl‬‬
+‫)اﻷڡﻀﻞ ﻟﻺ ‪#‬ٮٮ‪5‬ﺎج —‬
+
+‫ﺗﺠﺎري ‪ +‬ﻧﺴﺨﺔ ﻣﻔﺘﻮﺣﺔ اﻟﻤﺼﺪر ‪: API‬اﻟﻨﻮع‬
+‫اﻟﺘﺴﻌﯿﺮ‪ :‬ﻣﺠﺎﻧﻲ )‪ 500‬ﺻﻔﺤﺔ( → ‪/333$-16$‬ﺷﮭﺮ‬
+‫ﻧﺴﺒﺔ اﻟﻨﺠﺎح‪ %99 :‬ﻋﻠﻰ اﻟﻤﻮاﻗﻊ اﻟﻤﻌﻘﺪة‬
+
+‫ﺎﺋى إﻟﻰ‬
+‫‪ Markdown/JSON/HTML‬ٮ‪%‬ﺤويﻞ ٮ‪%‬ﻠ ‪%‬ڡ ‪7‬‬
+‫‪%‬أﺳرع ٮ‪-‬ـ ‪ %33‬ﻣﻊ ٮ"ﺴٮ‪-‬ﺔ ٮ ‪"-‬ﺤﺎح أﻋﲆ ٮ‪-‬ـ ‪ Fire-Engine 40‬ﻣﺤﺮك‬
+‫"‬
+‫"‬
+‫اﻟﺤﻄﺮ ‪ proxies‬إدارة ٮ‪%‬ﻠ ‪%‬ڡﺎﺋٮ‪D‬ﺔ ﻟﻠـ‬
+‫وﻣﲀڡﺤﺔ‬
+‫‪ JavaScript‬و ‪ Python‬ﻟـ ‪SDK‬‬
+‫‪ LlamaIndex‬و ‪ LangChain‬ٮ‪%‬ﲀﻣﻞ ﻣٮ‪-‬ﺎﺷﺮ ﻣﻊ‬
+‫‪5‬ﺤراج ‪ LLM‬اﻷذكﻰ — ٮ ‪H‬ﺴٮ ‪#‬‬
+‫)ﻟﻼﺳٮ ‪#‬‬
+‫‪5‬ﺤﺪم( ‪C. ScrapeGraphAI‬‬
+
+‫ﺧﺪﻣﺔ ﻣﺪﻓﻮﻋﺔ ‪ Python +‬اﻟﻨﻮع‪ :‬ﻣﻜﺘﺒﺔ‬
+‫أو ﻣﺠﺎﻧﻲ )ﻣﻔﺘﻮح اﻟﻤﺼﺪر( )‪ (API‬اﻟﺘﺴﻌﯿﺮ‪ :‬ﻣﻦ ‪/19$‬ﺷﮭﺮ‬
+
+‫ﻠﻌﺔ ﻃ ‪-‬ٮٮ‪D‬ﻌٮ‪D‬ﺔ ٮ‪-‬ﺪﻻ ً ﻣﻦ‬‫‪ CSS selectors‬ٮ ‪D‬ﺴٮ "‪%‬ﺤﺪم وﺻﻒ ٮ ‪w‬‬
+‫ذاٮ‪%‬ٮ‪D‬ﺔ اﻹﺻﻼح ‪- Directed Graph Logic — scrapers‬ٮٮ"ﺎء ﻋﲆ‬
+‫ٮ‪D‬ٮ‪%‬ﻜٮ‪D‬ﻒ ٮ‪%‬ﻠ ‪%‬ڡﺎﺋ ‪D‬ٮا ً ﻋٮ"ﺪ ٮ ‪%w‬ﻌٮ‪D‬يﺮ ‪-‬ٮ "ٮٮ‪D‬ﺔ اﻟﻤوا ‪%‬ڡﻊ‬
+‫‪ SmartScraperGraph, SearchGraph, SpeechGraph‬ٮ ‪D‬ﺪﻋﻢ‬
+‫‪from scrapegraphai.graphs import SmartScraperGraph‬‬
+‫(‪graph = SmartScraperGraph‬‬
+‫‪",‬اﺳﺘﺨﺮج ﻋﻨﺎوﯾﻦ اﻟﻤﻘﺎﻻت وأﺳﻌﺎر اﻟﻤﻨﺘﺠﺎت"=‪prompt‬‬
+‫‪source="https://example.com",‬‬
+‫!ﻣﺤﻠﻲ ‪#‬‬
+
+‫}}"‪config={"llm": {"model": "ollama/llama3‬‬
+‫)‬
+‫)(‪result = graph.run‬‬
+
+‫‪#‬‬
+‫إﺿﺎڡٮ‪H‬ﺔ ‪#‬‬
+‫ﻣڡٮ‪H‬ﺪة ‪D.‬‬
+‫أدوات‬
+‫‪0‬ﺤﺪام '‬
+‫اﻻﺳٮ '‬
+‫اﻷڡﻀﻞ‬
+
+‫اﻟٮ' وع‬
+
+‫اﻷداة‬
+
+‫ٮ&ﺴﺮﻋﺔ ‪ URL → Markdown‬ٮ‪,‬ﺤويﻞ‬
+
+‫&‬
+‫‪#‬ى ‪API‬‬
+‫ﻣﺤﺎٮ !‬
+
+‫‪Jina Reader‬‬
+
+‫ﻣرا ‪,‬ڡٮ&ﺔ اﻟٮ <‪,‬ﻌٮ‪:‬يرات ‪& +‬ﺣﺪوﻟﺔ‬
+
+‫‪No-code‬‬
+
+‫‪Browse AI‬‬
+
+‫&ﺣﺎﻫﺰ ‪+2000 scraper‬‬
+
+‫ﻣٮ‪#‬ﺼﺔ‬
+
+‫‪Apify‬‬
+
+‫أٮ‪,‬ﻤٮ‪,‬ﺔ ﺳريﻌﺔ ٮ&ﺪون ﻛﻮد‬
+
+‫‪Chrome Extension‬‬
+
+‫‪Bardeen AI‬‬
+
+‫ﻣﺸﺎريﻊ ﻛ &ٮٮ‪:‬ﺮة ٮ&ﺪون ﻛﻮد‬
+
+‫‪Desktop + Cloud‬‬
+
+‫‪Octoparse‬‬
+
+‫ٮ‪,‬ﺤﻜﻢ ﰷﻣﻞ ٮ&ﺎﻟﻤٮ ‪#‬‬
+‫‪,‬ﺼڡﺢ‬
+
+‫ﻣﻜ ‪,‬ٮٮ&ﺔ‬
+
+‫‪Playwright‬‬
+
+‫‪:‬اﻟٮ‪5‬ﻮﺻٮ‪H‬ﺔ ﻟٮ‪# #‬ﻄﺎﻣﻚ‬
+‫)اﻟﻤﺤﺮك اﻷﺳﺎﺳﻲ — ﻣﺠﺎﻧﻲ وﻣﺤﻠﻲ( ‪: Crawl4AI‬اﻟﻄﺒﻘﺔ اﻷوﻟﻰ‬
+‫)ﻟﻠﻤﻮاﻗﻊ اﻟﻤﻌﻘﺪة واﻟﻤﺤﻤﯿﺔ( ‪: Firecrawl API‬اﻟﻄﺒﻘﺔ اﻟﺜﺎﻧﯿﺔ‬
+‫)ﻟﻼﺳﺘﺨﺮاج اﻟﺬﻛﻲ ﺑﻠﻐﺔ ﻃﺒﯿﻌﯿﺔ( ‪: ScrapeGraphAI‬اﻟﻄﺒﻘﺔ اﻟﺜﺎﻟﺜﺔ‬
+‫ً( ‪: Playwright‬اﻟﻄﺒﻘﺔ اﻟﺮاﺑﻌﺔ‬
+‫)ﻛﺎﺣﺘﯿﺎﻃﻲ ﻟﻠﺤﺎﻻت اﻟﻤﻌﻘﺪة ﺟﺪا‬
+
+‫‪.‬‬
+‫واﻟﻤﻌﺎﻟﺤﺔ ‪2.‬‬
+‫}‪ {#2-image-tools‬أدوات اﻟٮ‪ .‬ﺤﺚ ﻋﻦ اﻟﺼور‬
+
+‫أدوات اﻟٮ< ﺤﺚ ﻋﻦ اﻟﺼور‬
+‫ﻟﻠٮ< ﺤﺚ ﻋﻦ اﻟﺼور ‪A. APIs‬‬
+‫اﻟﻤٮ‪:‬ﺰة‬
+
+‫'‬
+‫اﻟﻤﺪڡوع‬
+
+‫‪7‬‬
+‫ى‬
+‫اﻟﻤﺤﺎ 'ٮ ‪3‬‬
+
+‫‪API‬‬
+
+‫اﻷﺷﻤﻞ واﻷدق‬
+
+‫ﻃﻠﺐ ‪$5/1000‬‬
+
+‫ﻃﻠﺐ‪/‬ٮ ‪:‬ﻮم ‪100‬‬
+
+‫‪Google Custom Search API‬‬
+
+‫‪#‬ٮٮ‪,‬ﺎﺋﺞ ﻣﻤٮ‪,‬ﺎزة‬
+
+‫ﻣﻦ ‪3/1000$‬‬
+
+‫ﻃﻠﺐ‪/‬ﺷﻬﺮ ‪1000‬‬
+
+‫‪Bing Image Search API‬‬
+
+‫ٮ &‪:‬ﺤﻤﻊ ﻣﻦ ﻋﺪة ﻣﺤﺮﰷت‬
+
+‫ﻣﻦ ‪/50$‬ﺷﻬﺮ‬
+
+‫ٮ&ﺤﺚ‪/‬ﺷﻬﺮ ‪100‬‬
+
+‫‪SerpAPI‬‬
+
+‫اﻟﺤﻮدة &‬
+‫ﺻور ﻋﺎﻟٮ‪:‬ﺔ &‬
+‫ﻣﺤﺎ ‪#‬ٮٮ‪:‬ﺔ‬
+
+‫ﻋ‪ #‬ٮ‪:‬ﺮ ﻣﺤﺪود‬
+
+‫ﻋ‪ #‬ٮ‪:‬ﺮ ﻣﺤﺪود‬
+
+‫‪Unsplash API‬‬
+
+‫‪#‬‬
+‫ﺿﺤﻤﺔ‬
+‫ﻣﻜ ‪,‬ٮٮ&ﺔ ﺻور‬
+
+‫ﻋ‪ #‬ٮ‪:‬ﺮ ﻣﺤﺪود‬
+
+‫ﻋ‪ #‬ٮ‪:‬ﺮ ﻣﺤﺪود‬
+
+‫‪Pexels API‬‬
+
+‫<‬
+‫ﻣﻌﺎﻟﺤﺔ وٮ ‪5‬ﺤﻠٮ‪H‬ﻞ اﻟﺼور ‪B.‬‬
+‫أدوات‬
+‫'‬
+‫ﻣﻼﺣﻄﺎت‬
+
+‫اﻻﺳٮ '‬
+‫‪0‬ﺤﺪام‬
+
+‫اﻷداة‬
+
+‫‪& Python/C++‬‬
+‫‪#‬ى‬
+‫‪،‬ﻣﺤﺎٮ !‬
+
+‫رؤيﺔ ﺣﺎﺳوٮ&يﺔ ﺷﺎﻣﻠﺔ‬
+
+‫‪OpenCV‬‬
+
+‫&‬
+‫‪#‬ى‪# ،‬ﺣ ‪#‬ڡٮ‪:‬ﻒ‬
+‫ﻣﺤﺎٮ !‬
+
+‫ٮ‪,‬ﻌﺪٮ ‪:‬ﻞ اﻟﺼور اﻷﺳﺎﳼ‬
+
+‫‪Pillow/PIL‬‬
+
+‫‪# GPU‬‬
+‫ﻣڡٮ‪,‬وح اﻟﻤﺼﺪر‪ ،‬ٮ ‪:‬ﺤٮ‪,‬ﺎج‬
+
+‫‪#‬ڡﻬﻢ اﻟﺼور ٮ&ﺎﻟٮ‪#‬ﺺ‬
+
+‫)‪CLIP (OpenAI‬‬
+
+‫‪#‬‬
+‫ﻣڡٮ‪,‬وح اﻟﻤﺼﺪر ‪ Microsoft،‬ﻣﻦ‬
+
+‫ٮ‪,‬ﺤﻠٮ‪:‬ﻞ ﺻور ﻣ ‪,‬ٮ ‪,‬ڡﺪم‬
+
+‫‪Florence-2‬‬
+
+‫‪ segmentation‬أﺣﺪث ٮ‪#‬ﻤﻮذج ﻟـ‬
+
+‫ٮ‪, ,‬ڡﺴٮ‪:‬ﻢ اﻟﺼور‬
+
+‫)‪SAM 2 (Meta‬‬
+
+‫‪# + Arabic support‬‬
+‫ﻣڡٮ‪,‬وح اﻟﻤﺼﺪر‬
+
+‫اﺳٮ ‪,#‬ﺤراج ٮ‪#‬ﺺ ﻣﻦ ﺻور‬
+
+‫‪Tesseract OCR‬‬
+
+‫ٮ ‪:‬ﺪﻋﻢ اﻟﻌرٮ&يﺔ ٮ&ﺸكﻞ ﻣﻤٮ‪,‬ﺎز‬
+
+‫اﻟﻠﻌﺎت ‪OCR‬‬
+‫ﻣٮ‪,‬ﻌﺪد‬
+‫<‬
+
+‫‪EasyOCR‬‬
+
+‫‪ GPU‬ٮ ‪:‬ﺤٮ‪,‬ﺎج‬
+
+‫‪ AI‬ٮ‪,‬ﻌﺪٮ ‪:‬ﻞ اﻟﺼور ٮ&ﺎﻟـ‬
+
+‫)‪img2img (Stable Diffusion‬‬
+
+‫)‪ (Screenshots‬أدوات ﻟ ‪5‬ڡﻄﺎت اﻟﺸﺎﺷﺔ ‪C.‬‬
+‫اﻟﻤٮ‪:‬ﺰة‬
+
+‫اﻷداة‬
+
+‫ﻟ ‪,‬ڡﻄﺎت ﰷﻣﻠﺔ ‪ +‬ﻋٮ‪#‬ﺎﺻﺮ ﻣﺤﺪدة‬
+
+‫‪Playwright Screenshots‬‬
+
+‫‪ JavaScript rendering‬ﻟ ‪,‬ڡﻄﺎت ﻣﻊ‬
+
+‫‪Puppeteer‬‬
+
+‫أ ‪,‬ڡﺪم ﻟﻜﻦ ﻣﺴ ‪,‬ٮ ‪,‬ڡﺮ &ﺣﺪا ً‬
+
+‫‪Selenium‬‬
+
+API ‫ڡﻄﺎت‬, ‫ى ﻟﻠ‬
+! ‫ﺳﺤﺎ &ٮ‬
+
+ScreenshotOne API
+
+Pipeline ‫اﻟﺼور اﻟﻤﻮﴅ ٮ<ﻪ‬:
+‫ → ﺑﺤﺚ‬Google/Bing Image API
+‫ → ﻟﻘﻄﺎت‬Playwright (multi-frame)
+OCR → EasyOCR (‫إﻧﺠﻠﯿﺰي‬/‫)ﻋﺮﺑﻲ‬
+‫ → ﺗﺤﻠﯿﻞ‬CLIP + Florence-2
+‫ → ﺗﻌﺪﯾﻞ‬Pillow + OpenCV
+AI Generation → Stable Diffusion (‫ ﻣﺤﻠﻲ ﻋﻠﻰ‬GPU)
+
+3. ‫اﻵلى‬
+‫( أدوات اﻟٮ@ﻌﻠﻢ‬ML Learning & Training) {#3-ml-tools}
+I
+‫ﺔ‬H‫أُﻃﺮ اﻟﻌﻤﻞ اﻷﺳﺎﺳٮ‬
+A. ‫ﻖ‬H‫ڡٮ‬5 ‫ﺪريﺐ واﻟﻀٮ< ﻂ اﻟﺪ‬5‫( ﻟﻠٮ‬Fine-tuning)
+‫اﻷداة‬
+
+' ‫اﻻﺳٮ‬
+‫ﺤﺪام‬0
+
+GPU ‫ﻣﻄﻠﻮب؟‬
+
+Hugging Face Transformers
+
+‫ﻤﻮذج‬#‫ﺿٮ&ﻂ أي ٮ‬/‫ﺪريﺐ‬,‫ٮ‬
+
+‫ﻌﻢ‬#‫ٮ‬
+
+Unsloth
+
+5-2 ‫ﻖ أﺳرع‬:‫ڡٮ‬, ‫ﺿٮ&ﻂ د‬x
+
+‫ﻌﻢ‬#‫ٮ‬
+
+LoRA/QLoRA
+
+‫ڡﻞ‬, ‫ﺿٮ&ﻂ ٮ&ﺬاﻛﺮة أ‬
+
+(‫ڡﻞ‬, ‫ﻌﻢ )أ‬#‫ٮ‬
+
+LlamaFactory
+
+&
+‫واﺣﻬﺔ ﺳﻬﻠﺔ ﻟﻠﻀٮ&ﻂ‬
+
+‫ﻌﻢ‬#‫ٮ‬
+
+Axolotl
+
+‫ڡﺪم‬, ‫ٮ‬, ‫ﺿٮ&ﻂ ﻣ‬
+
+‫ﻌﻢ‬#‫ٮ‬
+
+B. ‫ﻄﻤﺔ‬## ‫ ﺎء أٮ‬#‫ ﻟٮ< ٮ‬RAG (Retrieval-Augmented Generation)
+‫اﻷداة‬
+
+'
+‫ڡﺔ‬:' ‫اﻟﻮﻃٮ‬
+
+LangChain
+
+‫ڡﺎت‬, ‫ٮ‬: ‫ﻄ &ٮ‬,‫ﺎء ٮ‬#‫ إﻃﺎر ﺷﺎﻣﻞ ﻟ &ٮٮ‬LLM
+
+LlamaIndex
+
+#
+‫ى‬
+! ‫ڡ‬# ‫ﺤﺼﺺ‬,# ‫ ﻣٮ‬RAG ‫واﻟڡﻬﺮﺳﺔ‬
+
+ChromaDB
+
+‫ﺎت‬#‫ڡﺎﻋﺪة ٮ&يﺎٮ‬, Vector ‫ﺔ‬:‫ﻣﺤﻠٮ‬
+
+Qdrant
+
+Vector DB ‫ﻋﺎلى اﻷداء‬
+!
+
+‫‪ GraphQL‬ﻣﻊ ‪Vector DB‬‬
+
+‫‪Weaviate‬‬
+
+‫ٮ&ﺤﺚ ﻣٮ &‪,‬ﺤﻬﺎت ‪#‬ڡﺎﺋﻖ اﻟﺴﺮﻋﺔ‬
+
+‫)‪FAISS (Meta‬‬
+
+‫)‪ (MLOps & Monitoring‬أدوات ﻣرا ‪5‬ڡٮ< ﺔ اﻟٮ‪ #‬ﻤﺎذج ‪C.‬‬
+‫'‬
+‫اﻟﻮﻃٮ '‪:‬ڡﺔ‬
+
+‫اﻷداة‬
+
+‫ٮ‪,‬تٮ&ﻊ اﻟٮ &‪,‬ﺤﺎرب ‪ +‬ٮ‪#‬ﺸﺮ اﻟٮ‪#‬ﻤﺎذج‬
+
+‫‪MLflow‬‬
+
+‫ﻣرا ‪,‬ڡٮ&ﺔ ‪ +‬ٮ‪,‬ﺼور اﻟٮ‪,‬ﺪريﺐ‬
+
+‫‪Weights & Biases‬‬
+
+‫)‪ (Drift Detection‬ﻛﺸﻒ اﻻٮ‪#‬ﺤراف‬
+
+‫‪Evidently AI‬‬
+
+‫ﻣرا ‪,‬ڡٮ&ﺔ ﻣﺴٮ‪,‬ﻤﺮة ﻟﻠٮ‪#‬ﻤﺎذج‬
+
+‫‪WhyLabs‬‬
+
+‫&ﺣﻮدة اﻟ &ٮٮ‪:‬ﺎٮ‪#‬ﺎت‬
+
+‫‪Great Expectations‬‬
+
+‫إﺻﺪارات اﻟ &ٮٮ‪:‬ﺎٮ‪#‬ﺎت واﻟٮ‪#‬ﻤﺎذج‬
+
+‫‪DVC‬‬
+
+‫‪ AI Agents‬أدوات ٮ<ٮ‪ #‬ﺎء ‪D.‬‬
+‫اﻟﻤٮ‪:‬ﺰة‬
+
+‫اﻷداة‬
+
+‫‪ graph‬ﻣﻌ ‪,‬ڡﺪة ٮ&ـ ‪& agents‬ٮٮ‪#‬ﺎء‬
+
+‫‪LangGraph‬‬
+
+‫‪# AI agents‬ڡرق ﻣﻦ‬
+
+‫‪CrewAI‬‬
+
+‫ﻣﺤﺎدٮ‪Ç‬ﺎت ﻣٮ‪,‬ﻌﺪدة اﻟﻮكﻼء‬
+
+‫)‪AutoGen (Microsoft‬‬
+
+‫ﻣﻊ اﻟٮ‪,‬ﻄ &ٮ ‪:‬ٮ ‪,‬ڡﺎت ‪ AI‬ٮ‪,‬ﲀﻣﻞ‬
+
+‫‪Semantic Kernel‬‬
+
+‫‪NLP pipelines‬‬
+
+‫‪Haystack‬‬
+
+‫}‪ AI Avatar {#4-avatar-tools‬أدوات ‪4.‬‬
+‫ﻣ ‪5‬ڡﺎرٮ‪#‬ﺔ ﺷﺎﻣﻠﺔ‬
+‫‪#‬‬
+‫ﻟﻺ ‪#‬ٮٮ‪5‬ﺎج اﻟٮ <‬
+‫)ﻣﺪڡﻮﻋﺔ( ‪A.‬‬
+‫‪5‬ﺤﺎري‬
+‫اﻟﻤٮ‪:‬ﺰة اﻟﺮﺋٮ‪:‬ﺴٮ‪:‬ﺔ‬
+
+‫‪L‬‬
+‫اﻟﻠﻌﺎت‬
+
+‫اﻟﺴﻌﺮ‪/‬ﺷﻬﺮ‬
+
+‫اﻷداة‬
+
+‫‪ + Voice Cloning‬اﻷﻛٮ‪Ç‬ﺮ وا ‪,‬ڡﻌٮ‪:‬ﺔ‬
+
+‫‪175+‬‬
+
+‫ﻣﻦ ‪24$‬‬
+
+‫‪HeyGen‬‬
+
+‫‪#‬‬
+‫اﻷڡﻀﻞ ﻟﻠٮ‪,‬ﺪريﺐ اﻟﻤﺆﺳﴘ‬
+
+‫‪140+‬‬
+
+‫ﻣﻦ ‪18$‬‬
+
+‫‪Synthesia‬‬
+
+‫‪Creative Reality™ API‬‬
+
+‫‪30+‬‬
+
+‫ﻣﻦ ‪4.70$‬‬
+
+‫‪D-ID‬‬
+
+‫‪:‬مى‬
+‫ٮ ‪,#‬ڡﺎﻋﲇ ‪ +‬ٮ‪,‬ﻌﻠٮ !‬
+
+‫‪70+‬‬
+
+‫ﻣﻦ ‪23$‬‬
+
+‫‪Colossyan‬‬
+
+‫‪#‬ڡﺎﺋﻖ اﻟوا ‪,‬ڡﻌٮ‪:‬ﺔ‬
+
+‫‪80+‬‬
+
+‫ﻣﻦ ‪30$‬‬
+
+‫‪DeepBrain AI‬‬
+
+‫‪#‬‬
+‫ﻣڡٮ‪5‬ﻮﺣﺔ اﻟﻤﺼﺪر )اﻷﻫﻢ ﻟﺤﺎﻟٮ‪5‬ﻚ( ‪B.‬‬
+‫‪#‬‬
+‫)اﻷڡﻀﻞ ‪#‬‬
+‫ﻣڡٮ‪5‬وح اﻟﻤﺼﺪر( ‪Duix Avatar‬‬
+
+‫‪GitHub: github.com/duixcom/Duix-Avatar‬‬
+‫اﻟﺘﺮﺧﯿﺺ‪ :‬ﻣﻔﺘﻮح اﻟﻤﺼﺪر ﺑﺎﻟﻜﺎﻣﻞ‬
+‫ً ‪: Offline‬اﻟﻌﻤﻞ‬
+‫ﺗﻤﺎﻣﺎ‬
+‫اﻟﻠﻐﺎت‪ 8 :‬ﻟﻐﺎت )ﻣﻨﮭﺎ اﻟﻌﺮﺑﯿﺔ!(‬
+‫‪: Windows/Ubuntu + GPU‬اﻟﻤﺘﻄﻠﺒﺎت‬
+
+‫"‬
+‫ﻟﻠﻤﻄﻬﺮ واﻟﺼﻮت‬
+‫اﺳ ‪%‬ٮٮ"ﺴﺎخ د ‪%‬ڡٮ‪D‬ﻖ‬
+‫ٮ ‪D‬ﻌﻤﻞ ٮ‪-‬ﺪون إ "ٮٮ‪%‬ﺮٮ"ﺖ — ﺣﻤﺎٮ ‪D‬ﺔ ﰷﻣﻠﺔ "‬
+‫ﻟﻠﺤﺼﻮﺻٮ‪D‬ﺔ‬
+‫‪ Avatar‬ٮ"ﺺ وﺻﻮت ﻟ ‪%‬ڡٮ‪D‬ﺎدة اﻟـ‬
+‫ﻣزاﻣٮ"ﺔ "‬
+‫ﺷڡﺎه ذﻛٮ‪D‬ﺔ‬
+‫ﺣﺎﻫﺰ ‪Docker deployment‬‬‫‪#‬‬
+‫أدوات ‪#‬‬
+‫إﺿﺎڡٮ‪H‬ﺔ‬
+‫ﻣڡٮ‪5‬ﻮﺣﺔ‬
+
+‫'‬
+‫اﻟﻮﻃٮ '‪:‬ڡﺔ‬
+
+‫اﻷداة‬
+
+‫ٮ‪,‬ﺤريﻚ ﺻورة ٮ‪Ç‬ﺎ &ٮٮ‪,‬ﺔ ٮ&ﺎﻟﺼﻮت‬
+
+‫‪SadTalker‬‬
+
+‫ﻣزاﻣٮ‪#‬ﺔ ‪#‬‬
+‫ﺷڡﺎه ﻣﻊ أي ‪#‬ڡٮ‪:‬ﺪٮ ‪:‬ﻮ‬
+
+‫‪Wav2Lip‬‬
+
+‫&‬
+‫اﻟﻮﺣﻮه‬
+‫ٮ‪,‬ﺤﺴٮ‪:‬ﻦ &ﺣﻮدة‬
+
+‫‪GFPGAN‬‬
+
+‫&‬
+‫اﻟﻮﺣﻮه‬
+‫اﺳ ‪,‬ٮٮ‪#‬ﺴﺎخ‬
+
+‫‪DeepFaceLab‬‬
+
+‫ٮ‪,‬ﻮﻟٮ‪:‬ﺪ ﺻﻮت ‪#‬‬
+‫ﻣڡٮ‪,‬وح اﻟﻤﺼﺪر‬
+
+‫‪Coqui TTS‬‬
+
+‫عى &ﺣﺪا ً ‪Text-to-Speech‬‬
+‫وا ‪,‬ڡ !‬
+
+‫)‪Bark (Suno‬‬
+
+‫‪ Avatar:‬اﻟﻤﻮﴅ ٮ<ﻪ ﻟﻠـ ‪Architecture‬‬
+‫)ﯾﻮﻟﺪ اﻟﺮد( ‪Text Input → LLM‬‬
+‫↓‬
+‫ﯾﺤﻮل اﻟﻨﺺ ﻟﺼﻮت → )‪TTS Engine (Bark/Coqui‬‬
+‫↓‬
+‫‪ Avatar‬ﯾﺤﺮك اﻟـ → )‪Avatar Engine (Duix/SadTalker‬‬
+‫↓‬
+‫ﯾﻌﺮض ﻟﻠﻤﺴﺘﺨﺪم → ‪Video Output‬‬
+‫ُ‬
+
+‫}‪ {#5-local-llm‬ﻣﺤﲇ؟ — ٮ@ﺤﻠٮ‪-‬ﻞ )‬
+‫ﻣڡﺼﻞ ‪ LLM‬ﻫﻞ ٮ@ﺤٮ@ﺎج ‪5.‬‬
+‫ﻣﺤﲇ — وإﻟٮ‪H‬ﻚ اﻟﺴٮ< ﺐ واﻟٮ ‪5#‬ڡﺎﺻٮ‪H‬ﻞ ‪< LLM‬‬
+‫اﻹﺣﺎٮ<ﺔ‪ :‬ٮ‪#‬ﻌﻢ‪ ،‬ٮ ‪5‬ﺤٮ‪5‬ﺎج‬
+‫ﻣﺤﲇ؟ ‪ LLM‬ﻟﻤﺎذا ٮ ‪5‬ﺤٮ‪5‬ﺎج‬
+‫اﻟﺸرح‬
+
+‫اﻟﺴٮ‪ 7‬ﺐ‬
+
+‫واﻟﻌﻤﻼء ٮ‪& ,‬ٮ ‪,‬ڡﻰ ﻋﲆ ﺳٮ ‪#‬‬
+‫‪:‬ﺮڡراٮ‪,‬ﻚ ‪ GAARA‬ٮ&يﺎٮ‪#‬ﺎت‬
+
+‫ﺳٮ‪H‬ﺎدة اﻟٮ< ٮ‪H‬ﺎٮ‪#‬ﺎت‬
+
+‫ٮ‪,‬كﻠﻒ ‪ .$$$‬ﻣﺤﻠ ‪:‬ٮا ً = ٮ ‪#‬‬
+‫‪,‬كﻠڡﺔ ﻛﻬرٮ&ﺎء ‪#‬ڡ ‪,‬ڡﻂ ‪API calls‬‬
+
+‫اﻟٮ ‪#‬‬
+‫‪5‬كﻠڡﺔ‬
+
+‫ﻻٮ ‪#‬‬
+‫‪,‬ﺄﺣﺮ ﺷٮ&ﻜﺔ — اﺳٮ &‪,‬ﺤﺎٮ&ﺔ ‪#‬ڡوريﺔ‬
+
+‫اﻟﺴﺮﻋﺔ‬
+
+‫ٮ ‪:‬ﻤﻜٮ‪#‬ﻚ ﺿٮ&ﻂ اﻟٮ‪#‬ﻤﻮذج ﻋﲆ ٮ&يﺎٮ‪#‬ﺎٮ‪,‬ﻚ اﻟزراﻋٮ‪:‬ﺔ‬
+
+‫اﻟٮ ‪#‬‬
+‫‪5‬ﺤﺼٮ‪H‬ﺺ‬
+
+‫أو ﻋ‪ #‬ٮ‪:‬ﺮﻫﺎ ‪ OpenAI‬ﻻ ٮ‪,‬تﺄٮ‪Ç‬ﺮ ٮ&ﺎ ‪#‬ٮ ‪,‬ڡﻄﺎع ‪#‬ﺣﺪﻣﺔ‬
+
+‫اﻻﺳ ‪5‬ٮ ‪5‬ڡﻼﻟٮ‪H‬ﺔ‬
+
+‫ﻟﻦ ٮ <‪,‬ﻌﺎدر ﺳٮ ‪#‬‬
+‫‪:‬ﺮڡﺮك ‪ Sakata‬وٮ‪Ç‬ﺎﺋﻖ اﻟٮ ‪,#‬ڡﺎوض ﻣﻊ‬
+
+‫‪#‬‬
+‫اﻟﺤﺼﻮﺻٮ‪H‬ﺔ‬
+
+‫ﻟﺪٮ ‪H‬ﻚ ﺣﺎﻟ ‪H‬ٮاً؟ ‪ GPU‬ﻣﺎ ﻫﻮ‬
+‫‪ RTX 4090 (24GB VRAM):‬إذا ﻟﺪٮ ‪H‬ﻚ‬
+
+‫‪:‬ﯾﻤﻜﻨﻚ ﺗﺸﻐﯿﻞ‬
+‫)‪ (~128 tokens/sec‬ﺑﻜﻔﺎءة ﻋﺎﻟﯿﺔ — ‪Llama 3.1 8B‬‬
+‫ﻣﻤﺘﺎز ﻟﻠﻤﮭﺎم اﻟﻌﺎﻣﺔ — ‪Mistral 7B‬‬
+‫‪-bit quantization‬ﺑـ ‪Qwen 2.5 14B — 4‬‬
+‫ﻟﻠﺒﺮﻣﺠﺔ — ‪CodeLlama 13B‬‬
+‫‪ Microsoft‬ﻣﻦ — ‪Phi-3 Medium 14B‬‬
+‫)أﺑﻄﺄ( ‪-bit quantization‬ﺑـ ‪Llama 3.1 70B — 4‬‬
+‫واﺣﺪ ‪ GPU‬ﻣﺴﺘﺤﯿﻞ ﻋﻠﻰ — ‪Llama 3.1 405B‬‬
+
+‫‪ RTX 3090 (24GB VRAM):‬إذا ﻟﺪٮ ‪H‬ﻚ‬
+
+‫ً ﻟﻜﻦ‬
+‫‪:‬ﻧﻔﺲ اﻟﻘﺎﺋﻤﺔ أﻋﻼه ﺗﻘﺮﯾﺒﺎ‬
+‫‪ RTX 4090‬أﺑﻄﺄ ﺑـ ‪ %30-20‬ﻣﻦ ‪-‬‬
+‫ﺳﻌﺮ ﻣﺴﺘﻌﻤﻞ ‪) 900-700$‬ﻗﯿﻤﺔ ﻣﻤﺘﺎزة!( ‪-‬‬
+
+‫‪:‬اﻷﺣﺪث — )‪ RTX 5090 (32GB VRAM‬إذا ﻟﺪٮ ‪H‬ﻚ‬
+
+‫‪ +‬ﻛﻞ ﻣﺎ ﺳﺒﻖ‬
+‫ﺑﺮاﺣﺔ ‪ Q4 quantization‬ﺑـ ‪70B models‬‬
+‫‪ RTX 4090‬أﺳﺮع ﺑـ ‪ %67‬ﻣﻦ‬
+‫‪B models‬ﻋﻠﻰ ‪213 tokens/sec 8‬‬
+
+‫ﻣﺤﻠ ‪H‬ٮا ً ‪ LLM‬أدوات ٮ ‪u‬‬
+‫‪5‬ﺸﻌٮ‪H‬ﻞ‬
+‫‪:‬اﻷﺳﺎﺳٮ‪H‬ﺔ )ٮ <‪H‬ﺤﺐ ٮ ‪5‬ثٮ< ‪H‬ٮٮ‪5‬ﻬﺎ(‬
+
+‫)اﻷﺳﻬﻞ — اٮ<ﺪأ ٮ<ﻪ‬
+
+‫( ‪1. Ollama‬‬
+‫ﺗﺜﺒﯿﺖ ‪#‬‬
+
+‫‪curl -fsSL https://ollama.ai/install.sh | sh‬‬
+‫ﺗﺤﻤﯿﻞ وﺗﺸﻐﯿﻞ ﻧﻤﻮذج ‪#‬‬
+‫‪ollama pull llama3.1:8b‬‬
+‫‪ollama run llama3.1:8b‬‬
+‫ﺟﺎھﺰ ﻟﻼﺳﺘﺨﺪام ‪# API‬‬
+‫{' ‪curl http://localhost:11434/api/generate -d‬‬
+‫‪"model": "llama3.1:8b",‬‬
+‫"ﻣﺎ ھﻲ أﻓﻀﻞ ﺑﺬور اﻟﻄﻤﺎﻃﻢ ﻟﻤﺼﺮ؟" ‪"prompt":‬‬
+‫'}‬
+
+‫‪%‬واڡﻖ ﻣﻊ ‪ API‬ٮ "‬
+‫‪ OpenAI‬ﻣٮ "‬
+‫‪D‬ﻮڡﺮ‬
+‫ٮ ‪D‬ﺪﻋﻢ أﻛٮ‪É‬ﺮ ﻣﻦ ‪ 100‬ٮ"ﻤﻮذج‬
+‫إدارة ٮ‪%‬ﻠ ‪%‬ڡﺎﺋٮ‪D‬ﺔ ﻟﻠﺬاﻛﺮة‬
+‫‪ Linux/Mac/Windows‬ٮ ‪D‬ﻌﻤﻞ ﻋﲆ‬
+‫‪#‬‬
+‫)اﻷڡﻀﻞ ﻟﻺ ‪#‬ٮٮ‪5‬ﺎج‬
+
+‫( ‪2. vLLM‬‬
+
+‫‪pip install vllm‬‬
+‫ﺗﺸﻐﯿﻞ ﻛﺴﯿﺮﻓﺮ ‪#‬‬
+‫\ ‪python -m vllm.serve --model meta-llama/Llama-3.1-8B-Instruct‬‬
+‫\ ‪--quantization awq‬‬
+‫\ ‪--max-model-len 8192‬‬
+‫‪--api-key your-secret-key‬‬
+
+‫ﻣﻦ اﻷدوات "‬
+‫اﻷﺣرى ‪x‬أﺳرع ٮ‪-‬ـ ‪2.7‬‬
+‫‪%‬ٮ ‪% D‬ڡﻠﻞ اﺳٮ‪%‬ﻬﻼك اﻟﺬاﻛﺮة ٮ‪-‬ـ ‪PagedAttention 80-60‬‬
+‫ﻟﻠﻄﻠٮ‪-‬ﺎت اﻟﻤٮ‪%‬ﻌﺪدة ‪ batching‬ٮ ‪D‬ﺪﻋﻢ‬
+‫‪É‬ﺎلى ﻟ ‪-‬ٮٮ‪D‬ﺌﺔ اﻹ "ٮٮ‪%‬ﺎج‬
+‫ﻣٮ ‪7‬‬
+‫<‬
+‫)واﺣﻬﺔ رﺳﻮﻣٮ‪H‬ﺔ( ‪3. LM Studio‬‬
+‫ﺳﻬﻞ اﻻﺳٮ "‪%‬ﺤﺪام ‪ Desktop‬ٮ‪%‬ﻄ ‪-‬ٮٮ‪D‬ﻖ‬
+‫ٮ‪%‬ﺤﻤٮ‪D‬ﻞ اﻟٮ"ﻤﺎذج ‪-‬ٮ "ٮ ‪%‬ڡﺮة واﺣﺪة‬
+‫‪ Windows/Mac/Linux‬ٮ ‪D‬ﻌﻤﻞ ﻋﲆ‬
+‫"‬
+‫ﻟﻼﺣ ‪%‬ٮٮ‪-‬ﺎر واﻟٮ ‪%-‬ﺤرٮ‪-‬ﺔ‬
+‫‪É‬ﺎلى‬
+‫ﻣٮ ‪7‬‬
+‫‪#‬‬
+‫)أﺣﻒ وز ‪#‬ٮا ً( ‪4. llama.cpp‬‬
+‫ﺳريﻊ ‪-‬ﺣﺪا ً — ‪C++‬‬
+‫‪ CPU + GPU‬ٮ ‪D‬ﻌﻤﻞ ﻋﲆ‬
+‫‪ GGUF‬ٮ ‪D‬ﺪﻋﻢ كﻞ ﺻيﻎ‬
+‫‬‫ﻟﻸﺣﻬﺰة اﻟﻤﺤﺪودة‬
+‫‪É‬ﺎلى‬
+‫ﻣٮ ‪7‬‬
+‫‪:‬اﻟٮ‪ #‬ﻤﺎذج اﻟﻤﻮﴅ ٮ<ﻬﺎ ﻟﺤﺎﻟٮ‪5‬ﻚ‬
+‫)‪ (Q4‬ﻣﻄﻠﻮب ‪VRAM‬‬
+
+‫اﻻﺳٮ '‬
+‫‪0‬ﺤﺪام‬
+
+‫‪7‬‬
+‫اﻟﺤﺤﻢ‬
+
+‫اﻟٮ' ﻤﻮذج‬
+
+‫‪~5 GB‬‬
+
+‫اﻟﻤﺤﺮك اﻷﺳﺎﳼ ﻟﻠٮ ‪#‬‬
+‫‪#‬ﻄﺎم‬
+
+‫‪8B‬‬
+
+‫‪Llama 3.1 8B‬‬
+
+‫‪~4.5 GB‬‬
+
+‫ٮ&ﺪٮ ‪:‬ﻞ ﺳريﻊ‬
+
+‫‪7B‬‬
+
+‫‪Mistral 7B‬‬
+
+‫‪~4.5 GB‬‬
+
+‫ﻣﻤٮ‪,‬ﺎز ﻟﻠﻌرٮ&يﺔ‬
+
+‫‪7B‬‬
+
+‫‪Qwen 2.5 7B‬‬
+
+‫‪~4.5 GB‬‬
+
+‫‪ ERP‬ٮ‪,‬ﻮﻟٮ‪:‬ﺪ ﻛﻮد‬
+
+‫‪7B‬‬
+
+‫‪CodeLlama 7B‬‬
+
+Nomic Embed
+
+137M
+
+‫ﺪ‬:‫ﻮﻟٮ‬,‫ ٮ‬Embeddings
+
+~0.5 GB
+
+Llama 3.1 70B
+
+70B
+
+‫ڡﺪة‬, ‫( ﻣﻬﺎم ﻣﻌ‬Q4)
+
+~40 GB*
+
+70 ‫اﻟٮ"ﻤﻮذج‬B ‫ﺎج‬%‫ﺤٮ‬D ‫ ٮ‬GPU ‫ﺮ أو ﻋﺪة‬-‫ أﻛٮ‬GPUs ‫ أو‬quantization ‫ﺮ‬É‫أﻛٮ‬
+# ‫ اﻟٮ‬API:
+‫ﺔ ٮ<ـ‬#‫ڡﺎرٮ‬5 ‫كﻠڡﺔ ﻣ‬5
+
+API (OpenAI GPT-4o):
+- $15/‫ ﻣﻠﯿﻮن‬token input + $60/‫ ﻣﻠﯿﻮن‬token output
+- ~$200-500/‫ﺷﮭﺮ ﻻﺳﺘﺨﺪام ﻣﺘﻮﺳﻂ‬
+‫( ﻣﺤﻠﻲ‬RTX 4090 + Llama 3.1 8B):
+- ‫ﺷﮭﺮ‬/50-30$~ :‫ﻛﮭﺮﺑﺎء‬
+- GPU: $1,600-2,000 (‫)ﻣﺮة واﺣﺪة‬
+- ROI: ‫ أﺷﮭﺮ‬4-3 ‫ﺧﻼل‬
+
+6. ‫ﺔ اﻟٮ) )ﻄﺎم اﻟﻤوزع‬-‫ٮ) ٮ‬.‫( ٮ‬Multi-Server Architecture) {#6distributed-architecture}
+# ‫ﻢ‬H‫ﺼﻤٮ‬5 ‫ٮ‬
+‫ﺔ‬H‫ٮٮ‬5 ‫ﺤ‬5‫ﻚ اﻟٮ‬5‫ٮٮ‬H #‫ﻣﺤﺼﺺ ﻟٮ< ٮ‬
+┌─────────────────────────────────────────────────────────┐
+│
+
+GAARA AI NETWORK
+
+│
+
+│
+
+│
+
+│
+
+┌──────────────┐
+
+┌──────────────┐
+
+│
+
+│
+
+LOCAL PC
+
+│
+
+│
+
+(GPU Master) │
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│ │
+
+│
+
+│ • RTX GPU
+
+│
+
+│ • CPU Only
+
+│
+
+│ • CPU Only
+
+│ │
+
+│
+
+│ • LLM Engine │
+
+│ • Scraping
+
+│
+
+│ • Scraping
+
+│ │
+
+│
+
+│ • Training
+
+│
+
+│ • Data Proc
+
+│
+
+│ • Data Proc
+
+│ │
+
+│
+
+│ • Avatar Gen │
+
+│ • API Serve
+
+│
+
+│ • API Serve
+
+│ │
+
+│
+
+│ • Image AI
+
+│
+
+│ • Monitoring │
+
+│ • Big Data
+
+│ │
+
+│
+
+└──────┬───────┘
+
+└──────┬───────┘
+
+└───────┬───────┘ │
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+└──────────┬───────┴───────────────────┘
+
+│
+
+│
+
+│
+
+┌───────────────┐ │
+
+VPS #1
+
+│
+
+│ (Worker)
+
+│
+
+│
+
+VPS #2
+
+│ (Worker)
+
+│ │
+│ │
+
+│
+
+│
+
+│
+
+│
+
+┌──────────▼──────────┐
+
+│
+
+│
+
+│
+
+LOCAL SERVER
+
+│
+
+│
+
+│
+
+│
+
+(Storage Master)
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+• PostgreSQL DB
+
+│
+
+│
+
+│
+│
+
+│
+
+• Vector DB
+
+│
+
+│
+
+│
+
+• File Storage
+
+│
+
+│
+
+│
+
+│
+
+• Backup System
+
+│
+
+│
+
+│
+
+│
+
+• ERP Database
+
+│
+
+│
+
+│
+
+└─────────────────────┘
+
+│
+
+└─────────────────────────────────────────────────────────┘
+
+# ‫ﻞ دور كﻞ ﺳٮ‬H‫ڡﺼٮ‬5# ‫ٮ‬:
+‫ﺮڡﺮ‬H
+‫ﺮ اﻟﻤﺤﲇ‬5 ‫ﻮٮ‬H‫( <ﺣﻬﺎز اﻟﻜﻤٮ< ٮ‬GPU Master)
+
+‫ ﻣﺮﻛﺰ اﻟﺬﻛﺎء اﻻﺻﻄﻨﺎﻋﻲ‬:‫اﻟﺪور‬
+‫اﻟﻤﮭﺎم‬:
+- ‫ ﺗﺸﻐﯿﻞ‬LLM ‫ ﻋﺒﺮ‬Ollama/vLLM
+- ‫( ﺗﺪرﯾﺐ وﺿﺒﻂ اﻟﻨﻤﺎذج‬Fine-tuning)
+- ‫ ﺗﻮﻟﯿﺪ‬Avatar (‫ ﯾﺤﺘﺎج‬GPU)
+- ‫ ﻣﻌﺎﻟﺠﺔ اﻟﺼﻮر ﺑﺎﻟـ‬AI (CLIP, Stable Diffusion)
+- Image Generation ‫ و‬OCR ‫اﻟﻤﺘﻘﺪم‬
+‫اﻟﺒﺮﻣﺠﯿﺎت اﻟﻤﻄﻠﻮﺑﺔ‬:
+- NVIDIA Drivers + CUDA Toolkit
+- Ollama (‫ ﻟﺘﺸﻐﯿﻞ‬LLMs)
+- vLLM (‫)ﻟﺨﺪﻣﺔ اﻹﻧﺘﺎج‬
+- Docker + NVIDIA Container Toolkit
+- FastAPI (‫ ﻟﺘﻘﺪﯾﻢ‬API)
+API Endpoints ‫ﯾﻮﻓﺮھﺎ‬:
+- POST /api/llm/generate
+
+→ ‫ﺗﻮﻟﯿﺪ ﻧﺺ‬
+
+- POST /api/llm/embed
+
+→ ‫ ﺗﻮﻟﯿﺪ‬embeddings
+
+- POST /api/avatar/generate
+
+→ ‫ ﺗﻮﻟﯿﺪ‬avatar
+
+- POST /api/image/analyze
+
+→ ‫ﺗﺤﻠﯿﻞ ﺻﻮر‬
+
+- POST /api/image/generate
+
+→ ‫ﺗﻮﻟﯿﺪ ﺻﻮر‬
+
+- POST /api/train/start
+
+→ ‫ﺑﺪء ﺗﺪرﯾﺐ‬
+
+VPS #1 (Worker — ‫)اﻟٮ< ﺤﺚ واﻟﻜﺸﻂ‬
+
+‫ ﺟﻤﻊ اﻟﺒﯿﺎﻧﺎت ﻣﻦ اﻹﻧﺘﺮﻧﺖ‬:‫اﻟﺪور‬
+‫اﻟﻤﮭﺎم‬:
+- ‫ ﺗﺸﻐﯿﻞ‬Crawl4AI ‫ﻟﻠﺒﺤﺚ اﻟﻤﺴﺘﻤﺮ‬
+- ‫ﻛﺸﻂ اﻟﻤﻮاﻗﻊ اﻟﻤﺠﺪوﻟﺔ‬
+- Firecrawl API calls
+- Image Search APIs
+
+‫‪- Monitor & Alerts‬‬
+‫‪:‬اﻟﺒﺮﻣﺠﯿﺎت اﻟﻤﻄﻠﻮﺑﺔ‬
+‫‪- Python 3.11+‬‬
+‫‪- Crawl4AI + Playwright‬‬
+‫)ﻟﺠﺪوﻟﺔ اﻟﻤﮭﺎم( ‪- Celery + Redis‬‬
+‫)ﻣﺮاﻗﺒﺔ( ‪- Prometheus + Grafana‬‬
+‫‪:‬اﻟﻤﻮاﺻﻔﺎت اﻟﻤﻮﺻﻰ ﺑﮭﺎ‬
+‫‪- 4-8 vCPUs‬‬
+‫‪- 8-16 GB RAM‬‬
+‫‪- 100+ GB SSD‬‬
+‫ﻧﻄﺎق ﺗﺮددي ﻋﺎﻟﻲ ‪-‬‬
+‫اﻟﺴﻌﺮ‪/50-20$~ :‬ﺷﮭﺮ ‪-‬‬
+
+‫<‬
+‫)ﻣﻌﺎﻟﺤﺔ اﻟٮ< ٮ‪H‬ﺎٮ‪#‬ﺎت — ‪VPS #2 (Worker‬‬
+
+‫اﻟﺪور‪ :‬ﻣﻌﺎﻟﺠﺔ وﺗﺨﺰﯾﻦ اﻟﺒﯿﺎﻧﺎت اﻟﻀﺨﻤﺔ‬
+‫‪:‬اﻟﻤﮭﺎم‬
+‫)‪ (ETL‬ﻣﻌﺎﻟﺠﺔ اﻟﺒﯿﺎﻧﺎت اﻟﻤﺠﻤﻌﺔ ‪-‬‬
+‫ﻟﻠﻤﻌﺎﻟﺠﺔ اﻟﻤﻮزﻋﺔ ‪- Apache Spark/Dask‬‬
+‫ﺗﻨﻈﯿﻒ وھﯿﻜﻠﺔ اﻟﺒﯿﺎﻧﺎت ‪-‬‬
+‫ﻋﺎم ﻟﻠﻌﻤﻼء ‪- API‬‬
+‫ﻟﻠﺼﻮر اﻟﻤﻌﺎﻟﺠﺔ ‪- CDN‬‬
+‫‪:‬اﻟﺒﺮﻣﺠﯿﺎت اﻟﻤﻄﻠﻮﺑﺔ‬
+‫‪- Python + Pandas/Polars‬‬
+‫)اﺧﺘﯿﺎري( ‪- Apache Spark‬‬
+‫)‪- MinIO (object storage‬‬
+‫)‪- Nginx (reverse proxy‬‬
+‫‪:‬اﻟﻤﻮاﺻﻔﺎت اﻟﻤﻮﺻﻰ ﺑﮭﺎ‬
+‫‪- 4-8 vCPUs‬‬
+‫‪- 16-32 GB RAM‬‬
+‫‪- 500+ GB SSD‬‬
+‫اﻟﺴﻌﺮ‪/80-30$~ :‬ﺷﮭﺮ ‪-‬‬
+
+‫)‪ (Storage Master‬اﻟﺴٮ ‪#‬‬
+‫‪H‬ﺮڡﺮ اﻟﻤﺤﲇ‬
+
+‫‪ ERP‬اﻟﺪور‪ :‬ﻣﺮﻛﺰ اﻟﺒﯿﺎﻧﺎت واﻟـ‬
+‫‪:‬اﻟﻤﮭﺎم‬
+‫)‪ ERP‬ﻗﺎﻋﺪة ﺑﯿﺎﻧﺎت( ‪- PostgreSQL‬‬
+‫)‪- Qdrant/ChromaDB (Vector Database‬‬
+‫)ﺗﺨﺰﯾﻦ اﻟﻤﻠﻔﺎت( ‪- NFS/MinIO‬‬
+
+‫ﺗﻠﻘﺎﺋﻲ ‪- Backup‬‬
+‫‪ VPS servers‬ﻣﻊ اﻟـ ‪- Sync‬‬
+‫‪:‬اﻟﺒﺮﻣﺠﯿﺎت اﻟﻤﻄﻠﻮﺑﺔ‬
+‫‪- PostgreSQL 16+‬‬
+‫)‪- Qdrant (Vector DB‬‬
+‫)‪- MinIO (Object Storage‬‬
+‫)‪- Restic/Borg (Backup‬‬
+‫)ﺗﺄﻣﯿﻦ اﻻﺗﺼﺎﻻت( ‪- WireGuard VPN‬‬
+
+‫ٮ<روٮ ‪5‬ﻮﻛول اﻻٮ ‪5‬ﺼﺎل ٮ<يﻦ اﻟﺴٮ ‪#‬‬
+‫‪H‬ﺮڡرات‬
+‫‪:‬اﻟﺸﺒﻜﺔ اﻵﻣﻨﺔ‬
+‫)‪: WireGuard VPN (mesh network‬ﻃﺮﯾﻘﺔ‬
+‫‪: AES-256‬اﻟﺘﺸﻔﯿﺮ‬
+‫‪: UDP 51820‬اﻟﻤﻨﺎﻓﺬ‬
+‫‪:‬اﻟﻤﻤﯿﺰات‬
+‫ً ‪-‬‬
+‫)‪ (overhead < 1ms‬ﺳﺮﯾﻊ ﺟﺪا‬
+‫ﺗﺸﻔﯿﺮ ﻗﻮي ‪-‬‬
+‫إﻋﺪاد ﺑﺴﯿﻂ ‪-‬‬
+‫‪ NAT‬ﯾﻌﻤﻞ ﻋﺒﺮ ‪-‬‬
+‫‪:‬ﻃﺮﯾﻘﺔ اﻻﺗﺼﺎل ﺑﯿﻦ اﻟﺨﺪﻣﺎت‬
+‫‪ FastAPI‬ﻋﺒﺮ ‪: REST API‬اﻷﺳﺎﺳﻲ‬
+‫‪ RabbitMQ‬أو ‪: Redis Pub/Sub‬اﻟﺮﺳﺎﺋﻞ‬
+‫)ﻟﻠﻤﮭﺎم اﻟﻄﻮﯾﻠﺔ( ‪: Celery‬اﻟﻤﮭﺎم‬
+‫)ﻟﻠﺘﺤﺪﯾﺜﺎت اﻟﻔﻮرﯾﺔ( ‪: WebSocket‬اﻟﺒﺚ‬
+
+‫اﻟٮ< ٮ‪H‬ﺎٮ‪#‬ﺎت اﻟﻤوزع ‪Pipeline‬‬
+‫]‪/ERP‬ﻃﻠﺐ ﺑﺤﺚ ﻣﻦ اﻟﻤﺴﺘﺨﺪم[‬
+‫│‬
+‫▼‬
+‫]ﯾﺒﺤﺚ ﻓﻲ اﻹﻧﺘﺮﻧﺖ ‪[VPS #1:‬‬
+‫│‬
+‫]ﻣﻌﺎﻟﺠﺔ وﺗﻨﻈﯿﻒ ‪ ──────────► [VPS #2:‬ﺑﯿﺎﻧﺎت ﻧﺼﯿﺔ ──├‬
+‫]ﺗﺨﺰﯾﻦ ‪ +‬ﻓﮭﺮﺳﺔ ‪ ────────────────────► [VPS #2:‬ﺻﻮر ──├‬
+‫│‬
+‫▼‬
+‫]ﯾﺮﺳﻞ ﻟﻠﻤﻌﺎﻟﺠﺔ اﻟﺬﻛﯿﺔ ‪[VPS #2:‬‬
+‫│‬
+‫▼‬
+‫])‪ (GPU‬اﻟﻜﻤﺒﯿﻮﺗﺮ اﻟﻤﺤﻠﻲ[‬
+
+├── LLM ‫ﯾﺤﻠﻞ وﯾﻠﺨﺺ‬
+├── ‫ ﯾﻮﻟﺪ‬embeddings
+├── Avatar (‫ﯾﻘﺪم اﻟﻨﺘﺎﺋﺞ )اﺧﺘﯿﺎري‬
+│
+▼
+[‫]اﻟﺴﯿﺮﻓﺮ اﻟﻤﺤﻠﻲ‬
+├── ‫ ﯾﺨﺰن ﻓﻲ‬PostgreSQL
+├── ‫ ﯾﺨﺰن‬embeddings ‫ ﻓﻲ‬Vector DB
+├── ‫ ﯾﺤﺪث ﻗﺎﻋﺪة ﺑﯿﺎﻧﺎت‬ERP
+├── Backup ‫ﺗﻠﻘﺎﺋﻲ‬
+│
+▼
+[‫اﻟﻨﺘﯿﺠﺔ ← اﻟﻤﺴﺘﺨﺪم‬/ERP Dashboard]
+
+#
+‫ إﻋﺪاد‬WireGuard VPN (‫)اﻟﺤﻄوات‬
+# ‫ﻋﻠﻰ ﻛﻞ ﺳﯿﺮﻓﺮ‬:
+sudo apt install wireguard
+# ‫ﺗﻮﻟﯿﺪ اﻟﻤﻔﺎﺗﯿﺢ‬
+wg genkey | tee privatekey | wg pubkey > publickey
+# /etc/wireguard/wg0.conf (‫ ﻣﺜﺎل ﻟﻠـ‬GPU Master)
+[Interface]
+PrivateKey = <GPU_MASTER_PRIVATE_KEY>
+Address = 10.0.0.1/24
+ListenPort = 51820
+[Peer]
+
+# VPS #1
+
+PublicKey = <VPS1_PUBLIC_KEY>
+AllowedIPs = 10.0.0.2/32
+Endpoint = <VPS1_PUBLIC_IP>:51820
+[Peer]
+
+# VPS #2
+
+PublicKey = <VPS2_PUBLIC_KEY>
+AllowedIPs = 10.0.0.3/32
+Endpoint = <VPS2_PUBLIC_IP>:51820
+[Peer]
+
+# Local Server
+
+PublicKey = <LOCAL_SERVER_PUBLIC_KEY>
+AllowedIPs = 10.0.0.4/32
+# ‫ﺗﺸﻐﯿﻞ‬
+sudo wg-quick up wg0
+sudo systemctl enable wg-quick@wg0
+
+#
+‫ﺔ‬H‫اﻟﺪاﺣﻠٮ‬
+‫ ﺎويﻦ‬#‫ﺷٮ< ﻜﺔ اﻟﻌٮ‬
+' ‫اﻟﺴٮ‬
+‫ﺮڡﺮ‬:
+
+WireGuard IP
+
+‫اﻟﺪور‬
+
+GPU Master (‫ﺮ‬,‫ﻮٮ‬:‫)اﻟﻜﻤ &ٮٮ‬
+
+10.0.0.1
+
+LLM + AI
+
+VPS #1
+
+10.0.0.2
+
+Scraping
+
+VPS #2
+
+10.0.0.3
+
+Data Processing
+
+Local Server
+
+10.0.0.4
+
+Storage + ERP
+
+7. ‫ﻂ ﻣﻊ‬.‫ اﻟرٮ‬Django ERP {#7-erp-integration}
+‫ﻄﻮﻣﺔ‬# #‫ﺔ رٮ<ﻂ ﻣٮ‬H‫ڡٮ‬H# ‫ ﻛٮ‬GAARA AI ‫ ﻣﻊ اﻟـ‬ERP
+< ai_integration
+A. Django App ‫ﺪ‬H ‫ﺣﺪٮ‬:
+
+# ai_integration/models.py
+from django.db import models
+class AITask(models.Model):
+TASK_TYPES = [
+('search', 'Web Search'),
+('image_search', 'Image Search'),
+('analyze', 'AI Analysis'),
+('avatar', 'Avatar Generation'),
+('learn', 'Learning Task'),
+('scrape', 'Data Scraping'),
+]
+STATUS_CHOICES = [
+('pending', 'Pending'),
+('running', 'Running'),
+('completed', 'Completed'),
+('failed', 'Failed'),
+]
+task_type = models.CharField(max_length=20, choices=TASK_TYPES)
+status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+input_data = models.JSONField()
+output_data = models.JSONField(null=True, blank=True)
+server_node = models.CharField(max_length=50)
+
+# which server processed it
+
+created_at = models.DateTimeField(auto_now_add=True)
+
+completed_at = models.DateTimeField(null=True, blank=True)
+processing_time_ms = models.IntegerField(null=True)
+error_message = models.TextField(blank=True)
+created_by = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+class AIKnowledgeBase(models.Model):
+"""‫"""ﺗﺨﺰﯾﻦ اﻟﻤﻌﺮﻓﺔ اﻟﻤﺘﺮاﻛﻤﺔ ﻣﻦ اﻟﺒﺤﺚ واﻟﺘﻌﻠﻢ‬
+title = models.CharField(max_length=500)
+content = models.TextField()
+source_url = models.URLField(blank=True)
+embedding_id = models.CharField(max_length=100)
+
+# ID in Vector DB
+
+category = models.CharField(max_length=100)
+language = models.CharField(max_length=10, default='ar')
+relevance_score = models.FloatField(default=0.0)
+created_at = models.DateTimeField(auto_now_add=True)
+last_verified = models.DateTimeField(null=True)
+class AILearningSession(models.Model):
+"""‫"""ﺗﺘﺒﻊ ﺟﻠﺴﺎت اﻟﺘﻌﻠﻢ‬
+topic = models.CharField(max_length=500)
+queries_executed = models.IntegerField(default=0)
+pages_scraped = models.IntegerField(default=0)
+images_collected = models.IntegerField(default=0)
+knowledge_items_created = models.IntegerField(default=0)
+model_used = models.CharField(max_length=100)
+started_at = models.DateTimeField(auto_now_add=True)
+completed_at = models.DateTimeField(null=True)
+config = models.JSONField(default=dict)
+
+# learning parameters
+
+class DriftReport(models.Model):
+"""‫"""ﺗﻘﺎرﯾﺮ اﻧﺤﺮاف اﻟﻨﻤﺎذج‬
+model_name = models.CharField(max_length=200)
+drift_score = models.FloatField()
+drift_type = models.CharField(max_length=50)
+
+# data, concept, feature
+
+details = models.JSONField()
+action_taken = models.CharField(max_length=100, blank=True)
+detected_at = models.DateTimeField(auto_now_add=True)
+
+# ‫واﺻﻞ ﻣﻊ اﻟﺴٮ‬5‫ﻟﻠٮ‬
+B. Service Layer ‫ﺮڡرات‬H
+
+# ai_integration/services.py
+import httpx
+from django.conf import settings
+class AIClusterClient:
+
+"""‫ ﻋﻤﯿﻞ ﻟﻠﺘﻮاﺻﻞ ﻣﻊ ﻛﻞ ﺳﯿﺮﻓﺮات‬GAARA AI"""
+SERVERS = {
+'gpu_master': 'http://10.0.0.1:8000',
+'scraper_vps': 'http://10.0.0.2:8000',
+'data_vps': 'http://10.0.0.3:8000',
+}
+async def generate_text(self, prompt, model="llama3.1:8b"):
+"""‫ ﺗﻮﻟﯿﺪ ﻧﺺ ﻣﻦ‬GPU Master"""
+async with httpx.AsyncClient(timeout=60) as client:
+response = await client.post(
+f"{self.SERVERS['gpu_master']}/api/llm/generate",
+json={"prompt": prompt, "model": model}
+)
+return response.json()
+async def search_web(self, query, max_pages=10):
+"""‫ ﺑﺤﺚ ﻋﻠﻰ اﻹﻧﺘﺮﻧﺖ ﻋﺒﺮ‬VPS #1"""
+async with httpx.AsyncClient(timeout=120) as client:
+response = await client.post(
+f"{self.SERVERS['scraper_vps']}/api/search",
+json={"query": query, "max_pages": max_pages}
+)
+return response.json()
+async def search_images(self, query, count=10):
+"""‫ ﺑﺤﺚ ﻋﻦ ﺻﻮر ﻋﺒﺮ‬VPS #1"""
+async with httpx.AsyncClient(timeout=60) as client:
+response = await client.post(
+f"{self.SERVERS['scraper_vps']}/api/images/search",
+json={"query": query, "count": count}
+)
+return response.json()
+async def generate_avatar_video(self, text, avatar_id=None):
+"""‫ ﺗﻮﻟﯿﺪ ﻓﯿﺪﯾﻮ‬avatar ‫ ﻋﺒﺮ‬GPU Master"""
+async with httpx.AsyncClient(timeout=300) as client:
+response = await client.post(
+f"{self.SERVERS['gpu_master']}/api/avatar/generate",
+json={"text": text, "avatar_id": avatar_id}
+)
+return response.json()
+async def start_learning_session(self, topic, config=None):
+"""‫"""ﺑﺪء ﺟﻠﺴﺔ ﺗﻌﻠﻢ ﻣﻮزﻋﺔ‬
+default_config = {
+
+"search_depth": 3,
+"max_pages": 50,
+"languages": ["ar", "en"],
+"include_images": True,
+"save_to_knowledge_base": True,
+}
+if config:
+default_config.update(config)
+# Step 1: VPS ‫ﯾﺒﺤﺚ‬
+search_results = await self.search_web(topic, max_pages=default_config["max_pages"])
+# Step 2: GPU ‫ﯾﺤﻠﻞ‬
+analysis = await self.generate_text(
+f"‫ﺣﻠﻞ وﻗﻢ ﺑﺘﻠﺨﯿﺺ ھﺬه اﻟﻤﻌﻠﻮﻣﺎت ﻋﻦ‬: {topic}\n\n{search_results}"
+)
+return {"search_results": search_results, "analysis": analysis}
+
+#
+C. ‫إﺿﺎڡﺔ ﻟﻠـ‬
+ERP URLs
+
+# ai_integration/urls.py
+from django.urls import path
+from . import views
+app_name = 'ai_integration'
+urlpatterns = [
+# Dashboard
+path('dashboard/', views.AIDashboardView.as_view(), name='dashboard'),
+# Settings
+path('settings/', views.AISettingsView.as_view(), name='settings'),
+# Tasks
+path('tasks/', views.AITaskListView.as_view(), name='task-list'),
+path('tasks/create/', views.AITaskCreateView.as_view(), name='task-create'),
+# Search
+path('search/', views.AISearchView.as_view(), name='search'),
+path('search/images/', views.ImageSearchView.as_view(), name='image-search'),
+# Learning
+path('learn/', views.LearningView.as_view(), name='learn'),
+path('learn/sessions/', views.LearningSessionListView.as_view(), name='sessions'),
+
+# Knowledge Base
+path('knowledge/', views.KnowledgeBaseView.as_view(), name='knowledge'),
+# Avatar
+path('avatar/', views.AvatarView.as_view(), name='avatar'),
+# Monitoring
+path('monitor/', views.MonitorView.as_view(), name='monitor'),
+path('monitor/drift/', views.DriftView.as_view(), name='drift'),
+# API Endpoints
+path('api/task/', views.TaskAPIView.as_view(), name='api-task'),
+path('api/search/', views.SearchAPIView.as_view(), name='api-search'),
+path('api/llm/', views.LLMAPIView.as_view(), name='api-llm'),
+]
+
+8. ‫ﺔ‬-‫ﺎت اﻟٮ) ﻬﺎﺋٮ‬-‫{ اﻟٮ@ﻮﺻٮ‬#8-recommendations}
+‫ﺔ‬H‫ﺬ اﻟﻤﺮﺣﻠٮ‬H‫ڡٮ‬# #‫ٮ‬5‫ﺣﻄﺔ اﻟٮ‬#
+(2-1 ‫ﺎت )أﺳٮ< وع‬H‫ اﻷﺳﺎﺳٮ‬:1 ‫اﻟﻤﺮﺣﻠﺔ‬
+
+□ ‫ ﺗﺜﺒﯿﺖ‬Ollama ‫( ﻋﻠﻰ اﻟﻜﻤﺒﯿﻮﺗﺮ‬GPU)
+□ ‫ ﺗﺤﻤﯿﻞ‬Llama 3.1 8B + Qwen 2.5 7B
+□ ‫ إﻋﺪاد‬WireGuard VPN ‫ﺑﯿﻦ ﻛﻞ اﻟﺴﯿﺮﻓﺮات‬
+□ ‫ ﺗﺜﺒﯿﺖ‬Crawl4AI ‫ ﻋﻠﻰ‬VPS #1
+□ ‫ إﻋﺪاد‬PostgreSQL + Qdrant ‫ﻋﻠﻰ اﻟﺴﯿﺮﻓﺮ اﻟﻤﺤﻠﻲ‬
+
+(4-3 ‫ اﻟٮ< ﺤﺚ واﻟﻜﺸﻂ )أﺳٮ< وع‬:2 ‫اﻟﻤﺮﺣﻠﺔ‬
+
+□ ‫ ﺑﻨﺎء‬Search Pipeline (Crawl4AI + Firecrawl)
+□ ‫ إﻋﺪاد‬Image Search APIs
+□ ‫ ﺑﻨﺎء‬ETL pipeline ‫ ﻋﻠﻰ‬VPS #2
+□ ‫ رﺑﻂ‬Vector DB ‫ﻟﻠﺘﺨﺰﯾﻦ اﻟﺬﻛﻲ‬
+□ ‫ إﻧﺸﺎء‬ai_integration Django app
+
+(6-5 ‫ﻌﻠﻢ واﻟﺬﰷء )أﺳٮ< وع‬5‫ اﻟٮ‬:3 ‫اﻟﻤﺮﺣﻠﺔ‬
+
+□ ‫ ﺑﻨﺎء‬RAG system (LangChain + Qdrant)
+
+□ ‫ إﻋﺪاد‬Evidently AI ‫ﻟﻤﺮاﻗﺒﺔ اﻻﻧﺤﺮاف‬
+□ ‫ﺑﻨﺎء ﺻﻔﺤﺔ إﻋﺪادات اﻟﺘﻌﻠﻢ‬
+□ ‫ رﺑﻂ‬Learning Sessions ‫ ﺑﺎﻟـ‬ERP
+□ ‫ إﻋﺪاد‬Celery ‫ﻟﻠﻤﮭﺎم اﻟﻤﺠﺪوﻟﺔ‬
+
+<
+4 ‫اﻟﻤﺮﺣﻠﺔ‬: Avatar (8-7 ‫واﻟواﺣﻬﺎت )أﺳٮ< وع‬
+
+□ ‫ ﺗﺜﺒﯿﺖ‬Duix Avatar ‫ ﻋﻠﻰ‬GPU
+□ ‫ إﻋﺪاد‬Bark/Coqui TTS (‫)ﺑﺎﻟﻌﺮﺑﻲ‬
+□ ‫ ﺑﻨﺎء‬Avatar Pipeline
+□ ‫ رﺑﻂ‬Avatar ‫ ﺑﺎﻟـ‬ERP Dashboard
+□ ‫ ﺑﻨﺎء‬Monitor Dashboard
+
+#
+‫ﻒ اﻟﺸﻬريﺔ‬H‫ﲀﻟٮ‬5‫ﻣﻠﺤﺺ اﻟٮ‬
+‫ ٮ' ﺪ‬7‫اﻟٮ‬
+
+' ‫اﻟٮ‬
+‫كﻠڡﺔ‬0
+
+VPS #1 (Scraping)
+
+$20-50/‫ﺷﻬﺮ‬
+
+VPS #2 (Data)
+
+$30-80/‫ﺷﻬﺮ‬
+
+Firecrawl API
+
+$16-99/‫ﺷﻬﺮ‬
+
+Google Image API
+
+$5-20/‫ﺷﻬﺮ‬
+
+‫ ﻛﻬرٮ&ﺎء‬GPU
+
+$30-50/‫ﺷﻬﺮ‬
+
+<
+‫ﻤﺎلى‬
+‫اﻹﺣ‬
+!
+
+$101-299/‫ﺷﻬﺮ‬
+
+‫ﺤﺪام‬%" ‫ اﺳٮ‬:‫ڡﺎرٮ"ﺔ‬% ‫ ﻣ‬OpenAI API ‫ﻄﺮة‬D‫ﺪون أي ﺳٮ‬-‫ﺷﻬﺮ ٮ‬/1000-200$ = ‫ڡﻂ‬% ‫"ڡ‬
+
+Stack ‫ﻬﺎﺋى‬
+#‫ڡﲏ اﻟٮ‬5 ‫ٮ‬5 ‫اﻟ‬
+!
+AI Engine:
+LLM: Ollama + vLLM (Llama 3.1 / Qwen 2.5)
+Embeddings: Nomic Embed / BGE-M3
+RAG: LangChain + Qdrant
+Agents: LangGraph / CrewAI
+Web Scraping:
+Primary: Crawl4AI (‫ ﻣﺠﺎﻧﻲ‬،‫)ﻣﺤﻠﻲ‬
+Secondary: Firecrawl API (‫)ﻟﻠﻤﻮاﻗﻊ اﻟﻤﻌﻘﺪة‬
+Smart: ScrapeGraphAI (‫)ﻟﻼﺳﺘﺨﺮاج اﻟﺬﻛﻲ‬
+
+Browser: Playwright
+Image Pipeline:
+Search: Google Custom Search + Bing
+OCR: EasyOCR (‫إﻧﺠﻠﯿﺰي‬/‫)ﻋﺮﺑﻲ‬
+Analysis: CLIP + Florence-2
+Generation: Stable Diffusion
+Avatar:
+Engine: Duix Avatar (‫)ﻣﻔﺘﻮح اﻟﻤﺼﺪر‬
+TTS: Bark / Coqui TTS
+Lip Sync: Wav2Lip
+Infrastructure:
+VPN: WireGuard
+Queue: Celery + Redis
+Storage: PostgreSQL + Qdrant + MinIO
+Monitoring: Prometheus + Grafana + Evidently
+Container: Docker + Docker Compose
+ERP Integration:
+Framework: Django (ai_integration app)
+API: FastAPI (on each server)
+Communication: REST + Redis Pub/Sub
+
+GAARA AI Ecosystem Research — February 2026 Prepared for GAARA Group
+
+

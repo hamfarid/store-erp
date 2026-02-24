@@ -1,9 +1,16 @@
-# Error Handling Template
+# 🛡️ Error Handling Template (Global System v26 Diamond 32)
 
-## Custom Error Classes
+**Status:** MANDATORY
+**Enforcement:** Automated by Sentinel (Linter)
+
+## 1. The Philosophy
+Typed Errors > String Messages.
+
+## 2. Custom Error Classes
+You MUST extend `AppError` for all operational errors.
 
 ```javascript
-// Base Error
+// errors.js
 class AppError extends Error {
   constructor(message, statusCode) {
     super(message);
@@ -13,7 +20,6 @@ class AppError extends Error {
   }
 }
 
-// Specific Errors
 class NotFoundError extends AppError {
   constructor(message = 'Resource not found') {
     super(message, 404);
@@ -35,13 +41,14 @@ class AuthenticationError extends AppError {
 module.exports = { AppError, NotFoundError, ValidationError, AuthenticationError };
 ```
 
-## Global Error Handler
+## 3. Global Error Handler
+You MUST catch all errors centrally.
 
 ```javascript
 const errorHandler = (err, req, res, next) => {
   const { statusCode = 500, message } = err;
   
-  // Log error
+  // Sentinel Check: Mandatory Logging
   logger.error({
     message: err.message,
     stack: err.stack,
@@ -50,11 +57,11 @@ const errorHandler = (err, req, res, next) => {
     method: req.method
   });
   
-  // Send response
+  // Security: Hide implementation details in production
   res.status(statusCode).json({
     status: 'error',
     statusCode,
-    message: err.isOperational ? message : 'Something went wrong'
+    message: err.isOperational ? message : 'Internal Server Error'
   });
 };
 

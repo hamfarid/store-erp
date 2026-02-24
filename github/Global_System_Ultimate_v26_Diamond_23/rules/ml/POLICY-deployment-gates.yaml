@@ -1,0 +1,63 @@
+# POLICY-deployment-gates.yaml
+# Governance: ML/AI Application Framework (Feb 2026)
+# Tooling: MLflow 3.9, Fairlearn, Evidently AI 0.7.17
+
+deployment_gates:
+  training_to_validation:
+    description: "Checks before promoting a model from Training to Validation."
+    gates:
+      - check: "metrics_exceed_baseline"
+        threshold: "accuracy > 0.95, f1_score > 0.90"
+      - check: "bias_fairness_pass"
+        tool: "Fairlearn"
+        metric: "demographic_parity_difference < 0.1"
+      - check: "no_data_leakage"
+        tool: "Evidently AI"
+        metric: "target_leakage_detected == False"
+      - check: "experiment_logged"
+        tool: "MLflow"
+        metric: "artifacts_logged == True"
+      - check: "model_card_draft_created"
+        tool: "Markdown"
+        metric: "exists(model_card.md) == True"
+
+  validation_to_staging:
+    description: "Checks before promoting a model from Validation to Staging."
+    gates:
+      - check: "integration_tests_pass"
+        tool: "pytest"
+        metric: "tests_passed == 100%"
+      - check: "latency_sla_met"
+        tool: "Locust/K6"
+        metric: "p95_latency < 100ms (real-time), p99_latency < 500ms (near-real-time)"
+      - check: "candidate_exceeds_production"
+        tool: "MLflow"
+        metric: "candidate_metric >= production_metric"
+      - check: "resource_consumption_within_budget"
+        tool: "Prometheus"
+        metric: "cpu_usage < 80%, memory_usage < 16GB"
+      - check: "security_scan_clean"
+        tool: "Trivy/Bandit"
+        metric: "vulnerabilities == 0"
+
+  staging_to_production:
+    description: "Checks before promoting a model from Staging to Production."
+    gates:
+      - check: "shadow_canary_results_acceptable"
+        tool: "Istio/KServe"
+        metric: "error_rate < 1%, latency_p99 < 200ms"
+      - check: "rollback_mechanism_verified"
+        tool: "ArgoCD"
+        metric: "rollback_tested == True"
+      - check: "monitoring_dashboards_configured"
+        tool: "Grafana"
+        metric: "dashboard_exists == True"
+      - check: "alert_thresholds_set"
+        tool: "Prometheus/Alertmanager"
+        metric: "alerts_configured == True"
+      - check: "manual_sign_off"
+        tool: "Jira/ServiceNow"
+        metric: "approved_by_compliance == True (regulated models)"
+      - check: "model_card_finalized"
+        tool: "Markdown"
+        metric: "reviewed_and_approved == True"

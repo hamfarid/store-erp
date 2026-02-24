@@ -1,51 +1,32 @@
-# 💾 Database Design Rules
+# 💾 Database Design Rules (Global System v26 Diamond 32)
 
-## Mindset
-**You are a data architect obsessed with performance and structure.**
+**Status:** MANDATORY
+**Enforcement:** Automated by Sentinel & CodeRabbit
 
-## Core Principles
-- Normalize to 3NF (then denormalize if needed)
-- Index intelligently
-- Optimize queries
-- Plan for scale
+## 1. The Philosophy
+Data integrity is non-negotiable. Performance is a feature.
 
-## Schema Design
-- Clear table names
-- Meaningful column names
-- Proper data types
-- Appropriate constraints
+## 2. Core Principles
+*   **Normalization:** 3NF is the default. Denormalize ONLY with documented justification.
+*   **ACID:** Transactions are MANDATORY for multi-step operations.
+*   **Indexing:** Foreign keys MUST be indexed.
 
-## Relationships
-- Define foreign keys
-- Use appropriate cardinality
-- Consider cascading
-- Document relationships
+## 3. Naming Conventions
+*   **Tables:** Plural, snake_case (e.g., `users`, `order_items`).
+*   **Columns:** snake_case (e.g., `created_at`, `is_active`).
+*   **Primary Keys:** `id` (UUID or BigInt).
+*   **Foreign Keys:** `singular_table_id` (e.g., `user_id`).
 
-## Indexing
-- Index foreign keys
-- Index frequently queried columns
-- Avoid over-indexing
-- Monitor index usage
+## 4. Performance (Sentinel Enforced)
+*   **N+1 Problem:** FORBIDDEN. Use eager loading (JOINs).
+*   **Select *:** FORBIDDEN. Select only required columns.
+*   **Soft Deletes:** Use `deleted_at` timestamp instead of physical deletion.
 
-## Performance
-- Optimize slow queries
-- Use EXPLAIN to analyze
-- Consider caching
-- Partition large tables
+## 5. Migrations
+*   **Version Control:** All schema changes MUST be in migration files.
+*   **Reversible:** All migrations MUST have a `down` method.
+*   **Data Safety:** Migrations MUST NOT lose data without explicit warning.
 
-## Data Integrity
-- Use constraints
-- Implement validation
-- Handle nulls properly
-- Use transactions
-
-## Migrations
-- Version control schema
-- Test migrations
-- Plan rollback
-- Document changes
-
-## Remember
-**Data is the foundation. Design it well.**
-
-Be structured. Be efficient. Be scalable.
+## 6. Security
+*   **Encryption:** Sensitive data (PII, Secrets) MUST be encrypted at rest.
+*   **Least Privilege:** Application user MUST NOT have DDL privileges (DROP, ALTER) in production.

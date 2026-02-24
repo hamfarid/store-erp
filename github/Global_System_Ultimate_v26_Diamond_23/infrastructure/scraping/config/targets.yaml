@@ -1,0 +1,74 @@
+# Universal Scraper Configuration (v2026.2)
+# Define scraping targets dynamically without changing code
+
+targets:
+  - name: "financial_news_bloomberg"
+    type: "news"
+    start_urls: ["https://www.bloomberg.com/markets"]
+    allowed_domains: ["bloomberg.com"]
+    rules:
+      - allow: "/news/articles/"
+        callback: "parse_article"
+    selectors:
+      title: "h1.headline::text"
+      body: "div.body-content p::text"
+      date: "time::attr(datetime)"
+    schedule: "0 * * * *" # Every hour
+
+  - name: "amazon_products"
+    type: "ecommerce"
+    start_urls: ["https://www.amazon.com/s?k=laptop"]
+    allowed_domains: ["amazon.com"]
+    rules:
+      - allow: "/dp/"
+        callback: "parse_product"
+    selectors:
+      name: "span#productTitle::text"
+      price: "span.a-price-whole::text"
+      rating: "span.a-icon-alt::text"
+    schedule: "0 0 * * *" # Daily
+
+  - name: "twitter_sentiment"
+    type: "social"
+    start_urls: ["https://twitter.com/search?q=bitcoin"]
+    allowed_domains: ["twitter.com"]
+    api_mode: true # Use API instead of HTML parsing if available
+    schedule: "*/15 * * * *" # Every 15 mins
+
+  - name: "tech_news_example"
+    type: "news"
+    start_urls: ["https://techcrunch.com/"]
+    allowed_domains: ["techcrunch.com"]
+    rules:
+      - allow: "category/artificial-intelligence/"
+        callback: "parse_article"
+    selectors:
+      title: "h1.article__title::text"
+      body: "div.article-content p::text"
+      date: "time.article__timestamp::attr(datetime)"
+    schedule: "0 12 * * *" # Daily at noon
+
+  - name: "ecommerce_example"
+    type: "ecommerce"
+    start_urls: ["https://books.toscrape.com/"]
+    allowed_domains: ["books.toscrape.com"]
+    rules:
+      - allow: "catalogue/"
+        callback: "parse_product"
+    selectors:
+      name: "h1::text"
+      price: "p.price_color::text"
+      rating: "p.star-rating::attr(class)"
+    schedule: "0 0 * * 0" # Weekly on Sunday
+
+  - name: "plant_disease_images"
+    type: "image"
+    start_urls: ["https://www.kaggle.com/datasets/emmarex/plant-disease-expert"]
+    allowed_domains: ["kaggle.com"]
+    rules:
+      - allow: "/datasets/"
+        callback: "parse_dataset"
+    selectors:
+      image_url: "img.dataset-cover::attr(src)"
+      label: "h1.dataset-title::text"
+    schedule: "0 0 1 * *" # Monthly

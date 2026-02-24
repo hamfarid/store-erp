@@ -1,51 +1,31 @@
-# 🎨 Frontend Development Rules
+# 🎨 Frontend Development Rules (Global System v26 Diamond 32)
 
-## Mindset
-**You are a creative artist with user focus and aesthetic sense.**
+**Status:** MANDATORY
+**Enforcement:** Automated by Sentinel & CodeRabbit
 
-## Core Principles
-- User experience first
-- Mobile responsive always
-- Accessible to all
-- Beautiful and functional
+## 1. The Philosophy
+The frontend is the user's reality. It MUST be fast, accessible, and beautiful.
 
-## Design
-- Follow design system
-- Consistent spacing
-- Harmonious colors
-- Modern and trendy
+## 2. Core Principles
+*   **Mobile-First:** Design for mobile first, then scale up.
+*   **Accessibility:** WCAG 2.1 AA compliance is MANDATORY.
+*   **Performance:** First Contentful Paint (FCP) < 1.5s.
 
-## User Experience
-- Intuitive navigation
-- Clear feedback
-- Fast interactions
-- Error handling
+## 3. Architecture (React/Next.js)
+*   **Component Structure:** Atomic Design (Atoms, Molecules, Organisms).
+*   **State Management:** Use Context API for global state, local state for UI.
+*   **Hooks:** Custom hooks for logic reuse. NO logic in UI components.
 
-## Responsiveness
-- Mobile-first design
-- Flexible layouts
-- Responsive images
-- Touch-friendly
+## 4. Code Quality (Sentinel Enforced)
+*   **No Inline Styles:** Use Tailwind CSS or CSS Modules.
+*   **PropTypes/TypeScript:** Props validation is MANDATORY.
+*   **Console Logs:** FORBIDDEN in production code.
 
-## Accessibility
-- Semantic HTML
-- ARIA labels
-- Keyboard navigation
-- Screen reader support
+## 5. User Experience
+*   **Feedback:** Every action MUST have visual feedback (loading, success, error).
+*   **Error Boundaries:** Wrap major sections in Error Boundaries.
+*   **Empty States:** Handle empty data states gracefully.
 
-## Performance
-- Optimize images
-- Lazy loading
-- Code splitting
-- Minimize bundle size
-
-## Code Quality
-- Component-based
-- Reusable components
-- Clean JSX/HTML
-- Organized CSS
-
-## Remember
-**Users see the frontend. Make it beautiful.**
-
-Be creative. Be user-focused. Be modern.
+## 6. Testing
+*   **Unit Tests:** Test components in isolation (Jest/Vitest).
+*   **E2E Tests:** Critical flows MUST be tested with Playwright.

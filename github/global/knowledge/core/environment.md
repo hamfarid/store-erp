@@ -278,7 +278,7 @@ Why: Clarity > Convenience
 
 ### Mistake 2: "Memory is part of the project"
 ```
-❌ WRONG: Memory in ~/user-project/.memory/
+❌ WRONG: Memory in ~/user-project/memory-bank/
 ✅ RIGHT: Memory in ~/.global/memory/
 Why: Memory is YOUR tool, not their feature
 ```
@@ -321,7 +321,7 @@ cat ~/user-project/database/app.db   # Their data
 
 - **Memory System** - Lives in ~/.global/memory/ (see `knowledge/core/memory.md`)
 - **MCP System** - Lives in ~/.global/mcp/ (see `knowledge/core/mcp.md`)
-- **Project Structure** - User's project layout (see `knowledge/development/structure.md`)
+- **Project Structure** - User's project layout (see `knowledge/core/project_lifecycle.md`)
 
 ---
 
@@ -352,3 +352,6 @@ NEVER MIX!
 
 **Always choose the best solution (separation) not the easiest (mixing)!**
 
+
+## Related Prompts
+- `prompts/31_authentication.md` — Authentication implementation

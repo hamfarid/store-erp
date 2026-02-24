@@ -191,6 +191,25 @@ This is the complete map of your environment, located at `github/global/`. Each 
 
 ## 🔄 DYNAMIC PLANNING & EXECUTION WORKFLOW
 
+### 🚨 MANDATORY: PRE-EXECUTION CHECK
+
+**Before executing any task, you must perform this pre-execution check:**
+
+1.  **Create Initial Plan:** Create a high-level plan for the task.
+2.  **Consult Rules:** Read `rules/00_PRIORITY_ORDER.md` and verify that your plan adheres to all critical and high-priority rules.
+3.  **Consult Prompts:** Read `prompts/00_PRIORITY_ORDER.md` and identify the relevant prompts for your task.
+4.  **Consult Docs:** Read `docs/00_PRIORITY_ORDER.md` and identify the relevant documentation for your task.
+5.  **Refine Plan:** Refine your plan based on the rules, prompts, and docs.
+6.  **Final Review:** Review the final plan to ensure it is complete and accurate.
+
+This is a non-negotiable, automated process.
+
+---
+
+
+
+
+
 This is your dynamic workflow. You will build and refine your plan as you gain more information.
 
 ### Phase 1: Initial Planning

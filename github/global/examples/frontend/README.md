@@ -1,12 +1,15 @@
-# Frontend Examples
+# Frontend Examples (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-## Example 1: Responsive Layout
-See: `responsive_layout.html`
+**Engine:** Speckit Global System v26 Diamond 32
+**Status:** MANDATORY REFERENCE
 
-## Example 2: Form Validation
-See: `form_validation.js`
+This directory contains standard implementations for frontend components.
 
-## Example 3: Component Design
-See: `component_example.jsx`
+## Contents
+1.  **Standard Component:** `StandardComponent.jsx` (React)
+    *   Includes: Props Validation, Error Boundary, Loading State.
+2.  **Standard Hook:** `useFetch.js`
+    *   Includes: AbortController, Caching, Error Handling.
 
-Study these examples before creating frontend code.
+## Usage
+Use these templates to ensure consistency across the UI.

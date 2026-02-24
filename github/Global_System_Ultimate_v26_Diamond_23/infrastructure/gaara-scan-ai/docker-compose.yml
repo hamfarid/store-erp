@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  ml-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.ml-service
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/models
+    volumes:
+      - ./models:/models
+
+  crawler-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.crawler
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=ml_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6
+    ports:
+      - "6379:6379"
+
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.ml-service
+    command: celery -A tasks worker --loglevel=info
+    depends_on:
+      - redis
+      - db
+
+  dashboard:
+    image: node:14
+    working_dir: /app
+    volumes:
+      - ./dashboard:/app
+    command: npm start
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:

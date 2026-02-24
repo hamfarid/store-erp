@@ -1,61 +1,42 @@
-> This is a template. Fill this out for your specific project.
+# API Documentation (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-# API Documentation
+**Version:** 37.0
+**Engine:** Speckit Global System v26 Diamond 32
+**Status:** MANDATORY
 
-**Version:** 1.0  
-**Base URL:** `/api/v1`
+## 📋 Overview
+This document outlines the standard for API documentation within the Global System v26 Diamond 32. All APIs must be documented using this template and verified by `speckit verify`.
 
----
+## 🏗️ Design Principles (Speckit Plan)
+1.  **Resource Naming:** Use nouns, plural, lowercase (e.g., `/api/products`).
+2.  **Methods:** GET, POST, PUT, DELETE, PATCH.
+3.  **Status Codes:** 200 (OK), 201 (Created), 400 (Bad Request), 401 (Unauthorized), 403 (Forbidden), 404 (Not Found), 500 (Server Error).
+4.  **Versioning:** `/api/v1/resource`.
 
-## 1. Authentication
+## 💻 Implementation (Speckit Implement)
+*   **Frameworks:** FastAPI (Python), Express (Node.js).
+*   **Validation:** Pydantic (Python), Zod (Node.js).
+*   **Documentation:** OpenAPI/Swagger (Auto-generated).
 
-*Describe how to authenticate with the API. Is it API keys, OAuth 2.0, JWT? Provide examples.*
+## 🔒 Security (Sentinel Check)
+*   **Authentication:** JWT (Stateless), OAuth2.
+*   **Rate Limiting:** Redis-based (e.g., 100 req/min).
+*   **Input Sanitization:** Prevent SQLi and XSS.
 
-**Example: Bearer Token**
+## 🧪 Verification (Speckit Verify)
+*   **Unit Tests:** Test each endpoint in isolation.
+*   **Integration Tests:** Test full flows (Register -> Login -> Create).
+*   **Security Tests:** Check for IDOR, Broken Auth.
 
-All API requests must include an `Authorization` header with a valid JWT token.
-
-```http
-Authorization: Bearer <YOUR_JWT_TOKEN>
-```
-
-## 2. Rate Limiting
-
-- **Standard Limit:** 100 requests per minute per IP address.
-- **Authenticated Limit:** 1000 requests per minute per user.
-
-## 3. Error Handling
-
-*Describe the common error codes and their meanings.*
-
-| Status Code | Meaning               | Description                                      |
-|-------------|-----------------------|--------------------------------------------------|
-| `400`       | Bad Request           | The request was malformed or invalid.            |
-| `401`       | Unauthorized          | Authentication failed or is required.            |
-| `403`       | Forbidden             | You do not have permission to access this resource.|
-| `404`       | Not Found             | The requested resource could not be found.       |
-| `429`       | Too Many Requests     | You have exceeded the rate limit.                |
-| `500`       | Internal Server Error | Something went wrong on our end.                 |
-
-**Error Response Body:**
-
-```json
-{
-  "error": {
-    "message": "A human-readable error message."
-  }
-}
-```
+## 📄 Documentation
+*   **Auto-Generate:** Use Swagger UI (`/docs`).
+*   **Examples:** Provide curl examples for every endpoint.
 
 ---
 
-## 4. Endpoints
+## Example Endpoint Documentation
 
-*Document each API endpoint in detail.*
-
-### Users
-
-#### `GET /users`
+### `GET /users`
 
 - **Description:** Retrieve a list of all users.
 - **Permissions:** `admin`
@@ -80,58 +61,3 @@ Authorization: Bearer <YOUR_JWT_TOKEN>
   }
 }
 ```
-
-#### `POST /users`
-
-- **Description:** Create a new user.
-- **Permissions:** `admin`
-- **Request Body:**
-
-```json
-{
-  "name": "Bob",
-  "email": "bob@example.com",
-  "password": "strongpassword123"
-}
-```
-
-- **Success Response (201 Created):**
-
-```json
-{
-  "data": {
-    "id": "user-456",
-    "name": "Bob",
-    "email": "bob@example.com"
-  }
-}
-```
-
-#### `GET /users/{id}`
-
-- **Description:** Retrieve a single user by their ID.
-- **Permissions:** `admin` or owner of the user account.
-- **Path Parameters:**
-    - `id` (string, required): The ID of the user to retrieve.
-- **Success Response (200 OK):**
-
-```json
-{
-  "data": {
-    "id": "user-123",
-    "name": "Alice",
-    "email": "alice@example.com"
-  }
-}
-```
-
-- **Error Response (404 Not Found):**
-
-```json
-{
-  "error": {
-    "message": "User not found."
-  }
-}
-```
-

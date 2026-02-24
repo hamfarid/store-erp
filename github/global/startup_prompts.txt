@@ -1,0 +1,130 @@
+‫ٮ‪-‬ﺼﻮص ٮ(ﺪء اﻟﻌﻤﻞ — ‪V26 Diamond 13‬‬
+‫ى‬
+‫أي ‪( Claude / Cursor /‬ﺣﺎﻫﺰة ﻟﻠٮ‪ -‬ﺴﺦ واﻟﻠﺼﻖ ﻣٮ( ﺎﺷﺮة ‪-‬ڡ ‪.‬‬
+‫‪AI Agent‬‬
+‫"‬
+‫اﻟﺼڡﺮ‬
+‫اﻟﺴٮ*ٮ" ﺎريﻮ اﻷول‪ :‬ﻣﺸروع ‪,‬ﺣﺪٮ *ﺪ ﻣﻦ‬
+‫‪:‬اﻟﺤﻄﻮة ‪ — 1‬ﻟﺼﻖ ﻫﺬا اﻟٮ& ﺺ أوﻻ ً‬
+‫&‬
+‫‪ Global System v26 Diamond 32 v26.0 (Diamond 13).‬أﻧﺖ ﺗﻌﻤﻞ اﻵن ﺗﺤﺖ إﻃﺎر‬
+‫‪ @BOOTSTRAP.md:‬ﻗﺒﻞ أي ﺷﻲء‪ ،‬اﺗﺒﻊ ﺑﺮوﺗﻮﻛﻮل اﻹﻋﺪاد ﻓﻲ‬
+‫اﻟﺪﺳﺘﻮر اﻟﺮﺋﯿﺴﻲ ﻟﻠﻨﻈﺎم — ‪ @AGENTS.md‬اﻗﺮأ ‪1.‬‬
+‫ﻧﻘﻄﺔ اﻟﺪﺧﻮل واﻟﺘﻮﺟﯿﮭﺎت اﻷﺳﺎﺳﯿﺔ — ‪ @CLAUDE.md‬اﻗﺮأ ‪2.‬‬
+‫اﻟﻘﻮاﻋﺪ ﻏﯿﺮ اﻟﻘﺎﺑﻠﺔ ﻟﻠﺘﻔﺎوض — ‪ @rules/00-iron-rules.md‬اﻗﺮأ ‪3.‬‬
+‫اﻟﺒﺮوﺗﻮﻛﻮل اﻟﺘﺸﻐﯿﻠﻲ اﻟﻜﺎﻣﻞ — ‪ @prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT.md‬اﻗﺮأ ‪4.‬‬
+‫ّﺪ ﻟﻲ أﻧﻚ ﻓﮭﻤﺖ‬
+‫‪:‬ﺑﻌﺪ اﻟﻘﺮاءة‪ ،‬أﻛ‬
+‫)‪ (Architect → Developer → Reviewer → QA‬اﻷدوار اﻟﻤﺘﺎﺣﺔ ‪-‬‬
+‫)‪ (No File Loss, Context First, No Hallucinations‬اﻟﻘﻮاﻋﺪ اﻟﺤﺪﯾﺪﯾﺔ ‪-‬‬
+‫)‪ (rules/, roles/, errors/, memory-bank/, workflows/‬ﺑﻨﯿﺔ اﻟﻤﺠﻠﺪات ‪-‬‬
+‫)‪ (4-Block Pattern, 5-Layer Immune System, Diamond Process‬اﻟﺒﺮوﺗﻮﻛﻮل اﻟﺘﺸﻐﯿﻠﻲ ‪-‬‬
+
+‫&‬
+‫‪:‬اﻟﺤﻄﻮة ‪ — 2‬ٮ=ﻌﺪ ٮ ‪5‬ﺄﻛٮ‪8‬ﺪ اﻟ ‪5‬ڡراءة‪ ،‬ﻟﺼﻖ ﻫﺬا‬
+‫‪.‬ﻣﻤﺘﺎز‪ .‬اﻵن ﻧﺒﺪأ ﻣﺸﺮوع ﺟﺪﯾﺪ‬
+‫اﻟﻤﺸﺮوع‪] :‬اﺳﻢ اﻟﻤﺸﺮوع[‬
+‫اﻟﻮﺻﻒ‪] :‬وﺻﻒ ﻣﺨﺘﺼﺮ ﻟﻠﻤﺸﺮوع[‬
+‫]‪: [Web App / API / Full-Stack / ML Pipeline / ERP Module‬اﻟﻨﻮع‬
+‫]أو اﺗﺮﻛﮭﺎ ﻓﺎرﻏﺔ ﻟﯿﺨﺘﺎر ‪: [Django / React / FastAPI /‬اﻟﺘﻘﻨﯿﺎت‬
+‫اﻟﮭﺪف‪] :‬ﻣﺎ اﻟﺬي ﯾﺠﺐ أن ﯾﺤﻘﻘﮫ اﻟﻤﺸﺮوع[‬
+‫‪ roles/ROLE-01-architect.md):‬اﻗﺮأ( ‪ Architect‬اﻟﻤﻄﻠﻮب ﻣﻨﻚ اﻵن ﻛـ‬
+‫ﺑﻤﻌﻠﻮﻣﺎت اﻟﻤﺸﺮوع ‪ memory-bank/projectBrief.md‬اﻣﻸ ‪1.‬‬
+‫ﺑﺎﻟﺘﻘﻨﯿﺎت اﻟﻤﺨﺘﺎرة ‪ memory-bank/techContext.md‬اﻣﻸ ‪2.‬‬
+‫ّﻠﮭﺎ ﻓﻲ ‪3.‬‬
+‫‪ memory-bank/systemPatterns.md‬ﺻﻤﻢ اﻟﺒﻨﯿﺔ اﻷوﻟﯿﺔ وﺳﺠ‬
+
+‫ﺑﺎﻟﺤﺎﻟﺔ اﻟﺤﺎﻟﯿﺔ ‪ memory-bank/activeContext.md‬أﻧﺸﺊ ‪4.‬‬
+‫ﺪم ﻟﻲ ﺧﻄﺔ اﻟﻌﻤﻞ ﻗﺒﻞ اﻟﺒﺪء ﺑﺎﻟﻜﻮد ‪5.‬‬
+‫ﻗّ‬
+‫‪.‬ﻻ ﺗﻜﺘﺐ أي ﻛﻮد ﻗﺒﻞ اﻛﺘﻤﺎل اﻟﺨﻄﻮات أﻋﻼه‬
+
+‫ى‪ :‬ﻣﺸروع <ڡﺎﺋﻢ‬
+‫)‪ (Existing Codebase‬اﻟﺴٮ*ٮ" ﺎريﻮ اﻟٮ‪A‬ﺎ "ٮ >‬
+‫‪:‬اﻟﺤﻄﻮة ‪ — 1‬ﻟﺼﻖ ﻫﺬا اﻟٮ& ﺺ أوﻻ ً‬
+‫&‬
+‫‪ Global System v26 Diamond 32 v26.0 (Diamond 13).‬أﻧﺖ ﺗﻌﻤﻞ اﻵن ﺗﺤﺖ إﻃﺎر‬
+‫‪ Context First:‬ھﺬا ﻣﺸﺮوع ﻗﺎﺋﻢ‪ .‬ﻗﺒﻞ أي ﺗﻌﺪﯾﻞ‪ ،‬اﺗﺒﻊ ﺑﺮوﺗﻮﻛﻮل‬
+‫‪ @rules/00-iron-rules.md‬و ‪ @CLAUDE.md‬و ‪ @AGENTS.md‬اﻗﺮأ ‪1.‬‬
+‫آﺧﺮ ﺣﺎﻟﺔ ﻋﻤﻞ — ‪ @memory-bank/activeContext.md‬اﻗﺮأ ‪2.‬‬
+‫ﻣﻌﻠﻮﻣﺎت اﻟﻤﺸﺮوع — ‪ @memory-bank/projectBrief.md‬اﻗﺮأ ‪3.‬‬
+‫اﻟﺘﻘﻨﯿﺎت اﻟﻤﺴﺘﺨﺪﻣﺔ — ‪ @memory-bank/techContext.md‬اﻗﺮأ ‪4.‬‬
+‫اﻷﻧﻤﺎط اﻟﻤﻌﻤﺎرﯾﺔ — ‪ @memory-bank/systemPatterns.md‬اﻗﺮأ ‪5.‬‬
+‫اﻷﺧﻄﺎء اﻟﻤﻤﻨﻮﻋﺔ — ‪ @errors/DONT_MAKE_THESE_ERRORS_AGAIN.md‬اﻗﺮأ ‪6.‬‬
+‫‪:‬ﺑﻌﺪ اﻟﻘﺮاءة‪ ،‬أﻋﻄﻨﻲ ﻣﻠﺨﺺ ﻣﺨﺘﺼﺮ ﻟﻤﺎ ﻓﮭﻤﺘﮫ ﻋﻦ‬
+‫ﺣﺎﻟﺔ اﻟﻤﺸﺮوع اﻟﺤﺎﻟﯿﺔ ‪-‬‬
+‫آﺧﺮ ﻣﮭﻤﺔ ﺗﻤﺖ ‪-‬‬
+‫اﻟﺘﻘﻨﯿﺎت اﻟﻤﺴﺘﺨﺪﻣﺔ ‪-‬‬
+‫ّﻘﺔ ‪-‬‬
+‫أي ﻣﺸﺎﻛﻞ ﻣﻌﻠ‬
+
+‫‪:‬اﻟﺤﻄﻮة ‪ — 2‬ٮ=ﻌﺪ ٮ ‪5‬ﺄﻛٮ‪8‬ﺪ &‬
+‫&‬
+‫اﻟڡﻬﻢ‪ ،‬ﻟﺼﻖ اﻟﻤﻬﻤﺔ‬
+‫اﻟﻤﻄﻠﻮب اﻵن‪] :‬ﺻﻒ اﻟﻤﮭﻤﺔ ﺑﻮﺿﻮح[‬
+‫‪].md).‬اﻟﺪور[‪ roles/ROLE-‬اﻗﺮأ( ]‪ [Architect/Developer/Reviewer/QA‬اﻋﻤﻞ ﻛـ‬
+‫‪:‬ﻗﺒﻞ اﻟﺒﺪء‬
+‫اﻟﻤﺘﻌﻠﻘﺔ ﺑﺎﻟﻤﮭﻤﺔ ‪ rules/‬ﺗﺄﻛﺪ ﻣﻦ ﻗﺮاءة ‪-‬‬
+‫ﻟﺘﻔﺎدي اﻷﺧﻄﺎء اﻟﻤﻌﺮوﻓﺔ ‪ errors/‬راﺟﻊ ‪-‬‬
+‫ﺪث ‪-‬‬
+‫ﺑﺎﻟﻤﮭﻤﺔ اﻟﺠﺎرﯾﺔ ‪ memory-bank/activeContext.md‬ﺣّ‬
+‫‪:‬ﺑﻌﺪ اﻻﻧﺘﮭﺎء‬
+‫ﺪث ‪-‬‬
+‫ﺑﺎﻟﻨﺘﯿﺠﺔ ‪ memory-bank/activeContext.md‬ﺣّ‬
+‫ّﻞ أي دروس ﻣﺴﺘﻔﺎدة ﻓﻲ ‪-‬‬
+‫‪ memory-bank/lessons.md‬ﺳﺠ‬
+
+"
+< ‫ ﻟﻠﻤﻬﺎم اﻟﻤٮ‬ML/AI — ‫إﺿﺎڡﺔ ﻋﲆ أي ﺳٮ*ٮ" ﺎريﻮ‬:
+‫ﺎﻟـ‬,‫<ﻌﻠڡﺔ ٮ‬
+‫ ھﺬه اﻟﻤﮭﻤﺔ ﺗﺘﻌﻠﻖ ﺑـ‬ML/AI. ‫ﺑﺎﻹﺿﺎﻓﺔ ﻟﻠﻘﻮاﻋﺪ اﻟﻌﺎﻣﺔ‬:
+1. ‫ اﻗﺮأ‬rules/ml/ ‫ﺑﺎﻟﻜﺎﻣﻞ — ﺧﺎﺻﺔ‬:
+- rules/ml/RULES-plant-disease-analysis.md
+- rules/ml/RULES-image-binarization.md
+- rules/ml/RULES-multi-crop-augmentation.md
+- rules/ml/RULES-embedding-storage.md
+- rules/ml/RULES-gradcam-heatmap.md
+2. ‫ اﻗﺮأ‬errors/ml/ — ‫ﻛﺘﺎﻟﻮﺟﺎت اﻷﺧﻄﺎء‬:
+- errors/ml/ERROR-multi-view-pipeline-catalog.md
+- errors/ml/ERROR-deep-learning-training-catalog.md
+- errors/ml/ERROR-drift-detection-catalog.md
+3. ‫ اﺗﺒﻊ‬workflow: workflows/ml/ML_MULTI_VIEW_WORKFLOW.md
+4. ‫ أي ﻛﻮد‬ML ‫ﯾﺠﺐ أن ﯾﻠﺘﺰم ﺑﺎﻟﺤﺪود اﻟﺼﺎرﻣﺔ‬:
+- Morphological kernels ≤ 15×15, iterations ≤ 5
+- Hue jitter ≤ ±0.1, Saturation jitter ≤ ±0.4
+- Embeddings must be L2-normalized (assert abs(norm - 1.0) < 1e-6)
+- Library versions pinned exactly
+
+" ‫أواﻣﺮ اﻟﻄوارئ )ٮ<ُﺴٮ‬:
+(‫ٮ" ﺎء اﻟﻌﻤﻞ‬A‫<ﺤﺪم أٮ‬
+/compact
+
+— ‫ﺿﻐﻂ ﻧﺎﻓﺬة اﻟﺴﯿﺎق ﻋﻨﺪ اﻣﺘﻼﺋﮭﺎ‬
+
+/refresh
+
+— ‫ إﻋﺎدة ﺗﺤﻤﯿﻞ ﻛﻞ اﻟﺴﯿﺎق ﻣﻦ‬memory-bank/
+
+/checkpoint — ‫ ﺣﻔﻆ اﻟﺤﺎﻟﺔ اﻟﺤﺎﻟﯿﺔ ﻓﻲ‬memory-bank/activeContext.md
+
+"
+‫ﻣﻼﺣﻄﺎت ﻣﻬﻤﺔ‬:
+1. ‫ى‬
+! ‫ڡ‬# ”‫ڡرأ ﻫﺬا اﻟﻤﻠﻒ‬. ‫ﻌﲏ “ا‬2 ‫ﻞ اﺳﻢ اﻟﻤﻠﻒ ٮ‬7‫ڡٮ‬. @ ‫ رﻣﺰ‬Cursor ‫ و‬Claude Code
+#
+#
+7
+‫اﻟﻤﺤﻠﺪ ﰷﻣﻼ ً أو‬
+‫ارڡﻊ‬
+2. ‫ﺤﺪم‬.# ‫ﺴٮ‬.‫ﺖ ٮ‬#‫ إذا ﻛٮ‬Claude.ai (‫)اﻟويﺐ‬، ‫ﺔ‬7‫اﻟﻤﻠڡﺎت اﻟﻤﻄﻠوٮ‬
+7 ‫ ﺿﻊ‬Global_System_Ultimate_v26_Diamond ‫ﺣﺬر اﻟﻤﺸروع‬7 ‫ى‬
+3. ‫ى‬
+! ‫ڡ‬# Cursor: ‫ﻣﺤﻠﺪ‬
+! ‫ڡ‬#
+# ‫ٮ‬
+#
+4. ‫ﻌﺪﻫﺎ‬7‫اﻟﻤﻠڡﺎت — ٮ‬
+‫ڡراءة كﻞ‬. ‫ﺎج‬.‫ﺤٮ‬.‫ڡﻂ ٮ‬. ‫ڡ‬# ‫ أول ﻣﺮة‬activeContext.md ‫ﻤرار‬.‫ى ﻟﻼﺳٮ‬
+! ‫ﻜڡ‬2
+
+

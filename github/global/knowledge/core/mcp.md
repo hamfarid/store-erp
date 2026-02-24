@@ -281,9 +281,9 @@ decision = thinking_framework.analyze({
 ## Related Knowledge Items
 
 - **Memory System** - Save MCP usage (see `knowledge/core/memory.md`)
-- **Thinking Framework** - Consider MCP in decisions (see `knowledge/core/thinking.md`)
+- **Thinking Framework** - Consider MCP in decisions (see `knowledge/core/16_sequential_thinking.md`)
 - **Environment Separation** - Keep MCP separate (see `knowledge/core/environment.md`)
-- **Browser Automation** - Uses playwright MCP (see `knowledge/technical/browser.md`)
+- **Browser Automation** - Uses playwright MCP (see `knowledge/core/mcp.md`)
 
 ---
 

@@ -1,0 +1,24 @@
+{
+    "agent": {
+        "name": "Global System Agent",
+        "role": "Orchestrator",
+        "model": "claude-3-opus-20240229",
+        "temperature": 0.2
+    },
+    "mcp": {
+        "enabled": true,
+        "config": "mcp_config.json"
+    },
+    "context": {
+        "files": [
+            "GLOBAL_PROFESSIONAL_CORE_PROMPT.md",
+            "INITIAL_TODO.md",
+            "BOOTSTRAP.md"
+        ]
+    },
+    "rules": {
+        "edd": true,
+        "bats": true,
+        "osf_score": true
+    }
+}

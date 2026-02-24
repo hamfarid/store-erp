@@ -1,7 +1,7 @@
 ================================================================================
 MODULE 72: /docs FOLDER MANAGEMENT
 ================================================================================
-Version: Latest
+Version: 1.0.0
 Last Updated: 2025-11-07
 Purpose: Structure and maintain the /docs folder
 ================================================================================
@@ -75,8 +75,8 @@ docs/
 │   ├── 002-use-jwt.md           # ADR 002
 │   └── template.md              # ADR template
 └── changelog/
-    ├── .md                # Version 1.0.0 changelog
-    ├── .md                # Version 1.1.0 changelog
+    ├── v1.0.0.md                # Version 1.0.0 changelog
+    ├── v1.1.0.md                # Version 1.1.0 changelog
     └── CHANGELOG.md             # Full changelog
 ```
 

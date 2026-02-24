@@ -1,0 +1,11 @@
+openapi: 3.0.0
+info:
+  title: Global System API
+  version: Global System v26 Diamond 32
+paths:
+  /health:
+    get:
+      summary: Health Check
+      responses:
+        '200':
+          description: OK

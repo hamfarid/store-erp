@@ -1,12 +1,15 @@
-# Testing Examples
+# Testing Examples (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-## Example 1: Unit Tests
-See: `unit_test_example.py`
+**Engine:** Speckit Global System v26 Diamond 32
+**Status:** MANDATORY REFERENCE
 
-## Example 2: Integration Tests
-See: `integration_test_example.py`
+This directory contains standard implementations for testing strategies.
 
-## Example 3: E2E Tests
-See: `e2e_test_example.py`
+## Contents
+1.  **Unit Test:** `test_example.py` (pytest)
+    *   Includes: Fixtures, Mocking, Parametrization.
+2.  **Integration Test:** `integration_test_example.js` (Jest/Supertest)
+    *   Includes: Database setup/teardown, API calls.
 
-Study these examples before writing tests.
+## Usage
+Code without tests is legacy code. Write tests first (TDD) or immediately after implementation.

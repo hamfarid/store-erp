@@ -1,44 +1,29 @@
-# 🔐 Authentication Workflow
+# 🔐 Authentication Workflow (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-**Version:** 9.0.0  
-**Expert:** Security Expert + Backend Expert  
-**Estimated Time:** 4-8 hours
-
----
+**Version:** 37.0
+**Engine:** Speckit Global System v26 Diamond 32 + Sentinel
+**Status:** MANDATORY
 
 ## Workflow
 
 ```
-Design → Implement → Secure → Test
+Design (Speckit) → Implement (Speckit) → Verify (Sentinel)
 ```
 
-## Phase 1: Design (Security Expert)
-1. Choose method (JWT, Session, OAuth)
-2. Define user model
-3. Plan token management
-4. Design permissions
+## Phase 1: Design (Speckit)
+1.  **Analyze:** Determine auth requirements (JWT, OAuth, Session).
+2.  **Plan:** Define User Model and Auth Flow in `specs/auth.spec.md`.
+3.  **Security First:** Plan for Hashing (Argon2), Rate Limiting, and HTTPS.
 
-## Phase 2: Implement (Backend Expert)
-1. Create user model
-2. Implement registration
-3. Implement login
-4. Implement logout
-5. Token generation/validation
+## Phase 2: Implement (Speckit)
+1.  **Tasks:** Generate tasks for User Model, Login, Register, Logout.
+2.  **Code:** Implement using TDD.
+3.  **Constraint:** NEVER store plain-text passwords.
 
-## Phase 3: Secure (Security Expert)
-1. Hash passwords (bcrypt/Argon2)
-2. Secure tokens
-3. Add rate limiting
-4. Implement MFA (if needed)
-5. HTTPS enforcement
+## Phase 3: Verify (Sentinel)
+1.  **Sentinel Check:** Ensure no secrets (e.g., JWT_SECRET) are hardcoded.
+2.  **CodeRabbit Check:** Verify hashing algorithms and token storage.
+3.  **Penetration Test:** Run automated attacks (Brute Force, SQLi) using `speckit verify`.
 
-## Phase 4: Test (Testing Expert)
-1. Test registration
-2. Test login/logout
-3. Test token validation
-4. Test security (brute force, etc.)
-5. Test permissions
-
----
-
-*Secure authentication implementation.*
+## Remember
+**Authentication is the gate. Make it strong.**

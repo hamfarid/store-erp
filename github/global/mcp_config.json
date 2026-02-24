@@ -1,0 +1,15 @@
+{
+    "mcpServers": {
+        "speckit": {
+            "command": "python3",
+            "args": ["scripts/speckit.py"],
+            "env": {
+                "PYTHONPATH": "."
+            }
+        },
+        "filesystem": {
+            "command": "npx",
+            "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+        }
+    }
+}

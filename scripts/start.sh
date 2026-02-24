@@ -1,9 +1,12 @@
 #!/bin/bash
 
-# 🏪 نظام إدارة المخزون الكامل - سكريبت التشغيل
-# Complete Inventory Management System - Start Script
+################################################################################
+# Store ERP - Start Script
+# Version: 2.0.0
+# Description: Start both backend and frontend servers
+################################################################################
 
-set -e  # Exit on any error
+set -e  # Exit on error
 
 # Colors for output
 RED='\033[0;31m'
@@ -12,275 +15,244 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Function to print colored output
-print_status() {
-    echo -e "${BLUE}[INFO]${NC} $1"
+# Project directory
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# PID files
+BACKEND_PID_FILE="$PROJECT_DIR/.backend.pid"
+FRONTEND_PID_FILE="$PROJECT_DIR/.frontend.pid"
+
+################################################################################
+# Helper Functions
+################################################################################
+
+print_header() {
+    echo -e "\n${BLUE}========================================${NC}"
+    echo -e "${BLUE}$1${NC}"
+    echo -e "${BLUE}========================================${NC}\n"
 }
 
 print_success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
-}
-
-print_warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
+    echo -e "${GREEN}✓ $1${NC}"
 }
 
 print_error() {
-    echo -e "${RED}[ERROR]${NC} $1"
+    echo -e "${RED}✗ $1${NC}"
 }
 
-# Function to check if port is in use
+print_warning() {
+    echo -e "${YELLOW}⚠ $1${NC}"
+}
+
+print_info() {
+    echo -e "${BLUE}ℹ $1${NC}"
+}
+
 check_port() {
-    local port=$1
-    if command -v lsof >/dev/null 2>&1; then
-        if lsof -Pi :$port -sTCP:LISTEN -t >/dev/null; then
-            return 0  # Port is in use
-        fi
-    elif command -v netstat >/dev/null 2>&1; then
-        if netstat -an | grep ":$port " | grep LISTEN >/dev/null; then
-            return 0  # Port is in use
-        fi
-    fi
-    return 1  # Port is free
-}
-
-# Function to kill process on port
-kill_port() {
-    local port=$1
-    print_status "إيقاف العملية على المنفذ $port..."
-    print_status "Killing process on port $port..."
-    
-    if command -v lsof >/dev/null 2>&1; then
-        local pid=$(lsof -ti:$port)
-        if [ ! -z "$pid" ]; then
-            kill -9 $pid 2>/dev/null || true
-        fi
-    elif command -v netstat >/dev/null 2>&1; then
-        # For Windows/other systems
-        if command -v taskkill >/dev/null 2>&1; then
-            for pid in $(netstat -ano | grep ":$port " | awk '{print $5}'); do
-                taskkill /PID $pid /F 2>/dev/null || true
-            done
-        fi
-    fi
-}
-
-# Function to start backend
-start_backend() {
-    print_status "بدء تشغيل الخادم الخلفي..."
-    print_status "Starting backend server..."
-    
-    cd backend
-    
-    # Check if virtual environment exists
-    if [ ! -d "venv" ]; then
-        print_error "البيئة الافتراضية غير موجودة. يرجى تشغيل ./scripts/install.sh أولاً"
-        print_error "Virtual environment not found. Please run ./scripts/install.sh first"
-        exit 1
-    fi
-    
-    # Activate virtual environment
-    source venv/bin/activate 2>/dev/null || source venv/Scripts/activate 2>/dev/null || {
-        print_error "فشل في تفعيل البيئة الافتراضية"
-        print_error "Failed to activate virtual environment"
-        exit 1
-    }
-    
-    # Check if main.py exists
-    if [ ! -f "src/main.py" ]; then
-        print_error "ملف src/main.py غير موجود"
-        print_error "src/main.py not found"
-        exit 1
-    fi
-    
-    # Kill any existing process on port 8000
-    if check_port 8000; then
-        print_warning "المنفذ 8000 مستخدم، سيتم إيقاف العملية الموجودة"
-        print_warning "Port 8000 is in use, killing existing process"
-        kill_port 8000
-        sleep 2
-    fi
-    
-    # Start backend server
-    print_status "تشغيل الخادم الخلفي على http://localhost:8000"
-    print_status "Starting backend server on http://localhost:8000"
-    
-    # Start in background
-    nohup python src/main.py > ../logs/backend.log 2>&1 &
-    BACKEND_PID=$!
-    
-    # Wait a moment for server to start
-    sleep 3
-    
-    # Check if backend is running
-    if check_port 8000; then
-        print_success "الخادم الخلفي يعمل بنجاح (PID: $BACKEND_PID)"
-        print_success "Backend server running successfully (PID: $BACKEND_PID)"
-        echo $BACKEND_PID > ../logs/backend.pid
+    if lsof -Pi :$1 -sTCP:LISTEN -t >/dev/null 2>&1; then
+        return 0
     else
-        print_error "فشل في تشغيل الخادم الخلفي"
-        print_error "Failed to start backend server"
-        exit 1
+        return 1
     fi
-    
-    cd ..
 }
 
-# Function to start frontend
-start_frontend() {
-    print_status "بدء تشغيل الواجهة الأمامية..."
-    print_status "Starting frontend server..."
+wait_for_port() {
+    local port=$1
+    local max_attempts=30
+    local attempt=0
     
-    cd frontend
-    
-    # Check if node_modules exists
-    if [ ! -d "node_modules" ]; then
-        print_error "مجلد node_modules غير موجود. يرجى تشغيل ./scripts/install.sh أولاً"
-        print_error "node_modules directory not found. Please run ./scripts/install.sh first"
-        exit 1
-    fi
-    
-    # Kill any existing process on port 5173
-    if check_port 5173; then
-        print_warning "المنفذ 5173 مستخدم، سيتم إيقاف العملية الموجودة"
-        print_warning "Port 5173 is in use, killing existing process"
-        kill_port 5173
-        sleep 2
-    fi
-    
-    # Start frontend server
-    print_status "تشغيل الواجهة الأمامية على http://localhost:5173"
-    print_status "Starting frontend server on http://localhost:5173"
-    
-    # Start in background
-    nohup npm run dev > ../logs/frontend.log 2>&1 &
-    FRONTEND_PID=$!
-    
-    # Wait a moment for server to start
-    sleep 5
-    
-    # Check if frontend is running
-    if check_port 5173; then
-        print_success "الواجهة الأمامية تعمل بنجاح (PID: $FRONTEND_PID)"
-        print_success "Frontend server running successfully (PID: $FRONTEND_PID)"
-        echo $FRONTEND_PID > ../logs/frontend.pid
-    else
-        print_error "فشل في تشغيل الواجهة الأمامية"
-        print_error "Failed to start frontend server"
-        exit 1
-    fi
-    
-    cd ..
+    while [ $attempt -lt $max_attempts ]; do
+        if check_port $port; then
+            return 0
+        fi
+        sleep 1
+        attempt=$((attempt + 1))
+    done
+    return 1
 }
 
-# Function to stop servers
-stop_servers() {
-    print_status "إيقاف الخوادم..."
-    print_status "Stopping servers..."
-    
-    # Stop backend
-    if [ -f "logs/backend.pid" ]; then
-        BACKEND_PID=$(cat logs/backend.pid)
-        if kill -0 $BACKEND_PID 2>/dev/null; then
+################################################################################
+# Check if already running
+################################################################################
+
+if [ -f "$BACKEND_PID_FILE" ]; then
+    BACKEND_PID=$(cat "$BACKEND_PID_FILE")
+    if ps -p $BACKEND_PID > /dev/null 2>&1; then
+        print_warning "Backend is already running (PID: $BACKEND_PID)"
+        read -p "Stop and restart? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Stopping backend..."
             kill $BACKEND_PID
-            print_success "تم إيقاف الخادم الخلفي"
-            print_success "Backend server stopped"
-        fi
-        rm -f logs/backend.pid
-    fi
-    
-    # Stop frontend
-    if [ -f "logs/frontend.pid" ]; then
-        FRONTEND_PID=$(cat logs/frontend.pid)
-        if kill -0 $FRONTEND_PID 2>/dev/null; then
-            kill $FRONTEND_PID
-            print_success "تم إيقاف الواجهة الأمامية"
-            print_success "Frontend server stopped"
-        fi
-        rm -f logs/frontend.pid
-    fi
-    
-    # Kill any remaining processes on ports
-    kill_port 8000
-    kill_port 5173
-}
-
-# Function to show status
-show_status() {
-    print_status "حالة الخوادم:"
-    print_status "Server status:"
-    
-    if check_port 8000; then
-        print_success "الخادم الخلفي يعمل على http://localhost:8000"
-        print_success "Backend server running on http://localhost:8000"
-    else
-        print_error "الخادم الخلفي متوقف"
-        print_error "Backend server stopped"
-    fi
-    
-    if check_port 5173; then
-        print_success "الواجهة الأمامية تعمل على http://localhost:5173"
-        print_success "Frontend server running on http://localhost:5173"
-    else
-        print_error "الواجهة الأمامية متوقفة"
-        print_error "Frontend server stopped"
-    fi
-}
-
-# Main function
-main() {
-    # Check if we're in the right directory
-    if [ ! -f "README.md" ] || [ ! -d "backend" ] || [ ! -d "frontend" ]; then
-        print_error "يرجى تشغيل هذا السكريبت من المجلد الجذر للمشروع"
-        print_error "Please run this script from the project root directory"
-        exit 1
-    fi
-    
-    # Create logs directory
-    mkdir -p logs
-    
-    # Handle command line arguments
-    case "${1:-start}" in
-        "start")
-            print_status "🏪 بدء تشغيل نظام إدارة المخزون الكامل..."
-            print_status "🏪 Starting Complete Inventory Management System..."
-            start_backend
-            start_frontend
-            echo ""
-            print_success "🎉 النظام يعمل بنجاح!"
-            print_success "🎉 System is running successfully!"
-            echo ""
-            print_status "الروابط:"
-            print_status "URLs:"
-            print_status "  الواجهة الأمامية / Frontend: http://localhost:5173"
-            print_status "  الخادم الخلفي / Backend: http://localhost:8000"
-            print_status "  API Documentation: http://localhost:8000/api"
-            echo ""
-            print_status "لإيقاف النظام: ./scripts/start.sh stop"
-            print_status "To stop the system: ./scripts/start.sh stop"
-            ;;
-        "stop")
-            stop_servers
-            ;;
-        "restart")
-            stop_servers
+            rm -f "$BACKEND_PID_FILE"
             sleep 2
-            start_backend
-            start_frontend
-            ;;
-        "status")
-            show_status
-            ;;
-        *)
-            echo "Usage: $0 {start|stop|restart|status}"
-            echo "الاستخدام: $0 {start|stop|restart|status}"
-            exit 1
-            ;;
-    esac
-}
+        else
+            print_info "Keeping backend running"
+        fi
+    else
+        rm -f "$BACKEND_PID_FILE"
+    fi
+fi
 
-# Handle Ctrl+C
-trap 'print_status "تم إيقاف السكريبت"; print_status "Script interrupted"; exit 0' INT
+if [ -f "$FRONTEND_PID_FILE" ]; then
+    FRONTEND_PID=$(cat "$FRONTEND_PID_FILE")
+    if ps -p $FRONTEND_PID > /dev/null 2>&1; then
+        print_warning "Frontend is already running (PID: $FRONTEND_PID)"
+        read -p "Stop and restart? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Stopping frontend..."
+            kill $FRONTEND_PID
+            rm -f "$FRONTEND_PID_FILE"
+            sleep 2
+        else
+            print_info "Keeping frontend running"
+        fi
+    else
+        rm -f "$FRONTEND_PID_FILE"
+    fi
+fi
 
-# Run main function
-main "$@"
+################################################################################
+# Start Backend
+################################################################################
+
+print_header "Starting Backend Server"
+
+cd "$PROJECT_DIR/backend"
+
+# Check if virtual environment exists
+if [ ! -d "venv" ]; then
+    print_error "Virtual environment not found"
+    print_info "Run ./setup.sh first"
+    exit 1
+fi
+
+# Activate virtual environment
+source venv/bin/activate
+
+# Check if Flask app exists
+if [ ! -f "src/app.py" ] && [ ! -f "app.py" ]; then
+    print_error "Flask app not found"
+    exit 1
+fi
+
+# Determine Flask app location
+if [ -f "src/app.py" ]; then
+    FLASK_APP="src/app.py"
+else
+    FLASK_APP="app.py"
+fi
+
+# Load environment variables
+if [ -f ".env" ]; then
+    export $(cat .env | grep -v '^#' | xargs)
+fi
+
+# Start backend server
+print_info "Starting Flask server..."
+
+# Check if port is available
+BACKEND_PORT=${PORT:-8000}
+if check_port $BACKEND_PORT; then
+    print_error "Port $BACKEND_PORT is already in use"
+    print_info "Stop the process using this port or change PORT in backend/.env"
+    exit 1
+fi
+
+# Start backend in background
+nohup python $FLASK_APP > "$PROJECT_DIR/logs/backend.log" 2>&1 &
+BACKEND_PID=$!
+echo $BACKEND_PID > "$BACKEND_PID_FILE"
+
+# Wait for backend to start
+print_info "Waiting for backend to start..."
+if wait_for_port $BACKEND_PORT; then
+    print_success "Backend started successfully (PID: $BACKEND_PID)"
+    print_info "Backend URL: http://localhost:$BACKEND_PORT"
+else
+    print_error "Backend failed to start"
+    print_info "Check logs: $PROJECT_DIR/logs/backend.log"
+    exit 1
+fi
+
+################################################################################
+# Start Frontend
+################################################################################
+
+print_header "Starting Frontend Server"
+
+cd "$PROJECT_DIR/frontend"
+
+# Check if node_modules exists
+if [ ! -d "node_modules" ]; then
+    print_error "node_modules not found"
+    print_info "Run ./setup.sh first"
+    exit 1
+fi
+
+# Load environment variables
+if [ -f ".env" ]; then
+    export $(cat .env | grep -v '^#' | xargs)
+fi
+
+# Start frontend server
+print_info "Starting Vite dev server..."
+
+# Check if port is available
+FRONTEND_PORT=5502
+if check_port $FRONTEND_PORT; then
+    print_error "Port $FRONTEND_PORT is already in use"
+    print_info "Stop the process using this port"
+    exit 1
+fi
+
+# Start frontend in background
+nohup pnpm dev > "$PROJECT_DIR/logs/frontend.log" 2>&1 &
+FRONTEND_PID=$!
+echo $FRONTEND_PID > "$FRONTEND_PID_FILE"
+
+# Wait for frontend to start
+print_info "Waiting for frontend to start..."
+if wait_for_port $FRONTEND_PORT; then
+    print_success "Frontend started successfully (PID: $FRONTEND_PID)"
+    print_info "Frontend URL: http://localhost:$FRONTEND_PORT"
+else
+    print_error "Frontend failed to start"
+    print_info "Check logs: $PROJECT_DIR/logs/frontend.log"
+    exit 1
+fi
+
+################################################################################
+# Success
+################################################################################
+
+print_header "Store ERP Started Successfully!"
+
+echo -e "${GREEN}✓ Both servers are running!${NC}\n"
+
+echo "Access the application:"
+echo "  ${BLUE}Frontend:${NC} http://localhost:$FRONTEND_PORT"
+echo "  ${BLUE}Backend API:${NC} http://localhost:$BACKEND_PORT"
+echo ""
+echo "Default login:"
+echo "  ${BLUE}Username:${NC} admin"
+echo "  ${BLUE}Password:${NC} admin123"
+echo ""
+echo "Process IDs:"
+echo "  ${BLUE}Backend:${NC} $BACKEND_PID"
+echo "  ${BLUE}Frontend:${NC} $FRONTEND_PID"
+echo ""
+echo "Logs:"
+echo "  ${BLUE}Backend:${NC} $PROJECT_DIR/logs/backend.log"
+echo "  ${BLUE}Frontend:${NC} $PROJECT_DIR/logs/frontend.log"
+echo "  ${BLUE}Application:${NC} $PROJECT_DIR/logs/application/app.log"
+echo ""
+echo "Commands:"
+echo "  ${BLUE}Stop servers:${NC} ./stop.sh"
+echo "  ${BLUE}Restart servers:${NC} ./restart.sh"
+echo "  ${BLUE}Check status:${NC} ./status.sh"
+echo "  ${BLUE}View logs:${NC} tail -f logs/backend.log logs/frontend.log"
+echo ""
+
+print_success "Happy coding! 🚀"

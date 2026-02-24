@@ -1,12 +1,15 @@
-# Database Examples
+# Database Examples (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-## Example 1: E-commerce Schema
-See: `ecommerce_schema.sql`
+**Engine:** Speckit Global System v26 Diamond 32
+**Status:** MANDATORY REFERENCE
 
-## Example 2: User Management Schema
-See: `user_schema.sql`
+This directory contains standard implementations for database interactions.
 
-## Example 3: Indexing Strategy
-See: `indexing_example.sql`
+## Contents
+1.  **Standard Migration:** `migration_example.sql`
+    *   Includes: Transaction safety, Idempotency checks.
+2.  **Standard Model:** `standard_model.py` (SQLAlchemy)
+    *   Includes: Mixins, Indexing, Relationships.
 
-Study these examples before designing databases.
+## Usage
+All database changes must go through the migration process defined here.

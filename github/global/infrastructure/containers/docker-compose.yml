@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  search-agent:
+    build: ./search
+    container_name: search-agent
+    environment:
+      - SCRAPY_SETTINGS_MODULE=search_agent.settings
+      - ROBOTSTXT_OBEY=True
+      - DOWNLOAD_DELAY=10
+      - USER_AGENT=GlobalSystemBot/1.0 (contact@example.com)
+    volumes:
+      - ./search/data:/home/search_agent/data
+    networks:
+      - ml-network
+    restart: on-failure
+
+  learning-agent:
+    build: ./learning
+    container_name: learning-agent
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - CUDA_VISIBLE_DEVICES=0
+    volumes:
+      - ./learning/data:/home/learning_agent/data
+      - ./learning/models:/home/learning_agent/models
+    networks:
+      - ml-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    depends_on:
+      - mlflow
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.11.0
+    container_name: mlflow
+    ports:
+      - "5000:5000"
+    command: mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns --host 0.0.0.0
+    networks:
+      - ml-network
+
+networks:
+  ml-network:
+    driver: bridge

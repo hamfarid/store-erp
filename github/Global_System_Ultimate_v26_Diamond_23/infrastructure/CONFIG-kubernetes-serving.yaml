@@ -1,0 +1,44 @@
+# CONFIG-kubernetes-serving.yaml
+# Governance: ML/AI Application Framework (Feb 2026)
+# Tooling: KServe, Kubernetes
+
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: "sklearn-iris"
+  namespace: "default"
+  annotations:
+    "sidecar.istio.io/inject": "false"
+spec:
+  predictor:
+    sklearn:
+      storageUri: "gs://kfserving-examples/models/sklearn/1.0/model"
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "1"
+          memory: "512Mi"
+    minReplicas: 1
+    maxReplicas: 5
+    scaleTarget: 100  # Requests per second per replica
+    scaleMetric: "concurrency"
+    containerConcurrency: 10
+    timeout: 60
+    serviceAccountName: "sa-sklearn-iris"
+    securityContext:
+      runAsNonRoot: true
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "kubernetes.io/arch"
+                  operator: "In"
+                  values:
+                    - "amd64"

@@ -1,0 +1,21 @@
+version: 1.0
+rules:
+  - name: Universal Governance
+    description: Enforce AGENTS.md rules across the project.
+    source: ./AGENTS.md
+    severity: error
+  - name: Anti-Hallucination (Active Memory)
+    description: Enforce 5-Layer Defense Stack (Active Memory + HALT + FINCH-ZK).
+    source: ./knowledge/protocols/anti_hallucination.md
+    severity: critical
+  - name: Memory Bank Integrity
+    description: Ensure memory bank files are updated and consistent.
+    check:
+      file_exists:
+        - memory-bank/activeContext.md
+        - memory-bank/progress.md
+        - memory-bank/decisionLog.md
+  - name: External Hippocampus
+    description: Verify connection to external knowledge sources (RAG/MCP).
+    check:
+      mcp_connected: true

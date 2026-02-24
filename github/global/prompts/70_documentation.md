@@ -1,7 +1,31 @@
+# PROMPT 70: LIVING DOCUMENTATION (v29.0)
+
+## 1. The "Atomic Update" Rule
+**Rule:** Documentation is NOT a separate phase. It happens **atomically** with code changes.
+*   **If you change a function signature:** Update the docstring IMMEDIATELY.
+*   **If you change an API endpoint:** Update `global/docs/Routes_BE.md` IMMEDIATELY.
+*   **If you change the DB schema:** Update `global/docs/DATABASE_SCHEMA.md` IMMEDIATELY.
+
+## 2. The "Speckit" Integration
+**Rule:** Use Speckit to verify documentation freshness.
+*   **Check:** "Does the code match the docs?"
+*   **Action:** If NO, fail the build (mentally) and fix the docs.
+
+## 3. The "Why" over "What"
+**Rule:** Comments should explain WHY, not WHAT.
+*   ❌ `// Increment i by 1`
+*   ✅ `// Increment retry counter to trigger exponential backoff`
+
+## 4. Visual Documentation (v29.0)
+**Rule:** Use Mermaid diagrams for complex logic.
+*   **Flowcharts:** For business logic.
+*   **Sequence Diagrams:** For API interactions.
+*   **ER Diagrams:** For database relationships.
+
 ================================================================================
 MODULE 70: DOCUMENTATION
 ================================================================================
-Version: Latest
+Version: 1.0.0
 Last Updated: 2025-11-07
 Purpose: Code documentation, API docs, user guides, best practices
 ================================================================================
@@ -750,27 +774,3 @@ DOCUMENTATION CHECKLIST:
 ☐ Usage examples provided
 ☐ Configuration documented
 ☐ Architecture documented
-☐ Design decisions recorded (ADRs)
-☐ Workflow documented
-☐ Troubleshooting guide available
-☐ Changelog maintained
-☐ License included
-
-================================================================================
-## REMEMBER
-================================================================================
-
-✓ Document while coding, not after
-✓ Explain WHY, not just WHAT
-✓ Include examples
-✓ Keep it up-to-date
-✓ Write for humans
-✓ Use clear language
-✓ Add diagrams when helpful
-✓ Document edge cases
-✓ Document known issues
-✓ Make it searchable
-
-Good documentation = Happy developers!
-================================================================================
-

@@ -1,0 +1,22 @@
+# Frontend Dockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy application code
+COPY . .
+
+# Expose the dynamic port (default 3000, overridden by docker-compose)
+EXPOSE ${FRONTEND_PORT:-3000}
+
+# Start command (uses environment variable for port)
+CMD ["sh", "-c", "pnpm start --port ${FRONTEND_PORT:-3000}"]

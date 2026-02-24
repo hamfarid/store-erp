@@ -1,3 +1,5 @@
+# Database Schema
+
 > This is a template. Fill this out for your specific project.
 
 # Database Schema

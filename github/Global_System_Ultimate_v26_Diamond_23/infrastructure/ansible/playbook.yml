@@ -1,0 +1,11 @@
+---
+# Ansible Playbook (Global System Ultimate)
+- name: Configure Web Servers
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes

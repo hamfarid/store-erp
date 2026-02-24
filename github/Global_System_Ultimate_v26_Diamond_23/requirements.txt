@@ -1,0 +1,17 @@
+# Global System Ultimate - Root Requirements
+# Verified Feb 2026: Dev Tools & Governance
+
+# Linting & Formatting
+ruff==0.15.1
+bandit==1.9.3
+pre-commit==3.6.0
+
+# Testing & Evals
+pytest==8.0.0
+# promptfoo is a Node.js tool, installed via npm in genesis.py
+
+# Infrastructure & Tools
+docker==7.0.0
+requests==2.31.0
+PyYAML==6.0.1
+tiktoken==0.6.0  # For Context Counting

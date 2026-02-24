@@ -1,0 +1,22 @@
+# Spark ML Image (v2026.2)
+FROM bitnami/spark:3.5.0
+
+USER root
+
+# Install Python dependencies for ML
+RUN pip install --no-cache-dir \
+    mlflow==2.10.0 \
+    delta-spark==3.0.0 \
+    pandas==2.2.0 \
+    numpy==1.26.3 \
+    scikit-learn==1.4.0 \
+    torch==2.2.0 \
+    torchvision==0.17.0
+
+# Install Hadoop AWS for S3 access
+RUN curl -O https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.4/hadoop-aws-3.3.4.jar && \
+    mv hadoop-aws-3.3.4.jar /opt/bitnami/spark/jars/ && \
+    curl -O https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.262/aws-java-sdk-bundle-1.12.262.jar && \
+    mv aws-java-sdk-bundle-1.12.262.jar /opt/bitnami/spark/jars/
+
+USER 1001

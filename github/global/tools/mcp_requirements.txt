@@ -1,0 +1,6 @@
+chromadb
+mcp
+fastmcp
+pydantic
+requests
+sentence-transformers

@@ -1,8 +1,10 @@
+# Prompt 41: Testing — Unit, Integration, E2E
+
 =================================================================================
 TESTING - Unit, Integration, E2E
 =================================================================================
 
-Version: Latest
+Version: 5.0.0
 Type: Quality Assurance - Testing
 
 Comprehensive testing strategies and implementations.
@@ -261,7 +263,7 @@ END OF TESTING PROMPT
 
 
 ================================================================================
-RECOVERED CONTENT FROM  (Phase 2)
+RECOVERED CONTENT FROM Global System v26 Diamond 32 (Phase 2)
 ================================================================================
 
 shared', 'core']
@@ -463,7 +465,7 @@ from pathlib import Path
 
 def load_error_patterns():
     """Load error patterns from error log."""
-    error_file = Path('docs/errors/Dont_make_this_error_again.md')
+    error_file = Path('docs/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md')
     if not error_file.exists():
         return []
     
@@ -502,7 +504,7 @@ if __name__ == '__main__':
     patterns = load_error_patterns()
     if check_files_for_patterns(patterns):
         print("\n❌ Known error patterns detected!")
-        print("   Check docs/errors/Dont_make_this_error_again.md")
+        print("   Check docs/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md")
         sys.exit(1)
     
     print("✅ No known error patterns found")

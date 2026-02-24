@@ -1,57 +1,44 @@
 #!/bin/bash
-# Arabic Inventory Management System - Complete System Startup Script
 
-echo "🚀 Starting Complete Arabic Inventory Management System..."
+echo "========================================"
+echo "    نظام إدارة المخزون الزراعي"
+echo "========================================"
+echo
 
-# Function to check if a command exists
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
+echo "🚀 تشغيل النظام..."
+echo
 
-# Check prerequisites
-echo "🔍 Checking prerequisites..."
-
-if ! command_exists python3; then
-    echo "❌ Python 3 is required but not installed."
-    exit 1
-fi
-
-if ! command_exists node; then
-    echo "❌ Node.js is required but not installed."
-    exit 1
-fi
-
-echo "✅ Prerequisites check passed!"
-
-# Start backend in background
-echo "🔧 Starting backend server..."
+echo "📊 تشغيل قاعدة البيانات..."
 cd backend
-pip3 install -r requirements.txt 2>/dev/null || echo "⚠️ Could not install Python dependencies"
-export FLASK_APP=app.py
-export FLASK_ENV=production
-python3 app.py &
+python3 database_setup.py
+echo
+
+echo "🔧 تشغيل الخادم الخلفي..."
+python3 app_with_database.py &
 BACKEND_PID=$!
-echo "✅ Backend started with PID: $BACKEND_PID"
+echo "✅ الخادم الخلفي يعمل على: http://localhost:8002"
+echo
 
-# Wait a moment for backend to start
-sleep 3
-
-# Start frontend
-echo "🎨 Starting frontend server..."
+echo "🌐 تشغيل الواجهة الأمامية..."
 cd ../frontend
-npm install 2>/dev/null || echo "⚠️ Could not install Node.js dependencies"
 npm run dev &
 FRONTEND_PID=$!
-echo "✅ Frontend started with PID: $FRONTEND_PID"
+echo "✅ الواجهة الأمامية ستعمل على: http://localhost:3004"
+echo
 
-echo ""
-echo "🎉 Arabic Inventory Management System is now running!"
-echo "📊 Backend API: http://localhost:5001"
-echo "🌐 Frontend UI: http://localhost:3000"
-echo ""
-echo "To stop the system, press Ctrl+C or run:"
-echo "kill $BACKEND_PID $FRONTEND_PID"
+echo "========================================"
+echo "🎉 النظام جاهز للاستخدام!"
+echo "========================================"
+echo
+echo "🔗 افتح المتصفح واذهب إلى: http://localhost:3004"
+echo "🔐 تسجيل الدخول: admin / admin123"
+echo
+echo "اضغط Ctrl+C لإيقاف النظام"
 
-# Wait for user interrupt
-trap "echo '🛑 Stopping system...'; kill $BACKEND_PID $FRONTEND_PID 2>/dev/null; exit 0" INT
-wait
+# انتظار إشارة الإيقاف
+trap "echo 'إيقاف النظام...'; kill $BACKEND_PID $FRONTEND_PID; exit" INT
+
+# انتظار لا نهائي
+while true; do
+    sleep 1
+done

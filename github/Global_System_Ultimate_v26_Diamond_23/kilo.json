@@ -1,0 +1,19 @@
+{
+  "agent_name": "GlobalSystem_Ultimate",
+  "role": "Executor (Kilo)",
+  "description": "The Doer - Executes tasks, runs code, and manages infrastructure.",
+  "capabilities": [
+    "docker_management",
+    "python_execution",
+    "node_execution",
+    "file_system_ops",
+    "network_access"
+  ],
+  "constraints": {
+    "max_memory_usage": "4GB",
+    "max_execution_time": "300s",
+    "allowed_networks": ["global_neural_net", "host"]
+  },
+  "memory_path": "memory-bank",
+  "version": "Ultimate"
+}

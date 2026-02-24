@@ -1,0 +1,49 @@
+# ML Alerting & Escalation Policy (v17.0)
+# Scope: Production ML Systems
+# Compliance: SRE Best Practices
+
+alert_levels:
+  P0_CRITICAL:
+    description: "System Down or Data Loss"
+    response_time: "15 minutes"
+    channels: ["PagerDuty", "Slack #ml-critical", "SMS"]
+    triggers:
+      - "Inference Latency > 500ms (P99)"
+      - "Error Rate > 5%"
+      - "Data Drift (PSI) > 0.5"
+    escalation:
+      - "On-Call ML Engineer (Immediate)"
+      - "Engineering Manager (15m)"
+      - "CTO (1h)"
+
+  P1_HIGH:
+    description: "Major Feature Degradation"
+    response_time: "1 hour"
+    channels: ["Slack #ml-alerts", "Email"]
+    triggers:
+      - "Inference Latency > 200ms (P99)"
+      - "Error Rate > 1%"
+      - "Data Drift (PSI) > 0.2"
+    escalation:
+      - "On-Call ML Engineer (1h)"
+      - "Tech Lead (4h)"
+
+  P2_MEDIUM:
+    description: "Minor Performance Drop"
+    response_time: "24 hours"
+    channels: ["Jira Ticket", "Email"]
+    triggers:
+      - "Model Accuracy Drop > 5%"
+      - "Resource Usage > 80%"
+    escalation:
+      - "ML Team (Next Business Day)"
+
+fatigue_prevention:
+  grouping: "Group alerts by service/cluster"
+  suppression: "Suppress P2 alerts during maintenance windows"
+  review: "Weekly review of noisy alerts"
+
+post_mortem:
+  required_for: ["P0_CRITICAL", "P1_HIGH"]
+  template: "templates/ml/TEMPLATE-post-mortem.md"
+  timeline: "Within 48 hours of resolution"

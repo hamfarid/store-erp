@@ -1,0 +1,49 @@
+# Hallucination Detection Alerts Configuration
+# Defines alerts for detecting hallucinations in AI-generated content.
+
+alerts:
+  - name: "Hallucination Detected"
+    description: "Triggered when a hallucination is detected in the generated text."
+    severity: "critical"
+    condition: "hallucination_score > 0.8"
+    actions:
+      - "notify_admin"
+      - "log_event"
+      - "block_response"
+
+  - name: "High Severity Hallucination"
+    description: "Triggered when a high-severity hallucination is detected."
+    severity: "high"
+    condition: "hallucination_score > 0.6"
+    actions:
+      - "notify_admin"
+      - "log_event"
+
+  - name: "Medium Severity Hallucination"
+    description: "Triggered when a medium-severity hallucination is detected."
+    severity: "medium"
+    condition: "hallucination_score > 0.4"
+    actions:
+      - "log_event"
+
+  - name: "Low Severity Hallucination"
+    description: "Triggered when a low-severity hallucination is detected."
+    severity: "low"
+    condition: "hallucination_score > 0.2"
+    actions:
+      - "log_event"
+
+actions:
+  notify_admin:
+    type: "email"
+    recipient: "admin@example.com"
+    subject: "Hallucination Alert"
+  
+  log_event:
+    type: "log"
+    file: "/var/log/hallucination_alerts.log"
+    format: "json"
+
+  block_response:
+    type: "block"
+    message: "Response blocked due to detected hallucination."

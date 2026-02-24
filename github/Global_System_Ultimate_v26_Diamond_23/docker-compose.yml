@@ -1,0 +1,39 @@
+networks:
+  backend: {}
+  frontend: {}
+services:
+  app:
+    build: .
+    depends_on:
+    - redis
+    deploy:
+      resources:
+        limits:
+          memory: 1024m
+    environment:
+    - REDIS_URL=redis://redis:6379
+    networks:
+    - backend
+    - frontend
+    volumes:
+    - .:/app
+  redis:
+    healthcheck:
+      interval: 10s
+      retries: 5
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      timeout: 5s
+    image: redis:alpine
+    networks:
+    - backend
+    ports:
+    - 6379:6379
+    restart: always
+    volumes:
+    - redis_data:/data
+version: '3.8'
+volumes:
+  redis_data: {}

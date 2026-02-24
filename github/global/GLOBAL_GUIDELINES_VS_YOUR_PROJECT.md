@@ -25,7 +25,7 @@ This is the instruction manual. It contains:
 - `knowledge/`: A library of verified facts and solutions.
 - `rules/`: Non-negotiable coding standards.
 - `workflows/`: Pre-defined multi-step tasks.
-- `.memory/`: The AI agent's working memory.
+- `memory-bank/`: The AI agent's working memory.
 - `system_log.md`: The AI agent's action log.
 
 ### Your Project (e.g., `my-project/`)
@@ -47,13 +47,13 @@ This is the actual application you are building. It contains:
 | Environment | Global Guidelines (`github/global/`) | Your Project (e.g., `my-project/`) |
 |---|---|---|
 | **Purpose** | The AI's instruction manual & tools | The user's actual application |
-| **Database**| For the AI's tools only (e.g., `.memory/`) | The application's database (e.g., PostgreSQL) |
+| **Database**| For the AI's tools only (e.g., `memory-bank/`) | The application's database (e.g., PostgreSQL) |
 | **Docker** | For the AI's tools only | The application's containers |
 | **Config** | For the AI's tools only | The application's configuration (`.env`) |
 
 ### What this means in practice:
 
-- **DO NOT** use the `github/global/.memory/` directory to store user data for your project.
+- **DO NOT** use the `github/global/memory-bank/` directory to store user data for your project.
 - **DO NOT** use the `github/global/system_log.md` to log application events. Create a separate logging system for your project.
 - **DO NOT** use the `github/global/` Docker setup for your project. Create a `docker-compose.yml` inside your project directory.
 - **DO NOT** store your project's API keys or database URLs in the `github/global/` environment.
@@ -63,7 +63,7 @@ This is the actual application you are building. It contains:
 ### Example of Correct Separation:
 
 **Global Guidelines (AI's Brain):**
-- `~/github/global/.memory/`
+- `~/github/global/memory-bank/`
 - `~/github/global/system_log.md`
 
 **Your Project (User's Application):**
@@ -93,7 +93,7 @@ This is the actual application you are building. It contains:
 ## 🎯 The Correct Workflow
 
 1. **Receive a task** (e.g., `start-new-project`).
-2. **Read the Core Prompt** (`GLOBAL_PROFESSIONAL_CORE_PROMPT.md`).
+2. **Read the Core Prompt** (`GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md`).
 3. **Read the relevant prompts** from `github/global/prompts/`.
 4. **Create a new directory** for the user's project (e.g., `mkdir my-project`).
 5. **Work inside the new directory** (`cd my-project`).

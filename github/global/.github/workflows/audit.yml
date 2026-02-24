@@ -1,0 +1,70 @@
+# Global System v26.0.2 Diamond 32 — CI Audit Pipeline
+name: Diamond 32 Audit
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    name: Zero-Error Audit
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Run zero-error audit
+        run: python3 tools/zero_error_audit.py
+
+      - name: Validate Python syntax
+        run: |
+          find . -name "*.py" -type f | while read f; do
+            python3 -c "import ast; ast.parse(open('$f').read())" || exit 1
+          done
+
+      - name: Validate JSON syntax
+        run: |
+          find . -name "*.json" -type f ! -path "*/node_modules/*" | while read f; do
+            python3 -c "import json; json.load(open('$f'))" || exit 1
+          done
+
+      - name: Validate YAML syntax
+        run: |
+          find . \( -name "*.yaml" -o -name "*.yml" \) -type f | while read f; do
+            python3 -c "import yaml; list(yaml.safe_load_all(open('$f')))" || exit 1
+          done
+
+      - name: Validate Shell syntax
+        run: |
+          find . -name "*.sh" -type f | while read f; do
+            bash -n "$f" || exit 1
+          done
+
+      - name: Check MD headers
+        run: |
+          ERRORS=0
+          find . -name "*.md" -type f ! -path "*/archive/*" ! -path "*/audit_v35.9/*" | while read f; do
+            head -1 "$f" | grep -q "^#" || { echo "MISSING HEADER: $f"; ERRORS=$((ERRORS+1)); }
+          done
+          [ "$ERRORS" -eq 0 ] || exit 1
+
+      - name: Check no stale versions
+        run: |
+          STALE=$(find . -name "*.md" -type f ! -path "*/archive/*" ! -path "*/CHANGELOG*" -exec grep -l "v26\.0\.0" {} \; | wc -l)
+          [ "$STALE" -eq 0 ] || { echo "Found $STALE files with stale v26.0.0"; exit 1; }
+
+      - name: Check no .DS_Store
+        run: |
+          DS=$(find . -name ".DS_Store" | wc -l)
+          [ "$DS" -eq 0 ] || { echo "Found $DS .DS_Store files"; exit 1; }

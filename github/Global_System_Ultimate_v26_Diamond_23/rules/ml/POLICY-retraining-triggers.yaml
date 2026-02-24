@@ -1,0 +1,43 @@
+# ML Retraining Triggers Policy (v17.0)
+# Scope: Continuous Training (CT) Pipeline
+# Compliance: MLOps Level 2
+
+triggers:
+  scheduled:
+    frequency: "Monthly (1st of month)"
+    description: "Regular refresh with new data"
+    approval: "Automatic if metrics pass"
+
+  performance_drop:
+    metric: "F1-Score"
+    threshold: "< 0.80 (Baseline: 0.85)"
+    window: "Rolling 7-day average"
+    action: "Trigger Retraining Pipeline"
+    approval: "Manual Review Required"
+
+  data_drift:
+    metric: "PSI (Population Stability Index)"
+    threshold: "> 0.25"
+    features: ["Top 10 Importance Features"]
+    action: "Trigger Retraining Pipeline"
+    approval: "Automatic"
+
+  concept_drift:
+    metric: "Target Distribution Shift"
+    threshold: "KL Divergence > 0.1"
+    action: "Trigger Retraining Pipeline"
+    approval: "Manual Review Required"
+
+  code_change:
+    event: "Merge to main branch"
+    path: "src/models/"
+    action: "Trigger Full Pipeline (Training + Eval)"
+    approval: "CI/CD Gate"
+
+gates:
+  staging:
+    criteria: "New Model F1 > Current Production F1"
+    test_set: "Golden Dataset (v2.0)"
+  production:
+    criteria: "Canary Deployment Error Rate < 1%"
+    latency: "P99 < 200ms"

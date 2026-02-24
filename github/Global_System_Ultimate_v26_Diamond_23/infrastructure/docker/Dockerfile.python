@@ -1,0 +1,50 @@
+# 🐍 OPTIMIZED PYTHON DOCKERFILE
+# Uses: uv (fast), distroless (secure), multi-stage build (small)
+# FRAMEWORK: 2026 AI Coding Agent Governance (Area 3)
+# VERSION: Global System Ultimate (See VERSION file)
+
+# --- Stage 1: Builder ---
+FROM python:3.13-slim AS build
+
+# Install uv (pinned to v0.10.2 as per framework)
+COPY --from=ghcr.io/astral-sh/uv:0.10.2 /uv /uvx /bin/
+
+WORKDIR /app
+
+# Set environment variables for uv optimization
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
+
+# Copy dependency files first (cache layer optimization)
+COPY uv.lock pyproject.toml ./
+
+# Install dependencies into .venv
+# --frozen: strict lockfile adherence
+# --no-dev: production dependencies only
+RUN --mount=type=cache,target=/root/.cache/uv uv sync --frozen --no-dev
+
+# Copy source code
+COPY . .
+
+# --- Stage 2: Runtime ---
+# Use distroless/cc for Python with C extensions (or distroless/static for pure Python)
+FROM gcr.io/distroless/cc AS runtime
+
+# Copy virtual environment from builder
+COPY --from=build /app/.venv /app/.venv
+
+# Add .venv/bin to PATH
+ENV PATH="/app/.venv/bin:$PATH"
+
+# Set working directory
+WORKDIR /app
+
+# Copy application code (if not installed as package)
+COPY --from=build /app /app
+
+# Set user to non-root (distroless default is nonroot:nonroot)
+# Note: distroless images run as nonroot by default, but explicit is better.
+# However, distroless/cc might require specific user setup if not default.
+# We stick to the framework example which implies default user or specific setup.
+
+# Command to run the application
+CMD ["python", "-m", "app.main"]

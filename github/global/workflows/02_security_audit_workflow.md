@@ -1,45 +1,37 @@
-# Security Audit Workflow
+# Security Audit Workflow (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-This workflow performs a comprehensive security audit of the codebase.
+Security is not a step; it is a mindset. In the Swarm, **The Reviewer** and **The Critic** are the primary guardians, but **The Executor** must build securely from the start.
 
-## Steps
+## 🛡️ The Swarm Defense Protocol
 
-1. **Dependency Vulnerability Scan**
-   - Run: `npm audit` (Node.js)
-   - Run: `safety check` (Python)
-   - Run: `bundle audit` (Ruby)
+### Phase 1: The Planner (Threat Modeling)
+*   **Action:** Identify the "Crown Jewels" (Database, API Keys, User Data).
+*   **Question:** "How would I hack this?"
+*   **Output:** `THREAT_MODEL.md` (List of potential attack vectors).
 
-2. **Static Code Analysis**
-   - Run: `eslint` with security rules
-   - Run: `bandit` (Python)
-   - Run: `brakeman` (Ruby on Rails)
+### Phase 2: The Executor (Secure Implementation)
+*   **Action:**
+    *   Use `python-dotenv` for secrets (NEVER hardcode).
+    *   Use `bcrypt` or `Argon2` for passwords.
+    *   Use Parameterized Queries for SQL.
+*   **Self-Check:** Run `bandit` or `npm audit` locally before committing.
 
-3. **Secret Detection**
-   - Run: `git-secrets --scan`
-   - Run: `trufflehog`
-   - Check for hardcoded API keys, passwords
+### Phase 3: The Reviewer (Vulnerability Scanning)
+*   **Action:**
+    1.  **Static Analysis (SAST):** Run `bandit -r .` and `eslint-plugin-security`.
+    2.  **Dependency Check:** Run `pip-audit` or `npm audit`.
+    3.  **Secret Scanning:** Run `trufflehog` or `git-secrets` (simulated via Sentinel).
+*   **Output:** `SECURITY_LOG.md`.
 
-4. **SQL Injection Check**
-   - Review all database queries
-   - Ensure parameterized queries are used
-   - Run: `sqlmap` for automated testing
+### Phase 4: The Critic (Penetration Simulation)
+*   **Action:**
+    1.  **The "Red Team" Mindset:** Attempt to bypass the logic.
+    2.  **Sentinel Check:** `python3 global_system/tools/sentinel.py` (Final Gate).
+    3.  **VETO Power:** If *any* High/Critical vulnerability exists, the release is blocked.
 
-5. **XSS Vulnerability Check**
-   - Review all user input handling
-   - Ensure proper sanitization
-   - Run: `XSStrike` for automated testing
-
-6. **Authentication & Authorization Review**
-   - Verify JWT implementation
-   - Check password hashing (bcrypt, Argon2)
-   - Review role-based access control
-
-7. **API Security Check**
-   - Verify rate limiting is enabled
-   - Check CORS configuration
-   - Ensure HTTPS is enforced
-
-8. **Generate Security Report**
-   - Document all findings
-   - Prioritize by severity (Critical, High, Medium, Low)
-   - Create remediation plan
+## 🚨 Emergency Response (If Breach Detected)
+1.  **Isolate:** Take the container/service offline.
+2.  **Analyze:** Planner identifies the breach point.
+3.  **Patch:** Executor fixes the hole.
+4.  **Verify:** Reviewer confirms the patch works.
+5.  **Restore:** Critic approves re-deployment.

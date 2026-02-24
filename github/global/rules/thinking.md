@@ -1,45 +1,55 @@
-# 🧠 Thinking Framework Rules
+# Sequential Thinking Rules (Global System v26 Diamond 32)
 
-## Purpose
-Think systematically, not randomly. Break down problems, analyze deeply, make informed decisions.
+## Mandatory Application
+You **must** apply Sequential Thinking for:
+1.  **Complex Tasks:** Any task involving >3 steps or multiple dependencies.
+2.  **Debugging:** When diagnosing errors or unexpected behavior.
+3.  **Architecture:** When designing new components or systems.
 
-## Core Principle
-**Think before you act. Plan before you code. Analyze before you decide.**
+## The Process
+1.  **Context Verification:**
+    *   List all files read.
+    *   Confirm understanding of existing patterns.
+    *   *Output:* `[Context Verification] ✅ Read X, Y, Z.`
+2.  **Librarian Check:**
+    *   **Action:** Check `memory-bank/file_registry.json` (if exists) or `all_files_inventory.txt`.
+    *   **Oath:** "I swear I am not creating a duplicate."
+    *   *Output:* `[Librarian Check] ✅ 'utils.py' exists. Using it.`
+3.  **Temporal Check:**
+    *   Identify the project phase (Prototype/Dev/Prod).
+    *   *Output:* `[Temporal Check] Phase: The Forge. Priority: Clean Code.`
+4.  **Holographic Mapping:**
+    *   Map Upstream, Downstream, and Lateral dependencies.
+    *   *Output:* `[Blast Radius] Changing X affects Y and Z.`
+5.  **Deconstruct:** Break it down.
+6.  **Visual Thinking:**
+    *   Create a Mermaid diagram for complex flows.
+    *   *Output:* `[Visual Thinking] graph TD; A-->B;`
+7.  **Sequence:** Order it.
+8.  **Analyze:** Verify it.
+9.  **Shadow Critique:**
+    *   **The Shadow Architect** attacks the plan.
+    *   *Output:* `[Shadow Critique] ⚠️ Risk: X is a single point of failure.`
+10. **Synthesize:** Build it.
+11. **Evolutionary Check:**
+    *   Did I learn something new?
+    *   If YES -> Create a Meta-Rule in `memory-bank/lessons.md`.
+    *   *Output:* `[Evolution] Updated lessons.md`
+12. **Review:** Check it.
 
-## Thinking Process
+## The Swarm Intelligence Protocol
+**Rule:** Before finalizing a plan, simulate a debate between these personas:
+*   **The Architect:** "Is this scalable?"
+*   **The Security Engineer:** "Is this secure?"
+*   **The Product Manager:** "Does this add value?"
+*   **The QA Engineer:** "How will this break?"
 
-### 1. Understand
-- What is the problem?
-- What is the goal?
-- What are the constraints?
+**Example Output:**
+> **[Swarm Debate]**
+> *   **Architect:** Suggests Microservices.
+> *   **Product Manager:** Rejects due to timeline.
+> *   **Consensus:** Modular Monolith.
 
-### 2. Analyze
-- Break down into components
-- Identify dependencies
-- Find patterns
-
-### 3. Plan
-- Design solution
-- Consider alternatives
-- Choose best approach
-
-### 4. Execute
-- Implement systematically
-- Test continuously
-- Document thoroughly
-
-### 5. Review
-- Does it work?
-- Is it optimal?
-- Can it be improved?
-
-## Always Ask
-- Why? (Understand purpose)
-- What if? (Consider alternatives)
-- How? (Plan implementation)
-- What could go wrong? (Risk analysis)
-
-## Remember
-**Good thinking leads to good code. Bad thinking leads to bad code.**
-
-Think deeply. Act wisely.
+## Documentation
+-   **Log It:** You must explicitly state your thinking process in the logs.
+-   **Format:** Use the `Sequential Thinking` header in your output.

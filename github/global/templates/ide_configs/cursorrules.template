@@ -1,0 +1,22 @@
+# Cursor Rules for Global System v26.0 (Diamond 20)
+# This file is automatically activated by configure_ide.py
+
+# --- Core Principles ---
+# 1. EDD (Evidence-Driven Development): Always verify before implementation.
+# 2. BATS (Backward And Threat-model Security): Security first.
+# 3. OSF_Score (Optimization Scoring Framework): Optimize for performance.
+
+# --- Project Structure ---
+# - roles/: Agent role definitions
+# - rules/: Operational rules
+# - knowledge/: Guides and best practices
+# - templates/: Reusable templates
+# - scripts/: Automation scripts
+
+# --- Agent Behavior ---
+# - Always check INITIAL_TODO.md before starting.
+# - Use speckit.py for task management.
+# - Follow the Global Professional Core Prompt.
+
+# --- MCP Integration ---
+# Ensure mcp_config.json is respected.

@@ -1,66 +1,42 @@
-# 🚀 Deployment Workflow
+# 🚀 Deployment Workflow (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-**Version:** 9.0.0  
-**Expert:** Team Leader + Backend Expert  
-**Estimated Time:** 2-6 hours
-
----
+**Version:** 37.0
+**Engine:** Speckit Global System v26 Diamond 32 + Sentinel
+**Status:** MANDATORY
 
 ## Workflow
 
 ```
-Prepare → Build → Test → Deploy → Monitor
+Verify (Sentinel) → Build → Deploy → Monitor
 ```
 
-## Phase 1: Prepare
-1. Environment variables
-2. Database migrations
-3. Static files
-4. Dependencies
+## Phase 1: Pre-Flight Check (Sentinel)
+1.  **Run Verification:**
+    ```bash
+    python3 global/tools/speckit.py verify
+    ```
+    *   **STOP** if any test fails.
+    *   **STOP** if Sentinel finds secrets or TODOs.
+    *   **STOP** if CodeRabbit finds critical issues.
+
+2.  **Environment Check:**
+    *   Ensure all secrets are in the deployment environment (NOT in code).
+    *   Verify database migrations are ready.
 
 ## Phase 2: Build
-1. Docker image (if using)
-2. Run tests
-3. Build assets
-4. Create release
+1.  **Docker:** Build and tag image.
+2.  **Assets:** Compile static assets.
+3.  **Artifacts:** Package the release.
 
 ## Phase 3: Deploy
-### Option A: Docker
-```bash
-docker build -t app:latest .
-docker push registry/app:latest
-docker-compose up -d
-```
+1.  **Strategy:** Blue/Green or Rolling Update.
+2.  **Database:** Run migrations *before* switching traffic.
+3.  **Traffic:** Switch traffic to new version.
 
-### Option B: Traditional
-```bash
-git pull
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py collectstatic
-systemctl restart app
-```
+## Phase 4: Post-Deploy Monitor
+1.  **Health Check:** Verify `/health` endpoint.
+2.  **Logs:** Monitor for errors (Sentry).
+3.  **Rollback:** Be ready to revert if metrics degrade.
 
-### Option C: Cloud (AWS/GCP/Azure)
-```bash
-# Use platform-specific CLI
-aws deploy ...
-gcloud app deploy ...
-az webapp deploy ...
-```
-
-## Phase 4: Verify
-1. Health check
-2. Smoke tests
-3. Monitor logs
-4. Check metrics
-
-## Phase 5: Monitor
-1. Application metrics
-2. Error tracking (Sentry)
-3. Performance monitoring
-4. User feedback
-
----
-
-*Reliable deployment process.*
+## Remember
+**Deployment is not the end. It is the beginning of reality.**

@@ -1,0 +1,9 @@
+format: table
+exit-code: 1
+severity:
+  - HIGH
+  - CRITICAL
+scanners:
+  - config
+  - secret
+  - vulnerability

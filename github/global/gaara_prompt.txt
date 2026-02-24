@@ -1,0 +1,3250 @@
+GAARA-AI UNIFIED ECOSYSTEM —
+COMPREHENSIVE BUILD PROMPT
+Version: 3.0 FINAL — February 2026
+Company: GAARA Group — Agricultural
+Conglomerate (Egypt, Est. 1881)
+WHO YOU ARE & WHAT TO BUILD
+& ‫ﻣٮ‬
+‫ أٮ&ﺖ ﻣﻄور‬AI/ML/DevOps ‫ﲏ ٮ &&ﻄﺎم‬,‫ٮٮ‬. ‫ﺤﺼﺺ ﺳ‬.& ‫ ﻣٮ‬GAARA-AI — ‫ﲀﻣﻠﺔ ﻟﺸﺮﻛﺔ‬.‫&ﺎعى ﻣٮ‬
+: ‫&ﻄﻮﻣﺔ ذﰷء اﺻﻄٮ‬
+‫ ﺳٮ&ﺔ‬144 ‫ﺔ ﻣﺼريﺔ ﻋﻤﺮﻫﺎ‬H‫( زراﻋٮ‬GAARA Group)، ‫ﺬور‬,‫ ﻣوزع ﺣﺼري ﻟٮ‬Sakata ‫ ﺳٮ&ﺔ‬55 ‫ى ﻣﺼﺮ ﻟﻤﺪة‬
+: ‫ &ڡ‬.
+& ‫ ﻣوزﻋﺔ ﻋﲆ ﻋﺪة ﺳٮ‬Tailscale
+& ‫ اﻟٮ‬Docker Microservices ‫ﺮ‬,‫ﺼﻠﺔ ﻋٮ‬.‫ﺮڡرات ﻣٮ‬H
+‫ﺔ‬H‫ٮ &ٮٮ‬, ‫ﻌﻤﻞ ﻋﲆ‬H ‫&ﻄﺎم ٮ‬
+, ‫)ﺣ‬،
+,
+&
+& ‫ ﻣﻊ‬Django ERP (60+ module ‫)ﻣﻮﺣﻮد‬
+Mesh VPN (ً ‫ٮا‬H ‫)داﺣﻠ‬
+‫ و‬Cloudflare Tunnel (ً ‫ٮا‬H ‫ﺎرﺣ‬
+& ‫ ﻛٮ‬FastAPI ‫ ﻛـ‬API Gateway ‫&ﺎعى‬
+&
+‫&ﻄﺎم أﺳﺎﳼ و‬
+: ‫ﻟﺤﺪﻣﺎت اﻟﺬﰷء اﻻﺻﻄٮ‬.
+‫ﻌﻤﻞ ﻋﲆ‬H ‫ كﻞ ﳾء ٮ‬:‫ ٮ"ﺔ‬$‫ڡﺎﻋﺪة اﻟﺬﻫٮ‬- ‫ اﻟ‬CPU ً ‫( أوﻻ‬ONNX Runtime) → GPU ‫ﺔ‬H‫ڡٮ‬. ‫ﺮ‬.‫ڡا ً ﻛٮ‬. ‫ُﻀﺎف ﻻﺣ‬H‫ٮ‬.
+
+SYSTEM MODULES (8 Modules)
+#
+
+Module
+
+1
+
+AI Agent
+
+2
+
+AI Avatar
+
+3
+
+4
+
+Search &
+Scraper
+Image Engine
+
+"
+‫ڡﺔ‬$" ‫اﻟﻮﻃٮ‬
+LLM inference, chat, summarize,
+embeddings
+Text-to-Speech, talking avatar, lip
+sync
+Web search, multi-engine
+scraping, data extraction
+OCR (Arabic+English), image
+analysis, screenshots
+
+‫اﻟﺤﺎويﺔ‬
+gaara-llm
+
+gaara-avatar
+
+gaara-scraper
+
+gaara-image
+
+Drift
+
+5
+
+Model monitoring, data drift,
+
+Detection
+System
+
+6
+
+Health checks, metrics, alerting
+
+Monitor
+Big Data &
+
+7
+
+Knowledge
+Data Learning
+
+8
+
+(in gateway)
+
+concept drift
+
+gaara-grafana
+
+RAG pipeline, vector search,
+
+gaara-vectordb
+
+knowledge base
+
+(Qdrant)
+
+Self-learning sessions, scheduled
+
+& Backup
+
+gaara-prometheus +
+
+backup
+
+(Celery workers)
+
+NETWORK ARCHITECTURE — Tailscale + Cloudflare
+‫ٮٮ"ﻦ‬- ‫ڡ‬- $‫اﻟﻄٮ‬:
+& ‫ﻂ اﻟﺴٮ‬,‫( رٮ‬100.x.x.x)
+&
+Tailscale = ‫ﺔ‬H‫اﻟﺪاﺣﻠٮ‬
+‫ﻜﺔ‬,‫( اﻟﺸٮ‬Mesh VPN) — ‫ﻌﻀﻬﺎ‬,‫ٮٮ‬, ‫ﺮڡرات‬H
+, ‫اﻟﺤ‬
+& ‫ﻌريﺾ‬.‫ﺔ — ٮ‬H‫ﺎرﺣٮ‬
+& ‫ﺔ‬,‫واٮ‬,‫ اﻟٮ‬ports
+Cloudflare Tunnel = ‫ﺢ‬.‫ﺪون &ڡٮ‬,‫ﺮٮ&ﺖ ٮ‬.‫اﻟﺤﺪﻣﺎت ﻟﻺ &ٮٮ‬
+┌──────────────────────────────────────────────────────────────────────┐
+│
+
+INTERNET
+
+│
+
+│
+
+│
+
+│
+
+│
+
+┌─────────▼──────────┐
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│ • HTTPS/TLS Auto
+
+│
+
+│
+
+│
+
+│ • DDoS Protection
+
+│
+
+│
+
+│
+
+│ • WAF Firewall
+
+│
+
+│
+
+│
+
+│ • Zero Trust Auth
+
+│
+
+│
+
+│
+
+│ • CDN Caching
+
+│
+
+│
+
+│
+
+└────────┬───────────┘
+
+│
+
+CLOUDFLARE EDGE
+
+│
+│
+
+│
+
+│
+
+│ Cloudflare Tunnel (outbound only)
+
+│
+
+│
+
+┌──────────────────────────┼──────────────────────────────────┐
+
+│
+
+│
+
+│
+
+TAILSCALE MESH (Tailnet: 100.x.x.x)
+
+│
+
+│
+
+│
+
+│
+
+Zero-Config • P2P • WireGuard-based
+
+│
+
+│
+
+│
+
+│
+
+MagicDNS: gpu-pc, vps1, vps2, local-server
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+┌───────────────┐
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│ gpu-pc
+
+│
+
+│
+
+│ 100.x.x.1
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│ • Ollama LLM
+
+│
+
+│ • Scraper
+
+│
+
+│ • Data Process │
+
+│
+
+│
+
+│
+GPU PC
+│
+
+┌───────────────┐
+│
+
+│
+
+VPS #1
+
+│
+
+│ vps1
+│ 100.x.x.2
+
+│
+
+┌────────────────┐
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│ vps2
+
+VPS #2
+
+│ 100.x.x.3
+
+│
+
+│
+│
+
+│
+
+│
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│ • Plant Doctor│
+
+│ • Search APIs │
+
+│ • Batch Infer
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│ • Avatar
+
+│
+
+│ • Monitoring
+
+│
+
+│ • Learning Wkr │
+
+│
+
+│
+
+│
+
+│
+
+│ • Image AI
+
+│
+
+│ • Celery Wkr
+
+│
+
+│ • Celery Wkr
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│ • Training
+
+│
+
+│ • Flower UI
+
+│
+
+│ • Backup Agent │
+
+│
+
+│
+
+│
+
+│
+
+└───────┬───────┘
+
+└───────┬───────┘
+
+└───────┬────────┘
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+┌──────────▼──────────┐
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│ local-server
+
+│
+
+│
+
+│ 100.x.x.4
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│
+
+│ • PostgreSQL 16
+
+│
+
+│
+
+│
+
+│
+
+│ • Redis 7
+
+│
+
+│
+
+│
+
+│
+
+│ • Qdrant VectorDB
+
+│
+
+│
+
+│
+
+│
+
+│ • MinIO Storage
+
+│
+
+│
+
+│
+
+│
+
+│ • Django ERP
+
+│
+
+│
+
+│
+
+│
+
+│ • API Gateway
+
+│
+
+│
+
+│
+
+│
+
+│ • cloudflared
+
+│
+
+│
+
+│
+
+│
+
+└────────────────────┘
+
+│
+
+│
+
+└────────────────────────────────────────────────────────────┘
+
+└──────────┬───────┴───────────────────┘
+
+│
+
+│
+│
+
+LOCAL SERVER
+
+│
+
+│
+
+│◄── Cloudflare Tunnel ──────┼────┘
+│
+
+(cloudflared container)
+
+└──────────────────────────────────────────────────────────────────────┘
+
+‫ ﻟﻤﺎذا‬Tailscale + Cloudflare ‫ وﻟٮ"ﺲ‬WireGuard‫؟‬
+WireGuard (‫ﺪوي‬$ ‫)ٮ‬
+‫اﻹﻋﺪاد‬
+
+‫( ﻣﻌ &ڡﺪ‬keys, configs per
+node)
+
+Tailscale + Cloudflare
+‫ڡﺔ واﺣﺪة‬- ‫ڡ "ٮ‬- ‫ د‬per node
+
+NAT Traversal
+
+‫ﺣﻠﻒ‬, ‫ﻌﻤﻞ‬0 ‫ ﻻ ٮ‬Double NAT
+
+‫ﺎﺋى‬
+= ‫ڡ‬- ‫ﻠ‬- ‫>( ٮ‬90% P2P ‫ ﺎﺷﺮ‬$‫)ﻣٮ‬
+
+DNS
+
+‫ﺪوي‬0 ‫ٮ‬
+
+MagicDNS ‫ﺎﺋى‬
+= ‫ڡ‬- ‫ﻠ‬- ‫( ٮ‬gpu-pc, vps1…)
+
+‫ﺚ كﻞ‬0 ‫ ٮ&ﺤﺪٮ‬configs ً ‫ﺪويا‬0 ‫ٮ‬
+
+- ‫ڡ‬F
+tailscale up ‫ڡﻂ‬
+
+HTTPS ‫ﺖ‬,‫ٮٮ&ﺮٮ‬, ‫ﻟﻺ‬
+
+Nginx + Let’s Encrypt ‫ﺪوي‬0 ‫ٮ‬
+
+Cloudflare ‫ﺎﺋى‬
+= ‫ڡ‬- ‫ﻠ‬- ‫ ٮ‬+ DDoS + WAF
+
+‫اﻷﻣﺎن‬
+
+‫ﺪ‬0‫ﺣٮ‬:
+
+Zero Trust + ACLs + Audit Log
+
+, ‫اﻟٮ‬
+‫&كﻠڡﺔ‬
+
+:
+‫ى‬,
+I ‫ﻣﺤﺎٮ‬
+
+$ (Personal plan: 100 device)
+‫ى‬
+= ‫ٮ‬F ‫ﻣﺤﺎ‬
+
+‫ﺔ‬:‫اﻟﻤرا &ڡٮ‬
+
+: ‫ﻻٮ‬
+‫ﻮﺣﺪ‬0
+
+,
+‫إﺿﺎڡﺔ‬
+node
+‫ﺪ‬0 ‫ﺣﺪٮ‬:
+
+Tailscale Admin + Cloudflare
+Dashboard
+
+F ‫)كﻞ ﺳٮ‬:
+Tailscale Setup (per node — ‫"ﺮڡﺮ‬
+# ═══ INSTALL TAILSCALE (‫═══ )ﻛﻞ اﻟﺴﯿﺮﻓﺮات‬
+curl -fsSL https://tailscale.com/install.sh | sh
+# ═══ GPU PC ═══
+tailscale up --hostname=gpu-pc --advertise-tags=tag:ai-gpu
+# (‫ﯾﻔﺘﺢ راﺑﻂ ﻓﻲ اﻟﻤﺘﺼﻔﺢ ﻟﻠﻤﺼﺎدﻗﺔ )ﻣﺮة واﺣﺪة ﻓﻘﻂ‬
+# ═══ VPS #1 ═══
+tailscale up --hostname=vps1 --advertise-tags=tag:ai-worker --authkey=tskey-auth-xxxxx
+# ‫ اﺳﺘﺨﺪم‬Auth Key ‫ﻟﻠﺴﯿﺮﻓﺮات ﺑﺪون ﻣﺘﺼﻔﺢ‬
+# ═══ VPS #2 ═══
+tailscale up --hostname=vps2 --advertise-tags=tag:ai-worker --authkey=tskey-auth-xxxxx
+# ═══ LOCAL SERVER (+ Subnet Router ‫═══ )ﻟﻠﺸﺒﻜﺔ اﻟﻤﺤﻠﯿﺔ‬
+tailscale up --hostname=local-server --advertise-tags=tag:ai-infra \
+--advertise-routes=192.168.1.0/24 --authkey=tskey-auth-xxxxx
+# advertise-routes ‫ ﯾﺠﻌﻞ اﻟﺸﺒﻜﺔ اﻟﻤﺤﻠﯿﺔ ﻣﺘﺎﺣﺔ ﻟﻜﻞ اﻟـ‬nodes
+# ═══ ‫═══ اﻟﺘﺤﻘﻖ‬
+tailscale status
+
+# ‫ﯾﻌﺮض ﻛﻞ اﻷﺟﮭﺰة اﻟﻤﺘﺼﻠﺔ‬
+
+tailscale ping vps1 # ‫ﯾﺨﺘﺒﺮ اﻻﺗﺼﺎل اﻟﻤﺒﺎﺷﺮ‬
+# MagicDNS ً
+‫ﯾﻌﻤﻞ ﺗﻠﻘﺎﺋﯿﺎ‬: ping gpu-pc, ping vps1, etc.
+
+Tailscale ACLs (Access Control):
+// ‫ ﻓﻲ‬Tailscale Admin Console → Access Controls
+{
+"tagOwners": {
+"tag:ai-gpu": ["autogroup:admin"],
+"tag:ai-worker": ["autogroup:admin"],
+"tag:ai-infra": ["autogroup:admin"]
+},
+"acls": [
+// AI services can reach infrastructure
+{"action": "accept", "src": ["tag:ai-gpu", "tag:ai-worker"], "dst": ["tag:ai-infra:*"]},
+// GPU can reach workers
+{"action": "accept", "src": ["tag:ai-gpu"], "dst": ["tag:ai-worker:*"]},
+// Workers can reach GPU (for LLM requests)
+{"action": "accept", "src": ["tag:ai-worker"], "dst": ["tag:ai-gpu:11434"]},
+// Infrastructure nodes talk to each other
+{"action": "accept", "src": ["tag:ai-infra"], "dst": ["tag:ai-infra:*"]}
+]
+
+}
+
+Cloudflare Tunnel Setup:
+# 1. ‫ إﻧﺸﺎء‬Tunnel ‫ ﻓﻲ‬Cloudflare Dashboard:
+#
+
+dash.teams.cloudflare.com → Access → Tunnels → Create Tunnel
+
+#
+
+‫اﺳﻢ‬: gaara-ai-tunnel
+
+#
+
+‫ اﻧﺴﺦ اﻟـ‬Token
+
+# 2. ‫ ﻓﻲ‬Docker Compose (‫ً — )اﻧﻈﺮ أدﻧﺎه‬
+‫ﯾﻌﻤﻞ ﺗﻠﻘﺎﺋﯿﺎ‬
+# 3. ‫ ﺗﮭﯿﺌﺔ‬Public Hostnames ‫ ﻓﻲ‬Cloudflare Dashboard:
+#
+
+ai.gaara.com
+
+→ http://api-gateway:8000
+
+(API Gateway)
+
+#
+
+erp.gaara.com
+
+→ http://localhost:8080
+
+(Django ERP)
+
+#
+
+flower.gaara.com
+
+→ http://flower:5555
+
+(Celery Monitor)
+
+#
+
+grafana.gaara.com → http://grafana:3000
+
+(Monitoring)
+
+# 4. ‫ ﺗﻔﻌﯿﻞ‬Cloudflare Access (Zero Trust):
+#
+
+Applications → Add → Self-hosted
+
+#
+
+Policy: Allow — Email domain @gaara.com + One-time PIN
+
+DOCKER COMPOSE (Complete)
+# docker-compose.yml
+version: "3.9"
+services:
+# ═══════════════════════════════════════════════
+#
+
+LAYER 1: LLM SERVICE (Ollama)
+
+# ═══════════════════════════════════════════════
+ollama:
+image: ollama/ollama:latest
+container_name: gaara-llm
+ports:
+- "11434:11434"
+volumes:
+- ollama_data:/root/.ollama
+environment:
+- OLLAMA_NUM_PARALLEL=2
+- OLLAMA_MAX_LOADED_MODELS=2
+# ‫ ﻹﺿﺎﻓﺔ‬GPU ً
+‫ﻻﺣﻘﺎ‬:
+
+# deploy:
+#
+
+resources:
+
+#
+
+reservations:
+
+#
+
+devices:
+
+#
+
+- driver: nvidia
+
+#
+
+count: 1
+
+#
+
+capabilities: [gpu]
+
+restart: unless-stopped
+healthcheck:
+test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+interval: 30s
+timeout: 10s
+retries: 3
+networks:
+- gaara-net
+# ═══════════════════════════════════════════════
+#
+
+LAYER 2: PLANT DOCTOR SERVICE
+
+# YOLOv8 (disease) + DenseNet121 (nutrients)
+# ═══════════════════════════════════════════════
+plant-doctor:
+build:
+context: ./services/plant-doctor
+dockerfile: Dockerfile
+container_name: gaara-plant-doctor
+ports:
+- "8001:8001"
+volumes:
+- ./models/plant:/app/models
+- plant_data:/app/data
+environment:
+- DEVICE=cpu
+- USE_ONNX=true
+- OLLAMA_URL=http://ollama:11434
+- REDIS_URL=redis://redis:6379/1
+- DB_URL=postgresql://gaara:${DB_PASS}@postgres:5432/gaara_ai
+depends_on:
+ollama:
+condition: service_healthy
+redis:
+condition: service_started
+restart: unless-stopped
+healthcheck:
+test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+interval: 30s
+timeout: 10s
+networks:
+
+- gaara-net
+# ═══════════════════════════════════════════════
+#
+
+LAYER 2: SCRAPING & SEARCH SERVICE
+
+# Crawl4AI + Firecrawl + Playwright + ScrapeGraphAI
+# ═══════════════════════════════════════════════
+scraper:
+build:
+context: ./services/scraper
+dockerfile: Dockerfile
+container_name: gaara-scraper
+ports:
+- "8002:8002"
+environment:
+- FIRECRAWL_API_KEY=${FIRECRAWL_KEY}
+- GOOGLE_SEARCH_API_KEY=${GOOGLE_SEARCH_KEY}
+- GOOGLE_SEARCH_CX=${GOOGLE_CX}
+- BING_SEARCH_API_KEY=${BING_SEARCH_KEY}
+- REDIS_URL=redis://redis:6379/2
+depends_on:
+- redis
+restart: unless-stopped
+healthcheck:
+test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+interval: 30s
+timeout: 10s
+networks:
+- gaara-net
+# ═══════════════════════════════════════════════
+#
+
+LAYER 2: IMAGE PROCESSING SERVICE
+
+# EasyOCR + CLIP + OpenCV + Playwright Screenshots
+# ═══════════════════════════════════════════════
+image-processor:
+build:
+context: ./services/image-processor
+dockerfile: Dockerfile
+container_name: gaara-image
+ports:
+- "8003:8003"
+volumes:
+- ./models/image:/app/models
+- image_data:/app/data
+environment:
+- DEVICE=cpu
+- OCR_LANGUAGES=ar,en
+restart: unless-stopped
+
+healthcheck:
+test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+interval: 30s
+timeout: 10s
+networks:
+- gaara-net
+# ═══════════════════════════════════════════════
+#
+
+LAYER 2: AVATAR & TTS SERVICE
+
+# Bark TTS + Coqui TTS + SadTalker/Wav2Lip
+# ═══════════════════════════════════════════════
+avatar:
+build:
+context: ./services/avatar
+dockerfile: Dockerfile
+container_name: gaara-avatar
+ports:
+- "8004:8004"
+volumes:
+- avatar_data:/app/data
+environment:
+- DEVICE=cpu
+- DEFAULT_LANG=ar
+restart: unless-stopped
+networks:
+- gaara-net
+# ═══════════════════════════════════════════════
+#
+
+LAYER 3: API GATEWAY (FastAPI)
+
+# Central entry point for all AI services
+# ═══════════════════════════════════════════════
+api-gateway:
+build:
+context: ./services/gateway
+dockerfile: Dockerfile
+container_name: gaara-gateway
+ports:
+- "8000:8000"
+environment:
+# Service URLs
+- LLM_URL=http://ollama:11434
+- PLANT_URL=http://plant-doctor:8001
+- SCRAPER_URL=http://scraper:8002
+- IMAGE_URL=http://image-processor:8003
+- AVATAR_URL=http://avatar:8004
+# Infrastructure
+- REDIS_URL=redis://redis:6379/0
+
+- QDRANT_URL=http://qdrant:6333
+- DB_URL=postgresql+asyncpg://gaara:${DB_PASS}@postgres:5432/gaara_ai
+- MINIO_URL=minio:9000
+- MINIO_ACCESS_KEY=gaara
+- MINIO_SECRET_KEY=${MINIO_PASS}
+# Security
+- JWT_SECRET=${JWT_SECRET}
+- JWT_ALGORITHM=HS256
+- JWT_EXPIRY_MINUTES=1440
+depends_on:
+- ollama
+- plant-doctor
+- scraper
+- image-processor
+- redis
+- qdrant
+- postgres
+restart: unless-stopped
+healthcheck:
+test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+interval: 15s
+timeout: 5s
+networks:
+- gaara-net
+# ═══════════════════════════════════════════════
+#
+
+CELERY WORKERS (3 specialized workers)
+
+# ═══════════════════════════════════════════════
+celery-worker-ai:
+build: ./services/gateway
+container_name: gaara-worker-ai
+command: >
+celery -A core.celery_app worker
+-Q ai_tasks,plant_diagnosis
+-n worker_ai@%h
+--concurrency=4
+--max-tasks-per-child=100
+--loglevel=info
+environment:
+- REDIS_URL=redis://redis:6379/0
+- QDRANT_URL=http://qdrant:6333
+- DB_URL=postgresql+asyncpg://gaara:${DB_PASS}@postgres:5432/gaara_ai
+- LLM_URL=http://ollama:11434
+- PLANT_URL=http://plant-doctor:8001
+depends_on:
+- redis
+- ollama
+
+restart: unless-stopped
+networks:
+- gaara-net
+celery-worker-scraping:
+build: ./services/scraper
+container_name: gaara-worker-scraping
+command: >
+celery -A core.celery_app worker
+-Q scraping_tasks,search_tasks
+-n worker_scrape@%h
+--concurrency=8
+--max-tasks-per-child=200
+--loglevel=info
+environment:
+- REDIS_URL=redis://redis:6379/0
+- FIRECRAWL_API_KEY=${FIRECRAWL_KEY}
+depends_on:
+- redis
+restart: unless-stopped
+networks:
+- gaara-net
+celery-worker-data:
+build: ./services/gateway
+container_name: gaara-worker-data
+command: >
+celery -A core.celery_app worker
+-Q data_processing,learning_tasks
+-n worker_data@%h
+--concurrency=4
+--max-tasks-per-child=50
+--loglevel=info
+environment:
+- REDIS_URL=redis://redis:6379/0
+- QDRANT_URL=http://qdrant:6333
+- DB_URL=postgresql+asyncpg://gaara:${DB_PASS}@postgres:5432/gaara_ai
+depends_on:
+- redis
+- qdrant
+- postgres
+restart: unless-stopped
+networks:
+- gaara-net
+celery-beat:
+build: ./services/gateway
+
+container_name: gaara-beat
+command: celery -A core.celery_app beat --loglevel=info
+environment:
+- REDIS_URL=redis://redis:6379/0
+depends_on:
+- redis
+restart: unless-stopped
+networks:
+- gaara-net
+flower:
+build: ./services/gateway
+container_name: gaara-flower
+command: celery -A core.celery_app flower --port=5555 --broker_api=redis://redis:6379/0
+ports:
+- "5555:5555"
+depends_on:
+- redis
+restart: unless-stopped
+networks:
+- gaara-net
+# ═══════════════════════════════════════════════
+#
+
+INFRASTRUCTURE LAYER
+
+# ═══════════════════════════════════════════════
+postgres:
+image: postgres:16-alpine
+container_name: gaara-db
+ports:
+- "5432:5432"
+environment:
+- POSTGRES_DB=gaara_ai
+- POSTGRES_USER=gaara
+- POSTGRES_PASSWORD=${DB_PASS}
+volumes:
+- postgres_data:/var/lib/postgresql/data
+- ./config/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+restart: unless-stopped
+healthcheck:
+test: ["CMD-SHELL", "pg_isready -U gaara -d gaara_ai"]
+interval: 10s
+timeout: 5s
+networks:
+- gaara-net
+redis:
+image: redis:7-alpine
+
+container_name: gaara-redis
+ports:
+- "6379:6379"
+command: >
+redis-server
+--appendonly yes
+--maxmemory 512mb
+--maxmemory-policy allkeys-lru
+--requirepass ${REDIS_PASS}
+volumes:
+- redis_data:/data
+restart: unless-stopped
+healthcheck:
+test: ["CMD", "redis-cli", "-a", "${REDIS_PASS}", "ping"]
+interval: 10s
+timeout: 5s
+networks:
+- gaara-net
+qdrant:
+image: qdrant/qdrant:latest
+container_name: gaara-vectordb
+ports:
+- "6333:6333"
+- "6334:6334"
+volumes:
+- qdrant_data:/qdrant/storage
+environment:
+- QDRANT__SERVICE__GRPC_PORT=6334
+restart: unless-stopped
+healthcheck:
+test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+interval: 15s
+timeout: 5s
+networks:
+- gaara-net
+minio:
+image: minio/minio:latest
+container_name: gaara-storage
+ports:
+- "9000:9000"
+- "9001:9001"
+command: server /data --console-address ":9001"
+environment:
+- MINIO_ROOT_USER=gaara
+- MINIO_ROOT_PASSWORD=${MINIO_PASS}
+
+volumes:
+- minio_data:/data
+restart: unless-stopped
+networks:
+- gaara-net
+# ═══════════════════════════════════════════════
+#
+
+TAILSCALE SIDECAR (Mesh VPN — internal)
+
+# Connects this server to the Tailnet
+# ═══════════════════════════════════════════════
+tailscale:
+image: tailscale/tailscale:stable
+container_name: gaara-tailscale
+hostname: local-server
+
+# ‫ اﺳﻢ اﻟﺠﮭﺎز ﻓﻲ‬MagicDNS
+
+cap_add:
+- NET_ADMIN
+- SYS_MODULE
+environment:
+- TS_AUTHKEY=${TAILSCALE_AUTHKEY}
+
+# Pre-auth key from Tailscale Admin
+
+- TS_STATE_DIR=/var/lib/tailscale
+- TS_EXTRA_ARGS=--advertise-tags=tag:ai-infra --advertise-routes=172.20.0.0/16
+- TS_USERSPACE=false
+volumes:
+- tailscale_data:/var/lib/tailscale
+- /dev/net/tun:/dev/net/tun
+restart: unless-stopped
+networks:
+- gaara-net
+# ═══════════════════════════════════════════════
+#
+
+CLOUDFLARE TUNNEL (External access — no open ports)
+
+# Exposes services to Internet via Cloudflare Edge
+# ═══════════════════════════════════════════════
+cloudflared:
+image: cloudflare/cloudflared:latest
+container_name: gaara-cloudflared
+command: tunnel --no-autoupdate run
+environment:
+- TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+# Ingress rules configured in Cloudflare Dashboard:
+#
+
+ai.gaara.com
+
+→ http://api-gateway:8000
+
+#
+
+erp.gaara.com
+
+→ http://localhost:8080
+
+#
+
+flower.gaara.com
+
+→ http://flower:5555
+
+#
+
+grafana.gaara.com
+
+→ http://grafana:3000
+
+depends_on:
+- api-gateway
+restart: unless-stopped
+
+networks:
+- gaara-net
+# ═══════════════════════════════════════════════
+#
+
+MONITORING LAYER
+
+# ═══════════════════════════════════════════════
+prometheus:
+image: prom/prometheus:latest
+container_name: gaara-prometheus
+ports:
+- "9090:9090"
+volumes:
+- ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+- prometheus_data:/prometheus
+restart: unless-stopped
+networks:
+- gaara-net
+grafana:
+image: grafana/grafana:latest
+container_name: gaara-grafana
+ports:
+- "3000:3000"
+environment:
+- GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASS}
+volumes:
+- grafana_data:/var/lib/grafana
+- ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards
+restart: unless-stopped
+networks:
+- gaara-net
+networks:
+gaara-net:
+driver: bridge
+volumes:
+ollama_data:
+plant_data:
+image_data:
+avatar_data:
+postgres_data:
+redis_data:
+qdrant_data:
+minio_data:
+tailscale_data:
+prometheus_data:
+
+grafana_data:
+
+.env file:
+# Database
+DB_PASS=your_secure_password_here
+# Redis
+REDIS_PASS=your_redis_password
+# MinIO
+MINIO_PASS=your_minio_password
+# JWT
+JWT_SECRET=your_jwt_secret_key_here
+# ═══ NETWORKING ═══
+# Tailscale (get from: Tailscale Admin → Settings → Keys → Generate auth key)
+TAILSCALE_AUTHKEY=tskey-auth-xxxxxxxxxxxxx
+# Cloudflare Tunnel (get from: dash.teams.cloudflare.com → Tunnels → Create)
+CLOUDFLARE_TUNNEL_TOKEN=eyJhIjoixxxxxxxxxxxxxxxxx
+# API Keys
+FIRECRAWL_KEY=fc-xxxxxxxxxxxxxxxx
+GOOGLE_SEARCH_KEY=AIzaxxxxxxxxxxxxxxxxx
+GOOGLE_CX=xxxxxxxxxxxxxxxxx
+BING_SEARCH_KEY=xxxxxxxxxxxxxxxx
+HUGGINGFACE_TOKEN=hf_xxxxxxxxxxxxxxxx
+# Monitoring
+GRAFANA_PASS=admin_password
+
+COMPLETE PROJECT STRUCTURE
+gaara-ai/
+├── docker-compose.yml
+├── docker-compose.gpu.yml
+├── .env
+├── .env.example
+├── README.md
+│
+
+# GPU override file
+
+├── config/
+│
+
+├── prometheus/
+
+│
+
+│
+
+│
+
+├── grafana/
+
+│
+
+│
+
+│
+
+│
+
+├── ai-overview.json
+
+# AI services dashboard
+
+│
+
+│
+
+└── system-health.json
+
+# Infrastructure dashboard
+
+│
+
+├── postgres/
+
+│
+
+│
+
+│
+
+└── cloudflare/
+
+│
+
+└── prometheus.yml
+
+# Scrape targets config
+
+└── dashboards/
+
+└── init.sql
+└── config.yml
+
+# Initial DB schema
+# Cloudflare Tunnel ingress rules
+
+│
+├── services/
+│
+
+│
+
+│
+
+├── gateway/
+
+│
+
+│
+
+├── Dockerfile
+
+│
+
+│
+
+├── requirements.txt
+
+│
+
+│
+
+├── main.py
+
+│
+
+│
+
+│
+
+│
+
+│
+
+├── core/
+
+│
+
+│
+
+│
+
+├── __init__.py
+
+│
+
+│
+
+│
+
+├── config.py
+
+# Pydantic BaseSettings
+
+│
+
+│
+
+│
+
+├── celery_app.py
+
+# Celery config + task routing + beat schedule
+
+│
+
+│
+
+│
+
+├── security.py
+
+# JWT auth + API key validation
+
+│
+
+│
+
+│
+
+├── middleware.py
+
+# Logging, CORS, rate limiting, metrics
+
+│
+
+│
+
+│
+
+└── database.py
+
+# AsyncSession + SQLAlchemy engine
+
+│
+
+│
+
+│
+
+│
+
+│
+
+├── api/
+
+│
+
+│
+
+│
+
+├── __init__.py
+
+│
+
+│
+
+│
+
+└── v1/
+
+│
+
+│
+
+│
+
+├── __init__.py
+
+│
+
+│
+
+│
+
+├── router.py
+
+# Include all sub-routers
+
+│
+
+│
+
+│
+
+├── llm.py
+
+# POST /generate, /embed, /chat, /summarize
+
+│
+
+│
+
+│
+
+├── plant.py
+
+# POST /diagnose, /disease, /nutrient, /batch
+
+│
+
+│
+
+│
+
+├── search.py
+
+# POST /web, /images, /scrape, /deep
+
+│
+
+│
+
+│
+
+├── image.py
+
+# POST /ocr, /analyze, /screenshot, /edit
+
+│
+
+│
+
+│
+
+├── avatar.py
+
+# POST /generate, /tts, /present
+
+│
+
+│
+
+│
+
+├── knowledge.py
+
+# GET+POST /search, /add, /ask, /categories
+
+│
+
+│
+
+│
+
+├── learn.py
+
+# POST /session, GET /sessions, /schedule
+
+│
+
+│
+
+│
+
+└── monitor.py
+
+# GET /health, /metrics, /tasks, /drift, /servers
+
+│
+
+│
+
+│
+
+│
+
+│
+
+├── tasks/
+
+│
+
+│
+
+│
+
+├── __init__.py
+
+│
+
+│
+
+│
+
+├── ai_tasks.py
+
+# generate_text, generate_embedding, chat_completion
+
+│
+
+│
+
+│
+
+├── plant_tasks.py
+
+# diagnose_plant, batch_diagnosis
+
+│
+
+│
+
+│
+
+├── search_tasks.py
+
+# web_search, scrape_url, image_search, deep_research
+
+│
+
+│
+
+│
+
+├── learning_tasks.py
+
+# run_learning_session, learn_from_url, learn_from_do
+
+# ═══
+
+API GATEWAY + CELERY ═══
+
+# FastAPI app entry
+
+│
+
+│
+
+│
+
+├── data_tasks.py
+
+# process_raw_data, generate_report, etl_pipeline
+
+│
+
+│
+
+│
+
+└── scheduled_tasks.py
+
+# health_check_all, check_model_drift, sync_kb, backu
+
+│
+
+│
+
+│
+
+│
+
+│
+
+├── models/
+
+│
+
+│
+
+│
+
+├── __init__.py
+
+│
+
+│
+
+│
+
+├── schemas.py
+
+# ALL Pydantic request/response models
+
+│
+
+│
+
+│
+
+└── database.py
+
+# SQLAlchemy ORM models
+
+│
+
+│
+
+│
+
+│
+
+│
+
+└── services/
+
+│
+
+│
+
+├── __init__.py
+
+│
+
+│
+
+├── llm_client.py
+
+# OllamaClient class (httpx async)
+
+│
+
+│
+
+├── qdrant_client.py
+
+# QdrantService class (CRUD + search)
+
+│
+
+│
+
+├── rag_service.py
+
+# GAARARAGService (LangChain + Qdrant + Ollama)
+
+│
+
+│
+
+├── drift_service.py
+
+# EvidentlyDriftService (data drift + model drift)
+
+│
+
+│
+
+└── cluster_client.py
+
+# Inter-service HTTP communication
+
+│
+
+│
+
+│
+
+├── plant-doctor/
+
+│
+
+│
+
+├── Dockerfile
+
+│
+
+│
+
+├── requirements.txt
+
+│
+
+│
+
+├── main.py
+
+# FastAPI app
+
+│
+
+│
+
+├── doctor.py
+
+# GAARAPlantDoctor main class
+
+│
+
+│
+
+├── disease_detector.py
+
+# YOLOv8 disease detection engine
+
+│
+
+│
+
+├── nutrient_analyzer.py
+
+# DenseNet121 nutrient deficiency engine
+
+│
+
+│
+
+├── treatment_db.py
+
+# Treatment + fertilizer recommendation DB
+
+│
+
+│
+
+├── preprocessing.py
+
+# Image preprocessing pipeline
+
+│
+
+│
+
+└── models/
+
+# Pre-trained weights
+
+│
+
+│
+
+├── yolov8n_plant_disease.pt
+
+│
+
+│
+
+├── yolov8n_plant_disease.onnx
+
+│
+
+│
+
+├── densenet121_nutrients.pt
+
+│
+
+│
+
+├── densenet121_nutrients.onnx
+
+│
+
+│
+
+└── class_names.json
+
+│
+
+│
+
+│
+
+├── scraper/
+
+# ═══
+
+│
+
+│
+
+├── Dockerfile
+
+# Base: mcr.microsoft.com/playwright/python:v1.49.0
+
+│
+
+│
+
+├── requirements.txt
+
+│
+
+│
+
+├── main.py
+
+│
+
+│
+
+├── engines/
+
+│
+
+│
+
+│
+
+├── __init__.py
+
+│
+
+│
+
+│
+
+├── crawl4ai_engine.py
+
+# PRIMARY: Free, local, VLM-powered
+
+│
+
+│
+
+│
+
+├── firecrawl_engine.py
+
+# SECONDARY: Complex sites, API-based
+
+│
+
+│
+
+│
+
+├── playwright_engine.py
+
+# FALLBACK: Full browser automation
+
+│
+
+│
+
+│
+
+└── scrapegraph_engine.py
+
+# SMART: Natural language extraction
+
+│
+
+│
+
+├── search/
+
+│
+
+│
+
+│
+
+├── __init__.py
+
+│
+
+│
+
+│
+
+├── google_search.py
+
+# Google Custom Search API
+
+│
+
+│
+
+│
+
+├── bing_search.py
+
+# Bing Search API
+
+│
+
+│
+
+│
+
+└── image_search.py
+
+# Image search aggregator
+
+# ═══
+
+PLANT DISEASE SERVICE ═══
+
+SCRAPING & SEARCH SERVICE ═══
+
+# FastAPI app
+
+│
+
+│
+
+└── pipelines/
+
+│
+
+│
+
+├── __init__.py
+
+│
+
+│
+
+├── search_pipeline.py
+
+# Orchestrate multi-source search
+
+│
+
+│
+
+├── scrape_pipeline.py
+
+# Multi-engine with fallback
+
+│
+
+│
+
+└── data_cleaner.py
+
+# Clean, structure, validate data
+
+│
+
+│
+
+│
+
+├── image-processor/
+
+│
+
+│
+
+├── Dockerfile
+
+│
+
+│
+
+├── requirements.txt
+
+│
+
+│
+
+├── main.py
+
+│
+
+│
+
+├── ocr_service.py
+
+# EasyOCR (Arabic + English)
+
+│
+
+│
+
+├── image_analyzer.py
+
+# CLIP / Florence-2 analysis
+
+│
+
+│
+
+├── screenshot_service.py
+
+# Playwright website screenshots
+
+│
+
+│
+
+└── image_editor.py
+
+# Resize, crop, watermark, format convert
+
+│
+
+│
+
+│
+
+└── avatar/
+
+# ═══
+
+# ═══
+
+IMAGE PROCESSING SERVICE ═══
+
+AVATAR & TTS SERVICE ═══
+
+│
+
+├── Dockerfile
+
+│
+
+├── requirements.txt
+
+│
+
+├── main.py
+
+│
+
+├── tts_engine.py
+
+# Bark + Coqui TTS (Arabic/English)
+
+│
+
+├── avatar_engine.py
+
+# SadTalker / Duix Avatar
+
+│
+
+└── lipsync_engine.py
+
+# Wav2Lip synchronization
+
+│
+├── django_erp/
+
+# ═══
+
+DJANGO ERP INTEGRATION ═══
+
+│
+
+└── ai_integration/
+
+# Django App (add to INSTALLED_APPS)
+
+│
+
+├── __init__.py
+
+│
+
+├── apps.py
+
+# AiIntegrationConfig
+
+│
+
+├── admin.py
+
+# Admin registrations
+
+│
+
+├── models.py
+
+# AITask, AIKnowledgeBase, AIDiagnosis, etc.
+
+│
+
+├── views.py
+
+# Dashboard, Settings, Plant Doctor, etc.
+
+│
+
+├── urls.py
+
+# /ai/ prefix routes
+
+│
+
+├── serializers.py
+
+# DRF serializers
+
+│
+
+├── services.py
+
+# AIClusterClient (httpx → gateway)
+
+│
+
+├── forms.py
+
+# Settings forms
+
+│
+
+├── tasks.py
+
+# Django-aware Celery tasks
+
+│
+
+├── context_processors.py
+
+# AI status in templates
+
+│
+
+├── templates/ai_integration/
+
+│
+
+│
+
+├── base_ai.html
+
+# AI section base template
+
+│
+
+│
+
+├── dashboard.html
+
+# ‫ﻟﻮﺣﺔ اﻟﺘﺤﻜﻢ اﻟﺮﺋﯿﺴﯿﺔ‬
+
+│
+
+│
+
+├── settings.html
+
+# (‫ أﻗﺴﺎم‬10) ‫اﻹﻋﺪادات‬
+
+│
+
+│
+
+├── plant_doctor.html
+
+# ‫ﺗﺸﺨﯿﺺ أﻣﺮاض اﻟﻨﺒﺎﺗﺎت‬
+
+│
+
+│
+
+├── search.html
+
+# ‫اﻟﺒﺤﺚ اﻟﺬﻛﻲ‬
+
+│
+
+│
+
+├── knowledge.html
+
+# ‫ﻗﺎﻋﺪة اﻟﻤﻌﺮﻓﺔ‬
+
+│
+
+│
+
+├── learning.html
+
+# ‫ﺟﻠﺴﺎت اﻟﺘﻌﻠﻢ‬
+
+│
+
+│
+
+├── avatar.html
+
+# ‫ اﺳﺘﻮدﯾﻮ اﻟـ‬Avatar
+
+│
+
+│
+
+└── monitor.html
+
+# ‫ﻣﺮاﻗﺒﺔ اﻟﻨﻈﺎم‬
+
+│
+
+├── static/ai_integration/
+
+│
+
+│
+
+├── css/ai_styles.css
+
+│
+
+│
+
+├── js/ai_dashboard.js
+
+│
+
+│
+
+└── js/ai_settings.js
+
+│
+
+└── migrations/
+
+│
+├── models/
+│
+
+├── plant/
+
+│
+
+├── image/
+
+│
+
+└── llm/
+
+# Shared model weights
+
+│
+└── scripts/
+├── setup.sh
+
+# Full initial setup
+
+├── deploy.sh
+
+# Production deployment
+
+├── backup.sh
+
+# Automated backup
+
+├── train_plant_doctor.py
+
+# Train/fine-tune plant models
+
+├── download_models.sh
+
+# Download all pre-trained models
+
+└── init_qdrant_collections.py
+
+# Create Qdrant collections
+
+REQUIREMENTS PER SERVICE
+gateway/requirements.txt:
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+celery[redis]>=5.6.2
+redis>=5.2.0
+flower>=2.0.0
+httpx>=0.28.0
+pydantic>=2.10.0
+pydantic-settings>=2.7.0
+sqlalchemy[asyncio]>=2.0.0
+asyncpg>=0.30.0
+alembic>=1.14.0
+qdrant-client>=1.13.0
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-qdrant>=0.2.0
+langchain-text-splitters>=0.3.0
+fastembed>=0.4.0
+evidently>=0.6.0
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.0
+prometheus-client>=0.22.0
+
+structlog>=24.0.0
+python-multipart>=0.0.18
+minio>=7.2.0
+
+plant-doctor/requirements.txt:
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+ultralytics>=8.3.0
+torch>=2.5.0
+torchvision>=0.20.0
+onnxruntime>=1.20.0
+opencv-python-headless>=4.10.0
+pillow>=11.0.0
+numpy>=2.0.0
+scikit-learn>=1.6.0
+httpx>=0.28.0
+redis>=5.2.0
+
+scraper/requirements.txt:
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+crawl4ai>=0.4.0
+firecrawl-py>=1.5.0
+scrapegraphai>=1.30.0
+playwright>=1.49.0
+beautifulsoup4>=4.12.0
+httpx>=0.28.0
+celery[redis]>=5.6.2
+aiohttp>=3.11.0
+lxml>=5.3.0
+
+image-processor/requirements.txt:
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+easyocr>=1.7.0
+opencv-python-headless>=4.10.0
+pillow>=11.0.0
+transformers>=4.47.0
+torch>=2.5.0
+onnxruntime>=1.20.0
+
+httpx>=0.28.0
+
+avatar/requirements.txt:
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+TTS>=0.22.0
+bark>=0.1.5
+torch>=2.5.0
+torchaudio>=2.5.0
+numpy>=2.0.0
+scipy>=1.14.0
+httpx>=0.28.0
+
+API ENDPOINTS — COMPLETE
+Gateway Health & Auth:
+GET
+
+/health
+
+# Gateway health
+
+POST /auth/token
+
+# Get JWT token
+
+POST /auth/refresh
+
+# Refresh token
+
+LLM (/api/v1/llm):
+POST /api/v1/llm/generate
+
+# Text generation
+
+Body: { prompt, model?, temperature?, max_tokens? }
+Response: { text, model, tokens_used, duration_ms }
+POST /api/v1/llm/embed
+
+# Generate embeddings
+
+Body: { text, model? }
+Response: { embedding: float[], model, dimensions }
+POST /api/v1/llm/chat
+
+# Multi-turn conversation
+
+Body: { messages: [{role, content}], model?, temperature? }
+Response: { response, messages_count }
+POST /api/v1/llm/summarize
+
+# Summarize text/document
+
+Body: { text, max_length?, language? }
+Response: { summary, original_length, summary_length }
+GET
+
+/api/v1/llm/models
+
+# Available models
+
+Response: { models: [{name, size, quantization, loaded}] }
+
+Plant Doctor (/api/v1/plant):
+POST /api/v1/plant/diagnose
+
+# Full diagnosis (disease + nutrients)
+
+Body: multipart/form-data { image, crop_type? }
+Response: {
+diseases: [{ name, confidence, bbox, severity }],
+nutrients: { N, P, K, Ca, Mg, Fe, Mn, Zn: { status, confidence } },
+treatment: { disease_treatment, fertilizer, dosage, application },
+image_annotated: base64
+}
+POST /api/v1/plant/disease
+
+# Disease detection only
+
+POST /api/v1/plant/nutrient
+
+# Nutrient deficiency only
+
+POST /api/v1/plant/batch
+
+# Batch (multiple images)
+
+GET
+
+/api/v1/plant/treatments
+
+# Treatment database
+
+GET
+
+/api/v1/plant/history
+
+# Past diagnoses
+
+GET
+
+/api/v1/plant/stats
+
+# Diagnosis statistics
+
+Search & Scraping (/api/v1/search):
+POST /api/v1/search/web
+
+# Web search
+
+Body: { query, num_results?, language? }
+Response: { results: [{ title, url, snippet, date }] }
+POST /api/v1/search/images
+
+# Image search
+
+Body: { query, num_results?, size? }
+POST /api/v1/search/scrape
+
+# Scrape URL
+
+Body: { url, engine?, extract_images?, extract_links? }
+Response: { content, title, images, links, metadata }
+POST /api/v1/search/deep
+
+# Deep research (multi-source)
+
+Body: { topic, max_sources?, depth?, save_to_kb? }
+Response: { summary, sources: [], knowledge_items_added }
+POST /api/v1/search/scheduled
+
+# Schedule recurring scrape
+
+GET
+
+# Search history
+
+/api/v1/search/history
+
+Image (/api/v1/image):
+POST /api/v1/image/ocr
+
+# OCR (Arabic + English)
+
+Body: multipart { image, languages? }
+Response: { text, language_detected, confidence, regions }
+POST /api/v1/image/analyze
+
+# AI image analysis
+
+Body: multipart { image, question? }
+Response: { description, tags, objects, answer? }
+POST /api/v1/image/screenshot
+
+# Website screenshot
+
+Body: { url, width?, height?, full_page? }
+Response: { image: base64, format }
+POST /api/v1/image/edit
+
+# Image editing
+
+Body: multipart { image, operations: [resize/crop/watermark] }
+
+Knowledge Base (/api/v1/knowledge):
+POST /api/v1/knowledge/add
+
+# Add to knowledge base
+
+Body: { text, category, metadata?, source? }
+GET
+
+/api/v1/knowledge/search
+
+# Semantic search
+
+Query: ?q=search_text&category=&top_k=5
+POST /api/v1/knowledge/ask
+
+# RAG: Question → Answer from KB
+
+Body: { question, category?, top_k? }
+Response: { answer, sources: [{ text, score, metadata }] }
+GET
+
+/api/v1/knowledge/categories
+
+# List categories
+
+DELETE /api/v1/knowledge/{id}
+
+# Delete item
+
+POST /api/v1/knowledge/import
+
+# Import from file (PDF/DOCX/CSV)
+
+Learning (/api/v1/learn):
+POST /api/v1/learn/session
+
+# Start learning session
+
+Body: { topics: [], max_pages?, depth?, save_to_kb? }
+Response: { session_id, status: "started" }
+GET
+
+/api/v1/learn/sessions
+
+# List sessions
+
+GET
+
+/api/v1/learn/session/{id}
+
+# Session details + progress
+
+POST /api/v1/learn/schedule
+
+# Schedule periodic learning
+
+PUT
+
+# Update learning settings
+
+/api/v1/learn/settings
+
+DELETE /api/v1/learn/session/{id}
+
+Avatar (/api/v1/avatar):
+
+# Cancel session
+
+POST /api/v1/avatar/tts
+
+# Text-to-speech
+
+Body: { text, language?, voice? }
+Response: { audio: base64, format, duration_sec }
+POST /api/v1/avatar/generate
+
+# Full avatar video
+
+Body: { text, language?, voice?, avatar_style? }
+Response: { video: base64, format, duration_sec }
+POST /api/v1/avatar/present
+
+# Present AI results via avatar
+
+Body: { data, presentation_style? }
+GET
+
+/api/v1/avatar/voices
+
+# Available voices
+
+Monitor (/api/v1/monitor):
+GET
+
+/api/v1/monitor/health
+
+# All services health
+
+Response: { services: { llm, plant, scraper, image, avatar, db, redis, qdrant: status }
+GET
+
+/api/v1/monitor/metrics
+
+# Prometheus metrics endpoint
+
+GET
+
+/api/v1/monitor/tasks
+
+# Active Celery tasks
+
+GET
+
+/api/v1/monitor/drift
+
+# Model drift reports
+
+GET
+
+/api/v1/monitor/servers
+
+# All server statuses (CPU, RAM, Disk)
+
+GET
+
+/api/v1/monitor/logs
+
+# Recent logs (structured)
+
+CELERY CONFIGURATION — COMPLETE
+# core/celery_app.py
+import os
+from celery import Celery
+from celery.schedules import crontab
+app = Celery('gaara_ai')
+# Broker & Backend
+app.conf.broker_url = os.getenv('REDIS_URL', 'redis://redis:6379/0')
+app.conf.result_backend = os.getenv('REDIS_URL', 'redis://redis:6379/0')
+# Serialization
+app.conf.accept_content = ['json']
+app.conf.task_serializer = 'json'
+app.conf.result_serializer = 'json'
+app.conf.timezone = 'Africa/Cairo'
+
+# Reliability (Celery 5.6.2 improvements)
+app.conf.broker_connection_retry_on_startup = True
+app.conf.broker_connection_max_retries = 10
+app.conf.task_acks_late = True
+app.conf.worker_prefetch_multiplier = 1
+app.conf.task_compression = 'gzip'
+# Results
+app.conf.result_expires = 3600
+
+# 1 hour
+
+app.conf.task_track_started = True
+# Task Routing — 5 queues
+app.conf.task_routes = {
+# AI — HIGH priority
+'tasks.ai_tasks.*': {'queue': 'ai_tasks'},
+'tasks.plant_tasks.*': {'queue': 'plant_diagnosis'},
+# Search — MEDIUM priority
+'tasks.search_tasks.web_search': {'queue': 'search_tasks'},
+'tasks.search_tasks.scrape_url': {'queue': 'scraping_tasks'},
+'tasks.search_tasks.image_search': {'queue': 'search_tasks'},
+'tasks.search_tasks.deep_research': {'queue': 'search_tasks'},
+# Data — LOW priority
+'tasks.data_tasks.*': {'queue': 'data_processing'},
+'tasks.learning_tasks.*': {'queue': 'learning_tasks'},
+}
+# Beat Schedule — Periodic Tasks
+app.conf.beat_schedule = {
+'health-check-5min': {
+'task': 'tasks.scheduled_tasks.health_check_all',
+'schedule': 300.0,
+},
+'drift-detection-daily-2am': {
+'task': 'tasks.scheduled_tasks.check_model_drift',
+'schedule': crontab(hour=2, minute=0),
+},
+'knowledge-sync-hourly': {
+'task': 'tasks.scheduled_tasks.sync_knowledge_base',
+'schedule': crontab(minute=0),
+},
+'backup-daily-3am': {
+'task': 'tasks.scheduled_tasks.run_backup',
+'schedule': crontab(hour=3, minute=0),
+},
+'scheduled-scraping-6h': {
+'task': 'tasks.scheduled_tasks.run_scheduled_scrapes',
+
+'schedule': crontab(hour='*/6'),
+},
+'metrics-collection-1min': {
+'task': 'tasks.scheduled_tasks.collect_metrics',
+'schedule': 60.0,
+},
+}
+app.autodiscover_tasks(['tasks'])
+
+RAG PIPELINE — LangChain + Qdrant + Ollama
+Qdrant Collections:
+# scripts/init_qdrant_collections.py
+COLLECTIONS = {
+'gaara_agricultural': 'Agricultural knowledge (crops, seasons, soil)',
+'gaara_products': 'Seed catalog, varieties, specifications',
+'gaara_diseases': 'Plant diseases database',
+'gaara_nutrients': 'Nutrient deficiency information',
+'gaara_treatments': 'Treatment protocols + fertilizers',
+'gaara_market': 'Market intelligence, prices, competitors',
+'gaara_general': 'General knowledge base',
+}
+# Vector size: 768 (for BGE-M3 / Nomic) or 384 (for all-MiniLM-L6)
+# Distance: Cosine
+
+RAG Service:
+# services/rag_service.py
+from langchain_qdrant import QdrantVectorStore
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain.chains import RetrievalQA
+from langchain_community.llms import Ollama
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from qdrant_client import QdrantClient
+class GAARARAGService:
+def __init__(self):
+self.embeddings = HuggingFaceEmbeddings(
+model_name="BAAI/bge-m3",
+
+# or "nomic-ai/nomic-embed-text-v1.5"
+
+model_kwargs={'device': 'cpu'}
+
+)
+self.llm = Ollama(base_url="http://ollama:11434", model="qwen2.5:7b")
+self.qdrant = QdrantClient(url="http://qdrant:6333")
+self.splitter = RecursiveCharacterTextSplitter(
+chunk_size=800, chunk_overlap=120
+)
+def add_knowledge(self, text, category, metadata=None):
+# Chunk → Embed → Store in Qdrant collection
+chunks = self.splitter.split_text(text)
+# ... store in qdrant with embeddings + metadata
+def search(self, query, category=None, top_k=5):
+# Embed query → Similarity search in Qdrant
+# Return ranked results with scores
+def ask(self, question, category=None):
+# RAG pipeline: search → retrieve → augment → generate
+vector_store = QdrantVectorStore(
+client=self.qdrant,
+collection_name=f"gaara_{category or 'general'}",
+embedding=self.embeddings
+)
+retriever = vector_store.as_retriever(
+search_type="similarity", search_kwargs={"k": 5}
+)
+qa_chain = RetrievalQA.from_chain_type(
+llm=self.llm, retriever=retriever,
+return_source_documents=True
+)
+return qa_chain.invoke(question)
+def learn_from_url(self, url):
+# Scrape → Clean → Chunk → Embed → Store
+def learn_from_document(self, file_path):
+# Parse (PDF/DOCX) → Chunk → Embed → Store
+
+DRIFT DETECTION — Evidently AI
+# services/drift_service.py
+from evidently import Report
+from evidently.presets import DataDriftPreset
+import pandas as pd
+
+class EvidentlyDriftService:
+def check_data_drift(self, reference_data, current_data):
+report = Report([DataDriftPreset(method="psi")], include_tests=True)
+result = report.run(reference_data, current_data)
+return {
+'drifted': result.as_dict()['tests'][0]['status'] == 'FAIL',
+'drift_score': result.as_dict()['metrics'][0]['result']['dataset_drift'],
+'drifted_features': [...]
+
+# features with drift
+
+}
+def check_model_drift(self, model_name, recent_predictions):
+# Compare recent predictions distribution vs training baseline
+# Alert if significant drift detected
+
+PLANT DOCTOR — COMPLETE IMPLEMENTATION
+Training:
+# scripts/train_plant_doctor.py
+from ultralytics import YOLO
+from datasets import load_dataset
+# 1. Disease Detection — YOLOv8
+model = YOLO('yolov8n.pt')
+model.train(
+data='plant_diseases/',
+
+# PlantVillage format
+
+epochs=100,
+imgsz=640,
+batch=16,
+device='0',
+
+# GPU or 'cpu'
+
+name='gaara_plant_disease'
+)
+# Export ONNX for CPU
+model.export(format='onnx', simplify=True)
+# 2. Nutrient Deficiency — DenseNet121
+import torch
+from torchvision.models import densenet121
+model = densenet121(weights='IMAGENET1K_V1')
+model.classifier = torch.nn.Linear(1024, 9)
+# Fine-tune on nutrient deficiency dataset
+# Export ONNX
+
+# 9 nutrient classes
+
+Datasets:
+
+PlantVillage: load_dataset("mohanty/PlantVillage", "color") — 54,306 images, 14 crops, 26 dis
+Banana Nutrient: Mendeley Data — 8 nutrients (N, P, K, Ca, Mg, Fe, Mn, B)
+Rice Nutrient: Roboflow — N, P, K, Fe, Mg deficiency
+Coffee Leaf: CoLeaf dataset — nutritional deficiencies
+
+CPU Optimization:
+# Use ONNX Runtime for 2-5x faster inference on CPU
+import onnxruntime as ort
+session = ort.InferenceSession("yolov8n_plant_disease.onnx",
+providers=['CPUExecutionProvider'])
+
+DJANGO ERP PAGES (8 Pages)
+1. Dashboard ( /ai/dashboard/ )
+& ‫ ﻋﺪد اﻟٮ‬:‫ﺎت‬H‫إﺣﺼﺎﺋٮ‬
+‫ﻌﻠﻢ‬.‫ﺣﻠﺴﺎت اﻟٮ‬, ،‫ﺤﺚ‬,‫ﺎت اﻟٮ‬H‫ ﻋﻤﻠٮ‬،‫ﺼﺎت‬H‫ﺸﺤٮ‬.
+‫ﺔ‬H‫يﺎ &ٮٮ‬,‫( رﺳﻮم ٮ‬Chart.js): ‫ أداء اﻟـ‬AI ‫ڡﺖ‬. ‫ﻤرور اﻟﻮ‬,‫ٮ‬
+, ‫ﺎت ﻣﻊ &ٮٮ‬H‫ ﻋﻤﻠٮ‬10 ‫آﺣﺮ‬
+&
+‫ﺎﺋﺤﻬﺎ‬.
+& ‫ڡﺎت ﺣﺎﻟﺔ اﻟﺴٮ‬. ‫ﻄﺎ‬,‫ٮ‬
+&
+& ‫ﺮڡرات‬H
+(‫أﺻڡﺮ‬/‫أﺣﻤﺮ‬/‫ﻀﺮ‬
+‫)أﺣ‬
+‫هﺎت اﻟﻄوارئ‬H‫ٮٮ‬, ‫ &ٮ‬.‫ٮ‬
+
+2. Settings ( /ai/settings/ ) — 10 ‫ڡﺴﺎم‬- ‫أ‬:
+Section 1: Learning — max_pages, depth, auto_learn, schedule, domains, min_score, language
+
+Section 2: Models — primary_llm, embedding_model, plant_model, nutrient_model, use_onnx, temp
+
+Section 3: Scraping — primary_engine, max_concurrent, robots_txt, proxy, user_agent, rate_lim
+Section 4: Images — ocr_languages, search_api, max_size, auto_ocr, screenshot_format
+Section 5: Servers — server cards (name, IP, role, status, CPU%, RAM%, Disk%), VPN status
+Section 6: Avatar — voice, language, style, tts_engine, video_quality
+
+Section 7: Monitoring — alert_email, cpu_threshold, memory_threshold, drift_enabled, drift_th
+Section 8: Backup — schedule, retention_days, location, auto_backup
+Section 9: ERP Integration — api_url, api_key, auto_sync, sync_interval
+Section 10: API Keys — firecrawl, google, bing, huggingface (masked display)
+
+3. Plant Doctor ( /ai/plant-doctor/ )
+Drag & Drop image upload
+& ‫ﺎﺋﺞ اﻟٮ‬.‫ &ٮٮ‬bounding boxes ‫ﻋﲆ اﻟﺼورة‬
+‫ﺺ ﻣﻊ‬H‫ﺸﺤٮ‬.
+Bar chart ‫ڡﺺ اﻟﻌٮ&ﺎﺻﺮ‬. ‫( ﻟ &ٮ‬N, P, K, Ca, Mg, Fe, Mn, Zn)
+, ،‫رح )اﺳﻢ اﻟﻌﻼج‬.‫ڡٮ‬. ‫ﺣﺪول اﻟﻌﻼج اﻟﻤ‬,
+(‫ﺤﺪام‬.& ‫ڡﺔ اﻻﺳٮ‬. ‫ ﻃري‬،‫اﻟﺤﺮﻋﺔ‬
+,
+& ‫ﺳﺤﻞ اﻟٮ‬
+‫ڡﺔ‬. ‫ٮ‬, ‫ﺼﺎت اﻟﺴﺎ‬H‫ﺸﺤٮ‬.
+
+4. AI Search ( /ai/search/ )
+‫ذكى ﻣﻊ‬
+‫ﺤﺚ‬,‫ ﺷريﻂ ٮ‬autocomplete
+:
+Tabs: Web / Images / Deep Research
+‫ﺎﺋﺞ ﻣﻊ‬.‫ &ٮٮ‬snippet + source + date
+‫“ زر‬Save to Knowledge Base”
+& type, date range, source, language
+‫ﺮ‬.‫ڡﻼٮ‬:
+
+5. Knowledge Base ( /ai/knowledge/ )
+& ‫( ﺣﺴﺐ‬7 categories)
+Tree view ‫اﻟڡﺌﺎت‬
+Semantic search bar
+Card view ‫ﺎﺋﺞ‬.‫( ﻟﻠ &ٮٮ‬title, snippet, source, date, category)
+CRUD: Add / Edit / Delete items
+Import: PDF, DOCX, CSV upload
+&
+& ‫اﺳﺄل ﺳؤال واﻟٮ‬
+RAG Ask: ‫اﻟﻤﻌﺮڡﺔ‬
+‫ڡﺎﻋﺪة‬. ‫ﺐ ﻣﻦ‬H‫ﺤٮ‬H, ‫&ﻄﺎم ٮ‬
+
+6. Learning Sessions ( /ai/learning/ )
+‫“ زر‬Start New Session” → modal (topics, depth, max_pages)
+Active sessions ‫ ﻣﻊ‬progress bar
+Completed sessions log ‫ ﻣﻊ‬summary
+Schedule recurring sessions
+
+7. Avatar Studio ( /ai/avatar/ )
+Text input → TTS → Avatar video
+
+Voice selector (Arabic/English voices)
+Preview audio before generating video
+“Present Results” → auto-generate avatar for any AI output
+Video gallery
+
+8. System Monitor ( /ai/monitor/ )
+Service status cards (all 15+ services)
+Embedded Grafana dashboards (iframe)
+Celery tasks queue visualization
+Drift detection reports
+Error log viewer
+Server resource charts (CPU, RAM, Disk over time)
+
+WORKFLOW CHAINS
+Chain 1: Smart Search → Knowledge
+User Query → LLM (optimize query) → Web Search (Google+Bing)
+→ Scrape Top 5 Results (Crawl4AI) → LLM (summarize + extract facts)
+→ Generate Embeddings (BGE-M3) → Store in Qdrant → Return Summary + Sources
+
+Chain 2: Plant Diagnosis → Treatment → ERP
+Upload Image → Pre-process (OpenCV: resize, normalize)
+→ YOLOv8 (disease detection + bounding boxes)
++ DenseNet121 (nutrient deficiency classification)
+→ LLM (generate human-readable diagnosis in Arabic)
+→ Treatment DB lookup (treatment + fertilizer + dosage)
+→ Save to Django ERP (AIDiagnosis model)
+→ [Optional] Avatar presents results
+→ Return annotated image + report
+
+Chain 3: Learning Session
+
+Define Topics → Generate Search Queries (LLM)
+→ Web Search (multiple queries) → Scrape Pages (Crawl4AI, max_depth)
+→ Clean Data → RecursiveCharacterTextSplitter (800 chars, 120 overlap)
+→ Generate Embeddings (BGE-M3) → Store in Qdrant (categorized)
+→ LLM Summary of session → Save Report → Notify User
+
+Chain 4: Market Intelligence (Scheduled)
+Cron Trigger → Scrape Competitor Sites → Extract Price Data
+→ Compare with GAARA Products → Detect Significant Changes
+→ Generate Report → Store in Knowledge Base
+→ Alert via Email if price difference > threshold
+
+Chain 5: Avatar Presentation
+Any AI Output → LLM (generate presentation script, Arabic)
+→ TTS Engine (Bark/Coqui → Arabic audio)
+→ Avatar Engine (SadTalker → animate face)
+→ Lip Sync (Wav2Lip) → Output MP4 → Deliver
+
+KEY DESIGN DECISIONS
+#
+1
+
+2
+
+3
+
+4
+
+5
+6
+
+Decision
+
+‫ ﺎب‬2‫اﻷﺳٮ‬
+
+CPU-First
+
+‫ﺪون‬:‫ﻌﻤﻞ ٮ‬0 ‫ كﻞ ﳾء ٮ‬GPU ً ‫أوﻻ‬، GPU ‫ﺔ ﻻﺣ &ڡﺔ‬0‫ٮ&ﺮ &ڡٮ‬
+
+(ONNX)
+Service per
+
+‫ﺣﺎويﺔ‬/‫ﺣﺪﻣﺔ‬, ‫ﻞ‬:‫ ٮ‬،‫ﺣﺎويﺔ‬/‫ﺔ‬:‫ﺲ ﻣﻜ &ٮٮ‬0‫( ﻟٮ‬YOLOv8+DenseNet = Plant Doctor
+
+Function
+
+‫)واﺣﺪ‬
+
+Celery for
+Async
+Qdrant (not
+Chroma)
+FastAPI
+Gateway
+Django for UI
+
+‫ﺔ‬0‫ٮٮ‬, ‫ﺎ‬T‫ ٮ‬2 < ‫ﺔ‬0‫ → أي ﻋﻤﻠٮ‬Celery task
+
+‫ﺪﻋﻢ‬0 ‫ ٮ‬،‫ٮٮ&ﺎج‬, ‫ى اﻹ‬
+I ‫ڡ‬, ً ‫ﺮ اﺳ &ٮ &ڡرارا‬T‫ أﺳرع وأﻛٮ‬Hybrid Search
+
+, ‫ٮ &ڡﻄﺔ‬, + JWT + rate limiting
+‫دﺣول واﺣﺪة‬
+, ‫ﻣﻮﺣﻮد ٮ‬
+:
+‫ اﻟـ‬ERP ‫ﺎﻟڡﻌﻞ‬:
+(60+ module)، ‫ﻒ‬0‫ﻀٮ‬,‫ ٮ‬app ‫ﺪ‬0 ‫ﺣﺪٮ‬:
+
+Redis
+7
+
+(Broker +
+
+Celery broker + result backend + caching
+
+Cache)
+8
+
+9
+10
+11
+12
+13
+
+ONNX
+Runtime
+
+5-2 ‫ٮ&ﺴريﻊ‬x ‫ ﻋﲆ‬CPU ‫ـ‬:‫ﺔ ٮ‬,‫ ﻣ &ڡﺎرٮ‬PyTorch
+
+Cloudflare
+
+, (zero-config) + Cloudflare Tunnel: ‫ٮ&ﻌريﺾ‬
+Tailscale: mesh P2P ‫داﺣﲇ‬
+: ‫ﺣ‬, (DDoS + WAF + HTTPS ‫ﺎﺋى‬
+‫ى آﻣﻦ‬
+I ‫ﺎرح‬
+I ‫)ٮ&ﻠ &ڡ‬
+
+Arabic-First
+
+OCR ‫ى‬
+I ‫ٮ‬: ‫ﻋر‬، TTS ‫ى‬
+I ‫ٮ‬: ‫ﻋر‬، LLM ‫ى‬
+I ‫ٮ‬: ‫ﺪﻋﻢ ﻋر‬0 ‫( ٮ‬Qwen 2.5)
+
+Tailscale +
+
+LangChain +
+Qdrant
+Evidently AI
+BGE-M3
+Embeddings
+
+RAG pipeline ‫ ﻣﻊ‬Hybrid Search (Dense + Sparse BM25)
+,
+:
+Model drift monitoring ‫وﻣڡٮ&وح اﻟﻤﺼﺪر‬
+‫ى‬,
+I ‫ﻣﺤﺎٮ‬
+‫زي‬0‫ﺤﻠٮ‬,: ‫ إٮ‬+ ‫ى‬
+I ‫ٮ‬: ‫ﺪﻋﻢ ﻋر‬0 ‫ ٮ‬+ Multilingual
+
+IMPLEMENTATION PHASES
+Phase 1 (Week 1-2): Foundation — CPU Only
+docker-compose.yml ‫( ﻛﺎﻣﻞ‬PostgreSQL + Redis + Qdrant + MinIO)
+FastAPI Gateway ‫ ﻣﻊ‬basic routes + JWT auth
+Ollama container ‫ ﻣﻊ‬Phi-3 Mini / Qwen2.5:1.5b (CPU models)
+Celery workers + Beat scheduler + Flower UI
+Django ai_integration app (models, basic views)
+Tailscale VPN setup ‫ ﺑﯿﻦ اﻟﺴﯿﺮﻓﺮات‬+ Cloudflare Tunnel ‫ﻟﻠﻮﺻﻮل اﻟﺨﺎرﺟﻲ‬
+Prometheus + Grafana basic setup
+init_qdrant_collections.py
+
+Phase 2 (Week 3-4): Core AI Services
+Plant Doctor (YOLOv8n ONNX + DenseNet121 ONNX on CPU)
+Scraping service (Crawl4AI + Firecrawl + Playwright)
+Image Processing (EasyOCR Arabic+English + CLIP)
+RAG Pipeline (LangChain + Qdrant + BGE-M3)
+All API endpoints functional + tested
+Django pages: Dashboard + Settings
+
+Phase 3 (Week 5-6): Intelligence & Learning
+Learning sessions (automated web learning → KB)
+Knowledge base management + semantic search
+Deep research (multi-source + summarization)
+Drift monitoring (Evidently AI integration)
+Django pages: Plant Doctor + Search + Knowledge + Learning
+
+Phase 4 (Week 7-8): GPU + Polish + Production
+GPU upgrade: Ollama → Llama 3.1 8B / Qwen2.5 7B
+Avatar service (Bark TTS + SadTalker)
+Train custom plant disease model on GAARA field data
+Django pages: Avatar Studio + System Monitor
+Grafana dashboards (AI + System)
+Automated backup system
+Security hardening (HTTPS, firewall, API rate limits)
+Load testing + optimization
+
+TECHNICAL NOTES
+Python: 3.12+
+Django: 5.x + DRF 3.15+
+FastAPI: 0.115+ (ASGI 4.0)
+Celery: 5.6.2+ (Jan 2026 — improved Redis stability via Kombu 5.5.0)
+SQLAlchemy: 2.0+ (async support)
+PostgreSQL: 16 Alpine
+Redis: 7 Alpine
+Qdrant: Latest (v1.13+, supports Hybrid Search via Query API)
+Docker: 27+ with Compose v2
+LangChain: 0.3+ (LCEL syntax)
+Evidently: 0.6+ (100+ built-in metrics)
+Ultralytics: 8.3+ (YOLOv8/v10)
+ONNX Runtime: 1.20+
+EasyOCR: 1.7+ (Arabic + English)
+Crawl4AI: 0.4+ (VLM Zero-Shot extraction)
+BGE-M3 Embeddings: Multilingual, 768 dimensions
+Tailscale: Stable (WireGuard-based mesh VPN, MagicDNS, ACLs, P2P)
+Cloudflare Tunnel: cloudflared latest (Zero Trust, HTTPS auto, DDoS, WAF)
+
+START BUILDING
+‫ٮٮ&ﺎء‬, ‫ٮ‬, ‫ﺪأ‬,‫ اٮ‬Phase 1 ً ‫أوﻻ‬:
+1. Ü&‫ أٮ‬docker-compose.yml ‫ﻌﻤﻞ‬H ‫ﰷﻣﻼ ً ٮ‬
+, ‫ﻤﻜﻦ أن ٮ‬H ‫ ٮ‬mock responses ً ‫)أوﻻ‬
+2. Ü&‫ أٮ‬FastAPI gateway ‫ ﻣﻊ كﻞ اﻟـ‬endpoints (‫ﺮﺣﻊ‬.
+3. Ü&‫ أٮ‬Celery configuration ‫ ﰷﻣﻠﺔ ﻣﻊ‬task routing
+4. Ü&‫ أٮ‬Django ai_integration app ‫ ﻣﻊ‬models
+5. Ü&‫ أٮ‬Pydantic schemas ‫ ﻟكﻞ‬request/response
+, ‫ٮٮ‬, ‫اﻟﺤﺪﻣﺎت‬
+& ‫ﺸﻌﻞ كﻞ‬H
+6. ‫ﺄﻛﺪ أن‬.‫ ٮ‬docker-compose up ‫&ﺤﺎح‬
+à ‫ٮ‬
+7. ‫ﺐ‬.‫ اﻛٮ‬health check ‫ﻟكﻞ &ﺣﺪﻣﺔ‬
+O ‫ٮﻼ ً ﻟﻠٮ‬$ ‫ڡﺎ‬- ‫"ﺤﺐ أن ٮ "ﻜون ﰷﻣﻼ ً و‬$ ‫ كﻞ ﻣﻠﻒ ٮ‬placeholder ‫ أو‬TODO.
+‫ﺸﻌٮ"ﻞ — ﻟٮ"ﺲ‬‫ﺪأ اﻵن‬$‫اٮ‬.
+
+

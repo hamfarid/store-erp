@@ -1,57 +1,39 @@
-# 🔒 Security Rules
+# 🔒 Security Rules (Global System v26 Diamond 32)
+
+**Status:** MANDATORY
+**Enforcement:** Automated by `tools/preflight_check.py`
 
 ## Mindset
 **You are paranoid. Everything is a threat until proven safe.**
 
 ## Core Principles
-- Trust no input
-- Validate everything
-- Assume breach
-- Defense in depth
+- **Trust No Input:** Validate everything.
+- **Zero Secrets:** No API keys in code. Ever.
+- **Automated Defense:** Sentinel watches everything.
+
+## The Sentinel Protocol
+1.  **Secret Scanning:** Sentinel blocks any commit with regex patterns matching API keys, passwords, or tokens.
+2.  **TODO Scanning:** Sentinel blocks "TODO" comments in security-critical files.
+3.  **Dependency Check:** CodeRabbit (if active) flags vulnerable dependencies.
 
 ## Input Validation
-- Validate all user inputs
-- Sanitize all outputs
-- Use whitelist, not blacklist
-- Reject invalid data
+- **SQL Injection:** MUST use parameterized queries. Sentinel blocks `f"SELECT...`.
+- **XSS:** MUST use framework auto-escaping.
+- **Validation:** Use Pydantic/Zod for strict schema validation.
 
-## Authentication
-- Use strong password hashing (bcrypt, Argon2)
-- Implement MFA when possible
-- Use secure session management
-- Implement rate limiting
-
-## Authorization
-- Principle of least privilege
-- Check permissions on every request
-- Don't trust client-side checks
-- Implement RBAC properly
+## Authentication & Authorization
+- **Passwords:** Use bcrypt/Argon2.
+- **Sessions:** Secure, HTTPOnly cookies.
+- **RBAC:** Check permissions on EVERY request.
 
 ## Data Protection
-- Encrypt sensitive data
-- Use HTTPS everywhere
-- Secure API keys
-- Don't log sensitive data
-
-## SQL Injection
-- Use parameterized queries
-- Never concatenate SQL
-- Use ORM safely
-- Validate inputs
-
-## XSS Prevention
-- Escape all outputs
-- Use Content Security Policy
-- Sanitize HTML inputs
-- Use framework protections
-
-## CSRF Protection
-- Use CSRF tokens
-- Validate origin
-- Use SameSite cookies
-- Check Referer header
+- **Encryption:** Encrypt sensitive data at rest and in transit.
+- **HTTPS:** Enforce HTTPS everywhere.
+- **Logs:** Never log PII or secrets.
 
 ## Remember
-**Assume everything is malicious. Protect everything.**
+**Security is not a feature. It is the foundation.**
+**If Sentinel blocks you, thank it.**
 
-Be paranoid. Be thorough. Be secure.
+## Related Prompts
+- `prompts/31_authentication.md` — Authentication implementation

@@ -1,20 +1,27 @@
-# Database Migration Example
+# 🗄️ Database Migration Example (Global System v26 Diamond 32)
 
-## Migration File Structure
+**Status:** MANDATORY
+**Enforcement:** Automated by Sentinel (Migration Check)
 
-\`\`\`
+## 1. The Philosophy
+Data is sacred. Migrations MUST be reversible and transactional.
+
+## 2. File Structure
+```
 migrations/
 ├── 001_create_users_table.sql
 ├── 002_add_email_verification.sql
 └── 003_create_posts_table.sql
-\`\`\`
+```
 
-## Example Migration (PostgreSQL)
+## 3. Example Migration (PostgreSQL)
+You MUST include both `UP` and `DOWN` sections.
 
-\`\`\`sql
+```sql
 -- 001_create_users_table.sql
 
 -- UP
+BEGIN;
 CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   email VARCHAR(255) UNIQUE NOT NULL,
@@ -24,21 +31,14 @@ CREATE TABLE users (
 );
 
 CREATE INDEX idx_users_email ON users(email);
+COMMIT;
 
 -- DOWN
+BEGIN;
 DROP INDEX IF EXISTS idx_users_email;
 DROP TABLE IF EXISTS users;
-\`\`\`
+COMMIT;
+```
 
-## Running Migrations
-
-\`\`\`bash
-# Apply all pending migrations
-npm run migrate:up
-
-# Rollback last migration
-npm run migrate:down
-
-# Check migration status
-npm run migrate:status
-\`\`\`
+## 4. The "Transaction" Law
+All migrations MUST be wrapped in `BEGIN; ... COMMIT;`. If a migration fails halfway, it must roll back completely.

@@ -1,0 +1,37 @@
+# EditorConfig — Global System v26.0.2 Diamond 32
+# https://editorconfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false
+indent_size = 2
+
+[*.{yaml,yml}]
+indent_size = 2
+
+[*.json]
+indent_size = 2
+
+[*.{js,jsx,ts,tsx}]
+indent_size = 2
+
+[*.sql]
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+
+[*.sh]
+indent_size = 4
+
+[Dockerfile*]
+indent_size = 4

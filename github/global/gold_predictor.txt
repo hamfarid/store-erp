@@ -1,0 +1,1307 @@
+Gold Price Predictor: complete dual-system
+architecture guide
+This dual-system financial prediction platform—a FastAPI ML backend paired
+with a React/Express frontend—requires solving seven interconnected
+infrastructure challenges to reach production readiness. The core problems span
+Docker containerization of complex ML dependencies, GPU-aware model routing,
+automated retraining pipelines, multilingual news sentiment integration, time-series
+data storage, monitoring dashboards, and reliable inter-service communication. What
+follows is a battle-tested architecture built on proven fintech MLOps patterns, with
+concrete configurations, schemas, and code examples for each layer.
+The system predicts prices for five assets (Gold, Bitcoin, Ethereum, EGP/USD, TRY/USD)
+using four model types (ARIMA, LSTM, Prophet, Ensemble) across three time horizons
+(7d, 30d, 90d)—producing 60 distinct model instances that must be trained,
+versioned, monitored, and served reliably.
+
+1. Docker configuration that actually handles Prophet,
+PyTorch, and statsmodels together
+The single hardest Docker problem here is Prophet. It requires a C++ compiler ( g++ )
+and cmdstanpy , which compiles Stan models during installation.
+
+DeepWiki
+
+Fossies
+
+The
+
+solution is a multi-stage build that compiles everything in a builder stage and copies
+only runtime artifacts to a slim production image.
+
+Multi-stage Dockerfile
+# === Stage 1: Builder ===
+FROM python:3.11-slim-bookworm AS builder
+RUN apt-get update && apt-get install -y --no-install-recommends \
+g++ make build-essential && rm -rf /var/lib/apt/lists/*
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+# PyTorch with CUDA — falls back to CPU automatically when no GPU present
+
+RUN pip install --no-cache-dir torch==2.5.1+cu121 \
+--index-url https://download.pytorch.org/whl/cu121
+# Prophet: install cmdstanpy first, compile cmdstan, then Prophet
+RUN pip install --no-cache-dir cmdstanpy==1.2.4 && \
+python -c "import cmdstanpy; cmdstanpy.install_cmdstan(version='2.33.1', cores=4)"
+RUN pip install --no-cache-dir prophet==1.1.6
+# Remaining ML + API dependencies
+RUN pip install --no-cache-dir \
+fastapi==0.115.0 uvicorn[standard]==0.32.0 statsmodels==0.14.4 \
+pandas==2.2.3 numpy==1.26.4 scikit-learn==1.5.2 joblib==1.4.2 \
+psycopg2-binary==2.9.10 redis==5.2.0 pydantic==2.10.0 httpx==0.27.0 \
+celery==5.4.0 prometheus-client==0.21.0
+# === Stage 2: Runtime ===
+FROM python:3.11-slim-bookworm AS runtime
+RUN apt-get update && apt-get install -y --no-install-recommends \
+libgomp1 curl && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /opt/venv /opt/venv
+COPY --from=builder /root/.cmdstan /root/.cmdstan
+ENV PATH="/opt/venv/bin:$PATH"
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+WORKDIR /app
+COPY . .
+RUN mkdir -p /app/models
+EXPOSE 8001
+HEALTHCHECK --interval=30s --timeout=15s --retries=5 --start-period=120s \
+CMD curl -f http://localhost:8001/health || exit 1
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001", "--workers", "1"]
+
+The key insight: install the CUDA-enabled PyTorch wheel in every image. On machines
+without GPUs, torch.cuda.is_available() returns False and PyTorch falls back to CPU
+transparently.
+
+MachineLearningMastery
+
+This means one image works everywhere—no
+
+separate CPU and GPU builds. The multi-stage build drops g++ and build-essential
+from the runtime image, saving 200MB+.
+
+Medium
+
+Expected final size: ~3-4GB with
+
+CUDA wheels, ~1.5-2GB if building a CPU-only variant.
+
+Docker Compose with PostgreSQL replicas, Redis Sentinel, and optional
+
+GPU
+# docker-compose.yml — works on CPU-only machines
+services:
+ml-service:
+build: .
+ports: ["8001:8001"]
+environment:
+DATABASE_URL: postgresql://gold:secret@pg-primary:5432/gold_prices
+DATABASE_REPLICA_URL: postgresql://gold:secret@pg-replica:5432/gold_prices
+REDIS_SENTINEL_HOST: redis-sentinel-1
+REDIS_MASTER_NAME: mymaster
+MODEL_DIR: /app/models
+PRELOAD_MODELS: "true"
+volumes: [model-data:/app/models]
+depends_on:
+pg-primary: { condition: service_healthy }
+redis-master: { condition: service_healthy }
+deploy:
+replicas: 3
+resources:
+limits: { memory: 4G }
+reservations: { memory: 2G }
+healthcheck:
+test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+interval: 30s
+timeout: 15s
+retries: 5
+start_period: 120s
+pg-primary:
+image: postgres:16-alpine
+environment:
+POSTGRES_DB: gold_prices
+POSTGRES_USER: gold
+POSTGRES_PASSWORD: secret
+volumes:
+- pg-primary-data:/var/lib/postgresql/data
+- ./docker/postgres/primary-init.sh:/docker-entrypoint-initdb.d/init.sh
+command: >
+postgres -c wal_level=replica -c max_wal_senders=3
+-c max_replication_slots=3 -c hot_standby=on
+healthcheck:
+test: ["CMD-SHELL", "pg_isready -U gold -d gold_prices"]
+interval: 10s
+
+pg-replica:
+image: postgres:16-alpine
+volumes:
+- pg-replica-data:/var/lib/postgresql/data
+- ./docker/postgres/replica-entrypoint.sh:/replica-entrypoint.sh
+depends_on:
+pg-primary: { condition: service_healthy }
+entrypoint: /replica-entrypoint.sh
+redis-master:
+image: redis:7-alpine
+command: redis-server --appendonly yes --requirepass redis_secret
+healthcheck:
+test: ["CMD", "redis-cli", "-a", "redis_secret", "ping"]
+redis-replica:
+image: redis:7-alpine
+command: >
+redis-server --appendonly yes --replicaof redis-master 6379
+--masterauth redis_secret --requirepass redis_secret
+redis-sentinel-1: &sentinel
+image: redis:7-alpine
+command: >
+sh -c 'echo "sentinel monitor mymaster redis-master 6379 2" > /etc/s.conf &&
+echo "sentinel auth-pass mymaster redis_secret" >> /etc/s.conf &&
+echo "sentinel down-after-milliseconds mymaster 5000" >> /etc/s.conf &&
+redis-server /etc/s.conf --sentinel'
+depends_on: [redis-master, redis-replica]
+redis-sentinel-2: *sentinel
+redis-sentinel-3: *sentinel
+volumes:
+pg-primary-data:
+pg-replica-data:
+model-data:
+
+For GPU machines, use a separate override file rather than trying to make GPU config
+optional in the base compose:
+# docker-compose.gpu.yml
+services:
+ml-service:
+deploy:
+resources:
+reservations:
+
+devices:
+- driver: nvidia
+count: 1
+capabilities: [gpu]
+
+Launch with docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+on GPU machines. The base file works as-is on CPU-only laptops.
+
+2. GPU auto-detection routes LSTM to GPU while ARIMA
+and Prophet stay on CPU
+ARIMA (statsmodels) and Prophet are CPU-only libraries—they have no GPU codepath.
+Only LSTM (PyTorch) benefits from GPU acceleration. The model manager pattern below
+handles this automatically:
+class ModelManager:
+def __init__(self, model_dir: str = "/app/models"):
+self.model_dir = Path(model_dir)
+self._models: dict[str, object] = {}
+self._load_status: dict[str, str] = {}
+self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+def _load_single_model(self, asset: str, model_type: str):
+key = f"{asset}_{model_type}"
+try:
+if model_type == "lstm":
+model = torch.load(self.model_dir / f"{asset}_lstm.pt",
+map_location=self.device)
+model.to(self.device).eval()
+elif model_type == "arima":
+with open(self.model_dir / f"{asset}_arima.pkl", "rb") as f:
+model = pickle.load(f)
+elif model_type == "prophet":
+with open(self.model_dir / f"{asset}_prophet.json") as f:
+model = model_from_json(json.load(f))
+elif model_type == "ensemble":
+with open(self.model_dir / f"{asset}_ensemble.pkl", "rb") as f:
+model = pickle.load(f)
+self._models[key] = model
+self._load_status[key] = "loaded"
+except Exception as e:
+self._load_status[key] = f"error: {e}"
+
+def get_model(self, asset: str, model_type: str):
+key = f"{asset}_{model_type}"
+if key not in self._models:
+self._load_single_model(asset, model_type)
+return self._models.get(key)
+def health_status(self) -> dict:
+expected = {f"{a}_{m}" for a in ASSETS for m in MODEL_TYPES}
+loaded = {k for k, v in self._load_status.items() if v == "loaded"}
+return {
+"total_expected": len(expected), "loaded": len(loaded),
+"device": str(self.device), "gpu_available": torch.cuda.is_available(),
+"all_loaded": loaded == expected,
+"failed": {k: v for k, v in self._load_status.items() if v != "loaded"}
+}
+
+Memory budget for the full model stack: LSTM models are typically 10-100MB per
+asset, ARIMA ~1-5MB, Prophet ~1-10MB, Ensemble configs under 1MB. Total on-disk:
+~300MB for all 20 models. Runtime memory is 2-3× that (~600MB-1.5GB per worker).
+With 3 Docker replicas running 1 Uvicorn worker each, budget ~1.5-4.5GB total RAM
+for the ML service cluster. Running single-worker-per-container avoids PyTorch’s known
+issues with Gunicorn --preload fork semantics.
+For LSTM time-series models specifically, the performance difference between CPU and
+GPU is modest for inference (these are small models, not GPT-scale). A financial LSTM
+with 2 layers and 128 hidden units runs inference in <100ms on CPU. GPU matters
+primarily for training, where weekly retraining of 5 assets might take 25-150 minutes on
+CPU versus 5-15 minutes on GPU.
+
+Medium
+
+3. Auto-retraining pipeline: Celery orchestrates the full
+lifecycle
+The retraining architecture uses Celery + Redis (not APScheduler) because Celery
+provides distributed task execution, retry mechanisms,
+
+MoldStud
+
+task
+
+chaining/grouping, and monitoring via Flower—all critical for ML training workloads.
+
+Recommended retraining schedule
+Model
+
+Frequency
+
+Training
+
+Window
+
+Time
+
+Strategy
+
+Justification
+
+Lightweight, sensitive to
+
+ARIMA
+
+Daily (2:15
+
+~30s per
+
+AM UTC)
+
+asset
+
+Rolling
+365-500
+days
+
+recent autocorrelation.
+Research shows reestimation frequency is the
+chief determinant of ARIMA
+forecasting performance
+Emergent Mind
+
+LSTM
+
+Weekly
+
+5-
+
+Rolling
+
+Daily retraining yields
+
+(Sunday 3
+
+30min/asset
+
+500-750
+
+marginal gains (~2-5%
+
+AM)
+
+CPU
+
+days
+
+improvement at 7× cost)
+
+Weekly
+Prophet
+
+(Sunday
+3:30 AM)
+
+~60s per
+asset
+
+Daily after
+Ensemble
+
+ARIMA +
+
+weights
+
+weekly full
+optimization
+
+Expanding
+(full
+history)
+
+Last 30
+<1s
+
+days of
+predictions
+
+Prophet benefits from full
+history for seasonality; has
+built-in changepoint
+detection
+Dynamic weighting
+consistently outperforms
+static in financial literature
+ResearchGate
+
+Rolling windows outperform expanding windows for ARIMA and LSTM on financial
+data because expanding windows dilute predictive signal from structural breaks.
+
+Atlas
+
+Prophet is the exception—it benefits from full history for seasonal pattern identification.
+
+Celery task pipeline
+app = Celery('financial_pipeline', broker='redis://redis:6379/0')
+app.conf.beat_schedule = {
+'daily-data-fetch':
+
+{'task': 'tasks.fetch_all', 'schedule': crontab(hour=2, minute=0
+
+'daily-arima-retrain':
+
+{'task': 'tasks.retrain_arima_all', 'schedule': crontab(hour=2,
+
+'daily-drift-check':
+
+{'task': 'tasks.run_drift_detection', 'schedule': crontab(hour=2
+
+'daily-ensemble-weights': {'task': 'tasks.update_weights', 'schedule': crontab(hour=2, mi
+'weekly-lstm':
+
+{'task': 'tasks.retrain_lstm_all',
+
+'weekly-prophet':
+
+{'task': 'tasks.retrain_prophet_all',
+
+'schedule': crontab(hour=3, minute=0, day_of_week='sun')},
+'schedule': crontab(hour=3, minute=30, day_of_week='sun')},
+}
+
+Each training task follows a strict pipeline: acquire Redis lock → fetch data → validate
+→ train candidate → evaluate on holdout → compare with production model →
+promote if better → release lock. The training lock uses Redis SET NX EX with a Lua
+
+script for atomic owner-only release,
+
+Redis
+
+preventing concurrent training of the same
+
+model:
+class TrainingLock:
+def __init__(self, model_type, asset, timeout=3600):
+self.redis = redis.Redis(host='redis', port=6379, db=2)
+self.lock_key = f"training_lock:{model_type}:{asset}"
+self.lock_id = f"{model_type}_{asset}_{time.time()}"
+def acquire(self):
+return bool(self.redis.set(self.lock_key, self.lock_id, nx=True, ex=self.timeout))
+def release(self):
+lua = """
+if redis.call("get", KEYS[1]) == ARGV[1] then
+return redis.call("del", KEYS[1])
+else return 0 end"""
+return bool(self.redis.eval(lua, 1, self.lock_key, self.lock_id))
+
+Drift detection triggers emergency retrains
+The drift detector combines four signals: Population Stability Index (PSI > 0.20 =
+critical), Kolmogorov-Smirnov test
+
+Naitive
+
+Acceldata
+
+(p < 0.05), MAPE degradation
+
+(>50% increase from baseline), and directional accuracy (below 50% = worse than
+random). When drift is detected, an emergency retrain fires immediately regardless of
+schedule.
+
+Ensemble weight optimization
+Daily optimization uses inverse-error weighting with exponential forgetting
+(λ=0.95, so recent errors matter more). Weekly full optimization uses scipy SLSQP to
+directly minimize ensemble MAPE on the last 30 days of predictions. A floor weight of
+0.05-0.10 prevents completely excluding any model, and z-score monitoring detects
+sudden model failure (z > 2.5 → reduce weight to floor).
+
+Data fetching APIs by asset
+Gold: yfinance ticker GC=F (free, no key), backup: GoldAPI.io (300 req/month free)
+Bitcoin/Ethereum: CoinGecko API (free 30 calls/min, 10+ years of history),
+CoinGecko
+
+backup: Binance API
+
+CoinGecko
+
+EGP/USD, TRY/USD: yfinance tickers USDEGP=X / USDTRY=X , backup: ExchangeRateAPI (1500 req/month free)
+
+All data is validated for: missing values (forward-fill, limit 3 days), duplicate dates,
+positive prices, and outlier detection via IQR on returns (flag >50% daily moves for
+crypto, >5% for EGP/TRY as anomalies).
+
+4. Multilingual news sentiment pipeline with Arabic
+support
+News API stack
+Alpha Vantage News Sentiment is the primary API—it provides pre-computed
+sentiment scores per ticker for Gold, BTC, ETH, and forex pairs, with filtering via
+CRYPTO:BTC , FOREX:USD , COMMODITY:GOLD . The free tier allows 25 requests/day; premium
+
+plans start at $49.99/month.
+
+alphavantage
+
+Alpha Vantage
+
+Marketaux serves as
+
+secondary (built-in sentiment, 30+ languages, 5000+ sources). Finnhub supplements
+with real-time market news.
+
+Finnhub
+
+Finnhub
+
+For Arabic financial news, no dedicated API exists. The practical approach is RSS
+feeds:
+Argaam (argaam.com/en/rss) — Saudi/GCC markets, commodities
+
+Argaam
+
+Mubasher (mubasher.info/news/rss) — MENA stock markets leader
+
+Mubasher Info
+
+Al Arabiya Business (alarabiya.net/tools/mrss) — Broad MENA finance
+
+Al Arabiya
+
+CNBC Arabia — RSS feeds for MENA markets
+Arabic news is critical for EGP and TRY predictions specifically: CBE policy decisions
+and TCMB announcements often break in Arabic media hours before English coverage.
+
+Dual-language sentiment analysis
+English: ProsusAI/FinBERT achieves 97% accuracy on financial text. Score calculation:
+sentiment = P(positive) - P(negative) on a [-1, +1] scale. GitHub Arabic: CAMeL-
+
+Lab/bert-base-arabic-camelbert-da-sentiment handles MSA and dialectal Arabic
+TechScience
+
+with 92% accuracy. A language-detection layer ( langdetect ) routes
+
+each article to the appropriate model.
+Aggregation uses time-decay weighting (exponential decay with λ=0.1 per hour) and
+source credibility weighting (Reuters/Bloomberg: 10, Argaam/CNBC Arabia: 7-8,
+general news: 3). Research consistently shows sentiment features improve financial
+predictions by 8-18% relative improvement in accuracy.
+
+arXiv
+
+Dynamic caching replaces static 30-minute TTL
+The static 30-minute cache is suboptimal. Replace with context-aware dynamic TTL:
+Context
+
+TTL
+
+Rationale
+
+Crypto during high volatility
+
+1-5 min
+
+24/7 market, fast-moving
+
+Gold during London/NY session
+
+5-15 min
+
+Active trading window
+
+Forex off-hours (weekends)
+
+30-60 min
+
+Markets closed
+
+Breaking news detected
+
+Minimum TTL (60s)
+
+Cache bypassed
+
+Normal market hours
+
+10-15 min
+
+Balanced freshness/cost
+
+Breaking news detection combines three signals: velocity spike (3× normal article rate
+*
+in 15 minutes), keyword triggers (Federal Reserve, rate decision, crash, ,‫ﺎر‬#‫ اٮ&ﻬٮ‬,‫ﻋﺎﺣﻞ‬
+‫)اﻟ *ٮٮ&ﻚ اﻟﻤﺮﻛزي‬, and abnormal price movement (>1.5% for gold, >3% for BTC). Any
+signal triggers immediate cache invalidation and fresh fetches from all sources.
+
+5. TimescaleDB hypertables and MLflow power the storage
+layer
+Time-series data storage
+Add the TimescaleDB extension to existing PostgreSQL 14 ( CREATE EXTENSION
+timescaledb ). This provides automatic time-based partitioning, continuous aggregates,
+
+90-95% compression for historical data, and time_bucket() for efficient aggregation
+—all without migrating to a different database.
+CREATE EXTENSION IF NOT EXISTS timescaledb;
+CREATE TABLE price_data (
+time
+
+TIMESTAMPTZ NOT NULL,
+
+asset
+
+TEXT NOT NULL,
+
+source
+
+TEXT DEFAULT 'primary',
+
+open
+
+NUMERIC(20,8) NOT NULL,
+
+high
+
+NUMERIC(20,8) NOT NULL,
+
+low
+
+NUMERIC(20,8) NOT NULL,
+
+close
+
+NUMERIC(20,8) NOT NULL,
+
+volume
+
+NUMERIC(20,4),
+
+sma_20
+
+NUMERIC(20,8),
+
+rsi_14
+
+NUMERIC(10,4),
+
+UNIQUE (time, asset, source)
+);
+SELECT create_hypertable('price_data', 'time', chunk_time_interval => INTERVAL '7 days');
+CREATE INDEX idx_price_asset_time ON price_data (asset, time DESC);
+-- Compress chunks older than 30 days (90-95% storage reduction)
+ALTER TABLE price_data SET (
+timescaledb.compress,
+timescaledb.compress_segmentby = 'asset',
+timescaledb.compress_orderby = 'time DESC'
+);
+SELECT add_compression_policy('price_data', INTERVAL '30 days');
+
+Complete database schema
+The schema spans nine tables covering the full ML lifecycle:
+-- Model versions with artifact references
+CREATE TABLE model_versions (
+id
+
+SERIAL PRIMARY KEY,
+
+model_name
+
+TEXT NOT NULL,
+
+asset
+
+TEXT NOT NULL,
+
+horizon
+
+TEXT NOT NULL,
+
+version
+
+INTEGER NOT NULL,
+
+stage
+
+TEXT DEFAULT 'development',
+
+artifact_uri
+
+TEXT NOT NULL,
+
+file_format
+
+TEXT NOT NULL,
+
+mape
+
+NUMERIC(10,4),
+
+rmse
+
+NUMERIC(20,8),
+
+-- 'arima','lstm','prophet','ensemble'
+-- '7d','30d','90d'
+
+-- MinIO path
+
+directional_accuracy NUMERIC(5,4),
+hyperparameters
+
+JSONB,
+
+trained_at
+
+TIMESTAMPTZ NOT NULL,
+
+is_active
+
+BOOLEAN DEFAULT false,
+
+UNIQUE (model_name, asset, horizon, version)
+);
+-- Training run history
+CREATE TABLE training_runs (
+id
+
+UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+model_name
+
+TEXT NOT NULL,
+
+asset
+
+TEXT NOT NULL,
+
+horizon
+
+TEXT NOT NULL,
+
+started_at
+
+TIMESTAMPTZ NOT NULL,
+
+completed_at
+
+TIMESTAMPTZ,
+
+status
+
+TEXT DEFAULT 'running',
+
+train_loss
+
+NUMERIC(10,6),
+
+val_loss
+
+NUMERIC(10,6),
+
+mape
+
+NUMERIC(10,4),
+
+directional_accuracy NUMERIC(5,4),
+hyperparameters JSONB,
+gpu_used
+
+BOOLEAN DEFAULT false,
+
+trigger_reason
+
+TEXT,
+
+model_version_id INTEGER REFERENCES model_versions(id),
+error_message
+
+TEXT
+
+);
+SELECT create_hypertable('training_runs', 'started_at');
+-- Prediction history for backtesting
+CREATE TABLE predictions (
+id
+
+BIGSERIAL,
+
+prediction_time
+
+TIMESTAMPTZ NOT NULL,
+
+model_name
+
+TEXT NOT NULL,
+
+asset
+
+TEXT NOT NULL,
+
+horizon
+
+TEXT NOT NULL,
+
+target_date
+
+TIMESTAMPTZ NOT NULL,
+
+predicted_value
+
+NUMERIC(20,8) NOT NULL,
+
+actual_value
+
+NUMERIC(20,8),
+
+confidence_lower_95 NUMERIC(20,8),
+confidence_upper_95 NUMERIC(20,8),
+absolute_error
+
+NUMERIC(20,8),
+
+percentage_error
+
+NUMERIC(10,6),
+
+direction_correct
+
+BOOLEAN,
+
+is_ensemble
+
+BOOLEAN DEFAULT false,
+
+PRIMARY KEY (id, prediction_time)
+);
+
+SELECT create_hypertable('predictions', 'prediction_time', chunk_time_interval => INTERVAL '7
+
+CREATE INDEX idx_pred_backtest ON predictions (asset, target_date DESC) WHERE actual_value IS
+-- Ensemble weight history
+CREATE TABLE ensemble_weights (
+id
+
+BIGSERIAL,
+
+time
+
+TIMESTAMPTZ NOT NULL,
+
+asset
+
+TEXT NOT NULL,
+
+horizon
+
+TEXT NOT NULL,
+
+arima_weight
+
+NUMERIC(5,4),
+
+lstm_weight
+
+NUMERIC(5,4),
+
+prophet_weight
+
+NUMERIC(5,4),
+
+optimization_method TEXT,
+ensemble_mape
+
+NUMERIC(10,4),
+
+PRIMARY KEY (id, time)
+
+);
+SELECT create_hypertable('ensemble_weights', 'time');
+-- News articles with sentiment
+CREATE TABLE news_articles (
+id
+
+BIGSERIAL PRIMARY KEY,
+
+published_at
+
+TIMESTAMPTZ NOT NULL,
+
+source
+
+TEXT NOT NULL,
+
+title
+
+TEXT NOT NULL,
+
+url
+
+TEXT UNIQUE,
+
+sentiment_score NUMERIC(5,4),
+sentiment_label TEXT,
+assets_mentioned TEXT[],
+language
+
+TEXT DEFAULT 'en'
+
+);
+CREATE INDEX idx_news_assets ON news_articles USING GIN (assets_mentioned);
+-- Aggregated sentiment per asset
+CREATE TABLE news_sentiment_aggregate (
+id
+
+BIGSERIAL,
+
+time
+
+TIMESTAMPTZ NOT NULL,
+
+asset
+
+TEXT NOT NULL,
+
+period
+
+TEXT NOT NULL,
+
+article_count
+
+INTEGER,
+
+avg_sentiment
+
+NUMERIC(5,4),
+
+weighted_sentiment NUMERIC(5,4),
+positive_ratio
+
+NUMERIC(5,4),
+
+PRIMARY KEY (id, time)
+);
+SELECT create_hypertable('news_sentiment_aggregate', 'time');
+-- Drift detection results
+CREATE TABLE model_drift_metrics (
+id
+
+BIGSERIAL,
+
+time
+
+TIMESTAMPTZ NOT NULL,
+
+model_name
+
+TEXT NOT NULL,
+
+asset
+
+TEXT NOT NULL,
+
+psi_score
+
+NUMERIC(10,6),
+
+ks_p_value
+
+NUMERIC(10,6),
+
+rolling_mape_7d NUMERIC(10,4),
+baseline_mape
+
+NUMERIC(10,4),
+
+drift_detected
+
+BOOLEAN DEFAULT false,
+
+drift_severity
+
+TEXT,
+
+PRIMARY KEY (id, time)
+);
+SELECT create_hypertable('model_drift_metrics', 'time');
+
+-- Alert management
+CREATE TABLE alerts (
+id
+
+BIGSERIAL PRIMARY KEY,
+
+created_at
+
+TIMESTAMPTZ DEFAULT NOW(),
+
+alert_type
+
+TEXT NOT NULL,
+
+severity
+
+TEXT NOT NULL,
+
+model_name
+
+TEXT,
+
+asset
+
+TEXT,
+
+metric_value
+
+NUMERIC(20,8),
+
+threshold_value NUMERIC(20,8),
+message
+
+TEXT NOT NULL,
+
+status
+
+TEXT DEFAULT 'open',
+
+action_triggered TEXT
+);
+
+Model artifact storage: MLflow + MinIO
+Store model weights in MinIO (self-hosted S3-compatible object storage) with MLflow
+Model Registry for versioning.
+
+MinIO
+
+Database BLOBs are wrong for binary model
+
+files—they bloat the database and slow backups. MLflow provides staging workflows
+(Development → Staging → Production → Archived)
+
+Medium
+
+and
+
+@champion / @challenger aliases for blue-green deployment. Introl
+# Add to docker-compose.yml
+mlflow:
+image: ghcr.io/mlflow/mlflow:latest
+ports: ["5000:5000"]
+environment:
+MLFLOW_BACKEND_STORE_URI: postgresql://gold:secret@pg-primary:5432/mlflow
+MLFLOW_ARTIFACT_ROOT: s3://mlflow-artifacts/
+MLFLOW_S3_ENDPOINT_URL: http://minio:9000
+command: mlflow server --host 0.0.0.0
+minio:
+image: minio/minio:latest
+ports: ["9000:9000", "9001:9001"]
+command: server /data --console-address ":9001"
+volumes: [minio_data:/data]
+
+Storage estimate: ~190GB for 2 years of weekly retraining across all 60 model
+instances, before compression.
+
+6. Three-tier monitoring uses Grafana, Streamlit, and React
+together
+Rather than choosing one dashboard technology, assign each a distinct role:
+Technology
+
+Role
+
+Why
+
+Real-time alerts,
+
+Already deployed with Prometheus. Connect
+
+Grafana
+
+infrastructure
+
+directly to PostgreSQL/TimescaleDB as data
+
+(port 3000)
+
+metrics, drift
+
+source for ML metrics. Native alerting with
+
+monitoring
+
+webhook triggers for auto-retrain
+
+Interactive ML
+Streamlit
+(port 8501)
+
+analysis,
+backtesting deepdives, model
+
+Already deployed. Python-native for data
+scientists. Best for ad-hoc investigation
+
+comparison
+End-user facing
+React (35+
+
+predictions,
+
+Already built. Embed Grafana panels via iframe
+
+pages)
+
+portfolio views,
+
+where needed
+
+news sentiment
+
+Dashboard layout
+Executive Overview tab: Status cards per asset (price, 24h change, model health as
+green/yellow/red), predicted vs actual overlay chart (last 30 days), model accuracy
+heatmap (rows=models, columns=assets, cells colored by MAPE), and recent alerts
+ticker.
+Model Performance tab: MAPE/RMSE trend lines per model over 90 days, directional
+accuracy bar charts, confidence interval fan charts with 80%/95% bands, and predicted
+vs actual scatter plots.
+Training & Drift tab: Gantt chart of recent training jobs with status colors, overlaid
+train/validation loss curves, PSI and KS-statistic time series per model, ensemble weight
+history as stacked area charts.
+News & Sentiment tab: Sentiment timeline overlaid with price per asset, correlation
+charts (sentiment score vs next-day price move), live news feed with sentiment
+indicators.
+
+Alert thresholds for financial models
+
+Metric
+
+Warning
+
+Critical
+
+MAPE (crypto)
+
+>10%
+
+>15%
+
+MAPE (forex)
+
+>5%
+
+>8%
+
+Directional accuracy
+
+<55%
+
+<50% (worse than coin flip)
+
+PSI drift score
+
+>0.10
+
+>0.20
+
+Model staleness
+
+>7 days
+
+>14 days since retrain
+
+Ensemble weight shift
+
+>15% change
+
+>25% change
+
+When Grafana alerts fire, they trigger webhooks that call Celery tasks for automatic
+retraining. The full loop: Grafana alert → webhook → Celery retrain task → MLflow
+register → validate against champion → promote or reject → update alerts table.
+MLops, Data Science
+
+7. Connecting FastAPI and Express/tRPC with resilient
+inter-service communication
+Since tRPC is TypeScript-only, the Express backend acts as a BFF (Backend-forFrontend) that proxies requests to FastAPI via standard REST/HTTP. For this twoservice architecture, REST outperforms gRPC in simplicity with negligible latency
+differences on payloads under 100KB. No separate API gateway is needed.
+
+Prediction routing by horizon
+Horizon
+
+Timeout
+
+Strategy
+
+7 days
+
+15s
+
+Synchronous HTTP with retry
+
+30 days
+
+30s
+
+Sync with async fallback
+
+90 days
+
+N/A
+
+Always async (Celery job queue)
+
+For 90-day ensemble predictions that take 1-5 minutes, the pattern is submit job →
+poll/subscribe for results:
+// tRPC router
+
+export const predictionsRouter = router({
+generate: protectedProcedure
+.input(predictionRequestSchema)
+.mutation(async ({ input }) => {
+if (input.horizon === '7d') {
+return await predictionBreaker.fire({
+method: 'POST', url: '/predictions/sync', data: input
+});
+}
+// 30d/90d: submit async job
+const { data } = await mlClient.post('/predictions/async', input);
+return { jobId: data.job_id, status: 'queued' };
+}),
+onPredictionComplete: protectedProcedure
+.input(z.object({ jobId: z.string() }))
+.subscription(async function* ({ input, signal }) {
+while (!signal?.aborted) {
+const status = await checkJobStatus(input.jobId);
+yield tracked(input.jobId, status);
+if (status.status === 'completed' || status.status === 'failed') break;
+await new Promise(r => setTimeout(r, 2000));
+}
+}),
+});
+
+Circuit breaker with cached fallback
+The Express backend wraps all FastAPI calls in a circuit breaker (using opossum ). When
+the ML service is down, the breaker opens after 50% failure rate and returns cached
+predictions with a staleness badge. Retry uses exponential backoff with jitter (2s, 4s,
+8s base delays + random 0-1s jitter).
+
+Real-time price updates via tRPC subscriptions (SSE)
+FastAPI publishes price updates to Redis PubSub channels ( price:gold ,
+price:bitcoin , etc.). Express subscribes to these channels and exposes them as tRPC
+
+subscription endpoints using Server-Sent Events. tRPC v11’s tracked() helper handles
+reconnection automatically—when a client disconnects and reconnects, it sends the last
+known event ID, and the server replays missed events from a Redis buffer.
+
+AI assistant integration
+Goldy (Claude) and Free (Gemini) should receive ensemble predictions only (not raw
+model outputs) to reduce noise and token cost. The context payload includes: current
+
+price, 24h/7d change, ensemble prediction with confidence intervals, model agreement
+status, news sentiment summary (aggregate score + top 3 headlines), and directional
+accuracy metrics. Rate limits: 5 Goldy calls/day for free users, 50 for premium; 50 Free
+calls/day for free users, 200 for premium.
+
+8. Complete API endpoint catalog
+FastAPI ML Backend (port 8001)
+Predictions: POST /api/v1/predictions/sync (7d), POST /api/v1/predictions/async
+(30d/90d), GET /api/v1/predictions/{job_id}/status , GET
+/api/v1/predictions/{job_id}/result , POST /api/v1/predictions/batch , GET
+/api/v1/predictions/latest/{asset}
+
+Training: POST /api/v1/training/start , POST /api/v1/training/{job_id}/stop , GET
+/api/v1/training/{job_id}/status , GET /api/v1/training/history
+
+Models: GET /api/v1/models/health , GET /api/v1/models/{model}/metrics , GET
+/api/v1/models/{model}/drift , GET /api/v1/models/{model}/versions , POST
+/api/v1/models/{model}/versions/{v}/rollback
+
+Ensemble: GET /api/v1/ensemble/weights , PUT /api/v1/ensemble/weights , POST
+/api/v1/ensemble/optimize
+
+News: GET /api/v1/news/{asset}/sentiment , GET /api/v1/news/{asset}/articles , GET
+/api/v1/news/trending
+
+System: GET /api/v1/health , GET /api/v1/health/ready , GET /api/v1/metrics
+(Prometheus), GET /docs (OpenAPI)
+
+Realistic accuracy benchmarks and common pitfalls
+Professional quant firms expect these ranges for financial prediction:
+Asset
+
+7-day MAPE
+
+30-day MAPE
+
+7-day Direction
+
+90-day Direction
+
+Gold
+
+2-4%
+
+4-8%
+
+60-65%
+
+50-55%
+
+Bitcoin
+
+5-10%
+
+10-20%
+
+55-60%
+
+50-52%
+
+EGP/TRY
+
+1-3%
+
+3-7%
+
+58-63%
+
+50-55%
+
+Claims of >70% directional accuracy on 90-day horizons for volatile assets
+should be treated with extreme skepticism—this almost always indicates overfitting,
+lookahead bias, or data snooping. The five critical pitfalls to guard against: lookahead
+bias (using future data in features—enforce strict temporal train/test splits),
+survivorship bias (use point-in-time data), overfitting (ensemble methods and walkforward validation mitigate this), data snooping (document all experiments, use
+Bonferroni correction), and narrative bias (LLMs rationalizing predictions post-hoc—
+separate prediction from explanation).
+
+Conclusion
+The architecture converges on several non-obvious decisions. One Docker image with
+CUDA PyTorch serves both GPU and CPU machines—GPU override files handle the
+rest. Celery + Redis beats APScheduler for ML training because distributed locking,
+task chaining, and failure recovery matter at scale. TimescaleDB as a PostgreSQL
+extension avoids a database migration while delivering 20× faster time-series queries
+through hypertable partitioning and continuous aggregates. Three dashboard
+technologies aren’t redundant—Grafana handles alerting, Streamlit handles
+interactive analysis, and React serves end users. The Express backend is inherently a
+BFF that proxies to FastAPI via REST; no API gateway needed for two services. And
+dynamic news caching based on market hours, volatility, and article velocity
+dramatically outperforms any fixed TTL. Together, these choices create a system where
+models retrain themselves when drift is detected, news sentiment feeds prediction
+features in real time across two languages, and the entire pipeline is observable from
+training loss curves to production prediction accuracy.
+
+

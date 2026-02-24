@@ -1,0 +1,36 @@
+# Search Container Requirements — v2026.2 (Updated Feb 2026)
+# PRIMARY: Crawl4AI (VLM-powered, free, local)
+# SECONDARY: Firecrawl (99% success, anti-bot)
+# FALLBACK: Playwright (full browser)
+# SMART: ScrapeGraphAI (natural language extraction)
+
+# === Core Framework ===
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+celery[redis]>=5.6.2
+
+# === Scraping Engines (2026) ===
+crawl4ai>=0.4.0
+firecrawl-py>=1.5.0
+scrapegraphai>=1.30.0
+playwright>=1.49.0
+beautifulsoup4>=4.12.0
+
+# === HTTP & Networking ===
+httpx>=0.28.0
+aiohttp>=3.11.0
+lxml>=5.3.0
+
+# === Search APIs ===
+google-api-python-client>=2.150.0
+
+# === Data Processing ===
+pydantic>=2.10.0
+python-dotenv>=1.0.1
+
+# === Compliance ===
+presidio-analyzer>=2.2.351
+presidio-anonymizer>=2.2.351
+
+# === Logging ===
+structlog>=24.0.0

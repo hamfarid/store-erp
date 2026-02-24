@@ -1,19 +1,24 @@
-# React Component Structure
+# ⚛️ React Component Structure (Global System v26 Diamond 32)
 
-## Folder Structure
+**Status:** MANDATORY
+**Enforcement:** Automated by Sentinel (Linter)
 
-\`\`\`
+## 1. The Philosophy
+A component is a self-contained universe. It owns its styles, tests, and logic.
+
+## 2. Folder Structure (The Pod)
+Every component MUST live in its own directory:
+```
 components/
 ├── Button/
-│   ├── Button.tsx
-│   ├── Button.test.tsx
-│   ├── Button.module.css
-│   └── index.ts
-\`\`\`
+│   ├── Button.tsx        # Logic & View
+│   ├── Button.test.tsx   # Verification
+│   ├── Button.module.css # Styles (if not using Tailwind)
+│   └── index.ts          # Public API
+```
 
-## Component Example
-
-\`\`\`typescript
+## 3. Component Example
+```typescript
 // Button.tsx
 import React from 'react';
 import styles from './Button.module.css';
@@ -31,21 +36,22 @@ export const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   disabled = false
 }) => {
+  // Sentinel Check: Accessibility attributes are mandatory
   return (
     <button
-      className={\`\${styles.button} \${styles[variant]}\`}
+      className={`${styles.button} ${styles[variant]}`}
       onClick={onClick}
       disabled={disabled}
+      aria-label={label}
     >
       {label}
     </button>
   );
 };
-\`\`\`
+```
 
-## Test Example
-
-\`\`\`typescript
+## 4. Test Example (Mandatory)
+```typescript
 // Button.test.tsx
 import { render, fireEvent } from '@testing-library/react';
 import { Button } from './Button';
@@ -57,4 +63,4 @@ test('calls onClick when clicked', () => {
   fireEvent.click(getByText('Click me'));
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
-\`\`\`
+```

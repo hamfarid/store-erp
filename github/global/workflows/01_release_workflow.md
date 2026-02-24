@@ -1,45 +1,48 @@
-# Release Workflow
+# Release Workflow (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-This workflow guides the process of creating a new production release.
+This workflow defines how the **Swarm of Agents** collaborates to release software. It is not just a list of commands; it is a cognitive relay race.
 
-## Steps
+## 🔄 The Swarm Relay
 
-1. **Verify All Tests Pass**
-   - Run: `npm test` or `pytest`
-   - Ensure 100% pass rate
+### Phase 1: The Planner (Strategic Prep)
+*   **Goal:** Confirm readiness for release.
+*   **Action:**
+    1.  Analyze `CHANGELOG.md` vs. `git log`. Are we missing anything?
+    2.  Check `PLAN.md` status. Are all tasks marked `[x]`?
+    3.  **Decision:** If gaps exist, abort release. If ready, trigger Phase 2.
 
-2. **Check Code Coverage**
-   - Run: `npm run coverage`
-   - Ensure >= 80%
+### Phase 2: The Executor (Build & Package)
+*   **Goal:** Create the artifact.
+*   **Action:**
+    1.  **Bump Version:** `npm version patch` / `bump2version`.
+    2.  **Build:** `npm run build` or `docker build`.
+    3.  **Self-Correction:** If build fails, fix it immediately (do not pass to Reviewer).
 
-3. **Run Security Scan**
-   - Run: `npm audit` or `safety check`
-   - Fix all critical and high vulnerabilities
+### Phase 3: The Reviewer (Audit & Test)
+*   **Goal:** Verify the artifact.
+*   **Action:**
+    1.  **Automated Checks:** `python3 global_system/tools/speckit.py verify`.
+    2.  **Coverage Check:** Ensure test coverage >= 80%.
+    3.  **Security Scan:** Run `npm audit` or `safety check`.
+    4.  **Output:** `REVIEW_LOG.md` (Pass/Fail).
 
-4. **Update Version**
-   - Run: `npm version patch` (or `minor`, `major`)
-   - Update CHANGELOG.md
+### Phase 4: The Critic (Final Gate)
+*   **Goal:** Zero-Error Approval.
+*   **Action:**
+    1.  **Sentinel Check:** `python3 global_system/tools/sentinel.py`.
+    2.  **Semantic Check:** Does the release match the Planner's intent?
+    3.  **The Button:**
+        *   **VETO:** Rollback.
+        *   **APPROVE:** `git push --tags` & Deploy.
 
-5. **Build Production Assets**
-   - Run: `npm run build`
-   - Verify no errors
+## 🚀 Deployment Commands (Only after Critic Approval)
+```bash
+# 1. Tag
+git tag -a Global System v26 Diamond 32 -m "Swarm Release Global System v26 Diamond 32"
 
-6. **Create Git Tag**
-   - Run: `git tag -a v1.0.0 -m "Release v1.0.0"`
-   - Push: `git push origin v1.0.0`
+# 2. Push
+git push origin Global System v26 Diamond 32
 
-7. **Deploy to Staging**
-   - Run: `kubectl apply -f k8s/staging/`
-   - Verify deployment
-
-8. **Run Smoke Tests**
-   - Execute E2E tests on staging
-   - Verify critical paths
-
-9. **Deploy to Production**
-   - Run: `kubectl apply -f k8s/production/`
-   - Monitor logs and metrics
-
-10. **Create Release Notes**
-    - Document new features, bug fixes, and breaking changes
-    - Publish on GitHub Releases
+# 3. Deploy (Example)
+kubectl apply -f k8s/production/
+```

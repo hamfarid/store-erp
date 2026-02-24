@@ -1,3 +1,5 @@
+# Security Guidelines
+
 > This is a template. Fill this out for your specific project.
 
 # Security Guidelines
@@ -44,7 +46,7 @@ This document outlines the security guidelines and best practices to be followed
 
 ## 4. Security Checklist
 
-Refer to the [Deployment Checklist](./DEPLOYMENT_CHECKLIST.md) for a pre-deployment security checklist.
+Refer to the [Deployment Checklist](../DEPLOYMENT_INSTRUCTIONS.md) for a pre-deployment security checklist.
 
 ## 5. Reporting a Vulnerability
 

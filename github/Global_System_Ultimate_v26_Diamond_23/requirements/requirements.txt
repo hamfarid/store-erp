@@ -1,0 +1,41 @@
+# 📦 Global System Ultimate v15.9.8 - Verified Feb 2026 Requirements
+# Use `uv pip install -r requirements.txt` for fast installation.
+
+# --- 🚀 Core Framework ---
+fastapi>=0.129.0  # Verified Feb 2026 Standard (FastAPI>=0.129)
+uvicorn[standard]>=0.34.0
+pydantic>=2.10.0
+pydantic-settings>=2.7.0
+
+# --- 🧠 AI & Agents ---
+langchain>=0.4.0
+langchain-community>=0.4.0
+langchain-ollama>=0.2.0
+chromadb>=0.6.0
+tiktoken>=0.8.0
+
+# --- 🔌 Networking & Async ---
+aiohttp>=3.11.0
+httpx>=0.28.0
+redis>=5.2.0  # Async support included
+
+# --- 🛠️ Tooling & DevOps (2026 Standards) ---
+structlog>=24.4.0
+typer>=0.15.0
+python-dotenv>=1.0.1
+ruff>=0.15.1  # Replaces black/flake8 (Feb 2026 Standard)
+bandit>=1.9.3 # Security scanning (Jan 2026)
+
+# --- 🧪 Testing (EDD Support) ---
+pytest>=8.3.0
+pytest-asyncio>=0.25.0
+pytest-cov>=6.0.0
+promptfoo>=0.40.0 # For EDD (Evaluation-Driven Development)
+
+# --- 📊 Data & Analysis ---
+pandas>=2.2.0
+numpy>=2.1.0
+
+# --- 🌐 MCP Support (Expanded) ---
+mcp>=1.2.0  # Nov 2025 Spec
+# Additional MCP servers should be installed via npm/docker

@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # 🧠 The Global Brain (Vector DB)
+  global_chroma:
+    image: chromadb/chroma:latest
+    container_name: global_chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - global_chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+    restart: always
+    deploy:
+      update_config:
+        order: start-first
+        failure_action: rollback
+    networks:
+      - global_neural_net
+
+  # 🦙 The Global Voice (LLM Runner)
+  global_ollama:
+    image: ollama/ollama:latest
+    container_name: global_ollama
+    ports:
+      - "8200:11434"
+    volumes:
+      - global_ollama_data:/root/.ollama
+    restart: always
+    deploy:
+      update_config:
+        order: start-first
+        failure_action: rollback
+    networks:
+      - global_neural_net
+
+  # ⚡ The Global Reflex (Cache/Queue)
+  global_redis:
+    image: redis:alpine
+    container_name: global_redis
+    ports:
+      - "11000:6379"
+    volumes:
+      - global_redis_data:/data
+    restart: always
+    deploy:
+      update_config:
+        order: start-first
+        failure_action: rollback
+    networks:
+      - global_neural_net
+
+  # 🌐 The Global Gateway (Nginx)
+  global_nginx:
+    image: nginx:alpine
+    container_name: global_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - /home/ubuntu/user_upload_analysis/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - global_ollama
+      - global_redis
+    networks:
+      - global_neural_net
+
+volumes:
+  global_chroma_data:
+  global_ollama_data:
+  global_redis_data:
+
+networks:
+  global_neural_net:
+    driver: bridge

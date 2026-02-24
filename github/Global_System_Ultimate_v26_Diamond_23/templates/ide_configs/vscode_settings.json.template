@@ -1,0 +1,19 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.python",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/__pycache__": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true
+    },
+    "mcp.enabled": true,
+    "mcp.configPath": "${workspaceFolder}/mcp_config.json",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "workbench.colorTheme": "Default Dark Modern"
+}

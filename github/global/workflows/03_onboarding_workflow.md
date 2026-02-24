@@ -1,42 +1,34 @@
-# Onboarding Workflow
+# Onboarding Workflow (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-This workflow helps new developers get up to speed with the project.
+This workflow helps new developers (and AI agents) get up to speed with the project using the **Agentic Engine**.
 
 ## Steps
 
-1. **Read Core Documentation**
+1. **Initialize the Agentic Engine**
+   - **Command:** `python3 global/tools/lifecycle.py <project_name> "Initialize Global System v26 Diamond 32"`
+   - This sets up the memory structure and logs the start.
+
+2. **Read Core Documentation**
    - Read: `README.md`
-   - Read: `docs/ARCHITECTURE.md`
-   - Read: `GLOBAL_PROFESSIONAL_CORE_PROMPT.md`
+   - Read: `global/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md`
+   - Read: `global/BOOTSTRAP.md`
 
-2. **Set Up Development Environment**
-   - Install dependencies: `npm install` or `pip install -r requirements.txt`
+3. **Set Up Development Environment**
+   - Install dependencies: `pip install -r requirements.txt`
    - Set up environment variables (copy `.env.example` to `.env`)
-   - Set up database: `npm run db:setup`
 
-3. **Run the Application Locally**
-   - Start backend: `npm run dev:backend`
-   - Start frontend: `npm run dev:frontend`
-   - Verify application runs without errors
+4. **Run Speckit Analysis**
+   - **Command:** `python3 global/tools/speckit.py analyze`
+   - This maps the codebase and creates `project_memory.md`.
 
-4. **Run Tests**
-   - Run unit tests: `npm test`
-   - Run E2E tests: `npm run test:e2e`
-   - Ensure all tests pass
-
-5. **Explore the Codebase**
-   - Review: `docs/PROJECT_MAPS.md`
-   - Understand folder structure
-   - Identify key components and modules
+5. **Run Verification**
+   - **Command:** `python3 global/tools/speckit.py verify`
+   - Ensure the codebase is clean (Sentinel Check).
 
 6. **Complete a Starter Task**
-   - Pick a "good first issue" from the issue tracker
-   - Create a feature branch
-   - Implement the fix/feature
-   - Write tests
-   - Submit a pull request
+   - Pick a task from `todo.md`.
+   - Use `speckit.py implement` to execute it.
 
 7. **Review Team Workflows**
-   - Read: `docs/CONTRIBUTING.md`
-   - Understand Git workflow
-   - Learn code review process
+   - Understand the **Zero-Error Policy**.
+   - Learn the **Sequential Thinking** process.

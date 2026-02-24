@@ -1,44 +1,47 @@
-# 📐 Blueprint Development Workflow
+# 📐 Blueprint Development Workflow (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-**Version:** 9.0.0  
-**Expert:** Backend Expert  
-**Estimated Time:** 2-4 hours
+**Version:** 37.0.0
+**Expert:** Backend Expert
+**Tools:** Speckit Global System v26 Diamond 32, Sentinel
 
 ---
 
 ## Workflow
 
 ```
-Plan → Structure → Implement → Register
+Analyze (Speckit) → Plan (Sequential) → Implement (Speckit) → Verify (Sentinel)
 ```
 
-## Phase 1: Plan Module
-1. Define purpose
-2. List routes
-3. Identify dependencies
+## Phase 1: Analyze & Plan (Speckit)
+1. **Analyze:** `python3 global/tools/speckit.py analyze`
+   - Map existing blueprints.
+   - Identify dependencies.
+2. **Plan:** Define routes and models in `todo.md`.
 
-## Phase 2: Create Structure
-```
-blueprint_name/
-├── __init__.py
-├── routes.py
-├── models.py (if needed)
-├── forms.py (if needed)
-└── templates/ (if needed)
-```
+## Phase 2: Create Structure (Librarian Protocol)
+1. **Check Registry:** Ensure no duplicate blueprints exist.
+2. **Structure:**
+   ```
+   blueprint_name/
+   ├── __init__.py
+   ├── routes.py
+   ├── models.py
+   ├── schemas.py (Pydantic)
+   └── tests/
+   ```
 
-## Phase 3: Implement
-1. Create blueprint
-2. Define routes
-3. Implement views
-4. Add templates
+## Phase 3: Implement (Speckit)
+1. **Command:** `python3 global/tools/speckit.py implement`
+2. **Standards:**
+   - Use Pydantic for validation.
+   - Use Dependency Injection.
 
-## Phase 4: Register & Test
-1. Register with app
-2. Test routes
-3. Document
-4. Deploy
+## Phase 4: Verify (Sentinel)
+1. **Command:** `python3 global/tools/speckit.py verify`
+   - **Sentinel:** Check for secrets/TODOs.
+   - **CodeRabbit:** Check for logic errors.
+   - **Tests:** Run `pytest blueprint_name/tests/`.
 
 ---
 
-*Modular Flask/Django blueprint development.*
+*Modular Flask/FastAPI blueprint development under Singularity Standards.*

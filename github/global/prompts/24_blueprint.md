@@ -1,8 +1,10 @@
+# Prompt 24: Blueprint Patterns
+
 ================================================================================
 BLUEPRINT PATTERNS - Project Templates and Scaffolding
 ================================================================================
 
-Version: Latest
+Version: 5.3.0
 Module: 14_blueprint.txt
 Purpose: Blueprint patterns for rapid project scaffolding and code generation
 Status: Production Ready
@@ -386,7 +388,7 @@ python_functions = "test_*"
 ```yaml
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 
+    rev: Global System v26 Diamond 32
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -398,7 +400,7 @@ repos:
       - id: debug-statements
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 
+    rev: Global System v26 Diamond 32
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]

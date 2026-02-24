@@ -2,7 +2,7 @@
 PROJECT TEMPLATES - ERP, Web, AI, ML
 =================================================================================
 
-Version: Latest
+Version: 5.0.0
 Type: Templates
 
 Comprehensive project templates for rapid development.

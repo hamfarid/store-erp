@@ -1,0 +1,193 @@
+# Global System v26 Diamond 32 - Manual Audit Checklist
+
+## 1. Root & Core Config Files
+- [ ] `.augment/rules/RULES-context-engineering.md` (Check for identity, version, memory path)
+- [ ] `.augment/rules/100-evolution-engine.md` (Check for identity, version, memory path)
+- [ ] `.augment/rules/mcp.md` (Check for identity, version, memory path)
+- [ ] `.augment/rules/safe-updates.md` (Check for identity, version, memory path)
+- [ ] `.augment/rules/coding-standards.md` (Check for identity, version, memory path)
+- [ ] `.augment/rules/dependency-management.md` (Check for identity, version, memory path)
+- [ ] `.clinerules/00-iron-rules.md` (Check for identity, version, memory path)
+- [ ] `.cursor/mcp.json` (Check for valid JSON, paths)
+- [ ] `.cursor/rules/01-coding-standards.md` (Check for identity, version, memory path)
+- [ ] `.docs/README.md` (Check for identity, version, memory path)
+- [ ] `AGENTS.md` (Check for identity, version, memory path, broken links)
+- [ ] `AI_CONTEXT_ROUTER.md` (Check for identity, version, memory path, broken links)
+- [ ] `AI_HANDBOOK.md` (Check for identity, version, memory path, broken links)
+- [ ] `BOOTSTRAP.md` (Check for identity, version, memory path, broken links)
+- [ ] `CLAUDE.md` (Check for identity, version, memory path, broken links)
+- [ ] `INSTALL_GUIDE.md` (Check for identity, version, memory path, broken links)
+- [ ] `INVENTORY.md` (Check for identity, version, memory path, broken links)
+- [ ] `MASTER_TASK_LIST.md` (Check for identity, version, memory path, broken links)
+- [ ] `README.md` (Check for identity, version, memory path, broken links)
+- [ ] `README_GITHUB.md` (Check for identity, version, memory path, broken links)
+- [ ] `USER_COMMANDS.md` (Check for identity, version, memory path, broken links)
+- [ ] `WHAT_TO_SAY_TO_THE_AI.md` (Check for identity, version, memory path, broken links)
+- [ ] `mcp_config.json` (Check for valid JSON, paths, secrets)
+- [ ] `kiro.yaml` (Check for valid YAML, paths)
+- [ ] `kilo.json` (Check for valid JSON, paths)
+
+## 2. Documentation & Knowledge Base
+- [ ] `knowledge/core/01_osf_framework.md`
+- [ ] `knowledge/core/02_zero_tolerance_rules.md`
+- [ ] `knowledge/development/03_frontend_architecture.md`
+- [ ] `knowledge/development/04_backend_architecture.md`
+- [ ] `knowledge/development/05_testing_strategy.md`
+- [ ] `knowledge/best_practices/06_security_best_practices.md`
+- [ ] `knowledge/development/07_git_workflow.md`
+- [ ] `knowledge/operations/08_deployment_checklist.md`
+- [ ] `knowledge/development/09_error_handling.md`
+- [ ] `knowledge/technical/10_performance_optimization.md`
+- [ ] `knowledge/technical/11_nx_monorepo.md`
+- [ ] `knowledge/technical/12_supabase_integration.md`
+- [ ] `knowledge/technical/13_playwright_testing.md`
+- [ ] `knowledge/technical/14_speckit_documentation.md`
+- [ ] `knowledge/technical/15_firecrawl_research.md`
+- [ ] `knowledge/core/16_sequential_thinking.md`
+- [ ] `knowledge/technical/api_docs_search.md`
+- [ ] `knowledge/core/environment.md`
+- [ ] `knowledge/core/mcp.md`
+- [ ] `knowledge/core/memory.md`
+- [ ] `knowledge/development/README.md`
+- [ ] `knowledge/technical/function_reference.md`
+- [ ] `knowledge/operations/README.md`
+- [ ] `knowledge/protocols/chain_of_vibes.md`
+- [ ] `knowledge/protocols/test_first.md`
+- [ ] `knowledge/technical/README.md`
+- [ ] `knowledge/templates/ARCHITECTURE.md`
+- [ ] `knowledge/templates/DECISIONS_LOG.md`
+- [ ] `knowledge/templates/HANDOFF.md`
+- [ ] `knowledge/templates/PROGRESS_TRACKER.md`
+- [ ] `knowledge/templates/PROJECT_PLAN.md`
+- [ ] `knowledge/workflows/AI_RAG_WORKFLOW.md`
+- [ ] `knowledge/workflows/API_WORKFLOW.md`
+- [ ] `knowledge/workflows/BACKEND_WORKFLOW.md`
+- [ ] `knowledge/workflows/CLI_WORKFLOW.md`
+- [ ] `knowledge/workflows/DATABASE_WORKFLOW.md`
+- [ ] `knowledge/workflows/DEVOPS_WORKFLOW.md`
+- [ ] `knowledge/workflows/FRONTEND_WORKFLOW.md`
+- [ ] `knowledge/workflows/SECURITY_WORKFLOW.md`
+- [ ] `knowledge/workflows/TESTING_WORKFLOW.md`
+- [ ] `knowledge/workflows/full_project.md`
+- [ ] `knowledge/workflows/project_initialization.md`
+
+## 3. Tools & Scripts
+- [ ] `tools/activate_global.py`
+- [ ] `tools/augment.py`
+- [ ] `tools/checkpoint_manager.py`
+- [ ] `tools/compliance_checker.py`
+- [ ] `tools/context_budget.py`
+- [ ] `tools/doc_injector.py`
+- [ ] `tools/error_learner.py`
+- [ ] `tools/file_cleanup.py`
+- [ ] `tools/genesis.py`
+- [ ] `tools/log_analyzer.py`
+- [ ] `tools/preflight_check.py`
+- [ ] `tools/remove_versions.py`
+- [ ] `tools/speckit.py`
+- [ ] `tools/verify_all_imports.py`
+- [ ] `scripts/activate_global.py`
+- [ ] `scripts/download_global_from_github.sh`
+- [ ] `antigravity.py`
+
+## 4. Memory Bank & Tasks
+- [ ] `memory-bank/README.md`
+- [ ] `memory-bank/README_PROFESSIONAL.md`
+- [ ] `memory-bank/activeContext.md`
+- [ ] `memory-bank/coordination.md`
+- [ ] `memory-bank/decisionLog.md`
+- [ ] `memory-bank/knowledge/core/memory.md`
+- [ ] `memory-bank/knowledge/lessons_learned/README.md`
+- [ ] `memory-bank/knowledge/best_practices/README.md`
+- [ ] `memory-bank/knowledge/lessons_learned/README.md`
+- [ ] `memory-bank/knowledge/best_practices/README.md`
+- [ ] `memory-bank/knowledge/solutions/README.md`
+- [ ] `memory-bank/lessons.md`
+- [ ] `memory-bank/productContext.md`
+- [ ] `memory-bank/progress.md`
+- [ ] `memory-bank/projectBrief.md`
+- [ ] `memory-bank/systemContext.md`
+- [ ] `memory-bank/systemPatterns.md`
+- [ ] `memory-bank/techContext.md`
+- [ ] `tasks/tasks.md`
+- [ ] `TASKS/BOOTSTRAP_LIFECYCLE.md`
+- [ ] `TASKS/UNIVERSAL_LIFECYCLE.md`
+
+## 5. Prompts (Sample Check)
+- [ ] `prompts/00_MASTER.md`
+- [ ] `prompts/00_PRIORITY_ORDER.md`
+- [ ] `prompts/01_memory_management.md`
+- [ ] `prompts/02_mcp.md`
+- [ ] `prompts/03_mcp_integration.md`
+- [ ] `prompts/04_thinking_framework.md`
+- [ ] `prompts/05_context_engineering.md`
+- [ ] `prompts/06_task_ai.md`
+- [ ] `prompts/07_code_generation.md`
+- [ ] `prompts/08_agentic_workflows.md`
+- [ ] `prompts/09_code_review.md`
+- [ ] `prompts/10_requirements.md`
+- [ ] `prompts/11_analysis.md`
+- [ ] `prompts/12_planning.md`
+- [ ] `prompts/13_path_and_import_tracing.md`
+- [ ] `prompts/13_path_and_import_tracing.md`
+- [ ] `prompts/14_sprint_planning.md`
+- [ ] `prompts/15_progress_tracking.md`
+- [ ] `prompts/16_risk_management.md`
+- [ ] `prompts/17_dependency_management.md`
+- [ ] `prompts/18_version_control.md`
+- [ ] `prompts/19_release_management.md`
+- [ ] `prompts/20_backend.md`
+- [ ] `prompts/21_frontend.md`
+- [ ] `prompts/22_database.md`
+- [ ] `prompts/23_api.md`
+- [ ] `prompts/24_blueprint.md`
+- [ ] `prompts/25_api_idempotency.md`
+- [ ] `prompts/25_api_idempotency.md`
+- [ ] `prompts/26_docker.md`
+- [ ] `prompts/27_monitoring.md`
+- [ ] `prompts/28_performance.md`
+- [ ] `prompts/29_backup_recovery.md`
+- [ ] `prompts/30_security.md`
+- [ ] `prompts/31_authentication.md`
+- [ ] `prompts/32_encryption.md`
+- [ ] `prompts/33_authorization.md`
+- [ ] `prompts/34_input_validation.md`
+- [ ] `prompts/35_audit_logging.md`
+- [ ] `prompts/36_vulnerability_scanning.md`
+- [ ] `prompts/37_penetration_testing.md`
+- [ ] `prompts/38_compliance.md`
+- [ ] `prompts/39_incident_response.md`
+- [ ] `prompts/40_quality.md`
+- [ ] `prompts/41_testing.md`
+- [ ] `prompts/42_e2e_testing.md`
+- [ ] `prompts/43_ui_ux_testing.md`
+- [ ] `prompts/44_database_testing.md`
+- [ ] `prompts/41_testing.md`
+- [ ] `prompts/46_integration_testing.md`
+- [ ] `prompts/47_load_testing.md`
+- [ ] `prompts/48_regression_testing.md`
+- [ ] `prompts/49_acceptance_testing.md`
+- [ ] `prompts/50_deployment.md`
+- [ ] `prompts/51_api_versioning.md`
+- [ ] `prompts/52_caching.md`
+- [ ] `prompts/53_rate_limiting.md`
+- [ ] `prompts/54_websockets.md`
+- [ ] `prompts/55_file_upload.md`
+- [ ] `prompts/56_email_system.md`
+- [ ] `prompts/57_search.md`
+- [ ] `prompts/58_notifications.md`
+- [ ] `prompts/59_analytics.md`
+- [ ] `prompts/60_gaara_ai_architecture.md`
+- [ ] `prompts/61_fastapi_gateway.md`
+- [ ] `prompts/62_ollama_llm_integration.md`
+- [ ] `prompts/63_rag_pipeline.md`
+- [ ] `prompts/64_celery_task_management.md`
+- [ ] `prompts/65_plant_doctor_ai.md`
+- [ ] `prompts/66_web_scraping_pipeline.md`
+- [ ] `prompts/67_image_processing_ocr.md`
+- [ ] `prompts/68_avatar_tts.md`
+- [ ] `prompts/69_drift_detection.md`
+- [ ] `prompts/70_tailscale_cloudflare.md`
+- [ ] `prompts/71_memory_save.md`
+- [ ] `prompts/76_docs_folder.md`
+- [ ] `prompts/73_structured_logging.md`

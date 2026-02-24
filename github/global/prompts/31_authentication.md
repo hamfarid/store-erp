@@ -1,8 +1,10 @@
+# Prompt 31: Authentication Systems
+
 =================================================================================
 AUTHENTICATION SYSTEMS - JWT, OAuth, Social Auth
 =================================================================================
 
-Version: Latest
+Version: 5.0.0
 Type: Security - Authentication
 
 Detailed guidance for implementing authentication systems.
@@ -293,13 +295,13 @@ Module: {module}
 Created: {date}
 Last Modified: {date}
 Author: {author}
-Description: TODO: Add description
+Description: Authentication flow implementation for Django and FastAPI services.
 
 Dependencies:
-- TODO: List dependencies
+- python-jose, passlib, python-multipart, fastapi-security
 
 Related Files:
-- TODO: List related files
+- rules/security.md, knowledge/core/environment.md
 """
 
 '''

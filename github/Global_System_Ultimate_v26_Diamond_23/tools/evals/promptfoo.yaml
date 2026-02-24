@@ -1,0 +1,16 @@
+# Promptfoo Configuration (Eval-Driven Development)
+# Reference: Area 5 of 2026 Framework
+
+prompts: [prompts/*.txt]
+providers: [openai:gpt-4o, anthropic:claude-3-5-sonnet-20240620]
+
+tests:
+  - description: "Basic Code Generation Test"
+    vars:
+      task: "Write a Python function to calculate Fibonacci numbers"
+    assert:
+      - type: is-json
+      - type: python-function
+        value: |
+          def validate(output):
+              return "def fibonacci" in output

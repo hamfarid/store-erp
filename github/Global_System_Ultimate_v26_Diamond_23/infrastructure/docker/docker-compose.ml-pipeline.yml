@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.10.0
+    ports: ["5000:5000"]
+    command: mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns
+
+  training:
+    build:
+      context: .
+      dockerfile: Dockerfile.ml-training
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - ./data:/app/data
+      - ./mlruns:/app/mlruns
+    depends_on:
+      - mlflow
+
+  serving:
+    image: kserve/kserve-inference-service:v0.11
+    ports: ["8080:8080"]
+    environment:
+      - MODEL_NAME=my-model
+      - SERVICE_TYPE=MODEL

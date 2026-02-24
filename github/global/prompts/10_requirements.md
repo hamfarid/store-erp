@@ -1,8 +1,10 @@
+# Prompt 10: Requirements Gathering
+
 =================================================================================
 REQUIREMENTS GATHERING - Interactive Project Setup
 =================================================================================
 
-Version: Latest
+Version: 5.0.0
 Type: Core - Requirements
 
 This prompt guides interactive project requirements gathering.
@@ -132,7 +134,7 @@ After requirements gathering:
 
 
 ================================================================================
-ADDITIONAL CONTENT FROM 
+ADDITIONAL CONTENT FROM Global System v26 Diamond 32
 ================================================================================
 
 39. PORT CONFIGURATION MANAGEMENT
@@ -778,24 +780,24 @@ User: "update configuration"
 
 
 ================================================================================
-RECOVERED CONTENT FROM  (Phase 2)
+RECOVERED CONTENT FROM Global System v26 Diamond 32 (Phase 2)
 ================================================================================
 
-GLOBAL DESIGN & EXECUTION PROMPT  — COMPLETE EDITION
+GLOBAL DESIGN & EXECUTION PROMPT Global System v26 Diamond 32 — COMPLETE EDITION
 
-Guidelines: LOADED  — GLOBAL policy active.
+Guidelines: LOADED Global System v26 Diamond 32 — GLOBAL policy active.
 Universal, production-ready rules for designing, building, auditing, repairing, and validating any project.
 
 ⸻
 
 VERSION HISTORY:
-- : Initial release with OSF framework
-- : Added KMS/Vault, OIDC, AWS Secrets
-- : Added Resilience & Circuit Breakers
-- : Expanded Frontend & Visual Design (13 sections)
-- : Added Integration Guides (Docker, Kubernetes, Maturity Model)
-- : Added CI/CD Integration Guide
-- : COMPLETE EDITION - Backend, Database, Security, DevOps, Testing expanded
+- Global System v26 Diamond 32: Initial release with OSF framework
+- Global System v26 Diamond 32: Added KMS/Vault, OIDC, AWS Secrets
+- Global System v26 Diamond 32: Added Resilience & Circuit Breakers
+- Global System v26 Diamond 32: Expanded Frontend & Visual Design (13 sections)
+- Global System v26 Diamond 32: Added Integration Guides (Docker, Kubernetes, Maturity Model)
+- Global System v26 Diamond 32: Added CI/CD Integration Guide
+- Global System v26 Diamond 32: COMPLETE EDITION - Backend, Database, Security, DevOps, Testing expanded
 
 
 ⸻
@@ -885,13 +887,13 @@ C) Patterns
 
 ⸻
 
-15) CI/CD INTEGRATION (from )
+15) CI/CD INTEGRATION (from Global System v26 Diamond 32)
 
 [Full CI/CD guide - GitHub Actions, GitLab CI, Security Scanning, Quality Gates, Deployment Strategies]
 
 ⸻
 
-16) INTEGRATION GUIDES (from )
+16) INTEGRATION GUIDES (from Global System v26 Diamond 32)
 
 A) Docker Integration
 - Multi-stage builds
@@ -1005,7 +1007,7 @@ D) Security
 
 ⸻
 
-22) SDUI (SERVER-DRIVEN UI) (NEW in )
+22) SDUI (SERVER-DRIVEN UI) (NEW in Global System v26 Diamond 32)
 
 A) Concept
 - UI structure defined by server responses
@@ -1068,7 +1070,7 @@ E) Security
 
 ⸻
 
-23) FILE HEADER POLICY (Enhanced in )
+23) FILE HEADER POLICY (Enhanced in Global System v26 Diamond 32)
 
 A) Mandatory Header (Line
 l
@@ -1083,7 +1085,7 @@ E) Benefits
 
 ⸻
 
-25) ROUTE OBFUSCATION (Enhanced in )
+25) ROUTE OBFUSCATION (Enhanced in Global System v26 Diamond 32)
 
 A) Purpose
 - Hide internal route structure
@@ -1119,7 +1121,7 @@ low, Kubeflow, Prefect
 
 ⸻
 
-28) ADDITIONAL BEST PRACTICES ()
+28) ADDITIONAL BEST PRACTICES (Global System v26 Diamond 32)
 
 A) Conventional Commits
 - Format: `<type>(<scope>): <subject>`
@@ -1130,7 +1132,7 @@ B) Branch Naming
 - Feature: `feature/user-auth`
 - Bugfix: `bugfix/login-error`
 - Hotfix: `hotfix/security-patch`
-- Release: `release/`
+- Release: `release/Global System v26 Diamond 32`
 
 C) Structured Logging
 ```json
@@ -1163,7 +1165,7 @@ E) Repository Privacy
 
 ⸻
 
-END OF GLOBAL_GUIDELINES 
+END OF GLOBAL_GUIDELINES Global System v26 Diamond 32
 
 New in v3.
 /components/UserProfile.tsx` - User profile component
@@ -1211,7 +1213,7 @@ find existing code
 
 ⸻
 
-30) ENVIRONMENT DETECTION & CONFIGURATION (CRITICAL - NEW in )
+30) ENVIRONMENT DETECTION & CONFIGURATION (CRITICAL - NEW in Global System v26 Diamond 32)
 
 **PURPOSE:** Ensure correct behavior for Development vs Production environments
 
@@ -1377,7 +1379,7 @@ ric in prod
 
 ⸻
 
-31) PRODUCTION SETUP WIZARD (CRITICAL - NEW in )
+31) PRODUCTION SETUP WIZARD (CRITICAL - NEW in Global System v26 Diamond 32)
 
 **PURPOSE:** Guide production deployment with interactive setup
 
@@ -1518,7 +1520,7 @@ E) BENEFITS
 (Continuing with remaining sections...)
 
 32) CROS
-S-BROWSER TESTING (CRITICAL - NEW in )
+S-BROWSER TESTING (CRITICAL - NEW in Global System v26 Diamond 32)
 
 **PURPOSE:** Ensure application works correctly across all major browsers and devices
 
@@ -1717,7 +1719,7 @@ G) BENEFITS
 
 ⸻
 
-33) UI ASSET MANAGEMENT (CRITICAL - NEW in )
+33) UI ASSET MANAGEMENT (CRITICAL - NEW in Global System v26 Diamond 32)
 
 **PURPOSE:** Ensure all UI assets (fonts, icons, images, CSS) load correctly
 
@@ -1929,7 +1931,7 @@ F) BENEFITS
 
 ⸻
 
-34) PRODUCTION ERROR HANDLING (CRITICAL - NEW in )
+34) PRODUCTION ERROR HANDLING (CRITICAL - NEW in Global System v26 Diamond 32)
 
 **PURPOSE:** Prevent error/stack trace leaks in production
 
@@ -2150,7 +2152,7 @@ E) BENEFITS
 
 (Continuing with sections 35-38...)
 
-35) .ENV VALIDATION & MANAGEMENT (CRITICAL - NEW in )
+35) .ENV VALIDATION & MANAGEMENT (CRITICAL - NEW in Global System v26 Diamond 32)
 
 **PU
 RPOSE:** Ensure .env is correctly configured with all required variables
@@ -2345,7 +2347,7 @@ F) BENEFITS
 
 ⸻
 
-36) IMPORT/EXPORT DOCUMENTATION (CRITICAL - NEW in )
+36) IMPORT/EXPORT DOCUMENTATION (CRITICAL - NEW in Global System v26 Diamond 32)
 
 **PURPOSE:** Track all imports/exports to prevent circular dependencies and duplication
 
@@ -2574,13 +2576,13 @@ rity threshold
 - Error handling tests
 - Class Registry sync
 
-Version: Latest
+Version: 3.2.0
 Date: 2025-10-28
 Status: Production Ready - Critical Fixes Applied
 License: Proprietary
 
-Total Sections: 38 (was 28 in )
-Total Lines: 3000+ (was 1147 in )
+Total Sections: 38 (was 28 in Global System v26 Diamond 32)
+Total Lines: 3000+ (was 1147 in Global System v26 Diamond 32)
 New Content: +1853 lines (+162%)
 
 ⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
@@ -3243,7 +3245,7 @@ if __name__ == '__main__':
 
 ### 48.1 Error Log File (APPEND-ONLY)
 
-**Location:** `docs/errors/Dont_make_this_error_again.md`
+**Location:** `docs/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md`
 
 **Rules:**
 - **APPEND-ONLY** - Never delete entries
@@ -3736,13 +3738,13 @@ Module: {module}
 Created: {date}
 Last Modified: {date}
 Author: {author}
-Description: TODO: Add description
+Description: System requirements and specifications for all modules.
 
 Dependencies:
-- TODO: List dependencies
+- pydantic, sqlalchemy, fastapi
 
 Related Files:
-- TODO: List related files
+- prompts/20_backend.md, prompts/22_database.md
 """
 
 '''
@@ -4162,7 +4164,7 @@ MAX_PAGE_SIZE = 100
 
 # Business Rules
 DEFAULT_TAX_RATE = Decimal('0.15')  # 15%
-DEFAULT_CURRENCY = 'EGP'
+DEFAULT_CURRENCY = 'SAR'
 DEFAULT_LANGUAGE = 'ar'
 
 # File Upload
@@ -4566,7 +4568,7 @@ class TestOrderIntegration:
 
 ---
 
-## Summary:  Additions
+## Summary: Global System v26 Diamond 32 Additions
 
 ### New Sections (46-57)
 
@@ -5221,7 +5223,7 @@ curl -sSL https://raw.githubusercontent.com/hamfarid/global/main/scripts/integra
 # 3. استخدام الأمثلة كـ context
 
 # مثال:
-augment.load_prompt("GLOBAL_GUIDELINES_.txt")
+augment.load_prompt("GLOBAL_GUIDELINES_Global System v26 Diamond 32.txt")
 augment.add_tool("tools/analyze_dependencies.py")
 augment.add_context("examples/simple-api/")
 ```
@@ -5233,7 +5235,7 @@ augment.add_context("examples/simple-api/")
 # أضف:
 """
 Use Global Guidelines from:
-- Prompt: GLOBAL_GUIDELINES_.txt
+- Prompt: GLOBAL_GUIDELINES_Global System v26 Diamond 32.txt
 - Tools: tools/
 - Examples: examples/
 - Templates: templates/
@@ -5246,7 +5248,7 @@ Use Global Guidelines from:
 // في .cursor/settings.json
 {
   "cursor.rules": [
-    "Follow GLOBAL_GUIDELINES_.txt",
+    "Follow GLOBAL_GUIDELINES_Global System v26 Diamond 32.txt",
     "Use tools/ for analysis",
     "Reference examples/ for patterns"
   ]
@@ -5297,7 +5299,7 @@ python main.py --debug
 ## 10. References / المراجع
 
 ### الوثائق الرئيسية:
-- [GLOBAL_GUIDELINES_.txt](../GLOBAL_GUIDELINES_.txt)
+- [GLOBAL_GUIDELINES_Global System v26 Diamond 32.txt](../GLOBAL_GUIDELINES_Global System v26 Diamond 32.txt)
 - [INIT_PY_BEST_PRACTICES.md](../INIT_PY_BEST_PRACTICES.md)
 - [OSF_FRAMEWORK.md](../OSF_FRAMEWORK.md)
 

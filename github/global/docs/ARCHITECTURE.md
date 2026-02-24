@@ -1,3 +1,5 @@
+# System Architecture
+
 > This is a template. Fill this out for your specific project.
 
 # System Architecture

@@ -1,0 +1,21 @@
+# Global System Ultimate - Backend Requirements
+# Verified Feb 2026: FastAPI 0.129+
+
+fastapi>=0.129.0
+uvicorn[standard]>=0.34.0
+pydantic>=2.10.0
+structlog>=24.4.0
+python-dotenv>=1.0.1
+
+# Database (Async)
+sqlalchemy>=2.0.25
+asyncpg>=0.29.0
+alembic>=1.13.1
+
+# Security
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+
+# AI & MCP
+openai>=1.12.0
+anthropic>=0.18.0

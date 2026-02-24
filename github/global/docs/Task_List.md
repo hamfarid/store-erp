@@ -1,19 +1,21 @@
+# Task List
+
 <!-- GUIDELINES_VERSION: 2.3 -->
 <!-- LAST_UPDATED: 2025-10-24 -->
 <!-- AUDIT_REF: docs/COMPREHENSIVE_AUDIT_2025-10-24.md -->
 <!-- ISSUES_WORKFLOW: .github/workflows/create_issues_from_task_list.yml -->
 
-# Task List — Store Management System v1.6
+# Task List — Store Management System Global System v26 Diamond 32
 
 ## Comprehensive Security & System Hardening
 
-**Guidelines**: GLOBAL_GUIDELINES v2.3
+**Guidelines**: GLOBAL_GUIDELINES Global System v26 Diamond 32
 **Audit Date**: 2025-10-24
 **Total Tasks**: 142 (23 P0, 47 P1, 54 P2, 18 P3)
 
 Automation: Use GitHub Actions → "Create Issues from Task List" to sync these tasks into GitHub Issues (idempotent; uses hidden TL-ID markers).
 
-Scope: repo_root="d:\APPS_AI\store\store_v1.6"
+Scope: repo_root="d:\APPS_AI\store\store_Global System v26 Diamond 32"
 Owner Legend: [AA]=Augment Agent, [Sec]=Security Lead, [BE]=Backend Dev, [FE]=Frontend Dev, [DBA]=Database Admin, [DX]=DevEx
 Status: [ ] Not Started, [/] In Progress, [x] Complete, [!] Blocked
 
@@ -408,8 +410,8 @@ Status: [ ] Not Started, [/] In Progress, [x] Complete, [!] Blocked
 
 ### UI/Brand (P1)
 
-58. [ ] **Generate design tokens from Gaara/MagSeeds** — [P1][FE][6h][None]
-    - Sources: <www.gaaragroup.com>, <www.magseeds.com>
+58. [ ] **Generate design tokens from Global System v26 Diamond 32/MagSeeds** — [P1][FE][6h][None]
+    - Sources: <www.Global System v26 Diamond 32group.com>, <www.magseeds.com>
     - Output: `/ui/theme/tokens.json` and `/docs/Brand_Palette.json`
     - Tokens: Colors, typography, spacing, shadows, radii
     - Integration: Replace hardcoded colors with token references
@@ -998,7 +1000,7 @@ Status: [ ] Not Started, [/] In Progress, [x] Complete, [!] Blocked
 ## REFERENCES
 
 - **Audit Report**: `docs/COMPREHENSIVE_AUDIT_2025-10-24.md`
-- **Global Guidelines**: `GLOBAL_GUIDELINES_v2.3.txt`
+- **Global Guidelines**: `GLOBAL_GUIDELINES_Global System v26 Diamond 32.txt`
 - **Security Documentation**: `docs/Security.md`
 - **API Contracts**: `docs/API_Contracts.md`
 - **Database Schema**: `docs/DB_Schema.md`

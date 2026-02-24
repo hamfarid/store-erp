@@ -1,12 +1,15 @@
-# Security Examples
+# Security Examples (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-## Example 1: Input Validation
-See: `validation_example.py`
+**Engine:** Speckit Global System v26 Diamond 32
+**Status:** MANDATORY REFERENCE
 
-## Example 2: SQL Injection Prevention
-See: `sql_injection_prevention.py`
+This directory contains standard implementations for security controls.
 
-## Example 3: XSS Prevention
-See: `xss_prevention.py`
+## Contents
+1.  **Authentication:** `auth_example.py` (Python/FastAPI)
+    *   Includes: JWT generation, Password hashing (Argon2), OAuth2 flow.
+2.  **Input Sanitization:** `sanitization_example.js`
+    *   Includes: XSS prevention, SQL injection prevention.
 
-Study these examples before implementing security.
+## Usage
+Security is not an afterthought. Use these patterns from Day 1.

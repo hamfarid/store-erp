@@ -1,37 +1,50 @@
-# REST API Best Practices
+# REST API Best Practices (Global System v26 Diamond 32)
 
-## 1. Use Proper HTTP Methods
+**Engine:** Speckit Global System v26 Diamond 32
+**Status:** MANDATORY REFERENCE
 
-- GET: Retrieve resources
-- POST: Create resources
-- PUT: Update entire resource
-- PATCH: Update partial resource
-- DELETE: Delete resource
+## 1. Speckit Plan: API Design
+Before coding, you MUST define the contract in `API_DOCUMENTATION.md`.
 
-## 2. Use Meaningful Status Codes
+## 2. Core Principles
+1.  **Resource-Oriented:** `/api/v1/resources` (Nouns, Plural).
+2.  **Stateless:** No session state on server (Use JWT).
+3.  **Versioning:** `/api/v1/` is MANDATORY.
 
-- 200: Success
-- 201: Created
-- 400: Bad Request
-- 401: Unauthorized
-- 403: Forbidden
-- 404: Not Found
-- 500: Internal Server Error
+## 3. Implementation Example (FastAPI)
 
-## 3. Implement Pagination
+```python
+from fastapi import FastAPI, HTTPException, Query
+from pydantic import BaseModel
 
-\`\`\`javascript
-GET /api/users?page=1&limit=20
-\`\`\`
+app = FastAPI()
 
-## 4. Use Filtering and Sorting
+class UserCreate(BaseModel):
+    username: str
+    email: str
 
-\`\`\`javascript
-GET /api/users?role=admin&sort=created_at:desc
-\`\`\`
+@app.post("/api/v1/users", status_code=201)
+async def create_user(user: UserCreate):
+    # Sentinel Check: Validation is handled by Pydantic
+    # [Verification Oath] I have confirmed db.create exists.
+    db_user = await db.create(user)
+    return {"data": db_user}
 
-## 5. Version Your API
+@app.get("/api/v1/users")
+async def list_users(
+    page: int = Query(1, ge=1), 
+    limit: int = Query(20, le=100)
+):
+    # Sentinel Check: Pagination is enforced
+    users = await db.get_all(skip=(page-1)*limit, limit=limit)
+    return {
+        "data": users,
+        "meta": {"page": page, "limit": limit}
+    }
+```
 
-\`\`\`javascript
-GET /api/v1/users
-\`\`\`
+## 4. Speckit Verify
+Run `speckit verify --api` to check:
+1.  Status codes correctness.
+2.  Response structure consistency.
+3.  Error handling.

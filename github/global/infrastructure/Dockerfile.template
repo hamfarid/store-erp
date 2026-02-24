@@ -1,0 +1,47 @@
+# Dockerfile Template (v40.7 Swarm Intelligence)
+# Usage: Copy to project root and rename to 'Dockerfile'
+
+# --- Stage 1: Builder ---
+FROM python:3.11-slim as builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+# --- Stage 2: Runner ---
+FROM python:3.11-slim as runner
+
+WORKDIR /app
+
+# Create non-root user for security
+RUN useradd -m appuser
+USER appuser
+
+# Copy installed packages from builder
+COPY --from=builder /root/.local /home/appuser/.local
+ENV PATH=/home/appuser/.local/bin:$PATH
+
+# Copy application code
+COPY . .
+
+# Environment Variables
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Expose Port
+EXPOSE 8000
+
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8000/health || exit 1
+
+# Command
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

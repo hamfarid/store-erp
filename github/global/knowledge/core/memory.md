@@ -1,7 +1,10 @@
-# Knowledge Item: Memory System
+# Memory Management Knowledge Base
+ (v26.0.2 Diamond 32 GAARA AI)
 
 > **Role:** Helper tool for senior technical lead  
 > **NOT part of user's project!**
+> **FRAMEWORK:** 2026 AI Coding Agent Governance (Area 1)
+> **VERSION:** Global System v26 Diamond 32 v26.0 Diamond 32 GAARA AI (See VERSION file)
 
 ---
 
@@ -45,10 +48,14 @@ Enable senior technical lead to maintain context, remember decisions, and learn 
 
 ### Memory System Location
 ```
-~/.global/memory/          # Memory system (NOT in project!)
-├── context.db             # SQLite database
-├── summaries/             # Conversation summaries
-└── decisions/             # Decision logs
+memory-bank/               # Project-specific memory (In project root)
+├── activeContext.md       # Current session context
+├── systemContext.md       # System architecture
+├── productContext.md      # Product requirements
+├── techContext.md         # Tech stack
+├── progress.md            # Progress tracking
+├── decisionLog.md         # Decision history
+└── lessons.md             # Lessons learned
 ```
 
 ### User's Project Location
@@ -56,18 +63,48 @@ Enable senior technical lead to maintain context, remember decisions, and learn 
 ~/user-project/            # User's actual project
 ├── src/                   # Project source code
 ├── database/              # Project database
-│   └── app.db            # Project data (separate!)
+│   └── app.db             # Project data (separate!)
 └── docs/                  # Project documentation
 ```
 
 ### Critical Separation
 ```
-Memory System:  ~/.global/memory/context.db
-Project DB:     ~/user-project/database/app.db
+Memory System:  memory-bank/ (Context for AI)
+Project DB:     database/app.db (Data for App)
 
 These are COMPLETELY SEPARATE!
 Never confuse them!
 ```
+
+## ADVANCED MEMORY STRATEGIES (2026 Framework)
+
+### 1. Session Memory (Claude Code Style)
+*   **Definition:** Temporary context relevant only to the current active session.
+*   **Action:** Store in `memory-bank/activeContext.md`.
+*   **Lifecycle:**
+    *   **Start:** Load `activeContext.md`.
+    *   **During:** Update with key variables and states.
+    *   **End:** Summarize into `memory-bank/lessons.md` and clear `activeContext.md` if task is complete.
+*   **Feature:** Supports `/remember` command to promote recurring patterns to permanent memory.
+
+### 2. The Memory Bank Pattern (Cline Style)
+*   **Structure:**
+    1.  `projectBrief.md`: Core requirements and goals.
+    2.  `productContext.md`: Why we are building this.
+    3.  `systemPatterns.md`: Architecture and design decisions (Mermaid diagrams).
+    4.  `techContext.md`: Technology stack and constraints.
+    5.  `activeContext.md`: Current session state.
+    6.  `progress.md`: What has been done and what is left.
+*   **Cycle:** Read → Verify → Execute → Update.
+
+### 3. Context Compression & Isolation
+*   **Compression Strategy:**
+    *   **Trigger:** When `activeContext.md` exceeds 100 lines.
+    *   **Action:** Summarize the oldest 50% into a single bullet point in `memory-bank/history.md`.
+    *   **Goal:** Keep the "Hot Context" small and fast.
+*   **Isolation Strategy:**
+    *   **Rule:** Different projects MUST have different memory banks.
+    *   **Implementation:** `memory-bank/` in project root.
 
 ## Example Usage
 
@@ -244,15 +281,15 @@ memory.save({"type": "decision", "content": decision})
 
 ### Mistake 4: Wrong Location
 ```
-❌ WRONG: Memory in ~/user-project/.memory/
-✅ RIGHT: Memory in ~/.global/memory/
+❌ WRONG: Memory in ~/user-project/memory-bank/
+✅ RIGHT: Memory in memory-bank/ (Project Root)
 ```
 
 ## Related Knowledge Items
 
 - **MCP System** - Another helper tool (see `knowledge/core/mcp.md`)
-- **Thinking Framework** - Uses memory for decisions (see `knowledge/core/thinking.md`)
-- **Context Engineering** - Builds on memory (see `knowledge/core/context.md`)
+- **Thinking Framework** - Uses memory for decisions (see `knowledge/core/16_sequential_thinking.md`)
+- **Context Engineering** - Builds on memory (see `knowledge/core/environment.md`)
 - **Environment Separation** - Critical concept (see `knowledge/core/environment.md`)
 
 ---
@@ -266,7 +303,6 @@ memory.save({"type": "decision", "content": decision})
 - Use it to maintain consistency
 - **DON'T confuse it with user's project!**
 
-**Location:** `~/.global/memory/` (NOT in user's project!)  
+**Location:** `memory-bank/` (In project root)
 **Purpose:** Help YOU work better  
 **Rule:** Always choose the best solution, not the easiest
-

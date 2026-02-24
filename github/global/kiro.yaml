@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: AgentConfig
+metadata:
+  name: global-system-ultimate
+  description: "The Coordinator (Kiro) - Manages agent interactions and workflows."
+spec:
+  role: orchestrator
+  memory: memory-bank
+  capabilities:
+    - coordination
+    - delegation
+    - conflict_resolution
+  protocols:
+    - name: "Standard Operation"
+      priority: 1
+      rules: ["Always verify before execution", "Log all decisions"]
+    - name: "Emergency Response"
+      priority: 0
+      rules: ["Override safety checks if authorized", "Notify human immediately"]
+  integrations:
+    - type: mcp
+      servers: ["filesystem", "github", "memory"]
+    - type: docker
+      containers: ["global_chroma", "global_ollama", "global_redis"]

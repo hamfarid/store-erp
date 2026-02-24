@@ -1,0 +1,468 @@
+/home/ubuntu/user_upload_analysis/GitHub/global_system/.docs/README.md:# Internal Documentation (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/.memory/knowledge/patterns/design_patterns.md:# Design Patterns (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/.memory/knowledge/antipatterns/common_mistakes.md:# Common Anti-Patterns (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/authentication.md:# 🔐 Authentication Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/01_release_workflow.md:# Release Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/blueprint_development.md:# 📐 Blueprint Development Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/02_security_audit_workflow.md:# Security Audit Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/api_development.md:# 🔌 API Development Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/deployment.md:# 🚀 Deployment Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/03_onboarding_workflow.md:# Onboarding Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/03_onboarding_workflow.md:   - **Command:** `python3 global/tools/lifecycle.py <project_name> "Initialize Global System v26 Diamond 32"`
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/03_onboarding_workflow.md:   - Read: `global/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md`
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/maintenance.md:# 🔧 Maintenance Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/05_bug_fix_workflow.md:# Bug Fix Workflow (Global System v26 Diamond 32 Swarm Intelligence)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/IRONCLAD_WORKFLOW_Global System v26 Diamond 32.md:# The Ironclad Workflow (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/04_feature_development_workflow.md:# Feature Development Workflow (Global System v26 Diamond 32 Swarm Intelligence)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/security_auditor.md:# Role: Security Auditor (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/lead_agent.md:# Role: Lead Agent (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/critic.md:# Role: The Critic (Zero-Error Gatekeeper) - Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/planner.md:# Role: The Planner (formerly Architect) - Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/executor.md:# Role: The Executor (formerly Builder) - Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/reviewer.md:# Role: The Reviewer (formerly QA Engineer) - Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/docs/TESTING_STRATEGY.md:# Testing Strategy (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/docs/API_DOCUMENTATION.md:# API Documentation (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/docs/api/openapi.yaml:  version: Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/docs/user_guides/getting_started.md:# Getting Started Guide (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/01_perfect_authentication_flow.md:# Perfect Authentication Flow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/database/README.md:# Database Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/03_react_component_structure.md:# ⚛️ React Component Structure (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/frontend/README.md:# Frontend Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/frontend/component_pattern.md:# Frontend Component Pattern (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/security/README.md:# Security Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/security/auth_example.py:Standard Authentication Template (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/security/auth_flow.md:# Perfect Authentication Flow (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/07_project_template_api_only.md:# 🔌 Project Template: API-Only (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/backend/README.md:# Backend Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/backend/api_structure.md:# API Structure (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/10_memory_usage_examples.md:# 🧠 Memory Usage Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/05_error_handling_pattern.md:# 🛡️ Error Handling Pattern (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/11_error_handling_template.md:# 🛡️ Error Handling Template (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/testing/README.md:# Testing Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/testing/test_example.py:Standard Unit Test Template (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/testing/e2e_test_pattern.md:# E2E Test Pattern (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/08_project_template_frontend_only.md:# 🎨 Project Template: Frontend-Only (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/13_monitoring_template.md:# 📡 Monitoring & Alerts Template (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/06_project_template_fullstack.md:# 🏗️ Project Template: Full-Stack (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/04_database_migration_example.md:# 🗄️ Database Migration Example (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/02_rest_api_best_practices.md:# REST API Best Practices (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/02_rest_api_best_practices.md:**Engine:** Speckit Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/12_rate_limiting_template.md:# 🚦 Rate Limiting Template (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/09_mcp_usage_examples.md:# 🔌 MCP Usage Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/rag/README.md:This directory contains a reference implementation for **Retrieval-Augmented Generation (RAG)** using the Global AI System Global System v26 Diamond 32 stack.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/rag/rag_api.py:# Injected by Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/rag/vector_db_setup.md:# RAG Vector DB Setup (Global System v26 Diamond 32 Swarm Intelligence)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:# Sequential Thinking Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:## The Process (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:1.  **Context Verification (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:2.  **Librarian Check (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:3.  **Temporal Check (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:4.  **Holographic Mapping (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:6.  **Visual Thinking (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:9.  **Shadow Critique (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:11. **Evolutionary Check (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:## The Swarm Intelligence Protocol (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/error_handling.md:# 🔧 Error Handling Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/mcp.md:# 🔌 MCP Usage Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/02_naming_conventions.md:# 🏷️ Naming Conventions (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/context_engineering.md:# 🎯 Context Engineering Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/testing.md:# ✅ Testing Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/backend.md:# 🔧 Backend Development Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/memory.md:# 🧠 Memory Management Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/03_commit_message_rules.md:# 📝 Commit Message Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/frontend.md:# 🎨 Frontend Development Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/01_code_style.md:# Code Style Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/14_no_duplicate_files.md:# 🚫 No Duplicate Files (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/security.md:# 🔒 Security Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/database.md:# 💾 Database Design Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/99_context_first.md:# 🛑 Rule 99: The Context First Mandate (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/100_evolution_engine.md:# 🧬 Rule 100: The Evolution Engine (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/101_shadow_architect.md:# 🌑 Rule 101: The Shadow Architect (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/102_temporal_awareness.md:# ⏳ Rule 102: Temporal Awareness (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/103_librarian_protocol.md:# 📚 Rule 103: The Librarian Protocol (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/104_anti_hallucination.md:# 🚫 Rule 104: The Anti-Hallucination Oath (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/105_speckit_protocol.md:# Rule 105: The Speckit Protocol (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/99_anti_hallucination.md:# 🛑 RULE 99: ANTI-HALLUCINATION & GROUNDING PROTOCOL (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/00_iron_rules.md:*Signed: Global AI System Global System v26 Diamond 32 Constitution*
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/coding_standards.md:# Coding Standards (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/security_policy.md:# Security Policy (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/86_audit_protocol.md:# 🛡️ Audit Protocol (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/07_code_generation.md:# Code Generation Prompt (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/49_acceptance_testing.md:# Acceptance Testing Prompt (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/81_error_handling.md:# Error Handling (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/70_documentation.md:# Living Documentation (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/74_auto_documentation.md:# Auto Documentation (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/23_api.md:# API Design & Development (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/40_quality.md:# Code Quality & Best Practices (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/06_task_ai.md:# Task AI & Planning (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/75_code_review.md:# Code Review Standards (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/42_e2e_testing.md:MODULE 42: END-TO-END TESTING Global System v26 Diamond 32 (Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/43_ui_ux_testing.md:MODULE 43: UI/UX TESTING & FIXES Global System v26 Diamond 32 (Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/76_performance_optimization.md:# Performance Optimization Standards (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/11_analysis.md:PROJECT ANALYSIS - Existing Project Analysis Global System v26 Diamond 32 (Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/09_code_review.md:# Code Review Prompt Global System v26 Diamond 32 (Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/30_security.md:# Security & Compliance (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/constitution.md:# /speckit.constitution (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/constitution.md:*   This project operates under the **Singularity System Global System v26 Diamond 32**.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/specify.md:# /speckit.specify (Agentic Engine Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/plan.md:# /speckit.plan (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/tasks.md:# /speckit.tasks (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/implement.md:# /speckit.implement (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/analyze.md:# /speckit.analyze (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/checklist.md:# /speckit.checklist (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/verify.md:# /speckit.verify (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/critique.md:# The Critic's Prompt (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/99_cognitive_architecture.md:All AI agents in the Global System v26 Diamond 32 system MUST follow this loop for complex tasks:
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/00_MASTER_Global System v26 Diamond 32.md:# 🌌 GLOBAL AI SYSTEM - MASTER PROMPT (Global System v26 Diamond 32 Singularity RAG Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/00_MASTER_Global System v26 Diamond 32.md:## 🚀 RAG Protocol (New in Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md:# 🌐 GLOBAL PROFESSIONAL ENGINEER CONSTITUTION Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md:**MODE: AUTONOMOUS SWARM INTELLIGENCE (Global System v26 Diamond 32)**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md:## 4. ⚙️ OPERATIONAL WORKFLOW (Swarm Intelligence Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md:*The Global Professional Engineer (Global System v26 Diamond 32)*
+/home/ubuntu/user_upload_analysis/GitHub/global_system/config/requirements.txt:# Global AI System Global System v26 Diamond 32 - Core Dependencies
+/home/ubuntu/user_upload_analysis/GitHub/global_system/setup_project.py:Global AI System Global System v26 Diamond 32 - Project Setup Script
+/home/ubuntu/user_upload_analysis/GitHub/global_system/setup_project.py:This script initializes a new project with the Global System v26 Diamond 32 architecture.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/setup_project.py:    print(f"\n🚀 [Setup Global System v26 Diamond 32] {step}...")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/setup_project.py:    print(f"🌟 Initializing Project: {project_name} (Global System v26 Diamond 32)")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/README.md:# ❌ Errors Tracking System (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:# ❌ Don't Make These Errors Again (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:## 🛠️ Error Resolution Workflow (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/USER_COMMANDS.md:# User Commands (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/USER_COMMANDS.md:Upgrade an existing project to Global System v26 Diamond 32 Swarm Intelligence Edition.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tasks/GAP_FILLING_PLAN.md:# 🛠️ Gap Filling Plan (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Import_Export_Map_Template.md:# Import/Export Map (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Errors_Log_Template.md:# Errors Log (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Errors_Log_Template.md:### Prevention (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Errors_Log_Template.md:#### Prevention (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Class_Registry_Template.md:# Class Registry - Complete Reference (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Task_List_Template.md:# Task List (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Folder_Maps_Template.md:# Folder Maps - Project Structure (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:| 2026-02-12 16:37:45 | AUDIT | Verified /home/ubuntu/user_upload_analysis/GitHub/global/VSCODE_STARTUP_PROMPT_Global System v26 Diamond 32.md: Self-Audit Passed |
+/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:| 2026-02-12 16:37:47 | AUDIT | Verified /home/ubuntu/user_upload_analysis/GitHub/global/prompts/00_MASTER_Global System v26 Diamond 32.md: Self-Audit Passed |
+/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:| 2026-02-12 16:37:48 | AUDIT | Verified /home/ubuntu/user_upload_analysis/GitHub/global/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md: Self-Audit Passed |
+/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:| 2026-02-12 16:37:49 | AUDIT | Verified /home/ubuntu/user_upload_analysis/GitHub/global/workflows/IRONCLAD_WORKFLOW_Global System v26 Diamond 32.md: Self-Audit Passed |
+/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:## Global System v26 Diamond 32 (Singularity RAG Edition) - Current
+/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:| 2026-02-14 | SYSTEM | Global System v26 Diamond 32 Cleanup Completed | Legacy files removed |
+/home/ubuntu/user_upload_analysis/GitHub/global_system/system_logger.py:# Injected by Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/download_global.sh:# Global System Download Script (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/download_global.sh:echo "⬇️  Cloning Global System Global System v26 Diamond 32 into $TARGET_DIR..."
+/home/ubuntu/user_upload_analysis/GitHub/global_system/download_global.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upload_global_to_github.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/init_new_project.sh:# Script to initialize a new project with the Global System structure (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/init_new_project.sh:echo "🚀 Initializing new project: $PROJECT_NAME (Global System v26 Diamond 32 Swarm Intelligence Edition)"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/init_new_project.sh:echo "  - global/ (The AI Brain Global System v26 Diamond 32)"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/init_new_project.sh:echo "👉 Next Step: Run 'python3 global/tools/lifecycle.py $PROJECT_NAME \"Initialize Global System v26 Diamond 32\"'"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/init_new_project.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/download_global_from_github.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v37.sh:# Script to UPGRADE an existing project to the Global System structure (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v37.sh:echo "🚀 Upgrading project at $PROJECT_ROOT to Global System v26 Diamond 32 Swarm Intelligence Edition..."
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v37.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v38.sh:# Global AI System Upgrade Script (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v38.sh:echo "🚀 Starting Upgrade to Global System v26 Diamond 32 (Swarm Intelligence Edition)..."
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v38.sh:echo "✅ Upgrade Complete! You are now running Global System v26 Diamond 32."
+/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v38.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/meta_rules/README.md:# Meta-Rules (The Immune System Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/speckit.py:Speckit Global System v26 Diamond 32 (Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/speckit.py:    parser = argparse.ArgumentParser(description="Speckit Global System v26 Diamond 32 - Swarm Intelligence")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/lifecycle.py:    log(f"Starting Singularity Lifecycle Global System v26 Diamond 32 for: {project_name}", "INIT")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/lifecycle.py:    # Standard Lifecycle (Speckit Global System v26 Diamond 32 Compliant)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/readme_generator.py:    content += "This project is managed by the **Singularity System Global System v26 Diamond 32**.\n"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/readme_generator.py:    content += "*   **Architect:** Speckit Global System v26 Diamond 32\n"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mission_control.py:Mission Control (Global System v26 Diamond 32 Swarm Intelligence)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mission_control.py:    print("║   🌌 GLOBAL AI SYSTEM - MISSION CONTROL (Global System v26 Diamond 32 Sentient)     ║")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/web_scraper.py:Camoufox Web Scraper Wrapper (Swarm Intelligence Edition Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/web_scraper.py:Integrated with Speckit Global System v26 Diamond 32 for E2E Testing.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/web_scraper.py:    parser = argparse.ArgumentParser(description="Camoufox Web Scraper (Swarm Intelligence Edition Global System v26 Diamond 32)")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/coderabbit_reviewer.py:CodeRabbit Reviewer (Swarm Intelligence Edition Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/coderabbit_reviewer.py:    **ROLE:** You are CodeRabbit (Global System v26 Diamond 32), a Senior Staff Engineer and AI Code Reviewer.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/coderabbit_reviewer.py:    **REVIEW GUIDELINES (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/sentinel.py:        "GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md",
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/sentinel.py:        "VSCODE_STARTUP_PROMPT_Global System v26 Diamond 32.md",
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/sentinel.py:    print(f"🛡️ Sentinel Global System v26 Diamond 32 (The Critic's Eye) guarding: {root_dir}")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/container_manager.py:Global AI System Global System v26 Diamond 32 - Container Manager
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/container_manager.py:    parser = argparse.ArgumentParser(description="Container Manager (Global System v26 Diamond 32)")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/rag_engine.py:RAG Engine (Swarm Intelligence Edition Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/error_learner.py:Error Learner (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/user_dna.py:User DNA (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mcp_manager.py:MCP Manager (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/doc_updater.py:Doc Updater (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/voice_interface.py:Voice Interface (Global System v26 Diamond 32 Stub)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/code_dna.py:Code DNA (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/auto_tune.py:Auto-Tuning Script (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/git_hooks.py:Git Hooks Manager (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/git_hooks.py:# Auto-generated by Global AI System Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:Mass Update Script (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:Upgrades all project files to Global System v26 Diamond 32 Swarm Intelligence Edition.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:OLD_VERSIONS = ["Global System v26 Diamond 32", "Global System v26 Diamond 32", "Global System v26 Diamond 32", "Global System v26 Diamond 32", "Global System v26 Diamond 32", "Global System v26 Diamond 32"]
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:NEW_VERSION = "Global System v26 Diamond 32"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:                 content = content.replace("import os", "import os\n# Injected by Global System v26 Diamond 32 Swarm Intelligence\ntry:\n    import global_system.genesis\nexcept:\n    pass")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:            for old_ver in ["Global System v26 Diamond 32", "Global System v26 Diamond 32", "Global System v26 Diamond 32"]:
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_scripts.py:Mass Update Script for Scripts & Configs (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_scripts.py:Upgrades shell scripts, JSON configs, and Python tools to Global System v26 Diamond 32.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_scripts.py:NEW_VERSION = "Global System v26 Diamond 32"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/file_cleanup.py:File Cleanup Script (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/file_cleanup.py:Removes legacy files and ensures clean state for Global System v26 Diamond 32.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/file_cleanup.py:            f.write("\n| 2026-02-14 | SYSTEM | Global System v26 Diamond 32 Cleanup Completed | Legacy files removed |\n")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/final_verify.py:Final Verification Script (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/final_verify_functional.py:Global AI System Global System v26 Diamond 32 - Final Functional Verification
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/final_verify_functional.py:    print("🔍 Starting Final Functional Verification (Global System v26 Diamond 32)...\n")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/final_verify_functional.py:    check_file_exists(req_path, "Global System v26 Diamond 32 Requirements")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/thing_central.py:ThingCentral (Swarm Intelligence Edition Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/verify_system_Global System v26 Diamond 32.py:    print("🔍 Starting System Verification Global System v26 Diamond 32...")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_swarm.py:    "Global System v26 Diamond 32": "Global System v26 Diamond 32",
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_swarm.py:    "Global System v26 Diamond 32": "Global System v26 Diamond 32",
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_swarm.py:    "Global System v26 Diamond 32": "Global System v26 Diamond 32",
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_swarm.py:    "Speckit Global System v26 Diamond 32": "Speckit Global System v26 Diamond 32",
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_swarm.py:    "GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md": "GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md", # Keep filename but update content references if needed
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_swarm.py:    print("🚀 Starting Mass Update for Swarm Intelligence Global System v26 Diamond 32...")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/db_migrator.py:# DB Migrator Tool (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/log_analyzer.py:# Log Analyzer Tool (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/infrastructure/Dockerfile.template:# Dockerfile Template (Global System v26 Diamond 32 Swarm Intelligence)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/infrastructure/terraform/main.tf:# Terraform Main Configuration (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/infrastructure/ansible/playbook.yml:# Ansible Playbook (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/infrastructure/ci_cd/pipeline_config.yml:# CI/CD Pipeline Configuration (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/all_files_inventory.txt:/home/ubuntu/user_upload_analysis/GitHub/global/VSCODE_STARTUP_PROMPT_Global System v26 Diamond 32.md
+/home/ubuntu/user_upload_analysis/GitHub/global_system/all_files_inventory.txt:/home/ubuntu/user_upload_analysis/GitHub/global/prompts/00_MASTER_Global System v26 Diamond 32.md
+/home/ubuntu/user_upload_analysis/GitHub/global_system/all_files_inventory.txt:/home/ubuntu/user_upload_analysis/GitHub/global/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md
+/home/ubuntu/user_upload_analysis/GitHub/global_system/all_files_inventory.txt:/home/ubuntu/user_upload_analysis/GitHub/global/workflows/IRONCLAD_WORKFLOW_Global System v26 Diamond 32.md
+/home/ubuntu/user_upload_analysis/GitHub/global_system/BOOTSTRAP.md:# 🚀 SYSTEM BOOTSTRAP PROTOCOL (Global System v26 Diamond 32 Singularity RAG Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/BOOTSTRAP.md:You are the **Global AI System Global System v26 Diamond 32 (Cognitive Architect)**.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/BOOTSTRAP.md:    *   **Read:** `global/prompts/00_MASTER_Global System v26 Diamond 32.md`
+/home/ubuntu/user_upload_analysis/GitHub/global_system/BOOTSTRAP.md:## ⚙️ THE COGNITIVE LOOP (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/MASTER_TASK_LIST.md:# 📋 Living Master Checklist (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/MASTER_TASK_LIST.md:- [x] `GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md` (Must include Folder Map)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/MASTER_TASK_LIST.md:**Last Updated:** Global System v26 Diamond 32 Init
+/home/ubuntu/user_upload_analysis/GitHub/global_system/AI_CONTEXT_ROUTER.md:# AI Context Router (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/AUDIT_CHECKLIST.md:- [x] `/home/ubuntu/user_upload_analysis/GitHub/global/VSCODE_STARTUP_PROMPT_Global System v26 Diamond 32.md` (Self-Audit Passed)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/AUDIT_CHECKLIST.md:- [x] `/home/ubuntu/user_upload_analysis/GitHub/global/prompts/00_MASTER_Global System v26 Diamond 32.md` (Self-Audit Passed)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/AUDIT_CHECKLIST.md:- [x] `/home/ubuntu/user_upload_analysis/GitHub/global/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md` (Self-Audit Passed)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/AUDIT_CHECKLIST.md:- [x] `/home/ubuntu/user_upload_analysis/GitHub/global/workflows/IRONCLAD_WORKFLOW_Global System v26 Diamond 32.md` (Self-Audit Passed)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/run_self_audit.py:# Injected by Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/current_file_list.txt:/home/ubuntu/user_upload_analysis/GitHub/global/workflows/IRONCLAD_WORKFLOW_Global System v26 Diamond 32.md
+/home/ubuntu/user_upload_analysis/GitHub/global_system/current_file_list.txt:/home/ubuntu/user_upload_analysis/GitHub/global/prompts/00_MASTER_Global System v26 Diamond 32.md
+/home/ubuntu/user_upload_analysis/GitHub/global_system/current_file_list.txt:/home/ubuntu/user_upload_analysis/GitHub/global/prompts/00_MASTER_Global System v26 Diamond 32.md
+/home/ubuntu/user_upload_analysis/GitHub/global_system/current_file_list.txt:/home/ubuntu/user_upload_analysis/GitHub/global/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md
+/home/ubuntu/user_upload_analysis/GitHub/global_system/current_file_list.txt:/home/ubuntu/user_upload_analysis/GitHub/global/VSCODE_STARTUP_PROMPT_Global System v26 Diamond 32.md
+/home/ubuntu/user_upload_analysis/GitHub/global_system/genesis.py:Genesis Bootstrap (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/genesis.py:        # sys.exit(1) # Allow proceeding without Docker for Global System v26 Diamond 32 flexibility
+/home/ubuntu/user_upload_analysis/GitHub/global_system/genesis.py:    print("🌌 GLOBAL AI SYSTEM - GENESIS PROTOCOL (Global System v26 Diamond 32)")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/VSCODE_STARTUP_PROMPT_Global System v26 Diamond 32.md:# VS Code Startup Prompt Global System v26 Diamond 32 (The Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/VSCODE_STARTUP_PROMPT_Global System v26 Diamond 32.md:@global/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md
+/home/ubuntu/user_upload_analysis/GitHub/global_system/VSCODE_STARTUP_PROMPT_Global System v26 Diamond 32.md:I am initializing the project under the **Global System v26 Diamond 32 Singularity Constitution**.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tests/unit/test_core.py:# Unit Test: Core Logic (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tests/integration/test_api_db.py:# Integration Test: API & DB (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/tests/e2e/test_user_flow.py:# E2E Test: User Flow (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/.docs/README.md:# Internal Documentation (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/.memory/knowledge/patterns/design_patterns.md:# Design Patterns (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/.memory/knowledge/antipatterns/common_mistakes.md:# Common Anti-Patterns (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/authentication.md:# 🔐 Authentication Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/01_release_workflow.md:# Release Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/blueprint_development.md:# 📐 Blueprint Development Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/02_security_audit_workflow.md:# Security Audit Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/api_development.md:# 🔌 API Development Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/deployment.md:# 🚀 Deployment Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/03_onboarding_workflow.md:# Onboarding Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/03_onboarding_workflow.md:   - **Command:** `python3 global/tools/lifecycle.py <project_name> "Initialize Global System v26 Diamond 32"`
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/03_onboarding_workflow.md:   - Read: `global/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md`
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/maintenance.md:# 🔧 Maintenance Workflow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/05_bug_fix_workflow.md:# Bug Fix Workflow (Global System v26 Diamond 32 Swarm Intelligence)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/IRONCLAD_WORKFLOW_Global System v26 Diamond 32.md:# The Ironclad Workflow (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/workflows/04_feature_development_workflow.md:# Feature Development Workflow (Global System v26 Diamond 32 Swarm Intelligence)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/security_auditor.md:# Role: Security Auditor (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/lead_agent.md:# Role: Lead Agent (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/critic.md:# Role: The Critic (Zero-Error Gatekeeper) - Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/planner.md:# Role: The Planner (formerly Architect) - Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/executor.md:# Role: The Executor (formerly Builder) - Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/roles/reviewer.md:# Role: The Reviewer (formerly QA Engineer) - Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/docs/TESTING_STRATEGY.md:# Testing Strategy (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/docs/API_DOCUMENTATION.md:# API Documentation (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/docs/api/openapi.yaml:  version: Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/docs/user_guides/getting_started.md:# Getting Started Guide (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/01_perfect_authentication_flow.md:# Perfect Authentication Flow (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/database/README.md:# Database Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/03_react_component_structure.md:# ⚛️ React Component Structure (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/frontend/README.md:# Frontend Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/frontend/component_pattern.md:# Frontend Component Pattern (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/security/README.md:# Security Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/security/auth_example.py:Standard Authentication Template (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/security/auth_flow.md:# Perfect Authentication Flow (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/07_project_template_api_only.md:# 🔌 Project Template: API-Only (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/backend/README.md:# Backend Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/backend/api_structure.md:# API Structure (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/10_memory_usage_examples.md:# 🧠 Memory Usage Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/05_error_handling_pattern.md:# 🛡️ Error Handling Pattern (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/11_error_handling_template.md:# 🛡️ Error Handling Template (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/testing/README.md:# Testing Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/testing/test_example.py:Standard Unit Test Template (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/testing/e2e_test_pattern.md:# E2E Test Pattern (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/08_project_template_frontend_only.md:# 🎨 Project Template: Frontend-Only (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/13_monitoring_template.md:# 📡 Monitoring & Alerts Template (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/06_project_template_fullstack.md:# 🏗️ Project Template: Full-Stack (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/04_database_migration_example.md:# 🗄️ Database Migration Example (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/02_rest_api_best_practices.md:# REST API Best Practices (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/02_rest_api_best_practices.md:**Engine:** Speckit Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/12_rate_limiting_template.md:# 🚦 Rate Limiting Template (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/09_mcp_usage_examples.md:# 🔌 MCP Usage Examples (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/rag/README.md:This directory contains a reference implementation for **Retrieval-Augmented Generation (RAG)** using the Global AI System Global System v26 Diamond 32 stack.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/rag/rag_api.py:# Injected by Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/examples/rag/vector_db_setup.md:# RAG Vector DB Setup (Global System v26 Diamond 32 Swarm Intelligence)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:# Sequential Thinking Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:## The Process (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:1.  **Context Verification (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:2.  **Librarian Check (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:3.  **Temporal Check (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:4.  **Holographic Mapping (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:6.  **Visual Thinking (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:9.  **Shadow Critique (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:11. **Evolutionary Check (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/thinking.md:## The Swarm Intelligence Protocol (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/error_handling.md:# 🔧 Error Handling Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/mcp.md:# 🔌 MCP Usage Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/02_naming_conventions.md:# 🏷️ Naming Conventions (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/context_engineering.md:# 🎯 Context Engineering Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/testing.md:# ✅ Testing Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/backend.md:# 🔧 Backend Development Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/memory.md:# 🧠 Memory Management Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/03_commit_message_rules.md:# 📝 Commit Message Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/frontend.md:# 🎨 Frontend Development Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/01_code_style.md:# Code Style Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/14_no_duplicate_files.md:# 🚫 No Duplicate Files (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/security.md:# 🔒 Security Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/database.md:# 💾 Database Design Rules (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/99_context_first.md:# 🛑 Rule 99: The Context First Mandate (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/100_evolution_engine.md:# 🧬 Rule 100: The Evolution Engine (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/101_shadow_architect.md:# 🌑 Rule 101: The Shadow Architect (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/102_temporal_awareness.md:# ⏳ Rule 102: Temporal Awareness (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/103_librarian_protocol.md:# 📚 Rule 103: The Librarian Protocol (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/104_anti_hallucination.md:# 🚫 Rule 104: The Anti-Hallucination Oath (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/105_speckit_protocol.md:# Rule 105: The Speckit Protocol (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/99_anti_hallucination.md:# 🛑 RULE 99: ANTI-HALLUCINATION & GROUNDING PROTOCOL (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/00_iron_rules.md:*Signed: Global AI System Global System v26 Diamond 32 Constitution*
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/coding_standards.md:# Coding Standards (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/rules/security_policy.md:# Security Policy (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/86_audit_protocol.md:# 🛡️ Audit Protocol (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/07_code_generation.md:# Code Generation Prompt (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/49_acceptance_testing.md:# Acceptance Testing Prompt (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/81_error_handling.md:# Error Handling (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/70_documentation.md:# Living Documentation (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/74_auto_documentation.md:# Auto Documentation (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/23_api.md:# API Design & Development (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/40_quality.md:# Code Quality & Best Practices (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/06_task_ai.md:# Task AI & Planning (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/75_code_review.md:# Code Review Standards (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/42_e2e_testing.md:MODULE 42: END-TO-END TESTING Global System v26 Diamond 32 (Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/43_ui_ux_testing.md:MODULE 43: UI/UX TESTING & FIXES Global System v26 Diamond 32 (Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/76_performance_optimization.md:# Performance Optimization Standards (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/11_analysis.md:PROJECT ANALYSIS - Existing Project Analysis Global System v26 Diamond 32 (Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/09_code_review.md:# Code Review Prompt Global System v26 Diamond 32 (Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/30_security.md:# Security & Compliance (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/constitution.md:# /speckit.constitution (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/constitution.md:*   This project operates under the **Singularity System Global System v26 Diamond 32**.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/specify.md:# /speckit.specify (Agentic Engine Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/plan.md:# /speckit.plan (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/tasks.md:# /speckit.tasks (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/implement.md:# /speckit.implement (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/analyze.md:# /speckit.analyze (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/checklist.md:# /speckit.checklist (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/verify.md:# /speckit.verify (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/speckit/critique.md:# The Critic's Prompt (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/99_cognitive_architecture.md:All AI agents in the Global System v26 Diamond 32 system MUST follow this loop for complex tasks:
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/00_MASTER_Global System v26 Diamond 32.md:# 🌌 GLOBAL AI SYSTEM - MASTER PROMPT (Global System v26 Diamond 32 Singularity RAG Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/00_MASTER_Global System v26 Diamond 32.md:## 🚀 RAG Protocol (New in Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md:# 🌐 GLOBAL PROFESSIONAL ENGINEER CONSTITUTION Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md:**MODE: AUTONOMOUS SWARM INTELLIGENCE (Global System v26 Diamond 32)**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md:## 4. ⚙️ OPERATIONAL WORKFLOW (Swarm Intelligence Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md:*The Global Professional Engineer (Global System v26 Diamond 32)*
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/config/requirements.txt:# Global AI System Global System v26 Diamond 32 - Core Dependencies
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/setup_project.py:Global AI System Global System v26 Diamond 32 - Project Setup Script
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/setup_project.py:This script initializes a new project with the Global System v26 Diamond 32 architecture.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/setup_project.py:    print(f"\n🚀 [Setup Global System v26 Diamond 32] {step}...")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/setup_project.py:    print(f"🌟 Initializing Project: {project_name} (Global System v26 Diamond 32)")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/README.md:# ❌ Errors Tracking System (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:# ❌ Don't Make These Errors Again (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:**Prevention (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/errors/DONT_MAKE_THESE_ERRORS_AGAIN.md:## 🛠️ Error Resolution Workflow (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/USER_COMMANDS.md:# User Commands (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/USER_COMMANDS.md:Upgrade an existing project to Global System v26 Diamond 32 Swarm Intelligence Edition.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tasks/GAP_FILLING_PLAN.md:# 🛠️ Gap Filling Plan (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Import_Export_Map_Template.md:# Import/Export Map (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Errors_Log_Template.md:# Errors Log (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Errors_Log_Template.md:### Prevention (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Errors_Log_Template.md:#### Prevention (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Class_Registry_Template.md:# Class Registry - Complete Reference (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Task_List_Template.md:# Task List (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/helpers/Folder_Maps_Template.md:# Folder Maps - Project Structure (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:| 2026-02-12 16:37:45 | AUDIT | Verified /home/ubuntu/user_upload_analysis/GitHub/global/VSCODE_STARTUP_PROMPT_Global System v26 Diamond 32.md: Self-Audit Passed |
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:| 2026-02-12 16:37:47 | AUDIT | Verified /home/ubuntu/user_upload_analysis/GitHub/global/prompts/00_MASTER_Global System v26 Diamond 32.md: Self-Audit Passed |
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:| 2026-02-12 16:37:48 | AUDIT | Verified /home/ubuntu/user_upload_analysis/GitHub/global/prompts/GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md: Self-Audit Passed |
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:| 2026-02-12 16:37:49 | AUDIT | Verified /home/ubuntu/user_upload_analysis/GitHub/global/workflows/IRONCLAD_WORKFLOW_Global System v26 Diamond 32.md: Self-Audit Passed |
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:## Global System v26 Diamond 32 (Singularity RAG Edition) - Current
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/system_log.md:| 2026-02-14 | SYSTEM | Global System v26 Diamond 32 Cleanup Completed | Legacy files removed |
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/system_logger.py:# Injected by Global System v26 Diamond 32 Swarm Intelligence
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/download_global.sh:# Global System Download Script (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/download_global.sh:echo "⬇️  Cloning Global System Global System v26 Diamond 32 into $TARGET_DIR..."
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/download_global.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upload_global_to_github.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/init_new_project.sh:# Script to initialize a new project with the Global System structure (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/init_new_project.sh:echo "🚀 Initializing new project: $PROJECT_NAME (Global System v26 Diamond 32 Swarm Intelligence Edition)"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/init_new_project.sh:echo "  - global/ (The AI Brain Global System v26 Diamond 32)"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/init_new_project.sh:echo "👉 Next Step: Run 'python3 global/tools/lifecycle.py $PROJECT_NAME \"Initialize Global System v26 Diamond 32\"'"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/init_new_project.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/download_global_from_github.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v37.sh:# Script to UPGRADE an existing project to the Global System structure (Global System v26 Diamond 32 Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v37.sh:echo "🚀 Upgrading project at $PROJECT_ROOT to Global System v26 Diamond 32 Swarm Intelligence Edition..."
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v37.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v38.sh:# Global AI System Upgrade Script (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v38.sh:echo "🚀 Starting Upgrade to Global System v26 Diamond 32 (Swarm Intelligence Edition)..."
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v38.sh:echo "✅ Upgrade Complete! You are now running Global System v26 Diamond 32."
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/scripts/upgrade_to_v38.sh:# Injected by Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/meta_rules/README.md:# Meta-Rules (The Immune System Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/speckit.py:Speckit Global System v26 Diamond 32 (Swarm Intelligence Edition)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/speckit.py:    parser = argparse.ArgumentParser(description="Speckit Global System v26 Diamond 32 - Swarm Intelligence")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/lifecycle.py:    log(f"Starting Singularity Lifecycle Global System v26 Diamond 32 for: {project_name}", "INIT")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/lifecycle.py:    # Standard Lifecycle (Speckit Global System v26 Diamond 32 Compliant)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/readme_generator.py:    content += "This project is managed by the **Singularity System Global System v26 Diamond 32**.\n"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/readme_generator.py:    content += "*   **Architect:** Speckit Global System v26 Diamond 32\n"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mission_control.py:Mission Control (Global System v26 Diamond 32 Swarm Intelligence)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mission_control.py:    print("║   🌌 GLOBAL AI SYSTEM - MISSION CONTROL (Global System v26 Diamond 32 Sentient)     ║")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/web_scraper.py:Camoufox Web Scraper Wrapper (Swarm Intelligence Edition Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/web_scraper.py:Integrated with Speckit Global System v26 Diamond 32 for E2E Testing.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/web_scraper.py:    parser = argparse.ArgumentParser(description="Camoufox Web Scraper (Swarm Intelligence Edition Global System v26 Diamond 32)")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/coderabbit_reviewer.py:CodeRabbit Reviewer (Swarm Intelligence Edition Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/coderabbit_reviewer.py:    **ROLE:** You are CodeRabbit (Global System v26 Diamond 32), a Senior Staff Engineer and AI Code Reviewer.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/coderabbit_reviewer.py:    **REVIEW GUIDELINES (Global System v26 Diamond 32):**
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/sentinel.py:        "GLOBAL_PROFESSIONAL_CORE_PROMPT_Global System v26 Diamond 32.md",
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/sentinel.py:        "VSCODE_STARTUP_PROMPT_Global System v26 Diamond 32.md",
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/sentinel.py:    print(f"🛡️ Sentinel Global System v26 Diamond 32 (The Critic's Eye) guarding: {root_dir}")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/container_manager.py:Global AI System Global System v26 Diamond 32 - Container Manager
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/container_manager.py:    parser = argparse.ArgumentParser(description="Container Manager (Global System v26 Diamond 32)")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/rag_engine.py:RAG Engine (Swarm Intelligence Edition Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/error_learner.py:Error Learner (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/user_dna.py:User DNA (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mcp_manager.py:MCP Manager (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/doc_updater.py:Doc Updater (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/voice_interface.py:Voice Interface (Global System v26 Diamond 32 Stub)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/code_dna.py:Code DNA (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/auto_tune.py:Auto-Tuning Script (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/git_hooks.py:Git Hooks Manager (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/git_hooks.py:# Auto-generated by Global AI System Global System v26 Diamond 32
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:Mass Update Script (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:Upgrades all project files to Global System v26 Diamond 32 Swarm Intelligence Edition.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:OLD_VERSIONS = ["Global System v26 Diamond 32", "Global System v26 Diamond 32", "Global System v26 Diamond 32", "Global System v26 Diamond 32", "Global System v26 Diamond 32", "Global System v26 Diamond 32"]
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:NEW_VERSION = "Global System v26 Diamond 32"
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:                 content = content.replace("import os", "import os\n# Injected by Global System v26 Diamond 32 Swarm Intelligence\ntry:\n    import global_system.genesis\nexcept:\n    pass")
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update.py:            for old_ver in ["Global System v26 Diamond 32", "Global System v26 Diamond 32", "Global System v26 Diamond 32"]:
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_scripts.py:Mass Update Script for Scripts & Configs (Global System v26 Diamond 32)
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_scripts.py:Upgrades shell scripts, JSON configs, and Python tools to Global System v26 Diamond 32.
+/home/ubuntu/user_upload_analysis/GitHub/global_system/OUTDATED_VERSIONS_LOG.txt:/home/ubuntu/user_upload_analysis/GitHub/global_system/tools/mass_update_scripts.py:NEW_VERSION = "Global System v26 Diamond 32"

@@ -1,86 +1,45 @@
-# 🔧 Maintenance Workflow
+# 🔧 Maintenance Workflow (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-**Version:** 9.0.0  
-**Expert:** Team Leader + All Experts  
-**Estimated Time:** Ongoing
-
----
+**Version:** 37.0
+**Engine:** Speckit Global System v26 Diamond 32
+**Status:** MANDATORY
 
 ## Workflow
 
 ```
-Monitor → Identify → Fix → Test → Deploy
+Monitor → Analyze (Speckit) → Fix (Speckit) → Verify (Sentinel)
 ```
 
-## Phase 1: Monitor
-1. Application metrics
-2. Error logs
-3. Performance metrics
-4. User feedback
-5. Security alerts
+## Phase 1: Monitor & Detect
+1.  **Logs:** Watch Sentry/CloudWatch.
+2.  **Feedback:** User reports.
+3.  **Alerts:** Automated system alerts.
 
-## Phase 2: Identify Issues
-1. Bugs
-2. Performance problems
-3. Security vulnerabilities
-4. Technical debt
-5. Feature requests
+## Phase 2: Analyze (Speckit)
+1.  **Run Analysis:**
+    ```bash
+    python3 global/tools/speckit.py analyze
+    ```
+2.  **Root Cause:** Use Sequential Thinking to find the *real* problem, not just the symptom.
+3.  **Plan Fix:** Create a `fix.plan.md`.
 
-## Phase 3: Prioritize
-```
-Priority Matrix:
-High Impact + Urgent → Do First
-High Impact + Not Urgent → Schedule
-Low Impact + Urgent → Quick Fix
-Low Impact + Not Urgent → Backlog
-```
+## Phase 3: Fix (Speckit)
+1.  **Implement:**
+    ```bash
+    python3 global/tools/speckit.py implement
+    ```
+2.  **Test:** Write a regression test that *fails* without the fix and *passes* with it.
 
-## Phase 4: Fix
-1. Reproduce issue
-2. Identify root cause
-3. Implement fix
-4. Test fix
-5. Document
+## Phase 4: Verify (Sentinel)
+1.  **Run Verification:**
+    ```bash
+    python3 global/tools/speckit.py verify
+    ```
+2.  **Prevention:** Update `global/helpers/Errors_Log_Template.md` to prevent recurrence.
 
-## Phase 5: Deploy Fix
-1. Create PR
-2. Code review
-3. Merge
-4. Deploy
-5. Verify fix
+## Regular Maintenance
+*   **Weekly:** Run `speckit.py verify` on the whole codebase.
+*   **Monthly:** Update dependencies and run Sentinel Check.
 
-## Phase 6: Prevent Recurrence
-1. Add tests
-2. Update documentation
-3. Improve monitoring
-4. Share lessons learned
-
----
-
-## Regular Maintenance Tasks
-
-### Daily
-- Check error logs
-- Monitor performance
-- Review alerts
-
-### Weekly
-- Security updates
-- Dependency updates
-- Backup verification
-
-### Monthly
-- Performance optimization
-- Code review
-- Documentation update
-- Technical debt reduction
-
-### Quarterly
-- Major updates
-- Architecture review
-- Security audit
-- Disaster recovery test
-
----
-
-*Proactive maintenance keeps systems healthy.*
+## Remember
+**Maintenance is not a chore. It is hygiene.**

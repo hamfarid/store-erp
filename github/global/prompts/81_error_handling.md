@@ -1,42 +1,24 @@
-# PROMPT 81: ERROR HANDLING
+# Error Handling (Global System v26 Diamond 32 Synchronized Intelligence Edition)
 
-**Objective:** Implement a robust and consistent error handling system.
+**Version:** 37.0
+**Engine:** Speckit Global System v26 Diamond 32 + Sentinel
+**Status:** MANDATORY
 
----
+## Objective
+Implement a robust, centralized error handling system that integrates with the Autonomous Engine's logging and monitoring.
 
-## 🎯 REQUIREMENTS
+## Requirements (Speckit Plan)
+1.  **Custom Exceptions:** Define domain-specific exceptions (e.g., `PaymentFailedError`, `ResourceNotFoundError`).
+2.  **Centralized Handling:** Use middleware (FastAPI/Express) to catch ALL exceptions.
+3.  **Structured Logging:** Log errors as JSON with trace IDs, integrated with `system_log.md`.
+4.  **Sentinel Integration:** Critical errors must trigger a Sentinel alert.
+5.  **User Feedback:** Sanitize error messages before sending to client (No stack traces in production).
 
-1.  **Custom Error Classes:** Create custom error classes for different types of errors (e.g., `ValidationError`, `AuthenticationError`).
-2.  **Global Error Handler:** Implement a global error handler to catch all unhandled exceptions.
-3.  **User-Friendly Messages:** Return user-friendly error messages to the client.
-4.  **Logging:** Log all errors with a full stack trace.
-5.  **HTTP Status Codes:** Use appropriate HTTP status codes for different types of errors.
+## Implementation (Speckit Implement)
+*   **Backend:** Global Exception Handler (FastAPI `@app.exception_handler`).
+*   **Frontend:** Error Boundaries (React) + Toast Notifications.
+*   **Logging:** Use `structlog` (Python) or `pino` (Node.js).
 
----
-
-## 📝 PHASES OF IMPLEMENTATION
-
-### Phase 1: Custom Errors
-1.  **Create Base Error:** Create a base `AppError` class that all other custom errors will extend.
-2.  **Create Custom Errors:** Create custom error classes for common error scenarios (e.g., `NotFoundError`, `ForbiddenError`).
-
-### Phase 2: Global Error Handler
-1.  **Create Middleware:** Create a global error handling middleware for the backend.
-2.  **Handle Errors:** The middleware should catch all errors, log them, and send a user-friendly response to the client.
-
-### Phase 3: Integration
-1.  **Throw Custom Errors:** Go through the codebase and replace generic `Error` objects with the new custom error classes.
-2.  **Handle Errors in UI:** Implement a consistent way to display errors to the user in the frontend.
-
-### Phase 4: Verification
-1.  **Test Error Scenarios:** Write tests to ensure that the error handling system works as expected for different error scenarios.
-2.  **Manual Verification:** Manually trigger different errors and verify that they are handled correctly.
-
----
-
-## ✅ SUCCESS CRITERIA
-
-- All errors are handled gracefully.
-- Users are shown user-friendly error messages.
-- All errors are logged with a full stack trace.
-- The application uses appropriate HTTP status codes.
+## Verification (Speckit Verify)
+*   **Test:** Unit tests must assert that correct custom exceptions are raised.
+*   **Chaos:** Simulate failures (DB down, API timeout) to verify resilience.

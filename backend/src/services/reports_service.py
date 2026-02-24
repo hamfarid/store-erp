@@ -144,7 +144,7 @@ class ReportsService:
     @staticmethod
     def get_top_products(period: ReportPeriod, limit: int = 10) -> List[Dict[str, Any]]:
         """Get top selling products."""
-        from src.models.invoice_unified import InvoiceItem
+        from src.models.invoice_unified import Invoice, InvoiceItem
         from src.models.inventory import Product
 
         query = (
@@ -169,8 +169,6 @@ class ReportsService:
             .order_by(desc("total_revenue"))
             .limit(limit)
         )
-
-        from src.models.invoice_unified import Invoice  # Import here to avoid circular
 
         return [
             {
