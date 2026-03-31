@@ -13,18 +13,18 @@ import Button from '../components/ui/ModernButton';
 const ReportCard = ({ title, description, icon: Icon, color, onClick }) => (
   <div
     onClick={onClick}
-    className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+    className="entity-card cursor-pointer group"
   >
     <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
       <Icon className="text-white" size={24} />
     </div>
-    <h3 className="font-bold text-gray-900 text-lg mb-2">{title}</h3>
-    <p className="text-gray-500 text-sm">{description}</p>
+    <h3 className="entity-card__name text-lg mb-2">{title}</h3>
+    <p className="text-secondary text-sm">{description}</p>
   </div>
 );
 
 const StatCard = ({ title, value, change, isPositive, icon: Icon, color }) => (
-  <div className="bg-white rounded-xl p-5 border border-gray-100">
+  <div className="stats-card">
     <div className="flex items-center justify-between mb-3">
       <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center`}>
         <Icon className="text-white" size={18} />
@@ -34,8 +34,8 @@ const StatCard = ({ title, value, change, isPositive, icon: Icon, color }) => (
         {change}%
       </span>
     </div>
-    <p className="text-gray-500 text-sm mb-1">{title}</p>
-    <p className="text-2xl font-bold text-gray-900">{value}</p>
+    <p className="text-secondary text-sm mb-1">{title}</p>
+    <p className="stats-card-value">{value}</p>
   </div>
 );
 
@@ -52,17 +52,17 @@ const ReportsPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 p-8" dir="rtl">
-      <div className="flex items-center justify-between mb-8">
+    <div className="page-container" dir="rtl">
+      <div className="page-header">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">التقارير</h1>
-          <p className="text-gray-500">تحليلات وإحصائيات شاملة</p>
+          <h1 className="page-title">التقارير</h1>
+          <p className="page-subtitle">تحليلات وإحصائيات شاملة</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="page-actions">
           <select
             value={dateRange}
             onChange={(e) => setDateRange(e.target.value)}
-            className="px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+            className="form-input-standard"
           >
             <option value="today">اليوم</option>
             <option value="week">هذا الأسبوع</option>
@@ -121,9 +121,9 @@ const ReportsPage = () => {
 
       {/* Reports Grid */}
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">التقارير المتاحة</h2>
+        <h2 className="text-xl font-bold text-primary mb-4">التقارير المتاحة</h2>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="entity-grid">
         {reports.map((report, index) => (
           <ReportCard
             key={index}

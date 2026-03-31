@@ -113,7 +113,7 @@ const authService = {
    * تفعيل المصادقة الثنائية
    */
   async enable2FA() {
-    return apiClient.post('/api/auth/2fa/enable');
+    return apiClient.post('/api/2fa/enable');
   },
 
   /**
@@ -121,18 +121,28 @@ const authService = {
    * @param {string} code - رمز التحقق
    */
   async disable2FA(code) {
-    return apiClient.post('/api/auth/2fa/disable', { code });
+    return apiClient.post('/api/2fa/disable', { code });
   },
 
   /**
-   * التحقق من رمز المصادقة الثنائية
-   * @param {string} code - رمز التحقق
+   * التحقق من رمز المصادقة الثنائية أثناء تسجيل الدخول
+   * @param {string} code - رمز التحقق من تطبيق المصادقة
+   * @param {string} tempToken - الرمز المؤقت من عملية تسجيل الدخول
    */
-  async verify2FA(code) {
-    const response = await apiClient.post('/api/auth/2fa/verify', { code });
+  async verify2FA(code, tempToken = null) {
+    // Use temp token from localStorage if not provided
+    const token = tempToken || localStorage.getItem('temp_2fa_token');
 
-    if (response.access_token) {
-      apiClient.setToken(response.access_token, response.refresh_token);
+    const response = await apiClient.post('/api/auth/2fa/verify-login', {
+      code,
+      temp_token: token
+    });
+
+    if (response.success && response.data?.access_token) {
+      // Clean up temp token
+      localStorage.removeItem('temp_2fa_token');
+      // Set the real tokens
+      apiClient.setToken(response.data.access_token, response.data.refresh_token);
     }
 
     return response;
@@ -142,14 +152,14 @@ const authService = {
    * الحصول على رموز الاسترداد
    */
   async getBackupCodes() {
-    return apiClient.get('/api/auth/2fa/backup-codes');
+    return apiClient.get('/api/2fa/status'); // Using status endpoint to get count
   },
 
   /**
    * إعادة توليد رموز الاسترداد
    */
   async regenerateBackupCodes() {
-    return apiClient.post('/api/auth/2fa/backup-codes/regenerate');
+    return apiClient.post('/api/2fa/regenerate-backup-codes');
   },
 
   // ==================== Sessions ====================

@@ -181,33 +181,33 @@ const RoleCard = ({ role, onEdit, onDelete, onView }) => {
   const gradient = colorMap[role.color] || colorMap.blue;
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl transition-all group">
-      <div className="flex items-start justify-between mb-4">
+    <div className="entity-card group">
+      <div className="entity-card__header">
         <div className="flex items-center gap-4">
           <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center text-white shadow-lg`}>
             <Icon size={24} />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-bold text-gray-900">{role.name}</h3>
+              <h3 className="entity-card__name">{role.name}</h3>
               {role.isSystem && (
-                <Lock size={14} className="text-gray-400" />
+                <Lock size={14} className="text-tertiary" />
               )}
             </div>
-            <p className="text-sm text-gray-500">{role.code}</p>
+            <p className="entity-card__meta">{role.code}</p>
           </div>
         </div>
-        <span className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">
+        <span className="status-badge status-badge--neutral">
           {role.usersCount} مستخدم
         </span>
       </div>
 
-      <p className="text-gray-600 text-sm mb-4">{role.description}</p>
+      <p className="text-secondary text-sm mb-4">{role.description}</p>
 
-      <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
+      <div className="entity-card__actions">
         <button
           onClick={() => onView(role)}
-          className="flex-1 py-2 text-center text-sm font-medium text-teal-600 hover:bg-teal-50 rounded-lg"
+          className="entity-card__action entity-card__action--primary"
         >
           <Eye size={16} className="inline ml-1" />
           عرض
@@ -216,14 +216,14 @@ const RoleCard = ({ role, onEdit, onDelete, onView }) => {
           <>
             <button
               onClick={() => onEdit(role)}
-              className="flex-1 py-2 text-center text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg"
+              className="entity-card__action entity-card__action--secondary"
             >
               <Edit size={16} className="inline ml-1" />
               تعديل
             </button>
             <button
               onClick={() => onDelete(role)}
-              className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg"
+              className="entity-card__action entity-card__action--danger p-2"
             >
               <Trash2 size={16} />
             </button>
@@ -321,75 +321,71 @@ const RolesPage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 p-8" dir="rtl">
+    <div className="page-container" dir="rtl">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="page-header">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">الأدوار والصلاحيات</h1>
-          <p className="text-gray-500">إدارة أدوار المستخدمين وصلاحياتهم</p>
+          <h1 className="page-title">الأدوار والصلاحيات</h1>
+          <p className="page-subtitle">إدارة أدوار المستخدمين وصلاحياتهم</p>
         </div>
-        <Button variant="primary" icon={Plus} onClick={() => setShowModal(true)}>
-          إضافة دور
-        </Button>
+        <div className="page-actions">
+          <Button variant="primary" icon={Plus} onClick={() => setShowModal(true)}>
+            إضافة دور
+          </Button>
+        </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">إجمالي الأدوار</p>
-              <p className="text-2xl font-bold text-gray-900">{sampleRoles.length}</p>
-            </div>
+      <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+        <div className="stats-card">
+          <div className="stats-card-header">
+            <span className="stats-card-title">إجمالي الأدوار</span>
             <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
               <Shield className="text-purple-600" size={24} />
             </div>
           </div>
+          <div className="stats-card-value">{sampleRoles.length}</div>
         </div>
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">أدوار نظامية</p>
-              <p className="text-2xl font-bold text-rose-600">
-                {sampleRoles.filter(r => r.isSystem).length}
-              </p>
-            </div>
+        <div className="stats-card">
+          <div className="stats-card-header">
+            <span className="stats-card-title">أدوار نظامية</span>
             <div className="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center">
               <Lock className="text-rose-600" size={24} />
             </div>
           </div>
+          <div className="stats-card-value text-rose-600">
+            {sampleRoles.filter(r => r.isSystem).length}
+          </div>
         </div>
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-gray-500 text-sm">إجمالي الصلاحيات</p>
-              <p className="text-2xl font-bold text-teal-600">
-                {permissionModules.reduce((sum, m) => sum + m.permissions.length, 0)}
-              </p>
-            </div>
+        <div className="stats-card">
+          <div className="stats-card-header">
+            <span className="stats-card-title">إجمالي الصلاحيات</span>
             <div className="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center">
               <Key className="text-teal-600" size={24} />
             </div>
+          </div>
+          <div className="stats-card-value text-teal-600">
+            {permissionModules.reduce((sum, m) => sum + m.permissions.length, 0)}
           </div>
         </div>
       </div>
 
       {/* Search */}
-      <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm mb-8">
-        <div className="relative max-w-md">
+      <div className="search-filter-bar">
+        <div className="relative search-input">
           <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="بحث في الأدوار..."
-            className="w-full pr-12 pl-4 py-3 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-teal-500"
+            className="form-input-standard pr-12"
           />
         </div>
       </div>
 
       {/* Roles Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="entity-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))' }}>
         {filteredRoles.map(role => (
           <RoleCard
             key={role.id}

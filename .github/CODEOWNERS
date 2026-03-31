@@ -1,0 +1,32 @@
+# Store ERP Code Owners
+# هذا الملف يحدد مالكي الأكواد المسؤولين عن المراجعة
+
+# المالكون الافتراضيون للمستودع
+*                           @hamfarid
+
+# ملفات الـ Backend
+backend/**                  @hamfarid
+*.py                        @hamfarid
+requirements*.txt           @hamfarid
+
+# ملفات الـ Frontend
+frontend/**                 @hamfarid
+*.js                        @hamfarid
+*.jsx                       @hamfarid
+*.ts                        @hamfarid
+*.tsx                       @hamfarid
+package*.json              @hamfarid
+
+# ملفات الإنتاج والنشر
+docker*                     @hamfarid
+docker-compose*.yml         @hamfarid
+.github/**                  @hamfarid
+.env*                       @hamfarid
+
+# ملفات التوثيق
+*.md                        @hamfarid
+docs/**                     @hamfarid
+
+# ملفات الإعدادات الحساسة
+.github/CODEOWNERS          @hamfarid
+.github/workflows/**        @hamfarid

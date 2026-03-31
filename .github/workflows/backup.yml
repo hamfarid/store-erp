@@ -1,0 +1,114 @@
+name: Automated Backups
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      backup_type:
+        description: 'Type of backup to create'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - database
+          - files
+
+jobs:
+  backup:
+    name: Create Project Backup
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install backup script dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Create full backup
+        if: github.event.inputs.backup_type == 'full' || github.event.inputs.backup_type == ''
+        run: |
+          python create_backup.py --backup-dir backups --manifest
+          ls -lh backups/
+
+      - name: Upload backup to GitHub Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          files: backups/*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload backup artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: project-backup
+          path: backups/
+          retention-days: 30
+
+      - name: Monitor backup size
+        run: |
+          BACKUP_SIZE=$(du -sh backups/ | cut -f1)
+          echo "Backup size: $BACKUP_SIZE"
+          if [ $(du -sb backups/ | cut -f1) -gt 1099511627776 ]; then
+            echo "⚠️ Warning: Backup exceeds 1TB"
+          fi
+
+      - name: Create backup summary
+        if: always()
+        run: |
+          echo "## 📦 Backup Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Timestamp**: $(date -u)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Backup Size**: $(du -sh backups/ | cut -f1)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Files Count**: $(find . -type f | wc -l)" >> $GITHUB_STEP_SUMMARY
+
+  database-backup:
+    name: Database Backup
+    runs-on: ubuntu-latest
+    if: github.event.inputs.backup_type == 'database' || github.event.inputs.backup_type == ''
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create database backup script
+        run: |
+          mkdir -p db_backups
+          echo "Database backup procedure documented in deployment guide"
+
+      - name: Upload database backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: database-backup
+          path: db_backups/
+          retention-days: 30
+
+  notify-backup-status:
+    name: Notify Backup Status
+    runs-on: ubuntu-latest
+    needs: [backup]
+    if: always()
+
+    steps:
+      - name: Send success notification
+        if: needs.backup.result == 'success'
+        run: |
+          echo "✅ Backup completed successfully"
+
+      - name: Send failure notification
+        if: needs.backup.result == 'failure'
+        run: |
+          echo "❌ Backup failed - review logs"

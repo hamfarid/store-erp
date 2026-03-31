@@ -48,6 +48,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
+import { API_BASE_URL } from '../config/api';
 import './DashboardNew.css';
 
 const DashboardNew = () => {
@@ -79,11 +80,10 @@ const DashboardNew = () => {
 
   const fetchDashboardData = async () => {
     setLoading(true);
-    
+
     try {
-      // Try to fetch from API
-      const baseUrl = 'http://127.0.0.1:8000';
-      const response = await fetch(`${baseUrl}/api/dashboard/stats`);
+      // Try to fetch from API using centralized config
+      const response = await fetch(`${API_BASE_URL}/api/dashboard/stats`);
       
       if (response.ok) {
         const data = await response.json();

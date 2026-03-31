@@ -169,7 +169,7 @@ class CrossEncoderReranker:
         """Lazy load the cross-encoder model."""
         if self._model is None:
             try:
-                from sentence_transformers import CrossEncoder
+                from sentence_transformers import CrossEncoder  # type: ignore[import-untyped]
 
                 self._model = CrossEncoder(self.model_name)
                 logger.info(f"P1.40: Loaded cross-encoder model: {self.model_name}")

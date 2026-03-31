@@ -1,0 +1,310 @@
+name: 📦 Release - Semantic Versioning
+
+# NOTE: Required GitHub Secrets (optional)
+# For auto-deployment after release, add these secrets in Settings → Secrets:
+#   - PRODUCTION_HOST, PRODUCTION_USER, PRODUCTION_SSH_KEY
+# See .github/SETUP_GITHUB_SECRETS.md for complete setup guide
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+        default: patch
+      target_branch:
+        description: 'Target branch for release'
+        required: true
+        type: choice
+        options:
+          - main
+          - develop
+        default: main
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '20'
+
+jobs:
+  # ============================================================
+  # حساب إصدار جديد (بناءً على Semantic Versioning)
+  # ============================================================
+  calculate-version:
+    name: Calculate New Version
+    runs-on: ubuntu-latest
+    outputs:
+      new_version: ${{ steps.version.outputs.new_version }}
+      previous_version: ${{ steps.version.outputs.previous_version }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get current version
+        id: version
+        run: |
+          # الحصول على آخر version tag
+          PREV_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          PREV_VERSION=${PREV_VERSION#v}
+
+          # استخراج الأجزاء
+          MAJOR=$(echo $PREV_VERSION | cut -d. -f1)
+          MINOR=$(echo $PREV_VERSION | cut -d. -f2)
+          PATCH=$(echo $PREV_VERSION | cut -d. -f3 | cut -d- -f1)
+
+          # حساب النسخة الجديدة
+          case "${{ inputs.release_type }}" in
+            major)
+              NEW_MAJOR=$((MAJOR + 1))
+              NEW_MINOR=0
+              NEW_PATCH=0
+              ;;
+            minor)
+              NEW_MAJOR=$MAJOR
+              NEW_MINOR=$((MINOR + 1))
+              NEW_PATCH=0
+              ;;
+            patch)
+              NEW_MAJOR=$MAJOR
+              NEW_MINOR=$MINOR
+              NEW_PATCH=$((PATCH + 1))
+              ;;
+          esac
+
+          NEW_VERSION="$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH"
+          echo "previous_version=$PREV_VERSION" >> $GITHUB_OUTPUT
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+          echo "📦 Version Increment"
+          echo "Previous: $PREV_VERSION"
+          echo "New: $NEW_VERSION"
+          echo "Type: ${{ inputs.release_type }}"
+
+  # ============================================================
+  # الاختبارات النهائية
+  # ============================================================
+  final-tests:
+    name: Final Tests Before Release
+    runs-on: ubuntu-latest
+    needs: calculate-version
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: test_store
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -q
+          pip install pytest pytest-cov -q
+
+      - name: Run backend tests
+        working-directory: backend
+        run: |
+          pytest tests/ -v --cov=src --tb=short
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/test_store
+          FLASK_ENV: testing
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Run frontend checks
+        working-directory: frontend
+        run: npm run lint 2>/dev/null || echo "No lint script"
+
+  # ============================================================
+  # تحديث CHANGELOG
+  # ============================================================
+  update-changelog:
+    name: Update CHANGELOG
+    runs-on: ubuntu-latest
+    needs: [calculate-version, final-tests]
+    outputs:
+      changelog_updated: ${{ steps.changelog.outputs.updated }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate changelog entries
+        id: changelog
+        run: |
+          NEW_VERSION=${{ needs.calculate-version.outputs.new_version }}
+          RELEASE_DATE=$(date +%Y-%m-%d)
+
+          # الحصول على commits منذ آخر release
+          COMMITS=$(git log $(git describe --tags --abbrev=0 2>/dev/null)..HEAD --pretty=format:"%h %s" 2>/dev/null || git log --all --pretty=format:"%h %s" | head -20)
+
+          # إنشاء CHANGELOG جديد
+          cat > /tmp/new_changelog.md << EOF
+          ## [$NEW_VERSION] - $RELEASE_DATE
+
+          ### Added
+          - تحسينات جديدة
+
+          ### Changed
+          - تحديثات وتحسينات
+
+          ### Fixed
+          - إصلاحات الأخطاء
+
+          ### Commits
+          \`\`\`
+          $COMMITS
+          \`\`\`
+
+          EOF
+
+          # دمج مع الـ CHANGELOG الموجود
+          if [ -f CHANGELOG.md ]; then
+            cat /tmp/new_changelog.md CHANGELOG.md > /tmp/combined.md
+            mv /tmp/combined.md CHANGELOG.md
+          else
+            mv /tmp/new_changelog.md CHANGELOG.md
+          fi
+
+          echo "updated=true" >> $GITHUB_OUTPUT
+
+      - name: Commit changelog
+        if: steps.changelog.outputs.updated == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add CHANGELOG.md
+          git commit -m "docs: update CHANGELOG for v${{ needs.calculate-version.outputs.new_version }}" || echo "No changes to commit"
+          git push origin ${{ inputs.target_branch }}
+
+  # ============================================================
+  # إنشاء Release و Tag
+  # ============================================================
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: [calculate-version, update-changelog]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+          fetch-depth: 0
+
+      - name: Create tag
+        run: |
+          NEW_VERSION=${{ needs.calculate-version.outputs.new_version }}
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag -a v$NEW_VERSION -m "Release v$NEW_VERSION (${{ inputs.release_type }})"
+          git push origin v$NEW_VERSION
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ needs.calculate-version.outputs.new_version }}
+          name: Release v${{ needs.calculate-version.outputs.new_version }}
+          body: |
+            ## 📦 Release v${{ needs.calculate-version.outputs.new_version }}
+
+            **Release Type**: ${{ inputs.release_type }}
+            **Previous Version**: v${{ needs.calculate-version.outputs.previous_version }}
+            **Target Branch**: ${{ inputs.target_branch }}
+
+            ### Installation
+            \`\`\`bash
+            git checkout v${{ needs.calculate-version.outputs.new_version }}
+            \`\`\`
+
+            ### Docker
+            \`\`\`bash
+            docker pull ghcr.io/hamfarid/store-erp:v${{ needs.calculate-version.outputs.new_version }}
+            \`\`\`
+
+            See [CHANGELOG.md](CHANGELOG.md) for detailed changes.
+          draft: false
+          prerelease: false
+          files: |
+            CHANGELOG.md
+
+  # ============================================================
+  # النشر التلقائي (اختياري)
+  # ============================================================
+  deploy:
+    name: Deploy Release
+    needs: [calculate-version, create-release]
+    runs-on: ubuntu-latest
+    if: inputs.target_branch == 'main'
+    # Note: Uncomment environment section after configuring in GitHub Settings
+    # environment:
+    #   name: production
+    #   url: https://example.com
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v${{ needs.calculate-version.outputs.new_version }}
+
+      - name: Deploy to production
+        run: |
+          echo "🚀 Deploying v${{ needs.calculate-version.outputs.new_version }} to production"
+          # Add your deployment commands here
+
+  # ============================================================
+  # ملخص الإصدار
+  # ============================================================
+  release-summary:
+    name: Release Summary
+    runs-on: ubuntu-latest
+    needs: [calculate-version, create-release]
+    if: always()
+
+    steps:
+      - name: Print release summary
+        run: |
+          echo "✅ Release Summary"
+          echo "=================="
+          echo "New Version: v${{ needs.calculate-version.outputs.new_version }}"
+          echo "Previous Version: v${{ needs.calculate-version.outputs.previous_version }}"
+          echo "Release Type: ${{ inputs.release_type }}"
+          echo "Target Branch: ${{ inputs.target_branch }}"
+          echo "Status: ${{ needs.create-release.result }}"

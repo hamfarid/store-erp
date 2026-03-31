@@ -9,11 +9,17 @@ from __future__ import annotations
 import os
 from functools import lru_cache
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import TYPE_CHECKING, List, Dict, Any
 
-import chromadb
-from chromadb.api.models.Collection import Collection
-from sentence_transformers import SentenceTransformer
+try:
+    import chromadb  # type: ignore[import-untyped]
+    from sentence_transformers import SentenceTransformer  # type: ignore[import-untyped]
+except ImportError:
+    chromadb = None  # type: ignore[assignment]
+    SentenceTransformer = None  # type: ignore[assignment,misc]
+
+if TYPE_CHECKING:
+    from chromadb.api.models.Collection import Collection  # type: ignore[import-untyped]
 
 # Configuration
 ROOT = Path(__file__).resolve().parents[2]  # .../complete_inventory_system

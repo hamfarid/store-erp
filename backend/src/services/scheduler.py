@@ -316,7 +316,7 @@ class TaskScheduler:
 
     def _job_low_stock_alerts(self):
         """Send low stock alerts."""
-        from src.models.product import Product
+        from src.models.inventory import Product
         from src.services.notification_service import NotificationService
         from src.models.user import User
 

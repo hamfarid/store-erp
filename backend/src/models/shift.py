@@ -13,7 +13,7 @@ class Shift(db.Model):
     id = Column(Integer, primary_key=True)
     shift_number = Column(String(50), unique=True, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    branch_id = Column(Integer, ForeignKey('branches.id'), nullable=True)
+    branch_id = Column(Integer, nullable=True)  # Branch table doesn't exist yet
     
     # معلومات الوردية
     opening_time = Column(DateTime, nullable=False, default=datetime.utcnow)

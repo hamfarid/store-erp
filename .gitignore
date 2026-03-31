@@ -64,6 +64,9 @@ media/
 *.backup
 backups/
 
+# Archived files
+_archived/
+
 # Archives (keep only final releases)
 *.zip
 *.tar.gz

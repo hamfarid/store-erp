@@ -1,0 +1,447 @@
+/**
+ * Store ERP - Page Component Styles
+ * 
+ * Reusable CSS classes for pages using the Design System tokens.
+ * Use these classes instead of hardcoded Tailwind colors.
+ */
+
+/* ========================================
+   PAGE LAYOUT
+   ======================================== */
+
+.page-container {
+  min-height: 100vh;
+  padding: var(--spacing-6);
+  background-color: var(--color-bg-secondary);
+}
+
+.page-header {
+  margin-bottom: var(--spacing-6);
+}
+
+.page-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-1);
+}
+
+.page-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   ENTITY CARDS (Customers, Suppliers, etc.)
+   ======================================== */
+
+.entity-card {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-border-light);
+  padding: var(--spacing-6);
+  transition: var(--transition-all);
+}
+
+.entity-card:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+.entity-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+}
+
+.entity-card__avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--shadow-lg);
+}
+
+.entity-card__avatar--primary {
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
+}
+
+.entity-card__avatar--secondary {
+  background: linear-gradient(135deg, var(--color-secondary-500), var(--color-secondary-600));
+}
+
+.entity-card__avatar--info {
+  background: linear-gradient(135deg, var(--color-info-500), var(--color-info-600));
+}
+
+.entity-card__name {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.entity-card__meta {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.entity-card__info {
+  margin-bottom: var(--spacing-4);
+}
+
+.entity-card__info-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-2);
+}
+
+.entity-card__info-icon {
+  color: var(--color-text-tertiary);
+}
+
+.entity-card__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-4);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.entity-card__stat {
+  text-align: center;
+}
+
+.entity-card__stat-value {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.entity-card__stat-value--primary {
+  color: var(--color-primary-600);
+}
+
+.entity-card__stat-value--success {
+  color: var(--color-success-600);
+}
+
+.entity-card__stat-value--danger {
+  color: var(--color-error-600);
+}
+
+.entity-card__stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.entity-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.entity-card__action {
+  flex: 1;
+  padding: var(--spacing-2);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-lg);
+  transition: var(--transition-colors);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.entity-card__action--primary {
+  color: var(--color-primary-600);
+}
+
+.entity-card__action--primary:hover {
+  background-color: var(--color-primary-50);
+}
+
+.entity-card__action--secondary {
+  color: var(--color-text-secondary);
+}
+
+.entity-card__action--secondary:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+.entity-card__action--danger {
+  color: var(--color-error-500);
+  padding: var(--spacing-2);
+  flex: 0;
+}
+
+.entity-card__action--danger:hover {
+  background-color: var(--color-error-50);
+}
+
+/* ========================================
+   GRID LAYOUTS
+   ======================================== */
+
+.entity-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-6);
+}
+
+@media (min-width: 768px) {
+  .entity-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .entity-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .entity-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ========================================
+   SEARCH & FILTER BAR
+   ======================================== */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
+.toolbar__search {
+  flex: 1;
+  min-width: 250px;
+}
+
+.toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* ========================================
+   RATING STARS
+   ======================================== */
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+}
+
+.rating-star--filled {
+  color: var(--color-warning-500);
+  fill: var(--color-warning-500);
+}
+
+.rating-star--empty {
+  color: var(--color-neutral-200);
+}
+
+/* ========================================
+   PROGRESS BAR
+   ======================================== */
+
+.progress-bar {
+  width: 100%;
+  height: 0.75rem;
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width var(--duration-500) var(--ease-out);
+}
+
+.progress-bar__fill--success {
+  background-color: var(--color-success-500);
+}
+
+.progress-bar__fill--warning {
+  background-color: var(--color-warning-500);
+}
+
+.progress-bar__fill--danger {
+  background-color: var(--color-error-500);
+}
+
+/* ========================================
+   STATUS BADGES
+   ======================================== */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.status-badge--success {
+  background-color: var(--color-success-100);
+  color: var(--color-success-700);
+}
+
+.status-badge--warning {
+  background-color: var(--color-warning-100);
+  color: var(--color-warning-700);
+}
+
+.status-badge--danger {
+  background-color: var(--color-error-100);
+  color: var(--color-error-700);
+}
+
+.status-badge--info {
+  background-color: var(--color-info-100);
+  color: var(--color-info-700);
+}
+
+/* ========================================
+   STAT CARDS
+   ======================================== */
+
+.stat-card {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-4);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all);
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card__value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.stat-card__label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* ========================================
+   LOADING & EMPTY STATES
+   ======================================== */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-12);
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid var(--color-border-light);
+  border-top-color: var(--color-primary-500);
+  border-radius: var(--radius-full);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-12);
+  text-align: center;
+  color: var(--color-text-tertiary);
+}
+
+.empty-state__icon {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: var(--spacing-4);
+  color: var(--color-neutral-300);
+}
+
+.empty-state__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.empty-state__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  max-width: 24rem;
+}
+
+/* ========================================
+   ERROR STATE
+   ======================================== */
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-12);
+  text-align: center;
+  background-color: var(--color-error-50);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-error-100);
+}
+
+.error-state__icon {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: var(--spacing-4);
+  color: var(--color-error-500);
+}
+
+.error-state__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-error-700);
+  margin-bottom: var(--spacing-2);
+}
+
+.error-state__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-error-600);
+  max-width: 24rem;
+}
+

@@ -66,8 +66,8 @@ const DashboardEnhanced = () => {
   }
 
   const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, onClick }) => (
-    <div 
-      className={`bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer ${onClick ? 'hover:scale-105 transition-transform' : ''}`}
+    <div
+      className={`stats-card hover:shadow-lg transition-shadow cursor-pointer ${onClick ? 'hover:scale-105 transition-transform' : ''}`}
       onClick={onClick}
     >
       <div className="flex items-center justify-between mb-4">
@@ -81,8 +81,8 @@ const DashboardEnhanced = () => {
           </div>
         )}
       </div>
-      <h3 className="text-gray-600 text-sm mb-1">{title}</h3>
-      <p className="text-2xl font-bold text-gray-900">{value.toLocaleString()}</p>
+      <h3 className="stats-card-title">{title}</h3>
+      <p className="stats-card-value">{value.toLocaleString()}</p>
     </div>
   )
 
@@ -113,7 +113,7 @@ const DashboardEnhanced = () => {
       <div className="page-header">
         <div>
           <h1 className="page-title">لوحة التحكم</h1>
-          <p className="text-gray-600 mt-1">مرحباً {user?.username || 'المستخدم'} 👋</p>
+          <p className="text-secondary mt-1">مرحباً {user?.username || 'المستخدم'} 👋</p>
         </div>
       </div>
 
@@ -167,26 +167,26 @@ const DashboardEnhanced = () => {
 
       {/* Financial Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white rounded-xl shadow-md p-6">
+        <div className="entity-card">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">المبيعات</h3>
+            <h3 className="text-lg font-semibold text-primary">المبيعات</h3>
             <TrendingUp className="h-5 w-5 text-green-500" />
           </div>
           <p className="text-3xl font-bold text-green-600 mb-2">
             {stats.totalSales.toLocaleString()} ج.م
           </p>
-          <p className="text-sm text-gray-600">+15% عن الشهر الماضي</p>
+          <p className="text-sm text-secondary">+15% عن الشهر الماضي</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-md p-6">
+        <div className="entity-card">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">المشتريات</h3>
+            <h3 className="text-lg font-semibold text-primary">المشتريات</h3>
             <TrendingDown className="h-5 w-5 text-red-500" />
           </div>
           <p className="text-3xl font-bold text-red-600 mb-2">
             {stats.totalPurchases.toLocaleString()} ج.م
           </p>
-          <p className="text-sm text-gray-600">-5% عن الشهر الماضي</p>
+          <p className="text-sm text-secondary">-5% عن الشهر الماضي</p>
         </div>
       </div>
 
@@ -226,8 +226,8 @@ const DashboardEnhanced = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-xl shadow-md p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">إجراءات سريعة</h3>
+      <div className="entity-card">
+        <h3 className="text-lg font-semibold text-primary mb-4">إجراءات سريعة</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <QuickAction
             title="منتج جديد"

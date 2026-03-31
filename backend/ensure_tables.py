@@ -23,16 +23,14 @@ def ensure_all_tables():
             from database import db
 
             # Import all models to ensure they are registered
-            from models import (
-                User,
-                Role,
-                Customer,
-                Product,
-                Category,
-                Warehouse,
-                UnifiedInvoice,
-                UnifiedInvoiceItem,
-                InvoicePayment,
+            from models.user import User, Role  # noqa: F811
+            from models.customer import Customer
+            from models.inventory import Product
+            from models.category import Category
+            from models.models import Warehouse
+            from models.unified_invoice import UnifiedInvoice, UnifiedInvoiceItem
+            from models.invoice_unified import InvoicePayment
+            from models.sales_advanced import (
                 SalesInvoice,
                 SalesInvoiceItem,
                 CustomerPayment,

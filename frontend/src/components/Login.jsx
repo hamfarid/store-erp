@@ -51,7 +51,18 @@ const Login = () => {
       const result = await login(credentials.username, credentials.password);
 
       if (isSuccess(result)) {
-        navigate('/');
+        // Check if 2FA verification is required
+        if (result.require_2fa) {
+          // Redirect to 2FA verification page with pending user data
+          navigate('/two-factor-verify', {
+            state: {
+              pendingUser: result.pendingUser,
+              temp_token: result.temp_token
+            }
+          });
+        } else {
+          navigate('/');
+        }
       } else {
         setError(getErrorMessage(result, 'خطأ في تسجيل الدخول'));
       }

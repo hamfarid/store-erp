@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import {
   TrendingUp, TrendingDown, Search, Filter, Calendar, Package,
   DollarSign, History, BarChart3, ArrowUpRight, ArrowDownRight,
-  Minus, Download
+  Minus, Download, RefreshCw
 } from 'lucide-react';
-import apiClient from '../services/apiClient';
+import { toast } from 'react-hot-toast';
+import priceHistoryService from '../services/priceHistoryService';
+import productService from '../services/productService';
 
 // UI Components
 import { Badge } from '../components/ui/badge';
@@ -155,21 +157,21 @@ const PriceHistory = () => {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const [historyResponse, productsResponse] = await Promise.all([
-        apiClient.get('/api/price-history'),
-        apiClient.get('/api/products')
+      const [historyResponse, productsResponse] = await Promise.allSettled([
+        priceHistoryService.getAll(),
+        productService.getAll()
       ]);
 
-      if (historyResponse.success && historyResponse.data?.length > 0) {
-        setPriceHistory(historyResponse.data);
-        setFilteredHistory(historyResponse.data);
+      if (historyResponse.status === 'fulfilled' && historyResponse.value.history?.length > 0) {
+        setPriceHistory(historyResponse.value.history);
+        setFilteredHistory(historyResponse.value.history);
       } else {
         setPriceHistory(sampleHistory);
         setFilteredHistory(sampleHistory);
       }
 
-      if (productsResponse.success && productsResponse.data?.length > 0) {
-        setProducts(productsResponse.data);
+      if (productsResponse.status === 'fulfilled' && productsResponse.value.products?.length > 0) {
+        setProducts(productsResponse.value.products);
       } else {
         setProducts(sampleProducts);
       }
@@ -180,6 +182,15 @@ const PriceHistory = () => {
       setProducts(sampleProducts);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleExport = async () => {
+    try {
+      await priceHistoryService.exportToExcel();
+      toast.success('تم تصدير سجل الأسعار بنجاح');
+    } catch (error) {
+      toast.error('فشل في التصدير');
     }
   };
 
@@ -272,10 +283,22 @@ const PriceHistory = () => {
           </h1>
           <p className="text-muted-foreground mt-1">تتبع تغييرات أسعار المنتجات</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-muted transition-colors">
-          <Download className="w-4 h-4" />
-          تصدير التقرير
-        </button>
+        <div className="flex gap-2">
+          <button 
+            onClick={fetchData}
+            className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-muted transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            تحديث
+          </button>
+          <button 
+            onClick={handleExport}
+            className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-muted transition-colors"
+          >
+            <Download className="w-4 h-4" />
+            تصدير التقرير
+          </button>
+        </div>
       </div>
 
       {/* Summary Cards */}

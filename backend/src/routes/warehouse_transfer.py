@@ -28,35 +28,30 @@ from sqlalchemy import or_
 # Lazy import models to avoid early mapper configuration errors
 WarehouseTransfer = None
 WarehouseTransferItem = None
+TransferStatus = None
 
 
 def _get_models():
-    global WarehouseTransfer, WarehouseTransferItem
+    global WarehouseTransfer, WarehouseTransferItem, TransferStatus
     if WarehouseTransfer is None or WarehouseTransferItem is None:
-        from models import warehouse_transfer as wt
+        from src.models import warehouse_transfer as wt
 
         WarehouseTransfer = wt.WarehouseTransfer
         WarehouseTransferItem = wt.WarehouseTransferItem
+        TransferStatus = wt.TransferStatus
     return WarehouseTransfer, WarehouseTransferItem
 
 
 # Import database - handle different import paths
 try:
-    from database import db
+    from src.database import db
 except ImportError:
-    # Create mock db for testing
-    class MockDB:
-        session = None
-
-        @staticmethod
-        def create_all():  # pragma: no cover - mock placeholder for tests
-            pass
-
-        @staticmethod
-        def drop_all():  # pragma: no cover - mock placeholder for tests
-            pass
-
-    db = MockDB()
+    try:
+        from database import db
+    except ImportError:
+        class MockDB:
+            session = None
+        db = MockDB()
 # Import auth functions
 try:
     from auth import login_required, has_permission, Permissions, AuthManager
@@ -221,13 +216,11 @@ def get_transfers():
         # فلترة حسب الحالة (تطبيع إلى Enum)
         if status:
             try:
-                from models.warehouse_transfer import TransferStatus as WTStatus
-
                 status_norm = status.strip().lower()
                 # توافق قديم: 'approved' تعتبر 'in_transit'
                 if status_norm == "approved":
                     status_norm = "in_transit"
-                enum_val = WTStatus(status_norm)
+                enum_val = TransferStatus(status_norm)
                 query = query.filter_by(status=enum_val)
             except Exception:
                 pass  # تجاهل قيمة حالة غير صالحة
@@ -376,7 +369,7 @@ def approve_transfer(transfer_id):
         WT, _ = _get_models()
         transfer = WT.query.get_or_404(transfer_id)
 
-        if transfer.status != WTStatus.PENDING:
+        if transfer.status != TransferStatus.PENDING:
             return (
                 jsonify({"status": "error", "message": "لا يمكن تأكيد هذا التحويل"}),
                 400,
@@ -395,7 +388,7 @@ def approve_transfer(transfer_id):
                     )
 
         # تحديث حالة التحويل والمعلومات التعريفية
-        transfer.status = WTStatus.IN_TRANSIT
+        transfer.status = TransferStatus.IN_TRANSIT
         try:
             transfer.approved_by = session["user_id"]
         except Exception:
@@ -432,7 +425,7 @@ def complete_transfer(transfer_id):
         WT, _ = _get_models()
         transfer = WT.query.get_or_404(transfer_id)
 
-        if transfer.status != WTStatus.IN_TRANSIT:
+        if transfer.status != TransferStatus.IN_TRANSIT:
             return (
                 jsonify({"status": "error", "message": "لا يمكن إكمال تحويل غير مؤكد"}),
                 400,
@@ -450,7 +443,7 @@ def complete_transfer(transfer_id):
                         item.quantity_sent or item.quantity_requested,
                     )
 
-        transfer.status = WTStatus.COMPLETED
+        transfer.status = TransferStatus.COMPLETED
         try:
             transfer.received_by = session["user_id"]
         except Exception:
@@ -487,13 +480,13 @@ def cancel_transfer(transfer_id):
         WT, _ = _get_models()
         transfer = WT.query.get_or_404(transfer_id)
 
-        if transfer.status == WTStatus.COMPLETED:
+        if transfer.status == TransferStatus.COMPLETED:
             return (
                 jsonify({"status": "error", "message": "لا يمكن إلغاء تحويل مكتمل"}),
                 400,
             )
 
-        transfer.status = WTStatus.CANCELLED
+        transfer.status = TransferStatus.CANCELLED
         db.session.commit()
 
         return jsonify(
@@ -526,9 +519,9 @@ def get_transfer_stats():
         WT, _ = _get_models()
         total_transfers = WT.query.count()
         WT, _ = _get_models()
-        pending_transfers = WT.query.filter_by(status=WTStatus.PENDING).count()
-        in_transit_transfers = WT.query.filter_by(status=WTStatus.IN_TRANSIT).count()
-        completed_transfers = WT.query.filter_by(status=WTStatus.COMPLETED).count()
+        pending_transfers = WT.query.filter_by(status=TransferStatus.PENDING).count()
+        in_transit_transfers = WT.query.filter_by(status=TransferStatus.IN_TRANSIT).count()
+        completed_transfers = WT.query.filter_by(status=TransferStatus.COMPLETED).count()
 
         # تحويلات اليوم
         today = datetime.now().date()

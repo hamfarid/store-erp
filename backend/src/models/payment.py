@@ -7,10 +7,12 @@ Models for tracking payments, refunds, and payment methods.
 """
 
 from datetime import datetime
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, TYPE_CHECKING
 from src.database import db
 from enum import Enum
-from src.models.invoice import Invoice
+
+if TYPE_CHECKING:
+    from src.models.invoice_unified import Invoice
 
 
 class PaymentStatus(str, Enum):
@@ -347,6 +349,7 @@ class PaymentService:
     def get_customer_balance(customer_id: int) -> Dict[str, float]:
         """Get customer payment balance."""
         from sqlalchemy import func
+        from src.models.invoice_unified import Invoice
 
         # Total invoiced
         total_invoiced = (
@@ -374,8 +377,6 @@ class PaymentService:
             .scalar()
             or 0
         )
-
-        from src.models.invoice import Invoice
 
         return {
             "total_invoiced": total_invoiced,

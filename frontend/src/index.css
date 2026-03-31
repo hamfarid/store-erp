@@ -11,6 +11,7 @@
 @import "./styles/buttons-enhanced-contrast.css";
 @import "./styles/icons-fix.css";
 @import "./styles/layout-consistency.css";
+@import "./styles/page-components.css";
 
 /* ========================================
    BASE STYLES
@@ -158,6 +159,7 @@ a:hover {
   border: 1px solid transparent;
   border-radius: var(--radius-lg);
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   transition: var(--transition-all);
   outline: none;

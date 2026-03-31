@@ -72,6 +72,83 @@ def calculate_change(current: float, previous: float) -> dict:
 # =============================================================================
 
 
+@dashboard_bp.route("/stats", methods=["GET"])
+def get_dashboard_stats():
+    """
+    Get dashboard statistics for the main dashboard view.
+    
+    This endpoint provides aggregated stats without requiring authentication
+    for initial page load, then updates with authenticated data.
+    """
+    from src.models.invoice_unified import Invoice
+    from src.models.inventory import Product
+    from src.models.partners import Customer, Supplier
+    from src.models.stock_movement import StockMovement
+
+    try:
+        today = datetime.now().date()
+        month_start = today.replace(day=1)
+        
+        # Total counts
+        total_products = Product.query.count()
+        total_customers = Customer.query.count()
+        total_suppliers = Supplier.query.count()
+        
+        # Low stock products
+        low_stock_count = Product.query.filter(
+            Product.current_stock <= Product.min_stock_level
+        ).count()
+        
+        # Monthly sales
+        monthly_sales = (
+            db.session.query(func.coalesce(func.sum(Invoice.total), 0))
+            .filter(
+                Invoice.type == "sale",
+                func.date(Invoice.created_at) >= month_start,
+                func.date(Invoice.created_at) <= today,
+            )
+            .scalar()
+            or 0
+        )
+        
+        # Total sales count
+        total_sales = Invoice.query.filter(Invoice.type == "sale").count()
+        
+        # Inventory value
+        inventory_value = (
+            db.session.query(
+                func.coalesce(func.sum(Product.current_stock * Product.selling_price), 0)
+            ).scalar()
+            or 0
+        )
+        
+        # Recent movements (last 30 days)
+        thirty_days_ago = today - timedelta(days=30)
+        recent_movements = StockMovement.query.filter(
+            func.date(StockMovement.created_at) >= thirty_days_ago
+        ).count()
+        
+        return jsonify({
+            "success": True,
+            "data": {
+                "total_products": total_products,
+                "total_customers": total_customers,
+                "total_suppliers": total_suppliers,
+                "total_sales": total_sales,
+                "total_inventory_value": float(inventory_value),
+                "low_stock_count": low_stock_count,
+                "recent_movements": recent_movements,
+                "monthly_revenue": float(monthly_sales)
+            }
+        })
+    except Exception as e:
+        logger.error(f"Error fetching dashboard stats: {e}")
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+
 @dashboard_bp.route("/summary", methods=["GET"])
 @token_required
 @require_permission(Permissions.DASHBOARD_VIEW)
@@ -81,8 +158,8 @@ def get_summary():
 
     Returns key metrics for the dashboard overview.
     """
-    from src.models.invoice import Invoice
-    from src.models.product import Product
+    from src.models.invoice_unified import Invoice
+    from src.models.inventory import Product
     from src.models.partners import Customer, Supplier
 
     period = request.args.get("period", "month")
@@ -146,7 +223,7 @@ def get_summary():
 
     # Low stock products
     low_stock = Product.query.filter(
-        Product.quantity <= Product.min_stock_level
+        Product.current_stock <= Product.min_stock_level
     ).count()
 
     # Pending invoices
@@ -192,7 +269,7 @@ def get_sales_chart():
         period: week, month, year
         type: daily, weekly, monthly
     """
-    from src.models.invoice import Invoice
+    from src.models.invoice_unified import Invoice
 
     period = request.args.get("period", "month")
     chart_type = request.args.get("type", "daily")
@@ -309,8 +386,8 @@ def get_top_products():
         period: week, month, year
         limit: Number of products (default 10)
     """
-    from src.models.invoice import Invoice, InvoiceItem
-    from src.models.product import Product
+    from src.models.invoice_unified import Invoice, InvoiceItem
+    from src.models.inventory import Product
 
     period = request.args.get("period", "month")
     limit = request.args.get("limit", 10, type=int)
@@ -366,7 +443,7 @@ def get_top_customers():
     """
     Get top customers by purchase amount.
     """
-    from src.models.invoice import Invoice
+    from src.models.invoice_unified import Invoice
     from src.models.partners import Customer
 
     period = request.args.get("period", "month")
@@ -419,13 +496,13 @@ def get_low_stock():
     """
     Get products with low stock.
     """
-    from src.models.product import Product
+    from src.models.inventory import Product
 
     limit = request.args.get("limit", 20, type=int)
 
     low_stock_products = (
-        Product.query.filter(Product.quantity <= Product.min_stock_level)
-        .order_by(Product.quantity.asc())
+        Product.query.filter(Product.current_stock <= Product.min_stock_level)
+        .order_by(Product.current_stock.asc())
         .limit(limit)
         .all()
     )
@@ -435,16 +512,16 @@ def get_low_stock():
             "success": True,
             "data": {
                 "total_count": Product.query.filter(
-                    Product.quantity <= Product.min_stock_level
+                    Product.current_stock <= Product.min_stock_level
                 ).count(),
                 "products": [
                     {
                         "id": p.id,
                         "name": p.name,
                         "sku": p.sku,
-                        "quantity": p.quantity,
+                        "quantity": p.current_stock,
                         "min_stock_level": p.min_stock_level,
-                        "shortage": p.min_stock_level - p.quantity,
+                        "shortage": p.min_stock_level - p.current_stock,
                     }
                     for p in low_stock_products
                 ],
@@ -460,7 +537,7 @@ def get_recent_activity():
     """
     Get recent activity feed.
     """
-    from src.models.invoice import Invoice
+    from src.models.invoice_unified import Invoice
     from src.models.stock_movement import StockMovement
 
     limit = request.args.get("limit", 20, type=int)
@@ -515,7 +592,7 @@ def get_payment_status():
     """
     Get payment status breakdown.
     """
-    from src.models.invoice import Invoice
+    from src.models.invoice_unified import Invoice
 
     period = request.args.get("period", "month")
     start_date, end_date = get_date_range(period)

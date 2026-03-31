@@ -167,7 +167,7 @@ class StockMovementService:
         Returns:
             StockMovement record
         """
-        from src.models.product import Product
+        from src.models.inventory import Product
 
         product = Product.query.get(product_id)
         if not product:

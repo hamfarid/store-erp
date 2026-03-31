@@ -335,9 +335,7 @@ class SystemIntegration:
                     notification = {
                         "type": "low_stock",
                         "title": "تنبيه: مخزون منخفض",
-                        "message": f"المنتج {
-                            product['product_name']} وصل لمستوى منخفض: {
-                            product['current_quantity']}",
+                        "message": f"المنتج {product['product_name']} وصل لمستوى منخفض: {product['current_quantity']}",
                         "product_id": product["product_id"],
                         "urgency": product.get("urgency_level", "medium"),
                         "created_at": datetime.now().isoformat(),

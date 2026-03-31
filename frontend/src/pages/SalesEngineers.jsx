@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import apiClient from '../services/apiClient';
 
 // UI Components
+import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import {
@@ -17,6 +18,74 @@ import { Label } from '../components/ui/label';
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue
 } from '../components/ui/select';
+
+// بيانات نموذجية
+const sampleEngineers = [
+  {
+    id: 1,
+    employee_id: 'EMP001',
+    name: 'محمد أحمد',
+    code: 'SE001',
+    email: 'mohamed@company.com',
+    phone: '0501234567',
+    commission_rate: 5.0,
+    target_monthly: 100000,
+    achieved_monthly: 85000,
+    status: 'active',
+    hire_date: '2023-01-15',
+    customers_count: 25,
+    invoices_count: 150,
+    total_sales: 1250000
+  },
+  {
+    id: 2,
+    employee_id: 'EMP002',
+    name: 'أحمد علي',
+    code: 'SE002',
+    email: 'ahmed@company.com',
+    phone: '0507654321',
+    commission_rate: 4.5,
+    target_monthly: 80000,
+    achieved_monthly: 92000,
+    status: 'active',
+    hire_date: '2023-03-20',
+    customers_count: 30,
+    invoices_count: 180,
+    total_sales: 1450000
+  },
+  {
+    id: 3,
+    employee_id: 'EMP003',
+    name: 'سارة محمد',
+    code: 'SE003',
+    email: 'sara@company.com',
+    phone: '0509876543',
+    commission_rate: 5.5,
+    target_monthly: 120000,
+    achieved_monthly: 110000,
+    status: 'active',
+    hire_date: '2022-06-10',
+    customers_count: 40,
+    invoices_count: 220,
+    total_sales: 2100000
+  },
+  {
+    id: 4,
+    employee_id: 'EMP004',
+    name: 'خالد عبدالله',
+    code: 'SE004',
+    email: 'khaled@company.com',
+    phone: '0505551234',
+    commission_rate: 4.0,
+    target_monthly: 60000,
+    achieved_monthly: 45000,
+    status: 'inactive',
+    hire_date: '2023-09-01',
+    customers_count: 15,
+    invoices_count: 50,
+    total_sales: 350000
+  }
+];
 
 /**
  * صفحة إدارة مهندسي المبيعات
@@ -31,79 +100,8 @@ const SalesEngineers = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [selectedEngineer, setSelectedEngineer] = useState(null);
 
-  // بيانات نموذجية
-  const sampleEngineers = [
-    {
-      id: 1,
-      employee_id: 'EMP001',
-      name: 'محمد أحمد',
-      code: 'SE001',
-      email: 'mohamed@company.com',
-      phone: '0501234567',
-      commission_rate: 5.0,
-      target_monthly: 100000,
-      achieved_monthly: 85000,
-      status: 'active',
-      hire_date: '2023-01-15',
-      customers_count: 25,
-      invoices_count: 150,
-      total_sales: 1250000
-    },
-    {
-      id: 2,
-      employee_id: 'EMP002',
-      name: 'أحمد علي',
-      code: 'SE002',
-      email: 'ahmed@company.com',
-      phone: '0507654321',
-      commission_rate: 4.5,
-      target_monthly: 80000,
-      achieved_monthly: 92000,
-      status: 'active',
-      hire_date: '2023-03-20',
-      customers_count: 30,
-      invoices_count: 180,
-      total_sales: 1450000
-    },
-    {
-      id: 3,
-      employee_id: 'EMP003',
-      name: 'سارة محمد',
-      code: 'SE003',
-      email: 'sara@company.com',
-      phone: '0509876543',
-      commission_rate: 5.5,
-      target_monthly: 120000,
-      achieved_monthly: 110000,
-      status: 'active',
-      hire_date: '2022-06-10',
-      customers_count: 40,
-      invoices_count: 220,
-      total_sales: 2100000
-    },
-    {
-      id: 4,
-      employee_id: 'EMP004',
-      name: 'خالد عبدالله',
-      code: 'SE004',
-      email: 'khaled@company.com',
-      phone: '0505551234',
-      commission_rate: 4.0,
-      target_monthly: 60000,
-      achieved_monthly: 45000,
-      status: 'inactive',
-      hire_date: '2023-09-01',
-      customers_count: 15,
-      invoices_count: 50,
-      total_sales: 350000
-    }
-  ];
-
-  useEffect(() => {
-    fetchEngineers();
-  }, []);
-
-  const fetchEngineers = async () => {
+  // 1. Wrap fetchEngineers in useCallback
+  const fetchEngineers = React.useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await apiClient.get('/api/sales-engineers');
@@ -121,7 +119,12 @@ const SalesEngineers = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  // 2. Add dependency
+  useEffect(() => {
+    fetchEngineers();
+  }, [fetchEngineers]);
 
   useEffect(() => {
     let filtered = engineers;
@@ -205,13 +208,10 @@ const SalesEngineers = () => {
           </h1>
           <p className="text-muted-foreground mt-1">إدارة فريق المبيعات والأداء</p>
         </div>
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-        >
+        <Button onClick={() => setShowAddModal(true)} className="gap-2">
           <Plus className="w-4 h-4" />
           إضافة مهندس مبيعات
-        </button>
+        </Button>
       </div>
 
       {/* Summary Cards */}
@@ -394,34 +394,40 @@ const SalesEngineers = () => {
                     </TableCell>
                     <TableCell>
                       <div className="flex gap-1">
-                        <button
+                        <Button
+                          variant="ghost"
+                          size="icon"
                           onClick={() => setSelectedEngineer(engineer)}
-                          className="p-2 hover:bg-muted rounded"
                           title="عرض التفاصيل"
                         >
                           <Eye className="w-4 h-4" />
-                        </button>
-                        <button
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
                           onClick={() => setSelectedEngineer(engineer)}
-                          className="p-2 hover:bg-muted rounded"
                           title="تعديل"
                         >
                           <Edit className="w-4 h-4" />
-                        </button>
-                        <button
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
                           onClick={() => handleStatusChange(engineer.id, engineer.status === 'active' ? 'inactive' : 'active')}
-                          className={`p-2 rounded ${engineer.status === 'active' ? 'text-red-600 hover:bg-red-50' : 'text-green-600 hover:bg-green-50'}`}
+                          className={engineer.status === 'active' ? 'text-destructive hover:bg-destructive/10' : 'text-green-600 hover:bg-green-100'}
                           title={engineer.status === 'active' ? 'تعطيل' : 'تفعيل'}
                         >
                           {engineer.status === 'active' ? <XCircle className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />}
-                        </button>
-                        <button
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
                           onClick={() => handleDelete(engineer.id)}
-                          className="p-2 text-red-600 hover:bg-red-50 rounded"
+                          className="text-destructive hover:bg-destructive/10"
                           title="حذف"
                         >
                           <Trash2 className="w-4 h-4" />
-                        </button>
+                        </Button>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -438,9 +444,74 @@ const SalesEngineers = () => {
           )}
         </CardContent>
       </Card>
+      
+      {/* 3. Implement Modals (Placeholders) */}
+      {showAddModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <Card className="w-full max-w-lg">
+            <CardHeader className="flex flex-row justify-between items-center">
+              <CardTitle>إضافة مهندس مبيعات جديد</CardTitle>
+              <Button variant="ghost" size="icon" onClick={() => setShowAddModal(false)}>
+                <XCircle size={20} />
+              </Button>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4 py-4">
+                 <p className="text-muted-foreground text-center">سيتم إضافة نموذج البيانات هنا قريباً</p>
+              </div>
+              <div className="flex justify-end gap-2 mt-4">
+                <Button variant="outline" onClick={() => setShowAddModal(false)}>إلغاء</Button>
+                <Button onClick={() => {
+                  toast.success("تم الإضافة (محاكاة)");
+                  setShowAddModal(false);
+                }}>حفظ</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {selectedEngineer && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+           <Card className="w-full max-w-lg">
+            <CardHeader className="flex flex-row justify-between items-center">
+              <CardTitle>{selectedEngineer.name}</CardTitle>
+              <Button variant="ghost" size="icon" onClick={() => setSelectedEngineer(null)}>
+                <XCircle size={20} />
+              </Button>
+            </CardHeader>
+            <CardContent>
+               <div className="space-y-4">
+                 <div className="grid grid-cols-2 gap-4">
+                   <div>
+                     <Label>الكود</Label>
+                     <p className="font-mono">{selectedEngineer.code}</p>
+                   </div>
+                   <div>
+                     <Label>الهاتف</Label>
+                     <p>{selectedEngineer.phone}</p>
+                   </div>
+                    <div>
+                     <Label>البريد الإلكتروني</Label>
+                     <p>{selectedEngineer.email}</p>
+                   </div>
+                   <div>
+                     <Label>الهدف الشهري</Label>
+                     <p>{formatCurrency(selectedEngineer.target_monthly)}</p>
+                   </div>
+                 </div>
+               </div>
+               <div className="flex justify-end gap-2 mt-6">
+                 <Button onClick={() => setSelectedEngineer(null)}>إغلاق</Button>
+               </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 };
+
 
 export default SalesEngineers;
 

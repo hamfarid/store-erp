@@ -203,10 +203,10 @@ def get_product_batches_report(product_id):
         product = Product.query.get_or_404(product_id)
 
         # معاملات الفلترة
-        _ = request.args.get
-        _ = request.args.get
-        _ = request.args.get
-        _ = request.args.get
+        include_expired = request.args.get("include_expired", "false").lower() == "true"
+        warehouse_id = request.args.get("warehouse_id", type=int)
+        supplier_id = request.args.get("supplier_id", type=int)
+        status = request.args.get("status")
 
         # بناء الاستعلام
         query = Lot.query.filter_by(product_id=product_id)
@@ -366,9 +366,9 @@ def get_ministry_batches_status_report():
             )
 
         # معاملات الفلترة
-        _ = request.args.get
-        _ = request.args.get
-        _ = request.args.get
+        approval_status = request.args.get("approval_status")
+        expired_certificates = request.args.get("expired_certificates", "false").lower() == "true"
+        renewal_due = request.args.get("renewal_due", "false").lower() == "true"
 
         # بناء الاستعلام
         query = Lotm.query

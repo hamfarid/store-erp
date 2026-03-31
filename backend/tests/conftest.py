@@ -47,6 +47,15 @@ def _preload_models():
         except Exception:
             pass
 
+    # Import ProductVariant to ensure table exists
+    try:
+        from src.models.product_variant import ProductVariant  # noqa: F401
+    except ImportError:
+        try:
+            from models.product_variant import ProductVariant  # type: ignore  # noqa: F401
+        except Exception:
+            pass
+
     try:
         from src.models.sales_engineer import SalesEngineer  # noqa: F401
     except ImportError:
@@ -140,6 +149,11 @@ def test_user(test_app):
         from src.models.user import User, Role
         from src.database import db
         from werkzeug.security import generate_password_hash
+        import time
+        
+        # Generate unique username to avoid conflicts
+        unique_id = str(int(time.time() * 1000))[-6:]
+        username = f"testuser_{unique_id}"
         
         # Ensure role exists
         role = Role.query.filter_by(name="user").first()
@@ -147,10 +161,15 @@ def test_user(test_app):
             role = Role(name="user", description="User Role")
             db.session.add(role)
             db.session.commit()
+        
+        # Check if user already exists
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            return {"id": existing_user.id, "username": existing_user.username, "role": "user"}
             
         user = User(
-            username="testuser",
-            email="testuser@example.com",
+            username=username,
+            email=f"{username}@example.com",
             full_name="Test User",
             role_id=role.id,
             password_hash=generate_password_hash("password123"),

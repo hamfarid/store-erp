@@ -81,9 +81,7 @@ class PurchaseOrder(db.Model):
         back_populates="purchase_order",
         cascade="all, delete-orphan",
     )
-    receipts = db.relationship(
-        "PurchaseReceipt", back_populates="purchase_order", cascade="all, delete-orphan"
-    )
+    # NOTE: 'receipts' backref is created by PurchaseReceipt in purchase_receipt.py
 
     def calculate_totals(self):
         """Calculate order totals."""
@@ -228,48 +226,6 @@ class PurchaseOrderItem(db.Model):
         }
 
 
-class PurchaseReceipt(db.Model):
-    """Record of goods received against a PO."""
-
-    __tablename__ = "purchase_receipts"
-
-    id = db.Column(db.Integer, primary_key=True)
-    receipt_number = db.Column(db.String(50), unique=True, nullable=False)
-    purchase_order_id = db.Column(
-        db.Integer, db.ForeignKey("purchase_orders.id"), nullable=False
-    )
-
-    # Receipt date
-    receipt_date = db.Column(db.DateTime, default=datetime.utcnow)
-
-    # Notes
-    notes = db.Column(db.Text)
-
-    # User
-    received_by = db.Column(db.Integer, db.ForeignKey("users.id"))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    # Relationships
-    purchase_order = db.relationship("PurchaseOrder", back_populates="receipts")
-    items = db.relationship(
-        "PurchaseReceiptItem", back_populates="receipt", cascade="all, delete-orphan"
-    )
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "id": self.id,
-            "receipt_number": self.receipt_number,
-            "purchase_order_id": self.purchase_order_id,
-            "po_number": self.purchase_order.po_number if self.purchase_order else None,
-            "receipt_date": (
-                self.receipt_date.isoformat() if self.receipt_date else None
-            ),
-            "notes": self.notes,
-            "items": [item.to_dict() for item in self.items],
-            "created_at": self.created_at.isoformat() if self.created_at else None,
-        }
-
-
 class PurchaseReceiptItem(db.Model):
     """Line item for purchase receipt."""
 
@@ -295,7 +251,7 @@ class PurchaseReceiptItem(db.Model):
     notes = db.Column(db.String(500))
 
     # Relationships
-    receipt = db.relationship("PurchaseReceipt", back_populates="items")
+    receipt = db.relationship("PurchaseReceipt", backref=db.backref("receipt_items", lazy="dynamic"))
     po_item = db.relationship("PurchaseOrderItem")
     product = db.relationship("Product")
 
@@ -315,7 +271,6 @@ class PurchaseReceiptItem(db.Model):
 __all__ = [
     "PurchaseOrder",
     "PurchaseOrderItem",
-    "PurchaseReceipt",
     "PurchaseReceiptItem",
     "POStatus",
 ]

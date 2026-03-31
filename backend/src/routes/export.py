@@ -62,7 +62,7 @@ def export_products():
         search: Filter by name/sku
         category_id: Filter by category
     """
-    from src.models.product import Product
+    from src.models.inventory import Product
     from src.database import db
 
     format = request.args.get("format", "xlsx")
@@ -130,7 +130,7 @@ def export_invoices():
         from_date: Start date (YYYY-MM-DD)
         to_date: End date (YYYY-MM-DD)
     """
-    from src.models.invoice import Invoice
+    from src.models.invoice_unified import Invoice
     from src.database import db
 
     format = request.args.get("format", "xlsx")

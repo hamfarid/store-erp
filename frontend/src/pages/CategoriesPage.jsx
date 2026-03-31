@@ -33,30 +33,30 @@ const CategoryCard = ({ category, onEdit, onDelete }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl transition-all duration-300 group">
+    <div className="entity-card group">
       <div className="flex items-start justify-between mb-4">
         <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${colors[category.color]} flex items-center justify-center text-2xl shadow-lg`}>
           {category.icon}
         </div>
         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button onClick={() => onEdit(category)} className="p-2 hover:bg-gray-100 rounded-lg">
-            <Edit size={16} className="text-gray-500" />
+          <button onClick={() => onEdit(category)} className="entity-card__action entity-card__action--secondary p-2">
+            <Edit size={16} />
           </button>
-          <button onClick={() => onDelete(category)} className="p-2 hover:bg-rose-50 rounded-lg">
-            <Trash2 size={16} className="text-rose-500" />
+          <button onClick={() => onDelete(category)} className="entity-card__action entity-card__action--danger p-2">
+            <Trash2 size={16} />
           </button>
         </div>
       </div>
-      
-      <h3 className="font-bold text-gray-900 text-lg mb-1">{category.name}</h3>
-      <div className="flex items-center gap-2 text-gray-500 text-sm">
+
+      <h3 className="entity-card__name text-lg mb-1">{category.name}</h3>
+      <div className="entity-card__meta">
         <Package size={14} />
         <span>{category.productCount} منتج</span>
       </div>
-      
+
       {category.parent && (
-        <div className="mt-3 pt-3 border-t border-gray-100">
-          <span className="text-xs text-gray-400">
+        <div className="mt-3 pt-3 border-t border-[var(--color-border-light)]">
+          <span className="text-xs text-tertiary">
             ضمن: {sampleCategories.find(c => c.id === category.parent)?.name}
           </span>
         </div>
@@ -80,7 +80,7 @@ const CategoriesPage = () => {
       <div className="page-header">
         <div>
           <h1 className="page-title">الفئات</h1>
-          <p className="text-gray-500 mt-1">إدارة فئات المنتجات</p>
+          <p className="page-subtitle">إدارة فئات المنتجات</p>
         </div>
         <div className="page-actions">
           <Button variant="primary" icon={Plus}>
@@ -146,7 +146,7 @@ const CategoriesPage = () => {
       </div>
 
       {/* Categories Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="entity-grid">
         {filteredCategories.map(category => (
           <CategoryCard
             key={category.id}

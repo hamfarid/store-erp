@@ -124,8 +124,8 @@ const SetupWizardPage = () => {
               <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center mx-auto mb-8">
                 <Sparkles className="text-white" size={48} />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">مرحباً بك في Store Pro</h2>
-              <p className="text-gray-500 text-lg mb-8 max-w-md mx-auto">
+              <h2 className="text-3xl font-bold text-primary mb-4">مرحباً بك في Store Pro</h2>
+              <p className="text-secondary text-lg mb-8 max-w-md mx-auto">
                 سنقوم بمساعدتك في إعداد نظامك خطوة بخطوة. لن يستغرق الأمر سوى بضع دقائق.
               </p>
               <Button variant="primary" size="lg" onClick={handleNext}>
@@ -143,30 +143,30 @@ const SetupWizardPage = () => {
                   <Building2 className="text-teal-600" size={24} />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">بيانات الشركة</h2>
-                  <p className="text-gray-500">أدخل معلومات شركتك الأساسية</p>
+                  <h2 className="text-2xl font-bold text-primary">بيانات الشركة</h2>
+                  <p className="text-secondary">أدخل معلومات شركتك الأساسية</p>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">اسم الشركة (عربي)</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">اسم الشركة (عربي)</label>
                     <input
                       type="text"
                       value={companyData.nameAr}
                       onChange={(e) => setCompanyData({...companyData, nameAr: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="شركة التقنية للتجارة"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">اسم الشركة (English)</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">اسم الشركة (English)</label>
                     <input
                       type="text"
                       value={companyData.name}
                       onChange={(e) => setCompanyData({...companyData, name: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="Tech Trading Co."
                     />
                   </div>
@@ -174,69 +174,69 @@ const SetupWizardPage = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-secondary mb-2">
                       <Mail size={14} className="inline ml-1" /> البريد الإلكتروني
                     </label>
                     <input
                       type="email"
                       value={companyData.email}
                       onChange={(e) => setCompanyData({...companyData, email: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="info@company.com"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-secondary mb-2">
                       <Phone size={14} className="inline ml-1" /> الهاتف
                     </label>
                     <input
                       type="tel"
                       value={companyData.phone}
                       onChange={(e) => setCompanyData({...companyData, phone: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="+966 5x xxx xxxx"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-secondary mb-2">
                     <MapPin size={14} className="inline ml-1" /> العنوان
                   </label>
                   <textarea
                     value={companyData.address}
                     onChange={(e) => setCompanyData({...companyData, address: e.target.value})}
                     rows={2}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                    className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                     placeholder="الرياض، حي العليا..."
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">الرقم الضريبي</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">الرقم الضريبي</label>
                     <input
                       type="text"
                       value={companyData.taxNumber}
                       onChange={(e) => setCompanyData({...companyData, taxNumber: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="300000000000000"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">السجل التجاري</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">السجل التجاري</label>
                     <input
                       type="text"
                       value={companyData.commercialRegister}
                       onChange={(e) => setCompanyData({...companyData, commercialRegister: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="1234567890"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
+              <div className="flex items-center justify-between mt-8 pt-6 border-t border-light">
                 <Button variant="ghost" onClick={handlePrev}>
                   <ChevronRight size={20} /> السابق
                 </Button>
@@ -255,30 +255,30 @@ const SetupWizardPage = () => {
                   <Shield className="text-purple-600" size={24} />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">حساب المدير</h2>
-                  <p className="text-gray-500">إنشاء حساب مدير النظام</p>
+                  <h2 className="text-2xl font-bold text-primary">حساب المدير</h2>
+                  <p className="text-secondary">إنشاء حساب مدير النظام</p>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">الاسم الكامل</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">الاسم الكامل</label>
                     <input
                       type="text"
                       value={adminData.name}
                       onChange={(e) => setAdminData({...adminData, name: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="أحمد محمد"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">اسم المستخدم</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">اسم المستخدم</label>
                     <input
                       type="text"
                       value={adminData.username}
                       onChange={(e) => setAdminData({...adminData, username: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="admin"
                     />
                   </div>
@@ -286,22 +286,22 @@ const SetupWizardPage = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">البريد الإلكتروني</label>
                     <input
                       type="email"
                       value={adminData.email}
                       onChange={(e) => setAdminData({...adminData, email: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="admin@company.com"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">رقم الهاتف</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">رقم الهاتف</label>
                     <input
                       type="tel"
                       value={adminData.phone}
                       onChange={(e) => setAdminData({...adminData, phone: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="+966 5x xxx xxxx"
                     />
                   </div>
@@ -309,31 +309,31 @@ const SetupWizardPage = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">كلمة المرور</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">كلمة المرور</label>
                     <div className="relative">
                       <input
                         type={showPassword ? 'text' : 'password'}
                         value={adminData.password}
                         onChange={(e) => setAdminData({...adminData, password: e.target.value})}
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                        className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                         placeholder="••••••••"
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 text-tertiary hover:text-secondary"
                       >
                         {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                       </button>
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">تأكيد كلمة المرور</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">تأكيد كلمة المرور</label>
                     <input
                       type="password"
                       value={adminData.confirmPassword}
                       onChange={(e) => setAdminData({...adminData, confirmPassword: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                       placeholder="••••••••"
                     />
                   </div>
@@ -346,7 +346,7 @@ const SetupWizardPage = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
+              <div className="flex items-center justify-between mt-8 pt-6 border-t border-light">
                 <Button variant="ghost" onClick={handlePrev}>
                   <ChevronRight size={20} /> السابق
                 </Button>
@@ -365,21 +365,21 @@ const SetupWizardPage = () => {
                   <Settings className="text-blue-600" size={24} />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">الإعدادات</h2>
-                  <p className="text-gray-500">تخصيص إعدادات النظام الأساسية</p>
+                  <h2 className="text-2xl font-bold text-primary">الإعدادات</h2>
+                  <p className="text-secondary">تخصيص إعدادات النظام الأساسية</p>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-secondary mb-2">
                       <CreditCard size={14} className="inline ml-1" /> العملة الافتراضية
                     </label>
                     <select
                       value={settingsData.currency}
                       onChange={(e) => setSettingsData({...settingsData, currency: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                     >
                       <option value="EGP">ريال سعودي (EGP)</option>
                       <option value="AED">درهم إماراتي (AED)</option>
@@ -388,13 +388,13 @@ const SetupWizardPage = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-secondary mb-2">
                       <Globe size={14} className="inline ml-1" /> المنطقة الزمنية
                     </label>
                     <select
                       value={settingsData.timezone}
                       onChange={(e) => setSettingsData({...settingsData, timezone: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                     >
                       <option value="Asia/Riyadh">الرياض (GMT+3)</option>
                       <option value="Asia/Dubai">دبي (GMT+4)</option>
@@ -406,22 +406,22 @@ const SetupWizardPage = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">اللغة الافتراضية</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">اللغة الافتراضية</label>
                     <select
                       value={settingsData.language}
                       onChange={(e) => setSettingsData({...settingsData, language: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                     >
                       <option value="ar">العربية</option>
                       <option value="en">English</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">بداية السنة المالية</label>
+                    <label className="block text-sm font-medium text-secondary mb-2">بداية السنة المالية</label>
                     <select
                       value={settingsData.fiscalYearStart}
                       onChange={(e) => setSettingsData({...settingsData, fiscalYearStart: e.target.value})}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-4 py-3 bg-secondary border border-light rounded-xl focus:ring-2 focus:ring-teal-500"
                     >
                       <option value="1">يناير</option>
                       <option value="4">أبريل</option>
@@ -432,7 +432,7 @@ const SetupWizardPage = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
+              <div className="flex items-center justify-between mt-8 pt-6 border-t border-light">
                 <Button variant="ghost" onClick={handlePrev}>
                   <ChevronRight size={20} /> السابق
                 </Button>
@@ -449,8 +449,8 @@ const SetupWizardPage = () => {
               <div className="w-24 h-24 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-8">
                 <CheckCircle className="text-emerald-600" size={48} />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">تم الإعداد بنجاح!</h2>
-              <p className="text-gray-500 text-lg mb-8 max-w-md mx-auto">
+              <h2 className="text-3xl font-bold text-primary mb-4">تم الإعداد بنجاح!</h2>
+              <p className="text-secondary text-lg mb-8 max-w-md mx-auto">
                 تم إعداد نظامك بنجاح. يمكنك الآن تسجيل الدخول والبدء في استخدام Store Pro.
               </p>
               <Button variant="primary" size="lg" onClick={() => window.location.href = '/login'}>

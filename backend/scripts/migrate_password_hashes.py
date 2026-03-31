@@ -17,8 +17,8 @@ import sys
 import os
 from pathlib import Path
 
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
+# Add src directory to path (backend/src)
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 try:
     from password_hasher import needs_rehash, get_algorithm, ARGON2_AVAILABLE

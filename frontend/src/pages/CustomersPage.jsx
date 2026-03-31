@@ -18,63 +18,63 @@ const sampleCustomers = [
 ];
 
 const CustomerCard = ({ customer, onView, onEdit, onDelete }) => (
-  <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl transition-all duration-300 group">
-    <div className="flex items-start justify-between mb-4">
+  <div className="entity-card group">
+    <div className="entity-card__header">
       <div className="flex items-center gap-4">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center text-white text-xl font-bold shadow-lg">
+        <div className="entity-card__avatar entity-card__avatar--secondary">
           {customer.name.charAt(0)}
         </div>
         <div>
-          <h3 className="font-bold text-gray-900">{customer.name}</h3>
-          <p className="text-sm text-gray-500 flex items-center gap-1">
+          <h3 className="entity-card__name">{customer.name}</h3>
+          <p className="entity-card__meta">
             <MapPin size={12} />
             {customer.city}
           </p>
         </div>
       </div>
-      <div className="flex items-center">
+      <div className="rating-stars">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} size={14} className={i < customer.rating ? 'text-amber-400 fill-amber-400' : 'text-gray-200'} />
+          <Star key={i} size={14} className={i < customer.rating ? 'rating-star--filled' : 'rating-star--empty'} />
         ))}
       </div>
     </div>
 
-    <div className="space-y-2 mb-4">
-      <div className="flex items-center gap-2 text-gray-600 text-sm">
-        <Mail size={14} className="text-gray-400" />
+    <div className="entity-card__info">
+      <div className="entity-card__info-row">
+        <Mail size={14} className="entity-card__info-icon" />
         <span>{customer.email}</span>
       </div>
-      <div className="flex items-center gap-2 text-gray-600 text-sm">
-        <Phone size={14} className="text-gray-400" />
+      <div className="entity-card__info-row">
+        <Phone size={14} className="entity-card__info-icon" />
         <span dir="ltr">{customer.phone}</span>
       </div>
     </div>
 
-    <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-100">
-      <div className="text-center">
-        <p className="text-lg font-bold text-gray-900">{customer.ordersCount}</p>
-        <p className="text-xs text-gray-500">الطلبات</p>
+    <div className="entity-card__stats">
+      <div className="entity-card__stat">
+        <p className="entity-card__stat-value">{customer.ordersCount}</p>
+        <p className="entity-card__stat-label">الطلبات</p>
       </div>
-      <div className="text-center">
-        <p className="text-lg font-bold text-teal-600">{(customer.totalPurchases / 1000).toFixed(0)}K</p>
-        <p className="text-xs text-gray-500">المشتريات</p>
+      <div className="entity-card__stat">
+        <p className="entity-card__stat-value entity-card__stat-value--primary">{(customer.totalPurchases / 1000).toFixed(0)}K</p>
+        <p className="entity-card__stat-label">المشتريات</p>
       </div>
-      <div className="text-center">
-        <p className={`text-lg font-bold ${customer.balance < 0 ? 'text-rose-600' : customer.balance > 0 ? 'text-emerald-600' : 'text-gray-900'}`}>
+      <div className="entity-card__stat">
+        <p className={`entity-card__stat-value ${customer.balance < 0 ? 'entity-card__stat-value--danger' : customer.balance > 0 ? 'entity-card__stat-value--success' : ''}`}>
           {customer.balance.toLocaleString()}
         </p>
-        <p className="text-xs text-gray-500">الرصيد</p>
+        <p className="entity-card__stat-label">الرصيد</p>
       </div>
     </div>
 
-    <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
-      <button onClick={() => onView(customer)} className="flex-1 py-2 text-center text-sm font-medium text-teal-600 hover:bg-teal-50 rounded-lg transition-colors">
+    <div className="entity-card__actions">
+      <button onClick={() => onView(customer)} className="entity-card__action entity-card__action--primary">
         عرض
       </button>
-      <button onClick={() => onEdit(customer)} className="flex-1 py-2 text-center text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+      <button onClick={() => onEdit(customer)} className="entity-card__action entity-card__action--secondary">
         تعديل
       </button>
-      <button onClick={() => onDelete(customer)} className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg transition-colors">
+      <button onClick={() => onDelete(customer)} className="entity-card__action entity-card__action--danger">
         <Trash2 size={16} />
       </button>
     </div>
@@ -103,7 +103,7 @@ const CustomersPage = () => {
       <div className="page-header">
         <div>
           <h1 className="page-title">العملاء</h1>
-          <p className="text-gray-500 mt-1">إدارة قاعدة بيانات العملاء</p>
+          <p className="page-subtitle">إدارة قاعدة بيانات العملاء</p>
         </div>
         <div className="page-actions">
           <Button variant="secondary" icon={Download}>تصدير</Button>
@@ -188,7 +188,7 @@ const CustomersPage = () => {
         </div>
 
       {/* Customers Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="entity-grid">
         {filteredCustomers.map(customer => (
           <CustomerCard
             key={customer.id}

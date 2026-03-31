@@ -34,8 +34,9 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 from sqlalchemy import func, or_
-from src.models.inventory import Category
+from src.models.inventory import Category, ProductGroup
 from src.models.product_unified import Product
+from src.models.models import Rank
 from src.models.warehouse_unified import Warehouse
 from src.models.supporting_models import StockMovement
 from src.models.customer import Customer

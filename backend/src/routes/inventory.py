@@ -57,7 +57,8 @@ except ImportError:
 
 
 # Canonical model imports (avoid legacy models.inventory to prevent duplicate registrations)
-from src.models.inventory import Category
+from src.models.inventory import Category, ProductGroup
+from src.models.models import Rank
 from src.models.product_unified import Product
 from src.models.warehouse_unified import Warehouse
 from src.models.supporting_models import StockMovement

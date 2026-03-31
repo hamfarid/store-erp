@@ -398,7 +398,7 @@ def init_barcode_routes(app):
 
     @barcode_bp.route("/product/<int:product_id>/barcode", methods=["GET"])
     def get_product_barcode(product_id):
-        from src.models.product import Product
+        from src.models.inventory import Product
 
         product = Product.query.get_or_404(product_id)
 
@@ -435,7 +435,7 @@ def init_barcode_routes(app):
 
     @barcode_bp.route("/product/<int:product_id>/qr", methods=["GET"])
     def get_product_qr(product_id):
-        from src.models.product import Product
+        from src.models.inventory import Product
 
         product = Product.query.get_or_404(product_id)
 

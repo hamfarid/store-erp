@@ -32,23 +32,23 @@ const PaymentsPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 p-8" dir="rtl">
-      <div className="flex items-center justify-between mb-8">
+    <div className="page-container" dir="rtl">
+      <div className="page-header">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">المدفوعات</h1>
-          <p className="text-gray-500">إدارة المقبوضات والمدفوعات</p>
+          <h1 className="page-title">المدفوعات</h1>
+          <p className="text-secondary">إدارة المقبوضات والمدفوعات</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="page-actions">
           <Button variant="secondary" icon={ArrowUpRight}>تسجيل دفعة</Button>
           <Button variant="primary" icon={ArrowDownRight}>تسجيل قبض</Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
+      <div className="stats-grid">
+        <div className="stats-card">
+          <div className="stats-card-header">
             <div>
-              <p className="text-gray-500 text-sm">إجمالي المقبوضات</p>
+              <p className="stats-card-title">إجمالي المقبوضات</p>
               <p className="text-2xl font-bold text-emerald-600">{totalReceived.toLocaleString()}</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
@@ -56,10 +56,10 @@ const PaymentsPage = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
+        <div className="stats-card">
+          <div className="stats-card-header">
             <div>
-              <p className="text-gray-500 text-sm">إجمالي المدفوعات</p>
+              <p className="stats-card-title">إجمالي المدفوعات</p>
               <p className="text-2xl font-bold text-rose-600">{totalPaid.toLocaleString()}</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center">
@@ -67,10 +67,10 @@ const PaymentsPage = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
+        <div className="stats-card">
+          <div className="stats-card-header">
             <div>
-              <p className="text-gray-500 text-sm">صافي التدفق</p>
+              <p className="stats-card-title">صافي التدفق</p>
               <p className={`text-2xl font-bold ${totalReceived - totalPaid > 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                 {(totalReceived - totalPaid).toLocaleString()}
               </p>
@@ -80,11 +80,11 @@ const PaymentsPage = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-xl p-5 border border-gray-100">
-          <div className="flex items-center justify-between">
+        <div className="stats-card">
+          <div className="stats-card-header">
             <div>
-              <p className="text-gray-500 text-sm">العمليات</p>
-              <p className="text-2xl font-bold text-gray-900">{samplePayments.length}</p>
+              <p className="stats-card-title">العمليات</p>
+              <p className="stats-card-value">{samplePayments.length}</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
               <CreditCard className="text-purple-600" size={24} />
@@ -93,34 +93,34 @@ const PaymentsPage = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm mb-8">
+      <div className="entity-card mb-8">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-tertiary" size={20} />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="بحث..."
-              className="w-full pr-12 pl-4 py-3 bg-gray-50 border-0 rounded-xl focus:ring-2 focus:ring-teal-500"
+              className="w-full pr-12 pl-4 py-3 bg-secondary border-0 rounded-xl focus:ring-2 focus:ring-teal-500"
             />
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setTypeFilter('all')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${typeFilter === 'all' ? 'bg-teal-100 text-teal-700' : 'text-gray-600 hover:bg-gray-100'}`}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${typeFilter === 'all' ? 'bg-teal-100 text-teal-700' : 'text-secondary hover:bg-hover'}`}
             >
               الكل
             </button>
             <button
               onClick={() => setTypeFilter('received')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${typeFilter === 'received' ? 'bg-emerald-100 text-emerald-700' : 'text-gray-600 hover:bg-gray-100'}`}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${typeFilter === 'received' ? 'bg-emerald-100 text-emerald-700' : 'text-secondary hover:bg-hover'}`}
             >
               مقبوضات
             </button>
             <button
               onClick={() => setTypeFilter('paid')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${typeFilter === 'paid' ? 'bg-rose-100 text-rose-700' : 'text-gray-600 hover:bg-gray-100'}`}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${typeFilter === 'paid' ? 'bg-rose-100 text-rose-700' : 'text-secondary hover:bg-hover'}`}
             >
               مدفوعات
             </button>
@@ -128,27 +128,27 @@ const PaymentsPage = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+      <div className="entity-card overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-100">
+          <thead className="bg-secondary border-b border-light">
             <tr>
-              <th className="px-6 py-4 text-right text-sm font-semibold text-gray-700">النوع</th>
-              <th className="px-6 py-4 text-right text-sm font-semibold text-gray-700">الطرف</th>
-              <th className="px-6 py-4 text-right text-sm font-semibold text-gray-700">المبلغ</th>
-              <th className="px-6 py-4 text-right text-sm font-semibold text-gray-700">الطريقة</th>
-              <th className="px-6 py-4 text-right text-sm font-semibold text-gray-700">التاريخ</th>
-              <th className="px-6 py-4 text-right text-sm font-semibold text-gray-700">المرجع</th>
-              <th className="px-6 py-4 text-right text-sm font-semibold text-gray-700">الحالة</th>
+              <th className="px-6 py-4 text-right text-sm font-semibold text-secondary">النوع</th>
+              <th className="px-6 py-4 text-right text-sm font-semibold text-secondary">الطرف</th>
+              <th className="px-6 py-4 text-right text-sm font-semibold text-secondary">المبلغ</th>
+              <th className="px-6 py-4 text-right text-sm font-semibold text-secondary">الطريقة</th>
+              <th className="px-6 py-4 text-right text-sm font-semibold text-secondary">التاريخ</th>
+              <th className="px-6 py-4 text-right text-sm font-semibold text-secondary">المرجع</th>
+              <th className="px-6 py-4 text-right text-sm font-semibold text-secondary">الحالة</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-light">
             {filteredPayments.map(payment => (
-              <tr key={payment.id} className="hover:bg-gray-50 transition-colors">
+              <tr key={payment.id} className="hover:bg-hover transition-colors">
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className={`w-10 h-10 rounded-xl ${payment.type === 'received' ? 'bg-emerald-100' : 'bg-rose-100'} flex items-center justify-center`}>
-                      {payment.type === 'received' ? 
-                        <ArrowDownRight size={18} className="text-emerald-600" /> : 
+                      {payment.type === 'received' ?
+                        <ArrowDownRight size={18} className="text-emerald-600" /> :
                         <ArrowUpRight size={18} className="text-rose-600" />
                       }
                     </div>
@@ -159,8 +159,8 @@ const PaymentsPage = () => {
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-2">
-                    {payment.type === 'received' ? <User size={14} className="text-gray-400" /> : <Building2 size={14} className="text-gray-400" />}
-                    <span className="text-gray-900">{payment.customer || payment.supplier}</span>
+                    {payment.type === 'received' ? <User size={14} className="text-tertiary" /> : <Building2 size={14} className="text-tertiary" />}
+                    <span className="text-primary">{payment.customer || payment.supplier}</span>
                   </div>
                 </td>
                 <td className="px-6 py-4">
@@ -169,14 +169,14 @@ const PaymentsPage = () => {
                   </span>
                 </td>
                 <td className="px-6 py-4">
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Banknote size={14} className="text-gray-400" />
+                  <div className="flex items-center gap-2 text-secondary">
+                    <Banknote size={14} className="text-tertiary" />
                     <span>{payment.method}</span>
                   </div>
                 </td>
                 <td className="px-6 py-4">
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Calendar size={14} className="text-gray-400" />
+                  <div className="flex items-center gap-2 text-secondary">
+                    <Calendar size={14} className="text-tertiary" />
                     <span>{new Date(payment.date).toLocaleDateString('ar-SA')}</span>
                   </div>
                 </td>

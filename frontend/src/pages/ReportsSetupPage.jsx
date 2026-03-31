@@ -313,15 +313,15 @@ const ReportsSetupPage = () => {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto" dir="rtl">
+    <div className="page-container" dir="rtl">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+          <h1 className="page-title flex items-center gap-3">
             <FileText className="w-8 h-8 text-primary-500" />
             إعدادات التقارير
           </h1>
-          <p className="text-gray-500 mt-2">
+          <p className="text-secondary mt-2">
             إنشاء وتخصيص قوالب التقارير
           </p>
         </div>
@@ -337,9 +337,9 @@ const ReportsSetupPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Templates List */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-            <div className="p-4 bg-gray-50 border-b border-gray-100">
-              <h2 className="font-semibold text-gray-900">قوالب التقارير</h2>
+          <div className="entity-card overflow-hidden p-0">
+            <div className="p-4 bg-secondary border-b border-light">
+              <h2 className="font-semibold text-primary">قوالب التقارير</h2>
             </div>
             <div className="max-h-[600px] overflow-y-auto">
               {templates.map(template => {
@@ -348,7 +348,7 @@ const ReportsSetupPage = () => {
                   <button
                     key={template.id}
                     onClick={() => handleSelectTemplate(template)}
-                    className={`w-full p-4 flex items-center gap-3 border-b border-gray-50 hover:bg-gray-50 transition-colors ${
+                    className={`w-full p-4 flex items-center gap-3 border-b border-light hover:bg-hover transition-colors ${
                       selectedTemplate?.id === template.id ? 'bg-primary-50 border-r-4 border-r-primary-500' : ''
                     }`}
                   >
@@ -360,7 +360,7 @@ const ReportsSetupPage = () => {
                       <IconComponent className="w-5 h-5" />
                     </div>
                     <div className="flex-1 text-right">
-                      <p className="font-medium text-gray-900">{template.name}</p>
+                      <p className="font-medium text-primary">{template.name}</p>
                       <div className="flex items-center gap-2 mt-1">
                         {template.schedule && (
                           <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full flex items-center gap-1">
@@ -369,7 +369,7 @@ const ReportsSetupPage = () => {
                           </span>
                         )}
                         {template.isDefault && (
-                          <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+                          <span className="text-xs status-badge--neutral px-2 py-0.5 rounded-full">
                             افتراضي
                           </span>
                         )}
@@ -381,7 +381,7 @@ const ReportsSetupPage = () => {
                           e.stopPropagation();
                           handleDeleteTemplate(template);
                         }}
-                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                        className="p-2 text-tertiary hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -396,7 +396,7 @@ const ReportsSetupPage = () => {
         {/* Template Editor */}
         <div className="lg:col-span-2">
           {(selectedTemplate || isEditing) ? (
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div className="entity-card overflow-hidden p-0">
               {/* Template Header */}
               <div className="p-6 bg-gradient-to-l from-secondary-500 to-secondary-600 text-white flex items-center justify-between">
                 <div>
@@ -458,25 +458,25 @@ const ReportsSetupPage = () => {
                   {/* Basic Info */}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-secondary mb-2">
                         اسم التقرير
                       </label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        className="w-full p-3 border border-light rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-secondary"
                         placeholder="مثال: تقرير المبيعات الشهرية"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-secondary mb-2">
                         نوع التقرير
                       </label>
                       <select
                         value={formData.type}
                         onChange={(e) => setFormData(prev => ({ ...prev, type: e.target.value, columns: [] }))}
-                        className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        className="w-full p-3 border border-light rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-secondary"
                       >
                         <option value="inventory">المخزون</option>
                         <option value="sales">المبيعات</option>
@@ -487,7 +487,7 @@ const ReportsSetupPage = () => {
 
                   {/* Columns Selection */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <h3 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
                       <Columns className="w-5 h-5 text-primary-500" />
                       أعمدة التقرير
                     </h3>
@@ -499,13 +499,13 @@ const ReportsSetupPage = () => {
                           className={`p-3 rounded-xl flex items-center gap-2 transition-all ${
                             formData.columns.includes(column.id)
                               ? 'bg-primary-100 text-primary-700 border-2 border-primary-300'
-                              : 'bg-gray-50 text-gray-600 border-2 border-transparent hover:border-gray-200'
+                              : 'bg-secondary text-secondary border-2 border-transparent hover:border-light'
                           }`}
                         >
                           {formData.columns.includes(column.id) ? (
                             <Check className="w-4 h-4" />
                           ) : (
-                            <div className="w-4 h-4 border-2 border-gray-300 rounded" />
+                            <div className="w-4 h-4 border-2 border-default rounded" />
                           )}
                           <span className="text-sm font-medium">{column.name}</span>
                         </button>
@@ -515,7 +515,7 @@ const ReportsSetupPage = () => {
 
                   {/* Chart Type */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <h3 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
                       <PieChart className="w-5 h-5 text-primary-500" />
                       نوع الرسم البياني
                     </h3>
@@ -529,7 +529,7 @@ const ReportsSetupPage = () => {
                             className={`flex-1 p-4 rounded-xl flex flex-col items-center gap-2 transition-all ${
                               formData.chartType === chart.id
                                 ? 'bg-primary-100 text-primary-700 border-2 border-primary-300'
-                                : 'bg-gray-50 text-gray-600 border-2 border-transparent hover:border-gray-200'
+                                : 'bg-secondary text-secondary border-2 border-transparent hover:border-light'
                             }`}
                           >
                             <ChartIcon className="w-8 h-8" />
@@ -542,7 +542,7 @@ const ReportsSetupPage = () => {
 
                   {/* Schedule */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <h3 className="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
                       <Clock className="w-5 h-5 text-primary-500" />
                       جدولة التقرير
                     </h3>
@@ -554,7 +554,7 @@ const ReportsSetupPage = () => {
                           className={`p-3 rounded-xl text-center transition-all ${
                             formData.schedule === schedule.id
                               ? 'bg-primary-100 text-primary-700 border-2 border-primary-300'
-                              : 'bg-gray-50 text-gray-600 border-2 border-transparent hover:border-gray-200'
+                              : 'bg-secondary text-secondary border-2 border-transparent hover:border-light'
                           }`}
                         >
                           <span className="font-medium">{schedule.name}</span>
@@ -566,7 +566,7 @@ const ReportsSetupPage = () => {
                   {/* Email Recipients */}
                   {formData.schedule && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+                      <label className="block text-sm font-medium text-secondary mb-2 flex items-center gap-2">
                         <Mail className="w-4 h-4" />
                         إرسال إلى (البريد الإلكتروني)
                       </label>
@@ -574,7 +574,7 @@ const ReportsSetupPage = () => {
                         type="text"
                         value={formData.emailRecipients}
                         onChange={(e) => setFormData(prev => ({ ...prev, emailRecipients: e.target.value }))}
-                        className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        className="w-full p-3 border border-light rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-secondary"
                         placeholder="email1@example.com, email2@example.com"
                       />
                     </div>
@@ -586,7 +586,7 @@ const ReportsSetupPage = () => {
                   <div className="space-y-6">
                     {/* Columns */}
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-3">الأعمدة</h3>
+                      <h3 className="text-lg font-semibold text-primary mb-3">الأعمدة</h3>
                       <div className="flex flex-wrap gap-2">
                         {formData.columns.map(col => (
                           <span
@@ -600,13 +600,13 @@ const ReportsSetupPage = () => {
                     </div>
 
                     {/* Chart Preview Placeholder */}
-                    <div className="bg-gray-50 rounded-xl p-8 text-center">
-                      <div className="text-gray-400 mb-2">
-                        {CHART_TYPES.find(c => c.id === formData.chartType)?.icon && 
+                    <div className="bg-secondary rounded-xl p-8 text-center">
+                      <div className="text-tertiary mb-2">
+                        {CHART_TYPES.find(c => c.id === formData.chartType)?.icon &&
                           React.createElement(CHART_TYPES.find(c => c.id === formData.chartType).icon, { className: 'w-16 h-16 mx-auto' })
                         }
                       </div>
-                      <p className="text-gray-500">معاينة الرسم البياني</p>
+                      <p className="text-secondary">معاينة الرسم البياني</p>
                     </div>
 
                     {/* Schedule Info */}
@@ -628,7 +628,7 @@ const ReportsSetupPage = () => {
 
               {/* Save Button */}
               {isEditing && (
-                <div className="p-6 bg-gray-50 border-t border-gray-100">
+                <div className="p-6 bg-secondary border-t border-light">
                   <button
                     onClick={handleSaveTemplate}
                     disabled={saving}
@@ -650,12 +650,12 @@ const ReportsSetupPage = () => {
               )}
             </div>
           ) : (
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-12 flex flex-col items-center justify-center text-center">
-              <FileText className="w-16 h-16 text-gray-300 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            <div className="entity-card p-12 flex flex-col items-center justify-center text-center">
+              <FileText className="w-16 h-16 text-tertiary mb-4" />
+              <h3 className="text-xl font-semibold text-primary mb-2">
                 اختر قالب تقرير
               </h3>
-              <p className="text-gray-500 mb-6">
+              <p className="text-secondary mb-6">
                 اختر قالب من القائمة لعرض تفاصيله أو تعديله
               </p>
               <button

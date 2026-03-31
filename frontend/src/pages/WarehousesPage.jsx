@@ -19,28 +19,28 @@ const sampleWarehouses = [
 const WarehouseCard = ({ warehouse, onEdit, onDelete, onView }) => {
   const usagePercent = (warehouse.used / warehouse.capacity) * 100;
   const statusConfig = {
-    active: { color: 'emerald', label: 'نشط' },
-    warning: { color: 'amber', label: 'شبه ممتلئ' },
-    full: { color: 'rose', label: 'ممتلئ' },
+    active: { className: 'status-badge--success', label: 'نشط' },
+    warning: { className: 'status-badge--warning', label: 'شبه ممتلئ' },
+    full: { className: 'status-badge--danger', label: 'ممتلئ' },
   };
   const status = statusConfig[warehouse.status];
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-xl transition-all duration-300">
-      <div className="flex items-start justify-between mb-4">
+    <div className="entity-card">
+      <div className="entity-card__header">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white shadow-lg">
+          <div className="entity-card__avatar entity-card__avatar--info">
             <Warehouse size={24} />
           </div>
           <div>
-            <h3 className="font-bold text-gray-900">{warehouse.name}</h3>
-            <p className="text-sm text-gray-500 flex items-center gap-1">
+            <h3 className="entity-card__name">{warehouse.name}</h3>
+            <p className="entity-card__meta">
               <MapPin size={12} />
               {warehouse.location}
             </p>
           </div>
         </div>
-        <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-${status.color}-100 text-${status.color}-700`}>
+        <span className={`status-badge ${status.className}`}>
           {status.label}
         </span>
       </div>
@@ -48,42 +48,42 @@ const WarehouseCard = ({ warehouse, onEdit, onDelete, onView }) => {
       {/* Capacity Bar */}
       <div className="mb-4">
         <div className="flex items-center justify-between text-sm mb-2">
-          <span className="text-gray-500">السعة المستخدمة</span>
-          <span className="font-semibold text-gray-900">{usagePercent.toFixed(0)}%</span>
+          <span className="text-secondary">السعة المستخدمة</span>
+          <span className="font-semibold text-primary">{usagePercent.toFixed(0)}%</span>
         </div>
-        <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+        <div className="progress-bar">
           <div
-            className={`h-full rounded-full transition-all duration-500 ${
-              usagePercent > 90 ? 'bg-rose-500' : usagePercent > 70 ? 'bg-amber-500' : 'bg-emerald-500'
+            className={`progress-bar__fill ${
+              usagePercent > 90 ? 'progress-bar__fill--danger' : usagePercent > 70 ? 'progress-bar__fill--warning' : 'progress-bar__fill--success'
             }`}
             style={{ width: `${usagePercent}%` }}
           />
         </div>
-        <div className="flex items-center justify-between text-xs text-gray-400 mt-1">
+        <div className="flex items-center justify-between text-xs text-tertiary mt-1">
           <span>{warehouse.used.toLocaleString()} وحدة</span>
           <span>{warehouse.capacity.toLocaleString()} وحدة</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
-        <div>
-          <p className="text-2xl font-bold text-gray-900">{warehouse.products}</p>
-          <p className="text-xs text-gray-500">منتج</p>
+      <div className="entity-card__stats" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+        <div className="entity-card__stat">
+          <p className="entity-card__stat-value">{warehouse.products}</p>
+          <p className="entity-card__stat-label">منتج</p>
         </div>
-        <div>
-          <p className="text-2xl font-bold text-teal-600">{(warehouse.value / 1000).toFixed(0)}K</p>
-          <p className="text-xs text-gray-500">ج.م قيمة</p>
+        <div className="entity-card__stat">
+          <p className="entity-card__stat-value entity-card__stat-value--success">{(warehouse.value / 1000).toFixed(0)}K</p>
+          <p className="entity-card__stat-label">ج.م قيمة</p>
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
-        <button onClick={() => onView(warehouse)} className="flex-1 py-2 text-center text-sm font-medium text-purple-600 hover:bg-purple-50 rounded-lg">
+      <div className="entity-card__actions">
+        <button onClick={() => onView(warehouse)} className="entity-card__action entity-card__action--primary">
           عرض
         </button>
-        <button onClick={() => onEdit(warehouse)} className="flex-1 py-2 text-center text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">
+        <button onClick={() => onEdit(warehouse)} className="entity-card__action entity-card__action--secondary">
           تعديل
         </button>
-        <button onClick={() => onDelete(warehouse)} className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg">
+        <button onClick={() => onDelete(warehouse)} className="entity-card__action entity-card__action--danger">
           <Trash2 size={16} />
         </button>
       </div>
@@ -104,7 +104,7 @@ const WarehousesPage = () => {
       <div className="page-header">
         <div>
           <h1 className="page-title">المستودعات</h1>
-          <p className="text-gray-500 mt-1">إدارة المستودعات والمخزون</p>
+          <p className="page-subtitle">إدارة المستودعات والمخزون</p>
         </div>
         <div className="page-actions">
           <Button variant="primary" icon={Plus}>مستودع جديد</Button>
@@ -163,7 +163,7 @@ const WarehousesPage = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="entity-grid">
         {sampleWarehouses.map(warehouse => (
           <WarehouseCard
             key={warehouse.id}

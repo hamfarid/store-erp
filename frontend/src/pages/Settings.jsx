@@ -38,8 +38,8 @@ const StatCard = ({ icon: Icon, title, value, subtitle, color = 'primary', trend
             <Icon className="text-white" size={24} />
           </div>
           <div className="flex-1">
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{title}</p>
+            <p className="text-2xl font-bold text-primary">{value}</p>
+            <p className="text-sm text-secondary">{title}</p>
           </div>
           {trend && (
             <div className={`flex items-center gap-1 ${trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>

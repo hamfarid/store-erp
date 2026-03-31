@@ -1,0 +1,2962 @@
+<testsuites id="" name="" tests="710" failures="0" skipped="710" errors="0" time="5.031125">
+<testsuite name="auth.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Authentication › should display login page" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should show error for invalid credentials" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should logout successfully" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should redirect to login when accessing protected route without auth" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should show access denied for unauthorized user" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="customers.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Customers Management › should display customers list" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should search for customers" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should open add customer modal" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should create new customer" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should view customer details" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should edit customer" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should filter customers by status" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should export customers" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should paginate customers list" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dashboard.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Dashboard › should display dashboard statistics cards" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display sales chart" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display recent activities" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display low stock alerts" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should navigate to products from quick action" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should navigate to invoices from quick action" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should refresh dashboard data" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display correct date range" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should be responsive on mobile viewport" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="invoices.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Invoice Management › should display invoices list" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should create a new sales invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should view invoice details" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should filter invoices by type" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should filter invoices by status" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should calculate invoice totals correctly" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should print invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should export invoices" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should record payment for invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="lots.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testcase name="Lot Management › should display lots list" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should filter lots by status" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should search lots by lot number" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should open lot details" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should create new lot" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should edit existing lot" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should display quality fields" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should show expiry alerts on dashboard" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should access lot expiry report" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should filter expiring lots by days" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should export expiry report" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Status Transitions › should change lot status" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="performance.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="16" failures="0" skipped="16" time="0" errors="0">
+<testcase name="Page Load Performance › login page should load quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › dashboard should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › POS page should load quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › products list should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › reports page should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › login API should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › products API should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › dashboard API calls should be fast" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › search should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › modal should open quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › table pagination should be fast" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Core Web Vitals › should measure LCP on dashboard" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Core Web Vitals › should measure FCP" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage › should not have memory leaks after navigation" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage › should lazy load images" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Bundle Size Check › should not load excessive JavaScript" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="pos.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="POS System › should load POS page with all components" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should search and add product to cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should update quantity in cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should remove item from cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should calculate totals correctly" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should open payment modal" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should process cash payment" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should clear cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should handle barcode scan" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS FIFO Lot Selection › should auto-select oldest lot (FIFO)" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS FIFO Lot Selection › should show lot expiry warning" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="products.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Products Management › should display products list" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should open add product modal" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should create a new product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should edit a product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should search products" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should delete a product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should validate required fields" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should reject negative price" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reports.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="17" failures="0" skipped="17" time="0" errors="0">
+<testcase name="Reports System › should display reports dashboard" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to sales report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to inventory report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to profit/loss report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should filter by date range" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should display summary statistics" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should export sales report to PDF" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should export sales report to Excel" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should display inventory summary" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should filter by category" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should show low stock alerts" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should display profit summary" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should show chart visualization" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should filter by period" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should export profit report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports RTL Support › should render reports with RTL layout" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports RTL Support › should have correct text alignment in tables" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="security.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="17" failures="0" skipped="17" time="0" errors="0">
+<testcase name="Authentication Security › should not expose sensitive data in localStorage" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should invalidate token after logout" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should prevent access to protected routes without token" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should lock account after multiple failed attempts" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should require strong passwords" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should escape HTML in product names" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should escape HTML in search input" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should sanitize URLs" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="CSRF Protection › should have CSRF protection on forms" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Headers › should have security headers" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Headers › should have Content-Security-Policy" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should reject SQL injection attempts" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should validate numeric inputs" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should limit input length" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Security › should expire session after timeout" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Security › should not allow session fixation" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="File Upload Security › should reject dangerous file types" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="settings.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testcase name="General Settings › should display settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should show company information section" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should update company information" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should toggle dark mode" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should display notification settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should toggle notification channels" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should configure inventory alerts" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should set quiet hours" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should display tax settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should toggle tax enabled" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should configure default tax rate" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should add custom tax type" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should configure ZATCA settings" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should display backup settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should show backup history" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should create manual backup" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should configure auto backup" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should display users list" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should add new user" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should navigate to roles management" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="warehouses.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="chromium" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Warehouses Management › should display warehouses list" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should show warehouse details" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should add new warehouse" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should view warehouse inventory" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should transfer stock between warehouses" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should perform stock adjustment" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should filter warehouses" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should show warehouse statistics" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="auth.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Authentication › should display login page" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should show error for invalid credentials" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should logout successfully" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should redirect to login when accessing protected route without auth" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should show access denied for unauthorized user" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="customers.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Customers Management › should display customers list" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should search for customers" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should open add customer modal" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should create new customer" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should view customer details" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should edit customer" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should filter customers by status" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should export customers" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should paginate customers list" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dashboard.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Dashboard › should display dashboard statistics cards" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display sales chart" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display recent activities" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display low stock alerts" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should navigate to products from quick action" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should navigate to invoices from quick action" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should refresh dashboard data" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display correct date range" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should be responsive on mobile viewport" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="invoices.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Invoice Management › should display invoices list" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should create a new sales invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should view invoice details" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should filter invoices by type" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should filter invoices by status" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should calculate invoice totals correctly" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should print invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should export invoices" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should record payment for invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="lots.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testcase name="Lot Management › should display lots list" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should filter lots by status" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should search lots by lot number" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should open lot details" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should create new lot" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should edit existing lot" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should display quality fields" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should show expiry alerts on dashboard" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should access lot expiry report" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should filter expiring lots by days" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should export expiry report" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Status Transitions › should change lot status" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="performance.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="16" failures="0" skipped="16" time="0" errors="0">
+<testcase name="Page Load Performance › login page should load quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › dashboard should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › POS page should load quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › products list should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › reports page should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › login API should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › products API should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › dashboard API calls should be fast" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › search should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › modal should open quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › table pagination should be fast" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Core Web Vitals › should measure LCP on dashboard" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Core Web Vitals › should measure FCP" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage › should not have memory leaks after navigation" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage › should lazy load images" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Bundle Size Check › should not load excessive JavaScript" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="pos.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="POS System › should load POS page with all components" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should search and add product to cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should update quantity in cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should remove item from cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should calculate totals correctly" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should open payment modal" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should process cash payment" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should clear cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should handle barcode scan" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS FIFO Lot Selection › should auto-select oldest lot (FIFO)" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS FIFO Lot Selection › should show lot expiry warning" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="products.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Products Management › should display products list" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should open add product modal" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should create a new product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should edit a product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should search products" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should delete a product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should validate required fields" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should reject negative price" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reports.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="17" failures="0" skipped="17" time="0" errors="0">
+<testcase name="Reports System › should display reports dashboard" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to sales report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to inventory report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to profit/loss report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should filter by date range" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should display summary statistics" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should export sales report to PDF" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should export sales report to Excel" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should display inventory summary" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should filter by category" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should show low stock alerts" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should display profit summary" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should show chart visualization" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should filter by period" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should export profit report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports RTL Support › should render reports with RTL layout" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports RTL Support › should have correct text alignment in tables" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="security.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="17" failures="0" skipped="17" time="0" errors="0">
+<testcase name="Authentication Security › should not expose sensitive data in localStorage" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should invalidate token after logout" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should prevent access to protected routes without token" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should lock account after multiple failed attempts" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should require strong passwords" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should escape HTML in product names" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should escape HTML in search input" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should sanitize URLs" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="CSRF Protection › should have CSRF protection on forms" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Headers › should have security headers" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Headers › should have Content-Security-Policy" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should reject SQL injection attempts" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should validate numeric inputs" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should limit input length" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Security › should expire session after timeout" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Security › should not allow session fixation" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="File Upload Security › should reject dangerous file types" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="settings.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testcase name="General Settings › should display settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should show company information section" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should update company information" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should toggle dark mode" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should display notification settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should toggle notification channels" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should configure inventory alerts" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should set quiet hours" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should display tax settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should toggle tax enabled" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should configure default tax rate" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should add custom tax type" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should configure ZATCA settings" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should display backup settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should show backup history" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should create manual backup" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should configure auto backup" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should display users list" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should add new user" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should navigate to roles management" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="warehouses.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="firefox" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Warehouses Management › should display warehouses list" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should show warehouse details" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should add new warehouse" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should view warehouse inventory" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should transfer stock between warehouses" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should perform stock adjustment" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should filter warehouses" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should show warehouse statistics" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="auth.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Authentication › should display login page" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should show error for invalid credentials" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should logout successfully" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should redirect to login when accessing protected route without auth" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should show access denied for unauthorized user" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="customers.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Customers Management › should display customers list" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should search for customers" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should open add customer modal" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should create new customer" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should view customer details" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should edit customer" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should filter customers by status" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should export customers" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should paginate customers list" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dashboard.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Dashboard › should display dashboard statistics cards" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display sales chart" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display recent activities" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display low stock alerts" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should navigate to products from quick action" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should navigate to invoices from quick action" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should refresh dashboard data" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display correct date range" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should be responsive on mobile viewport" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="invoices.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Invoice Management › should display invoices list" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should create a new sales invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should view invoice details" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should filter invoices by type" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should filter invoices by status" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should calculate invoice totals correctly" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should print invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should export invoices" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should record payment for invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="lots.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testcase name="Lot Management › should display lots list" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should filter lots by status" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should search lots by lot number" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should open lot details" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should create new lot" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should edit existing lot" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should display quality fields" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should show expiry alerts on dashboard" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should access lot expiry report" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should filter expiring lots by days" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should export expiry report" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Status Transitions › should change lot status" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="performance.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="16" failures="0" skipped="16" time="0" errors="0">
+<testcase name="Page Load Performance › login page should load quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › dashboard should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › POS page should load quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › products list should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › reports page should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › login API should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › products API should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › dashboard API calls should be fast" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › search should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › modal should open quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › table pagination should be fast" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Core Web Vitals › should measure LCP on dashboard" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Core Web Vitals › should measure FCP" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage › should not have memory leaks after navigation" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage › should lazy load images" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Bundle Size Check › should not load excessive JavaScript" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="pos.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="POS System › should load POS page with all components" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should search and add product to cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should update quantity in cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should remove item from cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should calculate totals correctly" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should open payment modal" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should process cash payment" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should clear cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should handle barcode scan" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS FIFO Lot Selection › should auto-select oldest lot (FIFO)" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS FIFO Lot Selection › should show lot expiry warning" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="products.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Products Management › should display products list" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should open add product modal" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should create a new product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should edit a product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should search products" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should delete a product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should validate required fields" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should reject negative price" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reports.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="17" failures="0" skipped="17" time="0" errors="0">
+<testcase name="Reports System › should display reports dashboard" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to sales report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to inventory report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to profit/loss report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should filter by date range" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should display summary statistics" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should export sales report to PDF" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should export sales report to Excel" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should display inventory summary" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should filter by category" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should show low stock alerts" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should display profit summary" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should show chart visualization" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should filter by period" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should export profit report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports RTL Support › should render reports with RTL layout" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports RTL Support › should have correct text alignment in tables" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="security.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="17" failures="0" skipped="17" time="0" errors="0">
+<testcase name="Authentication Security › should not expose sensitive data in localStorage" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should invalidate token after logout" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should prevent access to protected routes without token" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should lock account after multiple failed attempts" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should require strong passwords" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should escape HTML in product names" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should escape HTML in search input" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should sanitize URLs" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="CSRF Protection › should have CSRF protection on forms" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Headers › should have security headers" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Headers › should have Content-Security-Policy" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should reject SQL injection attempts" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should validate numeric inputs" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should limit input length" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Security › should expire session after timeout" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Security › should not allow session fixation" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="File Upload Security › should reject dangerous file types" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="settings.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testcase name="General Settings › should display settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should show company information section" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should update company information" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should toggle dark mode" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should display notification settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should toggle notification channels" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should configure inventory alerts" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should set quiet hours" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should display tax settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should toggle tax enabled" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should configure default tax rate" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should add custom tax type" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should configure ZATCA settings" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should display backup settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should show backup history" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should create manual backup" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should configure auto backup" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should display users list" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should add new user" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should navigate to roles management" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="warehouses.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="webkit" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Warehouses Management › should display warehouses list" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should show warehouse details" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should add new warehouse" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should view warehouse inventory" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should transfer stock between warehouses" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should perform stock adjustment" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should filter warehouses" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should show warehouse statistics" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="auth.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Authentication › should display login page" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should show error for invalid credentials" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should logout successfully" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should redirect to login when accessing protected route without auth" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should show access denied for unauthorized user" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="customers.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Customers Management › should display customers list" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should search for customers" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should open add customer modal" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should create new customer" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should view customer details" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should edit customer" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should filter customers by status" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should export customers" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should paginate customers list" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dashboard.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Dashboard › should display dashboard statistics cards" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display sales chart" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display recent activities" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display low stock alerts" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should navigate to products from quick action" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should navigate to invoices from quick action" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should refresh dashboard data" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display correct date range" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should be responsive on mobile viewport" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="invoices.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Invoice Management › should display invoices list" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should create a new sales invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should view invoice details" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should filter invoices by type" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should filter invoices by status" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should calculate invoice totals correctly" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should print invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should export invoices" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should record payment for invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="lots.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testcase name="Lot Management › should display lots list" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should filter lots by status" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should search lots by lot number" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should open lot details" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should create new lot" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should edit existing lot" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should display quality fields" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should show expiry alerts on dashboard" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should access lot expiry report" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should filter expiring lots by days" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should export expiry report" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Status Transitions › should change lot status" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="performance.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="16" failures="0" skipped="16" time="0" errors="0">
+<testcase name="Page Load Performance › login page should load quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › dashboard should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › POS page should load quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › products list should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › reports page should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › login API should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › products API should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › dashboard API calls should be fast" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › search should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › modal should open quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › table pagination should be fast" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Core Web Vitals › should measure LCP on dashboard" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Core Web Vitals › should measure FCP" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage › should not have memory leaks after navigation" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage › should lazy load images" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Bundle Size Check › should not load excessive JavaScript" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="pos.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="POS System › should load POS page with all components" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should search and add product to cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should update quantity in cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should remove item from cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should calculate totals correctly" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should open payment modal" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should process cash payment" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should clear cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should handle barcode scan" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS FIFO Lot Selection › should auto-select oldest lot (FIFO)" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS FIFO Lot Selection › should show lot expiry warning" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="products.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Products Management › should display products list" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should open add product modal" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should create a new product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should edit a product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should search products" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should delete a product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should validate required fields" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should reject negative price" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reports.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="17" failures="0" skipped="17" time="0" errors="0">
+<testcase name="Reports System › should display reports dashboard" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to sales report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to inventory report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to profit/loss report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should filter by date range" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should display summary statistics" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should export sales report to PDF" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should export sales report to Excel" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should display inventory summary" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should filter by category" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should show low stock alerts" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should display profit summary" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should show chart visualization" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should filter by period" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should export profit report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports RTL Support › should render reports with RTL layout" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports RTL Support › should have correct text alignment in tables" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="security.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="17" failures="0" skipped="17" time="0" errors="0">
+<testcase name="Authentication Security › should not expose sensitive data in localStorage" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should invalidate token after logout" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should prevent access to protected routes without token" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should lock account after multiple failed attempts" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should require strong passwords" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should escape HTML in product names" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should escape HTML in search input" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should sanitize URLs" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="CSRF Protection › should have CSRF protection on forms" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Headers › should have security headers" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Headers › should have Content-Security-Policy" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should reject SQL injection attempts" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should validate numeric inputs" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should limit input length" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Security › should expire session after timeout" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Security › should not allow session fixation" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="File Upload Security › should reject dangerous file types" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="settings.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testcase name="General Settings › should display settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should show company information section" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should update company information" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should toggle dark mode" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should display notification settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should toggle notification channels" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should configure inventory alerts" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should set quiet hours" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should display tax settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should toggle tax enabled" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should configure default tax rate" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should add custom tax type" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should configure ZATCA settings" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should display backup settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should show backup history" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should create manual backup" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should configure auto backup" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should display users list" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should add new user" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should navigate to roles management" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="warehouses.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-chrome" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Warehouses Management › should display warehouses list" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should show warehouse details" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should add new warehouse" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should view warehouse inventory" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should transfer stock between warehouses" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should perform stock adjustment" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should filter warehouses" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should show warehouse statistics" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="auth.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Authentication › should display login page" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should show error for invalid credentials" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should login successfully with valid credentials" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should logout successfully" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should redirect to login when accessing protected route without auth" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication › should show access denied for unauthorized user" classname="auth.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="customers.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Customers Management › should display customers list" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should search for customers" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should open add customer modal" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should create new customer" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should view customer details" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should edit customer" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should filter customers by status" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should export customers" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Customers Management › should paginate customers list" classname="customers.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dashboard.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Dashboard › should display dashboard statistics cards" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display sales chart" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display recent activities" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display low stock alerts" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should navigate to products from quick action" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should navigate to invoices from quick action" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should refresh dashboard data" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should display correct date range" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard › should be responsive on mobile viewport" classname="dashboard.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="invoices.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Invoice Management › should display invoices list" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should create a new sales invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should view invoice details" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should filter invoices by type" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should filter invoices by status" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should calculate invoice totals correctly" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should print invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should export invoices" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invoice Management › should record payment for invoice" classname="invoices.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="lots.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="12" failures="0" skipped="12" time="0" errors="0">
+<testcase name="Lot Management › should display lots list" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should filter lots by status" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should search lots by lot number" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should open lot details" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should create new lot" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should edit existing lot" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Management › should display quality fields" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should show expiry alerts on dashboard" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should access lot expiry report" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should filter expiring lots by days" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Expiry Tracking › should export expiry report" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Lot Status Transitions › should change lot status" classname="lots.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="performance.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="16" failures="0" skipped="16" time="0" errors="0">
+<testcase name="Page Load Performance › login page should load quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › dashboard should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › POS page should load quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › products list should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Page Load Performance › reports page should load within threshold" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › login API should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › products API should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="API Response Performance › dashboard API calls should be fast" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › search should respond quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › modal should open quickly" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Interaction Performance › table pagination should be fast" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Core Web Vitals › should measure LCP on dashboard" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Core Web Vitals › should measure FCP" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage › should not have memory leaks after navigation" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage › should lazy load images" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Bundle Size Check › should not load excessive JavaScript" classname="performance.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="pos.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="POS System › should load POS page with all components" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should search and add product to cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should update quantity in cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should remove item from cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should calculate totals correctly" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should open payment modal" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should process cash payment" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should clear cart" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS System › should handle barcode scan" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS FIFO Lot Selection › should auto-select oldest lot (FIFO)" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="POS FIFO Lot Selection › should show lot expiry warning" classname="pos.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="products.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Products Management › should display products list" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should open add product modal" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should create a new product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should edit a product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should search products" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should delete a product" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should validate required fields" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Products Management › should reject negative price" classname="products.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reports.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="17" failures="0" skipped="17" time="0" errors="0">
+<testcase name="Reports System › should display reports dashboard" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to sales report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to inventory report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports System › should navigate to profit/loss report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should filter by date range" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should display summary statistics" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should export sales report to PDF" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Sales Reports › should export sales report to Excel" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should display inventory summary" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should filter by category" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Inventory Reports › should show low stock alerts" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should display profit summary" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should show chart visualization" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should filter by period" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profit/Loss Reports › should export profit report" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports RTL Support › should render reports with RTL layout" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Reports RTL Support › should have correct text alignment in tables" classname="reports.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="security.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="17" failures="0" skipped="17" time="0" errors="0">
+<testcase name="Authentication Security › should not expose sensitive data in localStorage" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should invalidate token after logout" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should prevent access to protected routes without token" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should lock account after multiple failed attempts" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Security › should require strong passwords" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should escape HTML in product names" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should escape HTML in search input" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="XSS Prevention › should sanitize URLs" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="CSRF Protection › should have CSRF protection on forms" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Headers › should have security headers" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Headers › should have Content-Security-Policy" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should reject SQL injection attempts" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should validate numeric inputs" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Input Validation › should limit input length" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Security › should expire session after timeout" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Security › should not allow session fixation" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="File Upload Security › should reject dangerous file types" classname="security.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="settings.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testcase name="General Settings › should display settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should show company information section" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should update company information" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="General Settings › should toggle dark mode" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should display notification settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should toggle notification channels" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should configure inventory alerts" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Notification Settings › should set quiet hours" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should display tax settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should toggle tax enabled" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should configure default tax rate" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should add custom tax type" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Tax Settings › should configure ZATCA settings" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should display backup settings page" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should show backup history" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should create manual backup" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Backup &amp; Restore Settings › should configure auto backup" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should display users list" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should add new user" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User &amp; Role Management Settings › should navigate to roles management" classname="settings.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="warehouses.spec.ts" timestamp="2026-01-17T10:25:47.733Z" hostname="mobile-safari" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Warehouses Management › should display warehouses list" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should show warehouse details" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should add new warehouse" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should view warehouse inventory" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should transfer stock between warehouses" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should perform stock adjustment" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should filter warehouses" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Warehouses Management › should show warehouse statistics" classname="warehouses.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+</testsuites>
