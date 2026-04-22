@@ -59,7 +59,7 @@
     "i18next-browser-languagedetector": "^7.2.0",
     "immer": "^10.0.3",
     "js-cookie": "^3.0.5",
-    "jspdf": "^3.0.4",
+    "jspdf": "^4.2.1",
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
     "lucide-react": "^0.294.0",
